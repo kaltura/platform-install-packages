@@ -1,0 +1,231 @@
+# -*- mode: makefile -*-
+# vim:syntax=make
+
+export DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
+export DEB_BUILD_GNU_TYPE ?= $(shell dpkg-architecture -qDEB_BUILD_GNU_TYPE)
+export DEB_HOST_ARCH      ?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
+export DEB_HOST_ARCH_CPU  ?= $(shell dpkg-architecture -qDEB_HOST_ARCH_CPU)
+export DEB_HOST_GNU_TYPE  ?= $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
+
+SVNREVISION=$(shell cat .svnrevision 2>/dev/null || echo "UNKNOWN")
+
+CROSS :=
+ifneq ($(DEB_BUILD_GNU_TYPE),$(DEB_HOST_GNU_TYPE))
+    CROSS :=  $(DEB_HOST_GNU_TYPE)-
+endif
+
+# list of flavors we want to build
+FLAVORS :=
+
+# this outputs 0 or 1 depending on whether a macro appears in the *default* cpp
+# -dM -P output; this is used to test the toolchain *default* configuration
+check_cpp = $(shell $(CROSS)cpp -dM -P /dev/null | grep -q '^\#define $(1)' && echo 1 || echo 0)
+
+# this outputs 0 or 1 depending on whether a piece of assembly can be compiled
+# with the *default* gcc flags; this is used to test the toolchain *default*
+# configuration
+check_asm = $(shell echo 'void foo(void) { __asm__ volatile("$(1)"); }' | $(CROSS)gcc -x c -c - -o /dev/null 2>/dev/null && echo 1 || echo 0)
+
+# the other flavors always build dynamic versions
+# Also, disable architecture-specific optimizations for default shared build
+ifeq ($(DEB_HOST_ARCH_CPU),arm)
+    # whether the toolchain *default* configuration includes vfp
+    vfp_asm := fadds s0, s0, s0
+    has_vfp := $(call check_asm, $(vfp_asm))
+    # whether the toolchain *default* configuration includes neon
+    neon_asm := vadd.i16 q0, q0, q0
+    has_neon := $(call check_asm, $(neon_asm))
+    # whether the toolchain *default* configuration enables ARMv7
+    v7_asm := dmb
+    has_v7 := $(call check_asm, $(v7_asm))
+    # whether the toolchain *default* configuration uses -mfloat-abi=soft
+    has_soft := $(call check_cpp,__SOFTFP__ 1)
+
+    # only build a VFP flavour if the toolchain doesn't enable VFP by default
+    ifneq ($(has_vfp),1)
+    FLAVORS += vfp
+    endif
+    # only build a NEON flavour if the toolchain doesn't enable NEON by default
+    ifneq ($(has_neon),1)
+    FLAVORS += neon
+    endif
+    # calling-conventions for VFP and NEON flavours: if the toolchain uses
+    # -mfloat-abi=soft, we want to use softfp, otherwise we want to use the
+    # toolchain default (either softfp or hardfp)
+    ifeq ($(has_soft),1)
+    float_abi := -mfloat-abi=softfp
+    else
+    float_abi :=
+    endif
+else ifeq ($(DEB_HOST_ARCH),i386)
+    FLAVORS += cmov
+else ifeq ($(DEB_HOST_ARCH),powerpc)
+    FLAVORS += altivec
+    nooptflags += --disable-altivec
+else ifeq ($(DEB_HOST_ARCH),sparc)
+    FLAVORS += vis
+    nooptflags += --disable-vis
+endif
+
+# build a static version on every architecture in the 'debian' Libav package
+FLAVORS += static
+
+# shared is generic, i.e. without arch specific opcodes
+# /!\ order matters, you want to list the shared flavor *last* so that the
+# binaries from this flavor overwrite the ones from the optional optimized
+# flavor(s) and from the static flavor
+FLAVORS += shared
+
+$(info Building FLAVORS=$(FLAVORS))
+
+# Conditionally enable certain features depending on
+# the corresponding header file being installed or not
+define cond_enable
+	$(shell test -r $(1) && echo --enable-$(2) )
+endef
+
+# variant that also requires --enable-version3
+define cond_enable_v3
+	$(shell test -r $(1) && echo --enable-$(2) --enable-version3 )
+endef
+
+# variant that also requires --enable-nonfree
+define cond_enable_nf
+	$(shell test -r $(1) && echo --enable-$(2) --enable-nonfree )
+endef
+
+# Common configuration flags
+confflags += --arch='$(DEB_HOST_ARCH_CPU)'
+confflags += --enable-pthreads
+confflags += --enable-runtime-cpudetect
+confflags += --extra-version='$(DEB_VERSION)'
+confflags += --libdir=/usr/lib/$(DEB_HOST_MULTIARCH)
+confflags += --prefix=/usr
+confflags += $(shell test -x /usr/bin/yasm || echo --disable-yasm )
+
+ifeq      ($(DEB_HOST_ARCH),armel)
+# this is required on Ubuntu lucid as it defaults to thumb2 and Libav has
+# plenty of incompatible assembly; not sure how to detect that properly
+confflags += --enable-pic
+endif
+
+ifeq      ($(DEB_HOST_ARCH),powerpc)
+confflags += --enable-pic
+endif
+
+# Additional features
+confflags += $(call cond_enable,/usr/include/bzlib.h,bzlib)
+confflags += $(call cond_enable,/usr/include/dc1394/dc1394.h,libdc1394)
+confflags += $(call cond_enable,/usr/include/freetype2/freetype/freetype.h,libfreetype)
+confflags += $(call cond_enable,/usr/include/frei0r.h,frei0r)
+confflags += $(call cond_enable,/usr/include/gnutls/gnutls.h,gnutls)
+confflags += $(call cond_enable,/usr/include/gsm/gsm.h,libgsm)
+confflags += $(call cond_enable,/usr/include/lame/lame.h,libmp3lame)
+confflags += $(call cond_enable,/usr/include/librtmp/http.h,librtmp)
+confflags += $(call cond_enable,/usr/include/opencv/cv.hpp,libopencv)
+confflags += $(call cond_enable,/usr/include/openjpeg.h,libopenjpeg)
+confflags += $(call cond_enable,/usr/include/opus/opus.h,libopus)
+confflags += $(call cond_enable,/usr/include/pulse/simple.h,libpulse)
+confflags += $(call cond_enable,/usr/include/schroedinger-1.0/schroedinger/schro.h,libschroedinger)
+confflags += $(call cond_enable,/usr/include/speex/speex.h,libspeex)
+confflags += $(call cond_enable,/usr/include/theora/theoraenc.h,libtheora)
+confflags += $(call cond_enable,/usr/include/va/va.h,vaapi)
+confflags += $(call cond_enable,/usr/include/vdpau/vdpau.h,vdpau)
+confflags += $(call cond_enable,/usr/include/vorbis/vorbisenc.h,libvorbis)
+confflags += $(call cond_enable,/usr/include/vpx/vpx_encoder.h,libvpx)
+confflags += $(call cond_enable,/usr/include/zlib.h,zlib)
+
+# Configuration flags causing the libs to be GPL tainted
+gpl_confflags += --enable-gpl
+gpl_confflags += --enable-swscale
+gpl_confflags += $(call cond_enable,/usr/include/cdio/paranoia.h,libcdio)
+gpl_confflags += $(call cond_enable,/usr/include/X11/extensions/XShm.h,x11grab)
+gpl_confflags += $(call cond_enable,/usr/include/x264.h,libx264)
+gpl_confflags += $(call cond_enable,/usr/include/xvid.h,libxvid)
+# comment out following line for LGPL versions of the libraries
+confflags += $(gpl_confflags)
+
+# Features that require (L)GPL v3
+v3_confflags += $(call cond_enable_v3,/usr/include/opencore-amrnb/interf_dec.h,libopencore-amrnb)
+v3_confflags += $(call cond_enable_v3,/usr/include/opencore-amrwb/dec_if.h,libopencore-amrwb)
+v3_confflags += $(call cond_enable_v3,/usr/include/vo-aacenc/voAAC.h,libvo-aacenc)
+v3_confflags += $(call cond_enable_v3,/usr/include/vo-amrwbenc/enc_if.h,libvo-amrwbenc)
+
+# FAAC is considered non-free
+confflags += $(call cond_enable_nf,/usr/include/faac.h,libfaac)
+
+# Enable hardened build flags through dpkg-buildflags
+CFLAGS := $(filter-out -g -O2,$(shell dpkg-buildflags --get CFLAGS))
+CPPFLAGS := $(shell dpkg-buildflags --get CPPFLAGS)
+LDFLAGS := $(filter-out %-Bsymbolic-functions,$(shell dpkg-buildflags --get LDFLAGS))
+
+ifneq (,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
+# Various parts of Libav (and swscale) FTBFS when compiling with -fPIC
+# and with mmx code enabled.
+  confflags += --disable-optimizations
+  confflags += --disable-mmx
+endif
+
+# Configuration flags for the static libraries
+static_build_confflags += $(confflags)
+
+# Configuration flags for the non-optimized shared libraries
+shared_build_confflags += $(confflags) --shlibdir=/usr/lib/$(DEB_HOST_MULTIARCH)
+# amd64 has no problems with optimized shared libs. i386 and arm do.
+ifneq      ($(DEB_HOST_ARCH),amd64)
+shared_build_confflags += $(nooptflags)
+endif
+shared_build_confflags += --enable-shared
+shared_build_confflags += --disable-static
+
+## specific to arm architectures
+# Configuration flags for the optimised shared libraries
+vfp_shlibdir := vfp
+vfp_build_confflags += $(confflags)
+vfp_build_confflags += --shlibdir=/usr/lib/$(DEB_HOST_MULTIARCH)/$(vfp_shlibdir)
+vfp_build_confflags += --enable-shared
+vfp_build_confflags += --disable-static
+vfp_build_confflags += --extra-cflags="-mfpu=vfp $(float_abi)"
+# NB: NEON always implies v7+ and Libav's NEON implementation requires VFP
+neon_shlibdir := neon/vfp
+neon_build_confflags += $(confflags)
+neon_build_confflags += --shlibdir=/usr/lib/$(DEB_HOST_MULTIARCH)/$(neon_shlibdir)
+# the NEON pass now requires ubfx which was introduced in armv6t2; we need to
+# enable at least armv6t2 for the NEON pass to build, but NEON implies armv7-a
+# so pass armv7-a if it's not already enabled
+ifneq ($(has_v7),1)
+neon_build_confflags += --cpu='armv7-a'
+endif
+neon_build_confflags += --extra-cflags="-mfpu=neon $(float_abi) -fPIC -DPIC"
+neon_build_confflags += --enable-shared
+neon_build_confflags += --disable-static
+
+## i386 architecture specific
+# Configuration flags for the optimized shared libraries
+cmov_shlibdir := i686/cmov
+cmov_build_confflags += $(confflags)
+cmov_build_confflags += $(nooptflags)
+cmov_build_confflags += --shlibdir=/usr/lib/$(DEB_HOST_MULTIARCH)/$(cmov_shlibdir)
+cmov_build_confflags += --cpu='i686'
+cmov_build_confflags += --enable-shared
+cmov_build_confflags += --disable-static
+
+## powerpc architecture specific
+# Configuration flags for the optimized shared libraries
+altivec_shlibdir := altivec
+altivec_build_confflags += $(confflags)
+altivec_build_confflags += --shlibdir=/usr/lib/$(DEB_HOST_MULTIARCH)/$(altivec_shlibdir)
+altivec_build_confflags += --cpu='g4'
+altivec_build_confflags += --enable-shared
+altivec_build_confflags += --disable-static
+altivec_build_confflags += --enable-altivec
+
+## sparc architecture specific
+# Configuration flags for the optimized shared libraries
+vis_shlibdir := v9
+vis_build_confflags += $(confflags)
+vis_build_confflags += --shlibdir=/usr/lib/$(DEB_HOST_MULTIARCH)/$(vis_shlibdir)
+vis_build_confflags += --cpu='sparc64'
+vis_build_confflags += --enable-shared
+vis_build_confflags += --disable-static
+vis_build_confflags += --extra-cflags="-fPIC -DPIC"

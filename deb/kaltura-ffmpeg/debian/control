@@ -1,0 +1,450 @@
+Source: kaltura-ffmpeg
+Section: libs
+Priority: optional
+Maintainer: Jess Portnoy <jess.portnoy@kaltura.com>
+Standards-Version: 3.9.4
+Homepage: http://ffmpeg.org/
+Build-Depends-Indep:
+ doxygen
+Build-Depends:
+ debhelper (>= 8.1.3~),
+ frei0r-plugins-dev,
+ libasound2-dev [linux-any],
+ libbz2-dev,
+ libcdio-cdda-dev,
+ libcdio-dev,
+ libcdio-paranoia-dev,
+ libdc1394-22-dev [linux-any],
+ libfreetype6-dev,
+ libgnutls-dev,
+ libgsm1-dev,
+ libimlib2-dev,
+ libjack-dev,
+ libmp3lame-dev,
+ libopencore-amrnb-dev,
+ libopencore-amrwb-dev,
+ libopencv-dev,
+ libopenjpeg-dev,
+ libopus-dev (>= 1.0.1),
+ libpulse-dev,
+ libraw1394-dev [linux-any],
+ librtmp-dev (>= 2.2e-4),
+ libschroedinger-dev,
+ libsdl1.2-dev,
+ libspeex-dev,
+ libtheora-dev (>> 0.0.0.alpha4),
+ libtiff4-dev | libtiff-dev,
+ libva-dev [!hurd-any],
+ libvdpau-dev,
+ libvo-aacenc-dev,
+ libvo-amrwbenc-dev,
+ libvorbis-dev,
+ libvpx-dev,
+ libx11-dev,
+ libx264-dev,
+ libxext-dev,
+ libxfixes-dev,
+ libxvidcore-dev,
+ libxvmc-dev,
+ texi2html,
+ yasm [any-amd64 any-i386],
+ zlib1g-dev
+
+Package: kaltura-ffmpeg
+Section: video
+Architecture: any
+Replaces:
+ kaltura-ffmpegcodec-extra-53 (<< 4:0.6~)
+Pre-Depends:
+ dpkg (>= 1.15.7.2~)
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends}
+Description: 
+ FFmpeg is a very fast video and audio converter. It can also grab from a
+ live audio/video source.
+ The command line interface is designed to be intuitive, in the sense that
+ ffmpeg tries to figure out all the parameters, when possible. You have
+ usually to give only the target bitrate you want. FFmpeg can also convert
+ from any sample rate to any other, and resize video on the fly with a high
+ quality polyphase filter.
+ .
+
+Package: kaltura-ffmpeg-dbg
+Section: debug
+Priority: extra
+Architecture: any
+Depends:
+ kaltura-kaltura-ffmpeg (= ${binary:Version}),
+ kaltura-ffmpegcodec54 (= ${binary:Version}) | kaltura-ffmpegcodec-extra-54 (= ${binary:Version}),
+ kaltura-ffmpegdevice53 (= ${binary:Version}),
+ kaltura-ffmpegformat54 (= ${binary:Version}),
+ kaltura-ffmpegutil52 (= ${binary:Version}),
+ libswscale2 (= ${binary:Version}),
+ ${misc:Depends}
+Description: Debug symbols for Ffmpeg related packages
+ Ffmpeg is a complete, cross-platform solution to decode, encode, record,
+ convert and stream audio and video.
+ .
+ This package contains debug data of the Ffmpeg related shared libraries.
+ .
+ Most people will not need this package. Please install it to produce useful
+ stacktraces to help debugging the Ffmpeg library.
+
+Package: kaltura-ffmpeg-doc
+Section: doc
+Architecture: all
+Depends:
+ ${misc:Depends}
+Description: Documentation of the Ffmpeg API
+ Ffmpeg is a complete, cross-platform solution to decode, encode, record,
+ convert and stream audio and video.
+ .
+ This package contains the html doxygen documentation of the Ffmpeg API.
+ .
+ Only application developers will find this package useful.
+
+Package: kaltura-ffmpegutil52
+Architecture: any
+Multi-Arch: same
+Pre-Depends: ${misc:Pre-Depends}
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends}
+Description: Ffmpeg utility library
+ Ffmpeg is a complete, cross-platform solution to decode, encode, record,
+ convert and stream audio and video.
+ .
+ This is the common utility library from Ffmpeg. It contains shared code
+ used by all other Ffmpeg libraries.
+
+Package: kaltura-ffmpegcodec54
+Architecture: any
+Multi-Arch: same
+Pre-Depends: ${misc:Pre-Depends}
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends}
+Description: Ffmpeg codec library
+ Ffmpeg is a complete, cross-platform solution to decode, encode, record,
+ convert and stream audio and video.
+ .
+ This is the codec library (both encoding and decoding).
+ .
+ It supports most existing codecs (MPEG, MPEG2, MPEG4, AC3, DV...).
+
+Package: kaltura-ffmpegdevice53
+Architecture: any
+Multi-Arch: same
+Pre-Depends: ${misc:Pre-Depends}
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends}
+Description: Ffmpeg device handling library
+ Ffmpeg is a complete, cross-platform solution to decode, encode, record,
+ convert and stream audio and video.
+ .
+ This is the device handling library from Ffmpeg.
+
+Package: kaltura-ffmpegformat54
+Architecture: any
+Multi-Arch: same
+Pre-Depends: ${misc:Pre-Depends}
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends}
+Description: Ffmpeg file format library
+ Ffmpeg is a complete, cross-platform solution to decode, encode, record,
+ convert and stream audio and video.
+ .
+ This is the library for handling file formats from Ffmpeg.
+ .
+ It supports most existing file formats (AVI, MPEG, OGG, Matroska,
+ ASF...).
+
+Package: kaltura-ffmpegfilter3
+Architecture: any
+Multi-Arch: same
+Pre-Depends: ${misc:Pre-Depends}
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends}
+Suggests:
+ frei0r-plugins (>= 1.3)
+Replaces:
+ kaltura-ffmpegfilter-extra-3
+Breaks:
+ kaltura-ffmpegfilter-extra-3 (<< 5:0.8.1-2)
+Description: Ffmpeg video filtering library
+ Ffmpeg is a complete, cross-platform solution to decode, encode, record,
+ convert and stream audio and video.
+ .
+ This is the video filtering library from Ffmpeg.
+
+Package: libswscale2
+Architecture: any
+Multi-Arch: same
+Pre-Depends: ${misc:Pre-Depends}
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends}
+Replaces:
+ libswscale-extra-2
+Breaks:
+ libswscale-extra-2 (<< 5:0.8.1-2)
+Description: Ffmpeg video scaling library
+ Ffmpeg is a complete, cross-platform solution to decode, encode, record,
+ convert and stream audio and video.
+ .
+ This is the video software scaling library from Ffmpeg.
+
+Package: kaltura-ffmpegutil-dev
+Section: libdevel
+Architecture: any
+Depends:
+ kaltura-ffmpegutil52 (= ${binary:Version}),
+ ${misc:Depends}
+Description: Development files for kaltura-ffmpegutil
+ Ffmpeg is a complete, cross-platform solution to decode, encode, record,
+ convert and stream audio and video.
+ .
+ This is the common utility library from Ffmpeg.
+ .
+ This package contains the header files and static libraries needed to
+ compile applications or shared objects that use ffmpegutil.
+
+Package: kaltura-ffmpegcodec-dev
+Section: libdevel
+Architecture: any
+Depends:
+ kaltura-ffmpegcodec54 (<= ${source:Upstream-Version}-99) | kaltura-ffmpegcodec-extra-54 (<= ${source:Upstream-Version}-99),
+ kaltura-ffmpegcodec54 (>= ${binary:Version}) | kaltura-ffmpegcodec-extra-54 (>= ${binary:Version}),
+ kaltura-ffmpegutil-dev (= ${binary:Version}),
+ ${misc:Depends}
+Suggests:
+ libdc1394-22-dev [linux-any],
+ libgsm1-dev,
+ libogg-dev,
+ libraw1394-dev [linux-any],
+ libschroedinger-dev,
+ libspeex-dev,
+ libtheora-dev (>> 0.0.0.alpha4),
+ libvorbis-dev,
+ libx11-dev,
+ libxext-dev,
+ zlib1g-dev
+Description: Development files for kaltura-ffmpegcodec
+ Ffmpeg is a complete, cross-platform solution to decode, encode, record,
+ convert and stream audio and video.
+ .
+ This is the codec library from Ffmpeg. It supports most existing
+ encoding formats (MPEG, DivX, MPEG4, AC3, DV...).
+ .
+ This package contains the header files and static libraries needed to
+ compile applications or shared objects that use ffmpegcodec.
+
+Package: kaltura-ffmpegdevice-dev
+Section: libdevel
+Architecture: any
+Depends:
+ kaltura-ffmpegdevice53 (= ${binary:Version}),
+ kaltura-ffmpegformat-dev (= ${binary:Version}),
+ ${misc:Depends}
+Description: Development files for kaltura-ffmpegdevice
+ Ffmpeg is a complete, cross-platform solution to decode, encode, record,
+ convert and stream audio and video.
+ .
+ This is the device handling library from Ffmpeg.
+ .
+ This package contains the header files and static libraries needed to
+ compile applications or shared objects that use kaltura-ffmpegdevice.
+
+Package: kaltura-ffmpegformat-dev
+Section: libdevel
+Architecture: any
+Depends:
+ kaltura-ffmpegcodec-dev (= ${binary:Version}),
+ kaltura-ffmpegformat54 (= ${binary:Version}),
+ kaltura-ffmpegutil-dev (= ${binary:Version}),
+ ${misc:Depends}
+Description: Development files for kaltura-ffmpegformat
+ Ffmpeg is a complete, cross-platform solution to decode, encode, record,
+ convert and stream audio and video.
+ .
+ This is the demuxer library from Ffmpeg. It supports most
+ existing file formats (AVI, MPEG, OGG, Matroska, ASF...).
+ .
+ This package contains the header files and static libraries needed to
+ compile applications or shared objects that use kaltura-ffmpegformat.
+
+Package: kaltura-ffmpegfilter-dev
+Section: libdevel
+Architecture: any
+Depends:
+ kaltura-ffmpegcodec-dev (= ${binary:Version}),
+ kaltura-ffmpegfilter3 (= ${binary:Version}),
+ ${misc:Depends}
+Description: Development files for kaltura-ffmpegfilter
+ Ffmpeg is a complete, cross-platform solution to decode, encode, record,
+ convert and stream audio and video.
+ .
+ This is the video filtering library from Ffmpeg.
+ .
+ This package contains the header files and static libraries needed to
+ compile applications or shared objects that use kaltura-ffmpegfilter.
+
+Package: libswscale-dev
+Section: libdevel
+Architecture: any
+Depends:
+ kaltura-ffmpegutil-dev (= ${binary:Version}),
+ libswscale2 (= ${binary:Version}),
+ ${misc:Depends}
+Description: Development files for libswscale
+ Ffmpeg is a complete, cross-platform solution to decode, encode, record,
+ convert and stream audio and video.
+ .
+ This is the video scaling library from Ffmpeg.
+ .
+ This package contains the header files and static libraries needed to
+ compile applications or shared objects that use libswscale.
+
+Package: kaltura-ffmpegresample-dev
+Section: libdevel
+Architecture: any
+Depends:
+ kaltura-ffmpegutil-dev (= ${binary:Version}),
+ kaltura-ffmpegresample1 (= ${binary:Version}),
+ ${misc:Depends}
+Description: Development files for kaltura-ffmpegresample
+ Ffmpeg is a complete, cross-platform solution to decode, encode, record,
+ convert and stream audio and video.
+ .
+ This is the video scaling library from Ffmpeg.
+ .
+ This package contains the header files and static libraries needed to
+ compile applications or shared objects that use libswrescale.
+
+Package: kaltura-ffmpegresample1
+Architecture: any
+Multi-Arch: same
+Pre-Depends: ${misc:Pre-Depends}
+Replaces:
+ kaltura-ffmpegresample0
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends}
+Description: Ffmpeg audo resampling library
+ Ffmpeg is a complete, cross-platform solution to decode, encode, record,
+ convert and stream audio and video.
+ .
+ This is the audio software resampling library from Ffmpeg.
+
+Package: kaltura-ffmpegutil-extra-52
+Section: oldlibs
+Priority: extra
+Architecture: all
+Depends:
+ kaltura-ffmpegutil52,
+ ${misc:Depends},
+Description: Ffmpeg utility library (transitional package)
+ Ffmpeg is a complete, cross-platform solution to decode, encode, record,
+ convert and stream audio and video.
+ .
+ This package is only used for transitional purposes and can be safely
+ removed when no other packages depend on this package.
+
+Package: kaltura-ffmpegcodec-extra-54
+Architecture: any
+Multi-Arch: same
+Pre-Depends: ${misc:Pre-Depends}
+Depends:
+ ${misc:Depends},
+ ${shlibs:Depends}
+Description: Ffmpeg codec library (additional codecs)
+ Ffmpeg is a complete, cross-platform solution to decode, encode, record,
+ convert and stream audio and video.
+ .
+ This is the codec library from Ffmpeg (both encoding and decoding).
+ .
+ This package is a replacement for the regular kaltura-ffmpegcodec54 library package;
+ it contains the following additional codecs:
+ .
+  * OpenCORE Adaptive Multi-Rate (AMR) Narrow-Band (Encoder/Decoder)
+  * OpenCORE Adaptive Multi-Rate (AMR) Wide-Band (Decoder)
+  * Android VisualOn AAC (Encoder)
+  * Android VisualOn Adaptive Multi-Rate (AMR) Wide-Band (Encoder)
+ .
+ Because this package links against libraries that are licensed under
+ Apache License 2.0, the resulting binaries are distributed under the
+ GPL version 3 or later.
+
+Package: kaltura-ffmpegdevice-extra-53
+Section: oldlibs
+Priority: extra
+Architecture: all
+Depends:
+ kaltura-ffmpegdevice53,
+ ${misc:Depends},
+Description: Ffmpeg device handling library (transitional package)
+ Ffmpeg is a complete, cross-platform solution to decode, encode, record,
+ convert and stream audio and video.
+ .
+ This package is only used for transitional purposes and can be safely
+ removed when no other packages depend on this package.
+
+Package: kaltura-ffmpegfilter-extra-3
+Section: oldlibs
+Priority: extra
+Architecture: all
+Depends:
+ kaltura-ffmpegfilter3,
+ ${misc:Depends},
+Description: Ffmpeg filter library (transitional package)
+ Ffmpeg is a complete, cross-platform solution to decode, encode, record,
+ convert and stream audio and video.
+ .
+ This package is only used for transitional purposes and can be safely
+ removed when no other packages depend on this package.
+
+Package: kaltura-ffmpegformat-extra-54
+Section: oldlibs
+Priority: extra
+Architecture: all
+Depends:
+ kaltura-ffmpegformat54,
+ ${misc:Depends},
+Description: Ffmpeg file format library (transitional package)
+ Ffmpeg is a complete, cross-platform solution to decode, encode, record,
+ convert and stream audio and video.
+ .
+ This package is only used for transitional purposes and can be safely
+ removed when no other packages depend on this package.
+
+Package: libswscale-extra-2
+Section: oldlibs
+Priority: extra
+Architecture: all
+Depends:
+ libswscale2,
+ ${misc:Depends},
+Description: Ffmpeg video software scaling library (transitional package)
+ Ffmpeg is a complete, cross-platform solution to decode, encode, record,
+ convert and stream audio and video.
+ .
+ This package is only used for transitional purposes and can be safely
+ removed when no other packages depend on this package.
+
+Package: kaltura-ffmpegcodec-extra
+Priority: extra
+Architecture: all
+Depends:
+ kaltura-ffmpegcodec-extra-54,
+ ${misc:Depends},
+Description: Ffmpeg codec library (additional codecs meta-package)
+ Ffmpeg is a complete, cross-platform solution to decode, encode, record,
+ convert and stream audio and video.
+ .
+ This package depends on the latest version of the kaltura-ffmpegcodec variant
+ that offers additional codec support. Application packages can depend
+ on it if they require or suggest this variant in a robust manner.

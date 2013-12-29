@@ -1,0 +1,5 @@
+#!/bin/bash
+if [ "$1" = 0 ] ; then
+    /sbin/service kaltura-sphinx stop >/dev/null 2>&1
+    /sbin/chkconfig --del kaltura-sphinx
+fi

@@ -1,0 +1,3 @@
+#!/bin/bash
+/sbin/ldconfig
+chcon -t textrel_shlib_t /usr/lib64/libav{codec,device,format,util}.so.*.*.* &>/dev/null || :

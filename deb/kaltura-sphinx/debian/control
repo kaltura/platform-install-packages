@@ -1,0 +1,17 @@
+Source: kaltura-sphinx
+Section: alien
+Priority: extra
+Maintainer: Jess Portnoy <jess@Jess Portnoy <jess.portnoy@kaltura.com>>
+
+Package: kaltura-sphinx
+Architecture: amd64
+Depends: ${shlibs:Depends}
+Description: Sphinx full-text search server - for Kaltura
+ Sphinx is a full-text search server that adds many advanced features
+ on top of plain old text searching. Data can be fetched directly from
+ a database, or streamed in XML format. MySQL, PostgreSQL, SQL Server,
+ Oracle, and other databases are supported. Client programs can query
+ Sphinx either using native SphinxAPI library, or using regular MySQL
+ client programs and libraries via SQL-like SphinxQL interface.
+ .
+ (Converted from a rpm package by alien version 8.89.)

@@ -1,0 +1,37 @@
+#!/bin/bash
+ldconfig
+# register service
+if [ "$1" = 1 ];
+then
+    /sbin/chkconfig --add kaltura-sphinx
+fi
+
+# create user/group, and update permissions
+groupadd -r kaltura 2>/dev/null || true
+useradd -M -r -d /var/lib/sphinx -s /bin/bash -c "Sphinx server" -g kaltura kaltura 2>/dev/null || true
+usermod -g kaltura kaltura 2>/dev/null || true
+chown -R kaltura:kaltura /opt/kaltura/sphinx-2.2.1/var/lib/sphinx /opt/kaltura/sphinx-2.2.1/var/log/sphinx /opt/kaltura/sphinx-2.2.1/var/run/sphinx
+
+# print some further pointers
+echo
+echo "Sphinx installed!"
+echo "Now create a full-text index, start the search daemon, and you're all set."
+echo
+echo "To manage indexes:"
+echo "    editor /etc/sphinx/sphinx.conf"
+echo
+echo "To rebuild all disk indexes:"
+echo "    sudo -u sphinx indexer --all --rotate"
+echo
+echo "To start/stop search daemon:"
+echo "    service kaltura-sphinx start/stop"
+echo
+echo "To query search daemon using MySQL client:"
+echo "    mysql -h 0 -P 9306"
+echo "    mysql> SELECT * FROM test1 WHERE MATCH('test');"
+echo
+echo "See the manual at /usr/share/doc/sphinx-2.2.1 for details."
+echo
+echo "For commercial support please contact Sphinx Technologies Inc at"
+echo "http://sphinxsearch.com/contacts.html"
+echo
