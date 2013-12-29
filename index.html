@@ -6,62 +6,260 @@
 
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <!--link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" /-->
 
-    <title>Platform-install-packages by kaltura</title>
+    <title>Kaltura Installation RPM and deb Packages Project by kaltura</title>
   </head>
 
   <body>
 
     <header>
       <div class="container">
-        <h1>Platform-install-packages</h1>
-        <h2>Official deployment packages to install the Kaltura platform on a server or cluster environments using native OS package managers</h2>
+        <h1>Kaltura RPM &amp; deb Packages Project</h1>
+        <h2>To enable the of use standard Linux binary packages and package managers to deploy the Kaltura platform.</h2>
 
         <section id="downloads">
-          <a href="https://github.com/kaltura/platform-install-packages/zipball/master" class="btn">Download as .zip</a>
-          <a href="https://github.com/kaltura/platform-install-packages/tarball/master" class="btn">Download as .tar.gz</a>
-          <a href="https://github.com/kaltura/platform-install-packages" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+          <a href="https://github.com/kaltura/platform-install-packages" target="_blank" class="btn btn-github"><span class="icon"></span>The code repository</a>
         </section>
       </div>
     </header>
 
     <div class="container">
       <section id="main_content">
-        <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+          <h1>
+            <a name="project-goal" class="anchor" href="#project-goal"><span class="octicon octicon-link"></span></a>
+            Project Goal
+          </h1>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+          <p>To enable the of use standard Linux binary packages and package managers to deploy the Kaltura platform.</p>
+          
+          <ul>
+            <li class="starli">This project sole purpose is to create standard installation packages for the Kaltura platform. It will make the installation process far easier (compared to the existing PHP/bash installers) and allow users to use package managers (aptitude, yum, synaptic, kpackage, etc.) and install Kaltura as you would any other binary package for your Linux distribution.</li>
+            <li class="starli">A longer term goal of this project is to allow standard distribution of the Kaltura platform via the official distribution repositories.</li>
+          </ul>
+          
+          <br />
+          
+          <h2>
+            <a name="project-reasons" class="anchor" href="#project-reasons"><span class="octicon octicon-link"></span></a>
+            Why do we need package installers?
+          </h2>
+          
+          <p><a href="http://bit.ly/1cFFgGf" target="_blank">deb</a> and <a href="http://red.ht/1cFFhtI" target="_blank">RPM</a> are the de-facto standard for binary installations on Linux. Using this installation method will yield the following advantages to Kaltura admins:</p>
+          <ul>
+            <li>Compatibility with the industry standards for installing linux packages, simplifying prerequisites and platform installation and wider and easier package distribution.</li>
+            <li>Simplified upgrade flow using standard package manager commands.</li>
+            <li>Simplified patch deployment using standard package manager commands.</li>
+            <li>Clean and organized components versioning and changes-log using standard package manager commands.</li>
+            <li>Faster configuration post system upgrade - When upgrading, package managers would show a diff between current configuration files and the ones in the package.</li>
+          </ul>
+           
+          <br />
+          
+          <h2>
+            <a name="supported-distros" class="anchor" href="#supported-distros"><span class="octicon octicon-link"></span></a>
+            Which Linux distributions will be supported?
+          </h2>
+          
+          <p>Following results from a recent Kaltura community usage survey, we've set this project to target the most popular Linux distros among Kaltura users, which includes:</p>
+          <ul>
+            <li>Ubuntu versions 12.04 [LTS] and above.</li>
+            <li>RHEL/CentOS 5.n and 6.n, and Fedora-Core 18 and above.</li>
+          </ul>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
+          <span style="color: #666;font-style: italic;font-size:0.8em;">We would love to have every known linux distribution supported! However the reality is that there’s a lot of work in maintaining each package. We hope that the larger community could help port and extend the packages into more distros as the project progresses.</span>
+            
+          <p style="font-size:1em;">&nbsp;</p>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+          <h2>
+            <a name="project-phases" class="anchor" href="#project-phases"><span class="octicon octicon-link"></span></a>
+            Project stages and updates
+          </h2>
+          
+          <h3>
+            <a name="phase-a" class="anchor" href="#phase-a"><span class="octicon octicon-link"></span></a>
+            Phase A - Specifications & Definitions
+          </h3>
+          
+          <p>Creating specs for deb and RPM packages, we intend to break it down to different packages to achieve a modular setup allowing the ability to install only specific needed platform components, and to build a structure that will enable a cluster environment, distributed servers platform deployment and easier component updates/patching.</p>
+          
+          <h4>
+            <a name="packages-list" class="anchor" href="#packages-list"><span class="octicon octicon-link"></span></a>
+            The Kaltura Packages Are
+          </h4>
+          
+          <ul>
+            <li>Kaltura Common - files and actions needed by all Kaltura server roles.</li>
+            <li>Kaltura API node - files and actions needed for an API-Front server role.</li>
+            <li>Kaltura Sphinx node - files and actions needed for a Sphinx Kaltura Indexing server role.</li>
+            <li>Kaltura DB node - files and actions needed for a MySQL DB Kaltura server role.</li>
+            <li>Kaltura Streaming Server - files and actions needed for a Wowza/Red5 server and Kaltura’s Live server plugins.</li>
+            <li>Kaltura Data Warehouse - files and actions needed for the Kaltura analytics data warehouse server role.</li>
+            <li>Kaltura monitoring common - Linux distro independant shell and PHP scripts to monitor the Kaltura environment.</li>
+            <li>Kaltura monitoring Nagios  - Nagios specific configuration for monitoring Kaltura.</li>
+          </ul>
+          
+          <h3>
+            <a name="phase-b" class="anchor" href="#phase-b"><span class="octicon octicon-link"></span></a>
+            Phase B - Building The Packages
+          </h3>
+          
+          <p>At this phase the packages will be built according to each distro guidelines and requirements.<br />
+          <a href="http://bit.ly/1hMwe9O" target="_blank">Debian</a>, <a href="http://bit.ly/1lpcYiz" target="_blank">Ubuntu</a>, <a href="http://bit.ly/1fQL0Lx" target="_blank">Fedora</a>.</p>
+          <p>You can track the development, contribute and help review the packages at:</p>
+          <ul>
+            <li><a href="https://github.com/kaltura/platform-install-packages" target="_blank">RPM: RedHat/CentOS/Fedora</a>.</li>
+            <li><a href="https://github.com/kaltura/platform-install-packages" target="_blank">deb: Debian/Ubuntu</a>.</li>
+          </ul>
+          
+          <h3>
+            <a name="phase-c1" class="anchor" href="#phase-c1"><span class="octicon octicon-link"></span></a>
+            Phase C.1 - Writing A Post-Install Configuration Guide
+          </h3>
+          
+          <p>While the packages will provide a complete installation on the system, post-installation configuration is always required, especially in clustered/multi-server environments. At this phase we will perform initial testing, and focus on preparing all necessary instructions into a post-install system configuration guide for the sys-admin wanting to deploy Kaltura.</p>
+          
+          <h3>
+            <a name="phase-c2" class="anchor" href="#phase-c2"><span class="octicon octicon-link"></span></a>
+            Phase C.2 - Beta Repositories & Testing
+          </h3>
+          
+          <p>Deploying to a public repositories for Debian/Ubuntu and RedHat/CentOS/Fedora.<br />
+          At this phase admins who are not necessarily developers, and beta testers are welcome to run the package installation using package managers of their liking, submit bugs and feature requests, and help make the packages stable and ready for public release.</p>
+          
+          <h3>
+            <a name="phase-d" class="anchor" href="#phase-d"><span class="octicon octicon-link"></span></a>
+            Phase D - Official GA Release
+          </h3>
+          
+          <p>Calling all Kaltura admins in the community to install and test the release ready packages.<br />
+          This phase will also allow us to clean things up, prepare any needed documentation, and submit official requests to each official distro repositories (<a href="http://bit.ly/1lpdUng" target="_blank">Ubuntu</a>, <a href="http://bit.ly/Jlkm2G" target="_blank">Fedora</a> and <a href="http://bit.ly/1bv2YyI" target="_blank">Debian</a>).</p>
+          
+          <h3>
+            <a name="phase-e" class="anchor" href="#phase-e"><span class="octicon octicon-link"></span></a>
+            Phase E - Post-Install Script for Developer Environment
+          </h3>
+          
+          <p>Create a post install script that will pull updated source-code from the official github repositories and configure an all-in-one developer environment for core developers wanting to write server plugins or modify and test core files.</p>
+          
+          <br />
+          
+          <h2>
+            <a name="help-contribute" class="anchor" href="#help-contribute"><span class="octicon octicon-link"></span></a>
+            How can you help and contribute?
+          </h2>
+          
+          <p>This project has an open call-for-participation even before a single line of code was written. Why not wait till there’s at least an early alpha? Because the installation of Kaltura has been a major hurdle for everyone in the community, and we want to make sure you are involved from the very beginning - the deeper you get with the code, the better and more stable this project will be!<br />
+          On a weekly basis the community team will update this page with project progress, so you can stay up to date, but you can also watch the github repositories and get updates when new code is pushed.</p>
 
-<h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
+          <p>There will be a weekly <a href="http://bit.ly/kaltura-webchat" target="_blank">IRC (#kaltura on freenode.net)</a> meeting every Tuesday at 10am NY time, where we openly discuss project status and details.<br />
+          Join us at #kaltura on freenode and share your feedback, insights and ideas for the project!</p>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+          <p>If you’ve already dipped your toes in the code, got experience building linux packages and want to join the team - drop us a line at 
+          <script language='javascript' type='text/javascript'><!--
+            x = '&#64;';
+            eml = '&#99;&#111;&#109;&#109;&#117;&#110;&#105;&#116;&#121;' + x + '&#107;&#97;&#108;&#116;&#117;&#114;&#97;&#46;&#99;&#111;&#109;';
+            msg = '&#69;&#109;&#97;&#105;&#108;&#32;&#116;&#104;&#101;&#32;&#99;&#111;&#109;&#109;&#117;&#110;&#105;&#116;&#121;&#32;&#116;&#101;&#97;&#109;';
+            out = '<a class="cloak_eml" href="mailto:' + eml + '">' + msg + '</a>';
+            document.write(out);
+            // -->
+          </script>
+          .</p>
 
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
-
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
-
-<h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
-
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
-
-<h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+          <p>And, to submit bugs, patches or feature requests, please use the issue trackers:</p>
+          <ul>
+            <li><a href="https://github.com/kaltura/platform-install-packages/issues" target="_blank">RPM Package Issues Tracker</a>.</li>
+            <li><a href="https://github.com/kaltura/platform-install-packages/issues" target="_blank">deb Package Issues Tracker</a>.</li>
+          </ul>
+          
+          
+          <br />
+          
+          <h2>
+            <a name="questions-answers" class="anchor" href="#questions-answers"><span class="octicon octicon-link"></span></a>
+            Project Questions &amp; Answers
+          </h2>
+          
+          <ul class="questionanswerul">
+            <li class="questionanswerli">
+              <ul>
+                <li class="questionli">
+                  Under Specifications & Definitions, why did we decide to break the server roles the way we did and not in other ways?
+                </li>
+                <li class="answerli">
+                  We wish to support a full cluster setup and maintain a modular structure to allow for easier server roles and respected maintainance and updates.<br />
+                  The Kaltura architecture allows designating each server (or group of servers for more computing power and redundancy purposes) with its own dedicated role (batch, front, Sphinx, etc.) but it is also possible to have a server that has multiple or all roles assigned to it.<br />
+                  By creating a package for each server role, we allow for easy support of both setup types, and gain a modular structure that allows for simpler updating/patching each individual server role.<br />
+                  If you wish to assign only one role, install the package for that role (all packages will also automatically require the kaltura-common package to be installed by the linux package manager), if you wish to have an all-in-one server, simply install all packages.</li>
+              </ul>
+            </li>
+            
+            <li class="questionanswerli">
+              <ul>
+                <li class="questionli">
+                  Are we compiling the requirements (e.g. sphinx, ffmpeg) or relying on other applications already distributed in the official repositories?
+                </li>
+                <li class="answerli">
+                  For MySQL and PHP, we use standard packages from the distributions official repository.<br />
+                  For Sphinx and ffmpeg, this cannot be done because a robust and stable Kaltura deployment requires very particular versions, often because they are newer and include fixes for crucial bugs, and additional functionality.<br />
+                  Therefore, some libraries will be supplied as separate packages which the kaltura packages will depend on.<br />
+                  Note that these packages will be installed under the Kaltura directory structure and thus will not conflict or override the parallel packages from the official distribution repository.<br />
+                  Nevertheless, this is a good time to remind that video processing is a demanding task and should be on its own dedicated machine - it is not recommended to install Kaltura alongside other production software on the same machine.
+                </li>
+              </ul>
+            </li>
+            
+            <li class="questionanswerli">
+              <ul>
+                <li class="questionli">
+                  What are the usernames, groups and permissions each package configures, and why do we need them?
+                </li>
+                <li class="answerli">
+                  The Kaltura platform basically works with the following users:<br />
+                  <ul>
+                    <li>Apache user: the default one each distribution sets up - for Debian/Ubuntu it is ‘www-data’, for RHEL/CentOS/FC it is ‘apache’.</li>
+                    <li>The ‘kaltura’ user: used for running our Sphinx daemon, the populate daemon (responsible for syncing MySQL and Sphinx) and various other aiding scripts, like cache cleaning, etc.</li>
+                  </ul>
+                  For security purposes, none of the Kaltura processes will run as root.
+                </li>
+              </ul>
+            </li>
+            
+            <li class="questionanswerli">
+              <ul>
+                <li class="questionli">
+                  How about installing Kaltura using Chef or Puppet scripts? 
+                </li>
+                <li class="answerli">
+                  We also have plans to write some automation scripts for deploying and scaling Kaltura using tools such Chef or Puppet. This is not the focus of this project, drop us a line if working on such scripts yourself.
+                </li>
+              </ul>
+            </li>
+            
+            <li class="questionanswerli">
+              <ul>
+                <li class="questionli">
+                  What is Kaltura?
+                </li>
+                <li class="answerli">
+                  Kaltura is the world’s first Open Source Online Video Platform, transforming the way people work, learn, and entertain using online video. The Kaltura platform empowers media applications with advanced video management, publishing, and monetization tools that increase their reach and monetization and simplify their video operations. Kaltura improves productivity and interaction among millions of employees by providing enterprises powerful online video tools for boosting internal knowledge sharing, training, and collaboration, and for more effective marketing. Kaltura offers next generation learning for millions of students and teachers by providing educational institutions disruptive online video solutions for improved teaching, learning, and increased engagement across campuses and beyond. For more information visit: <a href="http://corp.kaltura.com" target="_blank">http://corp.kaltura.com</a>, <a href="http://www.kaltura.org" target="_blank">http://www.kaltura.org</a> and <a href="http://www.html5video.org" target="_blank">http://www.html5video.org</a>.
+                </li>
+              </ul>
+            </li>
+          </ul>
       </section>
     </div>
 
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
     
+      ga('create', 'UA-46733681-1', 'kaltura.github.io');
+      ga('send', 'pageview');
+    
+    </script>
+
   </body>
 </html>
