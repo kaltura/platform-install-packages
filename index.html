@@ -8,15 +8,15 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
     <!--link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" /-->
 
-    <title>Kaltura Installation RPM and deb Packages Project by kaltura</title>
+    <title>Kaltura Installation Packages Project</title>
   </head>
 
   <body>
 
     <header>
       <div class="container">
-        <h1>Kaltura RPM &amp; deb Packages Project</h1>
-        <h2>To enable the of use standard Linux binary packages and package managers to deploy the Kaltura platform.</h2>
+        <h1>Kaltura Installation Packages Project</h1>
+        <h2>To enable the of use standard binary packages and package managers to deploy the Kaltura platform.</h2>
 
         <section id="downloads">
           <a href="https://github.com/kaltura/platform-install-packages" target="_blank" class="btn btn-github"><span class="icon"></span>The code repository</a>
@@ -31,10 +31,10 @@
             Project Goal
           </h1>
 
-          <p>To enable the of use standard Linux binary packages and package managers to deploy the Kaltura platform.</p>
+          <p>To enable the of use standard binary packages and package managers to deploy the Kaltura platform.</p>
           
           <ul>
-            <li class="starli">This project sole purpose is to create standard installation packages for the Kaltura platform. It will make the installation process far easier (compared to the existing PHP/bash installers) and allow users to use package managers (aptitude, yum, synaptic, kpackage, etc.) and install Kaltura as you would any other binary package for your Linux distribution.</li>
+            <li class="starli">This project sole purpose is to create standard installation packages for the Kaltura platform. It will make the installation process far easier (compared to the existing PHP/bash installers) and allow users to use package managers (aptitude, yum, synaptic, kpackage, etc.) and install Kaltura as you would any other binary package in your operating system of choice.</li>
             <li class="starli">A longer term goal of this project is to allow standard distribution of the Kaltura platform via the official distribution repositories.</li>
           </ul>
           
@@ -53,6 +53,28 @@
             <li>Clean and organized components versioning and changes-log using standard package manager commands.</li>
             <li>Faster configuration post system upgrade - When upgrading, package managers would show a diff between current configuration files and the ones in the package.</li>
           </ul>
+          
+          <br />
+          
+          <h2>
+            <a name="why-linux-first" class="anchor" href="#why-linux-first"><span class="octicon octicon-link"></span></a>
+            Is this project only Linux focused?
+          </h2>
+          
+          <p>Since Kaltura is built mostly in PHP and platform independant technologies, it is theoretically possible to deploy Kaltura on any OS.<br />
+            In the longer term we would love for this project to expand beyond deb and RPM packages to other distributions and operating systems.<br />
+            However, since the majority of Kaltura users and, majority of servers on the web, are Linux based, this project is started off focusing only on deb and RPM packages.<br />
+            We will try as much as possible to keep a common folder and coding practices that will allow porting easier later.<br />
+            If you are using Kaltura on another distribution or operating system, and have experience in creating installation packages - your help and contribution to the project will be greatly appreciated!<br />
+            Drop us a line at <script language='javascript' type='text/javascript'><!--
+            x = '&#64;';
+            eml = '&#99;&#111;&#109;&#109;&#117;&#110;&#105;&#116;&#121;' + x + '&#107;&#97;&#108;&#116;&#117;&#114;&#97;&#46;&#99;&#111;&#109;';
+            msg = '&#69;&#109;&#97;&#105;&#108;&#32;&#116;&#104;&#101;&#32;&#99;&#111;&#109;&#109;&#117;&#110;&#105;&#116;&#121;&#32;&#116;&#101;&#97;&#109;';
+            out = '<a class="cloak_eml" href="mailto:' + eml + '">' + msg + '</a>';
+            document.write(out);
+            // -->
+          </script> if you'd like to join and contribute other package types!
+          </p>
            
           <br />
           
@@ -81,7 +103,7 @@
             Phase A - Specifications & Definitions
           </h3>
           
-          <p>Creating specs for deb and RPM packages, we intend to break it down to different packages to achieve a modular setup allowing the ability to install only specific needed platform components, and to build a structure that will enable a cluster environment, distributed servers platform deployment and easier component updates/patching.</p>
+          <p>Creating the package specifications, we intend to break it down to different packages to achieve a modular setup allowing the ability to install only specific needed platform components, and to build a structure that will enable a cluster environment, distributed servers platform deployment and easier component updates/patching.</p>
           
           <h4>
             <a name="packages-list" class="anchor" href="#packages-list"><span class="octicon octicon-link"></span></a>
@@ -166,10 +188,11 @@
           </script>
           .</p>
 
-          <p>And, to submit bugs, patches or feature requests, please use the issue trackers:</p>
+          <p>To submit bugs, patches or feature requests, please use the issue tracker,<br />
+          and make sure to tag your issue with the proper label to the package type you're testing/extending:</p>
           <ul>
-            <li><a href="https://github.com/kaltura/platform-install-packages/issues" target="_blank">RPM Package Issues Tracker</a>.</li>
-            <li><a href="https://github.com/kaltura/platform-install-packages/issues" target="_blank">deb Package Issues Tracker</a>.</li>
+            <li><a href="https://github.com/kaltura/platform-install-packages/issues?labels=RPM" target="_blank">RPM Package Issues Tracker</a>.</li>
+            <li><a href="https://github.com/kaltura/platform-install-packages/issues?labels=deb" target="_blank">deb Package Issues Tracker</a>.</li>
           </ul>
           
           
