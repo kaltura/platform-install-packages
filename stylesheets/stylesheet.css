@@ -262,6 +262,17 @@ hr {
   background: url("../images/blacktocat.png") 0 0 no-repeat;
 }
 
+.btn-kaltura .icon {
+  opacity: 0.6;
+  background: url("../images/kaltura16px.png") 0 0 no-repeat;
+}
+
+.btn-discuss .icon {
+  opacity: 0.6;
+  background: url("../images/discussion16px.png") 0 0 no-repeat;
+}
+
+
 /* Links
    a, a:hover, a:visited
 */
