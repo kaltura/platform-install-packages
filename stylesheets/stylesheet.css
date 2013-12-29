@@ -1,7 +1,7 @@
 body {
   margin: 0;
-  padding: 0;
-  background: #151515 url("../images/bkg.png") 0 0;
+  padding: 0 30px 0 30px;
+  background: #242424 none 0 0;
   color: #eaeaea;
   font: 16px;
   line-height: 1.5;
@@ -12,7 +12,7 @@ body {
 
 .container {
   width: 90%;
-  max-width: 600px;
+  max-width: 720px;
   margin: 0 auto;
 }
 
@@ -36,7 +36,7 @@ li {
 */
 
 header {
-  background: rgba(0, 0, 0, 0.1);
+  /*background: rgba(0, 0, 0, 0.1);*/
   width: 100%;
   border-bottom: 1px dashed #b5e853;
   padding: 20px 0;
@@ -141,6 +141,46 @@ ul li:before {
   margin-left: -37px;
   margin-right: 21px;
   line-height: 16px;
+}
+
+ul.questionanswerul {
+  padding: 0;
+}
+
+ul li.questionanswerli {
+  border-left: 2px groove #424242;
+  padding-left: 10px;
+}
+
+ul li.questionanswerli:before {
+  content: none;
+}
+
+ul li.questionli {
+  font-style: italic;
+}
+
+ul li.questionli:before {
+  content: "Question: ";
+  font-style: italic;
+  font-size: 1.1em;
+  display: block;
+}
+
+ul li.answerli {
+  margin-bottom: 25px;
+  margin-top: 10px;
+}
+
+ul li.answerli:before {
+  content: "Answer: ";
+  font-style: italic;
+  font-size: 1.1em;
+  display: block;
+}
+
+ul li.starli:before {
+  content: "★";
 }
 
 blockquote {
