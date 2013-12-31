@@ -1,5 +1,5 @@
-Summary: Kaltura Open Source Video Platform - batch server 
-Name: kaltura-batch
+Summary: Kaltura Open Source Video Platform - Analytics 
+Name: kaltura-dwh
 Version: 9.7.0
 Release: 1
 License: AGPLv3+
@@ -7,7 +7,7 @@ Group: Server/Platform
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires: kaltura-base, kaltura-ffmpeg, kaltura-ffmpeg-aux, php, httpd, sox, mencoder, ImageMagick, sshpass, php-pecl-memcached, php-mcrypt
+Requires: kaltura-base,java-1.7.0-openjdk 
 
 %description
 Kaltura is the world's first Open Source Online Video Platform, transforming the way people work, 
@@ -21,35 +21,23 @@ teachers by providing educational institutions disruptive online video solutions
 learning, and increased engagement across campuses and beyond. 
 For more information visit: http://corp.kaltura.com, http://www.kaltura.org and http://www.html5video.org.
 
-This package sets up a node to be a batch server.
 
+The Kaltura platform enables video management, publishing, syndication and monetization, 
+as well as providing a robust framework for managing rich-media applications, 
+and developing a variety of online workflows for video. 
+
+This package configures the Data Warehouse [DWH] analytics component. 
 
 %prep
 %setup -q
 
 %build
 
-%install
 
 %clean
 rm -rf %{buildroot}
 
-%post
-if [ "$1" = 1 ];
-then
-    /sbin/chkconfig --add kaltura-batch
-fi
-
-%preun
-if [ "$1" = 0 ] ; then
-    /sbin/service kaltura-batch stop >/dev/null 2>&1
-    /sbin/chkconfig --del kaltura-batch
-fi
-# create user/group, and update permissions
-chown -R %{sphinx_user}:%{sphinx_group} %{prefix}-%{version}/batch 
-
 %files
-
 
 %changelog
 * Mon Dec  23 2013 Jess Portnoy <jess.portnoy@kaltura.com> - 8.0-1
