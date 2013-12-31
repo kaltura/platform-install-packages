@@ -5,6 +5,7 @@ Maintainer: Jess Portnoy <jess.portnoy@kaltura.com>
 
 Package: kaltura-sphinx
 Architecture: amd64
+Build-Depends: debhelper (>= 7.0.50), autotools-dev, gawk, libmysqlclient-dev, libpq-dev, autoconf, libtool, automake, docbook-to-man, libexpat-dev, libstemmer-dev, dh-autoreconf, adduser 
 Depends: ${shlibs:Depends},libmysqlclient18,libmysqlclient-dev
 Description: Sphinx full-text search server - for Kaltura
  Sphinx is a full-text search server that adds many advanced features
