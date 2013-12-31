@@ -26,7 +26,7 @@ The Kaltura platform enables video management, publishing, syndication and monet
 as well as providing a robust framework for managing rich-media applications, 
 and developing a variety of online workflows for video. 
 
-This package configures the analytics component. 
+This package configures the Data Warehouse [DWH] analytics component. 
 
 %prep
 %setup -q
