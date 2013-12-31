@@ -7,7 +7,7 @@ Group: Server/Platform
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires: httpd, php, kaltura-base, kaltura-ffmpeg, ImageMagick, mencoder
+Requires: httpd, php, kaltura-base, kaltura-ffmpeg, ImageMagick, mencoder, memcached, php-pecl-memcached, php-mysql, php-pecl-apc, php-mcrypt
 
 %description
 Kaltura is the world's first Open Source Online Video Platform, transforming the way people work, 

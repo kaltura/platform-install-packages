@@ -16,6 +16,8 @@ URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 #BuildArch: noarch
 BuildRequires: unzip
+# monit
+Requires: rsync,mail,mysql,cronie
 
 %description
 Kaltura is the world's first Open Source Online Video Platform, transforming the way people work, 
