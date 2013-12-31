@@ -1,0 +1,3 @@
+/etc/apache2/sites-available/kaltura-api.conf
+/etc/apache2/sites-available/kaltura-kmc.conf
+/etc/apache2/sites-available/kaltura-admin-console.conf
