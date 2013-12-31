@@ -161,13 +161,9 @@ fi
 %files
 %defattr(-,root,root,-)
 %{prefix}-%{version}/share/man/man1/*
-#%{prefix}/lib/libre2.a
-#%{prefix}/lib/libre2.so
-#%{prefix}/lib/libre2.so.0
-#%{prefix}/lib/libre2.so.0.0.0
 %doc COPYING doc/sphinx.html doc/sphinx.txt sphinx-min.conf.dist sphinx.conf.dist example.sql
 %dir %{confdir}
-%config(noreplace) %{confdir}/kaltura_sphinx.conf.template
+#%config(missingok) %{confdir}/kaltura_sphinx.conf
 %config %{_sysconfdir}/profile.d/kaltura_sphinx.sh
 %exclude %{confdir}/*.conf.dist
 %exclude %{confdir}/example.sql

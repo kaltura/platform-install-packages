@@ -51,19 +51,22 @@ rm -rf %{buildroot}
 
 # create user/group, and update permissions
 groupadd -r %{sphinx_group} 2>/dev/null || true
-useradd -M -r -d /opt/kaltura -s /bin/bash -c "Sphinx server" -g %{kaltura_group} %{kaltura_user} 2>/dev/null || true
+useradd -M -r -d /opt/kaltura -s /bin/bash -c "Kaltura server" -g %{kaltura_group} %{kaltura_user} 2>/dev/null || true
 usermod -g %{kaltura_group} %{kaltura_user} 2>/dev/null || true
 chown -R %{kaltura_user}:%{sphinx_group} %{prefix}-%{version}/log %{prefix}-%{version}/cache 
+# now replace tokens
 
 %preun
 
 %files
 %{prefix}/app
-#%ghost %{prefix}/app/configurations/*.ini
-#%ghost %{prefix}/app/configurations/apache/*.conf
+%config(noreplace,missingok) %{prefix}/app/configurations/base.ini
+%config(noreplace,missingok) %{prefix}/app/configurations/local.ini
+%config(noreplace,missingok) %{prefix}/app/configurations/monit/monit.d/*.rc
+
 
 %dir %{prefix}/log
-%{prefix}/cache
+%dir %{prefix}/cache
 
 %changelog
 * Mon Dec  23 2013 Jess Portnoy <jess.portnoy@kaltura.com> - 8.0-1

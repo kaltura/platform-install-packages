@@ -39,6 +39,7 @@ if [ "$1" = 1 ];
 then
     /sbin/chkconfig --add kaltura-batch
 fi
+# now replace tokens
 
 %preun
 if [ "$1" = 0 ] ; then
@@ -49,6 +50,11 @@ fi
 chown -R %{sphinx_user}:%{sphinx_group} %{prefix}-%{version}/batch 
 
 %files
+%config(noreplace,missingok) /etc/php.d/kaltura.ini
+%config(noreplace,missingok) %{prefix}/app/configurations/batch/*.conf
+%config(noreplace,missingok) %{prefix}/app/configurations/batch/*.ini
+%config(noreplace,missingok) %{_sysconfdir}/php.d/kaltura-batch.ini
+%config(noreplace,missingok) %{prefix}/app/configurations/apache/conf.d/batch.conf
 
 
 %changelog

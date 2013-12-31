@@ -38,6 +38,10 @@ This package sets up a server as a front node.
 rm -rf %{buildroot}
 
 %files
+%config(noreplace,missingok) %{_sysconfdir}/php.d/kaltura-front.ini
+%config(noreplace,missingok) %{prefix}/app/configurations/apache/conf.d/api.conf
+%config(noreplace,missingok) %{prefix}/app/configurations/apache/conf.d/kmc.conf
+%config(noreplace,missingok) %{prefix}/app/configurations/apache/conf.d/admin-console.conf
 
 %changelog
 * Mon Dec  23 2013 Jess Portnoy <jess.portnoy@kaltura.com> - 8.0-1
