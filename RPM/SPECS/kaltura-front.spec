@@ -38,6 +38,7 @@ This package sets up a server as a front node.
 rm -rf %{buildroot}
 
 %files
+%config(noreplace,missingok) %{_sysconfdir}/php.d/kaltura.ini
 
 %changelog
 * Mon Dec  23 2013 Jess Portnoy <jess.portnoy@kaltura.com> - 8.0-1
