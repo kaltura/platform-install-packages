@@ -61,7 +61,6 @@ chown -R %{kaltura_user}:%{sphinx_group} %{prefix}-%{version}/log %{prefix}-%{ve
 %files
 %{prefix}/app
 %config(noreplace,missingok) %{prefix}/app/configurations/*.ini
-%config(noreplace,missingok) %{prefix}/app/configurations/apache/conf.d/*.conf
 %config(noreplace,missingok) %{prefix}/app/configurations/monit/monit.d/*.rc
 
 
