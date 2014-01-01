@@ -20,7 +20,7 @@
 
 %{?el6:%define _without_dc1394 1}
 %{?el6:%define _without_schroedinger 1}
-%{?el6:%define _without_speex 1}
+#%{?el6:%define _without_speex 1}
 %{?el6:%define _without_theora 1}
 
 %{?el5:%define _without_dc1394 1}
@@ -76,6 +76,7 @@ BuildRequires: zlib-devel
 %{!?_without_xvid:BuildRequires: xvidcore-devel}
 %{!?_without_a52dec:Requires: a52dec}
 BuildRequires: yasm-devel
+BuildRequires: libass-devel 
 
 %description
 FFmpeg is a very fast video and audio converter. It can also grab from a
@@ -94,11 +95,9 @@ quality polyphase filter.
 
 %build
 export CFLAGS="%{optflags}"
-# We should be using --disable-opts since configure is adding some default opts
-# to ours (-O3), but as of 20061215 the build fails on asm stuff when it's set
-    #--mandir="%{_mandir}" \
-    #--incdir="%{_includedir}" \
-    #--disable-avisynth \
+
+
+# ./configure --extra-cflags=-O2 --enable-bzlib --disable-devices --enable-libfaac --enable-libaacplus --enable-libgsm --enable-libmp3lame --enable-libschroedinger --enable-libtheora --enable-libvorbis --enable-libx264 --enable-libxvid --enable-filter=movie --enable-avfilter --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-libvpx --enable-libspeex --enable-libass --enable-postproc --enable-pthreads --disable-static --enable-shared --enable-gpl --disable-debug --disable-optimizations --disable-stripping --extra-cflags=-fPIC --extra-ldflags=-fPIC --enable-nonfree --enable-version3 --libdir=/usr/local/lib64
 ./configure \
     --prefix="%{base_prefix}-%{version}" \
     --libdir="%{base_prefix}-%{version}/lib" \
@@ -134,6 +133,10 @@ export CFLAGS="%{optflags}"
     --enable-swscale \
     --enable-vdpau \
     --enable-version3 \
+    --enable-bzlib \
+    --disable-devices \
+    --enable-filter=movie \
+    --enable-libass \
     --enable-x11grab
 
 %{__make} %{?_smp_mflags}

@@ -134,6 +134,9 @@ export CFLAGS="%{optflags}"
     --enable-swscale \
     --enable-vdpau \
     --enable-version3 \
+    --enable-bzlib \
+    --disable-devices \
+    --enable-filter=movie \
     --enable-x11grab
 
 %{__make} %{?_smp_mflags}
