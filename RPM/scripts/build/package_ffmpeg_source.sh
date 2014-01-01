@@ -1,4 +1,4 @@
-#!/bin/bash - 
+#!/bin/bash -e 
 #===============================================================================
 #          FILE: package_ffmpeg_source.sh
 #         USAGE: ./package_ffmpeg_source.sh 
@@ -16,7 +16,7 @@
 #set -o nounset                              # Treat unset variables as an error
 
 if [ ! -x `which curl 2>/dev/null` ];then
-	echo "Need to install subversion."
+	echo "Need to install curl."
 	exit 2
 fi
 
