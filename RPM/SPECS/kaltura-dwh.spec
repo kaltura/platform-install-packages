@@ -7,7 +7,7 @@ Group: Server/Platform
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires: kaltura-base,java-1.7.0-openjdk 
+Requires: kaltura-base,kaltura-pentaho,java-1.7.0-openjdk 
 
 %description
 Kaltura is the world's first Open Source Online Video Platform, transforming the way people work, 
@@ -40,5 +40,5 @@ rm -rf %{buildroot}
 %files
 
 %changelog
-* Mon Dec  23 2013 Jess Portnoy <jess.portnoy@kaltura.com> - 8.0-1
+* Mon Dec  23 2013 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-1
 - First package
