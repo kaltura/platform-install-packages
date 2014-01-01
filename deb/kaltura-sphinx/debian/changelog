@@ -1,7 +1,5 @@
 kaltura-sphinx (2.2.1-2) experimental; urgency=low
-
-  * Converted from .rpm format to .deb by alien version 8.89
   
   First build.
 
- -- Jess Portnoy <jess@Jess Portnoy <jess.portnoy@kaltura.com>>  Thu, 26 Dec 2013 18:00:33 +0200
+ -- Jess Portnoy <jess.portnoy@kaltura.com>  Thu, 26 Dec 2013 18:00:33 +0200
