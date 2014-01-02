@@ -106,6 +106,9 @@ fi
 
 
 %changelog
+* Thu Jan 2 2013 Jess Portnoy <jess.portnoy@kaltura.com> - 5.6.2
+- Corrected daemon name to be 'kaltura-monit'
+
 * Thu Jan 2 2013 Jess Portnoy <jess.portnoy@kaltura.com> - 5.6.1
 - This package was originally taken from the Dag repo.
 - The reason for creating kaltura-monit
