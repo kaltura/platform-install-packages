@@ -16,7 +16,7 @@ Vendor:         Sphinx Technologies Inc.
 Packager:       Kaltura Inc.
 
 Source0:       	%{name}-%{version}.tar.gz 
-Source1:        %{name}.init
+Source1: 	%{name}
 Source2:	http://snowball.tartarus.org/dist/libstemmer_c.tgz
 Source3:	re2.tar.gz
 Source4:	kaltura.conf.template
@@ -80,16 +80,11 @@ mkdir -p $RPM_BUILD_ROOT%{prefix}-%{version}/run/sphinx
 # Create /var/lib/sphinx
 mkdir -p $RPM_BUILD_ROOT%{prefix}-%{version}/lib/sphinx
 
-# Create sphinx.conf
-install -p -D -m 0644 %{SOURCE4} \
-    $RPM_BUILD_ROOT%{confdir}/kaltura_sphinx.conf.template
-
-# Copy the test suite
 
 # Create /etc/logrotate.d/sphinx
 mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/logrotate.d
 cat > $RPM_BUILD_ROOT%{_sysconfdir}/logrotate.d/sphinx << EOF
-/var/log/sphinx/*.log {
+%{prefix}-%{version}/log/sphinx/*.log {
        weekly
        rotate 10
        copytruncate
@@ -169,7 +164,6 @@ fi
 %{prefix}-%{version}/bin/*
 %dir %{prefix}-%{version}/log/sphinx
 %dir %{prefix}-%{version}/run/sphinx
-#%exclude %{prefix}-%{version}/libstemmer_c/include
 
 
 
