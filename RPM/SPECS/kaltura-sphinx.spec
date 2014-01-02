@@ -5,6 +5,7 @@
 %define sphinx_user kaltura
 %define sphinx_group kaltura
 %define prefix	/opt/kaltura/sphinx
+# this isn't really a stand location for placing conf files but we wish to remain compatible with the current config dir tree used by Kaltura
 %define confdir	/opt/kaltura/app/configurations/sphinx
 
 Name:           kaltura-sphinx

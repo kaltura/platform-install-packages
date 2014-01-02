@@ -1,6 +1,3 @@
-# $Id: ffmpeg.spec 9308 2010-11-18 23:05:33Z dag $
-# Authority: dag
-
 %define base_prefix /opt/kaltura/ffmpeg
 %define _without_gsm 1
 %define _without_nut 1
@@ -164,6 +161,7 @@ EOF
 %post
 /sbin/ldconfig
 chcon -t textrel_shlib_t %{_libdir}/libav{codec,device,format,util}.so.*.*.* &>/dev/null || :
+ln -s %{base_prefix}-%{version}/bin/ffmpeg /opt/kaltura/bin/ffmpeg-aux 
 
 %postun -p /sbin/ldconfig
 

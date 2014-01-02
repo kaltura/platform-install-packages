@@ -1,3 +1,4 @@
+%define prefix /opt/kaltura
 Summary: Kaltura Open Source Video Platform - frontend server 
 Name: kaltura-front
 Version: 9.7.0
@@ -35,17 +36,20 @@ This package sets up a server as a front node.
 %prep
 %setup -q
 
-%build
+%install
+%define kmc_version `grep kmc_version | awk -F "="  '{print $2}'|sed 's@\s*@@g'`
 
 
 %clean
 rm -rf %{buildroot}
 
 %files
-%config(noreplace,missingok) %{_sysconfdir}/php.d/kaltura-front.ini
-%config(noreplace,missingok) %{prefix}/app/configurations/apache/conf.d/kaltura-api.conf
-%config(noreplace,missingok) %{prefix}/app/configurations/apache/conf.d/kaltura-kmc.conf
-%config(noreplace,missingok) %{prefix}/app/configurations/apache/conf.d/kaltura-admin-console.conf
+%config %{_sysconfdir}/php.d/kaltura-front.ini
+%config %{prefix}/app/configurations/apache/conf.d/kaltura-api.conf
+%config %{prefix}/app/configurations/apache/conf.d/kaltura-kmc.conf
+%config %{prefix}/app/configurations/apache/conf.d/kaltura-admin-console.conf
+%config %{prefix}/web/flash/kmc/%{kmc_version}/config.template.ini
+%config %{prefix}/html5/html5lib/v*/LocalSettings.php.template
 
 %changelog
 * Mon Dec  23 2013 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-1

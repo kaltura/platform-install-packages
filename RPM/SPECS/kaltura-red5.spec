@@ -63,6 +63,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %attr(0755,root,root) %dir %{red5_log}
 
+#@BIN_DIR@/red5/*.template
+#@BIN_DIR@/red5/conf/*.template.xml
+
 %post
 /sbin/chkconfig --add red5
 

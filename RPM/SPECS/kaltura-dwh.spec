@@ -38,6 +38,8 @@ This package configures the Data Warehouse [DWH] analytics component.
 rm -rf %{buildroot}
 
 %files
+#cron/dwh.template
+#.kettle/kettle.template.properties
 
 %changelog
 * Mon Dec  23 2013 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-1

@@ -59,10 +59,18 @@ chown -R %{kaltura_user}:%{sphinx_group} %{prefix}-%{version}/log %{prefix}-%{ve
 
 %files
 %{prefix}/app
-%config(noreplace,missingok) %{prefix}/app/configurations/base.ini
-%config(noreplace,missingok) %{prefix}/app/configurations/local.ini
-%config(noreplace,missingok) %{prefix}/app/configurations/monit/monit.d/*.rc
+%config %{prefix}/app/configurations/base.ini
+%config %{prefix}/app/configurations/local.template.ini
+%config %{prefix}/app/configurations/cron/api.template
 
+#token_files[] = @APP_DIR@/configurations/logrotate/kaltura_*.template
+#token_files[] = @APP_DIR@/deployment/base/scripts/init_content/*.template.xml
+#token_files[] = @APP_DIR@/deployment/base/scripts/init_data/*.template.ini
+#token_files[] = @APP_DIR@/plugins/sphinx_search/scripts/configs/server-sphinx.php.template
+#token_files[] = @APP_DIR@/tests/monitoring/config.template.ini
+#token_files[] = @APP_DIR@/tests/sanity/lib/*.template.ini
+#token_files[] = @DWH_DIR@/.kettle/kettle.template.properties
+#token_files[] = dbSchema/db.template.xml
 
 %dir %{prefix}/log
 %dir %{prefix}/cache

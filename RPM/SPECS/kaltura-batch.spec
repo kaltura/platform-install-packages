@@ -43,7 +43,10 @@ if [ "$1" = 1 ];
 then
     /sbin/chkconfig --add kaltura-batch
 fi
-# now replace tokens
+
+
+# "@BIN_DIR@/run/run-segmenter.sh^@BIN_DIR@/segmenter"
+# configurations/monit/monit.d/enabled.batch.rc"
 
 %preun
 if [ "$1" = 0 ] ; then
@@ -54,11 +57,9 @@ fi
 chown -R %{sphinx_user}:%{sphinx_group} %{prefix}-%{version}/batch 
 
 %files
-%config(noreplace,missingok) /etc/php.d/kaltura.ini
-%config(noreplace,missingok) %{prefix}/app/configurations/batch/*.conf
-%config(noreplace,missingok) %{prefix}/app/configurations/batch/*.ini
-%config(noreplace,missingok) %{_sysconfdir}/php.d/kaltura-batch.ini
-%config(noreplace,missingok) %{prefix}/app/configurations/apache/conf.d/batch.conf
+%config(noreplace,missingok) /etc/php.d/zz-%{name}.ini
+%config(noreplace,missingok) %{prefix}/app/configurations/batch/batch.ini.template
+%config(noreplace,missingok) %{prefix}/app/configurations/batch/scheduler.conf.template
 
 
 %changelog
