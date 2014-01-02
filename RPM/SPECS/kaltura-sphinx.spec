@@ -1,7 +1,3 @@
-#
-# spec file for sphinx 
-#
-
 %define sphinx_user kaltura
 %define sphinx_group kaltura
 %define prefix	/opt/kaltura/sphinx

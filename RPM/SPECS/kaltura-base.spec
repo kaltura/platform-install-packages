@@ -39,9 +39,18 @@ This is the base package, needed for any Kaltura server role.
 mkdir -p $RPM_BUILD_ROOT%{prefix}/log
 mkdir -p $RPM_BUILD_ROOT%{prefix}/app
 mkdir -p $RPM_BUILD_ROOT%{prefix}/cache
+mkdir -p $RPM_BUILD_ROOT/etc/kaltura.d
 for i in admin_console alpha api_v3 batch configurations deployment generator infra plugins start tests ui_infra var_console vendor;do 
 	mv  %{_builddir}/%{name}-%{version}/$i $RPM_BUILD_ROOT/%{prefix}/app
 done
+# now replace tokens
+sed 's#WEB_DIR=@WEB_DIR@#WEB_DIR=%{prefix}/web#' $RPM_BUILD_ROOT/%{prefix}/app/configurations/system.template.ini > $RPM_BUILD_ROOT/%{prefix}/app/configurations/system.ini
+sed 's#LOG_DIR=@LOG_DIR@#LOG_DIR=%{prefix}/log#' $RPM_BUILD_ROOT/%{prefix}/app/configurations/system.template.ini > $RPM_BUILD_ROOT/%{prefix}/app/configurations/system.ini
+sed 's#APP_DIR=@LOG_DIR@#APP_DIR=%{prefix}/app#' $RPM_BUILD_ROOT/%{prefix}/app/configurations/system.template.ini > $RPM_BUILD_ROOT/%{prefix}/app/configurations/system.ini
+sed 's#BASE_DIR=@BASE_DIR@#BASE_DIR=%{prefix}#' $RPM_BUILD_ROOT/%{prefix}/app/configurations/system.template.ini > $RPM_BUILD_ROOT/%{prefix}/app/configurations/system.ini
+sed 's#OS_KALTURA_USER=@OS_KALTURA_USER@#OS_KALTURA_USER=%{kaltura_user}#' $RPM_BUILD_ROOT/%{prefix}/app/configurations/system.template.ini > $RPM_BUILD_ROOT/%{prefix}/app/configurations/system.ini
+sed 's#PHP_BIN=@PHP_BIN@#PHP_BIN=%{_bindir}/php#' $RPM_BUILD_ROOT/%{prefix}/app/configurations/system.template.ini > $RPM_BUILD_ROOT/%{prefix}/app/configurations/system.ini
+rm $RPM_BUILD_ROOT/%{prefix}/app/generator/sources/android/DemoApplication/libs/libWVphoneAPI.so
 
 %clean
 rm -rf %{buildroot}
@@ -53,23 +62,26 @@ groupadd -r %{sphinx_group} 2>/dev/null || true
 useradd -M -r -d /opt/kaltura -s /bin/bash -c "Kaltura server" -g %{kaltura_group} %{kaltura_user} 2>/dev/null || true
 usermod -g %{kaltura_group} %{kaltura_user} 2>/dev/null || true
 chown -R %{kaltura_user}:%{sphinx_group} %{prefix}-%{version}/log %{prefix}-%{version}/cache 
-# now replace tokens
+ln -sf %{prefix}/app/configurations/system.ini /etc/kaltura.d/system.ini
 
 %preun
 
+%postun
+rm /etc/kaltura.d/system.ini
+
 %files
-%{prefix}/app
+%dir %{prefix}/app
 %config %{prefix}/app/configurations/base.ini
 %config %{prefix}/app/configurations/local.template.ini
 %config %{prefix}/app/configurations/cron/api.template
+%config %{prefix}/app/configurations/system.ini
+%config %{prefix}/app/configurations/system.template.ini
+%dir /etc/kaltura.d
 
 #token_files[] = @APP_DIR@/configurations/logrotate/kaltura_*.template
 #token_files[] = @APP_DIR@/deployment/base/scripts/init_content/*.template.xml
 #token_files[] = @APP_DIR@/deployment/base/scripts/init_data/*.template.ini
 #token_files[] = @APP_DIR@/plugins/sphinx_search/scripts/configs/server-sphinx.php.template
-#token_files[] = @APP_DIR@/tests/monitoring/config.template.ini
-#token_files[] = @APP_DIR@/tests/sanity/lib/*.template.ini
-#token_files[] = @DWH_DIR@/.kettle/kettle.template.properties
 #token_files[] = dbSchema/db.template.xml
 
 %dir %{prefix}/log

@@ -12,6 +12,7 @@ Requires(post): chkconfig
 Requires(preun): chkconfig
 # This is for /sbin/service
 Requires(preun): initscripts
+BuildArch: noarch
 
 %description
 Kaltura is the world's first Open Source Online Video Platform, transforming the way people work, 

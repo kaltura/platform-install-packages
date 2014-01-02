@@ -8,6 +8,7 @@ Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires: kaltura-base,kaltura-pentaho,java-1.7.0-openjdk 
+BuildArch: noarch
 
 %description
 Kaltura is the world's first Open Source Online Video Platform, transforming the way people work, 
