@@ -5,7 +5,11 @@ Version: 9.7.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
-Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
+Source0: kaltura-api.conf
+Source1: kaltura-kmc.conf
+Source2: kaltura-admin-console.conf
+Source3: zz-%{name}.ini 
+
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires: httpd, php, kaltura-base, kaltura-ffmpeg, ImageMagick, mencoder, memcached, php-pecl-memcached, php-mysql, php-pecl-apc, php-mcrypt
@@ -13,6 +17,7 @@ Requires(post): chkconfig
 Requires(preun): chkconfig
 # This is for /sbin/service
 Requires(preun): initscripts
+BuildArch: noarch
 
 %description
 Kaltura is the world's first Open Source Online Video Platform, transforming the way people work, 
@@ -33,23 +38,26 @@ and developing a variety of online workflows for video.
 
 This package sets up a server as a front node.
 
-%prep
-%setup -q
+#%prep
+#%setup -q
 
 %install
-%define kmc_version `grep kmc_version | awk -F "="  '{print $2}'|sed 's@\s*@@g'`
+mkdir -p $RPM_BUILD_ROOT/%{_sysconfdir}/httpd/conf.d
+cp %{SOURCE0} %{SOURCE1} %{SOURCE2} $RPM_BUILD_ROOT/%{_sysconfdir}/httpd/conf.d
+mkdir -p $RPM_BUILD_ROOT/%{_sysconfdir}/php.d
+cp %{SOURCE3} $RPM_BUILD_ROOT/%{_sysconfdir}/php.d
 
+%post
+service httpd restart
 
 %clean
 rm -rf %{buildroot}
 
 %files
-%config %{_sysconfdir}/php.d/kaltura-front.ini
-%config %{prefix}/app/configurations/apache/conf.d/kaltura-api.conf
-%config %{prefix}/app/configurations/apache/conf.d/kaltura-kmc.conf
-%config %{prefix}/app/configurations/apache/conf.d/kaltura-admin-console.conf
-%config %{prefix}/web/flash/kmc/%{kmc_version}/config.template.ini
-%config %{prefix}/html5/html5lib/v*/LocalSettings.php.template
+%config %{_sysconfdir}/php.d/zz-%{name}.ini
+%config %{_sysconfdir}/httpd/conf.d/kaltura-api.conf
+%config %{_sysconfdir}/httpd/conf.d/kaltura-kmc.conf
+%config %{_sysconfdir}/httpd/conf.d/kaltura-admin-console.conf
 
 %changelog
 * Mon Dec  23 2013 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-1
