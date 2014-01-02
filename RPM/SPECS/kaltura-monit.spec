@@ -6,7 +6,7 @@
 Summary: Process monitor and restart utility
 Name: kaltura-monit
 Version: 5.6
-Release: 1
+Release: 2 
 License: GPLv3
 Group: High Availability Management 
 URL: http://mmonit.com/monit/
@@ -70,7 +70,7 @@ if ! /usr/bin/id monit &>/dev/null; then
 fi
 
 %post
-/sbin/chkconfig --add monit
+/sbin/chkconfig --add kaltura-monit
 
 # Moving old style configuration file to conf standard location
 if [ -f %{confdir}/monitrc ]; then
@@ -79,8 +79,8 @@ fi
 
 %preun
 if [ $1 -eq 0 ]; then
-	service monit stop &>/dev/null || :
-	/sbin/chkconfig --del monit
+	service kaltura-monit stop &>/dev/null || :
+	/sbin/chkconfig --del kaltura-monit
 fi
 
 %postun
