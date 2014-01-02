@@ -51,6 +51,7 @@ sed 's#BASE_DIR=@BASE_DIR@#BASE_DIR=%{prefix}#' $RPM_BUILD_ROOT/%{prefix}/app/co
 sed 's#OS_KALTURA_USER=@OS_KALTURA_USER@#OS_KALTURA_USER=%{kaltura_user}#' $RPM_BUILD_ROOT/%{prefix}/app/configurations/system.template.ini > $RPM_BUILD_ROOT/%{prefix}/app/configurations/system.ini
 sed 's#PHP_BIN=@PHP_BIN@#PHP_BIN=%{_bindir}/php#' $RPM_BUILD_ROOT/%{prefix}/app/configurations/system.template.ini > $RPM_BUILD_ROOT/%{prefix}/app/configurations/system.ini
 rm $RPM_BUILD_ROOT/%{prefix}/app/generator/sources/android/DemoApplication/libs/libWVphoneAPI.so
+rm $RPM_BUILD_ROOT/%{prefix}/app/configurations/.project
 
 %clean
 rm -rf %{buildroot}
@@ -70,12 +71,29 @@ ln -sf %{prefix}/app/configurations/system.ini /etc/kaltura.d/system.ini
 rm /etc/kaltura.d/system.ini
 
 %files
-%dir %{prefix}/app
-%config %{prefix}/app/configurations/base.ini
-%config %{prefix}/app/configurations/local.template.ini
-%config %{prefix}/app/configurations/cron/api.template
-%config %{prefix}/app/configurations/system.ini
-%config %{prefix}/app/configurations/system.template.ini
+%{prefix}/app/admin_console
+%{prefix}/app/var_console
+%{prefix}/app/alpha
+%{prefix}/app/api_v3
+%{prefix}/app/batch
+%{prefix}/app/deployment
+%{prefix}/app/generator
+%{prefix}/app/infra
+%{prefix}/app/ui_infra
+%{prefix}/app/plugins
+%{prefix}/app/start
+%{prefix}/app/vendor
+%{prefix}/app/tests
+
+%config %{prefix}/app/configurations/*
+
+
+
+#%config %{prefix}/app/configurations/base.ini
+#%config %{prefix}/app/configurations/local.template.ini
+#%config %{prefix}/app/configurations/cron/api.template
+#%config %{prefix}/app/configurations/system.ini
+#%config %{prefix}/app/configurations/system.template.ini
 %dir /etc/kaltura.d
 
 #token_files[] = @APP_DIR@/configurations/logrotate/kaltura_*.template

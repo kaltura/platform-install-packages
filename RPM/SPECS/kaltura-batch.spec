@@ -1,10 +1,12 @@
+%define prefix /opt/kaltura
 Summary: Kaltura Open Source Video Platform - batch server 
 Name: kaltura-batch
 Version: 9.7.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
-Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
+#Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
+Source0: zz-%{name}.ini
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires: kaltura-base, kaltura-ffmpeg, kaltura-ffmpeg-aux, php, httpd, sox, mencoder, ImageMagick, sshpass, php-pecl-memcached, php-mcrypt
@@ -29,12 +31,15 @@ For more information visit: http://corp.kaltura.com, http://www.kaltura.org and 
 This package sets up a node to be a batch server.
 
 
-%prep
-%setup -q
+#%prep
+#%setup -q
 
 %build
 
 %install
+mkdir -p $RPM_BUILD_ROOT/%{_sysconfdir}/php.d
+cp %{SOURCE0} $RPM_BUILD_ROOT/%{_sysconfdir}/php.d/zz-%{name}.ini
+sed 's#WEB_DIR=@WEB_DIR@#WEB_DIR=%{prefix}/web#' $RPM_BUILD_ROOT/%{_sysconfdir}/php.d/zz-%{name}.ini
 
 %clean
 rm -rf %{buildroot}
@@ -58,11 +63,9 @@ fi
 chown -R %{sphinx_user}:%{sphinx_group} %{prefix}-%{version}/batch 
 
 %files
-%config(noreplace,missingok) /etc/php.d/zz-%{name}.ini
-%config(noreplace,missingok) %{prefix}/app/configurations/batch/batch.ini.template
-%config(noreplace,missingok) %{prefix}/app/configurations/batch/scheduler.conf.template
+%config /etc/php.d/zz-%{name}.ini
 
 
 %changelog
-* Mon Dec  23 2013 Jess Portnoy <jess.portnoy@kaltura.com> - 8.0-1
+* Mon Dec  23 2013 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-1
 - First package
