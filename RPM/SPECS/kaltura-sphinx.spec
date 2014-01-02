@@ -15,7 +15,7 @@ Summary:        Sphinx full-text search server - for Kaltura
 Group:          Applications/Text
 License:        GPLv2
 URL:            http://sphinxsearch.com
-Vendor:         Kaltura Inc.
+Vendor:         Sphinx Technologies Inc.
 Packager:       Kaltura Inc.
 
 Source0:       	%{name}-%{version}.tar.gz 

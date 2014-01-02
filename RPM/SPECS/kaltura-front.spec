@@ -8,6 +8,10 @@ Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires: httpd, php, kaltura-base, kaltura-ffmpeg, ImageMagick, mencoder, memcached, php-pecl-memcached, php-mysql, php-pecl-apc, php-mcrypt
+Requires(post): chkconfig
+Requires(preun): chkconfig
+# This is for /sbin/service
+Requires(preun): initscripts
 
 %description
 Kaltura is the world's first Open Source Online Video Platform, transforming the way people work, 
@@ -44,5 +48,5 @@ rm -rf %{buildroot}
 %config(noreplace,missingok) %{prefix}/app/configurations/apache/conf.d/kaltura-admin-console.conf
 
 %changelog
-* Mon Dec  23 2013 Jess Portnoy <jess.portnoy@kaltura.com> - 8.0-1
+* Mon Dec  23 2013 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-1
 - First package

@@ -1,4 +1,4 @@
-%define prefix /usr/local/pentaho 
+%define prefix /opt/kaltura/bin/pentaho 
 
 Name:		kaltura-pentaho
 Version:	4.2.1
@@ -24,6 +24,7 @@ Pentaho Open Source Data Integration Community Edition (CE).
 
 
 %install
+mkdir -p $RPM_BUILD_ROOT%{prefix}
 
 
 %clean
