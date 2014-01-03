@@ -17,7 +17,6 @@ Source0:        http://pecl.php.net/get/ssh2-%{version}.tgz
 Source1:        PHP-LICENSE-3.01
 Source2:        php-pecl-ssh2-0.10-README
 
-#Patch0:         ssh2-php53.patch
 
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -48,7 +47,7 @@ libssh2 is available from http://www.sourceforge.net/projects/libssh2
 %{__install} -m 644 -c %{SOURCE2} README
 
 cd %{pecl_name}-%{version}
-#%patch0 -p0 -b .php53
+
 
 
 %build
@@ -93,7 +92,6 @@ EOF
 
 * Thu Jan 14 2010 Chris Weyl <cweyl@alumni.drew.edu> 0.11.0-6
 - bump for libssh2 rebuild
-
 
 * Mon Sep 21 2009 Chris Weyl <cweyl@alumni.drew.edu> - 0.11.0-5
 - rebuild for libssh2 1.2
