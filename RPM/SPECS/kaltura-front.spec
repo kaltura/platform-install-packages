@@ -1,4 +1,7 @@
 %define prefix /opt/kaltura
+%define kaltura_user	kaltura
+%define kaltura_group	kaltura
+%define apache_user	apache
 Summary: Kaltura Open Source Video Platform - frontend server 
 Name: kaltura-front
 Version: 9.7.0
@@ -48,6 +51,8 @@ mkdir -p $RPM_BUILD_ROOT/%{_sysconfdir}/php.d
 cp %{SOURCE3} $RPM_BUILD_ROOT/%{_sysconfdir}/php.d
 
 %post
+chown %{kaltura_user}:%{apache_group} %{prefix}/log 
+chmod 775 %{prefix}/log
 service httpd restart
 
 %clean
@@ -62,3 +67,6 @@ rm -rf %{buildroot}
 %changelog
 * Mon Dec  23 2013 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-1
 - First package
+
+* Fri Jan 3 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-2
+- Added chown and chmod on log dir.

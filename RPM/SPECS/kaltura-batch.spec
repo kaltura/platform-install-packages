@@ -1,4 +1,7 @@
 %define prefix /opt/kaltura
+%define kaltura_user	kaltura
+%define kaltura_group	kaltura
+%define apache_user	apache
 Summary: Kaltura Open Source Video Platform - batch server 
 Name: kaltura-batch
 Version: 9.7.0
@@ -50,6 +53,10 @@ then
     /sbin/chkconfig --add kaltura-batch
 fi
 
+chown %{kaltura_user}:%{kaltura_group} %{prefix}/log 
+chown %{kaltura_user}:%{apache_group} %{prefix}/batch
+chmod 775 %{prefix}/log
+
 
 # "@BIN_DIR@/run/run-segmenter.sh^@BIN_DIR@/segmenter"
 # configurations/monit/monit.d/enabled.batch.rc"
@@ -59,13 +66,14 @@ if [ "$1" = 0 ] ; then
     /sbin/service kaltura-batch stop >/dev/null 2>&1
     /sbin/chkconfig --del kaltura-batch
 fi
-# create user/group, and update permissions
-chown -R %{sphinx_user}:%{sphinx_group} %{prefix}-%{version}/batch 
 
 %files
 %config /etc/php.d/zz-%{name}.ini
 
 
 %changelog
-* Mon Dec  23 2013 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-1
-- First package
+* Mon Dec 23 2013 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-1
+- First package.
+
+* Fri Jan 3 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-2
+- Added chown on log and batch dir.
