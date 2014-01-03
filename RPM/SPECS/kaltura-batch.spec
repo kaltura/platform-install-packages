@@ -5,14 +5,14 @@
 Summary: Kaltura Open Source Video Platform - batch server 
 Name: kaltura-batch
 Version: 9.7.0
-Release: 1
+Release: 3 
 License: AGPLv3+
 Group: Server/Platform 
 #Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
 Source0: zz-%{name}.ini
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires: kaltura-base, kaltura-ffmpeg, kaltura-ffmpeg-aux, php, httpd, sox, mencoder, ImageMagick, sshpass, php-pecl-memcached, php-mcrypt
+Requires: kaltura-base, kaltura-ffmpeg, kaltura-ffmpeg-aux, php, httpd, sox, mencoder, ImageMagick, sshpass, php-pecl-memcached, php-mcrypt,php-pecl-memcached
 Requires(post): chkconfig
 Requires(preun): chkconfig
 # This is for /sbin/service
@@ -52,6 +52,7 @@ if [ "$1" = 1 ];
 then
     /sbin/chkconfig --add kaltura-batch
 fi
+service httpd restart
 
 chown %{kaltura_user}:%{kaltura_group} %{prefix}/log 
 chown %{kaltura_user}:%{apache_group} %{prefix}/batch
@@ -66,14 +67,19 @@ if [ "$1" = 0 ] ; then
     /sbin/service kaltura-batch stop >/dev/null 2>&1
     /sbin/chkconfig --del kaltura-batch
 fi
+service httpd restart
 
 %files
 %config /etc/php.d/zz-%{name}.ini
 
 
 %changelog
-* Mon Dec 23 2013 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-1
-- First package.
+* Fri Jan 3 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-3
+- restart Apache at post and preun.
 
 * Fri Jan 3 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-2
 - Added chown on log and batch dir.
+
+* Mon Dec 23 2013 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-1
+- First package.
+

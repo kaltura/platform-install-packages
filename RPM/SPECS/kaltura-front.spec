@@ -65,8 +65,9 @@ rm -rf %{buildroot}
 %config %{_sysconfdir}/httpd/conf.d/kaltura-admin-console.conf
 
 %changelog
+* Fri Jan 3 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-2
+- Added chown and chmod on log dir.
+
 * Mon Dec  23 2013 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-1
 - First package
 
-* Fri Jan 3 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-2
-- Added chown and chmod on log dir.

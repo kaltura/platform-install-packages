@@ -37,6 +37,7 @@ This is the base package, needed for any Kaltura server role.
 
 %install
 mkdir -p $RPM_BUILD_ROOT%{prefix}/app
+mkdir -p $RPM_BUILD_ROOT%{prefix}/log
 mkdir -p $RPM_BUILD_ROOT/etc/kaltura.d
 for i in admin_console alpha api_v3 batch configurations deployment generator infra plugins start tests ui_infra var_console vendor;do 
 	mv  %{_builddir}/%{name}-%{version}/$i $RPM_BUILD_ROOT/%{prefix}/app
@@ -103,9 +104,9 @@ rm /etc/kaltura.d/system.ini
 
 
 %changelog
+* Fri Jan 3 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-2
+- Permissions corrected.
+
 * Mon Dec  23 2013 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-1
 - First package.
 
-
-* Fri Jan 3 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-2
-- Permissions corrected.
