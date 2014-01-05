@@ -4,7 +4,7 @@
 Summary: Library for encoding and decoding H264/AVC video streams
 Name: kaltura-x264
 Version: 0.140
-Release: 1.%{snap_date}
+Release: 2.%{snap_date}
 License: GPL
 Group: System Environment/Libraries
 URL: http://developers.videolan.org/x264.html
@@ -56,6 +56,10 @@ sed -i 's|/usr/X11R6/lib |/usr/X11R6/%{prefix}/lib |g' configure
 %install
 %{__rm} -rf %{buildroot}
 %{__make} install DESTDIR="%{buildroot}"
+%{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/ld.conf.so.d
+cat > $RPM_BUILD_ROOT%{_sysconfdir}/ld.conf.so.d/kaltura_x264.conf << EOF
+%{prefix}/lib
+EOF
 
 %clean
 %{__rm} -rf %{buildroot}
@@ -68,6 +72,7 @@ sed -i 's|/usr/X11R6/lib |/usr/X11R6/%{prefix}/lib |g' configure
 %doc AUTHORS COPYING
 %{prefix}/bin/x264
 %{prefix}/lib/libx264.so.*
+%config %{_sysconfdir}/ld.conf.so.d/kaltura_x264.conf
 
 %files devel
 %defattr(-, root, root, 0755)
@@ -78,6 +83,8 @@ sed -i 's|/usr/X11R6/lib |/usr/X11R6/%{prefix}/lib |g' configure
 %{prefix}/lib/libx264.so
 
 %changelog
+* Sun Jan 5 2014 Jess Portnoy <jess.portnoy@kaltura.com> 0.140-2.20140104 
+- Added %%{_sysconfdir}/ld.conf.so.d/kaltura_x264.conf
 * Sun Jan 5 2014 Jess Portnoy <jess.portnoy@kaltura.com> 0.140-1.20140104 
 - Adopted for Kaltura. Required for kaltura-ffmpeg. 
 

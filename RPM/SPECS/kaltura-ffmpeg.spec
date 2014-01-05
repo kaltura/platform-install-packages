@@ -43,7 +43,7 @@
 Summary: Utilities and libraries to record, convert and stream audio and video
 Name: kaltura-ffmpeg
 Version: 1.1.1
-Release: 1
+Release: 2 
 License: GPL
 Group: Applications/Multimedia
 URL: http://ffmpeg.org/
@@ -185,7 +185,7 @@ export CFLAGS="%{optflags}"
 %{__mkdir_p} %{buildroot}%{base_prefix}-%{version}/include/postproc/
 %{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
 cat > $RPM_BUILD_ROOT%{_sysconfdir}/profile.d/kaltura_ffmpeg.sh << EOF
-PATH=$PATH:%{base_prefix}/bin
+PATH=$PATH:%{base_prefix}-%{version}/bin
 export PATH
 EOF
 %{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/ld.conf.so.d
@@ -249,5 +249,7 @@ ln -s %{base_prefix}-%{version}/bin/ffmpeg /opt/kaltura/bin
 %{base_prefix}-%{version}/lib/pkgconfig/libswscale.pc
 
 %changelog
+* Sun Jan 5 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.1.1-2 
+- path in /etc/profile.d/kaltura_ffmpeg.sh corrected.
 * Wed Dec 25 2013 Jess Portnoy <jess.portnoy@kaltura.com> - 1.1.1-1
 - Initial build.
