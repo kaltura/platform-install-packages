@@ -17,7 +17,7 @@
 
 %{?el6:%define _without_dc1394 1}
 %{?el6:%define _without_schroedinger 1}
-%{?el6:%define _without_speex 1}
+#%{?el6:%define _without_speex 1}
 %{?el6:%define _without_theora 1}
 
 %{?el5:%define _without_dc1394 1}
@@ -69,11 +69,13 @@ BuildRequires: zlib-devel
 %{!?_without_theora:BuildRequires: libogg-devel, libtheora-devel}
 %{!?_without_vorbis:BuildRequires: libogg-devel, libvorbis-devel}
 %{!?_without_vpx:BuildRequires: libvpx-devel}
-%{!?_without_x264:BuildRequires: x264-devel}
+%{!?_without_x264:BuildRequires: kaltura-x264-devel}
 %{!?_without_xvid:BuildRequires: xvidcore-devel}
 %{!?_without_a52dec:Requires: a52dec}
 BuildRequires: yasm-devel
-Requires:kaltura-a52dec
+BuildRequires: libass-devel 
+BuildRequires: kaltura-x264-devel 
+Requires:kaltura-a52dec,kaltura-libfaac
 
 %description
 FFmpeg is a very fast video and audio converter. It can also grab from a
@@ -84,19 +86,43 @@ usually to give only the target bitrate you want. FFmpeg can also convert
 from any sample rate to any other, and resize video on the fly with a high
 quality polyphase filter.
 
+%package devel
+Summary: Header files and static library for the ffmpeg codec library
+Group: Development/Libraries
+Requires: %{name} = %{version}
+Requires: imlib2-devel, SDL-devel, freetype-devel, zlib-devel, pkgconfig
+%{!?_without_a52dec:Requires: a52dec-devel}
+%{!?_without_dc1394:Requires: libdc1394-devel}
+%{!?_without_faac:Requires: faac-devel}
+%{!?_without_faad:Requires: faad2-devel}
+%{!?_without_gsm:Requires: gsm-devel}
+%{!?_without_lame:Requires: lame-devel}
+%{!?_without_openjpeg:Requires: openjpeg-devel}
+%{!?_without_rtmp:Requires: librtmp-devel}
+%{!?_without_schroedinger:Requires: schroedinger-devel}
+%{!?_without_vorbis:Requires: libogg-devel, libvorbis-devel}
+%{!?_without_vpx:Requires: libvpx-devel}
+%{!?_without_x264:Requires: x264-devel}
+%{!?_without_xvid:Requires: xvidcore-devel}
+
+%description devel
+FFmpeg is a very fast video and audio converter. It can also grab from a
+live audio/video source.
+The command line interface is designed to be intuitive, in the sense that
+ffmpeg tries to figure out all the parameters, when possible. You have
+usually to give only the target bitrate you want. FFmpeg can also convert
+from any sample rate to any other, and resize video on the fly with a high
+quality polyphase filter.
+
+Install this package if you want to compile apps with ffmpeg support.
 
 %prep
-%setup -n ffmpeg-%{version}
+%setup -qn ffmpeg-%{version}
 
-%{__perl} -pi.orig -e 's|gsm.h|gsm/gsm.h|' configure libavcodec/libgsm.c
+sed -i 's|gsm.h|gsm/gsm.h|' configure libavcodec/libgsm.c
 
 %build
 export CFLAGS="%{optflags}"
-# We should be using --disable-opts since configure is adding some default opts
-# to ours (-O3), but as of 20061215 the build fails on asm stuff when it's set
-    #--mandir="%{_mandir}" \
-    #--incdir="%{_includedir}" \
-    #--disable-avisynth \
 ./configure \
     --prefix="%{base_prefix}-%{version}" \
     --libdir="%{base_prefix}-%{version}/lib" \
@@ -166,7 +192,7 @@ EOF
 
 %post
 /sbin/ldconfig
-chcon -t textrel_shlib_t %{_libdir}/libav{codec,device,format,util}.so.*.*.* &>/dev/null || :
+chcon -t textrel_shlib_t %{prefix}/lib/libav{codec,device,format,util}.so.*.*.* &>/dev/null || :
 ln -s %{base_prefix}-%{version}/bin/ffmpeg /opt/kaltura/bin/ffmpeg-aux 
 
 %postun -p /sbin/ldconfig
@@ -187,6 +213,34 @@ ln -s %{base_prefix}-%{version}/bin/ffmpeg /opt/kaltura/bin/ffmpeg-aux
 %{base_prefix}-%{version}/lib/pkgconfig/
 %exclude %{base_prefix}-%{version}/lib/*.a
 %exclude %{base_prefix}-%{version}/include
+
+%files devel
+%defattr(-, root, root, 0755)
+%doc _docs/*
+%{base_prefix}-%{version}/include/libavcodec/
+%{base_prefix}-%{version}/include/libavdevice/
+%{base_prefix}-%{version}/include/libavfilter/
+%{base_prefix}-%{version}/include/libavformat/
+%{base_prefix}-%{version}/include/libavutil/
+%{base_prefix}-%{version}/include/libswscale/
+%{base_prefix}-%{version}/lib/libavcodec.a
+%{base_prefix}-%{version}/lib/libavdevice.a
+%{base_prefix}-%{version}/lib/libavfilter.a
+%{base_prefix}-%{version}/lib/libavformat.a
+%{base_prefix}-%{version}/lib/libavutil.a
+%{base_prefix}-%{version}/lib/libswscale.a
+%{base_prefix}-%{version}/lib/libavcodec.so
+%{base_prefix}-%{version}/lib/libavdevice.so
+%{base_prefix}-%{version}/lib/libavfilter.so
+%{base_prefix}-%{version}/lib/libavformat.so
+%{base_prefix}-%{version}/lib/libavutil.so
+%{base_prefix}-%{version}/lib/libswscale.so
+%{base_prefix}-%{version}/lib/pkgconfig/libavcodec.pc
+%{base_prefix}-%{version}/lib/pkgconfig/libavdevice.pc
+%{base_prefix}-%{version}/lib/pkgconfig/libavfilter.pc
+%{base_prefix}-%{version}/lib/pkgconfig/libavformat.pc
+%{base_prefix}-%{version}/lib/pkgconfig/libavutil.pc
+%{base_prefix}-%{version}/lib/pkgconfig/libswscale.pc
 
 %changelog
 * Wed Dec 25 2013 Jess Portnoy <jess.portnoy@kaltura.com> - 0.6-1
