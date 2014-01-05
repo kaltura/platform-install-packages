@@ -73,6 +73,7 @@ BuildRequires: zlib-devel
 %{!?_without_xvid:BuildRequires: xvidcore-devel}
 %{!?_without_a52dec:Requires: a52dec}
 BuildRequires: yasm-devel
+Requires:kaltura-a52dec
 
 %description
 FFmpeg is a very fast video and audio converter. It can also grab from a
