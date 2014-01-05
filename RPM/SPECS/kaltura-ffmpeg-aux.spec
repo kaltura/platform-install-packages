@@ -75,7 +75,7 @@ BuildRequires: zlib-devel
 BuildRequires: yasm-devel
 BuildRequires: libass-devel 
 BuildRequires: kaltura-x264-devel 
-Requires:kaltura-a52dec,kaltura-libfaac
+Requires:kaltura-a52dec,kaltura-libfaac,kaltura-x264
 
 %description
 FFmpeg is a very fast video and audio converter. It can also grab from a
@@ -90,7 +90,7 @@ quality polyphase filter.
 Summary: Header files and static library for the ffmpeg codec library
 Group: Development/Libraries
 Requires: %{name} = %{version}
-Requires: imlib2-devel, SDL-devel, freetype-devel, zlib-devel, pkgconfig
+Requires: imlib2-devel, SDL-devel, freetype-devel, zlib-devel, pkgconfig,kaltura-x264
 %{!?_without_a52dec:Requires: a52dec-devel}
 %{!?_without_dc1394:Requires: libdc1394-devel}
 %{!?_without_faac:Requires: faac-devel}
@@ -102,7 +102,7 @@ Requires: imlib2-devel, SDL-devel, freetype-devel, zlib-devel, pkgconfig
 %{!?_without_schroedinger:Requires: schroedinger-devel}
 %{!?_without_vorbis:Requires: libogg-devel, libvorbis-devel}
 %{!?_without_vpx:Requires: libvpx-devel}
-%{!?_without_x264:Requires: x264-devel}
+%{!?_without_x264:Requires: kaltura-x264-devel}
 %{!?_without_xvid:Requires: xvidcore-devel}
 
 %description devel
