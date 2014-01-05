@@ -150,9 +150,14 @@ export CFLAGS="%{optflags}"
 # a compatibility symlink
 %{__mkdir_p} %{buildroot}%{_includedir}/postproc/
 %{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
-cat > $RPM_BUILD_ROOT%{_sysconfdir}/profile.d/kaltura_ffmpeg.sh << EOF
+cat > $RPM_BUILD_ROOT%{_sysconfdir}/profile.d/kaltura_ffmpeg-aux.sh << EOF
 PATH=$PATH:%{base_prefix}-%{version}/bin
 export PATH
+EOF
+
+%{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/ld.conf.so.d
+cat > $RPM_BUILD_ROOT%{_sysconfdir}/ld.conf.so.d/kaltura_ffmpeg_aux.conf << EOF
+%{base_prefix}-%{version}/lib
 EOF
 
 %clean
@@ -170,7 +175,8 @@ ln -s %{base_prefix}-%{version}/bin/ffmpeg /opt/kaltura/bin/ffmpeg-aux
 %defattr(-, root, root, 0755)
 %doc Changelog COPYING* CREDITS INSTALL MAINTAINERS README
 %doc %{base_prefix}-%{version}/share/man/man1
-%config %{_sysconfdir}/profile.d/kaltura_ffmpeg.sh
+%config %{_sysconfdir}/profile.d/kaltura_ffmpeg-aux.sh
+%config %{_sysconfdir}/ld.conf.so.d/kaltura_ffmpeg_aux.conf
 %{base_prefix}-%{version}/bin/ffprobe
 %{base_prefix}-%{version}/bin/ffmpeg
 %{base_prefix}-%{version}/bin/ffplay

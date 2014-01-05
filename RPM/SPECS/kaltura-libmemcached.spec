@@ -108,6 +108,10 @@ if [ ! -d %{buildroot}%{prefix}/share/man/man1 ]; then
    install -d %{buildroot}%{prefix}/share/man/man3
    install -p -m 644 man/*3 %{buildroot}%{prefix}/share/man/man3
 fi
+%{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/ld.conf.so.d
+cat > $RPM_BUILD_ROOT%{_sysconfdir}/ld.conf.so.d/kaltura_libmemcached.conf << EOF
+%{prefix}/lib
+EOF
 
 
 %check
@@ -137,6 +141,7 @@ rm -rf %{buildroot}
 %defattr (-,root,root,-) 
 %doc AUTHORS COPYING README THANKS TODO ChangeLog
 %{prefix}/bin/mem*
+%config %{_sysconfdir}/ld.conf.so.d/kaltura_libmemcached.conf
 %exclude %{prefix}/lib/lib*.la
 %{prefix}/lib/libhashkit.so.2*
 %{prefix}/lib/libmemcached.so.11*
