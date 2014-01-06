@@ -54,6 +54,8 @@ cp %{SOURCE3} $RPM_BUILD_ROOT/%{_sysconfdir}/php.d
 chown %{kaltura_user}:%{apache_group} %{prefix}/log 
 chmod 775 %{prefix}/log
 service httpd restart
+sed 's#@APP_DIR@#%{prefix}/app#' %{prefix}/configurations/monit/monit.d/httpd.template.rc > %{prefix}/configurations/monit/monit.d/httpd.rc 
+sed 's#@APACHE_SERVICE@#httpd#g' %{prefix}/configurations/monit/monit.d/httpd.rc
 
 %clean
 rm -rf %{buildroot}

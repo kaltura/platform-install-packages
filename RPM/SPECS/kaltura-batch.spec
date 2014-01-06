@@ -1,4 +1,5 @@
 %define prefix /opt/kaltura
+%define batch_confdir %{prefix}/app/configurations/batch/ 
 %define kaltura_user	kaltura
 %define kaltura_group	kaltura
 %define apache_user	apache
@@ -6,7 +7,7 @@
 Summary: Kaltura Open Source Video Platform - batch server 
 Name: kaltura-batch
 Version: 9.7.0
-Release: 5 
+Release: 6 
 License: AGPLv3+
 Group: Server/Platform 
 #Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -45,10 +46,23 @@ cp %{SOURCE0} $RPM_BUILD_ROOT/%{_sysconfdir}/php.d/zz-%{name}.ini
 cp %{SOURCE1} $RPM_BUILD_ROOT/%{_sysconfdir}/init.d/%{name}
 sed 's#WEB_DIR=@WEB_DIR@#WEB_DIR=%{prefix}/web#' $RPM_BUILD_ROOT/%{_sysconfdir}/php.d/zz-%{name}.ini
 
+# now replace tokens
+sed 's#WEB_DIR=@WEB_DIR@#WEB_DIR=%{prefix}/web#' $RPM_BUILD_ROOT/%{batch_confdir}/batch.ini.template > $RPM_BUILD_ROOT/%{batch_confdir}/batch.ini
+sed 's#LOG_DIR=@LOG_DIR@#LOG_DIR=%{prefix}/log#' -i  $RPM_BUILD_ROOT/%{batch_confdir}/batch.ini
+sed 's#APP_DIR=@APP_DIR@#APP_DIR=%{prefix}/app#' -i  $RPM_BUILD_ROOT/%{batch_confdir}/batch.ini
+sed 's#BASE_DIR=@BASE_DIR@#BASE_DIR=%{prefix}#' -i $RPM_BUILD_ROOT/%{batch_confdir}/batch.ini
+sed 's#OS_KALTURA_USER=@OS_KALTURA_USER@#OS_KALTURA_USER=%{kaltura_user}#' -i $RPM_BUILD_ROOT/%{batch_confdir}/batch.ini
+sed 's#PHP_BIN=@PHP_BIN@#PHP_BIN=%{_bindir}/php#' -i $RPM_BUILD_ROOT/%{batch_confdir}/batch.ini
+
 %clean
 rm -rf %{buildroot}
 
 %post
+sed 's#@LOG_DIR@#%{prefix}/log#'  %{prefix}/configurations/monit/monit.d/batch.template.rc %{prefix}/configurations/monit/monit.d/batch.rc
+sed 's#@APP_DIR@#%{prefix}/app#' -i %{prefix}/configurations/monit/monit.d/batch.rc 
+sed 's#@APP_DIR@#%{prefix}/app#' %{prefix}/configurations/monit/monit.d/httpd.template.rc > %{prefix}/configurations/monit/monit.d/httpd.rc 
+sed 's#@APACHE_SERVICE@#httpd#g' %{prefix}/configurations/monit/monit.d/httpd.rc
+
 if [ "$1" = 1 ];
 then
     /sbin/chkconfig --add kaltura-batch
@@ -76,10 +90,16 @@ service httpd restart
 
 %files
 %config /etc/php.d/zz-%{name}.ini
+%config %{prefix}/configurations/monit/monit.d/httpd*.rc
+%config %{prefix}/configurations/monit/monit.d/batch*.rc
+
 %{_sysconfdir}/init.d/%{name}
 
 
 %changelog
+* Mon Jan 6 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-6
+- Handle Monit config tmplts
+
 * Mon Jan 6 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-5
 - [Re]start daemon.
 

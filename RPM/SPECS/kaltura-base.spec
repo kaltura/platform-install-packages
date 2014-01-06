@@ -8,7 +8,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 9.7.0
-Release: 5 
+Release: 6 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -16,7 +16,7 @@ URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
 # monit
-Requires: rsync,mail,mysql,cronie
+Requires: rsync,mail,mysql,kaltura-monit,cronie
 
 %description
 Kaltura is the world's first Open Source Online Video Platform, transforming the way people work, 
@@ -50,8 +50,21 @@ sed 's#APP_DIR=@APP_DIR@#APP_DIR=%{prefix}/app#' -i  $RPM_BUILD_ROOT/%{prefix}/a
 sed 's#BASE_DIR=@BASE_DIR@#BASE_DIR=%{prefix}#' -i $RPM_BUILD_ROOT/%{prefix}/app/configurations/system.ini
 sed 's#OS_KALTURA_USER=@OS_KALTURA_USER@#OS_KALTURA_USER=%{kaltura_user}#' -i $RPM_BUILD_ROOT/%{prefix}/app/configurations/system.ini
 sed 's#PHP_BIN=@PHP_BIN@#PHP_BIN=%{_bindir}/php#' -i $RPM_BUILD_ROOT/%{prefix}/app/configurations/system.ini
+
 rm $RPM_BUILD_ROOT/%{prefix}/app/generator/sources/android/DemoApplication/libs/libWVphoneAPI.so
 rm $RPM_BUILD_ROOT/%{prefix}/app/configurations/.project
+
+%{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
+cat > $RPM_BUILD_ROOT%{_sysconfdir}/profile.d/kaltura_base.sh << EOF
+PATH=$PATH:%{prefix}/bin
+export PATH
+EOF
+
+%{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/ld.conf.so.d
+cat > $RPM_BUILD_ROOT%{_sysconfdir}/ld.conf.so.d/kaltura_base.conf << EOF
+%{prefix}/lib
+
+EOF
 
 %clean
 rm -rf %{buildroot}
@@ -87,14 +100,12 @@ rm /etc/kaltura.d/system.ini
 %{prefix}/app/tests
 
 %config %{prefix}/app/configurations/*
-
-
-
-#%config %{prefix}/app/configurations/base.ini
-#%config %{prefix}/app/configurations/local.template.ini
-#%config %{prefix}/app/configurations/cron/api.template
+%config %{_sysconfdir}/profile.d/kaltura_base.sh
 #%config %{prefix}/app/configurations/system.ini
-#%config %{prefix}/app/configurations/system.template.ini
+#%{prefix}/bin/configure_db.sh
+#%{prefix}/bin/configure_front.sh
+
+
 %dir /etc/kaltura.d
 %dir %{prefix}/log
 
@@ -106,6 +117,9 @@ rm /etc/kaltura.d/system.ini
 
 
 %changelog
+* Mon Jan 6 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-6
+- Depend on kaltura-monit and also fix PATH and LD_LIBRARY_PATH to include /opt/kaltura/{bin,lib}.
+
 * Mon Jan 6 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-5
 - Fuck me.
 

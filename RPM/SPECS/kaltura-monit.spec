@@ -1,4 +1,4 @@
-%define prefix /opt/kaltura/monit
+%define prefix /opt/kaltura/
 # this isn't really a stand location for placing conf files but we wish to remain compatible with the current config dir tree used by Kaltura
 %define confdir /opt/kaltura/app/configurations
 %define logmsg logger -t %{name}/rpm
