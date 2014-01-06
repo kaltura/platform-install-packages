@@ -15,7 +15,7 @@ Source3: zz-%{name}.ini
 
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires: httpd, php, kaltura-base, kaltura-ffmpeg, ImageMagick, mencoder, memcached, php-pecl-memcached, php-mysql, php-pecl-apc, php-mcrypt
+Requires: httpd, php, kaltura-base, kaltura-ffmpeg, ImageMagick, memcached, php-pecl-memcached, php-mysql, php-pecl-apc, php-mcrypt
 Requires(post): chkconfig
 Requires(preun): chkconfig
 # This is for /sbin/service

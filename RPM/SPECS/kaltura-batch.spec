@@ -2,17 +2,19 @@
 %define kaltura_user	kaltura
 %define kaltura_group	kaltura
 %define apache_user	apache
+%define apache_group	apache
 Summary: Kaltura Open Source Video Platform - batch server 
 Name: kaltura-batch
 Version: 9.7.0
-Release: 3 
+Release: 5 
 License: AGPLv3+
 Group: Server/Platform 
 #Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
 Source0: zz-%{name}.ini
+Source1: kaltura-batch
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires: kaltura-base, kaltura-ffmpeg, kaltura-ffmpeg-aux, php, httpd, sox, mencoder, ImageMagick, sshpass, php-pecl-memcached, php-mcrypt,php-pecl-memcached
+Requires: kaltura-base, kaltura-ffmpeg, kaltura-ffmpeg-aux, php, httpd, sox, ImageMagick, kaltura-sshpass, php-pecl-memcached, php-mcrypt,php-pecl-memcached
 Requires(post): chkconfig
 Requires(preun): chkconfig
 # This is for /sbin/service
@@ -34,14 +36,13 @@ For more information visit: http://corp.kaltura.com, http://www.kaltura.org and 
 This package sets up a node to be a batch server.
 
 
-#%prep
-#%setup -q
-
 %build
 
 %install
+mkdir -p $RPM_BUILD_ROOT/%{_sysconfdir}/init.d
 mkdir -p $RPM_BUILD_ROOT/%{_sysconfdir}/php.d
 cp %{SOURCE0} $RPM_BUILD_ROOT/%{_sysconfdir}/php.d/zz-%{name}.ini
+cp %{SOURCE1} $RPM_BUILD_ROOT/%{_sysconfdir}/init.d/%{name}
 sed 's#WEB_DIR=@WEB_DIR@#WEB_DIR=%{prefix}/web#' $RPM_BUILD_ROOT/%{_sysconfdir}/php.d/zz-%{name}.ini
 
 %clean
@@ -55,8 +56,9 @@ fi
 service httpd restart
 
 chown %{kaltura_user}:%{kaltura_group} %{prefix}/log 
-chown %{kaltura_user}:%{apache_group} %{prefix}/batch
+chown %{kaltura_user}:%{apache_group} %{prefix}/app/batch
 chmod 775 %{prefix}/log
+service kaltura-batch restart
 
 
 # "@BIN_DIR@/run/run-segmenter.sh^@BIN_DIR@/segmenter"
@@ -67,13 +69,20 @@ if [ "$1" = 0 ] ; then
     /sbin/service kaltura-batch stop >/dev/null 2>&1
     /sbin/chkconfig --del kaltura-batch
 fi
+service kaltura-batch restart
+
+%postun
 service httpd restart
 
 %files
 %config /etc/php.d/zz-%{name}.ini
+%{_sysconfdir}/init.d/%{name}
 
 
 %changelog
+* Mon Jan 6 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-5
+- [Re]start daemon.
+
 * Fri Jan 3 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-3
 - restart Apache at post and preun.
 

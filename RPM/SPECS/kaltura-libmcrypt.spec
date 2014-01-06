@@ -4,7 +4,7 @@
 Summary: Data encryption library
 Name: kaltura-libmcrypt
 Version: 2.5.7
-Release: 3
+Release: 5 
 License: LGPL
 Group: System Environment/Libraries
 URL: http://mcrypt.sourceforge.net/
@@ -29,7 +29,7 @@ TWOFISH, BLOWFISH, ARCFOUR, WAKE and more.
 Summary: Header files, libraries and development documentation for %{name}.
 Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
-
+Provides: libmcrypt = %{version}
 %description devel
 This package contains the header files, static libraries and development
 documentation for %{name}. If you like to develop programs using %{name},
@@ -52,7 +52,7 @@ you will need to install %{name}-devel.
 %{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/ld.conf.so.d
 %{__make} install DESTDIR="%{buildroot}"
 cat > $RPM_BUILD_ROOT%{_sysconfdir}/ld.conf.so.d/kaltura_libmcrypt.conf << EOF
-%{base_prefix}-%{version}/lib
+%{prefix}/lib
 EOF
 
 
@@ -83,6 +83,12 @@ EOF
 %exclude %{prefix}/lib/*.la
 
 %changelog
+* Mon Jan 6 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 2.5.7-5
+- Corrected LD_LIBRARY_PATH
+
+* Mon Jan 6 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 2.5.7-4
+- Added 'Provides'.
+
 * Wed Dec 25 2013 Jess Portnoy <jess.portnoy@kaltura.com> - 2.5.7-3 
 - Adopted for Kaltura.
 

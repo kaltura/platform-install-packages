@@ -7,7 +7,7 @@
 Summary: PHP Mcrypt extension. 
 Name: php-mcrypt
 Version: 5.3.3
-Release: 1
+Release: 3 
 License: The PHP License
 Group: Development/Languages
 URL: http://www.php.net/
@@ -22,7 +22,8 @@ Requires: php-api = %{php_api}
 
 
 BuildRequires: php-devel = %{version}
-Provides: php-mcrypt, libmcrypt
+Provides: php-mcrypt 
+Requires: libmcrypt
 BuildRequires: libmcrypt-devel
 %description
 PHP is an HTML-embedded scripting language.
@@ -31,7 +32,7 @@ This package contains the Mcrypt PHP extension, which
 has not been included in the basic PHP package for CentOS/RHEL/Fedora.
 
 %prep
-%setup -n %{real_name}-%{version}
+%setup -qn %{real_name}-%{version}
 
 %build
 export CFLAGS="%{optflags} -fno-strict-aliasing -Wno-pointer-sign"
@@ -62,7 +63,7 @@ for module in %{php_modules}; do
     %{__install} -Dp -m0755 ext/$module/modules/*.so %{buildroot}%{extensiondir}
     cat <<EOF >%{buildroot}%{_sysconfdir}/php.d/$module.ini
 ; Enable $module extension module
-extension=module.so
+extension=$module.so
 EOF
 done
 
@@ -76,5 +77,11 @@ done
 
 
 %changelog
-* Sun Jan 5 2013 Jess Portnoy <jess.portnoy@kaltura.com> - 5.3.3-1
+* Mon Jan 6 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 5.3.3-3
+- It does not PROVIDE libmcrypt, it requires it.
+
+* Mon Jan 6 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 5.3.3-2
+- Quiet setup and fixed extension directive.
+
+* Sun Jan 5 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 5.3.3-1
 - Initial package.
