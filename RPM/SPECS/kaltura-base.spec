@@ -8,15 +8,14 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 9.7.0
-Release: 6 
+Release: 7 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
-# monit
-Requires: rsync,mail,mysql,kaltura-monit,cronie
+Requires: rsync,mail,mysql,kaltura-monit,kaltura-postinst,cronie
 
 %description
 Kaltura is the world's first Open Source Online Video Platform, transforming the way people work, 
@@ -50,6 +49,8 @@ sed 's#APP_DIR=@APP_DIR@#APP_DIR=%{prefix}/app#' -i  $RPM_BUILD_ROOT/%{prefix}/a
 sed 's#BASE_DIR=@BASE_DIR@#BASE_DIR=%{prefix}#' -i $RPM_BUILD_ROOT/%{prefix}/app/configurations/system.ini
 sed 's#OS_KALTURA_USER=@OS_KALTURA_USER@#OS_KALTURA_USER=%{kaltura_user}#' -i $RPM_BUILD_ROOT/%{prefix}/app/configurations/system.ini
 sed 's#PHP_BIN=@PHP_BIN@#PHP_BIN=%{_bindir}/php#' -i $RPM_BUILD_ROOT/%{prefix}/app/configurations/system.ini
+sed 's#@IMAGE_MAGICK_BIN_DIR@#%{_bindir}#' $RPM_BUILD_ROOT/%{prefix}/app/configurations/local.template.ini > $RPM_BUILD_ROOT/%{prefix}/app/configurations/local.ini
+echo "%{version}-%{release}" > $RPM_BUILD_ROOT/%{prefix}/app/configurations/VERSION
 
 rm $RPM_BUILD_ROOT/%{prefix}/app/generator/sources/android/DemoApplication/libs/libWVphoneAPI.so
 rm $RPM_BUILD_ROOT/%{prefix}/app/configurations/.project
@@ -101,8 +102,6 @@ rm /etc/kaltura.d/system.ini
 
 %config %{prefix}/app/configurations/*
 %config %{_sysconfdir}/profile.d/kaltura_base.sh
-#%config %{prefix}/app/configurations/system.ini
-#%{prefix}/bin/configure_db.sh
 #%{prefix}/bin/configure_front.sh
 
 
@@ -117,6 +116,10 @@ rm /etc/kaltura.d/system.ini
 
 
 %changelog
+* Mon Jan 6 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-7
+- Added version file.
+- Added dep in kaltura-postinst.
+
 * Mon Jan 6 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-6
 - Depend on kaltura-monit and also fix PATH and LD_LIBRARY_PATH to include /opt/kaltura/{bin,lib}.
 

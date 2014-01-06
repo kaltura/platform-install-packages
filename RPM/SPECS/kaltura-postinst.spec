@@ -1,13 +1,19 @@
-Summary: Kaltura Open Source Video Platform - Analytics 
-Name: kaltura-dwh
-Version: 9.7.0
+%define kaltura_user	kaltura
+%define kaltura_group	kaltura
+%define prefix /opt/kaltura
+%define confdir %{prefix}/app/configurations
+%define logdir %{prefix}/log
+%define webdir %{prefix}/web
+
+Summary: Kaltura Open Source Video Platform 
+Name: kaltura-postinst 
+Version: 1.0.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
-Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
+Source0: %{name}-%{version}.tar.gz
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires: kaltura-base,kaltura-pentaho,java-1.7.0-openjdk 
 BuildArch: noarch
 
 %description
@@ -22,32 +28,28 @@ teachers by providing educational institutions disruptive online video solutions
 learning, and increased engagement across campuses and beyond. 
 For more information visit: http://corp.kaltura.com, http://www.kaltura.org and http://www.html5video.org.
 
-
-The Kaltura platform enables video management, publishing, syndication and monetization, 
-as well as providing a robust framework for managing rich-media applications, 
-and developing a variety of online workflows for video. 
-
-This package configures the Data Warehouse [DWH] analytics component. 
+This package includes post install scripts to be run post RPM install as they require user input.
 
 %prep
-%setup -q
-
-%build
+%setup -qn postinst
 
 %install
-#@DWH_DIR@/etlsource/execute/etl_daily.sh -p @DWH_DIR@
-#@DWH_DIR@/etlsource/execute/etl_hourly.sh -p @DWH_DIR@
-#@DWH_DIR@/etlsource/execute/etl_perform_retention_policy.sh -p @DWH_DIR@
-#@DWH_DIR@/etlsource/execute/etl_update_dims.sh -p @DWH_DIR@
-
+mkdir -p $RPM_BUILD_ROOT/%{prefix}/bin
+chmod +x *.sh 
+mv  *.{sh,rc} $RPM_BUILD_ROOT/%{prefix}/bin
 
 %clean
 rm -rf %{buildroot}
 
+%post
+
+%preun
+
 %files
-#cron/dwh.template
-#.kettle/kettle.template.properties
+%{prefix}/bin/*
+
 
 %changelog
-* Mon Dec  23 2013 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-1
-- First package
+* Mon Jan 6 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.0-1
+- initial package. 
+
