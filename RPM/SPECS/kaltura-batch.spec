@@ -7,7 +7,7 @@
 Summary: Kaltura Open Source Video Platform - batch server 
 Name: kaltura-batch
 Version: 9.7.0
-Release: 9 
+Release: 10 
 License: AGPLv3+
 Group: Server/Platform 
 #Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -15,7 +15,7 @@ Source0: zz-%{name}.ini
 Source1: kaltura-batch
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires: kaltura-base, kaltura-ffmpeg, kaltura-ffmpeg-aux, php, httpd, sox, ImageMagick, kaltura-sshpass, php-pecl-memcached, php-mcrypt,php-pecl-memcached,mediainfo
+Requires: kaltura-base, kaltura-ffmpeg, kaltura-ffmpeg-aux, php, httpd, sox, ImageMagick, kaltura-sshpass, php-pecl-memcached, php-mcrypt,php-pecl-memcached,mediainfo, kaltura-segmenter
 Requires(post): chkconfig
 Requires(preun): chkconfig
 # This is for /sbin/service
@@ -96,8 +96,12 @@ service httpd restart
 
 
 %changelog
+* Wed Jan 8 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-3
+- Added dep on kaltura-segmenter.
+
 * Wed Jan 8 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-9
 - Once again:(
+
 * Wed Jan 8 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-7
 - Wrong config path.
 

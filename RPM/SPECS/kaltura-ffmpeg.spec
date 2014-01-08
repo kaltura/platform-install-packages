@@ -1,5 +1,3 @@
-# $Id: ffmpeg.spec 9308 2010-11-18 23:05:33Z dag $
-# Authority: dag
 
 %define base_prefix /opt/kaltura/ffmpeg
 %define _without_gsm 1
@@ -15,8 +13,6 @@
 ### Use native xvid
 %define _without_xvid 1
 
-### Disabled speex support as ffmpeg needs speex 1.2 and RHEL5 ships with 1.0.5
-
 
 %{?el6:%define _without_dc1394 1}
 %{?el6:%define _without_schroedinger 1}
@@ -27,18 +23,6 @@
 %{?el5:%define _without_schroedinger 1}
 %{?el5:%define _without_speex 1}
 %{?el5:%define _without_theora 1}
-
-%{?el4:%define _without_dc1394 1}
-%{?el4:%define _without_speex 1}
-%{?el4:%define _without_texi2html 1}
-%{?el4:%define _without_theora 1}
-%{?el4:%define _without_v4l 1}
-
-%{?el3:%define _without_dc1394 1}
-%{?el3:%define _without_schroedinger 1}
-%{?el3:%define _without_speex 1}
-%{?el3:%define _without_texi2html 1}
-%{?el3:%define _without_theora 1}
 
 Summary: Utilities and libraries to record, convert and stream audio and video
 Name: kaltura-ffmpeg
