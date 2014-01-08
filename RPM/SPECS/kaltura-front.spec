@@ -5,7 +5,7 @@
 Summary: Kaltura Open Source Video Platform - frontend server 
 Name: kaltura-front
 Version: 9.7.0
-Release: 1
+Release: 2 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: kaltura-api.conf
@@ -15,7 +15,7 @@ Source3: zz-%{name}.ini
 
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires: httpd, php, kaltura-base, kaltura-ffmpeg, ImageMagick, memcached, php-pecl-memcached, php-mysql, php-pecl-apc, php-mcrypt
+Requires: mediainfo, httpd, php, kaltura-base, kaltura-ffmpeg, ImageMagick, memcached, php-pecl-memcached, php-mysql, php-pecl-apc, php-mcrypt
 Requires(post): chkconfig
 Requires(preun): chkconfig
 # This is for /sbin/service

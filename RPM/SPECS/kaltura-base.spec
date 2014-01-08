@@ -8,7 +8,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 9.7.0
-Release: 7 
+Release: 11 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -50,7 +50,8 @@ sed 's#BASE_DIR=@BASE_DIR@#BASE_DIR=%{prefix}#' -i $RPM_BUILD_ROOT/%{prefix}/app
 sed 's#OS_KALTURA_USER=@OS_KALTURA_USER@#OS_KALTURA_USER=%{kaltura_user}#' -i $RPM_BUILD_ROOT/%{prefix}/app/configurations/system.ini
 sed 's#PHP_BIN=@PHP_BIN@#PHP_BIN=%{_bindir}/php#' -i $RPM_BUILD_ROOT/%{prefix}/app/configurations/system.ini
 sed 's#@IMAGE_MAGICK_BIN_DIR@#%{_bindir}#' $RPM_BUILD_ROOT/%{prefix}/app/configurations/local.template.ini > $RPM_BUILD_ROOT/%{prefix}/app/configurations/local.ini
-echo "%{version}-%{release}" > $RPM_BUILD_ROOT/%{prefix}/app/configurations/VERSION
+echo "
+VERSION=%{version}-%{release}" >> $RPM_BUILD_ROOT/%{prefix}/app/configurations/system.ini
 
 rm $RPM_BUILD_ROOT/%{prefix}/app/generator/sources/android/DemoApplication/libs/libWVphoneAPI.so
 rm $RPM_BUILD_ROOT/%{prefix}/app/configurations/.project
@@ -81,9 +82,11 @@ chown -R %{kaltura_user}:%{kaltura_group} %{prefix}/app/cache
 ln -sf %{prefix}/app/configurations/system.ini /etc/kaltura.d/system.ini
 
 %preun
+if [ "$1" = 0 ] ; then
+	rm /etc/kaltura.d/system.ini
+fi
 
 %postun
-rm /etc/kaltura.d/system.ini
 
 %files
 %{prefix}/app/admin_console
@@ -102,6 +105,7 @@ rm /etc/kaltura.d/system.ini
 
 %config %{prefix}/app/configurations/*
 %config %{_sysconfdir}/profile.d/kaltura_base.sh
+%config %{_sysconfdir}/ld.conf.so.d/kaltura_base.conf
 #%{prefix}/bin/configure_front.sh
 
 
@@ -116,6 +120,12 @@ rm /etc/kaltura.d/system.ini
 
 
 %changelog
+* Wed Jan 8 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-9
+- rm system.ini synlink only at complete uninstalls, not upgrades.
+
+* Wed Jan 8 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-8
+- Do not override system.ini, add to it.
+
 * Mon Jan 6 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-7
 - Added version file.
 - Added dep in kaltura-postinst.
