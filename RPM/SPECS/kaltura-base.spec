@@ -38,6 +38,7 @@ This is the base package, needed for any Kaltura server role.
 mkdir -p $RPM_BUILD_ROOT%{prefix}/app
 mkdir -p $RPM_BUILD_ROOT%{prefix}/log
 mkdir -p $RPM_BUILD_ROOT%{prefix}/tmp
+mkdir -p $RPM_BUILD_ROOT%{prefix}/web
 mkdir -p $RPM_BUILD_ROOT%{prefix}/app/cache
 mkdir -p $RPM_BUILD_ROOT%{prefix}/bin
 mkdir -p $RPM_BUILD_ROOT%{prefix}/lib
@@ -133,6 +134,7 @@ fi
 %dir %{prefix}/lib
 %dir %{prefix}/include
 %dir %{prefix}/share
+%dir %{prefix}/web
 
 #token_files[] = @APP_DIR@/configurations/logrotate/kaltura_*.template
 #token_files[] = @APP_DIR@/deployment/base/scripts/init_content/*.template.xml
