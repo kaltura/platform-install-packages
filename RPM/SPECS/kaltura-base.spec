@@ -82,6 +82,12 @@ chown -R %{kaltura_user}:%{kaltura_group} %{prefix}/log
 chown -R %{kaltura_user}:%{kaltura_group} %{prefix}/app/cache 
 ln -sf %{prefix}/app/configurations/system.ini /etc/kaltura.d/system.ini
 
+echo "#####################################################################################################################################
+Installation of %{name} %{version} completed
+Please run %{prefix}/bin/%{name}-config.sh [/path/to/answer/file]
+To finalize the setup.
+" 
+
 %preun
 if [ "$1" = 0 ] ; then
 	rm /etc/kaltura.d/system.ini
@@ -107,7 +113,6 @@ fi
 %config %{prefix}/app/configurations/*
 %config %{_sysconfdir}/profile.d/kaltura_base.sh
 %config %{_sysconfdir}/ld.conf.so.d/kaltura_base.conf
-#%{prefix}/bin/configure_front.sh
 
 
 %dir /etc/kaltura.d
@@ -124,6 +129,7 @@ fi
 %changelog
 * Thu Jan 9 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-12
 - Added creation of /opt/kaltura/tmp dir.
+- Postinstall message.
 
 * Wed Jan 8 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-9
 - rm system.ini synlink only at complete uninstalls, not upgrades.

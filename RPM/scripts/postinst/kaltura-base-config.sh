@@ -41,7 +41,7 @@ CDN host [`hostname`]:
                 CDN_HOST=`hostname`
         fi
 
-        echo "Apache virtual host: "
+        echo "Apache virtual host [`hostname`]: "
         read -e KALTURA_VIRTUAL_HOST_NAME
         if [ -z "$KALTURA_VIRTUAL_HOST_NAME" ];then
                 KALTURA_VIRTUAL_HOST_NAME=`hostname`
@@ -93,19 +93,8 @@ CONF_FILES=`find $KALT_CONF_DIR  -type f|grep -v template`
 
 # Now we will sed.
 for CONF_FILE in $CONF_FILES;do
-	sed -i -e "s#@CDN_HOST@#$CDN_HOST#g" -e "s#@DB1_HOST@#$DB1_HOST#g" -e "s#@DB1_NAME@#$DB1_NAME#g" -e "s#@DB1_USER@#$DB1_PASS#g" -e "s#@DB_PORT@#$DB_PORT#g"-e "s#@TIME_ZONE@#$TIME_ZONE#g" -e "s#@KALTURA_FULL_VIRTUAL_HOST_NAME@#$KALTURA_FULL_VIRTUAL_HOST_NAME#g" -e "s#@KALTURA_VIRTUAL_HOST_NAME@#$KALTURA_VIRTUAL_HOST_NAME#g" 
+	sed -i -e "s#@CDN_HOST@#$CDN_HOST#g" -e "s#@DB1_HOST@#$DB1_HOST#g" -e "s#@DB1_NAME@#$DB1_NAME#g" -e "s#@DB1_USER@#$DB1_USER#g" -e "s#@DB1_PASS@#$DB1_PASS#g" -e "s#@DB_PORT@#$DB_PORT#g" -e "s#@TIME_ZONE@#$TIME_ZONE#g" -e "s#@KALTURA_FULL_VIRTUAL_HOST_NAME@#$KALTURA_FULL_VIRTUAL_HOST_NAME#g" -e "s#@KALTURA_VIRTUAL_HOST_NAME@#$KALTURA_VIRTUAL_HOST_NAME#g" $CONF_FILES 
 done
-#@CDN_HOST@
-#@DB1_HOST@
-#@DB1_NAME@
-#@DB1_PASS@
-#@DB1_USER@
-#@DB2_HOST@
-#@DB2_NAME@
-#@DB3_HOST@
-#@INSTALLED_HOSNAME@
-#@KALTURA_FULL_VIRTUAL_HOST_NAME@
-#@KALTURA_VIRTUAL_HOST_NAME@
 #@REPORT_ADMIN_EMAIL@
 #@TIME_ZONE@
 

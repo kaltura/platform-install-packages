@@ -78,9 +78,11 @@ chown %{kaltura_user}:%{apache_group} %{prefix}/app/batch
 chmod 775 %{prefix}/log
 service kaltura-batch restart
 
-
-# "@BIN_DIR@/run/run-segmenter.sh^@BIN_DIR@/segmenter"
-# configurations/monit/monit.d/enabled.batch.rc"
+echo "#####################################################################################################################################
+Installation of %{name} %{version} completed
+Please run %{prefix}/bin/%{name}-config.sh [/path/to/answer/file]
+To finalize the setup.
+" 
 
 %preun
 if [ "$1" = 0 ] ; then
