@@ -49,6 +49,7 @@ mkdir -p $RPM_BUILD_ROOT/%{_sysconfdir}/httpd/conf.d
 cp %{SOURCE0} %{SOURCE1} %{SOURCE2} $RPM_BUILD_ROOT/%{_sysconfdir}/httpd/conf.d
 mkdir -p $RPM_BUILD_ROOT/%{_sysconfdir}/php.d
 cp %{SOURCE3} $RPM_BUILD_ROOT/%{_sysconfdir}/php.d
+sed 's#@WEB_DIR@#%{prefix}/web#' $RPM_BUILD_ROOT/%{_sysconfdir}/php.d/zz-%{name}.ini
 
 %post
 chown %{kaltura_user}:%{apache_group} %{prefix}/log 

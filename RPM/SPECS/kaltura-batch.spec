@@ -45,7 +45,7 @@ mkdir -p $RPM_BUILD_ROOT/%{_sysconfdir}/php.d
 mkdir -p $RPM_BUILD_ROOT/%{batch_confdir}
 cp %{SOURCE0} $RPM_BUILD_ROOT/%{_sysconfdir}/php.d/zz-%{name}.ini
 cp %{SOURCE1} $RPM_BUILD_ROOT/%{_sysconfdir}/init.d/%{name}
-sed 's#WEB_DIR=@WEB_DIR@#WEB_DIR=%{prefix}/web#' $RPM_BUILD_ROOT/%{_sysconfdir}/php.d/zz-%{name}.ini
+sed 's#@WEB_DIR@#%{prefix}/web#' $RPM_BUILD_ROOT/%{_sysconfdir}/php.d/zz-%{name}.ini
 
 
 %clean
