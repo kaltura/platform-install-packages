@@ -42,6 +42,7 @@ mkdir -p $RPM_BUILD_ROOT%{prefix}/app/cache
 mkdir -p $RPM_BUILD_ROOT%{prefix}/bin
 mkdir -p $RPM_BUILD_ROOT%{prefix}/lib
 mkdir -p $RPM_BUILD_ROOT%{prefix}/include
+mkdir -p $RPM_BUILD_ROOT%{prefix}/share
 mkdir -p $RPM_BUILD_ROOT/etc/kaltura.d
 for i in admin_console alpha api_v3 batch configurations deployment generator infra plugins start tests ui_infra var_console vendor;do 
 	mv  %{_builddir}/%{name}-%{version}/$i $RPM_BUILD_ROOT/%{prefix}/app
@@ -131,6 +132,7 @@ fi
 %dir %{prefix}/bin
 %dir %{prefix}/lib
 %dir %{prefix}/include
+%dir %{prefix}/share
 
 #token_files[] = @APP_DIR@/configurations/logrotate/kaltura_*.template
 #token_files[] = @APP_DIR@/deployment/base/scripts/init_content/*.template.xml
