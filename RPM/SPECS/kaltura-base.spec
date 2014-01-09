@@ -8,7 +8,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 9.7.0
-Release: 19 
+Release: 21 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -48,16 +48,16 @@ for i in admin_console alpha api_v3 batch configurations deployment generator in
 done
 # now replace tokens
 sed 's#@WEB_DIR@#%{prefix}/web#g' $RPM_BUILD_ROOT/%{prefix}/app/configurations/system.template.ini > $RPM_BUILD_ROOT/%{prefix}/app/configurations/system.ini
-sed 's#@WEB_DIR@#%{prefix}/web#g' $RPM_BUILD_ROOT/%{prefix}/app/configurations/local.template.ini > $RPM_BUILD_ROOT/%{prefix}/app/configurations/local.ini
+sed 's#@IMAGE_MAGICK_BIN_DIR@#%{_bindir}#g' $RPM_BUILD_ROOT/%{prefix}/app/configurations/local.template.ini > $RPM_BUILD_ROOT/%{prefix}/app/configurations/local.ini
+sed 's#@WEB_DIR@#%{prefix}/web#g' -i $RPM_BUILD_ROOT/%{prefix}/app/configurations/local.ini
 sed 's#@LOG_DIR@#%{prefix}/log#g' -i  $RPM_BUILD_ROOT/%{prefix}/app/configurations/system.ini  $RPM_BUILD_ROOT/%{prefix}/app/configurations/local.ini
 sed 's#@TMP_DIR@#%{prefix}/tmp#g' -i  $RPM_BUILD_ROOT/%{prefix}/app/configurations/system.ini  $RPM_BUILD_ROOT/%{prefix}/app/configurations/local.ini
 sed 's#@APP_DIR@#%{prefix}/app#g' -i  $RPM_BUILD_ROOT/%{prefix}/app/configurations/system.ini  $RPM_BUILD_ROOT/%{prefix}/app/configurations/local.ini
 sed 's#@BASE_DIR@#%{prefix}#g' -i $RPM_BUILD_ROOT/%{prefix}/app/configurations/system.ini  $RPM_BUILD_ROOT/%{prefix}/app/configurations/local.ini
-sed 's#@BIN_DIR@#%{prefix}#g' -i $RPM_BUILD_ROOT/%{prefix}/app/configurations/system.ini  $RPM_BUILD_ROOT/%{prefix}/app/configurations/local.ini
+sed 's#@BIN_DIR@#%{prefix}/bin#g' -i $RPM_BUILD_ROOT/%{prefix}/app/configurations/system.ini  $RPM_BUILD_ROOT/%{prefix}/app/configurations/local.ini
 sed 's#@OS_KALTURA_USER@#%{kaltura_user}#g' -i $RPM_BUILD_ROOT/%{prefix}/app/configurations/system.ini $RPM_BUILD_ROOT/%{prefix}/app/configurations/local.ini
 sed 's#@PHP_BIN@#%{_bindir}/php#g' -i $RPM_BUILD_ROOT/%{prefix}/app/configurations/system.ini  $RPM_BUILD_ROOT/%{prefix}/app/configurations/local.ini
 sed 's#@CURL_BIN_DIR@#%{_bindir}#g' -i $RPM_BUILD_ROOT/%{prefix}/app/configurations/system.ini  $RPM_BUILD_ROOT/%{prefix}/app/configurations/local.ini
-sed 's#@IMAGE_MAGICK_BIN_DIR@#%{_bindir}#g' $RPM_BUILD_ROOT/%{prefix}/app/configurations/local.template.ini > $RPM_BUILD_ROOT/%{prefix}/app/configurations/local.ini
 
 rm $RPM_BUILD_ROOT/%{prefix}/app/generator/sources/android/DemoApplication/libs/libWVphoneAPI.so
 rm $RPM_BUILD_ROOT/%{prefix}/app/configurations/.project
