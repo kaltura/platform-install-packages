@@ -15,7 +15,7 @@ Source3: zz-%{name}.ini
 
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires: mediainfo, httpd, php, kaltura-base, kaltura-ffmpeg, ImageMagick, memcached, php-pecl-memcached, php-mysql, php-pecl-apc, php-mcrypt, kaltura-segmenter
+Requires: mediainfo, httpd, php, curl, kaltura-base, kaltura-ffmpeg, ImageMagick, memcached, php-pecl-memcached, php-mysql, php-pecl-apc, php-mcrypt, kaltura-segmenter
 Requires(post): chkconfig
 Requires(preun): chkconfig
 # This is for /sbin/service
@@ -56,6 +56,15 @@ chmod 775 %{prefix}/log
 service httpd restart
 sed 's#@APP_DIR@#%{prefix}/app#' %{prefix}/configurations/monit/monit.d/httpd.template.rc > %{prefix}/configurations/monit/monit.d/httpd.rc 
 sed 's#@APACHE_SERVICE@#httpd#g' %{prefix}/configurations/monit/monit.d/httpd.rc
+
+echo"
+#####################################################################################################################################
+Installation of %{name} %{version} completed
+Please run 
+# %{prefix}/bin/%{name}-config.sh [/path/to/answer/file]
+To finalize the setup.
+#####################################################################################################################################
+"
 
 %clean
 rm -rf %{buildroot}

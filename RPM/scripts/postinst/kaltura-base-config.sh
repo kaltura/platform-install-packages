@@ -18,7 +18,7 @@ verify_user_input()
 {
         ANSFILE=$1
 	. $ANSFILE
-        for VAL in TIME_ZONE KALTURA_FULL_VIRTUAL_HOST_NAME KALTURA_VIRTUAL_HOST_NAME DB1_HOST DB1_PORT DB1_NAME DB1_USER DB1_PASS; do
+        for VAL in TIME_ZONE KALTURA_FULL_VIRTUAL_HOST_NAME KALTURA_VIRTUAL_HOST_NAME DB1_HOST DB1_PORT DB1_NAME DB1_USER DB1_PASS SERVICE_URL; do
                 if [ -z "${!VAL}" ];then
                         echo "I need $VAL in $ANSFILE."
                         exit 1
@@ -80,6 +80,10 @@ CDN host [`hostname`]:
         #        stty $STTY_ORIG
 	#
         #done
+        while [ -z "$SERVICE_URL" ];do
+                echo "Service URL: "
+                read -e SERVICE_URL
+        done
 	echo "Generating a 15 chars random passwd.."
 	DB1_PASS=`< /dev/urandom tr -dc A-Za-z0-9_ | head -c15`
         while [ -z "$TIME_ZONE" ];do
@@ -90,11 +94,11 @@ fi
 
 # go over all conf files that are not templates.
 CONF_FILES=`find $KALT_CONF_DIR  -type f|grep -v template`
+cp $KALT_CONF_DIR/db.template.ini $KALT_CONF_DIR/db.ini
 
 # Now we will sed.
 for CONF_FILE in $CONF_FILES;do
-	sed -i -e "s#@CDN_HOST@#$CDN_HOST#g" -e "s#@DB1_HOST@#$DB1_HOST#g" -e "s#@DB1_NAME@#$DB1_NAME#g" -e "s#@DB1_USER@#$DB1_USER#g" -e "s#@DB1_PASS@#$DB1_PASS#g" -e "s#@DB_PORT@#$DB_PORT#g" -e "s#@TIME_ZONE@#$TIME_ZONE#g" -e "s#@KALTURA_FULL_VIRTUAL_HOST_NAME@#$KALTURA_FULL_VIRTUAL_HOST_NAME#g" -e "s#@KALTURA_VIRTUAL_HOST_NAME@#$KALTURA_VIRTUAL_HOST_NAME#g" $CONF_FILES 
+	sed -i -e "s#@CDN_HOST@#$CDN_HOST#g" -e "s#@DB1_HOST@#$DB1_HOST#g" -e "s#@DB1_NAME@#$DB1_NAME#g" -e "s#@DB1_USER@#$DB1_USER#g" -e "s#@DB1_PASS@#$DB1_PASS#g" -e "s#@DB_PORT@#$DB_PORT#g" -e "s#@TIME_ZONE@#$TIME_ZONE#g" -e "s#@KALTURA_FULL_VIRTUAL_HOST_NAME@#$KALTURA_FULL_VIRTUAL_HOST_NAME#g" -e "s#@KALTURA_VIRTUAL_HOST_NAME@#$KALTURA_VIRTUAL_HOST_NAME#g" -e "s#@SERVICE_URL@#$SERVICE_URL#g" -e "s#@WWW_HOST@#`hostname`#g" $CONF_FILES 
 done
 #@REPORT_ADMIN_EMAIL@
-#@TIME_ZONE@
 

@@ -137,9 +137,15 @@ echo
 echo "See the manual at /usr/share/doc/sphinx-%{version} for details."
 echo
 echo "For commercial support please contact Sphinx Technologies Inc at"
-echo "http://sphinxsearch.com/contacts.html"
-echo
+echo "http://sphinxsearch.com/contacts.html
 
+#####################################################################################################################################
+Installation of %{name} %{version} completed
+Please run 
+# %{prefix}/bin/%{name}-config.sh [/path/to/answer/file]
+To finalize the setup.
+#####################################################################################################################################
+"
 
 
 

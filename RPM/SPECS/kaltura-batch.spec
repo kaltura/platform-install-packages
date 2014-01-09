@@ -15,7 +15,7 @@ Source0: zz-%{name}.ini
 Source1: kaltura-batch
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires: kaltura-base, kaltura-ffmpeg, kaltura-ffmpeg-aux, php, httpd, sox, ImageMagick, kaltura-sshpass, php-pecl-memcached, php-mcrypt,php-pecl-memcached,mediainfo, kaltura-segmenter
+Requires: kaltura-base, kaltura-ffmpeg, kaltura-ffmpeg-aux, php, curl, httpd, sox, ImageMagick, kaltura-sshpass, php-pecl-memcached, php-mcrypt,php-pecl-memcached,mediainfo, kaltura-segmenter
 Requires(post): chkconfig
 Requires(preun): chkconfig
 # This is for /sbin/service
@@ -78,10 +78,15 @@ chown %{kaltura_user}:%{apache_group} %{prefix}/app/batch
 chmod 775 %{prefix}/log
 service kaltura-batch restart
 
-echo "#####################################################################################################################################
+echo "
+
+#####################################################################################################################################
 Installation of %{name} %{version} completed
-Please run %{prefix}/bin/%{name}-config.sh [/path/to/answer/file]
+Please run 
+# %{prefix}/bin/%{name}-config.sh [/path/to/answer/file]
 To finalize the setup.
+#####################################################################################################################################
+
 " 
 
 %preun

@@ -8,7 +8,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 9.7.0
-Release: 12 
+Release: 19 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -39,20 +39,25 @@ mkdir -p $RPM_BUILD_ROOT%{prefix}/app
 mkdir -p $RPM_BUILD_ROOT%{prefix}/log
 mkdir -p $RPM_BUILD_ROOT%{prefix}/tmp
 mkdir -p $RPM_BUILD_ROOT%{prefix}/app/cache
+mkdir -p $RPM_BUILD_ROOT%{prefix}/bin
+mkdir -p $RPM_BUILD_ROOT%{prefix}/lib
+mkdir -p $RPM_BUILD_ROOT%{prefix}/include
 mkdir -p $RPM_BUILD_ROOT/etc/kaltura.d
 for i in admin_console alpha api_v3 batch configurations deployment generator infra plugins start tests ui_infra var_console vendor;do 
 	mv  %{_builddir}/%{name}-%{version}/$i $RPM_BUILD_ROOT/%{prefix}/app
 done
 # now replace tokens
-sed 's#WEB_DIR=@WEB_DIR@#WEB_DIR=%{prefix}/web#' $RPM_BUILD_ROOT/%{prefix}/app/configurations/system.template.ini > $RPM_BUILD_ROOT/%{prefix}/app/configurations/system.ini
-sed 's#LOG_DIR=@LOG_DIR@#LOG_DIR=%{prefix}/log#' -i  $RPM_BUILD_ROOT/%{prefix}/app/configurations/system.ini
-sed 's#APP_DIR=@APP_DIR@#APP_DIR=%{prefix}/app#' -i  $RPM_BUILD_ROOT/%{prefix}/app/configurations/system.ini
-sed 's#BASE_DIR=@BASE_DIR@#BASE_DIR=%{prefix}#' -i $RPM_BUILD_ROOT/%{prefix}/app/configurations/system.ini
-sed 's#OS_KALTURA_USER=@OS_KALTURA_USER@#OS_KALTURA_USER=%{kaltura_user}#' -i $RPM_BUILD_ROOT/%{prefix}/app/configurations/system.ini
-sed 's#PHP_BIN=@PHP_BIN@#PHP_BIN=%{_bindir}/php#' -i $RPM_BUILD_ROOT/%{prefix}/app/configurations/system.ini
-sed 's#@IMAGE_MAGICK_BIN_DIR@#%{_bindir}#' $RPM_BUILD_ROOT/%{prefix}/app/configurations/local.template.ini > $RPM_BUILD_ROOT/%{prefix}/app/configurations/local.ini
-echo "
-VERSION=%{version}-%{release}" >> $RPM_BUILD_ROOT/%{prefix}/app/configurations/system.ini
+sed 's#@WEB_DIR@#%{prefix}/web#g' $RPM_BUILD_ROOT/%{prefix}/app/configurations/system.template.ini > $RPM_BUILD_ROOT/%{prefix}/app/configurations/system.ini
+sed 's#@WEB_DIR@#%{prefix}/web#g' $RPM_BUILD_ROOT/%{prefix}/app/configurations/local.template.ini > $RPM_BUILD_ROOT/%{prefix}/app/configurations/local.ini
+sed 's#@LOG_DIR@#%{prefix}/log#g' -i  $RPM_BUILD_ROOT/%{prefix}/app/configurations/system.ini  $RPM_BUILD_ROOT/%{prefix}/app/configurations/local.ini
+sed 's#@TMP_DIR@#%{prefix}/tmp#g' -i  $RPM_BUILD_ROOT/%{prefix}/app/configurations/system.ini  $RPM_BUILD_ROOT/%{prefix}/app/configurations/local.ini
+sed 's#@APP_DIR@#%{prefix}/app#g' -i  $RPM_BUILD_ROOT/%{prefix}/app/configurations/system.ini  $RPM_BUILD_ROOT/%{prefix}/app/configurations/local.ini
+sed 's#@BASE_DIR@#%{prefix}#g' -i $RPM_BUILD_ROOT/%{prefix}/app/configurations/system.ini  $RPM_BUILD_ROOT/%{prefix}/app/configurations/local.ini
+sed 's#@BIN_DIR@#%{prefix}#g' -i $RPM_BUILD_ROOT/%{prefix}/app/configurations/system.ini  $RPM_BUILD_ROOT/%{prefix}/app/configurations/local.ini
+sed 's#@OS_KALTURA_USER@#%{kaltura_user}#g' -i $RPM_BUILD_ROOT/%{prefix}/app/configurations/system.ini $RPM_BUILD_ROOT/%{prefix}/app/configurations/local.ini
+sed 's#@PHP_BIN@#%{_bindir}/php#g' -i $RPM_BUILD_ROOT/%{prefix}/app/configurations/system.ini  $RPM_BUILD_ROOT/%{prefix}/app/configurations/local.ini
+sed 's#@CURL_BIN_DIR@#%{_bindir}#g' -i $RPM_BUILD_ROOT/%{prefix}/app/configurations/system.ini  $RPM_BUILD_ROOT/%{prefix}/app/configurations/local.ini
+sed 's#@IMAGE_MAGICK_BIN_DIR@#%{_bindir}#g' $RPM_BUILD_ROOT/%{prefix}/app/configurations/local.template.ini > $RPM_BUILD_ROOT/%{prefix}/app/configurations/local.ini
 
 rm $RPM_BUILD_ROOT/%{prefix}/app/generator/sources/android/DemoApplication/libs/libWVphoneAPI.so
 rm $RPM_BUILD_ROOT/%{prefix}/app/configurations/.project
@@ -70,8 +75,7 @@ cat > $RPM_BUILD_ROOT%{_sysconfdir}/ld.conf.so.d/kaltura_base.conf << EOF
 EOF
 
 %clean
-rm -rf %{buildroot}
-
+#rm -rf %{buildroot}
 %post
 
 # create user/group, and update permissions
@@ -82,10 +86,15 @@ chown -R %{kaltura_user}:%{kaltura_group} %{prefix}/log
 chown -R %{kaltura_user}:%{kaltura_group} %{prefix}/app/cache 
 ln -sf %{prefix}/app/configurations/system.ini /etc/kaltura.d/system.ini
 
-echo "#####################################################################################################################################
+echo "
+
+#####################################################################################################################################
 Installation of %{name} %{version} completed
-Please run %{prefix}/bin/%{name}-config.sh [/path/to/answer/file]
+Please run 
+# %{prefix}/bin/%{name}-config.sh [/path/to/answer/file]
 To finalize the setup.
+#####################################################################################################################################
+
 " 
 
 %preun
@@ -118,6 +127,10 @@ fi
 %dir /etc/kaltura.d
 %dir %{prefix}/log
 %dir %{prefix}/tmp
+%dir %{prefix}/app/cache
+%dir %{prefix}/bin
+%dir %{prefix}/lib
+%dir %{prefix}/include
 
 #token_files[] = @APP_DIR@/configurations/logrotate/kaltura_*.template
 #token_files[] = @APP_DIR@/deployment/base/scripts/init_content/*.template.xml
@@ -127,6 +140,15 @@ fi
 
 
 %changelog
+* Thu Jan 9 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-16
+- No need for base.ini, there are no tokens there.
+
+* Thu Jan 9 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-16
+- Replace tokens in local.ini and base.ini as well.
+
+* Thu Jan 9 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-13
+- Create all base dirs and make sure they will be removed during un.
+
 * Thu Jan 9 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-12
 - Added creation of /opt/kaltura/tmp dir.
 - Postinstall message.
