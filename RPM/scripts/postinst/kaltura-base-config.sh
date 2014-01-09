@@ -66,7 +66,7 @@ CDN host [`hostname`]:
         echo "DB port [3306]: "
         read -e DB1_PORT
         if [ -z "$DB1_PORT" ];then
-                DB1_USER=3306
+                DB1_PORT=3306
         fi
         while [ -z "$DB1_USER" ];do
                 echo "Kaltura DB user: "
@@ -94,11 +94,14 @@ fi
 
 # go over all conf files that are not templates.
 CONF_FILES=`find $KALT_CONF_DIR  -type f|grep -v template`
-cp $KALT_CONF_DIR/db.template.ini $KALT_CONF_DIR/db.ini
 
+# if there's no db.ini file in place, copy the template 
+if [ ! -r "$KALT_CONF_DIR/db.ini" ];then
+	cp $KALT_CONF_DIR/db.template.ini $KALT_CONF_DIR/db.ini
+fi
 # Now we will sed.
 for CONF_FILE in $CONF_FILES;do
-	sed -i -e "s#@CDN_HOST@#$CDN_HOST#g" -e "s#@DB1_HOST@#$DB1_HOST#g" -e "s#@DB1_NAME@#$DB1_NAME#g" -e "s#@DB1_USER@#$DB1_USER#g" -e "s#@DB1_PASS@#$DB1_PASS#g" -e "s#@DB_PORT@#$DB_PORT#g" -e "s#@TIME_ZONE@#$TIME_ZONE#g" -e "s#@KALTURA_FULL_VIRTUAL_HOST_NAME@#$KALTURA_FULL_VIRTUAL_HOST_NAME#g" -e "s#@KALTURA_VIRTUAL_HOST_NAME@#$KALTURA_VIRTUAL_HOST_NAME#g" -e "s#@SERVICE_URL@#$SERVICE_URL#g" -e "s#@WWW_HOST@#`hostname`#g" $CONF_FILES 
+	sed -i -e "s#@CDN_HOST@#$CDN_HOST#g" -e "s#@DB[1-9]_HOST@#$DB1_HOST#g" -e "s#@DB[1-9]_NAME@#$DB1_NAME#g" -e "s#@DB[1-9]_USER@#$DB1_USER#g" -e "s#@DB[1-9]_PASS@#$DB1_PASS#g" -e "s#@DB[1-9]_PORT@#$DB1_PORT#g" -e "s#@TIME_ZONE@#$TIME_ZONE#g" -e "s#@KALTURA_FULL_VIRTUAL_HOST_NAME@#$KALTURA_FULL_VIRTUAL_HOST_NAME#g" -e "s#@KALTURA_VIRTUAL_HOST_NAME@#$KALTURA_VIRTUAL_HOST_NAME#g" -e "s#@SERVICE_URL@#$SERVICE_URL#g" -e "s#@WWW_HOST@#`hostname`#g" $CONF_FILES 
 done
 #@REPORT_ADMIN_EMAIL@
 
