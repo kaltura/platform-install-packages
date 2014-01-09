@@ -63,12 +63,14 @@ then
 fi
 
 # now replace tokens
-sed 's#WEB_DIR=@WEB_DIR@#WEB_DIR=%{prefix}/web#' $RPM_BUILD_ROOT/%{batch_confdir}/batch.ini.template > $RPM_BUILD_ROOT/%{batch_confdir}/batch.ini
+sed 's#@WEB_DIR@#%{prefix}/web#' $RPM_BUILD_ROOT/%{batch_confdir}/batch.ini.template > $RPM_BUILD_ROOT/%{batch_confdir}/batch.ini
 sed 's#@LOG_DIR@#%{prefix}/log#' -i  $RPM_BUILD_ROOT/%{batch_confdir}/batch.ini
 sed 's#@APP_DIR@{prefix}/app#' -i  $RPM_BUILD_ROOT/%{batch_confdir}/batch.ini
 sed 's#@BASE_DIR@#%{prefix}#' -i $RPM_BUILD_ROOT/%{batch_confdir}/batch.ini
 sed 's#@PHP_BIN@#%{_bindir}/php#' -i $RPM_BUILD_ROOT/%{batch_confdir}/batch.ini
 sed 's#@BIN_DIR@#%{prefix}/bin#' -i $RPM_BUILD_ROOT/%{batch_confdir}/batch.ini
+sed -i 's@^\(params.ImageMagickCmd\)\s*=.*@\1=%{bindir}/convert@' $RPM_BUILD_ROOT/%{batch_confdir}/batch.ini
+sed 's#@TMP_DIR@#%{prefix}/tmp#' -i $RPM_BUILD_ROOT/%{batch_confdir}/batch.ini
 service httpd restart
 
 chown %{kaltura_user}:%{kaltura_group} %{prefix}/log 
@@ -96,6 +98,10 @@ service httpd restart
 
 
 %changelog
+* Thu Jan 9 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-4
+- Set correct path to 'convert' binary
+- Replace TMP_DIR token.
+
 * Wed Jan 8 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-3
 - Added dep on kaltura-segmenter.
 

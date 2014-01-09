@@ -15,7 +15,8 @@
 
 #set -o nounset                              # Treat unset variables as an error
 
-
+BATCH_SCHEDULER_ID=`< /dev/urandom tr -dc 0-9 | head -c5`
+BATCH_PARTNER_ADMIN_SECRET=`echo "select admin_secret from partner where id=-1"|mysql -N -h$DB1_HOST -u$DB1_USER -p$DB1_PASS $DB1_NAME`
 #@BATCH_PARTNER_ADMIN_SECRET@
 #@BATCH_SCHEDULER_ID@
 #@BATCH_URL@

@@ -8,7 +8,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 9.7.0
-Release: 11 
+Release: 12 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -37,6 +37,7 @@ This is the base package, needed for any Kaltura server role.
 %install
 mkdir -p $RPM_BUILD_ROOT%{prefix}/app
 mkdir -p $RPM_BUILD_ROOT%{prefix}/log
+mkdir -p $RPM_BUILD_ROOT%{prefix}/tmp
 mkdir -p $RPM_BUILD_ROOT%{prefix}/app/cache
 mkdir -p $RPM_BUILD_ROOT/etc/kaltura.d
 for i in admin_console alpha api_v3 batch configurations deployment generator infra plugins start tests ui_infra var_console vendor;do 
@@ -111,6 +112,7 @@ fi
 
 %dir /etc/kaltura.d
 %dir %{prefix}/log
+%dir %{prefix}/tmp
 
 #token_files[] = @APP_DIR@/configurations/logrotate/kaltura_*.template
 #token_files[] = @APP_DIR@/deployment/base/scripts/init_content/*.template.xml
@@ -120,6 +122,9 @@ fi
 
 
 %changelog
+* Thu Jan 9 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-12
+- Added creation of /opt/kaltura/tmp dir.
+
 * Wed Jan 8 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-9
 - rm system.ini synlink only at complete uninstalls, not upgrades.
 

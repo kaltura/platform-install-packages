@@ -62,3 +62,4 @@ In order to finalize the system configuration, please input the following:"
 fi
 
 # now replace config tokens and run SQL creation scripts.
+sed -i -e "s#@DB1_HOST@#$DB1_HOST#g" -e "s#@DB1_NAME@#$DB1_NAME#g" -e "s#@DB1_USER@#$DB1_PASS#g"  

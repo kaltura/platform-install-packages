@@ -17,7 +17,7 @@
 verify_user_input()
 {
         ANSFILE=$1
-        for VAL in TIME_ZONE KALTURA_FULL_VIRTUAL_HOST_NAME DB1_HOST DB1_PORT DB1_NAME DB1_USER DB1_PASS ; do
+        for VAL in TIME_ZONE KALTURA_FULL_VIRTUAL_HOST_NAME KALTURA_VIRTUAL_HOST_NAME DB1_HOST DB1_PORT DB1_NAME DB1_USER DB1_PASS; do
                 if [ -z "${!VAL}" ];then
                         echo "I need $VAL in $ANSFILE."
                         exit 1
@@ -62,42 +62,37 @@ CDN host [`hostname`]:
                 DB1_NAME=kaltura
         fi
 
-        while [ -z "$DB_SUPER_USER" ];do
-                echo "DB super user [used to create the kaltura user and scheme]: "
-                read -e DB_SUPER_USER
-        done
-        while [ -z "$DB_SUPER_PASS" ];do
-                echo "DB super user passwd: "
-                STTY_ORIG=`stty -g`
-                stty -echo
-                read -e DB_SUPER_PASS
-                stty $STTY_ORIG
-
-        done
+        echo "DB port [3306]: "
+        read -e DB1_PORT
+        if [ -z "$DB1_PORT" ];then
+                DB1_USER=3306
+        fi
         while [ -z "$DB1_USER" ];do
                 echo "Kaltura DB user: "
                 read -e DB1_USER
         done
-        while [ -z "$DB1_PASS" ];do
-                echo "Kaltura DB passwd: "
-                STTY_ORIG=`stty -g`
-                stty -echo
-                read -e DB1_PASS
-                stty $STTY_ORIG
-
-        done
+        #while [ -z "$DB1_PASS" ];do
+        #        echo "Kaltura DB passwd: "
+        #        STTY_ORIG=`stty -g`
+        #        stty -echo
+        #        read -e DB1_PASS
+        #        stty $STTY_ORIG
+	#
+        #done
+	echo "Generating a 15 chars random passwd.."
+	DB1_PASS=`< /dev/urandom tr -dc A-Za-z0-9_ | head -c15`
         while [ -z "$TIME_ZONE" ];do
                 echo "Your time zone [see http://php.net/date.timezone]: "
                 read -e TIME_ZONE
         done
 fi
 
+# go over all conf files that are not templates.
+CONF_FILES=`find $KALT_CONF_DIR  -type f|grep -v template`
 
 # Now we will sed.
-CONF_FILES=`find $KALT_CONF_DIR -name "*.ini" -type f`
-
 for CONF_FILE in $CONF_FILES;do
-	sed -i -e "s#@CDN_HOST@#$CDN_HOST#g" -e "s#@DB1_HOST@#$DB1_HOST#g" -e "s#@DB1_NAME@#$DB1_NAME#g" -e "s#@DB1_USER@#$DB1_PASS#g"
+	sed -i -e "s#@CDN_HOST@#$CDN_HOST#g" -e "s#@DB1_HOST@#$DB1_HOST#g" -e "s#@DB1_NAME@#$DB1_NAME#g" -e "s#@DB1_USER@#$DB1_PASS#g" -e "s#@DB_PORT@#$DB_PORT#g"-e "s#@TIME_ZONE@#$TIME_ZONE#g" -e "s#@KALTURA_FULL_VIRTUAL_HOST_NAME@#$KALTURA_FULL_VIRTUAL_HOST_NAME#g" -e "s#@KALTURA_VIRTUAL_HOST_NAME@#$KALTURA_VIRTUAL_HOST_NAME#g" 
 done
 #@CDN_HOST@
 #@DB1_HOST@
