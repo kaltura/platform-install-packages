@@ -17,6 +17,7 @@
 verify_user_input()
 {
         ANSFILE=$1
+	. $ANSFILE
         for VAL in TIME_ZONE KALTURA_FULL_VIRTUAL_HOST_NAME KALTURA_VIRTUAL_HOST_NAME DB1_HOST DB1_PORT DB1_NAME DB1_USER DB1_PASS; do
                 if [ -z "${!VAL}" ];then
                         echo "I need $VAL in $ANSFILE."
