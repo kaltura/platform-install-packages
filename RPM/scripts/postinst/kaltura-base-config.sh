@@ -24,13 +24,8 @@ verify_user_input()
                 fi
         done
 }
-#KALTURA_RC=/etc/kaltura.d/system.ini
-#if [ ! -r $KALTURA_RC ];then
-#       echo "Missing $KALTURA_RC."
-#       exit 1
-#fi
-#. $KALTURA_RC
 
+KALT_CONF_DIR='/opt/kaltura/app/configurations/'
 if [ -n "$1" -a -r "$1" ];then
         ANSFILE=$1
         verify_user_input $ANSFILE
@@ -67,12 +62,24 @@ CDN host [`hostname`]:
                 DB1_NAME=kaltura
         fi
 
+        while [ -z "$DB_SUPER_USER" ];do
+                echo "DB super user [used to create the kaltura user and scheme]: "
+                read -e DB_SUPER_USER
+        done
+        while [ -z "$DB_SUPER_PASS" ];do
+                echo "DB super user passwd: "
+                STTY_ORIG=`stty -g`
+                stty -echo
+                read -e DB_SUPER_PASS
+                stty $STTY_ORIG
+
+        done
         while [ -z "$DB1_USER" ];do
-                echo "DB super user: "
+                echo "Kaltura DB user: "
                 read -e DB1_USER
         done
         while [ -z "$DB1_PASS" ];do
-                echo "DB super passwd: "
+                echo "Kaltura DB passwd: "
                 STTY_ORIG=`stty -g`
                 stty -echo
                 read -e DB1_PASS
@@ -85,7 +92,13 @@ CDN host [`hostname`]:
         done
 fi
 
+
 # Now we will sed.
+CONF_FILES=`find $KALT_CONF_DIR -name "*.ini" -type f`
+
+for CONF_FILE in $CONF_FILES;do
+	sed -i -e "s#@CDN_HOST@#$CDN_HOST#g" -e "s#@DB1_HOST@#$DB1_HOST#g" -e "s#@DB1_NAME@#$DB1_NAME#g" -e "s#@DB1_USER@#$DB1_PASS#g"
+done
 #@CDN_HOST@
 #@DB1_HOST@
 #@DB1_NAME@
