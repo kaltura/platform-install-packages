@@ -77,7 +77,7 @@ cat > $RPM_BUILD_ROOT%{_sysconfdir}/ld.conf.so.d/kaltura_base.conf << EOF
 EOF
 
 %clean
-#rm -rf %{buildroot}
+rm -rf %{buildroot}
 %post
 
 # create user/group, and update permissions
