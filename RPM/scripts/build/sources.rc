@@ -42,18 +42,22 @@ KALTURA_URI="https://github.com/kaltura/media-server/archive/$KALTURA_STREAMING_
 # Kaltura KMC:
 KMC_VERSION=v5.36.10
 KMC_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/flash/kmc/$KMC_VERSION"
+KMC_RPM_NAME="kaltura-kmc"
 
 # Kaltura KDP:
 # we bundle a few vers at each release:
 KDP_VERSIONS="v3.5.21 v3.8.9 v3.9.1 v3.9.2"
 KDP_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/flash/kdp3"
+KDP_RPM_NAME="kaltura-kdp"
 
 # Kaltura Clipapp:
 # we bundle a few vers at each release:
 CLIPAPP_VERSIONS="v1.0.5 v1.0.5_saas v1.0.7 v1.0.7_saas"
 CLIPAPP_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/apps/clipapp"
+CLIPAPP_RPM_NAME="kaltura-clipapp"
 
 # Kaltura kRecord
 # we bundle a few vers at each release:
 KRECORD_VERSIONS="v1.5.2 v1.6.2"
 KRECORD_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/flash/krecord"
+KRECORD_RPM_NAME="kaltura-krecord"

@@ -13,7 +13,7 @@
 #      REVISION:  ---
 #===============================================================================
 
-#set -o nounset                              # Treat unset variables as an error
+set -o nounset                              # Treat unset variables as an error
 SOURCES_RC=`dirname $0`/sources.rc
 if [ ! -r $SOURCES_RC ];then
 	echo "Could not find $SOURCES_RC"
@@ -25,7 +25,7 @@ if [ ! -x `which svn 2>/dev/null` ];then
 	exit 2
 fi
 
-svn export --force --quiet $KMC_URI $SOURCE_PACKAGING_DIR/kaltura-kmc-$KMC_VERSION 
+svn export --force --quiet $KMC_URI $SOURCE_PACKAGING_DIR/$KMC_RPM_NAME-$KMC_VERSION 
 cd $SOURCE_PACKAGING_DIR
-tar jcf $RPM_SOURCES_DIR/kaltura-kmc-$KMC_VERSION.tar.bz2 kaltura-kmc-$KMC_VERSION
-echo "Packaged into $RPM_SOURCES_DIR/kaltura-kmc-$KMC_VERSION.tar.bz2"
+tar jcf $RPM_SOURCES_DIR/$KMC_RPM_NAME-$KMC_VERSION.tar.bz2 $KMC_RPM_NAME-$KMC_VERSION
+echo "Packaged into $RPM_SOURCES_DIR/$KMC_RPM_NAME-$KMC_VERSION.tar.bz2"

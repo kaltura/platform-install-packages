@@ -13,7 +13,7 @@
 #      REVISION:  ---
 #===============================================================================
 
-#set -o nounset                              # Treat unset variables as an error
+set -o nounset                              # Treat unset variables as an error
 SOURCES_RC=`dirname $0`/sources.rc
 if [ ! -r $SOURCES_RC ];then
 	echo "Could not find $SOURCES_RC"
@@ -26,8 +26,9 @@ if [ ! -x `which svn 2>/dev/null` ];then
 fi
 
 for KDP_VERSION in $KDP_VERSIONS;do
-	svn export --force --quiet $KDP_URI/$KDP_VERSION $SOURCE_PACKAGING_DIR/kaltura-kdp/$KDP_VERSION 
+	svn export --force --quiet $KDP_URI/$KDP_VERSION $SOURCE_PACKAGING_DIR/$KDP_RPM_NAME/$KDP_VERSION 
 done
 cd $SOURCE_PACKAGING_DIR
-tar jcf $RPM_SOURCES_DIR/kaltura-kdp.tar.bz2 kaltura-kdp
-echo "Packaged into $RPM_SOURCES_DIR/kaltura-kdp.tar.bz2"
+tar jcf $RPM_SOURCES_DIR/$KDP_RPM_NAME.tar.bz2 $KDP_RPM_NAME
+echo "Packaged into $RPM_SOURCES_DIR/$KDP_RPM_NAME.tar.bz2"
+rpmbuild -ba $RPM_SPECS_DIR/$KDP_RPM_NAME.spec

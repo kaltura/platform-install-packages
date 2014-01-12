@@ -13,7 +13,7 @@
 #      REVISION:  ---
 #===============================================================================
 
-#set -o nounset                              # Treat unset variables as an error
+set -o nounset                              # Treat unset variables as an error
 SOURCES_RC=`dirname $0`/sources.rc
 if [ ! -r $SOURCES_RC ];then
 	echo "Could not find $SOURCES_RC"
@@ -26,8 +26,9 @@ if [ ! -x `which svn 2>/dev/null` ];then
 fi
 
 for CLIPAPP_VERSION in $CLIPAPP_VERSIONS;do
-	svn export --force --quiet $CLIPAPP_URI/$CLIPAPP_VERSION $SOURCE_PACKAGING_DIR/kaltura-clipapp/$CLIPAPP_VERSION 
+	svn export --force --quiet $CLIPAPP_URI/$CLIPAPP_VERSION $SOURCE_PACKAGING_DIR/$CLIPAPP_RPM_NAME/$CLIPAPP_VERSION 
 done
 cd $SOURCE_PACKAGING_DIR
-tar jcf $RPM_SOURCES_DIR/kaltura-clipapp.tar.bz2 kaltura-clipapp
-echo "Packaged into $RPM_SOURCES_DIR/kaltura-clipapp.tar.bz2"
+tar jcf $RPM_SOURCES_DIR/$CLIPAPP_RPM_NAME.tar.bz2 $CLIPAPP_RPM_NAME
+echo "Packaged into $RPM_SOURCES_DIR/$CLIPAPP_RPM_NAME.tar.bz2"
+rpmbuild -ba $RPM_SPECS_DIR/$CLIPAPP_RPM_NAME.spec
