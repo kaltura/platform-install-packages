@@ -6,7 +6,7 @@ License: AGPLv3+
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
-Requires: kaltura-kmc, kaltura-kdp
+Requires: kaltura-kmc, kaltura-kdp, kaltura_kcw kaltura_kdp kaltura_kdp3 kaltura_kdp3wrapper kaltura_kvpm
 
 %description
 Kaltura is the world's first Open Source Online Video Platform, transforming the way people work, 
@@ -20,7 +20,7 @@ teachers by providing educational institutions disruptive online video solutions
 learning, and increased engagement across campuses and beyond. 
 For more information visit: http://corp.kaltura.com, http://www.kaltura.org and http://www.html5video.org.
 
-This package install the Kaltura Flash/Java widgets: KMC, KDP, KSR
+This package install the Kaltura Flash widgets: KMC, KDP3, KCW, KDP3Wrapper, KVPM.
 
 %clean
 rm -rf %{buildroot}
@@ -34,5 +34,5 @@ rm -rf %{buildroot}
 %files
 
 %changelog
-* Mon Jan 8 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-1
-- This is a meta package which installs an all in 1 server. i.e: all server nodes will be installed on the same machine, producing a standalone Kaltura server.
+* Mon Jan 8 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.0-1
+- Initial package. 
