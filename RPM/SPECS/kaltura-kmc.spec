@@ -9,6 +9,7 @@ License: AGPLv3+
 URL: http://kaltura.org
 Source0: %{name}-%{version}.tar.bz2
 BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
+BuildArch: noarch
 
 Requires: kaltura-base, httpd	
 

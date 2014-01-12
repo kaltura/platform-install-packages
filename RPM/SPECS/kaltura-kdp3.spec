@@ -1,10 +1,9 @@
 %define prefix /opt/kaltura
-%define widget_name krecord
-%define krecord_vers "v1.5.2 v1.6.2"
-Name:	kaltura-%{widget_name}
-Version: 1.0.0 
+%define kdp3_vers "v3.5.21 v3.8.9 v3.9.1 v3.9.2"
+Name:	kaltura-kdp3	
+Version: 3.0.0 
 Release: 1
-Summary: Kaltura kRecord - used for recording from web cam
+Summary: Kaltura Dynamic Player
 License: AGPLv3+	
 URL: http://kaltura.org
 Source0: %{name}.tar.bz2
@@ -25,7 +24,7 @@ teachers by providing educational institutions disruptive online video solutions
 learning, and increased engagement across campuses and beyond. 
 For more information visit: http://corp.kaltura.com, http://www.kaltura.org and http://www.html5video.org.
 
-This package installs the Kaltura kRecord - used for recording from web cam.
+This package installs the KDP Flash player.
 
 %prep
 %setup -qn %{name} 
@@ -33,10 +32,9 @@ This package installs the Kaltura kRecord - used for recording from web cam.
 %build
 
 %install
-mkdir -p $RPM_BUILD_ROOT%{prefix}/web/flash/%{widget_name}
-for i in %{krecord_vers};do
-	cp -r %{_builddir}/%{name}/$i $RPM_BUILD_ROOT/%{prefix}/web/flash/%{widget_name}
-	find $RPM_BUILD_ROOT/%{prefix}/web/flash/%{widget_name} -name ".project" -exec rm {} \;
+mkdir -p $RPM_BUILD_ROOT%{prefix}/web/flash/kdp3
+for i in %{kdp3_vers};do
+	cp -r %{_builddir}/%{name}/$i $RPM_BUILD_ROOT/%{prefix}/web/flash/kdp3/
 done
 
 %clean
@@ -44,9 +42,9 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
-%{prefix}/web/flash/%{widget_name}
+%{prefix}/web/flash/kdp3
 
 
 %changelog
-* Sun Jan 12 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.0-1
+* Sun Jan 12 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 3.0.0-1
 - initial package.

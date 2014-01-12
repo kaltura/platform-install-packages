@@ -1,7 +1,7 @@
 #!/bin/bash -e 
 #===============================================================================
-#          FILE: package_kaltura_kdp.sh
-#         USAGE: ./package_kaltura_kdp.sh 
+#          FILE: package_kaltura_web.sh
+#         USAGE: ./package_kaltura_web.sh 
 #   DESCRIPTION: 
 #       OPTIONS: ---
 #  REQUIREMENTS: ---
@@ -25,10 +25,10 @@ if [ ! -x `which svn 2>/dev/null` ];then
 	exit 2
 fi
 
-for KDP_VERSION in $KDP_VERSIONS;do
-	svn export --force --quiet $KDP_URI/$KDP_VERSION $SOURCE_PACKAGING_DIR/$KDP_RPM_NAME/$KDP_VERSION 
+for KDP3_VERSION in $KDP3_VERSIONS;do
+	svn export --force --quiet $KDP3_URI/$KDP3_VERSION $SOURCE_PACKAGING_DIR/$KDP3_RPM_NAME/$KDP3_VERSION 
 done
 cd $SOURCE_PACKAGING_DIR
-tar jcf $RPM_SOURCES_DIR/$KDP_RPM_NAME.tar.bz2 $KDP_RPM_NAME
-echo "Packaged into $RPM_SOURCES_DIR/$KDP_RPM_NAME.tar.bz2"
-rpmbuild -ba $RPM_SPECS_DIR/$KDP_RPM_NAME.spec
+tar jcf $RPM_SOURCES_DIR/$KDP3_RPM_NAME.tar.bz2 $KDP3_RPM_NAME
+echo "Packaged into $RPM_SOURCES_DIR/$KDP3_RPM_NAME.tar.bz2"
+rpmbuild -ba $RPM_SPECS_DIR/$KDP3_RPM_NAME.spec
