@@ -25,7 +25,7 @@ if [ ! -x `which svn 2>/dev/null` ];then
 	exit 2
 fi
 
-svn export --force --quiet svn+ssh://jessp@kelev.kaltura.com/usr/local/kalprod/flash/kmc/$KMC_VERSION $SOURCE_PACKAGING_DIR/kaltura-kmc-$KMC_VERSION 
+svn export --force --quiet $KMC_URI $SOURCE_PACKAGING_DIR/kaltura-kmc-$KMC_VERSION 
 cd $SOURCE_PACKAGING_DIR
 tar jcf $RPM_SOURCES_DIR/kaltura-kmc-$KMC_VERSION.tar.bz2 kaltura-kmc-$KMC_VERSION
 echo "Packaged into $RPM_SOURCES_DIR/kaltura-kmc-$KMC_VERSION.tar.bz2"
