@@ -45,20 +45,20 @@ mkdir -p $RPM_BUILD_ROOT/%{_sysconfdir}/php.d
 mkdir -p $RPM_BUILD_ROOT/%{batch_confdir}
 cp %{SOURCE0} $RPM_BUILD_ROOT/%{_sysconfdir}/php.d/zz-%{name}.ini
 cp %{SOURCE1} $RPM_BUILD_ROOT/%{_sysconfdir}/init.d/%{name}
-sed 's#@WEB_DIR@#%{prefix}/web#' $RPM_BUILD_ROOT/%{_sysconfdir}/php.d/zz-%{name}.ini
+sed 's#@WEB_DIR@#%{prefix}/web#' -i $RPM_BUILD_ROOT/%{_sysconfdir}/php.d/zz-%{name}.ini
 
 
 %clean
 rm -rf %{buildroot}
 
 %post
-sed 's#@LOG_DIR@#%{prefix}/log#'  %{prefix}/app/configurations/monit.avail/batch.template.rc %{prefix}/configurations/monit.avail/batch.rc
+sed 's#@LOG_DIR@#%{prefix}/log#'  %{prefix}/app/configurations/monit.avail/batch.template.rc > %{prefix}/app/configurations/monit.avail/batch.rc
 sed 's#@APP_DIR@#%{prefix}/app#' -i %{prefix}/app/configurations/monit.avail/batch.rc 
-sed 's#@APP_DIR@#%{prefix}/app#' %{prefix}/app/configurations/monit.avail/httpd.template.rc > %{prefix}/configurations/monit.avail/httpd.rc 
-sed 's#@APACHE_SERVICE@#httpd#g' %{prefix}/app/configurations/monit.avail/httpd.rc
+sed 's#@APP_DIR@#%{prefix}/app#' %{prefix}/app/configurations/monit.avail/httpd.template.rc > %{prefix}/app/configurations/monit.avail/httpd.rc 
+sed 's#@APACHE_SERVICE@#httpd#g' -i %{prefix}/app/configurations/monit.avail/httpd.rc
 
-ln -fs %{prefix}/configurations/monit.avail/httpd.rc %{prefix}/configurations/monit.d/httpd.rc
-ln -fs %{prefix}/configurations/monit.avail/batch.rc %{prefix}/configurations/monit.d/batch.rc
+ln -fs %{prefix}/app/configurations/monit.avail/httpd.rc %{prefix}/app/configurations/monit.d/httpd.rc
+ln -fs %{prefix}/app/configurations/monit.avail/batch.rc %{prefix}/app/configurations/monit.d/batch.rc
 if [ "$1" = 1 ];then
 	/sbin/chkconfig --add kaltura-batch
 	echo"#####################################################################################################################################
@@ -90,7 +90,7 @@ service kaltura-batch restart
 %preun
 if [ "$1" = 0 ] ; then
 	/sbin/chkconfig --del kaltura-batch
-	rm %{prefix}/configurations/monit.d/httpd.rc %{prefix}/configurations/monit.d/batch.rc    
+	rm %{prefix}/app/configurations/monit.d/httpd.rc %{prefix}/app/configurations/monit.d/batch.rc || true
 fi
 service kaltura-batch restart
 

@@ -50,7 +50,7 @@ mkdir -p $RPM_BUILD_ROOT/%{_sysconfdir}/httpd/conf.d
 cp %{SOURCE0} %{SOURCE1} %{SOURCE2} $RPM_BUILD_ROOT/%{_sysconfdir}/httpd/conf.d
 mkdir -p $RPM_BUILD_ROOT/%{_sysconfdir}/php.d
 cp %{SOURCE3} $RPM_BUILD_ROOT/%{_sysconfdir}/php.d
-sed 's#@WEB_DIR@#%{prefix}/web#' $RPM_BUILD_ROOT/%{_sysconfdir}/php.d/zz-%{name}.ini
+sed 's#@WEB_DIR@#%{prefix}/web#' -i $RPM_BUILD_ROOT/%{_sysconfdir}/php.d/zz-%{name}.ini
 
 %post
 sed 's#@WEB_DIR@#%{prefix}/web#' -i $RPM_BUILD_ROOT/%{_sysconfdir}/httpd/conf.d/*.conf 
@@ -59,10 +59,10 @@ sed 's#@APP_DIR@#%{prefix}/app#' -i $RPM_BUILD_ROOT/%{_sysconfdir}/httpd/conf.d/
 chown %{kaltura_user}:%{apache_group} %{prefix}/log 
 chmod 775 %{prefix}/log
 service httpd restart
-sed 's#@APP_DIR@#%{prefix}/app#' %{prefix}/app/configurations/monit.avail/httpd.template.rc > %{prefix}/configurations/monit.avail/httpd.rc 
-sed 's#@APACHE_SERVICE@#httpd#g' %{prefix}/app/configurations/monit.avail/httpd.rc
+sed 's#@APP_DIR@#%{prefix}/app#' %{prefix}/app/configurations/monit.avail/httpd.template.rc > %{prefix}/app/configurations/monit.avail/httpd.rc 
+sed 's#@APACHE_SERVICE@#httpd#g' -i %{prefix}/app/configurations/monit.avail/httpd.rc
 
-ln -fs %{prefix}/configurations/monit.avail/httpd.rc %{prefix}/configurations/monit.d/httpd.rc
+ln -fs %{prefix}/app/configurations/monit.avail/httpd.rc %{prefix}/app/configurations/monit.d/httpd.rc
 
 if [ "$1" = 1 ];then
 	echo"#####################################################################################################################################
@@ -75,7 +75,7 @@ if [ "$1" = 1 ];then
 fi
 %preun
 if [ "$1" = 0 ] ; then
-	rm %{prefix}/configurations/monit.d/httpd.rc
+	rm %{prefix}/app/configurations/monit.d/httpd.rc || true
 fi
 
 %clean

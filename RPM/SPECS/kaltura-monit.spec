@@ -6,7 +6,7 @@
 Summary: Process monitor and restart utility
 Name: kaltura-monit
 Version: 5.6
-Release: 5 
+Release: 6 
 License: GPLv3
 Group: High Availability Management 
 URL: http://mmonit.com/monit/

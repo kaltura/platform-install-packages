@@ -40,7 +40,7 @@
 Summary: Utilities and libraries to record, convert and stream audio and video
 Name: kaltura-ffmpeg-aux
 Version: 0.6 
-Release: 1
+Release: 2 
 License: GPL
 Group: Applications/Multimedia
 URL: http://ffmpeg.org/
@@ -195,8 +195,11 @@ EOF
 chcon -t textrel_shlib_t %{prefix}/lib/libav{codec,device,format,util}.so.*.*.* &>/dev/null || :
 ln -fs %{base_prefix}-%{version}/bin/ffmpeg /opt/kaltura/bin/ffmpeg-aux 
 
-%postun -p /sbin/ldconfig
-
+%postun 
+/sbin/ldconfig
+if [ "$1" = 0 ] ; then
+	rm -f /opt/kaltura/bin/ffmpeg-aux
+fi
 
 %files
 %defattr(-, root, root, 0755)
@@ -243,5 +246,8 @@ ln -fs %{base_prefix}-%{version}/bin/ffmpeg /opt/kaltura/bin/ffmpeg-aux
 %{base_prefix}-%{version}/lib/pkgconfig/libswscale.pc
 
 %changelog
+* Sun Jan 12 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.1.1-2
+- Remove symlink to /opt/kaltura/bin at %%postun.
+
 * Wed Dec 25 2013 Jess Portnoy <jess.portnoy@kaltura.com> - 0.6-1
 - Initial build.
