@@ -1,7 +1,7 @@
 #!/bin/bash -e 
 #===============================================================================
-#          FILE: package_kaltura_web.sh
-#         USAGE: ./package_kaltura_web.sh 
+#          FILE: package_kaltura_kvpm.sh
+#         USAGE: ./package_kaltura_kvpm.sh 
 #   DESCRIPTION: 
 #       OPTIONS: ---
 #  REQUIREMENTS: ---
@@ -24,12 +24,8 @@ if [ ! -x `which svn 2>/dev/null` ];then
 	echo "Need to install svn."
 	exit 2
 fi
-svn export --force --quiet $KDP3PLUGINS_URI $SOURCE_PACKAGING_DIR/$KDP3PLUGINS_RPM_NAME
-for KDP3_VERSION in $KDP3_VERSIONS;do
-	svn export --force --quiet $KDP3_URI/$KDP3_VERSION $SOURCE_PACKAGING_DIR/$KDP3_RPM_NAME/$KDP3_VERSION 
-	cp -r $SOURCE_PACKAGING_DIR/$KDP3PLUGINS_RPM_NAME $SOURCE_PACKAGING_DIR/$KDP3_RPM_NAME/$KDP3_VERSION/plugins 
-done
+svn export --force --quiet $KVPM_URI $SOURCE_PACKAGING_DIR/$KVPM_RPM_NAME
 cd $SOURCE_PACKAGING_DIR
-tar jcf $RPM_SOURCES_DIR/$KDP3_RPM_NAME.tar.bz2 $KDP3_RPM_NAME
-echo "Packaged into $RPM_SOURCES_DIR/$KDP3_RPM_NAME.tar.bz2"
-rpmbuild -ba $RPM_SPECS_DIR/$KDP3_RPM_NAME.spec
+tar jcf $RPM_SOURCES_DIR/$KVPM_RPM_NAME.tar.bz2 $KVPM_RPM_NAME
+echo "Packaged into $RPM_SOURCES_DIR/$KVPM_RPM_NAME.tar.bz2"
+rpmbuild -ba $RPM_SPECS_DIR/$KVPM_RPM_NAME.spec
