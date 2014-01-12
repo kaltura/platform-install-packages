@@ -2,6 +2,8 @@
 SOURCE_PACKAGING_DIR=~/sources
 RPM_SOURCES_DIR=~/rpmbuild/SOURCES
 RPM_SPECS_DIR=~/rpmbuild/SPECS
+TMP_DIR=/tmp
+SVN_USER=jessp
 
 # Sphinx build vars:
 SPHINX_URI="http://sphinxsearch.googlecode.com/svn/trunk/"
@@ -36,3 +38,7 @@ KALTURA_URI="https://github.com/kaltura/server/archive/IX-$KALTURA_CORE_VERSION.
 # Kaltura Streaming lib build vars:
 KALTURA_STREAMING_LIB_VERSION="master"
 KALTURA_URI="https://github.com/kaltura/media-server/archive/$KALTURA_STREAMING_LIB_VERSION.zip"
+
+# Kaltura KMC:
+KMC_VERSION=v5.36.10
+KMC_URI="svn+ssh://svnuser@kelev.kaltura.com/usr/local/kalprod/flash/kmc/$KMC_VER"
