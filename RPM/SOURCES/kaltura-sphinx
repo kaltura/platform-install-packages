@@ -21,7 +21,7 @@
 . $APP_DIR/infra/scripts/functions.rc
 prog="searchd"
 config="$APP_DIR/configurations/sphinx/kaltura.conf"
-exec="$BASE_DIR/bin/sphinx/searchd"
+exec="$BASE_DIR/sphinx/bin/searchd"
 pid_file="/opt/kaltura/sphinx/searchd.pid"
 
 

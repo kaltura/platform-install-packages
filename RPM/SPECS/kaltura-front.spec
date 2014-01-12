@@ -65,13 +65,13 @@ sed 's#@APACHE_SERVICE@#httpd#g' -i %{prefix}/app/configurations/monit.avail/htt
 ln -fs %{prefix}/app/configurations/monit.avail/httpd.rc %{prefix}/app/configurations/monit.d/httpd.rc
 
 if [ "$1" = 1 ];then
-	echo"#####################################################################################################################################
-	Installation of %{name} %{version} completed
-	Please run 
-	# %{prefix}/bin/%{name}-config.sh [/path/to/answer/file]
-	To finalize the setup.
-	#####################################################################################################################################
-	"
+echo"#####################################################################################################################################
+Installation of %{name} %{version} completed
+Please run 
+# %{prefix}/bin/%{name}-config.sh [/path/to/answer/file]
+To finalize the setup.
+#####################################################################################################################################
+"
 fi
 %preun
 if [ "$1" = 0 ] ; then

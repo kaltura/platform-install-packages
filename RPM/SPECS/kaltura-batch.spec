@@ -7,12 +7,13 @@
 Summary: Kaltura Open Source Video Platform - batch server 
 Name: kaltura-batch
 Version: 9.7.0
-Release: 12 
+Release: 13 
 License: AGPLv3+
 Group: Server/Platform 
 #Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
 Source0: zz-%{name}.ini
 Source1: kaltura-batch
+Source2: kaltura-batch.conf
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires: kaltura-base, kaltura-ffmpeg, kaltura-ffmpeg-aux, php, curl, httpd, sox, ImageMagick, kaltura-sshpass, php-pecl-memcached, php-mcrypt,php-pecl-memcached,mediainfo, kaltura-segmenter
@@ -46,6 +47,8 @@ mkdir -p $RPM_BUILD_ROOT/%{batch_confdir}
 cp %{SOURCE0} $RPM_BUILD_ROOT/%{_sysconfdir}/php.d/zz-%{name}.ini
 cp %{SOURCE1} $RPM_BUILD_ROOT/%{_sysconfdir}/init.d/%{name}
 sed 's#@WEB_DIR@#%{prefix}/web#' -i $RPM_BUILD_ROOT/%{_sysconfdir}/php.d/zz-%{name}.ini
+mkdir -p $RPM_BUILD_ROOT/%{_sysconfdir}/httpd/conf.d
+cp %{SOURCE2} $RPM_BUILD_ROOT/%{_sysconfdir}/httpd/conf.d
 
 
 %clean
@@ -61,12 +64,12 @@ ln -fs %{prefix}/app/configurations/monit.avail/httpd.rc %{prefix}/app/configura
 ln -fs %{prefix}/app/configurations/monit.avail/batch.rc %{prefix}/app/configurations/monit.d/batch.rc
 if [ "$1" = 1 ];then
 	/sbin/chkconfig --add kaltura-batch
-	echo"#####################################################################################################################################
-	Installation of %{name} %{version} completed
-	Please run: 
-	# %{prefix}/bin/%{name}-config.sh [/path/to/answer/file]
-	To finalize the setup.
-	#####################################################################################################################################
+echo"#####################################################################################################################################
+Installation of %{name} %{version} completed
+Please run: 
+# %{prefix}/bin/%{name}-config.sh [/path/to/answer/file]
+To finalize the setup.
+#####################################################################################################################################
 "
 fi
 
@@ -99,11 +102,15 @@ service httpd restart
 
 %files
 %config /etc/php.d/zz-%{name}.ini
+%config %{_sysconfdir}/httpd/conf.d/kaltura-batch.conf
 
 %{_sysconfdir}/init.d/%{name}
 
 
 %changelog
+* Sun Jan 12 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-13
+- Dedicated Apache config for a batch node.
+
 * Sun Jan 12 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-12
 - Use the monit scandir mechanism.
 

@@ -6,7 +6,7 @@
 
 Name:           kaltura-sphinx
 Version:        2.2.1
-Release:        4
+Release:        8 
 Summary:        Sphinx full-text search server - for Kaltura
 
 Group:          Applications/Text
@@ -71,11 +71,11 @@ mkdir $RPM_BUILD_ROOT/opt/kaltura/sphinx/lib
 # Install sphinx initscript
 install -p -D -m 0755 %{SOURCE1} $RPM_BUILD_ROOT%{_initrddir}/kaltura-sphinx
 
-# Create /var/log/sphinx
-mkdir -p $RPM_BUILD_ROOT%{prefix}/var/log/sphinx
+mkdir -p $RPM_BUILD_ROOT/opt/kaltura/log/sphinx/data
 
 # Create /var/run/sphinx
-mkdir -p $RPM_BUILD_ROOT%{prefix}/var/run/sphinx
+mkdir -p $RPM_BUILD_ROOT%{prefix}/var/run
+
 
 
 
@@ -105,22 +105,25 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 ldconfig
+sed 's#@LOG_DIR@#/opt/kaltura/log#g' /opt/kaltura/app/configurations/sphinx/kaltura.conf.template > /opt/kaltura/app/configurations/sphinx/kaltura.conf
+sed 's#@BASE_DIR@#/opt/kaltura#g' -i $RPM_BUILD_ROOT/opt/kaltura/app/configurations/sphinx/kaltura.conf
+sed 's#^pid_file.*#pid_file=%{prefix}/var/run/searchd.pid#' -i $RPM_BUILD_ROOT/opt/kaltura/app/configurations/sphinx/kaltura.conf
 # register service
 if [ "$1" = 1 ];then
     /sbin/chkconfig --add kaltura-sphinx
-	echo "
-	#####################################################################################################################################
-	Installation of %{name} %{version} completed
-	Please run 
-	# %{prefix}/bin/%{name}-config.sh [/path/to/answer/file]
-	To finalize the setup.
-	#####################################################################################################################################
-	"
+echo "
+#####################################################################################################################################
+Installation of %{name} %{version} completed
+Please run 
+# %{prefix}/bin/%{name}-config.sh [/path/to/answer/file]
+To finalize the setup.
+#####################################################################################################################################
+"
 fi
 
 # create user/group, and update permissions
-chown -R %{sphinx_user}:%{sphinx_group} %{prefix}/var/log/sphinx %{prefix}/var/run/sphinx
-
+chown -R %{sphinx_user}:%{sphinx_group} %{prefix} /opt/kaltura/log/sphinx 
+%{_initrddir}/kaltura-sphinx restart
 
 
 
@@ -136,19 +139,22 @@ fi
 %{prefix}/share/man/man1/*
 %doc COPYING doc/sphinx.html doc/sphinx.txt sphinx-min.conf.dist sphinx.conf.dist example.sql
 %dir %{confdir}
-#%config(missingok) %{confdir}/kaltura_sphinx.conf
+#%config(noreplace) %{confdir}/kaltura_sphinx.conf
 %config %{_sysconfdir}/profile.d/kaltura_sphinx.sh
 %exclude %{confdir}/*.conf.dist
 %exclude %{confdir}/example.sql
 %{_initrddir}/kaltura-sphinx
 %config(noreplace) %{_sysconfdir}/logrotate.d/sphinx
 %{prefix}/bin/*
-%dir %{prefix}/var/log/sphinx
-%dir %{prefix}/var/run/sphinx
+%dir /opt/kaltura/log/sphinx
+%dir %{prefix}/var/run
 
 
 
 %changelog
+* Sun Jan 12 2014 Jess Portnoy <jess.portnoy@kaltura.com> 2.2.1.r4097-5
+- Replace tokens and create kaltura.conf - Sphinx config file.
+
 * Sun Jan 12 2014 Jess Portnoy <jess.portnoy@kaltura.com> 2.2.1.r4097-4
 - Output post message only on first install.
 
