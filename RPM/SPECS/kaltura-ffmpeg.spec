@@ -183,7 +183,7 @@ EOF
 %post
 /sbin/ldconfig
 chcon -t textrel_shlib_t %{base_prefix}-%{version}/lib/libav{codec,device,format,util}.so.*.*.* &>/dev/null || :
-ln -s %{base_prefix}-%{version}/bin/ffmpeg /opt/kaltura/bin 
+ln -fs %{base_prefix}-%{version}/bin/ffmpeg /opt/kaltura/bin 
 
 %postun -p /sbin/ldconfig
 

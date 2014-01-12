@@ -15,11 +15,4 @@
 
 #set -o nounset                              # Treat unset variables as an error
 
-
-#@INSTALLED_HOSNAME@
-#@KALTURA_FULL_VIRTUAL_HOST_NAME@
-#@KALTURA_VERSION@
-#@KALTURA_VERSION_TYPE@
-#@KALTURA_VIRTUAL_HOST_NAME@
-#@REPORT_ADMIN_EMAIL@
-#@TIME_ZONE@
+`dirname $0`/kaltura-base-config.sh

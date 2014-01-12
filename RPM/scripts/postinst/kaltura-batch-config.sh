@@ -14,6 +14,7 @@
 #===============================================================================
 
 #set -o nounset                              # Treat unset variables as an error
+`dirname $0`/kaltura-base-config.sh
 BATCH_SCHED_CONF=/opt/kaltura/app/configurations/batch/scheduler.conf
 BATCH_MAIN_CONF=/opt/kaltura/app/configurations/batch/batch.ini
 

@@ -2,10 +2,11 @@
 %define kaltura_user	kaltura
 %define kaltura_group	kaltura
 %define apache_user	apache
+%define apache_group	apache
 Summary: Kaltura Open Source Video Platform - frontend server 
 Name: kaltura-front
 Version: 9.7.0
-Release: 3 
+Release: 6 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: kaltura-api.conf
@@ -52,20 +53,30 @@ cp %{SOURCE3} $RPM_BUILD_ROOT/%{_sysconfdir}/php.d
 sed 's#@WEB_DIR@#%{prefix}/web#' $RPM_BUILD_ROOT/%{_sysconfdir}/php.d/zz-%{name}.ini
 
 %post
+sed 's#@WEB_DIR@#%{prefix}/web#' -i $RPM_BUILD_ROOT/%{_sysconfdir}/httpd/conf.d/*.conf 
+sed 's#@LOG_DIR@#%{prefix}/log#'  -i $RPM_BUILD_ROOT/%{_sysconfdir}/httpd/conf.d/*.conf
+sed 's#@APP_DIR@#%{prefix}/app#' -i $RPM_BUILD_ROOT/%{_sysconfdir}/httpd/conf.d/*.conf
 chown %{kaltura_user}:%{apache_group} %{prefix}/log 
 chmod 775 %{prefix}/log
 service httpd restart
-sed 's#@APP_DIR@#%{prefix}/app#' %{prefix}/configurations/monit/monit.d/httpd.template.rc > %{prefix}/configurations/monit/monit.d/httpd.rc 
-sed 's#@APACHE_SERVICE@#httpd#g' %{prefix}/configurations/monit/monit.d/httpd.rc
+sed 's#@APP_DIR@#%{prefix}/app#' %{prefix}/app/configurations/monit.avail/httpd.template.rc > %{prefix}/configurations/monit.avail/httpd.rc 
+sed 's#@APACHE_SERVICE@#httpd#g' %{prefix}/app/configurations/monit.avail/httpd.rc
 
-echo"
-#####################################################################################################################################
-Installation of %{name} %{version} completed
-Please run 
-# %{prefix}/bin/%{name}-config.sh [/path/to/answer/file]
-To finalize the setup.
-#####################################################################################################################################
-"
+ln -fs %{prefix}/configurations/monit.avail/httpd.rc %{prefix}/configurations/monit.d/httpd.rc
+
+if [ "$1" = 1 ];then
+	echo"#####################################################################################################################################
+	Installation of %{name} %{version} completed
+	Please run 
+	# %{prefix}/bin/%{name}-config.sh [/path/to/answer/file]
+	To finalize the setup.
+	#####################################################################################################################################
+	"
+fi
+%preun
+if [ "$1" = 0 ] ; then
+	rm %{prefix}/configurations/monit.d/httpd.rc
+fi
 
 %clean
 rm -rf %{buildroot}
@@ -77,6 +88,17 @@ rm -rf %{buildroot}
 %config %{_sysconfdir}/httpd/conf.d/kaltura-admin-console.conf
 
 %changelog
+* Sun Jan 12 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-6
+- Use the monit scandir mechanism.
+
+* Sun Jan 12 2014 Jess Portnoy <jess.portnoy@kaltura.com> 9.7.0-5
+- Output post message only on first install.
+- sed corrected.
+
+* Sun Jan 12 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-4
+- Added define for apache_group.
+- Monit conf path corrected.
+
 * Wed Jan 8 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-3
 - Added dep on kaltura-segmenter.
 

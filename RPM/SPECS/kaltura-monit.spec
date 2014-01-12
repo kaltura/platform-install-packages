@@ -6,7 +6,7 @@
 Summary: Process monitor and restart utility
 Name: kaltura-monit
 Version: 5.6
-Release: 2 
+Release: 5 
 License: GPLv3
 Group: High Availability Management 
 URL: http://mmonit.com/monit/
@@ -15,6 +15,8 @@ Packager: Jess Portnoy <jess.portnoy@kaltura.com>
 Vendor: Tildeslash Ltd. 
 
 Source0: http://mmonit.com/monit/dist/monit-%{version}.tar.gz
+Source1: kaltura-monit
+Source2: monit.conf
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
 BuildRequires: binutils
@@ -40,11 +42,6 @@ sed -i 's@^#\s+\(include .*\)$@\1@' monitrc
 # store id and state files in /var/monit
 sed -i 's@^#\(\s+\)set \(id|state\)file /var/\.monit\.\(id|state\)$@set $2file /var/monit/$3@' monitrc
 
-# fix config path in /etc/init.d/monit
-sed -i 's@monitrc@monit.conf@' contrib/rc.monit
-
-sed -i 's@MONIT=/usr/bin/monit@%{prefix}/bin/monit@g' contrib/rc.monit
-sed -i 's@etc/sysconfig/monit@%{confdir}/monit@g' contrib/rc.monit
 
 %build
 ./configure --build=x86_64-redhat-linux-gnu --host=x86_64-redhat-linux-gnu --target=x86_64-redhat-linux-gnu --prefix=%{prefix} --bindir=%{prefix}/bin --sbindir=%{prefix}/sbin --sysconfdir=%{confdir} --datadir=%{prefix}/share --includedir=%{prefix}/include --libdir=%{prefix}/lib64 --libexecdir=%{prefix}/libexec --localstatedir=%{prefix}/var --sharedstatedir=%{prefix}/var/lib --mandir=%{prefix}/man --infodir=%{prefix}/share/info --with-ssl-lib-dir=/usr/lib64/openssl
@@ -55,13 +52,14 @@ sed -i 's@etc/sysconfig/monit@%{confdir}/monit@g' contrib/rc.monit
 make install DESTDIR=$RPM_BUILD_ROOT INSTALL="%{__install} -p -c"
 
 %{__install} -Dp -m0755 contrib/rc.monit %{buildroot}%{_initrddir}/%{name}
-%{__install} -Dp -m0600 monitrc %{buildroot}%{confdir}/monit.conf
+%{__install} -Dp -m0600 %{SOURCE2} %{buildroot}%{confdir}/monit.conf
 
 %{__install} -d -m0755 %{buildroot}%{confdir}/monit.d/
 %{__install} -d -m0755 %{buildroot}%{prefix}/var/lib/monit/
 
 # create folder where state and id are stored
 %{__install} -d -m0755 %{buildroot}%{prefix}/var/monit/
+cp %{SOURCE1} %{buildroot}%{_initrddir}/kaltura-monit
 
 %pre
 if ! /usr/bin/id monit &>/dev/null; then
@@ -70,12 +68,11 @@ if ! /usr/bin/id monit &>/dev/null; then
 fi
 
 %post
-/sbin/chkconfig --add kaltura-monit
-
-# Moving old style configuration file to conf standard location
-if [ -f %{confdir}/monitrc ]; then
-    mv -f %{confdir}/monitrc %{confdir}/monit.conf
+if [ "$1" = 1 ];then
+	/sbin/chkconfig --add kaltura-monit
 fi
+/sbin/service monit restart &>/dev/null || :
+
 
 %preun
 if [ $1 -eq 0 ]; then
@@ -94,11 +91,12 @@ fi
 
 
 %files
-%defattr(-, root, root, 0755)
 %doc CHANGES COPYING README*
 %doc %{prefix}/man/man?/*
+%defattr(-, root, root, 0755)
 %{_initrddir}/kaltura-monit
 %config %{confdir}/monit.d/
+%config %{confdir}/monit.conf
 %config %{prefix}/var/monit/
 %{prefix}/var/lib/monit/
 %attr(0755, root, root) %{prefix}/bin/monit
@@ -106,10 +104,19 @@ fi
 
 
 %changelog
-* Thu Jan 2 2013 Jess Portnoy <jess.portnoy@kaltura.com> - 5.6.2
+* Sun Jan 12 2013 Jess Portnoy <jess.portnoy@kaltura.com> - 5.6-5
+- Added monit.conf
+
+* Sun Jan 12 2013 Jess Portnoy <jess.portnoy@kaltura.com> - 5.6-4
+- Changes to init script.
+
+* Sun Jan 12 2013 Jess Portnoy <jess.portnoy@kaltura.com> - 5.6-3
+- Only chkconfig on first install.
+
+* Thu Jan 2 2013 Jess Portnoy <jess.portnoy@kaltura.com> - 5.6-2
 - Corrected daemon name to be 'kaltura-monit'
 
-* Thu Jan 2 2013 Jess Portnoy <jess.portnoy@kaltura.com> - 5.6.1
+* Thu Jan 2 2013 Jess Portnoy <jess.portnoy@kaltura.com> - 5.6-1
 - This package was originally taken from the Dag repo.
 - The reason for creating kaltura-monit
 	0. none standard prefix so that one can also install the original monit package if one is inclined or needs it for other packages.

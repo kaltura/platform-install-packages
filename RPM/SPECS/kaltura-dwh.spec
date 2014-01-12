@@ -38,10 +38,20 @@ This package configures the Data Warehouse [DWH] analytics component.
 #@DWH_DIR@/etlsource/execute/etl_perform_retention_policy.sh -p @DWH_DIR@
 #@DWH_DIR@/etlsource/execute/etl_update_dims.sh -p @DWH_DIR@
 
-
 %clean
 rm -rf %{buildroot}
 
+%post
+if [ "$1" = 1 ];then
+	/sbin/chkconfig --add kaltura-batch
+	echo"#####################################################################################################################################
+	Installation of %{name} %{version} completed
+	Please run: 
+	# %{prefix}/bin/%{name}-config.sh [/path/to/answer/file]
+	To finalize the setup.
+	#####################################################################################################################################
+"
+fi
 %files
 #cron/dwh.template
 #.kettle/kettle.template.properties

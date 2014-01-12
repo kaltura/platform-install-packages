@@ -15,8 +15,4 @@
 
 #set -o nounset                              # Treat unset variables as an error
 
-#@SPHINX_DB_HOST@
-#@SPHINX_DB_NAME@
-#@SPHINX_SERVER@
-#@SPHINX_SERVER1@
-#@SPHINX_SERVER2@
+`dirname $0`/kaltura-base-config.sh

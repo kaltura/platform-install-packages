@@ -7,7 +7,7 @@
 Summary: Kaltura Open Source Video Platform - batch server 
 Name: kaltura-batch
 Version: 9.7.0
-Release: 11 
+Release: 12 
 License: AGPLv3+
 Group: Server/Platform 
 #Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -52,14 +52,22 @@ sed 's#@WEB_DIR@#%{prefix}/web#' $RPM_BUILD_ROOT/%{_sysconfdir}/php.d/zz-%{name}
 rm -rf %{buildroot}
 
 %post
-sed 's#@LOG_DIR@#%{prefix}/log#'  %{prefix}/app/configurations/monit/monit.d/batch.template.rc %{prefix}/configurations/monit/monit.d/batch.rc
-sed 's#@APP_DIR@#%{prefix}/app#' -i %{prefix}/app/configurations/monit/monit.d/batch.rc 
-sed 's#@APP_DIR@#%{prefix}/app#' %{prefix}/app/configurations/monit/monit.d/httpd.template.rc > %{prefix}/configurations/monit/monit.d/httpd.rc 
-sed 's#@APACHE_SERVICE@#httpd#g' %{prefix}/app/configurations/monit/monit.d/httpd.rc
+sed 's#@LOG_DIR@#%{prefix}/log#'  %{prefix}/app/configurations/monit.avail/batch.template.rc %{prefix}/configurations/monit.avail/batch.rc
+sed 's#@APP_DIR@#%{prefix}/app#' -i %{prefix}/app/configurations/monit.avail/batch.rc 
+sed 's#@APP_DIR@#%{prefix}/app#' %{prefix}/app/configurations/monit.avail/httpd.template.rc > %{prefix}/configurations/monit.avail/httpd.rc 
+sed 's#@APACHE_SERVICE@#httpd#g' %{prefix}/app/configurations/monit.avail/httpd.rc
 
-if [ "$1" = 1 ];
-then
-    /sbin/chkconfig --add kaltura-batch
+ln -fs %{prefix}/configurations/monit.avail/httpd.rc %{prefix}/configurations/monit.d/httpd.rc
+ln -fs %{prefix}/configurations/monit.avail/batch.rc %{prefix}/configurations/monit.d/batch.rc
+if [ "$1" = 1 ];then
+	/sbin/chkconfig --add kaltura-batch
+	echo"#####################################################################################################################################
+	Installation of %{name} %{version} completed
+	Please run: 
+	# %{prefix}/bin/%{name}-config.sh [/path/to/answer/file]
+	To finalize the setup.
+	#####################################################################################################################################
+"
 fi
 
 # now replace tokens
@@ -78,20 +86,11 @@ chown %{kaltura_user}:%{apache_group} %{prefix}/app/batch
 chmod 775 %{prefix}/log
 service kaltura-batch restart
 
-echo "
-
-#####################################################################################################################################
-Installation of %{name} %{version} completed
-Please run 
-# %{prefix}/bin/%{name}-config.sh [/path/to/answer/file]
-To finalize the setup.
-#####################################################################################################################################
-
-" 
 
 %preun
 if [ "$1" = 0 ] ; then
-    /sbin/chkconfig --del kaltura-batch
+	/sbin/chkconfig --del kaltura-batch
+	rm %{prefix}/configurations/monit.d/httpd.rc %{prefix}/configurations/monit.d/batch.rc    
 fi
 service kaltura-batch restart
 
@@ -105,6 +104,9 @@ service httpd restart
 
 
 %changelog
+* Sun Jan 12 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-12
+- Use the monit scandir mechanism.
+
 * Thu Jan 9 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-11
 - Set correct path to 'convert' binary
 - Replace TMP_DIR token.

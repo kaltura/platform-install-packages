@@ -28,6 +28,8 @@ if [ -n "$1" -a -r "$1" ];then
         ANSFILE=$1
         verify_user_input $ANSFILE
 else
+	# call base config:
+	`dirname $0`/kaltura-base-config.sh
         echo "Welcome to Kaltura Server `rpm -qa kaltura-base --queryformat %{version}` post install setup.
 In order to finalize the system configuration, please input the following:"
 
