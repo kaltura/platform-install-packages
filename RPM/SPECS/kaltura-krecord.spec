@@ -1,13 +1,16 @@
-Summary: Kaltura Open Source Video Platform all in 1 package 
-Name: kaltura-server
-Version: 9.7.0
+%define prefix /opt/kaltura
+%define widget_name krecord
+%define krecord_vers "v1.5.2 v1.6.2"
+Name:	kaltura-%{widget_name}
+Version: 1.0.0 
 Release: 1
-License: AGPLv3+
-Group: Server/Platform 
+Summary: Kaltura kRecord - used for recording from web cam
+License: AGPLv3+	
 URL: http://kaltura.org
-Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-BuildArch: noarch
-Requires: kaltura-front, kaltura-batch, kaltura-sphinx, kaltura-dwh
+Source0: %{name}.tar.bz2
+BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
+
+Requires: kaltura-base, httpd	
 
 %description
 Kaltura is the world's first Open Source Online Video Platform, transforming the way people work, 
@@ -21,19 +24,28 @@ teachers by providing educational institutions disruptive online video solutions
 learning, and increased engagement across campuses and beyond. 
 For more information visit: http://corp.kaltura.com, http://www.kaltura.org and http://www.html5video.org.
 
-This is a meta package which installs an all in 1 server. i.e: all server nodes will be installed on the same machine, producing a standalone Kaltura server.
+This package installs the Kaltura kRecord - used for recording from web cam.
+
+%prep
+%setup -qn %{name} 
+
+%build
+
+%install
+mkdir -p $RPM_BUILD_ROOT%{prefix}/web/flash/%{widget_name}
+for i in %{krecord_vers};do
+	cp -r %{_builddir}/%{name}/$i $RPM_BUILD_ROOT/%{prefix}/web/flash/%{widget_name}
+	find $RPM_BUILD_ROOT/%{prefix}/web/flash/%{widget_name} -name ".project" -exec rm {} \;
+done
 
 %clean
 rm -rf %{buildroot}
 
-%post
-
-%preun
-
-%postun
-
 %files
+%defattr(-,root,root,-)
+%{prefix}/web/flash/%{widget_name}
+
 
 %changelog
-* Mon Jan 8 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-1
-- This is a meta package which installs an all in 1 server. i.e: all server nodes will be installed on the same machine, producing a standalone Kaltura server.
+* Sun Jan 12 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.0-1
+- initial package.
