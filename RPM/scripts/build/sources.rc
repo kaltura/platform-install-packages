@@ -52,7 +52,7 @@ KDP_RPM_NAME="kaltura-kdp"
 
 # Kaltura KDP3:
 # we bundle a few vers at each release:
-KDP3_VERSIONS="v3.5.21 v3.8.9 v3.9.1 v3.9.2"
+KDP3_VERSIONS="v3.5.21 v3.8.9 v3.9.1 v3.9.2 v3.9.3"
 KDP3_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/flash/kdp3"
 KDP3_RPM_NAME="kaltura-kdp3"
 
@@ -86,7 +86,7 @@ KRECORD_RPM_NAME="kaltura-krecord"
 
 # Kaltura KCW
 # we bundle a few vers at each release:
-KCW_VERSIONS="v2.1.6.7 v2.1.5 v2.2.1 v2.2.3 v2.1.4 v2.1.6.7 v2.1.6.7 v1.5.4 v2.1.6.7 v2.1.2 v2.0.7 v2.1.6.3 v1.6.5 v1.6.5.24461"
+KCW_VERSIONS="v2.1.6.7 v2.1.5 v2.2.1 v2.2.3 v2.1.4 v1.5.4 v2.1.6.7 v2.1.2 v2.1.6.3"
 KCW_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/flash/kcw"
 KCW_RPM_NAME="kaltura-kcw"
 

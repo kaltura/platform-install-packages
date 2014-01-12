@@ -4,10 +4,9 @@ Version: 9.7.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
-Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires: kaltura-base,kaltura-pentaho,java-1.7.0-openjdk 
+Requires: kaltura-base,kaltura-pentaho,java-1.7.0-openjdk, kaltura-postinst 
 BuildArch: noarch
 
 %description
@@ -30,7 +29,6 @@ and developing a variety of online workflows for video.
 This package configures the Data Warehouse [DWH] analytics component. 
 
 %prep
-%setup -q
 
 %build
 

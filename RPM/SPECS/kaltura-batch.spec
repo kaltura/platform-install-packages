@@ -105,11 +105,11 @@ service httpd restart
 
 
 %changelog
-* Thu Jan 9 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-4
+* Thu Jan 9 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-11
 - Set correct path to 'convert' binary
 - Replace TMP_DIR token.
 
-* Wed Jan 8 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-3
+* Wed Jan 8 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-10
 - Added dep on kaltura-segmenter.
 
 * Wed Jan 8 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-9

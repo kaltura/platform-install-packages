@@ -1,8 +1,8 @@
 %define prefix /opt/kaltura
-%define kdp3_vers "v3.5.21 v3.8.9 v3.9.1 v3.9.2"
+%define kdp3_vers "v3.5.21 v3.8.9 v3.9.1 v3.9.2 v3.9.3"
 Name:	kaltura-kdp3	
 Version: 3.0.0 
-Release: 1
+Release: 2
 Summary: Kaltura Dynamic Player
 License: AGPLv3+	
 URL: http://kaltura.org
@@ -46,5 +46,7 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sun Jan 12 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 3.0.0-1
+- KDP v3.9.3 added.
 * Sun Jan 12 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 3.0.0-1
 - initial package.
