@@ -46,10 +46,11 @@ fi
 KALTURA_DB=$DB1_NAME
 
 # check DB connectivity:
-mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT
+echo "select version();" | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT -N
 if [ $? -ne 0 ];then
 cat << EOF
-Failed to run mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT."
+Failed to run:
+# mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT."
 Check your settings."
 EOF
 	exit 4
@@ -61,7 +62,7 @@ if [ $? -eq 0 ];then
 cat << EOF
 The $KALTURA_DB seems to already be installed.
 Did you mean to perform an upgrade? if so, run with:
-$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT upgrade
+# $0 $MYSQL_HOST $MYSQL_SUPER_USER $MYSQL_SUPER_USER_PASSWD $MYSQL_PORT upgrade
 EOF
 	exit 5
 fi 
@@ -70,6 +71,22 @@ for i in $DBS;do
 	PRIVS=${i}_privileges ;echo ${!PRIVS};
 done
 
+# this is the DB creation part, we want to exit if something fails here:
+set -e
+# create the DBs:
+for DB in $DBS;do 
+	echo "create db $DB"
+	echo "create database $i;" | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT
+	PRIVS=${DB}_privileges
+	DB_USER=${DB}_USER
+	echo "create user"
+	echo "create user ${!DB_USER};"  | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT
+	DB_SQL_FILES=${DB}_SQL_FILES
+done
+
+
+
+set +e
 # Create DBs, tables, users here:
 
 # SQL files to run will reside in a text file

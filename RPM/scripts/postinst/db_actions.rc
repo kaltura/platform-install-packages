@@ -1,12 +1,15 @@
-# This file basically defines the DBs names, privileges and users entitled to these privileges and SQL scripts to run for each.
+# This file basically defines the DBs names, privileges and users entitled to these privileges.
 
 DBS="KALTURA KALTURA_SPHINX_LOG KALTURADW KALTURADW_DS KALTURADW_BISOURCES KALTURALOG"
 KALTURA_PRIVILEGES="INSERT,UPDATE,DELETE,SELECT"
 KALTURA_USER="kaltura"
+KALTURA_SQL_FILES="@APP_DIR@/deployment/base/sql/01.kaltura_ce_tables.sql @APP_DIR@/deployment/base/sql/04.stored_procedures.sql"
+
 KALTURA_SPHINX_LOG_PRIVILEGES="SELECT,INSERT,UPDATE"
 KALTURA_SPHINX_LOG_USER="kaltura"
-KALTURADW_PRIVILEGES="INSERT,UPDATE,DELETE,SELECT,EXECUTE"
+KALTURA_SPHINX_LOG_FILES="@APP_DIR@/deployment/base/sql/01.kaltura_sphinx_ce_tables.sql"
 
+KALTURADW_PRIVILEGES="INSERT,UPDATE,DELETE,SELECT,EXECUTE"
 KALTURADW_USER="etl"
 KALTURADW_DS_PRIVILEGES="INSERT,UPDATE,DELETE,SELECT,EXECUTE"
 KALTURADW_DS_USER="etl"
