@@ -24,6 +24,13 @@ if [ ! -r "$RC_FILE" ];then
 	echo "Could not find $RC_FILE so, exiting.."
 	exit 2
 fi
+. $RC_FILE
+DB_ACTIONS_RC=`dirname $0`/db_actions.rc
+if [ ! -r "$DB_ACTIONS_RC" ];then
+	echo "Could not find $DB_ACTIONS_RC so, exiting.."
+	exit 3
+fi
+. $DB_ACTIONS_RC
 
 MYSQL_HOST=$1
 MYSQL_SUPER_USER=$2
@@ -45,7 +52,7 @@ cat << EOF
 Failed to run mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT."
 Check your settings."
 EOF
-	exit 3
+	exit 4
 fi
 
 # check whether the 'kaltura' already exists:
@@ -56,8 +63,12 @@ The $KALTURA_DB seems to already be installed.
 Did you mean to perform an upgrade? if so, run with:
 $MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT upgrade
 EOF
-	exit 4
+	exit 5
 fi 
+
+for i in $DBS;do 
+	PRIVS=${i}_privileges ;echo ${!PRIVS};
+done
 
 # Create DBs, tables, users here:
 
@@ -87,6 +98,7 @@ fi
 # kalturalog 
 # INSERT,UPDATE,DELETE,SELECT,LOCK TABLES
 
-
+# DWH setup:
+# @DWH_DIR@/setup/dwh_setup.sh
 
 
