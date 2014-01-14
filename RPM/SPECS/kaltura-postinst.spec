@@ -1,14 +1,9 @@
-%define kaltura_user	kaltura
-%define kaltura_group	kaltura
 %define prefix /opt/kaltura
-%define confdir %{prefix}/app/configurations
-%define logdir %{prefix}/log
-%define webdir %{prefix}/web
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.0
-Release: 10 
+Release: 11 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -37,6 +32,7 @@ This package includes post install scripts to be run post RPM install as they re
 mkdir -p $RPM_BUILD_ROOT/%{prefix}/bin
 chmod +x *.sh 
 mv  *.{sh,rc} $RPM_BUILD_ROOT/%{prefix}/bin
+sed -i 's#@APP_DIR@#%{prefix}/app#g' $RPM_BUILD_ROOT/%{prefix}/bin/*
 
 %clean
 rm -rf %{buildroot}
@@ -47,9 +43,12 @@ rm -rf %{buildroot}
 
 %files
 %{prefix}/bin/*
-
+%config %{prefix}/bin/db_actions.rc
 
 %changelog
+* Tue Jan 14 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.0-11
+- Added DB config script and RC file.
+
 * Thu Jan 9 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.0-4
 - Bounce.
 

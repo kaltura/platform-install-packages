@@ -46,6 +46,7 @@ fi
 KALTURA_DB=$DB1_NAME
 
 # check DB connectivity:
+echo "Checking MySQL version.."
 echo "select version();" | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT -N
 if [ $? -ne 0 ];then
 cat << EOF
@@ -57,40 +58,48 @@ EOF
 fi
 
 # check whether the 'kaltura' already exists:
-echo "show tables" | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT $KALTURA_DB
+echo "use kaltura" | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT $KALTURA_DB
 if [ $? -eq 0 ];then
 cat << EOF
-The $KALTURA_DB seems to already be installed.
+The $KALTURA_DB DB seems to already be installed.
+
 Did you mean to perform an upgrade? if so, run with:
 # $0 $MYSQL_HOST $MYSQL_SUPER_USER $MYSQL_SUPER_USER_PASSWD $MYSQL_PORT upgrade
+
 EOF
 	exit 5
 fi 
-
-for i in $DBS;do 
-	PRIVS=${i}_privileges ;echo ${!PRIVS};
-done
 
 # this is the DB creation part, we want to exit if something fails here:
 set -e
 
 # create users:
 for DB_USER in $DB_USERS;do
-	echo "creating user ${DB_USER}"
-	echo "create user ${DB_USER};"  | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT
+	echo "CREATE USER ${DB_USER} IDENTIFIED BY '$DB1_PASS' ;"
+	echo "CREATE USER ${DB_USER} IDENTIFIED BY '$DB1_PASS' ;"  | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT
 done
 # create the DBs:
 for DB in $DBS;do 
 	echo "creating db $DB"
 	echo "create database $DB;" | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT
-	PRIVS=${DB}_privileges
+	PRIVS=${DB}_PRIVILEGES
 	DB_USER=${DB}_USER
+	# apply privileges:
+	echo "GRANT ${!PRIVS} ON $DB.* TO '${!DB_USER}'@'%';FLUSH PRIVILEGES;" | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT
 	DB_SQL_FILES=${DB}_SQL_FILES
+	# run table creation scripts:
+	for SQL in ${!DB_SQL_FILES};do 
+		mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT $DB < $SQL
+	done
 done
 
-
+#deployment/base/scripts/insertContent.php
+#deployment/base/scripts/insertDefaults.php
+#deployment/base/scripts/insertPermissions.php
+#deployment/base/scripts/installPlugins.php
 
 set +e
+
 
 # DWH setup:
 # @DWH_DIR@/setup/dwh_setup.sh
