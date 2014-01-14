@@ -3,14 +3,13 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
 Version: v2.1.1
-Release: 1
+Release: 2 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/mwEmbed/tarball/%{name}-%{version}.tar.gz 
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
-#Requires: rsync,mail,mysql,kaltura-monit,kaltura-postinst,cronie
 
 %description
 Kaltura is the world's first Open Source Online Video Platform, transforming the way people work, 
@@ -41,8 +40,14 @@ rm -rf %{buildroot}
 %postun
 
 %files
+%defattr(-, root, root, 0755)
+%doc COPYING README.markdown 
 %{prefix}/html5/html5lib/%{version}
+%config %{prefix}/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Tue Jan 14 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.1.1-1
+- Added %%doc.
+
 * Tue Jan 14 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.1.1-1
 - initial package.

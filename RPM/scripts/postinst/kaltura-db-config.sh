@@ -73,47 +73,24 @@ done
 
 # this is the DB creation part, we want to exit if something fails here:
 set -e
+
+# create users:
+for DB_USER in $DB_USERS;do
+	echo "creating user ${DB_USER}"
+	echo "create user ${DB_USER};"  | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT
+done
 # create the DBs:
 for DB in $DBS;do 
-	echo "create db $DB"
-	echo "create database $i;" | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT
+	echo "creating db $DB"
+	echo "create database $DB;" | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT
 	PRIVS=${DB}_privileges
 	DB_USER=${DB}_USER
-	echo "create user"
-	echo "create user ${!DB_USER};"  | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT
 	DB_SQL_FILES=${DB}_SQL_FILES
 done
 
 
 
 set +e
-# Create DBs, tables, users here:
-
-# SQL files to run will reside in a text file
-
-# kaltura
-#@BASE_DIR@/app/deployment/base/sql/01.kaltura_ce_tables.sql
-#@BASE_DIR@/app/deployment/base/sql/04.stored_procedures.sql
-#user prives for $DB1_USER on $DB1_NAME:
-#INSERT,UPDATE,DELETE,SELECT
-
-#sphinx_log
-# @BASE_DIR@/app/deployment/base/sql/01.kaltura_sphinx_ce_tables.sql
-#user prives for $DB1_USER:
-#SELECT,INSERT,UPDATE
-
-# kalturadw
-#user prives for $DWH_USER:
-#INSERT,UPDATE,DELETE,SELECT,EXECUTE
-# kalturadw_bisources
-
-#user prives for $DWH_USER:
-# kalturadw_ds
-# INSERT,UPDATE,DELETE,SELECT,EXECUTE
-# 
-#user privs for $DWH_USER:
-# kalturalog 
-# INSERT,UPDATE,DELETE,SELECT,LOCK TABLES
 
 # DWH setup:
 # @DWH_DIR@/setup/dwh_setup.sh
