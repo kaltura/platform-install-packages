@@ -75,7 +75,7 @@ set -e
 
 # create users:
 for DB_USER in $DB_USERS;do
-	echo "CREATE USER ${DB_USER} IDENTIFIED BY '$DB1_PASS' ;"
+	echo "CREATE USER ${DB_USER};"
 	echo "CREATE USER ${DB_USER} IDENTIFIED BY '$DB1_PASS' ;"  | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT
 done
 # create the DBs:
@@ -97,6 +97,11 @@ done
 #deployment/base/scripts/insertDefaults.php
 #deployment/base/scripts/insertPermissions.php
 #deployment/base/scripts/installPlugins.php
+
+# populate data:
+for PHP_CODE in /opt/kaltura/app/deployment/base/scripts/*php;do
+	php PHP_CODE
+done
 
 set +e
 

@@ -7,7 +7,7 @@
 Summary: Kaltura Open Source Video Platform - batch server 
 Name: kaltura-batch
 Version: 9.7.0
-Release: 13 
+Release: 14 
 License: AGPLv3+
 Group: Server/Platform 
 #Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -108,6 +108,9 @@ service httpd restart
 
 
 %changelog
+* Sun Jan 14 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-14
+- PHP extensions added to 'Requires'.
+
 * Sun Jan 12 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-13
 - Dedicated Apache config for a batch node.
 

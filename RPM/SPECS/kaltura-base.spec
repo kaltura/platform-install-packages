@@ -8,14 +8,14 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 9.7.0
-Release: 22 
+Release: 23 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
-Requires: rsync,mail,mysql,kaltura-monit,kaltura-postinst,cronie
+Requires: rsync,mail,mysql,kaltura-monit,kaltura-postinst,cronie, php, php-xml, php-curl, php-mysql,php-gd,php-gmp, php-imap, php-ldap
 
 %description
 Kaltura is the world's first Open Source Online Video Platform, transforming the way people work, 
@@ -141,6 +141,9 @@ fi
 
 
 %changelog
+* Sun Jan 14 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-23
+- We have CLI scripts in PHP that need to run post install of the base package.
+
 * Sun Jan 12 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-22
 - Change name from .*.template.rc to .*.rc.template so that monit.d/*.rc will work correctly.
 
