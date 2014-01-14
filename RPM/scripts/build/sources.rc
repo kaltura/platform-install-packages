@@ -95,3 +95,8 @@ KCW_RPM_NAME="kaltura-kcw"
 KVPM_VERSION="v1.0.6"
 KVPM_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/flash/kvpm/$KVPM_VERSION"
 KVPM_RPM_NAME="kaltura-kvpm"
+
+# HTML5 lib
+HTML5LIB_VERSION=v2.1.1
+HTML5LIB_URI="https://github.com/kaltura/mwEmbed/tarball/$HTML5LIB_VERSION"
+HTML5LIB_RPM_NAME="kaltura-html5lib"

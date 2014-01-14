@@ -1,17 +1,16 @@
 %define prefix /opt/kaltura
-%define widget_name kcw
-%define kcw_vers "v1.5.4 v1.6.5 v1.6.5.24461 v2.0.7 v2.1.2 v2.1.4 v2.1.5 v2.1.6.3 v2.1.6.7 v2.2.1 v2.2.3"
-Name:	kaltura-%{widget_name}
-Version: 1.0.0 
-Release: 1
-Summary: Kaltura KCW - used for recording from web cam
-License: AGPLv3+	
-URL: http://kaltura.org
-Source0: %{name}.tar.bz2
-BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
-BuildArch: noarch
 
-Requires: kaltura-base, httpd	
+Summary: Kaltura Open Source Video Platform 
+Name: kaltura-html5lib
+Version: v2.1.1
+Release: 1
+License: AGPLv3+
+Group: Server/Platform 
+Source0: https://github.com/kaltura/mwEmbed/tarball/%{name}-%{version}.tar.gz 
+URL: http://kaltura.org
+Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+BuildArch: noarch
+#Requires: rsync,mail,mysql,kaltura-monit,kaltura-postinst,cronie
 
 %description
 Kaltura is the world's first Open Source Online Video Platform, transforming the way people work, 
@@ -25,28 +24,25 @@ teachers by providing educational institutions disruptive online video solutions
 learning, and increased engagement across campuses and beyond. 
 For more information visit: http://corp.kaltura.com, http://www.kaltura.org and http://www.html5video.org.
 
-This package installs the Kaltura KCW - used for recording from web cam.
+This package installs the Kaltura HTML5 library.
 
 %prep
-%setup -qn %{name} 
-
-%build
+%setup -q
 
 %install
-mkdir -p $RPM_BUILD_ROOT%{prefix}/web/flash/%{widget_name}
-for i in %{kcw_vers};do
-	cp -r %{_builddir}/%{name}/$i $RPM_BUILD_ROOT/%{prefix}/web/flash/%{widget_name}
-	find $RPM_BUILD_ROOT/%{prefix}/web/flash/%{widget_name} -name ".project" -exec rm {} \;
-done
+mkdir -p $RPM_BUILD_ROOT%{prefix}/html5/html5lib
+cp -r %{_builddir}/%{name}-%{version} $RPM_BUILD_ROOT%{prefix}/html5/html5lib/%{version}
 
 %clean
 rm -rf %{buildroot}
 
-%files
-%defattr(-,root,root,-)
-%{prefix}/web/flash/%{widget_name}
+%post
 
+%postun
+
+%files
+%{prefix}/html5/html5lib/%{version}
 
 %changelog
-* Sun Jan 12 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.0-1
+* Tue Jan 14 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.1.1-1
 - initial package.
