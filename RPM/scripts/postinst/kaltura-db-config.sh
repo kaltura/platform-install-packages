@@ -100,7 +100,7 @@ done
 
 # populate data:
 for PHP_CODE in /opt/kaltura/app/deployment/base/scripts/*php;do
-	php PHP_CODE
+	php $PHP_CODE
 done
 
 set +e
