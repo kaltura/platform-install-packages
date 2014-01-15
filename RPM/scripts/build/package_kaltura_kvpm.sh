@@ -26,6 +26,8 @@ if [ ! -x `which svn 2>/dev/null` ];then
 fi
 svn export --force --quiet $KVPM_URI $SOURCE_PACKAGING_DIR/$KVPM_RPM_NAME
 cd $SOURCE_PACKAGING_DIR
+# flash things DO NOT need exec perms.
+find $KVPM_RPM_NAME -type f -exec chmod -x {} \;
 tar jcf $RPM_SOURCES_DIR/$KVPM_RPM_NAME.tar.bz2 $KVPM_RPM_NAME
 echo "Packaged into $RPM_SOURCES_DIR/$KVPM_RPM_NAME.tar.bz2"
 rpmbuild -ba $RPM_SPECS_DIR/$KVPM_RPM_NAME.spec

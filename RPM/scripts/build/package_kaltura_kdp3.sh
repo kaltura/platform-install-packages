@@ -34,6 +34,8 @@ for KDP3_VERSION in $KDP3_VERSIONS;do
 	cp -r $SOURCE_PACKAGING_DIR/$KDP3PLUGINS_RPM_NAME $SOURCE_PACKAGING_DIR/$KDP3_RPM_NAME/$KDP3_VERSION/plugins 
 done
 cd $SOURCE_PACKAGING_DIR
+# flash things DO NOT need exec perms.
+find $KDP3_RPM_NAME -type f -exec chmod -x {} \;
 tar jcf $RPM_SOURCES_DIR/$KDP3_RPM_NAME.tar.bz2 $KDP3_RPM_NAME
 echo "Packaged into $RPM_SOURCES_DIR/$KDP3_RPM_NAME.tar.bz2"
 rpmbuild -ba $RPM_SPECS_DIR/$KDP3_RPM_NAME.spec

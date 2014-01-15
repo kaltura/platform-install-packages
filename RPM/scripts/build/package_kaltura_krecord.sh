@@ -29,6 +29,8 @@ for KRECORD_VERSION in $KRECORD_VERSIONS;do
 	svn export --force --quiet $KRECORD_URI/$KRECORD_VERSION $SOURCE_PACKAGING_DIR/$KRECORD_RPM_NAME/$KRECORD_VERSION 
 done
 cd $SOURCE_PACKAGING_DIR
+# flash things DO NOT need exec perms.
+find $KRECORD_RPM_NAME -type f -exec chmod -x {} \;
 tar jcf $RPM_SOURCES_DIR/$KRECORD_RPM_NAME.tar.bz2 $KRECORD_RPM_NAME
 echo "Packaged into $RPM_SOURCES_DIR/$KRECORD_RPM_NAME.tar.bz2"
 rpmbuild -ba $RPM_SPECS_DIR/$KRECORD_RPM_NAME.spec

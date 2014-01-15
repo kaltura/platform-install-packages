@@ -26,6 +26,8 @@ if [ ! -x `which svn 2>/dev/null` ];then
 fi
 svn export --force --quiet $KDP3WRAPPER_URI/$KDP3WRAPPER_VERSION $SOURCE_PACKAGING_DIR/$KDP3WRAPPER_RPM_NAME/$KDP3WRAPPER_VERSION 
 cd $SOURCE_PACKAGING_DIR
+# flash things DO NOT need exec perms.
+find $KDP3WRAPPER_RPM_NAME -type f -exec chmod -x {} \;
 tar jcf $RPM_SOURCES_DIR/$KDP3WRAPPER_RPM_NAME.tar.bz2 $KDP3WRAPPER_RPM_NAME
 echo "Packaged into $RPM_SOURCES_DIR/$KDP3WRAPPER_RPM_NAME.tar.bz2"
 rpmbuild -ba $RPM_SPECS_DIR/$KDP3WRAPPER_RPM_NAME.spec
