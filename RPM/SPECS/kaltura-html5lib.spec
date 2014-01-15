@@ -3,7 +3,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
 Version: v2.1.1
-Release: 2 
+Release: 3 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/mwEmbed/tarball/%{name}-%{version}.tar.gz 
@@ -29,7 +29,7 @@ This package installs the Kaltura HTML5 library.
 %setup -q
 
 %install
-mkdir -p $RPM_BUILD_ROOT%{prefix}/html5/html5lib
+mkdir -p $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib
 cp -r %{_builddir}/%{name}-%{version} $RPM_BUILD_ROOT%{prefix}/html5/html5lib/%{version}
 
 %clean
@@ -42,11 +42,14 @@ rm -rf %{buildroot}
 %files
 %defattr(-, root, root, 0755)
 %doc COPYING README.markdown 
-%{prefix}/html5/html5lib/%{version}
+%{prefix}/web/html5/html5lib/%{version}
 %config %{prefix}/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
-* Tue Jan 14 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.1.1-1
+* Wed Jan 15 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.1.1-3
+- Moved root dir to %{prefix}/web.
+
+* Tue Jan 14 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.1.1-2
 - Added %%doc.
 
 * Tue Jan 14 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.1.1-1
