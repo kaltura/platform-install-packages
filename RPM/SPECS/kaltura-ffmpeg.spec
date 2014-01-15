@@ -159,7 +159,9 @@ export CFLAGS="%{optflags}"
 %install
 %{__rm} -rf %{buildroot} _docs
 %{__make} install DESTDIR="%{buildroot}"
-
+cd tools && gcc qt-faststart.c -o qt-faststart
+mv qt-faststart %{buildroot}%{base_prefix}-%{version}/bin
+cd - 
 # Remove unwanted files from the included docs
 %{__cp} -a doc _docs
 %{__rm} -rf _docs/{Makefile,*.texi,*.pl}
@@ -198,10 +200,10 @@ fi
 %doc %{base_prefix}-%{version}/share/man/man1
 %config %{_sysconfdir}/profile.d/kaltura_ffmpeg.sh
 %config %{_sysconfdir}/ld.conf.so.d/kaltura_ffmpeg.conf
-%{base_prefix}-%{version}/bin/ffprobe
-%{base_prefix}-%{version}/bin/ffmpeg
-%{base_prefix}-%{version}/bin/ffplay
-%{base_prefix}-%{version}/bin/ffserver
+#%{base_prefix}-%{version}/bin/ffprobe
+%{base_prefix}-%{version}/bin/*
+#%{base_prefix}-%{version}/bin/ffplay
+#%{base_prefix}-%{version}/bin/ffserver
 %{base_prefix}-%{version}/share/ffmpeg/
 %{base_prefix}-%{version}/lib/*.so*
 %{base_prefix}-%{version}/lib/pkgconfig/
