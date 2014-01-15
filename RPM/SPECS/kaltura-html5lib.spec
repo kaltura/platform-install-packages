@@ -30,7 +30,7 @@ This package installs the Kaltura HTML5 library.
 
 %install
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib
-cp -r %{_builddir}/%{name}-%{version} $RPM_BUILD_ROOT%{prefix}/html5/html5lib/%{version}
+cp -r %{_builddir}/%{name}-%{version} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/%{version}
 
 %clean
 rm -rf %{buildroot}
@@ -43,7 +43,7 @@ rm -rf %{buildroot}
 %defattr(-, root, root, 0755)
 %doc COPYING README.markdown 
 %{prefix}/web/html5/html5lib/%{version}
-%config %{prefix}/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
+%config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
 * Wed Jan 15 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.1.1-3

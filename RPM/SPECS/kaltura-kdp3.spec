@@ -2,7 +2,7 @@
 %define kdp3_vers "v3.5.21 v3.8.9 v3.9.1 v3.9.2 v3.9.3"
 Name:	kaltura-kdp3	
 Version: 3.0.0 
-Release: 2
+Release: 3 
 Summary: Kaltura Dynamic Player
 License: AGPLv3+	
 URL: http://kaltura.org
@@ -33,6 +33,8 @@ This package installs the KDP Flash player.
 
 %install
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/flash/kdp3
+mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content
+mv %{_builddir}/%{name}/uiconf $RPM_BUILD_ROOT/%{prefix}/web/content
 for i in %{kdp3_vers};do
 	cp -r %{_builddir}/%{name}/$i $RPM_BUILD_ROOT/%{prefix}/web/flash/kdp3/
 done
@@ -43,10 +45,15 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root,-)
 %{prefix}/web/flash/kdp3
+%{prefix}/web/content/uiconf
 
 
 %changelog
-* Sun Jan 12 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 3.0.0-1
+* Wed Jan 14 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 3.0.0-3
+- Added uiconf.
+
+* Sun Jan 12 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 3.0.0-2
 - KDP v3.9.3 added.
+
 * Sun Jan 12 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 3.0.0-1
 - initial package.

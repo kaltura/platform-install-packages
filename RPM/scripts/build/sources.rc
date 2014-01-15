@@ -54,6 +54,7 @@ KDP_RPM_NAME="kaltura-kdp"
 # we bundle a few vers at each release:
 KDP3_VERSIONS="v3.5.21 v3.8.9 v3.9.1 v3.9.2 v3.9.3"
 KDP3_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/flash/kdp3"
+KDP3_UICONF_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalsource/uiconf/kaltura/kmc/appstudio/kdp3"
 KDP3_RPM_NAME="kaltura-kdp3"
 
 # Kaltura KDP3 Wrapper:
