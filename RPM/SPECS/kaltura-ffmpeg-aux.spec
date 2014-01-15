@@ -207,10 +207,7 @@ fi
 %doc %{base_prefix}-%{version}/share/man/man1
 %config %{_sysconfdir}/profile.d/kaltura_ffmpeg-aux.sh
 %config %{_sysconfdir}/ld.conf.so.d/kaltura_ffmpeg_aux.conf
-%{base_prefix}-%{version}/bin/ffprobe
-%{base_prefix}-%{version}/bin/ffmpeg
-%{base_prefix}-%{version}/bin/ffplay
-%{base_prefix}-%{version}/bin/ffserver
+%{base_prefix}-%{version}/bin/*
 %{base_prefix}-%{version}/share/ffmpeg/
 %{base_prefix}-%{version}/lib/*.so*
 %{base_prefix}-%{version}/lib/pkgconfig/
