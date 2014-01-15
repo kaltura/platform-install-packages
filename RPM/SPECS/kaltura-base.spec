@@ -8,7 +8,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 9.7.0
-Release: 23 
+Release: 24 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -44,6 +44,13 @@ mkdir -p $RPM_BUILD_ROOT%{prefix}/bin
 mkdir -p $RPM_BUILD_ROOT%{prefix}/lib
 mkdir -p $RPM_BUILD_ROOT%{prefix}/include
 mkdir -p $RPM_BUILD_ROOT%{prefix}/share
+
+mkdir -p $RPM_BUILD_ROOT%{prefix}/web/tmp
+mkdir -p $RPM_BUILD_ROOT%{prefix}/web/dropfolders
+mkdir -p $RPM_BUILD_ROOT%{prefix}/web/control
+
+
+
 mkdir -p $RPM_BUILD_ROOT/etc/kaltura.d
 for i in admin_console alpha api_v3 batch configurations deployment generator infra plugins start tests ui_infra var_console vendor;do 
 	mv  %{_builddir}/%{name}-%{version}/$i $RPM_BUILD_ROOT%{prefix}/app
@@ -132,15 +139,15 @@ fi
 %dir %{prefix}/include
 %dir %{prefix}/share
 %dir %{prefix}/web
-
-#token_files[] = @APP_DIR@/configurations/logrotate/kaltura_*.template
-#token_files[] = @APP_DIR@/deployment/base/scripts/init_content/*.template.xml
-#token_files[] = @APP_DIR@/deployment/base/scripts/init_data/*.template.ini
-#token_files[] = @APP_DIR@/plugins/sphinx_search/scripts/configs/server-sphinx.php.template
-#token_files[] = dbSchema/db.template.xml
+%dir %{prefix}/web/tmp
+%dir %{prefix}/web/control
+%dir %{prefix}/web/dropfolders
 
 
 %changelog
+* Sun Jan 15 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-24
+- Added web/tmp web/control and web/dropfolders.
+
 * Sun Jan 14 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-23
 - We have CLI scripts in PHP that need to run post install of the base package.
 

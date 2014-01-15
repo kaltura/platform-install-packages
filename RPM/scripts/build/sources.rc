@@ -92,12 +92,14 @@ KCW_UICONF_VERSIONS="v2.1.4 v2.1.5"
 KCW_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/flash/kcw"
 KCW_UICONF_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalsource/uiconf/kaltura/kmc/kcw"
 KCW_UICONF_GENERIC_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalsource/uiconf/kaltura/generic/kcw_2.1.5"
+KCW_UICONF_EDITOR_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalsource/uiconf/kcweditor/locales/en_US"
 KCW_RPM_NAME="kaltura-kcw"
 
 # Kaltura KVPM
 # we bundle a few vers at each release:
 KVPM_VERSION="v1.0.6"
 KVPM_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/flash/kvpm/$KVPM_VERSION"
+KVPM_UICONF_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalsource/uiconf/ps/kaltura/kvpm/$KVPM_VERSION"
 KVPM_RPM_NAME="kaltura-kvpm"
 
 # HTML5 lib

@@ -36,6 +36,7 @@ for KCW_UICONF_VERSION in $KCW_UICONF_VERSIONS;do
 	svn export --force --quiet $KCW_UICONF_URI/$KCW_UICONF_VERSION $SOURCE_PACKAGING_DIR/$KCW_RPM_NAME/uiconf/kaltura/kmc/kcw
 done
 svn export --force --quiet $KCW_UICONF_GENERIC_URI $SOURCE_PACKAGING_DIR/$KCW_RPM_NAME/uiconf/kaltura/kmc/generic
+svn export --force --quiet $KCW_UICONF_EDITOR_URI $SOURCE_PACKAGING_DIR/$KCW_RPM_NAME/uiconf/kcweditor/locales/en_US
 cd $SOURCE_PACKAGING_DIR
 
 # flash things DO NOT need exec perms.

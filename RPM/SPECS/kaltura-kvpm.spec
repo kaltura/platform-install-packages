@@ -31,8 +31,10 @@ This package installs the Kaltura Video Presentations Manager.
 %build
 
 %install
+mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content
+mv %{_builddir}/%{name}/uiconf $RPM_BUILD_ROOT/%{prefix}/web/content
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/flash/kvpm
-	cp -r %{_builddir}/%{name} $RPM_BUILD_ROOT/%{prefix}/web/flash/kvpm
+cp -r %{_builddir}/%{name} $RPM_BUILD_ROOT/%{prefix}/web/flash/kvpm
 
 %clean
 rm -rf %{buildroot}
@@ -40,6 +42,7 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root,-)
 %{prefix}/web/flash/kvpm
+%{prefix}/web/content/uiconf
 
 
 %changelog
