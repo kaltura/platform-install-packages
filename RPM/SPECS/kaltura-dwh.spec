@@ -43,7 +43,6 @@ rm -rf %{buildroot}
 
 %post
 if [ "$1" = 1 ];then
-	/sbin/chkconfig --add kaltura-batch
 	echo"#####################################################################################################################################
 	Installation of %{name} %{version} completed
 	Please run: 
