@@ -1,4 +1,4 @@
-#!/bin/bash - 
+#!/bin/bash -e 
 #===============================================================================
 #          FILE: kaltura-base-config.sh
 #         USAGE: ./kaltura-base-config.sh 
@@ -34,16 +34,20 @@ create_answer_file()
                         
                 fi
         done
-	echo "Answer file written to /tmp/kaltura_`date +%d_%m_%H_%M`.ans."
+	echo "
+Answer file written to /tmp/kaltura_`date +%d_%m_%H_%M`.ans
+You can use it to install the other hosts in your cluster.
+"
 
 }
 
+DISPLAY_NAME="Kaltura Server `rpm -qa kaltura-base --queryformat %{version}`"
 KALT_CONF_DIR='/opt/kaltura/app/configurations/'
 if [ -n "$1" -a -r "$1" ];then
         ANSFILE=$1
         verify_user_input $ANSFILE
 else
-        echo "Welcome to Kaltura Server `rpm -qa kaltura-base --queryformat %{version}` post install setup.
+        echo "Welcome to Kaltura Server $DISPLAY_NAME post install setup.
 In order to finalize the system configuration, please input the following:
 
 CDN host [`hostname`]:"
@@ -127,6 +131,7 @@ CDN host [`hostname`]:"
                 echo "Your time zone [see http://php.net/date.timezone]: "
                 read -e TIME_ZONE
         done
+sed -i "s#\(date.timezone\)\s*=.*#\1='$TIME_ZONE'#g" /etc/php.ini /etc/php.d/*kaltura*ini
 fi
 
 create_answer_file
@@ -192,6 +197,11 @@ for TMPL in `find /opt/kaltura/app/deployment/base/scripts/init_data/ -name "*te
 	sed -e "s#@WEB_DIR@#/opt/kaltura/web#g" -e "s#@TEMPLATE_PARTNER_ADMIN_SECRET@#$ADMIN_SECRET#g" -e "s#@ADMIN_CONSOLE_PARTNER_ADMIN_SECRET@#$ADMIN_SECRET#g" -e "s#@MONITOR_PARTNER_ADMIN_SECRET@#$MONITOR_PARTNER_ADMIN_SECRET#g" -e "s#@SERVICE_URL@#$SERVICE_URL#g" -e "s#@ADMIN_CONSOLE_ADMIN_MAIL@#$ADMIN_CONSOLE_ADMIN_MAIL#g" -e "s#@MONITOR_PARTNER_SECRET@#$MONITOR_PARTNER_SECRET#g" -e "s#@PARTNER_ZERO_ADMIN_SECRET@#$PARTNER_ZERO_ADMIN_SECRET#g" -e "s#@BATCH_PARTNER_ADMIN_SECRET@#$BATCH_PARTNER_ADMIN_SECRET#g" -e "s#@MEDIA_PARTNER_ADMIN_SECRET@#$MEDIA_PARTNER_ADMIN_SECRET#g" -e "s#@TEMPLATE_PARTNER_ADMIN_SECRET@#$TEMPLATE_PARTNER_ADMIN_SECRET#g" -i $DEST_FILE
 done
 
-echo "Generating client libs... see log at $BASE_DIR/log/generate.php.log."
+echo "
+Generating client libs... see log at $BASE_DIR/log/generate.php.log
+
+"
 php /opt/kaltura/app/generator/generate.php >> $BASE_DIR/log/generate.php.log 2>&1
 touch "base-config.lock" "$BASE_DIR/app/base-config.lock"
+
+echo "Configuration of $DISPLAY_NAME finished successfully!"
