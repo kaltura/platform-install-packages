@@ -16,3 +16,4 @@
 #set -o nounset                              # Treat unset variables as an error
 
 `dirname $0`/kaltura-base-config.sh
+service httpd restart

@@ -31,4 +31,4 @@ sed -i "s#@INSTALLED_HOSNAME@#`hostname`#" -i $BATCH_MAIN_CONF
 BATCH_SCHEDULER_ID=`< /dev/urandom tr -dc 0-9 | head -c5`
 sed 's#@BATCH_SCHEDULER_ID@#$BATCH_SCHEDULER_ID#' $SCHED_CONF.template > $SCHED_CONF
 
-
+service httpd restart

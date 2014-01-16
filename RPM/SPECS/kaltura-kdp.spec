@@ -1,6 +1,6 @@
 %define prefix /opt/kaltura
 %define kdp_vers "v2.7.0"
-Name:	kaltura-kdp-fallback	
+Name:	kaltura-kdp
 Version: v2.7.0 
 Release: 1
 Summary: Kaltura Dynamic Player
@@ -35,7 +35,6 @@ Please note that in normal situations, the KDP3 package will be used.
 %install
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/flash/kdp
 cp -r %{_builddir}/%{name}/%{version} $RPM_BUILD_ROOT/%{prefix}/web/flash/kdp/
-done
 
 %clean
 rm -rf %{buildroot}
