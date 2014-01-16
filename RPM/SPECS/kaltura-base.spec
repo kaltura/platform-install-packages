@@ -52,6 +52,12 @@ mkdir -p $RPM_BUILD_ROOT%{prefix}/web/control
 
 
 mkdir -p $RPM_BUILD_ROOT/etc/kaltura.d
+# align faulty permissions.
+for i in "*.xml" "*.template" "*.ttf" "*.xsl" "*.xsd" "*.yml" "*.smil" "*.srt" "*.sql" "*.orig" "*.patch" "*.po" "*.pdf" "*.otf" "*.txt" "*.php" "*.phtml" "*.
+project" "*.png" "*.properties" "*.sample" "*.swf" "*.sf" "*.swz" "*.uad" "*.prefs" "*.psd" "*.rvmrc" "*.sln" "*.ini" "*.log" ;do
+	find . -iname "$i" -exec chmod 644 {} \;
+done
+
 for i in admin_console alpha api_v3 batch configurations deployment generator infra plugins start tests ui_infra var_console vendor;do 
 	mv  %{_builddir}/%{name}-%{version}/$i $RPM_BUILD_ROOT%{prefix}/app
 done
