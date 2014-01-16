@@ -7,13 +7,12 @@
 Summary: Kaltura Open Source Video Platform - batch server 
 Name: kaltura-batch
 Version: 9.7.0
-Release: 14 
+Release: 15
 License: AGPLv3+
 Group: Server/Platform 
-#Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
 Source0: zz-%{name}.ini
 Source1: kaltura-batch
-Source2: kaltura-batch.conf
+#Source2: kaltura-batch.conf
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires: kaltura-base, kaltura-ffmpeg, kaltura-ffmpeg-aux, php, curl, httpd, sox, ImageMagick, kaltura-sshpass, php-pecl-memcached, php-mcrypt,php-pecl-memcached,mediainfo, kaltura-segmenter
@@ -47,8 +46,8 @@ mkdir -p $RPM_BUILD_ROOT/%{batch_confdir}
 cp %{SOURCE0} $RPM_BUILD_ROOT/%{_sysconfdir}/php.d/zz-%{name}.ini
 cp %{SOURCE1} $RPM_BUILD_ROOT/%{_sysconfdir}/init.d/%{name}
 sed 's#@WEB_DIR@#%{prefix}/web#' -i $RPM_BUILD_ROOT/%{_sysconfdir}/php.d/zz-%{name}.ini
-mkdir -p $RPM_BUILD_ROOT/%{_sysconfdir}/httpd/conf.d
-cp %{SOURCE2} $RPM_BUILD_ROOT/%{_sysconfdir}/httpd/conf.d
+#mkdir -p $RPM_BUILD_ROOT/%{_sysconfdir}/httpd/conf.d
+#cp %{SOURCE2} $RPM_BUILD_ROOT/%{_sysconfdir}/httpd/conf.d
 
 
 %clean
@@ -102,12 +101,16 @@ service httpd restart
 
 %files
 %config /etc/php.d/zz-%{name}.ini
-%config %{_sysconfdir}/httpd/conf.d/kaltura-batch.conf
+#%config %{_sysconfdir}/httpd/conf.d/kaltura-batch.conf
 
 %{_sysconfdir}/init.d/%{name}
 
 
 %changelog
+* Thu Jan 15 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-15
+- We will not bring a done config for batch Apache. 
+  Instead, during post we will generate from template and then SYMLINK to /etc/httpd/conf.d.
+
 * Sun Jan 14 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-14
 - PHP extensions added to 'Requires'.
 

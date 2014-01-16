@@ -6,12 +6,12 @@
 Summary: Kaltura Open Source Video Platform - frontend server 
 Name: kaltura-front
 Version: 9.7.0
-Release: 6 
+Release: 7 
 License: AGPLv3+
 Group: Server/Platform 
-Source0: kaltura-api.conf
-Source1: kaltura-kmc.conf
-Source2: kaltura-admin-console.conf
+#Source0: kaltura-api.conf
+#Source1: kaltura-kmc.conf
+#Source2: kaltura-admin-console.conf
 Source3: zz-%{name}.ini 
 
 URL: http://kaltura.org
@@ -47,15 +47,15 @@ This package sets up a server as a front node.
 
 %install
 mkdir -p $RPM_BUILD_ROOT/%{_sysconfdir}/httpd/conf.d
-cp %{SOURCE0} %{SOURCE1} %{SOURCE2} $RPM_BUILD_ROOT/%{_sysconfdir}/httpd/conf.d
+#cp %{SOURCE0} %{SOURCE1} %{SOURCE2} $RPM_BUILD_ROOT/%{_sysconfdir}/httpd/conf.d
 mkdir -p $RPM_BUILD_ROOT/%{_sysconfdir}/php.d
 cp %{SOURCE3} $RPM_BUILD_ROOT/%{_sysconfdir}/php.d
 sed 's#@WEB_DIR@#%{prefix}/web#' -i $RPM_BUILD_ROOT/%{_sysconfdir}/php.d/zz-%{name}.ini
 
 %post
-sed 's#@WEB_DIR@#%{prefix}/web#' -i $RPM_BUILD_ROOT/%{_sysconfdir}/httpd/conf.d/*.conf 
-sed 's#@LOG_DIR@#%{prefix}/log#'  -i $RPM_BUILD_ROOT/%{_sysconfdir}/httpd/conf.d/*.conf
-sed 's#@APP_DIR@#%{prefix}/app#' -i $RPM_BUILD_ROOT/%{_sysconfdir}/httpd/conf.d/*.conf
+#sed 's#@WEB_DIR@#%{prefix}/web#' -i $RPM_BUILD_ROOT/%{_sysconfdir}/httpd/conf.d/*.conf 
+#sed 's#@LOG_DIR@#%{prefix}/log#'  -i $RPM_BUILD_ROOT/%{_sysconfdir}/httpd/conf.d/*.conf
+#sed 's#@APP_DIR@#%{prefix}/app#' -i $RPM_BUILD_ROOT/%{_sysconfdir}/httpd/conf.d/*.conf
 chown %{kaltura_user}:%{apache_group} %{prefix}/log 
 chmod 775 %{prefix}/log
 service httpd restart
@@ -83,11 +83,15 @@ rm -rf %{buildroot}
 
 %files
 %config %{_sysconfdir}/php.d/zz-%{name}.ini
-%config %{_sysconfdir}/httpd/conf.d/kaltura-api.conf
-%config %{_sysconfdir}/httpd/conf.d/kaltura-kmc.conf
-%config %{_sysconfdir}/httpd/conf.d/kaltura-admin-console.conf
+#%config %{_sysconfdir}/httpd/conf.d/kaltura-api.conf
+#%config %{_sysconfdir}/httpd/conf.d/kaltura-kmc.conf
+#%config %{_sysconfdir}/httpd/conf.d/kaltura-admin-console.conf
 
 %changelog
+* Thu Jan 15 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-7
+- We will not bring a done config for front Apache. 
+  Instead, during post we will generate from template and then SYMLINK to /etc/httpd/conf.d.
+
 * Sun Jan 12 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-6
 - Use the monit scandir mechanism.
 
