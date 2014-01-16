@@ -147,3 +147,4 @@ done
 
 echo "Generating client libs..."
 php /opt/kaltura/app/generator/generate.php >> $BASE_DIR/log/generate.php.log 2>&1
+touch "base-config.lock" "$BASE_DIR/app/base-config.lock"

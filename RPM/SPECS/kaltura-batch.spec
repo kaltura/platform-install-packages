@@ -7,7 +7,7 @@
 Summary: Kaltura Open Source Video Platform - batch server 
 Name: kaltura-batch
 Version: 9.7.0
-Release: 15
+Release: 16 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: zz-%{name}.ini
@@ -45,7 +45,7 @@ mkdir -p $RPM_BUILD_ROOT/%{_sysconfdir}/php.d
 mkdir -p $RPM_BUILD_ROOT/%{batch_confdir}
 cp %{SOURCE0} $RPM_BUILD_ROOT/%{_sysconfdir}/php.d/zz-%{name}.ini
 cp %{SOURCE1} $RPM_BUILD_ROOT/%{_sysconfdir}/init.d/%{name}
-sed 's#@WEB_DIR@#%{prefix}/web#' -i $RPM_BUILD_ROOT/%{_sysconfdir}/php.d/zz-%{name}.ini
+sed 's#@WEB_DIR@#%{prefix}/web#g' -i $RPM_BUILD_ROOT/%{_sysconfdir}/php.d/zz-%{name}.ini
 #mkdir -p $RPM_BUILD_ROOT/%{_sysconfdir}/httpd/conf.d
 #cp %{SOURCE2} $RPM_BUILD_ROOT/%{_sysconfdir}/httpd/conf.d
 
@@ -54,9 +54,18 @@ sed 's#@WEB_DIR@#%{prefix}/web#' -i $RPM_BUILD_ROOT/%{_sysconfdir}/php.d/zz-%{na
 rm -rf %{buildroot}
 
 %post
-sed 's#@LOG_DIR@#%{prefix}/log#'  %{prefix}/app/configurations/monit.avail/batch.template.rc > %{prefix}/app/configurations/monit.avail/batch.rc
-sed 's#@APP_DIR@#%{prefix}/app#' -i %{prefix}/app/configurations/monit.avail/batch.rc 
-sed 's#@APP_DIR@#%{prefix}/app#' %{prefix}/app/configurations/monit.avail/httpd.template.rc > %{prefix}/app/configurations/monit.avail/httpd.rc 
+# now replace tokens
+#sed 's#@WEB_DIR@#%{prefix}/web#g' $RPM_BUILD_ROOT/%{batch_confdir}/batch.ini.template > $RPM_BUILD_ROOT/%{batch_confdir}/batch.ini
+#sed 's#@LOG_DIR@#%{prefix}/log#g' -i  $RPM_BUILD_ROOT/%{batch_confdir}/batch.ini
+#sed 's#@APP_DIR@%{prefix}/app#g' -i  $RPM_BUILD_ROOT/%{batch_confdir}/batch.ini
+#sed 's#@BASE_DIR@#%{prefix}#g' -i $RPM_BUILD_ROOT/%{batch_confdir}/batch.ini
+#sed 's#@PHP_BIN@#%{_bindir}/php#g' -i $RPM_BUILD_ROOT/%{batch_confdir}/batch.ini
+#sed 's#@BIN_DIR@#%{prefix}/bin#g' -i $RPM_BUILD_ROOT/%{batch_confdir}/batch.ini
+sed -i 's@^\(params.ImageMagickCmd\)\s*=.*@\1=%{bindir}/convert@' $RPM_BUILD_ROOT/%{batch_confdir}/batch.ini
+#sed 's#@TMP_DIR@#%{prefix}/tmp#g' -i $RPM_BUILD_ROOT/%{batch_confdir}/batch.ini
+sed 's#@LOG_DIR@#%{prefix}/log#g'  %{prefix}/app/configurations/monit.avail/batch.template.rc > %{prefix}/app/configurations/monit.avail/batch.rc
+sed 's#@APP_DIR@#%{prefix}/app#g' -i %{prefix}/app/configurations/monit.avail/batch.rc 
+sed 's#@APP_DIR@#%{prefix}/app#g' %{prefix}/app/configurations/monit.avail/httpd.template.rc > %{prefix}/app/configurations/monit.avail/httpd.rc 
 sed 's#@APACHE_SERVICE@#httpd#g' -i %{prefix}/app/configurations/monit.avail/httpd.rc
 
 ln -fs %{prefix}/app/configurations/monit.avail/httpd.rc %{prefix}/app/configurations/monit.d/httpd.rc
@@ -72,21 +81,15 @@ To finalize the setup.
 "
 fi
 
-# now replace tokens
-sed 's#@WEB_DIR@#%{prefix}/web#' $RPM_BUILD_ROOT/%{batch_confdir}/batch.ini.template > $RPM_BUILD_ROOT/%{batch_confdir}/batch.ini
-sed 's#@LOG_DIR@#%{prefix}/log#' -i  $RPM_BUILD_ROOT/%{batch_confdir}/batch.ini
-sed 's#@APP_DIR@{prefix}/app#' -i  $RPM_BUILD_ROOT/%{batch_confdir}/batch.ini
-sed 's#@BASE_DIR@#%{prefix}#' -i $RPM_BUILD_ROOT/%{batch_confdir}/batch.ini
-sed 's#@PHP_BIN@#%{_bindir}/php#' -i $RPM_BUILD_ROOT/%{batch_confdir}/batch.ini
-sed 's#@BIN_DIR@#%{prefix}/bin#' -i $RPM_BUILD_ROOT/%{batch_confdir}/batch.ini
-sed -i 's@^\(params.ImageMagickCmd\)\s*=.*@\1=%{bindir}/convert@' $RPM_BUILD_ROOT/%{batch_confdir}/batch.ini
-sed 's#@TMP_DIR@#%{prefix}/tmp#' -i $RPM_BUILD_ROOT/%{batch_confdir}/batch.ini
 service httpd restart
 
 chown %{kaltura_user}:%{kaltura_group} %{prefix}/log 
 chown %{kaltura_user}:%{apache_group} %{prefix}/app/batch
 chmod 775 %{prefix}/log
-service kaltura-batch restart
+# don't start it if its a fresh install, it will fail. It needs to go through postinst config first.
+if [ "$1" = 0 ];then
+	service kaltura-batch restart
+fi
 
 
 %preun
@@ -107,7 +110,10 @@ service httpd restart
 
 
 %changelog
-* Thu Jan 15 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-15
+* Thu Jan 16 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-16
+- seds to be done as part of the kaltura-base postint.
+
+* Thu Jan 16 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-15
 - We will not bring a done config for batch Apache. 
   Instead, during post we will generate from template and then SYMLINK to /etc/httpd/conf.d.
 

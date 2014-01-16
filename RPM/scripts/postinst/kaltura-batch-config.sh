@@ -14,7 +14,11 @@
 #===============================================================================
 
 #set -o nounset                              # Treat unset variables as an error
-`dirname $0`/kaltura-base-config.sh
+if [ ! -r /opt/kaltura/app/base-config.lock ];then
+	`dirname $0`/kaltura-base-config.sh
+else
+	echo "base-config skipped as /opt/kaltura/app/base-config.lock was found. Remove the lock to reconfigure."
+fi
 BATCH_SCHED_CONF=/opt/kaltura/app/configurations/batch/scheduler.conf
 BATCH_MAIN_CONF=/opt/kaltura/app/configurations/batch/batch.ini
 

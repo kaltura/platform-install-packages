@@ -146,7 +146,7 @@ fi
 %{_initrddir}/kaltura-sphinx
 %config(noreplace) %{_sysconfdir}/logrotate.d/sphinx
 %{prefix}/bin/*
-%dir /opt/kaltura/log/sphinx
+%dir /opt/kaltura/log/sphinx/data
 %dir %{prefix}/var/run
 
 
