@@ -19,8 +19,17 @@ if [ ! -r /opt/kaltura/app/base-config.lock ];then
 else
 	echo "base-config skipped as /opt/kaltura/app/base-config.lock was found. Remove the lock to reconfigure."
 fi
-BATCH_SCHED_CONF=/opt/kaltura/app/configurations/batch/scheduler.conf
-BATCH_MAIN_CONF=/opt/kaltura/app/configurations/batch/batch.ini
+
+CONFIG_DIR=/opt/kaltura/app/configurations
+if [ -r $CONFIG_DIR/system.ini ];then
+	. $CONFIG_DIR/system.ini
+else
+	echo "Missing $CONFIG_DIR/system.ini. Exiting.."
+	exit 1
+fi
+
+BATCH_SCHED_CONF=$APP_DIR/configurations/batch/scheduler.conf
+BATCH_MAIN_CONF=$APP_DIR/configurations/batch/batch.ini
 
 # if we couldn't access the DB to retrieve the secret, assume the post install has not finished yet.
 BATCH_PARTNER_ADMIN_SECRET=`echo "select admin_secret from partner where id=-1"|mysql -N -h$DB1_HOST -u$DB1_USER -p$DB1_PASS $DB1_NAME`
