@@ -10,7 +10,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 9.7.0
-Release: 27
+Release: 28
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -94,10 +94,12 @@ rm -rf %{buildroot}
 groupadd -r %{kaltura_group} 2>/dev/null || true
 useradd -M -r -d /opt/kaltura -s /bin/bash -c "Kaltura server" -g %{kaltura_group} %{kaltura_user} 2>/dev/null || true
 usermod -g %{kaltura_group} %{kaltura_user} 2>/dev/null || true
-chown -R %{kaltura_user}:%{kaltura_group} %{prefix}/log 
-chown -R %{kaltura_user}:%{kaltura_group} %{prefix}/tmp 
-chown -R %{kaltura_user}:%{kaltura_group} %{prefix}/app/cache 
+#chown -R %{kaltura_user}:%{kaltura_group} %{prefix}/log 
+#chown -R %{kaltura_user}:%{kaltura_group} %{prefix}/tmp 
+#chown -R %{kaltura_user}:%{kaltura_group} %{prefix}/app/cache 
 ln -sf %{prefix}/app/configurations/system.ini /etc/kaltura.d/system.ini
+ln -sf %{prefix}/app/api_v3/web %{prefix}/app/alpha/web/api_v3
+
 
 
 %preun

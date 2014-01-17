@@ -80,8 +80,8 @@ for DB_USER in $DB_USERS;do
 done
 # create the DBs:
 for DB in $DBS;do 
-	echo "creating db $DB"
-	echo "create database $DB;" | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT
+	echo "CREATE DATABASE $DB"
+	echo "CREATE DATABASE $DB;" | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT
 	PRIVS=${DB}_PRIVILEGES
 	DB_USER=${DB}_USER
 	# apply privileges:
@@ -98,10 +98,16 @@ done
 #deployment/base/scripts/insertPermissions.php
 #deployment/base/scripts/installPlugins.php
 
-# populate data:
-for PHP_CODE in /opt/kaltura/app/deployment/base/scripts/*php;do
-	php $PHP_CODE
-done
+echo "Populating DB with data.. please wait.."
+echo "Output for $APP_DIR/deployment/base/scripts/insertPermissions.php being logged into $LOG_DIR/insertPermissions.LOG"
+php $APP_DIR/deployment/base/scripts/insertPermissions.php  >> $LOG_DIR/insertPermissions.LOG 2>&1
+echo "Output for $APP_DIR/deployment/base/scripts/installPlugins.php being logged into $LOG_DIR/installPlugins.log"
+php $APP_DIR/deployment/base/scripts/installPlugins.php >> $LOG_DIR/installPlugins.log  2>&1
+echo "Output for $APP_DIR/deployment/base/scripts/insertDefaults.php being logged into $LOG_DIR/insertDefaults.log"
+php $APP_DIR/deployment/base/scripts/insertDefaults.php $APP_DIR/deployment/base/scripts/init_data >> $LOG_DIR/insertDefaults.log  2>&1
+echo "Output for $APP_DIR/deployment/base/scripts/insertContent.ph being logged into $LOG_DIR/insertContent.log"
+php $APP_DIR/deployment/base/scripts/insertContent.php >> $LOG_DIR/insertContent.log  2>&1
+
 
 set +e
 
