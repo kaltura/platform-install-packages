@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform - Analytics 
 Name: kaltura-dwh
 Version: 9.7.0
-Release: 3 
+Release: 4 
 License: AGPLv3+
 Group: Server/Platform 
 URL: http://kaltura.org
@@ -48,12 +48,12 @@ rm -rf %{buildroot}
 
 %post
 if [ "$1" = 1 ];then
-	echo"#####################################################################################################################################
-	Installation of %{name} %{version} completed
-	Please run: 
-	# %{prefix}/bin/%{name}-config.sh [/path/to/answer/file]
-	To finalize the setup.
-	#####################################################################################################################################
+echo "#####################################################################################################################################
+Installation of %{name} %{version} completed
+Please run: 
+# %{prefix}/bin/%{name}-config.sh [/path/to/answer/file]
+To finalize the setup.
+#####################################################################################################################################
 "
 fi
 %files

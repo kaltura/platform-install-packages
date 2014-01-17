@@ -123,8 +123,10 @@ fi
 
 # create user/group, and update permissions
 chown -R %{sphinx_user}:%{sphinx_group} %{prefix} /opt/kaltura/log/sphinx 
-%{_initrddir}/kaltura-sphinx restart
-
+# don't start unless it went through configuration and the INI was created.
+if [ -r /opt/kaltura/app/configurations/system.ini ];then 
+	%{_initrddir}/kaltura-sphinx restart
+fi
 
 
 %preun

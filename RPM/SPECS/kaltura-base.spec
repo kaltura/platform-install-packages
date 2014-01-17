@@ -10,7 +10,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 9.7.0
-Release: 26
+Release: 27
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -66,20 +66,9 @@ done
 mkdir -p $RPM_BUILD_ROOT%{prefix}/app/configurations/monit.d
 mv $RPM_BUILD_ROOT/%{prefix}/app/configurations/monit/monit.d $RPM_BUILD_ROOT/%{prefix}/app/configurations/monit.avail
 # change name from .*.template.rc to .*.rc.template so that monit.d/*.rc will work correctly.
-#for i in `find $RPM_BUILD_ROOT/%{prefix}/app/configurations/monit.d -name "*template*"`;do mv $i `echo $i|sed 's@\(.*\)\.\(.*\)\.\(.*\)@\1.\3.\2@'`;done
 
 # now replace tokens
-sed 's#@WEB_DIR@#%{prefix}/web#g' $RPM_BUILD_ROOT%{prefix}/app/configurations/system.template.ini > $RPM_BUILD_ROOT/%{prefix}/app/configurations/system.ini
 sed 's#@IMAGE_MAGICK_BIN_DIR@#%{_bindir}#g' $RPM_BUILD_ROOT%{prefix}/app/configurations/local.template.ini > $RPM_BUILD_ROOT/%{prefix}/app/configurations/local.ini
-#sed 's#@WEB_DIR@#%{prefix}/web#g' -i $RPM_BUILD_ROOT%{prefix}/app/configurations/local.ini
-#sed 's#@LOG_DIR@#%{prefix}/log#g' -i  $RPM_BUILD_ROOT%{prefix}/app/configurations/system.ini  $RPM_BUILD_ROOT/%{prefix}/app/configurations/local.ini
-#sed 's#@TMP_DIR@#%{prefix}/tmp#g' -i  $RPM_BUILD_ROOT%{prefix}/app/configurations/system.ini  $RPM_BUILD_ROOT/%{prefix}/app/configurations/local.ini
-#sed 's#@APP_DIR@#%{prefix}/app#g' -i  $RPM_BUILD_ROOT%{prefix}/app/configurations/system.ini  $RPM_BUILD_ROOT/%{prefix}/app/configurations/local.ini
-#sed 's#@BASE_DIR@#%{prefix}#g' -i $RPM_BUILD_ROOT%{prefix}/app/configurations/system.ini  $RPM_BUILD_ROOT/%{prefix}/app/configurations/local.ini
-sed 's#@BIN_DIR@#%{prefix}/bin#g' -i $RPM_BUILD_ROOT%{prefix}/app/configurations/system.ini  $RPM_BUILD_ROOT/%{prefix}/app/configurations/local.ini
-sed 's#@OS_KALTURA_USER@#%{kaltura_user}#g' -i $RPM_BUILD_ROOT/%{prefix}/app/configurations/system.ini $RPM_BUILD_ROOT/%{prefix}/app/configurations/local.ini
-sed 's#@PHP_BIN@#%{_bindir}/php#g' -i $RPM_BUILD_ROOT%{prefix}/app/configurations/system.ini  $RPM_BUILD_ROOT/%{prefix}/app/configurations/local.ini
-sed 's#@CURL_BIN_DIR@#%{_bindir}#g' -i $RPM_BUILD_ROOT%{prefix}/app/configurations/system.ini  $RPM_BUILD_ROOT/%{prefix}/app/configurations/local.ini
 
 rm $RPM_BUILD_ROOT%{prefix}/app/generator/sources/android/DemoApplication/libs/libWVphoneAPI.so
 rm $RPM_BUILD_ROOT%{prefix}/app/configurations/.project
@@ -154,7 +143,10 @@ fi
 
 
 %changelog
-* Sun Jan 15 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-24
+* Fri Jan 17 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-27
+- Do not create system.ini, post installs create it from template.
+
+* Wed Jan 15 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-24
 - Added web/tmp web/control and web/dropfolders.
 
 * Sun Jan 14 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-23

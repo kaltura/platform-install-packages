@@ -7,7 +7,7 @@
 Summary: Kaltura Open Source Video Platform - batch server 
 Name: kaltura-batch
 Version: 9.7.0
-Release: 19 
+Release: 20 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: zz-%{name}.ini
@@ -55,24 +55,14 @@ rm -rf %{buildroot}
 
 %post
 # now replace tokens
-#sed 's#@WEB_DIR@#%{prefix}/web#g' $RPM_BUILD_ROOT/%{batch_confdir}/batch.ini.template > $RPM_BUILD_ROOT/%{batch_confdir}/batch.ini
-#sed 's#@LOG_DIR@#%{prefix}/log#g' -i  $RPM_BUILD_ROOT/%{batch_confdir}/batch.ini
-#sed 's#@APP_DIR@%{prefix}/app#g' -i  $RPM_BUILD_ROOT/%{batch_confdir}/batch.ini
-#sed 's#@BASE_DIR@#%{prefix}#g' -i $RPM_BUILD_ROOT/%{batch_confdir}/batch.ini
-#sed 's#@PHP_BIN@#%{_bindir}/php#g' -i $RPM_BUILD_ROOT/%{batch_confdir}/batch.ini
-#sed 's#@BIN_DIR@#%{prefix}/bin#g' -i $RPM_BUILD_ROOT/%{batch_confdir}/batch.ini
-sed -i 's@^\(params.ImageMagickCmd\)\s*=.*@\1=%{bindir}/convert@' $RPM_BUILD_ROOT/%{batch_confdir}/batch.ini
-#sed 's#@TMP_DIR@#%{prefix}/tmp#g' -i $RPM_BUILD_ROOT/%{batch_confdir}/batch.ini
-sed 's#@LOG_DIR@#%{prefix}/log#g'  %{prefix}/app/configurations/monit.avail/batch.template.rc > %{prefix}/app/configurations/monit.avail/batch.rc
-sed 's#@APP_DIR@#%{prefix}/app#g' -i %{prefix}/app/configurations/monit.avail/batch.rc 
-sed 's#@APP_DIR@#%{prefix}/app#g' %{prefix}/app/configurations/monit.avail/httpd.template.rc > %{prefix}/app/configurations/monit.avail/httpd.rc 
+sed -i 's@^\(params.ImageMagickCmd\)\s*=.*@\1=%{bindir}/convert@' $RPM_BUILD_ROOT%{batch_confdir}/batch.ini.template
 sed 's#@APACHE_SERVICE@#httpd#g' -i %{prefix}/app/configurations/monit.avail/httpd.rc
 
 ln -fs %{prefix}/app/configurations/monit.avail/httpd.rc %{prefix}/app/configurations/monit.d/httpd.rc
 ln -fs %{prefix}/app/configurations/monit.avail/batch.rc %{prefix}/app/configurations/monit.d/batch.rc
 if [ "$1" = 1 ];then
 	/sbin/chkconfig --add kaltura-batch
-echo"#####################################################################################################################################
+echo " #####################################################################################################################################
 Installation of %{name} %{version} completed
 Please run: 
 # %{prefix}/bin/%{name}-config.sh [/path/to/answer/file]
@@ -99,7 +89,10 @@ if [ "$1" = 0 ] ; then
 	/sbin/chkconfig --del kaltura-batch
 	rm %{prefix}/app/configurations/monit.d/httpd.rc %{prefix}/app/configurations/monit.d/batch.rc || true
 fi
-service kaltura-batch restart
+# don't start unless it went through configuration and the INI was created.
+if [ -r %{prefix}/app/configurations/system.ini ];then 
+	service kaltura-batch restart
+fi
 
 %postun
 service httpd restart
