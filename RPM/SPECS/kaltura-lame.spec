@@ -72,8 +72,8 @@ cat > $RPM_BUILD_ROOT%{_sysconfdir}/profile.d/kaltura_lame.sh << EOF
 PATH=$PATH:%{base_prefix}/bin
 export PATH
 EOF
-%{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/ld.conf.so.d
-cat > $RPM_BUILD_ROOT%{_sysconfdir}/ld.conf.so.d/kaltura_lame.conf << EOF
+%{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/ld.so.conf.d
+cat > $RPM_BUILD_ROOT%{_sysconfdir}/ld.so.conf.d/kaltura_lame.conf << EOF
 %{base_prefix}-%{version}/lib
 EOF
 
@@ -101,7 +101,7 @@ execstack -c %{buildroot}%{prefix}/lib/*.so.*.*.* || :
 %doc %{prefix}/share/*
 %{prefix}/bin/lame
 %{prefix}/lib/libmp3lame.so.*
-%config %{_sysconfdir}/ld.conf.so.d/kaltura_lame.conf
+%config %{_sysconfdir}/ld.so.conf.d/kaltura_lame.conf
 %config %{_sysconfdir}/profile.d/kaltura_lame.sh
 
 %files devel

@@ -39,8 +39,8 @@ you will need to install %{name}-devel.
 %install
 %{__rm} -rf %{buildroot}
 %{__make} install DESTDIR="%{buildroot}"
-%{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/ld.conf.so.d
-cat > $RPM_BUILD_ROOT%{_sysconfdir}/ld.conf.so.d/kaltura-libopencore-amrnb.conf << EOF
+%{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/ld.so.conf.d
+cat > $RPM_BUILD_ROOT%{_sysconfdir}/ld.so.conf.d/kaltura-libopencore-amrnb.conf << EOF
 %{prefix}/lib
 EOF
 
@@ -51,7 +51,7 @@ EOF
 %{__rm} -rf %{buildroot}
 
 %files
-%config %{_sysconfdir}/ld.conf.so.d/kaltura-libopencore-amrnb.conf
+%config %{_sysconfdir}/ld.so.conf.d/kaltura-libopencore-amrnb.conf
 %defattr(-, root, root, 0755)
 %doc AUTHORS ChangeLog COPYING LICENSE README
 %{prefix}/lib/libopencore-amrnb.so.*

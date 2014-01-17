@@ -6,7 +6,7 @@
 Summary: Kaltura Open Source Video Platform - frontend server 
 Name: kaltura-front
 Version: 9.7.0
-Release: 7 
+Release: 10 
 License: AGPLv3+
 Group: Server/Platform 
 #Source0: kaltura-api.conf
@@ -16,7 +16,7 @@ Source3: zz-%{name}.ini
 
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires: mediainfo, httpd, php, curl, kaltura-base, kaltura-ffmpeg, ImageMagick, memcached, php-pecl-memcached, php-mysql, php-pecl-apc, php-mcrypt, kaltura-segmenter
+Requires: mediainfo, httpd, php, curl, kaltura-base, kaltura-ffmpeg, ImageMagick, memcached, php-pecl-memcached, php-mysql, php-pecl-apc, php-mcrypt, kaltura-segmenter, mod_ssl
 Requires(post): chkconfig
 Requires(preun): chkconfig
 # This is for /sbin/service
@@ -56,8 +56,11 @@ sed 's#@WEB_DIR@#%{prefix}/web#' -i $RPM_BUILD_ROOT/%{_sysconfdir}/php.d/zz-%{na
 #sed 's#@WEB_DIR@#%{prefix}/web#' -i $RPM_BUILD_ROOT/%{_sysconfdir}/httpd/conf.d/*.conf 
 #sed 's#@LOG_DIR@#%{prefix}/log#'  -i $RPM_BUILD_ROOT/%{_sysconfdir}/httpd/conf.d/*.conf
 #sed 's#@APP_DIR@#%{prefix}/app#' -i $RPM_BUILD_ROOT/%{_sysconfdir}/httpd/conf.d/*.conf
-chown %{kaltura_user}:%{apache_group} %{prefix}/log 
-chmod 775 %{prefix}/log
+
+chown -R %{kaltura_user}:%{apache_group} %{prefix}/log 
+chown -R %{kaltura_user}:%{apache_group} %{prefix}/tmp 
+chown -R %{kaltura_user}:%{apache_group} %{prefix}/app/cache 
+chmod 775 %{prefix}/log %{prefix}/tmp %{prefix}/app/cache %{prefix}/web
 service httpd restart
 sed 's#@APP_DIR@#%{prefix}/app#' %{prefix}/app/configurations/monit.avail/httpd.template.rc > %{prefix}/app/configurations/monit.avail/httpd.rc 
 sed 's#@APACHE_SERVICE@#httpd#g' -i %{prefix}/app/configurations/monit.avail/httpd.rc
@@ -88,6 +91,12 @@ rm -rf %{buildroot}
 #%config %{_sysconfdir}/httpd/conf.d/kaltura-admin-console.conf
 
 %changelog
+* Fri Jan 17 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-9
+- Corrected permissions.
+
+* Fri Jan 17 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-8
+- Add dep on mod_ssl.
+
 * Thu Jan 15 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-7
 - We will not bring a done config for front Apache. 
   Instead, during post we will generate from template and then SYMLINK to /etc/httpd/conf.d.

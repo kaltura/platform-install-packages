@@ -174,8 +174,8 @@ cat > $RPM_BUILD_ROOT%{_sysconfdir}/profile.d/kaltura_ffmpeg.sh << EOF
 PATH=$PATH:%{base_prefix}-%{version}/bin
 export PATH
 EOF
-%{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/ld.conf.so.d
-cat > $RPM_BUILD_ROOT%{_sysconfdir}/ld.conf.so.d/kaltura_ffmpeg.conf << EOF
+%{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/ld.so.conf.d
+cat > $RPM_BUILD_ROOT%{_sysconfdir}/ld.so.conf.d/kaltura_ffmpeg.conf << EOF
 %{base_prefix}-%{version}/lib
 EOF
 
@@ -201,7 +201,7 @@ fi
 %doc Changelog COPYING* CREDITS INSTALL MAINTAINERS README
 %doc %{base_prefix}-%{version}/share/man/man1
 %config %{_sysconfdir}/profile.d/kaltura_ffmpeg.sh
-%config %{_sysconfdir}/ld.conf.so.d/kaltura_ffmpeg.conf
+%config %{_sysconfdir}/ld.so.conf.d/kaltura_ffmpeg.conf
 #%{base_prefix}-%{version}/bin/ffprobe
 %{base_prefix}-%{version}/bin/*
 #%{base_prefix}-%{version}/bin/ffplay

@@ -1,5 +1,7 @@
 %define kaltura_user	kaltura
 %define kaltura_group	kaltura
+%define kaltura_user	apache
+%define kaltura_group	apache
 %define prefix /opt/kaltura
 %define confdir %{prefix}/app/configurations
 %define logdir %{prefix}/log
@@ -8,7 +10,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 9.7.0
-Release: 24 
+Release: 26
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -69,11 +71,11 @@ mv $RPM_BUILD_ROOT/%{prefix}/app/configurations/monit/monit.d $RPM_BUILD_ROOT/%{
 # now replace tokens
 sed 's#@WEB_DIR@#%{prefix}/web#g' $RPM_BUILD_ROOT%{prefix}/app/configurations/system.template.ini > $RPM_BUILD_ROOT/%{prefix}/app/configurations/system.ini
 sed 's#@IMAGE_MAGICK_BIN_DIR@#%{_bindir}#g' $RPM_BUILD_ROOT%{prefix}/app/configurations/local.template.ini > $RPM_BUILD_ROOT/%{prefix}/app/configurations/local.ini
-sed 's#@WEB_DIR@#%{prefix}/web#g' -i $RPM_BUILD_ROOT%{prefix}/app/configurations/local.ini
-sed 's#@LOG_DIR@#%{prefix}/log#g' -i  $RPM_BUILD_ROOT%{prefix}/app/configurations/system.ini  $RPM_BUILD_ROOT/%{prefix}/app/configurations/local.ini
-sed 's#@TMP_DIR@#%{prefix}/tmp#g' -i  $RPM_BUILD_ROOT%{prefix}/app/configurations/system.ini  $RPM_BUILD_ROOT/%{prefix}/app/configurations/local.ini
-sed 's#@APP_DIR@#%{prefix}/app#g' -i  $RPM_BUILD_ROOT%{prefix}/app/configurations/system.ini  $RPM_BUILD_ROOT/%{prefix}/app/configurations/local.ini
-sed 's#@BASE_DIR@#%{prefix}#g' -i $RPM_BUILD_ROOT%{prefix}/app/configurations/system.ini  $RPM_BUILD_ROOT/%{prefix}/app/configurations/local.ini
+#sed 's#@WEB_DIR@#%{prefix}/web#g' -i $RPM_BUILD_ROOT%{prefix}/app/configurations/local.ini
+#sed 's#@LOG_DIR@#%{prefix}/log#g' -i  $RPM_BUILD_ROOT%{prefix}/app/configurations/system.ini  $RPM_BUILD_ROOT/%{prefix}/app/configurations/local.ini
+#sed 's#@TMP_DIR@#%{prefix}/tmp#g' -i  $RPM_BUILD_ROOT%{prefix}/app/configurations/system.ini  $RPM_BUILD_ROOT/%{prefix}/app/configurations/local.ini
+#sed 's#@APP_DIR@#%{prefix}/app#g' -i  $RPM_BUILD_ROOT%{prefix}/app/configurations/system.ini  $RPM_BUILD_ROOT/%{prefix}/app/configurations/local.ini
+#sed 's#@BASE_DIR@#%{prefix}#g' -i $RPM_BUILD_ROOT%{prefix}/app/configurations/system.ini  $RPM_BUILD_ROOT/%{prefix}/app/configurations/local.ini
 sed 's#@BIN_DIR@#%{prefix}/bin#g' -i $RPM_BUILD_ROOT%{prefix}/app/configurations/system.ini  $RPM_BUILD_ROOT/%{prefix}/app/configurations/local.ini
 sed 's#@OS_KALTURA_USER@#%{kaltura_user}#g' -i $RPM_BUILD_ROOT/%{prefix}/app/configurations/system.ini $RPM_BUILD_ROOT/%{prefix}/app/configurations/local.ini
 sed 's#@PHP_BIN@#%{_bindir}/php#g' -i $RPM_BUILD_ROOT%{prefix}/app/configurations/system.ini  $RPM_BUILD_ROOT/%{prefix}/app/configurations/local.ini
@@ -88,8 +90,8 @@ PATH=$PATH:%{prefix}/bin
 export PATH
 EOF
 
-%{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/ld.conf.so.d
-cat > $RPM_BUILD_ROOT%{_sysconfdir}/ld.conf.so.d/kaltura_base.conf << EOF
+%{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/ld.so.conf.d
+cat > $RPM_BUILD_ROOT%{_sysconfdir}/ld.so.conf.d/kaltura_base.conf << EOF
 %{prefix}/lib
 
 EOF
@@ -104,6 +106,7 @@ groupadd -r %{kaltura_group} 2>/dev/null || true
 useradd -M -r -d /opt/kaltura -s /bin/bash -c "Kaltura server" -g %{kaltura_group} %{kaltura_user} 2>/dev/null || true
 usermod -g %{kaltura_group} %{kaltura_user} 2>/dev/null || true
 chown -R %{kaltura_user}:%{kaltura_group} %{prefix}/log 
+chown -R %{kaltura_user}:%{kaltura_group} %{prefix}/tmp 
 chown -R %{kaltura_user}:%{kaltura_group} %{prefix}/app/cache 
 ln -sf %{prefix}/app/configurations/system.ini /etc/kaltura.d/system.ini
 
@@ -132,7 +135,7 @@ fi
 
 %config %{prefix}/app/configurations/*
 %config %{_sysconfdir}/profile.d/kaltura_base.sh
-%config %{_sysconfdir}/ld.conf.so.d/kaltura_base.conf
+%config %{_sysconfdir}/ld.so.conf.d/kaltura_base.conf
 
 
 %dir /etc/kaltura.d

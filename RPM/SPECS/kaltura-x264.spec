@@ -56,8 +56,8 @@ sed -i 's|/usr/X11R6/lib |/usr/X11R6/%{prefix}/lib |g' configure
 %install
 %{__rm} -rf %{buildroot}
 %{__make} install DESTDIR="%{buildroot}"
-%{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/ld.conf.so.d
-cat > $RPM_BUILD_ROOT%{_sysconfdir}/ld.conf.so.d/kaltura_x264.conf << EOF
+%{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/ld.so.conf.d
+cat > $RPM_BUILD_ROOT%{_sysconfdir}/ld.so.conf.d/kaltura_x264.conf << EOF
 %{prefix}/lib
 EOF
 
@@ -72,7 +72,7 @@ EOF
 %doc AUTHORS COPYING
 %{prefix}/bin/x264
 %{prefix}/lib/libx264.so.*
-%config %{_sysconfdir}/ld.conf.so.d/kaltura_x264.conf
+%config %{_sysconfdir}/ld.so.conf.d/kaltura_x264.conf
 
 %files devel
 %defattr(-, root, root, 0755)
@@ -84,7 +84,7 @@ EOF
 
 %changelog
 * Sun Jan 5 2014 Jess Portnoy <jess.portnoy@kaltura.com> 0.140-2.20140104 
-- Added %%{_sysconfdir}/ld.conf.so.d/kaltura_x264.conf
+- Added %%{_sysconfdir}/ld.so.conf.d/kaltura_x264.conf
 * Sun Jan 5 2014 Jess Portnoy <jess.portnoy@kaltura.com> 0.140-1.20140104 
 - Adopted for Kaltura. Required for kaltura-ffmpeg. 
 

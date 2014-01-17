@@ -7,7 +7,7 @@
 Summary: Kaltura Open Source Video Platform - batch server 
 Name: kaltura-batch
 Version: 9.7.0
-Release: 16 
+Release: 19 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: zz-%{name}.ini
@@ -15,7 +15,7 @@ Source1: kaltura-batch
 #Source2: kaltura-batch.conf
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires: kaltura-base, kaltura-ffmpeg, kaltura-ffmpeg-aux, php, curl, httpd, sox, ImageMagick, kaltura-sshpass, php-pecl-memcached, php-mcrypt,php-pecl-memcached,mediainfo, kaltura-segmenter
+Requires: kaltura-base, kaltura-ffmpeg, kaltura-ffmpeg-aux, php, curl, httpd, sox, ImageMagick, kaltura-sshpass, php-pecl-memcached, php-mcrypt,php-pecl-memcached,mediainfo, kaltura-segmenter, mod_ssl
 Requires(post): chkconfig
 Requires(preun): chkconfig
 # This is for /sbin/service
@@ -81,11 +81,13 @@ To finalize the setup.
 "
 fi
 
-service httpd restart
+chown -R %{kaltura_user}:%{kaltura_group} %{prefix}/log 
+chown -R %{kaltura_user}:%{kaltura_group} %{prefix}/tmp 
+chown -R %{kaltura_user}:%{kaltura_group} %{prefix}/app/cache 
+chmod 775 %{prefix}/log %{prefix}/tmp %{prefix}/app/cache %{prefix}/web
 
-chown %{kaltura_user}:%{kaltura_group} %{prefix}/log 
-chown %{kaltura_user}:%{apache_group} %{prefix}/app/batch
-chmod 775 %{prefix}/log
+chown %{kaltura_user}:%{kaltura_group} %{prefix}/app/batch
+service httpd restart
 # don't start it if its a fresh install, it will fail. It needs to go through postinst config first.
 if [ "$1" = 0 ];then
 	service kaltura-batch restart
@@ -110,6 +112,12 @@ service httpd restart
 
 
 %changelog
+* Fri Jan 17 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-18
+- Corrected permissions.
+
+* Fri Jan 17 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-17
+- Add dep on mod_ssl.
+
 * Thu Jan 16 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-16
 - seds to be done as part of the kaltura-base postint.
 

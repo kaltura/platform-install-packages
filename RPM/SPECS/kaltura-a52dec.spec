@@ -55,8 +55,8 @@ to build programs that use it.
 %install
 %{__rm} -rf %{buildroot}
 %{__make} install DESTDIR="%{buildroot}"
-%{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/ld.conf.so.d
-cat > $RPM_BUILD_ROOT%{_sysconfdir}/ld.conf.so.d/kaltura_a52dec.conf << EOF
+%{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/ld.so.conf.d
+cat > $RPM_BUILD_ROOT%{_sysconfdir}/ld.so.conf.d/kaltura_a52dec.conf << EOF
 %{prefix}/lib
 EOF
 
@@ -73,7 +73,7 @@ EOF
 %files
 %defattr(-, root, root, 0755)
 %doc AUTHORS ChangeLog COPYING doc/liba52.txt HISTORY NEWS README TODO
-%config %{_sysconfdir}/ld.conf.so.d/kaltura_a52dec.conf
+%config %{_sysconfdir}/ld.so.conf.d/kaltura_a52dec.conf
 %{prefix}/bin/*
 %{prefix}/lib/*.so*
 %{prefix}/share/man/man1/*
@@ -88,7 +88,7 @@ EOF
 
 %changelog
 * Sun Jan 5 2014 Jess Portnoy <jess.portnoy@kaltura.com> 0.7.4-10
-- Create a file under /etc/ld.conf.so.d so.
+- Create a file under /etc/ld.so.conf.d so.
  
 * Sun Jan 5 2014 Jess Portnoy <jess.portnoy@kaltura.com> 0.7.4-9
 - Adopted for Kaltura. Required for kaltura-ffmpeg. 

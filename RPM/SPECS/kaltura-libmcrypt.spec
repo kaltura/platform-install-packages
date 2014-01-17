@@ -49,9 +49,9 @@ you will need to install %{name}-devel.
 
 %install
 %{__rm} -rf %{buildroot}
-%{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/ld.conf.so.d
+%{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/ld.so.conf.d
 %{__make} install DESTDIR="%{buildroot}"
-cat > $RPM_BUILD_ROOT%{_sysconfdir}/ld.conf.so.d/kaltura_libmcrypt.conf << EOF
+cat > $RPM_BUILD_ROOT%{_sysconfdir}/ld.so.conf.d/kaltura_libmcrypt.conf << EOF
 %{prefix}/lib
 EOF
 
@@ -74,7 +74,7 @@ EOF
 %defattr(-, root, root, 0755)
 %doc doc/README* doc/example.c
 %doc %{prefix}/share/man/man?/*
-%config %{_sysconfdir}/ld.conf.so.d/kaltura_libmcrypt.conf
+%config %{_sysconfdir}/ld.so.conf.d/kaltura_libmcrypt.conf
 %{prefix}/bin/*
 %{prefix}/lib/*.a
 %{prefix}/lib/*.so

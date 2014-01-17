@@ -39,8 +39,8 @@ you will need to install %{name}-devel.
 %install
 %{__rm} -rf %{buildroot}
 %{__make} install DESTDIR="%{buildroot}"
-%{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/ld.conf.so.d
-cat > $RPM_BUILD_ROOT%{_sysconfdir}/ld.conf.so.d/kaltura_libass.conf << EOF
+%{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/ld.so.conf.d
+cat > $RPM_BUILD_ROOT%{_sysconfdir}/ld.so.conf.d/kaltura_libass.conf << EOF
 %{prefix}/lib
 EOF
 
@@ -51,7 +51,7 @@ EOF
 %postun -p /sbin/ldconfig
 
 %files
-%config %{_sysconfdir}/ld.conf.so.d/kaltura_libass.conf
+%config %{_sysconfdir}/ld.so.conf.d/kaltura_libass.conf
 %defattr(-, root, root, 0755)
 %doc Changelog COPYING
 %{prefix}/lib/libass.so.*
