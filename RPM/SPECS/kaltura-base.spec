@@ -10,7 +10,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 9.7.0
-Release: 28
+Release: 29
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -88,6 +88,18 @@ EOF
 %clean
 rm -rf %{buildroot}
 
+%pre
+
+# maybe one day we will support SELinux in which case this can be ommitted.
+if which selinuxenabled 2>/dev/null; then
+	selinuxenabled
+	if [ $? -eq 0 ];then
+		echo "You have SELinux enabled, please change to permissive mode with:
+# setenforce permissive
+and then edit /etc/selinux/config to make the change permanent."
+		exit 1;
+	fi
+fi
 %post
 
 # create user/group, and update permissions
@@ -145,6 +157,9 @@ fi
 
 
 %changelog
+* Sat Jan 17 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-28
+- Make sure SELinux is not enabled.
+
 * Fri Jan 17 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-27
 - Do not create system.ini, post installs create it from template.
 
