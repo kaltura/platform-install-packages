@@ -4,6 +4,7 @@ RPM_SOURCES_DIR=~/rpmbuild/SOURCES
 RPM_SPECS_DIR=~/rpmbuild/SPECS
 TMP_DIR=/tmp
 SVN_USER=jessp
+KALTURA_SERVER_VERSION="9.7.0"
 
 # Sphinx build vars:
 SPHINX_URI="http://sphinxsearch.googlecode.com/svn/trunk/"
@@ -115,3 +116,9 @@ KVPM_RPM_NAME="kaltura-kvpm"
 HTML5LIB_VERSION="v2.1.1"
 HTML5LIB_URI="https://github.com/kaltura/mwEmbed/tarball/$HTML5LIB_VERSION"
 HTML5LIB_RPM_NAME="kaltura-html5lib"
+
+# Kaltura DWH
+DWH_VERSION="Gemini_2013_03_21"
+DWH_URI="svn+ssh://$SVN_USER@kelev.kaltura.com//usr/local/kalprod/dwh/core/branches/$DWH_VERSION"
+DWH_RPM_NAME="kaltura-dwh"
+

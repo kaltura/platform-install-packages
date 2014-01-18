@@ -32,7 +32,8 @@ This package installs the KMC Flash web interface.
 %setup -q 
 
 %build
-
+%post
+sed -i "s@\(^kmc_version\)\s*=.*@\1=%{version}@g" %{prefix}/app/configurations/base.ini
 %install
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/flash/kmc/login
 mv %{_builddir}/%{name}-%{version}/login/%{kmc_login_version} $RPM_BUILD_ROOT%{prefix}/web/flash/kmc/login/ 

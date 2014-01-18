@@ -108,6 +108,9 @@ php $APP_DIR/deployment/base/scripts/insertDefaults.php $APP_DIR/deployment/base
 echo "Output for $APP_DIR/deployment/base/scripts/insertContent.ph being logged into $LOG_DIR/insertContent.log"
 php $APP_DIR/deployment/base/scripts/insertContent.php >> $LOG_DIR/insertContent.log  2>&1
 
+KMC_VERSION=`grep "^kmc_version" /opt/kaltura/app/configurations/base.ini|awk -F "=" '{print $2}'|sed 's@\s*@@g'`
+php $APP_DIR/deployment/uiconf/deploy_v2.php --ini=$WEB_DIR/flash/kmc/$KMC_VERSION/config.ini
+find  $WEB_DIR/content/generatedUiConf -type d -exec chmod 775 {} \;
 
 set +e
 

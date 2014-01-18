@@ -2,9 +2,10 @@
 Summary: Kaltura Open Source Video Platform - Analytics 
 Name: kaltura-dwh
 Version: 9.7.0
-Release: 4 
+Release: 5 
 License: AGPLv3+
 Group: Server/Platform 
+Source0: %{name}-%{version}.tar.bz2
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires: kaltura-base,kaltura-pentaho,java-1.7.0-openjdk, kaltura-postinst 
@@ -30,12 +31,15 @@ and developing a variety of online workflows for video.
 This package configures the Data Warehouse [DWH] analytics component. 
 
 %prep
+%setup -q
 
 %build
 
 %install
 # for Apache access logs.
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/logs
+mkdir -p $RPM_BUILD_ROOT%{prefix}/dwh
+cp -r %{_builddir}/%{name}-%{version}/* $RPM_BUILD_ROOT%{prefix}/dwh/
 
 # goes to crontab
 #@DWH_DIR@/etlsource/execute/etl_daily.sh -p @DWH_DIR@
@@ -58,11 +62,15 @@ To finalize the setup.
 fi
 %files
 %dir %{prefix}/web/logs
+%{prefix}/dwh
 #cron/dwh.template
 ##.kettle/kettle.template.properties
 
 
 %changelog
+* Sat Jan 18 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-5
+- Install actual %%{prefix}/dwh dir
+
 * Thu Jan 16 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-3
 - Added creation of %%{prefix}/web/logs
 
