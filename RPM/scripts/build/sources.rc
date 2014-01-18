@@ -47,8 +47,10 @@ KALTURA_STREAMING_LIB_VERSION="master"
 KALTURA_URI="https://github.com/kaltura/media-server/archive/$KALTURA_STREAMING_LIB_VERSION.zip"
 
 # Kaltura KMC:
-KMC_VERSION=v5.36.10
+KMC_VERSION=v5.37.10
+KMC_LOGIN_VERSION=v1.2.3
 KMC_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/flash/kmc/$KMC_VERSION"
+KMC_LOGIN_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/flash/kmc/login/$KMC_LOGIN_VERSION"
 KMC_RPM_NAME="kaltura-kmc"
 
 # Kaltura KDP3:
