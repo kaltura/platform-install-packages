@@ -6,7 +6,7 @@
 Summary: Kaltura Open Source Video Platform - frontend server 
 Name: kaltura-front
 Version: 9.7.0
-Release: 11 
+Release: 12 
 License: AGPLv3+
 Group: Server/Platform 
 #Source0: kaltura-api.conf
@@ -60,7 +60,7 @@ sed 's#@WEB_DIR@#%{prefix}/web#' -i $RPM_BUILD_ROOT/%{_sysconfdir}/php.d/zz-%{na
 chown -R %{kaltura_user}:%{apache_group} %{prefix}/log 
 chown -R %{kaltura_user}:%{apache_group} %{prefix}/tmp 
 chown -R %{kaltura_user}:%{apache_group} %{prefix}/app/cache 
-chmod 775 %{prefix}/log %{prefix}/tmp %{prefix}/app/cache %{prefix}/web
+chmod -R 775 %{prefix}/log %{prefix}/tmp %{prefix}/app/cache %{prefix}/web
 service httpd restart
 sed 's#@APP_DIR@#%{prefix}/app#' %{prefix}/app/configurations/monit.avail/httpd.template.rc > %{prefix}/app/configurations/monit.avail/httpd.rc 
 sed 's#@APACHE_SERVICE@#httpd#g' -i %{prefix}/app/configurations/monit.avail/httpd.rc

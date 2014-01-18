@@ -121,8 +121,12 @@ CDN host [`hostname`]:"
                 read -e SERVICE_URL
         done
         while [ -z "$ADMIN_CONSOLE_ADMIN_MAIL" ];do
-                echo "Admin's mail address for alerts: "
+                echo "Admin's user: "
                 read -e ADMIN_CONSOLE_ADMIN_MAIL
+        done
+        while [ -z "$ADMIN_CONSOLE_ADMIN_PASSWD" ];do
+                echo "Admin's passwd: "
+                read -e ADMIN_CONSOLE_ADMIN_PASSWD
         done
         while [ -z "$TIME_ZONE" ];do
                 echo "Your time zone [see http://php.net/date.timezone]: "
@@ -130,9 +134,21 @@ CDN host [`hostname`]:"
         done
 sed -i "s#\(date.timezone\)\s*=.*#\1='$TIME_ZONE'#g" /etc/php.ini /etc/php.d/*kaltura*ini
 fi
+echo "use kaltura" | mysql -h$DB1_HOST -P$DB1_PASS -u$SUPER_USER -p$SUPER_USER_PASSWD mysql
+if [ $? -ne 0 ];then
+cat << EOF
+The $KALTURA_DB DB seems to be missing.
+
+Please run:
+# `basedir $0`/kaltura-db-config.sh $MYSQL_HOST $MYSQL_SUPER_USER $MYSQL_SUPER_USER_PASSWD $MYSQL_PORT upgrade
+
+EOF
+	exit 5
+fi 
+
 if [ -z "$DB1_PASS" ];then
 	DB1_PASS=`< /dev/urandom tr -dc A-Za-z0-9_ | head -c15`
-	echo "update mysql.user set password=PASSWORD('$DB1_PASS') WHERE user='kaltura';flush PRIVILEGES" | mysql -h$DB1_HOST -P3306 -u$SUPER_USER -p$SUPER_USER_PASSWD mysql
+	echo "update mysql.user set password=PASSWORD('$DB1_PASS') WHERE user='kaltura';flush PRIVILEGES" | mysql -h$DB1_HOST -P$DB1_PASS -u$SUPER_USER -p$SUPER_USER_PASSWD mysql
 fi
 create_answer_file
 DB1_NAME=kaltura
@@ -153,10 +169,16 @@ for TMPL_CONF_FILE in $CONF_FILES;do
 	sed -e "s#@CDN_HOST@#$CDN_HOST#g" -e "s#@DB[1-9]_HOST@#$DB1_HOST#g" -e "s#@DB[1-9]_NAME@#$DB1_NAME#g" -e "s#@DB[1-9]_USER@#$DB1_USER#g" -e "s#@DB[1-9]_PASS@#$DB1_PASS#g" -e "s#@DB[1-9]_PORT@#$DB1_PORT#g" -e "s#@TIME_ZONE@#$TIME_ZONE#g" -e "s#@KALTURA_FULL_VIRTUAL_HOST_NAME@#$KALTURA_FULL_VIRTUAL_HOST_NAME#g" -e "s#@KALTURA_VIRTUAL_HOST_NAME@#$KALTURA_VIRTUAL_HOST_NAME#g" -e "s#@SERVICE_URL@#$SERVICE_URL#g" -e "s#@WWW_HOST@#`hostname`#g" -e "s#@SPHINX_DB_NAME@#kaltura_sphinx_log#g" -e "s#@SPHINX_DB_HOST@#$SPHINX_DB_HOST#g" -e "s#@SPHINX_DB_PORT@#$DB1_PORT#g" -e "s#@DWH_HOST@#$DWH_HOST#g" -e "s#@DWH_PORT@#$DWH_PORT#g" -e "s#@SPHINX_SERVER1@#$SPHINX_SERVER1#g" -e "s#@SPHINX_SERVER2@#$SPHINX_SERVER2#g" -e "s#@DWH_DATABASE_NAME@#kalturadw#g" -e "s#@DWH_USER@#etl#g" -e "s#@DWH_PASS@#$DB1_PASS#g" -e "s#@ADMIN_CONSOLE_ADMIN_MAIL@#$ADMIN_CONSOLE_ADMIN_MAIL#g" -e "s#@WEB_DIR@#$BASE_DIR/web#g" -e "s#@LOG_DIR@#$BASE_DIR/log#g" -e "s#/opt/kaltura/app#$BASE_DIR/app#g" -e "s#@PHP_BIN@#/usr/bin/php#g" -e "s#@OS_KALTURA_USER@#kaltura#g" -e "s#@BASE_DIR@#$BASE_DIR#" -e "s#@APP_DIR@#$BASE_DIR/app#" -i $CONF_FILE
 done
 
+# these two have passwds in then.
+chown 600 $APP_DIR/configurations/system.ini $APP_DIR/configurations/db.ini
+
 # gen secrets
-ADMIN_SECRET=`< /dev/urandom tr -dc A-Za-z0-9_ | head -c10`
+ADMIN_SECRET=`$ADMIN_CONSOLE_ADMIN_PASSWD`
 HASHED_ADMIN_SECRET=`echo $ADMIN_SECRET|md5sum`
 ADMIN_SECRET=`echo $HASHED_ADMIN_SECRET|awk -F " " '{print $1}'`
+
+echo "update partner set admin_email='$ADMIN_CONSOLE_ADMIN_MAIL'" | mysql -h$DB1_HOST -u$DB1_NAME -p$DB1_PASS $DB1_NAME
+echo "update partner set admin_secret='$ADMIN_CONSOLE_ADMIN_PASSWD'" | mysql -h$DB1_HOST -u$DB1_NAME -p$DB1_PASS $DB1_NAME
 
 MONITOR_PARTNER_ADMIN_SECRET=`< /dev/urandom tr -dc A-Za-z0-9_ | head -c10`
 HASHED_MONITOR_PARTNER_ADMIN_SECRET=`echo $HASHED_MONITOR_PARTNER_ADMIN_SECRET | md5sum`

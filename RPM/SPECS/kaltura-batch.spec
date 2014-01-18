@@ -7,7 +7,7 @@
 Summary: Kaltura Open Source Video Platform - batch server 
 Name: kaltura-batch
 Version: 9.7.0
-Release: 20 
+Release: 21 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: zz-%{name}.ini
@@ -74,7 +74,7 @@ fi
 chown -R %{kaltura_user}:%{kaltura_group} %{prefix}/log 
 chown -R %{kaltura_user}:%{kaltura_group} %{prefix}/tmp 
 chown -R %{kaltura_user}:%{kaltura_group} %{prefix}/app/cache 
-chmod 775 %{prefix}/log %{prefix}/tmp %{prefix}/app/cache %{prefix}/web
+chmod -R 775 %{prefix}/log %{prefix}/tmp %{prefix}/app/cache %{prefix}/web
 
 chown %{kaltura_user}:%{kaltura_group} %{prefix}/app/batch
 service httpd restart
