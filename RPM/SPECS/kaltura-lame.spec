@@ -69,7 +69,7 @@ you will need to install %{name}-devel.
 %{__make} install DESTDIR="%{buildroot}"
 %{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
 cat > $RPM_BUILD_ROOT%{_sysconfdir}/profile.d/kaltura_lame.sh << EOF
-PATH=$PATH:%{base_prefix}/bin
+PATH=\$PATH:%{base_prefix}/bin
 export PATH
 EOF
 %{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/ld.so.conf.d

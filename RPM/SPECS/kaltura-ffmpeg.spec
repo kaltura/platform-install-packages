@@ -27,7 +27,7 @@
 Summary: Utilities and libraries to record, convert and stream audio and video
 Name: kaltura-ffmpeg
 Version: 1.1.1
-Release: 4 
+Release: 6 
 License: GPL
 Group: Applications/Multimedia
 URL: http://ffmpeg.org/
@@ -171,7 +171,7 @@ cd -
 %{__mkdir_p} %{buildroot}%{base_prefix}-%{version}/include/postproc/
 %{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
 cat > $RPM_BUILD_ROOT%{_sysconfdir}/profile.d/kaltura_ffmpeg.sh << EOF
-PATH=$PATH:%{base_prefix}-%{version}/bin
+PATH=\$PATH:%{base_prefix}-%{version}/bin
 export PATH
 EOF
 %{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/ld.so.conf.d

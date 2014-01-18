@@ -176,11 +176,11 @@ export CFLAGS="%{optflags}"
 # The <postproc/postprocess.h> is now at <ffmpeg/postprocess.h>, so provide
 # a compatibility symlink
 %{__mkdir_p} %{buildroot}%{_includedir}/postproc/
-%{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
-cat > $RPM_BUILD_ROOT%{_sysconfdir}/profile.d/kaltura_ffmpeg-aux.sh << EOF
-PATH=$PATH:%{base_prefix}-%{version}/bin
-export PATH
-EOF
+#%{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
+#cat > $RPM_BUILD_ROOT%{_sysconfdir}/profile.d/kaltura_ffmpeg-aux.sh << EOF
+#PATH=$PATH:%{base_prefix}-%{version}/bin
+#export PATH
+#EOF
 
 %{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/ld.so.conf.d
 cat > $RPM_BUILD_ROOT%{_sysconfdir}/ld.so.conf.d/kaltura_ffmpeg_aux.conf << EOF

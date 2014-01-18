@@ -95,7 +95,7 @@ EOF
 
 mkdir $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
 cat > $RPM_BUILD_ROOT%{_sysconfdir}/profile.d/kaltura_sphinx.sh << EOF
-PATH=$PATH:%{prefix}/bin
+PATH=\$PATH:%{prefix}/bin
 export PATH
 EOF
 

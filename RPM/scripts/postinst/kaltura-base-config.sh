@@ -134,7 +134,7 @@ CDN host [`hostname`]:"
         done
 sed -i "s#\(date.timezone\)\s*=.*#\1='$TIME_ZONE'#g" /etc/php.ini /etc/php.d/*kaltura*ini
 fi
-echo "use kaltura" | mysql -h$DB1_HOST -P$DB1_PASS -u$SUPER_USER -p$SUPER_USER_PASSWD mysql
+echo "use kaltura" | mysql -h$DB1_HOST -P$DB1_PORT -u$SUPER_USER -p$SUPER_USER_PASSWD mysql
 if [ $? -ne 0 ];then
 cat << EOF
 The $KALTURA_DB DB seems to be missing.
@@ -148,7 +148,7 @@ fi
 
 if [ -z "$DB1_PASS" ];then
 	DB1_PASS=`< /dev/urandom tr -dc A-Za-z0-9_ | head -c15`
-	echo "update mysql.user set password=PASSWORD('$DB1_PASS') WHERE user='kaltura';flush PRIVILEGES" | mysql -h$DB1_HOST -P$DB1_PASS -u$SUPER_USER -p$SUPER_USER_PASSWD mysql
+	echo "update mysql.user set password=PASSWORD('$DB1_PASS') WHERE user='kaltura';flush PRIVILEGES" | mysql -h$DB1_HOST -P$DB1_PORT -u$SUPER_USER -p$SUPER_USER_PASSWD mysql
 fi
 create_answer_file
 DB1_NAME=kaltura
@@ -158,8 +158,9 @@ DB1_USER=kaltura
 SPHINX_DB_HOST=$DB1_HOST
 SPHINX_DB_PORT=$DB1_PORT
 
-CONF_FILES=`find $KALT_CONF_DIR  -type f -name "*template*"`
 BASE_DIR=/opt/kaltura
+CONF_FILES=`find $KALT_CONF_DIR  -type f -name "*template*"`
+CONF_FILES="$CONF_FILES `find $BASE_DIR/dwh  -type f -name "*template*"`"
 # Now we will sed.
 
 for TMPL_CONF_FILE in $CONF_FILES;do
@@ -170,7 +171,7 @@ for TMPL_CONF_FILE in $CONF_FILES;do
 done
 
 # these two have passwds in then.
-chown 600 $APP_DIR/configurations/system.ini $APP_DIR/configurations/db.ini
+chown 600 $BASE_DIR/app/configurations/system.ini $BASE_DIR/app/configurations/db.ini
 
 # gen secrets
 ADMIN_SECRET=`$ADMIN_CONSOLE_ADMIN_PASSWD`

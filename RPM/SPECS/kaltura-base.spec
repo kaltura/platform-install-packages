@@ -75,7 +75,7 @@ rm $RPM_BUILD_ROOT%{prefix}/app/configurations/.project
 
 %{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
 cat > $RPM_BUILD_ROOT%{_sysconfdir}/profile.d/kaltura_base.sh << EOF
-PATH=$PATH:%{prefix}/bin
+PATH=\$PATH:%{prefix}/bin
 export PATH
 EOF
 
