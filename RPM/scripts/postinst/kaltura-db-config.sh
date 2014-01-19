@@ -92,10 +92,6 @@ for DB in $DBS;do
 		mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT $DB < $SQL
 	done
 done
-#deployment/base/scripts/insertContent.php
-#deployment/base/scripts/insertDefaults.php
-#deployment/base/scripts/insertPermissions.php
-#deployment/base/scripts/installPlugins.php
 
 echo "Populating DB with data.. please wait.."
 echo "Output for $APP_DIR/deployment/base/scripts/insertDefaults.php being logged into $LOG_DIR/insertDefaults.log"

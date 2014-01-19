@@ -7,10 +7,10 @@
 Summary: Kaltura Open Source Video Platform - frontend server 
 Name: kaltura-front
 Version: 9.7.0
-Release: 13 
+Release: 14 
 License: AGPLv3+
 Group: Server/Platform 
-#Source0: kaltura-api.conf
+Source0: kaltura.ssl.conf.template 
 #Source1: kaltura-kmc.conf
 #Source2: kaltura-admin-console.conf
 Source3: zz-%{name}.ini 
@@ -47,7 +47,8 @@ This package sets up a server as a front node.
 #%setup -q
 
 %install
-mkdir -p $RPM_BUILD_ROOT/%{_sysconfdir}/httpd/conf.d
+mkdir -p $RPM_BUILD_ROOT/%{prefix}/app/configurations/apache
+cp %{SOURCE0} $RPM_BUILD_ROOT/%{prefix}/app/configurations/apache
 #cp %{SOURCE0} %{SOURCE1} %{SOURCE2} $RPM_BUILD_ROOT/%{_sysconfdir}/httpd/conf.d
 mkdir -p $RPM_BUILD_ROOT/%{_sysconfdir}/php.d
 cp %{SOURCE3} $RPM_BUILD_ROOT/%{_sysconfdir}/php.d
@@ -78,15 +79,16 @@ To finalize the setup.
 "
 fi
 %preun
-if [ "$1" = 0 ] ; then
-	rm %{prefix}/app/configurations/monit.d/httpd.rc || true
-fi
+#if [ "$1" = 0 ] ; then
+#	rm %{prefix}/app/configurations/monit.d/httpd.rc || true
+#fi
 
 %clean
 rm -rf %{buildroot}
 
 %files
 %config %{_sysconfdir}/php.d/zz-%{name}.ini
+%config %{prefix}/app/configurations/apache/kaltura.ssl.conf.template 
 #%config %{_sysconfdir}/httpd/conf.d/kaltura-api.conf
 #%config %{_sysconfdir}/httpd/conf.d/kaltura-kmc.conf
 #%config %{_sysconfdir}/httpd/conf.d/kaltura-admin-console.conf
