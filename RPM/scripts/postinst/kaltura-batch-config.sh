@@ -46,5 +46,10 @@ sed "s#@BATCH_SCHEDULER_ID@#$BATCH_SCHEDULER_ID#" $BATCH_SCHED_CONF.template > $
 sed "s#@INSTALLED_HOSNAME@#`hostname`#g" -i $BATCH_SCHED_CONF
 sed "s#@BATCH_SCHEDULER_TEMPLATE@#1#g" -i $BATCH_SCHED_CONF
 
+# logrotate:
+ln -sf $APP_DIR/configurations/logrotate/kaltura_batch /etc/logroate.d/
+ln -sf $APP_DIR/configurations/logrotate/kaltura_apache /etc/logroate.d/
+ln -sf $APP_DIR/configurations/logrotate/kaltura_apps /etc/logroate.d/
+
 service httpd restart
 /etc/init.d/kaltura-batch restart

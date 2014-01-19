@@ -227,6 +227,8 @@ Generating client libs... see log at $BASE_DIR/log/generate.php.log
 
 "
 php /opt/kaltura/app/generator/generate.php >> $BASE_DIR/log/generate.php.log 2>&1
+
+ln -sf $BASE_DIR/app/configurations/logrotate/kaltura_base /etc/logroate.d/
 touch "base-config.lock" "$BASE_DIR/app/base-config.lock"
 
 echo "Configuration of $DISPLAY_NAME finished successfully!"
