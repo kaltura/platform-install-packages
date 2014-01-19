@@ -3,7 +3,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.0
-Release: 17
+Release: 18
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -32,7 +32,7 @@ This package includes post install scripts to be run post RPM install as they re
 mkdir -p $RPM_BUILD_ROOT/%{prefix}/bin
 chmod +x *.sh 
 mv  *.{sh,rc} $RPM_BUILD_ROOT/%{prefix}/bin
-sed -i 's#@APP_DIR@#%{prefix}/app#g' $RPM_BUILD_ROOT/%{prefix}/bin/*
+sed -i 's#@APP_DIR@#%{prefix}/app#g' $RPM_BUILD_ROOT/%{prefix}/bin/*rc
 
 %clean
 rm -rf %{buildroot}

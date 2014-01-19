@@ -25,11 +25,11 @@ if [ ! -r "$RC_FILE" ];then
 	echo "Could not find $RC_FILE so, exiting.."
 	exit 1 
 fi
-
+. $RC_FILE
 cat << EOF 
 Is your Apache working with SSL?[Y/n]
 EOF
-read $IS_SSL
+read IS_SSL
 if [ "$IS_SSL" != 'Y' ];then
 	echo "It is recommended that you do work using HTTPs. Would you like to continue anyway?[N/y]"
 	read CONT
@@ -40,17 +40,13 @@ if [ "$IS_SSL" != 'Y' ];then
 else
 	# configure SSL:
 	KALTURA_SSL_CONF=$APP_DIR/configurations/apache/kaltura.ssl.conf.template
-	if [ -f /etc/httpd/conf.d/ssl.conf ];then
-		echo "Moving /etc/httpd/conf.d/ssl.conf to /etc/httpd/conf.d/ssl.conf.ks.bak."
-		mv /etc/httpd/conf.d/ssl.conf /etc/httpd/conf.d/ssl.conf.ks.bak
-	fi
 	while [ -z "$CRT_FILE" ];do
 		echo "Please input path to your SSL certificate:"
-		read -e $CRT_FILE
+		read -e CRT_FILE
 	done
 	while [ -z "$KEY_FILE" ];do
 		echo "Please input path to your SSL key:"
-		read -e $KEY_FILE
+		read -e KEY_FILE
 	done
 fi
 
@@ -59,20 +55,35 @@ fi
 CRT_SUM=`openssl x509 -in $CRT_FILE -modulus -noout | openssl md5`
 KEY_SUM=`openssl rsa -in $KEY_FILE -modulus -noout | openssl md5`
 if [ "$CRT_SUM" != "$KEY_SUM" ];then
-	echo "MD5 sums between .key and .crt files DO NOT MATCH
+	echo "
+
+MD5 sums between .key and .crt files DO NOT MATCH
 # openssl rsa -in $KEY_PATH -modulus -noout | openssl md5
 $KEY_HASH
 # openssl x509 -in $CERT_PATH -modulus -noout | openssl md5
-$CRT_HASH"
+$CRT_HASH
+
+"
 	exit 3
 fi
 
 
 # if cert is self signed:
 if openssl verify  $CRT_FILE | grep 'self signed certificate' -q ;then
-	echo "WARNING: self signed cerificate detected. Will set settings.clientConfig.verifySSL=0 in $APP_DIR/configurations/admin.ini."
+	echo "
+
+WARNING: self signed cerificate detected. Will set settings.clientConfig.verifySSL=0 in $APP_DIR/configurations/admin.ini.
+
+"
 	echo "settings.clientConfig.verifySSL=0" >> $APP_DIR/configurations/admin.ini
 fi
+if [ -f /etc/httpd/conf.d/ssl.conf ];then
+	echo "Moving /etc/httpd/conf.d/ssl.conf to /etc/httpd/conf.d/ssl.conf.ks.bak."
+	mv /etc/httpd/conf.d/ssl.conf /etc/httpd/conf.d/ssl.conf.ks.bak
+fi
+sed -i "s#@SSL_CERTIFICATE_FILE@#$CRT_FILE#g" $APP_DIR/configurations/apache/kaltura.ssl.conf
+sed -i "s#@SSL_CERTIFICATE_KEY_FILE@#$KEY_FILE#g" $APP_DIR/configurations/apache/kaltura.ssl.conf
+ln -fs $APP_DIR/configurations/apache/kaltura.ssl.conf /etc/httpd/conf.d/  
 # clientConfig.verifySSL
 cat << EOF 
 Please select one of the following options:
@@ -84,8 +95,17 @@ EOF
 CONFIG_MSG="Setup enabled the following Apache configuration for you:"
 read CHOICE
 if [ $CHOICE = 0 ];then
+	cd $APP_DIR/configurations/apache/conf.d
+	for CONF in "*.conf" ;do
+		if echo $CONF | grep "^enabled" -q ;then
+			continue;
+		fi
+		ln -sf $CONF enabled.$CONF
+	done
 elif [ $CHOICE = 1 ];then
+	echo 1
 elif [ $CHOICE = 2 ];then
+	echo 2
 else
         echo "Choose a value between 0-2"
         exit 1

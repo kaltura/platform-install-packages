@@ -79,7 +79,7 @@ SSLCryptoDevice builtin
 #ServerName debian
 
 	ErrorLog "@LOG_DIR@/kaltura_apache_errors_ssl.log"
-	CustomLog "@LOG_DIR@/kaltura_apache_access_ssl.log vhost_kalt"
+	CustomLog "@LOG_DIR@/kaltura_apache_access_ssl.log" vhost_kalt
 	Include "@APP_DIR@/configurations/apache/conf.d/enabled.*.conf"
 # Use separate log files for the SSL virtual host; note that LogLevel
 # is not inherited from httpd.conf.
