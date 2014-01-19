@@ -82,18 +82,18 @@ chown %{kaltura_user}:%{kaltura_group} %{prefix}/app/batch
 service httpd restart
 # don't start it if its a fresh install, it will fail. It needs to go through postinst config first.
 if [ "$1" = 0 ];then
-	service kaltura-batch restart
+	# don't start unless it went through configuration and the INI was created.
+	if [ -r %{prefix}/app/configurations/system.ini ];then 
+		service kaltura-batch restart
+	fi
 fi
-
 
 %preun
 if [ "$1" = 0 ] ; then
 	/sbin/chkconfig --del kaltura-batch
 	rm %{prefix}/app/configurations/monit.d/httpd.rc %{prefix}/app/configurations/monit.d/batch.rc || true
-fi
-# don't start unless it went through configuration and the INI was created.
-if [ -r %{prefix}/app/configurations/system.ini ];then 
-	service kaltura-batch restart
+	rm %{_sysconfdir}/logroate.d/kaltura_api
+	rm %{_sysconfdir}/logroate.d/kaltura_apache
 fi
 
 %postun
