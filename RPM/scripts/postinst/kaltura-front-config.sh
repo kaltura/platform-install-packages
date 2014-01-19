@@ -96,7 +96,7 @@ ln -sf $APP_DIR/configurations/cron/api /etc/cron.d/kaltura-api
 ln -sf $APP_DIR/configurations/cron/cleanup /etc/cron.d/kaltura-cleanup
 
 # logrotate:
-ln -sf $APP_DIR/configurations/logrotate/kaltura_apache /etc/logroate.d/
-ln -sf $APP_DIR/configurations/logrotate/kaltura_apps /etc/logroate.d/
+ln -sf $APP_DIR/configurations/logrotate/kaltura_apache /etc/logrotate.d/ 
+ln -sf $APP_DIR/configurations/logrotate/kaltura_apps /etc/logrotate.d/
 
 service httpd restart

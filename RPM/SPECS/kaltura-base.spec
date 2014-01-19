@@ -123,7 +123,7 @@ ln -sf %{prefix}/app/api_v3/web %{prefix}/app/alpha/web/api_v3
 if [ "$1" = 0 ] ; then
 	rm %{_sysconfdir}/kaltura.d/system.ini
 	rm %{prefix}/app/alpha/web/api_v3
-	rm %{_sysconfdir}/logroate.d/kaltura_base
+	rm %{_sysconfdir}/logrotate.d/kaltura_base
 fi
 
 %postun

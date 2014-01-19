@@ -92,8 +92,8 @@ fi
 if [ "$1" = 0 ] ; then
 	/sbin/chkconfig --del kaltura-batch
 	rm %{prefix}/app/configurations/monit.d/httpd.rc %{prefix}/app/configurations/monit.d/batch.rc || true
-	rm %{_sysconfdir}/logroate.d/kaltura_api
-	rm %{_sysconfdir}/logroate.d/kaltura_apache
+	rm %{_sysconfdir}/logrotate.d/kaltura_api
+	rm %{_sysconfdir}/logrotate.d/kaltura_apache
 fi
 
 %postun

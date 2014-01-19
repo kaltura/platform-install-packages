@@ -83,8 +83,8 @@ if [ "$1" = 0 ] ; then
 #	rm %{prefix}/app/configurations/monit.d/httpd.rc || true#
 	rm %{_sysconfdir}/cron.d/kaltura-api
 	rm %{_sysconfdir}/cron.d/kaltura-cleanup
-	rm %{_sysconfdir}/logroate.d/kaltura_api
-	rm %{_sysconfdir}/logroate.d/kaltura_apache
+	rm %{_sysconfdir}/logrotate.d/kaltura_api
+	rm %{_sysconfdir}/logrotate.d/kaltura_apache
 fi
 
 %clean
