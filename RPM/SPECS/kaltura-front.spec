@@ -1,3 +1,4 @@
+%define kmc_version v5.37.10
 %define prefix /opt/kaltura
 %define kaltura_user	kaltura
 %define kaltura_group	kaltura
@@ -61,6 +62,7 @@ chown -R %{kaltura_user}:%{apache_group} %{prefix}/log
 chown -R %{kaltura_user}:%{apache_group} %{prefix}/tmp 
 chown -R %{kaltura_user}:%{apache_group} %{prefix}/app/cache 
 chmod -R 775 %{prefix}/log %{prefix}/tmp %{prefix}/app/cache %{prefix}/web
+sed -i "s@\(^kmc_version\)\s*=.*@\1=%{kmc_version}@g" %{prefix}/app/configurations/base.ini
 service httpd restart
 sed 's#@APP_DIR@#%{prefix}/app#' %{prefix}/app/configurations/monit.avail/httpd.template.rc > %{prefix}/app/configurations/monit.avail/httpd.rc 
 sed 's#@APACHE_SERVICE@#httpd#g' -i %{prefix}/app/configurations/monit.avail/httpd.rc

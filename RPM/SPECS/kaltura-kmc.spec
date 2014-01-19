@@ -2,7 +2,7 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmc	
 Version: v5.37.10
-Release: 3 
+Release: 4 
 Summary: Kaltura Management Console
 
 Group: System Management	
@@ -33,7 +33,6 @@ This package installs the KMC Flash web interface.
 
 %build
 %post
-sed -i "s@\(^kmc_version\)\s*=.*@\1=%{version}@g" %{prefix}/app/configurations/base.ini
 %install
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/flash/kmc/login
 mv %{_builddir}/%{name}-%{version}/login/%{kmc_login_version} $RPM_BUILD_ROOT%{prefix}/web/flash/kmc/login/ 
@@ -49,6 +48,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sat Jan 18 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.10-4
+- Replace version in base.ini
+
 * Sat Jan 18 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.10-2
 - Added the login dir.
 
