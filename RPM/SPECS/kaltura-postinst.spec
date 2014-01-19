@@ -3,7 +3,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.0
-Release: 14
+Release: 15
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -46,6 +46,9 @@ rm -rf %{buildroot}
 %config %{prefix}/bin/db_actions.rc
 
 %changelog
+* Sun Jan 19 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.0-15
+- Version bounce. 
+
 * Thu Jan 16 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.0-13
 - Only run base-config if there's no lock indicating it already ran.
 

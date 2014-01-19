@@ -1,7 +1,7 @@
 %define kaltura_user	kaltura
 %define kaltura_group	kaltura
-%define kaltura_user	apache
-%define kaltura_group	apache
+%define apache_user	apache
+%define apache_group	apache
 %define prefix /opt/kaltura
 %define confdir %{prefix}/app/configurations
 %define logdir %{prefix}/log
@@ -10,7 +10,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 9.7.0
-Release: 29
+Release: 31
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -142,18 +142,20 @@ fi
 
 
 %dir /etc/kaltura.d
+%defattr(-, %{kaltura_user}, %{apache_group} , 0775)
 %dir %{prefix}/log
 %dir %{prefix}/tmp
 %dir %{prefix}/app/cache
+%dir %{prefix}/web
+%dir %{prefix}/web/tmp
+%dir %{prefix}/web/control
+%dir %{prefix}/web/dropfolders
+%defattr(-, root,root, 0755)
 %dir %{prefix}/app/configurations/monit.d
 %dir %{prefix}/bin
 %dir %{prefix}/lib
 %dir %{prefix}/include
 %dir %{prefix}/share
-%dir %{prefix}/web
-%dir %{prefix}/web/tmp
-%dir %{prefix}/web/control
-%dir %{prefix}/web/dropfolders
 
 
 %changelog

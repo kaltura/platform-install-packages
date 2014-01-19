@@ -134,22 +134,7 @@ CDN host [`hostname`]:"
         done
 sed -i "s#\(date.timezone\)\s*=.*#\1='$TIME_ZONE'#g" /etc/php.ini /etc/php.d/*kaltura*ini
 fi
-echo "use kaltura" | mysql -h$DB1_HOST -P$DB1_PORT -u$SUPER_USER -p$SUPER_USER_PASSWD mysql
-if [ $? -ne 0 ];then
-cat << EOF
-The $KALTURA_DB DB seems to be missing.
 
-Please run:
-# `basedir $0`/kaltura-db-config.sh $MYSQL_HOST $MYSQL_SUPER_USER $MYSQL_SUPER_USER_PASSWD $MYSQL_PORT upgrade
-
-EOF
-	exit 5
-fi 
-
-if [ -z "$DB1_PASS" ];then
-	DB1_PASS=`< /dev/urandom tr -dc A-Za-z0-9_ | head -c15`
-	echo "update mysql.user set password=PASSWORD('$DB1_PASS') WHERE user='kaltura';flush PRIVILEGES" | mysql -h$DB1_HOST -P$DB1_PORT -u$SUPER_USER -p$SUPER_USER_PASSWD mysql
-fi
 create_answer_file
 DB1_NAME=kaltura
 DB1_USER=kaltura
@@ -178,8 +163,6 @@ ADMIN_SECRET=`$ADMIN_CONSOLE_ADMIN_PASSWD`
 HASHED_ADMIN_SECRET=`echo $ADMIN_SECRET|md5sum`
 ADMIN_SECRET=`echo $HASHED_ADMIN_SECRET|awk -F " " '{print $1}'`
 
-echo "update partner set admin_email='$ADMIN_CONSOLE_ADMIN_MAIL'" | mysql -h$DB1_HOST -u$DB1_NAME -p$DB1_PASS $DB1_NAME
-echo "update partner set admin_secret='$ADMIN_CONSOLE_ADMIN_PASSWD'" | mysql -h$DB1_HOST -u$DB1_NAME -p$DB1_PASS $DB1_NAME
 
 MONITOR_PARTNER_ADMIN_SECRET=`< /dev/urandom tr -dc A-Za-z0-9_ | head -c10`
 HASHED_MONITOR_PARTNER_ADMIN_SECRET=`echo $HASHED_MONITOR_PARTNER_ADMIN_SECRET | md5sum`
@@ -224,6 +207,20 @@ for TMPL in `find /opt/kaltura/app/deployment/base/scripts/init_data/ -name "*te
 	cp $TMPL $DEST_FILE
 	sed -e "s#@WEB_DIR@#/opt/kaltura/web#g" -e "s#@TEMPLATE_PARTNER_ADMIN_SECRET@#$ADMIN_SECRET#g" -e "s#@ADMIN_CONSOLE_PARTNER_ADMIN_SECRET@#$ADMIN_SECRET#g" -e "s#@MONITOR_PARTNER_ADMIN_SECRET@#$MONITOR_PARTNER_ADMIN_SECRET#g" -e "s#@SERVICE_URL@#$SERVICE_URL#g" -e "s#@ADMIN_CONSOLE_ADMIN_MAIL@#$ADMIN_CONSOLE_ADMIN_MAIL#g" -e "s#@MONITOR_PARTNER_SECRET@#$MONITOR_PARTNER_SECRET#g" -e "s#@PARTNER_ZERO_ADMIN_SECRET@#$PARTNER_ZERO_ADMIN_SECRET#g" -e "s#@BATCH_PARTNER_ADMIN_SECRET@#$BATCH_PARTNER_ADMIN_SECRET#g" -e "s#@MEDIA_PARTNER_ADMIN_SECRET@#$MEDIA_PARTNER_ADMIN_SECRET#g" -e "s#@TEMPLATE_PARTNER_ADMIN_SECRET@#$TEMPLATE_PARTNER_ADMIN_SECRET#g" -e "s#@KALTURA_VERSION@#$DISPLAY_NAME#g" -e "s#@HOSTED_PAGES_PARTNER_ADMIN_SECRET@#$HOSTED_PAGES_PARTNER_ADMIN_SECRET#g" -e "s#@STORAGE_BASE_DIR@#$BASE_DIR/web#g" -e "s#@DELIVERY_HTTP_BASE_URL@#https://dontknow.com#g" -e "s#@DELIVERY_RTMP_BASE_URL@#rtmp://reallydontknow.com#g" -e "s#@DELIVERY_ISS_BASE_URL@#https://honesttogodihavenoidea.com#g" -i $DEST_FILE
 done
+
+set +e
+echo "use kaltura" | mysql -h$DB1_HOST -P$DB1_PORT -u$SUPER_USER -p$SUPER_USER_PASSWD mysql 2> /dev/null
+if [ $? -ne 0 ];then
+#cat << EOF
+$BASE_DIR/bin/kaltura-db-config.sh $DB1_HOST $SUPER_USER $SUPER_USER_PASSWD $DB1_PORT
+
+#EOF
+#	exit 5
+fi 
+if [ -z "$DB1_PASS" ];then
+	DB1_PASS=`< /dev/urandom tr -dc A-Za-z0-9_ | head -c15`
+	echo "update mysql.user set password=PASSWORD('$DB1_PASS') WHERE user='kaltura';flush PRIVILEGES" | mysql -h$DB1_HOST -P$DB1_PORT -u$SUPER_USER -p$SUPER_USER_PASSWD mysql
+fi
 
 echo "
 Generating client libs... see log at $BASE_DIR/log/generate.php.log
