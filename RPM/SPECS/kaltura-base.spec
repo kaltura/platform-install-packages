@@ -122,6 +122,8 @@ ln -sf %{prefix}/app/api_v3/web %{prefix}/app/alpha/web/api_v3
 %preun
 if [ "$1" = 0 ] ; then
 	rm /etc/kaltura.d/system.ini
+	rm %{prefix}/app/alpha/web/api_v3
+	rm %{_sysconfdir}/logroate.d/kaltura_base
 fi
 
 %postun

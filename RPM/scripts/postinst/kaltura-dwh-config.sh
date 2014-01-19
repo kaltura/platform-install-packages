@@ -20,3 +20,4 @@ if [ ! -r /opt/kaltura/app/base-config.lock ];then
 else
 	echo "base-config skipped as /opt/kaltura/app/base-config.lock was found. Remove the lock to reconfigure."
 fi
+ln -sf $APP_DIR/configurations/cron/dwh /etc/cron.d/kaltura-dwh

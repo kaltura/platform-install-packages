@@ -79,9 +79,11 @@ To finalize the setup.
 "
 fi
 %preun
-#if [ "$1" = 0 ] ; then
-#	rm %{prefix}/app/configurations/monit.d/httpd.rc || true
-#fi
+if [ "$1" = 0 ] ; then
+#	rm %{prefix}/app/configurations/monit.d/httpd.rc || true#
+	rm %{_sysconfdir}/cron.d/kaltura-api
+	rm %{_sysconfdir}/cron.d/kaltura-cleanup
+fi
 
 %clean
 rm -rf %{buildroot}

@@ -61,6 +61,12 @@ To finalize the setup.
 #####################################################################################################################################
 "
 fi
+
+%preun
+if [ "$1" = 0 ] ; then
+	rm %{_sysconfdir}/cron.d/kaltura-dwh
+fi
+
 %files
 %dir %{prefix}/web/logs
 %{prefix}/dwh
