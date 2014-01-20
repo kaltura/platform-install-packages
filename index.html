@@ -327,6 +327,22 @@
             <li class="questionanswerli">
               <ul>
                 <li class="questionli">
+                  How can this handle non-standard install directories (i.e. installing outside /opt/kaltura)?
+                </li>
+                <li class="answerli">
+                  Although not ideal, and highly discouraged, non-standard deployments could be handled in either of the following ways:
+                  <ul>
+                    <li>Using a chroot under /opt/kaltura and have the chroot itself reside anywhere else.</li>
+                    <li>Install under /opt/kaltura and post installation move everything to different path (note that you will have to manually modify configuration files), Or move to a different path and keep a symlink to /opt/kaltura. This option makes upgrades a messy process.</li>
+                    <li>Clone the code repository, modify the /opt/kaltura path prefix, deploy a local version of the packages repository, and install using the local repository. Note that this will require keeping up to date with new releases manually and re-deploying each new release to the local repository.</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            
+            <li class="questionanswerli">
+              <ul>
+                <li class="questionli">
                   What is Kaltura?
                 </li>
                 <li class="answerli">
