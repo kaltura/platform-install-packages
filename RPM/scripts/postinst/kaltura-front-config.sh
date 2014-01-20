@@ -76,6 +76,7 @@ WARNING: self signed cerificate detected. Will set settings.clientConfig.verifyS
 
 "
 	echo "settings.clientConfig.verifySSL=0" >> $APP_DIR/configurations/admin.ini
+	sed -i  's@\(\[production\]\)@\1\nsettings.clientConfig.verifySSL=0@' $APP_DIR/configurations/admin.ini
 fi
 if [ -f /etc/httpd/conf.d/ssl.conf ];then
 	echo "Moving /etc/httpd/conf.d/ssl.conf to /etc/httpd/conf.d/ssl.conf.ks.bak."

@@ -28,7 +28,7 @@ verify_user_input()
 
 create_answer_file()
 {
-        for VAL in TIME_ZONE KALTURA_FULL_VIRTUAL_HOST_NAME KALTURA_VIRTUAL_HOST_NAME DB1_HOST DB1_PORT DB1_PASS DB1_NAME DB1_USER SERVICE_URL SPHINX_SERVER1 SPHINX_SERVER2 DWH_HOST DWH_PORT SPHINX_DB_HOST SPHINX_DB_PORT ADMIN_CONSOLE_ADMIN_MAIL CDN_HOST KALTURA_VIRTUAL_HOST_PORT; do
+        for VAL in TIME_ZONE KALTURA_FULL_VIRTUAL_HOST_NAME KALTURA_VIRTUAL_HOST_NAME DB1_HOST DB1_PORT DB1_PASS DB1_NAME DB1_USER SERVICE_URL SPHINX_SERVER1 SPHINX_SERVER2 DWH_HOST DWH_PORT SPHINX_DB_HOST SPHINX_DB_PORT ADMIN_CONSOLE_ADMIN_MAIL CDN_HOST KALTURA_VIRTUAL_HOST_PORT SUPER_USER SUPER_USER_PASSWD; do
                 if [ -n "${!VAL}" ];then
 			echo "$VAL=${!VAL}" >> /tmp/kaltura_`date +%d_%m_%H_%M`.ans
                         
@@ -89,7 +89,7 @@ CDN host [`hostname`]:"
         done
         while [ -z "$SUPER_USER_PASSWD" ];do
                 echo "MySQL super user passwd [this is only for setting the kaltura user passwd and WILL NOT be used with the application]: "
-                read -e SUPER_USER_PASSWD
+                read -s SUPER_USER_PASSWD
         done
 
 	echo "Analytics DB hostname [$DB1_HOST]:"
@@ -126,7 +126,7 @@ CDN host [`hostname`]:"
         done
         while [ -z "$ADMIN_CONSOLE_ADMIN_PASSWD" ];do
                 echo "Admin's passwd: "
-                read -e ADMIN_CONSOLE_ADMIN_PASSWD
+                read -s ADMIN_CONSOLE_ADMIN_PASSWD
         done
         while [ -z "$TIME_ZONE" ];do
                 echo "Your time zone [see http://php.net/date.timezone]: "
