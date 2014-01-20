@@ -208,7 +208,7 @@
             <li class="questionanswerli">
               <ul>
                 <li class="questionli">
-                  Under Specifications & Definitions, why did we decide to break the server roles the way we did and not in other ways?
+                  Under Specifications &amp; Definitions, why did we decide to break the server roles the way we did and not in other ways?
                 </li>
                 <li class="answerli">
                   We wish to support a full cluster setup and maintain a modular structure to allow for easier server roles and respected maintainance and updates.<br />
@@ -245,6 +245,18 @@
                     <li>The ‘kaltura’ user: used for running our Sphinx daemon, the populate daemon (responsible for syncing MySQL and Sphinx) and various other aiding scripts, like cache cleaning, etc.</li>
                   </ul>
                   For security purposes, none of the Kaltura processes will run as root.
+                </li>
+              </ul>
+            </li>
+            
+            <li class="questionanswerli">
+              <ul>
+                <li class="questionli">
+                  How will reassiging / repurposing server roles be handled?
+                </li>
+                <li class="answerli">
+                  Re-deploying server roles (e.g. deciding that a batch server will now become a front server instead) is easily handled when using packaged installs, and greatly due to the modular architecture chosen.<br />
+                  By having package for each server role, reconfiguring an existing server to operate as another (or additional) role, will be as simple as unintstalling the existing packages, and installing the packages of the desired role/s. The post-install script of the newly installed packages will take care of the new configurations required for each desired server role.
                 </li>
               </ul>
             </li>
