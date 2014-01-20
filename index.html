@@ -30,9 +30,9 @@
             $(function() {
               var count = 0;
               $("a[name!='undefined']").each(function(){
-                if (count > 0) $( "nav#navigation_menu" ).append(', ');
-                ++count;
                 if ($(this).attr('title') != null)
+                  if (count > 0) $( "nav#navigation_menu" ).append(', ');
+                  ++count;
                   $( "nav#navigation_menu" ).append( '<a href="#'+$(this).attr('name')+'">'+$(this).attr('title')+'</a>' );
               });
             });
@@ -336,7 +336,7 @@
                   How will you make cluster / multi-server environment deployments easier? 
                 </li>
                 <li class="answerli">
-                  Multi-server environment deployments are a central driving consideration for this project, there is a significant effort to define and separate packages based on <a href="#packages-list" title="See: The Kaltura Packages Are">server roles and components</a>. By having multiple packages that are self-contained and a clear chain of dependency management (which is handled by the system package manager), deploying across the network is made much simpler.<br />There are multitude of tools that can be leveraged to automate deploying Kaltura servers across the netwrok and even in rules-based automation of scaling or redundency scenarios. Depending on the environment restrictions and business constraints, these tools include the aforementioned planned Chef scripts, and other common tools such as <a href="http://www.redhat.com/products/enterprise-linux/satellite/" target="_blank">RedHat Satellite</a>, <a href="http://spacewalk.redhat.com/" target="_blank">Spacewalk</a> and others.<br />If you've got experience with automation, and would like to suggest best practices, ideas or concerns - please join us at the weekly IRC (Mondays at 10am EST) or post to the issue queue.
+                  Multi-server environment deployments are a central driving consideration for this project, there is a significant effort to define and separate packages based on <a href="#packages-list">server roles and components</a>. By having multiple packages that are self-contained and a clear chain of dependency management (which is handled by the system package manager), deploying across the network is made much simpler.<br />There are multitude of tools that can be leveraged to automate deploying Kaltura servers across the netwrok and even in rules-based automation of scaling or redundency scenarios. Depending on the environment restrictions and business constraints, these tools include the aforementioned planned Chef scripts, and other common tools such as <a href="http://www.redhat.com/products/enterprise-linux/satellite/" target="_blank">RedHat Satellite</a>, <a href="http://spacewalk.redhat.com/" target="_blank">Spacewalk</a> and others.<br />If you've got experience with automation, and would like to suggest best practices, ideas or concerns - please join us at the weekly IRC (Mondays at 10am EST) or post to the issue queue.
                 </li>
               </ul>
             </li>
