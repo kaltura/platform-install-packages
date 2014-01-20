@@ -12,7 +12,7 @@
   </head>
 
   <body>
-
+    <div id="top"></div>
     <header>
       <div class="container">
         <h1>Kaltura Installation Packages Project</h1>
@@ -383,7 +383,38 @@
           </ul>
       </section>
     </div>
+    
+    <div id="message"><a href="top">Scroll to top</a></div>
+    
+    <script>
+      $(function () {
 
+          /* set variables locally for increased performance */
+          var scroll_timer;
+          var displayed = false;
+          var $message = $('#message a');
+          var $window = $(window);
+          var top = $(document.body).children(0).position().top;
+      
+          /* react to scroll event on window */
+          $window.scroll(function () {
+              window.clearTimeout(scroll_timer);
+              scroll_timer = window.setTimeout(function () {
+                  if($window.scrollTop() <= top)
+                  {
+                      displayed = false;
+                      $message.fadeOut(500);
+                  }
+                  else if(displayed == false)
+                  {
+                      displayed = true;
+                      $message.stop(true, true).show().click(function () { $message.fadeOut(500); });
+                  }
+              }, 100);
+          });
+      });
+    </script>
+    
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
