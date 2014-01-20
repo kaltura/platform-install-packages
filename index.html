@@ -29,10 +29,11 @@
           <script>
             $(function() {
               var count = 0;
-              $("a[name!=undefined]").each(function(){
+              $("a[name!='undefined']").each(function(){
                 if (count > 0) $( "nav#navigation_menu" ).append(', ');
                 ++count;
-                $( "nav#navigation_menu" ).append( '<a href="#'+$(this).attr('name')+'">'+$(this).text()+'</a>' );
+                if ($(this).attr('title') != null)
+                  $( "nav#navigation_menu" ).append( '<a href="#'+$(this).attr('name')+'">'+$(this).attr('title')+'</a>' );
               });
             });
             
@@ -44,7 +45,7 @@
     <div class="container">
       <section id="main_content">
           <h1>
-            <a name="project-goal" class="anchor" href="#project-goal"><span class="octicon octicon-link"></span></a>
+            <a name="project-goal" title="Project Goal" class="anchor" href="#project-goal"><span class="octicon octicon-link"></span></a>
             Project Goal
           </h1>
 
@@ -58,7 +59,7 @@
           <br />
           
           <h2>
-            <a name="project-reasons" class="anchor" href="#project-reasons"><span class="octicon octicon-link"></span></a>
+            <a name="project-reasons" title="Why Standardized Package Installers?" class="anchor" href="#project-reasons"><span class="octicon octicon-link"></span></a>
             Why do we need package installers?
           </h2>
           
@@ -74,7 +75,7 @@
           <br />
           
           <h2>
-            <a name="why-linux-first" class="anchor" href="#why-linux-first"><span class="octicon octicon-link"></span></a>
+            <a name="why-linux-first" title="Why Linux First?" class="anchor" href="#why-linux-first"><span class="octicon octicon-link"></span></a>
             Is this project only Linux focused?
           </h2>
           
@@ -96,7 +97,7 @@
           <br />
           
           <h2>
-            <a name="supported-distros" class="anchor" href="#supported-distros"><span class="octicon octicon-link"></span></a>
+            <a name="supported-distros" title="Supported Linux Distros" class="anchor" href="#supported-distros"><span class="octicon octicon-link"></span></a>
             Which Linux distributions will be supported?
           </h2>
           
@@ -111,8 +112,8 @@
           <p style="font-size:1em;">&nbsp;</p>
 
           <h2>
-            <a name="project-phases" class="anchor" href="#project-phases"><span class="octicon octicon-link"></span></a>
-            Project stages and updates
+            <a name="project-phases" title="Project Phases" class="anchor" href="#project-phases"><span class="octicon octicon-link"></span></a>
+            Project phases and updates
           </h2>
           
           <h3>
@@ -183,7 +184,7 @@
           <br />
           
           <h2>
-            <a name="help-contribute" class="anchor" href="#help-contribute"><span class="octicon octicon-link"></span></a>
+            <a name="help-contribute" title="Contributing the project" class="anchor" href="#help-contribute"><span class="octicon octicon-link"></span></a>
             How can you help and contribute?
           </h2>
           
@@ -215,7 +216,7 @@
           <br />
           
           <h2>
-            <a name="questions-answers" class="anchor" href="#questions-answers"><span class="octicon octicon-link"></span></a>
+            <a name="questions-answers" title="Questions &amp; Answers" class="anchor" href="#questions-answers"><span class="octicon octicon-link"></span></a>
             Project Questions &amp; Answers
           </h2>
           
