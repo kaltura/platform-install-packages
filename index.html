@@ -28,7 +28,7 @@
           Jump to section:<br>
           <script>
             $(function() {
-              $("a[name*!='']").each(function(){
+              $("a[name!='']").each(function(){
                 $( "nav#navigation_menu" ).append( '<a href="#'+$(this).attr('name')+'">'+$(this).text()+'</a>' );
               });
             });
