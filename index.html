@@ -23,6 +23,15 @@
             <a href="http://kaltura.discoursehosting.net/" target="_blank" class="btn btn-discuss"><span class="icon"></span>Join the discussion</a>
             <a href="http://corp.kaltura.com" target="_blank" class="btn btn-kaltura"><span class="icon"></span>Visit Kaltura.com</a>
         </section>
+        
+        <nav id="navigation_menu">
+          Jump to section:<br>
+          <script>
+            $("a[name*!='']").each(function(){
+              $( "nav#navigation_menu" ).append( '<a href="#'+$(this).attr('name')+'">'+$(this).text()+'</a>' );
+            })
+          </script>
+        </nav>
       </div>
     </header>
 
