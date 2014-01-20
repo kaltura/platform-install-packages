@@ -244,7 +244,8 @@
                     <li>Apache user: the default one each distribution sets up - for Debian/Ubuntu it is ‘www-data’, for RHEL/CentOS/FC it is ‘apache’.</li>
                     <li>The ‘kaltura’ user: used for running our Sphinx daemon, the populate daemon (responsible for syncing MySQL and Sphinx) and various other aiding scripts, like cache cleaning, etc.</li>
                   </ul>
-                  For security purposes, none of the Kaltura processes will run as root.
+                  For security purposes, none of the Kaltura processes will run as root.<br />
+                  In addition, the post-install scripts will provide an option of specifically configuring usernames and groups in a non-standard environment deployments.
                 </li>
               </ul>
             </li>
