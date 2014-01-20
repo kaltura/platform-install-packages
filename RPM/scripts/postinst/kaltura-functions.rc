@@ -1,0 +1,72 @@
+# if we happen to already have system.ini lets source it
+RC_FILE=/etc/kaltura.d/system.ini
+if [  -r "$RC_FILE" ];then
+	. $RC_FILE
+else
+	BASE_DIR=/opt/kaltura
+fi
+
+# ssl functions
+check_cert_key()
+{
+	CRT_FILE=$1
+	KEY_FILE=$2
+	# check key and crt match
+	CRT_SUM=`openssl x509 -in $CRT_FILE -modulus -noout | openssl md5`
+	KEY_SUM=`openssl rsa -in $KEY_FILE -modulus -noout | openssl md5`
+	if [ "$CRT_SUM" != "$KEY_SUM" ];then
+		echo "
+
+	MD5 sums between .key and .crt files DO NOT MATCH
+	# openssl rsa -in $KEY_PATH -modulus -noout | openssl md5
+	$KEY_HASH
+	# openssl x509 -in $CERT_PATH -modulus -noout | openssl md5
+	$CRT_HASH
+
+	"
+		return 1
+	fi
+
+}
+
+is_self_signed()
+{
+	# check if cert is self signed:
+	CRT_FILE=$1
+	if openssl verify  $CRT_FILE | grep 'self signed certificate' -q ;then
+		echo "
+
+	WARNING: self signed cerificate detected. Will set settings.clientConfig.verifySSL=0 in $APP_DIR/configurations/admin.ini.
+
+
+	"
+		return 1
+	fi
+}
+
+configure_apache_ssl()
+{
+	KALTURA_SSL_CONFFILE=$1
+	if [ -f /etc/httpd/conf.d/ssl.conf ];then
+		echo "Moving /etc/httpd/conf.d/ssl.conf to /etc/httpd/conf.d/ssl.conf.ks.bak."
+		mv /etc/httpd/conf.d/ssl.conf /etc/httpd/conf.d/ssl.conf.ks.bak
+	fi
+	sed -i "s#@SSL_CERTIFICATE_FILE@#$CRT_FILE#g" $KALTURA_SSL_CONFFILE
+	sed -i "s#@SSL_CERTIFICATE_KEY_FILE@#$KEY_FILE#g" $KALTURA_SSL_CONFFILE
+	ln -fs $KALTURA_SSL_CONFFILE /etc/httpd/conf.d/  
+}
+
+call_base_config()
+{
+
+	if [ -n "$1" -a -r "$1" ];then
+		ANSFILE=$1
+		. $ANSFILE
+	fi
+	if [ ! -r $BASE_DIR/app/base-config.lock ];then
+		`dirname $0`/kaltura-base-config.sh $ANSFILE
+	else
+		echo "base-config skipped as /opt/kaltura/app/base-config.lock was found. Remove the lock to reconfigure."
+	fi
+
+}
