@@ -252,6 +252,35 @@
             <li class="questionanswerli">
               <ul>
                 <li class="questionli">
+                  How will packages help simplify upgrading of Kaltura servers?
+                </li>
+                <li class="answerli">
+                  By leveraging standard package managers, we plan to achieve a faster, incremental release cycles, with clear change-log and native system package versions management.</br>
+                  <ul>
+                    <li>Faster Incremental Releases - By having a clearly defined mechanism for releasing packages, we will also be able to release more often, incrementally resulting in smaller and easier to manage upgrade flows.</li>
+                    <li>Version Controlled - A key benefit of leveraging standard package managers is having clear change-logs and robust package version management. Package managers will know which version your system is on, and what upgrade scripts should be run to upgrade to a desired new version.</li>
+                    <li>PreInstall, PostInstall, PreUnInstall and PostUnInstall hooks - These native package manager system hooks allow us to clearly define scripts that can verify log-files diffs, perform cleanup tasks and more.</li>
+                  </ul>
+                  For example, handling of modified local config files while upgrading to a new config file format - Such scenario will be handled by the package manager, first the package manager will identify that there was a change in the config files in the version being deployed, a new template file will be deployed, and when the post-install script will run, it will extract the values from the local config file and migrate the values into the new template file, keeping a backup of the old config file.
+                </li>
+              </ul>
+            </li>
+            
+            <li class="questionanswerli">
+              <ul>
+                <li class="questionli">
+                  How could I automate installation of packages?
+                </li>
+                <li class="answerli">
+                  Using &quote;<a href="https://access.redhat.com/site/documentation/en-US/Red_Hat_Update_Infrastructure/1.2/html/Installation_Guide/chap-Installation_Guide-Answers_File.html" target="_blank">answer files</a>&quote;, package managers can be made to perform installations in a silent-mode, running complete deployment including post-install configurations.<br />
+                  This will be even further simplified by creating Chef (or the likes) deployment scripts that perform silent package installs followed by further network configuration (See How will you make cluster / multi-server environment deployments easier?).
+                </li>
+              </ul>
+            </li>
+            
+            <li class="questionanswerli">
+              <ul>
+                <li class="questionli">
                   Plans to create <a href="http://docs.opscode.com/chef_quick_overview.html" target="_blank">Chef</a> or <a href="http://puppetlabs.com/puppet/puppet-open-source" target="_blank">Puppet</a> scripts for deploying Kaltura? 
                 </li>
                 <li class="answerli">
