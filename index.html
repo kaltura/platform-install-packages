@@ -6,7 +6,7 @@
 
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <!--link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" /-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
     <title>Kaltura Installation Packages Project</title>
   </head>
@@ -27,9 +27,12 @@
         <nav id="navigation_menu">
           Jump to section:<br>
           <script>
-            $("a[name*!='']").each(function(){
-              $( "nav#navigation_menu" ).append( '<a href="#'+$(this).attr('name')+'">'+$(this).text()+'</a>' );
-            })
+            $(function() {
+              $("a[name*!='']").each(function(){
+                $( "nav#navigation_menu" ).append( '<a href="#'+$(this).attr('name')+'">'+$(this).text()+'</a>' );
+              });
+            });
+            
           </script>
         </nav>
       </div>
