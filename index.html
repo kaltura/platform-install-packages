@@ -28,7 +28,10 @@
           Jump to section:<br>
           <script>
             $(function() {
-              $("a[name!='']").each(function(){
+              var count = 0;
+              $("a[name!=undefined]").each(function(){
+                if (count > 0) $( "nav#navigation_menu" ).append(', ');
+                ++count;
                 $( "nav#navigation_menu" ).append( '<a href="#'+$(this).attr('name')+'">'+$(this).text()+'</a>' );
               });
             });
