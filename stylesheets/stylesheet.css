@@ -225,6 +225,10 @@ hr {
   color: #b5e853;
 }
 
+.octicon-link {
+  background: url("../images/anchor16.png") 0 0 no-repeat;
+}
+
 /* Buttons
 */
 
