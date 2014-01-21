@@ -6,6 +6,51 @@ else
 	BASE_DIR=/opt/kaltura
 fi
 
+call_base_config()
+{
+
+	if [ -n "$1" -a -r "$1" ];then
+		ANSFILE=$1
+		. $ANSFILE
+	fi
+	if [ ! -r $BASE_DIR/app/base-config.lock ];then
+		`dirname $0`/kaltura-base-config.sh $ANSFILE
+	else
+		echo "base-config skipped as /opt/kaltura/app/base-config.lock was found. Remove the lock to reconfigure."
+	fi
+
+}
+
+check_mysql_settings()
+{
+	DB_USER=$1
+	DB_PASSWD=$2
+	DB_HOST=$3
+	DB_PORT=$4
+	OPEN_FILES_LIMIT=`echo "select @@open_files_limit;" | mysql -u$DB_USER -p$DB_PASSWD -h$DB_HOST -P$DB_PORT -N`
+	if [ "$OPEN_FILES_LIMIT" -lt 20000 ];then
+		echo "please set open_files_limit => 20000 in my.cnf"
+		return 1
+	fi
+	LOWER_CASE_TABLE_NAMES=`echo "select @@lower_case_table_names;" | mysql -u$DB_USER -p$DB_PASSWD -h$DB_HOST -P$DB_PORT -N`
+	if [ "$LOWER_CASE_TABLE_NAMES" -ne 1 ];then
+		echo "please set lower_case_table_names=1 in my.cnf"
+		return 1
+	fi
+	#INNODB_LOG_FILE_SIZE=`echo "select @@innodb_log_file_size;" | mysql -u$DB_USER -p$DB_PASSWD -h$DB_HOST -P$DB_PORT -N`
+	#if [ "$INNODB_LOG_FILE_SIZE" -lt "" ];then
+	#	echo "please set innodb_log_file_size => 32M in my.cnf"
+	#	return 1
+	#fi
+	MAX_ALLOWED_PACKET=`echo "select @@max_allowed_packet;" | mysql -u$DB_USER -p$DB_PASSWD -h$DB_HOST -P$DB_PORT -N`
+	if [ "$MAX_ALLOWED_PACKET" -lt "16777216" ];then
+		echo "please set max_allowed_packet => 16M in my.cnf"
+		return 1
+	fi
+	return 0
+	
+}
+
 # ssl functions
 check_cert_key()
 {
@@ -56,17 +101,3 @@ configure_apache_ssl()
 	ln -fs $KALTURA_SSL_CONFFILE /etc/httpd/conf.d/  
 }
 
-call_base_config()
-{
-
-	if [ -n "$1" -a -r "$1" ];then
-		ANSFILE=$1
-		. $ANSFILE
-	fi
-	if [ ! -r $BASE_DIR/app/base-config.lock ];then
-		`dirname $0`/kaltura-base-config.sh $ANSFILE
-	else
-		echo "base-config skipped as /opt/kaltura/app/base-config.lock was found. Remove the lock to reconfigure."
-	fi
-
-}

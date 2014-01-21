@@ -6,7 +6,7 @@
 
 Name:           kaltura-sphinx
 Version:        2.2.1
-Release:        8 
+Release:        9 
 Summary:        Sphinx full-text search server - for Kaltura
 
 Group:          Applications/Text
@@ -20,6 +20,7 @@ Source1: 	%{name}
 Source2:	http://snowball.tartarus.org/dist/libstemmer_c.tgz
 Source3:	re2.tar.gz
 Source4:	kaltura.conf.template
+Source5: 	kaltura-populate
 Patch0:		config-main.patch
 Patch1:		config.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-build
@@ -69,7 +70,8 @@ make install DESTDIR=$RPM_BUILD_ROOT INSTALL="%{__install} -p -c"
 mkdir $RPM_BUILD_ROOT/opt/kaltura/sphinx/lib
 #mv $RPM_BUILD_ROOT/usr/local/lib/libre2* $RPM_BUILD_ROOT/opt/kaltura/sphinx/lib
 # Install sphinx initscript
-install -p -D -m 0755 %{SOURCE1} $RPM_BUILD_ROOT%{_initrddir}/kaltura-sphinx
+install -p -D -m 0755 %{SOURCE1} $RPM_BUILD_ROOT%{_initrddir}/
+install -p -D -m 0755 %{SOURCE5} $RPM_BUILD_ROOT%{_initrddir}/
 
 mkdir -p $RPM_BUILD_ROOT/opt/kaltura/log/sphinx/data
 
@@ -145,7 +147,7 @@ fi
 %config %{_sysconfdir}/profile.d/kaltura_sphinx.sh
 %exclude %{confdir}/*.conf.dist
 %exclude %{confdir}/example.sql
-%{_initrddir}/kaltura-sphinx
+%{_initrddir}/kaltura-*
 %config(noreplace) %{_sysconfdir}/logrotate.d/sphinx
 %{prefix}/bin/*
 %dir /opt/kaltura/log/sphinx/data
@@ -154,6 +156,9 @@ fi
 
 
 %changelog
+* Mon Jan 20 2014 Jess Portnoy <jess.portnoy@kaltura.com> 2.2.1.r4097-9
+- Added populate init script.
+
 * Sun Jan 12 2014 Jess Portnoy <jess.portnoy@kaltura.com> 2.2.1.r4097-5
 - Replace tokens and create kaltura.conf - Sphinx config file.
 

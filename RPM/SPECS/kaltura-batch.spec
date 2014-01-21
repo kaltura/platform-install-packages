@@ -7,7 +7,7 @@
 Summary: Kaltura Open Source Video Platform - batch server 
 Name: kaltura-batch
 Version: 9.7.0
-Release: 23 
+Release: 26 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: zz-%{name}.ini
@@ -16,6 +16,7 @@ Source2: kaltura.ssl.conf.template
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires: kaltura-base, kaltura-ffmpeg, kaltura-ffmpeg-aux, php, curl, httpd, sox, ImageMagick, kaltura-sshpass, php-pecl-memcached, php-mcrypt,php-pecl-memcached,mediainfo, kaltura-segmenter, mod_ssl
+PreReq: httpd
 Requires(post): chkconfig
 Requires(preun): chkconfig
 # This is for /sbin/service
@@ -43,6 +44,7 @@ This package sets up a node to be a batch server.
 mkdir -p $RPM_BUILD_ROOT/%{_sysconfdir}/init.d
 mkdir -p $RPM_BUILD_ROOT/%{_sysconfdir}/php.d
 mkdir -p $RPM_BUILD_ROOT/%{batch_confdir}
+mkdir -p $RPM_BUILD_ROOT/%{prefix}/log/batch
 cp %{SOURCE0} $RPM_BUILD_ROOT/%{_sysconfdir}/php.d/zz-%{name}.ini
 cp %{SOURCE1} $RPM_BUILD_ROOT/%{_sysconfdir}/init.d/%{name}
 mkdir -p $RPM_BUILD_ROOT/%{prefix}/app/configurations/apache
@@ -57,7 +59,8 @@ rm -rf %{buildroot}
 
 %post
 # now replace tokens
-sed -i 's@^\(params.ImageMagickCmd\)\s*=.*@\1=%{bindir}/convert@' $RPM_BUILD_ROOT%{batch_confdir}/batch.ini.template
+sed -i "s@^\(params.ImageMagickCmd\)\s*=.*@\1=%{_bindir}/convert@" $RPM_BUILD_ROOT%{batch_confdir}/batch.ini.template
+sed -i "s@^\(params.mediaInfoCmd\)\s*=.*@\1=%{_bindir}/convert@" $RPM_BUILD_ROOT%{batch_confdir}/batch.ini.template
 sed 's#@APACHE_SERVICE@#httpd#g' -i %{prefix}/app/configurations/monit.avail/httpd.rc
 
 ln -fs %{prefix}/app/configurations/monit.avail/httpd.rc %{prefix}/app/configurations/monit.d/httpd.rc
@@ -72,8 +75,8 @@ To finalize the setup.
 #####################################################################################################################################
 "
 fi
-
-chown -R %{kaltura_user}:%{apache_group} %{prefix}/log 
+usermod -a -G %{apache_group} %{kaltura_user}
+chown -R %{kaltura_user}:%{kaltura_group} %{prefix}/log/batch
 chown -R %{kaltura_user}:%{apache_group} %{prefix}/tmp 
 chown -R %{kaltura_user}:%{apache_group} %{prefix}/app/cache 
 chmod -R 775 %{prefix}/log %{prefix}/tmp %{prefix}/app/cache %{prefix}/web
@@ -91,9 +94,9 @@ fi
 %preun
 if [ "$1" = 0 ] ; then
 	/sbin/chkconfig --del kaltura-batch
-	rm %{prefix}/app/configurations/monit.d/httpd.rc %{prefix}/app/configurations/monit.d/batch.rc || true
-	rm %{_sysconfdir}/logrotate.d/kaltura_api
-	rm %{_sysconfdir}/logrotate.d/kaltura_apache
+	rm -f %{prefix}/app/configurations/monit.d/httpd.rc %{prefix}/app/configurations/monit.d/batch.rc 
+	rm -f %{_sysconfdir}/logrotate.d/kaltura_api
+	rm -f %{_sysconfdir}/logrotate.d/kaltura_apache
 fi
 
 %postun
@@ -103,6 +106,8 @@ service httpd restart
 %config /etc/php.d/zz-%{name}.ini
 %config %{prefix}/app/configurations/apache/kaltura.ssl.conf.template 
 %{_sysconfdir}/init.d/%{name}
+%defattr(-, %{kaltura_user}, %{kaltura_group} , 0755)
+%dir %{prefix}/log/batch
 
 
 %changelog

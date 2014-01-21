@@ -103,9 +103,11 @@ php $APP_DIR/deployment/base/scripts/insertDefaults.php $APP_DIR/deployment/base
 echo "Output for $APP_DIR/deployment/base/scripts/insertPermissions.php being logged into $LOG_DIR/insertPermissions.log"
 php $APP_DIR/deployment/base/scripts/insertPermissions.php  >> $LOG_DIR/insertPermissions.log 2>&1
 echo "Output for $APP_DIR/deployment/base/scripts/insertContent.php being logged into $LOG_DIR/insertContent.log"
+:> $LOG_DIR/kaltura_api_v3.log
 php $APP_DIR/deployment/base/scripts/insertContent.php >> $LOG_DIR/insertContent.log  2>&1
 
 KMC_VERSION=`grep "^kmc_version" /opt/kaltura/app/configurations/base.ini|awk -F "=" '{print $2}'|sed 's@\s*@@g'`
+echo "Running UI CONF"
 php $APP_DIR/deployment/uiconf/deploy_v2.php --ini=$WEB_DIR/flash/kmc/$KMC_VERSION/config.ini
 find  $WEB_DIR/content/generatedUiConf -type d -exec chmod 775 {} \;
 

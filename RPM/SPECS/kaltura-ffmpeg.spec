@@ -27,7 +27,7 @@
 Summary: Utilities and libraries to record, convert and stream audio and video
 Name: kaltura-ffmpeg
 Version: 1.1.1
-Release: 6 
+Release: 6
 License: GPL
 Group: Applications/Multimedia
 URL: http://ffmpeg.org/

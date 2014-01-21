@@ -205,7 +205,7 @@ fi
 %defattr(-, root, root, 0755)
 %doc Changelog COPYING* CREDITS INSTALL MAINTAINERS README
 %doc %{base_prefix}-%{version}/share/man/man1
-%config %{_sysconfdir}/profile.d/kaltura_ffmpeg-aux.sh
+#%config %{_sysconfdir}/profile.d/kaltura_ffmpeg-aux.sh
 %config %{_sysconfdir}/ld.so.conf.d/kaltura_ffmpeg_aux.conf
 %{base_prefix}-%{version}/bin/*
 %{base_prefix}-%{version}/share/ffmpeg/

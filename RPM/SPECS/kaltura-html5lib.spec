@@ -3,7 +3,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
 Version: v2.1.1
-Release: 3 
+Release: 4 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/mwEmbed/tarball/%{name}-%{version}.tar.gz 

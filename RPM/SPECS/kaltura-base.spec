@@ -12,7 +12,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 9.7.0
-Release: 32
+Release: 34
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -50,8 +50,19 @@ mkdir -p $RPM_BUILD_ROOT%{prefix}/include
 mkdir -p $RPM_BUILD_ROOT%{prefix}/share
 
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/tmp
-mkdir -p $RPM_BUILD_ROOT%{prefix}/web/dropfolders
+mkdir -p $RPM_BUILD_ROOT%{prefix}/web/tmp/imports
+mkdir -p $RPM_BUILD_ROOT%{prefix}/web/tmp/convert
+mkdir -p $RPM_BUILD_ROOT%{prefix}/web/tmp/thumb
+mkdir -p $RPM_BUILD_ROOT%{prefix}/web/tmp/xml
+mkdir -p $RPM_BUILD_ROOT%{prefix}/web/dropfolders/monitor
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/control
+mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content/webcam 
+mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content/cacheswf
+mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content/uploads
+mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content/entry
+mkdir -p $RPM_BUILD_ROOT%{prefix}web/content//metadata
+mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content/batchfiles
+mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content/templates
 
 
 
@@ -121,9 +132,9 @@ ln -sf %{prefix}/app/api_v3/web %{prefix}/app/alpha/web/api_v3
 
 %preun
 if [ "$1" = 0 ] ; then
-	rm %{_sysconfdir}/kaltura.d/system.ini
-	rm %{prefix}/app/alpha/web/api_v3
-	rm %{_sysconfdir}/logrotate.d/kaltura_base
+	rm -f %{_sysconfdir}/kaltura.d/system.ini
+	rm -f %{prefix}/app/alpha/web/api_v3
+	rm -f %{_sysconfdir}/logrotate.d/kaltura_base
 fi
 
 %postun
@@ -153,10 +164,10 @@ fi
 %dir %{prefix}/log
 %dir %{prefix}/tmp
 %dir %{prefix}/app/cache
-%dir %{prefix}/web
-%dir %{prefix}/web/tmp
+%{prefix}/web/content
+%{prefix}/web/tmp
 %dir %{prefix}/web/control
-%dir %{prefix}/web/dropfolders
+%{prefix}/web/dropfolders
 %defattr(-, root,root, 0755)
 %dir %{prefix}/app/configurations/monit.d
 %dir %{prefix}/bin
@@ -166,6 +177,9 @@ fi
 
 
 %changelog
+* Mon Jan 20 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-33
+- Create additionally needed directories under web.
+
 * Sat Jan 17 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-28
 - Make sure SELinux is not enabled.
 

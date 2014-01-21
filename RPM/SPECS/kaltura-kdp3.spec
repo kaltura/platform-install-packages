@@ -2,7 +2,7 @@
 %define kdp3_vers "v3.5.21 v3.8.9 v3.9.1 v3.9.2 v3.9.3"
 Name:	kaltura-kdp3	
 Version: 3.0.0 
-Release: 3 
+Release: 4 
 Summary: Kaltura Dynamic Player
 License: AGPLv3+	
 URL: http://kaltura.org

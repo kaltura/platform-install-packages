@@ -14,9 +14,27 @@
 #===============================================================================
 
 #set -o nounset                              # Treat unset variables as an error
-
+enable_apps_conf()
+{
+	KALTURA_APACHE_CONFD=$1
+	cd $KALTURA_APACHE_CONFD
+	for CONF in  apps.conf var.conf ;do
+		echo "Enabling Apache config - $CONF"
+		ln -s $CONF enabled.$CONF
+	done
+}
+enable_admin_conf()
+{
+	KALTURA_APACHE_CONFD=$1
+	echo "Enabling Apache config - admin.conf"
+	ln -s $KALTURA_APACHE_CONFD/admin.conf $KALTURA_APACHE_CONFD/enabled.admin.conf 
+}
+if [ -n "$1" -a -r "$1" ];then
+	ANSFILE=$1
+	. $ANSFILE
+fi
 if [ ! -r /opt/kaltura/app/base-config.lock ];then
-	`dirname $0`/kaltura-base-config.sh
+	`dirname $0`/kaltura-base-config.sh "$ANSFILE"
 else
 	echo "base-config skipped as /opt/kaltura/app/base-config.lock was found. Remove the lock to reconfigure."
 fi
@@ -26,10 +44,14 @@ if [ ! -r "$RC_FILE" ];then
 	exit 1 
 fi
 . $RC_FILE
+KALTURA_APACHE_CONF=$APP_DIR/configurations/apache
+KALTURA_APACHE_CONFD=$KALTURA_APACHE_CONF/conf.d
+if [ -z "$IS_SSL" ];then
 cat << EOF 
 Is your Apache working with SSL?[Y/n]
 EOF
-read IS_SSL
+	read IS_SSL
+fi
 if [ "$IS_SSL" != 'Y' ];then
 	echo "It is recommended that you do work using HTTPs. Would you like to continue anyway?[N/y]"
 	read CONT
@@ -39,7 +61,7 @@ if [ "$IS_SSL" != 'Y' ];then
 	fi
 else
 	# configure SSL:
-	KALTURA_SSL_CONF=$APP_DIR/configurations/apache/kaltura.ssl.conf.template
+	KALTURA_SSL_CONF=$KALTURA_APACHE_CONF/kaltura.ssl.conf.template
 	while [ -z "$CRT_FILE" ];do
 		echo "Please input path to your SSL certificate:"
 		read -e CRT_FILE
@@ -82,10 +104,11 @@ if [ -f /etc/httpd/conf.d/ssl.conf ];then
 	echo "Moving /etc/httpd/conf.d/ssl.conf to /etc/httpd/conf.d/ssl.conf.ks.bak."
 	mv /etc/httpd/conf.d/ssl.conf /etc/httpd/conf.d/ssl.conf.ks.bak
 fi
-sed -i "s#@SSL_CERTIFICATE_FILE@#$CRT_FILE#g" $APP_DIR/configurations/apache/kaltura.ssl.conf
-sed -i "s#@SSL_CERTIFICATE_KEY_FILE@#$KEY_FILE#g" $APP_DIR/configurations/apache/kaltura.ssl.conf
-ln -fs $APP_DIR/configurations/apache/kaltura.ssl.conf /etc/httpd/conf.d/  
+sed -i "s#@SSL_CERTIFICATE_FILE@#$CRT_FILE#g" $KALTURA_APACHE_CONF/kaltura.ssl.conf
+sed -i "s#@SSL_CERTIFICATE_KEY_FILE@#$KEY_FILE#g" $KALTURA_APACHE_CONF/kaltura.ssl.conf
+ln -fs $KALTURA_APACHE_CONF/kaltura.ssl.conf /etc/httpd/conf.d/  
 # clientConfig.verifySSL
+if [ -z "$CONFIG_CHOICE" ];then
 cat << EOF 
 Please select one of the following options:
 0. Kaltura Management Console [KMC], Hosted Apps, HTML5 lib and ClipApp
@@ -93,20 +116,20 @@ Please select one of the following options:
 2. All web interfaces 
 EOF
 
-CONFIG_MSG="Setup enabled the following Apache configuration for you:"
-read CHOICE
-if [ $CHOICE = 0 ];then
-	cd $APP_DIR/configurations/apache/conf.d
-	for CONF in "*.conf" ;do
-		if echo $CONF | grep "^enabled" -q ;then
-			continue;
-		fi
-		ln -sf $CONF enabled.$CONF
-	done
-elif [ $CHOICE = 1 ];then
-	echo 1
-elif [ $CHOICE = 2 ];then
-	echo 2
+	CONFIG_MSG="Setup enabled the following Apache configuration for you:"
+	read CONFIG_CHOICE
+fi
+
+# remove current syms if any.
+find $KALTURA_APACHE_CONFD -type l -exec rm {} \;
+
+if [ $CONFIG_CHOICE = 0 ];then
+	enable_apps_conf $KALTURA_APACHE_CONFD
+elif [ "$CONFIG_CHOICE" = 1 ];then
+	enable_admin_conf $KALTURA_APACHE_CONFD
+elif [ "$CONFIG_CHOICE" = 2 ];then
+	enable_apps_conf $KALTURA_APACHE_CONFD
+	enable_admin_conf $KALTURA_APACHE_CONFD
 else
         echo "Choose a value between 0-2"
         exit 1

@@ -7,7 +7,7 @@
 Summary: Kaltura Open Source Video Platform - frontend server 
 Name: kaltura-front
 Version: 9.7.0
-Release: 14 
+Release: 15 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: kaltura.ssl.conf.template 
@@ -81,10 +81,10 @@ fi
 %preun
 if [ "$1" = 0 ] ; then
 #	rm %{prefix}/app/configurations/monit.d/httpd.rc || true#
-	rm %{_sysconfdir}/cron.d/kaltura-api
-	rm %{_sysconfdir}/cron.d/kaltura-cleanup
-	rm %{_sysconfdir}/logrotate.d/kaltura_api
-	rm %{_sysconfdir}/logrotate.d/kaltura_apache
+	rm -f %{_sysconfdir}/cron.d/kaltura-api
+	rm -f %{_sysconfdir}/cron.d/kaltura-cleanup
+	rm -f %{_sysconfdir}/logrotate.d/kaltura_api
+	rm -f %{_sysconfdir}/logrotate.d/kaltura_apache
 fi
 
 %clean
