@@ -286,7 +286,7 @@
                 </li>
                 <li class="answerli">
                   Re-deploying server roles (e.g. deciding that a batch server will now become a front server instead) is easily handled when using packaged installs, and greatly due to the modular architecture chosen.<br />
-                  By having package for each server role, reconfiguring an existing server to operate as another (or additional) role, will be as simple as unintstalling the existing packages, and installing the packages of the desired role/s. The post-install script of the newly installed packages will take care of the new configurations required for each desired server role.
+                  By having a package for each server role, reconfiguring an existing server to operate as another (or additional) role, will be as simple as unintstalling the existing packages, and installing the packages of the desired role/s. The post-install script of the newly installed packages will take care of the new configurations required for each desired server role.
                 </li>
               </ul>
             </li>
@@ -301,7 +301,7 @@
                   <ul>
                     <li>Faster Incremental Releases - By having a clearly defined mechanism for releasing packages, we will also be able to release more often, incrementally resulting in smaller and easier to manage upgrade flows.</li>
                     <li>Version Controlled - A key benefit of leveraging standard package managers is having clear change-logs and robust package version management. Package managers will know which version your system is on, and what upgrade scripts should be run to upgrade to a desired new version.</li>
-                    <li>PreInstall, PostInstall, PreUnInstall and PostUnInstall hooks - These native package manager system hooks allow us to clearly define scripts that can verify log-files diffs, perform cleanup tasks and more.</li>
+                    <li>PreInstall, PostInstall, PreUnInstall and PostUnInstall hooks - These native package manager system hooks allow us to clearly define scripts that can verify config-files diffs, perform cleanup tasks and more.</li>
                   </ul>
                   For example, handling of modified local config files while upgrading to a new config file format - Such scenario will be handled by the package manager, first the package manager will identify that there was a change in the config files in the version being deployed, a new template file will be deployed, and when the post-install script will run, it will extract the values from the local config file and migrate the values into the new template file, keeping a backup of the old config file.
                 </li>
@@ -314,7 +314,7 @@
                   How could I automate installation of packages?
                 </li>
                 <li class="answerli">
-                  Using &quot;<a href="https://access.redhat.com/site/documentation/en-US/Red_Hat_Update_Infrastructure/1.2/html/Installation_Guide/chap-Installation_Guide-Answers_File.html" target="_blank">answer files</a>&quot;, package managers can be made to perform installations in a silent-mode, running complete deployment including post-install configurations.<br />
+                  Using &quot;answers file&quot; (<a href="https://access.redhat.com/site/documentation/en-US/Red_Hat_Update_Infrastructure/1.2/html/Installation_Guide/chap-Installation_Guide-Answers_File.html" target="_blank">example of an answers file for illustration</a>), package managers can be made to perform installations in a silent-mode, running complete deployment including post-install configurations.<br />
                   This will be even further simplified by creating Chef (or the likes) deployment scripts that perform silent package installs followed by further network configuration (See How will you make cluster / multi-server environment deployments easier?).
                 </li>
               </ul>
@@ -337,7 +337,7 @@
                   How will you make cluster / multi-server environment deployments easier? 
                 </li>
                 <li class="answerli">
-                  Multi-server environment deployments are a central driving consideration for this project, there is a significant effort to define and separate packages based on <a href="#packages-list">server roles and components</a>. By having multiple packages that are self-contained and a clear chain of dependency management (which is handled by the system package manager), deploying across the network is made much simpler.<br />There are multitude of tools that can be leveraged to automate deploying Kaltura servers across the netwrok and even in rules-based automation of scaling or redundency scenarios. Depending on the environment restrictions and business constraints, these tools include the aforementioned planned Chef scripts, and other common tools such as <a href="http://www.redhat.com/products/enterprise-linux/satellite/" target="_blank">RedHat Satellite</a>, <a href="http://spacewalk.redhat.com/" target="_blank">Spacewalk</a> and others.<br />If you've got experience with automation, and would like to suggest best practices, ideas or concerns - please join us at the weekly IRC (Mondays at 10am EST) or post to the issue queue.
+                  Multi-server environment deployments are a central driving consideration for this project, there is a significant effort to define and separate packages based on <a href="#packages-list">server roles and components</a>. By having multiple packages that are self-contained and a clear chain of dependency management (which is handled by the system package manager), deploying across the network is made much simpler.<br />There are multitude of tools that can be leveraged to automate deploying Kaltura servers across the netwrok and even in rules-based automation of scaling or redundency scenarios. Depending on the environment restrictions and business constraints, these tools include the aforementioned planned Chef scripts, and other common tools such as <a href="http://www.redhat.com/products/enterprise-linux/satellite/" target="_blank">RedHat Satellite</a>, <a href="http://spacewalk.redhat.com/" target="_blank">Spacewalk</a> and others.<br />If you've got experience with automation, and would like to suggest best practices, ideas or concerns - <a href="#help-contribute">please join us at the weekly IRC (Mondays at 10am EST)</a> or post to the issue queue.
                 </li>
               </ul>
             </li>
