@@ -64,7 +64,7 @@ fi
 
 %preun
 if [ "$1" = 0 ] ; then
-	rm %{_sysconfdir}/cron.d/kaltura-dwh
+	rm -f %{_sysconfdir}/cron.d/kaltura-dwh
 fi
 
 %files

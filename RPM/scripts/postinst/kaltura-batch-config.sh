@@ -46,9 +46,8 @@ sed -i "s#@BATCH_PARTNER_ADMIN_SECRET@#$BATCH_PARTNER_ADMIN_SECRET#" -i $BATCH_M
 sed -i "s#@INSTALLED_HOSNAME@#`hostname`#" -i $BATCH_MAIN_CONF
 
 BATCH_SCHEDULER_ID=`< /dev/urandom tr -dc 0-9 | head -c5`
-sed "s#@BATCH_SCHEDULER_ID@#$BATCH_SCHEDULER_ID#" $BATCH_SCHED_CONF.template > $BATCH_SCHED_CONF
-sed "s#@INSTALLED_HOSNAME@#`hostname`#g" -i $BATCH_SCHED_CONF
-sed "s#@BATCH_SCHEDULER_TEMPLATE@#1#g" -i $BATCH_SCHED_CONF
+sed "s#@BATCH_SCHEDULER_ID@#$BATCH_SCHEDULER_ID#"  -i $BATCH_MAIN_CONF 
+sed "s#@INSTALLED_HOSNAME@#`hostname`#g" -i  -i $BATCH_MAIN_CONF
 
 # logrotate:
 ln -sf $APP_DIR/configurations/logrotate/kaltura_batch /etc/logrotate.d/ 

@@ -6,7 +6,7 @@
 
 Name:           kaltura-sphinx
 Version:        2.2.1
-Release:        9 
+Release:        10 
 Summary:        Sphinx full-text search server - for Kaltura
 
 Group:          Applications/Text
@@ -69,10 +69,11 @@ rm -rf $RPM_BUILD_ROOT
 make install DESTDIR=$RPM_BUILD_ROOT INSTALL="%{__install} -p -c"
 mkdir $RPM_BUILD_ROOT/opt/kaltura/sphinx/lib
 #mv $RPM_BUILD_ROOT/usr/local/lib/libre2* $RPM_BUILD_ROOT/opt/kaltura/sphinx/lib
+mkdir -p  $RPM_BUILD_ROOT%{_initrddir}
 # Install sphinx initscript
 install -p -D -m 0755 %{SOURCE1} $RPM_BUILD_ROOT%{_initrddir}/
 install -p -D -m 0755 %{SOURCE5} $RPM_BUILD_ROOT%{_initrddir}/
-
+chmod +x $RPM_BUILD_ROOT%{_initrddir}/*
 mkdir -p $RPM_BUILD_ROOT/opt/kaltura/log/sphinx/data
 
 # Create /var/run/sphinx

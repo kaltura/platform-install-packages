@@ -7,12 +7,13 @@
 Summary: Kaltura Open Source Video Platform - batch server 
 Name: kaltura-batch
 Version: 9.7.0
-Release: 26 
+Release: 28 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: zz-%{name}.ini
 Source1: kaltura-batch
-Source2: kaltura.ssl.conf.template 
+#Source2: kaltura.ssl.conf.template 
+Source3: batch.ini.template 
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires: kaltura-base, kaltura-ffmpeg, kaltura-ffmpeg-aux, php, curl, httpd, sox, ImageMagick, kaltura-sshpass, php-pecl-memcached, php-mcrypt,php-pecl-memcached,mediainfo, kaltura-segmenter, mod_ssl
@@ -48,7 +49,7 @@ mkdir -p $RPM_BUILD_ROOT/%{prefix}/log/batch
 cp %{SOURCE0} $RPM_BUILD_ROOT/%{_sysconfdir}/php.d/zz-%{name}.ini
 cp %{SOURCE1} $RPM_BUILD_ROOT/%{_sysconfdir}/init.d/%{name}
 mkdir -p $RPM_BUILD_ROOT/%{prefix}/app/configurations/apache
-cp %{SOURCE2} $RPM_BUILD_ROOT/%{prefix}/app/configurations/apache
+cp %{SOURCE3} $RPM_BUILD_ROOT/%{prefix}/app/configurations/batch
 sed 's#@WEB_DIR@#%{prefix}/web#g' -i $RPM_BUILD_ROOT/%{_sysconfdir}/php.d/zz-%{name}.ini
 #mkdir -p $RPM_BUILD_ROOT/%{_sysconfdir}/httpd/conf.d
 #cp %{SOURCE2} $RPM_BUILD_ROOT/%{_sysconfdir}/httpd/conf.d
@@ -104,7 +105,8 @@ service httpd restart
 
 %files
 %config /etc/php.d/zz-%{name}.ini
-%config %{prefix}/app/configurations/apache/kaltura.ssl.conf.template 
+#%config %{prefix}/app/configurations/apache/kaltura.ssl.conf.template 
+%config %{prefix}/app/configurations/batch/batch.ini.template
 %{_sysconfdir}/init.d/%{name}
 %defattr(-, %{kaltura_user}, %{kaltura_group} , 0755)
 %dir %{prefix}/log/batch

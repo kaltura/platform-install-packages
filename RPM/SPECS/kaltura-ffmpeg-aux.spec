@@ -1,7 +1,6 @@
 %define base_prefix /opt/kaltura/ffmpeg
 %define _without_gsm 1
 %define _without_nut 1
-%define _without_openjpeg 1
 
 ### No package yet
 %define _without_vpx 1
@@ -75,6 +74,7 @@ BuildRequires: zlib-devel
 BuildRequires: yasm-devel
 BuildRequires: libass-devel 
 BuildRequires: kaltura-x264-devel 
+BuildRequires: openjpeg-devel
 Requires:kaltura-a52dec,kaltura-libfaac,kaltura-x264
 
 %description

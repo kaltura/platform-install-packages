@@ -57,9 +57,10 @@ EOF
 	exit 4
 fi
 
-# check whether the 'kaltura' already exists:
-echo "use kaltura" | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT $KALTURA_DB 2> /dev/null
-if [ $? -eq 0 ];then
+if [ -z "$POPULATE_ONLY" ];then
+	# check whether the 'kaltura' already exists:
+	echo "use kaltura" | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT $KALTURA_DB 2> /dev/null
+	if [ $? -eq 0 ];then
 cat << EOF
 The $KALTURA_DB DB seems to already be installed.
 
@@ -67,31 +68,40 @@ Did you mean to perform an upgrade? if so, run with:
 # $0 $MYSQL_HOST $MYSQL_SUPER_USER $MYSQL_SUPER_USER_PASSWD $MYSQL_PORT upgrade
 
 EOF
-	exit 5
-fi 
+		exit 5
+	fi 
 
-# this is the DB creation part, we want to exit if something fails here:
-set -e
+	# this is the DB creation part, we want to exit if something fails here:
+	set -e
 
-# create users:
-for DB_USER in $DB_USERS;do
-	echo "CREATE USER ${DB_USER};"
-	echo "CREATE USER ${DB_USER} IDENTIFIED BY '$DB1_PASS' ;"  | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT
-done
-# create the DBs:
-for DB in $DBS;do 
-	echo "CREATE DATABASE $DB"
-	echo "CREATE DATABASE $DB;" | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT
-	PRIVS=${DB}_PRIVILEGES
-	DB_USER=${DB}_USER
-	# apply privileges:
-	echo "GRANT ${!PRIVS} ON $DB.* TO '${!DB_USER}'@'%';FLUSH PRIVILEGES;" | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT
-	DB_SQL_FILES=${DB}_SQL_FILES
-	# run table creation scripts:
-	for SQL in ${!DB_SQL_FILES};do 
-		mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT $DB < $SQL
+	# create users:
+	for DB_USER in $DB_USERS;do
+		echo "CREATE USER ${DB_USER};"
+		echo "CREATE USER ${DB_USER} IDENTIFIED BY '$DB1_PASS' ;"  | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT
 	done
-done
+	# create the DBs:
+	for DB in $DBS;do 
+		echo "CREATE DATABASE $DB"
+		echo "CREATE DATABASE $DB;" | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT
+		PRIVS=${DB}_PRIVILEGES
+		DB_USER=${DB}_USER
+		# apply privileges:
+		echo "GRANT ${!PRIVS} ON $DB.* TO '${!DB_USER}'@'%';FLUSH PRIVILEGES;" | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT
+		DB_SQL_FILES=${DB}_SQL_FILES
+		# run table creation scripts:
+		for SQL in ${!DB_SQL_FILES};do 
+			mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT $DB < $SQL
+		done
+	done
+
+	# DB schema created. Before we move onto populating, lets check MySQL and Sphinx connectivity.
+fi
+set +e
+curl -k "$SERVICE_URL/api_v3/index.php?service=system&action=ping"
+if [ $? -ne 0 ];then
+	echo "I could not ping the service URL, I need this for populating the DB. Please reconfigure."
+	exit 111
+fi
 
 echo "Cleaning cache.."
 rm -rf $APP_DIR/cache/*
@@ -103,15 +113,21 @@ php $APP_DIR/deployment/base/scripts/insertDefaults.php $APP_DIR/deployment/base
 echo "Output for $APP_DIR/deployment/base/scripts/insertPermissions.php being logged into $LOG_DIR/insertPermissions.log"
 php $APP_DIR/deployment/base/scripts/insertPermissions.php  >> $LOG_DIR/insertPermissions.log 2>&1
 echo "Output for $APP_DIR/deployment/base/scripts/insertContent.php being logged into $LOG_DIR/insertContent.log"
-:> $LOG_DIR/kaltura_api_v3.log
 php $APP_DIR/deployment/base/scripts/insertContent.php >> $LOG_DIR/insertContent.log  2>&1
 
+if [ -z "IS_SSL" ];then
+# force KMC login via HTTPs.
+	php $APP_DIR/deployment/base/scripts/insertPermissions.php -d $APP_DIR/deployment/permissions/ssl/
+fi
+
 KMC_VERSION=`grep "^kmc_version" /opt/kaltura/app/configurations/base.ini|awk -F "=" '{print $2}'|sed 's@\s*@@g'`
-echo "Running UI CONF"
-php $APP_DIR/deployment/uiconf/deploy_v2.php --ini=$WEB_DIR/flash/kmc/$KMC_VERSION/config.ini
+echo "Generating UI confs.."
+php $APP_DIR/deployment/uiconf/deploy_v2.php --ini=$WEB_DIR/flash/kmc/$KMC_VERSION/config.ini >> $LOG_DIR/deploy_v2.log  2>&1
 find  $WEB_DIR/content/generatedUiConf -type d -exec chmod 775 {} \;
 
 set +e
+rm -rf $APP_DIR/cache/*
+rm -f $APP_DIR/cache/kaltura-*.log
 
 
 # DWH setup:

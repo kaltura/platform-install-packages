@@ -1,4 +1,4 @@
-#!/bin/bash - 
+#!/bin/bash -
 #===============================================================================
 #          FILE: kaltura-front-config.sh
 #         USAGE: ./kaltura-front-config.sh 

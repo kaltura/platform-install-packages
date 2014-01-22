@@ -12,10 +12,11 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 9.7.0
-Release: 34
+Release: 36
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
+Source1: kaltura.ssl.conf.template 
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
@@ -86,8 +87,10 @@ sed 's#@IMAGE_MAGICK_BIN_DIR@#%{_bindir}#g' $RPM_BUILD_ROOT%{prefix}/app/configu
 sed -i "s@\(^kmc_version\)\s*=.*@\1=%{kmc_version}@g" $RPM_BUILD_ROOT%{prefix}/app/configurations/base.ini
 rm $RPM_BUILD_ROOT%{prefix}/app/generator/sources/android/DemoApplication/libs/libWVphoneAPI.so
 rm $RPM_BUILD_ROOT%{prefix}/app/configurations/.project
-# we bring our own in kaltura-front and kaltura-batch.
-rm $RPM_BUILD_ROOT%{prefix}/app/configurations/apache/kaltura.ssl.conf.template
+# we bring our own for kaltura-front and kaltura-batch.
+cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/app/configurations/apache/kaltura.ssl.conf.template
+# we bring another in kaltura-batch
+rm $RPM_BUILD_ROOT%{prefix}/app/configurations/batch/batch.ini.template
 
 %{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
 cat > $RPM_BUILD_ROOT%{_sysconfdir}/profile.d/kaltura_base.sh << EOF
@@ -135,6 +138,8 @@ if [ "$1" = 0 ] ; then
 	rm -f %{_sysconfdir}/kaltura.d/system.ini
 	rm -f %{prefix}/app/alpha/web/api_v3
 	rm -f %{_sysconfdir}/logrotate.d/kaltura_base
+	# get rid of stray symlinks.
+	find %{_sysconfdir}/httpd/conf.d/ -type l -name "*kaltura*" -exec rm {} \;
 fi
 
 %postun

@@ -10,7 +10,7 @@ Version: 9.7.0
 Release: 15 
 License: AGPLv3+
 Group: Server/Platform 
-Source0: kaltura.ssl.conf.template 
+#Source0: kaltura.ssl.conf.template 
 #Source1: kaltura-kmc.conf
 #Source2: kaltura-admin-console.conf
 Source3: zz-%{name}.ini 
@@ -48,8 +48,6 @@ This package sets up a server as a front node.
 
 %install
 mkdir -p $RPM_BUILD_ROOT/%{prefix}/app/configurations/apache
-cp %{SOURCE0} $RPM_BUILD_ROOT/%{prefix}/app/configurations/apache
-#cp %{SOURCE0} %{SOURCE1} %{SOURCE2} $RPM_BUILD_ROOT/%{_sysconfdir}/httpd/conf.d
 mkdir -p $RPM_BUILD_ROOT/%{_sysconfdir}/php.d
 cp %{SOURCE3} $RPM_BUILD_ROOT/%{_sysconfdir}/php.d
 sed 's#@WEB_DIR@#%{prefix}/web#' -i $RPM_BUILD_ROOT/%{_sysconfdir}/php.d/zz-%{name}.ini
@@ -92,10 +90,6 @@ rm -rf %{buildroot}
 
 %files
 %config %{_sysconfdir}/php.d/zz-%{name}.ini
-%config %{prefix}/app/configurations/apache/kaltura.ssl.conf.template 
-#%config %{_sysconfdir}/httpd/conf.d/kaltura-api.conf
-#%config %{_sysconfdir}/httpd/conf.d/kaltura-kmc.conf
-#%config %{_sysconfdir}/httpd/conf.d/kaltura-admin-console.conf
 
 %changelog
 * Fri Jan 17 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-9
