@@ -2,13 +2,14 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmc	
 Version: v5.37.10
-Release: 4 
+Release: 6 
 Summary: Kaltura Management Console
 
 Group: System Management	
 License: AGPLv3+	
 URL: http://kaltura.org
 Source0: %{name}-%{version}.tar.bz2
+Source1: kmc_config.ini
 BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 BuildArch: noarch
 
@@ -37,6 +38,7 @@ This package installs the KMC Flash web interface.
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/flash/kmc/login
 mv %{_builddir}/%{name}-%{version}/login/%{kmc_login_version} $RPM_BUILD_ROOT%{prefix}/web/flash/kmc/login/ 
 cp -r %{_builddir}/%{name}-%{version} $RPM_BUILD_ROOT/%{prefix}/web/flash/kmc/%{version}
+cp %{SOURCE1} $RPM_BUILD_ROOT/%{prefix}/web/flash/kmc/%{version}/config.ini
 
 
 %clean
@@ -45,6 +47,7 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root,-)
 %{prefix}/web/flash/kmc
+%config %{prefix}/web/flash/kmc/%{version}/config.ini
 
 
 %changelog

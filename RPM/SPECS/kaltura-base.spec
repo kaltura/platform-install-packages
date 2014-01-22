@@ -12,11 +12,13 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 9.7.0
-Release: 37
+Release: 38
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
 Source1: kaltura.ssl.conf.template 
+# 22/01/14 due to a bug, can be removed in the next version:
+Source2: 01.conversionProfile.99.template.xml
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
@@ -90,8 +92,12 @@ rm $RPM_BUILD_ROOT%{prefix}/app/generator/sources/android/DemoApplication/libs/l
 rm $RPM_BUILD_ROOT%{prefix}/app/configurations/.project
 # we bring our own for kaltura-front and kaltura-batch.
 cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/app/configurations/apache/kaltura.ssl.conf.template
+
 # we bring another in kaltura-batch
 rm $RPM_BUILD_ROOT%{prefix}/app/configurations/batch/batch.ini.template
+
+# 22/01/14 due to a bug, can be removed in the next version:
+cp %{SOURCE2} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_content/01.conversionProfile.99.template.xml
 
 %{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
 cat > $RPM_BUILD_ROOT%{_sysconfdir}/profile.d/kaltura_base.sh << EOF
