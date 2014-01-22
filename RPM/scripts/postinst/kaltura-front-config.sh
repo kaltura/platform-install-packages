@@ -55,59 +55,68 @@ fi
 if [ "$IS_SSL" != 'Y' ];then
 	echo "It is recommended that you do work using HTTPs. Would you like to continue anyway?[N/y]"
 	read CONT
-	if [ "$CONT" != 'y' ];then
+	if [ "$CONT" != 'y' -a "$CONT" != 'Y' ];then
 		echo "Exiting."
 		exit 2
 	fi
+	KALTURA_MAIN_CONF=$KALTURA_APACHE_CONF/kaltura.conf
 else
 	# configure SSL:
-	KALTURA_SSL_CONF=$KALTURA_APACHE_CONF/kaltura.ssl.conf.template
-	while [ -z "$CRT_FILE" ];do
-		echo "Please input path to your SSL certificate:"
+	KALTURA_MAIN_CONF=$KALTURA_APACHE_CONF/kaltura.ssl.conf
+	if [ -z "$CRT_FILE" ];then
+		echo "Please input path to your SSL certificate: [/etc/ssl/certs/localhost.crt]"
 		read -e CRT_FILE
-	done
-	while [ -z "$KEY_FILE" ];do
-		echo "Please input path to your SSL key:"
+		if [ -z "$CRT_FILE" ];then
+			CRT_FILE=/etc/ssl/certs/localhost.crt
+		fi
+	fi
+	if [ -z "$KEY_FILE" ];then
+		echo "Please input path to your SSL key: [/etc/tls/private/localhost.key]"
 		read -e KEY_FILE
-	done
+		if [ -z "$KEY_FILE" ];then
+			KEY_FILE=/etc/pki/tls/private/localhost.key
+		fi
+	fi
+	# check key and crt match
+	CRT_SUM=`openssl x509 -in $CRT_FILE -modulus -noout | openssl md5`
+	KEY_SUM=`openssl rsa -in $KEY_FILE -modulus -noout | openssl md5`
+	if [ "$CRT_SUM" != "$KEY_SUM" ];then
+		echo "
+
+	MD5 sums between .key and .crt files DO NOT MATCH
+	# openssl rsa -in $KEY_PATH -modulus -noout | openssl md5
+	$KEY_HASH
+	# openssl x509 -in $CERT_PATH -modulus -noout | openssl md5
+	$CRT_HASH
+
+	"
+		exit 3
+	fi
+
+
+	# if cert is self signed:
+	if openssl verify  $CRT_FILE | grep 'self signed certificate' -q ;then
+		echo "
+
+	WARNING: self signed cerificate detected. Will set settings.clientConfig.verifySSL=0 in $APP_DIR/configurations/admin.ini.
+
+	"
+		echo "settings.clientConfig.verifySSL=0" >> $APP_DIR/configurations/admin.ini
+		if ! grep -q settings.clientConfig.verifySSL $APP_DIR/configurations/admin.ini;then
+			sed -i  's@\(\[production\]\)@\1\nsettings.clientConfig.verifySSL=0@' $APP_DIR/configurations/admin.ini
+		fi
+	fi
+	if [ -f /etc/httpd/conf.d/ssl.conf ];then
+		echo "Moving /etc/httpd/conf.d/ssl.conf to /etc/httpd/conf.d/ssl.conf.ks.bak."
+		mv /etc/httpd/conf.d/ssl.conf /etc/httpd/conf.d/ssl.conf.ks.bak
+	fi
 fi
 
 
-# check key and crt match
-CRT_SUM=`openssl x509 -in $CRT_FILE -modulus -noout | openssl md5`
-KEY_SUM=`openssl rsa -in $KEY_FILE -modulus -noout | openssl md5`
-if [ "$CRT_SUM" != "$KEY_SUM" ];then
-	echo "
-
-MD5 sums between .key and .crt files DO NOT MATCH
-# openssl rsa -in $KEY_PATH -modulus -noout | openssl md5
-$KEY_HASH
-# openssl x509 -in $CERT_PATH -modulus -noout | openssl md5
-$CRT_HASH
-
-"
-	exit 3
-fi
-
-
-# if cert is self signed:
-if openssl verify  $CRT_FILE | grep 'self signed certificate' -q ;then
-	echo "
-
-WARNING: self signed cerificate detected. Will set settings.clientConfig.verifySSL=0 in $APP_DIR/configurations/admin.ini.
-
-"
-	echo "settings.clientConfig.verifySSL=0" >> $APP_DIR/configurations/admin.ini
-	sed -i  's@\(\[production\]\)@\1\nsettings.clientConfig.verifySSL=0@' $APP_DIR/configurations/admin.ini
-fi
-if [ -f /etc/httpd/conf.d/ssl.conf ];then
-	echo "Moving /etc/httpd/conf.d/ssl.conf to /etc/httpd/conf.d/ssl.conf.ks.bak."
-	mv /etc/httpd/conf.d/ssl.conf /etc/httpd/conf.d/ssl.conf.ks.bak
-fi
-sed -i "s#@SSL_CERTIFICATE_FILE@#$CRT_FILE#g" $KALTURA_APACHE_CONF/kaltura.ssl.conf
-sed -i "s#@SSL_CERTIFICATE_KEY_FILE@#$KEY_FILE#g" $KALTURA_APACHE_CONF/kaltura.ssl.conf
-ln -fs $KALTURA_APACHE_CONF/kaltura.ssl.conf /etc/httpd/conf.d/  
-# clientConfig.verifySSL
+sed -i "s#@SSL_CERTIFICATE_FILE@#$CRT_FILE#g" $KALTURA_MAIN_CONF
+sed -i "s#@SSL_CERTIFICATE_KEY_FILE@#$KEY_FILE#g" $KALTURA_MAIN_CONF
+find /etc/httpd/conf.d/ -type l -name "kaltura*.conf" -exec rm {} \;
+ln -fs $KALTURA_MAIN_CONF /etc/httpd/conf.d/  
 if [ -z "$CONFIG_CHOICE" ];then
 cat << EOF 
 Please select one of the following options:

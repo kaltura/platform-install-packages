@@ -12,7 +12,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 9.7.0
-Release: 36
+Release: 37
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -82,7 +82,8 @@ mv $RPM_BUILD_ROOT/%{prefix}/app/configurations/monit/monit.d $RPM_BUILD_ROOT/%{
 # change name from .*.template.rc to .*.rc.template so that monit.d/*.rc will work correctly.
 
 # now replace tokens
-sed 's#@IMAGE_MAGICK_BIN_DIR@#%{_bindir}#g' $RPM_BUILD_ROOT%{prefix}/app/configurations/local.template.ini > $RPM_BUILD_ROOT/%{prefix}/app/configurations/local.ini
+#sed 's#@IMAGE_MAGICK_BIN_DIR@#%{_bindir}#g' $RPM_BUILD_ROOT%{prefix}/app/configurations/local.template.ini > $RPM_BUILD_ROOT/%{prefix}/app/configurations/local.ini
+#sed -i 's#@CURL_BIN_DIR@#%{_bindir}#g' $RPM_BUILD_ROOT%{prefix}/app/configurations/local.ini
 
 sed -i "s@\(^kmc_version\)\s*=.*@\1=%{kmc_version}@g" $RPM_BUILD_ROOT%{prefix}/app/configurations/base.ini
 rm $RPM_BUILD_ROOT%{prefix}/app/generator/sources/android/DemoApplication/libs/libWVphoneAPI.so

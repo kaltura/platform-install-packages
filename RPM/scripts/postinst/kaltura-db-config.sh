@@ -31,6 +31,12 @@ if [ ! -r "$DB_ACTIONS_RC" ];then
 	exit 3
 fi
 . $DB_ACTIONS_RC
+KALTURA_FUNCTIONS_RC=`dirname $0`/kaltura-functions.rc
+if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
+	echo "Could not find $KALTURA_FUNCTIONS_RC so, exiting.."
+	exit 3
+fi
+. $KALTURA_FUNCTIONS_RC
 
 MYSQL_HOST=$1
 MYSQL_SUPER_USER=$2
@@ -97,10 +103,11 @@ EOF
 	# DB schema created. Before we move onto populating, lets check MySQL and Sphinx connectivity.
 fi
 set +e
-curl -k "$SERVICE_URL/api_v3/index.php?service=system&action=ping"
-if [ $? -ne 0 ];then
-	echo "I could not ping the service URL, I need this for populating the DB. Please reconfigure."
-	exit 111
+
+echo "Checking connectivity to needed daemons..."
+if ! check_connectivity $SERVICE_URL $DB1_HOST $DB1_PORT $DB1_USER $DB1_PASS $SPHINX_HOST;then
+	echo "Please check your setup and then run $0 again."
+	exit 6
 fi
 
 echo "Cleaning cache.."
@@ -115,7 +122,7 @@ php $APP_DIR/deployment/base/scripts/insertPermissions.php  >> $LOG_DIR/insertPe
 echo "Output for $APP_DIR/deployment/base/scripts/insertContent.php being logged into $LOG_DIR/insertContent.log"
 php $APP_DIR/deployment/base/scripts/insertContent.php >> $LOG_DIR/insertContent.log  2>&1
 
-if [ -z "IS_SSL" ];then
+if [ -n "$IS_SSL" ];then
 # force KMC login via HTTPs.
 	php $APP_DIR/deployment/base/scripts/insertPermissions.php -d $APP_DIR/deployment/permissions/ssl/
 fi
@@ -129,7 +136,14 @@ set +e
 rm -rf $APP_DIR/cache/*
 rm -f $APP_DIR/cache/kaltura-*.log
 
-
+echo "Do you wish to configure DWH? Depending on your ENV, this may take up to 40 minutes.
+If you prefer, you can configure it at a later date by running:
+$BASE_DIR/setup/dwh_setup.sh
+"
+read CONFIGURE
+if [ "$CONFIGURE" = 'Y' -o "$CONFIGURE" = 'y' ];then
+	$BASE_DIR/setup/dwh_setup.sh
+fi
 # DWH setup:
 # @DWH_DIR@/setup/dwh_setup.sh
 
