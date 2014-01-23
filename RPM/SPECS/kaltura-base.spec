@@ -12,13 +12,14 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 9.7.0
-Release: 38
+Release: 41 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
 Source1: kaltura.ssl.conf.template 
 # 22/01/14 due to a bug, can be removed in the next version:
 Source2: 01.conversionProfile.99.template.xml
+patch0: KMediaInfoMediaParser.php.diff 
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
@@ -40,6 +41,8 @@ This is the base package, needed for any Kaltura server role.
 
 %prep
 %setup -q
+%patch0 -p0 
+
 
 %install
 mkdir -p $RPM_BUILD_ROOT%{prefix}/app
@@ -117,7 +120,7 @@ rm -rf %{buildroot}
 %pre
 
 # maybe one day we will support SELinux in which case this can be ommitted.
-if which getenforce 2>/dev/null; then
+if which getenforce >> /dev/null 2>&1; then
 	
 	if [ `getenforce` = 'Enforcing' ];then
 		echo "You have SELinux enabled, please change to permissive mode with:
@@ -131,12 +134,20 @@ fi
 # create user/group, and update permissions
 groupadd -r %{kaltura_group} 2>/dev/null || true
 useradd -M -r -d /opt/kaltura -s /bin/bash -c "Kaltura server" -g %{kaltura_group} %{kaltura_user} 2>/dev/null || true
+getent group apache >/dev/null || groupadd -g 48 -r apache
+getent passwd apache >/dev/null || \
+  useradd -r -u 48 -g apache -s /sbin/nologin \
+    -d /var/www -c "Apache" apache
+
 usermod -g %{kaltura_group} %{kaltura_user} 2>/dev/null || true
 #chown -R %{kaltura_user}:%{kaltura_group} %{prefix}/log 
 #chown -R %{kaltura_user}:%{kaltura_group} %{prefix}/tmp 
 #chown -R %{kaltura_user}:%{kaltura_group} %{prefix}/app/cache 
 ln -sf %{prefix}/app/configurations/system.ini /etc/kaltura.d/system.ini
 ln -sf %{prefix}/app/api_v3/web %{prefix}/app/alpha/web/api_v3
+chown apache.kaltura -R /opt/kaltura/web/content/entry /opt/kaltura/web/content/uploads/ /opt/kaltura/web/content/webcam/
+chmod 775 /opt/kaltura/web/content/entry /opt/kaltura/web/content/uploads/ /opt/kaltura/web/content/webcam/ 
+
 
 
 
@@ -147,6 +158,7 @@ if [ "$1" = 0 ] ; then
 	rm -f %{_sysconfdir}/logrotate.d/kaltura_base
 	# get rid of stray symlinks.
 	find %{_sysconfdir}/httpd/conf.d/ -type l -name "*kaltura*" -exec rm {} \;
+	find %{prefix}/app -maxdepth 1 -name "*.lock" -exec rm {} \;
 fi
 
 %postun
@@ -176,10 +188,9 @@ fi
 %dir %{prefix}/log
 %dir %{prefix}/tmp
 %dir %{prefix}/app/cache
-%{prefix}/web/content
-%{prefix}/web/tmp
+%{prefix}/web/*
 %dir %{prefix}/web/control
-%{prefix}/web/dropfolders
+%dir %{prefix}/web/dropfolders
 %defattr(-, root,root, 0755)
 %dir %{prefix}/app/configurations/monit.d
 %dir %{prefix}/bin

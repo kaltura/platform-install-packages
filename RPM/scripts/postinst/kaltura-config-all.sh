@@ -15,12 +15,12 @@ echo "Running FrontEnd config...
 
 "
 
-$BASE_DIR/bin/kaltura-front-config.sh "$ANSFILE" 
+bash -e $BASE_DIR/bin/kaltura-front-config.sh "$ANSFILE" 
 
 echo "Running Sphinx config...
 
 "
-$BASE_DIR/bin/kaltura-sphinx-config.sh "$ANSFILE" 
+bash -e $BASE_DIR/bin/kaltura-sphinx-config.sh "$ANSFILE" 
 RC_FILE=/etc/kaltura.d/system.ini
 if [ ! -r "$RC_FILE" ];then
 	echo "Could not find $RC_FILE so, exiting.."
@@ -59,3 +59,6 @@ echo "Running Batch config...
 
 "
 $BASE_DIR/bin/kaltura-batch-config.sh "$ANSFILE" 
+rm -rf $APP_DIR/cache/*
+rm -f $APP_DIR/log/kaltura-*.log
+

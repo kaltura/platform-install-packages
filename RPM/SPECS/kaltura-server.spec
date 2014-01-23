@@ -28,7 +28,7 @@ rm -rf %{buildroot}
 
 %pre
 # maybe one day we will support SELinux in which case this can be ommitted.
-if which getenforce 2>/dev/null; then
+if which getenforce >> /dev/null 2>&1; then
 	
 	if [ `getenforce` = 'Enforcing' ];then
 		echo "You have SELinux enabled, please change to permissive mode with:

@@ -6,7 +6,7 @@
 
 Name:           kaltura-sphinx
 Version:        2.2.1
-Release:        10 
+Release:        11 
 Summary:        Sphinx full-text search server - for Kaltura
 
 Group:          Applications/Text
@@ -124,6 +124,8 @@ To finalize the setup.
 "
 fi
 
+mkdir -p %{prefix}/app/configurations/sphinx/populate
+touch %{prefix}/app/configurations/sphinx/populate/`hostname`.ini
 # create user/group, and update permissions
 chown -R %{sphinx_user}:%{sphinx_group} %{prefix} /opt/kaltura/log/sphinx 
 # don't start unless it went through configuration and the INI was created.
@@ -136,6 +138,7 @@ fi
 if [ "$1" = 0 ] ; then
     /sbin/service kaltura-sphinx stop >/dev/null 2>&1
     /sbin/chkconfig --del kaltura-sphinx
+    rm -f %{prefix}/app/configurations/sphinx/populate/`hostname`.ini
 fi
 
 
@@ -151,6 +154,7 @@ fi
 %{_initrddir}/kaltura-*
 %config(noreplace) %{_sysconfdir}/logrotate.d/sphinx
 %{prefix}/bin/*
+%dir /opt/kaltura/log/sphinx
 %dir /opt/kaltura/log/sphinx/data
 %dir %{prefix}/var/run
 

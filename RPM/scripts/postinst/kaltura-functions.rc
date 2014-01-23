@@ -49,11 +49,40 @@ check_mysql_settings()
 		RC=1
 	fi
 
-	if [ "$RC" -eq 1 ];then
-		echo -en "$MSG\n"
-		return $RC
+	echo -en "$MSG\n"
+	return $RC
+	
+}
+
+check_connectivity()
+{
+	DB_USER=$1
+	DB_PASSWD=$2
+	DB_HOST=$3
+	DB_PORT=$4
+	SPHINX_SERVER=$5
+	SERVICE_URL=$6
+	RC=0
+	MSG="Connectivity test passed:)"
+	echo "select version();" | mysql -u$DB_USER -p$DB_PASSWD -h$DB_HOST -P$DB_PORT -N > /dev/null 2>&1
+	if [ $? -ne 0 ];then
+		MSG="Couldn't connect with mysql -u$DB_USER -p$DB_PASSWD -h$DB_HOST -P$DB_PORT."
+		RC=1
 	fi
-	return 0
+	
+	echo "show tables;" | mysql -h$SPHINX_SERVER -P9312  > /dev/null 2>&1
+	if [ $? -ne 0 ];then
+		MSG="$MSG\nCouldn't connect to Sphinx with mysql -u$SPHINX_SERVER -P9312."
+		RC=1
+	fi
+	curl "$SERVICE_URL/api_v3/index.php?service=system&action=ping" -k  > /dev/null 2>&1
+	if [ $? -ne 0 ];then
+		MSG="$MSG\nCouldn't make an API request to $SERVICE_URL/api_v3/index.php?service=system&action=ping."
+		RC=1
+	fi
+
+	echo -en "$MSG\n"
+	return $RC
 	
 }
 

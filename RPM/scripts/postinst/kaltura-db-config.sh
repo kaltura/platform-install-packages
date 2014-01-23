@@ -106,11 +106,11 @@ EOF
 fi
 set +e
 
-#echo "Checking connectivity to needed daemons..."
-#if ! check_connectivity $SERVICE_URL $DB1_HOST $DB1_PORT $DB1_USER $DB1_PASS $SPHINX_HOST;then
-#	echo "Please check your setup and then run $0 again."
-#	exit 6
-#fi
+echo "Checking connectivity to needed daemons..."
+if ! check_connectivity $DB1_USER $DB1_PASS $DB1_HOST $DB1_PORT $SPHINX_HOST $SERVICE_URL;then
+	echo "Please check your setup and then run $0 again."
+	exit 6
+fi
 
 echo "Cleaning cache.."
 rm -rf $APP_DIR/cache/*
@@ -136,7 +136,7 @@ find  $WEB_DIR/content/generatedUiConf -type d -exec chmod 775 {} \;
 
 set +e
 rm -rf $APP_DIR/cache/*
-rm -f $APP_DIR/cache/kaltura-*.log
+rm -f $APP_DIR/log/kaltura-*.log
 
 
 # DWH setup:

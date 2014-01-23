@@ -91,7 +91,8 @@ fi
 echo "
 IS_SSL=1" >> $RC_FILE 
 
-php $APP_DIR/deployment/base/scripts/insertPermissions.php -d $APP_DIR/deployment/permissions/ssl/ >/dev/null 2>&1
+# it might fail if done before there's a DB but I don't want it to stop the config script, it can be easily fixed later.
+php $APP_DIR/deployment/base/scripts/insertPermissions.php -d $APP_DIR/deployment/permissions/ssl/ >/dev/null 2>&1 ||true
 
 # if cert is self signed:
 if openssl verify  $CRT_FILE | grep 'self signed certificate' -q ;then
