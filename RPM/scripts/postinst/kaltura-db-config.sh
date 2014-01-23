@@ -62,7 +62,9 @@ Check your settings."
 EOF
 	exit 4
 fi
-
+if ! check_mysql_settings $MYSQL_SUPER_USER $MYSQL_SUPER_USER_PASSWD $MYSQL_HOST $MYSQL_PORT ;then
+	exit 7
+fi
 if [ -z "$POPULATE_ONLY" ];then
 	# check whether the 'kaltura' already exists:
 	echo "use kaltura" | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT $KALTURA_DB 2> /dev/null
@@ -104,11 +106,11 @@ EOF
 fi
 set +e
 
-echo "Checking connectivity to needed daemons..."
-if ! check_connectivity $SERVICE_URL $DB1_HOST $DB1_PORT $DB1_USER $DB1_PASS $SPHINX_HOST;then
-	echo "Please check your setup and then run $0 again."
-	exit 6
-fi
+#echo "Checking connectivity to needed daemons..."
+#if ! check_connectivity $SERVICE_URL $DB1_HOST $DB1_PORT $DB1_USER $DB1_PASS $SPHINX_HOST;then
+#	echo "Please check your setup and then run $0 again."
+#	exit 6
+#fi
 
 echo "Cleaning cache.."
 rm -rf $APP_DIR/cache/*
@@ -136,14 +138,7 @@ set +e
 rm -rf $APP_DIR/cache/*
 rm -f $APP_DIR/cache/kaltura-*.log
 
-echo "Do you wish to configure DWH? Depending on your ENV, this may take up to 40 minutes.
-If you prefer, you can configure it at a later date by running:
-$BASE_DIR/setup/dwh_setup.sh
-"
-read CONFIGURE
-if [ "$CONFIGURE" = 'Y' -o "$CONFIGURE" = 'y' ];then
-	$BASE_DIR/setup/dwh_setup.sh
-fi
+
 # DWH setup:
 # @DWH_DIR@/setup/dwh_setup.sh
 

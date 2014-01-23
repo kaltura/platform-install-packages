@@ -58,10 +58,10 @@ EOF
 
 %files devel
 %defattr(-, root, root, 0755)
-%doc doc/*.txt
 %{prefix}/include/fdk-aac
 %{prefix}/lib/pkgconfig/*.pc
 %{prefix}/lib/*.a
+%{prefix}/lib/libfdk-aac.la
 
 %changelog
 * Wed Jan 22 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 0.1.3-1

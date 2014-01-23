@@ -74,6 +74,7 @@ enabledWorkers.KAsyncCopyPartner					= 1
 maximumExecutionTime			= 300
 params.tempDirectoryPath		= @TMP_DIR@
 engineOptions.asperaTempFolder	= @TMP_DIR@/aspera_upload
+clientConfig.verifySSL 		= 0
 
 
 [JobHandlerWorker : Worker]

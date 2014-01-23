@@ -46,6 +46,17 @@ This package sets up a server as a front node.
 #%prep
 #%setup -q
 
+%pre
+# maybe one day we will support SELinux in which case this can be ommitted.
+if which getenforce 2>/dev/null; then
+	
+	if [ `getenforce` = 'Enforcing' ];then
+		echo "You have SELinux enabled, please change to permissive mode with:
+# setenforce permissive
+and then edit /etc/selinux/config to make the change permanent."
+		exit 1;
+	fi
+fi
 %install
 mkdir -p $RPM_BUILD_ROOT/%{prefix}/app/configurations/apache
 mkdir -p $RPM_BUILD_ROOT/%{_sysconfdir}/php.d

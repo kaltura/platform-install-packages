@@ -117,9 +117,9 @@ rm -rf %{buildroot}
 %pre
 
 # maybe one day we will support SELinux in which case this can be ommitted.
-if which selinuxenabled 2>/dev/null; then
-	selinuxenabled
-	if [ $? -eq 0 ];then
+if which getenforce 2>/dev/null; then
+	
+	if [ `getenforce` = 'Enforcing' ];then
 		echo "You have SELinux enabled, please change to permissive mode with:
 # setenforce permissive
 and then edit /etc/selinux/config to make the change permanent."

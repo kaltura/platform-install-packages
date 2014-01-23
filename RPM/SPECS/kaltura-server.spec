@@ -26,6 +26,17 @@ This is a meta package which installs an all in 1 server. i.e: all server nodes 
 %clean
 rm -rf %{buildroot}
 
+%pre
+# maybe one day we will support SELinux in which case this can be ommitted.
+if which getenforce 2>/dev/null; then
+	
+	if [ `getenforce` = 'Enforcing' ];then
+		echo "You have SELinux enabled, please change to permissive mode with:
+# setenforce permissive
+and then edit /etc/selinux/config to make the change permanent."
+		exit 1;
+	fi
+fi
 %post
 
 %preun

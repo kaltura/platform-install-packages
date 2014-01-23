@@ -218,7 +218,7 @@ install_batch()
 	rm /etc/cron.d/dwh_crontab||true
 	cp crontab/kaltura_crontab crontab/kaltura_crontab.bak.`date +%d_%m_%y`
 	cp crontab/kaltura_crontab.templ crontab/kaltura_crontab
-	sed -i "s%@BASE_DIR@%$BASE_DIR%g;s%@APP_DIR@%$BASE_DIR/app%g;s%@PHP_BIN@%$PHP_BIN%g;s%@LOG_DIR@%$BASE_DIR/log%g" crontab/kaltura_crontab
+	sed -i "s%@BASE_DIR@%$BASE_DIR%g;s%/opt/kaltura/app%$BASE_DIR/app%g;s%@PHP_BIN@%$PHP_BIN%g;s%@LOG_DIR@%$BASE_DIR/log%g" crontab/kaltura_crontab
 	for i in reportUsageTrackingIfOptIn.php watch.populate.sh dwh_plays_views_sync.sh send-usage-report.php;do  
 		sed -i "s@\(.*$i.*\)@#commented out by $0 when configuring batch: \1@g" crontab/kaltura_crontab; 
 	done
@@ -249,7 +249,7 @@ install_sphinx()
 	rm /etc/cron.d/dwh_crontab || true
 	cp crontab/kaltura_crontab crontab/kaltura_crontab.bak.`date +%d_%m_%y`
 	cp crontab/kaltura_crontab.templ crontab/kaltura_crontab
-	sed -i "s%@BASE_DIR@%$BASE_DIR%g;s%@APP_DIR@%$BASE_DIR/app%g;s%@PHP_BIN@%$PHP_BIN%g;s%@LOG_DIR@%$BASE_DIR/log%g" crontab/kaltura_crontab
+	sed -i "s%@BASE_DIR@%$BASE_DIR%g;s%/opt/kaltura/app%$BASE_DIR/app%g;s%@PHP_BIN@%$PHP_BIN%g;s%@LOG_DIR@%$BASE_DIR/log%g" crontab/kaltura_crontab
 	for i in reportUsageTrackingIfOptIn.php watch.batchMgr.sh dwh_plays_views_sync.sh send-usage-report.php;do  
 		sed -i "s@\(.*$i.*\)@#commented out by $0 when configuring sphinx: \1@g" crontab/kaltura_crontab; 
 	done
@@ -275,7 +275,7 @@ install_api()
 	rm /etc/cron.d/dwh_crontab || true
 	cp crontab/kaltura_crontab crontab/kaltura_crontab.bak.`date +%d_%m_%y`
 	cp crontab/kaltura_crontab.templ crontab/kaltura_crontab
-	sed -i "s%@BASE_DIR@%$BASE_DIR%g;s%@APP_DIR@%$BASE_DIR/app%g;s%@PHP_BIN@%$PHP_BIN%g;s%@LOG_DIR@%$BASE_DIR/log%g" crontab/kaltura_crontab
+	sed -i "s%@BASE_DIR@%$BASE_DIR%g;s%/opt/kaltura/app%$BASE_DIR/app%g;s%@PHP_BIN@%$PHP_BIN%g;s%@LOG_DIR@%$BASE_DIR/log%g" crontab/kaltura_crontab
 	for i in reportUsageTrackingIfOptIn.php watch.batchMgr.sh dwh_plays_views_sync.sh send-usage-report.php;do  
 		sed -i "s@\(.*$i.*\)@#commented out by $0 when configuring api: \1@g" crontab/kaltura_crontab; 
 	done

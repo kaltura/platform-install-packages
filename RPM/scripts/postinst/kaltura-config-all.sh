@@ -59,4 +59,3 @@ echo "Running Batch config...
 
 "
 $BASE_DIR/bin/kaltura-batch-config.sh "$ANSFILE" 
-$BASE_DIR/bin/kaltura-dwh-config.sh  "$ANSFILE" 

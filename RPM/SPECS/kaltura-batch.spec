@@ -7,7 +7,7 @@
 Summary: Kaltura Open Source Video Platform - batch server 
 Name: kaltura-batch
 Version: 9.7.0
-Release: 29 
+Release: 30 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: zz-%{name}.ini
@@ -58,14 +58,26 @@ sed 's#@WEB_DIR@#%{prefix}/web#g' -i $RPM_BUILD_ROOT/%{_sysconfdir}/php.d/zz-%{n
 %clean
 rm -rf %{buildroot}
 
+%pre
+# maybe one day we will support SELinux in which case this can be ommitted.
+if which getenforce 2>/dev/null; then
+	
+	if [ `getenforce` = 'Enforcing' ];then
+		echo "You have SELinux enabled, please change to permissive mode with:
+# setenforce permissive
+and then edit /etc/selinux/config to make the change permanent."
+		exit 1;
+	fi
+fi
+
 %post
 # now replace tokens
 sed -i "s@^\(params.ImageMagickCmd\)\s*=.*@\1=%{_bindir}/convert@" $RPM_BUILD_ROOT%{batch_confdir}/batch.ini.template
 sed -i "s@^\(params.mediaInfoCmd\)\s*=.*@\1=%{_bindir}/convert@" $RPM_BUILD_ROOT%{batch_confdir}/batch.ini.template
-sed 's#@APACHE_SERVICE@#httpd#g' -i %{prefix}/app/configurations/monit.avail/httpd.rc
+#sed 's#@APACHE_SERVICE@#httpd#g' -i %{prefix}/app/configurations/monit.avail/httpd.rc
 
-ln -fs %{prefix}/app/configurations/monit.avail/httpd.rc %{prefix}/app/configurations/monit.d/httpd.rc
-ln -fs %{prefix}/app/configurations/monit.avail/batch.rc %{prefix}/app/configurations/monit.d/batch.rc
+#ln -fs %{prefix}/app/configurations/monit.avail/httpd.rc %{prefix}/app/configurations/monit.d/httpd.rc
+#ln -fs %{prefix}/app/configurations/monit.avail/batch.rc %{prefix}/app/configurations/monit.d/batch.rc
 if [ "$1" = 1 ];then
 	/sbin/chkconfig --add kaltura-batch
 echo " #####################################################################################################################################
