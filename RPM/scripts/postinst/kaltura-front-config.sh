@@ -36,7 +36,10 @@ fi
 if [ ! -r /opt/kaltura/app/base-config.lock ];then
 	`dirname $0`/kaltura-base-config.sh "$ANSFILE"
 else
-	echo "base-config skipped as /opt/kaltura/app/base-config.lock was found. Remove the lock to reconfigure."
+	echo "base-config completed successfully, if you ever want to re-configure your system (e.g. change DB hostname) run the following script:
+# rm /opt/kaltura/app/base-config.lock
+# $BASE_DIR/bin/kaltura-base-config.sh
+"
 fi
 RC_FILE=/etc/kaltura.d/system.ini
 if [ ! -r "$RC_FILE" ];then
@@ -51,6 +54,9 @@ cat << EOF
 Is your Apache working with SSL?[Y/n]
 EOF
 	read IS_SSL
+	if [ -z "$IS_SSL" ];then
+        	IS_SSL='Y'
+        fi  
 fi
 if [ "$IS_SSL" != 'Y' -a "$IS_SSL" != 1 -a ! -r "$ANSFILE" ];then
 	echo "It is recommended that you do work using HTTPs. Would you like to continue anyway?[N/y]"
@@ -62,14 +68,22 @@ if [ "$IS_SSL" != 'Y' -a "$IS_SSL" != 1 -a ! -r "$ANSFILE" ];then
 else
 	# configure SSL:
 	KALTURA_SSL_CONF=$KALTURA_APACHE_CONF/kaltura.ssl.conf.template
-	while [ -z "$CRT_FILE" ];do
-		echo "Please input path to your SSL certificate:"
+	if [ -z "$CRT_FILE" ] ;then
+		echo "Please input path to your SSL certificate[/etc/ssl/certs/localhost.crt]:"
 		read -e CRT_FILE
-	done
-	while [ -z "$KEY_FILE" ];do
-		echo "Please input path to your SSL key:"
+		if [ -z "$CRT_FILE" ];then
+			CRT_FILE=/etc/ssl/certs/localhost.crt
+		fi
+		
+	fi
+	if [ -z "$KEY_FILE" ];then
+		echo "Please input path to your SSL key[/etc/pki/tls/private/localhost.key]:"
 		read -e KEY_FILE
-	done
+		if [ -z "$KEY_FILE" ];then
+			KEY_FILE=/etc/pki/tls/private/localhost.key
+		fi
+
+	fi
 fi
 
 

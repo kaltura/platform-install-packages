@@ -18,7 +18,10 @@
 if [ ! -r /opt/kaltura/app/base-config.lock ];then
 	`dirname $0`/kaltura-base-config.sh
 else
-	echo "base-config skipped as /opt/kaltura/app/base-config.lock was found. Remove the lock to reconfigure."
+	echo "base-config completed successfully, if you ever want to re-configure your system (e.g. change DB hostname) run the following script:
+# rm /opt/kaltura/app/base-config.lock
+# $BASE_DIR/bin/kaltura-base-config.sh
+"
 fi
 ln -sf $APP_DIR/configurations/cron/dwh /etc/cron.d/kaltura-dwh
 echo "DWH configured."

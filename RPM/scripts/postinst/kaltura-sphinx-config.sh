@@ -19,10 +19,19 @@ if [ -n "$1" -a -r "$1" ];then
 	ANSFILE=$1
 	. $ANSFILE
 fi
+RC_FILE=/etc/kaltura.d/system.ini
+if [ ! -r "$RC_FILE" ];then
+	echo "Could not find $RC_FILE so, exiting.."
+	exit 2
+fi
+. $RC_FILE
 if [ ! -r /opt/kaltura/app/base-config.lock ];then
 	`dirname $0`/kaltura-base-config.sh "$ANSFILE"
 else
-	echo "base-config skipped as /opt/kaltura/app/base-config.lock was found. Remove the lock to reconfigure."
+	echo "base-config completed successfully, if you ever want to re-configure your system (e.g. change DB hostname) run the following script:
+# rm /opt/kaltura/app/base-config.lock
+# $BASE_DIR/bin/kaltura-base-config.sh
+"
 fi
-/etc/init.d/kaltura-sphinx restart
-/etc/init.d/kaltura-populate restart
+/etc/init.d/kaltura-sphinx restart >/dev/null 2>&1
+/etc/init.d/kaltura-populate restart >/dev/null 2>&1

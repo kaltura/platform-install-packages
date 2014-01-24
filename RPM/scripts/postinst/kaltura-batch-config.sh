@@ -21,7 +21,10 @@ fi
 if [ ! -r /opt/kaltura/app/base-config.lock ];then
 	`dirname $0`/kaltura-base-config.sh "$ANSFILE"
 else
-	echo "base-config skipped as /opt/kaltura/app/base-config.lock was found. Remove the lock to reconfigure."
+	echo "base-config completed successfully, if you ever want to re-configure your system (e.g. change DB hostname) run the following script:
+# rm /opt/kaltura/app/base-config.lock
+# $BASE_DIR/bin/kaltura-base-config.sh
+"
 fi
 
 CONFIG_DIR=/opt/kaltura/app/configurations
@@ -55,4 +58,4 @@ ln -sf $APP_DIR/configurations/logrotate/kaltura_apache /etc/logrotate.d/
 ln -sf $APP_DIR/configurations/logrotate/kaltura_apps /etc/logrotate.d/
 
 service httpd restart
-/etc/init.d/kaltura-batch restart
+/etc/init.d/kaltura-batch restart >/dev/null 2>&1

@@ -6,7 +6,7 @@
 
 Name:           kaltura-sphinx
 Version:        2.2.1
-Release:        11 
+Release:        12
 Summary:        Sphinx full-text search server - for Kaltura
 
 Group:          Applications/Text
@@ -108,6 +108,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 ldconfig
+groupadd -r %{kaltura_group} 2>/dev/null || true
+useradd -M -r -d /opt/kaltura -s /bin/bash -c "Kaltura server" -g %{kaltura_group} %{kaltura_user} 2>/dev/null || true
 sed 's#@LOG_DIR@#/opt/kaltura/log#g' /opt/kaltura/app/configurations/sphinx/kaltura.conf.template > /opt/kaltura/app/configurations/sphinx/kaltura.conf
 sed 's#@BASE_DIR@#/opt/kaltura#g' -i $RPM_BUILD_ROOT/opt/kaltura/app/configurations/sphinx/kaltura.conf
 sed 's#^pid_file.*#pid_file=%{prefix}/var/run/searchd.pid#' -i $RPM_BUILD_ROOT/opt/kaltura/app/configurations/sphinx/kaltura.conf

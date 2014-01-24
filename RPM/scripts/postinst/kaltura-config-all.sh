@@ -11,22 +11,35 @@ echo "Running base config...
 
 "
 $BASE_DIR/bin/kaltura-base-config.sh "$ANSFILE" 
+if [ $? -ne 0 ];then
+	echo "$BASE_DIR/bin/kaltura-base-config.sh failed:( You can re-run it when the issue is fixed"
+	exit 1
+fi
+
+RC_FILE=/etc/kaltura.d/system.ini
+if [ ! -r "$RC_FILE" ];then
+	echo "Could not find $RC_FILE so, exiting.."
+	exit 2
+fi
+. $RC_FILE
 echo "Running FrontEnd config...
 
 "
 
 bash -e $BASE_DIR/bin/kaltura-front-config.sh "$ANSFILE" 
+if [ $? -ne 0 ];then
+	echo "$BASE_DIR/bin/kaltura-front-config.sh failed:( You can re-run it when the issue is fixed"
+	exit 2 
+fi
 
 echo "Running Sphinx config...
 
 "
 bash -e $BASE_DIR/bin/kaltura-sphinx-config.sh "$ANSFILE" 
-RC_FILE=/etc/kaltura.d/system.ini
-if [ ! -r "$RC_FILE" ];then
-	echo "Could not find $RC_FILE so, exiting.."
-	exit 1 
+if [ $? -ne 0 ];then
+	echo "$BASE_DIR/bin/kaltura-sphinx-config.sh failed:( You can re-run it when the issue is fixed"
+	exit 3 
 fi
-. $RC_FILE
 echo "use kaltura" | mysql -h$DB1_HOST -P$DB1_PORT -u$SUPER_USER -p$SUPER_USER_PASSWD mysql 2> /dev/null
 if [ $? -ne 0 ];then
 	echo "
@@ -62,3 +75,8 @@ $BASE_DIR/bin/kaltura-batch-config.sh "$ANSFILE"
 rm -rf $APP_DIR/cache/*
 rm -f $APP_DIR/log/kaltura-*.log
 
+
+echo "Setup is done. To login please access:
+$SERVICE_URL
+
+"

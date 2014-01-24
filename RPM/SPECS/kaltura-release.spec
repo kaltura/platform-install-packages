@@ -1,4 +1,4 @@
-%define baseurl 192.168.193.141:7373
+%define baseurl 54.211.235.142 
 %define path kaltura-ce-rpm
 Summary: Kaltura Server release file and package configuration
 Name: kaltura-release

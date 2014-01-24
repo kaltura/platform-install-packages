@@ -126,7 +126,7 @@ php $APP_DIR/deployment/base/scripts/insertContent.php >> $LOG_DIR/insertContent
 
 if [ -n "$IS_SSL" ];then
 # force KMC login via HTTPs.
-	php $APP_DIR/deployment/base/scripts/insertPermissions.php -d $APP_DIR/deployment/permissions/ssl/
+	php $APP_DIR/deployment/base/scripts/insertPermissions.php -d $APP_DIR/deployment/permissions/ssl/ > /dev/null 2>&1
 fi
 
 KMC_VERSION=`grep "^kmc_version" /opt/kaltura/app/configurations/base.ini|awk -F "=" '{print $2}'|sed 's@\s*@@g'`
