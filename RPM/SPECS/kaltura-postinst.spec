@@ -46,10 +46,13 @@ rm -rf %{buildroot}
 %config %{prefix}/bin/db_actions.rc
 
 %changelog
-* Sat Jan 25 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.0-
-- Unsubscribe mail token replaced
+* Sat Jan 25 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.0-38
+- Unsubscribe mail token now replaced
 - Setting Apache on HTTP works
 - Added port selection in front config
+- Added export DB script
+- Added %%prefix/bin/kaltura-drop-db.sh
+- Added %%prefix/kaltura-mysql-settings.sh
 
 * Sun Jan 19 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.0-15
 - Version bounce. 
