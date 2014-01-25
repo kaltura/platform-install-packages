@@ -18,19 +18,26 @@ verify_user_input()
 {
         ANSFILE=$1
 	. $ANSFILE
-        for VAL in TIME_ZONE KALTURA_FULL_VIRTUAL_HOST_NAME KALTURA_VIRTUAL_HOST_NAME DB1_HOST DB1_PORT DB1_NAME DB1_USER SERVICE_URL SPHINX_SERVER1 SPHINX_SERVER2 DWH_HOST DWH_PORT SPHINX_DB_HOST SPHINX_DB_PORT ADMIN_CONSOLE_ADMIN_MAIL SUPER_USER SUPER_USER_PASSWD CDN_HOST KALTURA_VIRTUAL_HOST_PORT DB1_PASS DWH_PASS; do
+        for VAL in TIME_ZONE KALTURA_FULL_VIRTUAL_HOST_NAME KALTURA_VIRTUAL_HOST_NAME DB1_HOST DB1_PORT DB1_NAME DB1_USER SERVICE_URL SPHINX_SERVER1 SPHINX_SERVER2 DWH_HOST DWH_PORT SPHINX_DB_HOST SPHINX_DB_PORT ADMIN_CONSOLE_ADMIN_MAIL ADMIN_CONSOLE_PASSWORD SUPER_USER SUPER_USER_PASSWD CDN_HOST KALTURA_VIRTUAL_HOST_PORT DB1_PASS DWH_PASS; do
                 if [ -z "${!VAL}" ];then
-                        echo "I need $VAL in $ANSFILE."
-                        exit 1
+                        #echo "I need $VAL in $ANSFILE."
+                        #exit 1
+			VALS="$VALS\n$VAL"
+			RC=1
                 fi
         done
+	if [ $RC -eq 1 ];then
+		echo -en "Missing the following params in $ANSFILE
+		$VALS
+		"
+	fi
 }
 
 create_answer_file()
 {
-        for VAL in TIME_ZONE KALTURA_FULL_VIRTUAL_HOST_NAME KALTURA_VIRTUAL_HOST_NAME DB1_HOST DB1_PORT DB1_PASS DB1_NAME DB1_USER SERVICE_URL SPHINX_SERVER1 SPHINX_SERVER2 DWH_HOST DWH_PORT SPHINX_DB_HOST SPHINX_DB_PORT ADMIN_CONSOLE_ADMIN_MAIL CDN_HOST KALTURA_VIRTUAL_HOST_PORT SUPER_USER SUPER_USER_PASSWD ENVIRONMENT_NAME; do
+        for VAL in TIME_ZONE KALTURA_FULL_VIRTUAL_HOST_NAME KALTURA_VIRTUAL_HOST_NAME DB1_HOST DB1_PORT DB1_PASS DB1_NAME DB1_USER SERVICE_URL SPHINX_SERVER1 SPHINX_SERVER2 DWH_HOST DWH_PORT SPHINX_DB_HOST SPHINX_DB_PORT ADMIN_CONSOLE_ADMIN_MAIL ADMIN_CONSOLE_PASSWORD CDN_HOST KALTURA_VIRTUAL_HOST_PORT SUPER_USER SUPER_USER_PASSWD ENVIRONMENT_NAME; do
                 if [ -n "${!VAL}" ];then
-			echo "$VAL=${!VAL}" >> /tmp/kaltura_`date +%d_%m_%H_%M`.ans
+			echo "$VAL=\"${!VAL}\"" >> /tmp/kaltura_`date +%d_%m_%H_%M`.ans
                         
                 fi
         done
@@ -40,17 +47,17 @@ You can use it to install the other hosts in your cluster.
 "
 
 }
-RC_FILE=/etc/kaltura.d/system.ini
-if [ -r "$RC_FILE" ];then
-	. $RC_FILE
-fi
+#RC_FILE=/etc/kaltura.d/system.ini
+#if [ -r "$RC_FILE" ];then
+#	. $RC_FILE
+#fi
 
 DISPLAY_NAME="Kaltura Server `rpm -qa kaltura-base --queryformat %{version}`"
 KALT_CONF_DIR='/opt/kaltura/app/configurations/'
 if [ -n "$1" -a -r "$1" ];then
         ANSFILE=$1
         verify_user_input $ANSFILE
-	. ANSFILE
+	. $ANSFILE
 	export ANSFILE
 else
         echo "Welcome to Kaltura Server $DISPLAY_NAME post install setup.
@@ -123,10 +130,15 @@ CDN host [`hostname`]:"
 	fi
 
         while [ -z "$SERVICE_URL" ];do
-                echo "Service URL [$KALTURA_FULL_VIRTUAL_HOST_NAME]: "
+		if [ "$KALTURA_VIRTUAL_HOST_PORT" -eq 443 ];then
+			PROTOCOL="https"
+		else
+			PROTOCOL="http"
+		fi
+                echo "Service URL [$PROTOCOL://$KALTURA_FULL_VIRTUAL_HOST_NAME]: "
                 read -e SERVICE_URL
 		if [ -z "$SERVICE_URL" ];then
-			SERVICE_URL=$KALTURA_FULL_VIRTUAL_HOST_NAME
+			SERVICE_URL=$PROTOCOL://$KALTURA_FULL_VIRTUAL_HOST_NAME
 		fi
         done
         while [ -z "$ADMIN_CONSOLE_ADMIN_MAIL" ];do
@@ -155,24 +167,25 @@ CDN host [`hostname`]:"
 	fi
 
 	if [ -z "$CONTACT_URL" ];then
-		echo "Your website Contact Us URL[http://corp.kaltura.com/company/contact-us]:"
+		echo "Your website Contact Us URL [http://corp.kaltura.com/company/contact-us]:"
 		read CONTACT_URL
 		if [ -z "$CONTACT_URL" ];then
 			CONTACT_URL="http://corp.kaltura.com/company/contact-us"
 		fi
 	fi
 	if [ -z "$CONTACT_PHONE_NUMBER" ];then
-		echo "Contact us phone number[+1 800 871 5224]?"
+		echo "Contact us phone number [+1 800 871 5224]?"
 		read CONTACT_PHONE_NUMBER
 		if [ -z "$CONTACT_PHONE_NUMBER" ];then
 			CONTACT_PHONE_NUMBER="+1 800 871 5224"
 		fi
 	fi
+
+
 BEGINNERS_TUTORIAL_URL=http://bit.ly/KalturaUploadMenu
 QUICK_START_GUIDE_URL=http://bit.ly/KalturaKmcManual
 FORUMS_URLS=http://bit.ly/KalturaForums
 
-#	sed -e "s#@CONTACT_URL@$CONTACT_URL@g" -e "s#@ENVIRONMENT_NAME@#$ENVIRONMENT_NAME@g" -e "s#@BEGINNERS_TUTORIAL_URL@#$BEGINNERS_TUTORIAL_URL#g" -e "s#@BEGINNERS_TUTORIAL_URL@$BEGINNERS_TUTORIAL_URL#g" -e "s#@QUICK_START_GUIDE_URL@#$QUICK_START_GUIDE_URL#g" -e "s#@FORUMS_URLS@#$FORUMS_URLS#g"
 
 
 
@@ -201,7 +214,7 @@ for TMPL_CONF_FILE in $CONF_FILES;do
 	CONF_FILE=`echo $TMPL_CONF_FILE | sed 's@\(.*\)\.template\(.*\)@\1\2@'`
 #	echo $CONF_FILE
 	cp $TMPL_CONF_FILE $CONF_FILE
-	sed -e "s#@CDN_HOST@#$CDN_HOST#g" -e "s#@DB[1-9]_HOST@#$DB1_HOST#g" -e "s#@DB[1-9]_NAME@#$DB1_NAME#g" -e "s#@DB[1-9]_USER@#$DB1_USER#g" -e "s#@DB[1-9]_PASS@#$DB1_PASS#g" -e "s#@DB[1-9]_PORT@#$DB1_PORT#g" -e "s#@TIME_ZONE@#$TIME_ZONE#g" -e "s#@KALTURA_FULL_VIRTUAL_HOST_NAME@#$KALTURA_FULL_VIRTUAL_HOST_NAME#g" -e "s#@KALTURA_VIRTUAL_HOST_NAME@#$KALTURA_VIRTUAL_HOST_NAME#g" -e "s#@SERVICE_URL@#$SERVICE_URL#g" -e "s#@WWW_HOST@#`hostname`#g" -e "s#@SPHINX_DB_NAME@#kaltura_sphinx_log#g" -e "s#@SPHINX_DB_HOST@#$SPHINX_DB_HOST#g" -e "s#@SPHINX_DB_PORT@#$DB1_PORT#g" -e "s#@DWH_HOST@#$DWH_HOST#g" -e "s#@DWH_PORT@#$DWH_PORT#g" -e "s#@SPHINX_SERVER1@#$SPHINX_SERVER1#g" -e "s#@SPHINX_SERVER2@#$SPHINX_SERVER2#g" -e "s#@DWH_DATABASE_NAME@#kalturadw#g" -e "s#@DWH_USER@#etl#g" -e "s#@DWH_PASS@#$DB1_PASS#g" -e "s#@ADMIN_CONSOLE_ADMIN_MAIL@#$ADMIN_CONSOLE_ADMIN_MAIL#g" -e "s#@WEB_DIR@#$BASE_DIR/web#g" -e "s#@LOG_DIR@#$BASE_DIR/log#g" -e "s#/opt/kaltura/app#$BASE_DIR/app#g" -e "s#@PHP_BIN@#/usr/bin/php#g" -e "s#@OS_KALTURA_USER@#kaltura#g" -e "s#@BASE_DIR@#$BASE_DIR#" -e "s#@APP_DIR@#$BASE_DIR/app#" -e "s#@DWH_DIR@#$BASE_DIR/dwh#g" -e "s#@EVENTS_LOGS_DIR@#$BASE_DIR/web/logs#g" -e "s#@TMP_DIR@#$BASE_DIR/tmp#g" -e "s#@APACHE_SERVICE@#httpd#g" -e "s#@KALTURA_VIRTUAL_HOST_PORT@#$KALTURA_VIRTUAL_HOST_PORT#g" -e "s#@BIN_DIR@#$BASE_DIR/bin#g" -e "s#@KALTURA_VERSION@#$DISPLAY_NAME#g" -e "s#@SPHINX_SERVER@#$SPHINX_SERVER#g" -e "s#@IMAGE_MAGICK_BIN_DIR@#/usr/bin#g" -e "s#@CURL_BIN_DIR@#/usr/bin#g" -e "s@^\(bin_path_mediainfo\).*@\1=/usr/bin/mediainfo@g" -e "s#@CONTACT_URL@#$CONTACT_URL#g" -e "s#@ENVIRONMENT_NAME@#$ENVIRONMENT_NAME#g" -e "s#@BEGINNERS_TUTORIAL_URL@#$BEGINNERS_TUTORIAL_URL#g" -e "s#@BEGINNERS_TUTORIAL_URL@#$BEGINNERS_TUTORIAL_URL#g" -e "s#@QUICK_START_GUIDE_URL@#$QUICK_START_GUIDE_URL#g" -e "s#@FORUMS_URLS@#$FORUMS_URLS#g" -e "s#@CONTACT_PHONE_NUMBER@#$CONTACT_PHONE_NUMBER#g" -i $CONF_FILE
+	sed -e "s#@CDN_HOST@#$CDN_HOST#g" -e "s#@DB[1-9]_HOST@#$DB1_HOST#g" -e "s#@DB[1-9]_NAME@#$DB1_NAME#g" -e "s#@DB[1-9]_USER@#$DB1_USER#g" -e "s#@DB[1-9]_PASS@#$DB1_PASS#g" -e "s#@DB[1-9]_PORT@#$DB1_PORT#g" -e "s#@TIME_ZONE@#$TIME_ZONE#g" -e "s#@KALTURA_FULL_VIRTUAL_HOST_NAME@#$KALTURA_FULL_VIRTUAL_HOST_NAME#g" -e "s#@KALTURA_VIRTUAL_HOST_NAME@#$KALTURA_VIRTUAL_HOST_NAME#g" -e "s#@SERVICE_URL@#$SERVICE_URL#g" -e "s#@WWW_HOST@#$KALTURA_VIRTUAL_HOST_NAME#g" -e "s#@SPHINX_DB_NAME@#kaltura_sphinx_log#g" -e "s#@SPHINX_DB_HOST@#$SPHINX_DB_HOST#g" -e "s#@SPHINX_DB_PORT@#$DB1_PORT#g" -e "s#@DWH_HOST@#$DWH_HOST#g" -e "s#@DWH_PORT@#$DWH_PORT#g" -e "s#@SPHINX_SERVER1@#$SPHINX_SERVER1#g" -e "s#@SPHINX_SERVER2@#$SPHINX_SERVER2#g" -e "s#@DWH_DATABASE_NAME@#kalturadw#g" -e "s#@DWH_USER@#etl#g" -e "s#@DWH_PASS@#$DB1_PASS#g" -e "s#@ADMIN_CONSOLE_ADMIN_MAIL@#$ADMIN_CONSOLE_ADMIN_MAIL#g" -e "s#@WEB_DIR@#$BASE_DIR/web#g" -e "s#@LOG_DIR@#$BASE_DIR/log#g" -e "s#/opt/kaltura/app#$BASE_DIR/app#g" -e "s#@PHP_BIN@#/usr/bin/php#g" -e "s#@OS_KALTURA_USER@#kaltura#g" -e "s#@BASE_DIR@#$BASE_DIR#" -e "s#@APP_DIR@#$BASE_DIR/app#" -e "s#@DWH_DIR@#$BASE_DIR/dwh#g" -e "s#@EVENTS_LOGS_DIR@#$BASE_DIR/web/logs#g" -e "s#@TMP_DIR@#$BASE_DIR/tmp#g" -e "s#@APACHE_SERVICE@#httpd#g" -e "s#@KALTURA_VIRTUAL_HOST_PORT@#$KALTURA_VIRTUAL_HOST_PORT#g" -e "s#@BIN_DIR@#$BASE_DIR/bin#g" -e "s#@KALTURA_VERSION@#$DISPLAY_NAME#g" -e "s#@SPHINX_SERVER@#$SPHINX_SERVER#g" -e "s#@IMAGE_MAGICK_BIN_DIR@#/usr/bin#g" -e "s#@CURL_BIN_DIR@#/usr/bin#g" -e "s@^\(bin_path_mediainfo\).*@\1=/usr/bin/mediainfo@g" -e "s#@CONTACT_URL@#$CONTACT_URL#g" -e "s#@ENVIRONMENT_NAME@#$ENVIRONMENT_NAME#g" -e "s#@BEGINNERS_TUTORIAL_URL@#$BEGINNERS_TUTORIAL_URL#g" -e "s#@BEGINNERS_TUTORIAL_URL@#$BEGINNERS_TUTORIAL_URL#g" -e "s#@QUICK_START_GUIDE_URL@#$QUICK_START_GUIDE_URL#g" -e "s#@FORUMS_URLS@#$FORUMS_URLS#g" -e "s#@CONTACT_PHONE_NUMBER@#$CONTACT_PHONE_NUMBER#g" -e "s#@UNSUBSCRIBE_EMAIL_URL@#$SERVICE_URL/index.php/extwidget/blockMail?e=#g" -i $CONF_FILE
 done
 
 echo "
@@ -209,7 +222,9 @@ SERVICE_URL=$SERVICE_URL
 SPHINX_HOST=$SPHINX_SERVER1
 DB1_PORT=$DB1_PORT
 SUPER_USER=$SUPER_USER
-SUPER_USER_PASSWD=$SUPER_USER_PASSWD" >> $BASE_DIR/app/configurations/system.ini
+SUPER_USER_PASSWD=$SUPER_USER_PASSWD
+KALTURA_VIRTUAL_HOST_NAME=$KALTURA_VIRTUAL_HOST_NAME
+KALTURA_FULL_VIRTUAL_HOST_NAME=$KALTURA_FULL_VIRTUAL_HOST_NAME">> $BASE_DIR/app/configurations/system.ini
 # these two have passwds in them.
 chown kaltura.apache $BASE_DIR/app/configurations/system.ini $BASE_DIR/app/configurations/db.ini
 chmod 640 $BASE_DIR/app/configurations/system.ini $BASE_DIR/app/configurations/db.ini

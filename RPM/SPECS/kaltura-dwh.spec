@@ -2,13 +2,13 @@
 Summary: Kaltura Open Source Video Platform - Analytics 
 Name: kaltura-dwh
 Version: 9.7.0
-Release: 6 
+Release: 7 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.bz2
-URL: http://kaltura.org
+URL: https://github.com/kaltura/dwh/tree/master
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires: kaltura-base,kaltura-pentaho,java-1.7.0-openjdk, kaltura-postinst 
+Requires: kaltura-base,kaltura-pentaho,jre, kaltura-postinst 
 BuildArch: noarch
 
 %description
@@ -42,12 +42,6 @@ mkdir -p $RPM_BUILD_ROOT%{prefix}/dwh
 cp -r %{_builddir}/%{name}-%{version}/* $RPM_BUILD_ROOT%{prefix}/dwh/
 cp -r %{_builddir}/%{name}-%{version}/.kettle $RPM_BUILD_ROOT%{prefix}/dwh/
 
-# goes to crontab
-#@DWH_DIR@/etlsource/execute/etl_daily.sh -p @DWH_DIR@
-#@DWH_DIR@/etlsource/execute/etl_hourly.sh -p @DWH_DIR@
-#@DWH_DIR@/etlsource/execute/etl_perform_retention_policy.sh -p @DWH_DIR@
-#@DWH_DIR@/etlsource/execute/etl_update_dims.sh -p @DWH_DIR@
-
 %clean
 rm -rf %{buildroot}
 
@@ -72,6 +66,9 @@ To finalize the setup.
 #####################################################################################################################################
 "
 fi
+# Alas, we only work well with Sun's Java so, first lets find the latest version we have for it [this package is included in Kaltura's repo, as taken from Oracle's site
+LATEST_JAVA=`ls -d /usr/java/jre*|tail -1`
+alternatives --install /usr/bin/java java $LATEST_JAVA/bin/java  20000
 
 %preun
 if [ "$1" = 0 ] ; then
@@ -81,8 +78,6 @@ fi
 %files
 %dir %{prefix}/web/logs
 %{prefix}/dwh
-#cron/dwh.template
-##.kettle/kettle.template.properties
 
 
 %changelog

@@ -12,15 +12,16 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 9.7.0
-Release: 42 
+Release: 44
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
-Source1: kaltura.ssl.conf.template 
+Source1: kaltura.apache.ssl.conf.template 
+Source3: kaltura.apache.conf.template 
 # 22/01/14 due to a bug, can be removed in the next version:
 Source2: 01.conversionProfile.99.template.xml
 patch0: KMediaInfoMediaParser.php.diff 
-URL: http://kaltura.org
+URL: https://github.com/kaltura/server/tree/master
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
 Requires: rsync,mail,mysql,kaltura-monit,kaltura-postinst,cronie, php, php-xml, php-curl, php-mysql,php-gd,php-gmp, php-imap, php-ldap,ntp
@@ -95,6 +96,7 @@ rm $RPM_BUILD_ROOT%{prefix}/app/generator/sources/android/DemoApplication/libs/l
 rm $RPM_BUILD_ROOT%{prefix}/app/configurations/.project
 # we bring our own for kaltura-front and kaltura-batch.
 cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/app/configurations/apache/kaltura.ssl.conf.template
+cp %{SOURCE3} $RPM_BUILD_ROOT%{prefix}/app/configurations/apache/kaltura.conf.template
 
 # we bring another in kaltura-batch
 rm $RPM_BUILD_ROOT%{prefix}/app/configurations/batch/batch.ini.template
