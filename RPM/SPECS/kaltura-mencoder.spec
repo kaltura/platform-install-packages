@@ -4,7 +4,7 @@
 Summary: Utilities and libraries for MPlayer movie encoder
 Name: kaltura-mencoder
 Version: %{real_version}
-Release: 3 
+Release: 6 
 License: GPL
 Group: Applications/Multimedia
 URL: http://www.mplayerhq.hu 
@@ -16,7 +16,7 @@ Source: svn://svn.mplayerhq.hu/mplayer/trunk/%{name}-%{real_version}.tar.bz2
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
 BuildRequires: prelink
-Requires:kaltura-a52dec,kaltura-libfaac,kaltura-libass,kaltura-x264,libjpeg-turbo.i686
+Requires:kaltura-a52dec,kaltura-libfaac,kaltura-libass,kaltura-x264
 
 %description
 Utilities and libraries for MPlayer movie encoder
@@ -34,7 +34,7 @@ ls -al %{_builddir}/%{name}-%{real_version}
 mv %{_builddir}/%{name}-%{real_version}/* $RPM_BUILD_ROOT/%{base_prefix}/bin
 %{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
 cat > $RPM_BUILD_ROOT%{_sysconfdir}/profile.d/kaltura_mencoder.sh << EOF
-PATH=\$PATH:%{base_prefix}-%{version}/bin
+PATH=\$PATH:%{base_prefix}/bin
 export PATH
 EOF
 %{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/ld.so.conf.d
@@ -49,6 +49,7 @@ EOF
 /sbin/ldconfig
 chcon -t textrel_shlib_t %{base_prefix}/lib/.so.*.*.* &>/dev/null || :
 ln -fs %{base_prefix}/bin/mencoder /opt/kaltura/bin 
+ln -fs %{base_prefix}/bin/mencoder-dir/mencoder /opt/kaltura/bin/
 
 %postun 
 /sbin/ldconfig

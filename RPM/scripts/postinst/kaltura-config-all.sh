@@ -22,6 +22,14 @@ if [ ! -r "$RC_FILE" ];then
 	exit 2
 fi
 . $RC_FILE
+echo "Running Sphinx config...
+
+"
+bash -e $BASE_DIR/bin/kaltura-sphinx-config.sh "$ANSFILE" 
+if [ $? -ne 0 ];then
+	echo "$BASE_DIR/bin/kaltura-sphinx-config.sh failed:( You can re-run it when the issue is fixed"
+	exit 3 
+fi
 echo "use kaltura" | mysql -h$DB1_HOST -P$DB1_PORT -u$SUPER_USER -p$SUPER_USER_PASSWD mysql 2> /dev/null
 if [ $? -ne 0 ];then
 	echo "
@@ -60,14 +68,6 @@ if [ $? -ne 0 ];then
 	exit 2 
 fi
 
-echo "Running Sphinx config...
-
-"
-bash -e $BASE_DIR/bin/kaltura-sphinx-config.sh "$ANSFILE" 
-if [ $? -ne 0 ];then
-	echo "$BASE_DIR/bin/kaltura-sphinx-config.sh failed:( You can re-run it when the issue is fixed"
-	exit 3 
-fi
 echo "Running Batch config...
 
 "

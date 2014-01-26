@@ -49,7 +49,7 @@ fi
 . $RC_FILE
 KALTURA_APACHE_CONF=$APP_DIR/configurations/apache
 KALTURA_APACHE_CONFD=$KALTURA_APACHE_CONF/conf.d
-#if [ -z "$IS_SSL" ];then
+if [ -z "$IS_SSL" ];then
 #unset IS_SSL
 cat << EOF 
 Is your Apache working with SSL?[Y/n]
@@ -58,7 +58,7 @@ EOF
 	if [ -z "$IS_SSL" ];then
         	IS_SSL='Y'
         fi  
-#fi
+fi
 if [ "$IS_SSL" != 'Y' -a "$IS_SSL" != 1 ];then
 #-a ! -r "$ANSFILE" ];then
 	echo "It is recommended that you do work using HTTPs. Would you like to continue anyway?[N/y]"
@@ -133,22 +133,28 @@ else
 	DEFAULT_PORT=80
 fi
 
-echo "Which port will this Vhost listen on? [$DEFAULT_PORT] "
-read -e KALTURA_VIRTUAL_HOST_PORT
 if [ -z "$KALTURA_VIRTUAL_HOST_PORT" ];then
-	KALTURA_VIRTUAL_HOST_PORT=$DEFAULT_PORT
-	#echo $KALTURA_VIRTUAL_HOST_PORT
+	echo "Which port will this Vhost listen on? [$DEFAULT_PORT] "
+	read -e KALTURA_VIRTUAL_HOST_PORT
+	if [ -z "$KALTURA_VIRTUAL_HOST_PORT" ];then
+		KALTURA_VIRTUAL_HOST_PORT=$DEFAULT_PORT
+		#echo $KALTURA_VIRTUAL_HOST_PORT
+	fi
+	if [ "$KALTURA_VIRTUAL_HOST_PORT" -eq 443 ];then
+		PROTOCOL="https"
+	else
+		PROTOCOL="http"
+	fi
 fi
-if [ "$KALTURA_VIRTUAL_HOST_PORT" -eq 443 ];then
-	PROTOCOL="https"
-else
-	PROTOCOL="http"
-fi
-echo "Service URL [$PROTOCOL://$KALTURA_VIRTUAL_HOST_NAME:$KALTURA_VIRTUAL_HOST_PORT]: "
-read -e SERVICE_URL
+
 if [ -z "$SERVICE_URL" ];then
-	SERVICE_URL=$PROTOCOL://$KALTURA_FULL_VIRTUAL_HOST_NAME
+	echo "Service URL [$PROTOCOL://$KALTURA_VIRTUAL_HOST_NAME:$KALTURA_VIRTUAL_HOST_PORT]: "
+	read -e SERVICE_URL
+	if [ -z "$SERVICE_URL" ];then
+		SERVICE_URL=$PROTOCOL://$KALTURA_FULL_VIRTUAL_HOST_NAME
+	fi
 fi
+
 echo "update permission set STATUS=2 WHERE permission.PARTNER_ID IN ('0') AND permission.NAME='FEATURE_KMC_ENFORCE_HTTPS' ORDER BY permission.STATUS ASC LIMIT 1;" | mysql $DB1_NAME -h$DB1_HOST -u$DB1_USER -P$DB1_PORT -p$DB1_PASS 
 cp $KALTURA_APACHE_CONFD/enabled.kaltura.conf.template $KALTURA_APACHE_CONFD/enabled.kaltura.conf 
 sed -e "s#@APP_DIR@#$APP_DIR#g" -e "s#@LOG_DIR@#$LOG_DIR#g" -e "s#@WEB_DIR@#$WEB_DIR#g" -e "s#@KALTURA_VIRTUAL_HOST_NAME@#$KALTURA_VIRTUAL_HOST_NAME#g" -e "s#@KALTURA_VIRTUAL_HOST_PORT@#$KALTURA_VIRTUAL_HOST_PORT#g" -e "s#@SERVICE_URL@#$SERVICE_URL#g" -i $MAIN_APACHE_CONF $KALTURA_APACHE_CONFD/enabled.kaltura.conf
@@ -174,7 +180,7 @@ fi
 # remove current syms if any.
 find $KALTURA_APACHE_CONFD -type l -exec rm {} \;
 
-if [ $CONFIG_CHOICE = 0 ];then
+if [ "$CONFIG_CHOICE" = 0 ];then
 	enable_apps_conf $KALTURA_APACHE_CONFD
 elif [ "$CONFIG_CHOICE" = 1 ];then
 	enable_admin_conf $KALTURA_APACHE_CONFD

@@ -31,6 +31,7 @@ verify_user_input()
 		echo -en "Missing the following params in $ANSFILE
 		$VALS
 		"
+		exit $RC 
 	fi
 }
 
