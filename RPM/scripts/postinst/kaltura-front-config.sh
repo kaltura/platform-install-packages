@@ -1,4 +1,4 @@
-#!/bin/bash -
+#!/bin/bash -x
 #===============================================================================
 #          FILE: kaltura-front-config.sh
 #         USAGE: ./kaltura-front-config.sh 
@@ -50,6 +50,7 @@ fi
 KALTURA_APACHE_CONF=$APP_DIR/configurations/apache
 KALTURA_APACHE_CONFD=$KALTURA_APACHE_CONF/conf.d
 #if [ -z "$IS_SSL" ];then
+#unset IS_SSL
 cat << EOF 
 Is your Apache working with SSL?[Y/n]
 EOF
@@ -58,7 +59,8 @@ EOF
         	IS_SSL='Y'
         fi  
 #fi
-if [ "$IS_SSL" != 'Y' -a "$IS_SSL" != 1 -a ! -r "$ANSFILE" ];then
+if [ "$IS_SSL" != 'Y' -a "$IS_SSL" != 1 ];then
+#-a ! -r "$ANSFILE" ];then
 	echo "It is recommended that you do work using HTTPs. Would you like to continue anyway?[N/y]"
 	read CONT
 	if [ "$CONT" != 'y' ];then

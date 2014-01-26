@@ -56,7 +56,7 @@ echo "Running FrontEnd config...
 
 bash -e $BASE_DIR/bin/kaltura-front-config.sh "$ANSFILE" 
 if [ $? -ne 0 ];then
-	echo "$BASE_DIR/bin/kaltura-front-config.sh failed:( You can re-run it when the issue is fixed."
+	echo "$BASE_DIR/bin/kaltura-front-config.sh failed:( You can re-run it when the issue is fixed"
 	exit 2 
 fi
 
@@ -65,10 +65,9 @@ echo "Running Sphinx config...
 "
 bash -e $BASE_DIR/bin/kaltura-sphinx-config.sh "$ANSFILE" 
 if [ $? -ne 0 ];then
-	echo "$BASE_DIR/bin/kaltura-sphinx-config.sh failed:( You can re-run it when the issue is fixed."
+	echo "$BASE_DIR/bin/kaltura-sphinx-config.sh failed:( You can re-run it when the issue is fixed"
 	exit 3 
 fi
-
 echo "Running Batch config...
 
 "
