@@ -16,7 +16,8 @@ The repository URL will be structured as follow:
 * RPM: http://REPOSITORY_DOMAIN/BRANCH/noarch/kaltura-release.noarch.rpm
 * DEB: http://REPOSITORY_DOMAIN/debian/dists/BRANCH
 
-**BRANCH** - will be replaced with the name of the desired install release branch. We will eventually have the following branches:
+**BRANCH** - will be replaced with the name of the desired install release branch.   
+We will eventually have the following branches:
 * nightly - latest testing release, built every night from latest dev branch.
 * stable-latest - latest recommended production release.
 * Kaltura official major release names (e.g. eagle, falcon, gemini, hercules, iris, etc.).
