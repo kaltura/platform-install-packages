@@ -123,7 +123,7 @@ HTML5LIB_URI="https://github.com/kaltura/mwEmbed/tarball/$HTML5LIB_VERSION"
 HTML5LIB_RPM_NAME="kaltura-html5lib"
 
 # Kaltura DWH
-DWH_VERSION="Gemini_2013_03_21"
-DWH_URI="svn+ssh://$SVN_USER@kelev.kaltura.com//usr/local/kalprod/dwh/core/branches/$DWH_VERSION"
+DWH_VERSION="master"
+DWH_URI="https://github.com/kaltura/dwh/archive/$DWH_VERSION.zip"
 DWH_RPM_NAME="kaltura-dwh"
 

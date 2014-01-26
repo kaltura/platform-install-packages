@@ -1,12 +1,12 @@
 %define prefix /opt/kaltura
 Summary: Kaltura Open Source Video Platform - Analytics 
 Name: kaltura-dwh
-Version: 9.7.0
-Release: 7 
+Version: 9.7.0 
+Release: 8 
 License: AGPLv3+
 Group: Server/Platform 
-Source0: %{name}-%{version}.tar.bz2
-URL: https://github.com/kaltura/dwh/tree/master
+Source0: https://github.com/kaltura/dwh/archive/%{name}-master.zip
+URL: https://github.com/kaltura/dwh/tree/master 
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires: kaltura-base,kaltura-pentaho,jre, kaltura-postinst 
 BuildArch: noarch
@@ -31,7 +31,7 @@ and developing a variety of online workflows for video.
 This package configures the Data Warehouse [DWH] analytics component. 
 
 %prep
-%setup -q
+%setup -qn dwh-master
 
 %build
 
@@ -39,8 +39,8 @@ This package configures the Data Warehouse [DWH] analytics component.
 # for Apache access logs.
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/logs
 mkdir -p $RPM_BUILD_ROOT%{prefix}/dwh
-cp -r %{_builddir}/%{name}-%{version}/* $RPM_BUILD_ROOT%{prefix}/dwh/
-cp -r %{_builddir}/%{name}-%{version}/.kettle $RPM_BUILD_ROOT%{prefix}/dwh/
+cp -r %{_builddir}/dwh-master/* $RPM_BUILD_ROOT%{prefix}/dwh/
+cp -r %{_builddir}/dwh-master/.kettle $RPM_BUILD_ROOT%{prefix}/dwh/
 
 %clean
 rm -rf %{buildroot}
@@ -81,6 +81,9 @@ fi
 
 
 %changelog
+* Sun Jan 26 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-8
+- Sources moved to GIT.
+
 * Sat Jan 18 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-6
 - Plus .kettle config.
 
