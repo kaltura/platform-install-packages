@@ -12,7 +12,6 @@ To learn more and keep track of project status, review [the project page](http:/
 
 
 # Repository Server Release Name Convension
-At the moment we're in early alpha testing phase. The URL of the repository will change when we reach beta phase.    
 The repository URL will be structured as follow:    
 `http://REPOSITORY_URL/BRANCH/noarch/kaltura-release.noarch.[rpm/deb]`.    
 *BRANCH* - will be replaced with the name of the desired install release branch. We will eventually have the following branches:
@@ -21,7 +20,8 @@ The repository URL will be structured as follow:
 * Kaltura official major release names (e.g. eagle, falcon, gemini, hercules, iris, etc.).
 
 ##### Current TEST repository URL:
-http://54.211.235.142/nightly/noarch/kaltura-release.noarch.rpm
+At the moment we're in early alpha testing phase. The URL of the repository will change when we reach beta phase.    
+`http://54.211.235.142/nightly/noarch/kaltura-release.noarch.rpm`
 
 
 
