@@ -11,6 +11,20 @@ To learn more and keep track of project status, review [the project page](http:/
 * Installing on Debian based Linux distros (including Ubuntu) - *Coming Soon*
 
 
+# Repository Server Release Name Convension
+At the moment we're in early alpha testing phase. The URL of the repository will change when we reach beta phase.    
+The repository URL will be structured as follow:    
+`http://REPOSITORY_URL/BRANCH/noarch/kaltura-release.noarch.[rpm/deb]`.    
+*BRANCH* - will be replaced with the name of the desired install release branch. We will eventually have the following branches:
+* nightly - latest testing release, built every night from latest dev branch.
+* stable-latest - latest recommended production release.
+* Kaltura official major release names (e.g. eagle, falcon, gemini, hercules, iris, etc.).
+
+##### Current TEST repository URL:
+http://54.211.235.142/nightly/noarch/kaltura-release.noarch.rpm
+
+
+
 # License and Copyright Information
 All code in this project is released under the [AGPLv3 license](http://www.gnu.org/licenses/agpl-3.0.html) unless a different license for a particular library is specified in the applicable library path. 
 
