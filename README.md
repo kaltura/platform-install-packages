@@ -6,12 +6,12 @@ This project features official deployment packages to install the Kaltura platfo
 To learn more and keep track of project status, review [the project page](http://kaltura.github.io/platform-install-packages/).
 
 
-# Installing Kaltura using Standard Packages
+## Installing Kaltura using Standard Packages
 * [Installing on RedHat based Linux distros (including FC, RHEL and CentOS)](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-redhat-based.md).
 * Installing on Debian based Linux distros (including Ubuntu) - *Coming Soon*
 
 
-# Repository Server Release Name Convension
+## Repository Server Release Name Convension
 The repository URL will be structured as follow:    
 * RPM: http://REPOSITORY_DOMAIN/BRANCH/noarch/kaltura-release.noarch.rpm
 * DEB: http://REPOSITORY_DOMAIN/debian/dists/BRANCH
@@ -28,7 +28,7 @@ At the moment we're in early alpha testing of the RPM repository.
 `http://54.211.235.142/nightly/noarch/kaltura-release.noarch.rpm`
 
 
-# License and Copyright Information
+## License and Copyright Information
 All code in this project is released under the [AGPLv3 license](http://www.gnu.org/licenses/agpl-3.0.html) unless a different license for a particular library is specified in the applicable library path. 
 
 Copyright © Kaltura Inc. All rights reserved.
