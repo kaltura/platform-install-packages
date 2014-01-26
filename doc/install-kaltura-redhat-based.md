@@ -6,7 +6,7 @@ This guide applies to all major RH based Linux distros including Fedora Core, RH
 ###### Pre-Install notes
 
 * **Resolveable host names** - When installing, you will be promopted for each server's resolvable hostname. Note that it is crucial that all host names will be resolveable by other servers in the cluster (and outside the cluster for front machines). Before installing, verify the /etc/hosts file is properly configured and that all Kaltura server hostnames are resolveable in your network.
-* **ROOT is REQUIRED** - Before you begin, make sure you're logged in as the system root. root access is required to install Kaltura. ```sudo sudo su - ```
+* **ROOT is REQUIRED** - Before you begin, make sure you're logged in as the system root. root access is required to install Kaltura. ```sudo su - ```
 
 ###### iptables and ports
 Kaltura requires certain ports to be open for proper operation. [See the list of required open ports](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura-required-ports.md).   
