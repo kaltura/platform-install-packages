@@ -7,7 +7,7 @@ To learn more and keep track of project status, review [the project page](http:/
 
 
 # Installing Kaltura using Standard Packages
-* [Installing on RedHat based Linux distros (including FC, RHEL and CentOS](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-redhat-based.md)
+* [Installing on RedHat based Linux distros (including FC, RHEL and CentOS)](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-redhat-based.md).
 * Installing on Debian based Linux distros (including Ubuntu) - *Coming Soon*
 
 
