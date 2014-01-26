@@ -1,4 +1,4 @@
-# Installing Kaltura on RedHat based Linux distros 
+# Installing Kaltura on RedHat Linux
 This guide applies to all major RH based Linux distros including Fedora Core, RHEL, CentOS, etc.
 
 ## Installing on a new machine
