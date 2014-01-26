@@ -2,7 +2,7 @@
 This guide applies to all major RH based Linux distros including Fedora Core, RHEL, CentOS, etc.
 
 ## Installing on a new machine
-Before you begin, make sure you're logged in as the system root. root access is required to install Kaltura. ```sudo sudo su - ```
+**ROOT is REQUIRED** - Before you begin, make sure you're logged in as the system root. root access is required to install Kaltura. ```sudo sudo su - ```
 
 ###### iptables and ports
 Kaltura requires certain ports to be open for proper operation. [See the list of required open ports](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura-required-ports.md).   
