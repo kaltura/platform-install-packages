@@ -11,10 +11,8 @@ To learn more and keep track of project status, review [the project page](http:/
 ### RedHat based Linux distros (Fedora Core, RHEL, CentOS, etc.)
 
 #### Installing on a new machine
-Before you begin, make sure you're logged in as the system root. root access is required to install Kaltura.
-```bash
-sudo sudo su -
-```
+Before you begin, make sure you're logged in as the system root. root access is required to install Kaltura. ```sudo sudo su - ```
+
 ###### iptables and ports
 Kaltura requires certain ports to be open for proper operation. [See a list of required open ports below](#required-open-ports-to-run-kaltura).   
 If you're just testing and don't mind an open system, you can use the below to disbale iptables altogether:
