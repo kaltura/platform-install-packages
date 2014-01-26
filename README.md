@@ -71,7 +71,7 @@ Use this in cases where you want to clear the database and start from fresh
 /opt/kaltura/bin/kaltura-config-all.sh [answers-file-path]
 ```
 
-#### Complete uninstall 
+#### Complete REinstall 
 This will completely remove Kaltura, then download and install from scratch.
 ```bash
 /opt/kaltura/bin/kaltura-drop-db.sh
