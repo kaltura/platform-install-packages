@@ -16,7 +16,7 @@ To learn more and keep track of project status, review [the project page](http:/
 sudo sudo su -
 ```
 ###### iptables and ports
-Kaltura requires certain ports to be open for proper operation. [See a list of required open ports below](#required-open-ports-to-run-kaltura).
+Kaltura requires certain ports to be open for proper operation. [See a list of required open ports below](#required-open-ports-to-run-kaltura).   
 If you're just testing and don't mind an open system, you can use the below to disbale iptables altogether:
 ```bash
 iptables -F
