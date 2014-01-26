@@ -31,12 +31,12 @@ If you're just testing and don't mind an open system, you can use the below to d
 Note: at the time of this release the revision is 3 but please browse http://54.211.235.142/kaltura-ce-rpm/noarch/ to find the latest.
 
 ```
-###### Install and configure MySQL (if you’re going to use DB on the same server)
+###### Install and configure MySQL server
 ```bash
 # yum install mysql-server
 # /etc/init.d/mysqld start
 # mysql_secure_installation
-#Run the my.cnf configuration script
+If installing locally, run the MySQL configuration script. You may also copy it to your MySQL server and run it there.
 # /opt/kaltura/bin/kaltura-mysql-settings.sh
 ```
 ###### Configure your email server and MTA - REQUIRED
