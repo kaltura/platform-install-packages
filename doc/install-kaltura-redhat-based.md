@@ -5,7 +5,7 @@ This guide applies to all major RH based Linux distros including Fedora Core, RH
 Before you begin, make sure you're logged in as the system root. root access is required to install Kaltura. ```sudo sudo su - ```
 
 ###### iptables and ports
-Kaltura requires certain ports to be open for proper operation. [See a list of required open ports below](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura-required-ports.md).   
+Kaltura requires certain ports to be open for proper operation. [See the list of required open ports](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura-required-ports.md).   
 If you're just testing and don't mind an open system, you can use the below to disbale iptables altogether:
 ```bash
 iptables -F
