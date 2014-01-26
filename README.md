@@ -10,9 +10,9 @@ To learn more and keep track of project status, review [the project page](http:/
 
 ### RedHat based Linux distros (Fedora Core, RHEL, CentOS, etc.)
 
-###### Installing on a new machine
+#### Installing on a new machine
+Before you begin, make sure you're logged in as the system root. root access is required to install Kaltura.
 ```bash
-#Installing Kaltura requires root 
 sudo sudo su -
 ```
 ###### iptables and ports
