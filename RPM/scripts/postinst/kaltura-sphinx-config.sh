@@ -33,5 +33,8 @@ else
 # $BASE_DIR/bin/kaltura-base-config.sh
 "
 fi
+mkdir -p $LOG_DIR/sphinx/data
+chown $OS_KALTURA_USER.$OS_KALTURA_USER $LOG_DIR/sphinx/data
+echo "sphinxServer = $SPHINX_HOST" > /opt/kaltura/app/configurations/sphinx/populate/`hostname`.ini
 /etc/init.d/kaltura-sphinx restart >/dev/null 2>&1
 /etc/init.d/kaltura-populate restart >/dev/null 2>&1

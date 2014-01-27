@@ -1,9 +1,9 @@
 %define baseurl 54.211.235.142 
-%define path kaltura-ce-rpm
+%define path nightly/RPMS
 Summary: Kaltura Server release file and package configuration
 Name: kaltura-release
-Version: 9.7.0
-Release: 3 
+Version: 9.9.0
+Release: 1 
 License: AGPLv3+
 Group: Server/Platform 
 URL: http://kaltura.org
@@ -65,6 +65,9 @@ exit 0
 #%{_sysconfdir}/pki/rpm-gpg/RPM-GPG-KEY-rpmforge-*
 
 %changelog
+* Mon Jan 27 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-1
+- 9.9.0
+
 * Sun Jan 26 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-3
 - Added 32bit repos.
 

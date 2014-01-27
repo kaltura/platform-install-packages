@@ -11,8 +11,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 9.7.0
-Release: 44
+Version: 9.9.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -41,7 +41,7 @@ For more information visit: http://corp.kaltura.com, http://www.kaltura.org and 
 This is the base package, needed for any Kaltura server role.
 
 %prep
-%setup -q
+%setup -qn server-IX-%{version}
 %patch0 -p0 
 
 
@@ -81,7 +81,7 @@ project" "*.png" "*.properties" "*.sample" "*.swf" "*.sf" "*.swz" "*.uad" "*.pre
 done
 
 for i in admin_console alpha api_v3 batch configurations deployment generator infra plugins start tests ui_infra var_console vendor;do 
-	mv  %{_builddir}/%{name}-%{version}/$i $RPM_BUILD_ROOT%{prefix}/app
+	mv  %{_builddir}/server-IX-%{version}/$i $RPM_BUILD_ROOT%{prefix}/app
 done
 mkdir -p $RPM_BUILD_ROOT%{prefix}/app/configurations/monit.d
 mv $RPM_BUILD_ROOT/%{prefix}/app/configurations/monit/monit.d $RPM_BUILD_ROOT/%{prefix}/app/configurations/monit.avail
@@ -202,6 +202,9 @@ fi
 
 
 %changelog
+* Mon Jan 27 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-1
+- Moving to IX-9.9.0
+
 * Mon Jan 20 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-33
 - Create additionally needed directories under web.
 

@@ -127,3 +127,4 @@ DWH_VERSION="master"
 DWH_URI="https://github.com/kaltura/dwh/archive/$DWH_VERSION.zip"
 DWH_RPM_NAME="kaltura-dwh"
 
+HTML5_PLAYER_STUDIO_URI=https://github.com/kaltura/player-studio

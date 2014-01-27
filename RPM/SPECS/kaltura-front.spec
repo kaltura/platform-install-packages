@@ -6,8 +6,8 @@
 %define apache_group	apache
 Summary: Kaltura Open Source Video Platform - frontend server 
 Name: kaltura-front
-Version: 9.7.0
-Release: 15 
+Version: 9.9.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 #Source0: kaltura.ssl.conf.template 
@@ -102,6 +102,9 @@ rm -rf %{buildroot}
 %config %{_sysconfdir}/php.d/zz-%{name}.ini
 
 %changelog
+* Mon Jan 27 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-1
+- Moving to IX-9.9.0
+
 * Fri Jan 17 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-9
 - Corrected permissions.
 

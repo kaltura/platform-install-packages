@@ -23,5 +23,12 @@ else
 # $BASE_DIR/bin/kaltura-base-config.sh
 "
 fi
+RC_FILE=/etc/kaltura.d/system.ini
+if [ ! -r "$RC_FILE" ];then
+	echo "Could not find $RC_FILE so, exiting.."
+	exit 2
+fi
+. $RC_FILE
+ /opt/kaltura/dwh/setup/dwh_setup.sh -u$SUPER_USER -k /opt/kaltura/pentaho/pdi/ -d/opt/kaltura/dwh -h$DWH_HOST -P$DWH_PORT -p$SUPER_USER_PASSWD
 ln -sf $APP_DIR/configurations/cron/dwh /etc/cron.d/kaltura-dwh
 echo "DWH configured."

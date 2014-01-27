@@ -2,8 +2,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
-Version: 1.0.0
-Release: 40 
+Version: 1.0.1
+Release: 1 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -46,6 +46,9 @@ rm -rf %{buildroot}
 %config %{prefix}/bin/db_actions.rc
 
 %changelog
+* Mon Jan 27 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.1-1
+- New minor release.
+
 * Sat Jan 25 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.0-38
 - Unsubscribe mail token now replaced
 - Setting Apache on HTTP works

@@ -57,5 +57,8 @@ ln -sf $APP_DIR/configurations/logrotate/kaltura_batch /etc/logrotate.d/
 ln -sf $APP_DIR/configurations/logrotate/kaltura_apache /etc/logrotate.d/
 ln -sf $APP_DIR/configurations/logrotate/kaltura_apps /etc/logrotate.d/
 
+mkdir -p $LOG_DIR/batch
+chown $OS_KALTURA_USER.$OS_KALTURA_USER $LOG_DIR/batch
+
 service httpd restart
 /etc/init.d/kaltura-batch restart >/dev/null 2>&1
