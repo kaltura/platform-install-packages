@@ -97,7 +97,7 @@ show_status() {
 	echo "Populate is running as $KP ..."
 	return 0
 	else
-		echo "Service populate isn't running"
+		echo "Service populate isn't running."
 		return 3
 	fi
 }
@@ -115,9 +115,9 @@ stop() {
 		echo
 		RC=0
 	else
-		echo_failure
-		echo
-		echo "Service populate not running"
+		#echo_failure
+		echo "
+			Service populate isn't currently running."
 		RC=0
 	fi
 	rm -f $LOCKFILE

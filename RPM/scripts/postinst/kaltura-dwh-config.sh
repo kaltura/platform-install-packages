@@ -29,6 +29,15 @@ if [ ! -r "$RC_FILE" ];then
 	exit 2
 fi
 . $RC_FILE
- /opt/kaltura/dwh/setup/dwh_setup.sh -u$SUPER_USER -k /opt/kaltura/pentaho/pdi/ -d/opt/kaltura/dwh -h$DWH_HOST -P$DWH_PORT -p$SUPER_USER_PASSWD
+TABLES=`echo "show tables" | mysql -h$DWH_HOST -u$SUPER_USER -p$SUPER_USER_PASSWD -P$DWH_PORT kalturadw 2> /dev/null`
+if [ -z "$TABLES" ];then 
+	echo "Deploying analytics warehouse DB, please be patient as this may take a while..."
+	/opt/kaltura/dwh/setup/dwh_setup.sh -u$SUPER_USER -k /opt/kaltura/pentaho/pdi/ -d/opt/kaltura/dwh -h$DWH_HOST -P$DWH_PORT -p$SUPER_USER_PASSWD
+else
+cat << EOF
+The Kaltura DWH DB seems to already be installed.
+DB creation will be skipped.
+EOF
+fi
 ln -sf $APP_DIR/configurations/cron/dwh /etc/cron.d/kaltura-dwh
 echo "DWH configured."

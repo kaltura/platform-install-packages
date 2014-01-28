@@ -44,16 +44,18 @@ create_answer_file()
                 fi
         done
 	echo "
-Answer file written to /tmp/kaltura_`date +%d_%m_%H_%M`.ans
-You can use it to install the other hosts in your cluster.
+
+========================================================================================================================
+Kaltura install answer file written to /tmp/kaltura_`date +%d_%m_%H_%M`.ans  -  Please save it!
+This answers file can be used to silently-install re-install this machine or deploy other hosts in your cluster.
+========================================================================================================================
+
 "
 
 }
-#RC_FILE=/etc/kaltura.d/system.ini
-#if [ -r "$RC_FILE" ];then
-#	. $RC_FILE
-#fi
 
+
+LOCALHOST=127.0.0.1
 DISPLAY_NAME="Kaltura Server `rpm -qa kaltura-base --queryformat %{version}`"
 KALT_CONF_DIR='/opt/kaltura/app/configurations/'
 if [ -n "$1" -a -r "$1" ];then
@@ -87,10 +89,13 @@ CDN host [`hostname`]:"
         fi
         KALTURA_FULL_VIRTUAL_HOST_NAME="$KALTURA_VIRTUAL_HOST_NAME:$KALTURA_VIRTUAL_HOST_PORT"
 
-        while [ -z "$DB1_HOST" ];do
-                echo "DB hostname: "
+        if [ -z "$DB1_HOST" ];then
+                echo "DB hostname [$LOCALHOST]: "
                 read -e DB1_HOST
-        done
+        	if [ -z "$DB1_HOST" ];then
+			DB1_HOST=$LOCALHOST	
+		fi
+        fi
 
         echo "DB port [3306]: "
         read -e DB1_PORT
@@ -120,12 +125,12 @@ CDN host [`hostname`]:"
 		#echo $DWH_PORT
 	fi
 
-        while [ -z "$SPHINX_SERVER1" ];do
-                echo "Sphinx host: "
+        if [ -z "$SPHINX_SERVER1" ];then
+                echo "Sphinx host [$LOCALHOST]: "
                 read -e SPHINX_SERVER1
-        done
+        fi
 	
-	echo "Secondary Sphinx host: "
+	echo "Secondary Sphinx host: [leave empty if none] "
 	read -e SPHINX_SERVER2
 	if [ -z $SPHINX_SERVER2 ];then
 		SPHINX_SERVER2=" "
@@ -209,7 +214,7 @@ SPHINX_DB_PORT=$DB1_PORT
 
 BASE_DIR=/opt/kaltura
 CONF_FILES=`find $KALT_CONF_DIR  -type f -name "*template*"`
-CONF_FILES="$CONF_FILES `find $BASE_DIR/dwh  -type f -name "*template*"`"
+CONF_FILES="$CONF_FILES $BASE_DIR/app/batch/batches/Mailer/emails_en.template.ini `find $BASE_DIR/dwh  -type f -name "*template*"`"
 # Now we will sed.
 
 for TMPL_CONF_FILE in $CONF_FILES;do

@@ -12,7 +12,7 @@ echo "Running base config...
 "
 $BASE_DIR/bin/kaltura-base-config.sh "$ANSFILE" 
 if [ $? -ne 0 ];then
-	echo "$BASE_DIR/bin/kaltura-base-config.sh failed:( You can re-run it when the issue is fixed"
+	echo "$BASE_DIR/bin/kaltura-base-config.sh failed:( You can re-run it when the issue is fixed."
 	exit 1
 fi
 
@@ -27,7 +27,7 @@ echo "Running Sphinx config...
 "
 bash -e $BASE_DIR/bin/kaltura-sphinx-config.sh "$ANSFILE" 
 if [ $? -ne 0 ];then
-	echo "$BASE_DIR/bin/kaltura-sphinx-config.sh failed:( You can re-run it when the issue is fixed"
+	echo "$BASE_DIR/bin/kaltura-sphinx-config.sh failed:( You can re-run it when the issue is fixed."
 	exit 3 
 fi
 echo "Running FrontEnd config...
@@ -36,7 +36,7 @@ echo "Running FrontEnd config...
 
 $BASE_DIR/bin/kaltura-front-config.sh "$ANSFILE" 
 if [ $? -ne 0 ];then
-	echo "$BASE_DIR/bin/kaltura-front-config.sh failed:( You can re-run it when the issue is fixed"
+	echo "$BASE_DIR/bin/kaltura-front-config.sh failed:( You can re-run it when the issue is fixed."
 	exit 2 
 fi
 echo "use kaltura" | mysql -h$DB1_HOST -P$DB1_PORT -u$SUPER_USER -p$SUPER_USER_PASSWD mysql 2> /dev/null
@@ -78,8 +78,18 @@ $BASE_DIR/bin/kaltura-dwh-config.sh "$ANSFILE"
 rm -rf $APP_DIR/cache/*
 rm -f $APP_DIR/log/kaltura-*.log
 
+echo "==============================================================================================================
 
-echo "Setup is done. To login please access:
+Setup is completed successfully! 
+
+To access your Kaltura tools visit:
 $SERVICE_URL
 
+To begin, access the Admin Console using the Admin email and password you've entered while installing.
+When logged in to the KAC, create a new publisher account to being using Kaltura.
+Visit http://www.kaltura.org to join the community and get help!
+Visit http://knowledge.kaltura.com to read documentation and learn more.
+=====================================================================================================================
 "
+
+

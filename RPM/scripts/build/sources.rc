@@ -117,6 +117,12 @@ KVPM_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/flash/kvpm/$KV
 KVPM_UICONF_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalsource/uiconf/ps/kaltura/kvpm/$KVPM_VERSION"
 KVPM_RPM_NAME="kaltura-kvpm"
 
+# Kaltura KCLIP
+# we bundle a few vers at each release:
+KCLIP_VERSION="v1.1.2.1"
+KCLIP_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/flash/kclip/$KCLIP_VERSION"
+KCLIP_RPM_NAME="kaltura-kclip"
+
 # HTML5 lib
 HTML5LIB_VERSION="v2.1.1"
 HTML5LIB_URI="https://github.com/kaltura/mwEmbed/tarball/$HTML5LIB_VERSION"

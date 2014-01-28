@@ -6,7 +6,7 @@
 
 Name:           kaltura-sphinx
 Version:        2.2.1
-Release:        12
+Release:        13
 Summary:        Sphinx full-text search server - for Kaltura
 
 Group:          Applications/Text
@@ -164,6 +164,10 @@ fi
 
 
 %changelog
+* Mon Jan 20 2014 Jess Portnoy <jess.portnoy@kaltura.com> 2.2.1.r4097-9
+- With populate, no need to show an error if trying to stop a none running instance.
+  Saying it isn't running is good enough and cause less panic.
+
 * Mon Jan 20 2014 Jess Portnoy <jess.portnoy@kaltura.com> 2.2.1.r4097-9
 - Added populate init script.
 

@@ -1,12 +1,12 @@
 Summary: Kaltura widgets
 Name: kaltura-widgets
 Version: 1.0.0
-Release: 2 
+Release: 4 
 License: AGPLv3+
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
-Requires: kaltura-kmc, kaltura-kdp, kaltura-kcw kaltura-kdp kaltura-kdp3 kaltura-kdp3wrapper kaltura-kvpm
+Requires: kaltura-clipapp, kaltura-kmc, kaltura-kdp, kaltura-kcw kaltura-kdp kaltura-kdp3 kaltura-kdp3wrapper kaltura-kvpm, kaltura-kclip
 
 %description
 Kaltura is the world's first Open Source Online Video Platform, transforming the way people work, 
@@ -34,7 +34,14 @@ rm -rf %{buildroot}
 %files
 
 %changelog
+* Tue Jan 28 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.0-4
+- Require kclip
+
+* Tue Jan 28 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.0-3
+- kaltura-kclip added
+
 * Sun Jan 12 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.0-2
 - Corrected deps.
+
 * Sun Jan 12 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.0-1
 - Initial package. 

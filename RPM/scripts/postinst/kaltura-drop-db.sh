@@ -1,4 +1,4 @@
-#!/bin/bash - 
+#!/bin/bash -e 
 #===============================================================================
 #          FILE: kaltura-drop-db.sh
 #         USAGE: ./kaltura-drop-db.sh 
@@ -29,6 +29,7 @@ echo "This will drop the following DBs:
 $DBS 
 and remove users:
 $DB_USERS
+on $DB1_HOST
 
 Are you absolutely certain you want this? [n/Y]
 "
@@ -38,6 +39,7 @@ if [ "$AN" != 'Y' ];then
 fi
 echo "root DB passwd:"
 read -s DBPASSWD
+echo "Removing..."
 for i in $DBS;do echo "drop database $i" | mysql -h$DB1_HOST -p$DBPASSWD ;done
 for i in $DB_USERS;do echo "drop user $i" | mysql -h$DB1_HOST -p$DBPASSWD ;done
 

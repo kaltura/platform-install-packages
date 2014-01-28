@@ -3,7 +3,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.2
-Release: 4 
+Release: 6 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -46,6 +46,15 @@ rm -rf %{buildroot}
 %config %{prefix}/bin/db_actions.rc
 
 %changelog
+* Tue Jan 28 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.1-6
+- Proper Analytics population msg.
+- Change all server prompt defaults to 127.0.0.1
+- Changed inst complete msg.
+
+
+* Tue Jan 28 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.1-5
+- bash -x on drop-db.sh
+
 * Mon Jan 27 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.1-3
 - Removed debug from front.
 - Added DWH config to config-all.sh
