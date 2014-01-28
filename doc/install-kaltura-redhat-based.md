@@ -22,8 +22,9 @@ setenforce permissive
 ```
 ###### Auto Set the Kaltura install repository links 
 **Note: that this is currently our test URL, the repo URL will change soon.**
-```rpm -ihv http://54.211.235.142/kaltura-ce-rpm/noarch/kaltura-release-9.7.0-$REVISION.noarch.rpm```   
-*Jan 26, 2014*: At the time of this release the revision is 3 but please browse http://54.211.235.142/kaltura-ce-rpm/noarch/ to find the latest.
+```rpm -ihv rpm -ihv http://54.211.235.142/nightly/RPMS/noarch/kaltura-release.noarch.rpm```   
+`http://54.211.235.142/nightly/RPMS/noarch/kaltura-release.noarch.rpm` represents the latest master release (latest nightly build).
+
 ###### Install and configure MySQL (if you’re going to use DB on the same server)
 ```bash
 yum install mysql-server
@@ -71,7 +72,7 @@ This will completely remove Kaltura, then download and install from scratch.
 /opt/kaltura/bin/kaltura-drop-db.sh
 yum remove "*kaltura*"
 rm -rf /opt/kaltura
-rpm -ihv http://54.211.235.142/kaltura-ce-rpm/noarch/kaltura-release-9.7.0-$REVISION.noarch.rpm
+rpm -ihv http://54.211.235.142/nightly/RPMS/noarch/kaltura-release.noarch.rpm
 yum clean all
 yum install kaltura-server
 /opt/kaltura/bin/kaltura-config-all.sh [answers-file-path]
