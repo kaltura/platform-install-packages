@@ -12,7 +12,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 9.9.0
-Release: 1
+Release: 2 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -20,7 +20,7 @@ Source1: kaltura.apache.ssl.conf.template
 Source3: kaltura.apache.conf.template 
 # 22/01/14 due to a bug, can be removed in the next version:
 Source2: 01.conversionProfile.99.template.xml
-patch0: KMediaInfoMediaParser.php.diff 
+#patch0: KMediaInfoMediaParser.php.diff 
 URL: https://github.com/kaltura/server/tree/master
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
@@ -42,7 +42,7 @@ This is the base package, needed for any Kaltura server role.
 
 %prep
 %setup -qn server-IX-%{version}
-%patch0 -p0 
+#%patch0 -p0 
 
 
 %install

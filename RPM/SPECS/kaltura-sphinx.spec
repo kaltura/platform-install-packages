@@ -139,6 +139,7 @@ fi
 %preun
 if [ "$1" = 0 ] ; then
     /sbin/service kaltura-sphinx stop >/dev/null 2>&1
+    /sbin/service kaltura-populate stop >/dev/null 2>&1
     /sbin/chkconfig --del kaltura-sphinx
     rm -f %{prefix}/app/configurations/sphinx/populate/`hostname`.ini
 fi

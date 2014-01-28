@@ -7,7 +7,7 @@
 Summary: Kaltura Open Source Video Platform - batch server 
 Name: kaltura-batch
 Version: 9.9.0
-Release: 1 
+Release: 5 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: zz-%{name}.ini
@@ -16,8 +16,8 @@ Source1: kaltura-batch
 Source3: batch.ini.template 
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires: kaltura-base, kaltura-ffmpeg, kaltura-ffmpeg-aux, php, curl, httpd, sox, ImageMagick, kaltura-sshpass, php-pecl-memcached, php-mcrypt,php-pecl-memcached,mediainfo, kaltura-segmenter, mod_ssl
-PreReq: httpd
+Requires: kaltura-base, kaltura-ffmpeg, kaltura-ffmpeg-aux, php, curl, httpd, sox, ImageMagick, kaltura-sshpass, php-pecl-memcached, php-mcrypt,php-pecl-memcached,mediainfo, kaltura-segmenter, mod_ssl,kaltura-mencoder
+#PreReq: httpd
 Requires(post): chkconfig
 Requires(preun): chkconfig
 # This is for /sbin/service
@@ -73,7 +73,7 @@ fi
 %post
 # now replace tokens
 sed -i "s@^\(params.ImageMagickCmd\)\s*=.*@\1=%{_bindir}/convert@" $RPM_BUILD_ROOT%{batch_confdir}/batch.ini.template
-sed -i "s@^\(params.mediaInfoCmd\)\s*=.*@\1=%{_bindir}/convert@" $RPM_BUILD_ROOT%{batch_confdir}/batch.ini.template
+sed -i "s@^\(params.mediaInfoCmd\)\s*=.*@\1=%{_bindir}/mediainfo@" $RPM_BUILD_ROOT%{batch_confdir}/batch.ini.template
 #sed 's#@APACHE_SERVICE@#httpd#g' -i %{prefix}/app/configurations/monit.avail/httpd.rc
 
 #ln -fs %{prefix}/app/configurations/monit.avail/httpd.rc %{prefix}/app/configurations/monit.d/httpd.rc
@@ -126,6 +126,9 @@ service httpd restart
 
 
 %changelog
+* Mon Jan 27 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-2
+- kaltura-mencoder added to dep list.
+
 * Mon Jan 27 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-1
 - Moving to IX-9.9.0
 

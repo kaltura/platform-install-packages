@@ -72,6 +72,9 @@ echo "Running Batch config...
 
 "
 $BASE_DIR/bin/kaltura-batch-config.sh "$ANSFILE" 
+
+$BASE_DIR/bin/kaltura-dwh-config.sh "$ANSFILE" 
+
 rm -rf $APP_DIR/cache/*
 rm -f $APP_DIR/log/kaltura-*.log
 

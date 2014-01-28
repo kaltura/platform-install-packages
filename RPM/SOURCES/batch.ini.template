@@ -18,7 +18,7 @@ dwhEnabled											= 0
 timezone											= @TIME_ZONE@
 statusInterval										= 300
 
-[@INSTALLED_HOSNAME@ : template]
+[@INSTALLED_HOSNAME@ : mainTemplate]
 id	= @BATCH_SCHEDULER_ID@
 name                                                                                            = Default Scheduler
 

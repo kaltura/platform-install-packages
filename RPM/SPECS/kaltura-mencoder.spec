@@ -4,7 +4,7 @@
 Summary: Utilities and libraries for MPlayer movie encoder
 Name: kaltura-mencoder
 Version: %{real_version}
-Release: 8 
+Release: 9 
 License: GPL
 Group: Applications/Multimedia
 URL: http://www.mplayerhq.hu 
@@ -50,7 +50,7 @@ EOF
 %post
 /sbin/ldconfig
 chcon -t textrel_shlib_t %{base_prefix}/lib/.so.*.*.* &>/dev/null || :
-ln -fs %{base_prefix}/bin/mencoder-dir/mencoder /opt/kaltura/bin/
+ln -fs %{base_prefix}/bin/mencoder /opt/kaltura/bin/
 
 %postun 
 /sbin/ldconfig

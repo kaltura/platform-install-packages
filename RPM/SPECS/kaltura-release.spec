@@ -3,7 +3,7 @@
 Summary: Kaltura Server release file and package configuration
 Name: kaltura-release
 Version: 9.9.0
-Release: 1 
+Release: 2 
 License: AGPLv3+
 Group: Server/Platform 
 URL: http://kaltura.org
@@ -60,7 +60,7 @@ exit 0
 #%doc RPM-GPG-KEY-rpmforge-matthias
 #%endif
 %dir %{_sysconfdir}/yum.repos.d/
-%config(noreplace) %{_sysconfdir}/yum.repos.d/kaltura.repo
+%config %{_sysconfdir}/yum.repos.d/kaltura.repo
 #%dir %{_sysconfdir}/pki/rpm-gpg/
 #%{_sysconfdir}/pki/rpm-gpg/RPM-GPG-KEY-rpmforge-*
 

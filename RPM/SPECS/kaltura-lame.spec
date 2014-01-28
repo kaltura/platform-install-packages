@@ -2,7 +2,7 @@
 Summary: LAME Ain't an MP3 Encoder... but it's the best of all
 Name: kaltura-lame
 Version: 3.99.5
-Release: 2
+Release: 3 
 License: LGPL
 Group: Applications/Multimedia
 URL: http://lame.sourceforge.net/
@@ -69,12 +69,12 @@ you will need to install %{name}-devel.
 %{__make} install DESTDIR="%{buildroot}"
 %{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
 cat > $RPM_BUILD_ROOT%{_sysconfdir}/profile.d/kaltura_lame.sh << EOF
-PATH=\$PATH:%{base_prefix}/bin
+PATH=\$PATH:%{prefix}/bin
 export PATH
 EOF
 %{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/ld.so.conf.d
 cat > $RPM_BUILD_ROOT%{_sysconfdir}/ld.so.conf.d/kaltura_lame.conf << EOF
-%{base_prefix}-%{version}/lib
+%{prefix}/lib
 EOF
 
 ### Some apps still expect to find <lame.h>
@@ -113,7 +113,10 @@ execstack -c %{buildroot}%{prefix}/lib/*.so.*.*.* || :
 %exclude %{prefix}/lib/libmp3lame.la
 
 %changelog
-* Mon Feb 5 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.16-2
+* Mon Feb 27 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 3.99.5-3
+- Corrected paths to bin and lib dir in profile.d and ld.so.conf.d.
+
+* Mon Feb 5 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 3.99.5-2 
 - Adopted for Kaltura.
 
 * Sun Mar 11 2012 Dag Wieers <dag@wieers.com> - 3.99.5-1
