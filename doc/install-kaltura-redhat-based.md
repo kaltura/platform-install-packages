@@ -18,6 +18,7 @@ chkconfig iptables off
 ###### Disable SELinux - REQUIRED (currently Kaltura can't run properly with SELinux)
 ```bash 
 setenforce permissive
+# To verify SELinux will not revert to enabled next restart:
 # Edit /etc/selinux/config
 # Set SELINUX=permissive
 # Save /etc/selinux/config
@@ -32,7 +33,7 @@ setenforce permissive
 yum install mysql-server
 /etc/init.d/mysqld start
 mysql_secure_installation
-# Run the my.cnf configuration script
+# Run the my.cnf configuration script ON THE MYSQL server
 /opt/kaltura/bin/kaltura-mysql-settings.sh
 ```
 ###### Configure your email server and MTA - REQUIRED
