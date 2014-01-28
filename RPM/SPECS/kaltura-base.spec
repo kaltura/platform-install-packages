@@ -12,15 +12,16 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 9.9.0
-Release: 2 
+Release: 3 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
 Source1: kaltura.apache.ssl.conf.template 
-Source3: kaltura.apache.conf.template 
 # 22/01/14 due to a bug, can be removed in the next version:
 Source2: 01.conversionProfile.99.template.xml
-#patch0: KMediaInfoMediaParser.php.diff 
+Source3: kaltura.apache.conf.template 
+Source4: emails_en.template.ini
+Source5: 01.Partner.template.ini
 URL: https://github.com/kaltura/server/tree/master
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
@@ -42,7 +43,6 @@ This is the base package, needed for any Kaltura server role.
 
 %prep
 %setup -qn server-IX-%{version}
-#%patch0 -p0 
 
 
 %install
@@ -85,11 +85,6 @@ for i in admin_console alpha api_v3 batch configurations deployment generator in
 done
 mkdir -p $RPM_BUILD_ROOT%{prefix}/app/configurations/monit.d
 mv $RPM_BUILD_ROOT/%{prefix}/app/configurations/monit/monit.d $RPM_BUILD_ROOT/%{prefix}/app/configurations/monit.avail
-# change name from .*.template.rc to .*.rc.template so that monit.d/*.rc will work correctly.
-
-# now replace tokens
-#sed 's#@IMAGE_MAGICK_BIN_DIR@#%{_bindir}#g' $RPM_BUILD_ROOT%{prefix}/app/configurations/local.template.ini > $RPM_BUILD_ROOT/%{prefix}/app/configurations/local.ini
-#sed -i 's#@CURL_BIN_DIR@#%{_bindir}#g' $RPM_BUILD_ROOT%{prefix}/app/configurations/local.ini
 
 sed -i "s@\(^kmc_version\)\s*=.*@\1=%{kmc_version}@g" $RPM_BUILD_ROOT%{prefix}/app/configurations/base.ini
 rm $RPM_BUILD_ROOT%{prefix}/app/generator/sources/android/DemoApplication/libs/libWVphoneAPI.so
@@ -97,6 +92,9 @@ rm $RPM_BUILD_ROOT%{prefix}/app/configurations/.project
 # we bring our own for kaltura-front and kaltura-batch.
 cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/app/configurations/apache/kaltura.ssl.conf.template
 cp %{SOURCE3} $RPM_BUILD_ROOT%{prefix}/app/configurations/apache/kaltura.conf.template
+cp %{SOURCE4} $RPM_BUILD_ROOT%{prefix}/app/batch/batches/Mailer/emails_en.template.ini
+# Add partnerParentId=0 to Mr. partner 99.
+cp %{SOURCE5} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_data/01.Partner.template.ini
 
 # we bring another in kaltura-batch
 rm $RPM_BUILD_ROOT%{prefix}/app/configurations/batch/batch.ini.template
@@ -142,9 +140,6 @@ getent passwd apache >/dev/null || \
     -d /var/www -c "Apache" apache
 
 usermod -g %{kaltura_group} %{kaltura_user} 2>/dev/null || true
-#chown -R %{kaltura_user}:%{kaltura_group} %{prefix}/log 
-#chown -R %{kaltura_user}:%{kaltura_group} %{prefix}/tmp 
-#chown -R %{kaltura_user}:%{kaltura_group} %{prefix}/app/cache 
 ln -sf %{prefix}/app/configurations/system.ini /etc/kaltura.d/system.ini
 ln -sf %{prefix}/app/api_v3/web %{prefix}/app/alpha/web/api_v3
 chown apache.kaltura -R /opt/kaltura/web/content/entry /opt/kaltura/web/content/uploads/ /opt/kaltura/web/content/webcam/
@@ -202,6 +197,9 @@ fi
 
 
 %changelog
+* Tue Jan 28 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-3
+- Added emails_en.template.ini
+
 * Mon Jan 27 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-1
 - Moving to IX-9.9.0
 
