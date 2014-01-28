@@ -18,7 +18,9 @@ chkconfig iptables off
 ###### Disable SELinux - REQUIRED (currently Kaltura can't run properly with SELinux)
 ```bash 
 setenforce permissive
-# Edit /etc/selinux/config, Set SELINUX=permissive and save
+# Edit /etc/selinux/config
+# Set SELINUX=permissive
+# Save /etc/selinux/config
 ```
 ###### Auto Set the Kaltura install repository links 
 **Note: that this is currently our test URL, the repo URL will change soon.**
