@@ -1,51 +1,81 @@
 Dear Kaltura administrator,
 
 
+
 Thank you for installing Kaltura, the open source media asset management platform.
 
+
 This email confirms that you've successfully installed a Kaltura server on:
+
 @SERVICE_URL@
 
+
 To begin using your new Kaltura server, access the Admin Console at:
+
 @SERVICE_URL@/admin_console/
 
+
 Use @ADMIN_CONSOLE_ADMIN_MAIL@ and the the password you've entered while installing.
+
 When logged in to the KAC, click on "Add New Publisher" to create a new account and being using Kaltura.
 
-Please tell us about your experience running Kaltura at:
-http://bit.ly/kcommnuitysurvey
+
+Please tell us about your experience running Kaltura at: http://bit.ly/kcommnuitysurvey
+
 
 
 6 Quick Tips For Smooth Kaltura Maintenance -
 
+
 Tip #1:
+
 Join the community discussion board at: http://forum.kaltura.org to get help, meet other Kaltura community members and share your Kaltura stories!
 
+
 Tip #2:
+
 In order to automate the installation of your Kaltura server (if you running in a cluster, or just to make the next install faster) - you can use the answers file that was generated for you during the installation, and pass it as a parameter to the post-install script. 
+
 Find your answers file at: @ANSFILE@
 
+
 Tip #3:
+
 Check your install log, and verify everything went smoothly. 
+
 Find your install log file at: @BASE_DIR@/log
 
+
 Tip #4:
+
 If you ever come across issues, this is a quick way to grep all log files for errors:
+
 grep 'ERR:\|exception\|trace\|CRIT\|\[error\]' @BASE_DIR@/log/*.log --color -r
 
+
 Tip #5:
+
 Follow http://bit.ly/kcore-release-notes for the latest Kaltura release notes.
 
+
 Tip #6:
+
 Visit http://knowledge.kaltura.com to read documentation and learn more.
+
 Visit http://www.kaltura.org to join the community and get help.
 
 
+
 We're excited to have you join the Kaltura community!
+
 Please email community@kaltura.com for any questions, ideas or join us for a beer!
 
 
 
+
 The Kaltura team
+
 community@kaltura.com
+
 http://corp.kaltura.com
+
