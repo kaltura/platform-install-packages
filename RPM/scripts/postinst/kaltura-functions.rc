@@ -6,7 +6,7 @@ else
 	BASE_DIR=/opt/kaltura
 fi
 
-POST_INST_MAIL_SUBJECT='Your Kaltura server is up! and 6 Quick Tips For Smooth Kaltura Maintenance'
+POST_INST_MAIL_SUBJECT='Your new Kaltura server is up! and 6 Quick Tips For Smooth Kaltura Maintenance'
 POST_INST_MAIL_TMPL=$BASE_DIR/app/configurations/post_inst_mail
 
 call_base_config()
@@ -142,6 +142,6 @@ configure_apache_ssl()
 send_post_inst_msg()
 {
 	MAILTO=$1
-	mail -s "$POST_INST_MAIL_SUBJECT" $MAILTO < $POST_INST_MAIL_TMPL 
+	mail -s "$POST_INST_MAIL_SUBJECT" -r "Kaltura Video Platform <kaltura@$KALTURA_VIRTUAL_HOST_NAME>" $MAILTO < $POST_INST_MAIL_TMPL 
 	
 }

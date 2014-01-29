@@ -7,7 +7,7 @@
 Summary: Kaltura Open Source Video Platform - batch server 
 Name: kaltura-batch
 Version: 9.9.0
-Release: 5 
+Release: 6 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: zz-%{name}.ini
@@ -102,6 +102,10 @@ if [ "$1" = 0 ];then
 	if [ -r %{prefix}/app/configurations/system.ini ];then 
 		service kaltura-batch restart
 	fi
+fi
+
+if [ "$1" = 0 ];then
+	%{prefix}/bin/kaltura-dwh-config.sh
 fi
 
 %preun

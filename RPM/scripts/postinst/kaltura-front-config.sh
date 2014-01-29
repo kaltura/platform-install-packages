@@ -29,9 +29,29 @@ enable_admin_conf()
 	echo "Enabling Apache config - admin.conf"
 	ln -s $KALTURA_APACHE_CONFD/admin.conf $KALTURA_APACHE_CONFD/enabled.admin.conf 
 }
+create_answer_file()
+{
+	ANSFILE="$1"
+        for VAL in CONFIG_CHOICE IS_SSL CRT_FILE KEY_FILE; do
+                if [ -n "${!VAL}" ];then
+			echo "$VAL=\"${!VAL}\"" >> $ANSFILE 
+                fi
+        done
+	echo "
+
+========================================================================================================================
+Kaltura install answer file written to $ANSFILE  -  Please save it!
+This answers file can be used to silently-install re-install this machine or deploy other hosts in your cluster.
+========================================================================================================================
+
+"
+}
 if [ -n "$1" -a -r "$1" ];then
 	ANSFILE=$1
 	. $ANSFILE
+	AUTO_YES=1
+	NEWANSFILE="/tmp/kaltura_`date +%d_%m_%H_%M.ans`"
+	cp $ANSFILE $NEWANSFILE
 fi
 if [ ! -r /opt/kaltura/app/base-config.lock ];then
 	`dirname $0`/kaltura-base-config.sh "$ANSFILE"
@@ -61,11 +81,15 @@ EOF
 fi
 if [ "$IS_SSL" != 'Y' -a "$IS_SSL" != 1 ];then
 #-a ! -r "$ANSFILE" ];then
-	echo "It is recommended that you do work using HTTPs. Would you like to continue anyway?[N/y]"
-	read CONT
-	if [ "$CONT" != 'y' ];then
-		echo "Exiting."
-		exit 2
+	echo "update permission set STATUS=1 WHERE permission.NAME='FEATURE_KMC_ENFORCE_HTTPS' ;" | mysql $DB1_NAME -h$DB1_HOST -u$DB1_USER -P$DB1_PORT -p$DB1_PASS 
+	if [ -z "$AUTO_YES" ];then
+		echo "It is recommended that you do work using HTTPs. Would you like to continue anyway?[N/y]"
+		read CONT
+		if [ "$CONT" != 'y' ];then
+			echo "Exiting."
+			exit 2
+		fi
+		IS_SSL='N'
 	fi
 	MAIN_APACHE_CONF=$KALTURA_APACHE_CONF/kaltura.conf
 else
@@ -101,10 +125,6 @@ else
 
 	"
 		exit 3
-	fi
-	if ! grep -q 'IS_SSL=Y' $RC_FILE;then
-		echo "
-		IS_SSL=Y" >> $RC_FILE 
 	fi
 	# it might fail if done before there's a DB but I don't want it to stop the config script, it can be easily fixed later.
 	php $APP_DIR/deployment/base/scripts/insertPermissions.php -d $APP_DIR/deployment/permissions/ssl/ >/dev/null 2>&1 ||true
@@ -205,4 +225,9 @@ ln -sf $APP_DIR/configurations/cron/cleanup /etc/cron.d/kaltura-cleanup
 ln -sf $APP_DIR/configurations/logrotate/kaltura_apache /etc/logrotate.d/ 
 ln -sf $APP_DIR/configurations/logrotate/kaltura_apps /etc/logrotate.d/
 
+if [ -r "$NEWANSFILE" ];then
+	create_answer_file $NEWANSFILE
+fi
+chown -R apache.kaltura /opt/kaltura/log /opt/kaltura/app/cache
+chmod -R 775 /opt/kaltura/log /opt/kaltura/app/cache/
 service httpd restart

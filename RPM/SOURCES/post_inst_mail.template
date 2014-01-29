@@ -27,7 +27,7 @@ Find your answers file at: @ANSFILE@
 
 Tip #3:
 Check your install log, and verify everything went smoothly. 
-Find your install log file at: @BASE_DIR/log@
+Find your install log file at: @BASE_DIR@/log
 
 Tip #4:
 If you ever come across issues, this is a quick way to grep all log files for errors:

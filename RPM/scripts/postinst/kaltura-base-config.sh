@@ -38,9 +38,10 @@ verify_user_input()
 create_answer_file()
 {
 	POST_INST_MAIL_TMPL=$1
+	ANSFILE=/tmp/kaltura_`date +%d_%m_%H_%M`.ans
         for VAL in TIME_ZONE KALTURA_FULL_VIRTUAL_HOST_NAME KALTURA_VIRTUAL_HOST_NAME DB1_HOST DB1_PORT DB1_PASS DB1_NAME DB1_USER SERVICE_URL SPHINX_SERVER1 SPHINX_SERVER2 DWH_HOST DWH_PORT SPHINX_DB_HOST SPHINX_DB_PORT ADMIN_CONSOLE_ADMIN_MAIL ADMIN_CONSOLE_PASSWORD CDN_HOST KALTURA_VIRTUAL_HOST_PORT SUPER_USER SUPER_USER_PASSWD ENVIRONMENT_NAME DWH_PASS; do
                 if [ -n "${!VAL}" ];then
-			ANSFILE=/tmp/kaltura_`date +%d_%m_%H_%M`.ans
+			#ANSFILE=/tmp/kaltura_`date +%d_%m_%H_%M`.ans
 			echo "$VAL=\"${!VAL}\"" >> $ANSFILE 
                 fi
         done

@@ -3,7 +3,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.2
-Release: 11 
+Release: 18 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -50,6 +50,11 @@ rm -rf %{buildroot}
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Wed Jan 29 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.2-8
+- Modified post install mail template.
+
+* Tue Jan 28 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.2-7
+- With post install mail template.
 * Tue Jan 28 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.2-8
 - Now actually USE the templ to send it out.
 
