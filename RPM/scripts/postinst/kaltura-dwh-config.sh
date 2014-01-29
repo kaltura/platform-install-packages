@@ -39,5 +39,7 @@ The Kaltura DWH DB seems to already be installed.
 DB creation will be skipped.
 EOF
 fi
+sed  's#\(@DWH_DIR@\)$#\1 -k /opt/kaltura/pentaho/pdi/kitchen.sh#g' $APP_DIR/configurations/cron/dwh.template >$APP_DIR/configurations/cron/dwh
+sed -i -e "s#@DWH_DIR@#$BASE_DIR/dwh#g" -e "s#@APP_DIR@#$APP_DIR#g" -e "s#@LOG_DIR@#$LOG_DIR#g" $APP_DIR/configurations/cron/dwh
 ln -sf $APP_DIR/configurations/cron/dwh /etc/cron.d/kaltura-dwh
 echo "DWH configured."

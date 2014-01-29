@@ -7,6 +7,12 @@ if [ -n "$1" -a -r "$1" ];then
 	export ANSFILE
 fi
 
+KALTURA_FUNCTIONS_RC=`dirname $0`/kaltura-functions.rc
+if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
+	echo "Could not find $KALTURA_FUNCTIONS_RC so, exiting.."
+	exit 3
+fi
+. $KALTURA_FUNCTIONS_RC
 echo "Running base config...
 
 "
@@ -92,4 +98,4 @@ Visit http://knowledge.kaltura.com to read documentation and learn more.
 =====================================================================================================================
 "
 
-
+send_post_inst_msg $ADMIN_CONSOLE_ADMIN_MAIL 

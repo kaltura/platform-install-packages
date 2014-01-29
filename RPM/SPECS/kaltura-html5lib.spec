@@ -3,10 +3,11 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
 Version: v2.1.1
-Release: 4 
+Release: 5 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/mwEmbed/tarball/%{name}-%{version}.tar.gz 
+Source1: LocalSettings.php
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
@@ -28,9 +29,12 @@ This package installs the Kaltura HTML5 library.
 %prep
 %setup -q
 
+
+
 %install
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib
 cp -r %{_builddir}/%{name}-%{version} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/%{version}
+cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/%{version}
 
 %clean
 rm -rf %{buildroot}
@@ -46,6 +50,9 @@ rm -rf %{buildroot}
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Tue Jan 28 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.1.1-5
+- LocalSettings.php is ALWAYS the same, it has no custom data, why not just bring it as part of the package??
+
 * Wed Jan 15 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.1.1-3
 - Moved root dir to %{prefix}/web.
 

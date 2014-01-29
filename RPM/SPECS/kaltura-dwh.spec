@@ -1,11 +1,12 @@
 %define prefix /opt/kaltura
+%define kaltura_user kaltura
 Summary: Kaltura Open Source Video Platform - Analytics 
 Name: kaltura-dwh
-Version: 9.9.0 
-Release: 1
+Version: 9.2.0
+Release: 2
 License: AGPLv3+
 Group: Server/Platform 
-Source0: https://github.com/kaltura/dwh/archive/%{name}-master.zip
+Source0: https://github.com/kaltura/dwh/archive/%{name}-IX-%{version}.zip
 URL: https://github.com/kaltura/dwh/tree/master 
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires: kaltura-base,kaltura-pentaho,jre, kaltura-postinst 
@@ -31,16 +32,16 @@ and developing a variety of online workflows for video.
 This package configures the Data Warehouse [DWH] analytics component. 
 
 %prep
-%setup -qn dwh-master
+%setup -qn dwh-IX-%{version} 
 
 %build
 
 %install
 # for Apache access logs.
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/logs
-mkdir -p $RPM_BUILD_ROOT%{prefix}/dwh
-cp -r %{_builddir}/dwh-master/* $RPM_BUILD_ROOT%{prefix}/dwh/
-cp -r %{_builddir}/dwh-master/.kettle $RPM_BUILD_ROOT%{prefix}/dwh/
+cp -r %{_builddir}/dwh-IX-%{version} $RPM_BUILD_ROOT%{prefix}/dwh
+#cp -r %{_builddir}/dwh-IX-%{version}/.kettle $RPM_BUILD_ROOT%{prefix}/dwh/
+chmod +x $RPM_BUILD_ROOT%{prefix}/dwh/etlsource/execute/*.sh
 
 %clean
 rm -rf %{buildroot}
@@ -57,14 +58,8 @@ and then edit /etc/selinux/config to make the change permanent."
 fi
 
 %post
-if [ "$1" = 1 ];then
-echo "#####################################################################################################################################
-Installation of %{name} %{version} completed
-Please run: 
-# %{prefix}/bin/%{name}-config.sh [/path/to/answer/file]
-To finalize the setup.
-#####################################################################################################################################
-"
+if [ "$1" = 0 ];then
+	%{prefix}/bin/kaltura-dwh-config.sh
 fi
 # Alas, we only work well with Sun's Java so, first lets find the latest version we have for it [this package is included in Kaltura's repo, as taken from Oracle's site
 LATEST_JAVA=`ls -d /usr/java/jre*|tail -1`
@@ -77,23 +72,37 @@ fi
 
 %files
 %dir %{prefix}/web/logs
+%defattr(-, %{kaltura_user},root 0755)
 %{prefix}/dwh
 
 
 %changelog
-* Mon Jan 27 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-1
+* Wed Jan 29 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.2.0-2
+%%{prefix}/bin/kaltura-dwh-config.sh does not require user interaction, if this is an upgrade just run it at %%post.
+
+* Wed Jan 29 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.2.0-1
+- Fixes Unknown column 'invalid_login_count' in 'field list' - this field was dropped from the kaltura operational DB.
+
+* Wed Jan 29 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.1.0-3
+- Define 'kaltura_user' in the spec.
+
+* Wed Jan 29 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.1.0-2
+- Make kaltura owner of logs dir.
+- Set exec bit on all shell scripts.
+
+* Mon Jan 27 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.1.0-1
 - Moving to IX-9.9.0
 
-* Sun Jan 26 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-8
+* Sun Jan 26 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.1.0-8
 - Sources moved to GIT.
 
-* Sat Jan 18 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-6
+* Sat Jan 18 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.1.0-6
 - Plus .kettle config.
 
-* Sat Jan 18 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-5
+* Sat Jan 18 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.1.0-5
 - Install actual %%{prefix}/dwh dir
 
-* Thu Jan 16 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-3
+* Thu Jan 16 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.1.0-3
 - Added creation of %%{prefix}/web/logs
 
 * Mon Dec 23 2013 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-1

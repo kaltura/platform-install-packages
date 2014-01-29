@@ -6,6 +6,9 @@ else
 	BASE_DIR=/opt/kaltura
 fi
 
+POST_INST_MAIL_SUBJECT='Your new Kaltura server is up\!'
+POST_INST_MAIL_TMPL=$BASE_DIR/app/configurations/post_inst_mail
+
 call_base_config()
 {
 
@@ -136,3 +139,9 @@ configure_apache_ssl()
 	ln -fs $KALTURA_SSL_CONFFILE /etc/httpd/conf.d/  
 }
 
+send_post_inst_msg()
+{
+	MAILTO=$1
+	mail -s "$POST_INST_MAIL_SUBJECT" $MAILTO < $POST_INST_MAIL_TMPL 
+	
+}

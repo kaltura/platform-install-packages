@@ -1,6 +1,8 @@
 # this sucks but base.ini needs to know the KMC version and it needs to be known cross cluster because, it is needed to generate the UI confs, which is done by the db-config postinst script which can run from every cluster node.
 %define kmc_version v5.37.10
-%define kclipper_version v1.0.7
+%define clipapp_version v1.0.7
+%define html5_version v2.1.1
+%define kdp3_wrapper_version v37.0
 %define kaltura_user	kaltura
 %define kaltura_group	kaltura
 %define apache_user	apache
@@ -13,7 +15,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 9.9.0
-Release: 4 
+Release: 11 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -26,7 +28,7 @@ Source5: 01.Partner.template.ini
 URL: https://github.com/kaltura/server/tree/master
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
-Requires: rsync,mail,mysql,kaltura-monit,kaltura-postinst,cronie, php, php-xml, php-curl, php-mysql,php-gd,php-gmp, php-imap, php-ldap,ntp
+Requires: rsync,mail,mysql,kaltura-monit,kaltura-postinst,cronie, php, php-xml, php-curl, php-mysql,php-gd,php-gmp, php-imap, php-ldap,ntp,mailx
 
 %description
 Kaltura is the world's first Open Source Online Video Platform, transforming the way people work, 
@@ -89,6 +91,10 @@ mv $RPM_BUILD_ROOT/%{prefix}/app/configurations/monit/monit.d $RPM_BUILD_ROOT/%{
 
 sed -i "s@\(^kmc_version\)\s*=.*@\1=%{kmc_version}@g" $RPM_BUILD_ROOT%{prefix}/app/configurations/base.ini
 sed -i "s@\(^clipapp_version\)\s*=.*@\1=%{clipapp_version}@g" $RPM_BUILD_ROOT%{prefix}/app/configurations/base.ini
+sed -i "s@\(^html5_version\)\s*=.*@\1=%{html5_version}@g" $RPM_BUILD_ROOT%{prefix}/app/configurations/base.ini
+sed -i "s@\(^kdp3_wrapper_version\)\s*=.*@\1=%{kdp3_wrapper_version}@g" $RPM_BUILD_ROOT%{prefix}/app/configurations/base.ini
+# our Pentaho is correctly installed under its own dir and not %prefix/bin which is the known default so, adding -k path to kitchen.sh
+sed -i 's#\(@DWH_DIR@\)$#\1 -k /opt/kaltura/pentaho/pdi/kitchen.sh#g' $RPM_BUILD_ROOT%{prefix}/app/configurations/cron/dwh.template
 rm $RPM_BUILD_ROOT%{prefix}/app/generator/sources/android/DemoApplication/libs/libWVphoneAPI.so
 rm $RPM_BUILD_ROOT%{prefix}/app/configurations/.project
 # we bring our own for kaltura-front and kaltura-batch.
@@ -147,7 +153,14 @@ ln -sf %{prefix}/app/api_v3/web %{prefix}/app/alpha/web/api_v3
 chown apache.kaltura -R /opt/kaltura/web/content/entry /opt/kaltura/web/content/uploads/ /opt/kaltura/web/content/webcam/
 chmod 775 /opt/kaltura/web/content/entry /opt/kaltura/web/content/uploads/ /opt/kaltura/web/content/webcam/ 
 /etc/init.d/ntpd start
-
+echo "$1" >/tmp/1
+if [ "$1" = 2 ];then
+	echo "Regenarating client libs.. this will take up to 2 minutes to complete."
+	php %{prefix}/app/generator/generate.php
+	if [ -x %{_sysconfdir}/init.d/httpd ];then
+		%{_sysconfdir}/init.d/httpd restart
+	fi
+fi
 
 
 %preun
@@ -183,10 +196,11 @@ fi
 
 
 %dir /etc/kaltura.d
-%defattr(-, %{kaltura_user}, %{apache_group} , 0775)
 %dir %{prefix}/log
 %dir %{prefix}/tmp
 %dir %{prefix}/app/cache
+%defattr(-, %{kaltura_user}, %{kaltura-user} , 0755)
+%dir %{prefix}
 %{prefix}/web/*
 %dir %{prefix}/web/control
 %dir %{prefix}/web/dropfolders
@@ -199,8 +213,16 @@ fi
 
 
 %changelog
+* Wed Jan 28 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-10
+- debugme.
+* Wed Jan 28 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-9
+- %%{prefix} to be owned by %%{kaltura_user}, %%{kaltura-user}
+
+* Tue Jan 28 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-4
+- Depend on mailx.
+
 * Tue Jan 28 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-3
-- Added emails_en.template.ini
+- Added emails_en.template.ini.
 
 * Mon Jan 27 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-1
 - Moving to IX-9.9.0

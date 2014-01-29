@@ -2,7 +2,7 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmc	
 Version: v5.37.10
-Release: 6 
+Release: 7 
 Summary: Kaltura Management Console
 
 Group: System Management	
@@ -13,7 +13,7 @@ Source1: kmc_config.ini
 BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 BuildArch: noarch
 
-Requires: kaltura-base, httpd	
+Requires: kaltura-base, httpd, kaltura-html5-studio,php-cli	
 
 %description
 Kaltura is the world's first Open Source Online Video Platform, transforming the way people work, 
@@ -34,6 +34,9 @@ This package installs the KMC Flash web interface.
 
 %build
 %post
+php %{prefix}/app/deployment/uiconf/deploy_v2.php --ini=%{prefix}/web/flash/kmc/%{version}/config.ini >> %{prefix}/log/deploy_v2.log  2>&1
+
+
 %install
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/flash/kmc/login
 mv %{_builddir}/%{name}-%{version}/login/%{kmc_login_version} $RPM_BUILD_ROOT%{prefix}/web/flash/kmc/login/ 
@@ -51,6 +54,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sat Jan 18 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.10-7
+- Added dep on kaltura-html5-studio
+
 * Sat Jan 18 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.10-4
 - Replace version in base.ini
 

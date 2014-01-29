@@ -3,10 +3,11 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.2
-Release: 6 
+Release: 11 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
+Source1: post_inst_mail.template
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
@@ -30,8 +31,10 @@ This package includes post install scripts to be run post RPM install as they re
 
 %install
 mkdir -p $RPM_BUILD_ROOT/%{prefix}/bin
+mkdir -p $RPM_BUILD_ROOT/%{prefix}/app/configurations
 chmod +x *.sh 
-mv  *.{sh,rc} $RPM_BUILD_ROOT/%{prefix}/bin
+mv  *.sh *.rc $RPM_BUILD_ROOT/%{prefix}/bin
+cp %{SOURCE1} $RPM_BUILD_ROOT/%{prefix}/app/configurations
 sed -i 's#@APP_DIR@#%{prefix}/app#g' $RPM_BUILD_ROOT/%{prefix}/bin/*rc
 
 %clean
@@ -44,22 +47,28 @@ rm -rf %{buildroot}
 %files
 %{prefix}/bin/*
 %config %{prefix}/bin/db_actions.rc
+%config %{prefix}/app/configurations/*
 
 %changelog
-* Tue Jan 28 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.1-6
+* Tue Jan 28 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.2-8
+- Now actually USE the templ to send it out.
+
+* Tue Jan 28 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.2-7
+- With post install mail template.
+
+* Tue Jan 28 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.2-6
 - Proper Analytics population msg.
-- Change all server prompt defaults to 127.0.0.1
+- Change all server prompt defaults to 127.0.0.1.
 - Changed inst complete msg.
 
-
-* Tue Jan 28 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.1-5
+* Tue Jan 28 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.2-5
 - bash -x on drop-db.sh
 
-* Mon Jan 27 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.1-3
+* Mon Jan 27 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.2-3
 - Removed debug from front.
 - Added DWH config to config-all.sh
 
-* Mon Jan 27 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.1-1
+* Mon Jan 27 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.2-1
 - New minor release.
 
 * Sat Jan 25 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.0-38

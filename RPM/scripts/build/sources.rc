@@ -1,4 +1,5 @@
 # General ENV vars:
+# sometimes people package their archives in the stupidest way possible. In such cases, they are extracted here, re-assembled in a normal way and move to $RPM_SOURCES_DIR.
 SOURCE_PACKAGING_DIR=~/sources
 RPM_SOURCES_DIR=~/rpmbuild/SOURCES
 RPM_SPECS_DIR=~/rpmbuild/SPECS
@@ -72,10 +73,10 @@ KDP3_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/flash/kdp3"
 KDP3_UICONF_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalsource/uiconf/kaltura/kmc/appstudio/kdp3"
 KDP3_RPM_NAME="kaltura-kdp3"
 
-# Kaltura KDP3 Wrapper:
-KDP3WRAPPER_VERSION="v37.0"
-KDP3WRAPPER_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/flash/kdp3wrapper"
-KDP3WRAPPER_RPM_NAME="kaltura-kdp3wrapper"
+# Kaltura KDP Wrapper:
+KDPWRAPPER_VERSION="v11.0"
+KDPWRAPPER_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/flash/kdpwrapper"
+KDPWRAPPER_RPM_NAME="kaltura-kdpwrapper"
 
 # Kaltura KDP3 plugins:
 # we bundle a few vers at each release:
@@ -129,8 +130,16 @@ HTML5LIB_URI="https://github.com/kaltura/mwEmbed/tarball/$HTML5LIB_VERSION"
 HTML5LIB_RPM_NAME="kaltura-html5lib"
 
 # Kaltura DWH
-DWH_VERSION="master"
+DWH_VERSION="IX-9.2.0"
 DWH_URI="https://github.com/kaltura/dwh/archive/$DWH_VERSION.zip"
 DWH_RPM_NAME="kaltura-dwh"
 
-HTML5_PLAYER_STUDIO_URI=https://github.com/kaltura/player-studio
+
+# App Studio HTML5:
+HTML5_APP_STUDIO_VERSION="v0.3"
+HTML5_APP_STUDIO_ARCHIVE_NAME=studio_$HTML5_APP_STUDIO_VERSION.zip
+HTML5_APP_STUDIO_URI=https://github.com/kaltura/player-studio/releases/download/$HTML5_APP_STUDIO_VERSION/$HTML5_APP_STUDIO_ARCHIVE_NAME
+HTML5_APP_STUDIO_RPM_NAME=kaltura-html5-studio
+HTML5_APP_STUDIO_NORMALIZED_ARCHIVE_NAME=$HTML5_APP_STUDIO_RPM_NAME-$HTML5_APP_STUDIO_VERSION.zip
+
+
