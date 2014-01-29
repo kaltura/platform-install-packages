@@ -26,7 +26,7 @@ In order to automate the installation of your Kaltura server (if you running in 
 Find your answers file at: @ANSFILE@
 
 Tip #3:
-Check your install log, and verify everything went smoothly. F
+Check your install log, and verify everything went smoothly. 
 Find your install log file at: @BASE_DIR/log@
 
 Tip #4:
