@@ -34,7 +34,7 @@ Find your install log file at: @BASE_DIR/log@
 
 Tip #4:
 If you ever come across issues, this is a quick way to grep all log files for errors:
-grep "ERR:\|exception\|trace\|CRIT\|error" @BASE_DIR@/log/*.log --color -r
+grep 'ERR:\|exception\|trace\|CRIT\|\[error\]' @BASE_DIR@/log/*.log --color -r
 
 Tip #5:
 Follow http://bit.ly/kcore-release-notes for the latest Kaltura release notes.
