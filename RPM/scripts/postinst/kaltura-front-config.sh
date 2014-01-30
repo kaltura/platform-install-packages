@@ -34,6 +34,7 @@ create_answer_file()
 	ANSFILE="$1"
         for VAL in CONFIG_CHOICE IS_SSL CRT_FILE KEY_FILE; do
                 if [ -n "${!VAL}" ];then
+			sed "/^$VAL=.*/d" -i $ANSFILE
 			echo "$VAL=\"${!VAL}\"" >> $ANSFILE 
                 fi
         done
@@ -81,7 +82,7 @@ EOF
 fi
 if [ "$IS_SSL" != 'Y' -a "$IS_SSL" != 1 ];then
 #-a ! -r "$ANSFILE" ];then
-	echo "update permission set STATUS=1 WHERE permission.NAME='FEATURE_KMC_ENFORCE_HTTPS' ;" | mysql $DB1_NAME -h$DB1_HOST -u$DB1_USER -P$DB1_PORT -p$DB1_PASS 
+	echo "update permission set STATUS=3 WHERE permission.NAME='FEATURE_KMC_ENFORCE_HTTPS' ;" | mysql $DB1_NAME -h$DB1_HOST -u$DB1_USER -P$DB1_PORT -p$DB1_PASS 
 	if [ -z "$AUTO_YES" ];then
 		echo "It is recommended that you do work using HTTPs. Would you like to continue anyway?[N/y]"
 		read CONT

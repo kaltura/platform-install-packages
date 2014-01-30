@@ -3,7 +3,7 @@
 Summary: Kaltura Open Source Video Platform - Analytics 
 Name: kaltura-dwh
 Version: 9.2.0
-Release: 3 
+Release: 5 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/dwh/archive/%{name}-IX-%{version}.zip
@@ -41,7 +41,7 @@ This package configures the Data Warehouse [DWH] analytics component.
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/logs
 cp -r %{_builddir}/dwh-IX-%{version} $RPM_BUILD_ROOT%{prefix}/dwh
 #cp -r %{_builddir}/dwh-IX-%{version}/.kettle $RPM_BUILD_ROOT%{prefix}/dwh/
-chmod +x $RPM_BUILD_ROOT%{prefix}/dwh/etlsource/execute/*.sh
+find  $RPM_BUILD_ROOT%{prefix}/dwh/ -name "*.sh" -type f -exec chmod +x {} \;
 
 %clean
 rm -rf %{buildroot}
