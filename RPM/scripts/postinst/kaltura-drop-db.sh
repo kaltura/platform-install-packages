@@ -39,8 +39,10 @@ if [ "$AN" != 'Y' ];then
 fi
 echo "root DB passwd:"
 read -s DBPASSWD
-echo "Removing..."
-for i in $DBS;do echo "drop database $i" | mysql -h$DB1_HOST -p$DBPASSWD ;done
+for i in $DBS;do
+	echo "Removing $i" 
+	echo "drop database $i" | mysql -h$DB1_HOST -p$DBPASSWD ;
+done
 for i in $DB_USERS;do echo "drop user $i" | mysql -h$DB1_HOST -p$DBPASSWD ;done
 
 

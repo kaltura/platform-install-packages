@@ -56,7 +56,7 @@ start() {
 	echo -n $"Starting:"
 	KP=$(pgrep -P 1 -f $SCRIPTEXE)
 	if ! kill -0 `cat $LOCKFILE 2>/dev/null` 2>/dev/null; then 
-		echo_failure
+		#echo_failure
 		echo
 		if [ "X$KP" != "X" ]; then
 			echo "Service populate already running"

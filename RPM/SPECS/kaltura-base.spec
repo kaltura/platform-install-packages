@@ -15,7 +15,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 9.9.0
-Release: 12 
+Release: 16 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -25,6 +25,7 @@ Source2: 01.conversionProfile.99.template.xml
 Source3: kaltura.apache.conf.template 
 Source4: emails_en.template.ini
 Source5: 01.Partner.template.ini
+Source6: 02.Permission.ini
 URL: https://github.com/kaltura/server/tree/master
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
@@ -105,6 +106,7 @@ cp %{SOURCE3} $RPM_BUILD_ROOT%{prefix}/app/configurations/apache/kaltura.conf.te
 cp %{SOURCE4} $RPM_BUILD_ROOT%{prefix}/app/batch/batches/Mailer/emails_en.template.ini
 # Add partnerParentId=0 to Mr. partner 99.
 cp %{SOURCE5} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_data/01.Partner.template.ini
+cp %{SOURCE6} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_data/02.Permission.ini
 
 # we bring another in kaltura-batch
 rm $RPM_BUILD_ROOT%{prefix}/app/configurations/batch/batch.ini.template
@@ -201,7 +203,7 @@ fi
 %dir %{prefix}/log
 %dir %{prefix}/tmp
 %dir %{prefix}/app/cache
-%defattr(-, %{kaltura_user}, %{kaltura-user} , 0755)
+%defattr(-, %{kaltura_user}, %{kaltura_group} , 0755)
 %dir %{prefix}
 %{prefix}/web/*
 %dir %{prefix}/web/control

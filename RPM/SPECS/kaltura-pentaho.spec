@@ -1,8 +1,11 @@
 %define prefix /opt/kaltura/pentaho 
 
+%define kaltura_user	kaltura
+%define kaltura_group	kaltura
+
 Name:		kaltura-pentaho
 Version:	4.2.1
-Release:	1
+Release:	2
 Summary:	Pentaho Open Source Suite Data Integration Community Edition (CE).
 Group:		System Management
 License:	LGPLv2+
@@ -35,6 +38,7 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root,-)
 %doc docs README_INFOBRIGHT.txt README_LINUX.txt 
+%defattr(-, %{kaltura_user}, %{kaltura_group} , 0755)
 %{prefix}/pdi/*
 
 

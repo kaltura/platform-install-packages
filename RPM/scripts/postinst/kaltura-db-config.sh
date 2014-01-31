@@ -102,10 +102,11 @@ EOF
 		done
 	done
 	echo "GRANT SELECT ON kaltura.* TO 'etl'@'%';FLUSH PRIVILEGES;" | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT
+
+	# DB schema created. Before we move onto populating, lets check MySQL and Sphinx connectivity.
 fi
 set +e
 
-	# DB schema created. Before we move onto populating, lets check MySQL and Sphinx connectivity.
 echo "Checking connectivity to needed daemons..."
 if ! check_connectivity $DB1_USER $DB1_PASS $DB1_HOST $DB1_PORT $SPHINX_HOST $SERVICE_URL;then
 	echo "Please check your setup and then run $0 again."
@@ -134,8 +135,9 @@ fi
 KMC_VERSION=`grep "^kmc_version" /opt/kaltura/app/configurations/base.ini|awk -F "=" '{print $2}'|sed 's@\s*@@g'`
 echo "Generating UI confs.."
 php $APP_DIR/deployment/uiconf/deploy_v2.php --ini=$WEB_DIR/flash/kmc/$KMC_VERSION/config.ini >> $LOG_DIR/deploy_v2.log  2>&1
-echo "update ui_conf set html5_url='/html5/html5lib/v2.1.1/mwEmbedLoader.php' where html5_url like '/html5/html5lib/v%/mwEmbedLoader.php';" | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT
-echo "update kaltura.ui_conf set swf_url='/flash/kdp3/v3.9.3/kdp3.swf' where swf_url like '/flash/kdp3/%kdp3.swf' and obj_type=8;"  | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT
+echo "update kaltura.ui_conf set swf_url='/flash/kdp3/v3.9.3/kdp3.swf' where swf_url like '/flash/kdp3/%kdp3.swf';"  | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT
+echo "update ui_conf set html5_url='/html5/html5lib/v2.1.1/mwEmbedLoader.php' where html5_url like '/html5/html5lib/v%/mwEmbedLoader.php';"  | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT
+
 find  $WEB_DIR/content/generatedUiConf -type d -exec chmod 775 {} \;
 
 set +e
