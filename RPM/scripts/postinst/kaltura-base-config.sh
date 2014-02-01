@@ -173,14 +173,19 @@ CDN host [`hostname`]:"
 		fi
         done
         while [ -z "$TIME_ZONE" ];do
-        	TZ=`cat /etc/sysconfig/clock | cut -d'"' -f2`
-                echo "Your time zone [see http://php.net/date.timezone], or press enter for [$TZ]: "
+                TZ=`awk -F '"' '{print $2}' /etc/sysconfig/clock`
+                if [ -n "$TZ" ];then
+                        echo "Your time zone [see http://php.net/date.timezone], or press enter for [$TZ]: "
+                else        
+                         echo "Your time zone [see http://php.net/date.timezone]"
+                fi           
                 read -e TIME_ZONE
-                if [ -z "$TIME_ZONE" ];then
-                	TIME_ZONE="$TZ"	
-                fi
+                if [ -z "$TIME_ZONE" -a -n "$TZ" ];then
+                        TIME_ZONE="$TZ"  
+                fi          
         done
-	
+
+
 	if [ -z "$ENVIRONMENT_NAME" ];then
 		echo "How would you like to name your system (this name will show as the From field in emails sent by the system) [Kaltura Video Platform]?"
 		read ENVIRONMENT_NAME
