@@ -177,7 +177,7 @@ CDN host [`hostname`]:"
                 if [ -n "$TZ" ];then
                         echo "Your time zone [see http://php.net/date.timezone], or press enter for [$TZ]: "
                 else        
-                         echo "Your time zone [see http://php.net/date.timezone]"
+                         echo "Your time zone [see http://php.net/date.timezone]:"
                 fi           
                 read -e TIME_ZONE
                 if [ -z "$TIME_ZONE" -a -n "$TZ" ];then
