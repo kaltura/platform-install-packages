@@ -31,10 +31,11 @@ and remove users:
 $DB_USERS
 on $DB1_HOST
 
-Are you absolutely certain you want this? [n/Y]
+Are you absolutely certain you want this? Type yes
 "
 read AN
-if [ "$AN" != 'Y' ];then
+if [ "$AN" != 'yes' ];then
+	echo "Exiting. You must type the word 'yes'."
 	exit 1
 fi
 echo "root DB passwd:"
