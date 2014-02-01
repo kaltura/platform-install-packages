@@ -26,7 +26,7 @@ setenforce permissive
 ```
 ###### Auto Set the Kaltura install repository links 
 **Note: that this is currently our test URL, the repo URL will change soon.**
-```rpm -ihv rpm -ihv http://54.211.235.142/nightly/RPMS/noarch/kaltura-release.noarch.rpm```   
+```rpm -ihv http://54.211.235.142/nightly/RPMS/noarch/kaltura-release.noarch.rpm```   
 `http://54.211.235.142/nightly/RPMS/noarch/kaltura-release.noarch.rpm` represents the latest master release (latest nightly build).
 
 ###### Install and configure MySQL (if you’re going to use DB on the same server)
