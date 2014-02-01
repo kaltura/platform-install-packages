@@ -58,6 +58,7 @@ KMC_VERSION=v5.37.10
 KMC_LOGIN_VERSION=v1.2.3
 KMC_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/flash/kmc/$KMC_VERSION"
 KMC_LOGIN_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/flash/kmc/login/$KMC_LOGIN_VERSION"
+KMC_UICONF_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalsource/uiconf/kaltura/kmc"
 KMC_RPM_NAME="kaltura-kmc"
 
 # Kaltura KDP3:
@@ -68,8 +69,8 @@ KDP_RPM_NAME="kaltura-kdp"
 
 # Kaltura KDP3:
 # we bundle a few vers at each release:
-KDP3_VERSIONS="v3.5.21 v3.8.9 v3.9.1 v3.9.2 v3.9.3"
-KDP3_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/flash/kdp3"
+KDP3_VERSION="v3.9.7"
+KDP3_URI="https://github.com/kaltura/kdp/releases/download/$KDP3_VERSION/$KDP3_VERSION.zip"
 KDP3_UICONF_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalsource/uiconf/kaltura/kmc/appstudio/kdp3"
 KDP3_RPM_NAME="kaltura-kdp3"
 
@@ -97,8 +98,8 @@ CLIPAPP_RPM_NAME="kaltura-clipapp"
 
 # Kaltura kRecord
 # we bundle a few vers at each release:
-KRECORD_VERSIONS="v1.5.2 v1.6.2"
-KRECORD_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/flash/krecord"
+KRECORD_VERSION="v1.7"
+KRECORD_URI="https://github.com/kaltura/krecord/releases/download/$KRECORD_VERSION/$KRECORD_VERSION.zip"
 KRECORD_RPM_NAME="kaltura-krecord"
 
 # Kaltura KCW

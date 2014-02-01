@@ -15,7 +15,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 9.9.0
-Release: 16 
+Release: 18 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -26,6 +26,8 @@ Source3: kaltura.apache.conf.template
 Source4: emails_en.template.ini
 Source5: 01.Partner.template.ini
 Source6: 02.Permission.ini
+Source7: dwh.template
+Source8: 01.uiConf.99.template.xml
 URL: https://github.com/kaltura/server/tree/master
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
@@ -107,6 +109,8 @@ cp %{SOURCE4} $RPM_BUILD_ROOT%{prefix}/app/batch/batches/Mailer/emails_en.templa
 # Add partnerParentId=0 to Mr. partner 99.
 cp %{SOURCE5} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_data/01.Partner.template.ini
 cp %{SOURCE6} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_data/02.Permission.ini
+cp %{SOURCE8} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_content/01.uiConf.99.template.xml
+cp %{SOURCE7} $RPM_BUILD_ROOT%{prefix}/app/configurations/cron/dwh.template
 
 # we bring another in kaltura-batch
 rm $RPM_BUILD_ROOT%{prefix}/app/configurations/batch/batch.ini.template
@@ -157,7 +161,6 @@ ln -sf %{prefix}/app/api_v3/web %{prefix}/app/alpha/web/api_v3
 chown apache.kaltura -R /opt/kaltura/web/content/entry /opt/kaltura/web/content/uploads/ /opt/kaltura/web/content/webcam/
 chmod 775 /opt/kaltura/web/content/entry /opt/kaltura/web/content/uploads/ /opt/kaltura/web/content/webcam/ 
 /etc/init.d/ntpd start
-echo "$1" >/tmp/1
 if [ "$1" = 2 ];then
 	echo "Regenarating client libs.. this will take up to 2 minutes to complete."
 	php %{prefix}/app/generator/generate.php
@@ -217,8 +220,12 @@ fi
 
 
 %changelog
+* Fri Jan 31 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-18
+- Fixed template for UI conf generation.
+
 * Wed Jan 28 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-10
 - debugme.
+
 * Wed Jan 28 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-9
 - %%{prefix} to be owned by %%{kaltura_user}, %%{kaltura-user}
 

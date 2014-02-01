@@ -7,7 +7,7 @@
 Summary: Kaltura Open Source Video Platform - batch server 
 Name: kaltura-batch
 Version: 9.9.0
-Release: 6 
+Release: 7 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: zz-%{name}.ini
@@ -80,7 +80,7 @@ sed -i "s@^\(params.mediaInfoCmd\)\s*=.*@\1=%{_bindir}/mediainfo@" $RPM_BUILD_RO
 #ln -fs %{prefix}/app/configurations/monit.avail/batch.rc %{prefix}/app/configurations/monit.d/batch.rc
 if [ "$1" = 1 ];then
 	/sbin/chkconfig --add kaltura-batch
-echo " #####################################################################################################################################
+echo "#####################################################################################################################################
 Installation of %{name} %{version} completed
 Please run: 
 # %{prefix}/bin/%{name}-config.sh [/path/to/answer/file]
@@ -130,6 +130,9 @@ service httpd restart
 
 
 %changelog
+* Sat Feb 1 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-7
+- Minor fix to post install msg.
+
 * Mon Jan 27 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-2
 - kaltura-mencoder added to dep list.
 

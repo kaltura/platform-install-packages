@@ -84,9 +84,10 @@ $BASE_DIR/bin/kaltura-dwh-config.sh "$ANSFILE"
 rm -rf $APP_DIR/cache/*
 rm -f $APP_DIR/log/kaltura-*.log
 
-echo "==============================================================================================================
+echo "
+====================================================================================================================
 
-Setup is completed successfully! 
+Setup completed successfully! 
 
 To access your Kaltura tools visit:
 $SERVICE_URL

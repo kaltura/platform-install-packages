@@ -193,29 +193,27 @@ ln -fs $MAIN_APACHE_CONF /etc/httpd/conf.d/
 
 if [ -z "$CONFIG_CHOICE" ];then
 cat << EOF 
-Please select one of the following options:
-0. Kaltura Management Console [KMC], Hosted Apps, HTML5 lib and ClipApp
-1. KAC - Kaltura Admin Console
-2. All web interfaces 
+Please select one of the following options [0]:
+0. All web interfaces 
+1. Kaltura Management Console [KMC], Hosted Apps, HTML5 lib and ClipApp
+2. KAC - Kaltura Admin Console
 EOF
 
 	CONFIG_MSG="Setup enabled the following Apache configuration for you:"
 	read CONFIG_CHOICE
 fi
 
-# remove current syms if any.
 find $KALTURA_APACHE_CONFD -type l -exec rm {} \;
 
-if [ "$CONFIG_CHOICE" = 0 ];then
+if [ "$CONFIG_CHOICE" = 1 ];then
 	enable_apps_conf $KALTURA_APACHE_CONFD
-elif [ "$CONFIG_CHOICE" = 1 ];then
-	enable_admin_conf $KALTURA_APACHE_CONFD
 elif [ "$CONFIG_CHOICE" = 2 ];then
+	enable_admin_conf $KALTURA_APACHE_CONFD
+elif [ "$CONFIG_CHOICE" = 0 ];then
 	enable_apps_conf $KALTURA_APACHE_CONFD
 	enable_admin_conf $KALTURA_APACHE_CONFD
 else
-        echo "Choose a value between 0-2"
-        exit 1
+	CONFIG_CHOICE=0
 fi
 
 # cronjobs:

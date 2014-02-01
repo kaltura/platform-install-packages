@@ -20,22 +20,11 @@ if [ ! -r $SOURCES_RC ];then
 	exit 1
 fi
 . $SOURCES_RC 
-if [ ! -x `which svn 2>/dev/null` ];then
-	echo "Need to install svn."
+if [ ! -x `which wget 2>/dev/null` ];then
+	echo "Need to install wget."
 	exit 2
 fi
-# clean the source dir.
-rm -rf $SOURCE_PACKAGING_DIR/$KDP3_RPM_NAME/*
-svn export --force --quiet $KDP3PLUGINS_URI $SOURCE_PACKAGING_DIR/$KDP3PLUGINS_RPM_NAME
-mkdir -p $SOURCE_PACKAGING_DIR/uiconf/kaltura/kmc/appstudio/kdp3 
-svn export --force --quiet $KDP3_UICONF_URI $SOURCE_PACKAGING_DIR/$KDP3_RPM_NAME/uiconf/kaltura/kmc/appstudio/kdp3
-for KDP3_VERSION in $KDP3_VERSIONS;do
-	svn export --force --quiet $KDP3_URI/$KDP3_VERSION $SOURCE_PACKAGING_DIR/$KDP3_RPM_NAME/$KDP3_VERSION 
-	cp -r $SOURCE_PACKAGING_DIR/$KDP3PLUGINS_RPM_NAME $SOURCE_PACKAGING_DIR/$KDP3_RPM_NAME/$KDP3_VERSION/plugins 
-done
-cd $SOURCE_PACKAGING_DIR
-# flash things DO NOT need exec perms.
-find $KDP3_RPM_NAME -type f -exec chmod -x {} \;
-tar jcf $RPM_SOURCES_DIR/$KDP3_RPM_NAME.tar.bz2 $KDP3_RPM_NAME
-echo "Packaged into $RPM_SOURCES_DIR/$KDP3_RPM_NAME.tar.bz2"
-rpmbuild -ba $RPM_SPECS_DIR/$KDP3_RPM_NAME.spec
+mkdir -p $RPM_SOURCES_DIR/$KDP3_RPM_NAME
+wget $KDP3_URI -O$RPM_SOURCES_DIR/$KDP3_RPM_NAME-$KDP3_VERSION.zip
+echo "Packaged into $RPM_SOURCES_DIR/$KDP3_RPM_NAME-$KDP3_VERSION.zip"
+#rpmbuild -ba $RPM_SPECS_DIR/$KDP3_RPM_NAME.spec

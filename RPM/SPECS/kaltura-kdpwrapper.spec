@@ -1,13 +1,11 @@
 %define prefix /opt/kaltura
-%define kdp3_vers "v3.5.21 v3.8.9 v3.9.1 v3.9.2 v3.9.7"
-Name:	kaltura-kdp3	
-Version: v3.9.7
-Epoch: 1
-Release: 1 
-Summary: Kaltura Dynamic Player
+Name:	kaltura-kdpwrapper	
+Version: v11.0 
+Release: 1
+Summary: Kaltura KDP3 Wrapper
 License: AGPLv3+	
-URL: https://github.com/kaltura/kdp/releases/tag/%{version}
-Source0: %{name}-%{version}.zip
+URL: http://kaltura.org
+Source0: %{name}.tar.bz2
 BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 BuildArch: noarch
 
@@ -25,38 +23,25 @@ teachers by providing educational institutions disruptive online video solutions
 learning, and increased engagement across campuses and beyond. 
 For more information visit: http://corp.kaltura.com, http://www.kaltura.org and http://www.html5video.org.
 
-This package installs the KDP Flash player.
+This package installs the KDP Wrapper.
 
 %prep
-%setup -qn %{version} 
+%setup -qn %{name} 
 
 %build
 
 %install
-mkdir -p $RPM_BUILD_ROOT%{prefix}/web/flash/kdp3
-mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content
-cp -r %{_builddir}/%{version} $RPM_BUILD_ROOT/%{prefix}/web/flash/kdp3/%{version}
+mkdir -p $RPM_BUILD_ROOT%{prefix}/web/flash
+cp -r %{_builddir}/%{name} $RPM_BUILD_ROOT/%{prefix}/web/flash/kdpwrapper
 
 %clean
 rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
-%{prefix}/web/flash/kdp3
+%{prefix}/web/flash/kdpwrapper
 
 
 %changelog
-* Sat Feb 1 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 3.9.7-1
-- Added support in "allowUserPauseAds" flashvar that will allow the user to pause ad playback.
-- Fix DFXP styling: now subtitles will inherit the body style if no inlina style was set.
-- SUP-1355 - Pass "AdParameters" value to VPAID SWF
-- FEC-833 - Fix "Live" button functionality
-
-* Wed Jan 14 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 3.0.0-3
-- Added uiconf.
-
-* Sun Jan 12 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 3.0.0-2
-- KDP v3.9.3 added.
-
-* Sun Jan 12 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 3.0.0-1
+* Sun Jan 12 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v11.0-1
 - initial package.

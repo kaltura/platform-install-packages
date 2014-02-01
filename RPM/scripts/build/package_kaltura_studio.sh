@@ -24,13 +24,18 @@ if [ ! -x `which svn 2>/dev/null` ];then
 	echo "Need to install svn."
 	exit 2
 fi
-#mkdir -p $SOURCE_PACKAGING_DIR/uiconf/kaltura/kmc
-svn export --force --quiet $KMC_URI $SOURCE_PACKAGING_DIR/$KMC_RPM_NAME-$KMC_VERSION 
-svn export --force --quiet $KMC_LOGIN_URI $SOURCE_PACKAGING_DIR/$KMC_RPM_NAME-$KMC_VERSION/login/$KMC_LOGIN_VERSION
-svn export --force --quiet $KMC_UICONF_URI $SOURCE_PACKAGING_DIR/$KMC_RPM_NAME-$KMC_VERSION/uiconf/kaltura/kmc
+# clean the source dir.
+rm -rf $SOURCE_PACKAGING_DIR/$KDP3_RPM_NAME/*
+svn export --force --quiet $KDP3PLUGINS_URI $SOURCE_PACKAGING_DIR/$KDP3PLUGINS_RPM_NAME
+mkdir -p $SOURCE_PACKAGING_DIR/uiconf/kaltura/kmc/appstudio/kdp3 
+svn export --force --quiet $KDP3_UICONF_URI $SOURCE_PACKAGING_DIR/$KDP3_RPM_NAME/uiconf/kaltura/kmc/appstudio/kdp3
+for KDP3_VERSION in $KDP3_VERSIONS;do
+	svn export --force --quiet $KDP3_URI/$KDP3_VERSION $SOURCE_PACKAGING_DIR/$KDP3_RPM_NAME/$KDP3_VERSION 
+	cp -r $SOURCE_PACKAGING_DIR/$KDP3PLUGINS_RPM_NAME $SOURCE_PACKAGING_DIR/$KDP3_RPM_NAME/$KDP3_VERSION/plugins 
+done
 cd $SOURCE_PACKAGING_DIR
 # flash things DO NOT need exec perms.
-find $KMC_RPM_NAME-$KMC_VERSION -type f -exec chmod -x {} \;
-tar jcf $RPM_SOURCES_DIR/$KMC_RPM_NAME-$KMC_VERSION.tar.bz2 $KMC_RPM_NAME-$KMC_VERSION
-echo "Packaged into $RPM_SOURCES_DIR/$KMC_RPM_NAME-$KMC_VERSION.tar.bz2"
-#rpmbuild -ba $RPM_SPECS_DIR/$KMC_RPM_NAME.spec
+find $KDP3_RPM_NAME -type f -exec chmod -x {} \;
+tar jcf $RPM_SOURCES_DIR/$KDP3_RPM_NAME.tar.bz2 $KDP3_RPM_NAME
+echo "Packaged into $RPM_SOURCES_DIR/$KDP3_RPM_NAME.tar.bz2"
+rpmbuild -ba $RPM_SPECS_DIR/$KDP3_RPM_NAME.spec

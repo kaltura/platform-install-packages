@@ -1,13 +1,14 @@
 %define prefix /opt/kaltura
 %define widget_name krecord
-%define krecord_vers "v1.5.2 v1.6.2"
+%define krecord_vers "v1.7"
 Name:	kaltura-%{widget_name}
-Version: 1.0.0 
+Version: v1.7 
+Epoch: 1
 Release: 1
 Summary: Kaltura kRecord - used for recording from web cam
 License: AGPLv3+	
 URL: http://kaltura.org
-Source0: %{name}.tar.bz2
+Source0: %{name}-%{version}.zip
 BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 BuildArch: noarch
 
@@ -28,14 +29,14 @@ For more information visit: http://corp.kaltura.com, http://www.kaltura.org and 
 This package installs the Kaltura kRecord - used for recording from web cam.
 
 %prep
-%setup -qn %{name} 
+%setup -qn %{version} 
 
 %build
 
 %install
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/flash/%{widget_name}
 for i in %{krecord_vers};do
-	cp -r %{_builddir}/%{name}/$i $RPM_BUILD_ROOT/%{prefix}/web/flash/%{widget_name}
+	cp -r %{_builddir}/$i $RPM_BUILD_ROOT/%{prefix}/web/flash/%{widget_name}
 	find $RPM_BUILD_ROOT/%{prefix}/web/flash/%{widget_name} -name ".project" -exec rm {} \;
 done
 
@@ -48,5 +49,16 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sat Feb 1 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v1.7.0-1
+- Publish Live Streams
+  Use the following flashvars to publish live streams:
+	isLive: "true"
+	rtmpHost : address of a server that holds the app that handles publishing live streams (can be retrieved by parsing KalturaLiveStreamEntry.primaryBroadcastingUrl)
+	fmsApp: name of the application that will handle live streaming (can be retrieved by parsing KalturaLiveStreamEntry.primaryBroadcastingUrl)
+	streamName: name of the published stream (KalturaLiveStreamEntry.streamName)
+
+- NOTE: KRecord GUI doesn't support live streaming gracefully. This feature is planned to be used without UI (via JS API).
+- KRecord GUI doesn't stop you from publishing a live stream, but it doesn't hide irrelevant features like preview of published stream after publish is done.
+
 * Sun Jan 12 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.0-1
 - initial package.

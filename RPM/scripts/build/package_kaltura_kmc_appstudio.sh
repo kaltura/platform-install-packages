@@ -1,7 +1,7 @@
 #!/bin/bash -e 
 #===============================================================================
-#          FILE: package_kaltura_krecord.sh
-#         USAGE: ./package_kaltura_krecord.sh 
+#          FILE: package_kaltura_wrapper.sh
+#         USAGE: ./package_kaltura_wrapper.sh 
 #   DESCRIPTION: 
 #       OPTIONS: ---
 #  REQUIREMENTS: ---
@@ -20,12 +20,14 @@ if [ ! -r $SOURCES_RC ];then
 	exit 1
 fi
 . $SOURCES_RC 
-if [ ! -x `which wget 2>/dev/null` ];then
-	echo "Need to install wget."
+if [ ! -x `which svn 2>/dev/null` ];then
+	echo "Need to install svn."
 	exit 2
 fi
-mkdir -p $RPM_SOURCES_DIR/$KRECORD_RPM_NAME
-wget $KRECORD_URI -O$RPM_SOURCES_DIR/$KRECORD_RPM_NAME/$KRECORD_RPM_NAME-$KRECORD_VERSION.zip
-
-echo "Packaged into $RPM_SOURCES_DIR/$KRECORD_RPM_NAME/$KRECORD_RPM_NAME-$KRECORD_VERSION.zip"
-rpmbuild -ba $RPM_SPECS_DIR/$KRECORD_RPM_NAME.spec
+svn export --force --quiet $KDPWRAPPER_URI/$KDPWRAPPER_VERSION $SOURCE_PACKAGING_DIR/$KDPWRAPPER_RPM_NAME/$KDPWRAPPER_VERSION 
+cd $SOURCE_PACKAGING_DIR
+# flash things DO NOT need exec perms.
+find $KDPWRAPPER_RPM_NAME -type f -exec chmod -x {} \;
+tar jcf $RPM_SOURCES_DIR/$KDPWRAPPER_RPM_NAME.tar.bz2 $KDPWRAPPER_RPM_NAME
+echo "Packaged into $RPM_SOURCES_DIR/$KDPWRAPPER_RPM_NAME.tar.bz2"
+rpmbuild -ba $RPM_SPECS_DIR/$KDPWRAPPER_RPM_NAME.spec
