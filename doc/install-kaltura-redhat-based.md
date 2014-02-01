@@ -1,5 +1,6 @@
 # Installing Kaltura on RedHat Linux
-This guide applies to all major RH based Linux distros including Fedora Core, RHEL, CentOS, etc.
+This guide describes installation of an all-in-one Kaltura server and applies to all major RH based Linux distros including Fedora Core, RHEL, CentOS, etc.    
+Soon this document will be extended to include cluster deployment by specific server-roles/groups.
 
 ## Installing on a new machine
 
@@ -25,7 +26,7 @@ setenforce permissive
 ```
 ###### Auto Set the Kaltura install repository links 
 **Note: that this is currently our test URL, the repo URL will change soon.**
-```rpm -ihv rpm -ihv http://54.211.235.142/nightly/RPMS/noarch/kaltura-release.noarch.rpm```   
+```rpm -ihv http://54.211.235.142/nightly/RPMS/noarch/kaltura-release.noarch.rpm```   
 `http://54.211.235.142/nightly/RPMS/noarch/kaltura-release.noarch.rpm` represents the latest master release (latest nightly build).
 
 ###### Install and configure MySQL (if you’re going to use DB on the same server)
@@ -45,8 +46,10 @@ Two working solutions to the AWS EC2 email limitations are:
 * Using SendGrid as your mail service ([setting up ec2 with Sendgrid and postfix](http://www.zoharbabin.com/configure-ssmtp-or-postfix-to-send-email-via-sendgrid-on-centos-6-3-ec2)).
 * Using [Amazon's Simple Email Service](http://aws.amazon.com/ses/). 
 
-###### Configure the Kaltura installation (post-install script)
+###### Install Kaltura and Configure the Kaltura installation
 ```bash
+yum clean all
+yum install kaltura-server
 /opt/kaltura/bin/kaltura-config-all.sh [answers-file-path]
 ```
 `[answers-file-path]` is an optional flag, in case you have an answers file ready, you can use it to perform a silent install. If you don't have an answers file, simply omit it (`/opt/kaltura/bin/kaltura-config-all.sh`).   
