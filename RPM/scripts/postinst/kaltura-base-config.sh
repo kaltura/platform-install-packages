@@ -173,8 +173,12 @@ CDN host [`hostname`]:"
 		fi
         done
         while [ -z "$TIME_ZONE" ];do
-                echo "Your time zone [see http://php.net/date.timezone]: "
+        	TZ=`cat /etc/sysconfig/clock | cut -d'"' -f2`
+                echo "Your time zone [see http://php.net/date.timezone], or press enter for [$TZ]: "
                 read -e TIME_ZONE
+                if [ -z "$TIME_ZONE" ];then
+                	TIME_ZONE="$TZ"	
+                fi
         done
 	
 	if [ -z "$ENVIRONMENT_NAME" ];then
