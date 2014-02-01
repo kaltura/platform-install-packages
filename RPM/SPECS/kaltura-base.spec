@@ -15,7 +15,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 9.9.0
-Release: 18 
+Release: 19 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -220,6 +220,9 @@ fi
 
 
 %changelog
+* Sat Feb 1 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-19
+- New KDP3 ver v3.9.7 and hence, new 01.uiConf.99.template.xml. 
+
 * Fri Jan 31 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-18
 - Fixed template for UI conf generation.
 

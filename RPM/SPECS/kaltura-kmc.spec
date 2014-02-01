@@ -2,7 +2,7 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmc	
 Version: v5.37.10
-Release: 9 
+Release: 10 
 Summary: Kaltura Management Console
 
 Group: System Management	
@@ -55,6 +55,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sat Feb 1 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.10-10
+- Moving to KDP3 v3.9.7.
+
 * Sat Feb 1 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.10-9
 - Added nab UI confs.
 
