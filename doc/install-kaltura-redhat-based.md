@@ -46,8 +46,10 @@ Two working solutions to the AWS EC2 email limitations are:
 * Using SendGrid as your mail service ([setting up ec2 with Sendgrid and postfix](http://www.zoharbabin.com/configure-ssmtp-or-postfix-to-send-email-via-sendgrid-on-centos-6-3-ec2)).
 * Using [Amazon's Simple Email Service](http://aws.amazon.com/ses/). 
 
-###### Configure the Kaltura installation (post-install script)
+###### Install Kaltura and Configure the Kaltura installation
 ```bash
+yum clean all
+yum install kaltura-server
 /opt/kaltura/bin/kaltura-config-all.sh [answers-file-path]
 ```
 `[answers-file-path]` is an optional flag, in case you have an answers file ready, you can use it to perform a silent install. If you don't have an answers file, simply omit it (`/opt/kaltura/bin/kaltura-config-all.sh`).   
