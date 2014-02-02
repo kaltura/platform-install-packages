@@ -2,6 +2,8 @@
 This guide describes installation of an all-in-one Kaltura server and applies to all major RH based Linux distros including Fedora Core, RHEL, CentOS, etc.    
 Soon this document will be extended to include cluster deployment by specific server-roles/groups.
 
+Note for testers using VMWare: You can find solid VMWare images for CentOS and Fedora at: http://www.thoughtpolice.co.uk/vmware/.
+
 ## Installing on a new machine
 
 ###### Pre-Install notes
