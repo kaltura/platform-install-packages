@@ -1,6 +1,7 @@
 # Installing Kaltura on RedHat Linux
 This guide describes installation of an all-in-one Kaltura server and applies to all major RH based Linux distros including Fedora Core, RHEL, CentOS, etc.    
-Soon this document will be extended to include cluster deployment by specific server-roles/groups.
+Note that supported 
+While already supported by the code, this document doesn't yet provide cluster instructions. Cluster deployment by specific server-roles/groups will soon be added.
 
 Note for testers using VMWare: You can find solid VMWare images for CentOS and Fedora at: http://www.thoughtpolice.co.uk/vmware/.
 
