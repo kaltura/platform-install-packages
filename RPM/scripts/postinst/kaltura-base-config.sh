@@ -172,17 +172,19 @@ CDN host [`hostname`]:"
 			unset ADMIN_CONSOLE_PASSWORD
 		fi
         done
+	if [ -r /etc/sysconfig/clock ];then
+        	. /etc/sysconfig/clock
+        fi
         while [ -z "$TIME_ZONE" ];do
-                TZ=`awk -F '"' '{print $2}' /etc/sysconfig/clock`
-                if [ -n "$TZ" ];then
-                        echo "Your time zone [see http://php.net/date.timezone], or press enter for [$TZ]: "
-                else        
-                         echo "Your time zone [see http://php.net/date.timezone]:"
-                fi           
+                if [ -n "$ZONE" ];then
+                        echo "Your time zone [see http://php.net/date.timezone], or press enter for [$ZONE]: "
+                else
+                         echo "Your time zone [see http://php.net/date.timezone]"
+                fi
                 read -e TIME_ZONE
-                if [ -z "$TIME_ZONE" -a -n "$TZ" ];then
-                        TIME_ZONE="$TZ"  
-                fi          
+                if [ -z "$TIME_ZONE" -a -n "$ZONE" ];then
+                        TIME_ZONE="$ZONE"
+                fi
         done
 
 
