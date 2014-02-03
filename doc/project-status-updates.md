@@ -1,6 +1,7 @@
 **[Track milestones progress](https://github.com/kaltura/platform-install-packages/issues/milestones)**.
    
-2014-02-03: Single server installed passes successfully, including sanity of the following features:   
+####### 2014-02-03:
+Single server installed passes successfully, including sanity of the following features:   
 - Partner creation
 - Content upload of various kinds
 - Convert
@@ -12,5 +13,6 @@
 - Cluster install is in final stages of testing and expected to finish sanity today
 - Monitoring suite is under way and is also expected to be released for testing today
       
-2014-01-27: We are thrilled to share that we've reached public alpha testing phase of the RPM packages.
+####### 2014-01-27:
+We are thrilled to share that we've reached public alpha testing phase of the RPM packages.
 If you're running a RedHat based distro and would like to test, please review the RPM installation steps.
