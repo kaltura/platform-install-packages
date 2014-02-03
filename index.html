@@ -7,6 +7,9 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="javascripts/showdown.min.js"></script>
+    <script src="javascripts/jquery.base64.js"></script>
+    
 
     <title>Kaltura Installation Packages Project</title>
   </head>
@@ -63,10 +66,44 @@
             <a name="project-status" title="Latest Project Status" class="anchor" href="#project-status"><span class="octicon octicon-link"></span></a>
             Latest Project Status
           </h2>
-          <p><strong><a href="https://github.com/kaltura/platform-install-packages/issues/milestones" target="_blank">Track milestones progress</a>.</strong></p>
-          <p>[2014-01-27 (Monday)]: We are thrilled to share that we've reached public alpha testing phase of the RPM packages.<br />
-          If you're running a RedHat based distro and would like to test, please <a href="http://bit.ly/kaltura-install-redhat-linux" target="_blank">review the RPM installation steps</a>.
-          </p>
+          <div id="latestUpdateMd" style="margin: 1em 2em; border-left: 1px dotted #999; padding-left: 1em;"></div>
+          <p><a id="formerStatusToggler" href="#" onclick="return false;" style="text-decoration:none;">+ Read previous updates.</a></p>
+          <div id="formerUpdatesMd" style="display:none;margin: 1em 2em; border-left: 1px dotted #999; padding-left: 1em;"></div>
+          <script>
+              $(document).ready(function() {
+                  $("#formerStatusToggler").click(function() {
+                      $("#formerUpdatesMd").slideToggle(100, function() {
+                        if ($("#formerUpdatesMd").is(':visible')) {
+                            $("#formerStatusToggler").text('- Hide previous updates.');
+                        } else {
+                            $("#formerStatusToggler").text('+ Read previous updates.');
+                        }
+                      });
+                  });
+
+                  $.ajax({
+                      type: "GET",
+                      processData: true,
+                      url : "https://api.github.com/repos/kaltura/platform-install-packages/contents/doc/project-status-updates.md",
+                      success : function (result) {
+                          var mdtextfile = $.base64.decode(result.content);
+                          var mdtextarray = mdtextfile.split("#### ");
+                          var latestUpdate = mdtextarray[0] + "#### " + mdtextarray[1];
+                          mdtextarray.shift();
+                          mdtextarray.shift();
+                          var formerUpdates = "";
+                          mdtextarray.forEach(function(updatetxt) {
+                              formerUpdates = formerUpdates + "#### " + updatetxt;
+                          });
+                          var converter = new Showdown.converter();
+                          var latestUpdateHtml = converter.makeHtml(latestUpdate);
+                          var formerUpdatesHtml = converter.makeHtml(formerUpdates);
+                          document.getElementById('latestUpdateMd').innerHTML = latestUpdateHtml;
+                          document.getElementById('formerUpdatesMd').innerHTML = formerUpdatesHtml;
+                      }
+                  });
+              }); 
+          </script>
           
           <br />
           
