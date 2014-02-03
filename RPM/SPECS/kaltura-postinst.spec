@@ -3,7 +3,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.3
-Release: 6 
+Release: 9 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -50,6 +50,12 @@ rm -rf %{buildroot}
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Mon Feb 3 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.3-9
+- Fixes for cluster install.
+
+* Sun Feb 2 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.3-7
+- Auto detect TZ.
+
 * Sat Feb 1 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.3-5
 - Phrasing correction.
 

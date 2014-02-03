@@ -19,12 +19,6 @@ if [ -n "$1" -a -r "$1" ];then
 	ANSFILE=$1
 	. $ANSFILE
 fi
-RC_FILE=/etc/kaltura.d/system.ini
-if [ ! -r "$RC_FILE" ];then
-	echo "Could not find $RC_FILE so, exiting.."
-	exit 2
-fi
-. $RC_FILE
 if [ ! -r /opt/kaltura/app/base-config.lock ];then
 	`dirname $0`/kaltura-base-config.sh "$ANSFILE"
 else
@@ -33,6 +27,12 @@ else
 # $BASE_DIR/bin/kaltura-base-config.sh
 "
 fi
+RC_FILE=/etc/kaltura.d/system.ini
+if [ ! -r "$RC_FILE" ];then
+	echo "Could not find $RC_FILE so, exiting.."
+	exit 2
+fi
+. $RC_FILE
 mkdir -p $LOG_DIR/sphinx/data
 chown $OS_KALTURA_USER.$OS_KALTURA_USER $LOG_DIR/sphinx/data
 echo "sphinxServer = $SPHINX_HOST" > /opt/kaltura/app/configurations/sphinx/populate/`hostname`.ini

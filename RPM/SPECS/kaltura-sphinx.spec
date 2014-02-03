@@ -32,7 +32,7 @@ Requires(post): chkconfig
 Requires(preun): chkconfig
 # This is for /sbin/service
 Requires(preun): initscripts
-Requires: mysql-libs zlib openssl expat libgcc krb5-libs, kaltura-base
+Requires(preinst): mysql-libs zlib openssl expat libgcc krb5-libs, kaltura-base
 
 
 %description

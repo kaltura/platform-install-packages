@@ -236,7 +236,9 @@ SPHINX_DB_PORT=$DB1_PORT
 
 BASE_DIR=/opt/kaltura
 CONF_FILES=`find $KALT_CONF_DIR  -type f -name "*template*"`
-CONF_FILES="$CONF_FILES $BASE_DIR/app/batch/batches/Mailer/emails_en.template.ini `find $BASE_DIR/dwh  -type f -name "*template*"`"
+if [ -d "$BASE_DIR/dwh" ];then
+	CONF_FILES="$CONF_FILES $BASE_DIR/app/batch/batches/Mailer/emails_en.template.ini `find $BASE_DIR/dwh  -type f -name "*template*"`"
+fi
 # Now we will sed.
 
 for TMPL_CONF_FILE in $CONF_FILES;do
@@ -326,5 +328,8 @@ ln -sf $BASE_DIR/app/configurations/logrotate/kaltura_base /etc/logrotate.d/
 touch  "$BASE_DIR/app/base-config.lock"
 rm -rf $BASE_DIR/cache/*
 rm -f $BASE_DIR/log/kaltura*.log
+
+chown kaltura.apache $BASE_DIR/log
+chmod 775 $BASE_DIR/log
 
 echo "Configuration of $DISPLAY_NAME finished successfully!"

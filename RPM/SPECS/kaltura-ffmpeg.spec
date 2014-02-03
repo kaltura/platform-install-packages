@@ -26,7 +26,7 @@
 Summary: Utilities and libraries to record, convert and stream audio and video
 Name: kaltura-ffmpeg
 Version: 1.1.1
-Release: 7
+Release: 9 
 License: GPL
 Group: Applications/Multimedia
 URL: http://ffmpeg.org/
@@ -61,6 +61,9 @@ BuildRequires: zlib-devel
 BuildRequires: yasm-devel
 BuildRequires: libass-devel 
 BuildRequires: kaltura-x264-devel 
+BuildRequires: gsm-devel
+BuildRequires: speex-devel
+BuildRequires: libvpx-devel
 Requires:kaltura-a52dec,kaltura-libfaac,kaltura-libass,kaltura-x264
 
 %description
@@ -105,7 +108,6 @@ Install this package if you want to compile apps with ffmpeg support.
 %prep
 %setup -qn ffmpeg-%{version}
 
-sed -i 's|gsm.h|gsm/gsm.h|' configure libavcodec/libgsm.c
 
 %build
 export CFLAGS="%{optflags}"
@@ -123,36 +125,44 @@ export CFLAGS="%{optflags}"
 %ifarch x86_64
     --extra-cflags="%{optflags} -fPIC" \
 %endif
-    --enable-avfilter \
-%{!?_without_schroedinger:--enable-libschroedinger} \
-%{!?_without_dc1394:--enable-libdc1394} \
-%{!?_without_faac:--enable-libfaac} \
-%{!?_without_gsm:--enable-libgsm} \
-%{!?_without_lame:--enable-libmp3lame} \
-%{!?_without_nut:--enable-libnut} \
-%{!?_without_opencore_amr:--enable-libopencore-amrnb --enable-libopencore-amrwb} \
-%{!?_without_rtmp: --enable-librtmp} \
-%{!?_without_speex:--enable-libspeex} \
-%{!?_without_theora:--enable-libtheora} \
-%{!?_without_vorbis: --enable-libvorbis} \
-%{!?_without_vpx: --enable-libvpx} \
-%{!?_without_x264:--enable-libx264} \
-%{!?_without_xvid:--enable-libxvid} \
-    --enable-gpl \
-    --enable-nonfree \
-    --enable-libfdk-aac \
-%{!?_without_openjpeg:--enable-libopenjpeg} \
-    --enable-postproc \
-    --enable-pthreads \
-    --enable-shared \
-    --enable-swscale \
-    --enable-vdpau \
-    --enable-version3 \
     --enable-bzlib \
     --disable-devices \
+    --enable-libfaac \
+    --enable-libgsm \
+    --enable-libmp3lame \
+    --enable-libschroedinger \
+    --enable-libtheora \
+    --enable-libvorbis \
+    --enable-libx264 \
+    --enable-libxvid \
     --enable-filter=movie \
+    --enable-avfilter \
+    --enable-libopencore-amrnb \
+    --enable-libopencore-amrwb \
+    --enable-libopenjpeg \
+    --enable-libvpx \
+    --enable-libspeex \
     --enable-libass \
-    --enable-x11grab
+    --enable-postproc \
+    --enable-pthreads \
+    --enable-static \
+    --enable-shared \
+    --enable-gpl \
+     --disable-debug \
+    --disable-optimizations \
+ --enable-libfdk-aac \
+--enable-nonfree \
+--enable-gpl \
+--enable-nonfree \
+--enable-libfdk-aac \
+--enable-pthreads \
+--enable-swscale \
+--enable-vdpau \
+--enable-bzlib \
+--disable-devices \
+--enable-filter=movie \
+    --enable-version3 \
+--enable-x11grab
 
 %{__make} %{?_smp_mflags}
 

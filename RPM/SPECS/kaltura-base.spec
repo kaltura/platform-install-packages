@@ -15,7 +15,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 9.9.0
-Release: 19 
+Release: 21 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -28,10 +28,10 @@ Source5: 01.Partner.template.ini
 Source6: 02.Permission.ini
 Source7: dwh.template
 Source8: 01.uiConf.99.template.xml
-URL: https://github.com/kaltura/server/tree/master
+URL: https://github.com/kaltura/server/tree/IX-%{version}
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
-Requires: rsync,mail,mysql,kaltura-monit,kaltura-postinst,cronie, php, php-xml, php-curl, php-mysql,php-gd,php-gmp, php-imap, php-ldap,ntp,mailx
+Requires: rsync,mail,mysql,kaltura-monit,kaltura-postinst,cronie, php-cli, php-xml, php-curl, php-mysql,php-gd,php-gmp, php-imap, php-ldap,ntp,mailx
 
 %description
 Kaltura is the world's first Open Source Online Video Platform, transforming the way people work, 
@@ -220,6 +220,9 @@ fi
 
 
 %changelog
+* Sun Feb 2 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-21
+- Only PHP CLI is needed.
+
 * Sat Feb 1 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-19
 - New KDP3 ver v3.9.7 and hence, new 01.uiConf.99.template.xml. 
 

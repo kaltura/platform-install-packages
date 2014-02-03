@@ -75,7 +75,7 @@ check_connectivity()
 	
 	echo "show tables;" | mysql -h$SPHINX_SERVER -P9312  > /dev/null 2>&1
 	if [ $? -ne 0 ];then
-		MSG="$MSG\nCouldn't connect to Sphinx with mysql -u$SPHINX_SERVER -P9312."
+		MSG="$MSG\nCouldn't connect to Sphinx with mysql -h$SPHINX_SERVER -P9312."
 		RC=1
 	fi
 	curl "$SERVICE_URL/api_v3/index.php?service=system&action=ping" -k  > /dev/null 2>&1
