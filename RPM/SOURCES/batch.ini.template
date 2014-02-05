@@ -17,6 +17,8 @@ dwhPath												= @LOG_DIR@/dwh.log
 dwhEnabled											= 0
 timezone											= @TIME_ZONE@
 statusInterval										= 300
+directoryChmod                                                                          = 775
+chmod                                                                                           = 664
 
 [@INSTALLED_HOSNAME@ : mainTemplate]
 id	= @BATCH_SCHEDULER_ID@

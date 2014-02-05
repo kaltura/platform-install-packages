@@ -2,8 +2,8 @@
 %define kdp3_vers "v3.5.21 v3.8.9 v3.9.1 v3.9.2 v3.9.7"
 Name:	kaltura-kdp3	
 Version: v3.9.7
-Epoch: 1
-Release: 1 
+Epoch: 1 
+Release: 2
 Summary: Kaltura Dynamic Player
 License: AGPLv3+	
 URL: https://github.com/kaltura/kdp/releases/tag/%{version}
@@ -46,6 +46,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Feb 3 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v3.9.7-3
+- Since these widgets typically reside on NFS and served from another machine there is not need for the Apache dep.
+
 * Sat Feb 1 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 3.9.7-1
 - Added support in "allowUserPauseAds" flashvar that will allow the user to pause ad playback.
 - Fix DFXP styling: now subtitles will inherit the body style if no inlina style was set.

@@ -14,6 +14,10 @@
 #===============================================================================
 
 #set -o nounset                              # Treat unset variables as an error
+if ! rpm -q kaltura-batch;then
+	echo "First install kaltura-batch."
+	exit 11
+fi
 if [ -n "$1" -a -r "$1" ];then
 	ANSFILE=$1
 	. $ANSFILE
@@ -57,8 +61,10 @@ ln -sf $APP_DIR/configurations/logrotate/kaltura_batch /etc/logrotate.d/
 ln -sf $APP_DIR/configurations/logrotate/kaltura_apache /etc/logrotate.d/
 ln -sf $APP_DIR/configurations/logrotate/kaltura_apps /etc/logrotate.d/
 
-mkdir -p $LOG_DIR/batch
-chown $OS_KALTURA_USER.$OS_KALTURA_USER $LOG_DIR/batch
-
+mkdir -p $LOG_DIR/batch 
+find $BASE_DIR/app/cache/ $BASE_DIR/log -type d -exec chmod 775 {} \; 
+find $BASE_DIR/app/cache/ $BASE_DIR/log -type f -exec chmod 664 {} \; 
+chown -R kaltura.apache $BASE_DIR/app/cache/ $BASE_DIR/log
+ln -sf $APP_DIR/configurations/apache/kaltura.conf /etc/httpd/conf.d
 service httpd restart
 /etc/init.d/kaltura-batch restart >/dev/null 2>&1

@@ -15,7 +15,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 9.9.0
-Release: 21 
+Release: 26 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -61,6 +61,9 @@ mkdir -p $RPM_BUILD_ROOT%{prefix}/bin
 mkdir -p $RPM_BUILD_ROOT%{prefix}/lib
 mkdir -p $RPM_BUILD_ROOT%{prefix}/include
 mkdir -p $RPM_BUILD_ROOT%{prefix}/share
+
+mkdir -p $RPM_BUILD_ROOT%{prefix}/tmp/convert
+mkdir -p $RPM_BUILD_ROOT%{prefix}/tmp/thumb/
 
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/tmp
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/tmp/imports
@@ -148,18 +151,19 @@ fi
 %post
 
 # create user/group, and update permissions
-groupadd -r %{kaltura_group} 2>/dev/null || true
-useradd -M -r -d /opt/kaltura -s /bin/bash -c "Kaltura server" -g %{kaltura_group} %{kaltura_user} 2>/dev/null || true
+groupadd -r %{kaltura_group} -g7373 2>/dev/null || true
+useradd -M -r -u7373 -d /opt/kaltura -s /bin/bash -c "Kaltura server" -g %{kaltura_group} %{kaltura_user} 2>/dev/null || true
 getent group apache >/dev/null || groupadd -g 48 -r apache
 getent passwd apache >/dev/null || \
   useradd -r -u 48 -g apache -s /sbin/nologin \
     -d /var/www -c "Apache" apache
+usermod -a -G %{kaltura_group} %{apache_user}
 
 usermod -g %{kaltura_group} %{kaltura_user} 2>/dev/null || true
 ln -sf %{prefix}/app/configurations/system.ini /etc/kaltura.d/system.ini
 ln -sf %{prefix}/app/api_v3/web %{prefix}/app/alpha/web/api_v3
-chown apache.kaltura -R /opt/kaltura/web/content/entry /opt/kaltura/web/content/uploads/ /opt/kaltura/web/content/webcam/
-chmod 775 /opt/kaltura/web/content/entry /opt/kaltura/web/content/uploads/ /opt/kaltura/web/content/webcam/ 
+chown apache.kaltura -R /opt/kaltura/web/content/entry /opt/kaltura/web/content/uploads/ /opt/kaltura/web/content/webcam/ /opt/kaltura/web/tmp/
+find /opt/kaltura/web/content/entry /opt/kaltura/web/content/uploads/ /opt/kaltura/web/content/webcam/ /opt/kaltura/web/tmp/ -type d -exec chmod 775 {} \;
 /etc/init.d/ntpd start
 if [ "$1" = 2 ];then
 	echo "Regenarating client libs.. this will take up to 2 minutes to complete."
@@ -203,6 +207,7 @@ fi
 
 
 %dir /etc/kaltura.d
+%defattr(-, %{kaltura_user}, %{apache_group} , 0775)
 %dir %{prefix}/log
 %dir %{prefix}/tmp
 %dir %{prefix}/app/cache

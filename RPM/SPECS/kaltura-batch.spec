@@ -7,7 +7,7 @@
 Summary: Kaltura Open Source Video Platform - batch server 
 Name: kaltura-batch
 Version: 9.9.0
-Release: 7 
+Release: 10 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: zz-%{name}.ini
@@ -80,6 +80,7 @@ sed -i "s@^\(params.mediaInfoCmd\)\s*=.*@\1=%{_bindir}/mediainfo@" $RPM_BUILD_RO
 #ln -fs %{prefix}/app/configurations/monit.avail/batch.rc %{prefix}/app/configurations/monit.d/batch.rc
 if [ "$1" = 1 ];then
 	/sbin/chkconfig --add kaltura-batch
+	/sbin/chkconfig kaltura-batch on
 echo "#####################################################################################################################################
 Installation of %{name} %{version} completed
 Please run: 
@@ -105,7 +106,7 @@ if [ "$1" = 0 ];then
 fi
 
 if [ "$1" = 0 ];then
-	%{prefix}/bin/kaltura-dwh-config.sh
+	%{prefix}/bin/kaltura-batch-config.sh
 fi
 
 %preun
@@ -130,6 +131,9 @@ service httpd restart
 
 
 %changelog
+* Mon Feb 3 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-9
+- Start batch at init.
+
 * Sat Feb 1 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-7
 - Minor fix to post install msg.
 

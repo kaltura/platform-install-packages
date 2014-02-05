@@ -47,6 +47,10 @@ This answers file can be used to silently-install re-install this machine or dep
 
 "
 }
+if ! rpm -q kaltura-front;then
+	echo "First install kaltura-front."
+	exit 11
+fi
 if [ -n "$1" -a -r "$1" ];then
 	ANSFILE=$1
 	. $ANSFILE
@@ -227,6 +231,7 @@ ln -sf $APP_DIR/configurations/logrotate/kaltura_apps /etc/logrotate.d/
 if [ -r "$NEWANSFILE" ];then
 	create_answer_file $NEWANSFILE
 fi
-chown -R apache.kaltura /opt/kaltura/log /opt/kaltura/app/cache
-chmod -R 775 /opt/kaltura/log /opt/kaltura/app/cache/
+find $BASE_DIR/app/cache/ $BASE_DIR/log -type d -exec chmod 775 {} \; 
+find $BASE_DIR/app/cache/ $BASE_DIR/log -type f -exec chmod 664 {} \; 
+chown -R kaltura.apache $BASE_DIR/app/cache/ $BASE_DIR/log
 service httpd restart

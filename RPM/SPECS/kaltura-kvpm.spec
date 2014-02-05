@@ -1,7 +1,7 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kvpm	
 Version: v1.0.6 
-Release: 1
+Release: 2 
 Summary: Kaltura Video Presentations Manager
 License: AGPLv3+	
 URL: http://kaltura.org
@@ -46,5 +46,8 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Feb 3 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v1.0.6-2 
+- Since these widgets typically reside on NFS and served from another machine there is not need for the Apache dep.
+
 * Sun Jan 12 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v1.0.6-1
 - initial package.

@@ -2,7 +2,7 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmc	
 Version: v5.37.10
-Release: 10 
+Release: 11 
 Summary: Kaltura Management Console
 
 Group: System Management	
@@ -55,6 +55,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Feb 3 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v3.37.10-11
+- Since these widgets typically reside on NFS and served from another machine there is not need for the Apache dep.
+
 * Sat Feb 1 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.10-10
 - Moving to KDP3 v3.9.7.
 

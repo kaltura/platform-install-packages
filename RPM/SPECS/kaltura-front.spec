@@ -7,7 +7,7 @@
 Summary: Kaltura Open Source Video Platform - frontend server 
 Name: kaltura-front
 Version: 9.9.0
-Release: 1
+Release: 2 
 License: AGPLv3+
 Group: Server/Platform 
 #Source0: kaltura.ssl.conf.template 
@@ -71,6 +71,12 @@ chown -R %{kaltura_user}:%{apache_group} %{prefix}/log
 chown -R %{kaltura_user}:%{apache_group} %{prefix}/tmp 
 chown -R %{kaltura_user}:%{apache_group} %{prefix}/app/cache 
 chmod -R 775 %{prefix}/log %{prefix}/tmp %{prefix}/app/cache %{prefix}/web
+if [ "$1" = 1 ];then
+	/sbin/chkconfig --add httpd
+	/sbin/chkconfig httpd on
+	/sbin/chkconfig --add memcached 
+	/sbin/chkconfig memcached on
+fi
 service httpd restart
 sed 's#@APP_DIR@#%{prefix}/app#' %{prefix}/app/configurations/monit.avail/httpd.template.rc > %{prefix}/app/configurations/monit.avail/httpd.rc 
 sed 's#@APACHE_SERVICE@#httpd#g' -i %{prefix}/app/configurations/monit.avail/httpd.rc
@@ -102,6 +108,9 @@ rm -rf %{buildroot}
 %config %{_sysconfdir}/php.d/zz-%{name}.ini
 
 %changelog
+* Mon Feb 3 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-2
+- Start httpd and memcached at init.
+
 * Mon Jan 27 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-1
 - Moving to IX-9.9.0
 

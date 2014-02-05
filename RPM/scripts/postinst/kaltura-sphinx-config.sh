@@ -15,6 +15,10 @@
 
 #set -o nounset                              # Treat unset variables as an error
 
+if ! rpm -q kaltura-sphinx;then
+	echo "First install kaltura-sphinx."
+	exit 11
+fi
 if [ -n "$1" -a -r "$1" ];then
 	ANSFILE=$1
 	. $ANSFILE
@@ -33,8 +37,8 @@ if [ ! -r "$RC_FILE" ];then
 	exit 2
 fi
 . $RC_FILE
-mkdir -p $LOG_DIR/sphinx/data
-chown $OS_KALTURA_USER.$OS_KALTURA_USER $LOG_DIR/sphinx/data
+mkdir -p $LOG_DIR/sphinx/data $APP_DIR/cache//sphinx
+chown $OS_KALTURA_USER.$OS_KALTURA_USER $APP_DIR/cache/sphinx $LOG_DIR/sphinx/data
 echo "sphinxServer = $SPHINX_HOST" > /opt/kaltura/app/configurations/sphinx/populate/`hostname`.ini
 /etc/init.d/kaltura-sphinx restart >/dev/null 2>&1
 /etc/init.d/kaltura-populate restart >/dev/null 2>&1

@@ -15,6 +15,10 @@
 
 #set -o nounset                              # Treat unset variables as an error
 
+if ! rpm -q kaltura-dwh;then
+	echo "First install kaltura-dwh."
+	exit 11
+fi
 if [ ! -r /opt/kaltura/app/base-config.lock ];then
 	`dirname $0`/kaltura-base-config.sh
 else

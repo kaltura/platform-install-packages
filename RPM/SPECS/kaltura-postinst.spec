@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
-Version: 1.0.3
+Version: 1.0.4
 Release: 9 
 License: AGPLv3+
 Group: Server/Platform 
@@ -50,6 +50,22 @@ rm -rf %{buildroot}
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Wed Feb 5 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.4-8
+- typo fix.
+
+* Wed Feb 5 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.4-7
+- Passwd confirmation prompt
+- Changed string 'host' to 'hostname'
+
+* Mon Feb 3 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.4-3
+- Exit configs if the relevant RPM package isn't installed.
+
+* Mon Feb 3 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.3-11
+Replace tokens in %%{prefix}/app/tests/monitoring/config.template.ini
+
+* Mon Feb 3 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.3-10
+- Don't attempt to replace tokens for DWH if DWH isn't installed on node.
+
 * Mon Feb 3 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.3-9
 - Fixes for cluster install.
 
