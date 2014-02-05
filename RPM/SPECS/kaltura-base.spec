@@ -15,7 +15,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 9.9.0
-Release: 26 
+Release: 27 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -28,6 +28,7 @@ Source5: 01.Partner.template.ini
 Source6: 02.Permission.ini
 Source7: dwh.template
 Source8: 01.uiConf.99.template.xml
+#Source9: 01.conversionProfile.99.template.xml
 URL: https://github.com/kaltura/server/tree/IX-%{version}
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
@@ -225,6 +226,9 @@ fi
 
 
 %changelog
+* Wed Feb 5 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-27
+- Fixed the conversion template for p99. Include flav. ID 19.
+
 * Sun Feb 2 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-21
 - Only PHP CLI is needed.
 

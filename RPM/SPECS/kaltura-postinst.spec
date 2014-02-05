@@ -3,7 +3,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.4
-Release: 9 
+Release: 10 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -50,6 +50,10 @@ rm -rf %{buildroot}
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Wed Feb 5 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.4-10
+- Correctly replace timezone directive
+- Easier copy paste output for MySQL directives
+
 * Wed Feb 5 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.4-8
 - typo fix.
 
