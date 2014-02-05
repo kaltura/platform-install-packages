@@ -32,6 +32,12 @@ setenforce permissive
 ```rpm -ihv http://54.211.235.142/nightly/RPMS/noarch/kaltura-release.noarch.rpm```   
 `http://54.211.235.142/nightly/RPMS/noarch/kaltura-release.noarch.rpm` represents the latest master release (latest nightly build).
 
+###### Install the Kaltura Packages
+```bash
+yum clean all
+yum install kaltura-server
+```
+
 ###### Install and configure MySQL (if you’re going to use DB on the same server)
 ```bash
 yum install mysql-server
@@ -49,13 +55,11 @@ Two working solutions to the AWS EC2 email limitations are:
 * Using SendGrid as your mail service ([setting up ec2 with Sendgrid and postfix](http://www.zoharbabin.com/configure-ssmtp-or-postfix-to-send-email-via-sendgrid-on-centos-6-3-ec2)).
 * Using [Amazon's Simple Email Service](http://aws.amazon.com/ses/). 
 
-###### Install Kaltura and Configure the Kaltura installation
+###### Configure the Kaltura installation
 ```bash
-yum clean all
-yum install kaltura-server
 /opt/kaltura/bin/kaltura-config-all.sh [answers-file-path]
 ```
-`[answers-file-path]` is an optional flag, in case you have an answers file ready, you can use it to perform a silent install. If you don't have an answers file, simply omit it (`/opt/kaltura/bin/kaltura-config-all.sh`).   
+`[answers-file-path]` is an optional flag, in case you have an answers file ready, you can use it to perform a silent install. If you don't have an answers file, simply omit it (`/opt/kaltura/bin/kaltura-config-all.sh`). The answers file is automatically generated post the installation and is placed in `/tmp/kaltura*.ans`.     
 When asked, answer all the post-install script questions (or provide an answers file to perform a silent install) -
 * For CDN host: and Apache virtual host: use the resolvable domain name of your server (not always the default value, which will be the hostname).
 * For Service URL: enter protocol + domain (e.g. https://mykalturasite.com).
