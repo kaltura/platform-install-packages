@@ -1,45 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xml>
-	<config>
-		<serviceUrl>@SERVICE_URL@</serviceUrl>
-		<partnerId>99</partnerId>
-		<clientTag>Stand alone php 1.0.0</clientTag>
-		<curlTimeout>120</curlTimeout>
-		<userAgent>Stand alone php 1.0.0</userAgent>
-		<verifySSL objectType="bool">0</verifySSL>
-	</config>
-	<session>
-		<partnerId>99</partnerId>
-		<secret>@TEMPLATE_PARTNER_ADMIN_SECRET@</secret>
-		<userId></userId>
-		<sessionType>2</sessionType>
-		<expiry>86400</expiry>
-		<privileges></privileges> 
-	</session>
-	<request service="conversionProfile" action="add">
-		<conversionProfile objectType="KalturaConversionProfile">
-			<name>Default</name>
-			<type>1</type>
-			<systemName>Default</systemName>
-			<description>The default set of flavors. If not specified otherwise all media uploaded will be converted based on the definition in this profile</description>
-			<isDefault>1</isDefault>
-			<flavorParamsIds>0,2,3,4,5,6,7,19</flavorParamsIds>
-		</conversionProfile>
-		<conversionProfile objectType="KalturaConversionProfile">
-			<name>Cloud transcode</name>
-			<type>2</type>
-			<systemName>Default_Live</systemName>
-			<description>The default set of live renditions</description>
-			<isDefault>1</isDefault>
-			<flavorParamsIds>32,33,34,35</flavorParamsIds>
-		</conversionProfile>
-		<conversionProfile objectType="KalturaConversionProfile">
-			<name>Passthrough</name>
-			<type>2</type>
-			<systemName>Passthrough_Live</systemName>
-			<description>Publish only the broadcasted stream</description>
-			<isDefault>0</isDefault>
-			<flavorParamsIds>32</flavorParamsIds>
-		</conversionProfile>
-	</request>
+        <config>
+                <serviceUrl>@SERVICE_URL@</serviceUrl>
+                <partnerId>99</partnerId>
+                <clientTag>Stand alone php 1.0.0</clientTag>
+                <curlTimeout>120</curlTimeout>
+                <userAgent>Stand alone php 1.0.0</userAgent>
+                <verifySSL objectType="bool">0</verifySSL>
+        </config>
+        <session>
+                <partnerId>99</partnerId>
+                <secret>@TEMPLATE_PARTNER_ADMIN_SECRET@</secret>
+                <userId></userId>
+                <sessionType>2</sessionType>
+                <expiry>86400</expiry>
+                <privileges></privileges> 
+        </session>
+        <request service="conversionProfile" action="add">
+                <conversionProfile objectType="KalturaConversionProfile">
+                        <name>Default</name>
+                        <type>1</type>
+                        <systemName>Default</systemName>
+                        <description>The default set of flavors. If not specified otherwise all media uploaded will be converted based on the definition in this profile</description>
+                        <isDefault>1</isDefault>
+                        <flavorParamsIds>0,2,3,4,5,6,7,19</flavorParamsIds>
+                </conversionProfile>
+        </request>
+        <request service="conversionProfile" action="add">
+                <conversionProfile objectType="KalturaConversionProfile">
+                        <name>Cloud transcode</name>
+                        <type>2</type>
+                        <systemName>Default_Live</systemName>
+                        <description>The default set of live renditions</description>
+                        <isDefault>1</isDefault>
+                        <flavorParamsIds>32,33,34,35</flavorParamsIds>
+                </conversionProfile>
+        </request>
+        <request service="conversionProfile" action="add">
+                <conversionProfile objectType="KalturaConversionProfile">
+                        <name>Passthrough</name>
+                        <type>2</type>
+                        <systemName>Passthrough_Live</systemName>
+                        <description>Publish only the broadcasted stream</description>
+                        <isDefault>0</isDefault>
+                        <flavorParamsIds>32</flavorParamsIds>
+                </conversionProfile>
+        </request>
 </xml>
