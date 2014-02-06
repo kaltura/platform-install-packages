@@ -1,11 +1,5 @@
-#
-# Cookbook Name:: kaltura
-# Recipe:: default
-#
-# Copyright 2014, Kaltura, Ltd.
-#
-log "Installing Kaltura all in 1"
-package "kaltura-server" do
+log "Installing Kaltura batch"
+package "kaltura-batch" do
   action :install
  end
 #%w{ apr apr-util lynx }.each do |pkg|
@@ -20,9 +14,9 @@ template "/root/kaltura.ans" do
     group "root"
 end
 
-bash "setup DWH " do
+bash "setup batchMgr daemon" do
      user "root"
      code <<-EOH
-	"#{node[:kaltura][:install_root]}"/bin/kaltura-config-all.sh /root/kaltura.ans
+	"#{node[:kaltura][:install_root]}"/bin/kaltura-batch-config.sh /root/kaltura.ans
      EOH
 end
