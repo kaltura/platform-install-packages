@@ -5,6 +5,9 @@ This project features official deployment packages to install the Kaltura platfo
 
 **[To learn more and keep track of project status visit the project page](http://kaltura.github.io/platform-install-packages/)**.
 
+### Watch the alpha announcement video:
+[![Watch the alpha announcement video](http://kaltura.github.io/platform-install-packages/images/news/1st-alpha-video-thumb.png "Watch the alpha announcement video")](http://bit.ly/1fIsdmY)
+
 
 ## Installing Kaltura using Standard Packages
 * [Installing on RedHat based Linux distros (including FC, RHEL and CentOS)](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-redhat-based.md).
