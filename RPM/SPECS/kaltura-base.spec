@@ -15,7 +15,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 9.9.0
-Release: 27 
+Release: 28 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -226,6 +226,9 @@ fi
 
 
 %changelog
+* Fri Feb 7 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-28
+- Fix for https://github.com/kaltura/installer/issues/5
+
 * Wed Feb 5 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-27
 - Fixed the conversion template for p99. Include flav. ID 19.
 

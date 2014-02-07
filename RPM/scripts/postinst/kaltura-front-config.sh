@@ -193,7 +193,7 @@ CONF_FILES=`find $APP_DIR/configurations  -type f| grep -v template`
 for i in settings.serviceUrl \$wgKalturaServiceUrl \$wgKalturaCDNUrl \$wgKalturaStatsServiceUrl apphome_url admin_console_url admin_console SERVICE_URL settings.serviceUrl; do sed -i "s#\($i\)\s*=.*#\1=$SERVICE_URL#g" $CONF_FILES;done
 
 find /etc/httpd/conf.d -type l -name "kaltura*" -exec rm {} \;
-ln -fs $MAIN_APACHE_CONF /etc/httpd/conf.d/  
+ln -fs $MAIN_APACHE_CONF /etc/httpd/conf.d/zzz`basename $MAIN_APACHE_CONF`
 
 if [ -z "$CONFIG_CHOICE" ];then
 cat << EOF 
