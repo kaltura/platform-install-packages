@@ -5,7 +5,7 @@ default[:kaltura][:CDN_HOST] = "#{node[:fqdn]}"
 default[:kaltura][:KALTURA_VIRTUAL_HOST_NAME] = "#{node[:fqdn]}"
 default[:kaltura][:KALTURA_VIRTUAL_HOST_PORT]=80
 default[:kaltura][:PROTOCOL]="http"
-default[:kaltura][:KALTURA_FULL_VIRTUAL_HOST_NAME] = "#{node[:fqdn]}:#{node[:KALTURA_VIRTUAL_HOST_PORT]}"
+default[:kaltura][:KALTURA_FULL_VIRTUAL_HOST_NAME] = "#{node[:fqdn]}:#{node[:kaltura][:KALTURA_VIRTUAL_HOST_PORT]}"
 # what web UIs to expose
 default[:kaltura][:CONFIG_CHOICE]=0
 default[:kaltura][:IS_SSL]="n"
@@ -33,7 +33,7 @@ default[:kaltura][:BATCHSECRET] = "batchSecret"
 default[:kaltura][:ADMINSECRET] =  "adminSecret"
 default[:kaltura][:MONITORSECRET] =  "monitorSecret"
 default[:kaltura][:FLAVORSECRET] =  "flavorSecret"
-default[:kaltura][:SERVICE_URL] = "#{node[:PROTOCOL]}://#{node[:KALTURA_FULL_VIRTUAL_HOST_NAME]}"
+default[:kaltura][:SERVICE_URL] = "#{node[:kaltura][:PROTOCOL]}://#{node[:kaltura][:KALTURA_FULL_VIRTUAL_HOST_NAME]}"
 default[:kaltura][:TIME_ZONE] = "America/New_York"
 default[:kaltura][:SUPER_USER] = "root"
 default[:kaltura][:SUPER_USER_PASSWD] = "root"

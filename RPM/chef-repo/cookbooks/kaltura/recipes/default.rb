@@ -5,6 +5,7 @@
 # Copyright 2014, Kaltura, Ltd.
 #
 log "Installing Kaltura all in 1"
+if platform?("redhat", "centos", "fedora")
 bash "setup Kaltura's repo" do
      user "root"
      code <<-EOH
@@ -16,6 +17,7 @@ bash "setup Kaltura's repo" do
 		rpm -Uhv "#{node[:kaltura][:KALTURA_RELEASE_RPM]}" || true
 	fi
      EOH
+end
 end
 package "kaltura-server" do
   action :install

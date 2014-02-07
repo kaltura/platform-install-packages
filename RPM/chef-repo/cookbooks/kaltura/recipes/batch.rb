@@ -1,15 +1,18 @@
 log "Installing Kaltura batch"
-bash "setup Kaltura's repo" do
-     user "root"
-     code <<-EOH
-	if ! rpm -q kaltura-release;then
-		rpm -ihv "#{node[:kaltura][:KALTURA_RELEASE_RPM]}"
-	else
-		# if the package is already installed, maybe there's a new verison available.
-		# in RPM, it try to update to the same version you have now - it stupidly returns RC 1 and hence the || true.
-		rpm -Uhv "#{node[:kaltura][:KALTURA_RELEASE_RPM]}" || true
-	fi
-     EOH
+if platform?("redhat", "centos", "fedora")
+	bash "setup Kaltura's repo" do
+	     user "root"
+	     code <<-EOH
+	     echo Platform is #{node['platform']}
+		if ! rpm -q kaltura-release;then
+			rpm -ihv "#{node[:kaltura][:KALTURA_RELEASE_RPM]}"
+		else
+			# if the package is already installed, maybe there's a new verison available.
+			# in RPM, it try to update to the same version you have now - it stupidly returns RC 1 and hence the || true.
+			rpm -Uhv "#{node[:kaltura][:KALTURA_RELEASE_RPM]}" || true
+		fi
+	     EOH
+	end
 end
 package "kaltura-batch" do
   action :install
