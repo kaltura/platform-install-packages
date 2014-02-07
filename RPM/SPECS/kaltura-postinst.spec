@@ -52,6 +52,7 @@ rm -rf %{buildroot}
 %changelog
 * Fri Feb 7 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.4-11
 - Fixes https://github.com/kaltura/platform-install-packages/issues/21
+- Add logging to file during DWH setup.
 - Batch: only configure Kaltura vhost in the event the service URL is local.
 
 * Wed Feb 5 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.4-10
