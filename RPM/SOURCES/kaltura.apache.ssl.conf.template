@@ -9,7 +9,9 @@
 # consult the online docs. You have been warned.  
 #
 
-LoadModule ssl_module modules/mod_ssl.so
+<IfModule !ssl_module>
+	LoadModule ssl_module modules/mod_ssl.so
+</IfModule>
 
 #
 # When we also provide SSL we have to listen to the 

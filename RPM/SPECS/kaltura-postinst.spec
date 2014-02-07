@@ -50,6 +50,9 @@ rm -rf %{buildroot}
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Thu Feb 6 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.4-11
+- Batch: only configure Kaltura vhost in the event the service URL is local.
+
 * Wed Feb 5 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.4-10
 - Correctly replace timezone directive
 - Easier copy paste output for MySQL directives

@@ -51,8 +51,6 @@ cp %{SOURCE1} $RPM_BUILD_ROOT/%{_sysconfdir}/init.d/%{name}
 mkdir -p $RPM_BUILD_ROOT/%{prefix}/app/configurations/apache
 cp %{SOURCE3} $RPM_BUILD_ROOT/%{prefix}/app/configurations/batch
 sed 's#@WEB_DIR@#%{prefix}/web#g' -i $RPM_BUILD_ROOT/%{_sysconfdir}/php.d/zz-%{name}.ini
-#mkdir -p $RPM_BUILD_ROOT/%{_sysconfdir}/httpd/conf.d
-#cp %{SOURCE2} $RPM_BUILD_ROOT/%{_sysconfdir}/httpd/conf.d
 
 
 %clean
