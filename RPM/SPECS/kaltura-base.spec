@@ -159,6 +159,8 @@ getent passwd apache >/dev/null || \
 usermod -a -G %{kaltura_group} %{apache_user}
 
 usermod -g %{kaltura_group} %{kaltura_user} 2>/dev/null || true
+
+
 %post
 
 ln -sf %{prefix}/app/configurations/system.ini /etc/kaltura.d/system.ini
@@ -226,7 +228,7 @@ fi
 
 
 %changelog
-* Fri Feb 9 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-29
+* Sun Feb 9 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-29
 - Fix for https://github.com/kaltura/platform-install-packages/issues/23.
 
 * Fri Feb 7 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-28
