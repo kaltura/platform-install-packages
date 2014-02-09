@@ -15,7 +15,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 9.9.0
-Release: 29 
+Release: 30 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -28,6 +28,7 @@ Source5: 01.Partner.template.ini
 Source6: 02.Permission.ini
 Source7: dwh.template
 Source8: 01.uiConf.99.template.xml
+Source9: plugins.template.ini
 #Source9: 01.conversionProfile.99.template.xml
 URL: https://github.com/kaltura/server/tree/IX-%{version}
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -115,6 +116,7 @@ cp %{SOURCE5} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_data/01.
 cp %{SOURCE6} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_data/02.Permission.ini
 cp %{SOURCE8} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_content/01.uiConf.99.template.xml
 cp %{SOURCE7} $RPM_BUILD_ROOT%{prefix}/app/configurations/cron/dwh.template
+cp %{SOURCE9} $RPM_BUILD_ROOT%{prefix}/app/configurations/plugins.template.ini
 
 # we bring another in kaltura-batch
 rm $RPM_BUILD_ROOT%{prefix}/app/configurations/batch/batch.ini.template
@@ -228,6 +230,11 @@ fi
 
 
 %changelog
+* Sun Feb 9 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-30
+- Fix for https://github.com/kaltura/platform-install-packages/issues/25:
+disable Audit plugin.
+- Fix def. flavor creation.
+
 * Sun Feb 9 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-29
 - Fix for https://github.com/kaltura/platform-install-packages/issues/23.
 
