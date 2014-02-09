@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml>
+	<config>
+		<serviceUrl>@SERVICE_URL@</serviceUrl>
+		<partnerId>99</partnerId>
+		<clientTag>Stand alone php 1.0.0</clientTag>
+		<curlTimeout>120</curlTimeout>
+		<userAgent>Stand alone php 1.0.0</userAgent>
+		<verifySSL objectType="bool">0</verifySSL>
+	</config>
+	<session>
+		<partnerId>99</partnerId>
+		<secret>@TEMPLATE_PARTNER_ADMIN_SECRET@</secret>
+		<userId></userId>
+		<sessionType>2</sessionType>
+		<expiry>86400</expiry>
+		<privileges></privileges> 
+	</session>
+	<multirequest>
+		<request service="userRole" action="add">
+			<userRole objectType="KalturaUserRole">
+				<name>Manager</name>
+				<systemName>Manager</systemName>
+				<description>Full control over publisher account functionalities</description>
+				<permissionNames>BASE_USER_SESSION_PERMISSION,WIDGET_SESSION_PERMISSION,KMC_ACCESS,KMC_READ_ONLY,CONTENT_INGEST_UPLOAD,CONTENT_INGEST_BULK_UPLOAD,CONTENT_INGEST_FEED,CONTENT_MANAGE_DISTRIBUTION_BASE,CONTENT_MANAGE_DISTRIBUTION_WHERE,CONTENT_MANAGE_DISTRIBUTION_SEND,CONTENT_MANAGE_DISTRIBUTION_REMOVE,CONTENT_MANAGE_DISTRIBUTION_PROFILE_MODIFY,CONTENT_MANAGE_VIRUS_SCAN,CONTENT_MANAGE_MIX,CONTENT_MANAGE_BASE,CONTENT_MANAGE_METADATA,CONTENT_MANAGE_ASSIGN_CATEGORIES,CONTENT_MANAGE_THUMBNAIL,CONTENT_MANAGE_SCHEDULE,CONTENT_MANAGE_ACCESS_CONTROL,CONTENT_MANAGE_CUSTOM_DATA,CONTENT_MANAGE_DELETE,CONTENT_MANAGE_RECONVERT,CONTENT_MANAGE_EDIT_CATEGORIES,CONTENT_MANAGE_ANNOTATION,CONTENT_MANAGE_SHARE,CONTENT_MANAGE_DOWNLOAD,LIVE_STREAM_ADD,LIVE_STREAM_UPDATE,CONTENT_MODERATE_BASE,CONTENT_MODERATE_METADATA,CONTENT_MODERATE_CUSTOM_DATA,CONTENT_MODERATE_APPROVE_REJECT,PLAYLIST_BASE,PLAYLIST_ADD,PLAYLIST_UPDATE,PLAYLIST_DELETE,SYNDICATION_BASE,SYNDICATION_ADD,SYNDICATION_UPDATE,SYNDICATION_DELETE,STUDIO_BASE,STUDIO_ADD_UICONF,STUDIO_UPDATE_UICONF,STUDIO_DELETE_UICONF,ACCOUNT_BASE,INTEGRATION_BASE,ACCESS_CONTROL_BASE,ACCESS_CONTROL_ADD,ACCESS_CONTROL_UPDATE,ACCESS_CONTROL_DELETE,TRANSCODING_BASE,TRANSCODING_ADD,TRANSCODING_UPDATE,TRANSCODING_DELETE,CUSTOM_DATA_PROFILE_BASE,CUSTOM_DATA_PROFILE_ADD,CUSTOM_DATA_PROFILE_UPDATE,CUSTOM_DATA_PROFILE_DELETE,CUSTOM_DATA_FIELD_ADD,CUSTOM_DATA_FIELD_UPDATE,CUSTOM_DATA_FIELD_DELETE,ANALYTICS_BASE,WIDGET_ADMIN,SEARCH_SERVICE,ANALYTICS_SEND_DATA,AUDIT_TRAIL_BASE,AUDIT_TRAIL_ADD,ADVERTISING_BASE,ADVERTISING_UPDATE_SETTINGS,PLAYLIST_EMBED_CODE,STUDIO_BRAND_UICONF,STUDIO_SELECT_CONTENT,CONTENT_MANAGE_EMBED_CODE,PLAYLIST_EMBED_CODE</permissionNames>
+				<status>1</status>
+				<tags>kmc</tags>
+			</userRole>
+		</request>
+		<request service="user" action="add">
+			<user objectType="KalturaUser">
+				<id>template@kaltura.com</id>
+				<screenName>template@kaltura.com</screenName>
+				<email>template@kaltura.com</email>
+				<password>@TEMPLATE_PARTNER_ADMIN_SECRET@</password>
+				<status>1</status>
+				<isAdmin>1</isAdmin>
+				<roleIds>{1:result:id}</roleIds>
+				<fullName>Template Partner</fullName>
+			</user>
+		</request>
+	</multirequest>
+	<request service="userRole" action="add">
+		<userRole objectType="KalturaUserRole">
+			<name>Content Uploader</name>
+			<systemName>Content Uploader</systemName>
+			<description>Access to content ingestion and management functionalities</description>
+			<permissionNames>BASE_USER_SESSION_PERMISSION,WIDGET_SESSION_PERMISSION,KMC_ACCESS,KMC_READ_ONLY,CONTENT_INGEST_UPLOAD,CONTENT_INGEST_BULK_UPLOAD,CONTENT_MANAGE_BASE</permissionNames>
+			<status>1</status>
+			<tags>kmc</tags>
+		</userRole>
+	</request>
+	<request service="userRole" action="add">
+		<userRole objectType="KalturaUserRole">
+			<name>Content Moderator</name>
+			<systemName>Content Moderator</systemName>
+			<description>Access to publisher content moderation panel</description>
+			<permissionNames>BASE_USER_SESSION_PERMISSION,WIDGET_SESSION_PERMISSION,KMC_ACCESS,KMC_READ_ONLY,CONTENT_MODERATE_APPROVE_REJECT,CONTENT_MODERATE_BASE,CONTENT_MODERATE_METADATA,CONTENT_MODERATE_CUSTOM_DATA</permissionNames>
+			<status>1</status>
+			<tags>kmc</tags>
+		</userRole>
+	</request>
+	<request service="userRole" action="add">
+		<userRole objectType="KalturaUserRole">
+			<name>Player Designer</name>
+			<systemName>Player Designer</systemName>
+			<description>Access to publisher studio</description>
+			<permissionNames>BASE_USER_SESSION_PERMISSION,WIDGET_SESSION_PERMISSION,KMC_ACCESS,KMC_READ_ONLY,STUDIO_BASE,STUDIO_ADD_UICONF,STUDIO_UPDATE_UICONF,STUDIO_DELETE_UICONF,STUDIO_BRAND_UICONF</permissionNames>
+			<status>1</status>
+			<tags>kmc</tags>
+		</userRole>
+	</request>
+</xml>
