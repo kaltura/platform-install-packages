@@ -2,8 +2,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
-Version: 1.0.3
-Release: 9 
+Version: 1.0.4
+Release: 13 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -50,6 +50,31 @@ rm -rf %{buildroot}
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Fri Feb 7 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.4-11
+- Fixes https://github.com/kaltura/platform-install-packages/issues/21
+- Add logging to file during DWH setup.
+- Batch: only configure Kaltura vhost in the event the service URL is local.
+
+* Wed Feb 5 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.4-10
+- Correctly replace timezone directive
+- Easier copy paste output for MySQL directives
+
+* Wed Feb 5 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.4-8
+- typo fix.
+
+* Wed Feb 5 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.4-7
+- Passwd confirmation prompt
+- Changed string 'host' to 'hostname'
+
+* Mon Feb 3 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.4-3
+- Exit configs if the relevant RPM package isn't installed.
+
+* Mon Feb 3 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.3-11
+Replace tokens in %%{prefix}/app/tests/monitoring/config.template.ini
+
+* Mon Feb 3 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.3-10
+- Don't attempt to replace tokens for DWH if DWH isn't installed on node.
+
 * Mon Feb 3 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.3-9
 - Fixes for cluster install.
 

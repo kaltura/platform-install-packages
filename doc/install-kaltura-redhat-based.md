@@ -36,6 +36,12 @@ setenforce permissive
 ```bash
 yum clean all
 yum install kaltura-server
+# enable daemons at init:
+# The memcache and ntp RPMs used by Kaltura server are taken from the official disto's repo. 
+# Unfortuantely, the postinst scripts for these packages do not set it to start at init time.
+# To set this up:
+chkconfig memcached on
+chkconfig ntpd on
 ```
 
 ###### Install and configure MySQL (if you’re going to use DB on the same server)
@@ -45,6 +51,8 @@ yum install mysql-server
 mysql_secure_installation
 # Run the my.cnf configuration script ON THE MYSQL server
 /opt/kaltura/bin/kaltura-mysql-settings.sh
+# Enable MySQL at init time:
+chkconfig mysqld on
 ```
 ###### Configure your email server and MTA - REQUIRED
 If your machine doesn't have postfix email configured before the Kaltura install, you will not receive emails from the install system nor publisher account activation mails. 

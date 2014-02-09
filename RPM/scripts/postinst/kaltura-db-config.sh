@@ -115,8 +115,6 @@ fi
 
 echo "Cleaning cache.."
 rm -rf $APP_DIR/cache/*
-echo "Now starting pop daemon"
-/etc/init.d/kaltura-populate start || exit 11
 echo "Populating DB with data.. please wait.."
 echo "Output for $APP_DIR/deployment/base/scripts/installPlugins.php being logged into $LOG_DIR/installPlugins.log"
 php $APP_DIR/deployment/base/scripts/installPlugins.php >> $LOG_DIR/installPlugins.log  2>&1
@@ -141,7 +139,7 @@ php $APP_DIR/deployment/uiconf/deploy_v2.php --ini=$WEB_DIR/flash/kmc/$KMC_VERSI
 find  $WEB_DIR/content/generatedUiConf -type d -exec chmod 775 {} \;
 
 set +e
-rm -rf $APP_DIR/cache/*
+rm -rf $BASE_DIR/cache/*
 rm -f $APP_DIR/log/kaltura-*.log
 
 

@@ -1,7 +1,7 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kclip	
 Version: v1.1.2.1 
-Release: 2 
+Release: 3 
 Summary: Kaltura Video Presentations Manager
 License: AGPLv3+	
 URL: http://kaltura.org
@@ -9,7 +9,7 @@ Source0: %{name}.tar.bz2
 BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 BuildArch: noarch
 
-Requires: kaltura-base, httpd	
+Requires: kaltura-base
 
 %description
 Kaltura is the world's first Open Source Online Video Platform, transforming the way people work, 
@@ -46,6 +46,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Feb 3 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v1.1.2.1-3
+- Since these widgets typically reside on NFS and served from another machine there is not need for the Apache dep.
+
 * Tue Jan 28 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v1.1.2.1-2
 - wrong path to destination.
 

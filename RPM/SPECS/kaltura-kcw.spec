@@ -3,7 +3,7 @@
 %define kcw_vers "v2.1.6.7 v2.1.5 v2.2.1 v2.2.3 v2.1.4 v1.5.4 v2.1.2 v2.1.6.3"
 Name:	kaltura-%{widget_name}
 Version: 1.0.0 
-Release: 2 
+Release: 3 
 Summary: Kaltura KCW - used for recording from web cam
 License: AGPLv3+	
 URL: http://kaltura.org
@@ -50,6 +50,9 @@ rm -rf %{buildroot}
 %{prefix}/web/content/uiconf
 
 %changelog
+* Mon Feb 3 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.0-3
+- Since these widgets typically reside on NFS and served from another machine there is not need for the Apache dep.
+
 * Wed Jan 15 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.0-2
 - Added uiconfs.
 

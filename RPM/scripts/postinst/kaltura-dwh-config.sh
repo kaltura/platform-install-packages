@@ -15,6 +15,10 @@
 
 #set -o nounset                              # Treat unset variables as an error
 
+if ! rpm -q kaltura-dwh;then
+	echo "First install kaltura-dwh."
+	exit 11
+fi
 if [ ! -r /opt/kaltura/app/base-config.lock ];then
 	`dirname $0`/kaltura-base-config.sh
 else
@@ -31,8 +35,10 @@ fi
 . $RC_FILE
 TABLES=`echo "show tables" | mysql -h$DWH_HOST -u$SUPER_USER -p$SUPER_USER_PASSWD -P$DWH_PORT kalturadw 2> /dev/null`
 if [ -z "$TABLES" ];then 
-	echo "Deploying analytics warehouse DB, please be patient as this may take a while..."
-	/opt/kaltura/dwh/setup/dwh_setup.sh -u$SUPER_USER -k /opt/kaltura/pentaho/pdi/ -d/opt/kaltura/dwh -h$DWH_HOST -P$DWH_PORT -p$SUPER_USER_PASSWD
+	echo "Deploying analytics warehouse DB, please be patient as this may take a while...
+Output is logged to $BASE_DIR/dwh/logs/dwh_setup.log.
+"
+	$BASE_DIR/dwh/setup/dwh_setup.sh -u$SUPER_USER -k $BASE_DIR/pentaho/pdi/ -d$BASE_DIR/dwh -h$DWH_HOST -P$DWH_PORT -p$SUPER_USER_PASSWD | tee $BASE_DIR/dwh/logs/dwh_setup.log
 else
 cat << EOF
 The Kaltura DWH DB seems to already be installed.

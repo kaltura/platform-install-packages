@@ -47,6 +47,10 @@ This answers file can be used to silently-install re-install this machine or dep
 
 "
 }
+if ! rpm -q kaltura-front;then
+	echo "First install kaltura-front."
+	exit 11
+fi
 if [ -n "$1" -a -r "$1" ];then
 	ANSFILE=$1
 	. $ANSFILE
@@ -183,13 +187,14 @@ fi
 
 
 cp $KALTURA_APACHE_CONFD/enabled.kaltura.conf.template $KALTURA_APACHE_CONFD/enabled.kaltura.conf 
+cp $KALTURA_APACHE_CONF/kaltura.conf.template $KALTURA_APACHE_CONF/kaltura.conf
 sed -e "s#@APP_DIR@#$APP_DIR#g" -e "s#@LOG_DIR@#$LOG_DIR#g" -e "s#@WEB_DIR@#$WEB_DIR#g" -e "s#@KALTURA_VIRTUAL_HOST_NAME@#$KALTURA_VIRTUAL_HOST_NAME#g" -e "s#@KALTURA_VIRTUAL_HOST_PORT@#$KALTURA_VIRTUAL_HOST_PORT#g" -e "s#@SERVICE_URL@#$SERVICE_URL#g" -i $MAIN_APACHE_CONF $KALTURA_APACHE_CONFD/enabled.kaltura.conf
 
 CONF_FILES=`find $APP_DIR/configurations  -type f| grep -v template`
 for i in settings.serviceUrl \$wgKalturaServiceUrl \$wgKalturaCDNUrl \$wgKalturaStatsServiceUrl apphome_url admin_console_url admin_console SERVICE_URL settings.serviceUrl; do sed -i "s#\($i\)\s*=.*#\1=$SERVICE_URL#g" $CONF_FILES;done
 
-find /etc/httpd/conf.d -type l -name "kaltura*" -exec rm {} \;
-ln -fs $MAIN_APACHE_CONF /etc/httpd/conf.d/  
+find /etc/httpd/conf.d -type l -name "zzzkaltura*" -exec rm {} \;
+ln -fs $MAIN_APACHE_CONF /etc/httpd/conf.d/zzz`basename $MAIN_APACHE_CONF`
 
 if [ -z "$CONFIG_CHOICE" ];then
 cat << EOF 
@@ -227,6 +232,7 @@ ln -sf $APP_DIR/configurations/logrotate/kaltura_apps /etc/logrotate.d/
 if [ -r "$NEWANSFILE" ];then
 	create_answer_file $NEWANSFILE
 fi
-chown -R apache.kaltura /opt/kaltura/log /opt/kaltura/app/cache
-chmod -R 775 /opt/kaltura/log /opt/kaltura/app/cache/
+find $BASE_DIR/app/cache/ $BASE_DIR/log -type d -exec chmod 775 {} \; 
+find $BASE_DIR/app/cache/ $BASE_DIR/log -type f -exec chmod 664 {} \; 
+chown -R kaltura.apache $BASE_DIR/app/cache/ $BASE_DIR/log
 service httpd restart

@@ -6,7 +6,7 @@
 
 Name:           kaltura-sphinx
 Version:        2.2.1
-Release:        14
+Release:        16
 Summary:        Sphinx full-text search server - for Kaltura
 
 Group:          Applications/Text
@@ -115,12 +115,15 @@ sed 's#@BASE_DIR@#/opt/kaltura#g' -i $RPM_BUILD_ROOT/opt/kaltura/app/configurati
 sed 's#^pid_file.*#pid_file=%{prefix}/var/run/searchd.pid#' -i $RPM_BUILD_ROOT/opt/kaltura/app/configurations/sphinx/kaltura.conf
 # register service
 if [ "$1" = 1 ];then
-    /sbin/chkconfig --add kaltura-sphinx
+    /sbin/chkconfig --add %{name}
+	/sbin/chkconfig %{name} on
+    /sbin/chkconfig --add kaltura-populate
+	/sbin/chkconfig kaltura-populate on
 echo "
 #####################################################################################################################################
 Installation of %{name} %{version} completed
 Please run 
-# %{prefix}/bin/%{name}-config.sh [/path/to/answer/file]
+# /opt/kaltura/bin/%{name}-config.sh [/path/to/answer/file]
 To finalize the setup.
 #####################################################################################################################################
 "
@@ -133,6 +136,7 @@ chown -R %{sphinx_user}:%{sphinx_group} %{prefix} /opt/kaltura/log/sphinx
 # don't start unless it went through configuration and the INI was created.
 if [ -r /opt/kaltura/app/configurations/system.ini ];then 
 	%{_initrddir}/kaltura-sphinx restart
+	%{_initrddir}/kaltura-populate restart
 fi
 
 
@@ -140,7 +144,8 @@ fi
 if [ "$1" = 0 ] ; then
     /sbin/service kaltura-sphinx stop >/dev/null 2>&1
     /sbin/service kaltura-populate stop >/dev/null 2>&1
-    /sbin/chkconfig --del kaltura-sphinx
+    /sbin/chkconfig --del %{name}
+    /sbin/chkconfig --del kaltura-populate 
     rm -f %{prefix}/app/configurations/sphinx/populate/`hostname`.ini
 fi
 
@@ -164,6 +169,9 @@ fi
 
 
 %changelog
+* Mon Feb 3 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 2.2.1.r4097-15 
+- Start Sphinx and pop at init.
+
 * Mon Jan 20 2014 Jess Portnoy <jess.portnoy@kaltura.com> 2.2.1.r4097-9
 - With populate, no need to show an error if trying to stop a none running instance.
   Saying it isn't running is good enough and cause less panic.

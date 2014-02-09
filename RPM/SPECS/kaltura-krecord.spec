@@ -4,7 +4,7 @@
 Name:	kaltura-%{widget_name}
 Version: v1.7 
 Epoch: 1
-Release: 1
+Release: 2
 Summary: Kaltura kRecord - used for recording from web cam
 License: AGPLv3+	
 URL: http://kaltura.org
@@ -49,6 +49,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Feb 3 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v1.7.0-2
+- Since these widgets typically reside on NFS and served from another machine there is not need for the Apache dep.
+
 * Sat Feb 1 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v1.7.0-1
 - Publish Live Streams
   Use the following flashvars to publish live streams:
