@@ -15,7 +15,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 9.9.0
-Release: 28 
+Release: 29 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -149,8 +149,6 @@ and then edit /etc/selinux/config to make the change permanent."
 		exit 1;
 	fi
 fi
-%post
-
 # create user/group, and update permissions
 groupadd -r %{kaltura_group} -g7373 2>/dev/null || true
 useradd -M -r -u7373 -d /opt/kaltura -s /bin/bash -c "Kaltura server" -g %{kaltura_group} %{kaltura_user} 2>/dev/null || true
@@ -161,6 +159,8 @@ getent passwd apache >/dev/null || \
 usermod -a -G %{kaltura_group} %{apache_user}
 
 usermod -g %{kaltura_group} %{kaltura_user} 2>/dev/null || true
+%post
+
 ln -sf %{prefix}/app/configurations/system.ini /etc/kaltura.d/system.ini
 ln -sf %{prefix}/app/api_v3/web %{prefix}/app/alpha/web/api_v3
 chown apache.kaltura -R /opt/kaltura/web/content/entry /opt/kaltura/web/content/uploads/ /opt/kaltura/web/content/webcam/ /opt/kaltura/web/tmp/
@@ -226,6 +226,9 @@ fi
 
 
 %changelog
+* Fri Feb 9 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-29
+- Fix for https://github.com/kaltura/platform-install-packages/issues/23.
+
 * Fri Feb 7 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-28
 - Fix for https://github.com/kaltura/installer/issues/5
 
