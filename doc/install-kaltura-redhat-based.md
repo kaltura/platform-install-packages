@@ -72,11 +72,12 @@ When asked, answer all the post-install script questions (or provide an answers 
 * For CDN host: and Apache virtual host: use the resolvable domain name of your server (not always the default value, which will be the hostname).
 * For Service URL: enter protocol + domain (e.g. https://mykalturasite.com).
 
-## Upgrading an existing Kaltura installation 
+## Upgrade an existing Kaltura installation 
 *This will only work if the initial install was using this packages based install, it will not work for old Kaltura deployments using the PHP installers*
 ```bash
 yum clean all
 yum update "*kaltura*"
+rm /opt/kaltura/app/base-config.lock
 /opt/kaltura/bin/kaltura-config-all.sh [answers-file-path]
 ```
 
