@@ -89,7 +89,7 @@ EOF
 	done
 	# create the DBs:
 	for DB in $DBS;do 
-		echo "CREATE DATABASE $DB"
+		echo "CREATE DATABASE $DB;"
 		echo "CREATE DATABASE $DB;" | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT
 		PRIVS=${DB}_PRIVILEGES
 		DB_USER=${DB}_USER

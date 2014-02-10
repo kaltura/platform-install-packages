@@ -126,6 +126,11 @@ KCLIP_VERSION="v1.1.2.1"
 KCLIP_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/flash/kclip/$KCLIP_VERSION"
 KCLIP_RPM_NAME="kaltura-kclip"
 
+# Flex wrapper
+FLEX_WRAPPER_VERSION="v1.2"
+FLEX_WRAPPER_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/flash/flexwrapper/$FLEX_WRAPPER_VERSION"
+FLEX_WRAPPER_RPM_NAME="kaltura-flexwrapper"
+
 # HTML5 lib
 HTML5LIB_VERSION="v2.1.1"
 HTML5LIB_URI="https://github.com/kaltura/mwEmbed/tarball/$HTML5LIB_VERSION"

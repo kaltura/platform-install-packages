@@ -15,7 +15,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 9.9.0
-Release: 30 
+Release: 35 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -29,7 +29,7 @@ Source6: 02.Permission.ini
 Source7: dwh.template
 Source8: 01.uiConf.99.template.xml
 Source9: plugins.template.ini
-Source10: 01.UserRole.99.template.xml
+#Source10: 01.UserRole.99.template.xml
 #Source9: 01.conversionProfile.99.template.xml
 URL: https://github.com/kaltura/server/tree/IX-%{version}
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -118,7 +118,7 @@ cp %{SOURCE6} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_data/02.
 cp %{SOURCE8} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_content/01.uiConf.99.template.xml
 cp %{SOURCE7} $RPM_BUILD_ROOT%{prefix}/app/configurations/cron/dwh.template
 cp %{SOURCE9} $RPM_BUILD_ROOT%{prefix}/app/configurations/plugins.template.ini
-cp %{SOURCE10} $RPM_BUILD_ROOT%{prefix}/app/configurations/01.UserRole.99.template.xml
+#cp %{SOURCE10} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_content/01.UserRole.99.template.xml
 
 # we bring another in kaltura-batch
 rm $RPM_BUILD_ROOT%{prefix}/app/configurations/batch/batch.ini.template
@@ -173,10 +173,12 @@ chown apache.kaltura -R /opt/kaltura/web/content/entry /opt/kaltura/web/content/
 find /opt/kaltura/web/content/entry /opt/kaltura/web/content/uploads/ /opt/kaltura/web/content/webcam/ /opt/kaltura/web/tmp/ -type d -exec chmod 775 {} \;
 /etc/init.d/ntpd start
 if [ "$1" = 2 ];then
-	echo "Regenarating client libs.. this will take up to 2 minutes to complete."
-	php %{prefix}/app/generator/generate.php
-	if [ -x %{_sysconfdir}/init.d/httpd ];then
-		%{_sysconfdir}/init.d/httpd restart
+	if [ -r "%{prefix}/app/configurations/local.ini" -a -r "%{prefix}/app/configurations/base.ini" ];then
+		echo "Regenarating client libs.. this will take up to 2 minutes to complete."
+		php %{prefix}/app/generator/generate.php
+		if [ -x %{_sysconfdir}/init.d/httpd ];then
+			%{_sysconfdir}/init.d/httpd restart
+		fi
 	fi
 fi
 
@@ -232,6 +234,12 @@ fi
 
 
 %changelog
+* Mon Feb 10 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-34
+- Fix editing of p99 template.
+
+* Sun Feb 9 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-32
+- Only gen client libs if conf files are in place.
+
 * Sun Feb 9 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-31
 - Fix for https://github.com/kaltura/platform-install-packages/issues/28
 

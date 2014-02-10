@@ -65,8 +65,8 @@ mkdir -p $LOG_DIR/batch
 find $BASE_DIR/app/cache/ $BASE_DIR/log -type d -exec chmod 775 {} \; 
 find $BASE_DIR/app/cache/ $BASE_DIR/log -type f -exec chmod 664 {} \; 
 chown -R kaltura.apache $BASE_DIR/app/cache/ $BASE_DIR/log
-if [ "$KALTURA_VIRTUAL_HOST_NAME" = `hostname` -o "$KALTURA_VIRTUAL_HOST_NAME" = '127.0.0.1' -o "$KALTURA_VIRTUAL_HOST_NAME" = 'localhost' ];then
-	ln -sf $APP_DIR/configurations/apache/kaltura.conf /etc/httpd/conf.d/zzzkaltura.conf
-	service httpd restart
-fi
+#if [ "$KALTURA_VIRTUAL_HOST_NAME" = `hostname` -o "$KALTURA_VIRTUAL_HOST_NAME" = '127.0.0.1' -o "$KALTURA_VIRTUAL_HOST_NAME" = 'localhost' ];then
+#	ln -sf $APP_DIR/configurations/apache/kaltura.conf /etc/httpd/conf.d/zzzkaltura.conf
+#	service httpd restart
+#fi
 /etc/init.d/kaltura-batch restart >/dev/null 2>&1
