@@ -3,7 +3,7 @@ This guide describes installation of an all-in-one Kaltura server and applies to
 
 While already supported by the code, this document doesn't yet describe cluster deployment. Instructions for specific server-roles/groups and cluster configuration will soon be added. If you're eager to test cluster deployment, contact us over IRC #kaltura on freenode.net.
 
-Note for testers using VMWare: You can find solid VMWare images for CentOS and Fedora at: http://www.thoughtpolice.co.uk/vmware/.
+Note for testers using VMWare: You can find solid VMWare images at - http://www.thoughtpolice.co.uk/vmware/ --> Make sure to only use compatible OS images; either RedHat or CentOS 5.n, 6.n or FedoraCore 18+.
 
 ## Installing on a new machine
 
