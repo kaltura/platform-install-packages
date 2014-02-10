@@ -19,14 +19,11 @@ bash "setup Kaltura's repo" do
      EOH
 end
 end
-package "kaltura-server" do
-  action :install
- end
-#%w{ apr apr-util lynx }.each do |pkg|
-#  package pkg do
-#    action :install
-#  end
-#end
+%w{ mysql-server kaltura-server }.each do |pkg|
+  package pkg do
+    action :install
+  end
+end
 template "/root/kaltura.ans" do
     source "kaltura.ans.erb"
     mode 0600
@@ -34,9 +31,10 @@ template "/root/kaltura.ans" do
     group "root"
 end
 
-bash "setup DWH " do
+bash "setup All in 1" do
      user "root"
      code <<-EOH
+	#{node[:kaltura][:BASE_DIR]}/bin/kaltura-mysql-settings.sh
 	#{node[:kaltura][:BASE_DIR]}/bin/kaltura-config-all.sh /root/kaltura.ans
      EOH
 end

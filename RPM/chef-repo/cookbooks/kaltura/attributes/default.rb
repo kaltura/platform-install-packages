@@ -1,26 +1,26 @@
 # attributes
 default[:kaltura][:VERSION]= "v9.9.0"
 default[:kaltura][:KALTURA_RELEASE_RPM] = "http://54.211.235.142/nightly/RPMS/noarch/kaltura-release.noarch.rpm"
-default[:kaltura][:CDN_HOST] = "#{node[:fqdn]}"
-default[:kaltura][:KALTURA_VIRTUAL_HOST_NAME] = "#{node[:fqdn]}"
+default[:kaltura][:CDN_HOST] = "#{node[:hostname]}"
+default[:kaltura][:KALTURA_VIRTUAL_HOST_NAME] = "#{node[:hostname]}"
 default[:kaltura][:KALTURA_VIRTUAL_HOST_PORT]=80
 default[:kaltura][:PROTOCOL]="http"
-default[:kaltura][:KALTURA_FULL_VIRTUAL_HOST_NAME] = "#{node[:fqdn]}:#{node[:kaltura][:KALTURA_VIRTUAL_HOST_PORT]}"
+default[:kaltura][:KALTURA_FULL_VIRTUAL_HOST_NAME] = "#{node[:hostname]}:#{node[:kaltura][:KALTURA_VIRTUAL_HOST_PORT]}"
 # what web UIs to expose
 default[:kaltura][:CONFIG_CHOICE]=0
 default[:kaltura][:IS_SSL]="n"
-default[:kaltura][:SPHINX_SERVER1] = "#{node[:fqdn]}"
-default[:kaltura][:SPHINX_SERVER2] = "#{node[:fqdn]}"
+default[:kaltura][:SPHINX_SERVER1] = "#{node[:hostname]}"
+default[:kaltura][:SPHINX_SERVER2] = "#{node[:hostname]}"
 default[:kaltura][:DB1_PORT] = "3306"
-default[:kaltura][:DB1_HOST] = "amdb"
+default[:kaltura][:DB1_HOST] = "#{node[:hostname]}" 
 default[:kaltura][:DB1_NAME] = "kaltura"
 default[:kaltura][:DB1_USER] = "kaltura"
 default[:kaltura][:DB1_PASS] = "rXBtIUoKJNvkeVv"
 default[:kaltura][:DWH_PORT] = 3306
-default[:kaltura][:DWH_HOST] = "amdb"
+default[:kaltura][:DWH_HOST] = "#{node[:hostname]}"
 default[:kaltura][:DWH_USER] = "etl"
 default[:kaltura][:DWH_PASS] = "rXBtIUoKJNvkeVv"
-default[:kaltura][:SPHINX_DB_HOST] = "amdb"
+default[:kaltura][:SPHINX_DB_HOST] = "#{node[:hostname]}"
 default[:kaltura][:SPHINX_DB_PORT] = 3306
 default[:kaltura][:BASE_DIR] = "/opt/kaltura"
 default[:kaltura][:ADMIN_CONSOLE_ADMIN_MAIL] = "jess@kaltura.com"

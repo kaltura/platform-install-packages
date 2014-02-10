@@ -3,7 +3,7 @@ This guide describes installation of an all-in-one Kaltura server and applies to
 
 While already supported by the code, this document doesn't yet describe cluster deployment. Instructions for specific server-roles/groups and cluster configuration will soon be added. If you're eager to test cluster deployment, contact us over IRC #kaltura on freenode.net.
 
-Note for testers using VMWare: You can find solid VMWare images for CentOS and Fedora at: http://www.thoughtpolice.co.uk/vmware/.
+Note for testers using VMWare: You can find solid VMWare images at - http://www.thoughtpolice.co.uk/vmware/ --> Make sure to only use compatible OS images; either RedHat or CentOS 5.n, 6.n or FedoraCore 18+.
 
 ## Installing on a new machine
 
@@ -72,11 +72,12 @@ When asked, answer all the post-install script questions (or provide an answers 
 * For CDN host: and Apache virtual host: use the resolvable domain name of your server (not always the default value, which will be the hostname).
 * For Service URL: enter protocol + domain (e.g. https://mykalturasite.com).
 
-## Upgrading an existing Kaltura installation 
+## Upgrade an existing Kaltura installation 
 *This will only work if the initial install was using this packages based install, it will not work for old Kaltura deployments using the PHP installers*
 ```bash
 yum clean all
 yum update "*kaltura*"
+rm /opt/kaltura/app/base-config.lock
 /opt/kaltura/bin/kaltura-config-all.sh [answers-file-path]
 ```
 
