@@ -2,7 +2,7 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmc	
 Version: v5.37.10
-Release: 11 
+Release: 12 
 Summary: Kaltura Management Console
 
 Group: System Management	
@@ -39,9 +39,11 @@ if [ "$1" = 2 ];then
 fi
 
 %install
-mkdir -p $RPM_BUILD_ROOT%{prefix}/web/flash/kmc/login
+mkdir -p $RPM_BUILD_ROOT%{prefix}/web/flash/kmc/login 
+#$RPM_BUILD_ROOT%{prefix}/web/content/uiconf/kaltura/kmc
 mv %{_builddir}/%{name}-%{version}/login/%{kmc_login_version} $RPM_BUILD_ROOT%{prefix}/web/flash/kmc/login/ 
 cp -r %{_builddir}/%{name}-%{version} $RPM_BUILD_ROOT/%{prefix}/web/flash/kmc/%{version}
+#cp -r $RPM_BUILD_ROOT/%{prefix}/web/flash/kmc/%{version}/uiconf/kaltura/kmc/* $RPM_BUILD_ROOT%{prefix}/web/content/uiconf/kaltura/kmc/
 cp %{SOURCE1} $RPM_BUILD_ROOT/%{prefix}/web/flash/kmc/%{version}/config.ini
 
 
@@ -51,6 +53,7 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root,-)
 %{prefix}/web/flash/kmc
+#%{prefix}/web/content/uiconf/kaltura/kmc
 %config %{prefix}/web/flash/kmc/%{version}/config.ini
 
 

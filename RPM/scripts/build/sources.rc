@@ -105,13 +105,29 @@ KRECORD_RPM_NAME="kaltura-krecord"
 
 # Kaltura KCW
 # we bundle a few vers at each release:
-KCW_VERSIONS="v2.1.6.7 v2.1.5 v2.2.1 v2.2.3 v2.1.4 v1.5.4 v2.1.2 v2.1.6.3"
+KCW_VERSIONS="v2.1.6.7 v2.1.5 v2.2.1 v2.2.3 v2.1.4 v1.5.4 v2.1.2 v2.1.6.3 v2.2.4"
 KCW_UICONF_VERSIONS="v2.1.4 v2.1.5"
 KCW_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/flash/kcw"
 KCW_UICONF_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalsource/uiconf/kaltura/kmc/kcw"
 KCW_UICONF_GENERIC_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalsource/uiconf/kaltura/generic/kcw_2.1.5"
 KCW_UICONF_EDITOR_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalsource/uiconf/kcweditor/locales/en_US"
 KCW_RPM_NAME="kaltura-kcw"
+
+# Kaltura KSE
+# we bundle a few vers at each release:
+KSE_VERSIONS="v2.3 v2.2.2 v2.1.8 v2.1.4 v2.0.7 v2.1.3CE v2.3.2"
+#KSE_UICONF_VERSIONS="v2.1.4 v2.1.5"
+KSE_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/flash/kse"
+#KSE_UICONF_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalsource/uiconf/kaltura/kmc/kcw"
+#KSE_UICONF_GENERIC_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalsource/uiconf/kaltura/generic/kcw_2.1.5"
+#KSE_UICONF_EDITOR_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalsource/uiconf/kcweditor/locales/en_US"
+KSE_RPM_NAME="kaltura-kse"
+
+# Kaltura kUpload
+# we bundle a few vers at each release:
+KUPLOAD_VERSIONS="v1.2.8 v1.1.7 v1.0.23"
+KUPLOAD_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/flash/kupload"
+KUPLOAD_RPM_NAME="kaltura-kupload"
 
 # Kaltura KVPM
 # we bundle a few vers at each release:
@@ -125,6 +141,12 @@ KVPM_RPM_NAME="kaltura-kvpm"
 KCLIP_VERSION="v1.1.2.1"
 KCLIP_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/flash/kclip/$KCLIP_VERSION"
 KCLIP_RPM_NAME="kaltura-kclip"
+
+# Kaltura KSR
+# we bundle a few vers at each release:
+KSR_VERSION="v1.0.44"
+KSR_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/flash/ksr/$KSR_VERSION"
+KSR_RPM_NAME="kaltura-ksr"
 
 # Flex wrapper
 FLEX_WRAPPER_VERSION="v1.2"
