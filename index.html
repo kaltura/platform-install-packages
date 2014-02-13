@@ -270,7 +270,9 @@
           </h2>
           
           <ul class="questionanswerul">
+          
             <li class="questionanswerli">
+              <a name="questions-answers" title="Questions &amp; Answers" class="anchor" href="#questions-answers"><span class="octicon octicon-link"></span></a>
               <ul>
                 <li class="questionli">
                   Under Specifications &amp; Definitions, why did we decide to break the server roles the way we did and not in other ways?
@@ -289,9 +291,9 @@
                   Which official packages are being used and which are you bundling specifically?
                 </li>
                 <li class="answerli">
-                  This project aims to to support complete self-supported local installs of Kaltura (e.g. systems that are not connected).<br />
-                  In addition, in order to maintain the best possible version compatibility across the various platform components, it is crucial that we only package officially supported and widely maintained packages.<br />
-                  To meet these requirements, the packaging project will only depend on packages that are included in official distribution repositories (i.e. <span style="font-family:'Courier New'">/etc/yum.repos.d/</span> in yum and <span style="font-family:'Courier New'">/etc/apt/sources.list</span> in apt-get).
+                  This project aims to to support complete self-supported local installs of Kaltura on a lean environment, downloading the least possible number of packages and requiring the least possible number of additional repositories.<br />
+                  In addition, the packages project aims to maintain the perfect version compatibility across the various platform components.<br />
+                  To meet these requirements, the packaging project will only depend on official base distribution packages that are widely used and known to be stable and accepted.
                 </li>
               </ul>
             </li>
