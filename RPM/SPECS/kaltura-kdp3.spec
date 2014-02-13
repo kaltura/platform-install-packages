@@ -3,7 +3,7 @@
 Name:	kaltura-kdp3	
 Version: v3.9.7
 Epoch: 1 
-Release: 2
+Release: 4 
 Summary: Kaltura Dynamic Player
 License: AGPLv3+	
 URL: https://github.com/kaltura/kdp/releases/tag/%{version}

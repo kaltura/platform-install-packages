@@ -48,6 +48,7 @@ PENTAHO_URI="http://sourceforge.net/projects/pentaho/files/Data%20Integration/$P
 # Kaltura Core build vars:
 KALTURA_CORE_VERSION=9.7.0
 KALTURA_URI="https://github.com/kaltura/server/archive/IX-$KALTURA_CORE_VERSION.zip"
+KALTURA_TEMPLATES_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalsource/on-premise/trunk/packaging/templates"
 
 # Kaltura Streaming lib build vars:
 KALTURA_MEDIASERVER_VERSION="2.2.2"
@@ -62,9 +63,14 @@ KMC_LOGIN_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/flash/kmc
 KMC_UICONF_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalsource/uiconf/kaltura/kmc"
 KMC_RPM_NAME="kaltura-kmc"
 
+# Kaltura KMC docs:
+KMC_DOC_VERSION="master"
+KMC_DOC_URI="https://github.com/kaltura/kmc-docs/archive/$KMC_DOC_VERSION.zip"
+
+
 # Kaltura KDP3:
 # we bundle a few vers at each release:
-KDP_VERSIONS="v3.5.21 v3.8.9 v3.9.1 v3.9.2"
+KDP_VERSIONS="v3.5.21 v3.8.9 v3.9.1 v3.9.2 3.9.7"
 KDP_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/flash/kdp3"
 KDP_RPM_NAME="kaltura-kdp"
 

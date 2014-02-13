@@ -84,7 +84,7 @@ EOF
         	IS_SSL='Y'
         fi  
 fi
-if [ "$IS_SSL" != 'Y' -a "$IS_SSL" != 1 ];then
+if [ "$IS_SSL" != 'Y' -a "$IS_SSL" != 1 -a "$IS_SSL" != 'y' ];then
 #-a ! -r "$ANSFILE" ];then
 	echo "update permission set STATUS=3 WHERE permission.NAME='FEATURE_KMC_ENFORCE_HTTPS' ;" | mysql $DB1_NAME -h$DB1_HOST -u$DB1_USER -P$DB1_PORT -p$DB1_PASS 2> /dev/null 
 	if [ -z "$AUTO_YES" ];then

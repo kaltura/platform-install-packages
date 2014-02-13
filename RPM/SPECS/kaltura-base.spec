@@ -15,7 +15,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 9.9.0
-Release: 35 
+Release: 41 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -29,6 +29,7 @@ Source6: 02.Permission.ini
 Source7: dwh.template
 Source8: 01.uiConf.99.template.xml
 Source9: plugins.template.ini
+Source10: entry_and_uiconf_templates.tar.gz
 #Source10: 01.UserRole.99.template.xml
 #Source9: 01.conversionProfile.99.template.xml
 URL: https://github.com/kaltura/server/tree/IX-%{version}
@@ -126,10 +127,14 @@ rm $RPM_BUILD_ROOT%{prefix}/app/configurations/batch/batch.ini.template
 # 22/01/14 due to a bug, can be removed in the next version:
 cp %{SOURCE2} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_content/01.conversionProfile.99.template.xml
 
+mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content
+tar zxf %{SOURCE10} -C $RPM_BUILD_ROOT%{prefix}/web/content
+
 %{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
 cat > $RPM_BUILD_ROOT%{_sysconfdir}/profile.d/kaltura_base.sh << EOF
 PATH=\$PATH:%{prefix}/bin
 export PATH
+alias kaltlog='grep --color "ERR:\|PHP\|trace\|CRIT\|\[error\]" /opt/kaltura/log/*.log /opt/kaltura/log/batch/*.log'
 EOF
 
 %{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/ld.so.conf.d
@@ -175,6 +180,7 @@ find /opt/kaltura/web/content/entry /opt/kaltura/web/content/uploads/ /opt/kaltu
 if [ "$1" = 2 ];then
 	if [ -r "%{prefix}/app/configurations/local.ini" -a -r "%{prefix}/app/configurations/base.ini" ];then
 		echo "Regenarating client libs.. this will take up to 2 minutes to complete."
+		rm -rf %{prefix}/app/cache/*
 		php %{prefix}/app/generator/generate.php
 		if [ -x %{_sysconfdir}/init.d/httpd ];then
 			%{_sysconfdir}/init.d/httpd restart
@@ -220,9 +226,9 @@ fi
 %dir %{prefix}/log
 %dir %{prefix}/tmp
 %dir %{prefix}/app/cache
+%{prefix}/web/*
 %defattr(-, %{kaltura_user}, %{kaltura_group} , 0755)
 %dir %{prefix}
-%{prefix}/web/*
 %dir %{prefix}/web/control
 %dir %{prefix}/web/dropfolders
 %defattr(-, root,root, 0755)
@@ -234,6 +240,12 @@ fi
 
 
 %changelog
+* Wed Feb 12 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-39
+- Fix https://github.com/kaltura/platform-install-packages/issues/34
+
+* Tue Feb 11 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-38
+- Removed IsMindex plugin from template.
+
 * Mon Feb 10 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-34
 - Fix editing of p99 template.
 

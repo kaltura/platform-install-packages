@@ -3,7 +3,7 @@
 %define kcw_vers "v2.1.6.7 v2.1.5 v2.2.1 v2.2.3 v2.2.4 v2.1.4 v1.5.4 v2.1.2 v2.1.6.3"
 Name:	kaltura-%{widget_name}
 Version: 1.0.0 
-Release: 4 
+Release: 5 
 Summary: Kaltura KCW - used for recording from web cam
 License: AGPLv3+	
 URL: http://kaltura.org
@@ -35,7 +35,7 @@ This package installs the Kaltura KCW - used for recording from web cam.
 %install
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/flash/%{widget_name}
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content
-mv %{_builddir}/%{name}/uiconf $RPM_BUILD_ROOT/%{prefix}/web/content
+#mv %{_builddir}/%{name}/uiconf $RPM_BUILD_ROOT/%{prefix}/web/content
 for i in %{kcw_vers};do
 	cp -r %{_builddir}/%{name}/$i $RPM_BUILD_ROOT/%{prefix}/web/flash/%{widget_name}
 	find $RPM_BUILD_ROOT/%{prefix}/web/flash/%{widget_name} -name ".project" -exec rm {} \;
@@ -47,7 +47,7 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root,-)
 %{prefix}/web/flash/%{widget_name}
-%{prefix}/web/content/uiconf
+#%{prefix}/web/content/uiconf
 
 %changelog
 
