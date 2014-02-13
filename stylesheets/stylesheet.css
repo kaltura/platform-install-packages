@@ -232,6 +232,13 @@ hr {
   display: inline-block;
 }
 
+.qa-anchor-icon {
+  background: url("../images/questionicon.gif") 0 0 no-repeat;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+}
+
 /* Buttons
 */
 
