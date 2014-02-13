@@ -32,7 +32,7 @@
           <script>
             $(function() {
               var count = 0;
-              $("a[class='menuitem']").each(function(){
+              $("a.menuitem").each(function(){
                 if ($(this).attr('title') != null) {
                   if (count > 0) $( "nav#navigation_menu" ).append(', ');
                   ++count;
