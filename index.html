@@ -66,44 +66,8 @@
             <a name="project-status" title="Latest Project Status" class="anchor" href="#project-status"><span class="octicon octicon-link"></span></a>
             Latest Project Status
           </h2>
-          <div id="latestUpdateMd" style="margin: 1em 2em; border-left: 1px dotted #999; padding-left: 1em;"></div>
-          <p><a id="formerStatusToggler" href="#" onclick="return false;" style="text-decoration:none;">+ Read previous updates.</a></p>
-          <div id="formerUpdatesMd" style="display:none;margin: 1em 2em; border-left: 1px dotted #999; padding-left: 1em;"></div>
-          <script>
-              $(document).ready(function() {
-                  $("#formerStatusToggler").click(function() {
-                      $("#formerUpdatesMd").slideToggle(100, function() {
-                        if ($("#formerUpdatesMd").is(':visible')) {
-                            $("#formerStatusToggler").text('- Hide previous updates.');
-                        } else {
-                            $("#formerStatusToggler").text('+ Read previous updates.');
-                        }
-                      });
-                  });
-
-                  $.ajax({
-                      type: "GET",
-                      processData: true,
-                      url : "https://api.github.com/repos/kaltura/platform-install-packages/contents/doc/project-status-updates.md",
-                      success : function (result) {
-                          var mdtextfile = $.base64.decode(result.content);
-                          var mdtextarray = mdtextfile.split("#### ");
-                          var latestUpdate = mdtextarray[0] + "#### " + mdtextarray[1];
-                          mdtextarray.shift();
-                          mdtextarray.shift();
-                          var formerUpdates = "";
-                          mdtextarray.forEach(function(updatetxt) {
-                              formerUpdates = formerUpdates + "#### " + updatetxt;
-                          });
-                          var converter = new Showdown.converter();
-                          var latestUpdateHtml = converter.makeHtml(latestUpdate);
-                          var formerUpdatesHtml = converter.makeHtml(formerUpdates);
-                          document.getElementById('latestUpdateMd').innerHTML = latestUpdateHtml;
-                          document.getElementById('formerUpdatesMd').innerHTML = formerUpdatesHtml;
-                      }
-                  });
-              }); 
-          </script>
+          
+          <iframe src="status.html" id="latestUpdateIfrane" allowtransparency="true" width="100%" height="500" border="0" style="border: dotted 1px #63c0f5; border-bottom: none; border-top: none;"></iframe>
           
           <br />
           
@@ -440,6 +404,19 @@
                     <li>Install under /opt/kaltura and post installation move everything to different path (note that you will have to manually modify configuration files), Or move to a different path and keep a symlink to /opt/kaltura. This option makes upgrades a messy process.</li>
                     <li>Clone the code repository, modify the /opt/kaltura path prefix, deploy a local version of the packages repository, and install using the local repository. Note that this will require keeping up to date with new releases manually and re-deploying each new release to the local repository.</li>
                   </ul>
+                </li>
+              </ul>
+            </li>
+
+            <li class="questionanswerli">
+              <a name="grep-log-qa" class="anchor" href="#grep-log-qa"><span class="octicon qa-anchor-icon"></span></a>
+              <ul>
+                <li class="questionli">
+                  I've installed Kaltura. How can I tell if there are any errors?
+                </li>
+                <li class="answerli">
+                  You can use the following tail and grep combination to monitor the logs for errors:<br />
+                  <span style="font-family:'Courier New'">tail -f /opt/kaltura/log/*.log | grep "ERR:\|PHP\|trace\|CRIT" --color=always</span>
                 </li>
               </ul>
             </li>
