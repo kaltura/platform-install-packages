@@ -32,7 +32,7 @@
           <script>
             $(function() {
               var count = 0;
-              $("a[name!='undefined']").each(function(){
+              $("a[class=='menuitem']").each(function(){
                 if ($(this).attr('title') != null) {
                   if (count > 0) $( "nav#navigation_menu" ).append(', ');
                   ++count;
@@ -49,7 +49,7 @@
     <div class="container">
       <section id="main_content">
           <h1>
-            <a name="project-goal" title="Project Goal" class="anchor" href="#project-goal"><span class="octicon octicon-link"></span></a>
+            <a name="project-goal" title="Project Goal" class="anchor menuitem" href="#project-goal"><span class="octicon octicon-link"></span></a>
             Project Goal
           </h1>
 
@@ -272,9 +272,9 @@
           <ul class="questionanswerul">
           
             <li class="questionanswerli">
-              <a name="questions-answers" title="Questions &amp; Answers" class="anchor" href="#questions-answers"><span class="octicon octicon-link"></span></a>
               <ul>
                 <li class="questionli">
+                  <a name="spec-qa" class="anchor" href="#spec-qa"><span class="octicon octicon-link"></span></a>
                   Under Specifications &amp; Definitions, why did we decide to break the server roles the way we did and not in other ways?
                 </li>
                 <li class="answerli">
