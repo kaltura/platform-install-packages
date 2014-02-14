@@ -78,7 +78,10 @@ When asked, answer all the post-install script questions (or provide an answers 
 2. Mark 'OFLA Demo' and click 'Install'
 3. Edit /usr/lib/red5/webapps/oflaDemo/index.html and replace 'localhost' with your actual Red5 hostname or IP
 4. Test OflaDemo by making a request to http://hostname:5080/oflaDemo/ and playing the sample videos
-5. Run /opt/kaltura/bin/kaltura-red5-config.sh
+5. Run:
+```bash
+ \# /opt/kaltura/bin/kaltura-red5-config.sh
+```
 6. Record a video using KMC->Upload->Record from Webcam
 
 ## Upgrade an existing Kaltura installation 
