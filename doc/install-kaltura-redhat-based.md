@@ -80,9 +80,9 @@ When asked, answer all the post-install script questions (or provide an answers 
 4. Test OflaDemo by making a request to http://hostname:5080/oflaDemo/ and playing the sample videos
 5. Run:
 ```bash
- \# /opt/kaltura/bin/kaltura-red5-config.sh
+ # /opt/kaltura/bin/kaltura-red5-config.sh
 ```
-6. Record a video using KMC->Upload->Record from Webcam
+You can now record a video using KMC->Upload->Record from Webcam.
 
 ## Upgrade an existing Kaltura installation 
 *This will only work if the initial install was using this packages based install, it will not work for old Kaltura deployments using the PHP installers*
