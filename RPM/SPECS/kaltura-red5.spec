@@ -1,7 +1,7 @@
 Summary: Red5 Server
 Name: kaltura-red5
 Version: 1.0.0
-Release: 1
+Release: 2 
 Source0: %{name}-%{version}.tar.bz2
 Source1: %{name}-flash-%{version}.tar.bz2
 Source2: red5.init
@@ -23,6 +23,7 @@ The Red5 open source Flash server allows you to record and stream video to the F
 %setup -q
 
 %build
+export LD_LIBRARY_PATH=/usr/lib/jvm/java-1.6.0-openjdk-1.6.0.0.x86_64/lib/amd64/jli
 ant dist-installer
 
 %install
@@ -63,11 +64,11 @@ rm -rf $RPM_BUILD_ROOT
 
 %attr(0755,root,root) %dir %{red5_log}
 
-#@BIN_DIR@/red5/*.template
-#@BIN_DIR@/red5/conf/*.template.xml
 
 %post
 /sbin/chkconfig --add red5
+chkconfig red5 on
+/etc/init.d/red5 start
 
 %postun
 /sbin/service red5 restart > /dev/null 2>&1 || :
@@ -79,5 +80,8 @@ if [ "$1" = 0 ]; then
 fi
 
 %changelog
-* Wed Dec 26 2012 Tetsuya Morimoto <tetsuya.morimoto at gmail.com> 1.0.0-1%{?dist}
+* Thu Feb 13 2014 Jess Portnoy <jess.portnoy@kaltura.com> 1.0.0-2
+- Start at init.
+
+* Wed Dec 26 2012 Tetsuya Morimoto <tetsuya.morimoto at gmail.com> 1.0.0-1
 - first packaging for Red5 1.0 Final

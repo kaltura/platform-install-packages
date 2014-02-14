@@ -136,6 +136,7 @@ php $APP_DIR/deployment/uiconf/deploy_v2.php --ini=$WEB_DIR/flash/kmc/$KMC_VERSI
 #echo "update kaltura.ui_conf set swf_url='/flash/kdp3/v3.9.3/kdp3.swf' where swf_url like '/flash/kdp3/v%/kdp3.swf';"  | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT
 #echo "update kaltura.ui_conf set html5_url='/html5/html5lib/v2.1.1/mwEmbedLoader.php' where html5_url like '/html5/html5lib/v%/mwEmbedLoader.php';"  | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT
 
+
 find  $WEB_DIR/content/generatedUiConf -type d -exec chmod 775 {} \;
 
 set +e

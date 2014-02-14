@@ -1,13 +1,13 @@
 Summary: Kaltura Open Source Video Platform all in 1 package 
 Name: kaltura-server
 Version: 9.9.0
-Release: 1 
+Release: 2 
 License: AGPLv3+
 Group: Server/Platform 
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
-Requires: kaltura-front, kaltura-batch, kaltura-sphinx, kaltura-dwh, kaltura-widgets, kaltura-html5lib
+Requires: kaltura-front, kaltura-red5, kaltura-batch, kaltura-sphinx, kaltura-dwh, kaltura-widgets, kaltura-html5lib
 
 %description
 Kaltura is the world's first Open Source Online Video Platform, transforming the way people work, 
@@ -46,6 +46,9 @@ fi
 %files
 
 %changelog
+* Thu Feb 13 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-2
+- kaltura-red5 as dep.
+
 * Mon Jan 27 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-1
 - Moving to 9.9.0.
 
