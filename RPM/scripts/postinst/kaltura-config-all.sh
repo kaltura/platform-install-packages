@@ -82,11 +82,11 @@ $BASE_DIR/bin/kaltura-batch-config.sh "$ANSFILE"
 echo "Running Red5 config...
 
 "
-$BASE_DIR/bin/kaltura-red5-config.sh "$ANSFILE" 
-
-echo "Running DWH config...
-
-"
+#$BASE_DIR/bin/kaltura-red5-config.sh "$ANSFILE" 
+#
+#echo "Running DWH config...
+#
+#"
 $BASE_DIR/bin/kaltura-dwh-config.sh "$ANSFILE" 
 
 rm -rf $APP_DIR/cache/*

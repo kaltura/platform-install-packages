@@ -72,6 +72,15 @@ When asked, answer all the post-install script questions (or provide an answers 
 * For CDN host: and Apache virtual host: use the resolvable domain name of your server (not always the default value, which will be the hostname).
 * For Service URL: enter protocol + domain (e.g. https://mykalturasite.com).
 
+###### Configure Red5 server
+0. Request http://hostname:5080
+1. Click 'Install a ready-made application'
+2. Mark 'OFLA Demo' and click 'Install'
+3. Edit /usr/lib/red5/webapps/oflaDemo/index.html and replace 'localhost' with your actual Red5 hostname or IP
+4. Test OflaDemo by making a request to http://hostname:5080/oflaDemo/ and playing the sample videos
+5. Run /opt/kaltura/bin/kaltura-red5-config.sh
+6. Record a video using KMC->Upload->Record from Webcam
+
 ## Upgrade an existing Kaltura installation 
 *This will only work if the initial install was using this packages based install, it will not work for old Kaltura deployments using the PHP installers*
 ```bash
