@@ -73,12 +73,13 @@ When asked, answer all the post-install script questions (or provide an answers 
 * For Service URL: enter protocol + domain (e.g. https://mykalturasite.com).
 
 ###### Configure Red5 server
-* Request http://hostname:5080
-* Click 'Install a ready-made application'
-* Mark 'OFLA Demo' and click 'Install'
-* Edit /usr/lib/red5/webapps/oflaDemo/index.html and replace 'localhost' with your actual Red5 hostname or IP
-* Test OflaDemo by making a request to http://hostname:5080/oflaDemo/ and playing the sample videos
-* Run: ```bash
+- Request http://hostname:5080
+- Click 'Install a ready-made application'
+- Mark 'OFLA Demo' and click 'Install'
+- Edit /usr/lib/red5/webapps/oflaDemo/index.html and replace 'localhost' with your actual Red5 hostname or IP
+- Test OflaDemo by making a request to http://hostname:5080/oflaDemo/ and playing the sample videos
+- Run: 
+```bash
  # /opt/kaltura/bin/kaltura-red5-config.sh
 ```
 You can now record a video using KMC->Upload->Record from Webcam.
