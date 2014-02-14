@@ -2,6 +2,7 @@
 default[:kaltura][:VERSION]= "v9.9.0"
 default[:kaltura][:KALTURA_RELEASE_RPM] = "http://54.211.235.142/nightly/RPMS/noarch/kaltura-release.noarch.rpm"
 default[:kaltura][:CDN_HOST] = "#{node[:hostname]}"
+default[:kaltura][:RED5_HOST] = "#{node[:hostname]}"
 default[:kaltura][:KALTURA_VIRTUAL_HOST_NAME] = "#{node[:hostname]}"
 default[:kaltura][:KALTURA_VIRTUAL_HOST_PORT]=80
 default[:kaltura][:PROTOCOL]="http"

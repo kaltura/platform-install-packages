@@ -10,6 +10,7 @@ if platform?("redhat", "centos", "fedora")
 			# in RPM, it try to update to the same version you have now - it stupidly returns RC 1 and hence the || true.
 			rpm -Uhv "#{node[:kaltura][:KALTURA_RELEASE_RPM]}" || true
 		fi
+		yum clean all
 	     EOH
 	end
 end
