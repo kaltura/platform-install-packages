@@ -1,12 +1,12 @@
 %define prefix /opt/kaltura/
 # this isn't really a stand location for placing conf files but we wish to remain compatible with the current config dir tree used by Kaltura
-%define confdir /opt/kaltura/app/configurations
+%define confdir /opt/kaltura/app/configurations/monit
 %define logmsg logger -t %{name}/rpm
 
 Summary: Process monitor and restart utility
 Name: kaltura-monit
 Version: 5.6
-Release: 6 
+Release: 8 
 License: GPLv3
 Group: High Availability Management 
 URL: http://mmonit.com/monit/
@@ -70,6 +70,7 @@ fi
 %post
 if [ "$1" = 1 ];then
 	/sbin/chkconfig --add kaltura-monit
+	/sbin/chkconfig kaltura-monit on
 fi
 /sbin/service monit restart &>/dev/null || :
 
@@ -96,6 +97,7 @@ fi
 %defattr(-, root, root, 0755)
 %{_initrddir}/kaltura-monit
 %config %{confdir}/monit.d/
+%defattr(-, root, root, 0600)
 %config %{confdir}/monit.conf
 %config %{prefix}/var/monit/
 %{prefix}/var/lib/monit/
@@ -104,6 +106,13 @@ fi
 
 
 %changelog
+* Sat Feb 15 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 5.6-8
+- Changed monit confdir.
+
+* Sat Feb 15 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 5.6-7
+- chkconfig monit on.
+- Modications to the init script.
+
 * Sun Jan 12 2013 Jess Portnoy <jess.portnoy@kaltura.com> - 5.6-5
 - Added monit.conf
 

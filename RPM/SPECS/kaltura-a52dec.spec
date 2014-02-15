@@ -2,7 +2,7 @@
 Summary: Library for decoding ATSC A/52 (aka AC-3) audio streams
 Name: kaltura-a52dec
 Version: 0.7.4
-Release: 10 
+Release: 11
 License: GPL
 Group: Applications/Multimedia
 URL: http://liba52.sourceforge.net/
@@ -87,6 +87,9 @@ EOF
 
 
 %changelog
+* Sat Feb 15 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 0.7.4-11
+- Corrected path to ld.so.conf.d.
+
 * Sun Jan 5 2014 Jess Portnoy <jess.portnoy@kaltura.com> 0.7.4-10
 - Create a file under /etc/ld.so.conf.d so.
  

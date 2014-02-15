@@ -148,3 +148,6 @@ rm -f $APP_DIR/log/kaltura-*.log
 # @DWH_DIR@/setup/dwh_setup.sh
 
 
+if [ "$DB1_HOST" = `hostname` -o "$DB1_HOST" = '127.0.0.1' -o "$DB1_HOST" = 'localhost' ];then
+ln -sf $BASE_DIR/app/configurations/monit/monit.avail/mysqld.rc $BASE_DIR/app/configurations/monit/monit.d/enabled.mysqld.rc
+fi
