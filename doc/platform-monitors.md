@@ -1,4 +1,4 @@
-# Installing Kaltura-Monit
+# Setting up monitoring
 
 The Kaltura server includes extensive monitoring scripts, making use of our PHP5 API.   
 Apart from the scripts themselves, template configuration files for the Nagios monitoring system [http://www.nagios.com] are also supplied.   
