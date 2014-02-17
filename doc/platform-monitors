@@ -1,14 +1,18 @@
-The Kaltura server includes extensive monitoring scripts, making use of our PHP5 API. 
-Apart from the scripts themselves, template configuration files for the Nagios monitoring system [http://www.nagios.com] are also supplied.
-The monitors operate on partner -4, created as part of the installation and dedicated to this purpose.
-The configuration for the API monitors is auto generated and placed here:
-/opt/kaltura/app/tests/monitoring/config.ini
-The nagios templates can be found here:
-/opt/kaltura/app/plugins/monitor/nagios/config/
-If you wish to use the monitors with a monitoring system different than Nagios, it is very easy.
-Simple adopt the commands available here:
-/opt/kaltura/app/plugins/monitor/nagios/config/commands.cfg
-And make similar configurations for your monitoring system.
+# Installing Kaltura-Monit
+
+The Kaltura server includes extensive monitoring scripts, making use of our PHP5 API.   
+Apart from the scripts themselves, template configuration files for the Nagios monitoring system [http://www.nagios.com] are also supplied.   
+The monitors operate on partner -4, created as part of the installation and dedicated to this purpose.   
+
+* The configuration for the API monitors is auto generated and placed here:   
+`/opt/kaltura/app/tests/monitoring/config.ini`
+* The nagios templates can be found here:
+`/opt/kaltura/app/plugins/monitor/nagios/config/`
+
+If you wish to use the monitors with a monitoring system different than Nagios, it is very easy.   
+Simple adopt the commands available here:   
+`/opt/kaltura/app/plugins/monitor/nagios/config/commands.cfg`    
+And make similar configurations for your monitoring system.    
 
 All these monitors can run equally as well from the shell so they can also be placed as cron jobs.
 
