@@ -143,10 +143,10 @@ CDN hostname [`hostname`]:"
         fi
 	
         if [ -z "$RED5_HOST" ];then
-                echo "Media Streaming Server host [$LOCALHOST]: "
+                echo "Media Streaming Server host [`hostname`]: "
                 read -e RED5_HOST
 		if [ -z $RED5_HOST ];then
-			RED5_HOST="$LOCALHOST"
+			RED5_HOST=`hostname`
 		fi
         fi
 
@@ -285,6 +285,8 @@ RED5_HOST=$RED5_HOST">> $BASE_DIR/app/configurations/system.ini
 # these two have passwds in them.
 chown kaltura.apache $BASE_DIR/app/configurations/system.ini $BASE_DIR/app/configurations/db.ini
 chmod 640 $BASE_DIR/app/configurations/system.ini $BASE_DIR/app/configurations/db.ini
+chown root.root $BASE_DIR/app/configurations/monit/monit.conf
+chmod 600 $BASE_DIR/app/configurations/monit/monit.conf
 
 
 # gen secrets

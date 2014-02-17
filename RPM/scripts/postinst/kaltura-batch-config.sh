@@ -71,3 +71,4 @@ chown -R kaltura.apache $BASE_DIR/app/cache/ $BASE_DIR/log
 #fi
 /etc/init.d/kaltura-batch restart >/dev/null 2>&1
 ln -sf $BASE_DIR/app/configurations/monit/monit.avail/batch.rc $BASE_DIR/app/configurations/monit/monit.d/enabled.batch.rc
+/etc/init.d/kaltura-monit restart

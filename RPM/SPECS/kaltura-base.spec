@@ -15,7 +15,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 9.9.0
-Release: 46 
+Release: 48
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -270,6 +270,12 @@ fi
 
 
 %changelog
+* Sat Feb 15 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-48
+- fixed typo sphinx.populate.template.rc
+
+* Sat Feb 15 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-47
+- placeholder @ADMIN_CONSOLE_ADMIN_MAIL@ for mail in monit.conf.
+
 * Sat Feb 15 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-46
 - monit config moved to %%prefix/app/configurations/monit
 
