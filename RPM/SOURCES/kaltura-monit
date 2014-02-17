@@ -17,7 +17,7 @@
 
 ### Default variables
 #export PATH=/opt/kaltura/bin:$PATH
-CONFIG="/opt/kaltura/app/configurations/monit.conf"
+CONFIG="/opt/kaltura/app/configurations/monit/monit.conf"
 pidfile="/var/run/monit.pid"
 MONIT="/opt/kaltura/bin/monit"
 prog=`basename $MONIT`
