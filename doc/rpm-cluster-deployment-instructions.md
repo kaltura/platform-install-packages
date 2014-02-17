@@ -1,25 +1,27 @@
 # Kaltura cluster deployment
 
 Instructions here are for a cluster with the following members:
-1. NFS server
-1. Front
-1. Batch server
-1. Sphinx and DB server
-1. DWH server
+* NFS server
+* Front
+* Batch server
+* Sphinx and DB server
+* DWH server
 
-On the NFS machine:
+### On the NFS machine:
+```
 # yum install nfs-utils
 # /etc/init.d/nfs start
 # mkdir /opt/kaltura/web
-edit /etc/exports to have the desired settings, for example:
-/opt/kaltura/web *(rw,sync,no_root_squash)
+```
+edit `/etc/exports` to have the desired settings, for example:
+`/opt/kaltura/web *(rw,sync,no_root_squash)`
 
-Note that you may choose different settings which is fine so long as:
-0. the kaltura and apache user are both able to write to this volume
-1. the kaltura and apache user are both able create files with them as owners. i.e: do not use all_squash as an option.
+Note that you may choose different NFS settings which is fine so long as:
+* the kaltura and apache user are both able to write to this volume
+* the kaltura and apache user are both able create files with them as owners. i.e: do not use all_squash as an option.
 
 to export the volume:
-# exportfs -a
+`# exportfs -a`
 
 On the Front:
 =============
