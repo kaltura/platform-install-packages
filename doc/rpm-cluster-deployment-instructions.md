@@ -1,6 +1,10 @@
 # Kaltura cluster deployment
 
-Instructions here are for a cluster with the following members:
+#### Notes
+* If you see a `#` at the beginning of a line, this line should be run as `root`.
+* All post-install scripts accept answers-file as parameter, this can used for silent-automatic installs.
+
+#### Instructions here are for a cluster with the following members:
 * NFS server
 * Front
 * Batch server
