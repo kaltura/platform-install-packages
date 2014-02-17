@@ -4,7 +4,7 @@ The Kaltura server includes extensive monitoring scripts, making use of our PHP5
 Apart from the scripts themselves, template configuration files for the Nagios monitoring system [http://www.nagios.com] are also supplied.   
 The monitors operate on partner -4, created as part of the installation and dedicated to this purpose.   
 
-* The configuration for the API monitors is auto generated and placed here:   
+* The configuration for the API monitors is auto generated and placed here:
 `/opt/kaltura/app/tests/monitoring/config.ini`
 * The nagios templates can be found here:
 `/opt/kaltura/app/plugins/monitor/nagios/config/`
