@@ -3,7 +3,8 @@ To enable the of use standard binary packages and package managers to deploy the
 
 This project features official deployment packages to install the Kaltura platform on a server or cluster environments using native OS package managers.
 
-**[To learn more and keep track of project status visit the project page](http://kaltura.github.io/platform-install-packages/)**.
+**[Learn more & keep track on the project page](http://kaltura.github.io/platform-install-packages/)**.    
+[Read the announcement blog post!](http://blog.kaltura.org/introducing-kipp-kaltura-install-made-simple)   
 
 ### Watch the alpha announcement video:
 [![Watch the alpha announcement video](http://kaltura.github.io/platform-install-packages/images/news/1st-alpha-video-thumb.png "Watch the alpha announcement video")](http://bit.ly/1fIsdmY)
