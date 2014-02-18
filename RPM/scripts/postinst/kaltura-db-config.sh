@@ -134,10 +134,9 @@ fi
 KMC_VERSION=`grep "^kmc_version" /opt/kaltura/app/configurations/base.ini|awk -F "=" '{print $2}'|sed 's@\s*@@g'`
 echo "Generating UI confs.."
 php $APP_DIR/deployment/uiconf/deploy_v2.php --ini=$WEB_DIR/flash/kmc/$KMC_VERSION/config.ini >> $LOG_DIR/deploy_v2.log  2>&1
-#echo "update kaltura.ui_conf set swf_url='/flash/kdp3/v3.9.3/kdp3.swf' where swf_url like '/flash/kdp3/v%/kdp3.swf';"  | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT
-#echo "update kaltura.ui_conf set html5_url='/html5/html5lib/v2.1.1/mwEmbedLoader.php' where html5_url like '/html5/html5lib/v%/mwEmbedLoader.php';"  | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT
-
-
+for i in $APP_DIR/deployment/updates/scripts/*.sh;do
+	$i
+done
 find  $WEB_DIR/content/generatedUiConf -type d -exec chmod 775 {} \;
 
 set +e

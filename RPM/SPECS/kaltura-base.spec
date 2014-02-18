@@ -15,7 +15,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 9.9.0
-Release: 48
+Release: 49
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -89,7 +89,7 @@ mkdir -p $RPM_BUILD_ROOT%{prefix}/web/tmp/thumb
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/tmp/xml
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/dropfolders/monitor
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/control
-mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content/webcam 
+#mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content/webcam 
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content/cacheswf
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content/uploads
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content/entry
@@ -199,8 +199,9 @@ usermod -g %{kaltura_group} %{kaltura_user} 2>/dev/null || true
 
 ln -sf %{prefix}/app/configurations/system.ini /etc/kaltura.d/system.ini
 ln -sf %{prefix}/app/api_v3/web %{prefix}/app/alpha/web/api_v3
-chown apache.kaltura -R /opt/kaltura/web/content/entry /opt/kaltura/web/content/uploads/ /opt/kaltura/web/content/webcam/ /opt/kaltura/web/tmp/
-find /opt/kaltura/web/content/entry /opt/kaltura/web/content/uploads/ /opt/kaltura/web/content/webcam/ /opt/kaltura/web/tmp/ -type d -exec chmod 775 {} \;
+chown apache.kaltura -R /opt/kaltura/web/content/entry /opt/kaltura/web/content/uploads/  /opt/kaltura/web/tmp/
+#/opt/kaltura/web/content/webcam/
+find /opt/kaltura/web/content/entry /opt/kaltura/web/content/uploads/  /opt/kaltura/web/tmp/ -type d -exec chmod 775 {} \;
 /etc/init.d/ntpd start
 if [ "$1" = 2 ];then
 	if [ -r "%{prefix}/app/configurations/local.ini" -a -r "%{prefix}/app/configurations/base.ini" ];then

@@ -35,7 +35,7 @@ fi
 UI_CONF=`echo "select conf_file_path from ui_conf where tags like '%kmc_uploadWebCam%';"|mysql -u$DB1_USER -P$DB1_PORT -p$DB1_PASS $DB1_NAME -h$DB1_HOST --skip-column-names`
 sed -i "s@{HOST_NAME}@$RED5_HOST@g" "$BASE_DIR/web/$UI_CONF"
 if [ ! -L $BASE_DIR/web/content/webcam ];then
-        mv $BASE_DIR/web/content/webcam $BASE_DIR/web/content/webcam.org
+        #mv $BASE_DIR/web/content/webcam $BASE_DIR/web/content/webcam.org
         ln -sf /usr/lib/red5/webapps/oflaDemo/streams $BASE_DIR/web/content/webcam
 fi
 chown apache /usr/lib/red5/webapps/oflaDemo/streams
