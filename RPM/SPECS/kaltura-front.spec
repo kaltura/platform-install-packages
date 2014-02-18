@@ -7,7 +7,7 @@
 Summary: Kaltura Open Source Video Platform - frontend server 
 Name: kaltura-front
 Version: 9.9.0
-Release: 2 
+Release: 3
 License: AGPLv3+
 Group: Server/Platform 
 #Source0: kaltura.ssl.conf.template 
@@ -78,10 +78,6 @@ if [ "$1" = 1 ];then
 	/sbin/chkconfig memcached on
 fi
 service httpd restart
-sed 's#@APP_DIR@#%{prefix}/app#' %{prefix}/app/configurations/monit.avail/httpd.template.rc > %{prefix}/app/configurations/monit.avail/httpd.rc 
-sed 's#@APACHE_SERVICE@#httpd#g' -i %{prefix}/app/configurations/monit.avail/httpd.rc
-
-ln -fs %{prefix}/app/configurations/monit.avail/httpd.rc %{prefix}/app/configurations/monit.d/httpd.rc
 
 if [ "$1" = 1 ];then
 echo "#####################################################################################################################################
@@ -108,6 +104,9 @@ rm -rf %{buildroot}
 %config %{_sysconfdir}/php.d/zz-%{name}.ini
 
 %changelog
+* Tue Feb 18 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-3
+- monit is handled in postinst scripts now.
+
 * Mon Feb 3 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-2
 - Start httpd and memcached at init.
 

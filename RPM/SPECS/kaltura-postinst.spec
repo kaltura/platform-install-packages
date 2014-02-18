@@ -3,7 +3,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.5
-Release: 21 
+Release: 28 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -35,6 +35,7 @@ mkdir -p $RPM_BUILD_ROOT/%{prefix}/app/configurations
 chmod +x *.sh 
 mv  *.sh *.rc $RPM_BUILD_ROOT/%{prefix}/bin
 cp %{SOURCE1} $RPM_BUILD_ROOT/%{prefix}/app/configurations
+mkdir -p $RPM_BUILD_ROOT/%{prefix}/app/deployment/updates/scripts
 cp -r patches $RPM_BUILD_ROOT/%{prefix}/app/deployment/updates/scripts
 sed -i 's#@APP_DIR@#%{prefix}/app#g' $RPM_BUILD_ROOT/%{prefix}/bin/*rc
 
@@ -42,7 +43,17 @@ sed -i 's#@APP_DIR@#%{prefix}/app#g' $RPM_BUILD_ROOT/%{prefix}/bin/*rc
 rm -rf %{buildroot}
 
 %post
-
+if [ -r /etc/kaltura.d/system.ini ];then
+	. /etc/kaltura.d/system.ini
+	# check whether the 'kaltura' already exists:
+	echo "use kaltura" | mysql -h$DB1_HOST -u$DB1_USER -p$DB1_PASS -P$DB1_PORT $DB1_NAME 2> /dev/null
+	if [ $? -eq 0 ];then
+		for i in $APP_DIR/deployment/updates/scripts/patches/*.sh;do
+			echo "now running $i.."
+			$i  
+		done
+	fi
+fi
 %preun
 
 %files
@@ -52,6 +63,12 @@ rm -rf %{buildroot}
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Tue Feb 18 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.5-26
+- Only do the update if the record is missing.
+
+* Tue Feb 18 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.5-22
+- https://github.com/kaltura/platform-install-packages/issues/28
+ 
 * Mon Feb 17 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.5-20
 - Have hostname as default for Red5.
 
