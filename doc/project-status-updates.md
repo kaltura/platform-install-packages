@@ -9,7 +9,7 @@ Cluster install passed successfully, Chef scripts created, many tests passed and
 + 18 packaging bugs crushed (thanks to [@DBezemer](https://github.com/DBezemer), [@mobcdi](https://github.com/mobcdi) and [@doubleshot](https://github.com/doubleshot))!
 + [7 fix patches submitted to core](https://github.com/kaltura/server/pull/871) by [@jessp01](https://github.com/jessp01).
 + [1 Admin Console view](https://github.com/kaltura/server/pull/872 ) contributed by  [@DBezemer](https://github.com/DBezemer).
-+ New documents published: 1) [cluster deployment document](http://bit.ly/kipp-cluster-yum), 2) [configuring platform monitors](http://bit.ly/kipp-monit).
++ New documents published: 1) [cluster deployment document](http://bit.ly/kipp-cluster-yum), 2) [configuring platform monitors](http://bit.ly/kipp-monitoring).
 + Local Drop folders passed tests.
 + Upgrade to 9.10 will be skipped. As 9.11 planned for release next week, nightly will progress straight to 9.11.
 + [Project announced on a blog post!](http://blog.kaltura.org/introducing-kipp-kaltura-install-made-simple)
