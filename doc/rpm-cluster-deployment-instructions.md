@@ -1,6 +1,10 @@
 # Kaltura cluster deployment
 
-Instructions here are for a cluster with the following members:
+#### Notes
+* If you see a `#` at the beginning of a line, this line should be run as `root`.
+* All post-install scripts accept answers-file as parameter, this can used for silent-automatic installs.
+
+#### Instructions here are for a cluster with the following members:
 * NFS server
 * Front
 * Batch server
@@ -20,33 +24,38 @@ Note that you may choose different NFS settings which is fine so long as:
 * the kaltura and apache user are both able to write to this volume
 * the kaltura and apache user are both able create files with them as owners. i.e: do not use all_squash as an option.
 
-to export the volume:
-`# exportfs -a`
+to export the volume run: `# exportfs -a`
 
-On the Front:
-=============
-edit /etc/fstab and add:
-nfs-host:/opt/kaltura/web /opt/kaltura/web nfs4
-
+### On the Front:
+edit `/etc/fstab` and add:    
+`nfs-host:/opt/kaltura/web /opt/kaltura/web nfs4`
+Then run: 
+```
 # yum install kaltura-front kaltura-widgets
 # /opt/kaltura/bin/kaltura-front-config.sh
+```
 
-On the MySQL and Sphinx server:
-===============================
+### On the MySQL and Sphinx server:
+```
 # yum install kaltura-sphinx mysql-server
 # mysql_secure_install
 # /opt/kaltura/bin/kaltura-mysql-settings.sh
 # /opt/kaltura/bin/kaltura-sphinx-config.sh
 # /opt/kaltura/bin/kaltura-db-config.sh
+```
 
-On the batch server:
-====================
-edit /etc/fstab and add:
-nfs-host:/opt/kaltura/web /opt/kaltura/web nfs4
+### On the batch server:
+edit `/etc/fstab` and add: 
+`nfs-host:/opt/kaltura/web /opt/kaltura/web nfs4`    
+Then run:
+```
 # /opt/kaltura/bin/kaltura-batch-config.sh
+```
 
-On the DWH server:
-==================
-edit /etc/fstab and add:
-nfs-host:/opt/kaltura/web /opt/kaltura/web nfs4
+### On the DWH server:
+edit `/etc/fstab` and add: 
+`nfs-host:/opt/kaltura/web /opt/kaltura/web nfs4`   
+Then run:
+```
 # /opt/kaltura/bin/kaltura-dwh-config.sh
+```
