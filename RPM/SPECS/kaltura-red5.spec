@@ -1,7 +1,7 @@
 Summary: Red5 Server
 Name: kaltura-red5
-Version: 1.0.0
-Release: 2 
+Version: 1.0.2
+Release: 1 
 Source0: %{name}-%{version}.tar.bz2
 Source1: %{name}-flash-%{version}.tar.bz2
 Source2: red5.init
@@ -80,6 +80,9 @@ if [ "$1" = 0 ]; then
 fi
 
 %changelog
+* Wed Feb 19 2014 Jess Portnoy <jess.portnoy@kaltura.com> 1.0.2-1
+- Maybe this version is better? LOVE using RC versions.. sigh.
+
 * Thu Feb 13 2014 Jess Portnoy <jess.portnoy@kaltura.com> 1.0.0-2
 - Start at init.
 
