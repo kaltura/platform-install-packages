@@ -17,6 +17,7 @@ http://community.opscode.com/cookbooks/nfs
 
 Bootstrapping clients
 =====================
+# curl -L https://www.opscode.com/chef/install.sh|sh
 # mkdir -p /etc/chef
 # knife configure client /etc/chef
 copy /etc/chef/validation.pem from your Chef server onto /etc/chef
