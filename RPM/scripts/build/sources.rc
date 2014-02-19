@@ -36,9 +36,10 @@ FDK_RPM_PACKAGE_NAME=kaltura-libfdk-acc
 # Red5 build vars:
 RED5_VERSION=1.0.0
 RED5_SVN_VERSION=1_0
+RED5_FLASH_SVN_VERSION=1_0
 RED5_RPM_PACKAGE_NAME=kaltura-red5
 RED5_JAVA_URI="http://red5.googlecode.com/svn/java/server/tags/$RED5_SVN_VERSION"
-RED5_FLASH_URI="http://red5.googlecode.com/svn/flash/tags/$RED5_SVN_VERSION"
+RED5_FLASH_URI="http://red5.googlecode.com/svn/flash/tags/$RED5_FLASH_SVN_VERSION"
 
 # Pentaho:
 PENTAHO_VERSION=4.2.1
@@ -46,7 +47,7 @@ PENTAHO_RPM_PACKAGE_NAME=kaltura-pentaho
 PENTAHO_URI="http://sourceforge.net/projects/pentaho/files/Data%20Integration/$PENTAHO_VERSION-stable/pdi-ce-$PENTAHO_VERSION-stable.tar.gz"
 
 # Kaltura Core build vars:
-KALTURA_CORE_VERSION=9.7.0
+KALTURA_CORE_VERSION=9.9.0
 KALTURA_URI="https://github.com/kaltura/server/archive/IX-$KALTURA_CORE_VERSION.zip"
 KALTURA_TEMPLATES_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalsource/on-premise/trunk/packaging/templates"
 
