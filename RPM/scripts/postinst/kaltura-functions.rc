@@ -145,7 +145,6 @@ send_post_inst_msg()
 	mail -s "$POST_INST_MAIL_SUBJECT" -r "Kaltura Video Platform <kaltura@$KALTURA_VIRTUAL_HOST_NAME>" $MAILTO < $POST_INST_MAIL_TMPL 
 	
 }
-
 send_install_becon()
 {
         ROLE=$1
@@ -155,15 +154,16 @@ send_install_becon()
         RC_FILE=/etc/kaltura.d/system.ini
         if [ ! -r "$RC_FILE" ];then
                 echo "Could not find $RC_FILE so, exiting.."
-                exit 1
+                return 1
         fi
         . $RC_FILE
         BLKID=`blkid`
         MACHINE_ID=`echo -n $BLKID | md5sum|awk -F " " '{print $1}'`
         EPOCH=`date +%s`
         INSTALL_ID=`echo $BLKID : $EPOCH | md5sum|awk -F " " '{print $1}'`
-echo "curl $ANALYTICS_SERVER_URI -i -X POST -H "'Content-Type: application/json' -d {\'event_type\': \'install_start\', \'krole\': \'$ROLE\', \'email\': \'$MAILTO\', \'machineId\': \'$MACHINE_ID\', \'installationId\': \'$INSTALL_ID\', \'timestamp\': \'$EPOCH\', \'kernel_v\': \'`uname -r`\', \'machine_arch\': \'`uname -m`\',\'is_ssl\': \'0\', \'serviceurl\': \'$SERVICE_URL\', \'timezone\': \'$TIMEZONE\',\'package_type\':\'rpm\'}""
 #set -x
-        curl $ANALYTICS_SERVER_URI -i -X POST -H "'Content-Type: application/json' -d {\'event_type\': \'install_start\', \'krole\': \'$ROLE\', \'email\': \'$MAILTO\', \'machineId\': \'$MACHINE_ID\', \'installationId\': \'$INSTALL_ID\', \'timestamp\': \'$EPOCH\', \'kernel_v\': \'`uname -r`\', \'machine_arch\': \'`uname -m`\',\'is_ssl\': \'0\', \'serviceurl\': \'$SERVICE_URL\', \'timezone\': \'$TIMEZONE\',\'package_type\':\'rpm\'}"
+curl -i -X POST -H 'Content-Type: application/json' -d '{"event_type": "'$ACTION'", "krole": "'$ROLE'", "email": "'$MAILTO'", "machineId": "'$MACHINE_ID'", "installationId": "'$INSTALL_ID'", "timestamp": "'$EPOCH'", "kernel_v": "'`uname -r`'", "machine_arch": "'`uname -m`'","is_ssl": true, "serviceurl": "'$SERVICE_URL'", "timezone": "'$TIMEZONE'","package_type":"rpm"}' $ANALYTICS_SERVER_URI &>/dev/null
+
 #set +x
 }
+

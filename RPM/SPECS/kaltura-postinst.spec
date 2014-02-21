@@ -3,7 +3,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.5
-Release: 29 
+Release: 33
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -63,6 +63,9 @@ fi
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Fri Feb 21 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.5-30
+- With becons.
+
 * Thu Feb 20 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.5-29
 - Only add studio.template.ini to CONF_FILES if html5-studio is installed.
 
