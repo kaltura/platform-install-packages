@@ -36,7 +36,7 @@ if [ -r /etc/sysconfig/clock ];then
 else
        ZONE="unknown"
 fi  
-OUT=""
+OUT="1"
 send_install_becon kaltura-base $ZONE install_start 
 $BASE_DIR/bin/kaltura-base-config.sh "$ANSFILE"
 if [ $? -ne 0 ];then
