@@ -2,8 +2,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
-Version: 1.0.5
-Release: 33
+Version: 1.0.6
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -63,6 +63,12 @@ fi
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Sat Feb 22 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.6-1
+- Post becon tests.
+
+* Sat Feb 22 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.5-34
+- Becon corrections.
+
 * Fri Feb 21 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.5-30
 - With becons.
 

@@ -37,6 +37,8 @@ if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
 	exit 3
 fi
 . $KALTURA_FUNCTIONS_RC
+trap 'my_trap_handler ${LINENO} ${$?}' ERR
+send_install_becon `basename $0` $ZONE install_start 
 
 MYSQL_HOST=$1
 MYSQL_SUPER_USER=$2
@@ -65,6 +67,7 @@ fi
 if ! check_mysql_settings $MYSQL_SUPER_USER $MYSQL_SUPER_USER_PASSWD $MYSQL_HOST $MYSQL_PORT ;then
 	exit 7
 fi
+trap - ERR
 if [ -z "$POPULATE_ONLY" ];then
 	# check whether the 'kaltura' already exists:
 	echo "use kaltura" | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT $KALTURA_DB 2> /dev/null
@@ -78,6 +81,7 @@ Did you mean to perform an upgrade? if so, run with:
 EOF
 		exit 5
 	fi 
+trap 'my_trap_handler ${LINENO} ${$?}' ERR
 
 	# this is the DB creation part, we want to exit if something fails here:
 	set -e
@@ -152,3 +156,4 @@ if [ "$DB1_HOST" = `hostname` -o "$DB1_HOST" = '127.0.0.1' -o "$DB1_HOST" = 'loc
 	ln -sf $BASE_DIR/app/configurations/monit/monit.avail/mysqld.rc $BASE_DIR/app/configurations/monit/monit.d/enabled.mysqld.rc
 	/etc/init.d/kaltura-monit restart
 fi
+send_install_becon `basename $0` $ZONE install_success 

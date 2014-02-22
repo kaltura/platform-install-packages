@@ -37,9 +37,19 @@ if [ ! -r "$RC_FILE" ];then
 	exit 2
 fi
 . $RC_FILE
+KALTURA_FUNCTIONS_RC=`dirname $0`/kaltura-functions.rc
+if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
+	OUT="Could not find $KALTURA_FUNCTIONS_RC so, exiting.."
+	echo $OUT
+	exit 3
+fi
+. $KALTURA_FUNCTIONS_RC
+trap 'my_trap_handler ${LINENO} ${$?}' ERR
+send_install_becon `basename $0` $ZONE install_start 
 mkdir -p $LOG_DIR/sphinx/data $APP_DIR/cache//sphinx
 chown $OS_KALTURA_USER.$OS_KALTURA_USER $APP_DIR/cache/sphinx $LOG_DIR/sphinx/data
 echo "sphinxServer = $SPHINX_HOST" > /opt/kaltura/app/configurations/sphinx/populate/`hostname`.ini
 /etc/init.d/kaltura-sphinx restart >/dev/null 2>&1
 /etc/init.d/kaltura-populate restart >/dev/null 2>&1
 ln -sf $BASE_DIR/app/configurations/monit/monit.avail/sphinx.rc $BASE_DIR/app/configurations/monit/monit.d/enabled.sphinx.rc
+send_install_becon `basename $0` $ZONE install_success

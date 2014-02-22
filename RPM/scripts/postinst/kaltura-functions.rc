@@ -5,6 +5,10 @@ if [  -r "$RC_FILE" ];then
 else
 	BASE_DIR=/opt/kaltura
 fi
+if [ -r /etc/sysconfig/clock ];then
+        . /etc/sysconfig/clock
+fi
+
 
 POST_INST_MAIL_SUBJECT='Your new Kaltura server is up! and 6 Quick Tips For Smooth Kaltura Maintenance'
 POST_INST_MAIL_TMPL=$BASE_DIR/app/configurations/post_inst_mail
@@ -152,11 +156,9 @@ send_install_becon()
         ACTION=$3
         ANALYTICS_SERVER_URI="http://54.204.228.203/report"
         RC_FILE=/etc/kaltura.d/system.ini
-        if [ ! -r "$RC_FILE" ];then
-                echo "Could not find $RC_FILE so, exiting.."
-                return 1
-        fi
-        . $RC_FILE
+        if [ -r "$RC_FILE" ];then
+        	. $RC_FILE
+	fi
         BLKID=`blkid`
         MACHINE_ID=`echo -n $BLKID | md5sum|awk -F " " '{print $1}'`
         EPOCH=`date +%s`
@@ -167,3 +169,13 @@ curl -i -X POST -H 'Content-Type: application/json' -d '{"event_type": "'$ACTION
 #set +x
 }
 
+function my_trap_handler()
+{
+        MYSELF=`basename "$0"`               # equals to my script name
+        LASTLINE="$1"            # argument 1: last line of error occurence
+        LASTERR="$2"             # argument 2: error code of last command
+        RPM_VER=`rpm -q kaltura-postinst`
+        #echo "${MYSELF}: line ${LASTLINE}: exit status of last command: ${LASTERR},${RPM_VER}"
+        send_install_becon ${MYSELF} $ZONE "install_err_line:${LASTLINE},${RPM_VER}"
+        exit 11
+}
