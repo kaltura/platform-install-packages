@@ -9,6 +9,16 @@ echo `date`
 # chkconfig: 2345 13 87
 # description: Kaltura Sphinx Populate
 
+### BEGIN INIT INFO
+# Provides:          kaltura-populate
+# Required-Start:    $local_fs
+# Required-Stop:     $local_fs
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# X-Interactive:     true
+# Short-Description: Start/stop Kaltura populate daemon
+# Description:       Control the Kaltura populate daemon
+### END INIT INFO
 # Source function library.
 #. /etc/rc.d/init.d/functions
 

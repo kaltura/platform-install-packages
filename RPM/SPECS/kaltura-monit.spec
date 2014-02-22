@@ -1,12 +1,12 @@
 %define prefix /opt/kaltura/
 # this isn't really a stand location for placing conf files but we wish to remain compatible with the current config dir tree used by Kaltura
-%define confdir /opt/kaltura/app/configurations
+%define confdir /opt/kaltura/app/configurations/monit
 %define logmsg logger -t %{name}/rpm
 
 Summary: Process monitor and restart utility
 Name: kaltura-monit
 Version: 5.6
-Release: 6 
+Release: 11 
 License: GPLv3
 Group: High Availability Management 
 URL: http://mmonit.com/monit/
@@ -16,7 +16,7 @@ Vendor: Tildeslash Ltd.
 
 Source0: http://mmonit.com/monit/dist/monit-%{version}.tar.gz
 Source1: kaltura-monit
-Source2: monit.conf
+Source2: monit.template.conf
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
 BuildRequires: binutils
@@ -44,7 +44,7 @@ sed -i 's@^#\(\s+\)set \(id|state\)file /var/\.monit\.\(id|state\)$@set $2file /
 
 
 %build
-./configure --build=x86_64-redhat-linux-gnu --host=x86_64-redhat-linux-gnu --target=x86_64-redhat-linux-gnu --prefix=%{prefix} --bindir=%{prefix}/bin --sbindir=%{prefix}/sbin --sysconfdir=%{confdir} --datadir=%{prefix}/share --includedir=%{prefix}/include --libdir=%{prefix}/lib64 --libexecdir=%{prefix}/libexec --localstatedir=%{prefix}/var --sharedstatedir=%{prefix}/var/lib --mandir=%{prefix}/man --infodir=%{prefix}/share/info --with-ssl-lib-dir=/usr/lib64/openssl
+./configure --build=x86_64-redhat-linux-gnu --host=x86_64-redhat-linux-gnu --target=x86_64-redhat-linux-gnu --prefix=%{prefix} --bindir=%{prefix}/bin --sbindir=%{prefix}/sbin --sysconfdir=%{confdir} --datadir=%{prefix}/share --includedir=%{prefix}/include --libdir=%{prefix}/lib64 --libexecdir=%{prefix}/libexec --localstatedir=%{prefix}/var --sharedstatedir=%{prefix}/var/lib --mandir=%{prefix}/share/man --infodir=%{prefix}/share/info --with-ssl-lib-dir=/usr/lib64/openssl
 %{__make} %{?_smp_mflags}
 
 %install
@@ -52,7 +52,7 @@ sed -i 's@^#\(\s+\)set \(id|state\)file /var/\.monit\.\(id|state\)$@set $2file /
 make install DESTDIR=$RPM_BUILD_ROOT INSTALL="%{__install} -p -c"
 
 %{__install} -Dp -m0755 contrib/rc.monit %{buildroot}%{_initrddir}/%{name}
-%{__install} -Dp -m0600 %{SOURCE2} %{buildroot}%{confdir}/monit.conf
+%{__install} -Dp -m0600 %{SOURCE2} %{buildroot}%{confdir}/monit.template.conf
 
 %{__install} -d -m0755 %{buildroot}%{confdir}/monit.d/
 %{__install} -d -m0755 %{buildroot}%{prefix}/var/lib/monit/
@@ -70,6 +70,7 @@ fi
 %post
 if [ "$1" = 1 ];then
 	/sbin/chkconfig --add kaltura-monit
+	/sbin/chkconfig kaltura-monit on
 fi
 /sbin/service monit restart &>/dev/null || :
 
@@ -92,18 +93,35 @@ fi
 
 %files
 %doc CHANGES COPYING README*
-%doc %{prefix}/man/man?/*
+%doc %{prefix}/share/man/man?/*
 %defattr(-, root, root, 0755)
 %{_initrddir}/kaltura-monit
 %config %{confdir}/monit.d/
-%config %{confdir}/monit.conf
+%defattr(-, root, root, 0600)
+%config %{confdir}/monit.template.conf
 %config %{prefix}/var/monit/
 %{prefix}/var/lib/monit/
 %attr(0755, root, root) %{prefix}/bin/monit
-%attr(0600, root, root) %config(noreplace) %{confdir}/monit.conf
+#%attr(0600, root, root) %config(noreplace) %{confdir}/monit.conf
 
 
 %changelog
+* Mon Feb 17 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 5.6-11
+- Fix for https://github.com/kaltura/platform-install-packages/issues/41
+
+* Sun Feb 16 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 5.6-10
+- monit.conf needs to be templated because of the email addr.
+
+* Sat Feb 15 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 5.6-9
+- monit.conf: set daemon 10 # Poll every 10 seconds
+
+* Sat Feb 15 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 5.6-8
+- Changed monit confdir.
+
+* Sat Feb 15 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 5.6-7
+- chkconfig monit on.
+- Modications to the init script.
+
 * Sun Jan 12 2013 Jess Portnoy <jess.portnoy@kaltura.com> - 5.6-5
 - Added monit.conf
 

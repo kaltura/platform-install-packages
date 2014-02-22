@@ -68,7 +68,7 @@ EOF
 %files
 %defattr(-, root, root, 0755)
 %doc AUTHORS ChangeLog COPYING.LIB KNOWN-BUGS NEWS README THANKS TODO
-%{prefix}/lib/*.so.*
+%{prefix}/lib/*.so*
 
 %files devel
 %defattr(-, root, root, 0755)
@@ -77,7 +77,7 @@ EOF
 %config %{_sysconfdir}/ld.so.conf.d/kaltura_libmcrypt.conf
 %{prefix}/bin/*
 %{prefix}/lib/*.a
-%{prefix}/lib/*.so
+#%{prefix}/lib/*.so
 %{prefix}/include/*.h
 %{prefix}/share/aclocal/*.m4
 %exclude %{prefix}/lib/*.la

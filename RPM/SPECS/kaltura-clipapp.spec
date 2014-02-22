@@ -1,8 +1,9 @@
 %define prefix /opt/kaltura
-%define clipapp_vers "v1.0.5 v1.0.5_saas v1.0.7 v1.0.7_saas"
+#%define clipapp_vers "v1.0.5 v1.0.5_saas v1.0.7 v1.0.7_saas"
 Name:	kaltura-clipapp
-Version: 1.0.0 
+Version: v1.0.7
 Release: 1
+Epoch: 1
 Summary: Kaltura Clipper App 
 License: AGPLv3+	
 URL: http://kaltura.org
@@ -33,9 +34,10 @@ This package installs the Kaltura Clipper App, used for clipping segments from a
 
 %install
 mkdir -p $RPM_BUILD_ROOT%{prefix}/apps/clipapp
-for i in %{clipapp_vers};do
-	cp -r %{_builddir}/%{name}/$i $RPM_BUILD_ROOT/%{prefix}/apps/clipapp
-done
+#for i in %{clipapp_vers};do
+	cp -r %{_builddir}/%{name}/%{version} $RPM_BUILD_ROOT/%{prefix}/apps/clipapp
+	cp %{_builddir}/%{name}/%{version}_saas/config.local.php $RPM_BUILD_ROOT/%{prefix}/apps/clipapp/%{version}/config.local.php
+#done
 
 %clean
 rm -rf %{buildroot}
@@ -46,5 +48,8 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Tue Feb 18 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v1.0.7-1
+- Need the cnfig.local.php from saas for this one to work.
+
 * Sun Jan 12 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.0-1
 - initial package.

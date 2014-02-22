@@ -33,6 +33,14 @@ if [ ! -r "$RC_FILE" ];then
 	exit 2
 fi
 . $RC_FILE
+KALTURA_FUNCTIONS_RC=`dirname $0`/kaltura-functions.rc
+if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
+	echo "Could not find $KALTURA_FUNCTIONS_RC so, exiting.."
+	exit 3
+fi
+. $KALTURA_FUNCTIONS_RC
+trap 'my_trap_handler ${LINENO} ${$?}' ERR
+send_install_becon `basename $0` $ZONE install_start 
 TABLES=`echo "show tables" | mysql -h$DWH_HOST -u$SUPER_USER -p$SUPER_USER_PASSWD -P$DWH_PORT kalturadw 2> /dev/null`
 if [ -z "$TABLES" ];then 
 	echo "Deploying analytics warehouse DB, please be patient as this may take a while...
@@ -49,3 +57,4 @@ sed  's#\(@DWH_DIR@\)$#\1 -k /opt/kaltura/pentaho/pdi/kitchen.sh#g' $APP_DIR/con
 sed -i -e "s#@DWH_DIR@#$BASE_DIR/dwh#g" -e "s#@APP_DIR@#$APP_DIR#g" -e "s#@EVENTS_FETCH_METHOD@#local#g" -e "s#@LOG_DIR@#$LOG_DIR#g" $APP_DIR/configurations/cron/dwh
 ln -sf $APP_DIR/configurations/cron/dwh /etc/cron.d/kaltura-dwh
 echo "DWH configured."
+send_install_becon `basename $0` $ZONE install_success 

@@ -72,6 +72,15 @@ if [ ! -r "$RC_FILE" ];then
 	exit 1 
 fi
 . $RC_FILE
+KALTURA_FUNCTIONS_RC=`dirname $0`/kaltura-functions.rc
+if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
+	OUT="Could not find $KALTURA_FUNCTIONS_RC so, exiting.."
+	echo $OUT
+	exit 3
+fi
+. $KALTURA_FUNCTIONS_RC
+trap 'my_trap_handler ${LINENO} ${$?}' ERR
+send_install_becon `basename $0` $ZONE install_start 
 KALTURA_APACHE_CONF=$APP_DIR/configurations/apache
 KALTURA_APACHE_CONFD=$KALTURA_APACHE_CONF/conf.d
 if [ -z "$IS_SSL" ];then
@@ -86,7 +95,13 @@ EOF
 fi
 if [ "$IS_SSL" != 'Y' -a "$IS_SSL" != 1 -a "$IS_SSL" != 'y' ];then
 #-a ! -r "$ANSFILE" ];then
+trap - ERR
+echo "use kaltura" | mysql -h$DB1_HOST -u$DB1_USER -p$DB1_PASS -P$DB1_PORT $DB1_NAME 2> /dev/null
+if [ $? -eq 0 ];then
 	echo "update permission set STATUS=3 WHERE permission.NAME='FEATURE_KMC_ENFORCE_HTTPS' ;" | mysql $DB1_NAME -h$DB1_HOST -u$DB1_USER -P$DB1_PORT -p$DB1_PASS 2> /dev/null 
+fi
+trap 'my_trap_handler ${LINENO} ${$?}' ERR
+
 	if [ -z "$AUTO_YES" ];then
 		echo "It is recommended that you do work using HTTPs. Would you like to continue anyway?[N/y]"
 		read CONT
@@ -180,10 +195,12 @@ if [ -z "$SERVICE_URL" ];then
 	fi
 fi
 
-echo "use kaltura" | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT $KALTURA_DB 2> /dev/null
+trap - ERR
+echo "use kaltura" | mysql -h$DB1_HOST -u$DB1_USER -p$DB1_PASS -P$DB1_PORT $DB1_NAME 2> /dev/null
 if [ $? -eq 0 ];then
 	echo "update permission set STATUS=2 WHERE permission.PARTNER_ID IN ('0') AND permission.NAME='FEATURE_KMC_ENFORCE_HTTPS' ORDER BY permission.STATUS ASC LIMIT 1;" | mysql $DB1_NAME -h$DB1_HOST -u$DB1_USER -P$DB1_PORT -p$DB1_PASS 
 fi
+trap 'my_trap_handler ${LINENO} ${$?}' ERR
 
 
 cp $KALTURA_APACHE_CONFD/enabled.kaltura.conf.template $KALTURA_APACHE_CONFD/enabled.kaltura.conf 
@@ -236,3 +253,7 @@ find $BASE_DIR/app/cache/ $BASE_DIR/log -type d -exec chmod 775 {} \;
 find $BASE_DIR/app/cache/ $BASE_DIR/log -type f -exec chmod 664 {} \; 
 chown -R kaltura.apache $BASE_DIR/app/cache/ $BASE_DIR/log
 service httpd restart
+ln -sf $BASE_DIR/app/configurations/monit/monit.avail/httpd.rc $BASE_DIR/app/configurations/monit/monit.d/enabled.httpd.rc
+ln -sf $BASE_DIR/app/configurations/monit/monit.avail/memcached.rc $BASE_DIR/app/configurations/monit/monit.d/enabled.memcached.rc
+/etc/init.d/kaltura-monit restart
+send_install_becon `basename $0` $ZONE install_success 

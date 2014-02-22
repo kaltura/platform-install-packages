@@ -7,7 +7,7 @@
 Summary: PHP Mcrypt extension. 
 Name: php-mcrypt
 Version: 5.3.3
-Release: 3 
+Release: 4 
 License: The PHP License
 Group: Development/Languages
 URL: http://www.php.net/

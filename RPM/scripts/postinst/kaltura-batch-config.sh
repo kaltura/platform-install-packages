@@ -30,6 +30,15 @@ else
 # $BASE_DIR/bin/kaltura-base-config.sh
 "
 fi
+KALTURA_FUNCTIONS_RC=`dirname $0`/kaltura-functions.rc
+if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
+	OUT="Could not find $KALTURA_FUNCTIONS_RC so, exiting.."
+	echo $OUT
+	exit 3
+fi
+. $KALTURA_FUNCTIONS_RC
+trap 'my_trap_handler ${LINENO} ${$?}' ERR
+send_install_becon `basename $0` $ZONE install_start 
 
 CONFIG_DIR=/opt/kaltura/app/configurations
 if [ -r $CONFIG_DIR/system.ini ];then
@@ -70,3 +79,6 @@ chown -R kaltura.apache $BASE_DIR/app/cache/ $BASE_DIR/log
 #	service httpd restart
 #fi
 /etc/init.d/kaltura-batch restart >/dev/null 2>&1
+ln -sf $BASE_DIR/app/configurations/monit/monit.avail/batch.rc $BASE_DIR/app/configurations/monit/monit.d/enabled.batch.rc
+/etc/init.d/kaltura-monit restart
+send_install_becon `basename $0` $ZONE install_success 

@@ -2,8 +2,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
-Version: 1.0.5
-Release: 1 
+Version: 1.0.6
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -35,21 +35,87 @@ mkdir -p $RPM_BUILD_ROOT/%{prefix}/app/configurations
 chmod +x *.sh 
 mv  *.sh *.rc $RPM_BUILD_ROOT/%{prefix}/bin
 cp %{SOURCE1} $RPM_BUILD_ROOT/%{prefix}/app/configurations
+mkdir -p $RPM_BUILD_ROOT/%{prefix}/app/deployment/updates/scripts
+cp -r patches $RPM_BUILD_ROOT/%{prefix}/app/deployment/updates/scripts
 sed -i 's#@APP_DIR@#%{prefix}/app#g' $RPM_BUILD_ROOT/%{prefix}/bin/*rc
 
 %clean
 rm -rf %{buildroot}
 
 %post
-
+if [ -r /etc/kaltura.d/system.ini ];then
+	. /etc/kaltura.d/system.ini
+	# check whether the 'kaltura' already exists:
+	echo "use kaltura" | mysql -h$DB1_HOST -u$DB1_USER -p$DB1_PASS -P$DB1_PORT $DB1_NAME 2> /dev/null
+	if [ $? -eq 0 ];then
+		for i in $APP_DIR/deployment/updates/scripts/patches/*.sh;do
+			echo "now running $i.."
+			$i  
+		done
+	fi
+fi
 %preun
 
 %files
 %{prefix}/bin/*
+%{prefix}/app/deployment/updates/scripts/patches
 %config %{prefix}/bin/db_actions.rc
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Sat Feb 22 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.6-1
+- Post becon tests.
+
+* Sat Feb 22 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.5-34
+- Becon corrections.
+
+* Fri Feb 21 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.5-30
+- With becons.
+
+* Thu Feb 20 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.5-29
+- Only add studio.template.ini to CONF_FILES if html5-studio is installed.
+
+* Tue Feb 18 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.5-26
+- Only do the update if the record is missing.
+
+* Tue Feb 18 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.5-22
+- https://github.com/kaltura/platform-install-packages/issues/28
+ 
+* Mon Feb 17 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.5-20
+- Have hostname as default for Red5.
+
+* Sun Feb 16 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.5-19
+- Attempt to correct corrupted UI confs.
+
+* Sun Feb 16 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.5-18
+- Need to restart monit daemon after each daemon config, can't do it in all because not every inst. is all in 1.
+
+* Sun Feb 16 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.5-14
+- chown and chmod monit.conf to be root.root 600.
+
+* Sat Feb 15 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.5-13
+- Monit fixes.
+
+* Fri Feb 14 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.5-11
+- chown apache for the streams dir.
+
+* Fri Feb 14 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.5-8
+- Replace localhost with actual server name in oflaDemo/index.html
+* Fri Feb 14 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.5-6
+- Some fixes for Red5.
+
+* Fri Feb 14 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.5-5
+- Added Red5 config script.
+
+* Thu Feb 13 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.5-4
+- Symlink to red5 streaming dir.
+
+* Thu Feb 13 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.5-3
+- Prompt for RED5 host.
+
+* Thu Feb 13 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.5-2
+- Replace toks in studio.ini.
+
 * Fri Feb 7 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.4-11
 - Fixes https://github.com/kaltura/platform-install-packages/issues/21
 - Add logging to file during DWH setup.

@@ -1,61 +1,88 @@
-#! /bin/sh
+#!/bin/bash
 #
-# monit         Monitor Unix systems
+# Init file for Monit system monitor
+# Written by Stewart Adam <s.adam@diffingo.com>
+# based on script by Dag Wieers <dag@wieers.com>.
 #
-# Author:	Clinton Work,   <work@scripty.com>
+# chkconfig: - 98 02
+# description: Utility for monitoring services on a Unix system
 #
-# chkconfig:    2345 98 02
-# description:  Monit is a utility for managing and monitoring processes,
-#               files, directories and filesystems on a Unix system. 
-# processname:  monit
-# pidfile:      /var/run/monit.pid
-# config:       /etc/monit.conf
+# processname: monit
+# config: /etc/monit.conf
+# pidfile: /var/run/monit.pid
+# Short-Description: Monit is a system monitor
 
 # Source function library.
-. /etc/rc.d/init.d/functions
+. /etc/init.d/functions
 
-MONIT=/opt/kaltura/bin/monit
+### Default variables
+#export PATH=/opt/kaltura/bin:$PATH
+CONFIG="/opt/kaltura/app/configurations/monit/monit.conf"
+pidfile="/var/run/monit.pid"
+MONIT="/opt/kaltura/bin/monit"
+prog=`basename $MONIT`
 
-# Source monit configuration.
-if [ -f /opt/kaltura/app/configurations/monit.conf ] ; then
-        . /opt/kaltura/app/configurations/monit.conf
-fi
-
-[ -f $MONIT ] || exit 0
+# Check if requirements are met
+[ -x "$MONIT" ] || exit 1
+[ -r "$CONFIG" ] || exit 1
 
 RETVAL=0
 
-# See how we were called.
+start() {
+	echo -n $"Starting $prog: "
+	daemon $MONIT -c $CONFIG
+	RETVAL=$?
+	echo
+	[ $RETVAL -eq 0 ] && touch /var/lock/subsys/$prog
+	return $RETVAL
+}
+
+stop() {
+	echo -n $"Shutting down $prog: "
+	killproc -p ${pidfile}
+	RETVAL=$?
+	echo
+	[ $RETVAL -eq 0 ] && rm -f /var/lock/subsys/$prog
+	return $RETVAL
+}
+
+restart() {
+	stop
+	start
+}
+
+reload() {
+	echo -n $"Reloading $prog: "
+	$MONIT -c "$CONFIG" reload
+	RETVAL=$?
+	echo
+	return $RETVAL
+}
+
 case "$1" in
   start)
-        echo -n "Starting monit: "
-        daemon $NICELEVEL $MONIT
-        RETVAL=$?
-        echo
-        [ $RETVAL = 0 ] && touch /var/lock/subsys/monit
-        ;;
+	start
+	;;
   stop)
-        echo -n "Stopping monit: "
-        killproc monit
-        RETVAL=$?
-        echo
-        [ $RETVAL = 0 ] && rm -f /var/lock/subsys/monit
-        ;;
+	stop
+	;;
   restart)
-  	$0 stop
-	$0 start
-	RETVAL=$?
+	restart
+	;;
+  reload)
+	reload
 	;;
   condrestart)
-       [ -e /var/lock/subsys/monit ] && $0 restart
-       ;;
+	[ -e /var/lock/subsys/$prog ] && restart
+	RETVAL=$?
+	;;
   status)
-        status monit
+	status $prog
 	RETVAL=$?
 	;;
   *)
-	echo "Usage: $0 {start|stop|restart|condrestart|status}"
-	exit 1
+	echo $"Usage: $0 {start|stop|restart|reload|condrestart|status}"
+	RETVAL=1
 esac
 
 exit $RETVAL

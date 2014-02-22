@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configdata>
+	<accounts>
+		<label>Publishers</label>
+		<controller>partner</controller>
+		<action>dynamic_action</action>
+		<pages>
+			<accounts-management>
+				<label>Publisher Management</label>
+				<controller>partner</controller>
+				<action>list</action>
+			</accounts-management>
+			<account-new>
+				<label>Add New Publisher</label>
+				<controller>partner</controller>
+				<action>create</action>
+			</account-new>
+			<account-usage>
+				<label>Publishers' Usage</label>
+				<controller>partner-usage</controller>
+				<action>index</action>
+			</account-usage>
+		</pages>
+	</accounts>
+	<users>
+		<label>Users</label>
+		<controller>user</controller>
+		<action>dynamic_action</action>
+
+		<pages>
+			<users-management>
+				<label>User Management</label>
+				<controller>user</controller>
+				<action>index</action>
+			</users-management>
+			<create-new-user>
+				<label>Add User</label>
+				<controller>user</controller>
+				<action>create</action>
+			</create-new-user>
+			<change-my-settings>
+				<label>Change My Settings</label>
+				<controller>user</controller>
+				<action>settings</action>
+			</change-my-settings>
+			<user-role>
+				<label>User Roles</label>
+				<controller>user</controller>
+				<action>user-role</action>
+			</user-role>
+		</pages>
+	</users>
+	<widgets>
+		<label>UI Confs</label>
+		<controller>widget</controller>
+		<action>dynamic_action</action>
+		<pages>
+			<widgets>
+				<label>UI Confs Management</label>
+				<controller>widget</controller>
+				<action>list</action>
+			</widgets>
+		</pages>
+	</widgets>
+	<batch-proccess-control>
+		<label>Batch Process Control</label>
+		<controller>batch</controller>
+		<action>entry-investigation</action>
+		<pages>
+			<in-progress-tasks>
+				<label>In-Progress Tasks</label>
+				<controller>batch</controller>
+				<action>in-progress-tasks</action>
+			</in-progress-tasks>
+			<failed-tasks>
+				<label>Failed Tasks</label>
+				<controller>batch</controller>
+				<action>failed-tasks</action>
+			</failed-tasks>
+			<setup>
+				<label>Setup</label>
+				<controller>batch</controller>
+				<action>setup</action>
+			</setup>
+			<entry-lifecycle>
+				<label>Entry Lifecycle</label>
+				<controller>batch</controller>
+				<action>entry-lifecycle</action>
+			</entry-lifecycle>
+			<entry-investigation>
+				<label>Entry Investigation</label>
+				<controller>batch</controller>
+				<action>entry-investigation</action>
+			</entry-investigation>
+		</pages>
+	</batch-proccess-control>
+	<developer>
+		<label>Developer</label>
+		<controller>index</controller>
+		<action>dynamic_action</action>
+
+		<pages>
+			<testme>
+				<label>Test Console</label>
+				<controller>index</controller>
+				<action>testme</action>
+			</testme>
+			<testme-doc>
+				<label>API Documentation</label>
+				<controller>index</controller>
+				<action>testme-doc</action>
+			</testme-doc>
+			<apc>
+				<label>APC</label>
+				<controller>index</controller>
+				<action>apc</action>
+			</apc>
+			<client-libs>
+				<label>API Client Libraries</label>
+				<controller>index</controller>
+				<action>client-libs</action>
+			</client-libs>
+			<xsd-doc>
+				<label>XML Schema</label>
+				<controller>index</controller>
+				<action>xsd-doc</action>
+			</xsd-doc>
+		</pages>
+	</developer>
+	<monitoring>
+		<label>Monitoring</label>
+		<controller>index</controller>
+		<action>monit</action>
+	</monitoring>
+</configdata>

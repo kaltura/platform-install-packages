@@ -37,6 +37,8 @@ if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
 	exit 3
 fi
 . $KALTURA_FUNCTIONS_RC
+trap 'my_trap_handler ${LINENO} ${$?}' ERR
+send_install_becon `basename $0` $ZONE install_start 
 
 MYSQL_HOST=$1
 MYSQL_SUPER_USER=$2
@@ -65,6 +67,7 @@ fi
 if ! check_mysql_settings $MYSQL_SUPER_USER $MYSQL_SUPER_USER_PASSWD $MYSQL_HOST $MYSQL_PORT ;then
 	exit 7
 fi
+trap - ERR
 if [ -z "$POPULATE_ONLY" ];then
 	# check whether the 'kaltura' already exists:
 	echo "use kaltura" | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT $KALTURA_DB 2> /dev/null
@@ -78,6 +81,7 @@ Did you mean to perform an upgrade? if so, run with:
 EOF
 		exit 5
 	fi 
+trap 'my_trap_handler ${LINENO} ${$?}' ERR
 
 	# this is the DB creation part, we want to exit if something fails here:
 	set -e
@@ -115,6 +119,7 @@ fi
 
 echo "Cleaning cache.."
 rm -rf $APP_DIR/cache/*
+sed -i "s@?a=12@@g" $APP_DIR/deployment/base/scripts/init_content/ui_conf/*
 echo "Populating DB with data.. please wait.."
 echo "Output for $APP_DIR/deployment/base/scripts/installPlugins.php being logged into $LOG_DIR/installPlugins.log"
 php $APP_DIR/deployment/base/scripts/installPlugins.php >> $LOG_DIR/installPlugins.log  2>&1
@@ -133,9 +138,9 @@ fi
 KMC_VERSION=`grep "^kmc_version" /opt/kaltura/app/configurations/base.ini|awk -F "=" '{print $2}'|sed 's@\s*@@g'`
 echo "Generating UI confs.."
 php $APP_DIR/deployment/uiconf/deploy_v2.php --ini=$WEB_DIR/flash/kmc/$KMC_VERSION/config.ini >> $LOG_DIR/deploy_v2.log  2>&1
-#echo "update kaltura.ui_conf set swf_url='/flash/kdp3/v3.9.3/kdp3.swf' where swf_url like '/flash/kdp3/v%/kdp3.swf';"  | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT
-#echo "update kaltura.ui_conf set html5_url='/html5/html5lib/v2.1.1/mwEmbedLoader.php' where html5_url like '/html5/html5lib/v%/mwEmbedLoader.php';"  | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT
-
+for i in $APP_DIR/deployment/updates/scripts/patches/*.sh;do
+	$i
+done
 find  $WEB_DIR/content/generatedUiConf -type d -exec chmod 775 {} \;
 
 set +e
@@ -147,3 +152,8 @@ rm -f $APP_DIR/log/kaltura-*.log
 # @DWH_DIR@/setup/dwh_setup.sh
 
 
+if [ "$DB1_HOST" = `hostname` -o "$DB1_HOST" = '127.0.0.1' -o "$DB1_HOST" = 'localhost' ];then
+	ln -sf $BASE_DIR/app/configurations/monit/monit.avail/mysqld.rc $BASE_DIR/app/configurations/monit/monit.d/enabled.mysqld.rc
+	/etc/init.d/kaltura-monit restart
+fi
+send_install_becon `basename $0` $ZONE install_success 

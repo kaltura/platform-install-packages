@@ -15,7 +15,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 9.9.0
-Release: 42 
+Release: 49
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -32,6 +32,17 @@ Source9: plugins.template.ini
 Source10: entry_and_uiconf_templates.tar.gz
 # fixes https://github.com/kaltura/platform-install-packages/issues/37
 Source11: clear_cache.sh
+# monit templates
+Source12: mysqld.template.rc
+Source13: sphinx.template.rc 
+Source14: httpd.template.rc 
+Source15: batch.template.rc 
+Source16: memcached.template.rc
+Source17: navigation.xml 
+Source18: monit.phtml 
+Source19: IndexController.php
+Source20: sphinx.populate.template.rc
+
 #Source10: 01.UserRole.99.template.xml
 #Source9: 01.conversionProfile.99.template.xml
 URL: https://github.com/kaltura/server/tree/IX-%{version}
@@ -78,7 +89,7 @@ mkdir -p $RPM_BUILD_ROOT%{prefix}/web/tmp/thumb
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/tmp/xml
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/dropfolders/monitor
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/control
-mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content/webcam 
+#mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content/webcam 
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content/cacheswf
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content/uploads
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content/entry
@@ -100,8 +111,6 @@ for i in admin_console alpha api_v3 batch configurations deployment generator in
 done
 find  $RPM_BUILD_ROOT%{prefix}/app -name "*.sh" -type f -exec chmod +x {} \;
 
-mkdir -p $RPM_BUILD_ROOT%{prefix}/app/configurations/monit.d
-mv $RPM_BUILD_ROOT/%{prefix}/app/configurations/monit/monit.d $RPM_BUILD_ROOT/%{prefix}/app/configurations/monit.avail
 
 sed -i "s@\(^kmc_version\)\s*=.*@\1=%{kmc_version}@g" $RPM_BUILD_ROOT%{prefix}/app/configurations/base.ini
 sed -i "s@\(^clipapp_version\)\s*=.*@\1=%{clipapp_version}@g" $RPM_BUILD_ROOT%{prefix}/app/configurations/base.ini
@@ -123,6 +132,19 @@ cp %{SOURCE7} $RPM_BUILD_ROOT%{prefix}/app/configurations/cron/dwh.template
 cp %{SOURCE9} $RPM_BUILD_ROOT%{prefix}/app/configurations/plugins.template.ini
 #cp %{SOURCE10} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_content/01.UserRole.99.template.xml
 cp %{SOURCE11} $RPM_BUILD_ROOT%{prefix}/app/alpha/crond/kaltura/clear_cache.sh
+mkdir -p $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail
+cp %{SOURCE12} $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/
+cp %{SOURCE13} $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/
+cp %{SOURCE20} $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/
+cp %{SOURCE14} $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/
+cp %{SOURCE15} $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/
+cp %{SOURCE16} $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/
+
+# David Bezemer's Admin console and monit patches:
+cp %{SOURCE17} $RPM_BUILD_ROOT%{prefix}/app/admin_console/configs/navigation.xml
+cp %{SOURCE18} $RPM_BUILD_ROOT%{prefix}/app/admin_console/views/scripts/index/monit.phtml
+cp %{SOURCE19} $RPM_BUILD_ROOT%{prefix}/app/admin_console/controllers/IndexController.php
+
 # we bring another in kaltura-batch
 rm $RPM_BUILD_ROOT%{prefix}/app/configurations/batch/batch.ini.template
 
@@ -136,7 +158,8 @@ tar zxf %{SOURCE10} -C $RPM_BUILD_ROOT%{prefix}/web/content
 cat > $RPM_BUILD_ROOT%{_sysconfdir}/profile.d/kaltura_base.sh << EOF
 PATH=\$PATH:%{prefix}/bin
 export PATH
-alias kaltlog='grep --color "ERR:\|PHP\|trace\|CRIT\|\[error\]" /opt/kaltura/log/*.log /opt/kaltura/log/batch/*.log'
+alias allkaltlog='grep --color "ERR:\|PHP\|trace\|CRIT\|\[error\]" /opt/kaltura/log/*.log /opt/kaltura/log/batch/*.log'
+alias kaltlog='tail -f /opt/kaltura/log/*.log /opt/kaltura/log/batch/*.log | grep -A 1 -B 1 --color "ERR:\|PHP\|trace\|CRIT\|\[error\]"'
 EOF
 
 %{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/ld.so.conf.d
@@ -176,14 +199,20 @@ usermod -g %{kaltura_group} %{kaltura_user} 2>/dev/null || true
 
 ln -sf %{prefix}/app/configurations/system.ini /etc/kaltura.d/system.ini
 ln -sf %{prefix}/app/api_v3/web %{prefix}/app/alpha/web/api_v3
-chown apache.kaltura -R /opt/kaltura/web/content/entry /opt/kaltura/web/content/uploads/ /opt/kaltura/web/content/webcam/ /opt/kaltura/web/tmp/
-find /opt/kaltura/web/content/entry /opt/kaltura/web/content/uploads/ /opt/kaltura/web/content/webcam/ /opt/kaltura/web/tmp/ -type d -exec chmod 775 {} \;
+chown apache.kaltura -R /opt/kaltura/web/content/entry /opt/kaltura/web/content/uploads/  /opt/kaltura/web/tmp/
+#/opt/kaltura/web/content/webcam/
+find /opt/kaltura/web/content/entry /opt/kaltura/web/content/uploads/  /opt/kaltura/web/tmp/ -type d -exec chmod 775 {} \;
 /etc/init.d/ntpd start
 if [ "$1" = 2 ];then
 	if [ -r "%{prefix}/app/configurations/local.ini" -a -r "%{prefix}/app/configurations/base.ini" ];then
 		echo "Regenarating client libs.. this will take up to 2 minutes to complete."
 		rm -rf %{prefix}/app/cache/*
 		php %{prefix}/app/generator/generate.php
+		find %{prefix}/app/cache/ %{prefix}/log -type d -exec chmod 775 {} \;
+		find %{prefix}/app/cache/ %{prefix}/log -type f -exec chmod 664 {} \;
+		chown -R %{kaltura_user}.%{apache_user} %{prefix}/app/cache/ %{prefix}/log
+		chmod 775 %{prefix}/web/content
+
 		if [ -x %{_sysconfdir}/init.d/httpd ];then
 			%{_sysconfdir}/init.d/httpd restart
 		fi
@@ -234,7 +263,7 @@ fi
 %dir %{prefix}/web/control
 %dir %{prefix}/web/dropfolders
 %defattr(-, root,root, 0755)
-%dir %{prefix}/app/configurations/monit.d
+%dir %{prefix}/app/configurations/monit/monit.d
 %dir %{prefix}/bin
 %dir %{prefix}/lib
 %dir %{prefix}/include
@@ -242,6 +271,24 @@ fi
 
 
 %changelog
+* Sat Feb 15 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-48
+- fixed typo sphinx.populate.template.rc
+
+* Sat Feb 15 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-47
+- placeholder @ADMIN_CONSOLE_ADMIN_MAIL@ for mail in monit.conf.
+
+* Sat Feb 15 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-46
+- monit config moved to %%prefix/app/configurations/monit
+
+* Sat Feb 15 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-45
+- Integrated David Bezemer's Admin Console changes for monit.
+
+* Sat Feb 15 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-44
+- Added patched monit temlpates.
+
+* Sat Feb 15 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-43
+- Added alias for allkaltlog and changed kaltlog. Suggestion by David Bezemer.
+
 * Thu Feb 13 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-42
 - Fix for https://github.com/kaltura/platform-install-packages/issues/37
 

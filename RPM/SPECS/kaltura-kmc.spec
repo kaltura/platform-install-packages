@@ -2,7 +2,7 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmc	
 Version: v5.37.10
-Release: 16
+Release: 18
 Summary: Kaltura Management Console
 
 Group: System Management	
@@ -37,6 +37,7 @@ unzip %{SOURCE2}
 %build
 %post
 ls -sf %{prefix}/web/flash/kmc/%{version}/uiconf/kaltura/kmc/appstudio %{prefix}/web/content/uiconf
+ln -sf %{prefix}/web/flash/kmc/%{version}/uiconf/kaltura/kmc %{prefix}/web/content/uiconf/kaltura/kmc
 if [ "$1" = 2 -a -r "%{prefox}/app/configurations/local.ini" -a -r "%{prefox}/app/configurations/system.ini" ];then
 	php %{prefix}/app/deployment/uiconf/deploy_v2.php --ini=%{prefix}/web/flash/kmc/%{version}/config.ini >> %{prefix}/log/deploy_v2.log  2>&1
 fi
@@ -51,9 +52,9 @@ cp -r %{_builddir}/%{name}-%{version} $RPM_BUILD_ROOT/%{prefix}/web/flash/kmc/%{
 cp %{SOURCE1} $RPM_BUILD_ROOT/%{prefix}/web/flash/kmc/%{version}/config.ini
 
 %preun
-if [ "$1" = 0 ] ; then
-	rm -f %{prefix}/web/content/uiconf/appstudio
-fi
+#if [ "$1" = 0 ] ; then
+#	rm -f %{prefix}/web/content/uiconf/appstudio
+#fi
 
 %clean
 rm -rf %{buildroot}
@@ -67,6 +68,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Fri Feb 14 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v3.37.10-17
+- Yet another symlink needed in %%post
+
 * Wed Feb 12 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v3.37.10-16
 - Fix preun error.
 

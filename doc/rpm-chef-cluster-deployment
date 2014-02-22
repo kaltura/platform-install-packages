@@ -1,0 +1,37 @@
+Installing the Chef server
+==========================
+
+0. Request this page: http://www.getchef.com/chef/install/
+1. Select the 'Chef Server' tab
+2. Select your distribution, version and arch and download
+
+Download the RPM or deb package depending on your distribution.
+The post install will provide instructions as to what else needs to be done to set the instance up.
+
+3. Obtain chef-repo from https://github.com/kaltura/platform-install-packages.git
+4. Upload the Kaltura recipes to your Chef server using:
+# knife cookbook upload kaltura
+We also recommend you use the ready made recipes for MySQL and NFS which can be taken from here:
+http://community.opscode.com/cookbooks/mysql
+http://community.opscode.com/cookbooks/nfs
+
+Bootstrapping clients
+=====================
+# curl -L https://www.opscode.com/chef/install.sh|sh
+# mkdir -p /etc/chef
+# knife configure client /etc/chef
+copy /etc/chef/validation.pem from your Chef server onto /etc/chef
+Create a barebone /etc/chef/client.rb on the client:
+#/etc/chef/client.rb on Node 
+log_level :info
+log_location STDOUT
+chef_server_url 'http://yourchefserver.com:4000'
+validation_client_name 'chef-validator'
+# chef-client -i 3600 
+To test it, on the server, run: 
+# knife node list 
+This should list your newly added client.
+
+Repeat this action for each node in your Kaltura cluster.
+
+Log in to Chef's web I/F with https://server/

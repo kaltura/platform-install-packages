@@ -1,9 +1,9 @@
-%define baseurl 54.211.235.142 
+%define baseurl installrepo.kaltura.org
 %define path nightly/RPMS
 Summary: Kaltura Server release file and package configuration
 Name: kaltura-release
 Version: 9.9.0
-Release: 2 
+Release: 3 
 License: AGPLv3+
 Group: Server/Platform 
 URL: http://kaltura.org
