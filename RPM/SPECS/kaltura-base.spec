@@ -1,7 +1,7 @@
 # this sucks but base.ini needs to know the KMC version and it needs to be known cross cluster because, it is needed to generate the UI confs, which is done by the db-config postinst script which can run from every cluster node.
-%define kmc_version v5.37.11
+%define kmc_version v5.37.10
 %define clipapp_version v1.0.7
-%define html5_version v2.1.1
+%define html5_version v2.3
 %define kdp3_wrapper_version v37.0
 %define kaltura_user	kaltura
 %define kaltura_group	kaltura
@@ -15,7 +15,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 9.11.0
-Release: 1
+Release: 3 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -279,6 +279,9 @@ fi
 
 
 %changelog
+* Sun Feb 23 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.11.0-2
+- Added mechanism to handle SQL alters.
+
 * Sun Feb 23 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.11.0-1
 - Fixes:
   SUP-1389 - Flipped thumbnail for video Ready for Deployment
