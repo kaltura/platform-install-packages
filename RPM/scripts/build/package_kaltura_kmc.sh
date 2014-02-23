@@ -33,4 +33,4 @@ cd $SOURCE_PACKAGING_DIR
 find $KMC_RPM_NAME-$KMC_VERSION -type f -exec chmod -x {} \;
 tar jcf $RPM_SOURCES_DIR/$KMC_RPM_NAME-$KMC_VERSION.tar.bz2 $KMC_RPM_NAME-$KMC_VERSION
 echo "Packaged into $RPM_SOURCES_DIR/$KMC_RPM_NAME-$KMC_VERSION.tar.bz2"
-#rpmbuild -ba $RPM_SPECS_DIR/$KMC_RPM_NAME.spec
+rpmbuild -ba $RPM_SPECS_DIR/$KMC_RPM_NAME.spec

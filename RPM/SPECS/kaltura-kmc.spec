@@ -1,8 +1,8 @@
 %define kmc_login_version v1.2.3
 %define prefix /opt/kaltura
 Name:	kaltura-kmc	
-Version: v5.37.10
-Release: 18
+Version: v5.37.11
+Release: 2 
 Summary: Kaltura Management Console
 
 Group: System Management	
@@ -38,7 +38,7 @@ unzip %{SOURCE2}
 %post
 ls -sf %{prefix}/web/flash/kmc/%{version}/uiconf/kaltura/kmc/appstudio %{prefix}/web/content/uiconf
 ln -sf %{prefix}/web/flash/kmc/%{version}/uiconf/kaltura/kmc %{prefix}/web/content/uiconf/kaltura/kmc
-if [ "$1" = 2 -a -r "%{prefox}/app/configurations/local.ini" -a -r "%{prefox}/app/configurations/system.ini" ];then
+if [ -r "%{prefox}/app/configurations/local.ini" -a -r "%{prefox}/app/configurations/system.ini" ];then
 	php %{prefix}/app/deployment/uiconf/deploy_v2.php --ini=%{prefix}/web/flash/kmc/%{version}/config.ini >> %{prefix}/log/deploy_v2.log  2>&1
 fi
 
@@ -68,6 +68,12 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sun Feb 23 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.11-1
+- Upgrade to 5.37.11, fixes:
+  SUP-1491 - Cannot configure content distribution role Ready for Deployment
+  SUP-1265 - SEO values not populating Ready for Deployment
+  SUP-1382 - KMC Return 2 Source flavors Ready for Deployment 
+
 * Fri Feb 14 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v3.37.10-17
 - Yet another symlink needed in %%post
 

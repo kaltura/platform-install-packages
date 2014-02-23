@@ -2,8 +2,9 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.1.1
-Release: 6 
+Version: v2.3
+Release: 1
+Epoch:0 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/mwEmbed/tarball/%{name}-%{version}.tar.gz 
@@ -50,6 +51,13 @@ rm -rf %{buildroot}
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Sun Feb 23 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.3-1
+  Fixes:
+  - Studio V2 support
+  - supporting offline download kms app
+  - SUP-1365 pass vpaid params to flash as vpaidAdParameter flashvar with encoded value
+  - SUP-1461 captions does not work in IE8
+
 * Sun Feb 9 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.1.1-6
 - Fixed https://github.com/kaltura/platform-install-packages/issues/24
 

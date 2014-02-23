@@ -1,5 +1,5 @@
 # this sucks but base.ini needs to know the KMC version and it needs to be known cross cluster because, it is needed to generate the UI confs, which is done by the db-config postinst script which can run from every cluster node.
-%define kmc_version v5.37.10
+%define kmc_version v5.37.11
 %define clipapp_version v1.0.7
 %define html5_version v2.1.1
 %define kdp3_wrapper_version v37.0
@@ -14,8 +14,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 9.9.0
-Release: 49
+Version: 9.11.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -42,6 +42,7 @@ Source17: navigation.xml
 Source18: monit.phtml 
 Source19: IndexController.php
 Source20: sphinx.populate.template.rc
+Source21: sql_updates
 
 #Source10: 01.UserRole.99.template.xml
 #Source9: 01.conversionProfile.99.template.xml
@@ -144,6 +145,7 @@ cp %{SOURCE16} $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/
 cp %{SOURCE17} $RPM_BUILD_ROOT%{prefix}/app/admin_console/configs/navigation.xml
 cp %{SOURCE18} $RPM_BUILD_ROOT%{prefix}/app/admin_console/views/scripts/index/monit.phtml
 cp %{SOURCE19} $RPM_BUILD_ROOT%{prefix}/app/admin_console/controllers/IndexController.php
+cp %{SOURCE21} $RPM_BUILD_ROOT%{prefix}/app/deployment/sql_updates
 
 # we bring another in kaltura-batch
 rm $RPM_BUILD_ROOT%{prefix}/app/configurations/batch/batch.ini.template
@@ -217,6 +219,12 @@ if [ "$1" = 2 ];then
 			%{_sysconfdir}/init.d/httpd restart
 		fi
 	fi
+	if [ -r "%{prefix}/app/configurations/system.ini" ];then
+		for SQL in %{prefix}/app/deployment/sql_updates;do
+			mysql kaltura -h $DB1_HOST -u $SUPER_USER -P $DB1_PORT -p$SUPER_USER_PASSWD < $SQL
+		done
+		mv %{prefix}/app/deployment/sql_updates %{prefix}/app/deployment/sql_updates.done
+	fi
 fi
 
 
@@ -271,6 +279,13 @@ fi
 
 
 %changelog
+* Sun Feb 23 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.11.0-1
+- Fixes:
+  SUP-1389 - Flipped thumbnail for video Ready for Deployment
+  SUP-1416 - Removing the CC from the Email notifications Target Tamplates Ready for Deployment
+  SUP-1382 - KMC Return 2 Source flavors
+  PLAT-925 - Bug for PLAT-722 (Moderation with Live): Basic functionality not working consistently Closed
+
 * Sat Feb 15 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-48
 - fixed typo sphinx.populate.template.rc
 

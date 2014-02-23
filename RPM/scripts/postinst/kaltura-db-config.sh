@@ -154,6 +154,7 @@ rm -f $APP_DIR/log/kaltura-*.log
 
 if [ "$DB1_HOST" = `hostname` -o "$DB1_HOST" = '127.0.0.1' -o "$DB1_HOST" = 'localhost' ];then
 	ln -sf $BASE_DIR/app/configurations/monit/monit.avail/mysqld.rc $BASE_DIR/app/configurations/monit/monit.d/enabled.mysqld.rc
+	/etc/init.d/kaltura-monit stop >> /dev/null 2>&1
 	/etc/init.d/kaltura-monit restart
 fi
 send_install_becon `basename $0` $ZONE install_success 

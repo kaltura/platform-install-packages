@@ -3,7 +3,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.6
-Release: 1
+Release: 3 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -63,6 +63,10 @@ fi
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Sun Feb 23 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.6-2
+- monit's init show failure when attempting to stop a monit that isn't running.
+  Direct to /dev/null in that case.
+
 * Sat Feb 22 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.6-1
 - Post becon tests.
 

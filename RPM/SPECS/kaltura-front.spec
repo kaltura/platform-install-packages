@@ -1,4 +1,4 @@
-%define kmc_version v5.37.10
+%define kmc_version v5.37.11
 %define prefix /opt/kaltura
 %define kaltura_user	kaltura
 %define kaltura_group	kaltura
@@ -6,8 +6,8 @@
 %define apache_group	apache
 Summary: Kaltura Open Source Video Platform - frontend server 
 Name: kaltura-front
-Version: 9.9.0
-Release: 3
+Version: 9.11.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 #Source0: kaltura.ssl.conf.template 
@@ -104,6 +104,9 @@ rm -rf %{buildroot}
 %config %{_sysconfdir}/php.d/zz-%{name}.ini
 
 %changelog
+* Sun Feb 23 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.11.0-1
+- New tag.
+
 * Tue Feb 18 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-3
 - monit is handled in postinst scripts now.
 

@@ -2,8 +2,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5-studio
-Version: v0.3
-Release: 3 
+Version: v0.9
+Release: 1 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.bz2 
@@ -43,6 +43,7 @@ rm -rf %{buildroot}
 
 %post
 
+
 %postun
 
 %files
@@ -50,6 +51,22 @@ rm -rf %{buildroot}
 %{prefix}/apps/studio/%{version}
 
 %changelog
+* Sun Feb 23 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v0.9-1
+- Fixes:  
+    FEC-1008 Unable to Update player in IE9
+    FEC-1003 video is not loading on ie9
+    FEC-835 Studio v2: Unable to Create or Edit a player on IE8
+    FEC-1010 Vast is not shown on IE19 in Edit Page (Happens now in all features, not only in Vast)
+    FEC-1004 Features form is not expanding on ie10 while a feature is disabled
+    FEC-1001 Scroll bar is not shown on Look&feel while expanding all features (All browsers)
+    FEC-968 Studio v2: List of players is not refreshed after going back to list from duplicated player
+    FEC-898 issues with help descriptions (tooltips) in analytics tab
+    FEC-965 Studio v2: Number of players in players list is not kept (returns to default) after closing the player edit page
+    FEC-922 Vast plugin doesn't have help icon and description
+    FEC-975 cell hight doesn't match fonts size on ie10
+    FEC-988 Apply changes button is green even while you load at first time the player
+    FEC-964 line in all dropboxes is asymmetric
+
 * Thu Feb 13 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v0.3-3
 - Fixes the other points in https://github.com/kaltura/platform-install-packages/issues/30.
 

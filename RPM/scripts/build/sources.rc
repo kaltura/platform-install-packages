@@ -47,7 +47,7 @@ PENTAHO_RPM_PACKAGE_NAME=kaltura-pentaho
 PENTAHO_URI="http://sourceforge.net/projects/pentaho/files/Data%20Integration/$PENTAHO_VERSION-stable/pdi-ce-$PENTAHO_VERSION-stable.tar.gz"
 
 # Kaltura Core build vars:
-KALTURA_CORE_VERSION=9.9.0
+KALTURA_CORE_VERSION=9.11.0
 KALTURA_URI="https://github.com/kaltura/server/archive/IX-$KALTURA_CORE_VERSION.zip"
 KALTURA_TEMPLATES_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalsource/on-premise/trunk/packaging/templates"
 
@@ -57,7 +57,7 @@ KALTURA_MEDIASERVER_URI="https://github.com/kaltura/media-server/archive/$KALTUR
 KALTURA_MEDIASERVER_RPM_NAME=kaltura-media-server
 
 # Kaltura KMC:
-KMC_VERSION=v5.37.10
+KMC_VERSION=v5.37.11
 KMC_LOGIN_VERSION=v1.2.3
 KMC_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/flash/kmc/$KMC_VERSION"
 KMC_LOGIN_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/flash/kmc/login/$KMC_LOGIN_VERSION"
@@ -161,7 +161,7 @@ FLEX_WRAPPER_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/flash/
 FLEX_WRAPPER_RPM_NAME="kaltura-flexwrapper"
 
 # HTML5 lib
-HTML5LIB_VERSION="v2.1.1"
+HTML5LIB_VERSION="v2.3"
 HTML5LIB_URI="https://github.com/kaltura/mwEmbed/tarball/$HTML5LIB_VERSION"
 HTML5LIB_RPM_NAME="kaltura-html5lib"
 
@@ -172,7 +172,7 @@ DWH_RPM_NAME="kaltura-dwh"
 
 
 # App Studio HTML5:
-HTML5_APP_STUDIO_VERSION="v0.3"
+HTML5_APP_STUDIO_VERSION="v0.9"
 HTML5_APP_STUDIO_ARCHIVE_NAME=studio_$HTML5_APP_STUDIO_VERSION.zip
 HTML5_APP_STUDIO_URI=https://github.com/kaltura/player-studio/releases/download/$HTML5_APP_STUDIO_VERSION/$HTML5_APP_STUDIO_ARCHIVE_NAME
 HTML5_APP_STUDIO_RPM_NAME=kaltura-html5-studio
