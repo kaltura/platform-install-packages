@@ -29,7 +29,7 @@ verify_user_input()
 		OUT="Missing the following params in $ANSFILE
 		$VALS
 		"
-		echo $OUT
+		echo -en $OUT
        		send_install_becon kaltura-base $ZONE "install_fail: $OUT"
 		exit $RC 
 	fi
@@ -260,7 +260,7 @@ BASE_DIR=/opt/kaltura
 CONF_FILES=`find $KALT_CONF_DIR  -type f -name "*template*"`
 CONF_FILES="$CONF_FILES $BASE_DIR/app/batch/batches/Mailer/emails_en.template.ini $BASE_DIR/app/tests/monitoring/config.template.ini "
 if rpm -q kaltura-html5-studio > /dev/null;then
-	CONF_FILES="$CONF_FILES $BASE_DIR/apps/studio/v0.3/studio.template.ini"
+	CONF_FILES="$CONF_FILES $BASE_DIR/apps/studio/`rpm -qa kaltura-html5-studio --queryformat %{version}`/studio.template.ini"
 fi 
 CONF_FILES="$CONF_FILES `find /opt/kaltura/app/plugins/monitor/nagios/config -type f -name "*template*"`"
  
