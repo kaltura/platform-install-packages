@@ -33,6 +33,7 @@ end
 bash "setup batchMgr daemon" do
      user "root"
      code <<-EOH
+	#{node[:kaltura][:BASE_DIR]}/bin/kaltura-base-config.sh /root/kaltura.ans
 	#{node[:kaltura][:BASE_DIR]}/bin/kaltura-batch-config.sh /root/kaltura.ans
      EOH
 end

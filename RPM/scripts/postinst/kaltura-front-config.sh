@@ -262,8 +262,8 @@ ln -sf $BASE_DIR/app/configurations/monit/monit.avail/memcached.rc $BASE_DIR/app
         if [ $? -eq 0 ];then
                 if [ -r $BASE_DIR/apps/studio/`rpm -qa kaltura-html5-studio --queryformat %{version}`/studio.ini ];then
                         php $BASE_DIR/app/deployment/uiconf/deploy_v2.php --ini=$BASE_DIR/apps/studio/`rpm -qa kaltura-html5-studio --queryformat %{version}`/studio.ini >> /dev/null 2>&1
-                        php $BASE_DIR/app/deployment/uiconf/deploy_v2.php --ini=$BASE_DIR/web/flash/kmc/`rpm -qa kaltura-kmc --queryformat %{version}`/config.ini >> /dev/null 2>&1
                 fi
+                php $BASE_DIR/app/deployment/uiconf/deploy_v2.php --ini=$BASE_DIR/web/flash/kmc/`rpm -qa kaltura-kmc --queryformat %{version}`/config.ini >> /dev/null 2>&1
         fi
         trap 'my_trap_handler ${LINENO} ${$?}' ERR
 

@@ -15,7 +15,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 9.11.0
-Release: 5 
+Release: 8 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -43,7 +43,6 @@ Source18: monit.phtml
 Source19: IndexController.php
 Source20: sphinx.populate.template.rc
 Source21: sql_updates
-Source22:consent_msgs
 
 #Source10: 01.UserRole.99.template.xml
 #Source9: 01.conversionProfile.99.template.xml
@@ -147,7 +146,6 @@ cp %{SOURCE17} $RPM_BUILD_ROOT%{prefix}/app/admin_console/configs/navigation.xml
 cp %{SOURCE18} $RPM_BUILD_ROOT%{prefix}/app/admin_console/views/scripts/index/monit.phtml
 cp %{SOURCE19} $RPM_BUILD_ROOT%{prefix}/app/admin_console/controllers/IndexController.php
 cp %{SOURCE21} $RPM_BUILD_ROOT%{prefix}/app/deployment/sql_updates
-cp %{SOURCE22} $RPM_BUILD_ROOT%{prefix}/app/configurations/consent_msgs
 
 # we bring another in kaltura-batch
 rm $RPM_BUILD_ROOT%{prefix}/app/configurations/batch/batch.ini.template
@@ -221,12 +219,6 @@ if [ "$1" = 2 ];then
 			%{_sysconfdir}/init.d/httpd restart
 		fi
 	fi
-	if [ -r "%{prefix}/app/configurations/system.ini" ];then
-		for SQL in %{prefix}/app/deployment/sql_updates;do
-			mysql kaltura -h $DB1_HOST -u $SUPER_USER -P $DB1_PORT -p$SUPER_USER_PASSWD < $SQL
-		done
-		mv %{prefix}/app/deployment/sql_updates %{prefix}/app/deployment/sql_updates.done
-	fi
 fi
 
 
@@ -281,6 +273,9 @@ fi
 
 
 %changelog
+* Mon Feb 24 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.11.0-6
+- Post install mail templt: added the debug aliases to Tip #4 discussing troubleshooting procs.
+
 * Sun Feb 23 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.11.0-4
 - Added tracking concent messages file.
 

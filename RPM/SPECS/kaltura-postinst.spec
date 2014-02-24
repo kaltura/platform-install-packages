@@ -1,13 +1,14 @@
-%define prefix /opt/kaltura
+%define prefix /opt/kaltura 
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.6
-Release: 7 
+Release: 10
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
 Source1: post_inst_mail.template
+Source2:consent_msgs
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
@@ -35,6 +36,7 @@ mkdir -p $RPM_BUILD_ROOT/%{prefix}/app/configurations
 chmod +x *.sh 
 mv  *.sh *.rc $RPM_BUILD_ROOT/%{prefix}/bin
 cp %{SOURCE1} $RPM_BUILD_ROOT/%{prefix}/app/configurations
+cp %{SOURCE2} $RPM_BUILD_ROOT%{prefix}/app/configurations/consent_msgs
 mkdir -p $RPM_BUILD_ROOT/%{prefix}/app/deployment/updates/scripts
 cp -r patches $RPM_BUILD_ROOT/%{prefix}/app/deployment/updates/scripts
 sed -i 's#@APP_DIR@#%{prefix}/app#g' $RPM_BUILD_ROOT/%{prefix}/bin/*rc
@@ -43,15 +45,14 @@ sed -i 's#@APP_DIR@#%{prefix}/app#g' $RPM_BUILD_ROOT/%{prefix}/bin/*rc
 rm -rf %{buildroot}
 
 %post
-if [ -r /etc/kaltura.d/system.ini ];then
-	. /etc/kaltura.d/system.ini
-	# check whether the 'kaltura' already exists:
-	echo "use kaltura" | mysql -h$DB1_HOST -u$DB1_USER -p$DB1_PASS -P$DB1_PORT $DB1_NAME 2> /dev/null
-	if [ $? -eq 0 ];then
-		for i in $APP_DIR/deployment/updates/scripts/patches/*.sh;do
-			echo "now running $i.."
-			$i  
-		done
+if [ -r "%{prefix}/app/configurations/system.ini" -a -r %{prefix}/app/deployment/sql_updates ];then
+	. %{prefix}/app/configurations/system.ini
+	for SQL in `cat %{prefix}/app/deployment/sql_updates`;do
+		mysql kaltura -h $DB1_HOST -u $SUPER_USER -P $DB1_PORT -p$SUPER_USER_PASSWD < $SQL
+		RC=$?
+	done
+	if [ $RC -eq 0 ];then
+		mv %{prefix}/app/deployment/sql_updates %{prefix}/app/deployment/sql_updates.done
 	fi
 fi
 %preun
@@ -63,6 +64,9 @@ fi
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Mon Feb 24 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.6-8
+- If this is an upgrade and DB connectivity works - generate UI confs.
+
 * Sun Feb 23 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.6-2
 - monit's init show failure when attempting to stop a monit that isn't running.
   Direct to /dev/null in that case.
