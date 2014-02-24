@@ -1,5 +1,5 @@
 # this sucks but base.ini needs to know the KMC version and it needs to be known cross cluster because, it is needed to generate the UI confs, which is done by the db-config postinst script which can run from every cluster node.
-%define kmc_version v5.37.10
+%define kmc_version v5.37.11
 %define clipapp_version v1.0.7
 %define html5_version v2.3
 %define kdp3_wrapper_version v37.0
@@ -15,7 +15,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 9.11.0
-Release: 3 
+Release: 5 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -43,6 +43,7 @@ Source18: monit.phtml
 Source19: IndexController.php
 Source20: sphinx.populate.template.rc
 Source21: sql_updates
+Source22:consent_msgs
 
 #Source10: 01.UserRole.99.template.xml
 #Source9: 01.conversionProfile.99.template.xml
@@ -146,6 +147,7 @@ cp %{SOURCE17} $RPM_BUILD_ROOT%{prefix}/app/admin_console/configs/navigation.xml
 cp %{SOURCE18} $RPM_BUILD_ROOT%{prefix}/app/admin_console/views/scripts/index/monit.phtml
 cp %{SOURCE19} $RPM_BUILD_ROOT%{prefix}/app/admin_console/controllers/IndexController.php
 cp %{SOURCE21} $RPM_BUILD_ROOT%{prefix}/app/deployment/sql_updates
+cp %{SOURCE22} $RPM_BUILD_ROOT%{prefix}/app/configurations/consent_msgs
 
 # we bring another in kaltura-batch
 rm $RPM_BUILD_ROOT%{prefix}/app/configurations/batch/batch.ini.template
@@ -279,6 +281,9 @@ fi
 
 
 %changelog
+* Sun Feb 23 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.11.0-4
+- Added tracking concent messages file.
+
 * Sun Feb 23 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.11.0-2
 - Added mechanism to handle SQL alters.
 

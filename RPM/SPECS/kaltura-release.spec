@@ -3,7 +3,7 @@
 Summary: Kaltura Server release file and package configuration
 Name: kaltura-release
 Version: 9.11.0
-Release: 1 
+Release: 2 
 License: AGPLv3+
 Group: Server/Platform 
 URL: http://kaltura.org
@@ -25,12 +25,6 @@ GPG keys used to sign them.
 [Kaltura]
 name = Kaltura Server
 baseurl = http://%{baseurl}/%{path}/\$basearch/
-#gpgkey = file:///etc/pki/rpm-gpg/
-gpgcheck = 0
-
-[Kaltura-i686]
-name = Kaltura Server 32 bit
-baseurl = http://%{baseurl}/%{path}/\i686/
 #gpgkey = file:///etc/pki/rpm-gpg/
 gpgcheck = 0
 
@@ -65,6 +59,9 @@ exit 0
 #%{_sysconfdir}/pki/rpm-gpg/RPM-GPG-KEY-rpmforge-*
 
 %changelog
+* Sun Feb 23 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.11.0-2
+- dont need i686
+
 * Sun Feb 23 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.11.0-1
 - 9.11.0
 
