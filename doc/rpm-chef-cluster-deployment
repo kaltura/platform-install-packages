@@ -34,4 +34,41 @@ This should list your newly added client.
 
 Repeat this action for each node in your Kaltura cluster.
 
-Log in to Chef's web I/F with https://server/
+You should see your new nodes when running:
+[root@chef-server ~]# knife node list
+amall
+amall.kaltura.dev
+ambatch.kaltura.dev
+amfront.kaltura.dev
+amnfs
+
+Alternatively, log in to Chef's web I/F with https://server/
+You should see your added nodes under the "Nodes" tab as well as the "Clients" tab.
+
+
+Loading the NTP and MySQL recipes to your Chef server
+=====================================================
+Download NTP and MySQL recipes:
+http://community.opscode.com/cookbooks/ntp
+http://community.opscode.com/cookbooks/mysql
+
+These recipes have dependencies you will need as well. Please follow documentation on the above URLs.
+
+Loading the Kaltura recipes to your Chef server
+=================================================
+# git clone https://github.com/kaltura/platform-install-packages.git
+# cp -r sources/platform-install-packages/chef-repo/cookbooks/kaltura  /var/chef/cookbooks/kaltura/
+# knife cookbook upload --all
+To verify:
+# knife cookbook list
+You should see output along the lines of:
+[root@chef ~]# knife cookbook list
+build-essential   1.4.2
+kaltura           0.1.0
+line              0.5.1
+mysql             4.0.20
+nfs               0.5.0
+ntp               1.5.5
+openssl           1.1.0
+
+
