@@ -71,4 +71,20 @@ nfs               0.5.0
 ntp               1.5.5
 openssl           1.1.0
 
+Defining recipe run lists
+=========================
+Now that we have our cluster nodes registered, and our recipe uploaded to the Chef server, we need to assign a recipe[s] for each node type.
+The syntax for it is:
+# knife node run_list add $NODE_NAME $RECIPE
+
+So, for example:
+# knife node run_list add mynfs nfs::server
+# knife node run_list add my-mysql mysql::server 
+# knife node run_list add my-mysql mysql::_server_rhel 
+# knife node run_list add my-batch nfs 
+# knife node run_list add my-batch kaltura::batch 
+# knife node run_list add my-sphinx kaltura::sphinx
+# knife node run_list add my-sphinx nfs 
+
+
 
