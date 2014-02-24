@@ -42,7 +42,7 @@ ambatch.kaltura.dev
 amfront.kaltura.dev
 amnfs
 
-Alternatively, log in to Chef's web I/F with https://server/
+Alternatively, log in to Chef's web I/F with https://chef-server/
 You should see your added nodes under the "Nodes" tab as well as the "Clients" tab.
 
 
@@ -71,6 +71,13 @@ nfs               0.5.0
 ntp               1.5.5
 openssl           1.1.0
 
+Editing attributes.rb
+=========================
+The properties of your cluster should be set here:
+cookbooks/kaltura/attributes/default.rb
+When done editing, run:
+# knife cookbook upload kaltura
+
 Defining recipe run lists
 =========================
 Now that we have our cluster nodes registered, and our recipe uploaded to the Chef server, we need to assign a recipe[s] for each node type.
@@ -79,12 +86,45 @@ The syntax for it is:
 
 So, for example:
 # knife node run_list add mynfs nfs::server
-# knife node run_list add my-mysql mysql::server 
-# knife node run_list add my-mysql mysql::_server_rhel 
-# knife node run_list add my-batch nfs 
-# knife node run_list add my-batch kaltura::batch 
-# knife node run_list add my-sphinx kaltura::sphinx
-# knife node run_list add my-sphinx nfs 
+# knife node run_list add my-mysql-machine mysql::server 
+# knife node run_list add my-mysql-machine mysql::_server_rhel 
+# knife node run_list add my-batch-machine nfs 
+# knife node run_list add my-batch-machine kaltura::batch 
+# knife node run_list add my-sphinx-machine kaltura::sphinx
+# knife node run_list add my-sphinx-machine kaltura::db_config
+# knife node run_list add my-front-machine  nfs 
+# knife node run_list add my-front-machine  kaltura::batch 
+# knife node run_list add my-dwh-machine  kaltura::dwh 
+# knife node run_list add my-dwh-machine  kaltura::nfs
 
 
+Alternatively, log in to Chef's web I/F with https://chef-server
+And do this from "Nodes"->"Edit"
 
+Note 0: the db_config runs from sphinx because it requires Kaltura's code which there is no reason to deploy on the DB machine.
+Note 1: the above run lists are a recommedation, you can of course run more than one role per node.
+
+
+Running the Chef client
+=======================
+Installing on a node is done using the chef-client utility.
+Note that the order in which you install the nodes matters!
+It should be as following
+
+$ ssh my-mysql-machine
+root@my-mysql-machine:~# chef-client
+
+$ ssh my-front-machine
+root@my-front-machine:~# chef-client
+
+$ ssh my-sphinx-machine
+root@my-sphinx-machine:~# chef-client
+
+$ ssh my-batch-machine
+root@my-batch-machine:~# chef-client
+
+$ ssh my-dwh-machine
+root@my-dwh-machine:~# chef-client
+
+
+You should now have your cluster setup:)
