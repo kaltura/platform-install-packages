@@ -35,8 +35,7 @@ rpm -Uhv http://54.211.235.142/releases/nightly/RPMS/noarch/kaltura-release-9.11
 ```
 For stable updates:
 ```bash
- rpm -ihv
-http://54.211.235.142/releases/stable/RPMS/noarch/kaltura-release.noarch.rpm
+ rpm -ihv http://54.211.235.142/releases/stable/RPMS/noarch/kaltura-release.noarch.rpm
 ```
 
 ###### Install the Kaltura Packages
