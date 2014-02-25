@@ -31,11 +31,11 @@ setenforce permissive
 **Note: that this is currently our test URL, the repo URL will change soon.**
 For nightly builds use:
 ```bash   
-\#rpm -Uhv http://54.211.235.142/releases/nightly/RPMS/noarch/kaltura-release-9.11.0-3.noarch.rpm
+\\#rpm -Uhv http://54.211.235.142/releases/nightly/RPMS/noarch/kaltura-release-9.11.0-3.noarch.rpm
 ```
-```bash
 For stable updates:
-\# rpm -ihv
+```bash
+\\# rpm -ihv
 http://54.211.235.142/releases/stable/RPMS/noarch/kaltura-release.noarch.rpm
 ```
 
