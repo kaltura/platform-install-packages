@@ -15,7 +15,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 9.11.0
-Release: 8 
+Release: 11
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -42,7 +42,6 @@ Source17: navigation.xml
 Source18: monit.phtml 
 Source19: IndexController.php
 Source20: sphinx.populate.template.rc
-Source21: sql_updates
 
 #Source10: 01.UserRole.99.template.xml
 #Source9: 01.conversionProfile.99.template.xml
@@ -145,7 +144,6 @@ cp %{SOURCE16} $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/
 cp %{SOURCE17} $RPM_BUILD_ROOT%{prefix}/app/admin_console/configs/navigation.xml
 cp %{SOURCE18} $RPM_BUILD_ROOT%{prefix}/app/admin_console/views/scripts/index/monit.phtml
 cp %{SOURCE19} $RPM_BUILD_ROOT%{prefix}/app/admin_console/controllers/IndexController.php
-cp %{SOURCE21} $RPM_BUILD_ROOT%{prefix}/app/deployment/sql_updates
 
 # we bring another in kaltura-batch
 rm $RPM_BUILD_ROOT%{prefix}/app/configurations/batch/batch.ini.template
@@ -207,6 +205,7 @@ find /opt/kaltura/web/content/entry /opt/kaltura/web/content/uploads/  /opt/kalt
 /etc/init.d/ntpd start
 if [ "$1" = 2 ];then
 	if [ -r "%{prefix}/app/configurations/local.ini" -a -r "%{prefix}/app/configurations/base.ini" ];then
+		sed -i "s@^\(kaltura_version\).*@\1 = %{version}@g" %{prefix}/app/configurations/local.ini
 		echo "Regenarating client libs.. this will take up to 2 minutes to complete."
 		rm -rf %{prefix}/app/cache/*
 		php %{prefix}/app/generator/generate.php
@@ -273,6 +272,12 @@ fi
 
 
 %changelog
+* Tue Feb 25 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.11.0-11
+- Update version number.
+
+* Mon Feb 24 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.11.0-9
+- Consent strings added.
+
 * Mon Feb 24 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.11.0-6
 - Post install mail templt: added the debug aliases to Tip #4 discussing troubleshooting procs.
 

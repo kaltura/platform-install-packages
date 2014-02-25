@@ -2,7 +2,7 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmc	
 Version: v5.37.11
-Release: 2 
+Release: 3 
 Summary: Kaltura Management Console
 
 Group: System Management	
@@ -38,7 +38,7 @@ unzip %{SOURCE2}
 %post
 ls -sf %{prefix}/web/flash/kmc/%{version}/uiconf/kaltura/kmc/appstudio %{prefix}/web/content/uiconf
 ln -sf %{prefix}/web/flash/kmc/%{version}/uiconf/kaltura/kmc %{prefix}/web/content/uiconf/kaltura/kmc
-if [ -r "%{prefox}/app/configurations/local.ini" -a -r "%{prefox}/app/configurations/system.ini" ];then
+if [ -r "%{prefix}/app/configurations/local.ini" -a -r "%{prefix}/app/configurations/system.ini" ];then
 	php %{prefix}/app/deployment/uiconf/deploy_v2.php --ini=%{prefix}/web/flash/kmc/%{version}/config.ini >> %{prefix}/log/deploy_v2.log  2>&1
 fi
 

@@ -29,7 +29,15 @@ setenforce permissive
 ```
 ###### Auto Set the Kaltura install repository links 
 **Note: that this is currently our test URL, the repo URL will change soon.**
-```rpm -ihv http://installrepo.kaltura.org/nightly/RPMS/noarch/kaltura-release.noarch.rpm```   
+For nightly builds use:
+```bash   
+\#rpm -Uhv http://54.211.235.142/releases/nightly/RPMS/noarch/kaltura-release-9.11.0-3.noarch.rpm
+```
+```bash
+For stable updates:
+\# rpm -ihv
+http://54.211.235.142/releases/stable/RPMS/noarch/kaltura-release.noarch.rpm
+```
 
 ###### Install the Kaltura Packages
 ```bash

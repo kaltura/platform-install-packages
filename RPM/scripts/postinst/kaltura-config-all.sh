@@ -37,7 +37,7 @@ else
        ZONE="unknown"
 fi  
 OUT="1"
-send_install_becon `basename $0` $ZONE install_start 
+#send_install_becon `basename $0` $ZONE install_start 
 $BASE_DIR/bin/kaltura-base-config.sh "$ANSFILE"
 if [ $? -ne 0 ];then
        echo "$BASE_DIR/bin/kaltura-base-config.sh failed:( You can re-run it when the issue is fixed."
@@ -151,7 +151,6 @@ To begin, access the Admin Console using the Admin email and password you've ent
 When logged in to the KAC, create a new publisher account to being using Kaltura.
 Visit http://www.kaltura.org to join the community and get help!
 Visit http://knowledge.kaltura.com to read documentation and learn more.
-To learn about known issues and latest release notes, visit: http://bit.ly/kaltura-core-rn
 =====================================================================================================================
 "
 

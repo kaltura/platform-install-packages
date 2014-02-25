@@ -93,8 +93,7 @@ EOF
         	IS_SSL='Y'
         fi  
 fi
-if [ "$IS_SSL" != 'Y' -a "$IS_SSL" != 1 -a "$IS_SSL" != 'y' ];then
-#-a ! -r "$ANSFILE" ];then
+if [ "$IS_SSL" != 'Y' -a "$IS_SSL" != 1 -a "$IS_SSL" != 'y' -a "$IS_SSL" != 'true' ];then
 trap - ERR
 echo "use kaltura" | mysql -h$DB1_HOST -u$DB1_USER -p$DB1_PASS -P$DB1_PORT $DB1_NAME 2> /dev/null
 if [ $? -eq 0 ];then
@@ -257,15 +256,14 @@ service httpd restart
 ln -sf $BASE_DIR/app/configurations/monit/monit.avail/httpd.rc $BASE_DIR/app/configurations/monit/monit.d/enabled.httpd.rc
 ln -sf $BASE_DIR/app/configurations/monit/monit.avail/memcached.rc $BASE_DIR/app/configurations/monit/monit.d/enabled.memcached.rc
 /etc/init.d/kaltura-monit restart
-        trap - ERR
-        echo "use kaltura" | mysql -h$DB1_HOST -u$DB1_USER -p$DB1_PASS -P$DB1_PORT $DB1_NAME 2> /dev/null
-        if [ $? -eq 0 ];then
-                if [ -r $BASE_DIR/apps/studio/`rpm -qa kaltura-html5-studio --queryformat %{version}`/studio.ini ];then
-                        php $BASE_DIR/app/deployment/uiconf/deploy_v2.php --ini=$BASE_DIR/apps/studio/`rpm -qa kaltura-html5-studio --queryformat %{version}`/studio.ini >> /dev/null 2>&1
-                fi
-                php $BASE_DIR/app/deployment/uiconf/deploy_v2.php --ini=$BASE_DIR/web/flash/kmc/`rpm -qa kaltura-kmc --queryformat %{version}`/config.ini >> /dev/null 2>&1
-        fi
-        trap 'my_trap_handler ${LINENO} ${$?}' ERR
+	trap - ERR
+	echo "use kaltura" | mysql -h$DB1_HOST -u$DB1_USER -p$DB1_PASS -P$DB1_PORT $DB1_NAME 2> /dev/null
+	if [ $? -eq 0 ];then
+		if [ -r $BASE_DIR/apps/studio/`rpm -qa kaltura-html5-studio --queryformat %{version}`/studio.ini ];then
+			php $BASE_DIR/app/deployment/uiconf/deploy_v2.php --ini=$BASE_DIR/apps/studio/`rpm -qa kaltura-html5-studio --queryformat %{version}`/studio.ini >> /dev/null
+		fi
+	php $BASE_DIR/app/deployment/uiconf/deploy_v2.php --ini=$BASE_DIR/web/flash/kmc/`rpm -qa kaltura-kmc --queryformat %{version}`/config.ini >> /dev/null
 
-
+	fi
+	trap 'my_trap_handler ${LINENO} ${$?}' ERR
 send_install_becon `basename $0` $ZONE install_success 

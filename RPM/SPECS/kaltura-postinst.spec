@@ -2,13 +2,14 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
-Version: 1.0.6
-Release: 10
+Version: 1.0.7
+Release: 8 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
 Source1: post_inst_mail.template
-Source2:consent_msgs
+Source2: consent_msgs
+Source3: sql_updates
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
@@ -32,12 +33,12 @@ This package includes post install scripts to be run post RPM install as they re
 
 %install
 mkdir -p $RPM_BUILD_ROOT/%{prefix}/bin
-mkdir -p $RPM_BUILD_ROOT/%{prefix}/app/configurations
+mkdir -p $RPM_BUILD_ROOT/%{prefix}/app/configurations $RPM_BUILD_ROOT/%{prefix}/app/deployment/updates/scripts
 chmod +x *.sh 
 mv  *.sh *.rc $RPM_BUILD_ROOT/%{prefix}/bin
 cp %{SOURCE1} $RPM_BUILD_ROOT/%{prefix}/app/configurations
 cp %{SOURCE2} $RPM_BUILD_ROOT%{prefix}/app/configurations/consent_msgs
-mkdir -p $RPM_BUILD_ROOT/%{prefix}/app/deployment/updates/scripts
+cp %{SOURCE3} $RPM_BUILD_ROOT%{prefix}/app/deployment/sql_updates
 cp -r patches $RPM_BUILD_ROOT/%{prefix}/app/deployment/updates/scripts
 sed -i 's#@APP_DIR@#%{prefix}/app#g' $RPM_BUILD_ROOT/%{prefix}/bin/*rc
 
@@ -59,11 +60,24 @@ fi
 
 %files
 %{prefix}/bin/*
-%{prefix}/app/deployment/updates/scripts/patches
+%{prefix}/app/deployment/*
 %config %{prefix}/bin/db_actions.rc
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Wed Feb 25 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.7-8
+- Added version and revision info to beacons.
+
+* Wed Feb 25 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.7-7
+- /app/deployment/sql_updates should be in this package and not in base, since it is being used here.
+
+* Tue Feb 24 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.7-2
+- typo
+
+* Tue Feb 24 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.7-1
+- Becons modifications.
+- User consent msg added.
+
 * Mon Feb 24 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.6-8
 - If this is an upgrade and DB connectivity works - generate UI confs.
 

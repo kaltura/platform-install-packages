@@ -1,9 +1,9 @@
 %define baseurl installrepo.kaltura.org
-%define path 9.11.0/RPMS
+%define path releases/9.11.0/RPMS
 Summary: Kaltura Server release file and package configuration
 Name: kaltura-release
 Version: 9.11.0
-Release: 2 
+Release: 3 
 License: AGPLv3+
 Group: Server/Platform 
 URL: http://kaltura.org
@@ -59,6 +59,9 @@ exit 0
 #%{_sysconfdir}/pki/rpm-gpg/RPM-GPG-KEY-rpmforge-*
 
 %changelog
+* Tue Feb 25 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.11.0-3
+- URL to repo modified to include 'releases' in path.
+
 * Sun Feb 23 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.11.0-2
 - dont need i686
 

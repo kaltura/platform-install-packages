@@ -19,7 +19,7 @@ verify_user_input()
         ANSFILE=$1
 	. $ANSFILE
 	RC=0
-        for VAL in TIME_ZONE KALTURA_FULL_VIRTUAL_HOST_NAME KALTURA_VIRTUAL_HOST_NAME DB1_HOST DB1_PORT DB1_NAME DB1_USER SERVICE_URL SPHINX_SERVER1 SPHINX_SERVER2 DWH_HOST DWH_PORT SPHINX_DB_HOST SPHINX_DB_PORT ADMIN_CONSOLE_ADMIN_MAIL ADMIN_CONSOLE_PASSWORD SUPER_USER SUPER_USER_PASSWD CDN_HOST KALTURA_VIRTUAL_HOST_PORT DB1_PASS DWH_PASS PROTOCOL RED5_HOST; do
+        for VAL in TIME_ZONE KALTURA_FULL_VIRTUAL_HOST_NAME KALTURA_VIRTUAL_HOST_NAME DB1_HOST DB1_PORT DB1_NAME DB1_USER SERVICE_URL SPHINX_SERVER1 SPHINX_SERVER2 DWH_HOST DWH_PORT SPHINX_DB_HOST SPHINX_DB_PORT ADMIN_CONSOLE_ADMIN_MAIL ADMIN_CONSOLE_PASSWORD SUPER_USER SUPER_USER_PASSWD CDN_HOST KALTURA_VIRTUAL_HOST_PORT DB1_PASS DWH_PASS PROTOCOL RED5_HOST USER_CONSENT; do
                 if [ -z "${!VAL}" ];then
 			VALS="$VALS\n$VAL"
 			RC=1
@@ -39,7 +39,7 @@ create_answer_file()
 {
 	POST_INST_MAIL_TMPL=$1
 	ANSFILE=/tmp/kaltura_`date +%d_%m_%H_%M`.ans
-        for VAL in TIME_ZONE KALTURA_FULL_VIRTUAL_HOST_NAME KALTURA_VIRTUAL_HOST_NAME DB1_HOST DB1_PORT DB1_PASS DB1_NAME DB1_USER SERVICE_URL SPHINX_SERVER1 SPHINX_SERVER2 DWH_HOST DWH_PORT SPHINX_DB_HOST SPHINX_DB_PORT ADMIN_CONSOLE_ADMIN_MAIL ADMIN_CONSOLE_PASSWORD CDN_HOST KALTURA_VIRTUAL_HOST_PORT SUPER_USER SUPER_USER_PASSWD ENVIRONMENT_NAME DWH_PASS PROTOCOL RED5_HOST; do
+        for VAL in TIME_ZONE KALTURA_FULL_VIRTUAL_HOST_NAME KALTURA_VIRTUAL_HOST_NAME DB1_HOST DB1_PORT DB1_PASS DB1_NAME DB1_USER SERVICE_URL SPHINX_SERVER1 SPHINX_SERVER2 DWH_HOST DWH_PORT SPHINX_DB_HOST SPHINX_DB_PORT ADMIN_CONSOLE_ADMIN_MAIL ADMIN_CONSOLE_PASSWORD CDN_HOST KALTURA_VIRTUAL_HOST_PORT SUPER_USER SUPER_USER_PASSWD ENVIRONMENT_NAME DWH_PASS PROTOCOL RED5_HOST USER_CONSENT; do
                 if [ -n "${!VAL}" ];then
 			#ANSFILE=/tmp/kaltura_`date +%d_%m_%H_%M`.ans
 			echo "$VAL=\"${!VAL}\"" >> $ANSFILE 
@@ -65,18 +65,26 @@ if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
 fi
 . $KALTURA_FUNCTIONS_RC
 trap 'my_trap_handler ${LINENO} ${$?}' ERR
-send_install_becon `basename $0` $ZONE install_start 
+#send_install_becon `basename $0` $ZONE install_start 
 LOCALHOST=127.0.0.1
 DISPLAY_NAME="Kaltura Server `rpm -qa kaltura-base --queryformat %{version}`"
 KALT_CONF_DIR='/opt/kaltura/app/configurations/'
+echo "Welcome to Kaltura Server $DISPLAY_NAME post install setup."
+if [ "$USER_CONSENT" != 1 ];then
+	get_tracking_consent
+fi
+if [ -r $CONSENT_FILE ];then
+	. $CONSENT_FILE
+fi
 if [ -n "$1" -a -r "$1" ];then
         ANSFILE=$1
         verify_user_input $ANSFILE
 	. $ANSFILE
 	export ANSFILE
 else
-        echo "Welcome to Kaltura Server $DISPLAY_NAME post install setup.
-In order to finalize the system configuration, please input the following:
+       # echo "Welcome to Kaltura Server $DISPLAY_NAME post install setup.
+echo "In order to finalize the system configuration, please input the following:
+
 
 CDN hostname [`hostname`]:"
         read -e CDN_HOST
@@ -151,7 +159,7 @@ CDN hostname [`hostname`]:"
 			RED5_HOST=`hostname`
 		fi
         fi
-
+echo "Hi" && exit
 	echo "Secondary Sphinx hostname: [leave empty if none] "
 	read -e SPHINX_SERVER2
 	if [ -z $SPHINX_SERVER2 ];then
@@ -238,11 +246,11 @@ QUICK_START_GUIDE_URL=http://bit.ly/KalturaKmcManual
 FORUMS_URLS=http://bit.ly/KalturaForums
 
 
-create_answer_file $POST_INST_MAIL_TMPL
 
 
 
 fi
+create_answer_file $POST_INST_MAIL_TMPL
 
 sed -i "s#\(date.timezone\)\s*=.*#\1='$TIME_ZONE'#g" /etc/php.ini /etc/php.d/*kaltura*ini
 if [ -z "$DB1_PASS" ];then
