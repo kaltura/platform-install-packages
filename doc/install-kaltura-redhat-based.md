@@ -31,11 +31,11 @@ setenforce permissive
 **Note: that this is currently our test URL, the repo URL will change soon.**
 For nightly builds use:
 ```bash   
-rpm -Uhv http://54.211.235.142/releases/nightly/RPMS/noarch/kaltura-release-9.11.0-3.noarch.rpm
+\\#rpm -Uhv http://54.211.235.142/releases/nightly/RPMS/noarch/kaltura-release-9.11.0-3.noarch.rpm
 ```
 For stable updates:
 ```bash
- rpm -ihv http://54.211.235.142/releases/stable/RPMS/noarch/kaltura-release.noarch.rpm
+\\# rpm -ihv http://54.211.235.142/releases/stable/RPMS/noarch/kaltura-release.noarch.rpm
 ```
 
 ###### Install the Kaltura Packages
@@ -95,9 +95,9 @@ You can now record a video using KMC->Upload->Record from Webcam.
 ```bash
 yum clean all
 yum update "*kaltura*"
-rm /opt/kaltura/app/base-config.lock
-/opt/kaltura/bin/kaltura-config-all.sh [answers-file-path]
 ```
+Then follow the on-screen instructions (in case any further actions required).   
+
 
 ## Fresh Database Installation
 Use this in cases where you want to clear the database and start from fresh.
