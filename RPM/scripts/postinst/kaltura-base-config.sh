@@ -382,3 +382,4 @@ fi
 
 echo "Configuration of $DISPLAY_NAME finished successfully!"
 send_install_becon `basename $0` $ZONE install_success
+write_last_base_version

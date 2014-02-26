@@ -155,6 +155,9 @@ send_post_inst_msg()
 }
 send_install_becon()
 {
+	if ! check_if_upgrade;then
+		return 0 
+	fi
 	trap - ERR
 	#echo $USER_CONSENT
 	if [ -r $CONSENT_FILE ];then
@@ -257,4 +260,25 @@ get_tracking_consent()
 		echo "USER_CONSENT=0" > $CONSENT_FILE
 	fi
 	. $CONSENT_FILE
+}
+
+check_if_upgrade()
+{
+	trap - ERR
+	CUR_BASE_VERSION=`rpm -qa kaltura-base --queryformat %{version}`
+	LAST_BASE_VERSION=`cat $BASE_DIR/bin/last_base_ver 2> /dev/null`
+	echo "$CUR_BASE_VERSION $LAST_BASE_VERSION!"
+	if [ $CUR_BASE_VERSION = "$LAST_BASE_VERSION" ];then
+		echo "no up"
+		return 1 
+	fi
+	return 0 
+	trap 'my_trap_handler ${LINENO} ${$?}' ERR
+}
+
+write_last_base_version()
+{
+	CUR_BASE_VERSION=`rpm -qa kaltura-base --queryformat %{version}`
+	echo "I am wrting $CUR_BASE_VERSION"
+	echo "$CUR_BASE_VERSION" > $BASE_DIR/bin/last_base_ver
 }

@@ -3,7 +3,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.7
-Release: 8 
+Release: 9 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -65,7 +65,12 @@ fi
 %config %{prefix}/app/configurations/*
 
 %changelog
-* Wed Feb 25 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.7-8
+* Wed Feb 25 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.7-9
+- Do not beacon an install in case it is an upgrade.
+  For upgrade, we will send the event via the RPM post install as we already have all the info we need and know if the
+  user gave consent or not so, the fact the hook cannot get output does not bother us at all.
+
+* Tue Feb 26 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.7-8
 - Added version and revision info to beacons.
 
 * Wed Feb 25 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.7-7
