@@ -159,7 +159,6 @@ CDN hostname [`hostname`]:"
 			RED5_HOST=`hostname`
 		fi
         fi
-echo "Hi" && exit
 	echo "Secondary Sphinx hostname: [leave empty if none] "
 	read -e SPHINX_SERVER2
 	if [ -z $SPHINX_SERVER2 ];then

@@ -1,9 +1,10 @@
 %define baseurl installrepo.kaltura.org
-%define path releases/9.9.0/RPMS
+%define path releases/9.11.0/RPMS
+%define prefix /opt/kaltura 
 Summary: Kaltura Server release file and package configuration
 Name: kaltura-release
-Version: 9.9.0
-Release: 4 
+Version: 9.11.0
+Release: 18
 License: AGPLv3+
 Group: Server/Platform 
 URL: http://kaltura.org
@@ -43,6 +44,18 @@ EOF
 %{__rm} -rf %{buildroot}
 
 %post
+echo \$1 is $1
+if [ "$1" = 2 ];then
+	if [ -r  %{prefix}/bin/kaltura-functions.rc ];then
+		. %{prefix}/bin/kaltura-functions.rc
+		if [ -r /etc/sysconfig/clock ];then
+			. /etc/sysconfig/clock
+		else 
+			ZONE='unknown'
+	  	fi
+		send_install_becon %{name}-%{version}-%{release} $ZONE install_upgrade
+	fi
+fi
 #rpm -q gpg-pubkey-e42d547b-3960bdf1 &>/dev/null || rpm --import %{_sysconfdir}/pki/rpm-gpg/RPM-GPG-KEY-rpmforge-matthias
 exit 0
 
@@ -59,8 +72,17 @@ exit 0
 #%{_sysconfdir}/pki/rpm-gpg/RPM-GPG-KEY-rpmforge-*
 
 %changelog
-* Tue Feb 25 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-4
+* Wed Feb 26 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.11.0-5
+- Added update becon.
+
+* Tue Feb 25 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.11.0-3
 - URL to repo modified to include 'releases' in path.
+
+* Sun Feb 23 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.11.0-2
+- dont need i686
+
+* Sun Feb 23 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.11.0-1
+- 9.11.0
 
 * Mon Jan 27 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-1
 - 9.9.0

@@ -3,7 +3,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.7
-Release: 9 
+Release: 12
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -65,15 +65,18 @@ fi
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Wed Feb 25 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.7-10
+- https://github.com/mobcdi/platform-install-packages/commit/00d06299204b5b3a7314b8e705a75e73ae2de017
+
 * Wed Feb 25 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.7-9
 - Do not beacon an install in case it is an upgrade.
   For upgrade, we will send the event via the RPM post install as we already have all the info we need and know if the
   user gave consent or not so, the fact the hook cannot get output does not bother us at all.
 
-* Tue Feb 26 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.7-8
+* Tue Feb 24 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.7-8
 - Added version and revision info to beacons.
 
-* Wed Feb 25 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.7-7
+* Wed Feb 24 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.7-7
 - /app/deployment/sql_updates should be in this package and not in base, since it is being used here.
 
 * Tue Feb 24 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.7-2
