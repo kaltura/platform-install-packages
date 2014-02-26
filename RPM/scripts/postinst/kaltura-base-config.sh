@@ -159,7 +159,9 @@ CDN hostname [`hostname`]:"
 			RED5_HOST=`hostname`
 		fi
         fi
+# Not sure this is meant to exit here
 echo "Hi" && exit
+# should echo "Hi" && exit be removed 
 	echo "Secondary Sphinx hostname: [leave empty if none] "
 	read -e SPHINX_SERVER2
 	if [ -z $SPHINX_SERVER2 ];then
