@@ -21,7 +21,3 @@ All code in this project is released under the [AGPLv3 license](http://www.gnu.o
 Copyright © Kaltura Inc. All rights reserved.
 
 Authors [@jessp01](https://github.com/jessp01), [@zoharbabin](https://github.com/zoharbabin) and many others.
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/kaltura/platform-install-packages/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
