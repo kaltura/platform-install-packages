@@ -1,5 +1,6 @@
 %define baseurl installrepo.kaltura.org
-%define path releases/9.11.0/RPMS
+%define path releases/stable/RPMS
+%define testpath releases/nightly/RPMS
 %define prefix /opt/kaltura 
 Summary: Kaltura Server release file and package configuration
 Name: kaltura-release
@@ -28,12 +29,28 @@ name = Kaltura Server
 baseurl = http://%{baseurl}/%{path}/\$basearch/
 #gpgkey = file:///etc/pki/rpm-gpg/
 gpgcheck = 0
+enabled = 1
 
 [Kaltura-noarch]
 name = Kaltura Server arch independent
 baseurl = http://%{baseurl}/%{path}/noarch
 #gpgkey = file:///etc/pki/rpm-gpg/
 gpgcheck = 0
+enabled = 1
+
+[Kaltura-testing]
+name = Kaltura Server arch independent
+baseurl = http://%{baseurl}/%{testpath}/\$basearch/
+#gpgkey = file:///etc/pki/rpm-gpg/
+gpgcheck = 0
+enabled = 0
+
+[Kaltura-testing-noarch]
+name = Kaltura Server arch independent
+baseurl = http://%{baseurl}/%{testpath}/noarch
+#gpgkey = file:///etc/pki/rpm-gpg/
+gpgcheck = 0
+enabled = 0
 EOF
 
 %install
@@ -72,6 +89,9 @@ exit 0
 #%{_sysconfdir}/pki/rpm-gpg/RPM-GPG-KEY-rpmforge-*
 
 %changelog
+* Thu Feb 27 2014 David Bezemer <info@davidbezemer.nl> - 9.11.0-6
+- Add testing to base package
+
 * Wed Feb 26 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.11.0-5
 - Added update becon.
 
