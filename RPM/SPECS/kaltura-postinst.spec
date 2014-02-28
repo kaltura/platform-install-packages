@@ -3,7 +3,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.7
-Release: 12
+Release: 18
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -46,14 +46,25 @@ sed -i 's#@APP_DIR@#%{prefix}/app#g' $RPM_BUILD_ROOT/%{prefix}/bin/*rc
 rm -rf %{buildroot}
 
 %post
-if [ -r "%{prefix}/app/configurations/system.ini" -a -r %{prefix}/app/deployment/sql_updates ];then
-	. %{prefix}/app/configurations/system.ini
-	for SQL in `cat %{prefix}/app/deployment/sql_updates`;do
-		mysql kaltura -h $DB1_HOST -u $SUPER_USER -P $DB1_PORT -p$SUPER_USER_PASSWD < $SQL
-		RC=$?
-	done
-	if [ $RC -eq 0 ];then
-		mv %{prefix}/app/deployment/sql_updates %{prefix}/app/deployment/sql_updates.done
+if [ "$1" = 2 ];then
+	if [ -r "%{prefix}/app/configurations/system.ini" -a -r %{prefix}/app/deployment/sql_updates ];then
+		. %{prefix}/app/configurations/system.ini
+		RC=0
+		for SQL in `cat %{prefix}/app/deployment/sql_updates`;do
+		# if we have the .done file, then some updates already happened
+		# need to check if our current one is in the done list, if so, skip it.
+			if [ -r  %{prefix}/app/deployment/sql_updates.done ];then
+				if grep -q $SQL %{prefix}/app/deployment/sql_updates.done;then
+					continue
+				fi
+			fi
+			mysql kaltura -h $DB1_HOST -u $SUPER_USER -P $DB1_PORT -p$SUPER_USER_PASSWD < $SQL
+			RC=$?
+		done
+		if [ $RC -eq 0 ];then
+			cat %{prefix}/app/deployment/sql_updates >> %{prefix}/app/deployment/sql_updates.done
+			rm %{prefix}/app/deployment/sql_updates
+		fi
 	fi
 fi
 %preun
@@ -65,6 +76,13 @@ fi
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Fri Feb 27 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.7-15
+- Fix for https://github.com/kaltura/platform-install-packages/issues/47
+
+* Fri Feb 27 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.7-14
+- Added explanation on how to increase log level to DEBUG, see:
+  https://github.com/kaltura/platform-install-packages/issues/51  
+
 * Wed Feb 25 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.7-10
 - https://github.com/mobcdi/platform-install-packages/commit/00d06299204b5b3a7314b8e705a75e73ae2de017
 

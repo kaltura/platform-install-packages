@@ -61,7 +61,6 @@ EOF
 %{__rm} -rf %{buildroot}
 
 %post
-echo \$1 is $1
 if [ "$1" = 2 ];then
 	if [ -r  %{prefix}/bin/kaltura-functions.rc ];then
 		. %{prefix}/bin/kaltura-functions.rc
