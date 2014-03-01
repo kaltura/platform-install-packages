@@ -70,12 +70,12 @@ LOCALHOST=127.0.0.1
 DISPLAY_NAME="Kaltura Server `rpm -qa kaltura-base --queryformat %{version}`"
 KALT_CONF_DIR='/opt/kaltura/app/configurations/'
 echo "Welcome to Kaltura Server $DISPLAY_NAME post install setup."
-if [ "$USER_CONSENT" != 1 ];then
-	get_tracking_consent
-fi
 if [ -r $CONSENT_FILE ];then
-	. $CONSENT_FILE
+        . $CONSENT_FILE
+else
+        get_tracking_consent
 fi
+
 if [ -n "$1" -a -r "$1" ];then
         ANSFILE=$1
         verify_user_input $ANSFILE
