@@ -164,7 +164,10 @@ WARNING: self signed cerificate detected. Will set settings.clientConfig.verifyS
 	fi
 	sed "s#@SSL_CERTIFICATE_FILE@#$CRT_FILE#g" $MAIN_APACHE_CONF.template > $MAIN_APACHE_CONF
 	sed -i "s#@SSL_CERTIFICATE_KEY_FILE@#$KEY_FILE#g" $MAIN_APACHE_CONF
-	echo "IS_SSL=y" >> /etc/kaltura.d/system.ini
+	echo "IS_SSL=y" >> $RC_FILE 
+	echo "CRT_FILE=$CRT_FILE" >> $RC_FILE
+        echo "KEY_FILE=$KEY_FILE" >> $RC_FILE
+
 fi
 
 if [ "$IS_SSL" = 'Y' ];then 
