@@ -1,4 +1,14 @@
 **[Track milestones progress](https://github.com/kaltura/platform-install-packages/issues/milestones)**.
+
+#### 2014-03-02:
+
++ Alpha tests have all passes sucessfully. 
++ Further Cluster and Chef deployment guides were tested on AWS.
++ Red5 package fully tested (both webcam and FMLE).
++ QA Analytics reporting events deployed, users can now opt-in to send repoting events for system stability reports and deployment issue assistance.
++ IX-9.11.0 was released and tested.
++ Specifications and definition for the [Kaltura Platform Packages CI Project](https://github.com/kaltura/platform-continuous-integration) were created.
++ Entered [Phase D - Public Beta, and Continuous Integration System](http://kaltura.github.io/platform-install-packages/#phase-d).
    
 #### 2014-02-17:
 Cluster install passed successfully, Chef scripts created, many tests passed and bugs crushed.
@@ -27,6 +37,7 @@ Single server installed passes successfully, including sanity of the following f
 + API v3 tests for the PHP5 and Java client libs
 + Cluster install is in final stages of testing and expected to finish sanity today
 + Monitoring suite is under way and is also expected to be released for testing today
++ Entered [Phase C.2 - Alpha Repositories & Testing](http://kaltura.github.io/platform-install-packages/#phase-c2)
       
 #### 2014-01-27:
 We are thrilled to share that we've reached public alpha testing phase of the RPM packages.
