@@ -655,7 +655,7 @@ var writeAnchorTag = function(wholeMatch,m1,m2,m3,m4,m5,m6,m7) {
 		result +=  " title=\"" + title + "\"";
 	}
 
-	result += " target="_blank">" + link_text + "</a>";
+	result += " target=\"_blank\">" + link_text + "</a>";
 
 	return result;
 }
@@ -1276,7 +1276,7 @@ var _EncodeBackslashEscapes = function(text) {
 
 var _DoAutoLinks = function(text) {
 
-	text = text.replace(/<((https?|ftp|dict):[^'">\s]+)>/gi,"<a href=\"$1\" target="_blank">$1</a>");
+	text = text.replace(/<((https?|ftp|dict):[^'">\s]+)>/gi,"<a href=\"$1\" target=\"_blank\">$1</a>");
 
 	// Email addresses: <address@domain.foo>
 
