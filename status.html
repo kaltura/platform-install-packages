@@ -7,7 +7,9 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="javascripts/showdown.min.js"></script>
+    <script src="javascripts/showdown.js"></script>
+    <script src="javascripts/showdownext/github.js"></script>
+    <script src="javascripts/showdownext/prettify.js"></script>
     <script src="javascripts/jquery.base64.js"></script>
     <style type="text/css">
       body {background:none transparent;}
@@ -50,7 +52,7 @@
                           mdtextarray.forEach(function(updatetxt) {
                               formerUpdates = formerUpdates + "#### " + updatetxt;
                           });
-                          var converter = new Showdown.converter();
+                          var converter = new Showdown.converter({ extensions: ['prettify', 'github'] });
                           var latestUpdateHtml = converter.makeHtml(latestUpdate);
                           var formerUpdatesHtml = converter.makeHtml(formerUpdates);
                           document.getElementById('latestUpdateMd').innerHTML = latestUpdateHtml;
