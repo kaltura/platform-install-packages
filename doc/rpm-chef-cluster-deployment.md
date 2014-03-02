@@ -1,4 +1,6 @@
-# Installing the Chef server
+# Deploying Kaltura using Opscode Chef
+
+## Installing the Chef server
 
 1. Request this page: http://www.getchef.com/chef/install/
 1. Select the 'Chef Server' tab
