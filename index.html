@@ -175,31 +175,52 @@
             <li><a href="https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-redhat-based.md" target="_blank">Installing Kaltura on RedHat Linux</a>.</li>
             <li><a href="https://github.com/kaltura/platform-install-packages/blob/master/doc/platform-monitors.md" target="_blank">Setting up Kaltura platform monitoring</a>.</li>
             <li><a href="https://github.com/kaltura/platform-install-packages/blob/master/doc/rpm-cluster-deployment-instructions.md" target="_blank">Deploying Kaltura Clusters</a>.</li>
-            <li><a href="https://github.com/kaltura/platform-install-packages/blob/master/doc/rpm-chef-cluster-deployment.md" target="_blank">Deploying Kaltura using Opscode Chef</a>.</li>
           </ul>
           
           <h3>
             <a name="phase-c2" class="anchor" href="#phase-c2"><span class="octicon octicon-link"></span></a>
-            Phase C.2 - Beta Repositories & Testing
+            Phase C.2 - Alpha Repositories &amp; Testing
           </h3>
           
-          <p>Deploying to a public repositories for Debian/Ubuntu and RedHat/CentOS/Fedora.<br />
+          <p>Announcing public repository URL and calling for testers<br />
           At this phase admins who are not necessarily developers, and beta testers are welcome to run the package installation using package managers of their liking, submit bugs and feature requests, and help make the packages stable and ready for public release.</p>
+          <p>Also in this phase - creation of Chef deployment automation scripts and preparing the definitions for the CI (Continuous Integration) system.</p>
+          
+          <ul>
+            <li><a href="https://github.com/kaltura/platform-install-packages/blob/master/doc/rpm-chef-cluster-deployment.md" target="_blank">Deploying Kaltura using Opscode Chef</a>.</li>
+          </ul>
           
           <h3>
             <a name="phase-d" class="anchor" href="#phase-d"><span class="octicon octicon-link"></span></a>
-            Phase D - Official GA Release
+            Phase D - Public Beta, and Continuous Integration System
           </h3>
           
-          <p>Calling all Kaltura admins in the community to install and test the release ready packages.<br />
-          This phase will also allow us to clean things up, prepare any needed documentation, and submit official requests to each official distro repositories (<a href="http://bit.ly/1lpdUng" target="_blank">Ubuntu</a>, <a href="http://bit.ly/Jlkm2G" target="_blank">Fedora</a> and <a href="http://bit.ly/1bv2YyI" target="_blank">Debian</a>).</p>
+          <p>Track the development and learn more, visit the <strong><a href="https://github.com/kaltura/platform-continuous-integration" target="_blank">Continuous Integration System Project</a></strong>.</p>
+          <p>The creation and deployment of a CI (Continuous Integration) system for building, testing and distributing the platform packages.<br />
+          This is a crucial phase in the maturity of project, which will allow us to determine health status of the packages before releasing to user QA and public distribution.</p>
+          <p>During this phase beta testing of various cluster deployments will be continued, and tools to deploy and verify deployment health will be created.</p>
           
           <h3>
             <a name="phase-e" class="anchor" href="#phase-e"><span class="octicon octicon-link"></span></a>
-            Phase E - Post-Install Script for Developer Environment
+            Phase E - RC and GA Releases
+          </h3>
+          
+          <p>Updating Kaltura.org website, deletion of the old installer repositories, public announcements and overall clean-up.</p>
+          <p>Calling the wider Kaltura admins in the community to install and migrate to the new packages.</p>
+          
+          <h3>
+            <a name="phase-f" class="anchor" href="#phase-f"><span class="octicon octicon-link"></span></a>
+            Phase F - Post-Install Script for Developer Environment
           </h3>
           
           <p>Create a post install script that will pull updated source-code from the official github repositories and configure an all-in-one developer environment for core developers wanting to write server plugins or modify and test core files.</p>
+          
+          <h3>
+            <a name="phase-g" class="anchor" href="#phase-g"><span class="octicon octicon-link"></span></a>
+            Phase G - Distribution to Official Distro Repositories
+          </h3>
+          
+          <p>Submit official requests to each official distro repositories (<a href="http://bit.ly/1lpdUng" target="_blank">Ubuntu</a>, <a href="http://bit.ly/Jlkm2G" target="_blank">Fedora</a> and <a href="http://bit.ly/1bv2YyI" target="_blank">Debian</a>).</p>
           
           <br />
           
@@ -356,7 +377,6 @@
                 </li>
                 <li class="answerli">
                   Using &quot;answers file&quot; (<a href="http://kaltura.github.io/platform-install-packages/example-answers-file.ans">example of an answers file for illustration</a>), package managers can be made to perform installations in a silent-mode, running complete deployment including post-install configurations.<br />
-                  This will be even further simplified by creating Chef (or the likes) deployment scripts that perform silent package installs followed by further network configuration (See How will you make cluster / multi-server environment deployments easier?).
                 </li>
               </ul>
             </li>
@@ -365,10 +385,11 @@
               <a name="chef-puppet-qa" class="anchor" href="#chef-puppet-qa"><span class="octicon qa-anchor-icon"></span></a>
               <ul>
                 <li class="questionli">
-                  Plans to create <a href="http://docs.opscode.com/chef_quick_overview.html" target="_blank">Chef</a> or <a href="http://puppetlabs.com/puppet/puppet-open-source" target="_blank">Puppet</a> scripts for deploying Kaltura?
+                  Any plans to automate deployment and scaling of Kaltura using <a href="http://docs.opscode.com/chef_quick_overview.html" target="_blank">Chef</a> or <a href="http://puppetlabs.com/puppet/puppet-open-source" target="_blank">Puppet</a>?
                 </li>
                 <li class="answerli">
-                  As part of cluster install and testing automation this project will also introduce Chef scripts for the deployment of Kaltura clusters. We plan to separate it into a different project in the future, and publish the Chef recipes on <a href="http://community.opscode.com/cookbooks" target="_blank">Chef cookbooks site</a>.
+                   As part of <a herf="#phase-c2">Phase C.2</a>, we published <a href="https://github.com/kaltura/platform-install-packages/blob/master/doc/rpm-chef-cluster-deployment.md" target="_blank">Deploying Kaltura using Opscode Chef</a>, and we also plan to release the recipes on the <a href="http://community.opscode.com/cookbooks" target="_blank">Chef cookbooks site</a>.<br />
+                   If you are experienced with other technologies like <a href="http://puppetlabs.com/puppet/puppet-open-source" target="_blank">Puppet</a>, <a href="http://theforeman.org/" target="_blank">The Foreman</a>, <a href="http://www.cloudifysource.org/" target="_blank">Cloudify</a> or other automation / cloud management tools - we would love your help! :)
                 </li>
               </ul>
             </li>
