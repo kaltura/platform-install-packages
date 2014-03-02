@@ -1,5 +1,8 @@
 # Deploying Kaltura using Opscode Chef
 
+This guide is intended for users of Chef that would like to deploy Kaltura clusters using [Chef recipes](http://docs.opscode.com/essentials_cookbook_recipes.html).   
+If you don't know what Chef is, start by reading [An Overview of Chef](http://docs.opscode.com/chef_overview.html).
+
 ## Installing the Chef server
 
 1. Request this page: http://www.getchef.com/chef/install/
