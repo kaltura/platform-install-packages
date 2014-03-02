@@ -1,4 +1,8 @@
-# Kaltura cluster deployment
+# Deploying Kaltura Clusters
+
+Below are **RPM** based instructions for deploying Kaltura Clusters.    
+Refer to the [all-in-one installation guide](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-redhat-based.md) for more notes about deploying Kaltura in RPM supported environments.    
+Refer to the [Deploying Kaltura Clusters Using Chef](https://github.com/kaltura/platform-install-packages/blob/master/doc/rpm-chef-cluster-deployment.md) for automated Chef based deployments.
 
 #### Notes
 * If you see a `#` at the beginning of a line, this line should be run as `root`.
