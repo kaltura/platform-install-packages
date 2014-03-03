@@ -18,25 +18,27 @@ RC=0
 
 if [ -r "/opt/kaltura/app/configurations/system.ini" -a -r /opt/kaltura/app/deployment/sql_updates ];then
 		. /opt/kaltura/app/configurations/system.ini
-		for SQL in `cat /opt/kaltura/app/deployment/sql_updates`;do
+		for SQL in `cat $APP_DIR/deployment/sql_updates`;do
 		# if we have the .done file, then some updates already happened
 		# need to check if our current one is in the done list, if so, skip it.
-				if [ -r  /opt/kaltura/app/deployment/sql_updates.done ];then
-						if grep -q $SQL /opt/kaltura/app/deployment/sql_updates.done;then
+				if [ -r  $APP_DIR/deployment/sql_updates.done ];then
+						if grep -q $SQL $APP_DIR/deployment/sql_updates.done;then
 								continue
 						fi
 				fi
-				mysql kaltura -h $DB1_HOST -u $SUPER_USER -P $DB1_PORT -p$SUPER_USER_PASSWD < $SQL
+				OUT="$OUT || `mysql kaltura -h $DB1_HOST -u $SUPER_USER -P $DB1_PORT -p$SUPER_USER_PASSWD < $SQL  2>&1`"
 				RC=$?
 		done
 		if [ $RC -eq 0 ];then
-				cat /opt/kaltura/app/deployment/sql_updates >> /opt/kaltura/app/deployment/sql_updates.done
-				rm /opt/kaltura/app/deployment/sql_updates
+				cat $APP_DIR/deployment/sql_updates >> $APP_DIR/deployment/sql_updates.done
+				rm $APP_DIR/deployment/sql_updates
 		fi
 fi
 
-if [ -f /opt/kaltura/app/deployment/sql_updates ];then
-	echo "error occurred during DB update"
+if [ -f $APP_DIR/deployment/sql_updates ];then
+	echo "Error occurred during DB update:
+	$OUT
+	"
 else
-	echo "${RC} manual DB updates done"
+	echo "Manual DB updates finished with RC $RC"
 fi
