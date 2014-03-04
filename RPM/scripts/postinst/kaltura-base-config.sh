@@ -69,10 +69,10 @@ trap 'my_trap_handler ${LINENO} ${$?}' ERR
 LOCALHOST=127.0.0.1
 DISPLAY_NAME="Kaltura Server `rpm -qa kaltura-base --queryformat %{version}`"
 KALT_CONF_DIR='/opt/kaltura/app/configurations/'
-echo "Welcome to Kaltura Server $DISPLAY_NAME post install setup."
+echo "Welcome to $DISPLAY_NAME post install setup."
 if [ -r $CONSENT_FILE ];then
         . $CONSENT_FILE
-else
+elif [ -z "$USER_CONSENT" ];then
         get_tracking_consent
 fi
 
