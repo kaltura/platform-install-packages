@@ -67,7 +67,7 @@ fi
 trap 'my_trap_handler ${LINENO} ${$?}' ERR
 #send_install_becon `basename $0` $ZONE install_start 
 LOCALHOST=127.0.0.1
-DISPLAY_NAME="Kaltura Server `rpm -qa kaltura-base --queryformat %{version}`"
+DISPLAY_NAME="Kaltura Server `rpm -q kaltura-base --queryformat %{version}`"
 KALT_CONF_DIR='/opt/kaltura/app/configurations/'
 echo "Welcome to $DISPLAY_NAME post install setup."
 if [ -r $CONSENT_FILE ];then
