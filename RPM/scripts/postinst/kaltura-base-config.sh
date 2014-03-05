@@ -29,7 +29,7 @@ verify_user_input()
 		OUT="Missing the following params in $ANSFILE
 		$VALS
 		"
-		echo -en $OUT
+		echo -en "$OUT\n"
        		send_install_becon kaltura-base $ZONE "install_fail: $OUT"
 		exit $RC 
 	fi

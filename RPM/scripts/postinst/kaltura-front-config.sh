@@ -60,6 +60,10 @@ if [ -n "$1" -a -r "$1" ];then
 fi
 if [ ! -r /opt/kaltura/app/base-config.lock ];then
 	`dirname $0`/kaltura-base-config.sh "$ANSFILE"
+	if [ $? -ne 0 ];then
+		echo "Base config failed. Please correct and re-run $0."
+		exit 21
+	fi
 else
 	echo "base-config completed successfully, if you ever want to re-configure your system (e.g. change DB hostname) run the following script:
 # rm /opt/kaltura/app/base-config.lock
@@ -130,6 +134,10 @@ else
 		fi
 
 	fi
+	if [ -z "$CHAIN_FILE" ];then
+		echo "Please input path to your SSL chain file or leave empty in case you have none:"
+		read -e CHAIN_FILE
+	fi
 	# check key and crt match
 	CRT_SUM=`openssl x509 -in $CRT_FILE -modulus -noout | openssl md5`
 	KEY_SUM=`openssl rsa -in $KEY_FILE -modulus -noout | openssl md5`
@@ -164,9 +172,15 @@ WARNING: self signed cerificate detected. Will set settings.clientConfig.verifyS
 	fi
 	sed "s#@SSL_CERTIFICATE_FILE@#$CRT_FILE#g" $MAIN_APACHE_CONF.template > $MAIN_APACHE_CONF
 	sed -i "s#@SSL_CERTIFICATE_KEY_FILE@#$KEY_FILE#g" $MAIN_APACHE_CONF
+	if [ -r "$CHAIN_FILE" ];then
+		sed -i "s^#SSLCertificateChainFile @SSL_CERTIFICATE_CHAIN_FILE@^SSLCertificateChainFile $CHAIN_FILE^" $MAIN_APACHE_CONF
+	else
+		CHAIN_FILE="NO_CHAIN"
+	fi
 	echo "IS_SSL=y" >> $RC_FILE 
 	echo "CRT_FILE=$CRT_FILE" >> $RC_FILE
         echo "KEY_FILE=$KEY_FILE" >> $RC_FILE
+        echo "CHAIN_FILE=$CHAIN_FILE" >> $RC_FILE
 
 fi
 

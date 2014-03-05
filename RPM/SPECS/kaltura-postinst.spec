@@ -3,7 +3,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.7
-Release: 19 
+Release: 22 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -76,6 +76,16 @@ fi
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Wed Mar 5 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.7-22
+- Base - exit if something failed.
+
+* Wed Mar 5 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.7-21
+- Fix for https://github.com/kaltura/platform-install-packages/issues/57
+
+* Mon Mar 3 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.7-20
+- kaltura-db-update.sh by David Bezemer.
+- Respect the USER_CONSENT var from ans file for quiet installs.
+ 
 * Sat Mar 1 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.7-19
 - Write {KEY,CRT}_FILE to system.ini
 - Fix consent code flow to work with ans file.
