@@ -47,6 +47,8 @@ yum install kaltura-server
 # Unfortuantely, the postinst scripts for these packages do not set it to start at init time.
 # To set this up:
 chkconfig memcached on
+# force sync ntp
+ntpdate pool.ntp.org
 chkconfig ntpd on
 ```
 
@@ -71,7 +73,7 @@ Two working solutions to the AWS EC2 email limitations are:
 
 ###### Configure the Kaltura installation
 ```bash
-/opt/kaltura/bin/kaltura-config-all.sh [answers-file-path]
+/opt/kaltura/bin/kaltura-config-all.sh (you can use [answers-file-path] after the first install)
 ```
 `[answers-file-path]` is an optional flag, in case you have an answers file ready, you can use it to perform a silent install. If you don't have an answers file, simply omit it (`/opt/kaltura/bin/kaltura-config-all.sh`). The answers file is automatically generated post the installation and is placed in `/tmp/kaltura*.ans`.     
 When asked, answer all the post-install script questions (or provide an answers file to perform a silent install) -
@@ -112,7 +114,7 @@ This will completely remove Kaltura, then download and install from scratch.
 /opt/kaltura/bin/kaltura-drop-db.sh
 yum remove "*kaltura*"
 rm -rf /opt/kaltura
-rpm -ihv http://54.211.235.142/nightly/RPMS/noarch/kaltura-release.noarch.rpm
+rpm -ihv http://installrepo.kaltura.org/releases/stable/RPMS/noarch/kaltura-release.noarch.rpm
 yum clean all
 yum install kaltura-server
 /opt/kaltura/bin/kaltura-config-all.sh [answers-file-path]
