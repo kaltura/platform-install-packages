@@ -1,0 +1,58 @@
+# local TZ to be used by PHP code. Note that it MUST be the same as your DB TZ.
+TIME_ZONE="America/New_York"
+# Apache port
+KALTURA_VIRTUAL_HOST_PORT="443"
+KALTURA_VIRTUAL_HOST_NAME="@HOSTNAME@"
+# host and port
+KALTURA_FULL_VIRTUAL_HOST_NAME="$KALTURA_VIRTUAL_HOST_NAME:$KALTURA_VIRTUAL_HOST_PORT"
+# operational DB user and passwd
+DB1_NAME="kaltura"
+DB1_USER="kaltura"
+PROTOCOL="https"
+SERVICE_URL="$PROTOCOL://$KALTURA_FULL_VIRTUAL_HOST_NAME"
+SPHINX_SERVER1="@HOSTNAME@"
+SPHINX_SERVER2=" "
+SPHINX_DB_HOST="@HOSTNAME@"
+SPHINX_DB_PORT="3306"
+# user name for the Kaltura Admin Console, MUST be in the form of an email
+ADMIN_CONSOLE_ADMIN_MAIL="user@name.com"
+# passwd for the Kaltura Admin Console
+ADMIN_CONSOLE_PASSWORD="mypasswd"
+# for installs that have no remote CDN storage, use the same as $KALTURA_VIRTUAL_HOST_NAME
+CDN_HOST="@HOSTNAME@"
+# display name used when sending the 'welcome' mail.
+ENVIRONMENT_NAME="Kaltura Video Platform"
+# what web I/F would you want to enable, options:
+# 0 - All web interfaces 
+# 1 - Kaltura Management Console [KMC], Hosted Apps, HTML5 lib and ClipAp
+# 2 - KAC - Kaltura Admin Console
+CONFIG_CHOICE="0"
+# are we working over SSL? needed since, if so, we perform cert validity checks
+IS_SSL="y"
+# hostname for Red5
+RED5_HOST="@HOSTNAME@"
+# allow the install scripts to send install data for analytics and support purposes:
+# 1 - allow
+# 0 - prevent
+USER_CONSENT=1
+# SSL cert path
+CRT_FILE=/etc/ssl/certs/localhost.crt
+# SSL key path
+KEY_FILE=/etc/pki/tls/private/localhost.key
+# if such exists enter path here, otherwise leave as is.
+CHAIN_FILE=NONE
+# Operational DB MySQL 
+DB1_HOST="@MYSQL_HOST@"
+# MySQL PORT 
+DB1_PORT="@MYSQL_PORT@"
+# desired passwd, make it good.
+DB1_PASS="@KALT_DB_PASS@"
+# analytics NySQL DB
+DWH_HOST="@MYSQL_HOST@"
+# analytics NySQL port 
+DWH_PORT="@MYSQL_PORT@"
+# analytics NySQL port 
+DWH_PASS="@KALT_DB_PASS@"
+# MySQL super user, this is only used for bootstrap, the app itself will not connect with it.
+SUPER_USER="@MYSQL_SUPER_USER@"
+SUPER_USER_PASSWD="@MYSQL_SUPER_USER_PASSWD@"
