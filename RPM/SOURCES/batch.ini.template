@@ -52,9 +52,17 @@ enabledWorkers.KAsyncTransformMetadata				= 1
 enabledWorkers.KAsyncDispatchEventNotification		= 1
 enabledWorkers.KAsyncIndex							= 4
 enabledWorkers.KAsyncDelete							= 4
+enabledWorkers.KAsyncDeleteFile						= 1
 enabledWorkers.KAsyncMoveCategoryEntries			= 4
 enabledWorkers.KAsyncCopy							= 4
 enabledWorkers.KAsyncParseCaptionAsset				= 1
+enabledWorkers.KScheduledTaskRunner					= 0
+enabledWorkers.KScheduledTaskDryRunner				= 0
+enabledWorkers.KAsyncConvertLiveSegment				= 1
+enabledWorkers.KAsyncConcat							= 1
+enabledWorkers.KAsyncValidateLiveMediaServers		= 1
+enabledWorkers.KAsyncSyncCategoryPrivacyContext		= 1
+enabledWorkers.KAsyncTagIndex						= 1
 
 [mainTemplate : template]
 enabledWorkers.DirectoryCleanupShared				= 1
@@ -140,7 +148,6 @@ friendlyName										= Recorded Media Cleanup
 params.path											= @WOWZA_DIR@/content/
 params.pattern										= *
 params.minutesOld 									= 2880
-
 [KAsyncDbCleanup : PeriodicWorker]
 id													= 17
 friendlyName										= DB Cleanup
