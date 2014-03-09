@@ -42,7 +42,7 @@ Then run:
 ### On the MySQL and Sphinx server:
 ```
 # yum install kaltura-sphinx mysql-server
-# mysql_secure_install
+# mysql_secure_installation
 # /opt/kaltura/bin/kaltura-mysql-settings.sh
 # /opt/kaltura/bin/kaltura-sphinx-config.sh
 # /opt/kaltura/bin/kaltura-db-config.sh

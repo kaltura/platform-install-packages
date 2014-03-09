@@ -3,7 +3,9 @@ This guide describes installation of an all-in-one Kaltura server and applies to
 
 While already supported by the code, this document doesn't yet describe cluster deployment. Instructions for specific server-roles/groups and cluster configuration will soon be added. If you're eager to test cluster deployment, contact us over IRC #kaltura on freenode.net.
 
-Note for testers using VMWare: You can find solid VMWare images at - http://www.thoughtpolice.co.uk/vmware/ --> Make sure to only use compatible OS images; either RedHat or CentOS 5.n, 6.n or FedoraCore 18+.
+Note for testers using Virtualization: @DBezemer created a basic CentOS template virtual server vailable here in OVF format: https://www.dropbox.com/s/luai7sk8nmihrkx/20140306_CentOS-base.zip
+
+Alternatively you can find VMWare images at - http://www.thoughtpolice.co.uk/vmware/ --> Make sure to only use compatible OS images; either RedHat or CentOS 5.n, 6.n or FedoraCore 18+.
 
 ## Installing on a new machine
 
@@ -31,7 +33,7 @@ setenforce permissive
 **Note: that this is currently our test URL, the repo URL will change soon.**
 For nightly builds use:
 ```bash   
-\\#rpm -Uhv http://installrepo.kaltura.org/releases/nightly/RPMS/noarch/kaltura-release-9.11.0-3.noarch.rpm
+\\#rpm -Uhv http://installrepo.kaltura.org/releases/nightly/RPMS/noarch/kaltura-release.noarch.rpm
 ```
 For stable updates:
 ```bash
@@ -47,6 +49,8 @@ yum install kaltura-server
 # Unfortuantely, the postinst scripts for these packages do not set it to start at init time.
 # To set this up:
 chkconfig memcached on
+# force sync ntp
+ntpdate pool.ntp.org
 chkconfig ntpd on
 ```
 
@@ -71,7 +75,7 @@ Two working solutions to the AWS EC2 email limitations are:
 
 ###### Configure the Kaltura installation
 ```bash
-/opt/kaltura/bin/kaltura-config-all.sh [answers-file-path]
+/opt/kaltura/bin/kaltura-config-all.sh (you can use [answers-file-path] after the first install)
 ```
 `[answers-file-path]` is an optional flag, in case you have an answers file ready, you can use it to perform a silent install. If you don't have an answers file, simply omit it (`/opt/kaltura/bin/kaltura-config-all.sh`). The answers file is automatically generated post the installation and is placed in `/tmp/kaltura*.ans`.     
 When asked, answer all the post-install script questions (or provide an answers file to perform a silent install) -
@@ -112,7 +116,7 @@ This will completely remove Kaltura, then download and install from scratch.
 /opt/kaltura/bin/kaltura-drop-db.sh
 yum remove "*kaltura*"
 rm -rf /opt/kaltura
-rpm -ihv http://54.211.235.142/nightly/RPMS/noarch/kaltura-release.noarch.rpm
+rpm -ihv http://installrepo.kaltura.org/releases/stable/RPMS/noarch/kaltura-release.noarch.rpm
 yum clean all
 yum install kaltura-server
 /opt/kaltura/bin/kaltura-config-all.sh [answers-file-path]
