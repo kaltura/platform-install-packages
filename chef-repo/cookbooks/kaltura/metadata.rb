@@ -3,4 +3,4 @@ maintainer_email "jess.portnoy@kaltura.com"
 license          "AGPLv3+"
 description      "Installs/Configures kaltura"
 
-version          "0.1"
+version          "0.2"

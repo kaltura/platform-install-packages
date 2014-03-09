@@ -39,3 +39,7 @@ default[:kaltura][:TIME_ZONE] = "America/New_York"
 default[:kaltura][:SUPER_USER] = "root"
 default[:kaltura][:SUPER_USER_PASSWD] = "root"
 default[:kaltura][:ENVIRONMENT_NAME] = "Kaltura Video Platform"
+default[:kaltura][:USER_CONSENT] = 0
+default[:kaltura][:CRT_FILE] = "/etc/ssl/certs/localhost.crt"
+default[:kaltura][:KEY_FILE] = "/etc/pki/tls/private/localhost.key"
+default[:kaltura][:CHAIN_FILE] = "NOCHAIN"

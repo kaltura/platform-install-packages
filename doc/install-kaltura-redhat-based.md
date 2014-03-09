@@ -75,7 +75,8 @@ Two working solutions to the AWS EC2 email limitations are:
 
 ###### Configure the Kaltura installation
 ```bash
-/opt/kaltura/bin/kaltura-config-all.sh (you can use [answers-file-path] after the first install)
+/opt/kaltura/bin/kaltura-config-all.sh [answers-file-path]
+See doc/kaltura.template.ans for documention of needed variables.
 ```
 `[answers-file-path]` is an optional flag, in case you have an answers file ready, you can use it to perform a silent install. If you don't have an answers file, simply omit it (`/opt/kaltura/bin/kaltura-config-all.sh`). The answers file is automatically generated post the installation and is placed in `/tmp/kaltura*.ans`.     
 When asked, answer all the post-install script questions (or provide an answers file to perform a silent install) -
