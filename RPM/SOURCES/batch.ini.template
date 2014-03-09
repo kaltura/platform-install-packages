@@ -664,3 +664,38 @@ friendlyName										= CopyPartner
 type												= KAsyncCopyPartner
 maximumExecutionTime								= 12000
 scriptPath											= batches/CopyPartner/KAsyncCopyPartnerExe.php
+
+[KAsyncDeleteFile : JobHandlerWorker]
+id													= 530
+name												= KAsyncDeleteFile
+friendlyName										= Delete
+type												= KAsyncDeleteFile
+maximumExecutionTime								= 1200
+scriptPath											= batches/DeleteFile/KAsyncDeleteFileExe.php
+maxInstances										= 1
+
+[KScheduledTaskDryRunner : JobHandlerWorker]
+id													= 540
+type												= KScheduledTaskDryRunner
+scriptPath											= ../plugins/scheduled_task/batch/ScheduledTaskDryRunner/KScheduledTaskDryRunnerExe.php
+params.sharedTempPath 								= @TMP_DIR@/scheduledtasks
+
+[KScheduledTaskRunner : PeriodicWorker]
+type												= KScheduledTaskRunner
+maximumExecutionTime								= 600
+scriptPath											= ../plugins/scheduled_task/batch/ScheduledTaskRunner/KScheduledTaskRunnerExe.php
+sleepBetweenStopStart								= 21600
+
+[KAsyncSyncCategoryPrivacyContext : JobHandlerWorker]
+id													= 550
+friendlyName										= Sync Category Privacy Context
+type												= KAsyncSyncCategoryPrivacyContext
+maximumExecutionTime								= 12000
+scriptPath											= batches/SyncCategoryPrivacyContext/KAsyncSyncCategoryPrivacyContextExe.php
+
+[KAsyncTagIndex : JobHandlerWorker]
+id													= 560
+friendlyName										= Re-index tags
+type												= KAsyncTagIndex
+maximumExecutionTime								= 12000
+scriptPath											= ../plugins/tag_search/lib/batch/tag_index/KAsyncTagIndexExe.php
