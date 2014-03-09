@@ -1,8 +1,8 @@
 %define kmc_login_version v1.2.3
 %define prefix /opt/kaltura
 Name:	kaltura-kmc	
-Version: v5.37.11
-Release: 3 
+Version: v5.37.12
+Release: 1 
 Summary: Kaltura Management Console
 
 Group: System Management	
@@ -68,6 +68,14 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sun Mar 9 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.12-1
+- Upgrade to 5.37.12, fixes:
+  SUP-1634 - KMC will not alert when the user is uploading a file that is larger than 2GB using upload from desktop 
+  PLAT-994 - enable use of draft entries in playlists - when video media is not expected 
+  PLAT-985 - "Copy" button in "Preview & Embed" page is not working 
+- Removed the limitation of not being able to create a transcoding profile with no flavors.
+- Added the ability to choose transcoding profile for draft entry based on the permission "Enable KMC transcoding profile selection for draft entries".
+
 * Sun Feb 23 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.11-1
 - Upgrade to 5.37.11, fixes:
   SUP-1491 - Cannot configure content distribution role Ready for Deployment

@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.3
+Version: v2.4
 Release: 1
 Epoch:0 
 License: AGPLv3+
@@ -51,6 +51,10 @@ rm -rf %{buildroot}
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Sun Mar 9 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.4-1
+- SUP-1393 - Player 2.1 with leadwithhtml5 does not work on a secure MediaSpace instance on Safari 
+- SUP-1556 - HTML5 Player freezing when playing using Safari. 
+
 * Sun Feb 23 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.3-1
   Fixes:
   - Studio V2 support

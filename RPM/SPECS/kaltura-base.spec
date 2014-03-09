@@ -1,7 +1,7 @@
 # this sucks but base.ini needs to know the KMC version and it needs to be known cross cluster because, it is needed to generate the UI confs, which is done by the db-config postinst script which can run from every cluster node.
-%define kmc_version v5.37.11
+%define kmc_version v5.37.12
 %define clipapp_version v1.0.7
-%define html5_version v2.3
+%define html5_version v2.4
 %define kdp3_wrapper_version v37.0
 %define kaltura_user	kaltura
 %define kaltura_group	kaltura
@@ -14,8 +14,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 9.11.0
-Release: 16
+Version: 9.12.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -119,7 +119,7 @@ sed -i "s@\(^kdp3_wrapper_version\)\s*=.*@\1=%{kdp3_wrapper_version}@g" $RPM_BUI
 sed -i 's@^IsmIndex@;IsmIndex@g' %{SOURCE9}
 sed -i 's@^writers.\(.*\).filters.priority.priority\s*=\s*7@writers.\1.filters.priority.priority=4@g' $RPM_BUILD_ROOT%{prefix}/app/configurations/logger.template.ini 
 # our Pentaho is correctly installed under its own dir and not %prefix/bin which is the known default so, adding -k path to kitchen.sh
-sed -i 's#\(@DWH_DIR@\)$#\1 -k /opt/kaltura/pentaho/pdi/kitchen.sh#g' $RPM_BUILD_ROOT%{prefix}/app/configurations/cron/dwh.template
+sed -i 's#\(@DWH_DIR@\)$#\1 -k %{prefix}/pentaho/pdi/kitchen.sh#g' $RPM_BUILD_ROOT%{prefix}/app/configurations/cron/dwh.template
 rm $RPM_BUILD_ROOT%{prefix}/app/generator/sources/android/DemoApplication/libs/libWVphoneAPI.so
 rm $RPM_BUILD_ROOT%{prefix}/app/configurations/.project
 # we bring our own for kaltura-front and kaltura-batch.
@@ -160,8 +160,8 @@ tar zxf %{SOURCE10} -C $RPM_BUILD_ROOT%{prefix}/web/content
 cat > $RPM_BUILD_ROOT%{_sysconfdir}/profile.d/kaltura_base.sh << EOF
 PATH=\$PATH:%{prefix}/bin
 export PATH
-alias allkaltlog='grep --color "ERR:\|PHP\|trace\|CRIT\|\[error\]" /opt/kaltura/log/*.log /opt/kaltura/log/batch/*.log'
-alias kaltlog='tail -f /opt/kaltura/log/*.log /opt/kaltura/log/batch/*.log | grep -A 1 -B 1 --color "ERR:\|PHP\|trace\|CRIT\|\[error\]"'
+alias allkaltlog='grep --color "ERR:\|PHP\|trace\|CRIT\|\[error\]" %{prefix}/log/*.log %{prefix}/log/batch/*.log'
+alias kaltlog='tail -f %{prefix}/log/*.log %{prefix}/log/batch/*.log | grep -A 1 -B 1 --color "ERR:\|PHP\|trace\|CRIT\|\[error\]"'
 EOF
 
 %{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/ld.so.conf.d
@@ -187,7 +187,7 @@ and then edit /etc/selinux/config to make the change permanent."
 fi
 # create user/group, and update permissions
 groupadd -r %{kaltura_group} -g7373 2>/dev/null || true
-useradd -M -r -u7373 -d /opt/kaltura -s /bin/bash -c "Kaltura server" -g %{kaltura_group} %{kaltura_user} 2>/dev/null || true
+useradd -M -r -u7373 -d %{prefix} -s /bin/bash -c "Kaltura server" -g %{kaltura_group} %{kaltura_user} 2>/dev/null || true
 getent group apache >/dev/null || groupadd -g 48 -r apache
 getent passwd apache >/dev/null || \
   useradd -r -u 48 -g apache -s /sbin/nologin \
@@ -201,9 +201,9 @@ usermod -g %{kaltura_group} %{kaltura_user} 2>/dev/null || true
 
 ln -sf %{prefix}/app/configurations/system.ini /etc/kaltura.d/system.ini
 ln -sf %{prefix}/app/api_v3/web %{prefix}/app/alpha/web/api_v3
-chown apache.kaltura -R /opt/kaltura/web/content/entry /opt/kaltura/web/content/uploads/  /opt/kaltura/web/tmp/
-#/opt/kaltura/web/content/webcam/
-find /opt/kaltura/web/content/entry /opt/kaltura/web/content/uploads/  /opt/kaltura/web/tmp/ -type d -exec chmod 775 {} \;
+chown apache.kaltura -R %{prefix}/web/content/entry %{prefix}/web/content/uploads/  %{prefix}/web/tmp/
+#%{prefix}/web/content/webcam/
+find %{prefix}/web/content/entry %{prefix}/web/content/uploads/  %{prefix}/web/tmp/ -type d -exec chmod 775 {} \;
 /etc/init.d/ntpd start
 if [ "$1" = 2 ];then
 	if [ -r "%{prefix}/app/configurations/local.ini" -a -r "%{prefix}/app/configurations/base.ini" ];then
@@ -220,6 +220,13 @@ if [ "$1" = 2 ];then
 			%{_sysconfdir}/init.d/httpd restart
 		fi
 	fi
+	# see https://kaltura.atlassian.net/wiki/pages/viewpage.action?spaceKey=QAC&title=QA.Core+Deployment+Instructions%3A+Mar+9%2C+2014
+	#php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_01_20_categoryentry_syncprivacycontext_action.php
+	#php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_01_26_add_media_server_partner_level_permission.php
+ 	#php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_02_25_add_push_publish_permission_to_partner_0.php
+ 	#php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_01_26_update_live_stream_service_permissions.php
+	#php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_02_25_add_push_publish_permission_to_live_asset_parameters.php
+	#php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_02_25_add_push_publish_permission_to_live_entry_parameters.php
 fi
 
 
@@ -274,6 +281,26 @@ fi
 
 
 %changelog
+* Sun Mar 9 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.12.0-1
+- Ver Bounce to 9.12.0
+- PLAT-852 - Wowza working with multicast in a hybrid model Closed
+- PLAT-823 - enable use of draft entries in playlists - when video media is not expected Closed
+- Added the ability to create transcoding profiles with no flavors based on the permission "Enable KMC transcoding profile selection for draft entries".
+- Entries based on such transcoding profile are created with status "Ready".
+- PLAT-599 - On Course copy (copy category entries) enable to clone all entries Closed
+- Removal of 32 categories limitation on entry
+- PLAT-343 - Improved Fixed-Aspect-Ratio calculation Closed
+- PLAT-933 - Migrate to new Widevine url structure in encryption Closed
+- MG-134 - thumbnail - option to get an entry thumbnail with width/height closest to required work partial Closed
+- Backend permanent bypass to cache was verified by QA.Core
+- Fix must be verified by QA.App as well
+- PLAT-865 - add partner CRM id to the api Closed
+- PLAT-987 - Change default DVR window to be 2h rather than 24h Closed 
+- SUP-1505 - Is there a limitation for bulk download from KMC? Closed
+- SUP-1530 - Retry mechanism for import jobs when 'couldn't connect to host' Deployed
+- SUP-1574 - 'Add to playlist' shows playlists that does not belong to the logged user_id Deployed
+
+
 * Wed Mar 5 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.11.0-16
 - Place holder for Chain. See: https://github.com/kaltura/platform-install-packages/issues/57
   

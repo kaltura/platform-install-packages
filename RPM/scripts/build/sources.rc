@@ -7,7 +7,7 @@ PACKAGER_NAME="Jess Portnoy"
 PACKAGER_MAIL="jess.portnoy@kaltura.com"
 TMP_DIR=/tmp
 SVN_USER=jessp
-KALTURA_SERVER_VERSION="9.7.0"
+KALTURA_SERVER_VERSION="9.12.0"
 
 # Sphinx build vars:
 SPHINX_URI="http://sphinxsearch.googlecode.com/svn/trunk/"
@@ -49,7 +49,7 @@ PENTAHO_RPM_PACKAGE_NAME=kaltura-pentaho
 PENTAHO_URI="http://sourceforge.net/projects/pentaho/files/Data%20Integration/$PENTAHO_VERSION-stable/pdi-ce-$PENTAHO_VERSION-stable.tar.gz"
 
 # Kaltura Core build vars:
-KALTURA_CORE_VERSION=9.11.0
+KALTURA_CORE_VERSION=9.12.0
 KALTURA_URI="https://github.com/kaltura/server/archive/IX-$KALTURA_CORE_VERSION.zip"
 KALTURA_TEMPLATES_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalsource/on-premise/trunk/packaging/templates"
 
@@ -59,7 +59,7 @@ KALTURA_MEDIASERVER_URI="https://github.com/kaltura/media-server/archive/$KALTUR
 KALTURA_MEDIASERVER_RPM_NAME=kaltura-media-server
 
 # Kaltura KMC:
-KMC_VERSION=v5.37.11
+KMC_VERSION=v5.37.12
 KMC_LOGIN_VERSION=v1.2.3
 KMC_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/flash/kmc/$KMC_VERSION"
 KMC_LOGIN_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/flash/kmc/login/$KMC_LOGIN_VERSION"
@@ -73,13 +73,7 @@ KMC_DOC_URI="https://github.com/kaltura/kmc-docs/archive/$KMC_DOC_VERSION.zip"
 
 # Kaltura KDP3:
 # we bundle a few vers at each release:
-KDP_VERSIONS="v3.5.21 v3.8.9 v3.9.1 v3.9.2 3.9.7"
-KDP_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/flash/kdp3"
-KDP_RPM_NAME="kaltura-kdp"
-
-# Kaltura KDP3:
-# we bundle a few vers at each release:
-KDP3_VERSION="v3.9.7"
+KDP3_VERSION="v3.9.7 3.9.8"
 KDP3_URI="https://github.com/kaltura/kdp/releases/download/$KDP3_VERSION/$KDP3_VERSION.zip"
 KDP3_UICONF_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalsource/uiconf/kaltura/kmc/appstudio/kdp3"
 KDP3_RPM_NAME="kaltura-kdp3"
@@ -163,7 +157,7 @@ FLEX_WRAPPER_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/flash/
 FLEX_WRAPPER_RPM_NAME="kaltura-flexwrapper"
 
 # HTML5 lib
-HTML5LIB_VERSION="v2.3"
+HTML5LIB_VERSION="v2.4"
 HTML5LIB_URI="https://github.com/kaltura/mwEmbed/tarball/$HTML5LIB_VERSION"
 HTML5LIB_RPM_NAME="kaltura-html5lib"
 

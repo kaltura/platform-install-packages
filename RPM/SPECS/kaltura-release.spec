@@ -4,8 +4,8 @@
 %define prefix /opt/kaltura 
 Summary: Kaltura Server release file and package configuration
 Name: kaltura-release
-Version: 9.11.0
-Release: 18
+Version: 9.12.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 URL: http://kaltura.org
@@ -88,6 +88,9 @@ exit 0
 #%{_sysconfdir}/pki/rpm-gpg/RPM-GPG-KEY-rpmforge-*
 
 %changelog
+* Sun Mar 9 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.12.0-1
+- Ver Bounce to 9.12.0
+
 * Thu Feb 27 2014 David Bezemer <info@davidbezemer.nl> - 9.11.0-6
 - Add testing to base package
 

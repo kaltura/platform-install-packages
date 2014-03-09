@@ -1,9 +1,9 @@
 %define prefix /opt/kaltura
-%define kdp3_vers "v3.5.21 v3.8.9 v3.9.1 v3.9.2 v3.9.7"
+%define kdp3_vers "v3.5.21 v3.8.9 v3.9.1 v3.9.2 v3.9.7 v3.9.8"
 Name:	kaltura-kdp3	
-Version: v3.9.7
+Version: v3.9.8
 Epoch: 1 
-Release: 4 
+Release: 1 
 Summary: Kaltura Dynamic Player
 License: AGPLv3+	
 URL: https://github.com/kaltura/kdp/releases/tag/%{version}
@@ -46,6 +46,11 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sun Mar 9 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v3.9.8-1
+- SUP-1430 - Closed Captions won't show in livestream + prerolls 
+- SUP-1498 - Video is not Auto played After Ad served. 
+- SUP-1508 - [Internet Broadcasting] Closed Captioning won't work with flashvar. 
+
 * Mon Feb 3 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v3.9.7-3
 - Since these widgets typically reside on NFS and served from another machine there is not need for the Apache dep.
 
