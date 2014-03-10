@@ -4,6 +4,7 @@ This guide describes installation of an all-in-one Kaltura server and applies to
 While already supported by the code, this document doesn't yet describe cluster deployment. Instructions for specific server-roles/groups and cluster configuration will soon be added. If you're eager to test cluster deployment, contact us over IRC #kaltura on freenode.net.
 
 Note for testers using Virtualization: @DBezemer created a basic CentOS template virtual server vailable here in OVF format: https://www.dropbox.com/s/luai7sk8nmihrkx/20140306_CentOS-base.zip
+Also he created a full installed Kaltura environment, where all you have to do is change the hostname and run the configuration script (/opt/kaltura/bin/kaltura-config-all.sh [answers-file-path]), available for download in OVF here: https://www.dropbox.com/s/8992rjc8jpk5rz1/20140309_CentOS-Kaltura-Stable-9.9.0.zip
 
 Alternatively you can find VMWare images at - http://www.thoughtpolice.co.uk/vmware/ --> Make sure to only use compatible OS images; either RedHat or CentOS 5.n, 6.n or FedoraCore 18+.
 
