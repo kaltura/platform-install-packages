@@ -49,8 +49,6 @@ yum install kaltura-server
 # Unfortuantely, the postinst scripts for these packages do not set it to start at init time.
 # To set this up:
 chkconfig memcached on
-# force sync ntp
-ntpdate pool.ntp.org
 chkconfig ntpd on
 ```
 
