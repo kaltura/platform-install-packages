@@ -163,7 +163,7 @@ send_install_becon()
 	if [ -r $CONSENT_FILE ];then
 		. $CONSENT_FILE
 	fi
-	if [ -z "$USER_CONSENT" -o $USER_CONSENT = 0 ];then
+	if [ -z "$USER_CONSENT" -o "$USER_CONSENT" = 0 ];then
 		return 0 
 	fi
 	#echo sending becobeep

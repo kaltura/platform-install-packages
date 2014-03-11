@@ -61,7 +61,8 @@ KALTURA_MEDIASERVER_RPM_NAME=kaltura-media-server
 # Kaltura KMC:
 KMC_VERSION=v5.37.12
 KMC_LOGIN_VERSION=v1.2.3
-KMC_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/flash/kmc/$KMC_VERSION"
+#KMC_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/flash/kmc/$KMC_VERSION"
+KMC_URI="https://github.com/kaltura/management-console/archive/master.zip"
 KMC_LOGIN_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/flash/kmc/login/$KMC_LOGIN_VERSION"
 KMC_UICONF_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalsource/uiconf/kaltura/kmc"
 KMC_RPM_NAME="kaltura-kmc"
@@ -73,7 +74,7 @@ KMC_DOC_URI="https://github.com/kaltura/kmc-docs/archive/$KMC_DOC_VERSION.zip"
 
 # Kaltura KDP3:
 # we bundle a few vers at each release:
-KDP3_VERSION="v3.9.7 3.9.8"
+KDP3_VERSION="v3.9.8"
 KDP3_URI="https://github.com/kaltura/kdp/releases/download/$KDP3_VERSION/$KDP3_VERSION.zip"
 KDP3_UICONF_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalsource/uiconf/kaltura/kmc/appstudio/kdp3"
 KDP3_RPM_NAME="kaltura-kdp3"

@@ -3,7 +3,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.7
-Release: 22 
+Release: 23 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -76,6 +76,9 @@ fi
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Tue Mar 9 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.7-23
+- '"' around CONSENT.
+
 * Wed Mar 5 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.7-22
 - Base - exit if something failed.
 
