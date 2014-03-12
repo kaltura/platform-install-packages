@@ -220,13 +220,15 @@ if [ "$1" = 2 ];then
 		fi
 	fi
 	# see https://kaltura.atlassian.net/wiki/pages/viewpage.action?spaceKey=QAC&title=QA.Core+Deployment+Instructions%3A+Mar+9%2C+2014
-	php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_01_20_categoryentry_syncprivacycontext_action.php
-	php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_01_26_add_media_server_partner_level_permission.php
- 	php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_02_25_add_push_publish_permission_to_partner_0.php
- 	php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_01_26_update_live_stream_service_permissions.php
-	php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_02_25_add_push_publish_permission_to_live_asset_parameters.php
-	php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_02_25_add_push_publish_permission_to_live_entry_parameters.php
-	php %{prefix}/app/alpha/scripts/utils/setCategoryEntriesPrivacyContext.php realrun
+	if [ %{version} = '9.12.0' -a %{release} = '1' ];then
+		php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_01_20_categoryentry_syncprivacycontext_action.php
+		php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_01_26_add_media_server_partner_level_permission.php
+		php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_02_25_add_push_publish_permission_to_partner_0.php
+		php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_01_26_update_live_stream_service_permissions.php
+		php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_02_25_add_push_publish_permission_to_live_asset_parameters.php
+		php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_02_25_add_push_publish_permission_to_live_entry_parameters.php
+		php %{prefix}/app/alpha/scripts/utils/setCategoryEntriesPrivacyContext.php realrun
+	fi
 
 fi
 

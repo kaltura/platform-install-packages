@@ -58,8 +58,12 @@ if [ "$1" = 2 ];then
 					continue
 				fi
 			fi
-			mysql kaltura -h $DB1_HOST -u $SUPER_USER -P $DB1_PORT -p$SUPER_USER_PASSWD < $SQL
-			RC=$?
+			if [ -r $SQL ];then
+				mysql kaltura -h $DB1_HOST -u $SUPER_USER -P $DB1_PORT -p$SUPER_USER_PASSWD < $SQL
+				RC=$?
+			else
+				echo "In order to upgrade your DB, please run %{prefix}/bin/kaltura-db-update.sh once the RPMs installation completes."
+			fi
 		done
 		if [ $RC -eq 0 ];then
 			cat %{prefix}/app/deployment/sql_updates >> %{prefix}/app/deployment/sql_updates.done

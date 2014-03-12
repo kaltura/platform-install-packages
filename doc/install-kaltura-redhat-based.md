@@ -30,16 +30,16 @@ setenforce permissive
 # Set SELINUX=permissive
 # Save /etc/selinux/config
 ```
-##### Auto Set the Kaltura install repository links 
-**Please note that this is currently our test URL, the repo URL will change soon.**
+##### Auto Set the Kaltura install repository URLs 
+
+For stable updates (running as root):
+```bash
+rpm -ihv http://installrepo.kaltura.org/releases/stable/RPMS/noarch/kaltura-release.noarch.rpm
+```
 
 For nightly builds use (running as root):
 ```bash   
 rpm -Uhv http://installrepo.kaltura.org/releases/nightly/RPMS/noarch/kaltura-release.noarch.rpm
-```
-For stable updates (running as root):
-```bash
-rpm -ihv http://installrepo.kaltura.org/releases/stable/RPMS/noarch/kaltura-release.noarch.rpm
 ```
 
 ##### Note about SSL certificates
