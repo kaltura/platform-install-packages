@@ -10,19 +10,19 @@ This guide describes installation of an all-in-one Kaltura server and applies to
 
 ## Installing on a new machine
 
-###### Pre-Install notes
+##### Pre-Install notes
 
 * **Resolveable host names** - When installing, you will be promopted for each server's resolvable hostname. Note that it is crucial that all host names will be resolveable by other servers in the cluster (and outside the cluster for front machines). Before installing, verify the /etc/hosts file is properly configured and that all Kaltura server hostnames are resolveable in your network.
 * **ROOT is REQUIRED** - Before you begin, make sure you're logged in as the system root. root access is required to install Kaltura. ```sudo su - ```
 
-###### iptables and ports
+##### iptables and ports
 Kaltura requires certain ports to be open for proper operation. [See the list of required open ports](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura-required-ports.md).   
 If you're just testing and don't mind an open system, you can use the below to disbale iptables altogether:
 ```bash
 iptables -F
 chkconfig iptables off
 ```
-###### Disable SELinux - REQUIRED (currently Kaltura can't run properly with SELinux)
+##### Disable SELinux - REQUIRED (currently Kaltura can't run properly with SELinux)
 ```bash 
 setenforce permissive
 # To verify SELinux will not revert to enabled next restart:
@@ -30,7 +30,7 @@ setenforce permissive
 # Set SELINUX=permissive
 # Save /etc/selinux/config
 ```
-###### Auto Set the Kaltura install repository links 
+##### Auto Set the Kaltura install repository links 
 **Please note that this is currently our test URL, the repo URL will change soon.**
 
 For nightly builds use (running as root):
@@ -42,7 +42,7 @@ For stable updates (running as root):
 rpm -ihv http://installrepo.kaltura.org/releases/stable/RPMS/noarch/kaltura-release.noarch.rpm
 ```
 
-###### Note about SSL certificates
+##### Note about SSL certificates
 
 You can run Kaltura with or without SSL (state the correct protocol and certificates during the installation).  
 If you don't have a signed certificate you can use either of the following options.
@@ -63,7 +63,7 @@ SSLCertificateChainFile
 SSLCACertificateFile
 ```
 
-###### Install the Kaltura Packages
+##### Install the Kaltura Packages
 ```bash
 yum clean all
 yum install kaltura-server
@@ -75,7 +75,7 @@ chkconfig memcached on
 chkconfig ntpd on
 ```
 
-###### Install and configure MySQL (if you’re going to use DB on the same server)
+##### Install and configure MySQL (if you’re going to use DB on the same server)
 ```bash
 yum install mysql-server
 /etc/init.d/mysqld start
@@ -85,7 +85,8 @@ mysql_secure_installation
 # Enable MySQL at init time:
 chkconfig mysqld on
 ```
-###### Configure your email server and MTA - REQUIRED
+
+##### Configure your email server and MTA - REQUIRED
 If your machine doesn't have postfix email configured before the Kaltura install, you will not receive emails from the install system nor publisher account activation mails. 
 
 By default Amazon Web Services (AWS) EC2 machines are blocked from sending email via port 25. For more information see [this thread on AWS forums](https://forums.aws.amazon.com/message.jspa?messageID=317525#317525).  
@@ -94,7 +95,7 @@ Two working solutions to the AWS EC2 email limitations are:
 * Using SendGrid as your mail service ([setting up ec2 with Sendgrid and postfix](http://www.zoharbabin.com/configure-ssmtp-or-postfix-to-send-email-via-sendgrid-on-centos-6-3-ec2)).
 * Using [Amazon's Simple Email Service](http://aws.amazon.com/ses/). 
 
-###### Configure the Kaltura installation
+##### Configure the Kaltura installation
 ```bash
 /opt/kaltura/bin/kaltura-config-all.sh [answers-file-path]
 See doc/kaltura.template.ans for documention of needed variables.
@@ -104,7 +105,7 @@ When asked, answer all the post-install script questions (or provide an answers 
 * For CDN host: and Apache virtual host: use the resolvable domain name of your server (not always the default value, which will be the hostname).
 * For Service URL: enter protocol + domain (e.g. https://mykalturasite.com).
 
-###### Configure Red5 server
+##### Configure Red5 server
 - Request http://hostname:5080
 - Click 'Install a ready-made application'
 - Mark 'OFLA Demo' and click 'Install'
