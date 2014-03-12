@@ -123,7 +123,7 @@ yum clean all
 yum update "*kaltura*"
 ```
 Then follow the on-screen instructions (in case any further actions required).   
-Once the upgraded completes, please run:
+Once the upgrade completes, please run:
 ```bash
 /opt/kaltura/bin/kaltura-db-update.sh
 ```
