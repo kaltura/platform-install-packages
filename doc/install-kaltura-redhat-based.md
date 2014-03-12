@@ -53,7 +53,11 @@ You can generate a free valid cert here:
 http://cert.startcom.org/
 Also, for more info, please see:
 http://www.sslshopper.com/ssl-checker.html#hostname=https://mediasrv.cloud9aerial.com/
+Depending on your chosen certificate, you may need to also set the following directives: 
+SSLCertificateChainFile
+SSLCACertificateFile
 
+in /etc/httpd/conf.d/zzzkaltura.ssl.conf
 
 ###### Install the Kaltura Packages
 ```bash
