@@ -123,7 +123,11 @@ yum clean all
 yum update "*kaltura*"
 ```
 Then follow the on-screen instructions (in case any further actions required).   
-
+Once the upgraded completes, please run:
+```bash
+/opt/kaltura/bin/kaltura-db-update.sh
+```
+To upgrade your DB schema.
 
 ## Fresh Database Installation
 Use this in cases where you want to clear the database and start from fresh.
