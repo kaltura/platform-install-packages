@@ -57,7 +57,7 @@ KEY_FILE="/etc/pki/tls/private/localhost.key"
 * Alternatively, it is recommended that you use a properly signed certificate and use it instead of self-signed certificates. You can generate a free valid cert using http://cert.startcom.org/.    
 To verify the validity of your certificate, you can use [SSLShoper's SSL Check Utility](http://www.sslshopper.com/ssl-checker.html).  
 
-Depending on your chosen certificate, you may need to also set the following directives in `in /etc/httpd/conf.d/zzzkaltura.ssl.conf`: 
+Depending on your certificate, you may also need to set the following directives in `/etc/httpd/conf.d/zzzkaltura.ssl.conf`: 
 ```
 SSLCertificateChainFile
 SSLCACertificateFile
