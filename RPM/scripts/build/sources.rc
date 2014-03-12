@@ -61,8 +61,8 @@ KALTURA_MEDIASERVER_RPM_NAME=kaltura-media-server
 # Kaltura KMC:
 KMC_VERSION=v5.37.12
 KMC_LOGIN_VERSION=v1.2.3
-#KMC_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/flash/kmc/$KMC_VERSION"
-KMC_URI="https://github.com/kaltura/management-console/archive/master.zip"
+KMC_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/flash/kmc/$KMC_VERSION"
+#KMC_URI="https://github.com/kaltura/management-console/archive/master.zip"
 KMC_LOGIN_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/flash/kmc/login/$KMC_LOGIN_VERSION"
 KMC_UICONF_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalsource/uiconf/kaltura/kmc"
 KMC_RPM_NAME="kaltura-kmc"
