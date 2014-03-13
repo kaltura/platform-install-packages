@@ -104,8 +104,8 @@ Two working solutions to the AWS EC2 email limitations are:
 
 ##### Configure the Kaltura installation
 ```bash
-# /opt/kaltura/bin/kaltura-config-all.sh [answers-file-path]
-See doc/kaltura.template.ans for documention of needed variables.
+/opt/kaltura/bin/kaltura-config-all.sh [answers-file-path]
+# See doc/kaltura.template.ans for documention of needed variables.
 ```
 `[answers-file-path]` is an optional flag, in case you have an answers file ready, you can use it to perform a silent install. If you don't have an answers file, simply omit it (`/opt/kaltura/bin/kaltura-config-all.sh`). The answers file is automatically generated post the installation and is placed in `/tmp/kaltura*.ans`.     
 When asked, answer all the post-install script questions (or provide an answers file to perform a silent install) -
@@ -113,22 +113,24 @@ When asked, answer all the post-install script questions (or provide an answers 
 * For Service URL: enter protocol + domain (e.g. https://mykalturasite.com).
 
 ##### Configure Red5 server
-- Request http://hostname:5080
-- Click 'Install a ready-made application'
-- Mark 'OFLA Demo' and click 'Install'
-- Edit /usr/lib/red5/webapps/oflaDemo/index.html and replace 'localhost' with your actual Red5 hostname or IP
-- Test OflaDemo by making a request to http://hostname:5080/oflaDemo/ and playing the sample videos
-- Run: 
+1. Request http://hostname:5080
+1. Click 'Install a ready-made application'
+1. Mark 'OFLA Demo' and click 'Install'
+1. Edit /usr/lib/red5/webapps/oflaDemo/index.html and replace 'localhost' with your actual Red5 hostname or IP
+1. Test OflaDemo by making a request to http://hostname:5080/oflaDemo/ and playing the sample videos
+1. Run: 
+
 ```bash
- # /opt/kaltura/bin/kaltura-red5-config.sh
+/opt/kaltura/bin/kaltura-red5-config.sh
 ```
+
 You can now record a video using KMC->Upload->Record from Webcam.
 
 ## Upgrade an existing Kaltura installation 
 *This will only work if the initial install was using this packages based install, it will not work for old Kaltura deployments using the PHP installers*
 ```bash
-# yum clean all
-# yum update "*kaltura*"
+yum clean all
+yum update "*kaltura*"
 ```
 Then follow the on-screen instructions (in case any further actions required).   
 Once the upgrade completes, please run:
@@ -140,20 +142,20 @@ To upgrade your DB schema.
 ## Fresh Database Installation
 Use this in cases where you want to clear the database and start from fresh.
 ```bash
-# /opt/kaltura/bin/kaltura-drop-db.sh
-# /opt/kaltura/bin/kaltura-config-all.sh [answers-file-path]
+/opt/kaltura/bin/kaltura-drop-db.sh
+/opt/kaltura/bin/kaltura-config-all.sh [answers-file-path]
 ```
 
 ## Complete REinstall 
 This will completely remove Kaltura, then download and install from scratch.
 ```bash
-# /opt/kaltura/bin/kaltura-drop-db.sh
-# yum remove "*kaltura*"
-# rm -rf /opt/kaltura
-# rpm -ihv http://installrepo.kaltura.org/releases/stable/RPMS/noarch/kaltura-release.noarch.rpm
-# yum clean all
-# yum install kaltura-server
-# /opt/kaltura/bin/kaltura-config-all.sh [answers-file-path]
+/opt/kaltura/bin/kaltura-drop-db.sh
+yum remove "*kaltura*"
+rm -rf /opt/kaltura
+rpm -ihv http://installrepo.kaltura.org/releases/stable/RPMS/noarch/kaltura-release.noarch.rpm
+yum clean all
+yum install kaltura-server
+/opt/kaltura/bin/kaltura-config-all.sh [answers-file-path]
 ```
 *Note that the repository URL will change soon, this is just the test repository*
 
@@ -161,7 +163,7 @@ This will completely remove Kaltura, then download and install from scratch.
 If you ever come across issues, increase log verbosity to 7 using the following method.        
 Run the following command using root:    
 ```bash
-# sed -i 's@^writers.\(.*\).filters.priority.priority\s*=\s*7@writers.\1.filters.priority.priority=4@g' /opt/kaltura/app/configurations/logger.ini
+sed -i 's@^writers.\(.*\).filters.priority.priority\s*=\s*7@writers.\1.filters.priority.priority=4@g' /opt/kaltura/app/configurations/logger.ini
 ```
 Then restart your Apache.    
 
