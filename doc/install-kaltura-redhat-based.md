@@ -151,10 +151,10 @@ yum install kaltura-server
 *Note that the repository URL will change soon, this is just the test repository*
 
 ## Troubleshooting
-If you ever come across issues, increase log verbosity to 7 using the following method:
-
-```
-# sed -i 's@^writers.\(.*\).filters.priority.priority\s*=\s*7@writers.\1.filters.priority.priority=4@g' /opt/kaltura/app/configurations/logger.ini
+If you ever come across issues, increase log verbosity to 7 using the following method.        
+Run the following command using root:    
+```bash
+sed -i 's@^writers.\(.*\).filters.priority.priority\s*=\s*7@writers.\1.filters.priority.priority=4@g' /opt/kaltura/app/configurations/logger.ini
 ```
 Then restart your Apache.    
 
