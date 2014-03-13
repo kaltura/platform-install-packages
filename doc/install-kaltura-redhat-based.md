@@ -105,23 +105,6 @@ When asked, answer all the post-install script questions (or provide an answers 
 * For CDN host: and Apache virtual host: use the resolvable domain name of your server (not always the default value, which will be the hostname).
 * For Service URL: enter protocol + domain (e.g. https://mykalturasite.com).
 
-##### Troubleshooting
-If you ever come across issues, increase log verbosity to 7 using:
-# sed -i 's@^writers.\(.*\).filters.priority.priority\s*=\s*7@writers.\1.filters.priority.priority=4@g'
-Restart your Apache and then use the following aliases to grep all log files for errors:
-type kaltlog
-kaltlog is aliased to `tail -f /opt/kaltura/log/*.log /opt/kaltura/log/batch/*.log | grep -A 1 -B 1 --color "ERR:\|PHP\|trace\|CRIT\|\[error\]"'
-grep 'ERR:\|exception\|trace\|CRIT\|\[error\]' @BASE_DIR@/log/*.log --color -r
-
-This will tail the logs for errors while making the HTTP[s] requests to the server.
-
-You can also:
-type allkaltlog
-allkaltlog is aliased to `grep --color "ERR:\|PHP\|trace\|CRIT\|\[error\]" /opt/kaltura/log/*.log /opt/kaltura/log/batch/*.log'
-
-which will dump all errors from relevant logs. Note this may produce a lot of output.
-This output can be used to analyze past failures but for active debugging use the kaltlog alias.
-
 ##### Configure Red5 server
 - Request http://hostname:5080
 - Click 'Install a ready-made application'
@@ -166,3 +149,16 @@ yum install kaltura-server
 /opt/kaltura/bin/kaltura-config-all.sh [answers-file-path]
 ```
 *Note that the repository URL will change soon, this is just the test repository*
+
+## Troubleshooting
+If you ever come across issues, increase log verbosity to 7 using the following method:
+
+```
+# sed -i 's@^writers.\(.*\).filters.priority.priority\s*=\s*7@writers.\1.filters.priority.priority=4@g'
+```
+Then restart your Apache.    
+
+Run `kaltlog` (using root), which will continuously track (using `tail`) an error grep from all Kaltura log files.
+
+You can also use: `allkaltlog` (using root), which will dump all the error lines from the Kaltura logs once. Note that this can result in a lot of output, so the best way to use it will be to redirect to a file: `allkaltlog > errors.txt`.
+This output can be used to analyze past failures but for active debugging use the kaltlog alias.   
