@@ -106,6 +106,10 @@ fi
 
 
 %changelog
+* Thu Mar 13 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 5.6-12
+- Placeholders instead of hard coded host and path to APP_DIR.
+- Commented section about setting up monit over SSL.
+
 * Mon Feb 17 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 5.6-11
 - Fix for https://github.com/kaltura/platform-install-packages/issues/41
 
