@@ -61,18 +61,14 @@ To use the [monit](http://mmonit.com/monit/) Monitoring tab in admin console, yo
 chmod 600 /opt/kaltura/app/configurations/monit.pem
 /usr/bin/openssl gendh 512 >> /opt/kaltura/app/configurations/monit.pem
 ```
-Then edit: `/opt/kaltura/app/configurations/monit/monit.conf`
-
+Then edit: `/opt/kaltura/app/configurations/monit/monit.conf`    
 And add:
 ```
 SSL ENABLE
 PEMFILE /opt/kaltura/app/configurations/monit.pem
 ALLOWSELFCERTIFICATION
 ```
-Finally, run:
-```bash
-/etc/init.d/kaltura-monit restart
-```
+Finally, run: `/etc/init.d/kaltura-monit restart`
 
 ##### Install the Kaltura Packages
 ```bash
