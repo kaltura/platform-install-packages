@@ -35,6 +35,7 @@ Are you absolutely certain you want this? [n/Y]
 "
 read AN
 if [ "$AN" != 'Y' ];then
+	echo "Aborting. To remove hit UPPER CASED 'Y'"
 	exit 1
 fi
 echo "root DB passwd:"

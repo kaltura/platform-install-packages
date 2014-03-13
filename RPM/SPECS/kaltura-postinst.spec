@@ -2,8 +2,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
-Version: 1.0.7
-Release: 23 
+Version: 1.0.8
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -80,6 +80,10 @@ fi
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Thu Mar 13 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.8-1
+- Modified mail template a little.
+- Added script to configure NFS client side.
+
 * Tue Mar 9 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.7-23
 - '"' around CONSENT.
 
