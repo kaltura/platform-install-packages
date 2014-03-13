@@ -47,18 +47,16 @@ Find your install log file at: @BASE_DIR@/log
 
 
 Tip #4:
+If you ever come across issues, increase log verbosity to 7 using the following method.        
+Run the following command using root:    
+sed -i 's@^writers.\(.*\).filters.priority.priority\s*=\s*7@writers.\1.filters.priority.priority=4@g' /opt/kaltura/app/configurations/logger.ini
+Then restart your Apache.    
 
+Run `kaltlog` (using root), which will continuously track (using `tail`) an error grep from all Kaltura log files.
 
-If you ever come across issues, increase log verbosity to 7 using:
-# sed -i 's@^writers.\(.*\).filters.priority.priority\s*=\s*7@writers.\1.filters.priority.priority=4@g' /opt/kaltura/app/configurations/logger.ini
-Restart your Apache and then use the following aliases to grep all log files for errors:
-type kaltlog
-kaltlog is aliased to `tail -f /opt/kaltura/log/*.log /opt/kaltura/log/batch/*.log | grep -A 1 -B 1 --color "ERR:\|PHP\|trace\|CRIT\|\[error\]"'
-grep 'ERR:\|exception\|trace\|CRIT\|\[error\]' @BASE_DIR@/log/*.log --color -r
+You can also use: `allkaltlog` (using root), which will dump all the error lines from the Kaltura logs once. Note that this can result in a lot of output, so the best way to use it will be to redirect to a file: `allkaltlog > errors.txt`.
+This output can be used to analyze past failures but for active debugging use the kaltlog alias.   
 
-You can also:
-type allkaltlog
-allkaltlog is aliased to `grep --color "ERR:\|PHP\|trace\|CRIT\|\[error\]" /opt/kaltura/log/*.log /opt/kaltura/log/batch/*.log'
 
 Tip #5:
 
