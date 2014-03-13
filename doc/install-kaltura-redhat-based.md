@@ -63,6 +63,25 @@ SSLCertificateChainFile
 SSLCACertificateFile
 ```
 
+In order to generate a certificate for Monit to use so you can use the 'Monitoring' tab in admin console:
+```bash
+/usr/bin/openssl req -new -x509 -days 365 -nodes -out /opt/kaltura/app/configurations/monit.pem -keyout /opt/kaltura/app/configurations/monit.pem
+chmod 600 /opt/kaltura/app/configurations/monit.pem
+/usr/bin/openssl gendh 512 >> /opt/kaltura/app/configurations/monit.pem
+```
+edit:
+/opt/kaltura/app/configurations/monit/monit.conf
+
+And add:
+SSL ENABLE
+PEMFILE /opt/kaltura/app/configurations/monit.pem
+ALLOWSELFCERTIFICATION
+
+```bash
+# /etc/init.d/kaltura-monit restart
+```
+
+
 ##### Install the Kaltura Packages
 ```bash
 yum clean all
