@@ -65,17 +65,19 @@ SSLCACertificateFile
 
 In order to generate a certificate for Monit to use so you can use the 'Monitoring' tab in admin console:
 ```bash
-/usr/bin/openssl req -new -x509 -days 365 -nodes -out /opt/kaltura/app/configurations/monit.pem -keyout /opt/kaltura/app/configurations/monit.pem
-chmod 600 /opt/kaltura/app/configurations/monit.pem
-/usr/bin/openssl gendh 512 >> /opt/kaltura/app/configurations/monit.pem
+# /usr/bin/openssl req -new -x509 -days 365 -nodes -out /opt/kaltura/app/configurations/monit.pem -keyout /opt/kaltura/app/configurations/monit.pem
+# chmod 600 /opt/kaltura/app/configurations/monit.pem
+# /usr/bin/openssl gendh 512 >> /opt/kaltura/app/configurations/monit.pem
 ```
 edit:
 /opt/kaltura/app/configurations/monit/monit.conf
 
 And add:
+```
 SSL ENABLE
 PEMFILE /opt/kaltura/app/configurations/monit.pem
 ALLOWSELFCERTIFICATION
+```
 
 ```bash
 # /etc/init.d/kaltura-monit restart
@@ -116,7 +118,7 @@ Two working solutions to the AWS EC2 email limitations are:
 
 ##### Configure the Kaltura installation
 ```bash
-/opt/kaltura/bin/kaltura-config-all.sh [answers-file-path]
+# /opt/kaltura/bin/kaltura-config-all.sh [answers-file-path]
 See doc/kaltura.template.ans for documention of needed variables.
 ```
 `[answers-file-path]` is an optional flag, in case you have an answers file ready, you can use it to perform a silent install. If you don't have an answers file, simply omit it (`/opt/kaltura/bin/kaltura-config-all.sh`). The answers file is automatically generated post the installation and is placed in `/tmp/kaltura*.ans`.     
@@ -139,8 +141,8 @@ You can now record a video using KMC->Upload->Record from Webcam.
 ## Upgrade an existing Kaltura installation 
 *This will only work if the initial install was using this packages based install, it will not work for old Kaltura deployments using the PHP installers*
 ```bash
-yum clean all
-yum update "*kaltura*"
+# yum clean all
+# yum update "*kaltura*"
 ```
 Then follow the on-screen instructions (in case any further actions required).   
 Once the upgrade completes, please run:
@@ -152,20 +154,20 @@ To upgrade your DB schema.
 ## Fresh Database Installation
 Use this in cases where you want to clear the database and start from fresh.
 ```bash
-/opt/kaltura/bin/kaltura-drop-db.sh
-/opt/kaltura/bin/kaltura-config-all.sh [answers-file-path]
+# /opt/kaltura/bin/kaltura-drop-db.sh
+# /opt/kaltura/bin/kaltura-config-all.sh [answers-file-path]
 ```
 
 ## Complete REinstall 
 This will completely remove Kaltura, then download and install from scratch.
 ```bash
-/opt/kaltura/bin/kaltura-drop-db.sh
-yum remove "*kaltura*"
-rm -rf /opt/kaltura
-rpm -ihv http://installrepo.kaltura.org/releases/stable/RPMS/noarch/kaltura-release.noarch.rpm
-yum clean all
-yum install kaltura-server
-/opt/kaltura/bin/kaltura-config-all.sh [answers-file-path]
+# /opt/kaltura/bin/kaltura-drop-db.sh
+# yum remove "*kaltura*"
+# rm -rf /opt/kaltura
+# rpm -ihv http://installrepo.kaltura.org/releases/stable/RPMS/noarch/kaltura-release.noarch.rpm
+# yum clean all
+# yum install kaltura-server
+# /opt/kaltura/bin/kaltura-config-all.sh [answers-file-path]
 ```
 *Note that the repository URL will change soon, this is just the test repository*
 
@@ -173,7 +175,7 @@ yum install kaltura-server
 If you ever come across issues, increase log verbosity to 7 using the following method.        
 Run the following command using root:    
 ```bash
-sed -i 's@^writers.\(.*\).filters.priority.priority\s*=\s*7@writers.\1.filters.priority.priority=4@g' /opt/kaltura/app/configurations/logger.ini
+# sed -i 's@^writers.\(.*\).filters.priority.priority\s*=\s*7@writers.\1.filters.priority.priority=4@g' /opt/kaltura/app/configurations/logger.ini
 ```
 Then restart your Apache.    
 
