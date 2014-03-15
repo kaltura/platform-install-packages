@@ -6,7 +6,7 @@
 Summary: Process monitor and restart utility
 Name: kaltura-monit
 Version: 5.6
-Release: 12 
+Release: 14 
 License: GPLv3
 Group: High Availability Management 
 URL: http://mmonit.com/monit/
@@ -106,6 +106,9 @@ fi
 
 
 %changelog
+* Thu Mar 13 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 5.6-13
+- Generate random monit passwd.
+
 * Thu Mar 13 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 5.6-12
 - Placeholders instead of hard coded host and path to APP_DIR.
 - Commented section about setting up monit over SSL.

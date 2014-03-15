@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5-studio
-Version: v0.9
+Version: v0.9.2
 Release: 1 
 License: AGPLv3+
 Group: Server/Platform 
@@ -51,6 +51,12 @@ rm -rf %{buildroot}
 %{prefix}/apps/studio/%{version}
 
 %changelog
+* Fri Mar 14 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v0.9.2-1
+- IE8 support
+- FEC-883 vast UI
+- FEC-1073 various UI issues with shlomit & michael
+- FEC-995 Support HTML Companions ads vast default config.
+
 * Sun Feb 23 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v0.9-1
 - Fixes:  
     FEC-1008 Unable to Update player in IE9

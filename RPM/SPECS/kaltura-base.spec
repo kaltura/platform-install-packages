@@ -15,7 +15,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 9.12.0
-Release: 1
+Release: 3
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -42,7 +42,7 @@ Source17: navigation.xml
 Source18: monit.phtml 
 Source19: IndexController.php
 Source20: sphinx.populate.template.rc
-
+Source21: kaltura_batch_upload_falcon.zip
 #Source10: 01.UserRole.99.template.xml
 #Source9: 01.conversionProfile.99.template.xml
 URL: https://github.com/kaltura/server/tree/IX-%{version}
@@ -93,6 +93,7 @@ mkdir -p $RPM_BUILD_ROOT%{prefix}/web/control
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content/cacheswf
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content/uploads
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content/entry
+mkdir -p $RPM_BUILD_ROOT/%{prefix}/web/content/docs/
 mkdir -p $RPM_BUILD_ROOT%{prefix}web/content//metadata
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content/batchfiles
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content/templates
@@ -141,6 +142,9 @@ cp %{SOURCE20} $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/
 cp %{SOURCE14} $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/
 cp %{SOURCE15} $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/
 cp %{SOURCE16} $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/
+
+# sample bulks
+cp %{SOURCE21} $RPM_BUILD_ROOT%{prefix}/web/content/docs/
 
 # David Bezemer's Admin console and monit patches:
 cp %{SOURCE17} $RPM_BUILD_ROOT%{prefix}/app/admin_console/configs/navigation.xml
@@ -220,7 +224,7 @@ if [ "$1" = 2 ];then
 		fi
 	fi
 	# see https://kaltura.atlassian.net/wiki/pages/viewpage.action?spaceKey=QAC&title=QA.Core+Deployment+Instructions%3A+Mar+9%2C+2014
-	if [ %{version} = '9.12.0' -a %{release} = '1' ];then
+	if [ %{version} = '9.12.0' ];then
 		php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_01_20_categoryentry_syncprivacycontext_action.php
 		php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_01_26_add_media_server_partner_level_permission.php
 		php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_02_25_add_push_publish_permission_to_partner_0.php
@@ -284,6 +288,12 @@ fi
 
 
 %changelog
+* Thu Mar 13 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.12.0-2
+- Generate random monit passwd.
+
+* Thu Mar 13 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.12.0-2
+- Fix for https://github.com/kaltura/platform-install-packages/issues/71
+
 * Sun Mar 9 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.12.0-1
 - Ver Bounce to 9.12.0
 - PLAT-852 - Wowza working with multicast in a hybrid model Closed

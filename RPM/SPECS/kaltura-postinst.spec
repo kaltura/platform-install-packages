@@ -3,7 +3,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.8
-Release: 2 
+Release: 6 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -63,6 +63,7 @@ if [ "$1" = 2 ];then
 				RC=$?
 			else
 				echo "In order to upgrade your DB, please run %{prefix}/bin/kaltura-db-update.sh once the RPMs installation completes."
+				RC=1
 			fi
 		done
 		if [ $RC -eq 0 ];then
@@ -80,6 +81,9 @@ fi
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Thu Mar 13 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.8-3
+- Random monit passwd.
+
 * Thu Mar 13 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.8-2
 - Modified message in drop-db.sh
 
