@@ -14,26 +14,32 @@
 #===============================================================================
 #set -o nounset                              # Treat unset variables as an error
 
+KALTURA_FUNCTIONS_RC=`dirname $0`/kaltura-functions.rc
+if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
+	echo "Could not find $KALTURA_FUNCTIONS_RC so, exiting.."
+	exit 3
+fi
+. $KALTURA_FUNCTIONS_RC
 if [ "$#" -lt 4 ];then
-	echo "Usage: $0 <mysql-hostname> <mysql-super-user> <mysql-super-user-passwd> <mysql-port> [upgrade]"
+	echo -e "${BRIGHT_RED}Usage: $0 <mysql-hostname> <mysql-super-user> <mysql-super-user-passwd> <mysql-port> [upgrade]${NORMAL}"
 	exit 1
 fi
 
 RC_FILE=/etc/kaltura.d/system.ini
 if [ ! -r "$RC_FILE" ];then
-	echo "Could not find $RC_FILE so, exiting.."
+	echo -e "${BRIGHT_RED}ERROR: could not find $RC_FILE so, exiting..${NORMAL}"
 	exit 2
 fi
 . $RC_FILE
 DB_ACTIONS_RC=`dirname $0`/db_actions.rc
 if [ ! -r "$DB_ACTIONS_RC" ];then
-	echo "Could not find $DB_ACTIONS_RC so, exiting.."
+	echo -e "${BRIGHT_RED}ERROR: could not find $DB_ACTIONS_RC so, exiting..${NORMAL}"
 	exit 3
 fi
 . $DB_ACTIONS_RC
 KALTURA_FUNCTIONS_RC=`dirname $0`/kaltura-functions.rc
 if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
-	echo "Could not find $KALTURA_FUNCTIONS_RC so, exiting.."
+	echo -e "${BRIGHT_RED}ERROR: could not find $KALTURA_FUNCTIONS_RC so, exiting..${NORMAL}"
 	exit 3
 fi
 . $KALTURA_FUNCTIONS_RC
@@ -113,21 +119,21 @@ set +e
 
 echo "Checking connectivity to needed daemons..."
 if ! check_connectivity $DB1_USER $DB1_PASS $DB1_HOST $DB1_PORT $SPHINX_HOST $SERVICE_URL;then
-	echo "Please check your setup and then run $0 again."
+	echo -e "${BRIGHT_RED}Please check your setup and then run $0 again.${NORMAL}"
 	exit 6
 fi
 
 echo "Cleaning cache.."
 rm -rf $APP_DIR/cache/*
 sed -i "s@?a=12@@g" $APP_DIR/deployment/base/scripts/init_content/ui_conf/*
-echo "Populating DB with data.. please wait.."
+echo -e "${CYAN}Populating DB with data.. please wait..${NORMAL}"
 echo "Output for $APP_DIR/deployment/base/scripts/installPlugins.php being logged into $LOG_DIR/installPlugins.log"
 php $APP_DIR/deployment/base/scripts/installPlugins.php >> $LOG_DIR/installPlugins.log  2>&1
-echo "Output for $APP_DIR/deployment/base/scripts/insertDefaults.php being logged into $LOG_DIR/insertDefaults.log"
+echo -e "${CYAN}Output for $APP_DIR/deployment/base/scripts/insertDefaults.php being logged into $LOG_DIR/insertDefaults.log ${NORMAL}"
 php $APP_DIR/deployment/base/scripts/insertDefaults.php $APP_DIR/deployment/base/scripts/init_data >> $LOG_DIR/insertDefaults.log  2>&1
-echo "Output for $APP_DIR/deployment/base/scripts/insertPermissions.php being logged into $LOG_DIR/insertPermissions.log"
+echo -e "${CYAN}Output for $APP_DIR/deployment/base/scripts/insertPermissions.php being logged into $LOG_DIR/insertPermissions.log ${NORMAL}"
 php $APP_DIR/deployment/base/scripts/insertPermissions.php  >> $LOG_DIR/insertPermissions.log 2>&1
-echo "Output for $APP_DIR/deployment/base/scripts/insertContent.php being logged into $LOG_DIR/insertContent.log"
+echo -e "${CYAN}Output for $APP_DIR/deployment/base/scripts/insertContent.php being logged into $LOG_DIR/insertContent.log ${NORMAL}"
 php $APP_DIR/deployment/base/scripts/insertContent.php >> $LOG_DIR/insertContent.log  2>&1
 
 if [ -n "$IS_SSL" ];then
@@ -136,7 +142,7 @@ if [ -n "$IS_SSL" ];then
 fi
 
 KMC_VERSION=`grep "^kmc_version" /opt/kaltura/app/configurations/base.ini|awk -F "=" '{print $2}'|sed 's@\s*@@g'`
-echo "Generating UI confs.."
+echo -e "${BRIGHT_BLUE}Generating UI confs..${NORMAL}"
 php $APP_DIR/deployment/uiconf/deploy_v2.php --ini=$WEB_DIR/flash/kmc/$KMC_VERSION/config.ini >> $LOG_DIR/deploy_v2.log  2>&1
 for i in $APP_DIR/deployment/updates/scripts/patches/*.sh;do
 	$i

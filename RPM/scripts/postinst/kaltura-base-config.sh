@@ -26,10 +26,10 @@ verify_user_input()
                 fi
         done
 	if [ $RC -eq 1 ];then
-		OUT="Missing the following params in $ANSFILE
+		OUT="ERROR: Missing the following params in $ANSFILE
 		$VALS
 		"
-		echo -en "$OUT\n"
+		echo -en "${BRIGHT_RED}$OUT${NORMAL}\n"
        		send_install_becon kaltura-base $ZONE "install_fail: $OUT"
 		exit $RC 
 	fi
@@ -46,30 +46,29 @@ create_answer_file()
                 fi
         done
 			sed -i "s#@ANSFILE@#$ANSFILE#g" $POST_INST_MAIL_TMPL 
-	echo "
+	echo -en "${CYAN}
 
 ========================================================================================================================
 Kaltura install answer file written to $ANSFILE  -  Please save it!
 This answers file can be used to silently-install re-install this machine or deploy other hosts in your cluster.
 ========================================================================================================================
-
+${NORMAL}
 "
 
 }
 
 KALTURA_FUNCTIONS_RC=`dirname $0`/kaltura-functions.rc
 if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
-	OUT="Could not find $KALTURA_FUNCTIONS_RC so, exiting.."
-	echo $OUT
+	OUT="${BRIGHT_RED}ERROR:could not find $KALTURA_FUNCTIONS_RC so, exiting..${NORMAL}"
+	echo -en $OUT
 	exit 3
 fi
 . $KALTURA_FUNCTIONS_RC
 trap 'my_trap_handler ${LINENO} ${$?}' ERR
-#send_install_becon `basename $0` $ZONE install_start 
 LOCALHOST=127.0.0.1
 DISPLAY_NAME="Kaltura Server `rpm -q kaltura-base --queryformat %{version}`"
 KALT_CONF_DIR='/opt/kaltura/app/configurations/'
-echo "Welcome to $DISPLAY_NAME post install setup."
+echo -e "${CYAN}Welcome to $DISPLAY_NAME post install setup.${NORMAL}"
 if [ -r $CONSENT_FILE ];then
         . $CONSENT_FILE
 elif [ -z "$USER_CONSENT" ];then
@@ -83,69 +82,67 @@ if [ -n "$1" -a -r "$1" ];then
 	export ANSFILE
 else
        # echo "Welcome to Kaltura Server $DISPLAY_NAME post install setup.
-echo "In order to finalize the system configuration, please input the following:
+echo -e "\n${CYAN}In order to finalize the system configuration, please input the following:
 
 
-CDN hostname [`hostname`]:"
+CDN hostname [`hostname`]:${NORMAL}"
         read -e CDN_HOST
         if [ -z "$CDN_HOST" ];then
                 CDN_HOST=`hostname`
-		#echo $CDN_HOST
+
         fi
 
-        echo "Apache virtual hostname [`hostname`]: "
+        echo -en "${CYAN}Apache virtual hostname [${YELLOW}`hostname`${NORMAL}]: "
         read -e KALTURA_VIRTUAL_HOST_NAME
         if [ -z "$KALTURA_VIRTUAL_HOST_NAME" ];then
                 KALTURA_VIRTUAL_HOST_NAME=`hostname`
 		#echo $KALTURA_VIRTUAL_HOST_NAME
         fi
 
-        echo "Which port will this Vhost listen on [443]? "
+        echo -en "${CYAN}Which port will this Vhost listen on [${YELLOW}443${CYAN}]?${NORMAL} "
         read -e KALTURA_VIRTUAL_HOST_PORT
         if [ -z "$KALTURA_VIRTUAL_HOST_PORT" ];then
                 KALTURA_VIRTUAL_HOST_PORT=443
-		#echo $KALTURA_VIRTUAL_HOST_PORT
         fi
         KALTURA_FULL_VIRTUAL_HOST_NAME="$KALTURA_VIRTUAL_HOST_NAME:$KALTURA_VIRTUAL_HOST_PORT"
 
         if [ -z "$DB1_HOST" ];then
-                echo "DB hostname [$LOCALHOST]: "
+                echo -en "${CYAN}DB hostname [${YELLOW}$LOCALHOST${CYAN}]:${NORMAL} "
                 read -e DB1_HOST
         	if [ -z "$DB1_HOST" ];then
 			DB1_HOST=$LOCALHOST	
 		fi
         fi
 
-        echo "DB port [3306]: "
+        echo -en "${CYAN}DB port [${YELLOW}3306${CYAN}]:${NORMAL} "
         read -e DB1_PORT
         if [ -z "$DB1_PORT" ];then
                 DB1_PORT=3306
         fi
 
         while [ -z "$SUPER_USER" ];do
-                echo "MySQL super user [this is only for setting the kaltura user passwd and WILL NOT be used with the application]: "
+                echo -en "${CYAN}MySQL super user [this is only for setting the kaltura user passwd and WILL NOT be used with the application]:${NORMAL} "
                 read -e SUPER_USER
         done
         while [ -z "$SUPER_USER_PASSWD" ];do
-                echo "MySQL super user passwd [this is only for setting the kaltura user passwd and WILL NOT be used with the application]: "
+                echo -en "${CYAN}MySQL super user passwd [this is only for setting the kaltura user passwd and WILL NOT be used with the application]:${NORMAL} "
                 read -s SUPER_USER_PASSWD
         done
 
-	echo "Analytics DB hostname [$DB1_HOST]:"
+	echo -en "${CYAN}Analytics DB hostname [${YELLOW}$DB1_HOST${CYAN}]:${NORMAL}"
 	read -e DWH_HOST
 	if [ -z "$DWH_HOST" ];then
 		DWH_HOST=$DB1_HOST
 	fi
 
-	echo "Analytics DB port [$DB1_PORT]:"
+	echo -en "${CYAN}Analytics DB port [${YELLOW}$DB1_PORT${CYAN}]:${NORMAL}"
 	read -e DWH_PORT
 	if [ -z "$DWH_PORT" ];then
 		DWH_PORT=$DB1_PORT
-		#echo $DWH_PORT
 	fi
 
         if [ -z "$SPHINX_SERVER1" ];then
-                echo "Sphinx hostname [$LOCALHOST]: "
+                echo -en "${CYAN}Sphinx hostname [${YELLOW}$LOCALHOST${CYAN}]:${NORMAL} "
                 read -e SPHINX_SERVER1
 		if [ -z $SPHINX_SERVER1 ];then
 			SPHINX_SERVER1="$LOCALHOST"
@@ -153,13 +150,13 @@ CDN hostname [`hostname`]:"
         fi
 	
         if [ -z "$RED5_HOST" ];then
-                echo "Media Streaming Server host [`hostname`]: "
+                echo -en "${CYAN}Media Streaming Server host [${YELLOW}`hostname`${CYAN}]:${NORMAL} "
                 read -e RED5_HOST
 		if [ -z $RED5_HOST ];then
 			RED5_HOST=`hostname`
 		fi
         fi
-	echo "Secondary Sphinx hostname: [leave empty if none] "
+	echo -en "${CYAN}Secondary Sphinx hostname: [leave empty if none]${NORMAL} "
 	read -e SPHINX_SERVER2
 	if [ -z $SPHINX_SERVER2 ];then
 		SPHINX_SERVER2=" "
@@ -171,32 +168,32 @@ CDN hostname [`hostname`]:"
 		else
 			PROTOCOL="http"
 		fi
-                echo "Service URL [$PROTOCOL://$KALTURA_FULL_VIRTUAL_HOST_NAME]: "
+                echo -en "${CYAN}Service URL [${YELLOW}$PROTOCOL://$KALTURA_FULL_VIRTUAL_HOST_NAME${CYAN}]:${NORMAL} "
                 read -e SERVICE_URL
 		if [ -z "$SERVICE_URL" ];then
 			SERVICE_URL=$PROTOCOL://$KALTURA_FULL_VIRTUAL_HOST_NAME
 		fi
         done
         while [ -z "$ADMIN_CONSOLE_ADMIN_MAIL" ];do
-                echo "Kaltura Admin user (email address): "
+                echo -en "${CYAN}Kaltura Admin user (email address):${NORMAL} "
                 read -e ADMIN_CONSOLE_ADMIN_MAIL
         done
         while [ -z "$ADMIN_CONSOLE_PASSWORD" ];do
-                echo "Admin user login password (must be minimum 8 chars and include at least one of each: upper-case, lower-case, number and a special character):"
+                echo -en "${CYAN}Admin user login password (must be minimum 8 chars and include at least one of each: upper-case, lower-case, number and a special character):${NORMAL}"
                 read -s ADMIN_CONSOLE_PASSWORD
 		if echo $ADMIN_CONSOLE_PASSWORD | grep -q "/" ;then
-			echo "Passwd can't have the '/' char in it. Please re-input"
+			echo -en "${BRIGHT_RED}ERROR: Passwd can't have the '/' char in it. Please re-input.${NORMAL}"
 			unset ADMIN_CONSOLE_PASSWORD
 		fi
         done
 
         while [ -z "$ANSFILE" -a -z "$AGAIN_ADMIN_CONSOLE_PASSWORD" ];do
-                echo "Confirm passwd:"
+                echo -en "${CYAN}Confirm passwd:${NORMAL} "
                 read -s AGAIN_ADMIN_CONSOLE_PASSWORD
 		if [ "$ADMIN_CONSOLE_PASSWORD" != "$AGAIN_ADMIN_CONSOLE_PASSWORD" ];then
-			echo "Passwds do not match, again please." 
+			echo -en "${BRIGHT_RED}ERROR: Passwds do not match, again please.${NORMAL}" 
 			unset AGAIN_ADMIN_CONSOLE_PASSWORD
-			echo "Admin user login password (must be minimum 8 chars and include at least one of each: upper-case, lower-case, number and a special character):"
+			echo -en "${BRIGHT_RED}ERROR: Admin user login password (must be minimum 8 chars and include at least one of each: upper-case, lower-case, number and a special character): ${NORMAL}"
 			read -s ADMIN_CONSOLE_PASSWORD
 		fi
         done
@@ -205,9 +202,9 @@ CDN hostname [`hostname`]:"
         fi
         while [ -z "$TIME_ZONE" ];do
                 if [ -n "$ZONE" ];then
-                        echo "Your time zone [see http://php.net/date.timezone], or press enter for [$ZONE]: "
+                        echo -en "${CYAN}Your time zone [see http://php.net/date.timezone], or press enter for [${YELLOW}$ZONE${CYAN}]: ${NORMAL}"
                 else
-                         echo "Your time zone [see http://php.net/date.timezone]"
+                        echo -en "${CYAN}Your time zone [see http://php.net/date.timezone]: ${NORMAL}"
                 fi
                 read -e TIME_ZONE
                 if [ -z "$TIME_ZONE" -a -n "$ZONE" ];then
@@ -217,7 +214,7 @@ CDN hostname [`hostname`]:"
 
 
 	if [ -z "$ENVIRONMENT_NAME" ];then
-		echo "How would you like to name your system (this name will show as the From field in emails sent by the system) [Kaltura Video Platform]?"
+		echo -en "${CYAN}How would you like to name your system (this name will show as the From field in emails sent by the system) [${YELLOW}Kaltura Video Platform${CYAN}]?${NORMAL}"
 		read ENVIRONMENT_NAME
 		if [ -z "$ENVIRONMENT_NAME" ];then
 			ENVIRONMENT_NAME="Kaltura Video Platform"
@@ -225,14 +222,14 @@ CDN hostname [`hostname`]:"
 	fi
 
 	if [ -z "$CONTACT_URL" ];then
-		echo "Your website Contact Us URL [http://corp.kaltura.com/company/contact-us]:"
+		echo -en "${CYAN}Your website Contact Us URL [${YELLOW}http://corp.kaltura.com/company/contact-us${CYAN}]:${NORMAL} "
 		read CONTACT_URL
 		if [ -z "$CONTACT_URL" ];then
 			CONTACT_URL="http://corp.kaltura.com/company/contact-us"
 		fi
 	fi
 	if [ -z "$CONTACT_PHONE_NUMBER" ];then
-		echo "Contact us phone number [+1 800 871 5224]?"
+		echo -en "${CYAN}'Contact us' phone number [${YELLOW}+1 800 871 5224${NORMAL}]?"
 		read CONTACT_PHONE_NUMBER
 		if [ -z "$CONTACT_PHONE_NUMBER" ];then
 			CONTACT_PHONE_NUMBER="+1 800 871 5224"
@@ -358,9 +355,9 @@ for TMPL in $CONFS;do
 done
 
 if [ ! -r "$BASE_DIR/app/base-config-generator.lock" ];then
-	echo "
-	Generating client libs... see log at $BASE_DIR/log/generate.php.log
-
+	echo -en "
+	${CYAN}Generating client libs... see log at $BASE_DIR/log/generate.php.log
+	${NORMAL}
 	"
 	php /opt/kaltura/app/generator/generate.php >> $BASE_DIR/log/generate.php.log 2>&1 && touch "$BASE_DIR/app/base-config-generator.lock"
 fi
@@ -379,6 +376,6 @@ if [ -d /usr/lib/red5/webapps/oflaDemo ];then
 	ln -sf $BASE_DIR/web/content/webcam /usr/lib/red5/webapps/oflaDemo/streams
 fi
 
-echo "Configuration of $DISPLAY_NAME finished successfully!"
+echo "${BRIGHT_BLUE}Configuration of $DISPLAY_NAME finished successfully!${NORMAL}"
 send_install_becon `basename $0` $ZONE install_success
 write_last_base_version

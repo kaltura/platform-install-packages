@@ -31,7 +31,7 @@ call_base_config()
 	if [ ! -r $BASE_DIR/app/base-config.lock ];then
 		`dirname $0`/kaltura-base-config.sh $ANSFILE
 	else
-		echo "base-config skipped as /opt/kaltura/app/base-config.lock was found. Remove the lock to reconfigure."
+		echo -e "${CYAN}base-config skipped as /opt/kaltura/app/base-config.lock was found. Remove the lock to reconfigure.${NORMAL}"
 	fi
 
 }
@@ -45,7 +45,7 @@ check_mysql_settings()
 	RC=0
 	OPEN_FILES_LIMIT=`echo "select @@open_files_limit;" | mysql -u$DB_USER -p$DB_PASSWD -h$DB_HOST -P$DB_PORT -N`
 	if [ "$OPEN_FILES_LIMIT" -lt 20000 ];then
-		MSG="$MSG\nplease set the following in my.cnf and restart the daemon:\nopen_files_limit = 20000 in my.cnf"
+		MSG="${BRIGHT_RED}$MSG\nplease set the following in my.cnf and restart the daemon:\nopen_files_limit = 20000 in my.cnf${NORMAL}"
 		RC=1
 	fi
 	LOWER_CASE_TABLE_NAMES=`echo "select @@lower_case_table_names;" | mysql -u$DB_USER -p$DB_PASSWD -h$DB_HOST -P$DB_PORT -N`
@@ -81,18 +81,18 @@ check_connectivity()
 	MSG="Connectivity test passed:)"
 	echo "select version();" | mysql -u$DB_USER -p$DB_PASSWD -h$DB_HOST -P$DB_PORT -N > /dev/null 2>&1
 	if [ $? -ne 0 ];then
-		MSG="Couldn't connect with mysql -u$DB_USER -p$DB_PASSWD -h$DB_HOST -P$DB_PORT."
+		MSG="${BRIGHT_RED}ERROR: Couldn't connect with mysql -u$DB_USER -p$DB_PASSWD -h$DB_HOST -P$DB_PORT.${NORMAL}"
 		RC=1
 	fi
 	
 	echo "show tables;" | mysql -h$SPHINX_SERVER -P9312  > /dev/null 2>&1
 	if [ $? -ne 0 ];then
-		MSG="$MSG\nCouldn't connect to Sphinx with mysql -h$SPHINX_SERVER -P9312."
+		MSG="$MSG\n${BRIGHT_RED}ERROR: Couldn't connect to Sphinx with mysql -h$SPHINX_SERVER -P9312.${NORMAL}"
 		RC=1
 	fi
 	curl "$SERVICE_URL/api_v3/index.php?service=system&action=ping" -k  > /dev/null 2>&1
 	if [ $? -ne 0 ];then
-		MSG="$MSG\nCouldn't make an API request to $SERVICE_URL/api_v3/index.php?service=system&action=ping."
+		MSG="$MSG\n${BRIGHT_RED}ERROR: Couldn't make an API request to $SERVICE_URL/api_v3/index.php?service=system&action=ping.${NORMAL}"
 		RC=1
 	fi
 
@@ -110,14 +110,14 @@ check_cert_key()
 	CRT_SUM=`openssl x509 -in $CRT_FILE -modulus -noout | openssl md5`
 	KEY_SUM=`openssl rsa -in $KEY_FILE -modulus -noout | openssl md5`
 	if [ "$CRT_SUM" != "$KEY_SUM" ];then
-		echo "
+		echo -e "${BRIGHT_RED}
 
 	MD5 sums between .key and .crt files DO NOT MATCH
 	# openssl rsa -in $KEY_PATH -modulus -noout | openssl md5
 	$KEY_HASH
 	# openssl x509 -in $CERT_PATH -modulus -noout | openssl md5
 	$CRT_HASH
-
+	${NORMAL}
 	"
 		return 1
 	fi
@@ -129,9 +129,9 @@ is_self_signed()
 	# check if cert is self signed:
 	CRT_FILE=$1
 	if openssl verify  $CRT_FILE | grep 'self signed certificate' -q ;then
-		echo "
+		echo -en "
 
-	WARNING: self signed cerificate detected. Will set settings.clientConfig.verifySSL=0 in $APP_DIR/configurations/admin.ini.
+	${YELLOW}WARNING: self signed cerificate detected. Will set settings.clientConfig.verifySSL=0 in $APP_DIR/configurations/admin.ini.${NORMAL}
 
 
 	"
@@ -210,7 +210,7 @@ my_trap_handler()
         RPM_VER=`rpm -q kaltura-postinst`
 	if [ -d /opt/kaltura/log ];then
 		TAR_PATH=/opt/kaltura/log/log_`date +%d_%m_%y_%H_%M`.tar.gz	
-		echo "$FAIL_MSG
+		echo -en "${BRIGHT_RED}$FAIL_MSG${NORMAL}
 
 
 		"
@@ -224,9 +224,7 @@ my_trap_handler()
 		. $CONSENT_FILE 
 	fi
 	
-	#if [ "$USER_CONSENT" -eq 1 ];then
-       		send_install_becon ${MYSELF} $ZONE install_fail "${LASTLINE},${RPM_VER}"
-	#fi
+       	send_install_becon ${MYSELF} $ZONE install_fail "${LASTLINE},${RPM_VER}"
         exit 11
 }
 
@@ -244,10 +242,10 @@ validate_mail()
 get_tracking_consent()
 {
 
-	echo "$PRE_CONSENT 
+	echo -en "${BRIGHT_BLUE}$PRE_CONSENT 
 	
 
-[Email\NO]:"
+[Email\NO]:${NORMAL}"
 
 	CONTACT_MAIL="mailhere"
 	read -e CONTACT_MAIL

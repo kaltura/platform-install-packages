@@ -15,8 +15,15 @@
 
 #set -o nounset                              # Treat unset variables as an error
 
+KALTURA_FUNCTIONS_RC=`dirname $0`/kaltura-functions.rc
+if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
+	OUT="Could not find $KALTURA_FUNCTIONS_RC so, exiting.."
+	echo $OUT
+	exit 3
+fi
+. $KALTURA_FUNCTIONS_RC
 if ! rpm -q kaltura-sphinx;then
-	echo "First install kaltura-sphinx."
+	echo -e "${BRIGHT_RED}ERROR: first install kaltura-sphinx.${NORMAL}"
 	exit 11
 fi
 if [ -n "$1" -a -r "$1" ];then
@@ -26,24 +33,18 @@ fi
 if [ ! -r /opt/kaltura/app/base-config.lock ];then
 	`dirname $0`/kaltura-base-config.sh "$ANSFILE"
 else
-	echo "base-config completed successfully, if you ever want to re-configure your system (e.g. change DB hostname) run the following script:
+	echo -e "${BRIGHT_BLUE}base-config completed successfully, if you ever want to re-configure your system (e.g. change DB hostname) run the following script:
 # rm /opt/kaltura/app/base-config.lock
 # $BASE_DIR/bin/kaltura-base-config.sh
+${NORMAL}
 "
 fi
 RC_FILE=/etc/kaltura.d/system.ini
 if [ ! -r "$RC_FILE" ];then
-	echo "Could not find $RC_FILE so, exiting.."
+	echo -e "${BRIGHT_RED}ERROR: could not find $RC_FILE so, exiting..${NORMAL}"
 	exit 2
 fi
 . $RC_FILE
-KALTURA_FUNCTIONS_RC=`dirname $0`/kaltura-functions.rc
-if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
-	OUT="Could not find $KALTURA_FUNCTIONS_RC so, exiting.."
-	echo $OUT
-	exit 3
-fi
-. $KALTURA_FUNCTIONS_RC
 trap 'my_trap_handler ${LINENO} ${$?}' ERR
 send_install_becon `basename $0` $ZONE install_start 
 mkdir -p $LOG_DIR/sphinx/data $APP_DIR/cache//sphinx

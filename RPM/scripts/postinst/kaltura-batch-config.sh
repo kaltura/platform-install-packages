@@ -14,8 +14,15 @@
 #===============================================================================
 
 #set -o nounset                              # Treat unset variables as an error
+KALTURA_FUNCTIONS_RC=`dirname $0`/kaltura-functions.rc
+if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
+	OUT="${BRIGHT_RED}ERROR: Could not find $KALTURA_FUNCTIONS_RC so, exiting..${NORMAL}"
+	echo -e $OUT
+	exit 3
+fi
+. $KALTURA_FUNCTIONS_RC
 if ! rpm -q kaltura-batch;then
-	echo "First install kaltura-batch."
+	echo -e "${BRIGHT_RED}ERROR: First install kaltura-batch.${NORMAL}"
 	exit 11
 fi
 if [ -n "$1" -a -r "$1" ];then
@@ -25,18 +32,12 @@ fi
 if [ ! -r /opt/kaltura/app/base-config.lock ];then
 	`dirname $0`/kaltura-base-config.sh "$ANSFILE"
 else
-	echo "base-config completed successfully, if you ever want to re-configure your system (e.g. change DB hostname) run the following script:
+	echo -e "${BRIGHT_BLUE}base-config completed successfully, if you ever want to re-configure your system (e.g. change DB hostname) run the following script:
 # rm /opt/kaltura/app/base-config.lock
 # $BASE_DIR/bin/kaltura-base-config.sh
+${NORMAL}
 "
 fi
-KALTURA_FUNCTIONS_RC=`dirname $0`/kaltura-functions.rc
-if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
-	OUT="Could not find $KALTURA_FUNCTIONS_RC so, exiting.."
-	echo $OUT
-	exit 3
-fi
-. $KALTURA_FUNCTIONS_RC
 trap 'my_trap_handler ${LINENO} ${$?}' ERR
 send_install_becon `basename $0` $ZONE install_start 
 
@@ -44,7 +45,7 @@ CONFIG_DIR=/opt/kaltura/app/configurations
 if [ -r $CONFIG_DIR/system.ini ];then
 	. $CONFIG_DIR/system.ini
 else
-	echo "Missing $CONFIG_DIR/system.ini. Exiting.."
+	echo -e "${BRIGHT_RED}ERROR: Missing $CONFIG_DIR/system.ini. Exiting..${NORMAL}"
 	exit 1
 fi
 
@@ -54,7 +55,7 @@ BATCH_MAIN_CONF=$APP_DIR/configurations/batch/batch.ini
 # if we couldn't access the DB to retrieve the secret, assume the post install has not finished yet.
 BATCH_PARTNER_ADMIN_SECRET=`echo "select admin_secret from partner where id=-1"|mysql -N -h$DB1_HOST -u$DB1_USER -p$DB1_PASS $DB1_NAME`
 if [ -z "$BATCH_PARTNER_ADMIN_SECRET" ];then
-	echo "Could not retreive partner.admin_secret for id -1. It probably means you did not yet run $APP_DIR/kaltura-base-config.sh yet. Please do." 
+	echo -e "${BRIGHT_RED}ERROR: could not retreive partner.admin_secret for id -1. It probably means you did not yet run $APP_DIR/kaltura-base-config.sh yet. Please do.${NORMAL}" 
 	exit 2
 fi
 

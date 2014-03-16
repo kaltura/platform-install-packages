@@ -79,6 +79,8 @@ BRIGHT_WHITE="\033[${BRIGHT};${FG_WHITE}m"
 REV_CYAN="\033[${DULL};${BG_WHITE};${BG_CYAN}m"
 REV_RED="\033[${DULL};${FG_YELLOW}; ${BG_RED}m"
 
-echo -e "${CYAN}What's up?${NORMAL}"
-echo -e "${BRIGHT_BLUE}Jess likes this one :)${NORMAL}"
+JESS="Jess likes this one :)"
+#echo -e "${CYAN}What's up?${NORMAL}"
+#echo -e "${BRIGHT_BLUE}$JESS${NORMAL}"
+#echo -e "${YELLOW}Jess likes this one :)${NORMAL}"
 
