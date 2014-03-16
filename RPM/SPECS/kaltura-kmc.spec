@@ -2,7 +2,7 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmc	
 Version: v5.37.12
-Release: 5 
+Release: 6 
 Summary: Kaltura Management Console
 
 Group: System Management	
@@ -54,7 +54,7 @@ mv %{_builddir}/%{name}-%{version}/login/%{kmc_login_version} $RPM_BUILD_ROOT%{p
 cp -r %{_builddir}/%{name}-%{version} $RPM_BUILD_ROOT/%{prefix}/web/flash/kmc/%{version}
 #cp -r $RPM_BUILD_ROOT/%{prefix}/web/flash/kmc/%{version}/uiconf/kaltura/kmc/* $RPM_BUILD_ROOT%{prefix}/web/content/uiconf/kaltura/kmc/
 cp %{SOURCE1} $RPM_BUILD_ROOT/%{prefix}/web/flash/kmc/%{version}/config.ini
-cp %{SOURCE2} $RPM_BUILD_ROOT%{prefix}/web/content/docs/pdf
+cp -r %{_builddir}/%{name}-%{version}/kmc-docs-master/* $RPM_BUILD_ROOT%{prefix}/web/content/docs/
 cp %{SOURCE3} $RPM_BUILD_ROOT%{prefix}/web/content/docs/pdf
 
 %preun
@@ -68,7 +68,7 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root,-)
 %{prefix}/web/flash/kmc
-%doc %{prefix}/web/content/docs/pdf/*
+%doc %{prefix}/web/content/docs/
 %doc %{prefix}/app/alpha/web/lib/pdf/*
 #%{prefix}/web/content/uiconf/kaltura/kmc
 %config %{prefix}/web/flash/kmc/%{version}/config.ini

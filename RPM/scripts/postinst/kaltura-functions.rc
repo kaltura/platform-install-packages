@@ -5,6 +5,10 @@ if [  -r "$RC_FILE" ];then
 else
 	BASE_DIR=/opt/kaltura
 fi
+COLORS_RC=`dirname $0`/colors.sh
+if [ -r $COLORS_RC ];then
+	. $COLORS_RC
+fi
 if [ -r /etc/sysconfig/clock ];then
         . /etc/sysconfig/clock
 fi
