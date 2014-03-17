@@ -185,8 +185,7 @@ WARNING: self signed cerificate detected. Will set settings.clientConfig.verifyS
 
 fi
 
-echo "zz$IS_SSLxy"
-if [ "$IS_SSL" != 'Y' -a "$IS_SSL" != 1 -a "$IS_SSL" != 'y' -a "$IS_SSL" != 'true' ];then
+if [ "$IS_SSL" = 'Y' -o "$IS_SSL" = 1 -o "$IS_SSL" = 'y' -o "$IS_SSL" = 'true' ];then
 	DEFAULT_PORT=443
 	trap - ERR
 	echo "use kaltura" | mysql -h$DB1_HOST -u$DB1_USER -p$DB1_PASS -P$DB1_PORT $DB1_NAME 2> /dev/null
