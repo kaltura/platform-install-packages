@@ -60,7 +60,7 @@ fi
 KALTURA_DB=$DB1_NAME
 
 # check DB connectivity:
-echo "Checking MySQL version.."
+echo -e "${CYAN}Checking MySQL version..${NORMAL}"
 echo "select version();" | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT -N
 if [ $? -ne 0 ];then
 cat << EOF
@@ -81,11 +81,18 @@ if [ -z "$POPULATE_ONLY" ];then
 cat << EOF
 The $KALTURA_DB DB seems to already be installed.
 
-Did you mean to perform an upgrade? if so, run with:
+if you meant to perform an upgrade? run with:
 # $0 $MYSQL_HOST $MYSQL_SUPER_USER $MYSQL_SUPER_USER_PASSWD $MYSQL_PORT upgrade
 
+Otherwise, do you wish to remove the existing DB [n/Y]?
+
 EOF
-		exit 5
+		read REMOVE
+		if [ $REMOVE = "Y" ];then
+			`dirname $0`/kaltura-drop-db.sh
+		else
+			exit 5
+		fi
 	fi 
 trap 'my_trap_handler ${LINENO} ${$?}' ERR
 
@@ -127,7 +134,7 @@ echo "Cleaning cache.."
 rm -rf $APP_DIR/cache/*
 sed -i "s@?a=12@@g" $APP_DIR/deployment/base/scripts/init_content/ui_conf/*
 echo -e "${CYAN}Populating DB with data.. please wait..${NORMAL}"
-echo "Output for $APP_DIR/deployment/base/scripts/installPlugins.php being logged into $LOG_DIR/installPlugins.log"
+echo -e "${CYAN}Output for $APP_DIR/deployment/base/scripts/installPlugins.php being logged into $LOG_DIR/installPlugins.log ${NORMAL}"
 php $APP_DIR/deployment/base/scripts/installPlugins.php >> $LOG_DIR/installPlugins.log  2>&1
 echo -e "${CYAN}Output for $APP_DIR/deployment/base/scripts/insertDefaults.php being logged into $LOG_DIR/insertDefaults.log ${NORMAL}"
 php $APP_DIR/deployment/base/scripts/insertDefaults.php $APP_DIR/deployment/base/scripts/init_data >> $LOG_DIR/insertDefaults.log  2>&1
@@ -153,9 +160,6 @@ set +e
 rm -rf $BASE_DIR/cache/*
 rm -f $APP_DIR/log/kaltura-*.log
 
-
-# DWH setup:
-# @DWH_DIR@/setup/dwh_setup.sh
 
 
 if [ "$DB1_HOST" = `hostname` -o "$DB1_HOST" = '127.0.0.1' -o "$DB1_HOST" = 'localhost' ];then
