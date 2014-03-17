@@ -37,8 +37,13 @@ unzip %{SOURCE2}
 
 %build
 %post
-# remove links and resym.
-rm -f %{prefix}/web/content/uiconf %{prefix}/web/content/uiconf/kaltura/kmc
+if [ -L %{prefix}/web/content/uiconf ];then
+	rm %{prefix}/web/content/uiconf
+fi
+# remove link and resym.
+if [ -L %{prefix}/web/content/uiconf/kaltura/kmc ];then
+	rm %{prefix}/web/content/uiconf/kaltura/kmc
+fi
 
 ls -sf %{prefix}/web/flash/kmc/%{version}/uiconf/kaltura/kmc/appstudio %{prefix}/web/content/uiconf
 ln -sf %{prefix}/web/flash/kmc/%{version}/uiconf/kaltura/kmc %{prefix}/web/content/uiconf/kaltura/

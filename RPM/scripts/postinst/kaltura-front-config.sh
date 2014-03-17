@@ -38,13 +38,13 @@ create_answer_file()
 			echo "$VAL=\"${!VAL}\"" >> $ANSFILE 
                 fi
         done
-	echo "
+	echo -e "${CYAN}
 
 ========================================================================================================================
 Kaltura install answer file written to $ANSFILE  -  Please save it!
 This answers file can be used to silently-install re-install this machine or deploy other hosts in your cluster.
 ========================================================================================================================
-
+${NORMAL}
 "
 }
 KALTURA_FUNCTIONS_RC=`dirname $0`/kaltura-functions.rc
@@ -119,7 +119,7 @@ trap 'my_trap_handler ${LINENO} ${$?}' ERR
 else
 	# configure SSL:
 	MAIN_APACHE_CONF=$KALTURA_APACHE_CONF/kaltura.ssl.conf
-	if [ -z "$CRT_FILE" ] ;then
+	if [ ! -r "$CRT_FILE" ] ;then
 		echo -e "${CYAN}Please input path to your SSL certificate[${YELLOW}/etc/ssl/certs/localhost.crt${CYAN}]:${NORMAL}"
 		read -e CRT_FILE
 		if [ -z "$CRT_FILE" ];then
@@ -127,8 +127,8 @@ else
 		fi
 		
 	fi
-	if [ -z "$KEY_FILE" ];then
-		echo -e "${CYAN}Please input path to your SSL key[${YELLOW}/etc/pki/tls/private/localhost.key${CYAN}${NORMAL}]:"
+	if [ ! -r "$KEY_FILE" ];then
+		echo -e "${CYAN}Please input path to your SSL key[${YELLOW}/etc/pki/tls/private/localhost.key${CYAN}]:${NORMAL}"
 		read -e KEY_FILE
 		if [ -z "$KEY_FILE" ];then
 			KEY_FILE=/etc/pki/tls/private/localhost.key
@@ -136,7 +136,7 @@ else
 
 	fi
 	if [ -z "$CHAIN_FILE" ];then
-		echo -e "${CYAN}Please input path to your SSL chain file or leave empty in case you have none${CYAN}${NORMAL}:"
+		echo -e "${CYAN}Please input path to your SSL chain file or leave empty in case you have none${CYAN}:${NORMAL}"
 		read -e CHAIN_FILE
 	fi
 	# check key and crt match

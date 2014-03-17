@@ -3,7 +3,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.8
-Release: 6 
+Release: 11 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -81,6 +81,17 @@ fi
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Mon Mar 17 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.8-11
+- Colors && shit..
+
+* Mon Mar 17 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.8-10
+- Color corrections
+- Do not sed on php INIs where they are not present [DWH, Sphinx].
+- Suggest to drop the DB if it exists and db-config is run.
+
+* Mon Mar 17 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.8-7
+- Colorful output to make err detection easy.
+
 * Thu Mar 13 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.8-3
 - Random monit passwd.
 

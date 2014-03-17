@@ -248,7 +248,11 @@ FORUMS_URLS=http://bit.ly/KalturaForums
 fi
 create_answer_file $POST_INST_MAIL_TMPL
 
-sed -i "s#\(date.timezone\)\s*=.*#\1='$TIME_ZONE'#g" /etc/php.ini /etc/php.d/*kaltura*ini
+# need to check if we even have PHP as Sphinx and DWH can be installed without thank heavens.
+# reported by David Bezemer:
+ for INI in /etc/php.ini /etc/php.d/*kaltura*ini;do
+	sed -i "s#\(date.timezone\)\s*=.*#\1='$TIME_ZONE'#g" $INI
+done
 if [ -z "$DB1_PASS" ];then
 	DB1_PASS=`< /dev/urandom tr -dc A-Za-z0-9_ | head -c15`
 	echo "update mysql.user set password=PASSWORD('$DB1_PASS') WHERE user='kaltura';flush PRIVILEGES" | mysql -h$DB1_HOST -P$DB1_PORT -u$SUPER_USER -p$SUPER_USER_PASSWD mysql
@@ -376,6 +380,6 @@ if [ -d /usr/lib/red5/webapps/oflaDemo ];then
 	ln -sf $BASE_DIR/web/content/webcam /usr/lib/red5/webapps/oflaDemo/streams
 fi
 
-echo "${BRIGHT_BLUE}Configuration of $DISPLAY_NAME finished successfully!${NORMAL}"
+echo -e "${BRIGHT_BLUE}Configuration of $DISPLAY_NAME finished successfully!${NORMAL}"
 send_install_becon `basename $0` $ZONE install_success
 write_last_base_version

@@ -11,13 +11,13 @@
 #  REQUIREMENTS:  ---
 #          BUGS:  ---
 #         NOTES:  ---
-#        AUTHOR: YOUR NAME (), 
+#        AUTHOR: Jess Portnoy <jess.portnoy@kaltura.com>
 #       COMPANY: 
 #       CREATED: 07/27/2011 11:42:19 AM IDT
 #      REVISION:  ---
 #===============================================================================
 
-set -o nounset                              # Treat unset variables as an error
+#set -o nounset                              # Treat unset variables as an error
 
 DULL=0
 BRIGHT=1
@@ -80,7 +80,7 @@ REV_CYAN="\033[${DULL};${BG_WHITE};${BG_CYAN}m"
 REV_RED="\033[${DULL};${FG_YELLOW}; ${BG_RED}m"
 
 JESS="Jess likes this one :)"
-#echo -e "${CYAN}What's up?${NORMAL}"
+#echo -e "${BRIGHT_BLUE}What's up?${NORMAL}"
 #echo -e "${BRIGHT_BLUE}$JESS${NORMAL}"
 #echo -e "${YELLOW}Jess likes this one :)${NORMAL}"
 
