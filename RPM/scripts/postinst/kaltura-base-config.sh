@@ -179,7 +179,7 @@ CDN hostname [${YELLOW}`hostname`${CYAN}]:${NORMAL}"
                 read -e ADMIN_CONSOLE_ADMIN_MAIL
         done
         while [ -z "$ADMIN_CONSOLE_PASSWORD" ];do
-                echo -en "${CYAN}Admin user login password (must be minimum 8 chars and include at least one of each: upper-case, lower-case, number and a special character):${NORMAL}"
+                echo -en "${CYAN}Admin user login password (must be minimum 8 chars and include at least one of each: upper-case, lower-case, number and a special character):${NORMAL}\n"
                 read -s ADMIN_CONSOLE_PASSWORD
 		if echo $ADMIN_CONSOLE_PASSWORD | grep -q "/" ;then
 			echo -en "${BRIGHT_RED}ERROR: Passwd can't have the '/' char in it. Please re-input.${NORMAL}"
@@ -229,7 +229,7 @@ CDN hostname [${YELLOW}`hostname`${CYAN}]:${NORMAL}"
 		fi
 	fi
 	if [ -z "$CONTACT_PHONE_NUMBER" ];then
-		echo -en "${CYAN}'Contact us' phone number [${YELLOW}+1 800 871 5224${NORMAL}]?"
+		echo -en "${CYAN}'Contact us' phone number [${YELLOW}+1 800 871 5224${CYAN}]?${NORMAL}"
 		read CONTACT_PHONE_NUMBER
 		if [ -z "$CONTACT_PHONE_NUMBER" ];then
 			CONTACT_PHONE_NUMBER="+1 800 871 5224"
