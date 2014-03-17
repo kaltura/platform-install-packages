@@ -85,14 +85,14 @@ else
 echo -e "\n${CYAN}In order to finalize the system configuration, please input the following:
 
 
-CDN hostname [`hostname`]:${NORMAL}"
+CDN hostname [${YELLOW}`hostname`${CYAN}]:${NORMAL}"
         read -e CDN_HOST
         if [ -z "$CDN_HOST" ];then
                 CDN_HOST=`hostname`
 
         fi
 
-        echo -en "${CYAN}Apache virtual hostname [${YELLOW}`hostname`${NORMAL}]: "
+        echo -en "${CYAN}Apache virtual hostname [${YELLOW}`hostname`]:${NORMAL} "
         read -e KALTURA_VIRTUAL_HOST_NAME
         if [ -z "$KALTURA_VIRTUAL_HOST_NAME" ];then
                 KALTURA_VIRTUAL_HOST_NAME=`hostname`
@@ -188,7 +188,7 @@ CDN hostname [`hostname`]:${NORMAL}"
         done
 
         while [ -z "$ANSFILE" -a -z "$AGAIN_ADMIN_CONSOLE_PASSWORD" ];do
-                echo -en "${CYAN}Confirm passwd:${NORMAL} "
+                echo -en "\n${CYAN}Confirm passwd:${NORMAL} \n"
                 read -s AGAIN_ADMIN_CONSOLE_PASSWORD
 		if [ "$ADMIN_CONSOLE_PASSWORD" != "$AGAIN_ADMIN_CONSOLE_PASSWORD" ];then
 			echo -en "${BRIGHT_RED}ERROR: Passwds do not match, again please.${NORMAL}" 
