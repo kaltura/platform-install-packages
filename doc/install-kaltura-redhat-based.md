@@ -87,6 +87,11 @@ chkconfig ntpd on
 yum install mysql-server
 /etc/init.d/mysqld start
 mysql_secure_installation
+```
+**Make sure to say Y** for the `mysql_secure_install` install, and follow through all the mysql install questions before continuing further.    
+Failing to properly run `mysql_secure_install` will cause the kaltura mysql user to run without proper permissions to access your mysql DB.    
+
+```bash
 # Run the my.cnf configuration script ON THE MYSQL server
 /opt/kaltura/bin/kaltura-mysql-settings.sh
 # Enable MySQL at init time:
