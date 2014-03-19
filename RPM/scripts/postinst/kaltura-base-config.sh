@@ -251,7 +251,9 @@ create_answer_file $POST_INST_MAIL_TMPL
 # need to check if we even have PHP as Sphinx and DWH can be installed without thank heavens.
 # reported by David Bezemer:
  for INI in /etc/php.ini /etc/php.d/*kaltura*ini;do
-	sed -i "s#\(date.timezone\)\s*=.*#\1='$TIME_ZONE'#g" $INI
+	if [ -r "$INI" ];then
+		sed -i "s#\(date.timezone\)\s*=.*#\1='$TIME_ZONE'#g" $INI
+	fi
 done
 if [ -z "$DB1_PASS" ];then
 	DB1_PASS=`< /dev/urandom tr -dc A-Za-z0-9_ | head -c15`

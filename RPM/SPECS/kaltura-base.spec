@@ -15,7 +15,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 9.12.0
-Release: 3
+Release: 5 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -222,16 +222,16 @@ if [ "$1" = 2 ];then
 		if [ -x %{_sysconfdir}/init.d/httpd ];then
 			%{_sysconfdir}/init.d/httpd restart
 		fi
-	fi
-	# see https://kaltura.atlassian.net/wiki/pages/viewpage.action?spaceKey=QAC&title=QA.Core+Deployment+Instructions%3A+Mar+9%2C+2014
-	if [ %{version} = '9.12.0' ];then
-		php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_01_20_categoryentry_syncprivacycontext_action.php
-		php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_01_26_add_media_server_partner_level_permission.php
-		php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_02_25_add_push_publish_permission_to_partner_0.php
-		php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_01_26_update_live_stream_service_permissions.php
-		php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_02_25_add_push_publish_permission_to_live_asset_parameters.php
-		php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_02_25_add_push_publish_permission_to_live_entry_parameters.php
-		php %{prefix}/app/alpha/scripts/utils/setCategoryEntriesPrivacyContext.php realrun
+		# see https://kaltura.atlassian.net/wiki/pages/viewpage.action?spaceKey=QAC&title=QA.Core+Deployment+Instructions%3A+Mar+9%2C+2014
+		if [ %{version} = '9.12.0' ];then
+			php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_01_20_categoryentry_syncprivacycontext_action.php
+			php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_01_26_add_media_server_partner_level_permission.php
+			php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_02_25_add_push_publish_permission_to_partner_0.php
+			php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_01_26_update_live_stream_service_permissions.php
+			php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_02_25_add_push_publish_permission_to_live_asset_parameters.php
+			php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_02_25_add_push_publish_permission_to_live_entry_parameters.php
+			php %{prefix}/app/alpha/scripts/utils/setCategoryEntriesPrivacyContext.php realrun
+		fi
 	fi
 
 fi
@@ -288,6 +288,9 @@ fi
 
 
 %changelog
+* Tue Mar 18 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.12.0-5
+- Don't run upgrade scripts if not INIs.
+
 * Thu Mar 13 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.12.0-2
 - Generate random monit passwd.
 

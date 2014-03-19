@@ -32,14 +32,14 @@ setenforce permissive
 ```
 ##### Auto Set the Kaltura install repository URLs 
 
-For stable updates (running as root):
 ```bash
-rpm -ihv http://installrepo.kaltura.org/releases/stable/RPMS/noarch/kaltura-release.noarch.rpm
+rpm -ihv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
 ```
 
-For nightly builds use (running as root):
+This will enable the stable repo, to enable the nightly one in addition to it, please run:
 ```bash   
-rpm -Uhv http://installrepo.kaltura.org/releases/nightly/RPMS/noarch/kaltura-release.noarch.rpm
+yum-config-manager --enable Kaltura-testing-noarch
+yum-config-manager --enable Kaltura-testing
 ```
 
 ##### Note about SSL certificates

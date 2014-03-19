@@ -5,7 +5,7 @@
 Summary: Kaltura Server release file and package configuration
 Name: kaltura-release
 Version: 9.12.0
-Release: 1
+Release: 3 
 License: AGPLv3+
 Group: Server/Platform 
 URL: http://kaltura.org
@@ -27,28 +27,29 @@ GPG keys used to sign them.
 [Kaltura]
 name = Kaltura Server
 baseurl = http://%{baseurl}/%{path}/\$basearch/
-#gpgkey = file:///etc/pki/rpm-gpg/
-gpgcheck = 0
+gpgkey = http://%{baseurl}/%{path}/\$basearch/RPM-GPG-KEY-kaltura
+gpgcheck = 1
 enabled = 1
 
 [Kaltura-noarch]
 name = Kaltura Server arch independent
 baseurl = http://%{baseurl}/%{path}/noarch
-#gpgkey = file:///etc/pki/rpm-gpg/
-gpgcheck = 0
+gpgkey = http://%{baseurl}/%{path}/noarch/RPM-GPG-KEY-kaltura
+gpgcheck = 1
 enabled = 1
 
 [Kaltura-testing]
 name = Kaltura Server arch independent
 baseurl = http://%{baseurl}/%{testpath}/\$basearch/
-#gpgkey = file:///etc/pki/rpm-gpg/
-gpgcheck = 0
+gpgkey = http://%{baseurl}/%{testpath}/\$basearch/RPM-GPG-KEY-kaltura
+
+gpgcheck = 0 
 enabled = 0
 
 [Kaltura-testing-noarch]
 name = Kaltura Server arch independent
 baseurl = http://%{baseurl}/%{testpath}/noarch
-#gpgkey = file:///etc/pki/rpm-gpg/
+gpgkey = http://%{baseurl}/%{testpath}/noarch/RPM-GPG-KEY-kaltura
 gpgcheck = 0
 enabled = 0
 EOF
@@ -72,22 +73,16 @@ if [ "$1" = 2 ];then
 		send_install_becon %{name}-%{version}-%{release} $ZONE install_upgrade
 	fi
 fi
-#rpm -q gpg-pubkey-e42d547b-3960bdf1 &>/dev/null || rpm --import %{_sysconfdir}/pki/rpm-gpg/RPM-GPG-KEY-rpmforge-matthias
 exit 0
 
 %files
-#%defattr(-, root, root, 0755)
-#%if %{!?_without_rpmpubkey:1}0
-#%pubkey RPM-GPG-KEY-rpmforge-dag
-#%else
-#%doc RPM-GPG-KEY-rpmforge-matthias
-#%endif
 %dir %{_sysconfdir}/yum.repos.d/
 %config %{_sysconfdir}/yum.repos.d/kaltura.repo
-#%dir %{_sysconfdir}/pki/rpm-gpg/
-#%{_sysconfdir}/pki/rpm-gpg/RPM-GPG-KEY-rpmforge-*
 
 %changelog
+* Tue Mar 18 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.12.0-2
+- We will be signing our RPMs from now on.
+
 * Sun Mar 9 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.12.0-1
 - Ver Bounce to 9.12.0
 
