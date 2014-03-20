@@ -253,7 +253,8 @@ elif [ "$CONFIG_CHOICE" = 0 ];then
 	enable_apps_conf $KALTURA_APACHE_CONFD
 	enable_admin_conf $KALTURA_APACHE_CONFD
 else
-	CONFIG_CHOICE=0
+	enable_apps_conf $KALTURA_APACHE_CONFD
+	enable_admin_conf $KALTURA_APACHE_CONFD
 fi
 
 # cronjobs:
