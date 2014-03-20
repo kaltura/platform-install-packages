@@ -281,3 +281,24 @@ write_last_base_version()
 	CUR_BASE_VERSION=`rpm -qa kaltura-base --queryformat %{version}-%{release}`
 	echo "$CUR_BASE_VERSION" > $BASE_DIR/bin/last_base_ver
 }
+
+check_daemon_init_status()
+{
+        DAEMON=$2
+        MACHINE=$1
+        if ssh -t -lroot $MACHINE -i$PEM_CRT_PATH $SSH_QUIET_OPTS "sudo chkconfig $DAEMON";then
+                return 0
+        fi
+        return 1
+}
+
+check_daemon_status()
+{
+        DAEMON=$2
+        MACHINE=$1
+        if ssh -t -lroot $MACHINE -i$PEM_CRT_PATH $SSH_QUIET_OPTS "sudo service $DAEMON status";then
+                return 0
+        fi
+        return 1
+}
+  
