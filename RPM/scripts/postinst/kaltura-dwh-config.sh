@@ -28,7 +28,7 @@ fi
 if [ ! -r /opt/kaltura/app/base-config.lock ];then
 	`dirname $0`/kaltura-base-config.sh
 else
-	echo -e "${CYAN}base-config completed successfully, if you ever want to re-configure your system (e.g. change DB hostname) run the following script:
+	echo -e "${BRIGHT_BLUE}base-config completed successfully, if you ever want to re-configure your system (e.g. change DB hostname) run the following script:
 # rm /opt/kaltura/app/base-config.lock
 # $BASE_DIR/bin/kaltura-base-config.sh
 ${NORMAL}

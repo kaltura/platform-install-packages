@@ -148,8 +148,8 @@ ${BRIGHT_BLUE}$SERVICE_URL${CYAN}
 
 To begin, access the Admin Console using the Admin email and password you've entered while installing.
 When logged in to the KAC, create a new publisher account to being using Kaltura.
-Visit ${BRIGHT_BLUE}http://www.kaltura.org${NORMAL} to join the community and get help!
-Visit ${BRIGHT_BLUE}http://knowledge.kaltura.com${NORMAL} to read documentation and learn more.
+Visit ${BRIGHT_BLUE}http://www.kaltura.org${CYAN} to join the community and get help!
+Visit ${BRIGHT_BLUE}http://knowledge.kaltura.com${CYAN} to read documentation and learn more.
 =====================================================================================================================${NORMAL}
 "
 

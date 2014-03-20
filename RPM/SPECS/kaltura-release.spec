@@ -5,7 +5,7 @@
 Summary: Kaltura Server release file and package configuration
 Name: kaltura-release
 Version: 9.12.0
-Release: 3 
+Release: 5 
 License: AGPLv3+
 Group: Server/Platform 
 URL: http://kaltura.org
@@ -28,14 +28,14 @@ GPG keys used to sign them.
 name = Kaltura Server
 baseurl = http://%{baseurl}/%{path}/\$basearch/
 gpgkey = http://%{baseurl}/%{path}/\$basearch/RPM-GPG-KEY-kaltura
-gpgcheck = 1
+gpgcheck = 0 
 enabled = 1
 
 [Kaltura-noarch]
 name = Kaltura Server arch independent
 baseurl = http://%{baseurl}/%{path}/noarch
 gpgkey = http://%{baseurl}/%{path}/noarch/RPM-GPG-KEY-kaltura
-gpgcheck = 1
+gpgcheck = 0
 enabled = 1
 
 [Kaltura-testing]

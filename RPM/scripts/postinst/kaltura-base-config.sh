@@ -92,7 +92,7 @@ CDN hostname [${YELLOW}`hostname`${CYAN}]:${NORMAL}"
 
         fi
 
-        echo -en "${CYAN}Apache virtual hostname [${YELLOW}`hostname`]:${NORMAL} "
+        echo -en "${CYAN}Apache virtual hostname [${YELLOW}`hostname`${CYAN}]:${NORMAL} "
         read -e KALTURA_VIRTUAL_HOST_NAME
         if [ -z "$KALTURA_VIRTUAL_HOST_NAME" ];then
                 KALTURA_VIRTUAL_HOST_NAME=`hostname`
@@ -125,7 +125,7 @@ CDN hostname [${YELLOW}`hostname`${CYAN}]:${NORMAL}"
                 read -e SUPER_USER
         done
         while [ -z "$SUPER_USER_PASSWD" ];do
-                echo -en "${CYAN}MySQL super user passwd [this is only for setting the kaltura user passwd and WILL NOT be used with the application]:${NORMAL} "
+                echo -en "${CYAN}MySQL super user passwd [this is only for setting the kaltura user passwd and WILL NOT be used with the application]:${NORMAL}\n "
                 read -s SUPER_USER_PASSWD
         done
 
