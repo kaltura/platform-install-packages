@@ -280,9 +280,11 @@ ln -sf $BASE_DIR/app/configurations/monit/monit.avail/memcached.rc $BASE_DIR/app
 	if [ $? -eq 0 ];then
 		if [ -r $BASE_DIR/apps/studio/`rpm -qa kaltura-html5-studio --queryformat %{version}`/studio.ini ];then
 			php $BASE_DIR/app/deployment/uiconf/deploy_v2.php --ini=$BASE_DIR/apps/studio/`rpm -qa kaltura-html5-studio --queryformat %{version}`/studio.ini >> /dev/null
-			sed -i "s@^\(studio_version\s*=\)\(.*\)@\1 `rpm -qa kaltura-html5-studio --queryformat %{version}`@g" -i /opt/kaltura/app/configurations/base.ini
+			sed -i "s@^\(studio_version\s*=\)\(.*\)@\1 `rpm -qa kaltura-html5-studio --queryformat %{version}`@g" -i $BASE_DIR/app/configurations/base.ini
 		fi
-	php $BASE_DIR/app/deployment/uiconf/deploy_v2.php --ini=$BASE_DIR/web/flash/kmc/`rpm -qa kaltura-kmc --queryformat %{version}`/config.ini >> /dev/null
+	# we can't use rpm -q kaltura-kmc because this node may not be the one where we installed the KMC RPM on, as it resides in the web dir and does not need to be installed on all front nodes.
+	KMC_PATH=`ls -ld $BASE_DIR/web/flash/kmc/v*|awk -F " " '{print $NF}' |tail -1`
+	php $BASE_DIR/app/deployment/uiconf/deploy_v2.php --ini=$KMC_PATH/config.ini >> /dev/null
 
 	fi
 	trap 'my_trap_handler ${LINENO} ${$?}' ERR

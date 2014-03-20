@@ -32,7 +32,6 @@
 				<id>template@kaltura.com</id>
 				<screenName>template@kaltura.com</screenName>
 				<email>template@kaltura.com</email>
-				<password>@TEMPLATE_PARTNER_ADMIN_SECRET@</password>
 				<status>1</status>
 				<isAdmin>1</isAdmin>
 				<roleIds>{1:result:id}</roleIds>

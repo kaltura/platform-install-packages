@@ -3,7 +3,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.8
-Release: 16 
+Release: 17 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -81,6 +81,9 @@ fi
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Thu Mar 20 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.8-16
+- disable ERR trap when checking if kalturadw tables exist.
+
 * Mon Mar 17 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.8-11
 - Colors && shit..
 

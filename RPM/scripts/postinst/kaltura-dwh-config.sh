@@ -40,13 +40,14 @@ if [ ! -r "$RC_FILE" ];then
 	exit 2
 fi
 . $RC_FILE
-trap 'my_trap_handler ${LINENO} ${$?}' ERR
+trap - ERR
 send_install_becon `basename $0` $ZONE install_start 
 TABLES=`echo "show tables" | mysql -h$DWH_HOST -u$SUPER_USER -p$SUPER_USER_PASSWD -P$DWH_PORT kalturadw 2> /dev/null`
 if [ -z "$TABLES" ];then 
 	echo -e "${CYAN}Deploying analytics warehouse DB, please be patient as this may take a while...
 Output is logged to $BASE_DIR/dwh/logs/dwh_setup.log.${NORMAL}
 "
+	trap 'my_trap_handler ${LINENO} ${$?}' ERR
 	$BASE_DIR/dwh/setup/dwh_setup.sh -u$SUPER_USER -k $BASE_DIR/pentaho/pdi/ -d$BASE_DIR/dwh -h$DWH_HOST -P$DWH_PORT -p$SUPER_USER_PASSWD | tee $BASE_DIR/dwh/logs/dwh_setup.log
 else
 cat << EOF
