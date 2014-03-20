@@ -25,6 +25,7 @@ NOBODY_GROUP=$4
 IDMAPD_CONFFILE=/etc/idmapd.conf
 PREFIX=/opt/kaltura
 MOUNT_DIR=$PREFIX/web
+mkdir -p $MOUNT_DIR
 # create user/group, and update permissions
 groupadd -r kaltura -g7373 2>/dev/null || true
 useradd -M -r -u7373 -d $PREFIX -s /bin/bash -c "Kaltura server" -g kaltura kaltura 2>/dev/null || true
