@@ -37,8 +37,9 @@ report()
 	TIME=$4
 	echo "$TNAME, RC: $RC, MESSAGE: $MESSAGE, test took: $TIME"
 }
-#if [ "$ROLE" = "allin1" ];then
-	for D in $ALL_DAEMONS; do
+for D in $ALL_DAEMONS; do
+# if this package is installed check daemon status
+        if ssh -lroot $KALTURA_VIRTUAL_HOST_NAME $SSH_QUIET_OPTS "rpm -q $D";then
 		START=`date +%s.%N`
 		if check_daemon_status $KALTURA_VIRTUAL_HOST_NAME $D;then
 			END=`date +%s.%N`
@@ -59,17 +60,34 @@ report()
 			TOTAL_T=`bc <<< $TIME`
 			report "check_daemon_init_status" 1 "Daemon $D is NOT configured to run on init." "`bc <<< $END-$START`"
 		fi
-	done
-#fi
-check_start_page
-check_testme_page
-check_kmc_index_page
-check_admin_console_index_page
+	fi
+done
+START=`date +%s.%N`
+MSG=`check_start_page`
+RC=$?
+END=`date +%s.%N`
+report "check_start_page" $RC "$MSG" "`bc <<< $END-$START`"
+START=`date +%s.%N`
+MSG=`check_testme_page`
+RC=$?
+END=`date +%s.%N`
+report "check_testme_page" $RC "$MSG" "`bc <<< $END-$START`"
+
+START=`date +%s.%N`
+MSG=`check_kmc_index_page`
+RC=$?
+report "check_kmc_index_page" $RC "$MSG" "`bc <<< $END-$START`"
+
+START=`date +%s.%N`
+MSG=`check_admin_console_index_page`
+RC=$?
+report "check_admin_console_index_page" $RC "$MSG" "`bc <<< $END-$START`"
 
 DIRNAME=`dirname $0`
 ADMIN_PARTNER_SECRET=`echo "select admin_secret from partner where id=-2" | mysql -N -h $DB1_HOST -p$DB1_PASS $DB1_NAME -u$DB1_USER`
 START=`date +%s.%N`
-PARTNER_ID=`php $DIRNAME/create_partner.php $ADMIN_PARTNER_SECRET mb@kaltura.com testingpasswd $SERVICE_URL 2>&1`
+NOW=`date +%d-%H-%m-%S`
+PARTNER_ID=`php $DIRNAME/create_partner.php $ADMIN_PARTNER_SECRET mb-$NOW@kaltura.com testingpasswd $SERVICE_URL 2>&1`
 RC=$?
 END=`date +%s.%N`
 TOTAL_T=`bc <<< $TIME`
