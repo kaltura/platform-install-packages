@@ -48,7 +48,7 @@ else
         echo "Nobody-User = $NOBODY_USER" >>$IDMAPD_CONFFILE
         echo "Nobody-User = $NOBODY_GROUP" >>$IDMAPD_CONFFILE
 fi
-echo "$NFS_HOST:$MOUNT_DIR $MOUNT_DIR nfs4" >> /etc/fstab
+echo "$NFS_HOST:$MOUNT_DIR $MOUNT_DIR nfs4 _netdev,auto 0 0" >> /etc/fstab
 for DAEMON in rpcbind rpcidmapd ;do
 	service $DAEMON restart
 done

@@ -37,7 +37,7 @@ report()
 	TIME=$4
 	echo "$TNAME, RC: $RC, MESSAGE: $MESSAGE, test took: $TIME"
 }
-if [ "$ROLE" = "allin1" ];then
+#if [ "$ROLE" = "allin1" ];then
 	for D in $ALL_DAEMONS; do
 		START=`date +%s.%N`
 		if check_daemon_status $KALTURA_VIRTUAL_HOST_NAME $D;then
@@ -60,26 +60,37 @@ if [ "$ROLE" = "allin1" ];then
 			report "check_daemon_init_status" 1 "Daemon $D is NOT configured to run on init." "`bc <<< $END-$START`"
 		fi
 	done
-fi
+#fi
+check_start_page
+check_testme_page
+check_kmc_index_page
+check_admin_console_index_page
+
+DIRNAME=`dirname $0`
 ADMIN_PARTNER_SECRET=`echo "select admin_secret from partner where id=-2" | mysql -N -h $DB1_HOST -p$DB1_PASS $DB1_NAME -u$DB1_USER`
 START=`date +%s.%N`
-report "MySQL instance init" $RC "instance ID: $MYSQL_ID" "$TIME"
-PARTNER_ID=`php $CSI_HOME/sanity_tests/create_partner.php $ADMIN_PARTNER_SECRET mb@kaltura.com testingpasswd $SERVICE_URL`
+PARTNER_ID=`php $DIRNAME/create_partner.php $ADMIN_PARTNER_SECRET mb@kaltura.com testingpasswd $SERVICE_URL 2>&1`
 RC=$?
 END=`date +%s.%N`
 TOTAL_T=`bc <<< $TIME`
 report "Create Partner" $RC "New PID is $PARTNER_ID" "`bc <<< $END-$START`"
 START=`date +%s.%N`
 PARTNER_SECRET=`echo "select secret from partner where id=$PARTNER_ID" | mysql -N -h $DB1_HOST -p$DB1_PASS $DB1_NAME -u$DB1_USER`
-OUTP=`php $CSI_HOME/sanity_tests/upload_test.php $SERVICE_URL $PARTNER_ID $PARTNER_SECRET $WEB_DIR/content/templates/entry/data/kaltura_logo_animated_blue.flv`
+PARTNER_ADMIN_SECRET=`echo "select admin_secret from partner where id=$PARTNER_ID" | mysql -N -h $DB1_HOST -p$DB1_PASS $DB1_NAME -u$DB1_USER`
+OUTP=`php $DIRNAME/upload_test.php $SERVICE_URL $PARTNER_ID $PARTNER_SECRET $WEB_DIR/content/templates/entry/data/kaltura_logo_animated_blue.flv 2>&1`
 RC=$?
 END=`date +%s.%N`
 TOTAL_T=`bc <<< $TIME`
 report "Upload content kaltura_logo_animated_blue.flv" $RC "$OUTP" "`bc <<< $END-$START`"
 
-OUTP=`php $CSI_HOME/sanity_tests/upload_test.php $SERVICE_URL $PARTNER_ID $PARTNER_SECRET $WEB_DIR/content/templates/entry/data/kaltura_logo_animated_green.flv`
+OUTP=`php $DIRNAME/upload_test.php $SERVICE_URL $PARTNER_ID $PARTNER_SECRET $WEB_DIR/content/templates/entry/data/kaltura_logo_animated_green.flv 2>&1`
 RC=$?
 END=`date +%s.%N`
 TOTAL_T=`bc <<< $TIME`
 report "Upload content kaltura_logo_animated_green.flv" $RC "$OUTP" "`bc <<< $END-$START`"
 
+OUTP=`php $DIRNAME/upload_bulk.php $SERVICE_URL $PARTNER_ID $PARTNER_ADMIN_SECRET MB $WEB_DIR/content/docs/csv/kaltura_batch_upload_eagle.csv 2>&1`
+RC=$?
+END=`date +%s.%N`
+TOTAL_T=`bc <<< $TIME`
+report "Upload bulk using CSV" $RC "$OUTP" "`bc <<< $END-$START`"
