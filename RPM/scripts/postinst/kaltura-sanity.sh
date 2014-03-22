@@ -107,8 +107,15 @@ END=`date +%s.%N`
 TOTAL_T=`bc <<< $TIME`
 report "Upload content kaltura_logo_animated_green.flv" $RC "$OUTP" "`bc <<< $END-$START`"
 
-OUTP=`php $DIRNAME/upload_bulk.php $SERVICE_URL $PARTNER_ID $PARTNER_ADMIN_SECRET MB $WEB_DIR/content/docs/csv/kaltura_batch_upload_eagle.csv 2>&1`
+unzip -oqq $WEB_DIR/content/docs/kaltura_batch_upload_falcon.zip -d $WEB_DIR/content/docs
+OUTP=`php $DIRNAME/upload_bulk.php $SERVICE_URL $PARTNER_ID $PARTNER_ADMIN_SECRET MB $WEB_DIR/content/docs/kaltura_batch_upload_falcon.csv bulkUploadCsv.CSV 2>&1`
 RC=$?
 END=`date +%s.%N`
 TOTAL_T=`bc <<< $TIME`
 report "Upload bulk using CSV" $RC "$OUTP" "`bc <<< $END-$START`"
+
+OUTP=`php $DIRNAME/upload_bulk.php $SERVICE_URL $PARTNER_ID $PARTNER_ADMIN_SECRET MB $WEB_DIR/content/docs/kaltura_batch_upload_falcon.xml bulkUploadXml.XML 2>&1`
+RC=$?
+END=`date +%s.%N`
+TOTAL_T=`bc <<< $TIME`
+report "Upload bulk using XML" $RC "$OUTP" "`bc <<< $END-$START`"
