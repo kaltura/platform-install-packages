@@ -3,7 +3,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.8
-Release: 18 
+Release: 19
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -81,6 +81,9 @@ fi
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Sat Mar 22 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.8-19
+- kaltura-sanity.sh is operational.
+
 * Thu Mar 20 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.8-18
 - kaltura-front-config.sh - we can't use rpm -q kaltura-kmc because this node may not be the one where we installed the KMC RPM on, as it resides in the web dir and does not need to be installed on all front nodes.
 
