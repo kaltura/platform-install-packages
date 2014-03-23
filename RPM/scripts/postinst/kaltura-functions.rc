@@ -17,6 +17,13 @@ if [ -r $BASE_DIR/app/configurations/consent_msgs ];then
 	. $BASE_DIR/app/configurations/consent_msgs 
 fi
 CONSENT_FILE=/opt/kaltura/bin/contact.rc
+APACHE_DAEMON=httpd
+MYSQL_DAEMON=mysqld
+SPHINX_DAEMON=kaltura-sphinx
+BATCH_DAEMON=kaltura-batch
+MEMCACHE_DAEMON=memcached
+MONIT_DAEMON=kaltura-monit
+ALL_DAEMONS="$APACHE_DAEMON $SPHINX_DAEMON $BATCH_DAEMON $MONIT_DAEMON $MEMCACHE_DAEMON"
 
 POST_INST_MAIL_SUBJECT='Your new Kaltura server is up! and 6 Quick Tips For Smooth Kaltura Maintenance'
 POST_INST_MAIL_TMPL=$BASE_DIR/app/configurations/post_inst_mail
@@ -286,7 +293,7 @@ check_daemon_init_status()
 {
         DAEMON=$2
         MACHINE=$1
-        if ssh -t -lroot $MACHINE -i$PEM_CRT_PATH $SSH_QUIET_OPTS "sudo chkconfig $DAEMON";then
+        if ssh -lroot $MACHINE $SSH_QUIET_OPTS "chkconfig $DAEMON";then
                 return 0
         fi
         return 1
@@ -296,9 +303,83 @@ check_daemon_status()
 {
         DAEMON=$2
         MACHINE=$1
-        if ssh -t -lroot $MACHINE -i$PEM_CRT_PATH $SSH_QUIET_OPTS "sudo service $DAEMON status";then
+        if ssh -lroot $MACHINE $SSH_QUIET_OPTS "service $DAEMON status >/dev/null";then
                 return 0
         fi
         return 1
 }
-  
+ 
+check_start_page()
+{
+	# requesting the service URL should get a HTTP 301 to start page
+	START_PAGE=`curl -ks "$SERVICE_URL"  | grep 'The document has moved '|sed 's@.*a href="\(.*\)".*@\1@g'`
+	curl -ks $START_PAGE | grep 'Kaltura Video Platfrom - Home Page' -q
+	if [ $? -eq 0 ];then
+		echo "Successfully found 'Kaltura Video Platfrom - Home Page' on page $START_PAGE"
+		return 0
+	else
+		echo "Did not find 'Kaltura Video Platfrom - Home Page' on page $START_PAGE :("
+		return 1
+	fi	
+} 
+
+check_testme_page()
+{
+	TESTME_PAGE=`curl -ks "$SERVICE_URL/api_v3/testme"  | grep 'The document has moved '|sed 's@.*a href="\(.*\)".*@\1@g'`
+	curl -ks $TESTME_PAGE | grep 'Kaltura - Test Me Console' -q
+	if [ $? -eq 0 ];then
+		echo "Successfully found 'Kaltura - Test Me Console' on page $TESTME_PAGE"
+		return 0
+	else
+		echo "Did not find 'Kaltura - Test Me Console' on page $TESTME_PAGE :("
+		return 1
+	fi	
+} 
+check_kmc_index_page()
+{
+	curl -ks "$SERVICE_URL/kmc"  | grep -q 'Kaltura - Open Source Video Platform'
+	if [ $? -eq 0 ];then
+		echo "Successfully found 'Kaltura - Open Source Video Platform'"
+		return 0
+	else
+		echo "Did not find 'Kaltura - Open Source Video Platform' :("
+		return 1
+	fi
+}
+
+check_admin_console_index_page()
+{
+	AC_PAGE=`curl -ks "$SERVICE_URL/admin_console"  | grep 'The document has moved '|sed 's@.*a href="\(.*\)".*@\1@g'`
+	curl -ks $AC_PAGE | grep 'Kaltura Admin Console' -q
+	if [ $? -eq 0 ];then
+		echo "Successfully found 'Kaltura Admin Console' on page $AC_PAGE"
+		return 0
+	else
+		echo "Did not find 'Kaltura Admin Console' on page $AC_PAGE :("
+		return 1
+	fi	
+}
+
+test_red5_conn()
+{
+	$BASE_DIR/bin/fms_push_file_monitor.sh $BASE_DIR/web/content/templates/entry/data/kmc_logo.flv rtmp://$SERVICE_URL/oflaDemo/
+	RC=$?
+	return $RC 
+
+}
+
+report()
+{
+	TNAME=$1
+	RC=$2
+	MESSAGE=$3
+	TIME=$4
+	if [ $RC -eq 0 ];then
+		COLOR=${GREEN}
+		STAT="PASSED"
+	else
+		COLOR=${BRIGHT_RED}
+		STAT="FAILED"
+	fi
+	echo -e "[${CYAN}$TNAME${NORMAL}] [${COLOR}$STAT, RC: $RC${NORMAL}] - [$TIME]"
+}

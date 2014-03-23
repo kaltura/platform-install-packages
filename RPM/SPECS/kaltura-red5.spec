@@ -1,7 +1,7 @@
 Summary: Red5 Server
 Name: kaltura-red5
 Version: 1.0.0
-Release: 1 
+Release: 3 
 Source0: %{name}-%{version}.tar.bz2
 Source1: %{name}-flash-%{version}.tar.bz2
 Source2: red5.init
