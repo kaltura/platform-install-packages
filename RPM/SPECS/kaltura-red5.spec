@@ -1,6 +1,6 @@
 Summary: Red5 Server
 Name: kaltura-red5
-Version: 1.0.2
+Version: 1.0.0
 Release: 1 
 Source0: %{name}-%{version}.tar.bz2
 Source1: %{name}-flash-%{version}.tar.bz2
@@ -10,8 +10,7 @@ URL: http://www.red5.org/
 Group: Applications/Networking
 BuildRoot: %{_builddir}/%{name}-%{version}-%{release}-root
 BuildRequires: ant
-Requires: chkconfig
-Requires: java
+Requires: chkconfig,jre
 
 %define red5_lib    /usr/lib/red5
 %define red5_log    /var/log/red5
