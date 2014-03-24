@@ -308,7 +308,20 @@ check_daemon_status()
         fi
         return 1
 }
- 
+
+check_monit()
+{
+        DAEMON=$2
+        MACHINE=$1
+        ssh -lroot $MACHINE $SSH_QUIET_OPTS "service $DAEMON stop >/dev/null"
+	echo -e "${CYAN}Napping 10 seconds to allow the daemon $DAEMON to finish its init after monit restarted it..${NORMAL}"
+	sleep 10 
+        if ssh -lroot $MACHINE $SSH_QUIET_OPTS "service $DAEMON status >/dev/null";then
+                return 0
+        fi
+        return 1
+} 
+
 check_start_page()
 {
 	# requesting the service URL should get a HTTP 301 to start page
@@ -362,7 +375,7 @@ check_admin_console_index_page()
 
 test_red5_conn()
 {
-	$BASE_DIR/bin/fms_push_file_monitor.sh $BASE_DIR/web/content/templates/entry/data/kmc_logo.flv rtmp://$SERVICE_URL/oflaDemo/
+	$BASE_DIR/bin/fms_push_file_monitor.sh $BASE_DIR/web/content/templates/entry/data/kmc_logo.flv rtmp://$RED5_HOST/oflaDemo/
 	RC=$?
 	return $RC 
 
@@ -374,7 +387,7 @@ report()
 	RC=$2
 	MESSAGE=$3
 	TIME=$4
-	if [ $RC -eq 0 ];then
+	if [ "$RC" -eq 0 ];then
 		COLOR=${GREEN}
 		STAT="PASSED"
 	else
@@ -382,4 +395,35 @@ report()
 		STAT="FAILED"
 	fi
 	echo -e "[${CYAN}$TNAME${NORMAL}] [${COLOR}$STAT, RC: $RC${NORMAL}] - [$TIME]"
+}
+
+check_missing_web_files()
+{
+	MISSING_LIST="/tmp/missing_web_files_`date +%d_%m_%Y`"
+	TMP_MISSING_LIST="/tmp/missing_web_files_tmp_`date +%d_%m_%Y`"
+	# query to get all ui_confs
+	for i in `echo "select conf_file_path from ui_conf" | mysql -N -h $DB1_HOST -u $DB1_USER -p$DB1_PASS kaltura`;do 
+		if [ -r "$WEB_DIR/$i" ];then 
+			# run line by line over the XML to find the paths
+			while read L;do 
+				PATH_TO_SKIN=`echo $L|grep "/content" | sed 's#.*\(/content.*.htm\|/content.*.png\|/content.*.swf\|/content.*.xml\|/content.*.pdf\|/content.*.zip\).*#\1#g'` 
+				if [ -n "$PATH_TO_SKIN" ];then
+					if [ ! -r "$WEB_DIR$PATH_TO_SKIN" ];then 
+						echo "$WEB_DIR/$PATH_TO_SKIN is missing" >> $TMP_MISSING_LIST;
+						MATCH=1
+					fi
+				fi;
+			done < $WEB_DIR/$i;
+		else 
+			echo "UI conf $WEB_DIR/$i is missing";
+			MATCH=1
+		fi;
+	done
+	if [ $MATCH = 1 ];then
+		awk -F ' ' '{print $1}' $TMP_MISSING_LIST|sort -u > $MISSING_LIST
+		echo "See $MISSING_LIST for a list of misses"
+		return 1
+	else
+		return 0
+	fi
 }
