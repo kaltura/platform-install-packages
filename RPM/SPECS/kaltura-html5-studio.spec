@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5-studio
-Version: v0.9.2
+Version: v0.9.4
 Release: 1 
 License: AGPLv3+
 Group: Server/Platform 
@@ -51,6 +51,16 @@ rm -rf %{buildroot}
 %{prefix}/apps/studio/%{version}
 
 %changelog
+* Tue Mar 25 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v0.9.4-1
+- Navigation menu added
+- FEC-1097 Default value is missing in L&F ( title label)
+- FEC-1116 Flash Tabs no longer display UI after clicking on Studio in Firefox
+- FEC-1112 Bumper is not playing while adding in v2 studio
+- FEC-1018 Performance issue on IE8
+- FEC-893 Cache issue with new players in P&E
+
+
+
 * Fri Mar 14 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v0.9.2-1
 - IE8 support
 - FEC-883 vast UI

@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.4
+Version: v2.5
 Release: 1
 Epoch:0 
 License: AGPLv3+
@@ -51,6 +51,13 @@ rm -rf %{buildroot}
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Tue Mar 25 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.5-1
+- SUP-1608 - V2 player - Play From Start Time To End Time function not working 
+- SUP-1426 - HTML5 v2.0.2 Error message displays when leaving webpage 
+- SUP-1580 - Kaltura colored loading wheel showing up instead of custom (IE 8, 9, 10)
+- SUP-1717 - share plugin - social networks configurations 
+- SUP-1720 - V2 player - Loop uiVar get stuck
+
 * Sun Mar 9 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.4-1
 - SUP-1393 - Player 2.1 with leadwithhtml5 does not work on a secure MediaSpace instance on Safari 
 - SUP-1556 - HTML5 Player freezing when playing using Safari. 

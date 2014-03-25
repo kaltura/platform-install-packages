@@ -1,8 +1,8 @@
 %define kmc_login_version v1.2.3
 %define prefix /opt/kaltura
 Name:	kaltura-kmc	
-Version: v5.37.12
-Release: 6 
+Version: v5.37.14
+Release: 1 
 Summary: Kaltura Management Console
 
 Group: System Management	
@@ -55,11 +55,12 @@ fi
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/flash/kmc/login $RPM_BUILD_ROOT%{prefix}/app/alpha/web/lib $RPM_BUILD_ROOT%{prefix}/web/content/docs/pdf
 #$RPM_BUILD_ROOT%{prefix}/web/content/uiconf/kaltura/kmc
 mv kmc-docs-master/pdf $RPM_BUILD_ROOT%{prefix}/app/alpha/web/lib/ 
+cp -r %{_builddir}/%{name}-%{version}/kmc-docs-master/* $RPM_BUILD_ROOT%{prefix}/web/content/docs/
 mv %{_builddir}/%{name}-%{version}/login/%{kmc_login_version} $RPM_BUILD_ROOT%{prefix}/web/flash/kmc/login/ 
-cp -r %{_builddir}/%{name}-%{version} $RPM_BUILD_ROOT/%{prefix}/web/flash/kmc/%{version}
+mkdir $RPM_BUILD_ROOT%{prefix}/web/flash/kmc/%{version}
+cp -r %{_builddir}/%{name}-%{version}/%{version}/* $RPM_BUILD_ROOT/%{prefix}/web/flash/kmc/%{version}/
 #cp -r $RPM_BUILD_ROOT/%{prefix}/web/flash/kmc/%{version}/uiconf/kaltura/kmc/* $RPM_BUILD_ROOT%{prefix}/web/content/uiconf/kaltura/kmc/
 cp %{SOURCE1} $RPM_BUILD_ROOT/%{prefix}/web/flash/kmc/%{version}/config.ini
-cp -r %{_builddir}/%{name}-%{version}/kmc-docs-master/* $RPM_BUILD_ROOT%{prefix}/web/content/docs/
 cp %{SOURCE3} $RPM_BUILD_ROOT%{prefix}/web/content/docs/pdf
 
 %preun
@@ -80,6 +81,11 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Tue Mar 25 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.14-1
+- SUP-1581 - Remix feature is exposed to customers in Old KDP templates
+- KMC - After closing the "Support" page, the KMC is not usable
+- PLAT-1038 - Closing the "Preview & Embed" page is causing a change in the KMC's layout
+
 * Sun Mar 9 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.12-1
 - Upgrade to 5.37.12, fixes:
   SUP-1634 - KMC will not alert when the user is uploading a file that is larger than 2GB using upload from desktop 

@@ -3,7 +3,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.9
-Release: 1
+Release: 3 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -81,7 +81,10 @@ fi
 %config %{prefix}/app/configurations/*
 
 %changelog
-* Sun Mar 23 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.9-20
+* Tue Mar 25 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.9-2
+- To match Core release 9.13.0.
+
+* Sun Mar 23 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.9-1
 - kaltura-sanity.sh's output revised according to Zohar's requests.
 
 * Sat Mar 22 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.8-19
