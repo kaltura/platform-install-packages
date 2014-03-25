@@ -63,7 +63,7 @@ KMC_MINUS_V_VERSION=5.37.14
 KMC_VERSION=v$KMC_MINUS_V_VERSION
 KMC_LOGIN_VERSION=v1.2.3
 #KMC_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/flash/kmc/$KMC_VERSION"
-KMC_URI="https://github.com/kaltura/kmc/archive/$KMC_VERSION.zip"
+KMC_URI="https://github.com/kaltura/kmc/releases/download/v5.37.14/$KMC_VERSION.zip"
 KMC_LOGIN_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/flash/kmc/login/$KMC_LOGIN_VERSION"
 KMC_UICONF_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalsource/uiconf/kaltura/kmc"
 KMC_RPM_NAME="kaltura-kmc"
@@ -164,7 +164,7 @@ HTML5LIB_URI="https://github.com/kaltura/mwEmbed/tarball/$HTML5LIB_VERSION"
 HTML5LIB_RPM_NAME="kaltura-html5lib"
 
 # Kaltura DWH
-DWH_VERSION="IX-9.2.0"
+DWH_VERSION="IX-9.3.0"
 DWH_URI="https://github.com/kaltura/dwh/archive/$DWH_VERSION.zip"
 DWH_RPM_NAME="kaltura-dwh"
 
