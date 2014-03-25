@@ -55,8 +55,8 @@ if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
 fi
 . $KALTURA_FUNCTIONS_RC
 if ! rpm -q kaltura-front;then
-	echo -e "${BRIGHT_RED}ERROR: first install kaltura-front.${NORMAL}"
-	exit 11
+	echo -e "${BRIGHT_BLUE}Skipping as kaltura-front is not installed.${NORMAL}"
+	exit 0 
 fi
 if [ -n "$1" -a -r "$1" ];then
 	ANSFILE=$1

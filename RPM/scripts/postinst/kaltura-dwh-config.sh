@@ -22,8 +22,8 @@ if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
 fi
 . $KALTURA_FUNCTIONS_RC
 if ! rpm -q kaltura-dwh;then
-	echo -e "${BRIGHT_RED}First install kaltura-dwh.${NORMAL}"
-	exit 11
+	echo -e "${BRIGHT_BLUE}Skipping as kaltura-dwh is not installed.${NORMAL}"
+	exit 0 
 fi
 if [ ! -r /opt/kaltura/app/base-config.lock ];then
 	`dirname $0`/kaltura-base-config.sh
