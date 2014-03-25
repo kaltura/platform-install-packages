@@ -15,8 +15,8 @@
 
 #set -o nounset                              # Treat unset variables as an error
 if ! rpm -q kaltura-red5;then
-        echo "First install kaltura-red5."
-        exit 11
+	echo -e "${BRIGHT_BLUE}Skipping as kaltura-red5 is not installed.${NORMAL}"
+        exit 0 
 fi
 if [ ! -r /opt/kaltura/app/base-config.lock ];then
         `dirname $0`/kaltura-base-config.sh
