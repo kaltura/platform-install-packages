@@ -142,6 +142,7 @@ Then follow the on-screen instructions (in case any further actions required).
 Once the upgrade completes, please run:
 ```bash
 /opt/kaltura/bin/kaltura-db-update.sh
+/opt/kaltura/bin/kaltura-config-all.sh
 ```
 To upgrade your DB schema.
 
