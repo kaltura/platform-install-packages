@@ -283,7 +283,9 @@ HTML5_VER="`rpm -qa kaltura-html5lib --queryformat %{version}`"
 
 for TMPL_CONF_FILE in $CONF_FILES;do
 	CONF_FILE=`echo $TMPL_CONF_FILE | sed 's@\(.*\)\.template\(.*\)@\1\2@'`
-#	echo $CONF_FILE
+	if [ -r $CONF_FILE ];then
+		cp $CONF_FILE $CONF_FILE.backup
+	fi
 	if `echo $TMPL_CONF_FILE|grep -q template`;then
 		cp  $TMPL_CONF_FILE $CONF_FILE
 	fi

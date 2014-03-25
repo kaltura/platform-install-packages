@@ -25,13 +25,13 @@ if [ ! -x `which svn 2>/dev/null` ];then
 	exit 2
 fi
 #mkdir -p $SOURCE_PACKAGING_DIR/uiconf/kaltura/kmc
-svn export --force --quiet $KMC_URI $SOURCE_PACKAGING_DIR/$KMC_RPM_NAME-$KMC_VERSION 
+#svn export --force --quiet $KMC_URI $SOURCE_PACKAGING_DIR/$KMC_RPM_NAME-$KMC_VERSION 
 svn export --force --quiet $KMC_LOGIN_URI $SOURCE_PACKAGING_DIR/$KMC_RPM_NAME-$KMC_VERSION/login/$KMC_LOGIN_VERSION
 svn export --force --quiet $KMC_UICONF_URI $SOURCE_PACKAGING_DIR/$KMC_RPM_NAME-$KMC_VERSION/uiconf/kaltura/kmc
 cd $SOURCE_PACKAGING_DIR
-#wget $KMC_URI -O $KMC_RPM_NAME-$KMC_VERSION.zip
-#unzip $KMC_RPM_NAME-$KMC_VERSION.zip
-#mv management-console-master $KMC_RPM_NAME-$KMC_VERSION
+wget $KMC_URI -O $KMC_RPM_NAME-$KMC_VERSION.zip
+unzip $KMC_RPM_NAME-$KMC_VERSION.zip
+mv kmc-$KMC_MINUS_V_VERSION $KMC_RPM_NAME-$KMC_VERSION
 find $KMC_RPM_NAME-$KMC_VERSION -type f -exec chmod -x {} \;
 tar jcf $RPM_SOURCES_DIR/$KMC_RPM_NAME-$KMC_VERSION.tar.bz2 $KMC_RPM_NAME-$KMC_VERSION
 # flash things DO NOT need exec perms.

@@ -25,8 +25,8 @@
 
 Summary: Utilities and libraries to record, convert and stream audio and video
 Name: kaltura-ffmpeg
-Version: 1.1.1
-Release: 9 
+Version: 2.1.3
+Release: 1
 License: GPL
 Group: Applications/Multimedia
 URL: http://ffmpeg.org/
@@ -216,7 +216,7 @@ fi
 %{base_prefix}-%{version}/bin/*
 #%{base_prefix}-%{version}/bin/ffplay
 #%{base_prefix}-%{version}/bin/ffserver
-%{base_prefix}-%{version}/share/ffmpeg/
+%{base_prefix}-%{version}/share/*
 %{base_prefix}-%{version}/lib/*.so*
 %{base_prefix}-%{version}/lib/pkgconfig/
 %exclude %{base_prefix}-%{version}/lib/*.a
@@ -251,6 +251,53 @@ fi
 %{base_prefix}-%{version}/lib/pkgconfig/libswscale.pc
 
 %changelog
+* Tue Mar 25 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 2.1.3-1
+- Core now works with this version.
+  This ver fixes:
+- aecho filter
+- perspective filter ported from libmpcodecs
+- ffprobe -show_programs option
+- compand filter
+- RTMP seek support
+- when transcoding with ffmpeg (i.e. not streamcopying), -ss is now accurate
+  even when used as an input option. Previous behavior can be restored with
+  the -noaccurate_seek option.
+- ffmpeg -t option can now be used for inputs, to limit the duration of
+  data read from an input file
+- incomplete Voxware MetaSound decoder
+- read EXIF metadata from JPEG
+- DVB teletext decoder
+- phase filter ported from libmpcodecs
+- w3fdif filter
+- Opus support in Matroska
+- FFV1 version 1.3 is stable and no longer experimental
+- FFV1: YUVA(444,422,420) 9, 10 and 16 bit support
+- changed DTS stream id in lavf mpeg ps muxer from 0x8a to 0x88, to be
+  more consistent with other muxers.
+- adelay filter
+- pullup filter ported from libmpcodecs
+- ffprobe -read_intervals option
+- Lossless and alpha support for WebP decoder
+- Error Resilient AAC syntax (ER AAC LC) decoding
+- Low Delay AAC (ER AAC LD) decoding
+- mux chapters in ASF files
+- SFTP protocol (via libssh)
+- libx264: add ability to encode in YUVJ422P and YUVJ444P
+- Fraps: use BT.709 colorspace by default for yuv, as reference fraps decoder does
+- make decoding alpha optional for prores, ffv1 and vp6 by setting
+  the skip_alpha flag.
+- ladspa wrapper filter
+- native VP9 decoder
+- dpx parser
+- max_error_rate parameter in ffmpeg
+- PulseAudio output device
+- ReplayGain scanner
+- Enhanced Low Delay AAC (ER AAC ELD) decoding (no LD SBR support)
+- Linux framebuffer output device
+- HEVC decoder
+- raw HEVC, HEVC in MOV/MP4, HEVC in Matroska, HEVC in MPEG-TS demuxing
+- mergeplanes filter
+
 * Sun Jan 14 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.1.1-4
 - Added qt-faststart.
 
