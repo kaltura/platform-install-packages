@@ -22,11 +22,11 @@ setenforce permissive
 ```
 
 #### Instructions here are for a cluster with the following members:
-* [NFS server]()
-* [DB and Sphinx server]()
-* [Front]()
-* [Batch server]()
-* [DWH server]()
+* [NFS server](#the-nfs)
+* [DB and Sphinx](#the-db-and-sphinx)
+* [Front servers](#the-front)
+* [Batch servers](#the-batch)
+* [DWH server](#the-datawarehouse)
 
 ### The NFS
 The NFS is the shared network storage between all machines in the cluster. To learn more about NFS read [this wikipedia article about NFS](http://en.wikipedia.org/wiki/Network_File_System).
