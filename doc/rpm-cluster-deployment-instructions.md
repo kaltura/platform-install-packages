@@ -75,7 +75,7 @@ However, if network requirements dictates (noting that this will hurt performanc
 ##### Self-Balancing Components
 The following server roles should not be load-balanced:
 
-* Batche machines are very effective at scaling on themselves, by simply installing more batch servers in your cluster they will seamlessly register against the DB on their own and begin to take jobs independantly.
+* Batch machines are very effective at scaling on themselves, by simply installing more batch servers in your cluster they will seamlessly register against the DB on their own and begin to take jobs independantly.
 * Sphinx machines are balanced in the Kaltura application level.
 * MySQL DB has a [master-slave architecture](https://dev.mysql.com/doc/refman/5.0/en/replication-howto.html) of its own.
 
