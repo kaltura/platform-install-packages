@@ -144,14 +144,14 @@ Note that you can only have one machine for writes - this is your master.
 Follow these steps to 'load-balance' READ operations between the MySQL servers:  
 
 1. Edit `/opt/kaltura/app/configurations/db.ini`
-1. Find the following section, this is your MASTER (replace the upper case tokens with real values from your network hosts):
+2. Find the following section, this is your MASTER (replace the upper case tokens with real values from your network hosts):
 ```
 propel.connection.hostspec = MASTER_DB_HOST
 propel.connection.user = kaltura
 propel.connection.password = KALTURA_DB_USER_PASSWORD
 propel.connection.dsn = "mysql:host=MASTER_DB_HOST;port=3306;dbname=kaltura;"
 ```
-1. The sections that will follow will look the same, but after the key `propel`, you'll notice the numbers 2 and 3. These are the second and third MySQL servers that will be used as SLAVES (replace the upper case tokens with real values from your network hosts):
+3. The sections that will follow will look the same, but after the key `propel`, you'll notice the numbers 2 and 3. These are the second and third MySQL servers that will be used as SLAVES (replace the upper case tokens with real values from your network hosts):
 ```
 propel2.connection.hostspec = SECOND_DB_HOST
 propel2.connection.user = kaltura
