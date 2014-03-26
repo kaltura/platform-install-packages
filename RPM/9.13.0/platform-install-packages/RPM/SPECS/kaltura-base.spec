@@ -15,7 +15,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 9.13.0
-Release: 2 
+Release: 3 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -166,6 +166,9 @@ PATH=\$PATH:%{prefix}/bin
 export PATH
 alias allkaltlog='grep --color "ERR:\|PHP\|trace\|CRIT\|\[error\]" %{prefix}/log/*.log %{prefix}/log/batch/*.log'
 alias kaltlog='tail -f %{prefix}/log/*.log %{prefix}/log/batch/*.log | grep -A 1 -B 1 --color "ERR:\|PHP\|trace\|CRIT\|\[error\]"'
+if [ -r /etc/kaltura.d/system.ini ];then
+	. /etc/kaltura.d/system.ini
+fi
 EOF
 
 %{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/ld.so.conf.d
@@ -292,6 +295,10 @@ fi
 
 
 %changelog
+* Tue Mar 25 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.13.0-
+- if system.ini is available, source it in kaltura_base.sh, good when you run stuff like:
+  mysql -h$DB1_HOST -p$DB1_PASS
+
 * Tue Mar 25 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.13.0-2
 - Typo in file path.
 

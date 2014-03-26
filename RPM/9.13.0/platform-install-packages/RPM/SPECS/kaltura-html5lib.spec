@@ -3,7 +3,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
 Version: v2.5
-Release: 1
+Release: 2 
 Epoch:0 
 License: AGPLv3+
 Group: Server/Platform 
@@ -47,7 +47,7 @@ rm -rf %{buildroot}
 %files
 %defattr(-, root, root, 0755)
 %doc COPYING README.markdown 
-%{prefix}/web/html5/html5lib/%{version}
+%{prefix}/web/html5/html5lib
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog

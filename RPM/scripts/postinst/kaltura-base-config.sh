@@ -246,7 +246,6 @@ FORUMS_URLS=http://bit.ly/KalturaForums
 
 
 fi
-create_answer_file $POST_INST_MAIL_TMPL
 
 # need to check if we even have PHP as Sphinx and DWH can be installed without thank heavens.
 # reported by David Bezemer:
@@ -279,6 +278,7 @@ if [ -d "$BASE_DIR/dwh" ];then
 fi
 
 HTML5_VER="`rpm -qa kaltura-html5lib --queryformat %{version}`"
+create_answer_file $POST_INST_MAIL_TMPL
 # Now we will sed.
 
 for TMPL_CONF_FILE in $CONF_FILES;do
