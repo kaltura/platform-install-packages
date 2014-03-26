@@ -107,12 +107,11 @@ Then set priviliges accordingly:
 
 To export the volume run: `# exportfs -a`
 
-### The MySQL DB and Sphinx
+### The MySQL DB
 ```
 # rpm -Uhv http://installrepo.kaltura.org/releases/nightly/RPMS/noarch/kaltura-release.noarch.rpm
-# yum install kaltura-sphinx mysql-server mysql
+# yum install mysql-server mysql
 # /opt/kaltura/bin/kaltura-mysql-settings.sh
-# /opt/kaltura/bin/kaltura-sphinx-config.sh
 # mysql_secure_installation
 ```
 **Make sure to say Y** for the `mysql_secure_install` install, and follow through all the mysql install questions before continuing further.    
@@ -121,6 +120,29 @@ Failing to properly run `mysql_secure_install` will cause the kaltura mysql user
 # mysql -uroot -pYOUR_DB_ROOT_PASS
 mysql> GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;
 ```
+
+#### MySQL Replication and Scaling
+Scaling MySQL is an art on it's own. There are two aspects to it: Replication (having data live in more than one MySQL server for redundency and read scaling) and setting up read slaves.    
+
+To assist with MySQL master-slave replication, please refer to the [`kaltura-mysql-replication-config.sh` script](https://github.com/kaltura/platform-install-packages/blob/master/RPM/scripts/postinst/kaltura-mysql-replication-config.sh).    
+To run the replication configuration script, note the following:
+
+* The MySQL server you've installed during the Kaltura setup is your master. 
+* After completing the Kaltura setup, simply run `kaltura-mysql-replication-config.sh dbuser dbpass master_db_ip master` from the master machine
+* Follow the same instructions above to install every slave machine, and run the following command: `kaltura-mysql-replication-config.sh dbuser dbpass master_db_ip slave`
+
+To read more and learn about MySQL Master-Slave configuration, refer to the official MySQL documentation:  
+
+* [Setting the Replication Master Configuration](https://dev.mysql.com/doc/refman/5.0/en/replication-howto-masterbaseconfig.html)
+* [Setting the Replication Slave Configuration](https://dev.mysql.com/doc/refman/5.0/en/replication-howto-slavebaseconfig.html)
+
+### The Sphinx Indexing Server
+```
+# rpm -Uhv http://installrepo.kaltura.org/releases/nightly/RPMS/noarch/kaltura-release.noarch.rpm
+# yum install kaltura-sphinx
+# /opt/kaltura/bin/kaltura-sphinx-config.sh
+```
+It is recommended that Sphinx will be installed on its own dedicated machine. However, if needed, Sphinx can be coupled with a front machine in low-resources network.
 
 ### The Front
 Front in Kaltura represents the machines hosting the user-facing components, including the Kaltura API, the KMC and Admin Console, MediaSpace and all client-side widgets. 
