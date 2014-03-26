@@ -1,5 +1,5 @@
 # this sucks but base.ini needs to know the KMC version and it needs to be known cross cluster because, it is needed to generate the UI confs, which is done by the db-config postinst script which can run from every cluster node.
-%define kmc_version v5.37.12
+%define kmc_version v5.37.14
 %define clipapp_version v1.0.7
 %define html5_version v2.4
 %define kdp3_wrapper_version v37.0
@@ -14,8 +14,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 9.12.0
-Release: 7 
+Version: 9.13.0
+Release: 2 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -175,7 +175,7 @@ cat > $RPM_BUILD_ROOT%{_sysconfdir}/ld.so.conf.d/kaltura_base.conf << EOF
 EOF
 
 %clean
-rm -rf %{buildroot}
+#rm -rf %{buildroot}
 
 %pre
 
@@ -231,6 +231,10 @@ if [ "$1" = 2 ];then
 			php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_02_25_add_push_publish_permission_to_live_asset_parameters.php
 			php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_02_25_add_push_publish_permission_to_live_entry_parameters.php
 			php %{prefix}/app/alpha/scripts/utils/setCategoryEntriesPrivacyContext.php realrun
+		elif [ %{version} = '9.13.0' ];then
+
+			php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_03_10_addpushpublishconfigurationaction_added_to_livestreamservice.php
+			php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_03_09_add_system_admin_publisher_config_to_audittrail.php
 		fi
 	fi
 
@@ -288,6 +292,20 @@ fi
 
 
 %changelog
+* Tue Mar 25 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.13.0-2
+- Typo in file path.
+
+* Tue Mar 25 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.13.0-1
+- Ver Bounce to 9.13.0
+- PLAT-307 - FFMpeg 2.1.3 integration 
+- PLAT-914 - FileSyncImport - re-use curl 
+- PLAT-558 - Live streaming should support multiple stream ingest 
+- PLAT-932 - Production admin_console: "View History" doesn't work 
+- PLAT-1003 - E-mail for notification ,configurable fields override default values 
+- SUP-1567 - Problem to duplicate KSR from admin console. 
+- SUP-1625 - Avoid creating notification jobs when no notification email is configured
+
+
 * Tue Mar 20 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.12.0-7
 - Remove password tag from app/deployment/base/scripts/init_content/01.UserRole.99.template.xml.
   It causes issues and isn;t needed.
