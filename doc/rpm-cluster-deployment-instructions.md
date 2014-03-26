@@ -9,7 +9,7 @@ Refer to the [Deploying Kaltura Clusters Using Chef](https://github.com/kaltura/
 * [Load Balancer](#apache-load-balancer)
 * [NFS server](#the-nfs)
 * [MySQL Database](#the-mysql-database)
-* [Sphinx Indexing](the-sphinx-indexing-server)
+* [Sphinx Indexing](#the-sphinx-indexing-server)
 * [Front servers](#the-front)
 * [Batch servers](#the-batch)
 * [DWH server](#the-datawarehouse)
