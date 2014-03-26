@@ -1,7 +1,7 @@
 # Deploying Kaltura Clusters
 
 Below are **RPM** based instructions for deploying Kaltura Clusters.    
-Refer to the [all-in-one installation guide](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-redhat-based.md) for more notes about deploying Kaltura in RPM supported environments.    
+Refer to the [All-In-One Kaltura Server Installation Guide](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-redhat-based.md) for more notes about deploying Kaltura in RPM supported environments.    
 Refer to the [Deploying Kaltura Clusters Using Chef](https://github.com/kaltura/platform-install-packages/blob/master/doc/rpm-chef-cluster-deployment.md) for automated Chef based deployments.
 
 ### Instructions here are for a cluster with the following members:
