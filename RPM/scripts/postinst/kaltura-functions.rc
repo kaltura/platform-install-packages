@@ -293,7 +293,7 @@ check_daemon_init_status()
 {
         DAEMON=$2
         MACHINE=$1
-        if ssh -lroot $MACHINE $SSH_QUIET_OPTS "chkconfig $DAEMON";then
+        if chkconfig $DAEMON;then
                 return 0
         fi
         return 1
@@ -303,7 +303,7 @@ check_daemon_status()
 {
         DAEMON=$2
         MACHINE=$1
-        if ssh -lroot $MACHINE $SSH_QUIET_OPTS "service $DAEMON status >/dev/null";then
+        if service $DAEMON status >/dev/null;then
                 return 0
         fi
         return 1
@@ -313,10 +313,10 @@ check_monit()
 {
         DAEMON=$2
         MACHINE=$1
-        ssh -lroot $MACHINE $SSH_QUIET_OPTS "service $DAEMON stop >/dev/null"
+        service $DAEMON stop >/dev/null
 	echo -e "${CYAN}Napping 10 seconds to allow the daemon $DAEMON to finish its init after monit restarted it..${NORMAL}"
 	sleep 10 
-        if ssh -lroot $MACHINE $SSH_QUIET_OPTS "service $DAEMON status >/dev/null";then
+        if service $DAEMON status >/dev/null;then
                 return 0
         fi
         return 1

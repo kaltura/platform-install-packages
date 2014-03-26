@@ -31,7 +31,7 @@ fi
 
 for D in $ALL_DAEMONS; do
 # if this package is installed check daemon status
-        if ssh -lroot $KALTURA_VIRTUAL_HOST_NAME $SSH_QUIET_OPTS "rpm -q $D >/dev/null";then
+        if rpm -q $D >/dev/null;then
 		START=`date +%s.%N`
 		if check_daemon_status $KALTURA_VIRTUAL_HOST_NAME $D;then
 			END=`date +%s.%N`
