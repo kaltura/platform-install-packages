@@ -23,7 +23,7 @@ setenforce permissive
 
 #### Instructions here are for a cluster with the following members:
 * [NFS server](#the-nfs)
-* [DB and Sphinx](#the-db-and-sphinx)
+* [DB and Sphinx](#the-mysql-db-and-sphinx)
 * [Front servers](#the-front)
 * [Batch servers](#the-batch)
 * [DWH server](#the-datawarehouse)
@@ -56,7 +56,7 @@ Then set priviliges accordingly:
 
 To export the volume run: `# exportfs -a`
 
-### The MySQL and Sphinx server
+### The MySQL DB and Sphinx
 ```
 # rpm -Uhv http://installrepo.kaltura.org/releases/nightly/RPMS/noarch/kaltura-release.noarch.rpm
 # yum install kaltura-sphinx mysql-server mysql
