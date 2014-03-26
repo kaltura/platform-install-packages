@@ -2,7 +2,7 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmc	
 Version: v5.37.14
-Release: 2 
+Release: 3 
 Summary: Kaltura Management Console
 
 Group: System Management	
@@ -82,6 +82,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Wed Mar 26 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.14-3
+- kmc_config.ini updated with new kmc ver.
+
 * Tue Mar 25 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.14-1
 - SUP-1581 - Remix feature is exposed to customers in Old KDP templates
 - KMC - After closing the "Support" page, the KMC is not usable
