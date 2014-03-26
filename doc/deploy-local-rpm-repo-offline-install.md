@@ -15,17 +15,19 @@ This quick guide describes the steps required for creating and deploying Kaltura
 ```
 
 ## Create the local repository file
-This step is performed on each machine you're deploying Kaltura on.
-Create the `/etc/yum.repos.d/kaltura.repo` file.
-Add to this file the following text while changing the `%LOCAL_PATH%` accordingly.
+This step is performed on each machine you're deploying Kaltura on.   
+Create the `/etc/yum.repos.d/kaltura.repo` file.    
+Add to this file the following text while changing the `%LOCAL_PATH%` accordingly.    
+    
+`%LOCAL_PATH%` will be either a local file-system path to where the repository was downloaded to, or it can be a local apache server url.    
+For example:   
 
-`%LOCAL_PATH%` will be either a local file-system path to where the repository was downloaded to, or it can be a local apache server url.
-For example:
-If your repository files are in an Apache server, use:
+* If your repository files are in an Apache server, use:
 `baseurl=http://what.ever.com/path/to/repo/relative/to/docroot`
-If your repository files are local or mounted FS:
+* If your repository files are local or mounted FS:
 `baseurl=file:///somewhere/local/or/mounted/on/your/fs`
-Make sure to replace this file accordingly when creating the `kaltura.repo` file.
+
+Make sure to replace this file accordingly when creating the `kaltura.repo` file.   
 
 ```
 [Kaltura]
