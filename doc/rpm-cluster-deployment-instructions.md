@@ -4,6 +4,13 @@ Below are **RPM** based instructions for deploying Kaltura Clusters.
 Refer to the [all-in-one installation guide](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-redhat-based.md) for more notes about deploying Kaltura in RPM supported environments.    
 Refer to the [Deploying Kaltura Clusters Using Chef](https://github.com/kaltura/platform-install-packages/blob/master/doc/rpm-chef-cluster-deployment.md) for automated Chef based deployments.
 
+#### Instructions here are for a cluster with the following members:
+* [NFS server](#the-nfs)
+* [DB and Sphinx](#the-mysql-db-and-sphinx)
+* [Front servers](#the-front)
+* [Batch servers](#the-batch)
+* [DWH server](#the-datawarehouse)
+
 #### Notes
 * If you see a `#` at the beginning of a line, this line should be run as `root`.
 * All post-install scripts accept answers-file as parameter, this can used for silent-automatic installs.
@@ -21,12 +28,28 @@ setenforce permissive
 # Save /etc/selinux/config
 ```
 
-#### Instructions here are for a cluster with the following members:
-* [NFS server](#the-nfs)
-* [DB and Sphinx](#the-mysql-db-and-sphinx)
-* [Front servers](#the-front)
-* [Batch servers](#the-batch)
-* [DWH server](#the-datawarehouse)
+##### Note about SSL certificates
+
+You can run Kaltura with or without SSL (state the correct protocol and certificates during the installation).  
+It is recommended that you use a properly signed certificate and avoid self-signed certificates due to limitations of various browsers in properly loading websites using self-signed certificates.    
+You can generate a free valid cert using [http://cert.startcom.org/](http://cert.startcom.org/).    
+To verify the validity of your certificate, you can then use [SSLShoper's SSL Check Utility](http://www.sslshopper.com/ssl-checker.html).  
+
+Depending on your certificate, you may also need to set the following directives in `/etc/httpd/conf.d/zzzkaltura.ssl.conf`: 
+```
+SSLCertificateChainFile
+SSLCACertificateFile
+```
+
+##### Configure your email server and MTA - REQUIRED
+If your machine doesn't have postfix email configured before the Kaltura install, you will not receive emails from the install system nor publisher account activation mails. 
+
+By default Amazon Web Services (AWS) EC2 machines are blocked from sending email via port 25. For more information see [this thread on AWS forums](https://forums.aws.amazon.com/message.jspa?messageID=317525#317525).  
+Two working solutions to the AWS EC2 email limitations are:
+
+* Using SendGrid as your mail service ([setting up ec2 with Sendgrid and postfix](http://www.zoharbabin.com/configure-ssmtp-or-postfix-to-send-email-via-sendgrid-on-centos-6-3-ec2)).
+* Using [Amazon's Simple Email Service](http://aws.amazon.com/ses/). 
+
 
 ### The NFS
 The NFS is the shared network storage between all machines in the cluster. To learn more about NFS read [this wikipedia article about NFS](http://en.wikipedia.org/wiki/Network_File_System).
