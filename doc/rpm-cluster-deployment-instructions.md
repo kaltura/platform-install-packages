@@ -144,7 +144,7 @@ Batch in Kaltura represents the machines running all async operations. To learn 
 #### Note about batch scaling
 Adding more batch machines is simple and easy! Due to the distributed architecture of batches in Kaltura, batches are independantly registering themselves against the Kaltura cluster, and independantly assume jobs from the queue.   
 In order to scale your system batch capacity, simply install new bacth machines in the cluster.   
-
+When running the `kaltura-batch-config.sh` installer on the batch machine, the installer replaces the config tokens and sets a uniq ID per batch. Then seamlessly, the batch registers against the DB and starts taking available jobs.
 
 ### The DataWarehouse
 The DWH is Kaltura's Analytics server.
