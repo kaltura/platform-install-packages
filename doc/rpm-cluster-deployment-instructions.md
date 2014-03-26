@@ -8,7 +8,8 @@ Refer to the [Deploying Kaltura Clusters Using Chef](https://github.com/kaltura/
 
 * [Load Balancer](#apache-load-balancer)
 * [NFS server](#the-nfs)
-* [DB and Sphinx](#the-mysql-db-and-sphinx)
+* [MySQL Database](#the-mysql-database)
+* [Sphinx Indexing](the-sphinx-indexing-server)
 * [Front servers](#the-front)
 * [Batch servers](#the-batch)
 * [DWH server](#the-datawarehouse)
@@ -77,7 +78,7 @@ The following server roles should not be load-balanced:
 
 * Batch machines are very effective at scaling on themselves, by simply installing more batch servers in your cluster they will seamlessly register against the DB on their own and begin to take jobs independantly.
 * Sphinx machines are balanced in the Kaltura application level.
-* MySQL DB has a [master-slave architecture](https://dev.mysql.com/doc/refman/5.0/en/replication-howto.html) of its own.
+* See below the notes regarding MySQL replication and scaling.
 
 ### The NFS
 The NFS is the shared network storage between all machines in the cluster. To learn more about NFS read [this wikipedia article about NFS](http://en.wikipedia.org/wiki/Network_File_System).
@@ -107,7 +108,7 @@ Then set priviliges accordingly:
 
 To export the volume run: `# exportfs -a`
 
-### The MySQL DB
+### The MySQL Database
 ```
 # rpm -Uhv http://installrepo.kaltura.org/releases/nightly/RPMS/noarch/kaltura-release.noarch.rpm
 # yum install mysql-server mysql
@@ -124,6 +125,7 @@ mysql> GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;
 #### MySQL Replication and Scaling
 Scaling MySQL is an art on it's own. There are two aspects to it: Replication (having data live in more than one MySQL server for redundency and read scaling) and setting up read slaves.    
 
+##### MySQL Replication 
 To assist with MySQL master-slave replication, please refer to the [`kaltura-mysql-replication-config.sh` script](https://github.com/kaltura/platform-install-packages/blob/master/RPM/scripts/postinst/kaltura-mysql-replication-config.sh).    
 To run the replication configuration script, note the following:
 
@@ -135,6 +137,32 @@ To read more and learn about MySQL Master-Slave configuration, refer to the offi
 
 * [Setting the Replication Master Configuration](https://dev.mysql.com/doc/refman/5.0/en/replication-howto-masterbaseconfig.html)
 * [Setting the Replication Slave Configuration](https://dev.mysql.com/doc/refman/5.0/en/replication-howto-slavebaseconfig.html)
+
+##### MySQL Read Scaling 
+After configuring your environment MySQL replication, in order to distribute the READ load, you can also configure Kaltura to 'load-balance' MySQL reads between the master and 2 additional slave machines.    
+Note that you can only have one machine for writes - this is your master.    
+Follow these steps to 'load-balance' READ operations between the MySQL servers:  
+
+1. Edit `/opt/kaltura/app/configurations/db.ini`
+1. Find the following section, this is your MASTER (replace the upper case tokens with real values from your network hosts):
+```
+propel.connection.hostspec = MASTER_DB_HOST
+propel.connection.user = kaltura
+propel.connection.password = KALTURA_DB_USER_PASSWORD
+propel.connection.dsn = "mysql:host=MASTER_DB_HOST;port=3306;dbname=kaltura;"
+```
+1. The sections that will follow will look the same, but after the key `propel`, you'll notice the numbers 2 and 3. These are the second and third MySQL servers that will be used as SLAVES (replace the upper case tokens with real values from your network hosts):
+```
+propel2.connection.hostspec = SECOND_DB_HOST
+propel2.connection.user = kaltura
+propel2.connection.password = KALTURA_DB_USER_PASSWORD
+propel2.connection.dsn = "mysql:host=SECOND_DB_HOST;port=3306;dbname=kaltura;"
+
+propel3.connection.hostspec = THIRD_DB_HOST
+propel3.connection.user = kaltura
+propel3.connection.password = KALTURA_DB_USER_PASSWORD
+propel3.connection.dsn = "mysql:host=THIRD_DB_HOST;port=3306;dbname=kaltura;"
+```
 
 ### The Sphinx Indexing Server
 ```
