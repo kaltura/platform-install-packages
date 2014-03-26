@@ -1,4 +1,4 @@
-# Deploy local repository for offline install
+# Deploy Local Repository for Offline Install
 This quick guide describes the steps required for creating and deploying Kaltura Install Packages Repository locally for offline installations (for cases where the environment you’re deploying on is not connected to the internet).
 
 ### Notes
