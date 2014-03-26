@@ -44,7 +44,7 @@ SSLCACertificateFile
 ```
 
 ##### Configure your email server and MTA - REQUIRED
-If your machine doesn't have postfix email configured before the Kaltura install, you will not receive emails from the install system nor publisher account activation mails. 
+To achieve proper system operation and get email notifications, account activation emails, password changes, etc. all Kaltura machines in your cluster should have a functional email server. This is also ideal for monitoring purposes.   
 
 By default Amazon Web Services (AWS) EC2 machines are blocked from sending email via port 25. For more information see [this thread on AWS forums](https://forums.aws.amazon.com/message.jspa?messageID=317525#317525).  
 Two working solutions to the AWS EC2 email limitations are:
