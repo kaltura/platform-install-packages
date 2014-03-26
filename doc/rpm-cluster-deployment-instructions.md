@@ -5,6 +5,8 @@ Refer to the [all-in-one installation guide](https://github.com/kaltura/platform
 Refer to the [Deploying Kaltura Clusters Using Chef](https://github.com/kaltura/platform-install-packages/blob/master/doc/rpm-chef-cluster-deployment.md) for automated Chef based deployments.
 
 ### Instructions here are for a cluster with the following members:
+
+* [Load Balancer](#apache-load-balancer)
 * [NFS server](#the-nfs)
 * [DB and Sphinx](#the-mysql-db-and-sphinx)
 * [Front servers](#the-front)
@@ -51,7 +53,7 @@ Two working solutions to the AWS EC2 email limitations are:
 * Using [Amazon's Simple Email Service](http://aws.amazon.com/ses/). 
 
 
-### Apache based Load Balancer
+### Apache Load Balancer
 
 Load balancing is recommended to scale your front and streaming server (e.g. Red5, Wowza) machines.   
 To deploy an Apache based load balancer, refer to the [Apache Load Balancer configuration file example](https://github.com/kaltura/platform-install-packages/blob/master/doc/apache_balancer.conf).   
