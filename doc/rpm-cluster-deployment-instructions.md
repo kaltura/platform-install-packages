@@ -237,7 +237,7 @@ Please refer to the [Setting up Kaltura platform monitoring guide](https://githu
 Backup and restore is quite simple. Make sure that the following is being regularly backed up:
 
 * MySQL dump all Kaltura DBs (`kaltura`, `kaltura_sphinx_log`, `kalturadw`, `kalturadw_bisources`, `kalturadw_ds`, `kalturalog`). You can use the following `mysqldump` command:
-`# mysqldump -h$DBHOST -u$DBUSER -p$DBPASSWD -P$DBPORT --routines --single-transaction $TABLE_SCHEMA $TABLE | gzip > $OUT/$TABLE_SCHEMA.$TABLE.sql.gz`.
+`# mysqldump -h$DBHOST -u$DBUSER -p$DBPASSWD -P$DBPORT --routines --single-transaction $TABLE_SCHEMA $TABLE | gzip > $OUT/$TABLE_SCHEMA.$TABLE.sql.gz`
 * The `/opt/kaltura/web` directory, which includes all of the platform generated and media files.
 * The `/opt/kaltura/app/configurations` directory, which includes all of the platform configuration files.
 
