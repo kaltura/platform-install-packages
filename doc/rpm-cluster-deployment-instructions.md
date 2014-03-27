@@ -1,28 +1,34 @@
 # Deploying Kaltura Clusters
 
 Below are **RPM** based instructions for deploying Kaltura Clusters.    
-Refer to the [all-in-one installation guide](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-redhat-based.md) for more notes about deploying Kaltura in RPM supported environments.    
+Refer to the [All-In-One Kaltura Server Installation Guide](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-redhat-based.md) for more notes about deploying Kaltura in RPM supported environments.    
 Refer to the [Deploying Kaltura Clusters Using Chef](https://github.com/kaltura/platform-install-packages/blob/master/doc/rpm-chef-cluster-deployment.md) for automated Chef based deployments.
 
 ### Instructions here are for a cluster with the following members:
 
 * [Load Balancer](#apache-load-balancer)
 * [NFS server](#the-nfs)
-* [DB and Sphinx](#the-mysql-db-and-sphinx)
+* [MySQL Database](#the-mysql-database)
+* [Sphinx Indexing](#the-sphinx-indexing-server)
 * [Front servers](#the-front)
 * [Batch servers](#the-batch)
 * [DWH server](#the-datawarehouse)
+* [Streaming Server](#the-streaming-server)
+* [Platform Monitoring](#platform-monitoring)
+* [Backup and Restore](#backup-and-restore-practices)
 
-### Important Notes
+### Before You Get Started Notes
 * If you see a `#` at the beginning of a line, this line should be run as `root`.
+* Please review the [frequently answered questions](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura-packages-faq.md) document for general help before posting to the forums or issue queue.
 * All post-install scripts accept answers-file as parameter, this can used for silent-automatic installs.
+* [Kaltura Inc.](http://corp.kaltura.com) also provides commercial solutions and services including pro-active platform monitoring, applications, SLA, 24/7 support and professional services. If you're looking for a commercially supported video platform  with integrations to commercial encoders, streaming servers, eCDN, DRM and more - Start a [Free Trial od the Kaltura.com Hosted Platform](http://corp.kaltura.com/free-trial) or learn more about [Kaltura' Commercial OnPrem Edition™](http://corp.kaltura.com/Deployment-Options/Kaltura-On-Prem-Edition). For existing RPM based users, Kaltura offers commercial upgrade options.
 
 ##### iptables and ports
 Kaltura requires certain ports to be open for proper operation. [See the list of required open ports](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura-required-ports.md).   
 
 ##### Disable SELinux
 This is REQUIRED on all machines, currently Kaltura can't run properly with SELinux.
-```bash 
+``` 
 setenforce permissive
 # To verify SELinux will not revert to enabled next restart:
 # Edit /etc/selinux/config
@@ -52,7 +58,6 @@ Two working solutions to the AWS EC2 email limitations are:
 * Using SendGrid as your mail service ([setting up ec2 with Sendgrid and postfix](http://www.zoharbabin.com/configure-ssmtp-or-postfix-to-send-email-via-sendgrid-on-centos-6-3-ec2)).
 * Using [Amazon's Simple Email Service](http://aws.amazon.com/ses/). 
 
-
 ### Apache Load Balancer
 
 Load balancing is recommended to scale your front and streaming server (e.g. Red5, Wowza) machines.   
@@ -77,7 +82,7 @@ The following server roles should not be load-balanced:
 
 * Batch machines are very effective at scaling on themselves, by simply installing more batch servers in your cluster they will seamlessly register against the DB on their own and begin to take jobs independantly.
 * Sphinx machines are balanced in the Kaltura application level.
-* MySQL DB has a [master-slave architecture](https://dev.mysql.com/doc/refman/5.0/en/replication-howto.html) of its own.
+* See below the notes regarding MySQL replication and scaling.
 
 ### The NFS
 The NFS is the shared network storage between all machines in the cluster. To learn more about NFS read [this wikipedia article about NFS](http://en.wikipedia.org/wiki/Network_File_System).
@@ -107,12 +112,11 @@ Then set priviliges accordingly:
 
 To export the volume run: `# exportfs -a`
 
-### The MySQL DB and Sphinx
+### The MySQL Database
 ```
-# rpm -Uhv http://installrepo.kaltura.org/releases/nightly/RPMS/noarch/kaltura-release.noarch.rpm
-# yum install kaltura-sphinx mysql-server mysql
+# rpm -Uhv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
+# yum install mysql-server mysql
 # /opt/kaltura/bin/kaltura-mysql-settings.sh
-# /opt/kaltura/bin/kaltura-sphinx-config.sh
 # mysql_secure_installation
 ```
 **Make sure to say Y** for the `mysql_secure_install` install, and follow through all the mysql install questions before continuing further.    
@@ -122,10 +126,63 @@ Failing to properly run `mysql_secure_install` will cause the kaltura mysql user
 mysql> GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;
 ```
 
+#### MySQL Replication and Scaling
+Scaling MySQL is an art on it's own. There are two aspects to it: Replication (having data live in more than one MySQL server for redundency and read scaling) and setting up read slaves.    
+
+##### MySQL Replication 
+To assist with MySQL master-slave replication, please refer to the [`kaltura-mysql-replication-config.sh` script](https://github.com/kaltura/platform-install-packages/blob/master/RPM/scripts/postinst/kaltura-mysql-replication-config.sh).    
+To run the replication configuration script, note the following:
+
+* The MySQL server you've installed during the Kaltura setup is your master. 
+* After completing the Kaltura setup, simply run `kaltura-mysql-replication-config.sh dbuser dbpass master_db_ip master` from the master machine
+* Follow the same instructions above to install every slave machine, and run the following command: `kaltura-mysql-replication-config.sh dbuser dbpass master_db_ip slave`
+
+To read more and learn about MySQL Master-Slave configuration, refer to the official MySQL documentation:  
+
+* [Setting the Replication Master Configuration](https://dev.mysql.com/doc/refman/5.0/en/replication-howto-masterbaseconfig.html)
+* [Setting the Replication Slave Configuration](https://dev.mysql.com/doc/refman/5.0/en/replication-howto-slavebaseconfig.html)
+
+##### MySQL Read Scaling 
+After configuring your environment MySQL replication, in order to distribute the READ load, you can also configure Kaltura to 'load-balance' MySQL reads between the master and 2 additional slave machines.    
+Note that you can only have one machine for writes - this is your master.    
+Follow these steps to 'load-balance' READ operations between the MySQL servers:  
+
+* Edit `/opt/kaltura/app/configurations/db.ini`
+* Find the following section, this is your MASTER (replace the upper case tokens with real values from your network hosts):
+
+```
+propel.connection.hostspec = MASTER_DB_HOST
+propel.connection.user = kaltura
+propel.connection.password = KALTURA_DB_USER_PASSWORD
+propel.connection.dsn = "mysql:host=MASTER_DB_HOST;port=3306;dbname=kaltura;"
+```
+
+* The sections that will follow will look the same, but after the key `propel`, you'll notice the numbers 2 and 3. These are the second and third MySQL servers that will be used as SLAVES (replace the upper case tokens with real values from your network hosts):
+
+```
+propel2.connection.hostspec = SECOND_DB_HOST
+propel2.connection.user = kaltura
+propel2.connection.password = KALTURA_DB_USER_PASSWORD
+propel2.connection.dsn = "mysql:host=SECOND_DB_HOST;port=3306;dbname=kaltura;"
+
+propel3.connection.hostspec = THIRD_DB_HOST
+propel3.connection.user = kaltura
+propel3.connection.password = KALTURA_DB_USER_PASSWORD
+propel3.connection.dsn = "mysql:host=THIRD_DB_HOST;port=3306;dbname=kaltura;"
+```
+
+### The Sphinx Indexing Server
+```
+# rpm -Uhv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
+# yum install kaltura-sphinx
+# /opt/kaltura/bin/kaltura-sphinx-config.sh
+```
+It is recommended that Sphinx will be installed on its own dedicated machine. However, if needed, Sphinx can be coupled with a front machine in low-resources network.
+
 ### The Front
 Front in Kaltura represents the machines hosting the user-facing components, including the Kaltura API, the KMC and Admin Console, MediaSpace and all client-side widgets. 
 ```
-# rpm -Uhv http://installrepo.kaltura.org/releases/nightly/RPMS/noarch/kaltura-release.noarch.rpm
+# rpm -Uhv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
 # /opt/kaltura/bin/kaltura-nfs-client-config.sh
 # yum install kaltura-front kaltura-widgets kaltura-html5lib kaltura-html5-studio
 # /opt/kaltura/bin/kaltura-front-config.sh
@@ -135,7 +192,7 @@ Front in Kaltura represents the machines hosting the user-facing components, inc
 ### The Batch
 Batch in Kaltura represents the machines running all async operations. To learn more, read: [Introduction to Kaltura Batch Processes](http://knowledge.kaltura.com/node/230).
 ```
-# rpm -Uhv http://installrepo.kaltura.org/releases/nightly/RPMS/noarch/kaltura-release.noarch.rpm
+# rpm -Uhv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
 # /opt/kaltura/bin/kaltura-nfs-client-config.sh
 # yum install kaltura-batch
 # /opt/kaltura/bin/kaltura-batch-config.sh
@@ -149,8 +206,53 @@ When running the `kaltura-batch-config.sh` installer on the batch machine, the i
 ### The DataWarehouse
 The DWH is Kaltura's Analytics server.
 ```
-# rpm -Uhv http://installrepo.kaltura.org/releases/nightly/RPMS/noarch/kaltura-release.noarch.rpm
+# rpm -Uhv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
 # yum install kaltura-dwh
 # /opt/kaltura/bin/kaltura-nfs-client-config.sh
 # /opt/kaltura/bin/kaltura-dwh-config.sh
+```
+
+### The Streaming Server
+To achieve RTMP/t/e playback, Live streaming, webcam recording, and etc. Kaltura requires a streaming server.   
+You can use the open source Red5 server which is available as a Kaltura package too, and follow the steps below.   
+
+To install Red5:
+```
+# rpm -Uhv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
+# yum install kaltura-red5 kaltura-postinst
+```
+
+* Visit on your browser: `http://your_red5_server_hostname:5080` (This will load Red5's Web Admin)
+* Click 'Install a ready-made application'
+* Check 'OFLA Demo' and click 'Install'
+* Edit `/usr/lib/red5/webapps/oflaDemo/index.html` and replace `localhost` with your actual Red5 hostname or IP
+* Test OflaDemo by visiting `http://your_red5_server_hostname:5080/oflaDemo/` and playing the sample videos
+* Run: `# /opt/kaltura/bin/kaltura-red5-config.sh`
+
+Kaltura supports commercial encoders and streaming servers too. For more information about commercial alternatives see [Kaltura Commercial OnPrem Edition™](http://corp.kaltura.com/Deployment-Options/Kaltura-On-Prem-Edition).
+
+### Platform Monitoring
+Please refer to the [Setting up Kaltura platform monitoring guide](https://github.com/kaltura/platform-install-packages/blob/master/doc/platform-monitors.md).
+
+### Backup and Restore Practices
+Backup and restore is quite simple. Make sure that the following is being regularly backed up:
+
+* MySQL dump all Kaltura DBs (`kaltura`, `kaltura_sphinx_log`, `kalturadw`, `kalturadw_bisources`, `kalturadw_ds`, `kalturalog`). You can use the following `mysqldump` command:
+`# mysqldump -h$DBHOST -u$DBUSER -p$DBPASSWD -P$DBPORT --routines --single-transaction $TABLE_SCHEMA $TABLE | gzip > $OUT/$TABLE_SCHEMA.$TABLE.sql.gz`
+* The `/opt/kaltura/web` directory, which includes all of the platform generated and media files.
+* The `/opt/kaltura/app/configurations` directory, which includes all of the platform configuration files.
+
+Then, if needed, to restore the Kaltura server, follow these steps:
+
+* Install the **same version** of Kaltura on a clean machine
+* Stop all services
+* Copy over the web and configurations directories
+* Import the MySQL dump
+* Restart all services
+* Reindex Sphinx with the following commands: 
+
+```
+# rm -f /opt/kaltura/log/sphinx/data/*
+# cd /opt/kaltura/app/deployment/base/scripts/
+# for i in populateSphinx*;do php $i >/tmp/$.log;done
 ```

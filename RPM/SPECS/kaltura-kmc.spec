@@ -2,7 +2,7 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmc	
 Version: v5.37.14
-Release: 1 
+Release: 3 
 Summary: Kaltura Management Console
 
 Group: System Management	
@@ -59,6 +59,7 @@ cp -r %{_builddir}/%{name}-%{version}/kmc-docs-master/* $RPM_BUILD_ROOT%{prefix}
 mv %{_builddir}/%{name}-%{version}/login/%{kmc_login_version} $RPM_BUILD_ROOT%{prefix}/web/flash/kmc/login/ 
 mkdir $RPM_BUILD_ROOT%{prefix}/web/flash/kmc/%{version}
 cp -r %{_builddir}/%{name}-%{version}/%{version}/* $RPM_BUILD_ROOT/%{prefix}/web/flash/kmc/%{version}/
+mv %{_builddir}/%{name}-%{version}/uiconf $RPM_BUILD_ROOT%{prefix}/web/flash/kmc/%{version}/
 #cp -r $RPM_BUILD_ROOT/%{prefix}/web/flash/kmc/%{version}/uiconf/kaltura/kmc/* $RPM_BUILD_ROOT%{prefix}/web/content/uiconf/kaltura/kmc/
 cp %{SOURCE1} $RPM_BUILD_ROOT/%{prefix}/web/flash/kmc/%{version}/config.ini
 cp %{SOURCE3} $RPM_BUILD_ROOT%{prefix}/web/content/docs/pdf
@@ -81,6 +82,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Wed Mar 26 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.14-3
+- kmc_config.ini updated with new kmc ver.
+
 * Tue Mar 25 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.14-1
 - SUP-1581 - Remix feature is exposed to customers in Old KDP templates
 - KMC - After closing the "Support" page, the KMC is not usable

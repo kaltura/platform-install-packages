@@ -1,12 +1,14 @@
-# Installing Kaltura on RedHat Linux
+# Installing Kaltura on a Single All-In-One Server (RPM)
 This guide describes installation of an all-in-one Kaltura server and applies to all major RH based Linux distros including Fedora Core, RHEL, CentOS, etc. ([Note the supported distros and versions](http://kaltura.github.io/platform-install-packages/#supported-distros)).       
 
 ##### Notes
 
-1. This guide describes the installation and upgrade of an all-in-one machine where all the Kaltura components are installed on the same server. For cluster deployments, please refer to [cluster deployment document](http://bit.ly/kipp-cluster-yum), or [Deploying Kaltura using Opscode Chef](https://github.com/kaltura/platform-install-packages/blob/master/doc/rpm-chef-cluster-deployment.md).
-1. To learn about monitoring, please refer to [configuring platform monitors](http://bit.ly/kipp-monitoring).
-1. Testers using virtualization: [@DBezemer](https://github.com/DBezemer) created a basic CentOS template virtual server vailable here in OVF format: https://www.dropbox.com/s/luai7sk8nmihrkx/20140306_CentOS-base.zip
-1. Alternatively you can find VMWare images at - http://www.thoughtpolice.co.uk/vmware/ --> Make sure to only use compatible OS images; either RedHat or CentOS 5.n, 6.n or FedoraCore 18+.
+* Please review the [frequently answered questions](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura-packages-faq.md) document for general help before posting to the forums or issue queue.
+* This guide describes the installation and upgrade of an all-in-one machine where all the Kaltura components are installed on the same server. For cluster deployments, please refer to [cluster deployment document](http://bit.ly/kipp-cluster-yum), or [Deploying Kaltura using Opscode Chef](https://github.com/kaltura/platform-install-packages/blob/master/doc/rpm-chef-cluster-deployment.md).
+* To learn about monitoring, please refer to [configuring platform monitors](http://bit.ly/kipp-monitoring).
+* Testers using virtualization: [@DBezemer](https://github.com/DBezemer) created a basic CentOS template virtual server vailable here in OVF format: https://www.dropbox.com/s/luai7sk8nmihrkx/20140306_CentOS-base.zip
+* Alternatively you can find VMWare images at - http://www.thoughtpolice.co.uk/vmware/ --> Make sure to only use compatible OS images; either RedHat or CentOS 5.n, 6.n or FedoraCore 18+.
+* [Kaltura Inc.](http://corp.kaltura.com) also provides commercial solutions and services including pro-active platform monitoring, applications, SLA, 24/7 support and professional services. If you're looking for a commercially supported video platform  with integrations to commercial encoders, streaming servers, eCDN, DRM and more - Start a [Free Trial od the Kaltura.com Hosted Platform](http://corp.kaltura.com/free-trial) or learn more about [Kaltura' Commercial OnPrem Edition™](http://corp.kaltura.com/Deployment-Options/Kaltura-On-Prem-Edition). For existing RPM based users, Kaltura offers commercial upgrade options.
 
 ## Installing on a new machine
 
@@ -165,16 +167,3 @@ yum install kaltura-server
 /opt/kaltura/bin/kaltura-config-all.sh [answers-file-path]
 ```
 *Note that the repository URL will change soon, this is just the test repository*
-
-## Troubleshooting
-If you ever come across issues, increase log verbosity to 7 using the following method.        
-Run the following command using root:    
-```bash
-sed -i 's@^writers.\(.*\).filters.priority.priority\s*=\s*7@writers.\1.filters.priority.priority=4@g' /opt/kaltura/app/configurations/logger.ini
-```
-Then restart your Apache.    
-
-Run `kaltlog` (using root), which will continuously track (using `tail`) an error grep from all Kaltura log files.
-
-You can also use: `allkaltlog` (using root), which will dump all the error lines from the Kaltura logs once. Note that this can result in a lot of output, so the best way to use it will be to redirect to a file: `allkaltlog > errors.txt`.
-This output can be used to analyze past failures but for active debugging use the kaltlog alias.   
