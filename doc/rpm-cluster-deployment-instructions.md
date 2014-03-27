@@ -224,7 +224,7 @@ To install Red5:
 * Check 'OFLA Demo' and click 'Install'
 * Edit `/usr/lib/red5/webapps/oflaDemo/index.html` and replace `localhost` with your actual Red5 hostname or IP
 * Test OflaDemo by visiting `http://your_red5_server_hostname:5080/oflaDemo/` and playing the sample videos
-* Run: `/opt/kaltura/bin/kaltura-red5-config.sh`
+* Run: `# /opt/kaltura/bin/kaltura-red5-config.sh`
 
 Kaltura supports commercial encoders and streaming servers too. For more information about commercial alternatives see [Kaltura Commercial OnPrem Edition™](http://corp.kaltura.com/Deployment-Options/Kaltura-On-Prem-Edition).
 
