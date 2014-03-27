@@ -3,6 +3,12 @@
 ### Before You Get Started Notes
 * If you see a `#` at the beginning of a line, this line should be run as `root`.
 
+### Commercial Editions and Paid Support
+
+The Open Source Kaltura Platform is provided under the [AGPLv3 license](http://www.gnu.org/licenses/agpl-3.0.html) and with no commercial support or liability.  
+
+If you're looking for commercially supported solutions - [Kaltura Inc.](http://corp.kaltura.com) provides commercial editions including pro-active platform monitoring, applications, SLA, 24/7 support and professional services. If you're looking for a commercially supported version with integrations to commercial encoders, streaming servers, eCDN, DRM and more - Start a [Free Trial on Kaltura.com Hosted Platform](http://corp.kaltura.com/free-trial) or [Kaltura' Commercial OnPrem Edition™](http://corp.kaltura.com/Deployment-Options/Kaltura-On-Prem-Edition). For existing RPM based users, Kaltura offers commercial upgrade options.
+
 ### Changing Apache configurations post install.
 
 Sometimes, you may want to change deployment settings post installation, for example: replacing the domain, port or protocol, or changing the system to use SSL or stop using SSL.   
