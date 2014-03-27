@@ -22,3 +22,25 @@ On such cases, the solution is to download the packages, deploy a local reposito
 **Note** that when following this path, you will need to re-deploy your local repository for every new version upgrade.
 
 To perform an offline install, follow the [Deploy Local Repository for Offline Install guide](https://github.com/kaltura/platform-install-packages/blob/master/doc/deploy-local-rpm-repo-offline-install.md).
+
+### Fresh Database Installation
+
+On occasions where you'd like to drop the database and content and re-install Kaltura. Follor the below commands:    
+```bash
+# /opt/kaltura/bin/kaltura-drop-db.sh
+# /opt/kaltura/bin/kaltura-config-all.sh [answers-file-path]
+```
+
+### Troubleshooting Help
+
+If you ever come across issues with your deployment, increase log verbosity to 7 using the following method.        
+Run the following command:    
+```bash
+# sed -i 's@^writers.\(.*\).filters.priority.priority\s*=\s*7@writers.\1.filters.priority.priority=4@g' /opt/kaltura/app/configurations/logger.ini
+```
+Then restart your Apache.    
+
+Run `# kaltlog`, which will continuously track (using `tail`) an error grep from all Kaltura log files.
+
+You can also use: `# allkaltlog` (using root), which will dump all the error lines from the Kaltura logs once. Note that this can result in a lot of output, so the best way to use it will be to redirect to a file: `# allkaltlog > errors.txt`.
+This output can be used to analyze past failures but for active debugging use the kaltlog alias.   
