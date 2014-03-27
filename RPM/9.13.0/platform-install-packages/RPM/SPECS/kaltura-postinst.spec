@@ -3,7 +3,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.9
-Release: 3 
+Release: 8
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -35,7 +35,7 @@ This package includes post install scripts to be run post RPM install as they re
 mkdir -p $RPM_BUILD_ROOT/%{prefix}/bin
 mkdir -p $RPM_BUILD_ROOT/%{prefix}/app/configurations $RPM_BUILD_ROOT/%{prefix}/app/deployment/updates/scripts
 chmod +x *.sh 
-mv  *.sh *.rc $RPM_BUILD_ROOT/%{prefix}/bin
+mv  *.sh *.rc *.php $RPM_BUILD_ROOT/%{prefix}/bin
 cp %{SOURCE1} $RPM_BUILD_ROOT/%{prefix}/app/configurations
 cp %{SOURCE2} $RPM_BUILD_ROOT%{prefix}/app/configurations/consent_msgs
 cp %{SOURCE3} $RPM_BUILD_ROOT%{prefix}/app/deployment/sql_updates
@@ -81,6 +81,15 @@ fi
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Wed Mar 26 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.9-8
+- replace html5_version in base.ini to latest.
+
+* Wed Mar 26 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.9-7
+- The creation of ans file should be called later on.
+
+* Wed Mar 26 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.9-6
+- Script to setup MySQL replication added.
+
 * Tue Mar 25 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.9-2
 - To match Core release 9.13.0.
 

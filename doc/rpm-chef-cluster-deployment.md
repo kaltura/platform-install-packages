@@ -1,7 +1,12 @@
 # Deploying Kaltura using Opscode Chef
 
 This guide is intended for users of Chef that would like to deploy Kaltura clusters using [Chef recipes](http://docs.opscode.com/essentials_cookbook_recipes.html).   
-If you don't know what Chef is, start by reading [An Overview of Chef](http://docs.opscode.com/chef_overview.html).
+
+### Before You Get Strated Notes
+* If you don't know what Chef is, start by reading [An Overview of Chef](http://docs.opscode.com/chef_overview.html).
+* If you're looking to install Kaltura on a signle machine, see: [Installing Kaltura on a Single All-In-One Server (RPM)](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-redhat-based.md)
+* If you're looking to deploy a cluster manually or using other automation tools, see [Deploying Kaltura Clusters](https://github.com/kaltura/platform-install-packages/blob/master/doc/rpm-cluster-deployment-instructions.md).
+* [Kaltura Inc.](http://corp.kaltura.com) also provides commercial editions including applications, SLA, support and professional services. If you're looking for a commercially supported version with integrations to commercial encoders, streaming servers, eCDN, DRM and more - Start a [Free Trial on Kaltura.com Hosted Platform](http://corp.kaltura.com/free-trial) or [Kaltura' Commercial OnPrem Edition™](http://corp.kaltura.com/Deployment-Options/Kaltura-On-Prem-Edition).
 
 ## Installing the Chef server
 

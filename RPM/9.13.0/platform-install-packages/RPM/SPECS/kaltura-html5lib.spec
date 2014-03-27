@@ -3,12 +3,15 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
 Version: v2.5
-Release: 1
+Release: 3 
 Epoch:0 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/mwEmbed/tarball/%{name}-%{version}.tar.gz 
 Source1: LocalSettings.php
+Source2: kaltura-html5lib-v2.1.1.tar.gz
+Source3: kaltura-html5lib-v2.3.tar.gz
+Source4: kaltura-html5lib-v2.4.tar.gz
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
@@ -29,13 +32,18 @@ This package installs the Kaltura HTML5 library.
 
 %prep
 %setup -q
-
+tar zxf %{SOURCE2}
+tar zxf %{SOURCE3}
+tar zxf %{SOURCE4}
 
 
 %install
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib
 cp -r %{_builddir}/%{name}-%{version} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/%{version}
 cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/%{version}
+cp %{SOURCE2} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/
+cp %{SOURCE3} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/
+cp %{SOURCE4} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/
 
 %clean
 rm -rf %{buildroot}
@@ -47,7 +55,7 @@ rm -rf %{buildroot}
 %files
 %defattr(-, root, root, 0755)
 %doc COPYING README.markdown 
-%{prefix}/web/html5/html5lib/%{version}
+%{prefix}/web/html5/html5lib
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
