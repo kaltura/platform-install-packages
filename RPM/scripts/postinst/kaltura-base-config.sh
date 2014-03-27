@@ -374,6 +374,7 @@ set +e
 
 
 ln -sf $BASE_DIR/app/configurations/logrotate/kaltura_base /etc/logrotate.d/
+ln -sf $BASE_DIR/app/configurations/logrotate/kaltura_api /etc/logrotate.d/
 touch  "$BASE_DIR/app/base-config.lock"
 
 find $BASE_DIR/app/cache/ $BASE_DIR/log -type d -exec chmod 775 {} \; 
