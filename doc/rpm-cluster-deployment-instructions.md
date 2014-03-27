@@ -226,7 +226,7 @@ To install Red5:
 * Test OflaDemo by making a request to http://hostname:5080/oflaDemo/ and playing the sample videos
 * Run: `/opt/kaltura/bin/kaltura-red5-config.sh`
 
-Or you can use your choice of streaming server such Wowza, Adobe MediaServer, etc.    
+Kaltura supports commercial encoders and streaming servers too. For more information about commercial alternatives see [Kaltura Commercial OnPrem Edition™](http://corp.kaltura.com/Deployment-Options/Kaltura-On-Prem-Edition).
 
 ### Platform Monitoring
 Please refer to the [Setting up Kaltura platform monitoring guide](https://github.com/kaltura/platform-install-packages/blob/master/doc/platform-monitors.md).
