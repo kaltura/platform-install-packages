@@ -15,7 +15,7 @@ Refer to the [Deploying Kaltura Clusters Using Chef](https://github.com/kaltura/
 * [DWH server](#the-datawarehouse)
 * [Streaming Server](#the-streaming-server)
 * [Platform Monitoring](#platform-monitoring)
-* [Backup and Restore](#backup_and_restore_practices)
+* [Backup and Restore](#backup-and-restore-practices)
 
 ### Before You Get Started Notes
 * If you see a `#` at the beginning of a line, this line should be run as `root`.
