@@ -19,6 +19,7 @@ Refer to the [Deploying Kaltura Clusters Using Chef](https://github.com/kaltura/
 
 ### Before You Get Started Notes
 * If you see a `#` at the beginning of a line, this line should be run as `root`.
+* Please review the [frequently answered questions](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura-packages-faq.md) document for general help before posting to the forums or issue queue.
 * All post-install scripts accept answers-file as parameter, this can used for silent-automatic installs.
 * [Kaltura Inc.](http://corp.kaltura.com) also provides commercial editions including applications, SLA, support and professional services. If you're looking for a commercially supported version with integrations to commercial encoders, streaming servers, eCDN, DRM and more - Start a [Free Trial on Kaltura.com Hosted Platform](http://corp.kaltura.com/free-trial) or [Kaltura' Commercial OnPrem Edition™](http://corp.kaltura.com/Deployment-Options/Kaltura-On-Prem-Edition). For existing RPM based users, Kaltura offers commercial upgrade options.
 
