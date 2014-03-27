@@ -3,8 +3,9 @@
 ### Before You Get Started Notes
 * If you see a `#` at the beginning of a line, this line should be run as `root`.
 
-### Changing the service URL, port or protocol on a deployed system
+### Changing Apache configurations post install.
 
+Sometimes, you may want to change deployment settings post installation, for example: replacing the domain, port or protocol, or changing the system to use SSL or stop using SSL.   
 You can run `/opt/kaltura/bin/kaltura-front-config.sh` as many times as you'd like with different values. The script will re-configure the system accordingly.   
 For instance, you may want to change the service URL, port or protocol.
 
