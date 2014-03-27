@@ -14,6 +14,7 @@ Refer to the [Deploying Kaltura Clusters Using Chef](https://github.com/kaltura/
 * [Batch servers](#the-batch)
 * [DWH server](#the-datawarehouse)
 * [Streaming Server](#the-streaming-server)
+* [Platform Monitoring](#platform-monitoring)
 
 ### Important Notes
 * If you see a `#` at the beginning of a line, this line should be run as `root`.
@@ -53,9 +54,6 @@ Two working solutions to the AWS EC2 email limitations are:
 
 * Using SendGrid as your mail service ([setting up ec2 with Sendgrid and postfix](http://www.zoharbabin.com/configure-ssmtp-or-postfix-to-send-email-via-sendgrid-on-centos-6-3-ec2)).
 * Using [Amazon's Simple Email Service](http://aws.amazon.com/ses/). 
-
-### Platform Monitoring
-Please refer to the [Setting up Kaltura platform monitoring guide](https://github.com/kaltura/platform-install-packages/blob/master/doc/platform-monitors.md).
 
 ### Apache Load Balancer
 
@@ -229,3 +227,6 @@ To install Red5:
 * Run: `/opt/kaltura/bin/kaltura-red5-config.sh`
 
 Or you can use your choice of streaming server such Wowza, Adobe MediaServer, etc.    
+
+### Platform Monitoring
+Please refer to the [Setting up Kaltura platform monitoring guide](https://github.com/kaltura/platform-install-packages/blob/master/doc/platform-monitors.md).
