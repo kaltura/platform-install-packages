@@ -15,6 +15,7 @@ Refer to the [Deploying Kaltura Clusters Using Chef](https://github.com/kaltura/
 * [DWH server](#the-datawarehouse)
 * [Streaming Server](#the-streaming-server)
 * [Platform Monitoring](#platform-monitoring)
+* [Backup and Restore](#backup_and_restore_practices)
 
 ### Before You Get Started Notes
 * If you see a `#` at the beginning of a line, this line should be run as `root`.
@@ -231,3 +232,26 @@ Kaltura supports commercial encoders and streaming servers too. For more informa
 
 ### Platform Monitoring
 Please refer to the [Setting up Kaltura platform monitoring guide](https://github.com/kaltura/platform-install-packages/blob/master/doc/platform-monitors.md).
+
+### Backup and Restore Practices
+Backup and restore is quite simple. Make sure that the following is being regularly backed up:
+
+* MySQL dump all Kaltura DBs (`kaltura`, `kaltura_sphinx_log`, `kalturadw`, `kalturadw_bisources`, `kalturadw_ds`, `kalturalog`). You can use the following `mysqldump` command:
+`# mysqldump -h$DBHOST -u$DBUSER -p$DBPASSWD -P$DBPORT --routines --single-transaction $TABLE_SCHEMA $TABLE | gzip > $OUT/$TABLE_SCHEMA.$TABLE.sql.gz`.
+* The `/opt/kaltura/web` directory, which includes all of the platform generated and media files.
+* The `/opt/kaltura/app/configurations` directory, which includes all of the platform configuration files.
+
+Then, if needed, to restore the Kaltura server, follow these steps:
+
+* Install the **same version** of Kaltura on a clean machine
+* Stop all services
+* Copy over the web and configurations directories
+* Import the MySQL dump
+* Restart all services
+* Reindex Sphinx with the following commands: 
+
+```
+# rm -f /opt/kaltura/log/sphinx/data/*
+# cd /opt/kaltura/app/deployment/base/scripts/
+# for i in populateSphinx*;do php $i >/tmp/$.log;done
+```
