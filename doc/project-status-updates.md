@@ -2,7 +2,7 @@
 
 #### 2014-03-02:
 
-##### Install Packages Updates
+**Install Packages Updates**
 
 + Stable version is now 9.12.0, Testing version is 9.13.0
 + Migration path between 9.11.0, 9.12.0 was tested by several users and found stable. 
@@ -18,7 +18,7 @@
 + [@DBezemer](https://github.com/DBezemer) tested and updated [Deploying Kaltura Clusters guide](https://github.com/kaltura/platform-install-packages/blob/master/doc/rpm-cluster-deployment-instructions.md) to be even more "fool-proof".
 + [Deploy Local Repository for Offline Install](https://github.com/kaltura/platform-install-packages/blob/master/doc/deploy-local-rpm-repo-offline-install.md) guide was added to support environments that are not connected to the internet. 
 
-##### CI
+**Continuous Integration Updates**
 
 + Nightly sanity occurs each night on EC2, logs entries to SQLite and sends a CSV report by email. See [example CSV Report](https://github.com/kaltura/platform-install-packages/blob/master/doc/ci_example_csv_report.csv)
 + Erected a cluster to test on ESXi for testing, integration in progress
