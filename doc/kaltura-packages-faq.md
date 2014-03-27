@@ -13,3 +13,12 @@ Edit the answers file you've used to install Kaltura, then run:
 `# /opt/kaltura/bin/kaltura-front-config.sh /path/to/updated/ans/file`
 
 If you've lost your installation answers file, you can recreate one using the [Kaltura Install Answers File Example](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura.template.ans).
+
+### Deploy Local Repository for Offline Install
+
+On rare ocaasions, you may encounter the need to deploy Kaltura on an offline environment where internet connection is not available, and thus you can't reach the Kaltura packages install repository (http://installrepo.kaltura.org/releases/).
+
+On such cases, the solution is to download the packages, deploy a local repository and install from it instead of the online repository.   
+**Note** that when following this path, you will need to re-deploy your local repository for every new version upgrade.
+
+To perform an offline install, follow the [Deploy Local Repository for Offline Install guide](https://github.com/kaltura/platform-install-packages/blob/master/doc/deploy-local-rpm-repo-offline-install.md).
