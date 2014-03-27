@@ -54,6 +54,12 @@ if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
 	exit 3
 fi
 . $KALTURA_FUNCTIONS_RC
+RC_FILE=/etc/kaltura.d/system.ini
+if [ ! -r "$RC_FILE" ];then
+	echo -e "${BRIGHT_RED}ERROR: could not find $RC_FILE so, exiting..${NORMAL}"
+	exit 1 
+fi
+. $RC_FILE
 if ! rpm -q kaltura-front;then
 	echo -e "${BRIGHT_BLUE}Skipping as kaltura-front is not installed.${NORMAL}"
 	exit 0 
@@ -78,12 +84,6 @@ else
 ${NORMAL}
 "
 fi
-RC_FILE=/etc/kaltura.d/system.ini
-if [ ! -r "$RC_FILE" ];then
-	echo -e "${BRIGHT_RED}ERROR: could not find $RC_FILE so, exiting..${NORMAL}"
-	exit 1 
-fi
-. $RC_FILE
 trap 'my_trap_handler ${LINENO} ${$?}' ERR
 send_install_becon `basename $0` $ZONE install_start 
 KALTURA_APACHE_CONF=$APP_DIR/configurations/apache

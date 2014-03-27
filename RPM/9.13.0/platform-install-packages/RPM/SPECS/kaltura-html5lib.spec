@@ -3,7 +3,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
 Version: v2.5
-Release: 3 
+Release: 5
 Epoch:0 
 License: AGPLv3+
 Group: Server/Platform 
@@ -41,9 +41,9 @@ tar zxf %{SOURCE4}
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib
 cp -r %{_builddir}/%{name}-%{version} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/%{version}
 cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/%{version}
-cp %{SOURCE2} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/
-cp %{SOURCE3} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/
-cp %{SOURCE4} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/
+cp -r %{_builddir}/%{name}-v2.1.1 $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.1.1
+cp -r %{_builddir}/%{name}-v2.3 $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.3
+cp -r %{_builddir}/%{name}-v2.4 $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.4
 
 %clean
 rm -rf %{buildroot}
