@@ -1,10 +1,15 @@
 # Setting up Kaltura platform monitoring
 
+### Before You Get Started Notes
+
+* If you see a `#` at the beginning of a line, this line should be run as `root`.
+* Please review the [frequently answered questions](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura-packages-faq.md) document for general help before posting to the forums or issue queue.
+* [Kaltura Inc.](http://corp.kaltura.com) also provides commercial editions including pro-active platform monitoring, applications, SLA, 24/7 support and professional services. If you're looking for a commercially supported version with integrations to commercial encoders, streaming servers, eCDN, DRM and more - Start a [Free Trial on Kaltura.com Hosted Platform](http://corp.kaltura.com/free-trial) or [Kaltura' Commercial OnPrem Edition™](http://corp.kaltura.com/Deployment-Options/Kaltura-On-Prem-Edition). For existing RPM based users, Kaltura offers commercial upgrade options.
+
 The Kaltura server includes extensive monitoring scripts, making use of our PHP5 API.   
 Apart from the scripts themselves, template configuration files for the Nagios monitoring system [http://www.nagios.com] are also supplied.   
 The monitors operate on partner -4, created as part of the installation and dedicated to this purpose.   
 
-* Please review the [frequently answered questions](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura-packages-faq.md) document for general help before posting to the forums or issue queue.
 * The configuration for the API monitors is auto generated and placed here:
 `/opt/kaltura/app/tests/monitoring/config.ini`
 * The nagios templates can be found here:
