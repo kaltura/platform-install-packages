@@ -1,0 +1,71 @@
+Check httpd daemon status, PASSED [RC 0],Daemon httpd is running,.026728714
+Check httpd daemon is started by Monit, PASSED [RC 0],Daemon httpd is running,11.194445945
+check daemon httpd init status, PASSED [RC 0],Daemon httpd configured to run on init.,.008633819
+Check kaltura-sphinx daemon status, PASSED [RC 0],Daemon kaltura-sphinx is running,.039717372
+Check kaltura-sphinx daemon is started by Monit, PASSED [RC 0],Daemon kaltura-sphinx is running,10.584008701
+check daemon kaltura-sphinx init status, PASSED [RC 0],Daemon kaltura-sphinx configured to run on init.,.008321806
+Check kaltura-batch daemon status, PASSED [RC 0],Daemon kaltura-batch is running,.033971804
+Check kaltura-batch daemon is started by Monit, PASSED [RC 0],Daemon kaltura-batch is running,10.098900689
+check daemon kaltura-batch init status, PASSED [RC 0],Daemon kaltura-batch configured to run on init.,.008737084
+Check kaltura-monit daemon status, PASSED [RC 0],Daemon kaltura-monit is running,.028385584
+check daemon kaltura-monit init status, PASSED [RC 0],Daemon kaltura-monit configured to run on init.,.008358541
+Check memcached daemon status, PASSED [RC 0],Daemon memcached is running,.026320251
+Check memcached daemon is started by Monit, PASSED [RC 0],Daemon memcached is running,10.159418497
+check daemon memcached init status, PASSED [RC 0],Daemon memcached configured to run on init.,.009357280
+check_start_page, PASSED [RC 0],Successfully found 'Kaltura Video Platfrom - Home Page' on page http://amall/start/index.php,.059220322
+check_testme_page, PASSED [RC 0],Successfully found 'Kaltura - Test Me Console' on page http://amall/api_v3/testme/,.152407965
+check_kmc_index_page, PASSED [RC 0],Successfully found 'Kaltura - Open Source Video Platform',.081048435
+check_admin_console_index_page, PASSED [RC 0],Successfully found 'Kaltura Admin Console' on page http://amall/admin_console/,.243926148
+Create Partner, PASSED [RC 0],New PID is 110,2.782402709
+Upload content kaltura_logo_animated_blue.flv, PASSED [RC 0],PHP/5.3.3 1395773124.flv 0_dql3qs99,.900621572
+Upload content kaltura_logo_animated_green.flv, PASSED [RC 0],PHP/5.3.3 1395773125.flv 0_amko7usw,.577027147
+Upload bulk using CSV, PASSED [RC 0],Successfully uploaded       ,.579841428
+Upload bulk using XML, PASSED [RC 0],Successfully uploaded       ,.405585256
+Check httpd daemon status, PASSED [RC 0],Daemon httpd is running,.030087130
+Check httpd daemon is started by Monit, PASSED [RC 0],Daemon httpd is running,11.228816577
+check daemon httpd init status, PASSED [RC 0],Daemon httpd configured to run on init.,.008580835
+Check kaltura-sphinx daemon status, PASSED [RC 0],Daemon kaltura-sphinx is running,.047699075
+Check kaltura-sphinx daemon is started by Monit, PASSED [RC 0],Daemon kaltura-sphinx is running,10.596246874
+check daemon kaltura-sphinx init status, PASSED [RC 0],Daemon kaltura-sphinx configured to run on init.,.008556397
+Check kaltura-batch daemon status, PASSED [RC 0],Daemon kaltura-batch is running,.034772300
+Check kaltura-batch daemon is started by Monit, PASSED [RC 0],Daemon kaltura-batch is running,10.074107455
+check daemon kaltura-batch init status, PASSED [RC 0],Daemon kaltura-batch configured to run on init.,.008408123
+Check kaltura-monit daemon status, PASSED [RC 0],Daemon kaltura-monit is running,.027768784
+check daemon kaltura-monit init status, PASSED [RC 0],Daemon kaltura-monit configured to run on init.,.008213915
+Check memcached daemon status, PASSED [RC 0],Daemon memcached is running,.026291037
+Check memcached daemon is started by Monit, PASSED [RC 0],Daemon memcached is running,10.161653113
+check daemon memcached init status, PASSED [RC 0],Daemon memcached configured to run on init.,.008412507
+check_start_page, PASSED [RC 0],Successfully found 'Kaltura Video Platfrom - Home Page' on page http://amall/start/index.php,.043719575
+check_testme_page, PASSED [RC 0],Successfully found 'Kaltura - Test Me Console' on page http://amall/api_v3/testme/,.152954101
+check_kmc_index_page, PASSED [RC 0],Successfully found 'Kaltura - Open Source Video Platform',.082696102
+check_admin_console_index_page, PASSED [RC 0],Successfully found 'Kaltura Admin Console' on page http://amall/admin_console/,.220859045
+Create Partner, PASSED [RC 0],New PID is 111,4.507084330
+Upload content kaltura_logo_animated_blue.flv, PASSED [RC 0],PHP/5.3.3 1395773201.flv 0_jwkqqp6s,.886444238
+Upload content kaltura_logo_animated_green.flv, PASSED [RC 0],PHP/5.3.3 1395773202.flv 0_023xqaje,.539271024
+Upload bulk using CSV, PASSED [RC 0],Successfully uploaded       ,.647912698
+Upload bulk using XML, PASSED [RC 0],Successfully uploaded       ,.363531015
+Check httpd daemon status, PASSED [RC 0],Daemon httpd is running,.026729245
+Check httpd daemon status, PASSED [RC 0],Daemon httpd is running,.028647580
+Check httpd daemon is started by Monit, PASSED [RC 0],Daemon httpd is running,10.200942235
+check daemon httpd init status, PASSED [RC 0],Daemon httpd configured to run on init.,.008676185
+Check kaltura-sphinx daemon status, PASSED [RC 0],Daemon kaltura-sphinx is running,.041142306
+Check kaltura-sphinx daemon is started by Monit, PASSED [RC 0],Daemon kaltura-sphinx is running,10.584111574
+check daemon kaltura-sphinx init status, PASSED [RC 0],Daemon kaltura-sphinx configured to run on init.,.008368306
+Check kaltura-batch daemon status, PASSED [RC 0],Daemon kaltura-batch is running,.036541264
+Check kaltura-batch daemon is started by Monit, PASSED [RC 0],Daemon kaltura-batch is running,10.074066360
+check daemon kaltura-batch init status, PASSED [RC 0],Daemon kaltura-batch configured to run on init.,.008355238
+Check kaltura-monit daemon status, PASSED [RC 0],Daemon kaltura-monit is running,.027885957
+check daemon kaltura-monit init status, PASSED [RC 0],Daemon kaltura-monit configured to run on init.,.008218687
+Check memcached daemon status, PASSED [RC 0],Daemon memcached is running,.025930163
+Check memcached daemon is started by Monit, PASSED [RC 0],Daemon memcached is running,10.164006431
+check daemon memcached init status, PASSED [RC 0],Daemon memcached configured to run on init.,.008478972
+check_start_page, PASSED [RC 0],Successfully found 'Kaltura Video Platfrom - Home Page' on page http://amall/start/index.php,.039250518
+check_testme_page, PASSED [RC 0],Successfully found 'Kaltura - Test Me Console' on page http://amall/api_v3/testme/,.152420348
+check_kmc_index_page, PASSED [RC 0],Successfully found 'Kaltura - Open Source Video Platform',.094080555
+check_admin_console_index_page, PASSED [RC 0],Successfully found 'Kaltura Admin Console' on page http://amall/admin_console/,.192554358
+Create Partner, PASSED [RC 0],New PID is 112,2.726715389
+Upload content kaltura_logo_animated_blue.flv, PASSED [RC 0],PHP/5.3.3 1395773348.flv 0_p7svdkrl,.889921856
+Upload content kaltura_logo_animated_green.flv, PASSED [RC 0],PHP/5.3.3 1395773348.flv 0_v49el2nj,.579193865
+Upload bulk using CSV, PASSED [RC 0],Successfully uploaded       ,.547656402
+Upload bulk using XML, PASSED [RC 0],Successfully uploaded       ,.425329066
+Check missing web/content files - /tmp/missing_web_files_25_03_2014, FAILED [RC 1,],/tmp/missing_web_files_25_03_2014,1914.705168305
