@@ -54,6 +54,8 @@ Two working solutions to the AWS EC2 email limitations are:
 * Using SendGrid as your mail service ([setting up ec2 with Sendgrid and postfix](http://www.zoharbabin.com/configure-ssmtp-or-postfix-to-send-email-via-sendgrid-on-centos-6-3-ec2)).
 * Using [Amazon's Simple Email Service](http://aws.amazon.com/ses/). 
 
+### Platform Monitoring
+Please refer to the [Setting up Kaltura platform monitoring guide](https://github.com/kaltura/platform-install-packages/blob/master/doc/platform-monitors.md).
 
 ### Apache Load Balancer
 
