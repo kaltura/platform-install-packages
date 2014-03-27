@@ -13,6 +13,7 @@ Refer to the [Deploying Kaltura Clusters Using Chef](https://github.com/kaltura/
 * [Front servers](#the-front)
 * [Batch servers](#the-batch)
 * [DWH server](#the-datawarehouse)
+* [Streaming Server](#the-streaming-server)
 
 ### Important Notes
 * If you see a `#` at the beginning of a line, this line should be run as `root`.
@@ -23,7 +24,7 @@ Kaltura requires certain ports to be open for proper operation. [See the list of
 
 ##### Disable SELinux
 This is REQUIRED on all machines, currently Kaltura can't run properly with SELinux.
-```bash 
+``` 
 setenforce permissive
 # To verify SELinux will not revert to enabled next restart:
 # Edit /etc/selinux/config
@@ -110,7 +111,7 @@ To export the volume run: `# exportfs -a`
 
 ### The MySQL Database
 ```
-# rpm -Uhv http://installrepo.kaltura.org/releases/nightly/RPMS/noarch/kaltura-release.noarch.rpm
+# rpm -Uhv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
 # yum install mysql-server mysql
 # /opt/kaltura/bin/kaltura-mysql-settings.sh
 # mysql_secure_installation
@@ -145,13 +146,16 @@ Follow these steps to 'load-balance' READ operations between the MySQL servers:
 
 * Edit `/opt/kaltura/app/configurations/db.ini`
 * Find the following section, this is your MASTER (replace the upper case tokens with real values from your network hosts):
+
 ```
 propel.connection.hostspec = MASTER_DB_HOST
 propel.connection.user = kaltura
 propel.connection.password = KALTURA_DB_USER_PASSWORD
 propel.connection.dsn = "mysql:host=MASTER_DB_HOST;port=3306;dbname=kaltura;"
 ```
+
 * The sections that will follow will look the same, but after the key `propel`, you'll notice the numbers 2 and 3. These are the second and third MySQL servers that will be used as SLAVES (replace the upper case tokens with real values from your network hosts):
+
 ```
 propel2.connection.hostspec = SECOND_DB_HOST
 propel2.connection.user = kaltura
@@ -166,7 +170,7 @@ propel3.connection.dsn = "mysql:host=THIRD_DB_HOST;port=3306;dbname=kaltura;"
 
 ### The Sphinx Indexing Server
 ```
-# rpm -Uhv http://installrepo.kaltura.org/releases/nightly/RPMS/noarch/kaltura-release.noarch.rpm
+# rpm -Uhv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
 # yum install kaltura-sphinx
 # /opt/kaltura/bin/kaltura-sphinx-config.sh
 ```
@@ -175,7 +179,7 @@ It is recommended that Sphinx will be installed on its own dedicated machine. Ho
 ### The Front
 Front in Kaltura represents the machines hosting the user-facing components, including the Kaltura API, the KMC and Admin Console, MediaSpace and all client-side widgets. 
 ```
-# rpm -Uhv http://installrepo.kaltura.org/releases/nightly/RPMS/noarch/kaltura-release.noarch.rpm
+# rpm -Uhv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
 # /opt/kaltura/bin/kaltura-nfs-client-config.sh
 # yum install kaltura-front kaltura-widgets kaltura-html5lib kaltura-html5-studio
 # /opt/kaltura/bin/kaltura-front-config.sh
@@ -185,7 +189,7 @@ Front in Kaltura represents the machines hosting the user-facing components, inc
 ### The Batch
 Batch in Kaltura represents the machines running all async operations. To learn more, read: [Introduction to Kaltura Batch Processes](http://knowledge.kaltura.com/node/230).
 ```
-# rpm -Uhv http://installrepo.kaltura.org/releases/nightly/RPMS/noarch/kaltura-release.noarch.rpm
+# rpm -Uhv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
 # /opt/kaltura/bin/kaltura-nfs-client-config.sh
 # yum install kaltura-batch
 # /opt/kaltura/bin/kaltura-batch-config.sh
@@ -199,8 +203,27 @@ When running the `kaltura-batch-config.sh` installer on the batch machine, the i
 ### The DataWarehouse
 The DWH is Kaltura's Analytics server.
 ```
-# rpm -Uhv http://installrepo.kaltura.org/releases/nightly/RPMS/noarch/kaltura-release.noarch.rpm
+# rpm -Uhv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
 # yum install kaltura-dwh
 # /opt/kaltura/bin/kaltura-nfs-client-config.sh
 # /opt/kaltura/bin/kaltura-dwh-config.sh
 ```
+
+### The Streaming Server
+To achieve RTMP/t/e playback, Live streaming, webcam recording, and etc. Kaltura requires a streaming server.   
+You can use the open source Red5 server which is available as a Kaltura package too, and follow the steps below.   
+
+To install Red5:
+```
+# rpm -Uhv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
+# yum install kaltura-red5 kaltura-postinst
+```
+
+* Visit on your browser: http://your_red5_server_hostname:5080 (this will load Red5's Web Admin)
+* Click 'Install a ready-made application'
+* Check 'OFLA Demo' and click 'Install'
+* Edit /usr/lib/red5/webapps/oflaDemo/index.html and replace 'localhost' with your actual Red5 hostname or IP
+* Test OflaDemo by making a request to http://hostname:5080/oflaDemo/ and playing the sample videos
+* Run: `/opt/kaltura/bin/kaltura-red5-config.sh`
+
+Or you can use your choice of streaming server such Wowza, Adobe MediaServer, etc.    
