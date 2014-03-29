@@ -84,7 +84,8 @@ chkconfig memcached on
 chkconfig ntpd on
 ```
 
-##### Install and configure MySQL (if you’re going to use DB on the same server)
+##### Install and configure MySQL 5.1.n (if you’re going to use DB on the same server)
+Please note that currently, only MySQL 5.1 is supported, we recommend using the official package supplied by the RHEL/CentOS repos which is currently 5.1.73.
 ```bash
 yum install mysql-server
 /etc/init.d/mysqld start
