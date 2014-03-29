@@ -2,6 +2,30 @@
 
 #### 2014-03-02:
 
+**Install Packages Updates**
+
++ Stable version is now 9.12.0, Testing version is 9.13.0
++ Migration path between 9.11.0, 9.12.0 was tested by several users and found stable. 
++ 9.13.0 passed all CI tests.
++ Added [script to configure NFS client side](https://github.com/kaltura/platform-install-packages/blob/master/RPM/scripts/postinst/kaltura-nfs-client-config.sh)
++ Added new [FAQ section for commonly asked questions help](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura-packages-faq.md)
++ All CI tests were wrapped as local post-install sanity tests kit for users to run after installation verifying their install. [See sanity-test kit screenshot](https://raw.githubusercontent.com/kaltura/platform-install-packages/master/doc/post-inst-sanity-tests-output.png).
++ Install scripts output is now presented in colors to make messages easier to read and understand [See install output screenshot](https://raw.githubusercontent.com/kaltura/platform-install-packages/master/doc/rpm_install_console_colors.png)
++ Missing KMC documentation and bulk upload samples were added.
++ Widgets upgrade and cleanup completed - updated to use new github links rather than old SVN. And added CI test to check for existence of all widget swfs that are referenced by uiConfs.
++ Discovered missing old uiConf files - list is being checked against core to verify cleanup.
++ [@blackyboy](https://github.com/blackyboy) contributed [Configuring Drop Folder, Amazon S3 Remote Storage, Amazon CloudFront CDN, and CloudFront RTMP](https://github.com/kaltura/platform-install-packages/issues/61#issuecomment-38462301), will be added document shortly, and inspired the idea for [Create Post-Inst Scripts for CDN Configurations](https://github.com/kaltura/platform-install-packages/issues/80).
++ [@DBezemer](https://github.com/DBezemer) tested and updated [Deploying Kaltura Clusters guide](https://github.com/kaltura/platform-install-packages/blob/master/doc/rpm-cluster-deployment-instructions.md) to be even more "fool-proof".
++ [Deploy Local Repository for Offline Install](https://github.com/kaltura/platform-install-packages/blob/master/doc/deploy-local-rpm-repo-offline-install.md) guide was added to support environments that are not connected to the internet. 
+
+**Continuous Integration Updates**
+
++ Nightly sanity occurs each night on EC2, logs entries to SQLite and sends a CSV report by email. See [example CSV Report](https://github.com/kaltura/platform-install-packages/blob/master/doc/ci_example_csv_report.csv)
++ Erected a cluster to test on ESXi for testing, integration in progress
++ Currently working on integration using [The Foremen](http://www.theforeman.org/) to support wider range of deployment options.
+
+#### 2014-03-02:
+
 + Alpha tests have all passes sucessfully. 
 + Further Cluster and Chef deployment guides were tested on AWS.
 + Red5 package fully tested (both webcam and FMLE).
