@@ -113,9 +113,10 @@ Then set priviliges accordingly:
 To export the volume run: `# exportfs -a`
 
 ### The MySQL Database
+Please note that currently, only MySQL 5.1 is supported, we recommend using the official package supplied by the RHEL/CentOS repos which is currently 5.1.73.
 ```
 # rpm -Uhv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
-# yum install mysql-server mysql
+# yum install mysql-server kaltura-postinst 
 # /opt/kaltura/bin/kaltura-mysql-settings.sh
 # mysql_secure_installation
 ```
