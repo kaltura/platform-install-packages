@@ -121,6 +121,11 @@ When asked, answer all the post-install script questions (or provide an answers 
 * For CDN host: and Apache virtual host: use the resolvable domain name of your server (not always the default value, which will be the hostname).
 * For Service URL: enter protocol + domain (e.g. https://mykalturasite.com).
 
+Once the configuration phase is done, you may wish to run the sanity tests, for that, run:
+```base
+/opt/kaltura/bin/kaltura-sanity.sh
+```
+
 ##### Configure Red5 server
 1. Request http://hostname:5080
 1. Click 'Install a ready-made application'

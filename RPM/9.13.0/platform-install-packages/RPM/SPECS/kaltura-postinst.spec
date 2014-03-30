@@ -3,7 +3,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.9
-Release: 11
+Release: 13
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -81,6 +81,9 @@ fi
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Sun Mar 30 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.9-12
+- Tmp fix for 2014 https://github.com/kaltura/mwEmbed/issues/574
+
 * Sat Mar 29 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.9-11
 - Exit db-config.sh if MySQL ver is not 5.1.n
 
