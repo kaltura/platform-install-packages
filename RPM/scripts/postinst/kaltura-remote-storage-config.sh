@@ -27,7 +27,6 @@ if [ ! -r "$RC_FILE" ];then
 	exit 1 
 fi
 . $RC_FILE
-	echo 'Usage: ' . __FILE__ . ' <service_url> <partner_id> <partner_secret> <FTP|SFTP|SCP|S3> <storage_display_name> <storage_url> <storage_base_dir> <delivery_url> <username> <passwd> <storage_type>'."\n";
 
 echo -e "${BRIGHT_BLUE}Welcome to the remote storage configuration script!${NORMAL}"
 echo -e "${CYAN}Please input the partner ID for which to configure the account [all partners]:"
@@ -47,7 +46,7 @@ read PROTOCOL
 if [ -z "$PROTOCOL" ];then
 	PROTOCOL='SFTP'
 fi
-while [ -z "$STOR_URL" ];do
+while [ -z "$STOR_TYPE" ];do
 	echo -e "${CYAN}Please input storage URL:
 0. Amazon S3
 1. Akamai
@@ -70,9 +69,9 @@ while [ -z "$STOR_BASE_DIR" ];do
 	read STOR_BASE_DIR
 done
 
-while [ -z "$DELIVERY_URL" ];do
+while [ -z "$STOR_DELIVERY_URL" ];do
 	echo -e "${CYAN}Please input delivery URL:${NORMAL}"
-	read DELIVERY_URL
+	read STOR_DELIVERY_URL
 done
 while [ -z "$STOR_USER" ];do
 	echo -e "${CYAN}Please input storage account username:${NORMAL}"
@@ -83,3 +82,6 @@ while [ -z "$STOR_PASSWD" ];do
 	echo -e "${CYAN}Please input storage account passwd:${NORMAL}"
 	read STOR_PASSWD
 done
+
+# make the API call to create it
+`dirname $0`/kaltura-remote-storage-config.php $SERVICE_URL $PARNTERID $PROTOCOL $STOR_DISPLAY_NAME $STOR_URL $STOR_BASE_DIR $STOR_DELIVERY_URL $STOR_USER $STOR_PASS $STOR_TYPE
