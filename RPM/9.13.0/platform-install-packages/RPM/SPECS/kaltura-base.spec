@@ -15,7 +15,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 9.13.0
-Release: 5 
+Release: 6
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -45,6 +45,7 @@ Source20: sphinx.populate.template.rc
 Source21: kaltura_batch_upload_falcon.zip
 Source22: 01.UserRole.99.template.xml
 Source23: 04.flavorParams.ini
+Source24: 04.flavorParams.ini
 URL: https://github.com/kaltura/server/tree/IX-%{version}
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
@@ -135,6 +136,7 @@ cp %{SOURCE7} $RPM_BUILD_ROOT%{prefix}/app/configurations/cron/dwh.template
 cp %{SOURCE9} $RPM_BUILD_ROOT%{prefix}/app/configurations/plugins.template.ini
 cp %{SOURCE22} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_content/01.UserRole.99.template.xml
 cp %{SOURCE23} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_data/
+cp %{SOURCE24} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_data/
 cp %{SOURCE11} $RPM_BUILD_ROOT%{prefix}/app/alpha/crond/kaltura/clear_cache.sh
 mkdir -p $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail
 cp %{SOURCE12} $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/
@@ -296,7 +298,7 @@ fi
 
 
 %changelog
-* Sun Apr 1 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.13.0-5
+* Sun Apr 1 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.13.0-6
 - Here is our problem: the ip{hone,ad}new tags are only good for Akamai HLS, on any other serve method, it makes ip{hone,ad} serves not to work.
   If a user DOES wish to use Akamai HLS, we have the kaltura-remote-storage-config.sh for them to run.
 
