@@ -3,7 +3,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.9
-Release: 16
+Release: 17
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -81,6 +81,9 @@ fi
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Mon Mar 31 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.9-17
+- Added scripts to auto config storage profile.
+
 * Sun Mar 30 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.9-12
 - Tmp fix for 2014 https://github.com/kaltura/mwEmbed/issues/574
 

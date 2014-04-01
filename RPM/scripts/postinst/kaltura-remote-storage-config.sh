@@ -29,12 +29,13 @@ fi
 . $RC_FILE
 
 echo -e "${BRIGHT_BLUE}Welcome to the remote storage configuration script!${NORMAL}"
-echo -e "${CYAN}Please input the partner ID for which to configure the account [all partners]:"
+echo -e "${CYAN}Please input the partner ID for which to configure the account [all partners]:${NORMAL}"
 read PARTNERID
 if [ -z "$PARTNERID" ];then
 	PARTNERID='ALL'
 else 
-	echo -e "${CYAN}Please input partner secret:${NORMAL}"
+	echo -e "${CYAN}Please input -2 admin_secret:${NORMAL}"
+	read PARTNERSECRET
 # might need to explain how to get the secret..
 fi
 echo -e "${CYAN}Please select one of the following protocls [0]:
@@ -54,34 +55,34 @@ ${NORMAL}"
 	read STOR_TYPE
 done
 
-echo -e "${CYAN}Please input storage display name [My $STOR_TYPE over $PROTOCOL]:${NORMAL}"
-read STOR_DISPLAY_STRING
+echo -e "${CYAN}Please input storage display name [My storage profile]:${NORMAL}"
+read -e STOR_DISPLAY_STRING
 if [ -z "$STOR_DISPLAY_STRING" ];then
 	STOR_DISPLAY_STRING="My $STOR_TYPE over $PROTOCOL"
 fi
 while [ -z "$STOR_URL" ];do
 	echo -e "${CYAN}Please input storage URL:${NORMAL}"
-	read STOR_URL
+	read -e STOR_URL
 done
 
 while [ -z "$STOR_BASE_DIR" ];do
 	echo -e "${CYAN}Please input storage base dir:${NORMAL}"
-	read STOR_BASE_DIR
+	read -e STOR_BASE_DIR
 done
 
 while [ -z "$STOR_DELIVERY_URL" ];do
 	echo -e "${CYAN}Please input delivery URL:${NORMAL}"
-	read STOR_DELIVERY_URL
+	read -e STOR_DELIVERY_URL
 done
 while [ -z "$STOR_USER" ];do
 	echo -e "${CYAN}Please input storage account username:${NORMAL}"
-	read STOR_USER
+	read -e STOR_USER
 done
 
 while [ -z "$STOR_PASSWD" ];do
 	echo -e "${CYAN}Please input storage account passwd:${NORMAL}"
-	read STOR_PASSWD
+	read -s STOR_PASSWD
 done
 
 # make the API call to create it
-`dirname $0`/kaltura-remote-storage-config.php $SERVICE_URL $PARNTERID $PROTOCOL $STOR_DISPLAY_NAME $STOR_URL $STOR_BASE_DIR $STOR_DELIVERY_URL $STOR_USER $STOR_PASS $STOR_TYPE
+php `dirname $0`/kaltura-remote-storage-config.php $SERVICE_URL $PARTNERID $PARTNERSECRET $PROTOCOL "$STOR_DISPLAY_NAME" $STOR_URL $STOR_BASE_DIR $STOR_DELIVERY_URL $STOR_USER $STOR_PASSWD $STOR_TYPE
