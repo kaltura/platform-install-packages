@@ -7,7 +7,7 @@
 Summary: Kaltura Open Source Video Platform - frontend server 
 Name: kaltura-front
 Version: 9.13.0
-Release: 1
+Release: 2 
 License: AGPLv3+
 Group: Server/Platform 
 #Source0: kaltura.ssl.conf.template 
@@ -17,7 +17,7 @@ Source3: zz-%{name}.ini
 
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires: mediainfo, httpd, php, curl, kaltura-base, kaltura-ffmpeg, ImageMagick, memcached, php-pecl-memcached, php-mysql, php-pecl-apc, php-mcrypt, kaltura-segmenter, mod_ssl
+Requires: mediainfo, httpd, php, curl, kaltura-base, kaltura-ffmpeg, ImageMagick, memcached, php-pecl-memcached, php-pecl-ssh2, php-mysql, php-pecl-apc, php-mcrypt, kaltura-segmenter, mod_ssl
 Requires(post): chkconfig
 Requires(preun): chkconfig
 # This is for /sbin/service
@@ -104,6 +104,8 @@ rm -rf %{buildroot}
 %config %{_sysconfdir}/php.d/zz-%{name}.ini
 
 %changelog
+* Wed Apr 2 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.13.0-2
+- Added dep on php-pecl-ssh2
 * Tue Mar 25 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.13.0-1
 - Ver Bounce to 9.13.0
 

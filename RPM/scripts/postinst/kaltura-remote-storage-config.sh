@@ -28,52 +28,65 @@ if [ ! -r "$RC_FILE" ];then
 fi
 . $RC_FILE
 
+
 echo -e "${BRIGHT_BLUE}Welcome to the remote storage configuration script!${NORMAL}"
-echo -e "${CYAN}Please input the partner ID for which to configure the account [all partners]:${NORMAL}"
-read PARTNERID
-if [ -z "$PARTNERID" ];then
-	PARTNERID='ALL'
-else 
-	echo -e "${CYAN}Please input -2 admin_secret:${NORMAL}"
-	read PARTNERSECRET
-# might need to explain how to get the secret..
+while [ -z "$PARTNERID" ];do
+	echo -e "${CYAN}Please enter the partner id of the Kaltura account you'd like to configure the CDN for, or enter ALL (in caps) to set it as the default for all accounts:${NORMAL}"
+	read PARTNERID
+done
+echo -e "${CYAN}Please enter your admin console user email address [$ADMIN_CONSOLE_ADMIN_MAIL]:${NORMAL}"
+read MINUS2_MAIL
+if [ -z "$MINUS2_MAIL" ];then
+	MINUS2_MAIL=$ADMIN_CONSOLE_ADMIN_MAIL
 fi
-echo -e "${CYAN}Please select one of the following protocls [0]:
-0. SFTP
-1. FTP
-2. SCP
-3. S3 [Amazon]${NORMAL}"
-read PROTOCOL
-if [ -z "$PROTOCOL" ];then
-	PROTOCOL='SFTP'
-fi
+echo -e "${CYAN}Please enter the password you use to login to the admin console:${NORMAL}"
+read -s MINUS2_PASSWD
 while [ -z "$STOR_TYPE" ];do
-	echo -e "${CYAN}Please input storage URL:
+	echo -e "${CYAN}Please input storage type:
 0. Amazon S3
 1. Akamai
 ${NORMAL}"
 	read STOR_TYPE
 done
-
+if [ "$STOR_TYPE" -ne 0 ];then
+	echo -e "${CYAN}Please choose the protocol you'd like to use to upload to the remote storage profile [SFTP]:
+	SFTP
+	FTP
+	SCP
+	S3 [Amazon]${NORMAL}"
+	read PROTOCOL
+	if [ -z "$PROTOCOL" ];then
+		PROTOCOL='SFTP'
+	fi
+else
+	PROTOCOL=S3
+fi
 echo -e "${CYAN}Please input storage display name [My storage profile]:${NORMAL}"
 read -e STOR_DISPLAY_STRING
 if [ -z "$STOR_DISPLAY_STRING" ];then
-	STOR_DISPLAY_STRING="My $STOR_TYPE over $PROTOCOL"
+	STOR_DISPLAY_STRING="My storage profile"
 fi
 while [ -z "$STOR_URL" ];do
-	echo -e "${CYAN}Please input storage URL:${NORMAL}"
+	echo -e "${CYAN}Please input storage hostname:${NORMAL}"
 	read -e STOR_URL
 done
 
-while [ -z "$STOR_BASE_DIR" ];do
-	echo -e "${CYAN}Please input storage base dir:${NORMAL}"
-	read -e STOR_BASE_DIR
+echo -e "${CYAN}Please enter the directory on the remote storage server where the Kaltura files will be stored [/]:${NORMAL}"
+read -e STOR_BASE_DIR
+if [ -z "$STOR_BASE_DIR" ];then
+	STOR_BASE_DIR="/"
+fi
+
+while [ -z "$STOR_HTTP_DELIVERY_URL" ];do
+	echo -e "${CYAN}Please enter the CDN HTTP url from which the Kaltura player will perform playback:${NORMAL}"
+	read -e STOR_HTTP_DELIVERY_URL
 done
 
-while [ -z "$STOR_DELIVERY_URL" ];do
-	echo -e "${CYAN}Please input delivery URL:${NORMAL}"
-	read -e STOR_DELIVERY_URL
-done
+echo -e "${CYAN}Please enter the CDN HTTPS url from which the Kaltura player will perform playback:${NORMAL}"
+read -e STOR_HTTPS_DELIVERY_URL
+echo -e "${CYAN}Please enter the CDN RTMP url from which the Kaltura player will perform playback:${NORMAL}"
+read -e STOR_RTMP_DELIVERY_URL
+
 while [ -z "$STOR_USER" ];do
 	echo -e "${CYAN}Please input storage account username:${NORMAL}"
 	read -e STOR_USER
@@ -85,4 +98,13 @@ while [ -z "$STOR_PASSWD" ];do
 done
 
 # make the API call to create it
-php `dirname $0`/kaltura-remote-storage-config.php $SERVICE_URL $PARTNERID $PARTNERSECRET $PROTOCOL "$STOR_DISPLAY_NAME" $STOR_URL $STOR_BASE_DIR $STOR_DELIVERY_URL $STOR_USER $STOR_PASSWD $STOR_TYPE
+php `dirname $0`/kaltura-remote-storage-config.php $SERVICE_URL $PARTNERID $MINUS2_MAIL $MINUS2_PASSWD $PROTOCOL "$STOR_DISPLAY_STRING" $STOR_URL $STOR_BASE_DIR $STOR_HTTP_DELIVERY_URL $STOR_USER $STOR_PASSWD $STOR_TYPE
+
+if [ $? -eq 0 ]; then
+	echo -e "${BRIGHT_BLUE}$STOR_DISPLAY_STRING successfully configured.${NORMAL}"
+	# are we Akamai?
+	if [ $STOR_TYPE = 1 ];then
+		/opt/kaltura/bin/update_akamai_hls_flavor_tags.sh	
+	fi
+fi
+
