@@ -14,9 +14,17 @@ This project features official deployment packages to install the Kaltura platfo
 [![Watch the alpha announcement video](http://kaltura.github.io/platform-install-packages/images/news/1st-alpha-video-thumb.png "Watch the alpha announcement video")](http://bit.ly/1fIsdmY)
 
 
-## Installing Kaltura using Standard Packages
-* [Installing on RedHat based Linux distros (including FC, RHEL and CentOS)](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-redhat-based.md).
-* Installing on Debian based Linux distros (including Ubuntu) - *Coming Soon*
+## Documentation and Guides
+
+* [**Frequently Asked Questions**](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura-packages-faq.md)
+* [Single-server All-In-One RedHat based Linux distros Installation (including FC, RHEL and CentOS)](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-redhat-based.md).
+* Single-server All-In-One Debian based Linux distros (including Ubuntu) Installation - *Coming Soon*
+* [Deploying Kaltura Clusters (RPM)](https://github.com/kaltura/platform-install-packages/blob/master/doc/rpm-cluster-deployment-instructions.md)
+* [Deploying Kaltura using Opscode Chef (RPM)](https://github.com/kaltura/platform-install-packages/blob/master/doc/rpm-chef-cluster-deployment.md)
+* [Setting up Kaltura platform monitoring](https://github.com/kaltura/platform-install-packages/blob/master/doc/platform-monitors.md)
+* [Required Open Ports to run Kaltura](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura-required-ports.md)
+* [Deploy Local Repository for Offline Install](https://github.com/kaltura/platform-install-packages/blob/master/doc/deploy-local-rpm-repo-offline-install.md)
+
 
 
 ## License and Copyright Information
