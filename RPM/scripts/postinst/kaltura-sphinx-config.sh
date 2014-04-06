@@ -45,6 +45,8 @@ if [ ! -r "$RC_FILE" ];then
 	exit 2
 fi
 . $RC_FILE
+
+ln -sf $BASE_DIR/app/configurations/logrotate/kaltura_populate /etc/logrotate.d/
 trap 'my_trap_handler ${LINENO} ${$?}' ERR
 send_install_becon `basename $0` $ZONE install_start 
 mkdir -p $LOG_DIR/sphinx/data $APP_DIR/cache//sphinx

@@ -61,7 +61,18 @@ KALTURA_DB=$DB1_NAME
 
 # check DB connectivity:
 echo -e "${CYAN}Checking MySQL version..${NORMAL}"
-echo "select version();" | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT -N
+MYVER=`echo "select version();" | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT -N`
+MYMAJVER=`echo $MYVER| awk -F "." '{print $1}'`
+MYMINORVER=`echo $MYVER| awk -F "." '{print $2}'`
+
+if [ "$MYMAJVER" -ne 5 -o "$MYMINORVER" -ne 1 ];then
+	echo -e "${BRIGHT_RED}Your version of MySQL is not compatible with Kaltura at the moment. 
+Please install and configure MySQL 5.1 according to the instructions on the Kaltura install manual before proceeding with the Kaltura installation.${NORMAL}"
+	exit 1
+else
+	echo -e "${CYAN}Ver $MYVER found compatible${NORMAL}"
+fi
+
 if [ $? -ne 0 ];then
 cat << EOF
 Failed to run:

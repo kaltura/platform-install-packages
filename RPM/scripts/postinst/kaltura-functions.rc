@@ -415,7 +415,7 @@ check_missing_web_files()
 				fi;
 			done < $WEB_DIR/$i;
 		else 
-			echo "UI conf $WEB_DIR/$i is missing";
+			echo "UI conf $WEB_DIR/$i is missing" >> $TMP_MISSING_LIST;
 			MATCH=1
 		fi;
 	done

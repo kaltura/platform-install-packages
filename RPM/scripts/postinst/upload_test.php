@@ -1,4 +1,5 @@
 <?php
+
 if (count($argv)<5){
     echo 'Usage:' .__FILE__ .' <service_url> <partnerid> <secret> </path/to/asset>'."\n";
     exit (1);

@@ -1,11 +1,12 @@
 # Deploy Local Repository for Offline Install
 This quick guide describes the steps required for creating and deploying Kaltura Install Packages Repository locally for offline installations (for cases where the environment you’re deploying on is not connected to the internet).
 
-### Notes
+### Before You Get Started Notes
 
-1. Whenever you see `#` in the beginning of a command line, this means you should run the command as root.
-1. Follow the steps in this document in the order they are provided.
-1. This guide refers to the RPM packages only.
+* Whenever you see `#` in the beginning of a command line, this means you should run the command as root.
+* Follow the steps in this document in the order they are provided.
+* This guide refers to the RPM packages only.
+* [Kaltura Inc.](http://corp.kaltura.com) also provides commercial solutions and services including pro-active platform monitoring, applications, SLA, 24/7 support and professional services. If you're looking for a commercially supported video platform  with integrations to commercial encoders, streaming servers, eCDN, DRM and more - Start a [Free Trial of the Kaltura.com Hosted Platform](http://corp.kaltura.com/free-trial) or learn more about [Kaltura' Commercial OnPrem Edition™](http://corp.kaltura.com/Deployment-Options/Kaltura-On-Prem-Edition). For existing RPM based users, Kaltura offers commercial upgrade options.
 
 
 ## Download the repository

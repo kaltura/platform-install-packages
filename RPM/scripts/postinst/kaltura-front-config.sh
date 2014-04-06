@@ -54,6 +54,12 @@ if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
 	exit 3
 fi
 . $KALTURA_FUNCTIONS_RC
+RC_FILE=/etc/kaltura.d/system.ini
+if [ ! -r "$RC_FILE" ];then
+	echo -e "${BRIGHT_RED}ERROR: could not find $RC_FILE so, exiting..${NORMAL}"
+	exit 1 
+fi
+. $RC_FILE
 if ! rpm -q kaltura-front;then
 	echo -e "${BRIGHT_BLUE}Skipping as kaltura-front is not installed.${NORMAL}"
 	exit 0 
@@ -78,12 +84,6 @@ else
 ${NORMAL}
 "
 fi
-RC_FILE=/etc/kaltura.d/system.ini
-if [ ! -r "$RC_FILE" ];then
-	echo -e "${BRIGHT_RED}ERROR: could not find $RC_FILE so, exiting..${NORMAL}"
-	exit 1 
-fi
-. $RC_FILE
 trap 'my_trap_handler ${LINENO} ${$?}' ERR
 send_install_becon `basename $0` $ZONE install_start 
 KALTURA_APACHE_CONF=$APP_DIR/configurations/apache
@@ -259,7 +259,8 @@ fi
 
 # cronjobs:
 ln -sf $APP_DIR/configurations/cron/api /etc/cron.d/kaltura-api
-ln -sf $APP_DIR/configurations/cron/cleanup /etc/cron.d/kaltura-cleanup
+# currently causing issues, commenting
+#ln -sf $APP_DIR/configurations/cron/cleanup /etc/cron.d/kaltura-cleanup
 
 # logrotate:
 ln -sf $APP_DIR/configurations/logrotate/kaltura_apache /etc/logrotate.d/ 
@@ -284,9 +285,12 @@ ln -sf $BASE_DIR/app/configurations/monit/monit.avail/memcached.rc $BASE_DIR/app
 		fi
 	# we can't use rpm -q kaltura-kmc because this node may not be the one where we installed the KMC RPM on, as it resides in the web dir and does not need to be installed on all front nodes.
 		KMC_PATH=`ls -ld $BASE_DIR/web/flash/kmc/v*|awk -F " " '{print $NF}' |tail -1`
+		ln -sf $KMC_PATH/uiconf/kaltura/kmc  $BASE_DIR/web/content/uiconf/kaltura
 		php $BASE_DIR/app/deployment/uiconf/deploy_v2.php --ini=$KMC_PATH/config.ini >> /dev/null
 		HTML5_PATH=`ls -ld $BASE_DIR/web/html5/html5lib/v*|awk -F " " '{print $NF}' |tail -1`
 		sed -i "s@^\(html5_version\s*=\)\(.*\)@\1 `rpm -qa kaltura-html5lib --queryformat %{version}`@g" -i $BASE_DIR/app/configurations/base.ini
+		# https://github.com/kaltura/mwEmbed/issues/574
+		find $BASE_DIR/web/html5/html5lib/ -type f -exec sed -i "s@http://cdnapi.kaltura.com@$SERVICE_URL@g" {} \;
 	fi
 	trap 'my_trap_handler ${LINENO} ${$?}' ERR
 send_install_becon `basename $0` $ZONE install_success 

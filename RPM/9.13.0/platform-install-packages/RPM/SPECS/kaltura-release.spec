@@ -4,7 +4,7 @@
 %define prefix /opt/kaltura 
 Summary: Kaltura Server release file and package configuration
 Name: kaltura-release
-Version: 9.13.0
+Version: 9.14.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -28,14 +28,14 @@ GPG keys used to sign them.
 name = Kaltura Server
 baseurl = http://%{baseurl}/%{path}/\$basearch/
 gpgkey = http://%{baseurl}/%{path}/\$basearch/RPM-GPG-KEY-kaltura
-gpgcheck = 0 
+gpgcheck = 1 
 enabled = 1
 
 [Kaltura-noarch]
 name = Kaltura Server arch independent
 baseurl = http://%{baseurl}/%{path}/noarch
 gpgkey = http://%{baseurl}/%{path}/noarch/RPM-GPG-KEY-kaltura
-gpgcheck = 0
+gpgcheck = 1
 enabled = 1
 
 [Kaltura-testing]
@@ -43,14 +43,14 @@ name = Kaltura Server arch independent
 baseurl = http://%{baseurl}/%{testpath}/\$basearch/
 gpgkey = http://%{baseurl}/%{testpath}/\$basearch/RPM-GPG-KEY-kaltura
 
-gpgcheck = 0 
+gpgcheck = 1 
 enabled = 0
 
 [Kaltura-testing-noarch]
 name = Kaltura Server arch independent
 baseurl = http://%{baseurl}/%{testpath}/noarch
 gpgkey = http://%{baseurl}/%{testpath}/noarch/RPM-GPG-KEY-kaltura
-gpgcheck = 0
+gpgcheck = 1
 enabled = 0
 EOF
 
@@ -80,6 +80,9 @@ exit 0
 %config %{_sysconfdir}/yum.repos.d/kaltura.repo
 
 %changelog
+* Sun Apr 6 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.14.0-1
+- Ver Bounce to 9.14.0
+
 * Tue Mar 25 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.13.0-1
 - Ver Bounce to 9.13.0
 

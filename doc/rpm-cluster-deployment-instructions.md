@@ -19,8 +19,9 @@ Refer to the [Deploying Kaltura Clusters Using Chef](https://github.com/kaltura/
 
 ### Before You Get Started Notes
 * If you see a `#` at the beginning of a line, this line should be run as `root`.
+* Please review the [frequently answered questions](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura-packages-faq.md) document for general help before posting to the forums or issue queue.
 * All post-install scripts accept answers-file as parameter, this can used for silent-automatic installs.
-* [Kaltura Inc.](http://corp.kaltura.com) also provides commercial editions including applications, SLA, support and professional services. If you're looking for a commercially supported version with integrations to commercial encoders, streaming servers, eCDN, DRM and more - Start a [Free Trial on Kaltura.com Hosted Platform](http://corp.kaltura.com/free-trial) or [Kaltura' Commercial OnPrem Edition™](http://corp.kaltura.com/Deployment-Options/Kaltura-On-Prem-Edition). For existing RPM based users, Kaltura offers commercial upgrade options.
+* [Kaltura Inc.](http://corp.kaltura.com) also provides commercial solutions and services including pro-active platform monitoring, applications, SLA, 24/7 support and professional services. If you're looking for a commercially supported video platform  with integrations to commercial encoders, streaming servers, eCDN, DRM and more - Start a [Free Trial of the Kaltura.com Hosted Platform](http://corp.kaltura.com/free-trial) or learn more about [Kaltura' Commercial OnPrem Edition™](http://corp.kaltura.com/Deployment-Options/Kaltura-On-Prem-Edition). For existing RPM based users, Kaltura offers commercial upgrade options.
 
 ##### iptables and ports
 Kaltura requires certain ports to be open for proper operation. [See the list of required open ports](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura-required-ports.md).   
@@ -112,9 +113,10 @@ Then set priviliges accordingly:
 To export the volume run: `# exportfs -a`
 
 ### The MySQL Database
+Please note that currently, only MySQL 5.1 is supported, we recommend using the official package supplied by the RHEL/CentOS repos which is currently 5.1.73.
 ```
 # rpm -Uhv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
-# yum install mysql-server mysql
+# yum install mysql-server kaltura-postinst 
 # /opt/kaltura/bin/kaltura-mysql-settings.sh
 # mysql_secure_installation
 ```

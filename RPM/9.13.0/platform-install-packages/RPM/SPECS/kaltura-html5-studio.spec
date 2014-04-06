@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5-studio
-Version: v0.9.4
+Version: v0.9.6
 Release: 1 
 License: AGPLv3+
 Group: Server/Platform 
@@ -51,6 +51,13 @@ rm -rf %{buildroot}
 %{prefix}/apps/studio/%{version}
 
 %changelog
+* Sun Apr 6 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v0.9.6-1
+- FEC-1166 - Player Studio "does not support IE8 message" 
+- FEC-1163 - Player studio gives absolute http urls for players, breaks HTTPS
+- FEC-1162 - Can't scroll in player list in Universal studio
+- FEC-1157 - Studio Duplicate should not require up-to-date player 
+- FEC-1155 - Studio search is cut off in firefox 
+
 * Tue Mar 25 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v0.9.4-1
 - Navigation menu added
 - FEC-1097 Default value is missing in L&F ( title label)
