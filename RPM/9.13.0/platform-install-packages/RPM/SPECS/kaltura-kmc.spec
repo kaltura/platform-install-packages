@@ -1,8 +1,8 @@
-%define kmc_login_version v1.2.3
+%define kmc_login_version v1.2.4
 %define prefix /opt/kaltura
 Name:	kaltura-kmc	
-Version: v5.37.14
-Release: 3 
+Version: v5.37.16
+Release: 1 
 Summary: Kaltura Management Console
 
 Group: System Management	
@@ -82,6 +82,12 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sun Apr 6 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.16-1
+- Live Reports in Analytics (phase 0)
+- Legacy embed code removed from Preview & Embed page for Players falling back to HTML5 v2
+- SUP-1713 - Analytics categories filter is not needed 
+- FEC-1131 - When only universal studio is enabled for partner - the main studio menu is not displayed at all in KMC 
+
 * Wed Mar 26 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.14-3
 - kmc_config.ini updated with new kmc ver.
 

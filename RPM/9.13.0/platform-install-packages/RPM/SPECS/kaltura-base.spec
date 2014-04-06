@@ -1,5 +1,5 @@
 # this sucks but base.ini needs to know the KMC version and it needs to be known cross cluster because, it is needed to generate the UI confs, which is done by the db-config postinst script which can run from every cluster node.
-%define kmc_version v5.37.14
+%define kmc_version v5.37.16
 %define clipapp_version v1.0.7
 %define html5_version v2.4
 %define kdp3_wrapper_version v37.0
@@ -14,8 +14,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 9.13.0
-Release: 6
+Version: 9.14.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -242,6 +242,9 @@ if [ "$1" = 2 ];then
 			php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_03_10_addpushpublishconfigurationaction_added_to_livestreamservice.php > /tmp/2014_03_10_addpushpublishconfigurationaction_added_to_livestreamservice.php.log
 			php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_03_09_add_system_admin_publisher_config_to_audittrail.php > /tmp/2014_03_09_add_system_admin_publisher_config_to_audittrail.php.log
 		fi
+		elif [ %{version} = '9.14.0' ];then
+			php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_03_09_add_system_admin_publisher_config_to_audittrail.php > /tmp/2014_03_09_add_system_admin_publisher_config_to_audittrail.php.log
+		fi	
 	fi
 
 fi
@@ -298,6 +301,9 @@ fi
 
 
 %changelog
+* Sun Apr 6 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.14.0-1
+- Ver Bounce to 9.14.0
+
 * Sun Apr 1 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.13.0-6
 - Here is our problem: the ip{hone,ad}new tags are only good for Akamai HLS, on any other serve method, it makes ip{hone,ad} serves not to work.
   If a user DOES wish to use Akamai HLS, we have the kaltura-remote-storage-config.sh for them to run.

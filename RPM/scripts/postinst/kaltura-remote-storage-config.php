@@ -53,13 +53,11 @@ $storageProfile->storageUrl = $storage_url;
 $storageProfile->storageBaseDir = $storage_base_dir;
 $storageProfile->storageUsername = $username;
 $storageProfile->storagePassword = $passwd;
-//if (preg_match('#^https://#',$delivery_url)){
-	$storageProfile->deliveryHttpsBaseUrl = $delivery_url;
-//}else{
-	$storageProfile->deliveryHttpBaseUrl = $delivery_url;
-//}
+$storageProfile->deliveryHttpsBaseUrl = $delivery_url;
+$storageProfile->deliveryHttpBaseUrl = $delivery_url;
 $storageProfile->deliveryRmpBaseUrl = null;
 $storageProfile->flavorParamsIds = 0;
+$storageProfile->deliveryPriority = 0;
 //$storageProfile->urlManagerClass = 'MANAGER_CLASS';
 $storageProfile->urlManagerParams = array();
 $storageProfile->urlManagerParams[0] = null;

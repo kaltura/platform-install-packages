@@ -2,8 +2,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.5
-Release: 6 
+Version: v2.6
+Release: 1 
 Epoch:0 
 License: AGPLv3+
 Group: Server/Platform 
@@ -62,6 +62,11 @@ rm -rf %{buildroot}
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Sun Apr 6 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.6-1
+- FEC-1029 - TAR - JAWS reading buttons twice
+- FEC-1173 - "Replay" button needs to be pressed twice for staring to play
+- FEC-1160 - merge api fix for related videos failure on identical requests
+
 * Sun Mar 30 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.5-6
 - Copy the LocalSettings.php to all packaged HTML5 vers.
 

@@ -1,4 +1,4 @@
-%define kmc_version v5.37.14
+%define kmc_version v5.37.16
 %define prefix /opt/kaltura
 %define kaltura_user	kaltura
 %define kaltura_group	kaltura
@@ -6,8 +6,8 @@
 %define apache_group	apache
 Summary: Kaltura Open Source Video Platform - frontend server 
 Name: kaltura-front
-Version: 9.13.0
-Release: 2 
+Version: 9.14.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 #Source0: kaltura.ssl.conf.template 
@@ -104,6 +104,9 @@ rm -rf %{buildroot}
 %config %{_sysconfdir}/php.d/zz-%{name}.ini
 
 %changelog
+* Sun Apr 6 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.14.0-1
+- Ver Bounce to 9.14.0
+
 * Wed Apr 2 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.13.0-2
 - Added dep on php-pecl-ssh2
 * Tue Mar 25 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.13.0-1
