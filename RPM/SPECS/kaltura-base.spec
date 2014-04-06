@@ -1,5 +1,5 @@
 # this sucks but base.ini needs to know the KMC version and it needs to be known cross cluster because, it is needed to generate the UI confs, which is done by the db-config postinst script which can run from every cluster node.
-%define kmc_version v5.37.14
+%define kmc_version v5.37.16
 %define clipapp_version v1.0.7
 %define html5_version v2.4
 %define kdp3_wrapper_version v37.0
@@ -15,7 +15,11 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 9.14.0
+<<<<<<< HEAD
+Release: 1
+=======
 Release: 0
+>>>>>>> b878ca258fb939d78fc2c951824a398b004db5d3
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -44,7 +48,8 @@ Source19: IndexController.php
 Source20: sphinx.populate.template.rc
 Source21: kaltura_batch_upload_falcon.zip
 Source22: 01.UserRole.99.template.xml
-#Source9: 01.conversionProfile.99.template.xml
+Source23: 04.flavorParams.ini
+Source24: 04.flavorParams.ini
 URL: https://github.com/kaltura/server/tree/IX-%{version}
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
@@ -134,6 +139,8 @@ cp %{SOURCE8} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_content/
 cp %{SOURCE7} $RPM_BUILD_ROOT%{prefix}/app/configurations/cron/dwh.template
 cp %{SOURCE9} $RPM_BUILD_ROOT%{prefix}/app/configurations/plugins.template.ini
 cp %{SOURCE22} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_content/01.UserRole.99.template.xml
+cp %{SOURCE23} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_data/
+cp %{SOURCE24} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_data/
 cp %{SOURCE11} $RPM_BUILD_ROOT%{prefix}/app/alpha/crond/kaltura/clear_cache.sh
 mkdir -p $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail
 cp %{SOURCE12} $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/
@@ -239,6 +246,9 @@ if [ "$1" = 2 ];then
 			php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_03_10_addpushpublishconfigurationaction_added_to_livestreamservice.php > /tmp/2014_03_10_addpushpublishconfigurationaction_added_to_livestreamservice.php.log
 			php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_03_09_add_system_admin_publisher_config_to_audittrail.php > /tmp/2014_03_09_add_system_admin_publisher_config_to_audittrail.php.log
 		fi
+		elif [ %{version} = '9.14.0' ];then
+			php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_03_09_add_system_admin_publisher_config_to_audittrail.php > /tmp/2014_03_09_add_system_admin_publisher_config_to_audittrail.php.log
+		fi	
 	fi
 
 fi
@@ -295,6 +305,13 @@ fi
 
 
 %changelog
+* Sun Apr 6 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.14.0-1
+- Ver Bounce to 9.14.0
+
+* Sun Apr 1 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.13.0-6
+- Here is our problem: the ip{hone,ad}new tags are only good for Akamai HLS, on any other serve method, it makes ip{hone,ad} serves not to work.
+  If a user DOES wish to use Akamai HLS, we have the kaltura-remote-storage-config.sh for them to run.
+
 * Thu Mar 25 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.13.0-4
 - Log update scripts output to file instead of STDOUT
 
