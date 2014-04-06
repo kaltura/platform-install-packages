@@ -2,8 +2,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.5
-Release: 5
+Version: v2.6
+Release: 1 
 Epoch:0 
 License: AGPLv3+
 Group: Server/Platform 
@@ -42,8 +42,11 @@ mkdir -p $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib
 cp -r %{_builddir}/%{name}-%{version} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/%{version}
 cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/%{version}
 cp -r %{_builddir}/%{name}-v2.1.1 $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.1.1
+cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.1.1
 cp -r %{_builddir}/%{name}-v2.3 $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.3
+cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.3
 cp -r %{_builddir}/%{name}-v2.4 $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.4
+cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.4
 
 %clean
 rm -rf %{buildroot}
@@ -59,6 +62,14 @@ rm -rf %{buildroot}
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Sun Apr 6 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.6-1
+- FEC-1029 - TAR - JAWS reading buttons twice
+- FEC-1173 - "Replay" button needs to be pressed twice for staring to play
+- FEC-1160 - merge api fix for related videos failure on identical requests
+
+* Sun Mar 30 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.5-6
+- Copy the LocalSettings.php to all packaged HTML5 vers.
+
 * Tue Mar 25 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.5-1
 - SUP-1608 - V2 player - Play From Start Time To End Time function not working 
 - SUP-1426 - HTML5 v2.0.2 Error message displays when leaving webpage 
