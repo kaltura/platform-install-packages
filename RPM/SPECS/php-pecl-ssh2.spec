@@ -7,7 +7,7 @@
 
 Name:           php-pecl-ssh2
 Version:        0.12
-Release:        2 
+Release:        1
 Summary:        Bindings for the libssh2 library
 
 License:        PHP
@@ -23,7 +23,6 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:  libssh2-devel php-devel php-pear
 Requires(post): %{__pecl}
 Requires(postun): %{__pecl}
-Requires: libssh2 => 1.4.2
 Provides:       php-pecl(ssh2) = %{version}
 
 %if %{?php_zend_api}0

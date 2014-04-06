@@ -62,10 +62,8 @@ if [ "$1" = 0 ];then
 	%{prefix}/bin/kaltura-dwh-config.sh
 fi
 # Alas, we only work well with Sun's Java so, first lets find the latest version we have for it [this package is included in Kaltura's repo, as taken from Oracle's site
-LATEST_JAVA=`ls -d /usr/java/jre*|tail -1 2>/dev/null`
-if [ -d "$LATEST_JAVA" ];then
-	alternatives --install /usr/bin/java java $LATEST_JAVA/bin/java  20000
-fi
+LATEST_JAVA=`ls -d /usr/java/jre*|tail -1`
+alternatives --install /usr/bin/java java $LATEST_JAVA/bin/java  20000
 
 %preun
 if [ "$1" = 0 ] ; then
@@ -79,9 +77,6 @@ fi
 
 
 %changelog
-* Sun Mar 30 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.3.0-1
-- If we have JRE by Oracle lets make it the default using alternatives.
-
 * Wed Jan 29 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.2.0-2
 %%{prefix}/bin/kaltura-dwh-config.sh does not require user interaction, if this is an upgrade just run it at %%post.
 
