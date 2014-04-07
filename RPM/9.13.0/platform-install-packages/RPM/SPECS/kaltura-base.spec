@@ -40,7 +40,7 @@ Source20: sphinx.populate.template.rc
 Source21: kaltura_batch_upload_falcon.zip
 Source22: 01.UserRole.99.template.xml
 Source23: 04.flavorParams.ini
-Source24: 04.flavorParams.ini
+Source24: 04.liveParams.ini
 URL: https://github.com/kaltura/server/tree/IX-%{version}
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch

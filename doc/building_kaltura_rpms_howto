@@ -17,6 +17,11 @@ drwxr-xr-x  8 jess jess 12288 Apr  6 11:00 SOURCES -> /sym/link/to/platform-inst
 lrwxrwxrwx  1 jess jess    91 Mar 25 10:48 SPECS -> /sym/link/to/platform-install-packages/RPM/SPECS
 drwxrwxr-x  2 jess jess 36864 Apr  7 03:06 SRPMS
 
+platform-install-packages/RPM/.rpmmacros
+========================================
+This file specifies vars used in the RPM spec files, currently holds versions of supporting components, for instance, kaltura-kmc needs to know what kmc-login ver to take, etc.
+When components are upgraded, this file needs to be edited.
+In the build ENV, it should reside at ~/.rpmbuild
 
 platform-install-packages/RPM/scripts/build dir
 =================

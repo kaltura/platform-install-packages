@@ -40,9 +40,11 @@ rpm -ihv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
 
 This will enable the stable repo, to enable the nightly one in addition to it, please run:
 ```bash   
+yum install yum-utils
 yum-config-manager --enable Kaltura-testing-noarch
 yum-config-manager --enable Kaltura-testing
 ```
+Alternatively, you can just edit /etc/yum.repos.d/kaltura.repo directly and set 'enabled=1' on the testing repos.
 
 ##### Note about SSL certificates
 
