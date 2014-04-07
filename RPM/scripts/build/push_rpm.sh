@@ -26,7 +26,7 @@ if echo $RPM|grep -q noarch;then
 else
 	SUB_PATH=x86_64
 fi
-scp $BASE_RPM_DIR/$RPM root@54.211.235.1421:/var/www/html/releases/$REPO_VER/RPMS/$SUB_PATH
-ssh root@54.211.235.1421 rpm --addsign  /var/www/html/releases/$REPO_VER/RPMS/$SUB_PATH/$RPM
-ssh root@54.211.235.1421 createrepo /var/www/html/releases/$REPO_VER/RPMS/$SUB_PATH
+scp $BASE_RPM_DIR/$RPM root@54.211.235.142:/var/www/html/releases/$REPO_VER/RPMS/$SUB_PATH
+ssh root@54.211.235.142 rpm --addsign  /var/www/html/releases/$REPO_VER/RPMS/$SUB_PATH/$RPM
+ssh root@54.211.235.142 createrepo /var/www/html/releases/$REPO_VER/RPMS/$SUB_PATH
 
