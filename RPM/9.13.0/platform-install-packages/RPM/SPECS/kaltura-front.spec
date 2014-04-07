@@ -1,4 +1,3 @@
-%define kmc_version v5.37.14
 %define prefix /opt/kaltura
 %define kaltura_user	kaltura
 %define kaltura_group	kaltura
@@ -6,7 +5,7 @@
 %define apache_group	apache
 Summary: Kaltura Open Source Video Platform - frontend server 
 Name: kaltura-front
-Version: 9.13.0
+Version: 9.14.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 

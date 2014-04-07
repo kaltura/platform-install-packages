@@ -13,12 +13,12 @@ total 72
 drwxrwxr-x 88 jess jess  4096 Apr  7 03:06 BUILD
 drwxr-xr-x 45 jess jess  4096 Apr  7 03:06 BUILDROOT
 drwxrwxr-x  6 jess jess  4096 Jan 26 08:03 RPMS
-drwxr-xr-x  8 jess jess 12288 Apr  6 11:00 SOURCES -> /sym/link/to/platform-install-packages/blob/master/RPM/SOURCES
-lrwxrwxrwx  1 jess jess    91 Mar 25 10:48 SPECS -> /sym/link/to/platform-install-packages/blob/master/RPM/SPECS
+drwxr-xr-x  8 jess jess 12288 Apr  6 11:00 SOURCES -> /sym/link/to/platform-install-packages/RPM/SOURCES
+lrwxrwxrwx  1 jess jess    91 Mar 25 10:48 SPECS -> /sym/link/to/platform-install-packages/RPM/SPECS
 drwxrwxr-x  2 jess jess 36864 Apr  7 03:06 SRPMS
 
 
-scripts/build dir
+platform-install-packages/RPM/scripts/build dir
 =================
 sources.rc - this file has the ENV vars needed for building from sources. When versions of components are upgraded, they should be modified there.
 package_*.sh - each component has a wrapper script that fetches the sources from the needed version and packages them so that the RPM can be built.
@@ -26,3 +26,13 @@ package_*.sh - each component has a wrapper script that fetches the sources from
 Utility scripts
 ===============
 push_rpm.sh - scp the RPM to repo origin and sign it over SSH, then, generate meta data with create repo
+bounce_core_ver.sh
+
+Biweekly deployment instructions
+================================
+Each deployment has instructions here:
+https://kaltura.atlassian.net/wiki/display/QAC/QA.Core+Production+Deployments
+That includes the new versions for updated components as well as PHP/SQL scripts to run.
+The versions should be updated in platform-install-packages/RPM/scripts/build/sources.rc
+
+

@@ -1,4 +1,3 @@
-%define kmc_login_version v1.2.4
 %define prefix /opt/kaltura
 Name:	kaltura-kmc	
 Version: v5.37.16
