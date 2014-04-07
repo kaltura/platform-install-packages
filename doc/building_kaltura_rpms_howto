@@ -1,0 +1,28 @@
+Required RPMS for build
+=======================
+rpm-build gcc gcc-c++ git
+
+GIT repo
+========
+git clone https://github.com/kaltura/platform-install-packages
+
+~/rpmbuild dir structure
+========================
+$ ll ~/rpmbuild/
+total 72
+drwxrwxr-x 88 jess jess  4096 Apr  7 03:06 BUILD
+drwxr-xr-x 45 jess jess  4096 Apr  7 03:06 BUILDROOT
+drwxrwxr-x  6 jess jess  4096 Jan 26 08:03 RPMS
+drwxr-xr-x  8 jess jess 12288 Apr  6 11:00 SOURCES -> /sym/link/to/platform-install-packages/blob/master/RPM/SOURCES
+lrwxrwxrwx  1 jess jess    91 Mar 25 10:48 SPECS -> /sym/link/to/platform-install-packages/blob/master/RPM/SPECS
+drwxrwxr-x  2 jess jess 36864 Apr  7 03:06 SRPMS
+
+
+scripts/build dir
+=================
+sources.rc - this file has the ENV vars needed for building from sources. When versions of components are upgraded, they should be modified there.
+package_*.sh - each component has a wrapper script that fetches the sources from the needed version and packages them so that the RPM can be built.
+
+Utility scripts
+===============
+push_rpm.sh - scp the RPM to repo origin and sign it over SSH, then, generate meta data with create repo
