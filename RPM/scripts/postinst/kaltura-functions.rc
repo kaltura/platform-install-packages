@@ -395,6 +395,7 @@ report()
 		STAT="FAILED"
 	fi
 	echo -e "[${CYAN}$TNAME${NORMAL}] [${COLOR}$STAT, RC: $RC${NORMAL}] - [$TIME]"
+	echo -e "$TNAME,$STAT, $MESSAGE - RC: $RC, $TIME" >> /tmp/reportme.`date +%d_%m_%Y`.csv
 }
 
 check_missing_web_files()
