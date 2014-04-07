@@ -27,7 +27,7 @@ When components are upgraded, this file needs to be edited.
 In the build ENV, it should reside at ~/.rpmbuild
 
 platform-install-packages/RPM/scripts/build dir
-=================
+================================================
 sources.rc - this file has the ENV vars needed for building from sources. When versions of components are upgraded, they should be modified there.
 package_*.sh - each component has a wrapper script that fetches the sources from the needed version and packages them so that the RPM can be built.
 
