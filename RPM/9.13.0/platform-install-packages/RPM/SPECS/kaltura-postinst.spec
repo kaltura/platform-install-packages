@@ -3,7 +3,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.10
-Release: 5
+Release: 6 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -81,17 +81,8 @@ fi
 %config %{prefix}/app/configurations/*
 
 %changelog
-* Mon Mar 31 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.9-17
-- Added scripts to auto config storage profile.
-
-* Sun Mar 30 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.9-12
-- Tmp fix for 2014 https://github.com/kaltura/mwEmbed/issues/574
-
-* Sat Mar 29 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.9-11
-- Exit db-config.sh if MySQL ver is not 5.1.n
-
-* Thu Mar 27 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.9-10
-- Log rotation issues reported here: https://github.com/kaltura/platform-install-packages/issues/79
+* Tue Apr 8 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.10-2
+- Check if kaltura-base is installed before starting config proc.
 
 * Wed Mar 26 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.9-8
 - replace html5_version in base.ini to latest.

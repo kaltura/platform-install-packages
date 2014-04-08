@@ -64,6 +64,16 @@ if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
 	exit 3
 fi
 . $KALTURA_FUNCTIONS_RC
+if ! rpm -q kaltura-base;then
+	echo -e "${BRIGHT_RED}Exiting as kaltura-base is not installed.
+This MAY be because the installation of it was skipped do to SELinux being in 'Enforcing' mode.
+Please review: https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-redhat-based.md#disable-selinux---required-currently-kaltura-cant-run-properly-with-selinux
+And re-run:
+# yum install kaltura-server
+
+${NORMAL}"
+	exit 0 
+fi
 trap 'my_trap_handler ${LINENO} ${$?}' ERR
 LOCALHOST=127.0.0.1
 DISPLAY_NAME="Kaltura Server `rpm -q kaltura-base --queryformat %{version}`"
