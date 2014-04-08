@@ -146,6 +146,8 @@ You can now record a video using KMC->Upload->Record from Webcam.
 *This will only work if the initial install was using this packages based install, it will not work for old Kaltura deployments using the PHP installers*
 ```bash
 yum clean all
+yum update kaltura-release
+yum clean all
 yum update "*kaltura*"
 ```
 Then follow the on-screen instructions (in case any further actions required).   
