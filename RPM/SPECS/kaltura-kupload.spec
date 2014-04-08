@@ -1,6 +1,6 @@
 %define prefix /opt/kaltura
 %define widget_name kupload
-%define kupload_vers "v1.2.8 v1.1.7 v1.0.23"
+#%define kupload_vers "v1.2.8 v1.1.7 v1.0.23"
 Name:	kaltura-%{widget_name}
 Version: 1.0.0 
 Release: 1 

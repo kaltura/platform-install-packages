@@ -1,5 +1,4 @@
 %define prefix /opt/kaltura
-%define kdp_vers "v2.7.0"
 Name:	kaltura-kdp
 Version: v2.7.0 
 Release: 2

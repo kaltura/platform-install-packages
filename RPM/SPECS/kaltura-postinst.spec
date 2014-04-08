@@ -2,8 +2,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
-Version: 1.0.9
-Release: 9 
+Version: 1.0.10
+Release: 7 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -13,6 +13,7 @@ Source3: sql_updates
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
+Requires: bc
 
 %description
 Kaltura is the world's first Open Source Online Video Platform, transforming the way people work, 
@@ -81,6 +82,12 @@ fi
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Tue Apr 8 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.10-7
+- Added bc to deps. Used in kaltura-sanity.sh
+
+* Tue Apr 8 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.10-2
+- Check if kaltura-base is installed before starting config proc.
+
 * Wed Mar 26 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.9-8
 - replace html5_version in base.ini to latest.
 
