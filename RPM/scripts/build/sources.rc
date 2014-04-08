@@ -66,7 +66,7 @@ KMC_LOGIN_VERSION=v$KMC_LOGIN_MINUS_V_VERSION
 #KMC_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/flash/kmc/$KMC_VERSION"
 KMC_URI="https://github.com/kaltura/kmc/releases/download/$KMC_VERSION/$KMC_VERSION.zip"
 #$KMC_LOGIN_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/flash/kmc/login/$KMC_LOGIN_VERSION"
-KMC_LOGIN_URI="https://github.com/kaltura/kmc-login/archive/$KMC_LOGIN_VERSION.zip"
+KMC_LOGIN_URI="https://github.com/kaltura/kmc-login/archive/$KMC_LOGIN_VERSION.tar.gz"
 KMC_UICONF_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalsource/uiconf/kaltura/kmc"
 KMC_RPM_NAME="kaltura-kmc"
 
