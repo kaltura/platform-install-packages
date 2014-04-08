@@ -1,6 +1,5 @@
 %define prefix /opt/kaltura
 %define widget_name krecord
-%define krecord_vers "v1.7"
 Name:	kaltura-%{widget_name}
 Version: v1.7 
 Epoch: 1

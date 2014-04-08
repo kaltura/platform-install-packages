@@ -1,5 +1,4 @@
 %define prefix /opt/kaltura
-#%define clipapp_vers "v1.0.5 v1.0.5_saas v1.0.7 v1.0.7_saas"
 Name:	kaltura-clipapp
 Version: v1.0.7
 Release: 1
@@ -34,10 +33,8 @@ This package installs the Kaltura Clipper App, used for clipping segments from a
 
 %install
 mkdir -p $RPM_BUILD_ROOT%{prefix}/apps/clipapp
-#for i in %{clipapp_vers};do
-	cp -r %{_builddir}/%{name}/%{version} $RPM_BUILD_ROOT/%{prefix}/apps/clipapp
-	cp %{_builddir}/%{name}/%{version}_saas/config.local.php $RPM_BUILD_ROOT/%{prefix}/apps/clipapp/%{version}/config.local.php
-#done
+cp -r %{_builddir}/%{name}/%{version} $RPM_BUILD_ROOT/%{prefix}/apps/clipapp
+cp %{_builddir}/%{name}/%{version}_saas/config.local.php $RPM_BUILD_ROOT/%{prefix}/apps/clipapp/%{version}/config.local.php
 
 %clean
 rm -rf %{buildroot}

@@ -1,5 +1,4 @@
 %define prefix /opt/kaltura
-%define kdp3_vers "v3.5.21 v3.8.9 v3.9.1 v3.9.2 v3.9.7 v3.9.8"
 Name:	kaltura-kdp3	
 Version: v3.9.8
 Epoch: 1 
