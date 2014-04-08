@@ -96,6 +96,12 @@ The NFS is the shared network storage between all machines in the cluster. To le
 Edit `/etc/exports` to have the desired settings, for example:
 `/opt/kaltura/web *(rw,sync,no_root_squash)`
 
+Edit `/etc/idmapd.conf` and add your domain, for example:
+`Domain = kaltura.dev`
+```
+# /etc/init.d/rpcidmapd
+```
+
 Note that you may choose different NFS settings which is fine so long as:
 * the kaltura and apache user are both able to write to this volume
 * the kaltura and apache user are both able create files with them as owners. i.e: do not use all_squash as an option.

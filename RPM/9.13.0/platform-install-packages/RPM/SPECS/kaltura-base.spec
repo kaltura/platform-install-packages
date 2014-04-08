@@ -10,7 +10,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 9.14.0
-Release: 3
+Release: 6
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -119,6 +119,9 @@ sed -i 's@^writers.\(.*\).filters.priority.priority\s*=\s*7@writers.\1.filters.p
 sed -i 's#\(@DWH_DIR@\)$#\1 -k %{prefix}/pentaho/pdi/kitchen.sh#g' $RPM_BUILD_ROOT%{prefix}/app/configurations/cron/dwh.template
 rm $RPM_BUILD_ROOT%{prefix}/app/generator/sources/android/DemoApplication/libs/libWVphoneAPI.so
 rm $RPM_BUILD_ROOT%{prefix}/app/configurations/.project
+# see https://github.com/kaltura/platform-install-packages/issues/58 - these are taken care of on lines 139 though 144:
+rm $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.d/*template*
+
 # we bring our own for kaltura-front and kaltura-batch.
 cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/app/configurations/apache/kaltura.ssl.conf.template
 cp %{SOURCE3} $RPM_BUILD_ROOT%{prefix}/app/configurations/apache/kaltura.conf.template
@@ -224,7 +227,8 @@ if [ "$1" = 2 ];then
 			%{_sysconfdir}/init.d/httpd restart
 		fi
 		# see https://kaltura.atlassian.net/wiki/pages/viewpage.action?spaceKey=QAC&title=QA.Core+Deployment+Instructions%3A+Mar+9%2C+2014
-		if [ %{version} = '9.12.0' ];then
+		CORE_MAJ_VER=`echo %{version}|awk -F '.' '{print $2}'`
+		if [ $CORE_MAJ_VER -lt 12 ];then
 			php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_01_20_categoryentry_syncprivacycontext_action.php > /tmp/2014_01_20_categoryentry_syncprivacycontext_action.php.log
 			php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_01_26_add_media_server_partner_level_permission.php > /tmp/add_permissions/2014_01_26_add_media_server_partner_level_permission.php.log
 			php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_02_25_add_push_publish_permission_to_partner_0.php > /tmp/2014_02_25_add_push_publish_permission_to_partner_0.php
@@ -232,11 +236,11 @@ if [ "$1" = 2 ];then
 			php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_02_25_add_push_publish_permission_to_live_asset_parameters.php > /tmp/2014_02_25_add_push_publish_permission_to_live_asset_parameters.php.log
 			php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_02_25_add_push_publish_permission_to_live_entry_parameters.php > /tmp/2014_02_25_add_push_publish_permission_to_live_entry_parameters.php.log
 			php %{prefix}/app/alpha/scripts/utils/setCategoryEntriesPrivacyContext.php realrun > /tmp/setCategoryEntriesPrivacyContext.php.log
-		elif [ %{version} = '9.13.0' ];then
+		elif [ $CORE_MAJ_VER -lt 13 ];then
 
 			php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_03_10_addpushpublishconfigurationaction_added_to_livestreamservice.php > /tmp/2014_03_10_addpushpublishconfigurationaction_added_to_livestreamservice.php.log
 			php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_03_09_add_system_admin_publisher_config_to_audittrail.php > /tmp/2014_03_09_add_system_admin_publisher_config_to_audittrail.php.log
-		elif [ %{version} = '9.14.0' ];then
+		elif [ $CORE_MAJ_VER -lt 14 ];then
 			php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_03_09_add_system_admin_publisher_config_to_audittrail.php > /tmp/2014_03_09_add_system_admin_publisher_config_to_audittrail.php.log
 		fi	
 	fi
@@ -295,8 +299,25 @@ fi
 
 
 %changelog
+* Tue Apr 8 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.14.0-6
+- We need to run the alter scripts in the event the version is lower than n, not equal to n. Why? cause jumping from say 11 to 13 is completely legit.
+
+* Mon Apr 6 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.14.0-4
+- Another instance of the ipadnew tag[darn!].
+
 * Sun Apr 6 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.14.0-1
 - Ver Bounce to 9.14.0
+- PLAT-927 - In YouTube API connector map an entry to a YT playlist
+- SUP-1641 - Open Editor for the config file is not working
+- SUP-1775 - MP4 corrupted source shows as ready in KMC 
+- SUP-1579 - Entry 1_q5jzwqd0 not found in HTTP progressive
+- SUP-1612 - remote storage is not updated
+- SUP-1676 - CSV Bulk Upload - Fail
+- PLAT-1080 - Security Fix - Prevent Admin-Console from being loaded in iFrame
+- PLAT-1081 - Security Fix - disable auto complete for password field in admin-console login
+- PLAT-1082 - Security Fix - admin-console session cookie security hardening
+- PLAT-1151 - Webex - detect black/silent conversions
+- PLAT-1145 - Updating UIConf with JSOn Config looses the config XML 
 
 * Sun Apr 1 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.13.0-6
 - Here is our problem: the ip{hone,ad}new tags are only good for Akamai HLS, on any other serve method, it makes ip{hone,ad} serves not to work.
