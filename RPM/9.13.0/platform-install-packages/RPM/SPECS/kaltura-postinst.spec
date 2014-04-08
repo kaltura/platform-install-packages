@@ -3,7 +3,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.10
-Release: 1 
+Release: 2 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -81,6 +81,9 @@ fi
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Tue Apr 8 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.10-2
+- Check if kaltura-base is installed before starting config proc.
+
 * Wed Mar 26 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.9-8
 - replace html5_version in base.ini to latest.
 
