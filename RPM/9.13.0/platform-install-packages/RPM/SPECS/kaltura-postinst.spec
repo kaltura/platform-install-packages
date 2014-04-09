@@ -3,7 +3,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.10
-Release: 7 
+Release: 8 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -82,6 +82,9 @@ fi
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Wed Apr 9 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.10-8
+- Need to respect USER_CONSENT coming from the ans file.
+
 * Tue Apr 8 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.10-7
 - Added bc to deps. Used in kaltura-sanity.sh
 
