@@ -117,6 +117,11 @@ An example cluster deployment will be:
 # knife node run_list add my-dwh-machine  kaltura::nfs
 ```
 
+If at any point you would like to remove a role assignment, use:
+```
+# knife node run_list remove node 'recipe[COOKBOOK::RECIPE_NAME]'
+```
+
 Alternatively, log in to Chef's web I/F with https://chef-server    
 And deploy the cluster from the "Nodes"->"Edit" menu.
 
