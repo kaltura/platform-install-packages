@@ -69,6 +69,7 @@ Download NTP and MySQL recipes:
 1. http://community.opscode.com/cookbooks/mysql
 
 **These recipes have dependencies you will need as well. Please follow documentation on the above URLs.**
+
 **Note that the MySQL recipe configures MySQL to listen on localhost only. You need to change this here: mysql/templates/default/my.cnf.erb:bind-address as the various nodes in your cluster will need access to it.**
 
 ## Loading the Kaltura recipes to your Chef server
