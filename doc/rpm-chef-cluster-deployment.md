@@ -112,7 +112,7 @@ An example cluster deployment will be:
 # knife node run_list add my-sphinx-machine kaltura::sphinx
 # knife node run_list add my-sphinx-machine kaltura::db_config
 # knife node run_list add my-front-machine  nfs 
-# knife node run_list add my-front-machine  kaltura::batch 
+# knife node run_list add my-front-machine  kaltura::front 
 # knife node run_list add my-dwh-machine  kaltura::dwh 
 # knife node run_list add my-dwh-machine  kaltura::nfs
 ```
