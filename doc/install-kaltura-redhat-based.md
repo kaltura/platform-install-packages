@@ -38,13 +38,10 @@ setenforce permissive
 rpm -ihv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
 ```
 
-This will enable the stable repo, to enable the nightly one in addition to it, please run:
-```bash   
-yum install yum-utils
-yum-config-manager --enable Kaltura-testing-noarch
-yum-config-manager --enable Kaltura-testing
-```
-Alternatively, you can just edit /etc/yum.repos.d/kaltura.repo directly and set 'enabled=1' on the testing repos.
+This will enable the latest repo. 
+
+In the near future, we also plan to have a nighly repo, to be updated each night with fresh pull requests.
+
 
 ##### Note about SSL certificates
 
@@ -171,7 +168,7 @@ This will completely remove Kaltura, then download and install from scratch.
 /opt/kaltura/bin/kaltura-drop-db.sh
 yum remove "*kaltura*"
 rm -rf /opt/kaltura
-rpm -ihv http://installrepo.kaltura.org/releases/stable/RPMS/noarch/kaltura-release.noarch.rpm
+rpm -ihv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
 yum clean all
 yum install kaltura-server
 /opt/kaltura/bin/kaltura-config-all.sh [answers-file-path]
