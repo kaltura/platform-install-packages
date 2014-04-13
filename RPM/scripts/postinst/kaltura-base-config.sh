@@ -45,7 +45,9 @@ create_answer_file()
 			echo "$VAL=\"${!VAL}\"" >> $ANSFILE 
                 fi
         done
+	if [ -r "$POST_INST_MAIL_TMPL" ];then
 			sed -i "s#@ANSFILE@#$ANSFILE#g" $POST_INST_MAIL_TMPL 
+	fi
 	echo -en "${CYAN}
 
 ========================================================================================================================

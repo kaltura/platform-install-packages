@@ -1,11 +1,11 @@
 %define baseurl installrepo.kaltura.org
-%define path releases/stable/RPMS
+%define path releases/latest/RPMS
 %define testpath releases/nightly/RPMS
 %define prefix /opt/kaltura 
 Summary: Kaltura Server release file and package configuration
 Name: kaltura-release
 Version: 9.14.0
-Release: 3 
+Release: 4 
 License: AGPLv3+
 Group: Server/Platform 
 URL: http://kaltura.org
@@ -79,6 +79,9 @@ exit 0
 %config %{_sysconfdir}/yum.repos.d/kaltura.repo
 
 %changelog
+* Thu Apr 10 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.14.0-4
+- Changed repo name from stable to latest as requested by Zohar.
+
 * Sun Apr 6 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.14.0-1
 - Ver Bounce to 9.14.0
 
