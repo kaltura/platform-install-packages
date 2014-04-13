@@ -115,9 +115,12 @@ An example cluster deployment will be:
 # knife node run_list add my-sphinx-machine kaltura::db_config
 # knife node run_list add my-front-machine  nfs 
 # knife node run_list add my-front-machine  kaltura::front 
-# knife node run_list add my-dwh-machine  kaltura::dwh 
 # knife node run_list add my-dwh-machine  kaltura::nfs
+# knife node run_list add my-dwh-machine  kaltura::dwh 
 ```
+
+
+
 
 If at any point you would like to remove a role assignment, use:
 ```
@@ -130,7 +133,8 @@ And deploy the cluster from the "Nodes"->"Edit" menu.
 ### Notes 
 
 1. The db_config runs from sphinx because it requires Kaltura's code which there is no reason to deploy on the DB machine.
-1. The above run lists are a recommedation, you can of course run more than one role per node.
+2. The above run lists are a recommedation, you can of course run more than one role per node.
+3. The order of the run_list if crucial. NFS needs to happen first. Note that your recipe should include creation of /opt/kaltura/web BEFORE the NFS recipe runs.
 
 
 ## Running the Chef client
