@@ -158,3 +158,7 @@ root@my-batch-machine:~# chef-client
 $ ssh my-dwh-machine
 root@my-dwh-machine:~# chef-client
 ```
+
+### EC2 automation
+Please this howto about auto provisioning EC2 images:
+https://learnchef.opscode.com/starter-use-cases/multi-node-ec2/
