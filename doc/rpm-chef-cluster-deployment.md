@@ -70,6 +70,8 @@ Download NTP and MySQL recipes:
 
 **These recipes have dependencies you will need as well. Please follow documentation on the above URLs.**
 
+**Note that the MySQL recipe configures MySQL to listen on localhost only. You need to change this here: mysql/templates/default/my.cnf.erb:bind-address as the various nodes in your cluster will need access to it.**
+
 ## Loading the Kaltura recipes to your Chef server
 ```
 # git clone https://github.com/kaltura/platform-install-packages.git
@@ -112,9 +114,17 @@ An example cluster deployment will be:
 # knife node run_list add my-sphinx-machine kaltura::sphinx
 # knife node run_list add my-sphinx-machine kaltura::db_config
 # knife node run_list add my-front-machine  nfs 
-# knife node run_list add my-front-machine  kaltura::batch 
-# knife node run_list add my-dwh-machine  kaltura::dwh 
+# knife node run_list add my-front-machine  kaltura::front 
 # knife node run_list add my-dwh-machine  kaltura::nfs
+# knife node run_list add my-dwh-machine  kaltura::dwh 
+```
+
+
+
+
+If at any point you would like to remove a role assignment, use:
+```
+# knife node run_list remove node 'recipe[COOKBOOK::RECIPE_NAME]'
 ```
 
 Alternatively, log in to Chef's web I/F with https://chef-server    
@@ -123,7 +133,8 @@ And deploy the cluster from the "Nodes"->"Edit" menu.
 ### Notes 
 
 1. The db_config runs from sphinx because it requires Kaltura's code which there is no reason to deploy on the DB machine.
-1. The above run lists are a recommedation, you can of course run more than one role per node.
+2. The above run lists are a recommedation, you can of course run more than one role per node.
+3. The order of the run_list if crucial. NFS needs to happen first. Note that your recipe should include creation of /opt/kaltura/web BEFORE the NFS recipe runs.
 
 
 ## Running the Chef client
