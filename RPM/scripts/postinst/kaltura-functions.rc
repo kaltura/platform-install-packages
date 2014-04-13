@@ -314,8 +314,8 @@ check_monit()
         DAEMON=$2
         MACHINE=$1
         service $DAEMON stop >/dev/null
-	echo -e "${CYAN}Napping 10 seconds to allow the daemon $DAEMON to finish its init after monit restarted it..${NORMAL}"
-	sleep 10 
+	echo -e "${CYAN}Napping 20 seconds to allow the daemon $DAEMON to finish its init after monit restarted it..${NORMAL}"
+	sleep 20 
         if service $DAEMON status >/dev/null;then
                 return 0
         fi
