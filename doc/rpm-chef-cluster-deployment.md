@@ -134,7 +134,7 @@ And deploy the cluster from the "Nodes"->"Edit" menu.
 
 1. The db_config runs from sphinx because it requires Kaltura's code which there is no reason to deploy on the DB machine.
 2. The above run lists are a recommedation, you can of course run more than one role per node.
-3. The order of the run_list if crucial. NFS needs to happen first. Note that your recipe should include creation of /opt/kaltura/web BEFORE the NFS recipe runs.
+3. The order of the run_list is crucial. NFS needs to happen first. Note that your recipe should include creation of /opt/kaltura/web BEFORE the NFS recipe runs.
 
 
 ## Running the Chef client
