@@ -39,6 +39,28 @@ On occasions where you'd like to drop the database and content and re-install Ka
 
 ### Troubleshooting Help
 
+## No playback on iOS
+This is a known issue resolved in 9.13.0.
+However, if your DB was created earlier, the solution is this:
+
+
+Dump the flavor_asset table as bck with:
+
+```bash
+# mysqldump -uroot -p flavor_asset > /tmp/flavor_asset.sql
+mysql> update flavor_params set tags='mobile,web,mbr,iphone' where id in (2,3);
+mysql> update flavor_params set tags='mobile,web,mbr,ipad' where id in (5,6);
+mysql> update flavor_params set tags='mbr' where id in (35,34);
+mysql> update flavor_asset set tags='mobile,web,mbr,ipad' where tags='mobile,web,mbr,ipad,ipadnew';
+mysql> update flavor_asset set tags='mobile,web,mbr,iphone' where tags='mobile,web,mbr,iphone,iphonenew';
+```
+Entries should now play on iOS.
+If something went wrong, restore the original data using
+
+```bash
+# mysql -uroot -p < /tmp/flavor_asset.sql
+```
+
 If you ever come across issues with your deployment, increase log verbosity to 7 using the following method.        
 Run the following command:    
 ```bash
@@ -50,3 +72,6 @@ Run `# kaltlog`, which will continuously track (using `tail`) an error grep from
 
 You can also use: `# allkaltlog` (using root), which will dump all the error lines from the Kaltura logs once. Note that this can result in a lot of output, so the best way to use it will be to redirect to a file: `# allkaltlog > errors.txt`.
 This output can be used to analyze past failures but for active debugging use the kaltlog alias.   
+
+
+
