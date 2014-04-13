@@ -39,7 +39,7 @@ On occasions where you'd like to drop the database and content and re-install Ka
 
 ### Troubleshooting Help
 
-## No playback on iOS
+#### No playback on iOS
 This is a known issue resolved in 9.13.0.
 However, if your DB was created earlier, the solution is this:
 
