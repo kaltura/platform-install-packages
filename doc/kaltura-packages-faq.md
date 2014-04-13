@@ -59,7 +59,9 @@ If something went wrong, restore the original data using:
 mysql -uroot -p < /tmp/flavor_asset.sql
 ```
 
-If you ever come across issues with your deployment, increase log verbosity to 7 using the following method.        
+#### General troubleshoot procedure
+
+Increase log verbosity to 7 using the following method.        
 Run the following command:    
 ```bash
 # sed -i 's@^writers.\(.*\).filters.priority.priority\s*=\s*7@writers.\1.filters.priority.priority=4@g' /opt/kaltura/app/configurations/logger.ini
