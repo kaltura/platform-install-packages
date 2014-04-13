@@ -45,7 +45,6 @@ However, if your DB was created earlier, the solution is this:
 
 
 Dump the flavor_asset table as bck with:
-
 ```bash
 mysqldump -uroot -p flavor_asset > /tmp/flavor_asset.sql
 mysql> update flavor_params set tags='mobile,web,mbr,iphone' where id in (2,3);
@@ -55,8 +54,7 @@ mysql> update flavor_asset set tags='mobile,web,mbr,ipad' where tags='mobile,web
 mysql> update flavor_asset set tags='mobile,web,mbr,iphone' where tags='mobile,web,mbr,iphone,iphonenew';
 ```
 Entries should now play on iOS.
-If something went wrong, restore the original data using
-
+If something went wrong, restore the original data using:
 ```bash
 mysql -uroot -p < /tmp/flavor_asset.sql
 ```
