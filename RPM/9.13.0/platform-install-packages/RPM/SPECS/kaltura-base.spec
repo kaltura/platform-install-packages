@@ -179,7 +179,7 @@ cat > $RPM_BUILD_ROOT%{_sysconfdir}/ld.so.conf.d/kaltura_base.conf << EOF
 EOF
 
 %clean
-#rm -rf %{buildroot}
+rm -rf %{buildroot}
 
 %pre
 

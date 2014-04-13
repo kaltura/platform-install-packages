@@ -4,10 +4,15 @@ template "/etc/yum.repos.d/kaltura.repo" do
     owner "root"
     group "root"
 end
-log "Installing Kaltura Sphinx"
-package "kaltura-sphinx" do
+log "Configuring MySQL DB for Kaltura"
+package "kaltura-postinst" do
   action :install
  end
+#%w{ apr apr-util lynx }.each do |pkg|
+#  package pkg do
+#    action :install
+#  end
+#end
 
 template "/root/kaltura.ans" do
     source "kaltura.ans.erb"
@@ -16,12 +21,9 @@ template "/root/kaltura.ans" do
     group "root"
 end
 
-bash "setup sphinx node" do
+bash "setup MySQL configuration as Kaltura needs it" do
      user "root"
      code <<-EOH
 	#{node[:kaltura][:BASE_DIR]}/bin/kaltura-mysql-settings.sh
-        #{node[:kaltura][:BASE_DIR]}/bin/kaltura-base-config.sh /root/kaltura.ans
-        #{node[:kaltura][:BASE_DIR]}/bin/kaltura-sphinx-config.sh /root/kaltura.ans
      EOH
 end
-

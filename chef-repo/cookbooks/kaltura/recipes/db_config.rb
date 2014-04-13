@@ -1,11 +1,14 @@
-log "Installing Kaltura DWH"
+log "Configuring Kaltura DB"
 template "/etc/yum.repos.d/kaltura.repo" do
     source "kaltura.repo.erb"
     mode 0600
     owner "root"
     group "root"
 end
-package "kaltura-dwh" do
+package "kaltura-base" do
+  action :install
+ end
+package "kaltura-postinst" do
   action :install
  end
 #%w{ apr apr-util lynx }.each do |pkg|
@@ -21,10 +24,10 @@ template "/root/kaltura.ans" do
     group "root"
 end
 
-bash "setup DWH " do
+bash "setup Kaltura DB" do
      user "root"
      code <<-EOH
-	echo "NO" | #{node[:kaltura][:BASE_DIR]}/bin/kaltura-base-config.sh /root/kaltura.ans
-	#{node[:kaltura][:BASE_DIR]}/bin/kaltura-dwh-config.sh /root/kaltura.ans
+	#{node[:kaltura][:BASE_DIR]}/bin/kaltura-base-config.sh /root/kaltura.ans
+	"#{node[:kaltura][:BASE_DIR]}"/bin/kaltura-db-config.sh #{node[:kaltura][:DB1_HOST]} #{node[:kaltura][:SUPER_USER]} #{node[:kaltura][:SUPER_USER_PASSWD]} #{node[:kaltura][:DB1_PORT]}
      EOH
 end
