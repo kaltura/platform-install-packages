@@ -1,5 +1,6 @@
 # Installing Kaltura on a Single All-In-One Server (RPM)
 This guide describes installation of an all-in-one Kaltura server and applies to all major RH based Linux distros including Fedora Core, RHEL, CentOS, etc. ([Note the supported distros and versions](http://kaltura.github.io/platform-install-packages/#supported-distros)).       
+Please note that the machines architecture needs to be 64bit [x86_64].
 
 ##### Notes
 
