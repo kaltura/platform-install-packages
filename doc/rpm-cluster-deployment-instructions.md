@@ -198,7 +198,7 @@ Front in Kaltura represents the machines hosting the user-facing components, inc
 ```
 **NOTE: /opt/kaltura/bin/kaltura-db-config.sh and packages residing on the web mount only needs to run on the first node.**
 
-### The first Front node
+### Secondary Front nodes
 Front in Kaltura represents the machines hosting the user-facing components, including the Kaltura API, the KMC and Admin Console, MediaSpace and all client-side widgets. 
 ```
 # rpm -Uhv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
