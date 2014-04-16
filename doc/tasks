@@ -1,0 +1,5 @@
+- Disallow login to KMC if partner is -2
+- Change KMC login to be JS instead of FLASH
+- Mask passwds in admin console
+- Testme fixes
+- Storage: force 'http' in http delivery URL
