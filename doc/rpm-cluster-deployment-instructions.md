@@ -225,7 +225,7 @@ When running the `kaltura-batch-config.sh` installer on the batch machine, the i
 The DWH is Kaltura's Analytics server.
 ```
 # rpm -Uhv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
-# yum install kaltura-dwh
+# yum install kaltura-dwh kaltura-postinst
 # /opt/kaltura/bin/kaltura-nfs-client-config.sh
 # /opt/kaltura/bin/kaltura-dwh-config.sh
 ```
