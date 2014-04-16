@@ -196,6 +196,7 @@ Front in Kaltura represents the machines hosting the user-facing components, inc
 # /opt/kaltura/bin/kaltura-front-config.sh
 # /opt/kaltura/bin/kaltura-db-config.sh
 ```
+**NOTE: /opt/kaltura/bin/kaltura-db-config.sh only needs to run on the first node.**
 
 ### The Batch
 Batch in Kaltura represents the machines running all async operations. To learn more, read: [Introduction to Kaltura Batch Processes](http://knowledge.kaltura.com/node/230).
