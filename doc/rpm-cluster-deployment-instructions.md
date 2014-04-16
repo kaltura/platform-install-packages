@@ -187,7 +187,8 @@ propel3.connection.dsn = "mysql:host=THIRD_DB_HOST;port=3306;dbname=kaltura;"
 # /opt/kaltura/bin/kaltura-sphinx-config.sh
 ```
 It is recommended that Sphinx will be installed on its own dedicated machine. However, if needed, Sphinx can be coupled with a front machine in low-resources clusters.
-** After installing the first cluster node, obtain the auto generated file placed under /tmp/kaltura_*.ans, replace relevant values and use it for the installation of the remaining nodes **
+
+After installing the first cluster node, obtain the auto generated file placed under /tmp/kaltura_*.ans, replace relevant values and use it for the installation of the remaining nodes.
 
 ### The first Front node
 Front in Kaltura represents the machines hosting the user-facing components, including the Kaltura API, the KMC and Admin Console, MediaSpace and all client-side widgets. 
