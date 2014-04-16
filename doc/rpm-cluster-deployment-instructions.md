@@ -187,16 +187,25 @@ propel3.connection.dsn = "mysql:host=THIRD_DB_HOST;port=3306;dbname=kaltura;"
 ```
 It is recommended that Sphinx will be installed on its own dedicated machine. However, if needed, Sphinx can be coupled with a front machine in low-resources clusters.
 
-### The Front
+### The first Front node
 Front in Kaltura represents the machines hosting the user-facing components, including the Kaltura API, the KMC and Admin Console, MediaSpace and all client-side widgets. 
 ```
 # rpm -Uhv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
+# yum install kaltura-front kaltura-widgets kaltura-html5lib kaltura-html5-studio kaltura-postinst
 # /opt/kaltura/bin/kaltura-nfs-client-config.sh
-# yum install kaltura-front kaltura-widgets kaltura-html5lib kaltura-html5-studio
 # /opt/kaltura/bin/kaltura-front-config.sh
 # /opt/kaltura/bin/kaltura-db-config.sh
 ```
-**NOTE: /opt/kaltura/bin/kaltura-db-config.sh only needs to run on the first node.**
+**NOTE: /opt/kaltura/bin/kaltura-db-config.sh and packages residing on the web mount only needs to run on the first node.**
+
+### The first Front node
+Front in Kaltura represents the machines hosting the user-facing components, including the Kaltura API, the KMC and Admin Console, MediaSpace and all client-side widgets. 
+```
+# rpm -Uhv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
+# yum install kaltura-front kaltura-postinst
+# /opt/kaltura/bin/kaltura-nfs-client-config.sh
+# /opt/kaltura/bin/kaltura-front-config.sh
+```
 
 ### The Batch
 Batch in Kaltura represents the machines running all async operations. To learn more, read: [Introduction to Kaltura Batch Processes](http://knowledge.kaltura.com/node/230).
