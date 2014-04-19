@@ -54,6 +54,19 @@ if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
 	exit 3
 fi
 . $KALTURA_FUNCTIONS_RC
+if [ ! -r /opt/kaltura/app/base-config.lock ];then
+	`dirname $0`/kaltura-base-config.sh "$ANSFILE"
+	if [ $? -ne 0 ];then
+		echo -e "${BRIGHT_RED}ERROR: Base config failed. Please correct and re-run $0.${NORMAL}"
+		exit 21
+	fi
+else
+	echo -e "${BRIGHT_BLUE}base-config completed successfully, if you ever want to re-configure your system (e.g. change DB hostname) run the following script:
+# rm /opt/kaltura/app/base-config.lock
+# $BASE_DIR/bin/kaltura-base-config.sh
+${NORMAL}
+"
+fi
 RC_FILE=/etc/kaltura.d/system.ini
 if [ ! -r "$RC_FILE" ];then
 	echo -e "${BRIGHT_RED}ERROR: could not find $RC_FILE so, exiting..${NORMAL}"
@@ -70,19 +83,6 @@ if [ -n "$1" -a -r "$1" ];then
 	AUTO_YES=1
 	NEWANSFILE="/tmp/kaltura_`date +%d_%m_%H_%M.ans`"
 	cp $ANSFILE $NEWANSFILE
-fi
-if [ ! -r /opt/kaltura/app/base-config.lock ];then
-	`dirname $0`/kaltura-base-config.sh "$ANSFILE"
-	if [ $? -ne 0 ];then
-		echo -e "${BRIGHT_RED}ERROR: Base config failed. Please correct and re-run $0.${NORMAL}"
-		exit 21
-	fi
-else
-	echo -e "${BRIGHT_BLUE}base-config completed successfully, if you ever want to re-configure your system (e.g. change DB hostname) run the following script:
-# rm /opt/kaltura/app/base-config.lock
-# $BASE_DIR/bin/kaltura-base-config.sh
-${NORMAL}
-"
 fi
 trap 'my_trap_handler ${LINENO} ${$?}' ERR
 send_install_becon `basename $0` $ZONE install_start 
