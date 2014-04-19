@@ -2,8 +2,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
-Version: 1.0.10
-Release: 11
+Version: 1.0.11
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -82,6 +82,9 @@ fi
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Thu Apr 17 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.11-1
+- Bugs->fixes.
+
 * Wed Apr 9 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.10-8
 - Need to respect USER_CONSENT coming from the ans file.
 

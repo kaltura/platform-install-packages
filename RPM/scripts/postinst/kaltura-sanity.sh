@@ -146,14 +146,14 @@ else
 see: https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-redhat-based.md#configure-red5-server${NORMAL}"
 fi
 
-START=`date +%s.%N`
-OUTP=`check_missing_web_files`
-RC=$?
-END=`date +%s.%N`
-if [ $RC -ne 0 ];then
-	report "Check missing web/content files - $OUTP" $RC, $OUTP "`bc <<< $END-$START`"
-else
-	report "Check missing web/content files - none are missing" $RC, "All files found" "`bc <<< $END-$START`"
-
-fi
+#START=`date +%s.%N`
+#OUTP=`check_missing_web_files`
+#RC=$?
+#END=`date +%s.%N`
+#if [ $RC -ne 0 ];then
+#	report "Check missing web/content files - $OUTP" $RC, $OUTP "`bc <<< $END-$START`"
+#else
+#	report "Check missing web/content files - none are missing" $RC, "All files found" "`bc <<< $END-$START`"
+#
+#fi
 

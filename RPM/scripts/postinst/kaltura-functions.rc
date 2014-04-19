@@ -395,7 +395,14 @@ report()
 		STAT="FAILED"
 	fi
 	echo -e "[${CYAN}$TNAME${NORMAL}] [${COLOR}$STAT, RC: $RC${NORMAL}] - [$TIME]"
-	echo -e "$TNAME,$STAT, $MESSAGE - RC: $RC, $TIME" >> /tmp/reportme.`date +%d_%m_%Y`.csv
+	    test_name VARCHAR(256),
+    create_time INTEGER,
+    version VARCHAR(20) NOT NULL,
+    test_result INTEGER NOT NULL,
+    rc INTEGER,
+    exec_duration INTEGER
+
+	echo -e "$TNAME,`rpm -qa kaltura-base --queryformat %{version}`,$MESSAGE,$RC, $TIME" >> /tmp/reportme.`date +%d_%m_%Y`.csv
 }
 
 check_missing_web_files()
