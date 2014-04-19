@@ -205,7 +205,7 @@ Front in Kaltura represents the machines hosting the user-facing components, inc
 Front in Kaltura represents the machines hosting the user-facing components, including the Kaltura API, the KMC and Admin Console, MediaSpace and all client-side widgets. 
 ```
 # rpm -Uhv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
-# yum install kaltura-front kaltura-postinst
+# yum install kaltura-front
 # /opt/kaltura/bin/kaltura-nfs-client-config.sh
 # /opt/kaltura/bin/kaltura-front-config.sh
 ```
@@ -214,7 +214,7 @@ Front in Kaltura represents the machines hosting the user-facing components, inc
 Batch in Kaltura represents the machines running all async operations. To learn more, read: [Introduction to Kaltura Batch Processes](http://knowledge.kaltura.com/node/230).
 ```
 # rpm -Uhv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
-# yum install kaltura-batch kaltura-postinst
+# yum install kaltura-batch
 # /opt/kaltura/bin/kaltura-nfs-client-config.sh
 # /opt/kaltura/bin/kaltura-batch-config.sh
 ```

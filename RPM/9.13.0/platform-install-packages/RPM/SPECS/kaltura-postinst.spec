@@ -3,7 +3,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.11
-Release: 1
+Release: 5 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -60,7 +60,7 @@ if [ "$1" = 2 ];then
 				fi
 			fi
 			if [ -r $SQL ];then
-				mysql kaltura -h $DB1_HOST -u $SUPER_USER -P $DB1_PORT -p$SUPER_USER_PASSWD < $SQL
+				mysql kaltura -h $DB1_HOST -u $SUPER_USER -P $DB1_PORT -p$SUPER_USER_PASSWD < $SQL 2>/dev/null
 				RC=$?
 			else
 				echo "In order to upgrade your DB, please run %{prefix}/bin/kaltura-db-update.sh once the RPMs installation completes."
@@ -82,6 +82,9 @@ fi
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Sat Apr 19 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.11-2
+- In kaltura-front-config.sh - first call kaltura-base-config.sh
+
 * Thu Apr 17 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.11-1
 - Bugs->fixes.
 
