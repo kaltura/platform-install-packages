@@ -85,7 +85,7 @@ The following server roles should not be load-balanced:
 * Sphinx machines are balanced in the Kaltura application level.
 * See below the notes regarding MySQL replication and scaling.
 
-### The NFS
+### The NFS server
 The NFS is the shared network storage between all machines in the cluster. To learn more about NFS read [this wikipedia article about NFS](http://en.wikipedia.org/wiki/Network_File_System).
 ```
 # yum install nfs-utils-lib
@@ -114,7 +114,8 @@ Then set priviliges accordingly:
 # groupadd -g 48 -r apache
 # useradd -r -u 48 -g apache -s /sbin/nologin -d /var/www -c "Apache" apache
 # usermod -a -G kaltura apache
-# chown -R kaltura /opt/kaltura
+# chown -R kaltura.apache /opt/kaltura/web
+# chmod 775 /opt/kaltura/web
 ```
 
 To export the volume run: `# exportfs -a`
