@@ -195,12 +195,12 @@ After installing the first cluster node, obtain the auto generated file placed u
 Front in Kaltura represents the machines hosting the user-facing components, including the Kaltura API, the KMC and Admin Console, MediaSpace and all client-side widgets. 
 ```
 # rpm -Uhv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
-# yum install kaltura-front kaltura-widgets kaltura-html5lib kaltura-html5-studio kaltura-postinst
+# yum install kaltura-front kaltura-widgets kaltura-html5lib kaltura-html5-studio 
 # /opt/kaltura/bin/kaltura-nfs-client-config.sh
 # /opt/kaltura/bin/kaltura-front-config.sh
 # /opt/kaltura/bin/kaltura-db-config.sh
 ```
-**NOTE: /opt/kaltura/bin/kaltura-db-config.sh and packages residing on the web mount only needs to run on the first node.**
+**NOTE: /opt/kaltura/bin/kaltura-db-config.sh and kaltura-widgets kaltura-html5lib kaltura-html5-studio which are installed on the web mount only need to run on the first node.**
 
 ### Secondary Front nodes
 Front in Kaltura represents the machines hosting the user-facing components, including the Kaltura API, the KMC and Admin Console, MediaSpace and all client-side widgets. 

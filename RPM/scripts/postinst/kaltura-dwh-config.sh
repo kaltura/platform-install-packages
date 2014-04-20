@@ -58,5 +58,10 @@ fi
 sed  's#\(@DWH_DIR@\)$#\1 -k /opt/kaltura/pentaho/pdi/kitchen.sh#g' $APP_DIR/configurations/cron/dwh.template >$APP_DIR/configurations/cron/dwh
 sed -i -e "s#@DWH_DIR@#$BASE_DIR/dwh#g" -e "s#@APP_DIR@#$APP_DIR#g" -e "s#@EVENTS_FETCH_METHOD@#local#g" -e "s#@LOG_DIR@#$LOG_DIR#g" $APP_DIR/configurations/cron/dwh
 ln -sf $APP_DIR/configurations/cron/dwh /etc/cron.d/kaltura-dwh
+# Alas, we only work well with Sun's Java so, first lets find the latest version we have for it [this package is included in Kaltura's repo, as taken from Oracle's site
+LATEST_JAVA=`ls -d /usr/java/jre*|tail -1` 
+if [ -n "$LATEST_JAVA" ];then
+	alternatives --install /usr/bin/java java $LATEST_JAVA/bin/java  20000
+fi
 echo -e "${CYAN}DWH configured.${NORMAL}"
 send_install_becon `basename $0` $ZONE install_success 

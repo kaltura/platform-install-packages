@@ -28,7 +28,7 @@ if [ ! -r "$RC_FILE" ];then
 	exit 2 
 fi
 . $RC_FILE
-
+rm  /tmp/`hostname`-reportme.`date +%d_%m_%Y`.sql
 for D in $ALL_DAEMONS; do
 # if this package is installed check daemon status
         if rpm -q $D >/dev/null;then

@@ -394,8 +394,11 @@ report()
 		COLOR=${BRIGHT_RED}
 		STAT="FAILED"
 	fi
+
+
 	echo -e "[${CYAN}$TNAME${NORMAL}] [${COLOR}$STAT, RC: $RC${NORMAL}] - [$TIME]"
-	echo -e "$TNAME,`rpm -qa kaltura-base --queryformat %{version}`,$MESSAGE,$RC, $TIME" >> /tmp/reportme.`date +%d_%m_%Y`.csv
+#	echo -e "$TNAME,,`hostname`,$MESSAGE,$RC, $TIME" >> /tmp/`hostname`-reportme.`date +%d_%m_%Y`.csv
+	echo "INSERT INTO csi_log VALUES(NULL,'$TNAME','`hostname`',`date +%s`,\"$MESSAGE\",$RC,$TIME,'`rpm -qa kaltura-base --queryformat %{version}`');" >> /tmp/`hostname`-reportme.`date +%d_%m_%Y`.sql
 }
 
 check_missing_web_files()
