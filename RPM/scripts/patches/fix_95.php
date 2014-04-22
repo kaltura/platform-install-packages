@@ -1,6 +1,7 @@
 <?php
 if (count($argv)<4){
         echo 'Usage:' .__FILE__ .' <service_url> <partner_id> <secret> </path/to/xml>'."\n";
+	echo "for getting your partner ID admin_secret run:\nselect admin_secret,status from kaltura.partner where id=\$YOUR_ID;\n\n";
         exit (1); 
 }
 
@@ -30,4 +31,4 @@ $uiConf->creationMode=3;
 $uiConf->useCdn = '1';
 $uiConf->swfUrlVersion = '3.9.8';
 $results = $client->uiConf->add($uiConf);
-
+echo "Your new UI conf ID is ".$results->id."\nConnect to your DB and run: update kaltura.ui_conf set id=8700151 where id=".$results->id." limit 1;\n";
