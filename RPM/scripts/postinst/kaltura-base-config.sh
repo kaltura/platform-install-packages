@@ -115,7 +115,7 @@ CDN hostname [${YELLOW}`hostname`${CYAN}]:${NORMAL}"
                 #echo $KALTURA_VIRTUAL_HOST_NAME
         fi
 
-        echo -en "${CYAN}Which port will this Vhost listen on [${YELLOW}443${CYAN}]?${NORMAL} "
+        echo -en "${CYAN}Which port will this Vhost listen on [${YELLOW}80${CYAN}]?${NORMAL} "
         read -e KALTURA_VIRTUAL_HOST_PORT
         if [ -z "$KALTURA_VIRTUAL_HOST_PORT" ];then
                 KALTURA_VIRTUAL_HOST_PORT=443
@@ -271,8 +271,9 @@ fi
         fi
 done
 if [ -z "$DB1_PASS" ];then
-        DB1_PASS=`< /dev/urandom tr -dc A-Za-z0-9_ | head -c15`
+        DB1_PASS=`< /dev/urandom tr -dc A-Za-z0-9 | head -c15`
         echo "update mysql.user set password=PASSWORD('$DB1_PASS') WHERE user='kaltura';flush PRIVILEGES" | mysql -h$DB1_HOST -P$DB1_PORT -u$SUPER_USER -p$SUPER_USER_PASSWD mysql
+	DWH_PASS=$DB1_PASS
 fi
 DB1_NAME=kaltura
 DB1_USER=kaltura
@@ -282,7 +283,7 @@ SPHINX_DB_HOST=$DB1_HOST
 SPHINX_DB_PORT=$DB1_PORT
 
 CONF_FILES=`find $KALT_CONF_DIR  -type f -name "*template*"`
-CONF_FILES="$CONF_FILES $BASE_DIR/app/batch/batches/Mailer/emails_en.template.ini $BASE_DIR/app/tests/monitoring/config.template.ini "
+CONF_FILES="$CONF_FILES $BASE_DIR/app/batch/batches/Mailer/emails_en.template.ini $BASE_DIR/app/tests/monitoring/config.template.ini $BASE_DIR/bin/sanity_config.template.ini"
 if rpm -q kaltura-html5-studio > /dev/null;then
         CONF_FILES="$CONF_FILES $BASE_DIR/apps/studio/`rpm -qa kaltura-html5-studio --queryformat %{version}`/studio.template.ini"
 fi 
@@ -324,7 +325,7 @@ chmod 600 $BASE_DIR/app/configurations/monit/monit.conf
 
 
 # gen secrets
-ADMIN_SECRET=`$ADMIN_CONSOLE_ADMIN_PASSWD`
+ADMIN_SECRET=`< /dev/urandom tr -dc A-Za-z0-9_ | head -c10`
 HASHED_ADMIN_SECRET=`echo $ADMIN_SECRET|md5sum`
 ADMIN_SECRET=`echo $HASHED_ADMIN_SECRET|awk -F " " '{print $1}'`
 
