@@ -23,6 +23,8 @@ This guide is intended for users of Chef that would like to deploy Kaltura clust
     1. http://community.opscode.com/cookbooks/mysql
     1. http://community.opscode.com/cookbooks/nfs
 
+**Note: you may also want to use this recipe for a simple Apache load balancer: http://community.opscode.com/cookbooks/apache_load_balancer **
+
 ## Bootstrapping clients
 Run the following:
 ```
