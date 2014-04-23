@@ -10,3 +10,6 @@ Stack trace:
 #0 /opt/kaltura/app/plugins/admin_console/kaltura_internal_tools/services/KalturaInternalToolsSystemHelperService.php(22): ks::fromSecureString('djJ8MTc0fHK3sNK...')
 
 But this is not displayed, instead only: 'Internal server error occurred'
+Need to catch the exception and display.
+
+- Add our packages to ClearOS' repo
