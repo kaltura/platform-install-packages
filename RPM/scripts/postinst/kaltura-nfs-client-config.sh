@@ -54,7 +54,7 @@ for DAEMON in rpcbind rpcidmapd ;do
 done
 nfsidmap -c
 mount $MOUNT_DIR
-su kaltura -c "touch $MOUNT_DIR"
+su kaltura -c "touch $MOUNT_DIR/content"
 if [ $? -eq 0 ];then
 	echo "Mount is OK, writable to 'kaltura' user"
 else

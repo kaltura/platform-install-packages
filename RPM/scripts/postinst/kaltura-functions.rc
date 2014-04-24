@@ -314,13 +314,26 @@ check_monit()
         DAEMON=$2
         MACHINE=$1
         service $DAEMON stop >/dev/null
-	echo -e "${CYAN}Napping 20 seconds to allow the daemon $DAEMON to finish its init after monit restarted it..${NORMAL}"
-	sleep 20 
-        if service $DAEMON status >/dev/null;then
-                return 0
-        fi
+	for i in `seq 1 60`;do
+        	if service $DAEMON status >/dev/null;then
+                	return 0
+        	fi
+	echo -e "${CYAN}Napping 1 seconds to allow the daemon $DAEMON to finish its init after monit restarted it..${NORMAL}"
+	sleep 1
+	done
         return 1
 } 
+
+check_space()
+{
+	SPACE=`df -k $1 |sed '1,1d' |awk -F " " '{print $3}'`;if [ $SPACE -lt 700000 ];then 
+		echo "$SPACE"
+		return 1
+	else
+		echo "$SPACE"
+		return 0
+	fi
+}
 
 check_start_page()
 {
@@ -394,8 +407,11 @@ report()
 		COLOR=${BRIGHT_RED}
 		STAT="FAILED"
 	fi
+
+
 	echo -e "[${CYAN}$TNAME${NORMAL}] [${COLOR}$STAT, RC: $RC${NORMAL}] - [$TIME]"
-	echo -e "$TNAME,$STAT, $MESSAGE - RC: $RC, $TIME" >> /tmp/reportme.`date +%d_%m_%Y`.csv
+#	echo -e "$TNAME,,`hostname`,$MESSAGE,$RC, $TIME" >> /tmp/`hostname`-reportme.`date +%d_%m_%Y`.csv
+	echo "INSERT INTO csi_log VALUES(NULL,'$TNAME','`hostname`',`date +%s`,\"$MESSAGE\",$RC,$TIME,'`rpm -qa kaltura-base --queryformat %{version}`');" >> /tmp/`hostname`-reportme.`date +%d_%m_%Y`.sql
 }
 
 check_missing_web_files()

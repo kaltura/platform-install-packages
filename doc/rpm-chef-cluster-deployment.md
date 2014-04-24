@@ -23,6 +23,8 @@ This guide is intended for users of Chef that would like to deploy Kaltura clust
     1. http://community.opscode.com/cookbooks/mysql
     1. http://community.opscode.com/cookbooks/nfs
 
+**Note: you may also want to use this recipe for a simple Apache load balancer: http://community.opscode.com/cookbooks/apache_load_balancer **
+
 ## Bootstrapping clients
 Run the following:
 ```
@@ -134,7 +136,7 @@ And deploy the cluster from the "Nodes"->"Edit" menu.
 
 1. The db_config runs from sphinx because it requires Kaltura's code which there is no reason to deploy on the DB machine.
 2. The above run lists are a recommedation, you can of course run more than one role per node.
-3. The order of the run_list if crucial. NFS needs to happen first. Note that your recipe should include creation of /opt/kaltura/web BEFORE the NFS recipe runs.
+3. The order of the run_list is crucial. NFS needs to happen first. Note that your recipe should include creation of /opt/kaltura/web BEFORE the NFS recipe runs.
 
 
 ## Running the Chef client
@@ -158,3 +160,7 @@ root@my-batch-machine:~# chef-client
 $ ssh my-dwh-machine
 root@my-dwh-machine:~# chef-client
 ```
+
+### EC2 automation
+Please this howto about auto provisioning EC2 images:
+https://learnchef.opscode.com/starter-use-cases/multi-node-ec2/

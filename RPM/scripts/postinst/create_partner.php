@@ -14,16 +14,16 @@ $email=$argv[2];
 $name='Linux Rules';
 $cmsPassword=$argv[3];
 $secret = $argv[1];
-        $userId = null;
-        $type = KalturaSessionType::ADMIN;
-        $ks = $client->session->start($secret, $userId, $type, $admin_partner_id, $expiry, $privileges);
-        $client->setKs($ks);
-        $partner = new KalturaPartner();
-        $partner->website="http://www.kaltura.com";
-        $partner->adminName=$name;
-        $partner->name=$name;
-        $partner->description=" "; //cannot be empty or null
-        $partner->adminEmail=$email;
-        $results = $client->partner->register($partner, $cmsPassword);
-	echo($results->id);
+$userId = null;
+$type = KalturaSessionType::ADMIN;
+$ks = $client->session->start($secret, $userId, $type, $admin_partner_id, $expiry, $privileges);
+$client->setKs($ks);
+$partner = new KalturaPartner();
+$partner->website="http://www.kaltura.com";
+$partner->adminName=$name;
+$partner->name=$name;
+$partner->description=" "; //cannot be empty or null
+$partner->adminEmail=$email;
+$results = $client->partner->register($partner, $cmsPassword);
+echo($results->id);
 ?>

@@ -54,16 +54,6 @@ if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
 	exit 3
 fi
 . $KALTURA_FUNCTIONS_RC
-RC_FILE=/etc/kaltura.d/system.ini
-if [ ! -r "$RC_FILE" ];then
-	echo -e "${BRIGHT_RED}ERROR: could not find $RC_FILE so, exiting..${NORMAL}"
-	exit 1 
-fi
-. $RC_FILE
-if ! rpm -q kaltura-front;then
-	echo -e "${BRIGHT_BLUE}Skipping as kaltura-front is not installed.${NORMAL}"
-	exit 0 
-fi
 if [ -n "$1" -a -r "$1" ];then
 	ANSFILE=$1
 	. $ANSFILE
@@ -83,6 +73,16 @@ else
 # $BASE_DIR/bin/kaltura-base-config.sh
 ${NORMAL}
 "
+fi
+RC_FILE=/etc/kaltura.d/system.ini
+if [ ! -r "$RC_FILE" ];then
+	echo -e "${BRIGHT_RED}ERROR: could not find $RC_FILE so, exiting..${NORMAL}"
+	exit 1 
+fi
+. $RC_FILE
+if ! rpm -q kaltura-front;then
+	echo -e "${BRIGHT_BLUE}Skipping as kaltura-front is not installed.${NORMAL}"
+	exit 0 
 fi
 trap 'my_trap_handler ${LINENO} ${$?}' ERR
 send_install_becon `basename $0` $ZONE install_start 
@@ -273,6 +273,7 @@ find $BASE_DIR/app/cache/ $BASE_DIR/log -type d -exec chmod 775 {} \;
 find $BASE_DIR/app/cache/ $BASE_DIR/log -type f -exec chmod 664 {} \; 
 chown -R kaltura.apache $BASE_DIR/app/cache/ $BASE_DIR/log
 service httpd restart
+chkconfig httpd on
 ln -sf $BASE_DIR/app/configurations/monit/monit.avail/httpd.rc $BASE_DIR/app/configurations/monit/monit.d/enabled.httpd.rc
 ln -sf $BASE_DIR/app/configurations/monit/monit.avail/memcached.rc $BASE_DIR/app/configurations/monit/monit.d/enabled.memcached.rc
 /etc/init.d/kaltura-monit restart

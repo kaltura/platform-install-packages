@@ -10,7 +10,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 9.14.0
-Release: 6
+Release: 7 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -179,7 +179,7 @@ cat > $RPM_BUILD_ROOT%{_sysconfdir}/ld.so.conf.d/kaltura_base.conf << EOF
 EOF
 
 %clean
-#rm -rf %{buildroot}
+rm -rf %{buildroot}
 
 %pre
 

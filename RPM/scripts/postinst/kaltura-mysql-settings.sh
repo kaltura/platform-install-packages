@@ -15,6 +15,7 @@
 
 #set -o nounset                              # Treat unset variables as an error
 MY_CNF=/etc/my.cnf
+cp $MY_CNF $MY_CNF.orig
 sed -i '/^lower_case_table_names = 1$/d' $MY_CNF
 sed -i '/^open_files_limit.*$/d' $MY_CNF
 sed -i '/^max_allowed_packet.*$/d' $MY_CNF

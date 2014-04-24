@@ -18,7 +18,7 @@ $privileges = null;
 //csv file to use
 $csvFileData = $argv[5];
 // type here is CSV but can also work with XML
-$bulkUploadType = 'bulkUploadCsv.CSV';
+$bulkUploadType = $argv[6];
 //$bulkUploadType = $argv[6];
 $client=generate_ks($config->serviceUrl,$partnerId,$secret,$type=KalturaSessionType::ADMIN,$userId=null,$expiry = null,$privileges = null);
 // conversion profile to be used
