@@ -4,7 +4,7 @@
 - Testme fixes
 - format output of testme console in tree-like XML structure
 - allow configuration of package and publisher types from admin console
-- - provide an option to validate a KS, and display what capabilities it provides (especially handy for resolving a missing sview capability)
+- provide an option to validate a KS, and display what capabilities it provides (especially handy for resolving a missing sview capability)
 - when inputting an invalid KS in admin console's sys helper:
 ```PHP
 2014-04-20 05:27:46 [0.000542] [10.0.80.24] [2024683882] [API] [ks->logError] ERR: Hash [>M��!���b�ZHD���] doesn't match sha1 on partner [174].
