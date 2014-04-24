@@ -9,8 +9,7 @@
 - when inputting an invalid KS in admin console's sys helper:
 2014-04-20 05:27:46 [0.000542] [10.0.80.24] [2024683882] [API] [ks->logError] ERR: Hash [>M��!���b�ZHD���] doesn't match sha1 on partner [174].
 2014-04-20 05:27:46 [0.000378] [10.0.80.24] [2024683882] [API] [KalturaFrontController->getExceptionObject] CRIT: exception 'Exception' with message 'INVALID_STR' in /opt/kaltura/app/alpha/apps/kaltura/lib/webservices/kSessionUtils.class.php:272
-Stack trace:
-#0 /opt/kaltura/app/plugins/admin_console/kaltura_internal_tools/services/KalturaInternalToolsSystemHelperService.php(22): ks::fromSecureString('djJ8MTc0fHK3sNK...')
+Stack trace: #0 /opt/kaltura/app/plugins/admin_console/kaltura_internal_tools/services/KalturaInternalToolsSystemHelperService.php(22): ks::fromSecureString('djJ8MTc0fHK3sNK...')
 
 But this is not displayed, instead only: 'Internal server error occurred'
 Need to catch the exception and display.
