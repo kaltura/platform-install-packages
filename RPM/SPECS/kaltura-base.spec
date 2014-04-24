@@ -9,8 +9,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 9.14.0
-Release: 7 
+Version: 9.15.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -242,6 +242,10 @@ if [ "$1" = 2 ];then
 			php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_03_09_add_system_admin_publisher_config_to_audittrail.php > /tmp/2014_03_09_add_system_admin_publisher_config_to_audittrail.php.log
 		elif [ $CORE_MAJ_VER -lt 14 ];then
 			php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_03_09_add_system_admin_publisher_config_to_audittrail.php > /tmp/2014_03_09_add_system_admin_publisher_config_to_audittrail.php.log
+		elif [ $CORE_MAJ_VER -lt 15 ];then
+			php %{prefix}/app/deployment/updates/scripts/2014_04_02_enforce_live_params_permissions.php > /tmp/2014_04_02_enforce_live_params_permissions.php.log
+			php %{prefix}/app/deployment/updates/scripts/2014_04_16_remove_cloud_transcode_profile.php realrun > /tmp/2014_04_16_remove_cloud_transcode_profile.php.log
+			php %{prefix}/app/deployment/updates/scripts/2014_04_22_enable_live_paid_partners.php realrun > /tmp/2014_04_22_enable_live_paid_partners.php.log
 		fi	
 	fi
 
@@ -299,6 +303,26 @@ fi
 
 
 %changelog
+* Thu Apr 24 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.15.0-1
+- Ver Bounce to 9.15.0
+- SUP-1866 - Disabling email notifications
+- PLAT-1155 - Live streaming provision should exclude cloud transcode where not available
+- PLAT-1241 - Kaltura live - add support for setting base URL per customer
+- PLAT-1163 - Job suspend
+- i18n system flip (switched off by default)
+- PLAT-975 - add an option to define partner specific default thumbnail for audio entries 
+- PLAT-982 - m4a container support
+- PLAT-1037 - Using updateContent API request on an entry does not retain custom thumbnails 
+- Add a GeoDistance condition to the access control profile which verifies whether the request IP is within a given latitude:longitude:radius ranges (requires new ip2location)
+- SUP-1772 - Video replacement - cannot "Preview" flavor asset before approving replacement
+- SUP-1866 - Disabling email notifications
+- SUP-1742 - INTERNAL_SERVER_ERROR when trying to reset to a password with an invalid structure
+- PLAT-692 - Freezes occurs when playing kaltura live entry. (happens in production as well)
+- PLAT-1229 - When setting liveTranscording without source->FMLE export config is wrong
+- PLAT-1233 - Audio-Video Sync Issue on Live stream
+- PLAT-952 - Production:Kaltura live entry that is stream for many hours can't play->media not found
+
+
 * Tue Apr 8 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.14.0-6
 - We need to run the alter scripts in the event the version is lower than n, not equal to n. Why? cause jumping from say 11 to 13 is completely legit.
 
