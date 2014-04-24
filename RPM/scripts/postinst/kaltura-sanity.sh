@@ -167,12 +167,20 @@ else
 			START=`date +%s.%N`
 			OUTP=`php $DIRNAME/dwh_cycle.php $DIRNAME/sanity_config.ini 2>&1`
 			RC=$?
-		CLEANOUTPUT=`echo $OUTP|sed 's@"@@g'`
-		OUTP=`echo $CLEANOUTPUT|sed "s@'@@g"`
+			CLEANOUTPUT=`echo $OUTP|sed 's@"@@g'`
+			OUTP=`echo $CLEANOUTPUT|sed "s@'@@g"`
 			END=`date +%s.%N`
 			TOTAL_T=`bc <<< $TIME`
 			report "DWH cycle" $RC "$OUTP" "`bc <<< $END-$START`"
 		fi
+		START=`date +%s.%N`
+		OUTP=`php $DIRNAME/generate_ui_conf.php $SERVICE_URL $PARTNER_ID $PARTNER_ADMIN_SECRET 3.9.8 $DIRNAME/bin/player.xml 2>&1`
+		CLEANOUTPUT=`echo $OUTP|sed 's@"@@g'`
+		OUTP=`echo $CLEANOUTPUT|sed "s@'@@g"`
+		RC=$?
+		END=`date +%s.%N`
+		TOTAL_T=`bc <<< $TIME`
+		report "Create player" $RC "$OUTP" "`bc <<< $END-$START`"
 
 		START=`date +%s.%N`
 		OUTP=`php $DIRNAME/delete_partner.php $DIRNAME/sanity_config.ini 2>&1`
