@@ -291,28 +291,29 @@ write_last_base_version()
 
 check_daemon_init_status()
 {
-        DAEMON=$2
-        MACHINE=$1
+#set -x
+        DAEMON=$1
         if chkconfig $DAEMON;then
                 return 0
         fi
         return 1
+#set +x
 }
 
 check_daemon_status()
 {
-        DAEMON=$2
-        MACHINE=$1
+#set -x
+        DAEMON=$1
         if service $DAEMON status >/dev/null;then
                 return 0
         fi
+#set +x
         return 1
 }
 
 check_monit()
 {
-        DAEMON=$2
-        MACHINE=$1
+        DAEMON=$1
         service $DAEMON stop >/dev/null
 	for i in `seq 1 60`;do
         	if service $DAEMON status >/dev/null;then

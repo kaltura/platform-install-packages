@@ -47,7 +47,7 @@ for D in $ALL_DAEMONS; do
 # if this package is installed check daemon status
         if rpm -q $D >/dev/null;then
 		START=`date +%s.%N`
-		if check_daemon_status $KALTURA_VIRTUAL_HOST_NAME $D;then
+		if check_daemon_status  $D;then
 			END=`date +%s.%N`
 			TOTAL_T=`bc <<< $TIME`
 			report "Check $D daemon status" 0 "Daemon $D is running" "`bc <<< $END-$START`"
@@ -58,7 +58,7 @@ for D in $ALL_DAEMONS; do
 		fi
 		START=`date +%s.%N`
 		if [ $D != 'kaltura-monit' ];then
-		if check_monit $KALTURA_VIRTUAL_HOST_NAME $D;then
+		if check_monit  $D;then
 			END=`date +%s.%N`
 			TOTAL_T=`bc <<< $TIME`
 			report "Check $D daemon is started by Monit" 0 "Daemon $D is running" "`bc <<< $END-$START`"
@@ -69,7 +69,7 @@ for D in $ALL_DAEMONS; do
 		fi
 		fi
 		START=`date +%s.%N`
-		if check_daemon_init_status $KALTURA_VIRTUAL_HOST_NAME $D;then
+		if check_daemon_init_status $D;then
 			END=`date +%s.%N`
 			TOTAL_T=`bc <<< $TIME`
 			report "check daemon $D init status" 0 "Daemon $D configured to run on init." "`bc <<< $END-$START`"
