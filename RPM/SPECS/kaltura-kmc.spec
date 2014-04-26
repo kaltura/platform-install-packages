@@ -1,7 +1,7 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmc	
-Version: v5.37.16
-Release: 4 
+Version: v5.37.17
+Release: 2 
 Summary: Kaltura Management Console
 
 Group: System Management	
@@ -81,6 +81,10 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Thu Apr 24 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.17-1
+- PLAT-1242 - Uploading a "m4a" file from desktop - the file media type is not automatically chosen
+- PLAT-1265 - KMC online guide broken link on submitbulkoptions.htm
+
 * Sun Apr 6 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.16-1
 - Live Reports in Analytics (phase 0)
 - Legacy embed code removed from Preview & Embed page for Players falling back to HTML5 v2
