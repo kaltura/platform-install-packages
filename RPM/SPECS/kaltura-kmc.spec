@@ -1,7 +1,7 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmc	
 Version: v5.37.17
-Release: 2 
+Release: 3
 Summary: Kaltura Management Console
 
 Group: System Management	
@@ -81,6 +81,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sat Apr 26 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.17-3
+- Bounce KMC and HTML5lib vers in config.ini.
+
 * Thu Apr 24 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.17-1
 - PLAT-1242 - Uploading a "m4a" file from desktop - the file media type is not automatically chosen
 - PLAT-1265 - KMC online guide broken link on submitbulkoptions.htm
