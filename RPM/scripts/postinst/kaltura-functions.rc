@@ -445,3 +445,19 @@ check_missing_web_files()
 		return 0
 	fi
 }
+
+check_kmc_config_versions()
+{
+        COMP_NAME=$1
+        KMC_VER=`rpm -q kaltura-kmc --queryformat %{version}`
+        COMP_VER=`rpm -q $COMP_NAME --queryformat %{version}`
+        if [ $? -eq 0 ];then
+                grep -q $COMP_VER /opt/kaltura/web/flash/kmc/$KMC_VER/config.ini -m1
+                RC=$?
+		if [ $RC -eq 0 ];then
+			echo "$COMP_NAME $COMP_VER found in /opt/kaltura/web/flash/kmc/$KMC_VER/config.ini"
+		else
+			echo "$COMP_NAME $COMP_VER NOT found in /opt/kaltura/web/flash/kmc/$KMC_VER/config.ini"
+		fi
+        fi
+}

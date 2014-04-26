@@ -28,7 +28,7 @@ if [ ! -r "$RC_FILE" ];then
 	exit 2 
 fi
 . $RC_FILE
-rm  /tmp/`hostname`-reportme.`date +%d_%m_%Y`.sql
+rm  /tmp/`hostname`-reportme.`date +%d_%m_%Y`.sql 2> /dev/null
 rm $LOG_DIR/log/*log  $LOG_DIR/log/batch/*log 2> /dev/null
 for PARTITION in '/' $WEB_DIR;do
 	START=`date +%s.%N`
@@ -85,26 +85,35 @@ for D in $ALL_DAEMONS; do
 done
 
 START=`date +%s.%N`
-MSG=`check_start_page`
-END=`date +%s.%N`
+MSG=`check_kmc_config_versions kaltura-html5lib`
 RC=$?
 END=`date +%s.%N`
-report "check_start_page" $RC "$MSG" "`bc <<< $END-$START`"
+report "kaltura-html5lib ver in KMC config.ini" $RC "$MSG" "`bc <<< $END-$START`"
 START=`date +%s.%N`
-MSG=`check_testme_page`
+MSG=`check_kmc_config_versions kaltura-kmc`
 RC=$?
+END=`date +%s.%N`
+report "kaltura-kmc ver in KMC config.ini" $RC "$MSG" "`bc <<< $END-$START`"
+START=`date +%s.%N`
+MSG=`check_kmc_config_versions kaltura-kdp3`
+RC=$?
+END=`date +%s.%N`
+report "kaltura-kdp3 ver in KMC config.ini" $RC "$MSG" "`bc <<< $END-$START`"
+START=`date +%s.%N`
+RC=$?
+MSG=`check_testme_page`
 END=`date +%s.%N`
 report "check_testme_page" $RC "$MSG" "`bc <<< $END-$START`"
 
 START=`date +%s.%N`
-MSG=`check_kmc_index_page`
 RC=$?
+MSG=`check_kmc_index_page`
 END=`date +%s.%N`
 report "check_kmc_index_page" $RC "$MSG" "`bc <<< $END-$START`"
 
 START=`date +%s.%N`
-MSG=`check_admin_console_index_page`
 RC=$?
+MSG=`check_admin_console_index_page`
 END=`date +%s.%N`
 report "check_admin_console_index_page" $RC "$MSG" "`bc <<< $END-$START`"
 
