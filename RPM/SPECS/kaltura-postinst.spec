@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.12
-Release: 7
+Release: 8 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -81,6 +81,9 @@ fi
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Sat Apr 26 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.12-8
+- https://github.com/kaltura/platform-install-packages/issues/99
+
 * Sat Apr 26 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.12-6
 - [master 1112364] no need for these functions to accept machine as param. They check the services locally.
 

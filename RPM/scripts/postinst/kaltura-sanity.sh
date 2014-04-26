@@ -83,22 +83,26 @@ for D in $ALL_DAEMONS; do
 		echo -e "[${CYAN}Check $D daemon init${NORMAL}] [${BRIGHT_YELLOW}SKIPPED as $D is not installed${NORMAL}]"
 	fi
 done
-
-START=`date +%s.%N`
-MSG=`check_kmc_config_versions kaltura-html5lib`
-RC=$?
-END=`date +%s.%N`
-report "kaltura-html5lib ver in KMC config.ini" $RC "$MSG" "`bc <<< $END-$START`"
-START=`date +%s.%N`
-MSG=`check_kmc_config_versions kaltura-kmc`
-RC=$?
-END=`date +%s.%N`
-report "kaltura-kmc ver in KMC config.ini" $RC "$MSG" "`bc <<< $END-$START`"
-START=`date +%s.%N`
-MSG=`check_kmc_config_versions kaltura-kdp3`
-RC=$?
-END=`date +%s.%N`
-report "kaltura-kdp3 ver in KMC config.ini" $RC "$MSG" "`bc <<< $END-$START`"
+KMC_VER=`rpm -q kaltura-kmc --queryformat %{version} >/dev/null 2>&1`
+if [ $? -eq 0 ];then
+	START=`date +%s.%N`
+	MSG=`check_kmc_config_versions kaltura-html5lib`
+	RC=$?
+	END=`date +%s.%N`
+	report "kaltura-html5lib ver in KMC config.ini" $RC "$MSG" "`bc <<< $END-$START`"
+	START=`date +%s.%N`
+	MSG=`check_kmc_config_versions kaltura-kmc`
+	echo $MSG
+	RC=$?
+	END=`date +%s.%N`
+	report "kaltura-kmc ver in KMC config.ini" $RC "$MSG" "`bc <<< $END-$START`"
+	START=`date +%s.%N`
+	MSG=`check_kmc_config_versions kaltura-kdp3`
+	echo $MSG
+	RC=$?
+	END=`date +%s.%N`
+	report "kaltura-kdp3 ver in KMC config.ini" $RC "$MSG" "`bc <<< $END-$START`"
+fi
 START=`date +%s.%N`
 RC=$?
 MSG=`check_testme_page`
@@ -183,7 +187,7 @@ else
 			report "DWH cycle" $RC "$OUTP" "`bc <<< $END-$START`"
 		fi
 		START=`date +%s.%N`
-		OUTP=`php $DIRNAME/generate_ui_conf.php $SERVICE_URL $PARTNER_ID $PARTNER_ADMIN_SECRET 3.9.8 $DIRNAME/bin/player.xml 2>&1`
+		OUTP=`php $DIRNAME/generate_player.php $SERVICE_URL $PARTNER_ID $PARTNER_ADMIN_SECRET 3.9.8 $DIRNAME/bin/player.xml 2>&1`
 		CLEANOUTPUT=`echo $OUTP|sed 's@"@@g'`
 		OUTP=`echo $CLEANOUTPUT|sed "s@'@@g"`
 		RC=$?
