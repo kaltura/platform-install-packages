@@ -30,5 +30,5 @@ $uiConf->creationMode=3;
 $uiConf->useCdn = '1';
 $uiConf->swfUrlVersion = $player_ver;
 $results = $client->uiConf->add($uiConf);
-
+echo $results->id ." added\n";
 ?>
