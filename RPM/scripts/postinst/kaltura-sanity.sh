@@ -111,13 +111,15 @@ if [ $? -eq 0 ];then
 	fi
 	COMP_NAME=kaltura-kmc
         COMP_VER=`rpm -q $COMP_NAME --queryformat %{version}`
-	START=`date +%s.%N`
-	MSG=`check_kmc_config_versions kaltura-kmc $KMC_VER`
-	RC=$?
-	END=`date +%s.%N`
-	report "$COMP_NAME ver in KMC config.ini" $RC "$MSG" "`bc <<< $END-$START`"
-else
-	echo -e "[${CYAN}$COMP_NAME ver in KMC config.ini${NORMAL}][${BRIGHT_YELLOW}SKIPPED as KMC is not installed${NORMAL}]"
+	if [ $? -eq 0 ];then
+		START=`date +%s.%N`
+		MSG=`check_kmc_config_versions kaltura-kmc $KMC_VER`
+		RC=$?
+		END=`date +%s.%N`
+		report "$COMP_NAME ver in KMC config.ini" $RC "$MSG" "`bc <<< $END-$START`"
+	else
+		echo -e "[${CYAN}$COMP_NAME ver in KMC config.ini${NORMAL}][${BRIGHT_YELLOW}SKIPPED as KMC is not installed${NORMAL}]"
+	fi
 fi
 
 START=`date +%s.%N`
@@ -142,98 +144,117 @@ DIRNAME=`dirname $0`
 ADMIN_PARTNER_SECRET=`echo "select admin_secret from partner where id=-2" | mysql -N -h $DB1_HOST -p$DB1_PASS $DB1_NAME -u$DB1_USER`
 NOW=`date +%d-%H-%m-%S`
 START=`date +%s.%N`
-PARTNER_ID=`php $DIRNAME/create_partner.php $ADMIN_PARTNER_SECRET mb-$NOW@kaltura.com testingpasswd $SERVICE_URL 2>&1`
-RC=$?
-END=`date +%s.%N`
-report "Create Partner" $RC "New PID is $PARTNER_ID" "`bc <<< $END-$START`"
-if [ $RC -ne 0 ];then
-	echo -e "${BRIGHT_RED}Partner creation failed. I will skip all tests that require it.${NORMAL}"
-else
-	PARTNER_SECRET=`echo "select secret from partner where id=$PARTNER_ID" | mysql -N -h $DB1_HOST -p$DB1_PASS $DB1_NAME -u$DB1_USER`
-	PARTNER_ADMIN_SECRET=`echo "select admin_secret from partner where id=$PARTNER_ID" | mysql -N -h $DB1_HOST -p$DB1_PASS $DB1_NAME -u$DB1_USER`
-	sed -i "s#@PARTNER_ID@#$PARTNER_ID#g" $BASE_DIR/bin/sanity_config.ini
-	sed -i "s#@PARTNER_ADMIN_SECRET@#$PARTNER_ADMIN_SECRET#g" $BASE_DIR/bin/sanity_config.ini
-	sed -i "s#@ADMIN_CONSOLE_PARTNER_ID@#-2#g" $BASE_DIR/bin/sanity_config.ini
-	sed -i "s#@ADMIN_CONSOLE_PARTNER_ADMIN_SECRET@#$ADMIN_PARTNER_SECRET#g" $BASE_DIR/bin/sanity_config.ini
-	if rpm -q kaltura-batch >/dev/null 2>&1 || rpm -q kaltura-front >/dev/null 2>&1 ;then
-		START=`date +%s.%N`
-		UPLOADED_ENT=`php $DIRNAME/upload_test.php $SERVICE_URL $PARTNER_ID $PARTNER_SECRET $WEB_DIR/content/templates/entry/data/kaltura_logo_animated_blue.flv 2>&1`
-		RC=$?
-		END=`date +%s.%N`
-		TOTAL_T=`bc <<< $TIME`
-		report "Upload content kaltura_logo_animated_blue.flv" $RC "$UPLOADED_ENT" "`bc <<< $END-$START`"
-		echo -e "${CYAN}Napping 90 seconds to allow entry $UPLOADED_ENT to digest.. ${NORMAL}"
-		sleep 90
-		if rpm -q kaltura-dwh >> /dev/null 2>&1;then
-			echo -e "${CYAN}Testing analytics, be patient..${NORMAL}"
+if rpm -q kaltura-batch >/dev/null 2>&1 || rpm -q kaltura-front >/dev/null 2>&1 ;then
+	PARTNER_ID=`php $DIRNAME/create_partner.php $ADMIN_PARTNER_SECRET mb-$NOW@kaltura.com testingpasswd $SERVICE_URL 2>&1`
+	RC=$?
+	END=`date +%s.%N`
+	report "Create Partner" $RC "New PID is $PARTNER_ID" "`bc <<< $END-$START`"
+	if [ $RC -ne 0 ];then
+		echo -e "${BRIGHT_RED}Partner creation failed. I will skip all tests that require it.${NORMAL}"
+	else
+		PARTNER_SECRET=`echo "select secret from partner where id=$PARTNER_ID" | mysql -N -h $DB1_HOST -p$DB1_PASS $DB1_NAME -u$DB1_USER`
+		PARTNER_ADMIN_SECRET=`echo "select admin_secret from partner where id=$PARTNER_ID" | mysql -N -h $DB1_HOST -p$DB1_PASS $DB1_NAME -u$DB1_USER`
+		sed -i "s#@PARTNER_ID@#$PARTNER_ID#g" $BASE_DIR/bin/sanity_config.ini
+		sed -i "s#@PARTNER_ADMIN_SECRET@#$PARTNER_ADMIN_SECRET#g" $BASE_DIR/bin/sanity_config.ini
+		sed -i "s#@ADMIN_CONSOLE_PARTNER_ID@#-2#g" $BASE_DIR/bin/sanity_config.ini
+		sed -i "s#@ADMIN_CONSOLE_PARTNER_ADMIN_SECRET@#$ADMIN_PARTNER_SECRET#g" $BASE_DIR/bin/sanity_config.ini
 			START=`date +%s.%N`
-			OUTP=`php $DIRNAME/dwh_cycle.php $DIRNAME/sanity_config.ini 2>&1`
+			UPLOADED_ENT=`php $DIRNAME/upload_test.php $SERVICE_URL $PARTNER_ID $PARTNER_SECRET $WEB_DIR/content/templates/entry/data/kaltura_logo_animated_blue.flv 2>&1`
+			RC=$?
+			END=`date +%s.%N`
+			TOTAL_T=`bc <<< $TIME`
+			report "Upload content kaltura_logo_animated_blue.flv" $RC "$UPLOADED_ENT" "`bc <<< $END-$START`"
+			START=`date +%s.%N`
+			CONVERT_SUCCESS=0
+			for i in `seq 1 90`;do
+				php $DIRNAME/check_entry_status.php $SERVICE_URL $PARTNER_ID $PARTNER_SECRET $UPLOADED_ENT
+				# for us, status 2 is good
+				if [ $? -eq 2 ];then
+					RC=0
+					END=`date +%s.%N`
+					TOTAL_T=`bc <<< $TIME`
+					CONVERT_SUCCESS=1
+					break;
+				fi
+				echo -e "${CYAN}Napping 1 seconds to allow entry $UPLOADED_ENT to digest.. ${NORMAL}"
+				sleep 1
+			done
+			if [ "$CONVERT_SUCCESS" -eq 1 ];then
+				report "kaltura_logo_animated_blue.flv - $UPLOADED_ENT converted." $RC "$UPLOADED_ENT" "`bc <<< $END-$START`"
+			else
+				report "kaltura_logo_animated_blue.flv - $UPLOADED_ENT failed to convert." 1 "$UPLOADED_ENT" "`bc <<< $END-$START`"
+			fi
+
+			if rpm -q kaltura-dwh >> /dev/null 2>&1;then
+				echo -e "${CYAN}Testing analytics, be patient..${NORMAL}"
+				START=`date +%s.%N`
+				OUTP=`php $DIRNAME/dwh_cycle.php $DIRNAME/sanity_config.ini 2>&1`
+				RC=$?
+				CLEANOUTPUT=`echo $OUTP|sed 's@"@@g'`
+				OUTP=`echo $CLEANOUTPUT|sed "s@'@@g"`
+				END=`date +%s.%N`
+				TOTAL_T=`bc <<< $TIME`
+				report "DWH cycle" $RC "$OUTP" "`bc <<< $END-$START`"
+			fi
+
+			START=`date +%s.%N`
+			OUTP=`php $DIRNAME/upload_test.php $SERVICE_URL $PARTNER_ID $PARTNER_SECRET $WEB_DIR/content/templates/entry/data/kaltura_logo_animated_green.flv 2>&1`
 			RC=$?
 			CLEANOUTPUT=`echo $OUTP|sed 's@"@@g'`
 			OUTP=`echo $CLEANOUTPUT|sed "s@'@@g"`
 			END=`date +%s.%N`
 			TOTAL_T=`bc <<< $TIME`
-			report "DWH cycle" $RC "$OUTP" "`bc <<< $END-$START`"
-		fi
+			report "Upload content kaltura_logo_animated_green.flv" $RC "$OUTP" "`bc <<< $END-$START`"
 
-		START=`date +%s.%N`
-		OUTP=`php $DIRNAME/upload_test.php $SERVICE_URL $PARTNER_ID $PARTNER_SECRET $WEB_DIR/content/templates/entry/data/kaltura_logo_animated_green.flv 2>&1`
-		RC=$?
-		CLEANOUTPUT=`echo $OUTP|sed 's@"@@g'`
-		OUTP=`echo $CLEANOUTPUT|sed "s@'@@g"`
-		END=`date +%s.%N`
-		TOTAL_T=`bc <<< $TIME`
-		report "Upload content kaltura_logo_animated_green.flv" $RC "$OUTP" "`bc <<< $END-$START`"
+			unzip -oqq $WEB_DIR/content/docs/kaltura_batch_upload_falcon.zip -d $WEB_DIR/content/docs
+			START=`date +%s.%N`
+			OUTP=`php $DIRNAME/upload_bulk.php $SERVICE_URL $PARTNER_ID $PARTNER_ADMIN_SECRET MB $WEB_DIR/content/docs/kaltura_batch_upload_falcon.csv bulkUploadCsv.CSV 2>&1`
+			RC=$?
+			CLEANOUTPUT=`echo $OUTP|sed 's@"@@g'`
+			OUTP=`echo $CLEANOUTPUT|sed "s@'@@g"`
+			END=`date +%s.%N`
+			TOTAL_T=`bc <<< $TIME`
+			report "Upload bulk using CSV" $RC "$OUTP" "`bc <<< $END-$START`"
 
-		unzip -oqq $WEB_DIR/content/docs/kaltura_batch_upload_falcon.zip -d $WEB_DIR/content/docs
-		START=`date +%s.%N`
-		OUTP=`php $DIRNAME/upload_bulk.php $SERVICE_URL $PARTNER_ID $PARTNER_ADMIN_SECRET MB $WEB_DIR/content/docs/kaltura_batch_upload_falcon.csv bulkUploadCsv.CSV 2>&1`
-		RC=$?
-		CLEANOUTPUT=`echo $OUTP|sed 's@"@@g'`
-		OUTP=`echo $CLEANOUTPUT|sed "s@'@@g"`
-		END=`date +%s.%N`
-		TOTAL_T=`bc <<< $TIME`
-		report "Upload bulk using CSV" $RC "$OUTP" "`bc <<< $END-$START`"
-
-		START=`date +%s.%N`
-		OUTP=`php $DIRNAME/upload_bulk.php $SERVICE_URL $PARTNER_ID $PARTNER_ADMIN_SECRET MB $WEB_DIR/content/docs/kaltura_batch_upload_falcon.xml bulkUploadXml.XML 2>&1`
-		RC=$?
-		CLEANOUTPUT=`echo $OUTP|sed 's@"@@g'`
-		OUTP=`echo $CLEANOUTPUT|sed "s@'@@g"`
-		END=`date +%s.%N`
-		TOTAL_T=`bc <<< $TIME`
-		report "Upload bulk using XML" $RC "$OUTP" "`bc <<< $END-$START`"
-		START=`date +%s.%N`
-		OUTP=`php $DIRNAME/generate_player.php $SERVICE_URL $PARTNER_ID $PARTNER_ADMIN_SECRET 3.9.8 $DIRNAME/player.xml 2>&1`
-		RC=$?
-		CLEANOUTPUT=`echo $OUTP|sed 's@"@@g'`
-		OUTP=`echo $CLEANOUTPUT|sed "s@'@@g"`
-		END=`date +%s.%N`
-		TOTAL_T=`bc <<< $TIME`
-		report "Create player" $RC "$OUTP" "`bc <<< $END-$START`"
-		START=`date +%s.%N`
-		OUTP=`php $DIRNAME/generate_thumb.php $SERVICE_URL $PARTNER_ID $PARTNER_ADMIN_SECRET $UPLOADED_ENT 2>&1`
-		RC=$?
-		CLEANOUTPUT=`echo $OUTP|sed 's@"@@g'`
-		OUTP=`echo $CLEANOUTPUT|sed "s@'@@g"`
-		END=`date +%s.%N`
-		TOTAL_T=`bc <<< $TIME`
-		report "Generate thumb" $RC "$OUTP" "`bc <<< $END-$START`"
+			START=`date +%s.%N`
+			OUTP=`php $DIRNAME/upload_bulk.php $SERVICE_URL $PARTNER_ID $PARTNER_ADMIN_SECRET MB $WEB_DIR/content/docs/kaltura_batch_upload_falcon.xml bulkUploadXml.XML 2>&1`
+			RC=$?
+			CLEANOUTPUT=`echo $OUTP|sed 's@"@@g'`
+			OUTP=`echo $CLEANOUTPUT|sed "s@'@@g"`
+			END=`date +%s.%N`
+			TOTAL_T=`bc <<< $TIME`
+			report "Upload bulk using XML" $RC "$OUTP" "`bc <<< $END-$START`"
+			START=`date +%s.%N`
+			OUTP=`php $DIRNAME/generate_player.php $SERVICE_URL $PARTNER_ID $PARTNER_ADMIN_SECRET 3.9.8 $DIRNAME/player.xml 2>&1`
+			RC=$?
+			CLEANOUTPUT=`echo $OUTP|sed 's@"@@g'`
+			OUTP=`echo $CLEANOUTPUT|sed "s@'@@g"`
+			END=`date +%s.%N`
+			TOTAL_T=`bc <<< $TIME`
+			report "Create player" $RC "$OUTP" "`bc <<< $END-$START`"
+			START=`date +%s.%N`
+			OUTP=`php $DIRNAME/generate_thumb.php $SERVICE_URL $PARTNER_ID $PARTNER_ADMIN_SECRET $UPLOADED_ENT 2>&1`
+			RC=$?
+			CLEANOUTPUT=`echo $OUTP|sed 's@"@@g'`
+			OUTP=`echo $CLEANOUTPUT|sed "s@'@@g"`
+			END=`date +%s.%N`
+			TOTAL_T=`bc <<< $TIME`
+			report "Generate thumb" $RC "$OUTP" "`bc <<< $END-$START`"
 
 
-		START=`date +%s.%N`
-		OUTP=`php $DIRNAME/delete_partner.php $DIRNAME/sanity_config.ini 2>&1`
-		RC=$?
-		CLEANOUTPUT=`echo $OUTP|sed 's@"@@g'`
-		OUTP=`echo $CLEANOUTPUT|sed "s@'@@g"`
-		END=`date +%s.%N`
-		TOTAL_T=`bc <<< $TIME`
-		report "Delete parnter" $RC "$OUTP" "`bc <<< $END-$START`"
+			START=`date +%s.%N`
+			OUTP=`php $DIRNAME/delete_partner.php $DIRNAME/sanity_config.ini 2>&1`
+			RC=$?
+			CLEANOUTPUT=`echo $OUTP|sed 's@"@@g'`
+			OUTP=`echo $CLEANOUTPUT|sed "s@'@@g"`
+			END=`date +%s.%N`
+			TOTAL_T=`bc <<< $TIME`
+			report "Delete parnter" $RC "$OUTP" "`bc <<< $END-$START`"
 	fi
-	sed -i "1,/^adminConsolePartnerId/s/^adminConsolePartnerId\s*=.*/adminConsolePartnerId=@ADMIN_CONSOLE_PARTNER_ID@/" $DIRNAME/sanity_config.ini
-	sed -i "1,/^adminConsoleSecret/s/^adminConsoleSecret\s*=.*/adminConsoleSecret=@ADMIN_CONSOLE_PARTNER_ADMIN_SECRET@/" $DIRNAME/sanity_config.ini
-	sed -i "1,/^partnerId/s/^partnerId\s*=.*/partnerId=@PARTNER_ID@/" $DIRNAME/sanity_config.ini
-	sed -i "1,/^adminSecret/s/^adminSecret\s*=.*/adminSecret=@PARTNER_ADMIN_SECRET@/" $DIRNAME/sanity_config.ini
+sed -i "1,/^adminConsolePartnerId/s/^adminConsolePartnerId\s*=.*/adminConsolePartnerId=@ADMIN_CONSOLE_PARTNER_ID@/" $DIRNAME/sanity_config.ini
+sed -i "1,/^adminConsoleSecret/s/^adminConsoleSecret\s*=.*/adminConsoleSecret=@ADMIN_CONSOLE_PARTNER_ADMIN_SECRET@/" $DIRNAME/sanity_config.ini
+sed -i "1,/^partnerId/s/^partnerId\s*=.*/partnerId=@PARTNER_ID@/" $DIRNAME/sanity_config.ini
+sed -i "1,/^adminSecret/s/^adminSecret\s*=.*/adminSecret=@PARTNER_ADMIN_SECRET@/" $DIRNAME/sanity_config.ini
 
 fi
 WEBCAM_SYNLINK=`readlink -f $WEB_DIR/content/webcam`
