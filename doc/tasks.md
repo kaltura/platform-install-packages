@@ -25,3 +25,6 @@ Need to catch the exception and display.
 # Package
 - Add our packages to ClearOS' repo
 - (optionally) add package to EPEL
+
+# plugins
+- Create a plugin for the Monit monitoring tab in admin console
