@@ -83,26 +83,43 @@ for D in $ALL_DAEMONS; do
 		echo -e "[${CYAN}Check $D daemon init${NORMAL}] [${BRIGHT_YELLOW}SKIPPED as $D is not installed${NORMAL}]"
 	fi
 done
-KMC_VER=`rpm -q kaltura-kmc --queryformat %{version} >/dev/null 2>&1`
+
+rpm -q kaltura-kmc --queryformat %{version} >/dev/null 2>&1
 if [ $? -eq 0 ];then
+	KMC_VER=`rpm -q kaltura-kmc --queryformat %{version} `
+	COMP_NAME=kaltura-html5lib
+        COMP_VER=`rpm -q $COMP_NAME --queryformat %{version} >/dev/null 2>&1`
+	if [ $? -eq 0 ];then
+		START=`date +%s.%N`
+		MSG=`check_kmc_config_versions $COMP_NAME $KMC_VER`
+		RC=$?
+		END=`date +%s.%N`
+		report "$COMP_NAME ver in KMC config.ini" $RC "$MSG" "`bc <<< $END-$START`"
+	else
+		echo -e "[${CYAN}$COMP_NAME ver in KMC config.ini${NORMAL}][${BRIGHT_YELLOW}SKIPPED as $COMP_NAME is not installed${NORMAL}]"
+	fi
+	COMP_NAME=kaltura-kdp3	
+        COMP_VER=`rpm -q $COMP_NAME --queryformat %{version} >/dev/null 2>&1`
+	if [ $? -eq 0 ];then
+		START=`date +%s.%N`
+		MSG=`check_kmc_config_versions $COMP_NAME $KMC_VER`
+		RC=$?
+		END=`date +%s.%N`
+		report "$COMP_NAME ver in KMC config.ini" $RC "$MSG" "`bc <<< $END-$START`"
+	else
+		echo -e "[${CYAN}$COMP_NAME ver in KMC config.ini${NORMAL}][${BRIGHT_YELLOW}SKIPPED as KMC is not installed${NORMAL}]"
+	fi
+	COMP_NAME=kaltura-kmc
+        COMP_VER=`rpm -q $COMP_NAME --queryformat %{version}`
 	START=`date +%s.%N`
-	MSG=`check_kmc_config_versions kaltura-html5lib`
+	MSG=`check_kmc_config_versions kaltura-kmc $KMC_VER`
 	RC=$?
 	END=`date +%s.%N`
-	report "kaltura-html5lib ver in KMC config.ini" $RC "$MSG" "`bc <<< $END-$START`"
-	START=`date +%s.%N`
-	MSG=`check_kmc_config_versions kaltura-kmc`
-	echo $MSG
-	RC=$?
-	END=`date +%s.%N`
-	report "kaltura-kmc ver in KMC config.ini" $RC "$MSG" "`bc <<< $END-$START`"
-	START=`date +%s.%N`
-	MSG=`check_kmc_config_versions kaltura-kdp3`
-	echo $MSG
-	RC=$?
-	END=`date +%s.%N`
-	report "kaltura-kdp3 ver in KMC config.ini" $RC "$MSG" "`bc <<< $END-$START`"
+	report "$COMP_NAME ver in KMC config.ini" $RC "$MSG" "`bc <<< $END-$START`"
+else
+	echo -e "[${CYAN}$COMP_NAME ver in KMC config.ini${NORMAL}][${BRIGHT_YELLOW}SKIPPED as KMC is not installed${NORMAL}]"
 fi
+
 START=`date +%s.%N`
 RC=$?
 MSG=`check_testme_page`
@@ -187,7 +204,7 @@ else
 			report "DWH cycle" $RC "$OUTP" "`bc <<< $END-$START`"
 		fi
 		START=`date +%s.%N`
-		OUTP=`php $DIRNAME/generate_player.php $SERVICE_URL $PARTNER_ID $PARTNER_ADMIN_SECRET 3.9.8 $DIRNAME/bin/player.xml 2>&1`
+		OUTP=`php $DIRNAME/generate_player.php $SERVICE_URL $PARTNER_ID $PARTNER_ADMIN_SECRET 3.9.8 $DIRNAME/player.xml 2>&1`
 		CLEANOUTPUT=`echo $OUTP|sed 's@"@@g'`
 		OUTP=`echo $CLEANOUTPUT|sed "s@'@@g"`
 		RC=$?

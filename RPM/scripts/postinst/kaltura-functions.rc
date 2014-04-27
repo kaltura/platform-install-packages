@@ -450,14 +450,15 @@ check_kmc_config_versions()
 {
         COMP_NAME=$1
         KMC_VER=$2
-        COMP_VER=`rpm -q $COMP_NAME --queryformat %{version}`
-        if [ $? -eq 0 ];then
+#	set -x
+        	COMP_VER=`rpm -q $COMP_NAME --queryformat %{version}`
                 grep -q $COMP_VER /opt/kaltura/web/flash/kmc/$KMC_VER/config.ini -m1
                 RC=$?
 		if [ $RC -eq 0 ];then
 			echo "$COMP_NAME $COMP_VER found in /opt/kaltura/web/flash/kmc/$KMC_VER/config.ini"
+			return $RC
 		else
 			echo "$COMP_NAME $COMP_VER NOT found in /opt/kaltura/web/flash/kmc/$KMC_VER/config.ini"
+			return $RC
 		fi
-        fi
 }
