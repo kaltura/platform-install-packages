@@ -121,20 +121,20 @@ else
 fi
 
 START=`date +%s.%N`
-RC=$?
 MSG=`check_testme_page`
+RC=$?
 END=`date +%s.%N`
 report "check_testme_page" $RC "$MSG" "`bc <<< $END-$START`"
 
 START=`date +%s.%N`
-RC=$?
 MSG=`check_kmc_index_page`
+RC=$?
 END=`date +%s.%N`
 report "check_kmc_index_page" $RC "$MSG" "`bc <<< $END-$START`"
 
 START=`date +%s.%N`
-RC=$?
 MSG=`check_admin_console_index_page`
+RC=$?
 END=`date +%s.%N`
 report "check_admin_console_index_page" $RC "$MSG" "`bc <<< $END-$START`"
 
@@ -157,11 +157,24 @@ else
 	sed -i "s#@ADMIN_CONSOLE_PARTNER_ADMIN_SECRET@#$ADMIN_PARTNER_SECRET#g" $BASE_DIR/bin/sanity_config.ini
 	if rpm -q kaltura-batch >/dev/null 2>&1 || rpm -q kaltura-front >/dev/null 2>&1 ;then
 		START=`date +%s.%N`
-		OUTP=`php $DIRNAME/upload_test.php $SERVICE_URL $PARTNER_ID $PARTNER_SECRET $WEB_DIR/content/templates/entry/data/kaltura_logo_animated_blue.flv 2>&1`
+		UPLOADED_ENT=`php $DIRNAME/upload_test.php $SERVICE_URL $PARTNER_ID $PARTNER_SECRET $WEB_DIR/content/templates/entry/data/kaltura_logo_animated_blue.flv 2>&1`
 		RC=$?
 		END=`date +%s.%N`
 		TOTAL_T=`bc <<< $TIME`
-		report "Upload content kaltura_logo_animated_blue.flv" $RC "$OUTP" "`bc <<< $END-$START`"
+		report "Upload content kaltura_logo_animated_blue.flv" $RC "$UPLOADED_ENT" "`bc <<< $END-$START`"
+		echo -e "${CYAN}Napping 90 seconds to allow entry $UPLOADED_ENT to digest.. ${NORMAL}"
+		sleep 90
+		if rpm -q kaltura-dwh >> /dev/null 2>&1;then
+			echo -e "${CYAN}Testing analytics, be patient..${NORMAL}"
+			START=`date +%s.%N`
+			OUTP=`php $DIRNAME/dwh_cycle.php $DIRNAME/sanity_config.ini 2>&1`
+			RC=$?
+			CLEANOUTPUT=`echo $OUTP|sed 's@"@@g'`
+			OUTP=`echo $CLEANOUTPUT|sed "s@'@@g"`
+			END=`date +%s.%N`
+			TOTAL_T=`bc <<< $TIME`
+			report "DWH cycle" $RC "$OUTP" "`bc <<< $END-$START`"
+		fi
 
 		START=`date +%s.%N`
 		OUTP=`php $DIRNAME/upload_test.php $SERVICE_URL $PARTNER_ID $PARTNER_SECRET $WEB_DIR/content/templates/entry/data/kaltura_logo_animated_green.flv 2>&1`
@@ -190,33 +203,29 @@ else
 		END=`date +%s.%N`
 		TOTAL_T=`bc <<< $TIME`
 		report "Upload bulk using XML" $RC "$OUTP" "`bc <<< $END-$START`"
-		if rpm -q kaltura-dwh >> /dev/null 2>&1;then
-			echo -e "${CYAN}Testing analytics, be patient..${NORMAL}"
-			# give entries some time to process..
-			sleep 90
-			START=`date +%s.%N`
-			OUTP=`php $DIRNAME/dwh_cycle.php $DIRNAME/sanity_config.ini 2>&1`
-			RC=$?
-			CLEANOUTPUT=`echo $OUTP|sed 's@"@@g'`
-			OUTP=`echo $CLEANOUTPUT|sed "s@'@@g"`
-			END=`date +%s.%N`
-			TOTAL_T=`bc <<< $TIME`
-			report "DWH cycle" $RC "$OUTP" "`bc <<< $END-$START`"
-		fi
 		START=`date +%s.%N`
 		OUTP=`php $DIRNAME/generate_player.php $SERVICE_URL $PARTNER_ID $PARTNER_ADMIN_SECRET 3.9.8 $DIRNAME/player.xml 2>&1`
+		RC=$?
 		CLEANOUTPUT=`echo $OUTP|sed 's@"@@g'`
 		OUTP=`echo $CLEANOUTPUT|sed "s@'@@g"`
-		RC=$?
 		END=`date +%s.%N`
 		TOTAL_T=`bc <<< $TIME`
 		report "Create player" $RC "$OUTP" "`bc <<< $END-$START`"
+		START=`date +%s.%N`
+		OUTP=`php $DIRNAME/generate_thumb.php $SERVICE_URL $PARTNER_ID $PARTNER_ADMIN_SECRET $UPLOADED_ENT 2>&1`
+		RC=$?
+		CLEANOUTPUT=`echo $OUTP|sed 's@"@@g'`
+		OUTP=`echo $CLEANOUTPUT|sed "s@'@@g"`
+		END=`date +%s.%N`
+		TOTAL_T=`bc <<< $TIME`
+		report "Generate thumb" $RC "$OUTP" "`bc <<< $END-$START`"
+
 
 		START=`date +%s.%N`
 		OUTP=`php $DIRNAME/delete_partner.php $DIRNAME/sanity_config.ini 2>&1`
+		RC=$?
 		CLEANOUTPUT=`echo $OUTP|sed 's@"@@g'`
 		OUTP=`echo $CLEANOUTPUT|sed "s@'@@g"`
-		RC=$?
 		END=`date +%s.%N`
 		TOTAL_T=`bc <<< $TIME`
 		report "Delete parnter" $RC "$OUTP" "`bc <<< $END-$START`"
