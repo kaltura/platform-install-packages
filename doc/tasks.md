@@ -1,6 +1,7 @@
 # Admin Console
 
 - Mask passwds in admin console
+- Mark mandatory field with '*', red, whatever. For example - the 'Add publisher' form.
 - Testme fixes
 - format output of testme console in tree-like XML structure
 - allow configuration of package and publisher types from admin console
