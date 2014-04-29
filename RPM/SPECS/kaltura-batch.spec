@@ -7,7 +7,7 @@
 Summary: Kaltura Open Source Video Platform - batch server 
 Name: kaltura-batch
 Version: 9.15.0
-Release: 1
+Release: 2 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: zz-%{name}.ini

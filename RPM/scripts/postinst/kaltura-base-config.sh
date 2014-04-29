@@ -48,8 +48,8 @@ create_answer_file()
         if [ -r "$POST_INST_MAIL_TMPL" ];then
                         sed -i "s#@ANSFILE@#$ANSFILE#g" $POST_INST_MAIL_TMPL 
         fi
+	chmod 600 $ANSFILE
         echo -en "${CYAN}
-
 ========================================================================================================================
 Kaltura install answer file written to $ANSFILE  -  Please save it!
 This answers file can be used to silently-install re-install this machine or deploy other hosts in your cluster.
@@ -118,7 +118,7 @@ CDN hostname [${YELLOW}`hostname`${CYAN}]:${NORMAL}"
         echo -en "${CYAN}Which port will this Vhost listen on [${YELLOW}80${CYAN}]?${NORMAL} "
         read -e KALTURA_VIRTUAL_HOST_PORT
         if [ -z "$KALTURA_VIRTUAL_HOST_PORT" ];then
-                KALTURA_VIRTUAL_HOST_PORT=443
+                KALTURA_VIRTUAL_HOST_PORT=80
         fi
         KALTURA_FULL_VIRTUAL_HOST_NAME="$KALTURA_VIRTUAL_HOST_NAME:$KALTURA_VIRTUAL_HOST_PORT"
 

@@ -180,9 +180,9 @@ if rpm -q kaltura-batch >/dev/null 2>&1 || rpm -q kaltura-front >/dev/null 2>&1 
 				sleep 1
 			done
 			if [ "$CONVERT_SUCCESS" -eq 1 ];then
-				report "kaltura_logo_animated_blue.flv - $UPLOADED_ENT converted." $RC "$UPLOADED_ENT" "`bc <<< $END-$START`"
+				report "kaltura_logo_animated_blue.flv" $RC "$UPLOADED_ENT converted" "`bc <<< $END-$START`"
 			else
-				report "kaltura_logo_animated_blue.flv - $UPLOADED_ENT failed to convert." 1 "$UPLOADED_ENT" "`bc <<< $END-$START`"
+				report "kaltura_logo_animated_blue.flv" 1 "$UPLOADED_ENT failed to convert." "`bc <<< $END-$START`"
 			fi
 
 			if rpm -q kaltura-dwh >> /dev/null 2>&1;then
