@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.12
-Release: 21
+Release: 23
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -81,6 +81,11 @@ fi
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Tue Apr 29 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.12-23
+- need unzip for the sanity test.
+* Tue Apr 29 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.12-22
+- ans file has passwds in it and must be 600.
+
 * Sat Apr 26 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.12-8
 - https://github.com/kaltura/platform-install-packages/issues/99
 
