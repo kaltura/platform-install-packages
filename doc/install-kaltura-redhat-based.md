@@ -1,28 +1,30 @@
-# Installing Kaltura on a Single All-In-One Server (RPM)
-This guide describes installation of an all-in-one Kaltura server and applies to all major RH based Linux distros including Fedora Core, RHEL, CentOS, etc. ([Note the supported distros and versions](http://kaltura.github.io/platform-install-packages/#supported-distros)).       
-Please note that the machines architecture needs to be 64bit [x86_64].
+# Installing Kaltura on a Single Server (RPM)
+This guide describes RPM installation of an all-in-one Kaltura server and applies to all major RH based Linux distros including Fedora Core, RHEL, CentOS, etc. 
+([Note the supported distros and versions](http://kaltura.github.io/platform-install-packages/#supported-distros)).
 
-##### Notes
+[Kaltura Inc.](http://corp.kaltura.com) also provides commercial solutions and services including pro-active platform monitoring, applications, SLA, 24/7 support and professional services. If you're looking for a commercially supported video platform  with integrations to commercial encoders, streaming servers, eCDN, DRM and more - Start a [Free Trial of the Kaltura.com Hosted Platform](http://corp.kaltura.com/free-trial) or learn more about [Kaltura' Commercial OnPrem Edition™](http://corp.kaltura.com/Deployment-Options/Kaltura-On-Prem-Edition). For existing RPM based users, Kaltura offers commercial upgrade options.
 
-* Please review the [frequently answered questions](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura-packages-faq.md) document for general help before posting to the forums or issue queue.
-* This guide describes the installation and upgrade of an all-in-one machine where all the Kaltura components are installed on the same server. For cluster deployments, please refer to [cluster deployment document](http://bit.ly/kipp-cluster-yum), or [Deploying Kaltura using Opscode Chef](https://github.com/kaltura/platform-install-packages/blob/master/doc/rpm-chef-cluster-deployment.md).
-* To learn about monitoring, please refer to [configuring platform monitors](http://bit.ly/kipp-monitoring).
-* Testers using virtualization: [@DBezemer](https://github.com/DBezemer) created a basic CentOS template virtual server vailable here in OVF format: https://www.dropbox.com/s/luai7sk8nmihrkx/20140306_CentOS-base.zip
-* Alternatively you can find VMWare images at - http://www.thoughtpolice.co.uk/vmware/ --> Make sure to only use compatible OS images; either RedHat or CentOS 5.n, 6.n or FedoraCore 18+.
-* [Kaltura Inc.](http://corp.kaltura.com) also provides commercial solutions and services including pro-active platform monitoring, applications, SLA, 24/7 support and professional services. If you're looking for a commercially supported video platform  with integrations to commercial encoders, streaming servers, eCDN, DRM and more - Start a [Free Trial of the Kaltura.com Hosted Platform](http://corp.kaltura.com/free-trial) or learn more about [Kaltura' Commercial OnPrem Edition™](http://corp.kaltura.com/Deployment-Options/Kaltura-On-Prem-Edition). For existing RPM based users, Kaltura offers commercial upgrade options.
+#### Table of Contents
+[Non-SSL Step-by-step Installation]
+[SSL Step-by-step Installation]
+[Upgrade Process]
+[Remove Process]
+[Troubleshooting]
+[Additional Information]
 
-## Installing on a new machine
+## Non-SSL Step-by-step Installation
 
 ##### Pre-Install notes
+* This install guides assumes that you did a clean, basic install of one of the support OS's in 64bit architecture
+* When installing, you will be prompted for each server's resolvable hostname. Note that it is crucial that all host names will be resolvable by other servers in the cluster (and outside the cluster for front machines). Before installing, verify that your /etc/hosts file is properly configured and that all Kaltura server hostnames are resolvable in your network.
+* Before you begin, make sure you're logged in as the system root. Root access is required to install Kaltura, and you should execute ```sudo su``` to make sure that you are indeed root.
 
-* **Resolveable host names** - When installing, you will be promopted for each server's resolvable hostname. Note that it is crucial that all host names will be resolveable by other servers in the cluster (and outside the cluster for front machines). Before installing, verify the /etc/hosts file is properly configured and that all Kaltura server hostnames are resolveable in your network.
-* **ROOT is REQUIRED** - Before you begin, make sure you're logged in as the system root. root access is required to install Kaltura. ```sudo su - ```
-
-##### iptables and ports
+##### Firewall requirements
 Kaltura requires certain ports to be open for proper operation. [See the list of required open ports](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura-required-ports.md).   
 If you're just testing and don't mind an open system, you can use the below to disbale iptables altogether:
 ```bash
 iptables -F
+service iptables stop
 chkconfig iptables off
 ```
 ##### Disable SELinux - REQUIRED (currently Kaltura can't run properly with SELinux)
@@ -33,15 +35,72 @@ setenforce permissive
 # Set SELINUX=permissive
 # Save /etc/selinux/config
 ```
-##### Auto Set the Kaltura install repository URLs 
+##### Install the Kaltura install repository 
 
 ```bash
 rpm -ihv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
 ```
 
-This will enable the latest repo. 
+### Start of Kaltura installation
+This section is a step-by-step guide of a Kaltura installation without SSL.
 
-In the near future, we also plan to have a nighly repo, to be updated each night with fresh pull requests.
+#### MySQL
+Please note that currently, only MySQL 5.1 is supported, we recommend using the official package supplied by the RHEL/CentOS repos which is currently 5.1.73.
+
+Install MySQL and start and configure it:
+```bash
+yum install mysql mysql-server
+service mysqld start
+mysql_secure_installation
+chkconfig mysqld on
+```
+
+**Make sure to answer YES for all steps in the `mysql_secure_install` install, and follow through all the mysql install questions before continuing further.    
+Failing to properly run `mysql_secure_install` will cause the kaltura mysql user to run without proper permissions to access your mysql DB, and require you to start over again.
+
+Configure MySQL with the required Kaltura Settings
+```bash
+/opt/kaltura/bin/kaltura-mysql-settings.sh
+```
+
+#### Mail Server
+If your machine doesn't have postfix email configured before the Kaltura install, you will not receive emails from the install system nor publisher account activation mails.
+
+If postfix runs without further configuration starting it is sufficient to make Kaltura work.
+```bash
+service postfix restart
+```
+
+If you are using Amazon Web Services (AWS) please note that by default EC2 machines are blocked from sending email via port 25. For more information see [this thread on AWS forums](https://forums.aws.amazon.com/message.jspa?messageID=317525#317525).  
+
+##### Install Kaltura Server
+
+Install the basic Kaltura Packages:
+```bash
+yum clean all
+yum install kaltura-server
+```
+
+Start required service and configure them to run at boot:
+```bash
+service memcached restart
+service ntpd restart
+chkconfig memcached on
+chkconfig ntpd on
+```
+
+##### Configure the Kaltura installation
+```bash
+/opt/kaltura/bin/kaltura-config-all.sh
+```
+
+The below is a sample question answer format, replace the input with your own details:
+
+
+
+
+
+
 
 
 ##### Note about SSL certificates
@@ -102,7 +161,7 @@ chkconfig mysqld on
 ```
 
 ##### Configure your email server and MTA - REQUIRED
-If your machine doesn't have postfix email configured before the Kaltura install, you will not receive emails from the install system nor publisher account activation mails. 
+If your machine doesn't have postfix email configured before the Kaltura install, you will not receive emails from the install system nor publisher account activation mails.
 
 By default Amazon Web Services (AWS) EC2 machines are blocked from sending email via port 25. For more information see [this thread on AWS forums](https://forums.aws.amazon.com/message.jspa?messageID=317525#317525).  
 Two working solutions to the AWS EC2 email limitations are:
@@ -175,3 +234,14 @@ yum install kaltura-server
 /opt/kaltura/bin/kaltura-config-all.sh [answers-file-path]
 ```
 *Note that the repository URL will change soon, this is just the test repository*
+
+##### Additional Information
+* Please review the [frequently answered questions](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura-packages-faq.md) document for general help before posting to the forums or issue queue.
+* This guide describes the installation and upgrade of an all-in-one machine where all the Kaltura components are installed on the same server. For cluster deployments, please refer to [cluster deployment document](http://bit.ly/kipp-cluster-yum), or [Deploying Kaltura using Opscode Chef](https://github.com/kaltura/platform-install-packages/blob/master/doc/rpm-chef-cluster-deployment.md).
+* To learn about monitoring, please refer to [configuring platform monitors](http://bit.ly/kipp-monitoring).
+* Testers using virtualization: [@DBezemer](https://github.com/DBezemer) created a basic CentOS template virtual server vailable here in OVF format: https://www.dropbox.com/s/luai7sk8nmihrkx/20140306_CentOS-base.zip
+* Alternatively you can find VMWare images at - http://www.thoughtpolice.co.uk/vmware/ --> Make sure to only use compatible OS images; either RedHat or CentOS 5.n, 6.n or FedoraCore 18+.
+* Two working solutions to the AWS EC2 email limitations are:
+* *Using SendGrid as your mail service ([setting up ec2 with Sendgrid and postfix](http://www.zoharbabin.com/configure-ssmtp-or-postfix-to-send-email-via-sendgrid-on-centos-6-3-ec2)).
+* *Using [Amazon's Simple Email Service](http://aws.amazon.com/ses/).
+* [Kaltura Inc.](http://corp.kaltura.com) also provides commercial solutions and services including pro-active platform monitoring, applications, SLA, 24/7 support and professional services. If you're looking for a commercially supported video platform  with integrations to commercial encoders, streaming servers, eCDN, DRM and more - Start a [Free Trial of the Kaltura.com Hosted Platform](http://corp.kaltura.com/free-trial) or learn more about [Kaltura' Commercial OnPrem Edition™](http://corp.kaltura.com/Deployment-Options/Kaltura-On-Prem-Edition). For existing RPM based users, Kaltura offers commercial upgrade options.
