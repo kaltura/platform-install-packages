@@ -26,5 +26,8 @@ Need to catch the exception and display.
 - Add our packages to ClearOS' repo
 - (optionally) add package to EPEL
 
-# plugins
+# Plugins
 - Create a plugin for the Monit monitoring tab in admin console
+
+# Client libs
+- Add more client libs [http://knowledge.kaltura.com/adding-new-kaltura-api-client-library-generator]
