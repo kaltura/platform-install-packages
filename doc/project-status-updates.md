@@ -1,5 +1,16 @@
 **[Track milestones progress](https://github.com/kaltura/platform-install-packages/issues/milestones)**.
 
+#### 2014-05-04:
+
++ Stable version is now 9.15.0
+
+
+#### 2014-04-14:
+
++ Stable version is now 9.14.0
++ Progressed with tests for CI.
++ Dropped plans for using [The Foremen](http://www.theforeman.org/), seems not ready yet. Collaborators who are familiar with TheForeman are welcome to take on that task. For now, Chef + bash scripts seems to be answering the needs.
+
 #### 2014-03-02:
 
 **Install Packages Updates**
