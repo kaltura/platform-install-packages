@@ -166,7 +166,7 @@ if rpm -q kaltura-batch >/dev/null 2>&1 || rpm -q kaltura-front >/dev/null 2>&1 
 			report "Upload content kaltura_logo_animated_blue.flv" $RC "$UPLOADED_ENT" "`bc <<< $END-$START`"
 			START=`date +%s.%N`
 			CONVERT_SUCCESS=0
-			for i in `seq 1 90`;do
+			for i in `seq 1 9`;do
 				php $DIRNAME/check_entry_status.php $SERVICE_URL $PARTNER_ID $PARTNER_SECRET $UPLOADED_ENT
 				# for us, status 2 is good
 				if [ $? -eq 2 ];then
@@ -176,13 +176,13 @@ if rpm -q kaltura-batch >/dev/null 2>&1 || rpm -q kaltura-front >/dev/null 2>&1 
 					CONVERT_SUCCESS=1
 					break;
 				fi
-				echo -e "${CYAN}Napping 1 seconds to allow entry $UPLOADED_ENT to digest.. ${NORMAL}"
-				sleep 1
+				echo -e "${CYAN}Napping 10 seconds to allow entry $UPLOADED_ENT to digest.. ${NORMAL}"
+				sleep 10
 			done
 			if [ "$CONVERT_SUCCESS" -eq 1 ];then
-				report "kaltura_logo_animated_blue.flv" $RC "$UPLOADED_ENT converted" "`bc <<< $END-$START`"
+				report "kaltura_logo_animated_blue.flv - $UPLOADED_ENT status" $RC "$UPLOADED_ENT converted" "`bc <<< $END-$START`"
 			else
-				report "kaltura_logo_animated_blue.flv" 1 "$UPLOADED_ENT failed to convert." "`bc <<< $END-$START`"
+				report "kaltura_logo_animated_blue.flv - $UPLOADED_ENT status" 1 "$UPLOADED_ENT failed to convert." "`bc <<< $END-$START`"
 			fi
 
 			if rpm -q kaltura-dwh >> /dev/null 2>&1;then
