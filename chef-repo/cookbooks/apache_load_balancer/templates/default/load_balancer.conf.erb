@@ -1,0 +1,38 @@
+<VirtualHost <%= node['fqdn'] %>:<%= node[:load_balancer][:port]%>>
+        ServerName <%= node['fqdn'] %> 
+
+        ErrorLog logs/load-balancer-error_log
+        CustomLog logs/load-balancer-access_log combined
+        DocumentRoot /var/empty
+#        SSLProxyEngine On
+#        ProxyRequests Off 
+
+        <Proxy *>
+          Order deny,allow
+          Allow from all 
+        </Proxy>
+	Header add Set-Cookie "BALANCEID=.%{BALANCER_WORKER_ROUTE}e; path=/" env=BALANCER_ROUTE_CHANGED
+        Timeout <%= node[:load_balancer][:timeout]%>
+        ProxyTimeout <%= node[:load_balancer][:proxy_timeout]%>
+        ProxyPass /balancer-manager !
+        ProxyPass / balancer://<%= node['fqdn'] %>/ stickysession=BALANCEID|balanceid nofailover=On
+        ProxyPassReverse / http://<%= node[:load_balancer][:node0]%> route=<%= node[:load_balancer][:node0]%>
+        ProxyPassReverse / http://<%= node[:load_balancer][:node1]%> route=<%= node[:load_balancer][:node1]%>
+        <Proxy balancer://<%= node['fqdn'] %>>
+          BalancerMember http://<%= node[:load_balancer][:node0]%> route=<%= node[:load_balancer][:node0]%> retry=<%= node[:load_balancer][:retries]%> max=<%= node[:load_balancer][:max]%> timeout=<%= node[:load_balancer][:timeout]%>
+          BalancerMember http://<%= node[:load_balancer][:node1]%> route=<%= node[:load_balancer][:node0]%> retry=<%= node[:load_balancer][:retries]%> max=<%= node[:load_balancer][:max]%> timeout=<%= node[:load_balancer][:timeout]%>
+          ProxySet lbmethod=byrequests
+        </Proxy>
+
+
+        <Location /balancer-manager>
+          SetHandler balancer-manager
+        </Location>
+
+        <Directory "/var/empty">
+           AllowOverride AuthConfig
+        </Directory>
+
+
+</VirtualHost>
+
