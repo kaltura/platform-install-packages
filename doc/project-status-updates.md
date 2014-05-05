@@ -10,6 +10,7 @@ Celebrating over 100 bugs crushed mark! :) Thanks to all active contributors! (D
 + Many bug patches were merged to core in uiConfs, monitors, batches, and client generators. (ref: [pull1](https://github.com/jessp01/server/compare/kaltura:master...master), [pull2](https://github.com/kaltura/server/commit/3cfacf04d48640d63cc6080592ffcc1270da82a3))
 + Amazon Web Services documentations contributed by [@blackyboy](https://github.com/blackyboy): 1) [CloudFront HTTP/s](https://github.com/kaltura/platform-install-packages/blob/master/doc/setting-up-amazon-cloudfront-cdn-http-https.md), 2) [CloudFront RTMP](https://github.com/kaltura/platform-install-packages/blob/master/doc/setting-up-amazon-cloudfront-cdn-rtmp.md), and 3) [AWS S3 Remote Storage](https://github.com/kaltura/platform-install-packages/blob/master/doc/setup-amazon-S3-remote-storage.md).
 + Chef Kaltura cookbook are now available for download from the [official Chef community site](http://community.opscode.com/cookbooks/kaltura). 
++ Signed RPM packages: Signing RPMs adds an extra level of trustworthiness to the RPMs. A digital signature helps establish that the package indeed came from Kaltura, and not from someone masquerading as Kaltura or retrafficing via DNS spoofing, etc. (Read more about [RPM signing](http://docs.fedoraproject.org/en-US/Fedora_Draft_Documentation/0.1/html/RPM_Guide/ch11s04.html)). 
 
 
 #### 2014-04-14:
