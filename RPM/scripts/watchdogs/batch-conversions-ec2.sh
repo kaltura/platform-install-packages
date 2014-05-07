@@ -2,7 +2,8 @@
 #===============================================================================
 #          FILE: batch-conversions-ec2.sh
 #         USAGE: ./batch-conversions-ec2.sh 
-#   DESCRIPTION: 
+#   DESCRIPTION: A simple wd script to monitor batch conversion queue size and 
+# 		 lunch more EC2 instances with Chef setting them up a batch nodes. 
 #       OPTIONS: ---
 #  REQUIREMENTS: ---
 #          BUGS: ---
@@ -14,7 +15,7 @@
 #===============================================================================
 
 #set -o nounset                              # Treat unset variables as an error
-#!/bin/sh
+
 SYSTEM_INI=/etc/kaltura.d/system.ini
 if [ -r "$SYSTEM_INI" ];then
         . /etc/kaltura.d/system.ini
