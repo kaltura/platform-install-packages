@@ -1,12 +1,12 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmc	
 Version: v5.37.17
-Release: 5
+Release: 6 
 Summary: Kaltura Management Console
 
 Group: System Management	
 License: AGPLv3+	
-URL: http://kaltura.org
+URL: https://github.com/kaltura/kmc 
 Source0: %{name}-%{version}.tar.bz2
 Source1: kmc_config.ini
 Source2: kmc_doc.zip
@@ -81,6 +81,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Wed Mar 7 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.17-6
+- Added URL pointing to GIT repo.
+
 * Sat Apr 26 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.17-3
 - Bounce KMC and HTML5lib vers in config.ini.
 
