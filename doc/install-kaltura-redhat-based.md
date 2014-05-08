@@ -72,6 +72,13 @@ ALLOWSELFCERTIFICATION
 ```
 Finally, run: `/etc/init.d/kaltura-monit restart`
 
+##### Node regarding desktop installations
+
+When installing on a "desktop" environment there may be package conflicts with media encoding/decoding plugins.
+
+In Redhat 6.5 you should run the following to remove the conflicting packages:
+`rpm -e gstreamer-plugins-bad-free totem totem-nautilus`
+
 ##### Install the Kaltura Packages
 ```bash
 yum clean all

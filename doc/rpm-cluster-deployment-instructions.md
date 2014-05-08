@@ -132,15 +132,11 @@ Please note that currently, only MySQL 5.1 is supported, we recommend using the 
 Failing to properly run `mysql_secure_installation` will cause the kaltura mysql user to run without proper permissions to access your mysql DB.    
 ```
 # mysql -uroot -pYOUR_DB_ROOT_PASS
-mysql> GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;
+mysql> GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'YOUR_DB_ROOT_PASS' WITH GRANT OPTION;
 mysql> FLUSH PRIVILEGES;
 ```
 Note that in the statement above, MySQL is being open for access as root from ALL machines, depending on your setup, you may want to limit it further to allow only members of your Kaltura cluster.
 Remote root user should have an access to the mysql DB during the installation of the front and batch servers.
-Run:
-```
-mysql> SET PASSWORD FOR 'root'@'%' = PASSWORD('YOUR_DB_ROOT_PASS');
-```
 After the Kaltura cluster installation is done, you may want to remove the root access for security reasons, it will not longer be needed for the platform to operate as it will be using the 'kaltura' user to connect this point.
  
 
