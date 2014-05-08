@@ -10,7 +10,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 9.15.0
-Release: 5 
+Release: 6 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -41,6 +41,9 @@ Source21: kaltura_batch_upload_falcon.zip
 Source22: 01.UserRole.99.template.xml
 Source23: 04.flavorParams.ini
 Source24: 04.liveParams.ini
+Source25: kaltura_populate.template
+Source26: kaltura_batch.template
+
 URL: https://github.com/kaltura/server/tree/IX-%{version}
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
@@ -143,6 +146,8 @@ cp %{SOURCE20} $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/
 cp %{SOURCE14} $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/
 cp %{SOURCE15} $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/
 cp %{SOURCE16} $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/
+cp %{SOURCE25} $RPM_BUILD_ROOT%{prefix}/app/configurations/logrotate/
+cp %{SOURCE26} $RPM_BUILD_ROOT%{prefix}/app/configurations/logrotate/
 
 # sample bulks
 cp %{SOURCE21} $RPM_BUILD_ROOT%{prefix}/web/content/docs/
