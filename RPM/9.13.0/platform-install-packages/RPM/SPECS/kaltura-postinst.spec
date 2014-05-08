@@ -1,5 +1,4 @@
 %define prefix /opt/kaltura 
-
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.12
