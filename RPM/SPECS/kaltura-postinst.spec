@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.12
-Release: 28
+Release: 29
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -12,7 +12,7 @@ Source3: sql_updates
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
-Requires: bc
+Requires: bc,unzip
 
 %description
 Kaltura is the world's first Open Source Online Video Platform, transforming the way people work, 

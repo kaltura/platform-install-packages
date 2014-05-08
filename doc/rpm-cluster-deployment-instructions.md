@@ -135,12 +135,14 @@ Failing to properly run `mysql_secure_installation` will cause the kaltura mysql
 mysql> GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;
 mysql> FLUSH PRIVILEGES;
 ```
+Note that in the statement above, MySQL is being open for access as root from ALL machines, depending on your setup, you may want to limit it further to allow only members of your Kaltura cluster.
 Remote root user should have an access to the mysql DB during the installation of the front and batch servers.
 Run:
 ```
 mysql> SET PASSWORD FOR 'root'@'%' = PASSWORD('YOUR_DB_ROOT_PASS');
 ```
-Remove the remote root access to your MySQL DB for security reasons after Kaltura cluster installation.
+After the Kaltura cluster installation is done, you may want to remove the root access for security reasons, it will not longer be needed for the platform to operate as it will be using the 'kaltura' user to connect this point.
+ 
 
 #### MySQL Replication and Scaling
 Scaling MySQL is an art on it's own. There are two aspects to it: Replication (having data live in more than one MySQL server for redundency and read scaling) and setting up read slaves.    
