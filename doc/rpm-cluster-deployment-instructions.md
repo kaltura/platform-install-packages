@@ -132,15 +132,11 @@ Please note that currently, only MySQL 5.1 is supported, we recommend using the 
 Failing to properly run `mysql_secure_installation` will cause the kaltura mysql user to run without proper permissions to access your mysql DB.    
 ```
 # mysql -uroot -pYOUR_DB_ROOT_PASS
-mysql> GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;
+mysql> GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'YOUR_DB_ROOT_PASS' WITH GRANT OPTION;
 mysql> FLUSH PRIVILEGES;
 ```
 Note that in the statement above, MySQL is being open for access as root from ALL machines, depending on your setup, you may want to limit it further to allow only members of your Kaltura cluster.
 Remote root user should have an access to the mysql DB during the installation of the front and batch servers.
-Run:
-```
-mysql> SET PASSWORD FOR 'root'@'%' = PASSWORD('YOUR_DB_ROOT_PASS');
-```
 After the Kaltura cluster installation is done, you may want to remove the root access for security reasons, it will not longer be needed for the platform to operate as it will be using the 'kaltura' user to connect this point.
  
 
@@ -204,10 +200,10 @@ Front in Kaltura represents the machines hosting the user-facing components, inc
 ```
 # rpm -Uhv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
 # yum install kaltura-postinst
-# /opt/kaltura/bin/kaltura-nfs-client-config.sh
+# /opt/kaltura/bin/kaltura-nfs-client-config.sh <NFS host> <domain> <nobody-user> <nobody-group>
 # yum install kaltura-front kaltura-widgets kaltura-html5lib kaltura-html5-studio 
 # /opt/kaltura/bin/kaltura-front-config.sh
-# /opt/kaltura/bin/kaltura-db-config.sh
+# /opt/kaltura/bin/kaltura-db-config.sh <mysql-hostname> <mysql-super-user> <mysql-super-user-passwd> <mysql-port> [upgrade]
 ```
 **NOTE: /opt/kaltura/bin/kaltura-db-config.sh and kaltura-widgets kaltura-html5lib kaltura-html5-studio which are installed on the web mount only need to run on the first node.**
 
@@ -216,7 +212,7 @@ Front in Kaltura represents the machines hosting the user-facing components, inc
 ```
 # rpm -Uhv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
 # yum install kaltura-postinst
-# /opt/kaltura/bin/kaltura-nfs-client-config.sh
+# /opt/kaltura/bin/kaltura-nfs-client-config.sh <NFS host> <domain> <nobody-user> <nobody-group>
 # yum install kaltura-front
 # /opt/kaltura/bin/kaltura-front-config.sh
 ```
@@ -226,7 +222,7 @@ Batch in Kaltura represents the machines running all async operations. To learn 
 ```
 # rpm -Uhv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
 # yum install kaltura-postinst
-# /opt/kaltura/bin/kaltura-nfs-client-config.sh
+# /opt/kaltura/bin/kaltura-nfs-client-config.sh <NFS host> <domain> <nobody-user> <nobody-group>
 # yum install kaltura-batch
 # /opt/kaltura/bin/kaltura-batch-config.sh
 ```
@@ -241,7 +237,7 @@ The DWH is Kaltura's Analytics server.
 ```
 # rpm -Uhv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
 # yum install kaltura-dwh kaltura-postinst
-# /opt/kaltura/bin/kaltura-nfs-client-config.sh
+# /opt/kaltura/bin/kaltura-nfs-client-config.sh <NFS host> <domain> <nobody-user> <nobody-group>
 # /opt/kaltura/bin/kaltura-dwh-config.sh
 ```
 
