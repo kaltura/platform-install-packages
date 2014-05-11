@@ -200,10 +200,10 @@ Front in Kaltura represents the machines hosting the user-facing components, inc
 ```
 # rpm -Uhv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
 # yum install kaltura-postinst
-# /opt/kaltura/bin/kaltura-nfs-client-config.sh
+# /opt/kaltura/bin/kaltura-nfs-client-config.sh <NFS host> <domain> <nobody-user> <nobody-group>
 # yum install kaltura-front kaltura-widgets kaltura-html5lib kaltura-html5-studio 
 # /opt/kaltura/bin/kaltura-front-config.sh
-# /opt/kaltura/bin/kaltura-db-config.sh
+# /opt/kaltura/bin/kaltura-db-config.sh <mysql-hostname> <mysql-super-user> <mysql-super-user-passwd> <mysql-port> [upgrade]
 ```
 **NOTE: /opt/kaltura/bin/kaltura-db-config.sh and kaltura-widgets kaltura-html5lib kaltura-html5-studio which are installed on the web mount only need to run on the first node.**
 
@@ -212,7 +212,7 @@ Front in Kaltura represents the machines hosting the user-facing components, inc
 ```
 # rpm -Uhv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
 # yum install kaltura-postinst
-# /opt/kaltura/bin/kaltura-nfs-client-config.sh
+# /opt/kaltura/bin/kaltura-nfs-client-config.sh <NFS host> <domain> <nobody-user> <nobody-group>
 # yum install kaltura-front
 # /opt/kaltura/bin/kaltura-front-config.sh
 ```
@@ -222,7 +222,7 @@ Batch in Kaltura represents the machines running all async operations. To learn 
 ```
 # rpm -Uhv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
 # yum install kaltura-postinst
-# /opt/kaltura/bin/kaltura-nfs-client-config.sh
+# /opt/kaltura/bin/kaltura-nfs-client-config.sh <NFS host> <domain> <nobody-user> <nobody-group>
 # yum install kaltura-batch
 # /opt/kaltura/bin/kaltura-batch-config.sh
 ```
@@ -237,7 +237,7 @@ The DWH is Kaltura's Analytics server.
 ```
 # rpm -Uhv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
 # yum install kaltura-dwh kaltura-postinst
-# /opt/kaltura/bin/kaltura-nfs-client-config.sh
+# /opt/kaltura/bin/kaltura-nfs-client-config.sh <NFS host> <domain> <nobody-user> <nobody-group>
 # /opt/kaltura/bin/kaltura-dwh-config.sh
 ```
 
