@@ -32,7 +32,7 @@ enable_admin_conf()
 create_answer_file()
 {
 	ANSFILE="$1"
-        for VAL in CONFIG_CHOICE IS_SSL CRT_FILE KEY_FILE; do
+        for VAL in CONFIG_CHOICE IS_SSL CRT_FILE KEY_FILE CHAIN_FILE; do
                 if [ -n "${!VAL}" ];then
 			sed "/^$VAL=.*/d" -i $ANSFILE
 			echo "$VAL=\"${!VAL}\"" >> $ANSFILE 
