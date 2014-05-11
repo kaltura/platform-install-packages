@@ -1,0 +1,12 @@
+@LOG_DIR@/sphinx/kaltura_populate.log{
+ rotate 5
+ daily
+ missingok
+ compress
+ dateext
+ notifempty
+ sharedscripts
+ postrotate
+ service kaltura-populate restart
+ endscript
+}

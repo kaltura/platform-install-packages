@@ -1,0 +1,24 @@
+@LOG_DIR@/kaltura_batch.log {
+    nodateext
+    compress
+    rotate 40
+    create 644
+    missingok
+    notifempty
+    prerotate
+        service kaltura-batch stop 2>&1 >/dev/null || true
+    endscript
+    postrotate
+        service kaltura-batch start 2>&1 >/dev/null || true
+    endscript
+}
+
+@LOG_DIR@/batch/*log {
+    nodateext
+    compress
+    notifempty
+    rotate 40
+    create 644
+    missingok
+}
+
