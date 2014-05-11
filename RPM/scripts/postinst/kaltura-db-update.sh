@@ -26,7 +26,10 @@ if [ -r "/opt/kaltura/app/configurations/system.ini" -a -r /opt/kaltura/app/depl
 								continue
 						fi
 				fi
-				OUT="$OUT || `mysql kaltura -h $DB1_HOST -u $SUPER_USER -P $DB1_PORT -p$SUPER_USER_PASSWD < $SQL  2>&1`"
+				if [ -z "$DB_PORT" ];then
+					DB1_PORT=3306
+				fi
+				OUT="$OUT || `mysql kaltura -h $DB1_HOST -u $DB1_USER -P $DB1_PORT -p$DB1_PASS < $SQL  2>&1`"
 				RC=$?
 		done
 		if [ $RC -eq 0 ];then

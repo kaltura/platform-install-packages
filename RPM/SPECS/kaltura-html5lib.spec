@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.6
+Version: v2.7
 Release: 1 
 Epoch:0 
 License: AGPLv3+
@@ -12,6 +12,7 @@ Source1: LocalSettings.php
 Source2: kaltura-html5lib-v2.1.1.tar.gz
 Source3: kaltura-html5lib-v2.3.tar.gz
 Source4: kaltura-html5lib-v2.4.tar.gz
+Source5: kaltura-html5lib-v2.6.tar.gz
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
@@ -35,6 +36,7 @@ This package installs the Kaltura HTML5 library.
 tar zxf %{SOURCE2}
 tar zxf %{SOURCE3}
 tar zxf %{SOURCE4}
+tar zxf %{SOURCE5}
 
 
 %install
@@ -47,6 +49,8 @@ cp -r %{_builddir}/%{name}-v2.3 $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.3
 cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.3
 cp -r %{_builddir}/%{name}-v2.4 $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.4
 cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.4
+cp -r %{_builddir}/%{name}-v2.6 $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.6
+cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.6
 
 %clean
 rm -rf %{buildroot}
@@ -62,6 +66,23 @@ rm -rf %{buildroot}
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Thu Apr 24 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.7-1
+- SUP-1856 - [postmedia] sound turned off when next video plays after preroll
+- SUP-1884 - changeMedia autoPlay issue
+- SUP-1875 - Critical VAST bug for Postmedia
+- SUP-1917 - SF 43560 - Postmedia - critical bug in FF
+- SUP-1892 - Share URL of HTML5 player does not interpret "magic" substitution
+- FEC-1125 - Omniture plugin should support Ad Events
+- FEC-1172 - KDP API should remain active during ad playback
+- FEC-1189 - PostMedia -- KM-38 : autoMute should not be used on "next" video
+- FEC-1195 - Share fails in IE browsers in bad window.open call
+- FEC-1196 - PostMedia: first image of video appearing after video is complete
+- FEC-1197 - Share url text field is not evaluated in player v2
+- FEC-1199 - [ postmedia ] IE9 Browser freezes with the attempt to replay the video
+- FEC-1260 - Error on Firefox when changing media after vast pre-roll (with/without auto-play)
+- FEC-1257 - ChangeMedia with autoplay does not hide large play button
+- FEC-1219 - Custom share link cannot be copied from the link URL because it renders {mediaProxy.entry.id}
+
 * Sun Apr 6 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.6-1
 - FEC-1029 - TAR - JAWS reading buttons twice
 - FEC-1173 - "Replay" button needs to be pressed twice for staring to play

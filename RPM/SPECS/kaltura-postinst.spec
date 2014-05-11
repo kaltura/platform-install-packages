@@ -1,9 +1,8 @@
 %define prefix /opt/kaltura 
-
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
-Version: 1.0.10
-Release: 10
+Version: 1.0.12
+Release: 30
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -13,7 +12,7 @@ Source3: sql_updates
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
-Requires: bc
+Requires: bc,unzip
 
 %description
 Kaltura is the world's first Open Source Online Video Platform, transforming the way people work, 
@@ -36,7 +35,7 @@ This package includes post install scripts to be run post RPM install as they re
 mkdir -p $RPM_BUILD_ROOT/%{prefix}/bin
 mkdir -p $RPM_BUILD_ROOT/%{prefix}/app/configurations $RPM_BUILD_ROOT/%{prefix}/app/deployment/updates/scripts
 chmod +x *.sh 
-mv  *.sh *.rc *.php $RPM_BUILD_ROOT/%{prefix}/bin
+mv  *.sh *.rc *.php *.ini *.xml $RPM_BUILD_ROOT/%{prefix}/bin
 cp %{SOURCE1} $RPM_BUILD_ROOT/%{prefix}/app/configurations
 cp %{SOURCE2} $RPM_BUILD_ROOT%{prefix}/app/configurations/consent_msgs
 cp %{SOURCE3} $RPM_BUILD_ROOT%{prefix}/app/deployment/sql_updates
@@ -60,7 +59,7 @@ if [ "$1" = 2 ];then
 				fi
 			fi
 			if [ -r $SQL ];then
-				mysql kaltura -h $DB1_HOST -u $SUPER_USER -P $DB1_PORT -p$SUPER_USER_PASSWD < $SQL
+				mysql kaltura -h $DB1_HOST -u $DB1_USER -P $DB1_PORT -p$DB1_PASS < $SQL 2>/dev/null
 				RC=$?
 			else
 				echo "In order to upgrade your DB, please run %{prefix}/bin/kaltura-db-update.sh once the RPMs installation completes."
@@ -82,6 +81,33 @@ fi
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Sun May 4 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.12-28
+- Better output.
+
+* Tue Apr 29 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.12-23
+- need unzip for the sanity test.
+
+* Tue Apr 29 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.12-22
+- ans file has passwds in it and must be 600.
+
+* Sat Apr 26 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.12-8
+- https://github.com/kaltura/platform-install-packages/issues/99
+
+* Sat Apr 26 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.12-6
+- [master 1112364] no need for these functions to accept machine as param. They check the services locally.
+
+* Sat Apr 26 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.12-5
+- No reason to require root previleges for running the alters. 'kaltura' user is capable of it.
+
+* Sun Apr 20 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.11-18
+- Added dwh and delete partner to sanity testing.
+
+* Sat Apr 19 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.11-2
+- In kaltura-front-config.sh - first call kaltura-base-config.sh
+
+* Thu Apr 17 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.11-1
+- Bugs->fixes.
+
 * Wed Apr 9 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.10-8
 - Need to respect USER_CONSENT coming from the ans file.
 

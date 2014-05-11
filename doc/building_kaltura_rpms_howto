@@ -24,7 +24,7 @@ platform-install-packages/RPM/.rpmmacros
 ========================================
 This file specifies vars used in the RPM spec files, currently holds versions of supporting components, for instance, kaltura-kmc needs to know what kmc-login ver to take, etc.
 When components are upgraded, this file needs to be edited.
-In the build ENV, it should reside at ~/.rpmbuild
+In the build ENV, it should reside at ~/.rpmmacros
 
 platform-install-packages/RPM/scripts/build dir
 ================================================

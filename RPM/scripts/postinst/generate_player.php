@@ -25,10 +25,10 @@ $uiConf->width = 533;
 $uiConf->height = 300; 
 $uiConf->htmlParams = '';
 $uiConf->swfUrl = "/flash/kdp3/v$player_ver/kdp3.swf";
-$uiConf->confFile = file_get_contents($argv[4]);
+$uiConf->confFile = file_get_contents($argv[5]);
 $uiConf->creationMode=3;
 $uiConf->useCdn = '1';
 $uiConf->swfUrlVersion = $player_ver;
 $results = $client->uiConf->add($uiConf);
-
+echo "Generated UI conf id : ".$results->id ."\n";
 ?>

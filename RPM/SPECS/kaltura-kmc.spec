@@ -1,12 +1,12 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmc	
-Version: v5.37.16
-Release: 3 
+Version: v5.37.17
+Release: 6 
 Summary: Kaltura Management Console
 
 Group: System Management	
 License: AGPLv3+	
-URL: http://kaltura.org
+URL: https://github.com/kaltura/kmc 
 Source0: %{name}-%{version}.tar.bz2
 Source1: kmc_config.ini
 Source2: kmc_doc.zip
@@ -44,11 +44,11 @@ if [ -L %{prefix}/web/content/uiconf/kaltura/kmc ];then
 	rm %{prefix}/web/content/uiconf/kaltura/kmc
 fi
 
-ls -sf %{prefix}/web/flash/kmc/%{version}/uiconf/kaltura/kmc/appstudio %{prefix}/web/content/uiconf
-ln -sf %{prefix}/web/flash/kmc/%{version}/uiconf/kaltura/kmc %{prefix}/web/content/uiconf/kaltura/
-if [ -r "%{prefix}/app/configurations/local.ini" -a -r "%{prefix}/app/configurations/system.ini" ];then
-	php %{prefix}/app/deployment/uiconf/deploy_v2.php --ini=%{prefix}/web/flash/kmc/%{version}/config.ini >> %{prefix}/log/deploy_v2.log  2>&1
-fi
+mkdir -p %{prefix}/web/content/uiconf/kaltura
+cp -r %{prefix}/web/flash/kmc/%{version}/uiconf/kaltura/kmc %{prefix}/web/content/uiconf/kaltura
+#if [ -r "%{prefix}/app/configurations/local.ini" -a -r "%{prefix}/app/configurations/system.ini" ];then
+#	php %{prefix}/app/deployment/uiconf/deploy_v2.php --ini=%{prefix}/web/flash/kmc/%{version}/config.ini >> %{prefix}/log/deploy_v2.log  2>&1
+#fi
 
 %install
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/flash/kmc/login $RPM_BUILD_ROOT%{prefix}/app/alpha/web/lib $RPM_BUILD_ROOT%{prefix}/web/content/docs/pdf
@@ -81,6 +81,16 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Wed Mar 7 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.17-6
+- Added URL pointing to GIT repo.
+
+* Sat Apr 26 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.17-3
+- Bounce KMC and HTML5lib vers in config.ini.
+
+* Thu Apr 24 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.17-1
+- PLAT-1242 - Uploading a "m4a" file from desktop - the file media type is not automatically chosen
+- PLAT-1265 - KMC online guide broken link on submitbulkoptions.htm
+
 * Sun Apr 6 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.16-1
 - Live Reports in Analytics (phase 0)
 - Legacy embed code removed from Preview & Embed page for Players falling back to HTML5 v2

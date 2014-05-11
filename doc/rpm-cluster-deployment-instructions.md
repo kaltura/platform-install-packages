@@ -128,13 +128,21 @@ Please note that currently, only MySQL 5.1 is supported, we recommend using the 
 # /opt/kaltura/bin/kaltura-mysql-settings.sh
 # mysql_secure_installation
 ```
-**Make sure to say Y** for the `mysql_secure_install` install, and follow through all the mysql install questions before continuing further.    
-Failing to properly run `mysql_secure_install` will cause the kaltura mysql user to run without proper permissions to access your mysql DB.    
+**Make sure to say Y** for the `mysql_secure_installation` install, and follow through all the mysql install questions before continuing further.    
+Failing to properly run `mysql_secure_installation` will cause the kaltura mysql user to run without proper permissions to access your mysql DB.    
 ```
 # mysql -uroot -pYOUR_DB_ROOT_PASS
 mysql> GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;
 mysql> FLUSH PRIVILEGES;
 ```
+Note that in the statement above, MySQL is being open for access as root from ALL machines, depending on your setup, you may want to limit it further to allow only members of your Kaltura cluster.
+Remote root user should have an access to the mysql DB during the installation of the front and batch servers.
+Run:
+```
+mysql> SET PASSWORD FOR 'root'@'%' = PASSWORD('YOUR_DB_ROOT_PASS');
+```
+After the Kaltura cluster installation is done, you may want to remove the root access for security reasons, it will not longer be needed for the platform to operate as it will be using the 'kaltura' user to connect this point.
+ 
 
 #### MySQL Replication and Scaling
 Scaling MySQL is an art on it's own. There are two aspects to it: Replication (having data live in more than one MySQL server for redundency and read scaling) and setting up read slaves.    
@@ -195,8 +203,9 @@ After installing the first cluster node, obtain the auto generated file placed u
 Front in Kaltura represents the machines hosting the user-facing components, including the Kaltura API, the KMC and Admin Console, MediaSpace and all client-side widgets. 
 ```
 # rpm -Uhv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
-# yum install kaltura-front kaltura-widgets kaltura-html5lib kaltura-html5-studio 
+# yum install kaltura-postinst
 # /opt/kaltura/bin/kaltura-nfs-client-config.sh
+# yum install kaltura-front kaltura-widgets kaltura-html5lib kaltura-html5-studio 
 # /opt/kaltura/bin/kaltura-front-config.sh
 # /opt/kaltura/bin/kaltura-db-config.sh
 ```
@@ -206,8 +215,9 @@ Front in Kaltura represents the machines hosting the user-facing components, inc
 Front in Kaltura represents the machines hosting the user-facing components, including the Kaltura API, the KMC and Admin Console, MediaSpace and all client-side widgets. 
 ```
 # rpm -Uhv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
-# yum install kaltura-front
+# yum install kaltura-postinst
 # /opt/kaltura/bin/kaltura-nfs-client-config.sh
+# yum install kaltura-front
 # /opt/kaltura/bin/kaltura-front-config.sh
 ```
 
@@ -215,8 +225,9 @@ Front in Kaltura represents the machines hosting the user-facing components, inc
 Batch in Kaltura represents the machines running all async operations. To learn more, read: [Introduction to Kaltura Batch Processes](http://knowledge.kaltura.com/node/230).
 ```
 # rpm -Uhv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
-# yum install kaltura-batch
+# yum install kaltura-postinst
 # /opt/kaltura/bin/kaltura-nfs-client-config.sh
+# yum install kaltura-batch
 # /opt/kaltura/bin/kaltura-batch-config.sh
 ```
 

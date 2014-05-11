@@ -24,6 +24,7 @@ if [ ! -x `which wget 2>/dev/null` ];then
 	echo "Need to install wget."
 	exit 2
 fi
+HTML5LIB_VERSION=$1
 
 cd $SOURCE_PACKAGING_DIR
 wget $HTML5LIB_URI -O $HTML5LIB_RPM_NAME-$HTML5LIB_VERSION.tar.gz

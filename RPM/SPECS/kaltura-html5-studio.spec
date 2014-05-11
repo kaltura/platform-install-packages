@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5-studio
-Version: v0.9.6
+Version: v0.9.7
 Release: 1 
 License: AGPLv3+
 Group: Server/Platform 
@@ -51,6 +51,11 @@ rm -rf %{buildroot}
 %{prefix}/apps/studio/%{version}
 
 %changelog
+* Thu Apr 24 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v0.9.7-1
+- SUP-1805 - Studio V2 features - logo plugin
+- SUP-1808 - Studio V2 features - Info plugin
+- SUP-1928 - Studio V2 features - Watched color selector
+
 * Sun Apr 6 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v0.9.6-1
 - FEC-1166 - Player Studio "does not support IE8 message" 
 - FEC-1163 - Player studio gives absolute http urls for players, breaks HTTPS

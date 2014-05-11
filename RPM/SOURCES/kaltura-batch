@@ -79,7 +79,7 @@ start() {
 			echo "Removing stale lock file at $LOCKFILE"
 			rm -f $LOCKFILE
 			start_scheduler
-			return 1 
+			return 0 
 		fi
 	else
 		if [ "X$KP" != "X" ]; then
@@ -160,4 +160,3 @@ case "$1" in
 		exit 0
 		;;
 esac
-exit 0

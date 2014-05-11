@@ -2,7 +2,7 @@
 
 DBS="kaltura kaltura_sphinx_log kalturadw kalturadw_ds kalturadw_bisources kalturalog"
 DB_USERS="kaltura etl"
-kaltura_PRIVILEGES="INSERT,UPDATE,DELETE,SELECT"
+kaltura_PRIVILEGES="INSERT,UPDATE,DELETE,SELECT,ALTER"
 kaltura_USER="kaltura"
 kaltura_SQL_FILES="/opt/kaltura/app/deployment/base/sql/01.kaltura_ce_tables.sql /opt/kaltura/app/deployment/base/sql/04.stored_procedures.sql"
 

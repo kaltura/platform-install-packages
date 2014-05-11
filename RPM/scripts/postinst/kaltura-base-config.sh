@@ -48,8 +48,8 @@ create_answer_file()
         if [ -r "$POST_INST_MAIL_TMPL" ];then
                         sed -i "s#@ANSFILE@#$ANSFILE#g" $POST_INST_MAIL_TMPL 
         fi
+	chmod 600 $ANSFILE
         echo -en "${CYAN}
-
 ========================================================================================================================
 Kaltura install answer file written to $ANSFILE  -  Please save it!
 This answers file can be used to silently-install re-install this machine or deploy other hosts in your cluster.
@@ -115,10 +115,10 @@ CDN hostname [${YELLOW}`hostname`${CYAN}]:${NORMAL}"
                 #echo $KALTURA_VIRTUAL_HOST_NAME
         fi
 
-        echo -en "${CYAN}Which port will this Vhost listen on [${YELLOW}80${CYAN}]?${NORMAL} "
+        echo -en "${CYAN}Vhost port to listen on [${YELLOW}80${CYAN}]:${NORMAL} "
         read -e KALTURA_VIRTUAL_HOST_PORT
         if [ -z "$KALTURA_VIRTUAL_HOST_PORT" ];then
-                KALTURA_VIRTUAL_HOST_PORT=443
+                KALTURA_VIRTUAL_HOST_PORT=80
         fi
         KALTURA_FULL_VIRTUAL_HOST_NAME="$KALTURA_VIRTUAL_HOST_NAME:$KALTURA_VIRTUAL_HOST_PORT"
 
@@ -137,11 +137,11 @@ CDN hostname [${YELLOW}`hostname`${CYAN}]:${NORMAL}"
         fi
 
         while [ -z "$SUPER_USER" ];do
-                echo -en "${CYAN}MySQL super user [this is only for setting the kaltura user passwd and WILL NOT be used with the application]:${NORMAL} "
+                echo -en "${CYAN}MySQL super user [only for install, default root]:${NORMAL} "
                 read -e SUPER_USER
         done
         while [ -z "$SUPER_USER_PASSWD" ];do
-                echo -en "${CYAN}MySQL super user passwd [this is only for setting the kaltura user passwd and WILL NOT be used with the application]:${NORMAL}\n "
+                echo -en "${CYAN}MySQL super user passwd [only for install]:${NORMAL}\n "
                 read -s SUPER_USER_PASSWD
         done
 
@@ -172,7 +172,7 @@ CDN hostname [${YELLOW}`hostname`${CYAN}]:${NORMAL}"
                         RED5_HOST=`hostname`
                 fi
         fi
-        echo -en "${CYAN}Secondary Sphinx hostname: [leave empty if none]${NORMAL} "
+        echo -en "${CYAN}Secondary Sphinx hostname [leave empty if none]: ${NORMAL} "
         read -e SPHINX_SERVER2
         if [ -z $SPHINX_SERVER2 ];then
                 SPHINX_SERVER2=" "
@@ -230,7 +230,7 @@ CDN hostname [${YELLOW}`hostname`${CYAN}]:${NORMAL}"
 
 
         if [ -z "$ENVIRONMENT_NAME" ];then
-                echo -en "${CYAN}How would you like to name your system (this name will show as the From field in emails sent by the system) [${YELLOW}Kaltura Video Platform${CYAN}]?${NORMAL}"
+                echo -en "${CYAN}Your Kaltura install name (this name will show as the From field in emails sent by the system) [${YELLOW}Kaltura Video Platform${CYAN}]:${NORMAL}"
                 read ENVIRONMENT_NAME
                 if [ -z "$ENVIRONMENT_NAME" ];then
                         ENVIRONMENT_NAME="Kaltura Video Platform"
@@ -245,7 +245,7 @@ CDN hostname [${YELLOW}`hostname`${CYAN}]:${NORMAL}"
                 fi
         fi
         if [ -z "$CONTACT_PHONE_NUMBER" ];then
-                echo -en "${CYAN}'Contact us' phone number [${YELLOW}+1 800 871 5224${CYAN}]?${NORMAL}"
+                echo -en "${CYAN}Your 'Contact us' phone number [${YELLOW}+1 800 871 5224${CYAN}]:${NORMAL}"
                 read CONTACT_PHONE_NUMBER
                 if [ -z "$CONTACT_PHONE_NUMBER" ];then
                         CONTACT_PHONE_NUMBER="+1 800 871 5224"

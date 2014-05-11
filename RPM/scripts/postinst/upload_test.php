@@ -24,16 +24,16 @@ function upload($client,$fileData,$title,$conv_profile=null,$type=null)
 		}
 		$result = $client->baseEntry->addfromuploadedfile($entry, $tok, $type);
 		$id=$result->id;
-		$xme1=$client->getResponseHeaders();
+/*		$xme1=$client->getResponseHeaders();
 		$xme2=split(": ",$xme1[3]);
 		$xme=trim($xme2[1]);
-		echo $xme . " " .$title .' ';
+		echo $xme . " " .$title .' ';*/
 		return($id);
 	}catch(exception $e){
-		$xme1=$client->getResponseHeaders();
+/*		$xme1=$client->getResponseHeaders();
 		$xme2=split(": ",$xme1[3]);
 		$xme=trim($xme2[1]);
-		echo $xme . " " .$title .' ';
+		echo $xme . " " .$title .' ';*/
 		throw $e;
 	}
 }
