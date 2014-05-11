@@ -33,3 +33,5 @@ All code in this project is released under the [AGPLv3 license](http://www.gnu.o
 Copyright © Kaltura Inc. All rights reserved.
 
 Authors [@jessp01](https://github.com/jessp01), [@zoharbabin](https://github.com/zoharbabin) and many others.
+
+Contributors @DBezemer, @fugazi73, @blackyboy, @Ronileco, @jpluijmers, @smartdrive, @baiyou2014, @krarey, @nzimas, @nshulakov, @joerace, @iddrew, @ironsizide, @angober, @nviera777, @bnelson796, @cschaub, @mobcdi, @flipmcf, @dudyk, @vadimtar.
