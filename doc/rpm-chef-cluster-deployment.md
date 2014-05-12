@@ -64,10 +64,10 @@ nfs
 Alternatively, log in to Chef's web with https://chef-server/   
 You should see your added nodes under the "Nodes" tab as well as the "Clients" tab.
 
-## Loading the NTP and MySQL recipes to your Chef server
-Download NTP and MySQL recipes:
+## Loading the NFS and MySQL recipes to your Chef server
+Download NFS and MySQL recipes:
 
-1. http://community.opscode.com/cookbooks/ntp
+1. http://community.opscode.com/cookbooks/nfs
 1. http://community.opscode.com/cookbooks/mysql
 
 **These recipes have dependencies you will need as well. Please follow documentation on the above URLs.**
