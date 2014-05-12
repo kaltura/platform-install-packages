@@ -53,7 +53,10 @@ for DAEMON in rpcbind rpcidmapd ;do
 	service $DAEMON restart
 done
 nfsidmap -c
-mount $MOUNT_DIR
+cat /proc/mounts |grep -q "$NFS_HOST:$MOUNT_DIR\s* $MOUNT_DIR"
+if [ $? -ne 0 ];then
+	mount $MOUNT_DIR || echo "Failed to mount" && exit 2
+fi
 su kaltura -c "touch $MOUNT_DIR/"
 if [ $? -eq 0 ];then
 	echo "Mount is OK, writable to 'kaltura' user"

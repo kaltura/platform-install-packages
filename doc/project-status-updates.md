@@ -2,7 +2,7 @@
 
 #### 2014-05-04:
 
-Celebrating over 100 bugs crushed mark! :) Thanks to all active contributors! (DBezemer, fugazi73, blackyboy, Ronileco, jpluijmers, smartdrive, baiyou2014, krarey, nzimas, nshulakov, joerace, iddrew, ironsizide, angober, nviera777, bnelson796, cschaub, mobcdi, flipmcf).   
+Celebrating over 100 bugs crushed mark! :) Thanks to all active contributors! (DBezemer, fugazi73, blackyboy, Ronileco, jpluijmers, smartdrive, baiyou2014, krarey, nzimas, nshulakov, joerace, iddrew, ironsizide, angober, nviera777, bnelson796, cschaub, mobcdi, flipmcf, dudyk, vadimtar).   
 
 + Stable version is now 9.15.0.
 + Many more tests were added to the CI system.
