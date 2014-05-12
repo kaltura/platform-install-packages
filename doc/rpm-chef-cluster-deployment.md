@@ -19,9 +19,10 @@ This guide is intended for users of Chef that would like to deploy Kaltura clust
     1. The post install will provide instructions as to what else needs to be done to set the instance up.   
 1. Obtain chef-repo from https://github.com/kaltura/platform-install-packages.git  
 1. Upload the Kaltura recipes to your Chef server using: `# knife cookbook upload kaltura`
-1. We also recommend you use the ready made recipes for MySQL and NFS which can be taken from here:
+1. We also recommend you use the ready made recipes for MySQL, NFS and NTP which can be taken from here:
     1. http://community.opscode.com/cookbooks/mysql
     1. http://community.opscode.com/cookbooks/nfs
+    1. http://community.opscode.com/cookbooks/ntp
 
 **Note: you may also want to use this recipe for a simple Apache load balancer: http://community.opscode.com/cookbooks/apache_load_balancer **
 
