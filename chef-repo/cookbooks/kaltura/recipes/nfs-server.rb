@@ -4,7 +4,7 @@ end
 
 user "kaltura" do
   uid 7373
-  home "/opt/kaltura"
+  home "#{node[:kaltura][:BASE_DIR]}"
   supports :manage_home => false
   shell "/bin/bash"
   gid "kaltura"
@@ -26,21 +26,21 @@ user "apache" do
   comment "Apache"
 end
 
-directory "/opt/kaltura" do
+directory "#{node[:kaltura][:BASE_DIR]}" do
   owner "kaltura"
   group "apache"
   mode 00775
   action :create
 end
 
-directory "/opt/kaltura/web" do
+directory "#{node[:kaltura][:BASE_DIR]}/web" do
   owner "kaltura"
   group "apache"
   mode 00775
   action :create
 end
 
-nfs_export "/opt/kaltura/web" do
+nfs_export "#{node[:kaltura][:BASE_DIR]}/web" do
   network '*'
   writeable true 
   sync true

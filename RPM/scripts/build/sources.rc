@@ -66,7 +66,7 @@ KMC_LOGIN_VERSION=v$KMC_LOGIN_MINUS_V_VERSION
 KMC_URI="https://github.com/kaltura/kmc/releases/download/$KMC_VERSION/$KMC_VERSION.zip"
 KMC_LOGIN_URI="https://github.com/kaltura/kmc-login/releases/download/$KMC_LOGIN_VERSION/$KMC_LOGIN_VERSION.zip"
 KMC_UICONF_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalsource/uiconf/kaltura/kmc"
-KMC_DOCS_URI="https://github.com/kaltura/kmc-docs/archive/IX_9.15.0.tar.gz"
+KMC_DOCS_URI="https://github.com/kaltura/kmc-docs/archive/IX_$KALTURA_SERVER_VERSION.tar.gz"
 KMC_RPM_NAME="kaltura-kmc"
 
 # Kaltura KMC docs:

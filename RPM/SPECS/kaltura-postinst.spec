@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.12
-Release: 31
+Release: 32
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -81,6 +81,9 @@ fi
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Mon May 12 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.12-32
+- Fixes https://github.com/kaltura/platform-install-packages/pull/119
+
 * Sun May 11 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.12-31
 - Check if NFS volume is already mounted, if not, mount and exit if that fails.
 
