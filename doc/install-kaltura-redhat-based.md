@@ -81,6 +81,7 @@ If you are using Amazon Web Services (AWS) please note that by default EC2 machi
 Install the basic Kaltura Packages:
 ```bash
 yum clean all
+yum update -y
 yum install kaltura-server
 ```
 
@@ -219,6 +220,7 @@ If you are using Amazon Web Services (AWS) please note that by default EC2 machi
 Install the basic Kaltura Packages:
 ```bash
 yum clean all
+yum update -y
 yum install kaltura-server
 ```
 
