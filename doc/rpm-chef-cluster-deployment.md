@@ -112,7 +112,6 @@ An example cluster deployment will be:
 # knife node run_list add mynfs kaltura::nfs-server
 # knife node run_list add mynfs nfs::server
 # knife node run_list add my-mysql-machine mysql::server 
-# knife node run_list add my-mysql-machine mysql::_server_rhel 
 # knife node run_list add my-batch-machine nfs 
 # knife node run_list add my-batch-machine kaltura::batch 
 # knife node run_list add my-sphinx-machine kaltura::sphinx
