@@ -32,14 +32,14 @@ end
 directory "#{node[:kaltura][:BASE_DIR]}" do
   owner "kaltura"
   group "apache"
-  mode 00775
+  mode 0775
   action :create
 end
 
 directory "#{node[:kaltura][:BASE_DIR]}/web" do
   owner "kaltura"
   group "apache"
-  mode 00775
+  mode 0775
   action :create
 end
 

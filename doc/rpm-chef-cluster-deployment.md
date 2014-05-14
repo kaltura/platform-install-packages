@@ -68,7 +68,7 @@ You should see your added nodes under the "Nodes" tab as well as the "Clients" t
 ## Loading the NFS and MySQL recipes to your Chef server
 Download NFS and MySQL recipes:
 
-1. http://community.opscode.com/cookbooks/nfs
+1. https://github.com/jessp01/cookbook-nfs
 1. http://community.opscode.com/cookbooks/mysql
 
 **These recipes have dependencies you will need as well. Please follow documentation on the above URLs.**
