@@ -47,11 +47,11 @@ DB1_HOST="@MYSQL_HOST@"
 DB1_PORT="@MYSQL_PORT@"
 # desired passwd, make it good.
 DB1_PASS="@KALT_DB_PASS@"
-# analytics NySQL DB
+# analytics MySQL DB
 DWH_HOST="@MYSQL_HOST@"
-# analytics NySQL port 
+# analytics MySQL port 
 DWH_PORT="@MYSQL_PORT@"
-# analytics NySQL port 
+# analytics MySQL port 
 DWH_PASS="@KALT_DB_PASS@"
 # MySQL super user, this is only used for bootstrap, the app itself will not connect with it.
 SUPER_USER="@MYSQL_SUPER_USER@"
