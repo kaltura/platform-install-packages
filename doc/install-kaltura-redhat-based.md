@@ -224,10 +224,15 @@ If you are using Amazon Web Services (AWS) please note that by default EC2 machi
 
 #### Install Kaltura Server
 
+## Note: prior to installing Kaltura, while not a must, we recommend you update the installed packages to latest by running:
+```bash
+yum update
+```
+
 Install the basic Kaltura Packages:
 ```bash
 yum clean all
-yum update -y
+yum update "*kaltura*" 
 yum install kaltura-server
 ```
 
