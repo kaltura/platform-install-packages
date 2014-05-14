@@ -76,6 +76,13 @@ service postfix restart
 
 If you are using Amazon Web Services (AWS) please note that by default EC2 machines are blocked from sending email via port 25. For more information see [this thread on AWS forums](https://forums.aws.amazon.com/message.jspa?messageID=317525#317525).
 
+##### Node regarding desktop installations
+
+When installing on a "desktop" environment there may be package conflicts with media encoding/decoding plugins.
+
+In Redhat 6.5 you should run the following to remove the conflicting packages:
+`rpm -e gstreamer-plugins-bad-free totem totem-nautilus`
+
 #### Install Kaltura Server
 
 Install the basic Kaltura Packages:
