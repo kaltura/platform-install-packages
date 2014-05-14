@@ -153,6 +153,14 @@ echo -e "${CYAN}Output for $APP_DIR/deployment/base/scripts/insertPermissions.ph
 php $APP_DIR/deployment/base/scripts/insertPermissions.php  >> $LOG_DIR/insertPermissions.log 2>&1
 echo -e "${CYAN}Output for $APP_DIR/deployment/base/scripts/insertContent.php being logged into $LOG_DIR/insertContent.log ${NORMAL}"
 php $APP_DIR/deployment/base/scripts/insertContent.php >> $LOG_DIR/insertContent.log  2>&1
+if [ $? -ne 0 ];then
+cat << EOF
+Failed to run:
+php $APP_DIR/deployment/base/scripts/insertContent.php >> $LOG_DIR/insertContent.log  2>&1
+Check accessibility of the fronend system and your settings."
+EOF
+	exit 8
+fi
 
 if [ -n "$IS_SSL" ];then
 # force KMC login via HTTPs.
