@@ -88,15 +88,13 @@ if [ -n "$1" -a -r "$1" ];then
         verify_user_input $ANSFILE
         . $ANSFILE
         export ANSFILE
-        if [ -z "$USER_CONSENT" ];then
-                get_tracking_consent
-        fi
 else
         if [ -r $CONSENT_FILE ];then
                 . $CONSENT_FILE
         elif [ -z "$USER_CONSENT" ];then
                 get_tracking_consent
         fi
+        . $CONSENT_FILE
        # echo "Welcome to Kaltura Server $DISPLAY_NAME post install setup.
 echo -e "\n${CYAN}In order to finalize the system configuration, please input the following:
 
