@@ -2,7 +2,8 @@ default[:kaltura][:VERSION]= "v9.15.0"
 default[:kaltura][:CDN_HOST] = ""
 default[:kaltura][:RED5_HOST] = "#{node['fqdn']}"
 default[:kaltura][:KALTURA_VIRTUAL_HOST_NAME] = "#{node['fqdn']}"
-default[:kaltura][:KALTURA_VIRTUAL_HOST_PORT]=80                                                                                                                  default[:kaltura][:PROTOCOL]="http"                                                                                                                               
+default[:kaltura][:KALTURA_VIRTUAL_HOST_PORT]=80
+default[:kaltura][:PROTOCOL]="http"                                                                                                                               
 default[:kaltura][:KALTURA_FULL_VIRTUAL_HOST_NAME] = "#{node[:kaltura][:KALTURA_VIRTUAL_HOST_NAME]}:#{node[:kaltura][:KALTURA_VIRTUAL_HOST_PORT]}"                
 # what web UIs to expose    
 default[:kaltura][:CONFIG_CHOICE]=0                                                                                                                               

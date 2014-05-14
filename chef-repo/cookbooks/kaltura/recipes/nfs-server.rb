@@ -1,3 +1,6 @@
+# Recipe contributed by Dudy Kohen <admin@panda-os.com>
+# Creates needed users [kaltura and apache] on the NFS server.
+#
 group "kaltura" do
   gid 7373
 end
