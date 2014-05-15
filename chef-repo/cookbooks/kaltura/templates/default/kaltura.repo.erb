@@ -1,0 +1,28 @@
+# URL: http://kaltura.org/
+[Kaltura]
+name = Kaltura Server
+baseurl = <%= node[:kaltura][:REPO_URL]%>/releases/latest/RPMS/$basearch/
+gpgkey = <%= node[:kaltura][:REPO_URL]%>/releases/RPM-GPG-KEY-kaltura
+gpgcheck = 1 
+enabled = 1
+
+[Kaltura-noarch]
+name = Kaltura Server arch independent
+baseurl = <%= node[:kaltura][:REPO_URL]%>/releases/latest/RPMS/noarch
+gpgkey = <%= node[:kaltura][:REPO_URL]%>/releases/RPM-GPG-KEY-kaltura
+gpgcheck = 1
+enabled = 1
+
+[Kaltura-testing]
+name = Kaltura Server arch independent
+baseurl = <%= node[:kaltura][:REPO_URL]%>/releases/nightly/RPMS/$basearch/
+gpgkey = <%= node[:kaltura][:REPO_URL]%>/releases/RPM-GPG-KEY-kaltura
+gpgcheck = 1 
+enabled = 0
+
+[Kaltura-testing-noarch]
+name = Kaltura Server arch independent
+baseurl = <%= node[:kaltura][:REPO_URL]%>/releases/nightly/RPMS/noarch
+gpgkey = <%= node[:kaltura][:REPO_URL]%>/releases/RPM-GPG-KEY-kaltura
+gpgcheck = 1
+enabled = 0

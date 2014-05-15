@@ -42,7 +42,7 @@ default[:kaltura][:USER_CONSENT] = 0
 default[:kaltura][:CRT_FILE] = "/etc/ssl/certs/localhost.crt"
 default[:kaltura][:KEY_FILE] = "/etc/pki/tls/private/localhost.key"
 default[:kaltura][:CHAIN_FILE] = "NOCHAIN"
-default[:kaltura][:REPO_URL] = "http://54.211.235.142"
+default[:kaltura][:REPO_URL] = "http://installrepo.kaltura.org"
 default[:kaltura][:NFS_SERVER] =  ""
 # enable the testing repo
 default[:kaltura][:ENABLE_TESTING] = 1
