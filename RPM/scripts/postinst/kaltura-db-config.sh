@@ -143,7 +143,6 @@ fi
 
 echo "Cleaning cache.."
 rm -rf $APP_DIR/cache/*
-sed -i "s@?a=12@@g" $APP_DIR/deployment/base/scripts/init_content/ui_conf/*
 echo -e "${CYAN}Populating DB with data.. please wait..${NORMAL}"
 echo -e "${CYAN}Output for $APP_DIR/deployment/base/scripts/installPlugins.php being logged into $LOG_DIR/installPlugins.log ${NORMAL}"
 php $APP_DIR/deployment/base/scripts/installPlugins.php >> $LOG_DIR/installPlugins.log  2>&1
@@ -153,6 +152,14 @@ echo -e "${CYAN}Output for $APP_DIR/deployment/base/scripts/insertPermissions.ph
 php $APP_DIR/deployment/base/scripts/insertPermissions.php  >> $LOG_DIR/insertPermissions.log 2>&1
 echo -e "${CYAN}Output for $APP_DIR/deployment/base/scripts/insertContent.php being logged into $LOG_DIR/insertContent.log ${NORMAL}"
 php $APP_DIR/deployment/base/scripts/insertContent.php >> $LOG_DIR/insertContent.log  2>&1
+if [ $? -ne 0 ];then
+cat << EOF
+Failed to run:
+php $APP_DIR/deployment/base/scripts/insertContent.php >> $LOG_DIR/insertContent.log  2>&1
+EOF
+	echo -e "${BRIGHT_RED}Please check your setup and then run $0 again.${NORMAL}"
+	exit 8
+fi
 
 if [ -n "$IS_SSL" ];then
 # force KMC login via HTTPs.

@@ -32,7 +32,7 @@ enable_admin_conf()
 create_answer_file()
 {
 	ANSFILE="$1"
-        for VAL in CONFIG_CHOICE IS_SSL CRT_FILE KEY_FILE; do
+        for VAL in CONFIG_CHOICE IS_SSL CRT_FILE KEY_FILE CHAIN_FILE; do
                 if [ -n "${!VAL}" ];then
 			sed "/^$VAL=.*/d" -i $ANSFILE
 			echo "$VAL=\"${!VAL}\"" >> $ANSFILE 
@@ -54,12 +54,14 @@ if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
 	exit 3
 fi
 . $KALTURA_FUNCTIONS_RC
+NEWANSFILE="/tmp/kaltura_`date +%d_%m_%H_%M.ans`"
 if [ -n "$1" -a -r "$1" ];then
 	ANSFILE=$1
 	. $ANSFILE
 	AUTO_YES=1
-	NEWANSFILE="/tmp/kaltura_`date +%d_%m_%H_%M.ans`"
 	cp $ANSFILE $NEWANSFILE
+else
+	touch $NEWANSFILE
 fi
 if [ ! -r /opt/kaltura/app/base-config.lock ];then
 	`dirname $0`/kaltura-base-config.sh "$ANSFILE"

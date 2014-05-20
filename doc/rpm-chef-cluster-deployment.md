@@ -19,9 +19,10 @@ This guide is intended for users of Chef that would like to deploy Kaltura clust
     1. The post install will provide instructions as to what else needs to be done to set the instance up.   
 1. Obtain chef-repo from https://github.com/kaltura/platform-install-packages.git  
 1. Upload the Kaltura recipes to your Chef server using: `# knife cookbook upload kaltura`
-1. We also recommend you use the ready made recipes for MySQL and NFS which can be taken from here:
+1. We also recommend you use the ready made recipes for MySQL, NFS and NTP which can be taken from here:
     1. http://community.opscode.com/cookbooks/mysql
     1. http://community.opscode.com/cookbooks/nfs
+    1. http://community.opscode.com/cookbooks/ntp
 
 **Note: you may also want to use this recipe for a simple Apache load balancer: http://community.opscode.com/cookbooks/apache_load_balancer **
 
@@ -64,10 +65,10 @@ nfs
 Alternatively, log in to Chef's web with https://chef-server/   
 You should see your added nodes under the "Nodes" tab as well as the "Clients" tab.
 
-## Loading the NTP and MySQL recipes to your Chef server
-Download NTP and MySQL recipes:
+## Loading the NFS and MySQL recipes to your Chef server
+Download NFS and MySQL recipes:
 
-1. http://community.opscode.com/cookbooks/ntp
+1. https://github.com/jessp01/cookbook-nfs
 1. http://community.opscode.com/cookbooks/mysql
 
 **These recipes have dependencies you will need as well. Please follow documentation on the above URLs.**
@@ -108,9 +109,9 @@ The syntax for it is:
 ```
 An example cluster deployment will be:
 ```
+# knife node run_list add mynfs kaltura::nfs-server
 # knife node run_list add mynfs nfs::server
 # knife node run_list add my-mysql-machine mysql::server 
-# knife node run_list add my-mysql-machine mysql::_server_rhel 
 # knife node run_list add my-batch-machine nfs 
 # knife node run_list add my-batch-machine kaltura::batch 
 # knife node run_list add my-sphinx-machine kaltura::sphinx

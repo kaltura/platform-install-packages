@@ -1,7 +1,7 @@
 
 ## Description
 
-Installs and configures Kaltura
+Installs and configures Kaltura - the Open Source Video Platform.
 
 This cookbook deploys (installs and configures) complete Kaltura clusters and all required nodes and packages. It can be used to install and maintain Kaltura clusters,and to simplify deployment scaling.
 Read more at -
@@ -13,6 +13,11 @@ Kaltura’s mission is to power any video experience. Provider of the world’s 
 
 
 ## Requirements
+
+* RHEL/CentOS - 6.0 and above
+* Fedora Core 18 and above
+* MySQL 5.1.n [5.5 not currently supported]
+
 It is recommended, although not a must, that you use:
 
 http://community.opscode.com/cookbooks/mysql
@@ -25,10 +30,13 @@ In order to setup your MySQL and NFS servers.
 
 Author: Jess Portnoy <jess.portnoy@kaltura.com> 
 
-Copyright 2013, Kaltura, Inc.
+Copyright 2014, Kaltura, Inc.
 
-Licensed under the AGPLv3+ 
+Licensed under the AGPLv3+.
+
 you may not use this file except in compliance with the License.
+
 You may obtain a copy of the License at:
+
 http://www.gnu.org/licenses/agpl-3.0.html
 
