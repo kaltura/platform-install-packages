@@ -22,7 +22,7 @@ This guide describes RPM installation of an all-in-one Kaltura server and applie
 ### Pre-Install notes
 * This install guides assumes that you did a clean, basic install of one of the RHEL based OS's in 64bit architecture.
 * When installing, you will be prompted for each server's resolvable hostname. Note that it is crucial that all host names will be resolvable by other servers in the cluster (and outside the cluster for front machines). Before installing, verify that your /etc/hosts file is properly configured and that all Kaltura server hostnames are resolvable in your network.
-* Before you begin, make sure you're logged in as the system root. Root access is required to install Kaltura, and you should execute ```sudo su``` to make sure that you are indeed root.
+* Before you begin, make sure you're logged in as the system root. Root access is required to install Kaltura, and you should execute ```sudo su``` or ```su -``` to make sure that you are indeed root.
 
 #### Firewall requirements
 Kaltura requires certain ports to be open for proper operation. [See the list of required open ports](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura-required-ports.md).
@@ -165,7 +165,7 @@ Your install will now automatically perform all install tasks.
 ### Pre-Install notes
 * This install guides assumes that you did a clean, basic install of one of the support RHEL based OS's in 64bit architecture.
 * When installing, you will be prompted for each server's resolvable hostname. Note that it is crucial that all host names will be resolvable by other servers in the cluster (and outside the cluster for front machines). Before installing, verify that your /etc/hosts file is properly configured and that all Kaltura server hostnames are resolvable in your network.
-* Before you begin, make sure you're logged in as the system root. Root access is required to install Kaltura, and you should execute ```sudo su``` to make sure that you are indeed root.
+* Before you begin, make sure you're logged in as the system root. Root access is required to install Kaltura, and you should execute ```sudo su``` or ```su -``` to make sure that you are indeed root.
 * It is recommended that you use a properly signed certificate and avoid self-signed certificates due to limitations of various browsers in properly loading websites using self-signed certificates.
   * You can generate a free valid cert using [http://cert.startcom.org/](http://cert.startcom.org/).
   * To verify the validity of your certificate, you can then use [SSLShoper's SSL Check Utility](http://www.sslshopper.com/ssl-checker.html).
