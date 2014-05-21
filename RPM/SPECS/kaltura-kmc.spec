@@ -81,12 +81,12 @@ rm -rf %{buildroot}
 
 
 %changelog
-* Wed May 21 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.20-1
+* Wed May 21 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.20-1
 - PLAT-671 - KMC - Bulk Action - Remove Tags - Causes popup when opening category
 - FEC-1302 - security-fix (Oracle) - KMC support form does not validate input on GET parameters (XSS)
 - FEC-1402 - CLONE - security-fix (Oracle) - KMC support form does not validate input on GET parameters (XSS)
 
-* Wed Mar 7 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.17-6
+* Wed May 7 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.17-6
 - Added URL pointing to GIT repo.
 
 * Sat Apr 26 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.17-3

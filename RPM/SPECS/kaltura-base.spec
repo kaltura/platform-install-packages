@@ -260,6 +260,15 @@ if [ "$1" = 2 ];then
 			php %{prefix}/app/deployment/updates/scripts/2014_04_02_enforce_live_params_permissions.php > /tmp/2014_04_02_enforce_live_params_permissions.php.log
 			php %{prefix}/app/deployment/updates/scripts/2014_04_16_remove_cloud_transcode_profile.php realrun > /tmp/2014_04_16_remove_cloud_transcode_profile.php.log
 			php %{prefix}/app/deployment/updates/scripts/2014_04_22_enable_live_paid_partners.php realrun > /tmp/2014_04_22_enable_live_paid_partners.php.log
+		elif [ $CORE_MAJ_VER -lt 15 ];then
+			php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_01_26_add_media_server_partner_level_permission.php > /tmp/2014_01_26_add_media_server_partner_level_permission.php .log
+			php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_02_25_add_push_publish_permission_to_partner_0.php > /tmp/2014_02_25_add_push_publish_permission_to_partner_0.php.log
+			php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_01_26_update_live_stream_service_permissions.php > /tmp/2014_01_26_update_live_stream_service_permissions.php.log
+			php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_02_25_add_push_publish_permission_to_live_asset_parameters.php > /tmp/2014_02_25_add_push_publish_permission_to_live_asset_parameters.php.log
+			php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_02_25_add_push_publish_permission_to_live_entry_parameters.php > /tmp/2014_02_25_add_push_publish_permission_to_live_entry_parameters.php.log
+			php %{prefix}/app/deployment/updates/scripts/2014_03_10_addpushpublishconfigurationaction_added_to_livestreamservice.php > /tmp/2014_03_10_addpushpublishconfigurationaction_added_to_livestreamservice.php.log
+			php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_05_07_live_conversionprofile_hybrid_ecdn.php > /tmp/2014_05_07_live_conversionprofile_hybrid_ecdn.php.log
+			php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_05_07_add_always_allowed_hybrid_ecdn.php > /tmp/2014_05_07_add_always_allowed_hybrid_ecdn.php.log
 		fi	
 	fi
 

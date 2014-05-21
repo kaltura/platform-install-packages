@@ -66,7 +66,7 @@ rm -rf %{buildroot}
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
-* Wed Mar 21 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.9-1
+* Wed May 21 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.9-1
 - SUP-2048 - Omniture tracking issue on mobile devices
 - SUP-2108 - HTML5 V2 player - incorrect display in Share screen
 - FEC-1371 - IE9:The alert of missing Widevine Video Optimizer plugin is twisted.
