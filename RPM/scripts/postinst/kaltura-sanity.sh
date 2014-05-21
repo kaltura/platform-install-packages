@@ -4,6 +4,7 @@
 #         USAGE: ./kaltura_sanity.sh 
 #   DESCRIPTION: post install sanity script 
 #       OPTIONS: ---
+# 	LICENSE: AGPLv3+
 #  REQUIREMENTS: ---
 #          BUGS: ---
 #         NOTES: ---

@@ -4,6 +4,7 @@
 #         USAGE: ./kaltura-base-config.sh 
 #   DESCRIPTION: 
 #       OPTIONS: ---
+# 	LICENSE: AGPLv3+
 #  REQUIREMENTS: ---
 #          BUGS: ---
 #         NOTES: ---

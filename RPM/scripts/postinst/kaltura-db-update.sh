@@ -4,6 +4,7 @@
 #         USAGE: ./kaltura-db-update.sh 
 #   DESCRIPTION: 
 #       OPTIONS: ---
+# 	LICENSE: AGPLv3+
 #  REQUIREMENTS: ---
 #          BUGS: ---
 #         NOTES: ---

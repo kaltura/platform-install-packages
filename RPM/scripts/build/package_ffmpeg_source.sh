@@ -4,6 +4,7 @@
 #         USAGE: ./package_ffmpeg_source.sh 
 #   DESCRIPTION: 
 #       OPTIONS: ---
+# 	LICENSE: AGPLv3+
 #  REQUIREMENTS: ---
 #          BUGS: ---
 #         NOTES: ---

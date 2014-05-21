@@ -4,6 +4,7 @@
 #         USAGE: ./kaltura-batch-config.sh 
 #   DESCRIPTION: configure server as a batch node.
 #       OPTIONS: ---
+# 	LICENSE: AGPLv3+
 #  REQUIREMENTS: ---
 #          BUGS: ---
 #         NOTES: ---

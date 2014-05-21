@@ -4,6 +4,7 @@
 #         USAGE: ./kaltura-sphinx-config.sh 
 #   DESCRIPTION: configure server as a Sphinx node.
 #       OPTIONS: ---
+# 	LICENSE: AGPLv3+
 #  REQUIREMENTS: ---
 #          BUGS: ---
 #         NOTES: ---

@@ -4,6 +4,7 @@
 #         USAGE: ./package_sphinx_source.sh 
 #   DESCRIPTION: Retrieve new Sphinx source and package as a tar ball 
 #       OPTIONS: ---
+# 	LICENSE: AGPLv3+
 #  REQUIREMENTS: ---
 #          BUGS: ---
 #         NOTES: ---

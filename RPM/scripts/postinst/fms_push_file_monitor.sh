@@ -4,6 +4,7 @@
 #         USAGE: ./fms_push_file.sh 
 #   DESCRIPTION:
 #       OPTIONS: </path/to/local/file> <fms_host> [--debug]---
+# 	LICENSE: AGPLv3+
 #  REQUIREMENTS: ---
 #          BUGS: ---
 #         NOTES: ---

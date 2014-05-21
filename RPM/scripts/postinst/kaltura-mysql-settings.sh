@@ -4,6 +4,7 @@
 #         USAGE: ./kaltura-mysql-settings.sh 
 #   DESCRIPTION: 
 #       OPTIONS: ---
+# 	LICENSE: AGPLv3+
 #  REQUIREMENTS: ---
 #          BUGS: ---
 #         NOTES: ---

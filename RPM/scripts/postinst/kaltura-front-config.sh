@@ -4,6 +4,7 @@
 #         USAGE: ./kaltura-front-config.sh 
 #   DESCRIPTION: configure server as a front node.
 #       OPTIONS: ---
+# 	LICENSE: AGPLv3+
 #  REQUIREMENTS: ---
 #          BUGS: ---
 #         NOTES: ---

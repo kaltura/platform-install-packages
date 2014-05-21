@@ -4,6 +4,7 @@
 #         USAGE: ./kaltura-nfs-client-config.sh 
 #   DESCRIPTION: NFS client side preps. 
 #       OPTIONS: ---
+# 	LICENSE: AGPLv3+
 #  REQUIREMENTS: ---
 #          BUGS: ---
 #         NOTES: ---

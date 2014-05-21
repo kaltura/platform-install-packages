@@ -1,4 +1,16 @@
 #!/bin/sh
+#         USAGE: ./kaltura-mysql-replication-config.sh 
+#   DESCRIPTION:
+#       OPTIONS: rep_user rep_user_passw master_ip operation <master||slave> 
+# 	LICENSE: AGPLv3+
+#  REQUIREMENTS: ---
+#          BUGS: ---
+#         NOTES: ---
+#        AUTHOR: Jess Portnoy (), jess.portnoy@kaltura.com
+#  ORGANIZATION: Kaltura, inc.
+#       CREATED: 11/29/2013 03:26:51 PM IST
+#      REVISION:  ---
+#===============================================================================
 
 if [ $# -lt 4 ];then
 	echo "Usage: $0 rep_user rep_user_passw master_ip operation <master||slave>"

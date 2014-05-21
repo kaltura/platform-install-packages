@@ -4,6 +4,7 @@
 #         USAGE: ./package_kaltura_wrapper.sh 
 #   DESCRIPTION: 
 #       OPTIONS: ---
+# 	LICENSE: AGPLv3+
 #  REQUIREMENTS: ---
 #          BUGS: ---
 #         NOTES: ---

@@ -4,6 +4,7 @@
 #         USAGE: ./package_kaltura_html5lib.sh 
 #   DESCRIPTION: 
 #       OPTIONS: ---
+# 	LICENSE: AGPLv3+
 #  REQUIREMENTS: ---
 #          BUGS: ---
 #         NOTES: ---

@@ -4,6 +4,7 @@
 #         USAGE: ./package_pentaho_source.sh 
 #   DESCRIPTION: Retrieve Pentaho source
 #       OPTIONS: ---
+# 	LICENSE: AGPLv3+
 #  REQUIREMENTS: ---
 #          BUGS: ---
 #         NOTES: ---

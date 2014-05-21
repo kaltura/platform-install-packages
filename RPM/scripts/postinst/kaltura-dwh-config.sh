@@ -4,6 +4,7 @@
 #         USAGE: ./kaltura-dwh-config.sh 
 #   DESCRIPTION: configure the server as a DWH node. 
 #       OPTIONS: ---
+# 	LICENSE: AGPLv3+
 #  REQUIREMENTS: ---
 #          BUGS: ---
 #         NOTES: ---

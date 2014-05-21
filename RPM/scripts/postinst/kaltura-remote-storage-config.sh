@@ -4,6 +4,7 @@
 #         USAGE: ./kaltura-remote-storage-config.sh 
 #   DESCRIPTION: Auto config a remote storage profile
 #       OPTIONS: ---
+# 	LICENSE: AGPLv3+
 #  REQUIREMENTS: ---
 #          BUGS: ---
 #         NOTES: ---
