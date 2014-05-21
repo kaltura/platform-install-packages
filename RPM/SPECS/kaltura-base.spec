@@ -9,8 +9,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 9.15.0
-Release: 7 
+Version: 9.16.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -317,6 +317,22 @@ fi
 
 
 %changelog
+* Wed May 21 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.16.0-1
+- Ver Bounce to 9.16.0
+- PLAT-974 - add partner Reference ID to KMC and Multi-Account console
+- PLAT-1131 - Triggering distribution only when entry is assigned to a specific metadata
+- PLAT-1267 - Merge both DCs manifests into a single combined manifest
+- SUP-814 - Media counts in Channels do not match Channel preview or KMC counts
+- SUP-1504 - Re-publishing a rejected media item doesn't update for channel owner
+- SUP-1826 - Widevine encoding fails
+- SUP-1867 - Flavors Quality
+- SUP-1910 - Green line with flavor 480P
+- SUP-1987 - Instant blocking of user on KMC
+- SUP-2059 - Script error in Multiaccount console
+- PLAT-1039 - Kaltura live entry gets duration 1 hours.
+- PLAT-1311 - Wrong kaltura live duration when setting two DCs.
+- PLAT-1323 - Sphinx optimization - dynamic attributes within the match optimization
+
 * Mon May 19 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.15.0-7
 - tmp patch until https://github.com/jessp01/server/commit/13bd0c220111c1809d1a7f6e5544cc02b4e26cd9 is merged back to Core.
 
