@@ -10,7 +10,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 9.15.0
-Release: 6 
+Release: 7 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -43,6 +43,9 @@ Source23: 04.flavorParams.ini
 Source24: 04.liveParams.ini
 Source25: kaltura_populate.template
 Source26: kaltura_batch.template
+Source27: kmc1Success.php 
+Source28: galleryPartialSuccess.php
+Source29: gallerySuccess.php
 
 URL: https://github.com/kaltura/server/tree/IX-%{version}
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -148,6 +151,9 @@ cp %{SOURCE15} $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/
 cp %{SOURCE16} $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/
 cp %{SOURCE25} $RPM_BUILD_ROOT%{prefix}/app/configurations/logrotate/
 cp %{SOURCE26} $RPM_BUILD_ROOT%{prefix}/app/configurations/logrotate/
+cp %{SOURCE27} $RPM_BUILD_ROOT%{prefix}/app/alpha/apps/kaltura/modules/kmc/templates/
+cp %{SOURCE28} $RPM_BUILD_ROOT%{prefix}/app/alpha/apps/kaltura/modules/system/templates/
+cp %{SOURCE29} $RPM_BUILD_ROOT%{prefix}/app/alpha/apps/kaltura/modules/system/templates/
 
 # sample bulks
 cp %{SOURCE21} $RPM_BUILD_ROOT%{prefix}/web/content/docs/
@@ -311,6 +317,9 @@ fi
 
 
 %changelog
+* Mon May 19 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.15.0-7
+- tmp patch until https://github.com/jessp01/server/commit/13bd0c220111c1809d1a7f6e5544cc02b4e26cd9 is merged back to Core.
+
 * Thu Apr 24 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.15.0-1
 - Ver Bounce to 9.15.0
 - SUP-1866 - Disabling email notifications

@@ -53,7 +53,7 @@ for DAEMON in rpcbind rpcidmapd ;do
 	service $DAEMON restart
 done
 nfsidmap -c
-cat /proc/mounts |grep -q "$NFS_HOST:$MOUNT_DIR\s* $MOUNT_DIR"
+cat /proc/mounts |grep -q "$NFS_HOST:$MOUNT_DIR.*$MOUNT_DIR"
 if [ $? -ne 0 ];then
 	mount $MOUNT_DIR || echo "Failed to mount" && exit 2
 fi
