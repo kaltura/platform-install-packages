@@ -187,7 +187,12 @@ if rpm -q kaltura-batch >/dev/null 2>&1 || rpm -q kaltura-front >/dev/null 2>&1 
 			fi
 
 			if rpm -q kaltura-dwh >> /dev/null 2>&1;then
-				echo -e "${CYAN}Testing analytics, be patient..${NORMAL}"
+				echo -e "${CYAN}Testing analytics, be patient..
+
+Please note: if you are running this test on a clustered ENV, it will fail but this does not mean there is an actual problem.
+The tech information as to why is available here: 
+https://github.com/kaltura/platform-install-packages/issues/106#issuecomment-42837404"
+${NORMAL}"
 				START=`date +%s.%N`
 				OUTP=`php $DIRNAME/dwh_cycle.php $DIRNAME/sanity_config.ini 2>&1`
 				RC=$?
