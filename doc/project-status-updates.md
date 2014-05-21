@@ -3,7 +3,7 @@
 #### 2014-05-21:
 
 + Stable version is now 9.16.0
-+ Many bugs were crushed! (#130, #128, #127, #126, #121, #120, #119, #118, #113, #112, #103) - Many thanks to our newest contributors! [@dudyk](https://github.com/dudyk) and [@vadimtar](https://github.com/vadimtar)
++ Many bugs were crushed! ([#130](https://github.com/kaltura/platform-install-packages/pull/130), [#128](https://github.com/kaltura/platform-install-packages/pull/128), [#127](https://github.com/kaltura/platform-install-packages/pull/127), [#126](https://github.com/kaltura/platform-install-packages/pull/126), [#121](https://github.com/kaltura/platform-install-packages/pull/121), [#120](https://github.com/kaltura/platform-install-packages/pull/120), [#119](https://github.com/kaltura/platform-install-packages/pull/119), [#118](https://github.com/kaltura/platform-install-packages/pull/118), [#113](https://github.com/kaltura/platform-install-packages/pull/113), [#112](https://github.com/kaltura/platform-install-packages/pull/112), [#103](https://github.com/kaltura/platform-install-packages/pull/103)) - Many thanks to our newest contributors! [@dudyk](https://github.com/dudyk) and [@vadimtar](https://github.com/vadimtar)
 
 #### 2014-05-04:
 
