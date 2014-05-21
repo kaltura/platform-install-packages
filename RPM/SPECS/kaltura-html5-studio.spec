@@ -51,7 +51,7 @@ rm -rf %{buildroot}
 %{prefix}/apps/studio/%{version}
 
 %changelog
-* Wed Mar 21 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v1.1-1
+* Wed May 21 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v1.1-1
 - Additional Player v2 configurations available
 
 * Thu Apr 24 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v0.9.7-1
