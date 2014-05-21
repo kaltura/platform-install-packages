@@ -1,7 +1,7 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmc	
 Version: v5.37.20
-Release: 1
+Release: 2 
 Summary: Kaltura Management Console
 
 Group: System Management	
@@ -81,6 +81,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Wed May 21 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.20-2
+- Bounce the HTML5 and KMC versions in config.
+
 * Wed May 21 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.20-1
 - PLAT-671 - KMC - Bulk Action - Remove Tags - Causes popup when opening category
 - FEC-1302 - security-fix (Oracle) - KMC support form does not validate input on GET parameters (XSS)
