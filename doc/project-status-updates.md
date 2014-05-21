@@ -1,5 +1,10 @@
 **[Track milestones progress](https://github.com/kaltura/platform-install-packages/issues/milestones)**.
 
+#### 2014-05-21:
+
++ Stable version is now 9.16.0
++ Many bugs were crushed! (#130, #128, #127, #126, #121, #120, #119, #118, #113, #112, #103) - Many thanks to our newest contributors! [@dudyk](https://github.com/dudyk) and [@vadimtar](https://github.com/vadimtar)
+
 #### 2014-05-04:
 
 Celebrating over 100 bugs crushed mark! :) Thanks to all active contributors! (DBezemer, fugazi73, blackyboy, Ronileco, jpluijmers, smartdrive, baiyou2014, krarey, nzimas, nshulakov, joerace, iddrew, ironsizide, angober, nviera777, bnelson796, cschaub, mobcdi, flipmcf, dudyk, vadimtar).   
