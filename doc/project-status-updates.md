@@ -1,5 +1,14 @@
 **[Track milestones progress](https://github.com/kaltura/platform-install-packages/issues/milestones)**.
 
+#### 2014-05-21:
+
++ Stable version is now 9.16.0
++ Many bugs were crushed! ([#130](https://github.com/kaltura/platform-install-packages/pull/130), [#128](https://github.com/kaltura/platform-install-packages/pull/128), [#127](https://github.com/kaltura/platform-install-packages/pull/127), [#126](https://github.com/kaltura/platform-install-packages/pull/126), [#121](https://github.com/kaltura/platform-install-packages/pull/121), [#120](https://github.com/kaltura/platform-install-packages/pull/120), [#119](https://github.com/kaltura/platform-install-packages/pull/119), [#118](https://github.com/kaltura/platform-install-packages/pull/118), [#113](https://github.com/kaltura/platform-install-packages/pull/113), [#112](https://github.com/kaltura/platform-install-packages/pull/112), [#103](https://github.com/kaltura/platform-install-packages/pull/103)) - Many thanks to our newest contributors! [@dudyk](https://github.com/dudyk), [@vadimtar](https://github.com/vadimtar) and [@corematter](https://github.com/corematter)
++ Merged patches to core ([#1234](https://github.com/kaltura/server/pull/1234), [#1215](https://github.com/kaltura/server/pull/1215), [#1214](https://github.com/kaltura/server/pull/1214), [#1213](https://github.com/kaltura/server/pull/1213), [#1212](https://github.com/kaltura/server/pull/1212), [#1210](https://github.com/kaltura/server/pull/1210), [#1209](https://github.com/kaltura/server/pull/1209), [#1207](https://github.com/kaltura/server/pull/1207), [#1152](https://github.com/kaltura/server/pull/1152)).
++ More tests were added to the CI system.
++ Also contributed a [generic apache-load-balancer chef recipe](http://community.opscode.com/cookbooks/apache_load_balancer).
+
+
 #### 2014-05-04:
 
 Celebrating over 100 bugs crushed mark! :) Thanks to all active contributors! (DBezemer, fugazi73, blackyboy, Ronileco, jpluijmers, smartdrive, baiyou2014, krarey, nzimas, nshulakov, joerace, iddrew, ironsizide, angober, nviera777, bnelson796, cschaub, mobcdi, flipmcf, dudyk, vadimtar).   
