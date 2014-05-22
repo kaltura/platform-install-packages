@@ -4,8 +4,9 @@ To enable the of use standard binary packages and package managers to deploy the
 This project features official deployment packages to install the Kaltura platform on a server or cluster environments using native OS package managers.
 
 * **[Learn more & keep track on the project page](http://kaltura.github.io/platform-install-packages/)**.    
-* [Read the announcement blog post!](http://blog.kaltura.org/introducing-kipp-kaltura-install-made-simple)   
 * [Read Latest Project Status](https://github.com/kaltura/platform-install-packages/blob/master/doc/project-status-updates.md).
+* [See the Build and Test Reports on the Continuous Integration system](http://installrepo.kaltura.org/reports/ci/).    
++ Visit the [Kaltura Platform Packages CI Project](https://github.com/kaltura/platform-continuous-integration) and help by contributing automatic sanity tests.
 * Track the development of the [Kaltura Platform Packages CI Project](https://github.com/kaltura/platform-continuous-integration).
 * [Kaltura Inc.](http://corp.kaltura.com) also provides commercial solutions and services including pro-active platform monitoring, applications, SLA, 24/7 support and professional services. If you're looking for a commercially supported video platform  with integrations to commercial encoders, streaming servers, eCDN, DRM and more - Start a [Free Trial of the Kaltura.com Hosted Platform](http://corp.kaltura.com/free-trial) or learn more about [Kaltura' Commercial OnPrem Edition™](http://corp.kaltura.com/Deployment-Options/Kaltura-On-Prem-Edition). For existing RPM based users, Kaltura offers commercial upgrade options.
 * Please refer to the [Frequenetly Asked Questions document](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura-packages-faq.md) before opening new issues or forum threads.
