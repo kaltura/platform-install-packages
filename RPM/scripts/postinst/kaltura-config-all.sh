@@ -151,7 +151,13 @@ To begin, access the Admin Console using the Admin email and password you've ent
 When logged in to the KAC, create a new publisher account to being using Kaltura.
 Visit ${BRIGHT_BLUE}http://www.kaltura.org${CYAN} to join the community and get help!
 Visit ${BRIGHT_BLUE}http://knowledge.kaltura.com${CYAN} to read documentation and learn more.
-=====================================================================================================================${NORMAL}
+=====================================================================================================================
+
+
+Thank you for running Kaltura! To keep Kaltura viable, stable and tested, please join the community and help by contributing sanity tests that verify overall platform stability: http://bit.ly/kaltura-ci , and by contributing to the project roadmap by solving simple tasks and challenges: http://bit.ly/kaltura-tasks.
+
+
+${NORMAL}
 "
 
 find $BASE_DIR/app/cache/ $BASE_DIR/log -type d -exec chmod 775 {} \; 

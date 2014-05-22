@@ -278,6 +278,9 @@ else
 see: https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-redhat-based.md#configure-red5-server${NORMAL}"
 fi
 
+
+echo -e "${BRIGHT_BLUE}Thank you for running Kaltura! To keep Kaltura viable, stable and tested, please join the community and help by contributing sanity tests that verify overall platform stability: http://bit.ly/kaltura-ci , and by contributing to the project roadmap by solving simple tasks and challenges: http://bit.ly/kaltura-tasks.${NORMAL}"
+
 #START=`date +%s.%N`
 #OUTP=`check_missing_web_files`
 #RC=$?
