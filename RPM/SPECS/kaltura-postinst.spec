@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.13
-Release: 3
+Release: 7
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -81,6 +81,9 @@ fi
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Wed May 21 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.13-4
+- Added license info to scripts header. thank you David Kohen for pointing this out.
+
 * Thu May 15 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.13-2
 - Following https://github.com/kaltura/platform-install-packages/pull/128.
 

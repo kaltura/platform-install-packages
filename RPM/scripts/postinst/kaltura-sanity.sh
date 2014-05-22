@@ -191,7 +191,7 @@ if rpm -q kaltura-batch >/dev/null 2>&1 || rpm -q kaltura-front >/dev/null 2>&1 
 
 Please note: if you are running this test on a clustered ENV, it will fail but this does not mean there is an actual problem.
 The tech information as to why is available here: 
-https://github.com/kaltura/platform-install-packages/issues/106#issuecomment-42837404"
+https://github.com/kaltura/platform-install-packages/issues/106#issuecomment-42837404
 ${NORMAL}"
 				START=`date +%s.%N`
 				OUTP=`php $DIRNAME/dwh_cycle.php $DIRNAME/sanity_config.ini 2>&1`
