@@ -193,6 +193,8 @@ Please note: if you are running this test on a clustered ENV, it will fail but t
 The tech information as to why is available here: 
 https://github.com/kaltura/platform-install-packages/issues/106#issuecomment-42837404
 ${NORMAL}"
+  # this is to allow the logrotation to finish.
+  sleep 120 
 				START=`date +%s.%N`
 				OUTP=`php $DIRNAME/dwh_cycle.php $DIRNAME/sanity_config.ini 2>&1`
 				RC=$?
@@ -279,7 +281,10 @@ see: https://github.com/kaltura/platform-install-packages/blob/master/doc/instal
 fi
 
 
-echo -e "${BRIGHT_BLUE}Thank you for running Kaltura! To keep Kaltura viable, stable and tested, please join the community and help by contributing sanity tests that verify overall platform stability: http://bit.ly/kaltura-ci , and by contributing to the project roadmap by solving simple tasks and challenges: http://bit.ly/kaltura-tasks.${NORMAL}"
+echo -e "${BRIGHT_BLUE}
+
+Thank you for running Kaltura! To keep Kaltura viable, stable and tested, please join the community and help by contributing sanity tests that verify overall platform stability: http://bit.ly/kaltura-ci , and by contributing to the project roadmap by solving simple tasks and challenges: http://bit.ly/kaltura-tasks.
+${NORMAL}"
 
 #START=`date +%s.%N`
 #OUTP=`check_missing_web_files`

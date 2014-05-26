@@ -3,7 +3,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
 Version: v2.9
-Release: 1 
+Release: 2 
 Epoch:0 
 License: AGPLv3+
 Group: Server/Platform 
@@ -13,7 +13,7 @@ Source2: kaltura-html5lib-v2.1.1.tar.gz
 Source3: kaltura-html5lib-v2.3.tar.gz
 Source4: kaltura-html5lib-v2.4.tar.gz
 Source5: kaltura-html5lib-v2.6.tar.gz
-URL: http://kaltura.org
+URL: https://github.com/kaltura/mwEmbed 
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
 
@@ -66,6 +66,9 @@ rm -rf %{buildroot}
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Thu May 22 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.9-2
+- Add repo URL to metadata.
+
 * Wed May 21 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.9-1
 - SUP-2048 - Omniture tracking issue on mobile devices
 - SUP-2108 - HTML5 V2 player - incorrect display in Share screen
