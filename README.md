@@ -12,7 +12,7 @@ This project features official deployment packages to install the Kaltura platfo
 * Please refer to the [Frequenetly Asked Questions document](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura-packages-faq.md) before opening new issues or forum threads.
 
 ## How you can help
-Thank you for running Kaltura and pushing the limits of online video! By joinin the Kaltura community and contributing you will help grow the platform, and keeping it open, stable and accessible to all. You can contribute meaningfully to the project from day one:    
+Thank you for running Kaltura and pushing the limits of online video! By joining the Kaltura community and contributing you will help grow the platform, and keeping it open, stable and accessible to all. You can contribute meaningfully to the project from day one:    
 
 + By contributing sanity tests that verify overall platform stability ([http://bit.ly/kaltura-ci](see the Kaltura CI Project)).
 + By solving [simple tasks and challenges that advance the platform roadmap](http://bit.ly/kaltura-tasks).
@@ -30,7 +30,6 @@ Contact the authors or email community@kaltura.org if you have other ideas.
 
 * [**Frequently Asked Questions**](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura-packages-faq.md)
 * [Single-server All-In-One RedHat based Linux distros Installation (including FC, RHEL and CentOS)](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-redhat-based.md).
-* Single-server All-In-One Debian based Linux distros (including Ubuntu) Installation - *Coming Soon*
 * [Deploying Kaltura Clusters (RPM)](https://github.com/kaltura/platform-install-packages/blob/master/doc/rpm-cluster-deployment-instructions.md)
 * [Deploying Kaltura using Opscode Chef (RPM)](https://github.com/kaltura/platform-install-packages/blob/master/doc/rpm-chef-cluster-deployment.md)
 * [Setting up Kaltura platform monitoring](https://github.com/kaltura/platform-install-packages/blob/master/doc/platform-monitors.md)
