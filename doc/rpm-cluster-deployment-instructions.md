@@ -68,9 +68,31 @@ To configure the load balancer on your environment:
 
 1. Replace all occurances of `balancer.domain.org` with the desired hostname for the load balanacer (the main end-point your end-users will reach).
 1. Replace all occurances of `node0.domain.org` with the first front machine hostname and `node1.domain.org` with the second front machine hostname.    
-1. In order to add more front machines to the load balancing poll, simply clone the nodeX.domain.org lines and change to the hostnames of the new front machines.
+1. In order to add more front machines to the load balancing poll, simply clone the nodeX.domain.org lines and change to the hostnames of the new front machines and the route.
 
 Note that the port in the example file is 80 (standard HTTP port), feel free to change it if you're using a non-standard port.
+
+### HAProxy
+
+A simpler load balancer called HAProxy can also be configured **instead** of Apache load balancer, after installing it refer to the [configuration file example](https://github.com/kaltura/platform-install-packages/blob/master/doc/haproxy.cfg).
+To configure the load balancer on your environment:
+
+1. Replace all occurances of `node0.domain.org` with the first front machine hostname and `node1.domain.org` with the second front machine hostname.
+2. In order to add more front machines to the load balancing poll, simply clone the nodeX.domain.org line and change to the hostnames of the new front machines and change the server cookie ID (after the cookie keyword).
+
+If you want to have logging for HAProxy with the sample configuration, add the following lines to the syslog/rsyslog configuration (for rsyslog you can put this in the file /etc/rsyslog.d/haproxy.conf):
+```
+$ModLoad imudp
+$UDPServerRun 514
+
+local0.* -/var/log/haproxy_0.log
+local1.* -/var/log/haproxy_1.log
+```
+
+And restart syslog/rsyslog:
+```
+restart rsyslog
+```
 
 ##### SSL Offloading on a Load Balancer
 Load Balancers have the ability to perform SSL offloading (aka [SSL Acceleration](http://en.wikipedia.org/wiki/SSL_Acceleration)). Using SSL offloading can dramatically reduce the load on the systems by only encrypting the communications between the Load Balancer and the public network while communicating on non-encrypted http with the internal network (in Kaltura's case, between the Load Balancer and the front machines).
