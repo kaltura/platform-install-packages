@@ -5,8 +5,8 @@ The main repos are:
 * https://github.com/kaltura/platform-install-packages - The RPMs and install scripts
 * https://github.com/kaltura/server - Core Beckend
 * https://github.com/kaltura/kmc - KMC
-* https://github.com/kaltura/kdp - KDP3 player [Flash version]
-* https://github.com/kaltura/mwEmbed - HTML5 player
+* https://github.com/kaltura/kdp - KDP3 player [legacy Flash version]
+* https://github.com/kaltura/mwEmbed - HTML5 player [universal v2 player]
 * https://github.com/kaltura/player-studio - HTML5 Studio [studio v2]
 
 If you are uncertain where the contribution should go to, please do:
