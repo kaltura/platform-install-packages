@@ -135,10 +135,11 @@ CDN hostname [${YELLOW}`hostname`${CYAN}]:${NORMAL}"
                 DB1_PORT=3306
         fi
 
-        while [ -z "$SUPER_USER" ];do
-                echo -en "${CYAN}MySQL super user [only for install, default root]:${NORMAL} "
-                read -e SUPER_USER
-        done
+	echo -en "${CYAN}MySQL super user [only for install, default root]:${NORMAL} "
+	read -e SUPER_USER
+	if [ -z "$SUPER_USER" ];then
+		SUPER_USER=root
+	fi
         while [ -z "$SUPER_USER_PASSWD" ];do
                 echo -en "${CYAN}MySQL super user passwd [only for install]:${NORMAL}\n "
                 read -s SUPER_USER_PASSWD
