@@ -1,3 +1,7 @@
+Sign Kaltura's CLA
+===================
+http://agentcontribs.kaltura.org/agreements/KalturaCommunity/platform-install-packages
+
 Which repo should I contribue to?
 =================================
 The main repos are:
