@@ -187,7 +187,7 @@ send_install_becon()
 		ERR_LINE=$4
 	fi
 	#echo $ERR_LINE 
-        ANALYTICS_SERVER_URI="http://54.204.228.203/report"
+	ANALYTICS_SERVER_URI="http://installytics.kaltura.org/report"
         RC_FILE=/etc/kaltura.d/system.ini
         if [ -r "$RC_FILE" ];then
         	. $RC_FILE

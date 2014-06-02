@@ -1,8 +1,8 @@
 %define prefix /opt/kaltura 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
-Version: 1.0.13
-Release: 10
+Version: 1.0.14
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -81,6 +81,9 @@ fi
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Sun Jun 1 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.14-1
+- Offering 'root' as default does little good if we don't accept it and looping with prompt.
+
 * Thu May 22 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.13-8
 - F typo. 
 - Added call for contributors banner.
