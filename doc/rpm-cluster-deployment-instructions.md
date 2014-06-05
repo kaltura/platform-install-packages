@@ -219,7 +219,9 @@ After installing the first cluster node, obtain the auto generated file placed u
 
 ### The first Front node
 
-####NOTES: /opt/kaltura/bin/kaltura-db-config.sh and kaltura-widgets kaltura-html5lib kaltura-html5-studio which are installed on the web mount only need to run on the first node.
+####NOTES: 
+/opt/kaltura/bin/kaltura-db-config.sh and kaltura-widgets kaltura-html5lib kaltura-html5-studio which are installed on the web mount only need to run on the first node.
+
 Before starting, make sure the balancer does direct to the second front node as it is not yet installed.
 
 
