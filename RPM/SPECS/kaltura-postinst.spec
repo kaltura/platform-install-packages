@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.14
-Release: 1
+Release: 2
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -81,6 +81,9 @@ fi
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Mon Jun 2 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.14-2
+- Our analytics server moved to a new castle.
+
 * Sun Jun 1 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.14-1
 - Offering 'root' as default does little good if we don't accept it and looping with prompt.
 
