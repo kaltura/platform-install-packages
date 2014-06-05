@@ -243,6 +243,7 @@ Front in Kaltura represents the machines hosting the user-facing components, inc
 # yum install kaltura-front
 # /opt/kaltura/bin/kaltura-front-config.sh
 ```
+**NOTE: you can now configure the balancer to have the node in its pull.**
 
 ### The Batch
 Batch in Kaltura represents the machines running all async operations. To learn more, read: [Introduction to Kaltura Batch Processes](http://knowledge.kaltura.com/node/230).
