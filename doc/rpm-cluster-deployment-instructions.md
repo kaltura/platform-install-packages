@@ -233,7 +233,7 @@ Front in Kaltura represents the machines hosting the user-facing components, inc
 # /opt/kaltura/bin/kaltura-front-config.sh
 # . /etc/kaltura.d/system.ini
 Make certain this call returs 200
-# curl -I "http://$SERVICE_URL/api_v3/index.php
+# curl -I $SERVICE_URL/api_v3/index.php
 # /opt/kaltura/bin/kaltura-db-config.sh <mysql-hostname> <mysql-super-user> <mysql-super-user-passwd> <mysql-port> [upgrade]
 ```
 
