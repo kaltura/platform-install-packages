@@ -218,6 +218,12 @@ It is recommended that Sphinx will be installed on its own dedicated machine. Ho
 After installing the first cluster node, obtain the auto generated file placed under /tmp/kaltura_*.ans, replace relevant values and use it for the installation of the remaining nodes.
 
 ### The first Front node
+
+**NOTES: /opt/kaltura/bin/kaltura-db-config.sh and kaltura-widgets kaltura-html5lib kaltura-html5-studio which are installed on the web mount only need to run on the first node.
+Before starting, make sure the balancer does direct to the second front node as it is not yet installed.
+**
+
+
 Front in Kaltura represents the machines hosting the user-facing components, including the Kaltura API, the KMC and Admin Console, MediaSpace and all client-side widgets. 
 ```
 # rpm -Uhv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
@@ -227,7 +233,6 @@ Front in Kaltura represents the machines hosting the user-facing components, inc
 # /opt/kaltura/bin/kaltura-front-config.sh
 # /opt/kaltura/bin/kaltura-db-config.sh <mysql-hostname> <mysql-super-user> <mysql-super-user-passwd> <mysql-port> [upgrade]
 ```
-**NOTE: /opt/kaltura/bin/kaltura-db-config.sh and kaltura-widgets kaltura-html5lib kaltura-html5-studio which are installed on the web mount only need to run on the first node.**
 
 ### Secondary Front nodes
 Front in Kaltura represents the machines hosting the user-facing components, including the Kaltura API, the KMC and Admin Console, MediaSpace and all client-side widgets. 
