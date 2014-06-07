@@ -72,7 +72,7 @@ To configure the load balancer on your environment:
 
 Note that the port in the example file is 80 (standard HTTP port), feel free to change it if you're using a non-standard port.
 
-### HAProxy
+### HAProxy Load Balancer
 
 A simpler load balancer called HAProxy can also be configured **instead** of Apache load balancer, after installing it refer to the [configuration file example](https://github.com/kaltura/platform-install-packages/blob/master/doc/haproxy.cfg).
 To configure the load balancer on your environment:
