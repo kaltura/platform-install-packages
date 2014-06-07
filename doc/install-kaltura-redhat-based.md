@@ -19,6 +19,8 @@ This guide describes RPM installation of an all-in-one Kaltura server and applie
 
 [Additional Information](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-redhat-based.md#additional-information)
 
+[How to contribute](https://github.com/kaltura/platform-install-packages/blob/master/doc/CONTRIBUTERS.md)
+
 ## Non-SSL Step-by-step Installation
 
 ### Pre-Install notes
