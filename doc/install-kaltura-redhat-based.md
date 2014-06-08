@@ -80,7 +80,7 @@ service postfix restart
 
 If you are using Amazon Web Services (AWS) please note that by default EC2 machines are blocked from sending email via port 25. For more information see [this thread on AWS forums](https://forums.aws.amazon.com/message.jspa?messageID=317525#317525).
 
-##### Node regarding desktop installations
+##### Note regarding desktop installations
 
 When installing on a "desktop" environment there may be package conflicts with media encoding/decoding plugins.
 
@@ -92,7 +92,6 @@ In Redhat 6.5 you should run the following to remove the conflicting packages:
 Install the basic Kaltura Packages:
 ```bash
 yum clean all
-yum update -y
 yum install kaltura-server
 ```
 
@@ -228,7 +227,7 @@ If you are using Amazon Web Services (AWS) please note that by default EC2 machi
 
 #### Install Kaltura Server
 
-## Note: prior to installing Kaltura, while not a must, we recommend you update the installed packages to latest by running:
+Note: prior to installing Kaltura, while not a must, we recommend you update the installed packages to latest by running:
 ```bash
 yum update
 ```
