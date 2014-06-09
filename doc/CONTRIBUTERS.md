@@ -28,6 +28,14 @@ URL         : https://github.com/kaltura/server/tree/IX-9.16.0
 
 In this case, the file belongs to Kaltura's Core at https://github.com/kaltura/server
 
+Reporting issues
+================
+When reporting an issue, please make sure you include the version used.
+```
+# You can get the version using:
+$ rpm -q package
+```
+
 Contribution Guildlines
 =======================
 * No big Pull Requests. It makes reviewing and ensuring correctness hard. If possible, break it to smaller commits/pulls, each related to a specific issue.
