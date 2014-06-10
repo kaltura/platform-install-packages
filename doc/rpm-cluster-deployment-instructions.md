@@ -143,7 +143,7 @@ Then set priviliges accordingly:
 
 To export the volume run: `# exportfs -a`
 
-Before continuing, run the following test:
+Before continuing, run the following test on all front and Batch machines:
 
 ```
 # yum install telnet
@@ -174,7 +174,7 @@ Note that in the statement above, MySQL is being open for access as root from AL
 Remote root user should have an access to the mysql DB during the installation of the front and batch servers.
 After the Kaltura cluster installation is done, you may want to remove the root access for security reasons, it will not longer be needed for the platform to operate as it will be using the 'kaltura' user to connect this point.
  
-Before continuing the deployment, run the following test:
+Before continuing the deployment, run the following test on all front, Sphinx and Batch machines:
 
 ```
 # mysql -uroot -hMYSQL_HOST -p 
