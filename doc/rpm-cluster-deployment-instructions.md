@@ -27,6 +27,7 @@ Refer to the [Deploying Kaltura Clusters Using Chef](https://github.com/kaltura/
 ##### iptables and ports
 Kaltura requires certain ports to be open for proper operation. [See the list of required open ports](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura-required-ports.md).   
 
+
 ##### Disable SELinux
 This is REQUIRED on all machines, currently Kaltura can't run properly with SELinux.
 ``` 
@@ -142,6 +143,18 @@ Then set priviliges accordingly:
 
 To export the volume run: `# exportfs -a`
 
+Before continuing, run the following test:
+
+```
+# yum install telnet
+# telnet NFS_HOST 2049
+Should return something similar to:
+Trying 166.78.104.118...
+Connected to kalt-nfs0.
+Escape character is '^]'.
+```
+
+
 ### The MySQL Database
 Please note that currently, only MySQL 5.1 is supported, we recommend using the official package supplied by the RHEL/CentOS repos which is currently 5.1.73.
 ```
@@ -161,6 +174,23 @@ Note that in the statement above, MySQL is being open for access as root from AL
 Remote root user should have an access to the mysql DB during the installation of the front and batch servers.
 After the Kaltura cluster installation is done, you may want to remove the root access for security reasons, it will not longer be needed for the platform to operate as it will be using the 'kaltura' user to connect this point.
  
+Before continuing the deployment, run the following test:
+
+```
+# mysql -uroot -hMYSQL_HOST -p 
+
+If the connection fails, you may have a networking issue, run:
+
+# yum install telnet
+# telnet MYSQL_HOST 3306
+Should return something similar to:
+Trying 166.78.104.118...
+Connected to kalt-mysql0.
+Escape character is '^]'.
+
+If that works, then the block is at the MySQL level and not in the networking, make sure this is resolved before continuing.
+
+```
 
 #### MySQL Replication and Scaling
 Scaling MySQL is an art on it's own. There are two aspects to it: Replication (having data live in more than one MySQL server for redundency and read scaling) and setting up read slaves.    
