@@ -139,9 +139,8 @@ Then set priviliges accordingly:
 # usermod -a -G kaltura apache
 # chown -R kaltura.apache /opt/kaltura/web
 # chmod 775 /opt/kaltura/web
+# exportfs -a
 ```
-
-To export the volume run: `# exportfs -a`
 
 Before continuing, run the following test on all front and Batch machines:
 
@@ -267,6 +266,18 @@ Front in Kaltura represents the machines hosting the user-facing components, inc
 # . /etc/kaltura.d/system.ini
 Make certain this call returs 200
 # curl -I $SERVICE_URL/api_v3/index.php
+Output should be similar to:
+< HTTP/1.1 302 Found
+HTTP/1.1 302 Found
+< Date: Tue, 10 Jun 2014 09:32:33 GMT
+Date: Tue, 10 Jun 2014 09:32:33 GMT
+< Server: Apache/2.2.15 (Red Hat)
+Server: Apache/2.2.15 (Red Hat)
+< Location: http://162.209.63.118/start/index.php
+Location: http://162.209.63.118/start/index.php
+< Connection: close
+Connection: close
+
 # /opt/kaltura/bin/kaltura-db-config.sh <mysql-hostname> <mysql-super-user> <mysql-super-user-passwd> <mysql-port> [upgrade]
 ```
 
