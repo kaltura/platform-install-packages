@@ -35,6 +35,11 @@ When reporting an issue, please make sure you include the version used.
 # You can get the version using:
 $ rpm -q package
 ```
+Also, run:
+
+# /opt/kaltura/bin/kaltura-sanity.sh
+
+This might help you diagnose the issue yourself, if not, paste the results along with your report.
 
 Contribution Guildlines
 =======================
