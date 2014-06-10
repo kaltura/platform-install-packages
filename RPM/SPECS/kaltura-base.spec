@@ -10,7 +10,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 9.16.0
-Release: 1
+Release: 2 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -326,6 +326,8 @@ fi
 
 
 %changelog
+* Tue Jun 10 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.16.0-2
+- Fix for https://github.com/kaltura/platform-install-packages/issues/147
 * Wed May 21 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.16.0-1
 - Ver Bounce to 9.16.0
 - PLAT-974 - add partner Reference ID to KMC and Multi-Account console

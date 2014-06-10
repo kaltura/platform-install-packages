@@ -1,6 +1,6 @@
         check process batch 
            with pidfile "@LOG_DIR@/batch/batch.pid"
-           start program = "/etc/init.d/kaltura-batch start" with timeout 60 seconds
+           start program = "/etc/init.d/kaltura-batch restart" with timeout 60 seconds
            stop program = "/etc/init.d/kaltura-batch stop"
            #if 10 restarts within 10 cycles then timeout
            group kaltura
