@@ -1,7 +1,7 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmc	
-Version: v5.37.20
-Release: 2 
+Version: v5.37.21
+Release: 1
 Summary: Kaltura Management Console
 
 Group: System Management	
@@ -81,6 +81,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sat Jun 14 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.17.0-1
+- PLAT-974 - add partner Reference ID to KMC and Multi-Account console
+
 * Wed May 21 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.20-2
 - Bounce the HTML5 and KMC versions in config.
 

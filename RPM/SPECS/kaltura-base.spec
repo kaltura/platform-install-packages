@@ -9,14 +9,14 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 9.16.0
-Release: 2 
+Version: 9.17.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
 Source1: kaltura.apache.ssl.conf.template 
 # 22/01/14 due to a bug, can be removed in the next version:
-Source2: 01.conversionProfile.99.template.xml
+#Source2: 01.conversionProfile.99.template.xml
 Source3: kaltura.apache.conf.template 
 Source4: emails_en.template.ini
 Source5: 01.Partner.template.ini
@@ -37,15 +37,15 @@ Source17: navigation.xml
 Source18: monit.phtml 
 Source19: IndexController.php
 Source20: sphinx.populate.template.rc
-Source21: kaltura_batch_upload_falcon.zip
+# Source21: kaltura_batch_upload_falcon.zip
 Source22: 01.UserRole.99.template.xml
 Source23: 04.flavorParams.ini
 Source24: 04.liveParams.ini
 Source25: kaltura_populate.template
 Source26: kaltura_batch.template
 Source27: kmc1Success.php 
-Source28: galleryPartialSuccess.php
-Source29: gallerySuccess.php
+#Source28: galleryPartialSuccess.php
+#Source29: gallerySuccess.php
 
 URL: https://github.com/kaltura/server/tree/IX-%{version}
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -95,7 +95,7 @@ mkdir -p $RPM_BUILD_ROOT%{prefix}/web/control
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content/cacheswf
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content/uploads
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content/entry
-mkdir -p $RPM_BUILD_ROOT/%{prefix}/web/content/docs/
+#mkdir -p $RPM_BUILD_ROOT/%{prefix}/web/content/docs/
 mkdir -p $RPM_BUILD_ROOT%{prefix}web/content//metadata
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content/batchfiles
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content/templates
@@ -138,7 +138,7 @@ cp %{SOURCE6} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_data/02.
 cp %{SOURCE8} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_content/01.uiConf.99.template.xml
 cp %{SOURCE7} $RPM_BUILD_ROOT%{prefix}/app/configurations/cron/dwh.template
 cp %{SOURCE9} $RPM_BUILD_ROOT%{prefix}/app/configurations/plugins.template.ini
-cp %{SOURCE22} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_content/01.UserRole.99.template.xml
+#cp %{SOURCE22} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_content/01.UserRole.99.template.xml
 cp %{SOURCE23} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_data/
 cp %{SOURCE24} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_data/
 cp %{SOURCE11} $RPM_BUILD_ROOT%{prefix}/app/alpha/crond/kaltura/clear_cache.sh
@@ -152,11 +152,11 @@ cp %{SOURCE16} $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/
 cp %{SOURCE25} $RPM_BUILD_ROOT%{prefix}/app/configurations/logrotate/
 cp %{SOURCE26} $RPM_BUILD_ROOT%{prefix}/app/configurations/logrotate/
 cp %{SOURCE27} $RPM_BUILD_ROOT%{prefix}/app/alpha/apps/kaltura/modules/kmc/templates/
-cp %{SOURCE28} $RPM_BUILD_ROOT%{prefix}/app/alpha/apps/kaltura/modules/system/templates/
-cp %{SOURCE29} $RPM_BUILD_ROOT%{prefix}/app/alpha/apps/kaltura/modules/system/templates/
+#cp %{SOURCE28} $RPM_BUILD_ROOT%{prefix}/app/alpha/apps/kaltura/modules/system/templates/
+#cp %{SOURCE29} $RPM_BUILD_ROOT%{prefix}/app/alpha/apps/kaltura/modules/system/templates/
 
 # sample bulks
-cp %{SOURCE21} $RPM_BUILD_ROOT%{prefix}/web/content/docs/
+#cp %{SOURCE21} $RPM_BUILD_ROOT%{prefix}/web/content/docs/
 
 # David Bezemer's Admin console and monit patches:
 cp %{SOURCE17} $RPM_BUILD_ROOT%{prefix}/app/admin_console/configs/navigation.xml
@@ -167,7 +167,7 @@ cp %{SOURCE19} $RPM_BUILD_ROOT%{prefix}/app/admin_console/controllers/IndexContr
 rm $RPM_BUILD_ROOT%{prefix}/app/configurations/batch/batch.ini.template
 
 # 22/01/14 due to a bug, can be removed in the next version:
-cp %{SOURCE2} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_content/01.conversionProfile.99.template.xml
+#cp %{SOURCE2} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_content/01.conversionProfile.99.template.xml
 
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content
 tar zxf %{SOURCE10} -C $RPM_BUILD_ROOT%{prefix}/web/content
@@ -269,7 +269,11 @@ if [ "$1" = 2 ];then
 			php %{prefix}/app/deployment/updates/scripts/2014_03_10_addpushpublishconfigurationaction_added_to_livestreamservice.php > /tmp/2014_03_10_addpushpublishconfigurationaction_added_to_livestreamservice.php.log
 			php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_05_07_live_conversionprofile_hybrid_ecdn.php > /tmp/2014_05_07_live_conversionprofile_hybrid_ecdn.php.log
 			php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_05_07_add_always_allowed_hybrid_ecdn.php > /tmp/2014_05_07_add_always_allowed_hybrid_ecdn.php.log
-		fi	
+		elif [ $CORE_MAJ_VER -lt 16 ];then 
+			php %{prefix}/deployment/updates/scripts/add_permissions/2014_05_11_add_permissions_to_CONTENT_MODERATE_BASE.php > /tmp/2014_05_11_add_permissions_to_CONTENT_MODERATE_BASE.php.log
+			php %{prefix}/alpha/scripts/utils/addTvinciIngestSchemasToPartner99.php realrun > /tmp/addTvinciIngestSchemasToPartner99.php.log
+			php %{prefix}/app/deployment/base/scripts/installPlugins.php > /tmp/addTvinciIngestSchemasToPartner99.php.log
+		fi
 	fi
 
 fi
@@ -326,6 +330,19 @@ fi
 
 
 %changelog
+* Sat Jun 14 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.17.0-1
+- Ver Bounce to 9.17.0
+- PLAT-1382 - Audio distortions on AAC
+- PLAT-1308 - Delivery Managers 
+- PLAT-1352 - Tvinci integration - extend POC connector for Kaltura Connect Demo
+- PLAT-1111 - Lecture Capture - Ingestion and Management
+- SUP-2000 - Error when entering the edit entry window with content moderator role
+- SUP-1669 - Captions search returning incorrect number of results
+- SUP-1992 - Updating YT content (SF 43231)
+- SUP-2218 - Order of entries in KMS are not working for alphabetical order
+- SUP-2008 - Bulk download option randomly generates broken links
+- SUP-2119 - Issue with adding a new user
+
 * Tue Jun 10 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.16.0-2
 - Fix for https://github.com/kaltura/platform-install-packages/issues/147
 * Wed May 21 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.16.0-1

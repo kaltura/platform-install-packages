@@ -2,8 +2,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.9
-Release: 2 
+Version: v2.11
+Release: 1
 Epoch:0 
 License: AGPLv3+
 Group: Server/Platform 
@@ -66,6 +66,11 @@ rm -rf %{buildroot}
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Sat Jun 14 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.11-1
+- SUP-2306 - Bumper Click URL Not Working
+- SUP-2198 - Related plugin go into infinite loop
+- SUP-1983 - HTML5 v2 - HTTPS embed will not load on HTTP page
+
 * Thu May 22 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.9-2
 - Add repo URL to metadata.
 
