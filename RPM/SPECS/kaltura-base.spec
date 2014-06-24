@@ -10,7 +10,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 9.17.0
-Release: 2 
+Release: 3
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -19,7 +19,7 @@ Source1: kaltura.apache.ssl.conf.template
 #Source2: 01.conversionProfile.99.template.xml
 Source3: kaltura.apache.conf.template 
 Source4: emails_en.template.ini
-Source5: 01.Partner.template.ini
+#Source5: 01.Partner.template.ini
 Source6: 02.Permission.ini
 Source7: dwh.template
 Source8: 01.uiConf.99.template.xml
@@ -133,7 +133,7 @@ cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/app/configurations/apache/kaltura.ssl.con
 cp %{SOURCE3} $RPM_BUILD_ROOT%{prefix}/app/configurations/apache/kaltura.conf.template
 cp %{SOURCE4} $RPM_BUILD_ROOT%{prefix}/app/batch/batches/Mailer/emails_en.template.ini
 # Add partnerParentId=0 to Mr. partner 99.
-cp %{SOURCE5} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_data/01.Partner.template.ini
+#cp %{SOURCE5} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_data/01.Partner.template.ini
 cp %{SOURCE6} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_data/02.Permission.ini
 cp %{SOURCE8} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_content/01.uiConf.99.template.xml
 cp %{SOURCE7} $RPM_BUILD_ROOT%{prefix}/app/configurations/cron/dwh.template
@@ -330,6 +330,9 @@ fi
 
 
 %changelog
+* Tue Jun 24 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.17.0-3
+- No need to override 01.Partner.template.ini any longer
+
 * Sat Jun 14 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.17.0-1
 - Ver Bounce to 9.17.0
 - PLAT-1382 - Audio distortions on AAC

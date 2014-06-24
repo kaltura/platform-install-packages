@@ -1,8 +1,8 @@
 %define prefix /opt/kaltura 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
-Version: 1.0.14
-Release: 5
+Version: 1.0.15
+Release: 1 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -81,6 +81,9 @@ fi
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Tue Jun 24 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.15-1
+- need to replace WWW_HOST in the DB create scripts too
+
 * Tue Jun 10 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.14-5
 - Fixed streams dir and symlink check.
 
