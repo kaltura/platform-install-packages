@@ -313,7 +313,7 @@ echo " OK\n";
 /**
  * Reload the entry and check plays and views
  */
-/*$reloadedEntry = $client->media->get($entry->id);
+$reloadedEntry = $client->media->get($entry->id);
 /* @var $reloadedEntry KalturaMediaEntry 
 
 */

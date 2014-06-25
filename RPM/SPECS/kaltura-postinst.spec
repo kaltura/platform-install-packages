@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.15
-Release: 2
+Release: 5
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -81,6 +81,9 @@ fi
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Wed Jun 25 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.15-4
+- Added new token replacement for TEMPLATE_PARTNER_ADMIN_PASSWORD
+
 * Tue Jun 24 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.15-2
 -  -6 partner token replacement.
 

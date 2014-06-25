@@ -165,7 +165,7 @@ HTML5LIB_URI="https://github.com/kaltura/mwEmbed/tarball/$HTML5LIB_VERSION"
 HTML5LIB_RPM_NAME="kaltura-html5lib"
 
 # Kaltura DWH
-DWH_VERSION="IX-9.3.0"
+DWH_VERSION="IX-9.4.0"
 DWH_URI="https://github.com/kaltura/dwh/archive/$DWH_VERSION.zip"
 DWH_RPM_NAME="kaltura-dwh"
 

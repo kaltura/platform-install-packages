@@ -27,5 +27,5 @@ if [ ! -x `which wget 2>/dev/null` ];then
 fi
 
 wget $DWH_URI -O$RPM_SOURCES_DIR/$DWH_RPM_NAME-$DWH_VERSION.zip 
-echo "Packaged into $RPM_SOURCES_DIR/$DWH_RPM_NAME-$KALTURA_SERVER_VERSION.zip"
+echo "Packaged into $RPM_SOURCES_DIR/$DWH_RPM_NAME-$DWH_VERSION.zip"
 #rpmbuild -ba $RPM_SPECS_DIR/$DWH_RPM_NAME.spec
