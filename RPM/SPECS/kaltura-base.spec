@@ -10,7 +10,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 9.17.0
-Release: 4
+Release: 8
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -241,7 +241,6 @@ if [ "$1" = 2 ];then
 			%{_sysconfdir}/init.d/httpd start
 		fi
 		# see https://kaltura.atlassian.net/wiki/pages/viewpage.action?spaceKey=QAC&title=QA.Core+Deployment+Instructions%3A+Mar+9%2C+2014
-		CORE_MAJ_VER=`echo %{version}|awk -F '.' '{print $2}'`
 		if [ $CORE_MAJ_VER -lt 12 ];then
 			php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_01_20_categoryentry_syncprivacycontext_action.php > /tmp/2014_01_20_categoryentry_syncprivacycontext_action.php.log
 			php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_01_26_add_media_server_partner_level_permission.php > /tmp/add_permissions/2014_01_26_add_media_server_partner_level_permission.php.log
@@ -260,7 +259,7 @@ if [ "$1" = 2 ];then
 			php %{prefix}/app/deployment/updates/scripts/2014_04_02_enforce_live_params_permissions.php > /tmp/2014_04_02_enforce_live_params_permissions.php.log
 			php %{prefix}/app/deployment/updates/scripts/2014_04_16_remove_cloud_transcode_profile.php realrun > /tmp/2014_04_16_remove_cloud_transcode_profile.php.log
 			php %{prefix}/app/deployment/updates/scripts/2014_04_22_enable_live_paid_partners.php realrun > /tmp/2014_04_22_enable_live_paid_partners.php.log
-		elif [ $CORE_MAJ_VER -lt 15 ];then
+		elif [ $CORE_MAJ_VER -lt 16 ];then
 			php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_01_26_add_media_server_partner_level_permission.php > /tmp/2014_01_26_add_media_server_partner_level_permission.php .log
 			php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_02_25_add_push_publish_permission_to_partner_0.php > /tmp/2014_02_25_add_push_publish_permission_to_partner_0.php.log
 			php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_01_26_update_live_stream_service_permissions.php > /tmp/2014_01_26_update_live_stream_service_permissions.php.log
@@ -269,11 +268,13 @@ if [ "$1" = 2 ];then
 			php %{prefix}/app/deployment/updates/scripts/2014_03_10_addpushpublishconfigurationaction_added_to_livestreamservice.php > /tmp/2014_03_10_addpushpublishconfigurationaction_added_to_livestreamservice.php.log
 			php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_05_07_live_conversionprofile_hybrid_ecdn.php > /tmp/2014_05_07_live_conversionprofile_hybrid_ecdn.php.log
 			php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_05_07_add_always_allowed_hybrid_ecdn.php > /tmp/2014_05_07_add_always_allowed_hybrid_ecdn.php.log
-		elif [ $CORE_MAJ_VER -lt 16 ];then 
-			php %{prefix}/deployment/updates/scripts/add_permissions/2014_05_11_add_permissions_to_CONTENT_MODERATE_BASE.php > /tmp/2014_05_11_add_permissions_to_CONTENT_MODERATE_BASE.php.log
-			php %{prefix}/alpha/scripts/utils/addTvinciIngestSchemasToPartner99.php realrun > /tmp/addTvinciIngestSchemasToPartner99.php.log
-			php %{prefix}/app/deployment/base/scripts/installPlugins.php > /tmp/addTvinciIngestSchemasToPartner99.php.log
-		fi
+		#elif [ $CORE_MAJ_VER -lt 17 ];then 
+fi
+			php %{prefix}/app/deployment/updates/scripts/2014_05_26_create_no_session_role.php realrun > /tmp/2014_05_26_create_no_session_role.php.log
+			php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_05_11_add_permissions_to_CONTENT_MODERATE_BASE.php > /tmp/2014_05_11_add_permissions_to_CONTENT_MODERATE_BASE.php.log
+			php %{prefix}/app/alpha/scripts/utils/addTvinciIngestSchemasToPartner99.php realrun > /tmp/addTvinciIngestSchemasToPartner99.php.log
+			php %{prefix}/deployment/updates/scripts/add_permissions/delivery_profile_service.php > /tmp/delivery_profile_service.php
+			php %{prefix}/app/deployment/base/scripts/installPlugins.php > /tmp/installPlugins.php.log
 	fi
 
 fi
