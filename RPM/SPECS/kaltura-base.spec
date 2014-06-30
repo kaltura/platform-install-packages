@@ -9,17 +9,14 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 9.17.0
-Release: 8
+Version: 9.18.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
 Source1: kaltura.apache.ssl.conf.template 
-# 22/01/14 due to a bug, can be removed in the next version:
-#Source2: 01.conversionProfile.99.template.xml
 Source3: kaltura.apache.conf.template 
 Source4: emails_en.template.ini
-#Source5: 01.Partner.template.ini
 Source6: 02.Permission.ini
 Source7: dwh.template
 Source8: 01.uiConf.99.template.xml
@@ -37,15 +34,12 @@ Source17: navigation.xml
 Source18: monit.phtml 
 Source19: IndexController.php
 Source20: sphinx.populate.template.rc
-# Source21: kaltura_batch_upload_falcon.zip
 Source22: 01.UserRole.99.template.xml
 Source23: 04.flavorParams.ini
 Source24: 04.liveParams.ini
 Source25: kaltura_populate.template
 Source26: kaltura_batch.template
 Source27: kmc1Success.php 
-#Source28: galleryPartialSuccess.php
-#Source29: gallerySuccess.php
 
 URL: https://github.com/kaltura/server/tree/IX-%{version}
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -91,11 +85,9 @@ mkdir -p $RPM_BUILD_ROOT%{prefix}/web/tmp/thumb
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/tmp/xml
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/dropfolders/monitor
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/control
-#mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content/webcam 
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content/cacheswf
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content/uploads
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content/entry
-#mkdir -p $RPM_BUILD_ROOT/%{prefix}/web/content/docs/
 mkdir -p $RPM_BUILD_ROOT%{prefix}web/content//metadata
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content/batchfiles
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content/templates
@@ -132,8 +124,6 @@ rm $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.d/*template*
 cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/app/configurations/apache/kaltura.ssl.conf.template
 cp %{SOURCE3} $RPM_BUILD_ROOT%{prefix}/app/configurations/apache/kaltura.conf.template
 cp %{SOURCE4} $RPM_BUILD_ROOT%{prefix}/app/batch/batches/Mailer/emails_en.template.ini
-# Add partnerParentId=0 to Mr. partner 99.
-#cp %{SOURCE5} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_data/01.Partner.template.ini
 cp %{SOURCE6} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_data/02.Permission.ini
 cp %{SOURCE8} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_content/01.uiConf.99.template.xml
 cp %{SOURCE7} $RPM_BUILD_ROOT%{prefix}/app/configurations/cron/dwh.template
@@ -152,11 +142,7 @@ cp %{SOURCE16} $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/
 cp %{SOURCE25} $RPM_BUILD_ROOT%{prefix}/app/configurations/logrotate/
 cp %{SOURCE26} $RPM_BUILD_ROOT%{prefix}/app/configurations/logrotate/
 cp %{SOURCE27} $RPM_BUILD_ROOT%{prefix}/app/alpha/apps/kaltura/modules/kmc/templates/
-#cp %{SOURCE28} $RPM_BUILD_ROOT%{prefix}/app/alpha/apps/kaltura/modules/system/templates/
-#cp %{SOURCE29} $RPM_BUILD_ROOT%{prefix}/app/alpha/apps/kaltura/modules/system/templates/
 
-# sample bulks
-#cp %{SOURCE21} $RPM_BUILD_ROOT%{prefix}/web/content/docs/
 
 # David Bezemer's Admin console and monit patches:
 cp %{SOURCE17} $RPM_BUILD_ROOT%{prefix}/app/admin_console/configs/navigation.xml
@@ -166,8 +152,6 @@ cp %{SOURCE19} $RPM_BUILD_ROOT%{prefix}/app/admin_console/controllers/IndexContr
 # we bring another in kaltura-batch
 rm $RPM_BUILD_ROOT%{prefix}/app/configurations/batch/batch.ini.template
 
-# 22/01/14 due to a bug, can be removed in the next version:
-#cp %{SOURCE2} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_content/01.conversionProfile.99.template.xml
 
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content
 tar zxf %{SOURCE10} -C $RPM_BUILD_ROOT%{prefix}/web/content
@@ -240,41 +224,16 @@ if [ "$1" = 2 ];then
 		if ! %{_sysconfdir}/init.d/httpd status;then
 			%{_sysconfdir}/init.d/httpd start
 		fi
-		# see https://kaltura.atlassian.net/wiki/pages/viewpage.action?spaceKey=QAC&title=QA.Core+Deployment+Instructions%3A+Mar+9%2C+2014
-		if [ $CORE_MAJ_VER -lt 12 ];then
-			php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_01_20_categoryentry_syncprivacycontext_action.php > /tmp/2014_01_20_categoryentry_syncprivacycontext_action.php.log
-			php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_01_26_add_media_server_partner_level_permission.php > /tmp/add_permissions/2014_01_26_add_media_server_partner_level_permission.php.log
-			php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_02_25_add_push_publish_permission_to_partner_0.php > /tmp/2014_02_25_add_push_publish_permission_to_partner_0.php
-			php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_01_26_update_live_stream_service_permissions.php > /tmp/add_permissions/2014_01_26_update_live_stream_service_permissions.php.log
-			php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_02_25_add_push_publish_permission_to_live_asset_parameters.php > /tmp/2014_02_25_add_push_publish_permission_to_live_asset_parameters.php.log
-			php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_02_25_add_push_publish_permission_to_live_entry_parameters.php > /tmp/2014_02_25_add_push_publish_permission_to_live_entry_parameters.php.log
-			php %{prefix}/app/alpha/scripts/utils/setCategoryEntriesPrivacyContext.php realrun > /tmp/setCategoryEntriesPrivacyContext.php.log
-		elif [ $CORE_MAJ_VER -lt 13 ];then
 
-			php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_03_10_addpushpublishconfigurationaction_added_to_livestreamservice.php > /tmp/2014_03_10_addpushpublishconfigurationaction_added_to_livestreamservice.php.log
-			php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_03_09_add_system_admin_publisher_config_to_audittrail.php > /tmp/2014_03_09_add_system_admin_publisher_config_to_audittrail.php.log
-		elif [ $CORE_MAJ_VER -lt 14 ];then
-			php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_03_09_add_system_admin_publisher_config_to_audittrail.php > /tmp/2014_03_09_add_system_admin_publisher_config_to_audittrail.php.log
-		elif [ $CORE_MAJ_VER -lt 15 ];then
-			php %{prefix}/app/deployment/updates/scripts/2014_04_02_enforce_live_params_permissions.php > /tmp/2014_04_02_enforce_live_params_permissions.php.log
-			php %{prefix}/app/deployment/updates/scripts/2014_04_16_remove_cloud_transcode_profile.php realrun > /tmp/2014_04_16_remove_cloud_transcode_profile.php.log
-			php %{prefix}/app/deployment/updates/scripts/2014_04_22_enable_live_paid_partners.php realrun > /tmp/2014_04_22_enable_live_paid_partners.php.log
-		elif [ $CORE_MAJ_VER -lt 16 ];then
-			php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_01_26_add_media_server_partner_level_permission.php > /tmp/2014_01_26_add_media_server_partner_level_permission.php .log
-			php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_02_25_add_push_publish_permission_to_partner_0.php > /tmp/2014_02_25_add_push_publish_permission_to_partner_0.php.log
-			php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_01_26_update_live_stream_service_permissions.php > /tmp/2014_01_26_update_live_stream_service_permissions.php.log
-			php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_02_25_add_push_publish_permission_to_live_asset_parameters.php > /tmp/2014_02_25_add_push_publish_permission_to_live_asset_parameters.php.log
-			php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_02_25_add_push_publish_permission_to_live_entry_parameters.php > /tmp/2014_02_25_add_push_publish_permission_to_live_entry_parameters.php.log
-			php %{prefix}/app/deployment/updates/scripts/2014_03_10_addpushpublishconfigurationaction_added_to_livestreamservice.php > /tmp/2014_03_10_addpushpublishconfigurationaction_added_to_livestreamservice.php.log
-			php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_05_07_live_conversionprofile_hybrid_ecdn.php > /tmp/2014_05_07_live_conversionprofile_hybrid_ecdn.php.log
-			php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_05_07_add_always_allowed_hybrid_ecdn.php > /tmp/2014_05_07_add_always_allowed_hybrid_ecdn.php.log
-		#elif [ $CORE_MAJ_VER -lt 17 ];then 
-fi
-			php %{prefix}/app/deployment/updates/scripts/2014_05_26_create_no_session_role.php realrun > /tmp/2014_05_26_create_no_session_role.php.log
-			php %{prefix}/app/deployment/updates/scripts/add_permissions/2014_05_11_add_permissions_to_CONTENT_MODERATE_BASE.php > /tmp/2014_05_11_add_permissions_to_CONTENT_MODERATE_BASE.php.log
-			php %{prefix}/app/alpha/scripts/utils/addTvinciIngestSchemasToPartner99.php realrun > /tmp/addTvinciIngestSchemasToPartner99.php.log
-			php %{prefix}/deployment/updates/scripts/add_permissions/delivery_profile_service.php > /tmp/delivery_profile_service.php
-			php %{prefix}/app/deployment/base/scripts/installPlugins.php > /tmp/installPlugins.php.log
+		# we now need CREATE and DROP priv for 'kaltura' on kaltura.*
+		if [ -r /etc/kaltura.d/system.ini ];then
+			. /etc/kaltura.d/system.ini
+			echo "GRANT INSERT,UPDATE,DELETE,SELECT,ALTER,DROP,CREATE ON kaltura.* TO 'kaltura'@'%';FLUSH PRIVILEGES;"|mysql -h$DB1_HOST -u $SUPER_USER -p$SUPER_USER_PASSWD -P$DB1_PORT
+		fi
+		php %{prefix}/app/deployment/updates/update.php -i -d >> /opt/kaltura/log/kalt_up.log 2>&1
+		php %{prefix}/app/deployment/updates/update.php -i -s >> /opt/kaltura/log/kalt_up.log 2>&1
+		 php %{prefix}/app/deployment/base/scripts/installPlugins.php >> /opt/kaltura/log/kalt_up.log 2>&1
+
 	fi
 
 fi
@@ -331,6 +290,21 @@ fi
 
 
 %changelog
+* Sun Jun 29 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.18.0-1
+- Ver Bounce to 9.18.0
+- PLAT-1345 - API for per entry ingesting onTextData  (default 608 live captions)
+- PLAT-1136 - expose session start time on live entries
+- PLAT-1375 - Add configurable option to YouTube API connector - include entry name in YT 'raw file' filed instead of file name
+- PLAT-1403 - ISM flow - change file sync sub type of the manifest flavor to ASSET sub type instead ISM
+- PLAT-1299 - Add deletion mechanism to Webex drop Floder
+- SUP-2266 - Change the dataUrl to use thumbnail API
+- PLAT-1104 - KMC Login: The 'login' button is cut for Espan~ol
+- PLAT-1105 - KMC Login: Default captions are not shown in the selected language
+- PLAT-1106 - KMC Login: Default captions on the login page are editable
+
+* Sun Jun 29 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.17.0-10
+- From now on - will run update.php at each upgrade instead of specific scripts.
+
 * Tue Jun 25 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.17.0-4
 - Core now need the passwd for partner 99. Manually merged from 9.18.0.
 
