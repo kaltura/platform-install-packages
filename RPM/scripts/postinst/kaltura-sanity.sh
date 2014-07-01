@@ -182,6 +182,17 @@ if rpm -q kaltura-batch >/dev/null 2>&1 || rpm -q kaltura-front >/dev/null 2>&1 
 			done
 			if [ "$CONVERT_SUCCESS" -eq 1 ];then
 				report "kaltura_logo_animated_blue.flv - $UPLOADED_ENT status" $RC "$UPLOADED_ENT converted" "`bc <<< $END-$START`"
+				START=`date +%s.%N`
+				OUT=`php $DIRNAME/play.php --service-url=$SERVICE_URL --entry-id=$UPLOADED_ENT  --partner=$PARTNER_ID --secret=$PARTNER_SECRET|sed "s@'@@g"`
+				RC=$?
+				END=`date +%s.%N`
+				TOTAL_T=`bc <<< $END-$START`
+				if [ $RC -ne 0 ];then
+					report "Mock playback $UPLOADED_ENT failed" $RC "$OUT" "$TOTAL_T"
+				else
+					report "Mock playback $UPLOADED_ENT succeeded" $RC "$OUT" "$TOTAL_T"
+				fi	
+				
 			else
 				report "kaltura_logo_animated_blue.flv - $UPLOADED_ENT status" 1 "$UPLOADED_ENT failed to convert." "`bc <<< $END-$START`"
 			fi

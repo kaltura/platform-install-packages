@@ -1,13 +1,7 @@
 <?php
 require_once('/opt/kaltura/app/alpha/config/kConf.php');
 
-if($argc != 2)
-{
-        echo "Usage: php " . __FILE__ . " config_path\n";
-        exit(-1);
-}
-
-$configPath = $argv[1];
+$configPath = '/opt/kaltura/bin/sanity_config.ini'; 
 if(!file_exists($configPath))
 {
         echo "Configuration file [$configPath] does not exist\n";
@@ -94,7 +88,6 @@ function cUrl($url, $localFilePath, &$headers, $followLocation = true)
 }
 
 require_once ('/opt/kaltura/web/content/clientlibs/php5/KalturaClient.php');
-//require_once ('/opt/kaltura/app/tests/lib/KalturaClient.php');
 
 class SanityTestLogger implements IKalturaLogger
 {
