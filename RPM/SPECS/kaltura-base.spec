@@ -10,7 +10,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 9.18.0
-Release: 2 
+Release: 3
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -234,7 +234,7 @@ if [ "$1" = 2 ];then
 		php %{prefix}/app/deployment/updates/update.php -i -d >> /opt/kaltura/log/kalt_up.log 2>&1
 		php %{prefix}/app/deployment/updates/update.php -i -s >> /opt/kaltura/log/kalt_up.log 2>&1
 		php %{prefix}/app/deployment/base/scripts/installPlugins.php >> /opt/kaltura/log/kalt_up.log 2>&1
-		php %{prefix}/app/deployment/updates/scripts/2014_05_27_create_delivery_profiles.php  >> /opt/kaltura/log/kalt_up.log 2>&1
+	#	php %{prefix}/app/deployment/updates/scripts/2014_05_27_create_delivery_profiles.php  >> /opt/kaltura/log/kalt_up.log 2>&1
 
 	fi
 
@@ -292,6 +292,9 @@ fi
 
 
 %changelog
+* Tue Jul 1 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.18.0-3
+- https://github.com/kaltura/server/pull/1397/files#diff-0
+
 * Sun Jun 29 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.18.0-1
 - Ver Bounce to 9.18.0
 - PLAT-1345 - API for per entry ingesting onTextData  (default 608 live captions)
