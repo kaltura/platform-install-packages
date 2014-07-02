@@ -29,6 +29,8 @@ if [ ! -r "$RC_FILE" ];then
 	exit 2 
 fi
 . $RC_FILE
+
+DIRNAME=`dirname $0`
 rm  /tmp/`hostname`-reportme.`date +%d_%m_%Y`.sql 2> /dev/null
 rm $LOG_DIR/log/*log  $LOG_DIR/log/batch/*log 2> /dev/null
 for PARTITION in '/' $WEB_DIR;do
@@ -118,6 +120,12 @@ if [ $? -eq 0 ];then
 		RC=$?
 		END=`date +%s.%N`
 		report "$COMP_NAME ver in KMC config.ini" $RC "$MSG" "`bc <<< $END-$START`"
+		START=`date +%s.%N`
+		OUT=`php $DIRNAME/get_kmc_swfs.php`
+		RC=$?
+		END=`date +%s.%N`
+		report "Get KMC SWFs" $RC "$OUT" "`bc <<< $END-$START`"
+		
 	else
 		echo -e "[${CYAN}$COMP_NAME ver in KMC config.ini${NORMAL}][${BRIGHT_YELLOW}SKIPPED as KMC is not installed${NORMAL}]"
 	fi
@@ -141,7 +149,6 @@ RC=$?
 END=`date +%s.%N`
 report "check_admin_console_index_page" $RC "$MSG" "`bc <<< $END-$START`"
 
-DIRNAME=`dirname $0`
 ADMIN_PARTNER_SECRET=`echo "select admin_secret from partner where id=-2" | mysql -N -h $DB1_HOST -p$DB1_PASS $DB1_NAME -u$DB1_USER`
 NOW=`date +%d-%H-%m-%S`
 START=`date +%s.%N`
@@ -183,7 +190,7 @@ if rpm -q kaltura-batch >/dev/null 2>&1 || rpm -q kaltura-front >/dev/null 2>&1 
 			if [ "$CONVERT_SUCCESS" -eq 1 ];then
 				report "kaltura_logo_animated_blue.flv - $UPLOADED_ENT status" $RC "$UPLOADED_ENT converted" "`bc <<< $END-$START`"
 				START=`date +%s.%N`
-				OUT=`php $DIRNAME/play.php --service-url=$SERVICE_URL --entry-id=$UPLOADED_ENT  --partner=$PARTNER_ID --secret=$PARTNER_SECRET|sed "s@'@@g"`
+				OUT=`php $DIRNAME/play.php --service-url=$SERVICE_URL --entry-id=$UPLOADED_ENT  --partner=$PARTNER_ID --secret=$PARTNER_SECRET|sed "s@\"@@g"`
 				RC=$?
 				END=`date +%s.%N`
 				TOTAL_T=`bc <<< $END-$START`
