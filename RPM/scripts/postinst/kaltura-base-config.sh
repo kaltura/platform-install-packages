@@ -406,6 +406,14 @@ if [ -d /usr/lib/red5/webapps/oflaDemo ];then
         ln -sf $BASE_DIR/web/content/webcam /usr/lib/red5/webapps/oflaDemo/streams
 fi
 
+KMC_PATH=`ls -ld $BASE_DIR/web/flash/kmc/v*|awk -F " " '{print $NF}' |tail -1`
+KMC_LOGIN_PATH=`ls -ld $BASE_DIR/web/flash/kmc/login/v*|awk -F " " '{print $NF}' |tail -1`
+if [ -d "$KMC_PATH" -a -d "$KMC_LOGIN_PATH" ];then
+	KMC_VERSION=`basename $KMC_PATH`
+	KMC_LOGIN_VERSION=`basename $KMC_LOGIN_PATH`
+	sed -i "s#\(@KMC_VERSION@\)\s*=.*#\1=$KMC_VERSION#g" $RPM_BUILD_ROOT%{prefix}/bin/sanity_config.template.ini
+	sed -i "s#\(@KMC_LOGIN_VERSION@\)\s*=.*#\1=%{kmc_login_version}#g" $RPM_BUILD_ROOT%{prefix}/bin/sanity_config.template.ini
+fi
 echo -e "${BRIGHT_BLUE}Configuration of $DISPLAY_NAME finished successfully!${NORMAL}"
 send_install_becon `basename $0` $ZONE install_success
 write_last_base_version
