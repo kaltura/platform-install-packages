@@ -1,13 +1,13 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmc-docs	
-Version: 9.15.0
+Version: 9.16.0
 Release: 1
 Summary: Kaltura Management Console
 
 Group: System Management	
 License: AGPLv3+	
 URL: https://github.com/kaltura/kmc-docs 
-Source0: https://github.com/kaltura/kmc-docs/archive/kmc-docs-%{version}.tar.gz 
+Source0: https://github.com/kaltura/kmc-docs/archive/kmc-docs-IX_%{version}.zip 
 BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 BuildArch: noarch
 
@@ -50,5 +50,5 @@ rm -rf %{buildroot}
 
 
 %changelog
-* Mon Mar 12 Jess Portnoy <jess.portnoy@kaltura.com> - 9.15.0-1
+* Sat Jul 5 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.16.0-1
 - KMC docs is a different repo so it makes sense to separate it into a different package.

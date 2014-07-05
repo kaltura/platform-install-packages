@@ -2,3 +2,4 @@
 /opt/kaltura/app/deployment/updates/sql/2013_10_22_add_drm_policy_table.sql
 /opt/kaltura/app/deployment/updates/sql/2014_03_04_update_drm_device_table.sql
 /opt/kaltura/app/deployment/updates/sql/2014_03_20_add_root_id_batch_job_lock.sql
+/opt/kaltura/app/deployment/updates/sql/2014_01_22_create_delivery_table.sql
