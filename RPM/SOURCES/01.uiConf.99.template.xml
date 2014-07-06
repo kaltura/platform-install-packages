@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml>
+	<config>
+		<serviceUrl>@SERVICE_URL@</serviceUrl>
+		<partnerId>99</partnerId>
+		<clientTag>Stand alone php 1.0.0</clientTag>
+		<curlTimeout>120</curlTimeout>
+		<userAgent>Stand alone php 1.0.0</userAgent>
+		<verifySSL objectType="bool">0</verifySSL>
+	</config>
+	<session>
+		<partnerId>99</partnerId>
+		<secret>@TEMPLATE_PARTNER_ADMIN_SECRET@</secret>
+		<userId></userId>
+		<sessionType>2</sessionType>
+		<expiry>86400</expiry>
+		<privileges></privileges> 
+	</session>
+	<request service="uiConf" action="add">
+		<uiConf objectType="KalturaUiConf">
+			<objType>1</objType>
+			<name>Player with captions</name>
+			<width>560</width>
+			<height>395</height>
+			<swfUrl>/flash/kdp3/v3.9.7/kdp3.swf</swfUrl>
+			<html5Url>/html5/html5lib/v2.1.1/mwEmbedLoader.php</html5Url>
+			<useCdn>1</useCdn>
+			<tags>kdp3,player</tags>
+			<creationMode>2</creationMode>
+			<confFile path="ui_conf/playerWithCaptions.xml" />
+			<confFileFeatures path="ui_conf/playerWithCaptions.features.xml" />
+		</uiConf>
+	</request>
+	<request service="uiConf" action="add">
+		<uiConf objectType="KalturaUiConf">
+			<objType>1</objType>
+			<name>Hovering controllers player</name>
+			<width>560</width>
+			<height>315</height>
+			<swfUrl>/flash/kdp3/v3.9.7/kdp3.swf</swfUrl>
+			<html5Url>/html5/html5lib/v2.1.1/mwEmbedLoader.php</html5Url>
+			<useCdn>1</useCdn>
+			<tags>kdp3,player</tags>
+			<creationMode>2</creationMode>
+			<confFile path="ui_conf/hoveringControllersPlayer.xml" />
+			<confFileFeatures path="ui_conf/hoveringControllersPlayer.features.xml" />
+		</uiConf>
+	</request>
+	<request service="uiConf" action="add">
+		<uiConf objectType="KalturaUiConf">
+			<objType>1</objType>
+			<name>Widescreen player</name>
+			<width>460</width>
+			<height>290</height>
+			<swfUrl>/flash/kdp3/v3.9.7/kdp3.swf</swfUrl>
+			<html5Url>/html5/html5lib/v2.1.1/mwEmbedLoader.php</html5Url>
+			<useCdn>1</useCdn>
+			<tags>kdp3,player</tags>
+			<creationMode>2</creationMode>
+			<confFile path="ui_conf/widescreenPlayer.xml" />
+			<confFileFeatures path="ui_conf/widescreenPlayer.features.xml" />
+		</uiConf>
+	</request>
+	<request service="uiConf" action="add">
+		<uiConf objectType="KalturaUiConf">
+			<objType>1</objType>
+			<name>Multiple vertical playlist</name>
+			<width>525</width>
+			<height>665</height>
+			<swfUrl>/flash/kdp3/v3.9.7/kdp3.swf</swfUrl>
+			<html5Url>/html5/html5lib/v2.1.1/mwEmbedLoader.php</html5Url>
+			<useCdn>1</useCdn>
+			<tags>kdp3,playlist</tags>
+			<creationMode>2</creationMode>
+			<confFile path="ui_conf/multipleVerticalPlaylist.xml" />
+			<confFileFeatures path="ui_conf/multipleVerticalPlaylist.features.xml" />
+		</uiConf>
+	</request>
+	<request service="uiConf" action="add">
+		<uiConf objectType="KalturaUiConf">
+			<objType>8</objType>
+			<name>Player with custom watermark - with live support</name>
+			<width>400</width>
+			<height>330</height>
+			<swfUrl>/flash/kdp3/v3.9.7/kdp3.swf</swfUrl>
+			<html5Url>/html5/html5lib/v2.1.1/mwEmbedLoader.php</html5Url>
+			<useCdn>1</useCdn>
+			<tags></tags>
+			<creationMode>2</creationMode>
+			<confFile path="ui_conf/customWatermarkWithLive.xml" />
+		</uiConf>
+	</request>
+	<request service="uiConf" action="add">
+		<uiConf objectType="KalturaUiConf">
+			<objType>8</objType>
+			<name>Player with no share button - live stream support</name>
+			<width>400</width>
+			<height>360</height>
+			<swfUrl>/flash/kdp3/v3.9.7/kdp3.swf</swfUrl>
+			<html5Url>/html5/html5lib/v2.1.1/mwEmbedLoader.php</html5Url>
+			<useCdn>1</useCdn>
+			<tags></tags>
+			<creationMode>2</creationMode>
+			<confFile path="ui_conf/noShareWithLive.xml" />
+		</uiConf>
+	</request>
+	<request service="uiConf" action="add">
+		<uiConf objectType="KalturaUiConf">
+			<objType>8</objType>
+			<name>Widescreen playlist player - dark skin, minimal - with live support</name>
+			<width>740</width>
+			<height>255</height>
+			<swfUrl>/flash/kdp3/v3.9.7/kdp3.swf</swfUrl>
+			<html5Url>/html5/html5lib/v2.1.1/mwEmbedLoader.php</html5Url>
+			<useCdn>1</useCdn>
+			<tags></tags>
+			<creationMode>2</creationMode>
+			<confFile path="ui_conf/widescreenPlaylistDark.xml" />
+		</uiConf>
+	</request>
+	<request service="uiConf" action="add">
+		<uiConf objectType="KalturaUiConf">
+			<objType>8</objType>
+			<name>Widescreen player - light skin - with live support</name>
+			<width>400</width>
+			<height>285</height>
+			<swfUrl>/flash/kdp3/v3.9.7/kdp3.swf</swfUrl>
+			<html5Url>/html5/html5lib/v2.1.1/mwEmbedLoader.php</html5Url>
+			<useCdn>1</useCdn>
+			<tags></tags>
+			<creationMode>2</creationMode>
+			<confFile path="ui_conf/widescreenPlayerLightSkinWithLive.xml" />
+		</uiConf>
+	</request>
+	<request service="uiConf" action="add">
+		<uiConf objectType="KalturaUiConf">
+			<objType>8</objType>
+			<name>Widescreen playlist player - dark skin, minimal</name>
+			<width>740</width>
+			<height>255</height>
+			<swfUrl>/flash/kdp3/v3.9.7/kdp3.swf</swfUrl>
+			<html5Url>/html5/html5lib/v2.1.1/mwEmbedLoader.php</html5Url>
+			<useCdn>1</useCdn>
+			<tags>kdp3,playlist</tags>
+			<creationMode>2</creationMode>
+			<confFile path="ui_conf/widescreenPlaylistDarkSkin.xml" />
+			<confFileFeatures path="ui_conf/widescreenPlaylistDarkSkin.features.xml" />
+		</uiConf>
+	</request>
+	<request service="uiConf" action="add">
+		<uiConf objectType="KalturaUiConf">
+			<objType>1</objType>
+			<name>Player with no share button</name>
+			<width>560</width>
+			<height>395</height>
+			<swfUrl>/flash/kdp3/v3.9.7/kdp3.swf</swfUrl>
+			<html5Url>/html5/html5lib/v2.1.1/mwEmbedLoader.php</html5Url>
+			<useCdn>1</useCdn>
+			<tags>kdp3,player</tags>
+			<creationMode>2</creationMode>
+			<confFile path="ui_conf/playerNoShare.xml" />
+			<confFileFeatures path="ui_conf/playerNoShare.features.xml" />
+		</uiConf>
+	</request>
+</xml>
