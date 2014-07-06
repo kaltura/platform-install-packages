@@ -7,7 +7,7 @@
 
 Name:           php-pecl-ssh2
 Version:        0.12
-Release:        1
+Release:        2 
 Summary:        Bindings for the libssh2 library
 
 License:        PHP
@@ -80,13 +80,15 @@ EOF
 %config(noreplace) %{_sysconfdir}/php.d/ssh2.ini
 %{php_extdir}/ssh2.so
 
-
 %changelog
+* Sun Jul 08 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 0.12-2
+- For PHP 5_4
+
 * Fri Jan 3 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 0.12-1
 - First build for Kaltura CE.
 - Bounced version to 0.12. 
 
-%changelog
+
 * Wed Feb 09 2011 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.11.0-7
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_15_Mass_Rebuild
 
