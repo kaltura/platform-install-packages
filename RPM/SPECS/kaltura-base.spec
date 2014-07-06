@@ -6,6 +6,7 @@
 %define confdir %{prefix}/app/configurations
 %define logdir %{prefix}/log
 %define webdir %{prefix}/web
+%define CORE_BRANCH php54
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
@@ -13,7 +14,7 @@ Version: 9.18.0
 Release: 5
 License: AGPLv3+
 Group: Server/Platform 
-Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
+Source0: https://github.com/kaltura/server/archive/server-%{CORE_BRANCH}.zip
 Source1: kaltura.apache.ssl.conf.template 
 Source3: kaltura.apache.conf.template 
 Source4: emails_en.template.ini
@@ -41,7 +42,7 @@ Source25: kaltura_populate.template
 Source26: kaltura_batch.template
 Source27: kmc1Success.php 
 
-URL: https://github.com/kaltura/server/tree/IX-%{version}
+URL: https://github.com/kaltura/server/tree/%{CORE_BRANCH}
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
 Requires: rsync,mysql,kaltura-monit,kaltura-postinst,cronie, php-cli, php-xml, php-curl, php-mysql,php-gd,php-gmp, php-imap, php-ldap,ntp,mailx
@@ -61,7 +62,7 @@ For more information visit: http://corp.kaltura.com, http://www.kaltura.org and 
 This is the base package, needed for any Kaltura server role.
 
 %prep
-%setup -qn server-IX-%{version}
+%setup -qn server-%{CORE_BRANCH} 
 
 
 %install
@@ -102,7 +103,7 @@ project" "*.png" "*.properties" "*.sample" "*.swf" "*.sf" "*.swz" "*.uad" "*.pre
 done
 
 for i in admin_console alpha api_v3 batch configurations deployment generator infra plugins start tests ui_infra var_console vendor;do 
-	mv  %{_builddir}/server-IX-%{version}/$i $RPM_BUILD_ROOT%{prefix}/app
+	mv  %{_builddir}/server-%{CORE_BRANCH}/$i $RPM_BUILD_ROOT%{prefix}/app
 done
 find  $RPM_BUILD_ROOT%{prefix}/app -name "*.sh" -type f -exec chmod +x {} \;
 
@@ -290,7 +291,6 @@ fi
 %dir %{prefix}/include
 %dir %{prefix}/share
 
-
 %changelog
 * Tue Jul 1 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.18.0-3
 - https://github.com/kaltura/server/pull/1397/files#diff-0
@@ -310,7 +310,7 @@ fi
 * Sun Jun 29 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.17.0-10
 - From now on - will run update.php at each upgrade instead of specific scripts.
 
-* Tue Jun 25 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.17.0-4
+* Wed Jun 25 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.17.0-4
 - Core now need the passwd for partner 99. Manually merged from 9.18.0.
 
 * Tue Jun 24 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.17.0-3
@@ -373,7 +373,7 @@ fi
 * Tue Apr 8 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.14.0-6
 - We need to run the alter scripts in the event the version is lower than n, not equal to n. Why? cause jumping from say 11 to 13 is completely legit.
 
-* Mon Apr 6 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.14.0-4
+* Sun Apr 6 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.14.0-4
 - Another instance of the ipadnew tag[darn!].
 
 * Sun Apr 6 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.14.0-1
@@ -390,11 +390,11 @@ fi
 - PLAT-1151 - Webex - detect black/silent conversions
 - PLAT-1145 - Updating UIConf with JSOn Config looses the config XML 
 
-* Sun Apr 1 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.13.0-6
+* Tue Apr 1 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.13.0-6
 - Here is our problem: the ip{hone,ad}new tags are only good for Akamai HLS, on any other serve method, it makes ip{hone,ad} serves not to work.
   If a user DOES wish to use Akamai HLS, we have the kaltura-remote-storage-config.sh for them to run.
 
-* Thu Mar 25 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.13.0-4
+* Tue Mar 25 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.13.0-4
 - Log update scripts output to file instead of STDOUT
 
 * Tue Mar 25 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.13.0-3
@@ -415,7 +415,7 @@ fi
 - SUP-1625 - Avoid creating notification jobs when no notification email is configured
 
 
-* Tue Mar 20 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.12.0-7
+* Thu Mar 20 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.12.0-7
 - Remove password tag from app/deployment/base/scripts/init_content/01.UserRole.99.template.xml.
   It causes issues and isn;t needed.
 
@@ -454,10 +454,10 @@ fi
 * Wed Mar 5 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.11.0-16
 - Place holder for Chain. See: https://github.com/kaltura/platform-install-packages/issues/57
   
-* Fri Feb 27 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.11.0-15
+* Thu Feb 27 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.11.0-15
 - Fixes https://github.com/kaltura/platform-install-packages/issues/50
 
-* Fri Feb 27 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.11.0-14
+* Thu Feb 27 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.11.0-14
 - https://github.com/kaltura/platform-install-packages/issues/51
 
 * Tue Feb 25 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.11.0-11
@@ -541,10 +541,10 @@ disable Audit plugin.
 * Fri Jan 31 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-18
 - Fixed template for UI conf generation.
 
-* Wed Jan 28 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-10
+* Tue Jan 28 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-10
 - debugme.
 
-* Wed Jan 28 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-9
+* Tue Jan 28 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-9
 - %%{prefix} to be owned by %%{kaltura_user}, %%{kaltura-user}
 
 * Tue Jan 28 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.9.0-4
@@ -559,7 +559,7 @@ disable Audit plugin.
 * Mon Jan 20 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-33
 - Create additionally needed directories under web.
 
-* Sat Jan 17 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-28
+* Fri Jan 17 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-28
 - Make sure SELinux is not enabled.
 
 * Fri Jan 17 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-27
@@ -568,7 +568,7 @@ disable Audit plugin.
 * Wed Jan 15 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-24
 - Added web/tmp web/control and web/dropfolders.
 
-* Sun Jan 14 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-23
+* Tue Jan 14 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-23
 - We have CLI scripts in PHP that need to run post install of the base package.
 
 * Sun Jan 12 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.7.0-22
