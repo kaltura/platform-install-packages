@@ -1,0 +1,86 @@
+----------------------------------------
+See this link for more documentation:
+http://php.net/ssh2
+----------------------------------------
+
+CLIII. Secure Shell2 Functions
+Introduction
+
+Bindings to the libssh2 library which provide access to resources (shell, remote exec, tunneling, file transfer) on a remote machine using a secure cryptographic transport.
+
+Predefined Constants
+
+The constants below are defined by this extension, and will only be available when the extension has either been compiled into PHP or dynamically loaded at runtime.
+
+SSH2_FINGERPRINT_MD5 (integer)
+
+    Flag to ssh2_fingerprint() requesting hostkey fingerprint as an MD5 hash. 
+SSH2_FINGERPRINT_SHA1 (integer)
+
+    Flag to ssh2_fingerprint() requesting hostkey fingerprint as an SHA1 hash. 
+SSH2_FINGERPRINT_HEX (integer)
+
+    Flag to ssh2_fingerprint() requesting hostkey fingerprint as a string of hexits. 
+SSH2_FINGERPRINT_RAW (integer)
+
+    Flag to ssh2_fingerprint() requesting hostkey fingerprint as a raw string of 8-bit characters. 
+SSH2_TERM_UNIT_CHARS (integer)
+
+    Flag to ssh2_shell() specifying that width and height are provided as character sizes. 
+SSH2_TERM_UNIT_PIXELS (integer)
+
+    Flag to ssh2_shell() specifying that width and height are provided in pixel units. 
+SSH2_DEFAULT_TERM_WIDTH (integer)
+
+    Default terminal width requested by ssh2_shell(). 
+SSH2_DEFAULT_TERM_HEIGHT (integer)
+
+    Default terminal height requested by ssh2_shell(). 
+SSH2_DEFAULT_TERM_UNIT (integer)
+
+    Default terminal units requested by ssh2_shell(). 
+SSH2_STREAM_STDIO (integer)
+
+    Flag to ssh2_fetch_stream() requesting STDIO subchannel. 
+SSH2_STREAM_STDERR (integer)
+
+    Flag to ssh2_fetch_stream() requesting STDERR subchannel. 
+SSH2_DEFAULT_TERMINAL (string)
+
+    Default terminal type (e.g. vt102, ansi, xterm, vanilla) requested by ssh2_shell(). 
+
+
+Table of Contents:
+
+ssh2_auth_hostbased_file --  Authenticate using a public hostkey
+ssh2_auth_none --  Authenticate as "none"
+ssh2_auth_password --  Authenticate over SSH using a plain password
+ssh2_auth_pubkey_file --  Authenticate using a public key
+ssh2_connect --  Connect to an SSH server
+ssh2_exec --  Execute a command on a remote server
+ssh2_fetch_stream --  Fetch an extended data stream
+ssh2_fingerprint --  Retreive fingerprint of remote server
+ssh2_methods_negotiated --  Return list of negotiated methods
+ssh2_publickey_add --  Add an authorized publickey
+ssh2_publickey_init --  Initialize Publickey subsystem
+ssh2_publickey_list --  List currently authorized publickeys
+ssh2_publickey_remove --  Remove an authorized publickey
+ssh2_scp_recv --  Request a file via SCP
+ssh2_scp_send --  Send a file via SCP
+ssh2_sftp_lstat --  Stat a symbolic link
+ssh2_sftp_mkdir --  Create a directory
+ssh2_sftp_readlink --  Return the target of a symbolic link
+ssh2_sftp_realpath --  Resolve the realpath of a provided path string
+ssh2_sftp_rename --  Rename a remote file
+ssh2_sftp_rmdir --  Remove a directory
+ssh2_sftp_stat --  Stat a file on a remote filesystem
+ssh2_sftp_symlink --  Create a symlink
+ssh2_sftp_unlink --  Delete a file
+ssh2_sftp --  Initialize SFTP subsystem
+ssh2_shell --  Request an interactive shell
+ssh2_tunnel --  Open a tunnel through a remote server 
+
+----------------------------------------
+See this link for more documentation:
+http://php.net/ssh2
+----------------------------------------
