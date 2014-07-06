@@ -40,7 +40,7 @@ Source23: 04.flavorParams.ini
 Source24: 04.liveParams.ini
 Source25: kaltura_populate.template
 Source26: kaltura_batch.template
-Source27: kmc1Success.php 
+#Source27: kmc1Success.php 
 
 URL: https://github.com/kaltura/server/tree/%{CORE_BRANCH}
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -143,7 +143,6 @@ cp %{SOURCE15} $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/
 cp %{SOURCE16} $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/
 cp %{SOURCE25} $RPM_BUILD_ROOT%{prefix}/app/configurations/logrotate/
 cp %{SOURCE26} $RPM_BUILD_ROOT%{prefix}/app/configurations/logrotate/
-cp %{SOURCE27} $RPM_BUILD_ROOT%{prefix}/app/alpha/apps/kaltura/modules/kmc/templates/
 
 
 # David Bezemer's Admin console and monit patches:
