@@ -1,0 +1,13 @@
+--- a/sphinx.conf.in	2010-07-19 17:56:34.000000000 +0200
++++ b/sphinx.conf.in	2010-07-20 22:18:42.000000000 +0200
+@@ -636,8 +636,8 @@
+ indexer
+ {
+ 	# memory limit, in bytes, kiloytes (16384K) or megabytes (256M)
+-	# optional, default is 32M, max is 2047M, recommended is 256M to 1024M
+-	mem_limit		= 32M
++	# optional, default is 128M, max is 2047M, recommended is 256M to 1024M
++	mem_limit		= 128M
+ 
+ 	# maximum IO calls per second (for I/O throttling)
+ 	# optional, default is 0 (unlimited)
