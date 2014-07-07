@@ -17,8 +17,6 @@ Packager:       Kaltura Inc.
 
 Source0:       	%{name}-%{version}.tar.gz 
 Source1: 	%{name}
-Source2:	http://snowball.tartarus.org/dist/libstemmer_c.tgz
-Source3:	re2.tar.gz
 Source4:	kaltura.conf.template
 Source5: 	kaltura-populate
 Patch0:		config-main.patch
