@@ -3,8 +3,8 @@
 
 Summary: Data encryption library
 Name: kaltura-libmcrypt
-Version: 2.5.7
-Release: 5 
+Version: 2.6.8
+Release: 1 
 License: LGPL
 Group: System Environment/Libraries
 URL: http://mcrypt.sourceforge.net/
@@ -12,7 +12,7 @@ URL: http://mcrypt.sourceforge.net/
 Packager: Jess Portnoy <jess.portnoy@kaltura.com> 
 Vendor: Kaltura, Inc. 
 
-Source: http://dl.sf.net/mcrypt/libmcrypt-%{version}.tar.gz
+Source: http://downloads.sourceforge.net/project/mcrypt/MCrypt/%{version}/mcrypt-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
 BuildRequires: libtool >= 1.3.4
@@ -36,7 +36,7 @@ documentation for %{name}. If you like to develop programs using %{name},
 you will need to install %{name}-devel.
 
 %prep
-%setup -qn libmcrypt-%{version}
+%setup -qn mcrypt-%{version}
 
 %build
 ./configure \

@@ -2,7 +2,7 @@
 Summary: Toolkit for RTMP streams
 Name: kaltura-rtmpdump
 Version: 2.3
-Release: 2 
+Release: 3 
 License: GPLv2+
 Group: Applications/Internet
 URL: http://rtmpdump.mplayerhq.hu/
@@ -11,7 +11,7 @@ Source0: http://rtmpdump.mplayerhq.hu/download/rtmpdump-%{version}.tgz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
 BuildRequires: gnutls-devel >= 2.0
-BuildRequires: zlib-devel
+BuildRequires: zlib-devel, libgcrypt-devel
 
 %description
 rtmpdump is a toolkit for RTMP streams. All forms of RTMP are supported,

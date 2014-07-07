@@ -6,8 +6,8 @@
 
 Summary: PHP Mcrypt extension. 
 Name: php-mcrypt
-Version: 5.3.3
-Release: 4 
+Version: 5.4.16
+Release: 1
 License: The PHP License
 Group: Development/Languages
 URL: http://www.php.net/
@@ -24,7 +24,7 @@ Requires: php-api = %{php_api}
 BuildRequires: php-devel = %{version}
 Provides: php-mcrypt 
 Requires: libmcrypt
-BuildRequires: libmcrypt-devel
+BuildRequires: kaltura-libmcrypt-devel
 %description
 PHP is an HTML-embedded scripting language.
 

@@ -7,15 +7,15 @@
 
 Name:           php-pecl-ssh2
 Version:        0.12
-Release:        2 
+Release:        3
 Summary:        Bindings for the libssh2 library
 
 License:        PHP
 Group:          Development/Languages
 URL:            http://pecl.php.net/package/ssh2
 Source0:        http://pecl.php.net/get/ssh2-%{version}.tgz
-Source1:        PHP-LICENSE-3.01
-Source2:        php-pecl-ssh2-0.10-README
+#Source1:        PHP-LICENSE-3.01
+#Source2:        php-pecl-ssh2-0.10-README
 
 
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -43,8 +43,8 @@ libssh2 is available from http://www.sourceforge.net/projects/libssh2
 
 
 
-%{__install} -m 644 -c %{SOURCE1} LICENSE
-%{__install} -m 644 -c %{SOURCE2} README
+#%{__install} -m 644 -c %{SOURCE1} LICENSE
+#%{__install} -m 644 -c %{SOURCE2} README
 
 cd %{pecl_name}-%{version}
 
@@ -76,12 +76,12 @@ EOF
 
 %files
 %defattr(-,root,root,-)
-%doc LICENSE README
+#%doc LICENSE README
 %config(noreplace) %{_sysconfdir}/php.d/ssh2.ini
 %{php_extdir}/ssh2.so
 
 %changelog
-* Sun Jul 08 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 0.12-2
+* Sun Jul 06 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 0.12-3
 - For PHP 5_4
 
 * Fri Jan 3 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 0.12-1
