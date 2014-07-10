@@ -1,7 +1,7 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmc	
-Version: v5.37.21
-Release: 4
+Version: v5.37.22
+Release: 1
 Summary: Kaltura Management Console
 
 Group: System Management	
@@ -81,7 +81,13 @@ rm -rf %{buildroot}
 
 
 %changelog
-* Sat Jun 14 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.17.0-1
+* Thu Jul 10 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.22-1
+- PLAT-1342 - Reflect replacement ERROR status in the KMC
+- PLAT-1389 - New Access Control Profiles are missing "Allow All" settings for IPs (the default access control profile is missing it too)
+- FEC-1463 - on line help - broken links to live reports and live transcoding profiles' pages
+- PLAT-340 - B&S report is cut in KMC while using resolution low then 1400 * 1050 
+
+* Sat Jun 14 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.21-1
 - PLAT-974 - add partner Reference ID to KMC and Multi-Account console
 
 * Wed May 21 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.20-2

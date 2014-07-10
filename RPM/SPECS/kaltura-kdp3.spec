@@ -1,8 +1,8 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kdp3	
-Version: v3.9.8
+Version: v3.9.9
 Epoch: 1 
-Release: 2 
+Release: 1 
 Summary: Kaltura Dynamic Player
 License: AGPLv3+	
 URL: https://github.com/kaltura/kdp/releases/tag/%{version}
@@ -48,6 +48,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Thu Jul 10 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v3.9.9-1
+- New rel.
+
 * Sun Mar 9 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v3.9.8-1
 - SUP-1430 - Closed Captions won't show in livestream + prerolls 
 - SUP-1498 - Video is not Auto played After Ad served. 

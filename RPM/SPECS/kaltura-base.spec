@@ -9,8 +9,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 9.18.0
-Release: 5 
+Version: 9.19.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -292,6 +292,16 @@ fi
 
 
 %changelog
+* Thu Jul 10 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.19.0-1
+- Ver Bounce to 9.19.0
+- SUP-2290 - API endDate and startDate issues
+- SUP-2369 - executeplaylist service does not escape characters in the 'tag' field
+- SUP-2422 - UserID cannot be removed from a category
+- PLAT-1525 - key and iv in widevine configuration are switched 
+- PLAT-1442 - Create template for "Entry Changed" email notification
+- PLAT-1256 - Entry does not update replacement status properly if replacement fails to convert all flavors
+- PLAT-1510 - Multi-stream sources and Watermarking
+
 * Tue Jul 1 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.18.0-3
 - https://github.com/kaltura/server/pull/1397/files#diff-0
 

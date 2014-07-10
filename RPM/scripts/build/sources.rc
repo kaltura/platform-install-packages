@@ -7,7 +7,7 @@ PACKAGER_NAME="Jess Portnoy"
 PACKAGER_MAIL="jess.portnoy@kaltura.com"
 TMP_DIR=/tmp
 SVN_USER=jessp
-KALTURA_SERVER_VERSION="9.18.0"
+KALTURA_SERVER_VERSION="9.19.0"
 
 # Sphinx build vars:
 SPHINX_URI="http://sphinxsearch.googlecode.com/svn/trunk/"
@@ -59,9 +59,9 @@ KALTURA_MEDIASERVER_URI="https://github.com/kaltura/media-server/archive/$KALTUR
 KALTURA_MEDIASERVER_RPM_NAME=kaltura-media-server
 
 # Kaltura KMC:
-KMC_MINUS_V_VERSION=5.37.21
+KMC_MINUS_V_VERSION=5.37.22
 KMC_VERSION=v$KMC_MINUS_V_VERSION
-KMC_LOGIN_MINUS_V_VERSION=1.2.5
+KMC_LOGIN_MINUS_V_VERSION=1.2.6
 KMC_LOGIN_VERSION=v$KMC_LOGIN_MINUS_V_VERSION
 KMC_URI="https://github.com/kaltura/kmc/releases/download/$KMC_VERSION/$KMC_VERSION.zip"
 KMC_LOGIN_URI="https://github.com/kaltura/kmc-login/releases/download/$KMC_LOGIN_VERSION/$KMC_LOGIN_VERSION.zip"
@@ -160,7 +160,7 @@ FLEX_WRAPPER_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/flash/
 FLEX_WRAPPER_RPM_NAME="kaltura-flexwrapper"
 
 # HTML5 lib
-HTML5LIB_VERSION="v2.11"
+HTML5LIB_VERSION="v2.14"
 HTML5LIB_URI="https://github.com/kaltura/mwEmbed/tarball/$HTML5LIB_VERSION"
 HTML5LIB_RPM_NAME="kaltura-html5lib"
 
@@ -171,7 +171,7 @@ DWH_RPM_NAME="kaltura-dwh"
 
 
 # App Studio HTML5:
-HTML5_APP_STUDIO_VERSION="v1.4"
+HTML5_APP_STUDIO_VERSION="v1.5"
 HTML5_APP_STUDIO_ARCHIVE_NAME=studio_$HTML5_APP_STUDIO_VERSION.zip
 HTML5_APP_STUDIO_URI=https://github.com/kaltura/player-studio/releases/download/$HTML5_APP_STUDIO_VERSION/$HTML5_APP_STUDIO_ARCHIVE_NAME
 HTML5_APP_STUDIO_RPM_NAME=kaltura-html5-studio

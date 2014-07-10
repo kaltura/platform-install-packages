@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5-studio
-Version: v1.4
+Version: v1.5
 Release: 1 
 License: AGPLv3+
 Group: Server/Platform 
@@ -51,6 +51,9 @@ rm -rf %{buildroot}
 %{prefix}/apps/studio/%{version}
 
 %changelog
+* Thu Jul 10 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v1.5-1
+- Disable player upgrade in case of playlist
+
 * Sat Jun 14 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v1.1-4
 - Bouncing.
  

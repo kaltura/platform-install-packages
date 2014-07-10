@@ -2,8 +2,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.11
-Release: 2
+Version: v2.14
+Release: 1
 Epoch:0 
 License: AGPLv3+
 Group: Server/Platform 
@@ -69,6 +69,24 @@ rm -rf %{buildroot}
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Thu Jul 10 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.14-1
+- SUP-2464 - Ellentube V2 Player Issue - Doubleclick plugin is not working when using chromeless
+- SUP-2212 - playlist with restricted entries
+- SUP-2291 - Thumbnail not displayed when clicking share
+- SUP-2317 - Preferred downloaded flavor for download button doesn't persist from V1 to V2
+- SUP-2323 - Playlist on V2 player
+- SUP-2337 - black rectangle on share screen
+- SUP-2381 - NielsenCombined plugin in HTML5 v2 player sends "ci=undefined" instead of clientId
+- SUP-2386 - Send Notification "changeMedia" is not working in HTML5 player
+- SUP-2427 - Ellentv.com V2 Player - "matchMedia is null" Error (Firefox)
+- SUP-2431 - V2 player in iframe embed - close full screen is not working
+- SUP-2440 - Player not sending playbackComplete when playback ends
+- FEC-1394 - Error An error was experienced when playing the video on Chrome on fullscreen
+- FEC-1517 - Need to add the option to navigate from related to a new window instead of switch-media
+- FEC-1396 - needless fields in Widevine plugin
+- FEC-1531 - imageDefaultDuration=2 is set by default in ui variables plugin 
+- PS-988 - Browsers- Volume is always in full when page is refreshed. Doesn't remember last used volume level
+
 * Sat Jun 14 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.11-1
 - SUP-2306 - Bumper Click URL Not Working
 - SUP-2198 - Related plugin go into infinite loop
