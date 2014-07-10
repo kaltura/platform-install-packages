@@ -405,8 +405,8 @@ chmod 775 $BASE_DIR/web/content
 if [ -d /usr/lib/red5/webapps/oflaDemo ];then
         ln -sf $BASE_DIR/web/content/webcam /usr/lib/red5/webapps/oflaDemo/streams
 fi
-KMC_PATH=`ls -ld $BASE_DIR/web/flash/kmc/v*|awk -F " " '{print $NF}' |tail -1`
-KMC_LOGIN_PATH=`ls -ld $BASE_DIR/web/flash/kmc/login/v*|awk -F " " '{print $NF}' |tail -1`
+KMC_PATH=`ls -ld $BASE_DIR/web/flash/kmc/v*|awk -F " " '{print $NF}' |tail -1 2>/dev/null`
+KMC_LOGIN_PATH=`ls -ld $BASE_DIR/web/flash/kmc/login/v*|awk -F " " '{print $NF}' |tail -1 2>/dev/null`
 if [ -d "$KMC_PATH" -a -d "$KMC_LOGIN_PATH" ];then
         KMC_VERSION=`basename $KMC_PATH`
         KMC_LOGIN_VERSION=`basename $KMC_LOGIN_PATH`
