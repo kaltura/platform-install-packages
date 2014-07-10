@@ -38,6 +38,7 @@ gpgkey = http://%{baseurl}/releases/RPM-GPG-KEY-kaltura
 gpgcheck = 1
 enabled = 1
 
+# we currently do not have the nightly so commented. We do have plans to add that.
 #[Kaltura-testing]
 #name = Kaltura Server arch independent
 #baseurl = http://%{baseurl}/%{testpath}/\$basearch/
