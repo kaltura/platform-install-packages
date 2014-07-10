@@ -380,6 +380,8 @@ Or output all logged information to a file for analysis:
 allkaltlog > /path/to/mylogfile.log
 ```
 
+For posting questions, please go to:
+(http://forum.kaltura.org)
 
 ## Additional Information
 * Please review the [frequently answered questions](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura-packages-faq.md) document for general help before posting to the forums or issue queue.
