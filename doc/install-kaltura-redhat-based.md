@@ -151,6 +151,7 @@ Please select one of the following options [0]: "<0>"
 Your install will now automatically perform all install tasks.
 
 #### Configure Red5 server
+1. Restart red5 `service red5 restart`
 1. Request http://hostname:5080
 1. Click 'Install a ready-made application'
 1. Mark 'OFLA Demo' and click 'Install'
