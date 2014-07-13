@@ -5,7 +5,7 @@
 Summary: Kaltura Server release file and package configuration
 Name: kaltura-release
 Version: 9.19.0
-Release: 1
+Release: 2 
 License: AGPLv3+
 Group: Server/Platform 
 URL: http://kaltura.org

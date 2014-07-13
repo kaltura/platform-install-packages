@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.16
-Release: 3
+Release: 4
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -81,6 +81,9 @@ fi
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Thu  Jul 10 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.16-4
+- ls on the KMC dir may fail because this is running on Sphinx which needs no web mount so redirect STDERR to /dev/null
+
 * Mon Jul 2 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.16-3
 - KMC SWF tests added.
 
