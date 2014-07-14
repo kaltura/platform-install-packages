@@ -420,7 +420,7 @@ check_missing_web_files()
 	MISSING_LIST="/tmp/missing_web_files_`date +%d_%m_%Y`"
 	TMP_MISSING_LIST="/tmp/missing_web_files_tmp_`date +%d_%m_%Y`"
 	# query to get all ui_confs
-	for i in `echo "select conf_file_path from ui_conf" | mysql -N -h $DB1_HOST -u $DB1_USER -p$DB1_PASS kaltura`;do 
+	for i in `echo "select conf_file_path from ui_conf" | mysql -N -h $DB1_HOST -u $DB1_USER -P$DB1_PORT -p$DB1_PASS kaltura`;do 
 		if [ -r "$WEB_DIR/$i" ];then 
 			# run line by line over the XML to find the paths
 			while read L;do 

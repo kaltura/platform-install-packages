@@ -54,7 +54,7 @@ BATCH_SCHED_CONF=$APP_DIR/configurations/batch/scheduler.conf
 BATCH_MAIN_CONF=$APP_DIR/configurations/batch/batch.ini
 
 # if we couldn't access the DB to retrieve the secret, assume the post install has not finished yet.
-BATCH_PARTNER_ADMIN_SECRET=`echo "select admin_secret from partner where id=-1"|mysql -N -h$DB1_HOST -u$DB1_USER -p$DB1_PASS $DB1_NAME`
+BATCH_PARTNER_ADMIN_SECRET=`echo "select admin_secret from partner where id=-1"|mysql -N -h$DB1_HOST -u$DB1_USER -p$DB1_PASS $DB1_NAME -P$DB1_PORT`
 if [ -z "$BATCH_PARTNER_ADMIN_SECRET" ];then
 	echo -e "${BRIGHT_RED}ERROR: could not retreive partner.admin_secret for id -1. It probably means you did not yet run $APP_DIR/kaltura-base-config.sh yet. Please do.${NORMAL}" 
 	exit 2
