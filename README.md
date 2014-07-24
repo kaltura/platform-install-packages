@@ -14,7 +14,7 @@ This project features official deployment packages to install the Kaltura platfo
 ## How you can help
 Thank you for running Kaltura and pushing the limits of online video! By joining the Kaltura community and contributing you will help grow the platform, and keeping it open, stable and accessible to all. You can contribute meaningfully to the project from day one:    
 
-+ By contributing sanity tests that verify overall platform stability - [https://github.com/kaltura/platform-continuous-integration](see the Kaltura CI Project).
++ By contributing sanity tests that verify overall platform stability - [Join the Kaltura CI Project](https://github.com/kaltura/platform-continuous-integration).
 + By solving [simple tasks and challenges that advance the platform roadmap](http://bit.ly/kaltura-tasks).
 + By testing the platform components, including various deployment settings and environments, and network settings, [reporting issues and feature requests](https://github.com/kaltura/platform-install-packages/issues) and [pushing pull-requests](https://help.github.com/articles/creating-a-pull-request) that patch bugs.
 + By creating [documentation](https://github.com/kaltura/platform-install-packages/tree/master/doc), demos and examples.
