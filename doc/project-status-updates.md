@@ -1,5 +1,14 @@
 **[Track milestones progress](https://github.com/kaltura/platform-install-packages/issues/milestones)**.
 
+#### 2014-07-29:
+
++ Stable version is now 9.18.0, 9.19 is unstable beta ([see CI reports](http://installrepo.kaltura.org/reports/ci/)). 
++ Many bugs were crushed! Thanks and welcome to our newest contributors: [krarey](https://github.com/krarey), [kkraju4u](https://github.com/kkraju4u), [salaman](https://github.com/salaman), [ljutzkanov](https://github.com/ljutzkanov), [kcsunkara](https://github.com/kcsunkara), [shaktidhar](https://github.com/shaktidhar), [baldmonkeey](https://github.com/baldmonkeey), [paladox2015](https://github.com/paladox2015), [muli](https://github.com/muli), [developerworks](https://github.com/developerworks), [rajneeshksoni](https://github.com/rajneeshksoni), [danworldinc](https://github.com/danworldinc), and [basvandijk](https://github.com/basvandijk).
++ Contributor License Agreements system was deployed for smoother tracking of management of CLA signups. [See AgentContribs](http://agentcontribs.kaltura.org/).
++ Introducing: [Community contributions dashboard](http://agentcontribs.kaltura.org:8080/). 
++ New forums system was deployed on Kaltura.org. Fighting SPAM! Folks who'd like to join discussions or get more detailed assistance with topics related to the project should join the forums at [forum.kaltura.org](http://forum.kaltura.org).
+
+
 #### 2014-05-21:
 
 + Stable version is now 9.16.0
