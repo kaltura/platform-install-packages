@@ -9,7 +9,8 @@ As references, we encourage reviewing other known projects and their respective 
 * [Ubuntu, Canonical Projects](http://www.canonical.com/contributors).
 * [MongoDB](http://www.mongodb.com/legal/contributor-agreement).
 
-Please [CLICK HERE TO SIGN](http://agentcontribs.kaltura.org/agreements/KalturaCommunity/platform-install-packages) the Kaltura CLA.
+Please [CLICK HERE TO SIGN](http://agentcontribs.kaltura.org/agreements/KalturaCommunity/platform-install-packages) the Kaltura CLA digitally using your GitHub account. 
+You can also [download the Kaltura CLA in PDF format](http://knowledge.kaltura.com/node/1235/attachment/field_media), sign it and email to [community@kaltura.com](mailto:community@kaltura.com).
 
 Which repo should I contribute to?
 =================================
