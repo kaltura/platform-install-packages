@@ -28,14 +28,18 @@ The main repos are:
 * https://github.com/kaltura/player-studio - The HTML5 Player Studio (aka Studio v2)
 
 If you are uncertain which project a specific code belongs to, please run:
-```
+
+```bash
 $ rpm -qf /path/to/file
 $ rpm -qi package | grep URL
 ```
+
 For example:
-```
+
+```bash
 $ rpm -qf /opt/kaltura/app/batch/bootstrap.php 
 kaltura-base-9.16.0-1.noarch
+
 $ rpm -qi kaltura-base | grep URL
 URL         : https://github.com/kaltura/server/tree/IX-9.16.0
 ```
