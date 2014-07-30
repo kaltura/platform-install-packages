@@ -1,4 +1,9 @@
-Signing the Kaltura Contributor License Agreement (aka CLA)
+Contributing Code to the Kaltura Platform
+===================
+Kaltura is a multi-project platform. It consists of various backend and frontend projects, in several programing languages and technologies. As such, it may seem little scary to get started as a new developer in the community.   
+This guide was put together to guide your way as a developer getting started with Kaltura, walk you through the various platform projects, and practices of contributing code by submitting pull-requests and code patches.
+
+Signing the Contributor License Agreement
 ===================
 When you merge new code to the Kaltura Platform, we require that you sign the Kaltura Contributor License Agreement (or "CLA"). The CLA license is for your protection as a Contributor as well as the protection of the Project and its community members. It does not change your rights to use your own Contributions for any other purpose, and does not require any IP assignment of any kind.
 If you're working on a Kaltura project, or can clearly claim ownership of copyright in what you'll be contributing to the project, the CLA will ensure that your contributions are protected and that the project will forever remain free to be used and modified by the global community. 
@@ -12,18 +17,17 @@ As references, we encourage reviewing other known projects and their respective 
 Please [CLICK HERE TO SIGN](http://agentcontribs.kaltura.org/agreements/KalturaCommunity/platform-install-packages) the Kaltura CLA digitally using your GitHub account. 
 You can also [download the Kaltura CLA in PDF format](http://knowledge.kaltura.com/node/1235/attachment/field_media), sign it and email to [community@kaltura.com](mailto:community@kaltura.com).
 
-Which repo should I contribute to?
+Which Repositories Should I Contribute To?
 =================================
 The main repos are:
 
-* https://github.com/kaltura/platform-install-packages - The RPMs and install scripts
-* https://github.com/kaltura/server - Core Backend
-* https://github.com/kaltura/kmc - KMC
-* https://github.com/kaltura/kdp - KDP3 player [legacy Flash version]
-* https://github.com/kaltura/mwEmbed - HTML5 player [universal v2 player]
-* https://github.com/kaltura/player-studio - HTML5 Studio [studio v2]
+* https://github.com/kaltura/platform-install-packages - The Platform Install Packages and Scripts
+* https://github.com/kaltura/server - The Core Backend (The Kaltura Server)
+* https://github.com/kaltura/mwEmbed - The Kaltura JS Player Framework (aka Universal or v2 Player)
+* https://github.com/kaltura/kmc - The Kaltura Management Console (aka KMC)
+* https://github.com/kaltura/player-studio - The HTML5 Player Studio (aka Studio v2)
 
-If you are uncertain where the contribution should go to, please do:
+If you are uncertain which project a specific code belongs to, please run:
 ```
 $ rpm -qf /path/to/file
 $ rpm -qi package | grep URL
@@ -36,18 +40,17 @@ $ rpm -qi kaltura-base | grep URL
 URL         : https://github.com/kaltura/server/tree/IX-9.16.0
 ```
 
-In this case, the file belongs to Kaltura's Core at https://github.com/kaltura/server
+In this case, the file belongs to Kaltura's Core at `https://github.com/kaltura/server`
 
 Reporting issues
 ================
 When reporting an issue, please make sure you include the version used.
-```
+```bash
 # You can get the version using:
 $ rpm -q package
+# And you can get debug information (handy with reporting issues) using:
+$ /opt/kaltura/bin/kaltura-sanity.sh
 ```
-Also, run:
-
-# /opt/kaltura/bin/kaltura-sanity.sh
 
 This might help you diagnose the issue yourself, if not, paste the results along with your report.
 
@@ -61,10 +64,10 @@ Contribution Guidelines
 * Always keep performance in mind
 * If you are unsure about submitting a Pull request, ask one of the repository owners for clarification
 
-Submitting a contribution
+Submitting Pull-Requests
 =========================
 1. Fork the default branch of the relevant repo
 2. Create a branch with a meaningful name; i.e - some-feature-name-fix
 3. Commit and make a pull request
 
-Thank you for working with us to make Kaltura even more awesome :)
+Thank you for helping make Kaltura even more awesome! :)
