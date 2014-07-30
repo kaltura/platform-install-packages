@@ -1,6 +1,15 @@
-Sign Kaltura's CLA
+Signing the Kaltura Contributor License Agreement (aka CLA)
 ===================
-http://agentcontribs.kaltura.org/agreements/KalturaCommunity/platform-install-packages
+When you merge new code to the Kaltura Platform, we require that you sign the Kaltura Contributor License Agreement (or "CLA"). The CLA license is for your protection as a Contributor as well as the protection of the Project and its community members. It does not change your rights to use your own Contributions for any other purpose, and does not require any IP assignment of any kind.
+If you're working on a Kaltura project, or can clearly claim ownership of copyright in what you'll be contributing to the project, the CLA will ensure that your contributions are protected and that the project will forever remain free to be used and modified by the global community. 
+
+As references, we encourage reviewing other known projects and their respective CLAs - 
+* [The Apache Software Foundation](http://www.apache.org/licenses/#clas).
+* [The Fedora Project](https://fedoraproject.org/wiki/Legal:Fedora_Project_Contributor_Agreement).
+* [Ubuntu, Canonical Projects](http://www.canonical.com/contributors).
+* [MongoDB](http://www.mongodb.com/legal/contributor-agreement).
+
+Please [CLICK HERE TO SIGN](http://agentcontribs.kaltura.org/agreements/KalturaCommunity/platform-install-packages) the Kaltura CLA.
 
 Which repo should I contribute to?
 =================================
