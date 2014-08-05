@@ -2,8 +2,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.14
-Release: 1
+Version: v2.15
+Release: 2 
 Epoch:0 
 License: AGPLv3+
 Group: Server/Platform 
@@ -14,6 +14,7 @@ Source3: kaltura-html5lib-v2.3.tar.gz
 Source4: kaltura-html5lib-v2.4.tar.gz
 Source5: kaltura-html5lib-v2.6.tar.gz
 Source6: kaltura-html5lib-v2.9.tar.gz
+Source7: kaltura-html5lib-v2.14.tar.gz
 URL: https://github.com/kaltura/mwEmbed 
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
@@ -45,15 +46,17 @@ mkdir -p $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib
 cp -r %{_builddir}/%{name}-%{version} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/%{version}
 cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/%{version}
 cp -r %{_builddir}/%{name}-v2.1.1 $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.1.1
-cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.1.1
+cp %{SOURCE2} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.1.1
 cp -r %{_builddir}/%{name}-v2.3 $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.3
-cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.3
+cp %{SOURCE3} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.3
 cp -r %{_builddir}/%{name}-v2.4 $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.4
-cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.4
+cp %{SOURCE4} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.4
 cp -r %{_builddir}/%{name}-v2.6 $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.6
-cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.6
+cp %{SOURCE5} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.6
 cp -r %{_builddir}/%{name}-v2.9 $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.9
-cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.9
+cp %{SOURCE6} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.9
+cp -r %{_builddir}/%{name}-v2.9 $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.14
+cp %{SOURCE7} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.14
 
 %clean
 rm -rf %{buildroot}
@@ -69,6 +72,14 @@ rm -rf %{buildroot}
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Sun Aug 3 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.15-1
+- SUP-2413 - window.setInterval cause hTML5 player failure
+- SUP-2459 - Multiple "Pause" events
+- SUP-2499 - V2 with ad gets stuck before playing the video | Prod site | VAST | pre-roll
+- SUP-2292 - 'Expand Player' icon overlaps with video content frame
+- FEC-1611 - Video doesn't play when adblock is enabled (vast&Tremor&Doubleclick)
+- FEC-1249 - KDP event mapping had mapping to non-existant html5 player events
+
 * Thu Jul 10 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.14-1
 - SUP-2464 - Ellentube V2 Player Issue - Doubleclick plugin is not working when using chromeless
 - SUP-2212 - playlist with restricted entries

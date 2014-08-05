@@ -1,7 +1,7 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmc	
 Version: v5.37.22
-Release: 1
+Release: 2 
 Summary: Kaltura Management Console
 
 Group: System Management	
@@ -81,6 +81,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sun Aug 3 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.22-2
+- Upped HTML5 version
+
 * Thu Jul 10 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.22-1
 - PLAT-1342 - Reflect replacement ERROR status in the KMC
 - PLAT-1389 - New Access Control Profiles are missing "Allow All" settings for IPs (the default access control profile is missing it too)
