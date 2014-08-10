@@ -30,22 +30,21 @@ function clipi($client,$entry_id,$overwrite)
 		// Trim Entry
 		try {
 			$resultEntry = $client->media->updateContent($entry_id, $resource);
+			return $resultEntry->id;
 		} catch( Exception $e ){
-			echo $entry_id."\n";
 			die('{"error": "' . $e->getMessage() . '"}');
 		}
 	} else {
 		// Create New Media Entry
 		$entry = new KalturaMediaEntry();
 		$entry->name = "New Clipped sanity";
-		$entry->description = "New Clipped Entry Description";
+		$entry->description = "Run by kaltura-sanity.sh";
 		$entry->mediaType = 1; //The new media type
 
 		// New Clip
 		$clipped_one = $client->media->add($entry);
-var_dump($clipped_one);
 		$clipped_one = $client->media->addContent($clipped_one->id, $resource);
-		return $clipped_one;
+		return $clipped_one->id;
 	}
 	
 	}catch(exception $e){
@@ -60,4 +59,4 @@ $overwrite = $argv[5];
 $basedir=dirname(__FILE__);
 require_once($basedir.'/create_session.php');
 $client=generate_ks($service_url,$partnerId,$secret,$type=KalturaSessionType::USER,$userId=null);
-clipi($client,$entry_id,$overwrite);
+echo(clipi($client,$entry_id,$overwrite)). " was created.\n";

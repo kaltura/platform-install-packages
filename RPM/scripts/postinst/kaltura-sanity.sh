@@ -190,6 +190,28 @@ if rpm -q kaltura-batch >/dev/null 2>&1 || rpm -q kaltura-front >/dev/null 2>&1 
 			if [ "$CONVERT_SUCCESS" -eq 1 ];then
 				report "kaltura_logo_animated_blue.flv - $UPLOADED_ENT status" $RC "$UPLOADED_ENT converted" "`bc <<< $END-$START`"
 				START=`date +%s.%N`
+				OUT=`php $DIRNAME/clip_test.php $SERVICE_URL $PARTNER_ID $PARTNER_SECRET  $UPLOADED_ENT 0`
+				RC=$?
+				END=`date +%s.%N`
+				TOTAL_T=`bc <<< $END-$START`
+				if [ $RC -eq 0 ];then
+					report "Clipping $UPLOADED_ENT Succeeded" $RC "$OUT" "$TOTAL_T"
+				else
+					report "Clipping $UPLOADED_ENT failed" $RC "$OUT" "$TOTAL_T"
+				fi	
+
+				START=`date +%s.%N`
+				OUT=`php $DIRNAME/clip_test.php $SERVICE_URL $PARTNER_ID $PARTNER_SECRET  $UPLOADED_ENT 1`
+				RC=$?
+				END=`date +%s.%N`
+				TOTAL_T=`bc <<< $END-$START`
+				if [ $RC -eq 0 ];then
+					report "Trimming $UPLOADED_ENT Succeeded" $RC "$OUT" "$TOTAL_T"
+				else
+					report "Trimming $UPLOADED_ENT failed" $RC "$OUT" "$TOTAL_T"
+				fi	
+				
+				START=`date +%s.%N`
 				OUT=`php $DIRNAME/play.php --service-url=$SERVICE_URL --entry-id=$UPLOADED_ENT  --partner=$PARTNER_ID --secret=$PARTNER_SECRET|sed "s@\"@@g"`
 				RC=$?
 				END=`date +%s.%N`
