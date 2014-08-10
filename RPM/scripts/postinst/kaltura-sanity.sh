@@ -160,6 +160,19 @@ if rpm -q kaltura-batch >/dev/null 2>&1 || rpm -q kaltura-front >/dev/null 2>&1 
 	if [ $RC -ne 0 ];then
 		echo -e "${BRIGHT_RED}Partner creation failed. I will skip all tests that require it.${NORMAL}"
 	else
+		
+		echo -e "${CYAN}Napping 60 seconds to allow the system to send an email. ${NORMAL}"
+		sleep 60
+		START=`date +%s.%N`
+		MSG=`grep mb-$NOW@kaltura.com /var/log/maillog `
+		RC=$?
+		END=`date +%s.%N`
+		if [ $RC -ne 0 ];then
+			report "Couldn't find an email sending entry for mb-$NOW@kaltura.com [PID is $PARTNER_ID] in /var/log/maillog" $RC "" "`bc <<< $END-$START`"
+		else
+			report "Found an email sending entry for mb-$NOW@kaltura.com[PID is $PARTNER_ID] in /var/log/maillog" $RC "$MSG" "`bc <<< $END-$START`"
+
+		fi
 		PARTNER_SECRET=`echo "select secret from partner where id=$PARTNER_ID" | mysql -N -h $DB1_HOST -p$DB1_PASS $DB1_NAME -u$DB1_USER -P$DB1_PORT`
 		 PARTNER_ADMIN_SECRET=`echo "select admin_secret from partner where id=$PARTNER_ID" | mysql -N -h $DB1_HOST -p$DB1_PASS $DB1_NAME -u$DB1_USER -P$DB1_PORT`
 		sed -i "s#@PARTNER_ID@#$PARTNER_ID#g" $BASE_DIR/bin/sanity_config.ini
