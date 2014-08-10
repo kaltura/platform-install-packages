@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.17
-Release: 3
+Release: 4
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -81,6 +81,12 @@ fi
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Sun Aug 11 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.17-4
+- Added tests to sanity:
+  - clipping
+  - trimming
+  - mail sending post partner creation
+
 * Tue Aug 5 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.17-1
 - Starting support of alt port for Apache and CDN.
 
