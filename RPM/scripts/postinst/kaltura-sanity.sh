@@ -201,6 +201,18 @@ if rpm -q kaltura-batch >/dev/null 2>&1 || rpm -q kaltura-front >/dev/null 2>&1 
 			if [ "$CONVERT_SUCCESS" -eq 1 ];then
 				report "kaltura_logo_animated_blue.flv - $UPLOADED_ENT status" $RC "$UPLOADED_ENT converted" "`bc <<< $END-$START`"
 				START=`date +%s.%N`
+				OUT=` php $DIRNAME/create_thumbnail.php $SERVICE_URL $PARTNER_ID $PARTNER_ADMIN_SECRET $UPLOADED_ENT 1 2>&1`
+				curl -s $OUT > /tmp/$UPLOADED_ENT.jpg
+				compare -verbose -metric mae /tmp/$UPLOADED_ENT.jpg $DIRNAME/kaltura_logo_animated_blue_1_sec.jpg /tmp/$UPLOADED_ENT-diff.jpg  2>&1 | grep -q "all: 0 (0)" 
+				RC=$?
+				END=`date +%s.%N`
+				TOTAL_T=`bc <<< $END-$START`
+				if [ $RC -ne 0 ];then
+					report "Thumb for $UPLOADED_ENT does not match the signature of $DIRNAME/kaltura_logo_animated_blue_1_sec.jpg" $RC "$OUT" "$TOTAL_T"
+				else
+					report "Thumb for $UPLOADED_ENT identical to $DIRNAME/kaltura_logo_animated_blue_1_sec.jpg" $RC "$OUT" "$TOTAL_T"
+				fi	
+				START=`date +%s.%N`
 				OUT=`php $DIRNAME/clip_test.php $SERVICE_URL $PARTNER_ID $PARTNER_SECRET  $UPLOADED_ENT 0`
 				RC=$?
 				END=`date +%s.%N`
