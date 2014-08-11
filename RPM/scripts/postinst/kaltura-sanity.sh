@@ -161,7 +161,7 @@ if rpm -q kaltura-batch >/dev/null 2>&1 || rpm -q kaltura-front >/dev/null 2>&1 
 		echo -e "${BRIGHT_RED}Partner creation failed. I will skip all tests that require it.${NORMAL}"
 	else
 		START=`date +%s.%N`
-		OUT=`php $DIRNAME/dropbox_test.php $SERVICE_URL $PARTNER_ID $ADMIN_PARTNER_SECRET /tmp/sanity-drop-$NOW 2>&1`
+		OUT=`php $DIRNAME/dropbox_test.php $SERVICE_URL $PARTNER_ID $ADMIN_PARTNER_SECRET /tmp/sanity-drop-$NOW-$HOSTNAME 2>&1`
 		RC=$?
 		END=`date +%s.%N`
 		if [ $RC -ne 0 ];then
@@ -170,18 +170,6 @@ if rpm -q kaltura-batch >/dev/null 2>&1 || rpm -q kaltura-front >/dev/null 2>&1 
 		else
 			report "Local dropfolder creation succeeded" $RC $OUT "`bc <<< $END-$START`" 
 		
-		fi
-		echo -e "${CYAN}Napping 60 seconds to allow the system to send an email. ${NORMAL}"
-		sleep 60
-		START=`date +%s.%N`
-		MSG=`grep mb-$NOW@kaltura.com /var/log/maillog `
-		RC=$?
-		END=`date +%s.%N`
-		if [ $RC -ne 0 ];then
-			report "Couldn't find an email sending entry for mb-$NOW@kaltura.com [PID is $PARTNER_ID] in /var/log/maillog" $RC "" "`bc <<< $END-$START`"
-		else
-			report "Found an email sending entry for mb-$NOW@kaltura.com[PID is $PARTNER_ID] in /var/log/maillog" $RC "$MSG" "`bc <<< $END-$START`"
-
 		fi
 		PARTNER_SECRET=`echo "select secret from partner where id=$PARTNER_ID" | mysql -N -h $DB1_HOST -p$DB1_PASS $DB1_NAME -u$DB1_USER -P$DB1_PORT`
 		 PARTNER_ADMIN_SECRET=`echo "select admin_secret from partner where id=$PARTNER_ID" | mysql -N -h $DB1_HOST -p$DB1_PASS $DB1_NAME -u$DB1_USER -P$DB1_PORT`
@@ -247,6 +235,16 @@ if rpm -q kaltura-batch >/dev/null 2>&1 || rpm -q kaltura-front >/dev/null 2>&1 
 				
 			else
 				report "kaltura_logo_animated_blue.flv - $UPLOADED_ENT status" 1 "$UPLOADED_ENT failed to convert." "`bc <<< $END-$START`"
+			fi
+			START=`date +%s.%N`
+			MSG=`grep mb-$NOW@kaltura.com /var/log/maillog `
+			RC=$?
+			END=`date +%s.%N`
+			if [ $RC -ne 0 ];then
+				report "Couldn't find an email sending entry for mb-$NOW@kaltura.com [PID is $PARTNER_ID] in /var/log/maillog" $RC "" "`bc <<< $END-$START`"
+			else
+				report "Found an email sending entry for mb-$NOW@kaltura.com[PID is $PARTNER_ID] in /var/log/maillog" $RC "$MSG" "`bc <<< $END-$START`"
+
 			fi
 
 			if rpm -q kaltura-dwh >> /dev/null 2>&1;then
