@@ -153,7 +153,7 @@ ADMIN_PARTNER_SECRET=`echo "select admin_secret from partner where id=-2" | mysq
 NOW=`date +%d-%H-%m-%S`
 START=`date +%s.%N`
 if rpm -q kaltura-batch >/dev/null 2>&1 || rpm -q kaltura-front >/dev/null 2>&1 ;then
-	PARTNER_ID=`php $DIRNAME/create_partner.php $ADMIN_PARTNER_SECRET mb-$NOW@kaltura.com testingpasswd $SERVICE_URL 2>&1`
+	PARTNER_ID=`php $DIRNAME/create_partner.php $ADMIN_PARTNER_SECRET mb-$HOSTNAME@kaltura.com testingpasswd $SERVICE_URL 2>&1`
 	RC=$?
 	END=`date +%s.%N`
 	report "Create Partner" $RC "New PID is $PARTNER_ID" "`bc <<< $END-$START`"
@@ -249,13 +249,16 @@ if rpm -q kaltura-batch >/dev/null 2>&1 || rpm -q kaltura-front >/dev/null 2>&1 
 				report "kaltura_logo_animated_blue.flv - $UPLOADED_ENT status" 1 "$UPLOADED_ENT failed to convert." "`bc <<< $END-$START`"
 			fi
 			START=`date +%s.%N`
-			MSG=`grep mb-$NOW@kaltura.com /var/log/maillog `
+			echo "Testing mail sending" |mail -s "Kaltura sanity test email" mb-$HOSTNAME@kaltura.com
+			echo -e "${CYAN}Napping 30 seconds to allow mail to be sent out.. ${NORMAL}"
+			sleep 30
+			MSG=`grep mb-$HOSTNAME@kaltura.com /var/log/maillog `
 			RC=$?
 			END=`date +%s.%N`
 			if [ $RC -ne 0 ];then
-				report "Could not find an email sending entry for mb-$NOW@kaltura.com [PID is $PARTNER_ID] in /var/log/maillog" $RC "" "`bc <<< $END-$START`"
+				report "Could not find an email sending entry for mb-$HOSTNAME@kaltura.com [PID is $PARTNER_ID] in /var/log/maillog" $RC "" "`bc <<< $END-$START`"
 			else
-				report "Found an email sending entry for mb-$NOW@kaltura.com[PID is $PARTNER_ID] in /var/log/maillog" $RC "$MSG" "`bc <<< $END-$START`"
+				report "Found an email sending entry for mb-$HOSTNAME@kaltura.com[PID is $PARTNER_ID] in /var/log/maillog" $RC "$MSG" "`bc <<< $END-$START`"
 
 			fi
 

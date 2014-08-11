@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.17
-Release: 8
+Release: 13
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -81,10 +81,13 @@ fi
 %config %{prefix}/app/configurations/*
 
 %changelog
-* Mon Aug 12 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.17-5
+* Mon Aug 11 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.17-10
+- With thumb testing..
+
+* Mon Aug 11 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.17-5
 - Added dropfolder creation test.
 
-* Sun Aug 11 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.17-4
+* Sun Aug 10 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.17-4
 - Added tests to sanity:
   - clipping
   - trimming
