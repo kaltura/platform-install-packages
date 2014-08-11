@@ -30,7 +30,7 @@ This guide describes RPM installation of an all-in-one Kaltura server and applie
 
 #### Firewall requirements
 Kaltura requires certain ports to be open for proper operation. [See the list of required open ports](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura-required-ports.md).
-If you're just testing and don't mind an open system, you can use the below to disbale iptables altogether:
+If you're just testing and don't mind an open system, you can use the below to disable iptables altogether:
 ```bash
 iptables -F
 service iptables stop
