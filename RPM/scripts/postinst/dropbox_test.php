@@ -1,7 +1,7 @@
 <?php
 
-if (count($argv)<3){
-    echo 'Usage:' .__FILE__ .' <service_url> <partnerid> <-2 secret>'."\n";
+if (count($argv)<4){
+    echo 'Usage:' .__FILE__ .' <service_url> <partnerid> <-2 secret> <dropfolder path>'."\n";
     exit (1);
 }
 
@@ -15,14 +15,14 @@ function enable_dropbox_permission($client,$config,$partner_id)
 	$result = $client->permission->add($permission);
 }
 
-function create_dropbox($client,$partnerId)
+function create_dropbox($client,$partnerId, $droppath)
 {
 
 	try{
 		$dropFolder = new KalturaDropFolder();
 		$dropFolder->partnerId = $partnerId;
 		$dropFolder->name = 'sanity_drop';
-		$dropFolder->description = 'done by kaltura-sanity.sh';
+		$dropFolder->description = 'done by '.__FILE__;
 		$dropFolder->status = KalturaDropFolderStatus::ENABLED;
 		$dropfolderPlugin = KalturaDropfolderClientPlugin::get($client);
 		$dropFolder->type = KalturaDropFolderType::LOCAL;
@@ -31,7 +31,7 @@ function create_dropbox($client,$partnerId)
 		$dropFolder->fileHandlerConfig = new KalturaDropFolderContentFileHandlerConfig();
 		$dropFolder->fileHandlerConfig->contentMatchPolicy=KalturaDropFolderContentFileHandlerMatchPolicy::MATCH_EXISTING_OR_ADD_AS_NEW;
 	
-		$dropFolder->path='/tmp/dropme-kaltura3';
+		$dropFolder->path=$droppath;
 		mkdir($dropFolder->path);
 		chown($dropFolder->path,'kaltura');
 		chgrp($dropFolder->path,'apache');
@@ -46,6 +46,7 @@ function create_dropbox($client,$partnerId)
 $service_url = $argv[1];
 $partnerId=$argv[2];
 $minus_2_secret=$argv[3];
+$droppath=$argv[4];
 $basedir=dirname(__FILE__);
 require_once($basedir.'/create_session.php');
 //$client=generate_ks($service_url,-2,$minus_2_secret,$type=KalturaSessionType::ADMIN,$userId=null);
@@ -66,5 +67,5 @@ $pager = null;
 $result = $client->permission->listAction($filter, $pager);
 var_dump($result) ;exit(0);*/
 
-$drop_obj=create_dropbox($client,$partnerId);
+$drop_obj=create_dropbox($client,$partnerId,$droppath);
 echo "'".$drop_obj->name.'successfully created for partner:' .$drop_obj->partnerId;

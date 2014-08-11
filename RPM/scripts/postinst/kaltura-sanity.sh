@@ -160,7 +160,19 @@ if rpm -q kaltura-batch >/dev/null 2>&1 || rpm -q kaltura-front >/dev/null 2>&1 
 	if [ $RC -ne 0 ];then
 		echo -e "${BRIGHT_RED}Partner creation failed. I will skip all tests that require it.${NORMAL}"
 	else
+		START=`date +%s.%N`
+set -x
+		OUT=`php $DIRNAME/dropbox_test.php $SERVICE_URL $PARTNER_ID $ADMIN_PARTNER_SECRET /tmp/sanity-drop-$NOW 2>&1`
+		RC=$?
+set +x
+		END=`date +%s.%N`
+		if [ $RC -ne 0 ];then
 		
+			report "Local dropfolder creation failed" $RC $OUT "`bc <<< $END-$START`" 
+		else
+			report "Local dropfolder creation succeeded" $RC $OUT "`bc <<< $END-$START`" 
+		
+		fi
 		echo -e "${CYAN}Napping 60 seconds to allow the system to send an email. ${NORMAL}"
 		sleep 60
 		START=`date +%s.%N`
