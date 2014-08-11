@@ -68,4 +68,4 @@ $result = $client->permission->listAction($filter, $pager);
 var_dump($result) ;exit(0);*/
 
 $drop_obj=create_dropbox($client,$partnerId,$droppath);
-echo "'".$drop_obj->name.'successfully created for partner:' .$drop_obj->partnerId;
+echo "'".$drop_obj->name.' successfully created for partner:' .$drop_obj->partnerId;
