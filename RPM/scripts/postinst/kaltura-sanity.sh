@@ -166,9 +166,9 @@ if rpm -q kaltura-batch >/dev/null 2>&1 || rpm -q kaltura-front >/dev/null 2>&1 
 		END=`date +%s.%N`
 		if [ $RC -ne 0 ];then
 		
-			report "Local dropfolder creation failed" $RC $OUT "`bc <<< $END-$START`" 
+			report "Local dropfolder creation failed" $RC "$OUT" "`bc <<< $END-$START`" 
 		else
-			report "Local dropfolder creation succeeded" $RC $OUT "`bc <<< $END-$START`" 
+			report "Local dropfolder creation succeeded" $RC "$OUT" "`bc <<< $END-$START`" 
 		
 		fi
 		PARTNER_SECRET=`echo "select secret from partner where id=$PARTNER_ID" | mysql -N -h $DB1_HOST -p$DB1_PASS $DB1_NAME -u$DB1_USER -P$DB1_PORT`
