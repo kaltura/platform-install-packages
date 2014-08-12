@@ -7,7 +7,7 @@
 Summary: Kaltura Open Source Video Platform - batch server 
 Name: kaltura-batch
 Version: 9.19.0
-Release: 1
+Release: 2
 License: AGPLv3+
 Group: Server/Platform 
 Source0: zz-%{name}.ini
@@ -94,6 +94,7 @@ chown -R %{kaltura_user}:%{apache_group} %{prefix}/app/cache
 chmod -R 775 %{prefix}/log %{prefix}/tmp %{prefix}/app/cache %{prefix}/web
 
 chown %{kaltura_user}:%{kaltura_group} %{prefix}/app/batch
+echo "PATH=$PATH:/opt/kaltura/bin;export PATH" >> /etc/sysconfig/httpd
 service httpd restart
 # don't start it if its a fresh install, it will fail. It needs to go through postinst config first.
 if [ "$1" = 0 ];then
@@ -129,6 +130,14 @@ service httpd restart
 
 
 %changelog
+* Tue Aug 12 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.19.0-2
+- PATH="/sbin:/usr/sbin:/bin:/usr/bin"
+  * export PATH
+   /etc/init.d/httpd:
+   # Source function library.
+   .  /etc/rc.d/init.d/functions
+
+   to make a long story short: we need to have /opt/kaltura/bin in the PATH so echo it to /etc/sysconfig/httpd
 * Thu Jul 10 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.19.0-1
 - Ver Bounce to 9.19.0
 

@@ -6,7 +6,7 @@
 Summary: Kaltura Open Source Video Platform - frontend server 
 Name: kaltura-front
 Version: 9.19.0
-Release: 1
+Release: 2
 License: AGPLv3+
 Group: Server/Platform 
 #Source0: kaltura.ssl.conf.template 
@@ -16,7 +16,7 @@ Source3: zz-%{name}.ini
 
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires: mediainfo, httpd, php, curl, kaltura-base, kaltura-ffmpeg, ImageMagick, memcached, php-pecl-memcached, php-mysql, php-pecl-apc, php-mcrypt, kaltura-segmenter, mod_ssl
+Requires: mediainfo, httpd, php, curl, kaltura-base, kaltura-ffmpeg, ImageMagick, memcached, php-pecl-memcached, php-mysql, php-pecl-apc, php-mcrypt, kaltura-segmenter, mod_ssl,kaltura-sshpass
 Requires(post): chkconfig
 Requires(preun): chkconfig
 # This is for /sbin/service
@@ -76,6 +76,7 @@ if [ "$1" = 1 ];then
 	/sbin/chkconfig --add memcached 
 	/sbin/chkconfig memcached on
 fi
+echo "PATH=$PATH:/opt/kaltura/bin;export PATH" >> /etc/sysconfig/httpd
 service httpd restart
 
 if [ "$1" = 1 ];then
@@ -103,6 +104,15 @@ rm -rf %{buildroot}
 %config %{_sysconfdir}/php.d/zz-%{name}.ini
 
 %changelog
+* Tue Aug 12 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.19.0-2
+- PATH="/sbin:/usr/sbin:/bin:/usr/bin"
+  * export PATH
+   /etc/init.d/httpd:
+   # Source function library.
+   .  /etc/rc.d/init.d/functions
+
+   to make a long story short: we need to have /opt/kaltura/bin in the PATH so echo it to /etc/sysconfig/httpd
+
 * Thu Jul 10 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.19.0-1
 - Ver Bounce to 9.19.0
 
