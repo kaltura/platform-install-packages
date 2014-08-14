@@ -9,7 +9,7 @@ This project features official deployment packages to install the Kaltura platfo
 + Visit the [Kaltura Platform Packages CI Project](https://github.com/kaltura/platform-continuous-integration) and help by contributing automatic sanity tests.
 * Track the development of the [Kaltura Platform Packages CI Project](https://github.com/kaltura/platform-continuous-integration).
 * [Kaltura Inc.](http://corp.kaltura.com) also provides commercial solutions and services including pro-active platform monitoring, applications, SLA, 24/7 support and professional services. If you're looking for a commercially supported video platform  with integrations to commercial encoders, streaming servers, eCDN, DRM and more - Start a [Free Trial of the Kaltura.com Hosted Platform](http://corp.kaltura.com/free-trial) or learn more about [Kaltura' Commercial OnPrem Edition™](http://corp.kaltura.com/Deployment-Options/Kaltura-On-Prem-Edition). For existing RPM based users, Kaltura offers commercial upgrade options.
-* Please refer to the [Frequenetly Asked Questions document](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura-packages-faq.md) before opening new issues or forum threads.
+* Please refer to the [Frequently Asked Questions document](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura-packages-faq.md) before opening new issues or forum threads.
 
 ## How you can help
 Thank you for running Kaltura and pushing the limits of online video! By joining the Kaltura community and contributing you will help grow the platform, and keeping it open, stable and accessible to all. You can contribute meaningfully to the project from day one:    
