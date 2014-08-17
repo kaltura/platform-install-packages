@@ -15,16 +15,19 @@
 #===============================================================================
 
 set -o nounset                              # Treat unset variables as an error
+for i in wget ;do
+	EX_PATH=`which $i 2>/dev/null`
+	if [ -z "$EX_PATH" -o ! -x "$EX_PATH" ];then
+		echo "Need to install $i."
+		exit 2
+	fi
+done
 SOURCES_RC=`dirname $0`/sources.rc
 if [ ! -r $SOURCES_RC ];then
 	echo "Could not find $SOURCES_RC"
 	exit 1
 fi
 . $SOURCES_RC 
-if [ ! -x `which svn 2>/dev/null` ];then
-	echo "Need to install svn."
-	exit 2
-fi
 svn export --force --quiet $KCLIP_URI $SOURCE_PACKAGING_DIR/$KCLIP_RPM_NAME
 
 cd $SOURCE_PACKAGING_DIR

@@ -15,16 +15,20 @@
 #===============================================================================
 
 set -o nounset                              # Treat unset variables as an error
+for i in svn ;do
+	EX_PATH=`which $i 2>/dev/null`
+	if [ -z "$EX_PATH" -o ! -x "$EX_PATH" ];then
+		echo "Need to install $i."
+		exit 2
+	fi
+done
+
 SOURCES_RC=`dirname $0`/sources.rc
 if [ ! -r $SOURCES_RC ];then
 	echo "Could not find $SOURCES_RC"
 	exit 1
 fi
 . $SOURCES_RC 
-if [ ! -x `which svn 2>/dev/null` ];then
-	echo "Need to install svn."
-	exit 2
-fi
 
 for CLIPAPP_VERSION in $CLIPAPP_VERSIONS;do
 	svn export --force --quiet $CLIPAPP_URI/$CLIPAPP_VERSION $SOURCE_PACKAGING_DIR/$CLIPAPP_RPM_NAME/$CLIPAPP_VERSION 

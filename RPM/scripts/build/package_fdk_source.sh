@@ -16,10 +16,13 @@
 
 #set -o nounset                              # Treat unset variables as an error
 
-if [ ! -x `which git 2>/dev/null` ];then
-	echo "Need to install git."
-	exit 2
-fi
+for i in git;do
+	EX_PATH=`which $i 2>/dev/null`
+	if [ -z "$EX_PATH" -o ! -x "$EX_PATH" ];then
+		echo "Need to install $i."
+		exit 2
+	fi
+done
 
 SOURCES_RC=`dirname $0`/sources.rc
 if [ ! -r $SOURCES_RC ];then

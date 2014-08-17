@@ -15,16 +15,19 @@
 #===============================================================================
 
 set -o nounset                              # Treat unset variables as an error
+for i in wget ;do
+	EX_PATH=`which $i 2>/dev/null`
+	if [ -z "$EX_PATH" -o ! -x "$EX_PATH" ];then
+		echo "Need to install $i."
+		exit 2
+	fi
+done
 SOURCES_RC=`dirname $0`/sources.rc
 if [ ! -r $SOURCES_RC ];then
 	echo "Could not find $SOURCES_RC"
 	exit 1
 fi
 . $SOURCES_RC 
-if [ ! -x `which wget 2>/dev/null` ];then
-	echo "Need to install wget."
-	exit 2
-fi
 mkdir -p $SOURCE_PACKAGING_DIR/$HTML5_APP_STUDIO_RPM_NAME-$HTML5_APP_STUDIO_VERSION
 rm -rf $SOURCE_PACKAGING_DIR/$HTML5_APP_STUDIO_RPM_NAME-$HTML5_APP_STUDIO_VERSION/*
 wget -q $HTML5_APP_STUDIO_URI -O$SOURCE_PACKAGING_DIR/$HTML5_APP_STUDIO_RPM_NAME-$HTML5_APP_STUDIO_VERSION/$HTML5_APP_STUDIO_NORMALIZED_ARCHIVE_NAME
