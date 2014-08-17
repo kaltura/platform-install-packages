@@ -1,7 +1,10 @@
 <?php
 
 if (count($argv)<11){
-    echo 'Usage:' .__FILE__ .' <service_url> <partnerid> <minus_2_secret> <profile name> <delivery url> <storage host> <storage basedir> <remote storage username> <remote storage passwd> <remote storage protocol;i.e: FTP|SFTP|SCP|S3> <playback proto>'."\n";
+    echo 'Usage:' .__FILE__ .' <service_url> <partnerid> <minus_2_secret> <profile name> <delivery url> <storage host> <storage basedir> <remote storage username> <remote storage passwd> 
+ <remote storage proto: FTP|SFTP|SCP|S3>
+ <playback proto: APPLE_HTTP|HDS|RTMP|HTTP|AKAMAI_HD|AKAMAI_HDS>
+ <delivery proto: APPLE_HTTP|HDS|HTTP|RTMP|AKAMAI_HD|AKAMAI_HDS|AKAMAI_HLS_DIRECT|AKAMAI_HLS_MANIFEST>'."\n";
     exit (1);
 }
 require_once('/opt/kaltura/web/content/clientlibs/php5/KalturaClient.php');
@@ -12,7 +15,28 @@ $protocols['SCP'] = KalturaStorageProfileProtocol::SCP;
 $protocols['S3'] = KalturaStorageProfileProtocol::S3;
 
 
+$deliveries['APPLE_HTTP'] = KalturaDeliveryProfileType::APPLE_HTTP; 
+$deliveries['HDS'] = KalturaDeliveryProfileType::HDS;
+$deliveries['HTTP'] = KalturaDeliveryProfileType::HTTP;
+$deliveries['RTMP'] = KalturaDeliveryProfileType::RTMP;
+$deliveries['AKAMAI_HD'] = KalturaDeliveryProfileType::AKAMAI_HD;
+$deliveries['AKAMAI_HDS'] = KalturaDeliveryProfileType::AKAMAI_HDS;
+$deliveries['AKAMAI_HLS_DIRECT'] = KalturaDeliveryProfileType::AKAMAI_HLS_DIRECT;
+$deliveries['AKAMAI_HLS_MANIFEST'] = KalturaDeliveryProfileType::AKAMAI_HLS_MANIFEST;
+$deliveries['AKAMAI_HLS_DIRECT'] = KalturaDeliveryProfileType::AKAMAI_HLS_DIRECT;
+$deliveries['AKAMAI_HLS_MANIFEST'] = KalturaDeliveryProfileType::AKAMAI_HLS_MANIFEST;
+$deliveries['AKAMAI_HD'] = KalturaDeliveryProfileType::AKAMAI_HD;
+$deliveries['AKAMAI_HDS'] = KalturaDeliveryProfileType::AKAMAI_HDS;
+$deliveries['AKAMAI_HTTP'] = KalturaDeliveryProfileType::AKAMAI_HTTP;
+$deliveries['AKAMAI_RTMP'] = KalturaDeliveryProfileType::AKAMAI_RTMP;
 
+$playbacks['APPLE_HTTP'] = KalturaPlaybackProtocol::APPLE_HTTP;
+$playbacks['HDS'] = KalturaPlaybackProtocol::HDS;
+$playbacks['RTMP'] = KalturaPlaybackProtocol::RTMP;
+$playbacks['HTTP'] = KalturaPlaybackProtocol::HTTP;
+$playbacks['AKAMAI_HD'] = KalturaPlaybackProtocol::AKAMAI_HD;
+$playbacks['AKAMAI_HDS'] = KalturaPlaybackProtocol::AKAMAI_HDS;
+         
 $service_url = $argv[1];
 $partnerId=$argv[2];
 $secret=$argv[3];
