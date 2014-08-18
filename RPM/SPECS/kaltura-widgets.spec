@@ -6,7 +6,7 @@ License: AGPLv3+
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
-Requires: kaltura-krecord, kaltura-kupload, kaltura-ksr, kaltura-clipapp, kaltura-kmc, kaltura-kdp, kaltura-kcw kaltura-kdp kaltura-kdp3 kaltura-kdp3wrapper kaltura-kvpm, kaltura-kclip kaltura-kdpwrapper,kaltura-flexwrapper
+Requires: kaltura-krecord, kaltura-kupload, kaltura-clipapp, kaltura-kmc, kaltura-kdp, kaltura-kcw kaltura-kdp kaltura-kdp3 kaltura-kdp3wrapper kaltura-kvpm, kaltura-kclip kaltura-kdpwrapper,kaltura-flexwrapper
 
 %description
 Kaltura is the world's first Open Source Online Video Platform, transforming the way people work, 

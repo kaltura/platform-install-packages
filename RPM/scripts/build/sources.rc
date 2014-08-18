@@ -119,15 +119,6 @@ KCW_UICONF_GENERIC_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalsourc
 KCW_UICONF_EDITOR_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalsource/uiconf/kcweditor/locales/en_US"
 KCW_RPM_NAME="kaltura-kcw"
 
-# Kaltura KSE
-# we bundle a few vers at each release:
-KSE_VERSIONS="v2.3 v2.2.2 v2.1.8 v2.1.4 v2.0.7 v2.1.3CE v2.3.2"
-#KSE_UICONF_VERSIONS="v2.1.4 v2.1.5"
-KSE_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/flash/kse"
-#KSE_UICONF_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalsource/uiconf/kaltura/kmc/kcw"
-#KSE_UICONF_GENERIC_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalsource/uiconf/kaltura/generic/kcw_2.1.5"
-#KSE_UICONF_EDITOR_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalsource/uiconf/kcweditor/locales/en_US"
-KSE_RPM_NAME="kaltura-kse"
 
 # Kaltura kUpload
 # we bundle a few vers at each release:
