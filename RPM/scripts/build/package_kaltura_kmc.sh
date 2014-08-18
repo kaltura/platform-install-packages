@@ -15,19 +15,22 @@
 #===============================================================================
 
 set -o nounset                              # Treat unset variables as an error
+
+for i in svn unzip wget ;do
+	EX_PATH=`which $i 2>/dev/null`
+	if [ -z "$EX_PATH" -o ! -x "$EX_PATH" ];then
+		echo "Need to install $i."
+		exit 2
+	fi
+done
+
 SOURCES_RC=`dirname $0`/sources.rc
 if [ ! -r $SOURCES_RC ];then
 	echo "Could not find $SOURCES_RC"
 	exit 1
 fi
 . $SOURCES_RC 
-if [ ! -x `which svn 2>/dev/null` ];then
-	echo "Need to install svn."
-	exit 2
-fi
-#mkdir -p $SOURCE_PACKAGING_DIR/uiconf/kaltura/kmc
-#svn export --force --quiet $KMC_URI $SOURCE_PACKAGING_DIR/$KMC_RPM_NAME-$KMC_VERSION 
-#svn export --force --quiet $KMC_LOGIN_URI $SOURCE_PACKAGING_DIR/$KMC_RPM_NAME-$KMC_VERSION/login/$KMC_LOGIN_VERSION
+
 svn export --force --quiet $KMC_UICONF_URI $SOURCE_PACKAGING_DIR/$KMC_RPM_NAME-$KMC_VERSION/uiconf/kaltura/kmc
 cd $SOURCE_PACKAGING_DIR
 wget $KMC_URI -O $KMC_RPM_NAME-$KMC_VERSION.zip

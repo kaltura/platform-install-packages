@@ -20,7 +20,8 @@ if [ ! -r $SOURCES_RC ];then
 	exit 1
 fi
 . $SOURCES_RC 
-for i in zip wget;do
+
+for i in unzip wget;do
 	EX_PATH=`which $i 2>/dev/null`
 	if [ -z "$EX_PATH" -o ! -x "$EX_PATH" ];then
 		echo "Need to install $i."
@@ -30,9 +31,10 @@ done
 
 GITHUB_API=https://api.github.com
 NIGHTLY_BRANCH=`curl $GITHUB_API/repos/kaltura/server -s |grep default_branch| sed 's/"default_branch":\s*"\(.*\)",/\1/'| sed 's@\s*@@g'`
+TMPDIR=/tmp/nightly-core-$NIGHTLY_BRANCH
 wget https://github.com/kaltura/server/archive/$NIGHTLY_BRANCH.zip -O$RPM_SOURCES_DIR/$NIGHTLY_BRANCH.zip
-mkdir -p /tmp/nightly-core
-unzip -o -j $RPM_SOURCES_DIR/$NIGHTLY_BRANCH.zip server-$NIGHTLY_BRANCH/configurations/base.ini -d "/tmp/nightly-core"
+mkdir -p $TMPDIR 
+unzip -o -j $RPM_SOURCES_DIR/$NIGHTLY_BRANCH.zip server-$NIGHTLY_BRANCH/configurations/base.ini -d "$TMPDIR"
 #      - parse the base.ini and kmc_config.ini to locate versions for
 #        - HTML5
 #        - KMC
@@ -45,6 +47,7 @@ done
 
 #-------    - if kmc_version -ne version in sources.rc
 KMC_BRANCH=`curl $GITHUB_API/repos/kaltura/kmc -s |grep default_branch| sed 's/"default_branch":\s*"\(.*\)",/\1/'|sed 's@\s*@@g'`
+wget --no-check-certificate https://github.com/kaltura/kmc/raw/master/KMC/config/config.ini -O$TMPDIR/config.ini
 #extrace kmc_version.ini from archive and check versions of stuff
 #- set versions in acrrodence in:
 #       - spec files
