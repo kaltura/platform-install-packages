@@ -343,6 +343,13 @@ Once the upgrade completes, please run:
 /opt/kaltura/bin/kaltura-db-update.sh
 /opt/kaltura/bin/kaltura-config-all.sh
 ```
+
+In the event you would like to see what changes the package includes before deciding whether or not you wish to upgrade, run:
+```bash
+\# yum install yum-plugin-changelog
+\# yum changelog all kaltura-package-name-here
+```
+
 To upgrade your DB schema.
 
 ## Remove Kaltura

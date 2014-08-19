@@ -1,7 +1,7 @@
 Summary: Kaltura widgets
 Name: kaltura-widgets
 Version: 1.0.0
-Release: 7 
+Release: 8
 License: AGPLv3+
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -35,6 +35,9 @@ rm -rf %{buildroot}
 # its a meta package.
 
 %changelog
+* Mon Aug 18 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.0-8
+- KSR is OnPrem only so dropping from 'Requires'
+
 * Tue Feb 10 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.0-7
 - Added krecord, kupload and ksr as dep.
 
