@@ -346,8 +346,8 @@ Once the upgrade completes, please run:
 
 In the event you would like to see what changes the package includes before deciding whether or not you wish to upgrade, run:
 ```bash
-\# yum install yum-plugin-changelog
-\# yum changelog all kaltura-package-name-here
+yum install yum-plugin-changelog
+yum changelog all kaltura-package-name-here
 ```
 
 To upgrade your DB schema.
