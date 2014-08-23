@@ -147,19 +147,19 @@ Note that the order in which you install the nodes matters!
 It should be as following:
 ```
 $ ssh my-mysql-machine
-root@my-mysql-machine:~# chef-client
+root@my-mysql-machine:~# chef-client -ldebug
 
 $ ssh my-front-machine
-root@my-front-machine:~# chef-client
+root@my-front-machine:~# chef-client -ldebug
 
 $ ssh my-sphinx-machine
-root@my-sphinx-machine:~# chef-client
+root@my-sphinx-machine:~# chef-client -ldebug
 
 $ ssh my-batch-machine
-root@my-batch-machine:~# chef-client
+root@my-batch-machine:~# chef-client -ldebug
 
 $ ssh my-dwh-machine
-root@my-dwh-machine:~# chef-client
+root@my-dwh-machine:~# chef-client -ldebug
 ```
 
 ### EC2 automation
