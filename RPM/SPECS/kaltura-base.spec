@@ -9,7 +9,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 9.19.0
+Version: 9.19.2
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -292,6 +292,11 @@ fi
 
 
 %changelog
+* Fri Aug 23 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.19.2-1
+- SUP-2591 - Application Error in Canvas iFRAME EMBED
+- SUP-2581 - User Unable to Set Thumbnails /KMC
+- PLAT-1543 - Replacing entry distribute the temporary entry
+
 * Thu Jul 10 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.19.0-1
 - Ver Bounce to 9.19.0
 - SUP-2290 - API endDate and startDate issues
