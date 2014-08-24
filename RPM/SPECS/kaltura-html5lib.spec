@@ -3,7 +3,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
 Version: v2.15
-Release: 2 
+Release: 3 
 Epoch:0 
 License: AGPLv3+
 Group: Server/Platform 
@@ -46,17 +46,17 @@ mkdir -p $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib
 cp -r %{_builddir}/%{name}-%{version} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/%{version}
 cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/%{version}
 cp -r %{_builddir}/%{name}-v2.1.1 $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.1.1
-cp %{SOURCE2} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.1.1
+cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.1.1
 cp -r %{_builddir}/%{name}-v2.3 $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.3
-cp %{SOURCE3} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.3
+cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.3
 cp -r %{_builddir}/%{name}-v2.4 $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.4
-cp %{SOURCE4} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.4
+cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.4
 cp -r %{_builddir}/%{name}-v2.6 $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.6
-cp %{SOURCE5} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.6
+cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.6
 cp -r %{_builddir}/%{name}-v2.9 $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.9
-cp %{SOURCE6} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.9
-cp -r %{_builddir}/%{name}-v2.9 $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.14
-cp %{SOURCE7} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.14
+cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.9
+cp -r %{_builddir}/%{name}-v2.14 $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.14
+cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.14
 
 %clean
 rm -rf %{buildroot}
