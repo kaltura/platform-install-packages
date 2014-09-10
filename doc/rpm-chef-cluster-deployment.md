@@ -79,8 +79,10 @@ Before you upload the MySQL and NFS recipes to your chef server you need to conf
 **NFS Recipe**
 
 Add your mount point to the NFS recipe so each client that need access to it will be able to access.
-edit:`path/to/your-chef-repo/cookbooks/nfs/recipes/_common.rb`
-at the end of the file add:
+
+Edit:`path/to/your-chef-repo/cookbooks/nfs/recipes/_common.rb`
+
+At the end of the file add:
 ```
 mount "/opt/kaltura/web" do
   device "nfs.yourdomain.com:/opt/kaltura/web"
@@ -92,26 +94,30 @@ end
 This will mount the shared folder automatically even if you restart the server.
 
 **MySQL Recipe**
-The MySQL recipe configures MySQL to listen on localhost only. You need to change this as the various nodes in your cluster will need access to it, also, set the master password for root here:
-edit:`path/to/your-chef-repo/cookbooks/mysql/attributes/default.rb`
+
+The MySQL recipe configures MySQL to listen on localhost only, you need to change this as the various nodes in your cluster will need access to it, also, set the master password for root here:
+
+Edit:`path/to/your-chef-repo/cookbooks/mysql/attributes/default.rb`
+
 ```
 default['mysql']['server_root_password'] = 'yourpassword'
 default['mysql']['allow_remote_root'] = true
 ```
 Now edit:`path/to/your-chef-repo/cookbooks/mysql/templates/default/5.1/my.cnf.erb`
+
 Note: navigate into the "default" folder to configure as your mysql version if not 5.1.
-inside the [mysqld] tag at the last line add:
+
+Inside the [mysqld] tag at the last line add:
 
 ```
 open_files_limit = 20000
 lower_case_table_names=1
 max_allowed_packet = 16M
 ```
-finally navigate to `path/to/your-chef-repo/cookbooks/` and upload your configured cookbooks
+Finally navigate to `path/to/your-chef-repo/cookbooks/` and upload your configured cookbooks
 ```
 knife cookbook upload nfs
 knife cookbook upload mysql
-
 ```
 
 ## Loading the Kaltura recipes to your Chef server
