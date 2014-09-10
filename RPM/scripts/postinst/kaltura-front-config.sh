@@ -170,16 +170,17 @@ WARNING: self signed cerificate detected. Will set settings.clientConfig.verifyS
 		echo -e "settings.clientConfig.verifySSL=0" >> $APP_DIR/configurations/admin.ini
 		sed -i  's@\(\[production\]\)@\1\nsettings.clientConfig.verifySSL=0@' $APP_DIR/configurations/admin.ini
 	fi
-	if [ -f /etc/httpd/conf.d/ssl.conf ];then
-		echo "Moving /etc/httpd/conf.d/ssl.conf to /etc/httpd/conf.d/ssl.conf.ks.bak."
-		mv /etc/httpd/conf.d/ssl.conf /etc/httpd/conf.d/ssl.conf.ks.bak
-	fi
+	#if [ -f /etc/httpd/conf.d/ssl.conf ];then
+	#	echo "Moving /etc/httpd/conf.d/ssl.conf to /etc/httpd/conf.d/ssl.conf.ks.bak."
+	#	mv /etc/httpd/conf.d/ssl.conf /etc/httpd/conf.d/ssl.conf.ks.bak
+	#fi
 	sed "s#@SSL_CERTIFICATE_FILE@#$CRT_FILE#g" $MAIN_APACHE_CONF.template > $MAIN_APACHE_CONF
 	sed -i "s#@SSL_CERTIFICATE_KEY_FILE@#$KEY_FILE#g" $MAIN_APACHE_CONF
 	if [ -r "$CHAIN_FILE" ];then
-		sed -i "s^#SSLCertificateChainFile @SSL_CERTIFICATE_CHAIN_FILE@^SSLCertificateChainFile $CHAIN_FILE^" $MAIN_APACHE_CONF
+		sed -i "s^SSLCertificateChainFile @SSL_CERTIFICATE_CHAIN_FILE@^SSLCertificateChainFile $CHAIN_FILE^" $MAIN_APACHE_CONF
 	else
 		CHAIN_FILE="NO_CHAIN"
+		sed -i "s^SSLCertificateChainFile @SSL_CERTIFICATE_CHAIN_FILE@^#SSLCertificateChainFile @SSL_CERTIFICATE_CHAIN_FILE@^" $MAIN_APACHE_CONF
 	fi
 	echo "IS_SSL=y" >> $RC_FILE 
 	echo "CRT_FILE=$CRT_FILE" >> $RC_FILE
@@ -193,7 +194,7 @@ if [ "$IS_SSL" = 'Y' -o "$IS_SSL" = 1 -o "$IS_SSL" = 'y' -o "$IS_SSL" = 'true' ]
 	trap - ERR
 	echo "use kaltura" | mysql -h$DB1_HOST -u$DB1_USER -p$DB1_PASS -P$DB1_PORT $DB1_NAME 2> /dev/null
 	if [ $? -eq 0 ];then
-		echo "update permission set STATUS=2 WHERE permission.PARTNER_ID IN ('0') AND permission.NAME='FEATURE_KMC_ENFORCE_HTTPS' ORDER BY permission.STATUS ASC LIMIT 1;" | mysql $DB1_NAME -h$DB1_HOST -u$DB1_USER -P$DB1_PORT -p$DB1_PASS 
+		echo "update permission set STATUS=1 WHERE permission.PARTNER_ID IN ('0') AND permission.NAME='FEATURE_KMC_ENFORCE_HTTPS' ORDER BY permission.STATUS ASC LIMIT 1;" | mysql $DB1_NAME -h$DB1_HOST -u$DB1_USER -P$DB1_PORT -p$DB1_PASS 
 	fi
 	trap 'my_trap_handler ${LINENO} ${$?}' ERR
 else

@@ -10,16 +10,16 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 9.19.2
-Release: 1
+Release: 4
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
-Source1: kaltura.apache.ssl.conf.template 
+#Source1: kaltura.apache.ssl.conf.template 
 Source3: kaltura.apache.conf.template 
 Source4: emails_en.template.ini
-Source6: 02.Permission.ini
+#Source6: 02.Permission.ini
 Source7: dwh.template
-Source8: 01.uiConf.99.template.xml
+#Source8: 01.uiConf.99.template.xml
 Source9: plugins.template.ini
 Source10: entry_and_uiconf_templates.tar.gz
 # fixes https://github.com/kaltura/platform-install-packages/issues/37
@@ -34,7 +34,7 @@ Source17: navigation.xml
 Source18: monit.phtml 
 Source19: IndexController.php
 Source20: sphinx.populate.template.rc
-Source22: 01.UserRole.99.template.xml
+#Source22: 01.UserRole.99.template.xml
 Source23: 04.flavorParams.ini
 Source24: 04.liveParams.ini
 Source25: kaltura_populate.template
@@ -122,14 +122,14 @@ rm $RPM_BUILD_ROOT%{prefix}/app/configurations/.project
 rm $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.d/*template*
 
 # we bring our own for kaltura-front and kaltura-batch.
-cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/app/configurations/apache/kaltura.ssl.conf.template
+#cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/app/configurations/apache/kaltura.ssl.conf.template
 cp %{SOURCE3} $RPM_BUILD_ROOT%{prefix}/app/configurations/apache/kaltura.conf.template
 cp %{SOURCE4} $RPM_BUILD_ROOT%{prefix}/app/batch/batches/Mailer/emails_en.template.ini
-cp %{SOURCE6} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_data/02.Permission.ini
-cp %{SOURCE8} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_content/01.uiConf.99.template.xml
+#cp %{SOURCE6} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_data/02.Permission.ini
+#cp %{SOURCE8} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_content/01.uiConf.99.template.xml
 cp %{SOURCE7} $RPM_BUILD_ROOT%{prefix}/app/configurations/cron/dwh.template
 cp %{SOURCE9} $RPM_BUILD_ROOT%{prefix}/app/configurations/plugins.template.ini
-cp %{SOURCE22} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_content/01.UserRole.99.template.xml
+#cp %{SOURCE22} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_content/01.UserRole.99.template.xml
 cp %{SOURCE23} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_data/
 cp %{SOURCE24} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_data/
 cp %{SOURCE11} $RPM_BUILD_ROOT%{prefix}/app/alpha/crond/kaltura/clear_cache.sh
@@ -292,6 +292,9 @@ fi
 
 
 %changelog
+* Mon Sep 1 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.19.2-3
+- Dropping patches that were already merged to Core.
+
 * Fri Aug 23 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.19.2-1
 - SUP-2591 - Application Error in Canvas iFRAME EMBED
 - SUP-2581 - User Unable to Set Thumbnails /KMC
