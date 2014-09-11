@@ -412,9 +412,9 @@ done
 
 if [ ! -r "$BASE_DIR/app/base-config-generator.lock" ];then
         echo -en "
-        ${CYAN}Generating client libs...
+${CYAN}Generating client libs...
 This can take a few minutes to complete, see log at $BASE_DIR/log/generate.php.log.
-        ${NORMAL}
+${NORMAL}
         "
         php $BASE_DIR/app/generator/generate.php >> $BASE_DIR/log/generate.php.log 2>&1 && touch "$BASE_DIR/app/base-config-generator.lock"
 fi

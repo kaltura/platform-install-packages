@@ -107,7 +107,7 @@ done
 find  $RPM_BUILD_ROOT%{prefix}/app -name "*.sh" -type f -exec chmod +x {} \;
 
 
-sed -i "s@\(^kmc_version\)\s*=.*@\1=%{_kmc_version}@g" $RPM_BUILD_ROOT%{prefix}/app/configurations/base.ini
+sed -i "s@\(^kmc_version\)\s*=.*@\1=v5.37.21@g" $RPM_BUILD_ROOT%{prefix}/app/configurations/base.ini
 sed -i "s@\(^clipapp_version\)\s*=.*@\1=%{clipapp_version}@g" $RPM_BUILD_ROOT%{prefix}/app/configurations/base.ini
 sed -i "s@\(^html5_version\)\s*=.*@\1=%{html5_version}@g" $RPM_BUILD_ROOT%{prefix}/app/configurations/base.ini
 sed -i "s@\(^kdp3_wrapper_version\)\s*=.*@\1=%{kdp3_wrapper_version}@g" $RPM_BUILD_ROOT%{prefix}/app/configurations/base.ini
