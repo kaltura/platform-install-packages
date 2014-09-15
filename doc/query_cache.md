@@ -55,22 +55,25 @@ On all servers, set query_cache_enabled to true in kConfLocal (query_cache_inval
 
 Compilation notes
 =================
+```
 # wget http://launchpad.net/memcached-udfs/trunk/version-1.0/+download/memcached_functions_mysql-1.0.tar.gz
 # wget http://launchpad.net/libmemcached/1.0/0.37/+download/libmemcached-0.37.tar.gz
+```
 change:
 libmemcached/visibility.h:#  define LIBMEMCACHED_LOCAL  __attribute__ ((visibility("hidden")))
 to:
 libmemcached/visibility.h-#  define LIBMEMCACHED_LOCAL __attribute__ ((visibility("default")))
+```
 # export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig/ ; pkg-config --libs --cflags libmemcached
 # export PKG_CONFIG=/usr/bin/pkg-config
 #./configure --with-mysql=/usr/bin/mysql_config --libdir=/usr/lib64/mysql/
-
+```
 in order to overcome a segmentation fault when passing a null value to memc_set the following fix should be inserted to src/set.c at line 64
    if (args->args[0] == NULL)
      args->lengths[0]= 0;
-
+```
 # make install
 # cp /usr/lib64/mysql/libmemcached_functions_mysql.so /usr/lib64/mysql/plugin/
-
+```
 
 
