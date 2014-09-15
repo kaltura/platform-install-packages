@@ -1,10 +1,12 @@
 General
 =======
-The query cache is a generic mechanism for caching the results of database queries using memcache. The query cache uses a single shared memcache that will be added to each datacenter (not machine local memcaches). The query cache will in time deprecate several caches such as partnerPeer::retrieveByPK and entryPeer::doCountWithCache.
-How does it work ?
+The query cache is a generic mechanism for caching the results of database queries using memcache. 
+The query cache uses a single shared memcache that will be added to each datacenter (not machine local memcaches). 
 
-For example:
-============
+How does it work?
+
+Example:
+========
 
 mysql> select * from flavor_asset where entry_id=x and partner_id=y and ...
 
@@ -12,8 +14,8 @@ The first time this query is performed, it will get to the database. After the q
 
 What is the performance gain?
 =============================
-    Complex select queries that have several conditions / count queries will be replaced by a simple retrieveByPK-like query on the memcache.
-    The query cache stores serialized objects, saving the time of the Propel hydration process. 
+Complex select queries that have several conditions / count queries will be replaced by a simple retrieveByPK-like query on the memcache.
+The query cache stores serialized objects, saving the time of the Propel hydration process. 
 
 How do we know when a cached query is valid?
 ============================================
@@ -23,12 +25,11 @@ When do we update the invalidation keys?
 Whenever a flavor asset object of entry_id x is saved, it will also update the time saved in the memcache under 'flavor_asset:entry_id=x', thus invalidating all the queries that contained entry_id=x. On single datacenter environments the invalidation keys can be updated automatically by the 'save' functions. On multi datacenter environments this won't work, because it won't invalidate the queries that are cached on the remote DC. So, instead, we'll define triggers on the database that will perform the invalidation - whether the database was modified locally or by the replication.
 How to add a new query to the cache?
 ====================================
-    Override <peer>::getCacheInvalidationKeys to return a list of invalidation keys that should be checked before the supplied $criteria can be returned from the cache.
-    Override <object>::getCacheInvalidationKeys to return a list of invalidation keys that should be updated when $this object is saved.
-    The list of invalidation keys to update should also be added to $INVALIDATION_KEYS in deployment/base/scripts/createQueryCacheTriggers.php. 
+Override <peer>::getCacheInvalidationKeys to return a list of invalidation keys that should be checked before the supplied $criteria can be returned from the cache.
+Override <object>::getCacheInvalidationKeys to return a list of invalidation keys that should be updated when $this object is saved.
+The list of invalidation keys to update should also be added to $INVALIDATION_KEYS in deployment/base/scripts/createQueryCacheTriggers.php. 
 
 Use the following samples:
-
     Basic cache: asset.php & assetPeer.php.
     Multiple invalidation fields: kuser.php & kuserPeer.php.
     IN criteria caching: permission.php & permissionPeer.php. 
@@ -36,20 +37,19 @@ Use the following samples:
 What is the process for setting up the query cache?
 ===================================================
 
-All environments
-Set up a single machine on each datacenter that will run the shared memcached. Configure the hostname and port of this memcache in kConfLocal (global_memcache_host / global_memcache_port).
+Set up a single machine on each datacenter that will run the shared memcached. Configure the hostname and port of this memcache in local.ini (global_memcache_host / global_memcache_port).
 Single datacenter environment only
 On all servers, set query_cache_enabled and query_cache_invalidate_on_change to true in kConfLocal
 Multi datacenter environment only
 Perform the following on one of the mysql slaves in each datacenter:
 
-    Compile and install 'Memcached Functions for MySQL'. To install a precompiled version:
-        Copy /usr/lib64/mysql/plugin/libmemcached_functions_mysql.so and /usr/local/lib64/libmemcached.so.
-        Install the functions by running: mysql kaltura < memcached_functions_mysql-1.0/sql/install_functions.sql 
-    Configure the 'Memcached Functions for MySQL' library to use the shared memcache server by adding the command 'select memc_servers_set('<global memcache host>:<global memcache port>');' to the mysql init script.
+* Compile and install 'Memcached Functions for MySQL'. To install a precompiled version:
+* Copy /usr/lib64/mysql/plugin/libmemcached_functions_mysql.so and /usr/local/lib64/libmemcached.so.
+* Install the functions by running: mysql kaltura < memcached_functions_mysql-1.0/sql/install_functions.sql 
+* Configure the 'Memcached Functions for MySQL' library to use the shared memcache server by adding the command 'select memc_servers_set('<global memcache host>:<global memcache port>');' to the mysql init script.
     Note: To add an init script for mysql, add the switch 'init-file=<mysql init script path>' to the section [mysqld] in my.cnf.
-    Restart mysql.
-    Install the triggers by running from deployment/base/scripts: php createQueryCacheTriggers.php create <host> <user> <password> 
+* Restart mysql.
+* Install the triggers by running from deployment/base/scripts: php createQueryCacheTriggers.php create <host> <user> <password> 
 
 On all servers, set query_cache_enabled to true in kConfLocal (query_cache_invalidate_on_change should be left false).
 
