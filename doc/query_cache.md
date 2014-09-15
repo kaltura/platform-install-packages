@@ -1,6 +1,7 @@
 General
 =======
 The query cache is a generic mechanism for caching the results of database queries using memcache. 
+
 The query cache uses a single shared memcache that will be added to each datacenter (not machine local memcaches). 
 
 How does it work?
@@ -15,14 +16,17 @@ The first time this query is performed, it will get to the database. After the q
 What is the performance gain?
 =============================
 Complex select queries that have several conditions / count queries will be replaced by a simple retrieveByPK-like query on the memcache.
+
 The query cache stores serialized objects, saving the time of the Propel hydration process. 
 
 How do we know when a cached query is valid?
 ============================================
 Every query that is cached is associated with at least one 'invalidation key', each invalidation key holds the time of the last relevant change to the database, in the example above, we use the key: 'QCI-flavor_asset:entry_id=x'. Before we return a cached query from the memcache, we compare the time of the cached query to the time saved in all relevant invalidation keys. If one of the invalidation keys is newer than the cached query, the cached query is treated as invalid and won't be used.
-When do we update the invalidation keys?
 
+When do we update the invalidation keys?
+========================================
 Whenever a flavor asset object of entry_id x is saved, it will also update the time saved in the memcache under 'flavor_asset:entry_id=x', thus invalidating all the queries that contained entry_id=x. On single datacenter environments the invalidation keys can be updated automatically by the 'save' functions. On multi datacenter environments this won't work, because it won't invalidate the queries that are cached on the remote DC. So, instead, we'll define triggers on the database that will perform the invalidation - whether the database was modified locally or by the replication.
+
 How to add a new query to the cache?
 ====================================
 Override <peer>::getCacheInvalidationKeys to return a list of invalidation keys that should be checked before the supplied $criteria can be returned from the cache.
@@ -50,8 +54,7 @@ Perform the following on one of the mysql slaves in each datacenter:
     Note: To add an init script for mysql, add the switch 'init-file=<mysql init script path>' to the section [mysqld] in my.cnf.
 * Restart mysql.
 * Install the triggers by running from deployment/base/scripts: php createQueryCacheTriggers.php create <host> <user> <password> 
-
-On all servers, set query_cache_enabled to true in kConfLocal (query_cache_invalidate_on_change should be left false).
+* On all servers, set query_cache_enabled to true in local.ini (query_cache_invalidate_on_change should be left false).
 
 Compilation notes
 =================
