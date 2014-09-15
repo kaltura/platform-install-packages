@@ -56,16 +56,20 @@ Perform the following on one of the mysql slaves in each datacenter:
 * Install the triggers by running from deployment/base/scripts: php createQueryCacheTriggers.php create <host> <user> <password> 
 * On all servers, set query_cache_enabled to true in local.ini (query_cache_invalidate_on_change should be left false).
 
-Compilation notes
-=================
+Compilation
+===========
 ```
 # wget http://launchpad.net/memcached-udfs/trunk/version-1.0/+download/memcached_functions_mysql-1.0.tar.gz
 # wget http://launchpad.net/libmemcached/1.0/0.37/+download/libmemcached-0.37.tar.gz
 ```
 change:
+```
 libmemcached/visibility.h:#  define LIBMEMCACHED_LOCAL  __attribute__ ((visibility("hidden")))
+```
 to:
+```
 libmemcached/visibility.h-#  define LIBMEMCACHED_LOCAL __attribute__ ((visibility("default")))
+```
 ```
 # export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig/ ; pkg-config --libs --cflags libmemcached
 # export PKG_CONFIG=/usr/bin/pkg-config
