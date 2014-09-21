@@ -9,8 +9,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 9.19.2
-Release: 4
+Version: 9.19.3
+Release: 2
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -292,6 +292,19 @@ fi
 
 
 %changelog
+* Sun Sep 21 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.19.3-2
+- PLAT-1649 - Allow the option to disable KMC "forgot password" functionality per partner
+- PLAT-1559 - KMC-login to ignore "remember me" checkbox per partner configuration
+- PLAT-1558 - Add partner configuration to "disable" the "remember me" functionality in KMC login
+- PLAT-1555 - add XSS protection in API to not allow HTML
+- PLAT-1554 - Add ability to change the KS expiration for KMC login per partner
+- PLAT-1548 - analytics reports downloaded from KMC do not enforce any access-control policies or any other means of authentication
+- PLAT-1547 - stored XSS vulnerability in "my user settings" in the KMC
+- PLAT-1886 - Support Live to VOD flow with no "down time" where DVR + Recording is enabled.
+- PLAT-1663 - Create an API service that returns the version of the server
+- SUP-2447 - Clipping entries throws an error
+- API isCountryRestricted parameter returns-0
+
 * Mon Sep 1 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.19.2-3
 - Dropping patches that were already merged to Core.
 
