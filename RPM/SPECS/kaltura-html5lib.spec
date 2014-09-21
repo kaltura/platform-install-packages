@@ -2,8 +2,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.15
-Release: 3 
+Version: v2.18.5
+Release: 1
 Epoch:0 
 License: AGPLv3+
 Group: Server/Platform 
@@ -15,6 +15,7 @@ Source4: kaltura-html5lib-v2.4.tar.gz
 Source5: kaltura-html5lib-v2.6.tar.gz
 Source6: kaltura-html5lib-v2.9.tar.gz
 Source7: kaltura-html5lib-v2.14.tar.gz
+Source8: kaltura-html5lib-v2.15.tar.gz
 URL: https://github.com/kaltura/mwEmbed 
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
@@ -57,6 +58,8 @@ cp -r %{_builddir}/%{name}-v2.9 $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.9
 cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.9
 cp -r %{_builddir}/%{name}-v2.14 $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.14
 cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.14
+cp -r %{_builddir}/%{name}-v2.15 $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.15
+cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.15
 
 %clean
 rm -rf %{buildroot}
@@ -72,6 +75,9 @@ rm -rf %{buildroot}
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Sun Sep 21 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.18.5
+- ver bounce.
+
 * Sun Aug 3 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.15-1
 - SUP-2413 - window.setInterval cause hTML5 player failure
 - SUP-2459 - Multiple "Pause" events
