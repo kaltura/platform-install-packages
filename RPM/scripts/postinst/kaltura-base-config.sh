@@ -446,7 +446,7 @@ fi
 echo -e "${BRIGHT_BLUE}Configuration of $DISPLAY_NAME finished successfully!${NORMAL}"
 send_install_becon `basename $0` $ZONE install_success
 write_last_base_version
-if [ -x /etc/init.d/httpd ];then
-	service httpd reload
-fi
+#if [ -x /etc/init.d/httpd ];then
+#	service httpd reload
+#fi
 
