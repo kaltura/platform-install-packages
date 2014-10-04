@@ -295,7 +295,7 @@ Front in Kaltura represents the machines hosting the user-facing components, inc
 ### The Batch node
 Batch in Kaltura represents the machines running all async operations. To learn more, read: [Introduction to Kaltura Batch Processes](http://knowledge.kaltura.com/node/230).
 
-It is strongly recommended that you install at least 2 Sphinx nodes for redundancy.
+It is strongly recommended that you install at least 2 batch nodes for redundancy.
 
 ```
 # rpm -Uhv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
