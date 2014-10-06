@@ -49,38 +49,27 @@ Perform the following on one of the mysql slaves in each datacenter:
 
 * Compile and install 'Memcached Functions for MySQL'. To install a precompiled version:
 * Copy /usr/lib64/mysql/plugin/libmemcached_functions_mysql.so and /usr/local/lib64/libmemcached.so.
-* Install the functions by running: mysql kaltura < memcached_functions_mysql-1.0/sql/install_functions.sql 
+* Install the functions by running: mysql kaltura < memcached_functions_mysql-1.1/sql/install_functions.sql 
 * Configure the 'Memcached Functions for MySQL' library to use the shared memcache server by adding the command 'select memc_servers_set('<global memcache host>:<global memcache port>');' to the mysql init script.
-    Note: To add an init script for mysql, add the switch 'init-file=<mysql init script path>' to the section [mysqld] in my.cnf.
+    Note: To add an init script for mysql, add the switch 'init-file=<mysql init script path>' to the section [mysqld] in my.cnf and make sure that mysql user has acess to this file
 * Restart mysql.
 * Install the triggers by running from deployment/base/scripts: php createQueryCacheTriggers.php create <host> <user> <password> 
 * On all servers, set query_cache_enabled to true in local.ini (query_cache_invalidate_on_change should be left false).
 
-Compilation
+Pre-requisites
 ===========
 ```
-# wget http://launchpad.net/memcached-udfs/trunk/version-1.0/+download/memcached_functions_mysql-1.0.tar.gz
-# wget http://launchpad.net/libmemcached/1.0/0.37/+download/libmemcached-0.37.tar.gz
+# yum install libmemcached libmemcached-devel mysql-devel -y
 ```
-change:
+Compile
+===========
 ```
-libmemcached/visibility.h:#  define LIBMEMCACHED_LOCAL  __attribute__ ((visibility("hidden")))
-```
-to:
-```
-libmemcached/visibility.h-#  define LIBMEMCACHED_LOCAL __attribute__ ((visibility("default")))
+# wget https://launchpad.net/memcached-udfs/trunk/1.1/+download/memcached_functions_mysql-1.1.tar.gz
+# tar -xvf ./memcached_functions_mysql-1.1.tar.gz
+# cd ./memcached_functions_mysql-1.1
 ```
 ```
-# export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig/ ; pkg-config --libs --cflags libmemcached
-# export PKG_CONFIG=/usr/bin/pkg-config
 #./configure --with-mysql=/usr/bin/mysql_config --libdir=/usr/lib64/mysql/
-```
-in order to overcome a segmentation fault when passing a null value to memc_set the following fix should be inserted to src/set.c at line 64
-   if (args->args[0] == NULL)
-     args->lengths[0]= 0;
-```
 # make install
 # cp /usr/lib64/mysql/libmemcached_functions_mysql.so /usr/lib64/mysql/plugin/
 ```
-
-
