@@ -58,8 +58,15 @@ Perform the following on one of the mysql slaves in each datacenter:
 
 Pre-requisites
 ===========
+
+CentOS / RHEL:
 ```
-# yum install libmemcached libmemcached-devel mysql-devel -y
+# yum install libmemcached-devel mysql-devel
+```
+
+Ubuntu/Debian:
+```
+apt-get install libmemcached-dev libmysqld-dev
 ```
 Compile
 ===========
@@ -71,5 +78,9 @@ Compile
 ```
 #./configure --with-mysql=/usr/bin/mysql_config --libdir=/usr/lib64/mysql/
 # make install
+```
+Install
+===========
+```
 # cp /usr/lib64/mysql/libmemcached_functions_mysql.so /usr/lib64/mysql/plugin/
 ```
