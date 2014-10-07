@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.19
-Release: 1
+Release: 2 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -81,6 +81,10 @@ fi
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Mon Oct 6 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.19-2
+- redirect ls STDERR to dev/null
+- fix analytics.
+
 * Sun Sep 21 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.19-1
 - We do not want to reload Apache during base because if this is a reconfig, there would already be a symlink under /etc/httpd/conf.d/ pointing to the kaltura apache config, base will replace the actual values with the template and so, Apache will not load.
 

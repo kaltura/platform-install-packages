@@ -33,7 +33,7 @@ enable_admin_conf()
 create_answer_file()
 {
 	ANSFILE="$1"
-        for VAL in CONFIG_CHOICE IS_SSL CRT_FILE KEY_FILE CHAIN_FILE; do
+        for VAL in CONFIG_CHOICE IS_SSL CRT_FILE KEY_FILE CHAIN_FILE CA_FILE; do
                 if [ -n "${!VAL}" ];then
 			sed "/^$VAL=.*/d" -i $ANSFILE
 			echo "$VAL=\"${!VAL}\"" >> $ANSFILE 
@@ -142,6 +142,10 @@ else
 		echo -e "${CYAN}Please input path to your SSL chain file or leave empty in case you have none${CYAN}:${NORMAL}"
 		read -e CHAIN_FILE
 	fi
+	#if [ -z "$CA_FILE" ];then
+	#	echo -e "${CYAN}Please input path to your SSL CA file or leave empty in case you have none${CYAN}:${NORMAL}"
+	#	read -e CA_FILE
+	#fi
 	# check key and crt match
 	CRT_SUM=`openssl x509 -in $CRT_FILE -modulus -noout | openssl md5`
 	KEY_SUM=`openssl rsa -in $KEY_FILE -modulus -noout | openssl md5`
@@ -182,9 +186,16 @@ WARNING: self signed cerificate detected. Will set settings.clientConfig.verifyS
 		CHAIN_FILE="NO_CHAIN"
 		sed -i "s^SSLCertificateChainFile @SSL_CERTIFICATE_CHAIN_FILE@^#SSLCertificateChainFile @SSL_CERTIFICATE_CHAIN_FILE@^" $MAIN_APACHE_CONF
 	fi
+	if [ -r "$CA_FILE" ];then
+		sed -i "s^SSLCACertificateFile @SSL_CERTIFICATE_CA_FILE@^SSLCACertificateFile $CA_FILE^" $MAIN_APACHE_CONF
+	else
+		CA_FILE="NO_CA"
+		sed -i "s^SSLCACertificateFile @SSL_CERTIFICATE_CA_FILE@^#SSLCACertificateFile @SSL_CERTIFICATE_CA_FILE@^" $MAIN_APACHE_CONF
+	fi
 	echo "IS_SSL=y" >> $RC_FILE 
 	echo "CRT_FILE=$CRT_FILE" >> $RC_FILE
         echo "KEY_FILE=$KEY_FILE" >> $RC_FILE
+        echo "CA_FILE=$CA_FILE" >> $RC_FILE
         echo "CHAIN_FILE=$CHAIN_FILE" >> $RC_FILE
 
 fi
@@ -289,12 +300,12 @@ ln -sf $BASE_DIR/app/configurations/monit/monit.avail/memcached.rc $BASE_DIR/app
 			sed -i "s@^\(studio_version\s*=\)\(.*\)@\1 `rpm -qa kaltura-html5-studio --queryformat %{version}`@g" -i $BASE_DIR/app/configurations/base.ini
 		fi
 	# we can't use rpm -q kaltura-kmc because this node may not be the one where we installed the KMC RPM on, as it resides in the web dir and does not need to be installed on all front nodes.
-		KMC_PATH=`ls -ld $BASE_DIR/web/flash/kmc/v*|awk -F " " '{print $NF}' |tail -1`
+		KMC_PATH=`ls -ld $BASE_DIR/web/flash/kmc/v* 2>/dev/null|awk -F " " '{print $NF}' |tail -1`
 #sed -i "s#\(@KMC_VERSION@\)\s*=.*#\1=%{_kmc_version}#g" $RPM_BUILD_ROOT%{prefix}/bin/sanity_config.template.ini
 #sed -i "s#\(@KMC_LOGIN_VERSION@\)\s*=.*#\1=%{kmc_login_version}#g" $RPM_BUILD_ROOT%{prefix}/bin/sanity_config.template.ini
 		#ln -sf $KMC_PATH/uiconf/kaltura/kmc  $BASE_DIR/web/content/uiconf/kaltura
 		php $BASE_DIR/app/deployment/uiconf/deploy_v2.php --ini=$KMC_PATH/config.ini >> /dev/null
-		HTML5_PATH=`ls -ld $BASE_DIR/web/html5/html5lib/v*|awk -F " " '{print $NF}' |tail -1`
+		HTML5_PATH=`ls -ld $BASE_DIR/web/html5/html5lib/v* 2>/dev/null|awk -F " " '{print $NF}' |tail -1`
 		sed -i "s@^\(html5_version\s*=\)\(.*\)@\1 `rpm -qa kaltura-html5lib --queryformat %{version}`@g" -i $BASE_DIR/app/configurations/base.ini
 		# https://github.com/kaltura/mwEmbed/issues/574
 		# find $BASE_DIR/web/html5/html5lib/ -type f -exec sed -i "s@http://cdnapi.kaltura.com@$SERVICE_URL@g" {} \;

@@ -26,6 +26,12 @@ if ! rpm -q kaltura-batch;then
 	echo -e "${BRIGHT_BLUE}Skipping as kaltura-batch is not installed.${NORMAL}"
 	exit 0 
 fi
+if [ -r $CONSENT_FILE ];then
+	. $CONSENT_FILE
+elif [ -z "$USER_CONSENT" ];then
+	get_tracking_consent
+fi
+. $CONSENT_FILE
 if [ -n "$1" -a -r "$1" ];then
 	ANSFILE=$1
 	. $ANSFILE
@@ -41,7 +47,6 @@ ${NORMAL}
 fi
 trap 'my_trap_handler ${LINENO} ${$?}' ERR
 send_install_becon `basename $0` $ZONE install_start 
-
 CONFIG_DIR=/opt/kaltura/app/configurations
 if [ -r $CONFIG_DIR/system.ini ];then
 	. $CONFIG_DIR/system.ini

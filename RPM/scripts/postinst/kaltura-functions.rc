@@ -166,9 +166,9 @@ send_post_inst_msg()
 }
 send_install_becon()
 {
-	if ! check_if_upgrade;then
-		return 0 
-	fi
+#	if ! check_if_upgrade;then
+#		return 0 
+#	fi
 	trap - ERR
 	#echo $USER_CONSENT
 	if [ -r $CONSENT_FILE ];then
@@ -203,9 +203,10 @@ send_install_becon()
 	else
 		IS_SSL=false
 	fi
+#set -x
 	curl -i -X POST -H 'Content-Type: application/json' -d '{"event_type": "'$ACTION'", "server_role": "'$ROLE'", "user_email": "'$CONTACT_MAIL'", "machine_id": "'$MACHINE_ID'", "installation_id": "'$INSTALL_ID'", "timestamp": "'$EPOCH'", "kernel_version": "'`uname -r`'", "machine_arch": "'`uname -m`'","linux_flavor":"'`head -1 /etc/issue|sed "s#\s#_#g"`'","is_ssl": "'$IS_SSL'", "service_url": "'$SERVICE_URL'","install_err_line": "'$ERR_LINE'","timezone": "'$TIMEZONE'","package_type":"rpm","kaltura_version": "'`rpm -qa kaltura-base --queryformat %{version}`'","package_revision": "'`rpm -qa kaltura-base --queryformat %{release}`'"}' $ANALYTICS_SERVER_URI &>/dev/null
 
-	#set +x
+#	set +x
 	trap 'my_trap_handler ${LINENO} ${$?}' ERR
 }
 

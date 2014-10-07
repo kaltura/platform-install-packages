@@ -9,8 +9,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 9.19.3
-Release: 4
+Version: 9.19.4
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -294,6 +294,15 @@ fi
 
 
 %changelog
+* Sun Oct 5 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.19.4-1
+- Ver Bounce to 9.19.4
+- PLAT-1556 - BACKMS5SecAudit - Add ability to invalidate KS by a session ID
+- PLAT-1834 - Add support for the clipTo / seekFrom playManifest parameters in Akamai HDN2 deliveries
+- PLAT-1928 - adding an entry several times to category reports batch error
+- SUP-2489 - SF 48088 - Unable to download a Video
+- SUP-2764 - sf 50841| Telepictures-Ellen| analytics does not match
+- No email notification when removing member from channel
+
 * Tue Sep 30 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.19.3-4
 - http://forum.kaltura.org/t/upgrade-from-9-18-x-to-9-19-x-latest-release-as-on-date-caused-ssl-to-break/662
 
