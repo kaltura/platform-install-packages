@@ -57,7 +57,7 @@ Perform the following on one of the mysql slaves in each datacenter:
 * On all servers, set query_cache_enabled to true in local.ini (query_cache_invalidate_on_change should be left false).
 
 Pre-requisites
-===========
+==============
 
 CentOS / RHEL:
 ```
@@ -69,18 +69,23 @@ Ubuntu/Debian:
 apt-get install libmemcached-dev libmysqld-dev
 ```
 Compile
-===========
+=======
 ```
 # wget https://launchpad.net/memcached-udfs/trunk/1.1/+download/memcached_functions_mysql-1.1.tar.gz
 # tar -xvf ./memcached_functions_mysql-1.1.tar.gz
 # cd ./memcached_functions_mysql-1.1
 ```
 ```
-#./configure --with-mysql=/usr/bin/mysql_config --libdir=/usr/lib64/mysql/
+#./configure --with-mysql=/usr/bin/mysql_config 
 # make install
 ```
 Install
-===========
+=======
+CentOS / RHEL:
 ```
 # cp /usr/lib64/mysql/libmemcached_functions_mysql.so /usr/lib64/mysql/plugin/
+```
+Ubuntu/Debian:
+```
+# cp /usr/lib64/mysql/libmemcached_functions_mysql.so /usr/lib/mysql/plugin/
 ```
