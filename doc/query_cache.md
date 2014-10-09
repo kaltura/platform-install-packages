@@ -87,5 +87,5 @@ CentOS / RHEL:
 ```
 Ubuntu/Debian:
 ```
-# cp /usr/lib64/mysql/libmemcached_functions_mysql.so /usr/lib/mysql/plugin/
+# cp /usr/local/lib/libmemcached_functions_mysql.so /usr/lib/mysql/plugin/
 ```
