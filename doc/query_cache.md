@@ -83,7 +83,7 @@ Install
 =======
 CentOS / RHEL:
 ```
-# cp /usr/lib64/mysql/libmemcached_functions_mysql.so /usr/lib64/mysql/plugin/
+# cp /usr/local/lib/libmemcached_functions_mysql.so /usr/lib64/mysql/plugin/
 ```
 Ubuntu/Debian:
 ```
