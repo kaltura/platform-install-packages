@@ -7,7 +7,7 @@ Refer to the [Deploying Kaltura Clusters Using Chef](https://github.com/kaltura/
 ### Instructions here are for a cluster with the following members:
 
 * [Load Balancer](#apache-load-balancer)
-* [NFS server](#the-nfs)
+* [NFS server](#the-nfs-server)
 * [MySQL Database](#the-mysql-database)
 * [Sphinx Indexing](#the-sphinx-indexing-server)
 * [Front servers](#the-front)
