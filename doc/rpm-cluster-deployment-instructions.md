@@ -111,8 +111,10 @@ The following server roles should not be load-balanced:
 ### The NFS server
 The NFS is the shared network storage between all machines in the cluster. To learn more about NFS read [this wikipedia article about NFS](http://en.wikipedia.org/wiki/Network_File_System).
 ```
-# yum install nfs-utils-lib
+# yum install nfs-utils-lib ntp
 # chkconfig nfs on
+# chkconfig ntp on
+# service ntpd start
 # service rpcbind start
 # service nfs start
 # mkdir -p /opt/kaltura/web
@@ -158,9 +160,11 @@ Escape character is '^]'.
 Please note that currently, only MySQL 5.1 is supported, we recommend using the official package supplied by the RHEL/CentOS repos which is currently 5.1.73.
 ```
 # rpm -Uhv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
-# yum install mysql-server kaltura-postinst 
+# yum install mysql-server kaltura-postinst ntp 
 # /opt/kaltura/bin/kaltura-mysql-settings.sh
 # mysql_secure_installation
+# chkconfig ntp on
+# service ntpd start
 ```
 **Make sure to say Y** for the `mysql_secure_installation` install, and follow through all the mysql install questions before continuing further.    
 Failing to properly run `mysql_secure_installation` will cause the kaltura mysql user to run without proper permissions to access your mysql DB.    
