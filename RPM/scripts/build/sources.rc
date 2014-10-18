@@ -7,7 +7,7 @@ PACKAGER_NAME="Jess Portnoy"
 PACKAGER_MAIL="jess.portnoy@kaltura.com"
 TMP_DIR=/tmp
 SVN_USER=jessp
-KALTURA_SERVER_VERSION="9.19.4"
+KALTURA_SERVER_VERSION="9.19.5"
 
 # Sphinx build vars:
 SPHINX_URI="http://sphinxsearch.googlecode.com/svn/trunk/"

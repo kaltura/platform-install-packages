@@ -9,7 +9,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 9.19.4
+Version: 9.19.5
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -294,6 +294,18 @@ fi
 
 
 %changelog
+* Sat Oct 18 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.19.5-1
+- Ver Bounce to 9.19.5
+- PLAT-1897 - Enable users to play-out the remaining DVR even with recording disabled
+- PLAT-1459 - DVR take over during live broadcast
+- PLAT-1886 - Support Live to VOD flow with no "down time" where DVR + Recording is enabled.
+- PLAT-1476 - Stability issues around live recording / appending
+- PLAT-1114 - Test Wirecast Encoder with Kaltura Live Platform
+- SUP-2553 - Bulk upload URL problem 
+- SUP-2202 - Live stream recording issue
+- PLAT-1830 - Add access to the "Attachment" service to the "PLAYBACK_BASE_ROLE"
+- PLAT-1957 - ERROR on log - Failed to list entries cue-points.
+
 * Sun Oct 5 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.19.4-1
 - Ver Bounce to 9.19.4
 - PLAT-1556 - BACKMS5SecAudit - Add ability to invalidate KS by a session ID

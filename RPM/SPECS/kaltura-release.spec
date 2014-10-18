@@ -1,10 +1,9 @@
 %define baseurl installrepo.kaltura.org
-%define path releases/latest/RPMS
 %define testpath releases/nightly/RPMS
 %define prefix /opt/kaltura 
 Summary: Kaltura Server release file and package configuration
 Name: kaltura-release
-Version: 9.19.4
+Version: 9.19.5
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -12,6 +11,8 @@ URL: http://kaltura.org
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildArch: noarch
+
+%define path releases/%{version}/RPMS
 
 %description
 Kaltura Server release file. This package contains yum 
@@ -80,6 +81,9 @@ exit 0
 %config %{_sysconfdir}/yum.repos.d/kaltura.repo
 
 %changelog
+* Sat Oct 18 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.19.5-1
+- Ver Bounce to 9.19.5
+
 * Sun Oct 5 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.19.4-1
 - Ver Bounce to 9.19.4
 
