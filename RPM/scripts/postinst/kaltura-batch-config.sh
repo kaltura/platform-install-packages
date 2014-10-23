@@ -17,7 +17,7 @@
 #set -o nounset                              # Treat unset variables as an error
 KALTURA_FUNCTIONS_RC=`dirname $0`/kaltura-functions.rc
 if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
-	OUT="${BRIGHT_RED}ERROR: Could not find $KALTURA_FUNCTIONS_RC so, exiting..${NORMAL}"
+	OUT="ERROR: Could not find $KALTURA_FUNCTIONS_RC so, exiting.."
 	echo -e $OUT
 	exit 3
 fi

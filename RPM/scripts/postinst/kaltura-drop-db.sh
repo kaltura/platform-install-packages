@@ -31,8 +31,11 @@ $DBS
 and remove users:
 $DB_USERS
 on $DB1_HOST
-
+${BRIGHT_RED}
+NOTE: this is not reversible. 
+It is recommended you also back up the current data using mysqldump before continuing.
 Are you absolutely certain you want this? [n/Y]
+${NORMAL}
 "
 read AN
 if [ "$AN" != 'Y' ];then
