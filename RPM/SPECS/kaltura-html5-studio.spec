@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5-studio
-Version: v1.8
+Version: v1.8.1
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
