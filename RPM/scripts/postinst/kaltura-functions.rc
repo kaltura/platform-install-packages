@@ -362,23 +362,38 @@ check_start_page()
 check_testme_page()
 {
 	TESTME_PAGE=`curl -ks "$SERVICE_URL/api_v3/testme"  | grep 'The document has moved '|sed 's@.*a href="\(.*\)".*@\1@g'`
-	curl -ks $TESTME_PAGE | grep 'Kaltura - Test Me Console' -q
+	GOOD_STRING='Kaltura - Test Me Console'
+	curl -ks $TESTME_PAGE | grep "$GOOD_STRING" -q
 	if [ $? -eq 0 ];then
-		echo "Successfully found 'Kaltura - Test Me Console' on page $TESTME_PAGE"
+		echo "Successfully found '$GOOD_STRING' on page $TESTME_PAGE"
 		return 0
 	else
-		echo "Did not find 'Kaltura - Test Me Console' on page $TESTME_PAGE :("
+		echo "Did not find '$GOOD_STRING' on page $TESTME_PAGE :("
 		return 1
 	fi	
 } 
 check_kmc_index_page()
 {
-	curl -ks "$SERVICE_URL/kmc"  | grep -q 'Kaltura - Open Source Video Platform'
+	GOOD_STRING='Kaltura - Open Source Video Platform'
+	curl -ks "$SERVICE_URL/kmc"  | grep -q "$GOOD_STRING"
 	if [ $? -eq 0 ];then
-		echo "Successfully found 'Kaltura - Open Source Video Platform'"
+		echo "Successfully found '$GOOD_STRING'"
 		return 0
 	else
-		echo "Did not find 'Kaltura - Open Source Video Platform' :("
+		echo "Did not find '$GOOD_STRING' :("
+		return 1
+	fi
+}
+
+check_studio_index_page()
+{
+	GOOD_STRING='Universal Studio'
+	curl -ks "$SERVICE_URL/apps/studio/`rpm -qa kaltura-html5-studio --queryformat %{version}`/index.html"  | grep -q "$GOOD_STRING"
+	if [ $? -eq 0 ];then
+		echo "Successfully found '$GOOD_STRING'"
+		return 0
+	else
+		echo "Did not find '$GOOD_STRING' :("
 		return 1
 	fi
 }
@@ -386,12 +401,13 @@ check_kmc_index_page()
 check_admin_console_index_page()
 {
 	AC_PAGE=`curl -ks "$SERVICE_URL/admin_console"  | grep 'The document has moved '|sed 's@.*a href="\(.*\)".*@\1@g'`
-	curl -ks $AC_PAGE | grep 'Kaltura Admin Console' -q
+	GOOD_STRING='Kaltura Admin Console'
+	curl -ks $AC_PAGE | grep "$GOOD_STRING" -q
 	if [ $? -eq 0 ];then
-		echo "Successfully found 'Kaltura Admin Console' on page $AC_PAGE"
+		echo "Successfully found '$GOOD_STRING' on page $AC_PAGE"
 		return 0
 	else
-		echo "Did not find 'Kaltura Admin Console' on page $AC_PAGE :("
+		echo "Did not find '$GOOD_STRING' on page $AC_PAGE :("
 		return 1
 	fi	
 }
@@ -471,3 +487,4 @@ check_kmc_config_versions()
 			return $RC
 		fi
 }
+

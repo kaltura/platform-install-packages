@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.20
-Release: 2
+Release: 3
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -81,6 +81,10 @@ fi
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Thu Oct 23 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.20-3
+- Redirect ls' STDERR to /dev/null when looking for java
+- Added test for studio's index.html to kaltura-sanity.sh
+
 * Sun Oct 19 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.20-2
 - Correct /dev/null redirection.
 
