@@ -301,6 +301,7 @@ get_newsletter_consent()
 	read -e CONTACT_MAIL
 	while [ "$CONTACT_MAIL" != "NO" ];do
 		if validate_mail "$CONTACT_MAIL";then
+			echo -e "${BRIGHT_BLUE}Registering for the newsletter... this will take a few seconds.${NORMAL}"
 			curl "$NEWSLETTER_URL?email=$CONTACT_MAIL"
 			export CONTACT_MAIL
 			return 0

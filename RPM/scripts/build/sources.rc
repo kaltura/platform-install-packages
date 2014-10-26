@@ -33,7 +33,7 @@ X264_URI="http://downloads.videolan.org/pub/videolan/x264/snapshots/x264-snapsho
 # libfdk build vars:
 FDK_VERSION=0.1.3
 FDK_URI=https://github.com/mstorsjo/fdk-aac.git
-FDK_RPM_PACKAGE_NAME=kaltura-libfdk-acc
+FDK_RPM_PACKAGE_NAME=kaltura-libfdk-aac
 
 # Red5 build vars:
 RED5_VERSION=1.0.0

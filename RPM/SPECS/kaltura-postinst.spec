@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.20
-Release: 5
+Release: 7
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -81,6 +81,12 @@ fi
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Sun Oct 26 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.20-6
+- Call for Marketo takes a few sec to complete - added a message.
+
+* Sun Oct 26 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.20-5
+- Prompt about Community newsletter
+
 * Fri Oct 24 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.20-4
 - Only run studio test if kaltura-html5lib is installed
 

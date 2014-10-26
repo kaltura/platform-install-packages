@@ -30,7 +30,7 @@ fi
 cd $RPM_SOURCES_DIR
 cd $SOURCE_PACKAGING_DIR 
 git clone $FDK_URI 
-tar jcvf  $RPM_SOURCES_DIR/kaltura-fdk-acc-$FDK_VERSION.tar.bz2 fdk-aac 
+tar jcvf  $RPM_SOURCES_DIR/kaltura-fdk-aac-$FDK_VERSION.tar.bz2 fdk-aac 
 echo "written to: $RPM_SOURCES_DIR/kaltura-fdk-aac-$FDK_VERSION.tar.bz2"
 rpmbuild -ba $RPM_SPECS_DIR/$FDK_RPM_PACKAGE_NAME.spec
 
