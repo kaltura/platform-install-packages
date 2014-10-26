@@ -36,13 +36,13 @@ This package installs the Kaltura HTML5 library.
 
 %prep
 %setup -q
-tar zxf %{SOURCE2}
-tar zxf %{SOURCE3}
-tar zxf %{SOURCE4}
-tar zxf %{SOURCE5}
-tar zxf %{SOURCE6}
-tar zxf %{SOURCE7}
-tar zxf %{SOURCE8}
+tar zxf %{SOURCE2} -C %{_builddir}/
+tar zxf %{SOURCE3} -C %{_builddir}/
+tar zxf %{SOURCE4} -C %{_builddir}/
+tar zxf %{SOURCE5} -C %{_builddir}/
+tar zxf %{SOURCE6} -C %{_builddir}/
+tar zxf %{SOURCE7} -C %{_builddir}/
+tar zxf %{SOURCE8} -C %{_builddir}/
 
 
 %install
