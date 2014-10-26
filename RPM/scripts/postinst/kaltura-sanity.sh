@@ -149,11 +149,13 @@ RC=$?
 END=`date +%s.%N`
 report "check_admin_console_index_page" $RC "$MSG" "`bc <<< $END-$START`"
 
-START=`date +%s.%N`
-MSG=`check_studio_index_page`
-RC=$?
-END=`date +%s.%N`
-report "check_studio_index_page" $RC "$MSG" "`bc <<< $END-$START`"
+if rpm -q kaltura-html5lib >/dev/null 2>&1 ;then
+	START=`date +%s.%N`
+	MSG=`check_studio_index_page`
+	RC=$?
+	END=`date +%s.%N`
+	report "check_studio_index_page" $RC "$MSG" "`bc <<< $END-$START`"
+fi
 
 ADMIN_PARTNER_SECRET=`echo "select admin_secret from partner where id=-2" | mysql -N -h $DB1_HOST -p$DB1_PASS $DB1_NAME -u$DB1_USER  -P$DB1_PORT`
 NOW=`date +%d-%H-%m-%S`

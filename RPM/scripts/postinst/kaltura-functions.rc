@@ -28,6 +28,15 @@ ALL_DAEMONS="$APACHE_DAEMON $SPHINX_DAEMON $BATCH_DAEMON $MONIT_DAEMON $MEMCACHE
 POST_INST_MAIL_SUBJECT='Your new Kaltura server is up! and 6 Quick Tips For Smooth Kaltura Maintenance'
 POST_INST_MAIL_TMPL=$BASE_DIR/app/configurations/post_inst_mail
 
+ANALYTICS_SERVER_URI="http://installytics.kaltura.org/report"
+NEWSLETTER_URL="https://agentcontribs.kaltura.org/newsletter_subscribe.php"
+NEWSLETTER_MSG="
+To keep up with the bi-weekly Kaltura releases, and stay up to date with 
+the latest news, security and bug updates, and connect with the global
+Kaltura community - sign up for our regular Kaltura Community updates.
+Please enter your email to sign up, or enter NO to pass.
+"
+
 call_base_config()
 {
 
@@ -187,7 +196,6 @@ send_install_becon()
 		ERR_LINE=$4
 	fi
 	#echo $ERR_LINE 
-	ANALYTICS_SERVER_URI="http://installytics.kaltura.org/report"
         RC_FILE=/etc/kaltura.d/system.ini
         if [ -r "$RC_FILE" ];then
         	. $RC_FILE
@@ -280,6 +288,27 @@ get_tracking_consent()
 	. $CONSENT_FILE
 }
 
+get_newsletter_consent()
+{
+	echo -en "${BRIGHT_BLUE}$NEWSLETTER_MSG
+	
+
+[Email\NO]:${NORMAL}"
+
+	if [ -z CONTACT_MAIL ];then
+		CONTACT_MAIL="mailhere"
+	fi
+	read -e CONTACT_MAIL
+	while [ "$CONTACT_MAIL" != "NO" ];do
+		if validate_mail "$CONTACT_MAIL";then
+			curl "$NEWSLETTER_URL?email=$CONTACT_MAIL"
+			export CONTACT_MAIL
+			return 0
+		fi	
+		echo "Please input a valid mail address or 'NO'"
+		read -e CONTACT_MAIL
+	done
+}
 check_if_upgrade()
 {
 	trap - ERR

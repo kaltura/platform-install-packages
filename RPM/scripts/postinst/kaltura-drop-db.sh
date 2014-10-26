@@ -34,6 +34,8 @@ on $DB1_HOST
 ${BRIGHT_RED}
 NOTE: this is not reversible. 
 It is recommended you also back up the current data using mysqldump before continuing.
+You can use /opt/kaltura/bin/kaltura-export-db.sh to export the data.
+
 Are you absolutely certain you want this? [n/Y]
 ${NORMAL}
 "
