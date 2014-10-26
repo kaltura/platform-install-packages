@@ -75,8 +75,8 @@ KMC_DOC_URI="https://github.com/kaltura/kmc-docs/archive/$KMC_DOC_VERSION.zip"
 
 # Kaltura KDP3:
 # we bundle a few vers at each release:
-KDP3_VERSION="v3.9.9"
-KDP3_URI="https://github.com/kaltura/kdp/releases/download/$KDP3_VERSION/$KDP3_VERSION.zip"
+KDP3_VERSIONS="v3.9.7 v3.9.8 v3.9.9"
+KDP3_BASE_URI="https://github.com/kaltura/kdp/releases/download/"
 KDP3_UICONF_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalsource/uiconf/kaltura/kmc/appstudio/kdp3"
 KDP3_RPM_NAME="kaltura-kdp3"
 

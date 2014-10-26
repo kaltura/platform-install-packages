@@ -26,6 +26,8 @@ if [ ! -x `which wget 2>/dev/null` ];then
 	exit 2
 fi
 mkdir -p $RPM_SOURCES_DIR/$KDP3_RPM_NAME
-wget $KDP3_URI -O$RPM_SOURCES_DIR/$KDP3_RPM_NAME-$KDP3_VERSION.zip
-echo "Packaged into $RPM_SOURCES_DIR/$KDP3_RPM_NAME-$KDP3_VERSION.zip"
+for KDP3_VERSION in $KDP3_VERSIONS;do
+	wget $KDP3_BASE_URI/$KDP3_VERSION/$KDP3_VERSION.zip -O$RPM_SOURCES_DIR/$KDP3_RPM_NAME-$KDP3_VERSION.zip
+	echo "Packaged into $RPM_SOURCES_DIR/$KDP3_RPM_NAME-$KDP3_VERSION.zip"
+done
 rpmbuild -ba $RPM_SPECS_DIR/$KDP3_RPM_NAME.spec
