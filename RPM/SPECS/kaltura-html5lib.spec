@@ -40,6 +40,9 @@ tar zxf %{SOURCE2}
 tar zxf %{SOURCE3}
 tar zxf %{SOURCE4}
 tar zxf %{SOURCE5}
+tar zxf %{SOURCE6}
+tar zxf %{SOURCE7}
+tar zxf %{SOURCE8}
 
 
 %install
