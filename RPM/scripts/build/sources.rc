@@ -150,8 +150,8 @@ FLEX_WRAPPER_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/flash/
 FLEX_WRAPPER_RPM_NAME="kaltura-flexwrapper"
 
 # HTML5 lib
-HTML5LIB_VERSION="v2.18.5"
-HTML5LIB_URI="https://github.com/kaltura/mwEmbed/tarball/$HTML5LIB_VERSION"
+HTML5LIB_VERSIONS="v2.1.1 v2.3 v2.4 v2.6 v2.9 v2.14 v2.15 v2.18.5"
+HTML5LIB_BASE_URI="https://github.com/kaltura/mwEmbed/tarball/"
 HTML5LIB_RPM_NAME="kaltura-html5lib"
 
 # Kaltura DWH
