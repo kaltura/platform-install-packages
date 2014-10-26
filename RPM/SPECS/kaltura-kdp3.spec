@@ -30,9 +30,10 @@ This package installs the KDP Flash player.
 
 %prep
 %setup -qn %{version} 
+cd %{_builddir}
 unzip -qn %{SOURCE2} 
 unzip -qn %{SOURCE3} 
-
+cd -
 %build
 
 %install
