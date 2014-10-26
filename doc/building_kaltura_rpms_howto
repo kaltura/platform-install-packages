@@ -31,6 +31,18 @@ platform-install-packages/RPM/scripts/build dir
 sources.rc - this file has the ENV vars needed for building from sources. When versions of components are upgraded, they should be modified there.
 package_*.sh - each component has a wrapper script that fetches the sources from the needed version and packages them so that the RPM can be built.
 
+You will need to edit sources.rc and change:
+PACKAGER_NAME=""
+PACKAGER_MAIL=""
+SVN_USER=""
+
+You may also change these two although defaults should be fine:
+TMP_DIR=/tmp
+SOURCE_PACKAGING_DIR=~/sources
+
+And of course:
+$ mkdir $SOURCE_PACKAGING_DIR
+
 Utility scripts
 ===============
 push_rpm.sh - scp the RPM to repo origin and sign it over SSH, then, generate meta data with create repo
