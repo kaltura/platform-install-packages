@@ -174,10 +174,10 @@ WARNING: self signed cerificate detected. Will set settings.clientConfig.verifyS
 		echo -e "settings.clientConfig.verifySSL=0" >> $APP_DIR/configurations/admin.ini
 		sed -i  's@\(\[production\]\)@\1\nsettings.clientConfig.verifySSL=0@' $APP_DIR/configurations/admin.ini
 	fi
-	#if [ -f /etc/httpd/conf.d/ssl.conf ];then
-	#	echo "Moving /etc/httpd/conf.d/ssl.conf to /etc/httpd/conf.d/ssl.conf.ks.bak."
-	#	mv /etc/httpd/conf.d/ssl.conf /etc/httpd/conf.d/ssl.conf.ks.bak
-	#fi
+	if [ -f /etc/httpd/conf.d/ssl.conf ];then
+		echo "Moving /etc/httpd/conf.d/ssl.conf to /etc/httpd/conf.d/ssl.conf.ks.bak."
+		mv /etc/httpd/conf.d/ssl.conf /etc/httpd/conf.d/ssl.conf.ks.bak
+	fi
 	sed "s#@SSL_CERTIFICATE_FILE@#$CRT_FILE#g" -i $MAIN_APACHE_CONF
 	sed -i "s#@SSL_CERTIFICATE_KEY_FILE@#$KEY_FILE#g" $MAIN_APACHE_CONF
 	if [ -r "$CHAIN_FILE" ];then
