@@ -48,13 +48,13 @@ if [ ! -r "$RC_FILE" ];then
 fi
 . $RC_FILE
 trap - ERR
-send_install_becon `basename $0` $ZONE install_start 
+send_install_becon `basename $0` $ZONE install_start 0 
 TABLES=`echo "show tables" | mysql -h$DWH_HOST -u$SUPER_USER -p$SUPER_USER_PASSWD -P$DWH_PORT kalturadw 2> /dev/null`
 if [ -z "$TABLES" ];then 
 	echo -e "${CYAN}Deploying analytics warehouse DB, please be patient as this may take a while...
 Output is logged to $BASE_DIR/dwh/logs/dwh_setup.log.${NORMAL}
 "
-	trap 'my_trap_handler ${LINENO} ${$?}' ERR
+	trap 'my_trap_handler "${LINENO}" ${$?}' ERR
 	$BASE_DIR/dwh/setup/dwh_setup.sh -u$SUPER_USER -k $BASE_DIR/pentaho/pdi/ -d$BASE_DIR/dwh -h$DWH_HOST -P$DWH_PORT -p$SUPER_USER_PASSWD | tee $BASE_DIR/dwh/logs/dwh_setup.log
 else
 cat << EOF
@@ -71,4 +71,4 @@ if [ -n "$LATEST_JAVA" ];then
 	alternatives --install /usr/bin/java java $LATEST_JAVA/bin/java  20000
 fi
 echo -e "${CYAN}DWH configured.${NORMAL}"
-send_install_becon `basename $0` $ZONE install_success 
+send_install_becon `basename $0` $ZONE install_success 0 

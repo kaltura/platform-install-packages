@@ -44,8 +44,8 @@ if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
 	exit 3
 fi
 . $KALTURA_FUNCTIONS_RC
-trap 'my_trap_handler ${LINENO} ${$?}' ERR
-send_install_becon `basename $0` $ZONE install_start 
+trap 'my_trap_handler "${LINENO}" ${$?}' ERR
+send_install_becon `basename $0` $ZONE install_start 0 
 
 MYSQL_HOST=$1
 MYSQL_SUPER_USER=$2
@@ -106,7 +106,7 @@ EOF
 			exit 5
 		fi
 	fi 
-trap 'my_trap_handler ${LINENO} ${$?}' ERR
+trap 'my_trap_handler "${LINENO}" ${$?}' ERR
 
 	# this is the DB creation part, we want to exit if something fails here:
 	set -e
@@ -186,4 +186,4 @@ if [ "$DB1_HOST" = `hostname` -o "$DB1_HOST" = '127.0.0.1' -o "$DB1_HOST" = 'loc
 	/etc/init.d/kaltura-monit stop >> /dev/null 2>&1
 	/etc/init.d/kaltura-monit restart
 fi
-send_install_becon `basename $0` $ZONE install_success 
+send_install_becon `basename $0` $ZONE install_success 0 

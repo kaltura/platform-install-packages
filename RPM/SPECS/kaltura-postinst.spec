@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.20
-Release: 7
+Release: 9
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -81,6 +81,12 @@ fi
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Thu Oct 30 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.20-9
+- Fixes for Analytics.
+
+* Mon Oct 27 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.20-8
+- Added reconversion of entry to sanity.
+
 * Sun Oct 26 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.20-6
 - Call for Marketo takes a few sec to complete - added a message.
 

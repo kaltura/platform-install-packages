@@ -31,7 +31,7 @@ verify_user_input()
                 $VALS
                 "
                 echo -en "${BRIGHT_RED}$OUT${NORMAL}\n"
-                send_install_becon kaltura-base $ZONE "install_fail: $OUT"
+                send_install_becon kaltura-base $ZONE "install_fail"  "$OUT"
                 exit $RC 
         fi
 }
@@ -77,7 +77,8 @@ And re-run:
 ${NORMAL}"
         exit 0 
 fi
-trap 'my_trap_handler ${LINENO} ${$?}' ERR
+trap 'my_trap_handler "${LINENO}" ${$?}' ERR
+send_install_becon `basename $0` $ZONE install_start 0
 BASE_DIR=/opt/kaltura
 LOCALHOST=127.0.0.1
 DISPLAY_NAME="Kaltura Server `rpm -q kaltura-base --queryformat %{version}`"
@@ -445,7 +446,7 @@ fi
 
 
 echo -e "${BRIGHT_BLUE}Configuration of $DISPLAY_NAME finished successfully!${NORMAL}"
-send_install_becon `basename $0` $ZONE install_success
+send_install_becon `basename $0` $ZONE install_success 0
 write_last_base_version
 #if [ -x /etc/init.d/httpd ];then
 #	service httpd reload

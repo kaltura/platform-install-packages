@@ -45,8 +45,8 @@ else
 ${NORMAL}
 "
 fi
-trap 'my_trap_handler ${LINENO} ${$?}' ERR
-send_install_becon `basename $0` $ZONE install_start 
+trap 'my_trap_handler "${LINENO}" ${$?}' ERR
+send_install_becon `basename $0` $ZONE install_start 0 
 CONFIG_DIR=/opt/kaltura/app/configurations
 if [ -r $CONFIG_DIR/system.ini ];then
 	. $CONFIG_DIR/system.ini
@@ -94,4 +94,4 @@ ln -sf $BASE_DIR/app/configurations/monit/monit.avail/batch.rc $BASE_DIR/app/con
 ln -sf $BASE_DIR/app/configurations/monit/monit.avail/httpd.rc $BASE_DIR/app/configurations/monit/monit.d/enabled.httpd.rc
 /etc/init.d/kaltura-monit stop >> /dev/null 2>&1
 /etc/init.d/kaltura-monit start
-send_install_becon `basename $0` $ZONE install_success 
+send_install_becon `basename $0` $ZONE install_success 0 
