@@ -9,7 +9,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 9.19.5
+Version: 9.19.6
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -294,6 +294,15 @@ fi
 
 
 %changelog
+* Sun Nov 2 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.19.6-1
+- Ver Bounce to 9.19.6
+- PLAT-1735 - Security checks missing in flavorAsset.getDownloadUrl
+- PLAT-1965 - preventing useless AsyncDelete jobs creation
+- SUP-2767 - The peak usage Summary usage totals are wrong in Multiacct Admin
+- SUP-2935 - Remove Kaltura from being automatically added to the whitelisted domains
+- PLAT-934 - Bulk-download job stuck if no source or source not 'ready' & no conversion
+- PLAT-1973 - search media by user first name, last name, screen name 
+
 * Sat Oct 18 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.19.5-1
 - Ver Bounce to 9.19.5
 - PLAT-1897 - Enable users to play-out the remaining DVR even with recording disabled

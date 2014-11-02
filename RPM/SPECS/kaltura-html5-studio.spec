@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5-studio
-Version: v1.8.1
+Version: v1.9
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -51,6 +51,9 @@ rm -rf %{buildroot}
 %{prefix}/apps/studio/%{version}
 
 %changelog
+* Sun Nov 2 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v1.9-1
+- FEC-2049 - Send a notification of an error when the s_code in omniture fails to load
+
 * Sun Sep 21 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v1.8-1
 - Bouncing.
 

@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.18.5
+Version: v2.20
 Release: 1
 Epoch:0 
 License: AGPLv3+
@@ -78,7 +78,19 @@ rm -rf %{buildroot}
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
-* Sun Sep 21 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.18.5
+* Sun Nov 2 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.20-1
+- FEC-1012 - Player v2: Playlist component support
+- FEC-1837 - Add disable mouse hover controls during ad playback controls
+- SUP-2317 - Preferred downloaded flavor for download button doesn't persist from V1 to V2
+- SUP-2549 - V2 player stuck when "adBlock" is enabled | VAST plugin
+- SUP-2802 - Download specific flavor v2 player
+- SUP-2833 - Enable initial playlist player poster and disable between videos
+- SUP-3038 - autoMute flashvar doesn't always work
+- SUP-2841 - V2 LiveRail Countdown Timer Non-Functiona
+- SUP-2549 - V2 player stuck when "adBlock" is enabled | VAST plugin
+
+
+* Sun Sep 21 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.18.5-1
 - ver bounce.
 
 * Sun Aug 3 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.15-1
