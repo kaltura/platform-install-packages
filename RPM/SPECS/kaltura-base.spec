@@ -10,7 +10,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 9.19.6
-Release: 1
+Release: 2
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -214,10 +214,10 @@ if [ "$1" = 2 ];then
 	if [ -r "%{prefix}/app/configurations/local.ini" -a -r "%{prefix}/app/configurations/base.ini" ];then
 		sed -i "s@^\(kaltura_version\).*@\1 = %{version}@g" %{prefix}/app/configurations/local.ini
 		echo "Regenarating client libs.. this will take up to 2 minutes to complete."
-		rm -rf %{prefix}/app/cache/*
 		if %{_sysconfdir}/init.d/httpd status;then
 			/etc/init.d/httpd stop
 		fi
+		rm -rf %{prefix}/app/cache/*
 		php %{prefix}/app/generator/generate.php
 		find %{prefix}/app/cache/ %{prefix}/log -type d -exec chmod 775 {} \;
 		find %{prefix}/app/cache/ %{prefix}/log -type f -exec chmod 664 {} \;

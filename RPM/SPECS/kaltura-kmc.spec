@@ -1,7 +1,7 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmc	
 Version: v5.37.27
-Release: 1
+Release: 2
 Summary: Kaltura Management Console
 
 Group: System Management	
@@ -81,6 +81,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sun Nov 2 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.27-2
+- Bounce HTML5 lib ver in config.ini to v2.20.
+
 * Sun Oct 5 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.27-1
 - PLAT-1681 - KMC- Manual livestream entry has "hdnetworkmanifest" livestream configuration though no HDS url was configured
 - SUP-2392 - Disable editing of existing webvtt captions as well as not allow adding new ones (was "Webvtt upload from the KMC is not working")

@@ -48,7 +48,7 @@ Utility scripts
 push_rpm.sh - scp the RPM to repo origin and sign it over SSH, then, generate meta data with create repo
 bounce_core_ver.sh
 
-Biweekly deployment instructions
+Deployment instructions
 ================================
 Each deployment has instructions here:
 https://kaltura.atlassian.net/wiki/display/QAC/QA.Core+Production+Deployments
