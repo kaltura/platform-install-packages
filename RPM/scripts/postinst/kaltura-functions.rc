@@ -200,10 +200,31 @@ send_install_becon()
         if [ -r "$RC_FILE" ];then
         	. $RC_FILE
 	fi
-        BLKID=`blkid`
-        MACHINE_ID=`echo -n $BLKID | md5sum|awk -F " " '{print $1}'`
-        EPOCH=`date +%s`
-        INSTALL_ID=`echo $BLKID : $EPOCH | md5sum|awk -F " " '{print $1}'`
+	if which dmidecode >/dev/null 2>&1;then
+                UNIQ=`dmidecode -t 4`
+		# if it failed fallback to blkid
+			if [ $? -ne 0 ];then
+			    UNIQ=`blkid`
+			fi
+		# if it failed this way [still returns 0] then fallback
+			if echo $UNIQ |grep -q "No SMBIOS nor DMI entry";then
+				UNIQ=`blkid`
+			fi
+	# if the dmidecode is not installed..
+        elif which blkid >/dev/null 2>&1;then
+                UNIQ=`blkid`
+        fi
+
+        if [ -n "$UNIQ" ];then
+                MACHINE_ID=`echo -n $UNIQ | md5sum|awk -F " " '{print $1}'`
+                EPOCH=`date +%s`
+                INSTALL_ID=`echo $UNIQ : $EPOCH | md5sum|awk -F " " '{print $1}'`
+	# if, despite our efforts we got no uniq ID...
+        else
+                MACHINE_ID="did_not_find_blkid_or_dmidecode"
+                INSTALL_ID="did_not_find_blkid_or_dmidecode"
+        fi
+
 	#set -x
 
 	if  echo $SERVICE_URL | grep -q 'https://' ;then
