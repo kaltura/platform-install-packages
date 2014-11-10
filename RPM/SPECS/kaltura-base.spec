@@ -215,7 +215,10 @@ if [ "$1" = 2 ];then
 		sed -i "s@^\(kaltura_version\).*@\1 = %{version}@g" %{prefix}/app/configurations/local.ini
 		echo "Regenarating client libs.. this will take up to 2 minutes to complete."
 		if %{_sysconfdir}/init.d/httpd status;then
-			/etc/init.d/httpd stop
+			%{_sysconfdir}/init.d/httpd stop
+		fi
+		if %{_sysconfdir}/init.d/kaltura-sphinx status;then
+			%{_sysconfdir}/init.d/kaltura-sphinx stop
 		fi
 		rm -rf %{prefix}/app/cache/*
 		php %{prefix}/app/generator/generate.php

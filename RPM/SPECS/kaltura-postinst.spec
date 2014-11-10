@@ -1,8 +1,8 @@
 %define prefix /opt/kaltura 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
-Version: 1.0.20
-Release: 9
+Version: 1.0.21
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -81,6 +81,13 @@ fi
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Tue Nov 4 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.21-1
+- Installytics moved to MySQL so curl call for reporting changed some
+- Added subscribed_for_ce_updates to the report
+
+* Mon Nov 3 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.20-10
+- Try to use dmidecode to generate uniq machine ID, if it exists..
+
 * Thu Oct 30 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.20-9
 - Fixes for Analytics.
 

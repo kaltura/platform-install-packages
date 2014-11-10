@@ -188,8 +188,8 @@ send_install_becon()
 	fi
 	#echo sending becobeep
         ROLE=$1
-        ACTION=$3
 	TIMEZONE=$2
+        ACTION=$3
 	ERR_LINE=$ACTION
 
 	if [ -n $4 ];then
@@ -241,7 +241,13 @@ send_install_becon()
 	else
 		RELEASE=`head -1 /etc/issue |sed "s#\s#_#g"`
 	fi
+	if [ -n "$GET_UPDATES_NEWSLETTER" ];then
+		SUBSCRIBE4UPDATES=1
+	else
+		SUBSCRIBE4UPDATES=0
+	fi
 	curl -i -X POST -H 'Content-Type: application/json' -d '{"event_type": "'$ACTION'", "server_role": "'$ROLE'", "user_email": "'$CONTACT_MAIL'", "machine_id": "'$MACHINE_ID'", "installation_id": "'$INSTALL_ID'", "timestamp": "'$EPOCH'", "kernel_version": "'`uname -r`'", "machine_arch": "'`uname -m`'","linux_flavor":"'$RELEASE'","is_ssl": "'$IS_SSL'", "service_url": "'$SERVICE_URL'","install_err_line": "'$ERR_LINE'","timezone": "'$TIMEZONE'","package_type":"rpm","kaltura_version": "'`rpm -qa kaltura-base --queryformat %{version}`'","package_revision": "'`rpm -qa kaltura-base --queryformat %{release}`'"}' $ANALYTICS_SERVER_URI &>/dev/null
+	 curl --data "event_type=$ACTION&server_role=$ROLE&user_email=$CONTACT_MAIL&machine_id=$MACHINE_ID&installation_id=$INSTALL_ID&timestamp=`date +%s`&kernel_version=`uname -r`&machine_arch=`uname -m`&linux_flavor=$RELEASE&service_url=$SERVICE_URL&install_err_line=$ERR_LINE&timezone=$TIMEZONE&package_type=rpm&kaltura_version=`rpm -qa kaltura-base --queryformat %{version}`&package_revision=`rpm -qa kaltura-base --queryformat %{release}`&subscribed_for_ce_updates=$SUBSCRIBE4UPDATES" https://installytics.kaltura.org/report/add_rec.php 
 
 #	set +x
 	trap 'my_trap_handler ${LINENO} ${$?}' ERR
@@ -324,6 +330,7 @@ get_newsletter_consent()
 		if validate_mail "$CONTACT_MAIL";then
 			echo -e "${BRIGHT_BLUE}Registering for the newsletter... this will take a few seconds.${NORMAL}"
 			curl "$NEWSLETTER_URL?email=$CONTACT_MAIL"
+			echo "GET_UPDATES_NEWSLETTER=$CONTACT_MAIL" >> $CONSENT_FILE
 			export CONTACT_MAIL
 			return 0
 		fi	
