@@ -38,7 +38,7 @@ else
        ZONE="unknown"
 fi  
 OUT="1"
-#send_install_becon `basename $0` $ZONE install_start 
+send_install_becon `basename $0` $ZONE install_start 
 $BASE_DIR/bin/kaltura-base-config.sh "$ANSFILE"
 if [ $? -ne 0 ];then
        echo -e "${BRIGHT_RED}ERROR: $BASE_DIR/bin/kaltura-base-config.sh failed:( You can re-run it when the issue is fixed.${NORMAL}"

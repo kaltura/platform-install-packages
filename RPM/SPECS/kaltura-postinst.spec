@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.21
-Release: 1
+Release: 2
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -81,6 +81,9 @@ fi
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Mon Nov 10 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.21-2
+- Added script to handle the event of Sphinx being added a column
+
 * Tue Nov 4 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.21-1
 - Installytics moved to MySQL so curl call for reporting changed some
 - Added subscribed_for_ce_updates to the report

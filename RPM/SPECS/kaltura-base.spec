@@ -217,9 +217,9 @@ if [ "$1" = 2 ];then
 		if %{_sysconfdir}/init.d/httpd status;then
 			%{_sysconfdir}/init.d/httpd stop
 		fi
-		if %{_sysconfdir}/init.d/kaltura-sphinx status;then
-			%{_sysconfdir}/init.d/kaltura-sphinx stop
-		fi
+		#if %{_sysconfdir}/init.d/kaltura-sphinx status;then
+		#	%{_sysconfdir}/init.d/kaltura-sphinx stop
+		#fi
 		rm -rf %{prefix}/app/cache/*
 		php %{prefix}/app/generator/generate.php
 		find %{prefix}/app/cache/ %{prefix}/log -type d -exec chmod 775 {} \;

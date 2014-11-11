@@ -28,11 +28,19 @@ if [ ! -r "$RC_FILE" ];then
 	exit 1 
 fi
 . $RC_FILE
-if /etc/init.d/kaltura-sphinx status
-	# disable Sphinx's monit monitoring
-	rm $APP_DIR/app/configurations/monit/monit.d/enabled.sphinx.rc 
-	/etc/init.d/kaltura-sphinx stop
+if [ -r $APP_DIR/configurations/sphinx_conf_changed ];then
+	if /etc/init.d/kaltura-sphinx status;then
+		# disable Sphinx's monit monitoring
+		rm $APP_DIR/configurations/monit/monit.d/enabled.sphinx.rc 
+		/etc/init.d/kaltura-sphinx stop
+	fi
+	rm $BASE_DIR/sphinx/kaltura_*  $LOG_DIR/sphinx/data/binlog.*
+	/etc/init.d/kaltura-sphinx start
+	php $APP_DIR/deployment/base/scripts/populateSphinxEntries.php
+	if [ $? -ne 0 ];then
+
+		echo "Failed to run $APP_DIR/deployment/base/scripts/populateSphinxEntries.php.
+	Please try to run it manually and look at the logs"
+	fi
+	rm $APP_DIR/configurations/sphinx_conf_changed
 fi
-rm $APP_DIR/sphinx/kaltura_*  $LOG_DIR/sphinx/data/binlog.*
-/etc/init.d/kaltura-sphinx start
-php $APP_DIR/deployment/base/scripts/populateSphinxEntries.php
