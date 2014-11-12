@@ -3,7 +3,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
 Version: v2.20
-Release: 1
+Release: 2
 Epoch:0 
 License: AGPLv3+
 Group: Server/Platform 
@@ -16,6 +16,7 @@ Source5: kaltura-html5lib-v2.6.tar.gz
 Source6: kaltura-html5lib-v2.9.tar.gz
 Source7: kaltura-html5lib-v2.14.tar.gz
 Source8: kaltura-html5lib-v2.15.tar.gz
+Source9: kaltura-html5lib-v2.18.5.tar.gz
 URL: https://github.com/kaltura/mwEmbed 
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
@@ -63,6 +64,8 @@ cp -r %{_builddir}/%{name}-v2.14 $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.
 cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.14
 cp -r %{_builddir}/%{name}-v2.15 $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.15
 cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.15
+cp -r %{_builddir}/%{name}-v2.18.5 $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.18.5
+cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.18.5
 
 %clean
 rm -rf %{buildroot}

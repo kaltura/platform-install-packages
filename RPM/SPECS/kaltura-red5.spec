@@ -22,17 +22,23 @@ The Red5 open source Flash server allows you to record and stream video to the F
 %setup -qn red5-server-%{version}-RELEASE
 
 %build
-export LD_LIBRARY_PATH=/usr/lib/jvm/java-1.6.0-openjdk-1.6.0.0.x86_64/lib/amd64/jli
-ant dist-installer
+#export LD_LIBRARY_PATH=/usr/lib/jvm/java-1.6.0-openjdk-1.6.0.0.x86_64/lib/amd64/jli
+#ant dist-installer
 
+mvn dependency:copy-dependencies
+mvn -Dmaven.test.skip=true install
+mvn -Dmaven.test.skip=true -Dmaven.buildNumber.doUpdate=false package
+tar zxf target/red5-server-%{version}-RELEASE-server.tar.gz -C %{_builddir}/usr/lib/
 %install
-rm -rf $RPM_BUILD_ROOT
-make install PREFIX=$RPM_BUILD_ROOT/usr
+#rm -rf $RPM_BUILD_ROOT
+mkdir -p $RPM_BUILD_ROOT/usr/lib/
+mv %{_builddir}/usr/lib/red5-server-%{version}-RELEASE $RPM_BUILD_ROOT/%{red5_lib}
+rm $RPM_BUILD_ROOT/%{red5_lib}/*.bat
 # extra files
 #tar jxf %{SOURCE1}
 #cp -r %{name}-flash-%{version}/demos $RPM_BUILD_ROOT%{red5_lib}/webapps/root/  # recursively install
-install -m 0755 -d $RPM_BUILD_ROOT%{red5_lib}/plugins
-install -m 0755 plugins/* $RPM_BUILD_ROOT%{red5_lib}/plugins
+#install -m 0755 -d $RPM_BUILD_ROOT%{red5_lib}/plugins
+#install -m 0755 plugins/* $RPM_BUILD_ROOT%{red5_lib}/plugins
 install -d $RPM_BUILD_ROOT/etc/rc.d/init.d
 install -m 0755 %{SOURCE2} $RPM_BUILD_ROOT/etc/rc.d/init.d/red5
 install -d $RPM_BUILD_ROOT%{red5_log}
@@ -59,7 +65,8 @@ rm -rf $RPM_BUILD_ROOT
 %config %{red5_lib}/conf/*
 
 %attr(0755,root,root) /etc/rc.d/init.d/red5
-%doc license.txt doc/*
+%doc %{red5_lib}/license.txt 
+
 
 %attr(0755,root,root) %dir %{red5_log}
 
