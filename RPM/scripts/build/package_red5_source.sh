@@ -16,8 +16,12 @@
 
 set -o nounset                              # Treat unset variables as an error
 
-if [ ! -x `which svn 2>/dev/null` ];then
-	echo "Need to install subversion."
+if [ ! -x `which unzip 2>/dev/null` ];then
+	echo "Need to install unzip."
+	exit 2
+fi
+if [ ! -x `which wget 2>/dev/null` ];then
+	echo "Need to install wget."
 	exit 2
 fi
 
@@ -28,16 +32,17 @@ if [ ! -r $SOURCES_RC ];then
 fi
 . $SOURCES_RC 
 cd $SOURCE_PACKAGING_DIR 
-rm -rf $RED5_RPM_PACKAGE_NAME-flash-$RED5_VERSION $RED5_RPM_PACKAGE_NAME-$RED5_VERSION
-svn export $RED5_JAVA_URI $RED5_RPM_PACKAGE_NAME-$RED5_VERSION --force
-svn export $RED5_FLASH_URI $RED5_RPM_PACKAGE_NAME-flash-$RED5_VERSION --force
-tar jcf $RPM_SOURCES_DIR/$RED5_RPM_PACKAGE_NAME-$RED5_VERSION.tar.bz2 $RED5_RPM_PACKAGE_NAME-$RED5_VERSION
-cd $RED5_RPM_PACKAGE_NAME-flash-$RED5_VERSION
-mv deploy demos
-cd ..
-tar jcf $RPM_SOURCES_DIR/$RED5_RPM_PACKAGE_NAME-flash-$RED5_VERSION.tar.bz2 $RED5_RPM_PACKAGE_NAME-flash-$RED5_VERSION
+#rm -rf $RED5_RPM_PACKAGE_NAME-flash-$RED5_VERSION $RED5_RPM_PACKAGE_NAME-$RED5_VERSION
+#svn export $RED5_JAVA_URI $RED5_RPM_PACKAGE_NAME-$RED5_VERSION --force
+#svn export $RED5_FLASH_URI $RED5_RPM_PACKAGE_NAME-flash-$RED5_VERSION --force
+wget $RED5_JAVA_URI -O $RPM_SOURCES_DIR/$RED5_RPM_PACKAGE_NAME-$RED5_VERSION.zip 
+#tar jcf $RPM_SOURCES_DIR/$RED5_RPM_PACKAGE_NAME-$RED5_VERSION.tar.bz2 $RED5_RPM_PACKAGE_NAME-$RED5_VERSION
+#cd $RED5_RPM_PACKAGE_NAME-flash-$RED5_VERSION
+#mv deploy demos
+#cd ..
+#tar jcf $RPM_SOURCES_DIR/$RED5_RPM_PACKAGE_NAME-flash-$RED5_VERSION.tar.bz2 $RED5_RPM_PACKAGE_NAME-flash-$RED5_VERSION
 
-echo "written to: $RPM_SOURCES_DIR/$RED5_RPM_PACKAGE_NAME-$RED5_VERSION.tar.bz2"
-echo "written to: $RPM_SOURCES_DIR/$RED5_RPM_PACKAGE_NAME-flash-$RED5_VERSION.tar.bz2"
+echo "written to: $RPM_SOURCES_DIR/$RED5_RPM_PACKAGE_NAME-$RED5_VERSION.zip"
+#echo "written to: $RPM_SOURCES_DIR/$RED5_RPM_PACKAGE_NAME-flash-$RED5_VERSION.tar.bz2"
 rpmbuild -ba $RPM_SPECS_DIR/$RED5_RPM_PACKAGE_NAME.spec
 

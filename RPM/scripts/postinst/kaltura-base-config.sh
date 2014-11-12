@@ -228,6 +228,14 @@ CDN hostname [${YELLOW}`hostname`${CYAN}]:${NORMAL}"
                 if [ -z "$TIME_ZONE" -a -n "$ZONE" ];then
                         TIME_ZONE="$ZONE"
                 fi
+		trap - ERR
+		php -r "if (timezone_open('$TIME_ZONE') === false){exit(1);}" 2>/dev/null
+		RC=$?
+		trap 'my_trap_handler "${LINENO}" ${$?}' ERR
+		if [ $RC -ne 0 ];then
+			echo -e "${BRIGHT_RED}Bad Timezone value, please check valid options at http://php.net/date.timezone${NORMAL}"
+			unset TIME_ZONE
+		fi
         done
 
 

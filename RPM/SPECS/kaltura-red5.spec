@@ -1,9 +1,9 @@
 Summary: Red5 Server
 Name: kaltura-red5
-Version: 1.0.0
+Version: 1.0.3
 Release: 3 
-Source0: %{name}-%{version}.tar.bz2
-Source1: %{name}-flash-%{version}.tar.bz2
+Source0: %{name}-v%{version}.zip
+#Source1: %{name}-flash-%{version}.tar.bz2
 Source2: red5.init
 License: Apache Software License 2.0
 URL: http://www.red5.org/
@@ -19,7 +19,7 @@ Requires: chkconfig,jre
 The Red5 open source Flash server allows you to record and stream video to the Flash Player.
 
 %prep
-%setup -q
+%setup -qn red5-server-%{version}-RELEASE
 
 %build
 export LD_LIBRARY_PATH=/usr/lib/jvm/java-1.6.0-openjdk-1.6.0.0.x86_64/lib/amd64/jli
@@ -29,8 +29,8 @@ ant dist-installer
 rm -rf $RPM_BUILD_ROOT
 make install PREFIX=$RPM_BUILD_ROOT/usr
 # extra files
-tar jxf %{SOURCE1}
-cp -r %{name}-flash-%{version}/demos $RPM_BUILD_ROOT%{red5_lib}/webapps/root/  # recursively install
+#tar jxf %{SOURCE1}
+#cp -r %{name}-flash-%{version}/demos $RPM_BUILD_ROOT%{red5_lib}/webapps/root/  # recursively install
 install -m 0755 -d $RPM_BUILD_ROOT%{red5_lib}/plugins
 install -m 0755 plugins/* $RPM_BUILD_ROOT%{red5_lib}/plugins
 install -d $RPM_BUILD_ROOT/etc/rc.d/init.d
@@ -79,6 +79,9 @@ if [ "$1" = 0 ]; then
 fi
 
 %changelog
+* Tue Nov 11 2014 Jess Portnoy <jess.portnoy@kaltura.com> 1.0.3-1
+- New ver.
+
 * Wed Feb 19 2014 Jess Portnoy <jess.portnoy@kaltura.com> 1.0.2-1
 - Maybe this version is better? LOVE using RC versions.. sigh.
 
