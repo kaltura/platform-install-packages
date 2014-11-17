@@ -109,7 +109,9 @@ CDN hostname [${YELLOW}`hostname`${CYAN}]:${NORMAL}"
 
         fi
 
-        echo -en "${CYAN}Apache virtual hostname [${YELLOW}`hostname`${CYAN}]:${NORMAL} "
+        echo -e "${CYAN}Apache virtual hostname [${YELLOW}`hostname`${CYAN}]
+(Must be accessible from both inside the machine and from any clients / browsers that will use Kaltura):
+${NORMAL} "
         read -e KALTURA_VIRTUAL_HOST_NAME
         if [ -z "$KALTURA_VIRTUAL_HOST_NAME" ];then
                 KALTURA_VIRTUAL_HOST_NAME=`hostname`
@@ -186,7 +188,9 @@ CDN hostname [${YELLOW}`hostname`${CYAN}]:${NORMAL}"
                 else
                         PROTOCOL="http"
                 fi
-                echo -en "${CYAN}Service URL [${YELLOW}$PROTOCOL://$KALTURA_FULL_VIRTUAL_HOST_NAME${CYAN}]:${NORMAL} "
+                echo -e "${CYAN}Service URL [${YELLOW}$PROTOCOL://$KALTURA_FULL_VIRTUAL_HOST_NAME${CYAN}]
+(Must be accessible from both inside the machine and from any clients / browsers that will use Kaltura):
+${NORMAL} "
                 read -e SERVICE_URL
                 if [ -z "$SERVICE_URL" ];then
                         SERVICE_URL=$PROTOCOL://$KALTURA_FULL_VIRTUAL_HOST_NAME

@@ -9,8 +9,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 9.19.6
-Release: 2
+Version: 9.19.7
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -297,6 +297,9 @@ fi
 
 
 %changelog
+* Mon Nov 17 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.19.7-1
+- Ver Bounce to 9.19.7
+
 * Sun Nov 2 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.19.6-1
 - Ver Bounce to 9.19.6
 - PLAT-1735 - Security checks missing in flavorAsset.getDownloadUrl
