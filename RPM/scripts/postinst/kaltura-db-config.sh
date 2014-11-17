@@ -139,6 +139,15 @@ set +e
 echo "Checking connectivity to needed daemons..."
 if ! check_connectivity $DB1_USER $DB1_PASS $DB1_HOST $DB1_PORT $SPHINX_HOST $SERVICE_URL;then
 	echo -e "${BRIGHT_RED}Please check your setup and then run $0 again.${NORMAL}"
+cat << EOF
+
+Do you wish to remove the existing DB or keep for debugging puropses [n/Y]?
+
+EOF
+	read REMOVE
+	if [ $REMOVE = "Y" ];then
+		`dirname $0`/kaltura-drop-db.sh
+	fi
 	exit 6
 fi
 
