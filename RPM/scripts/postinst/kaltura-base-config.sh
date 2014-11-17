@@ -188,8 +188,8 @@ ${NORMAL} "
                 else
                         PROTOCOL="http"
                 fi
-                echo -e "${CYAN}Service URL [${YELLOW}$PROTOCOL://$KALTURA_FULL_VIRTUAL_HOST_NAME${CYAN}]
-(Must be accessible from both inside the machine and from any clients / browsers that will use Kaltura):
+                echo -e "${CYAN}Your Kaltura Service URL [${YELLOW}$PROTOCOL://$KALTURA_FULL_VIRTUAL_HOST_NAME${CYAN}]
+(Base URL where the Kaltura API and Apps will be accessed from - this would be your Load Balancer URL on a cluster or same as your virtual host in an all-in-one Kaltura server - Must be accessible from both inside the machine and from any clients / browsers that will use Kaltura):
 ${NORMAL} "
                 read -e SERVICE_URL
                 if [ -z "$SERVICE_URL" ];then

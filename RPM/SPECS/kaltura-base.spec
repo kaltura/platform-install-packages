@@ -299,6 +299,14 @@ fi
 %changelog
 * Mon Nov 17 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.19.7-1
 - Ver Bounce to 9.19.7
+- SUP-2768 - Recorded copy of Live Entry stream doesn't retain custom metadata
+- SUP-3144 - Manifest delivery returns HTTP 500 code - Es3
+- PLAT-1952 - Using CloudTranscode transcoding profile - recording entry of live entry shorter than original live entry (in ~11 seconds)
+- PLAT-2021 - Read permissions for Delivery profiles
+- PLAT-2078 - First Entry of the Playlist does not appear as First entry on related video card 
+- PLAT-889 - Support RTP and RTSP Wowza GoCoder ingest
+- SUP-2935 - Remove Kaltura from being automatically added to the whitelisted domains
+- PLAT-2069 - Add sub type for thumb cue point
 
 * Sun Nov 2 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.19.6-1
 - Ver Bounce to 9.19.6

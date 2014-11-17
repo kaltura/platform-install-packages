@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.20
+Version: v2.21
 Release: 2
 Epoch:0 
 License: AGPLv3+
@@ -81,6 +81,14 @@ rm -rf %{buildroot}
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Mon Nov 17 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.21-1
+- SUP-2939 - Request cookies are missing in header 
+- SUP-2423 - Thumbnail in full screen looks bad due to resize
+- SUP-2429 - V2 player, maximize/minimize full screen pause issue
+- SUP-2808 - Set max # of clips for V2 playlist player via UIVar
+- SUP-2926 - Video overlays ads when using "Share"
+- SUP-3044 - Vast overlay ads issue
+
 * Sun Nov 2 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.20-1
 - FEC-1012 - Player v2: Playlist component support
 - FEC-1837 - Add disable mouse hover controls during ad playback controls
