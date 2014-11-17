@@ -17,6 +17,7 @@ Source6: kaltura-html5lib-v2.9.tar.gz
 Source7: kaltura-html5lib-v2.14.tar.gz
 Source8: kaltura-html5lib-v2.15.tar.gz
 Source9: kaltura-html5lib-v2.18.5.tar.gz
+Source10: kaltura-html5lib-v2.20.tar.gz
 URL: https://github.com/kaltura/mwEmbed 
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
@@ -44,6 +45,8 @@ tar zxf %{SOURCE5} -C %{_builddir}/
 tar zxf %{SOURCE6} -C %{_builddir}/
 tar zxf %{SOURCE7} -C %{_builddir}/
 tar zxf %{SOURCE8} -C %{_builddir}/
+tar zxf %{SOURCE9} -C %{_builddir}/
+tar zxf %{SOURCE10} -C %{_builddir}/
 
 
 %install
@@ -66,6 +69,8 @@ cp -r %{_builddir}/%{name}-v2.15 $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.
 cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.15
 cp -r %{_builddir}/%{name}-v2.18.5 $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.18.5
 cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.18.5
+cp -r %{_builddir}/%{name}-v2.20 $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.20
+cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.20
 
 %clean
 rm -rf %{buildroot}
