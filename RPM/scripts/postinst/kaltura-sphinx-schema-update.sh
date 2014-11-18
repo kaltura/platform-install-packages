@@ -28,8 +28,8 @@ if [ ! -r "$RC_FILE" ];then
 	exit 1 
 fi
 . $RC_FILE
-# this if would have been very convenient, however, some users may upgrade from say, 2 versions down and not directly from last so we can't really tell their current status and hence, we should do this each upgrade. Since its CE, the running of this should not take that long anyhow.
-#if [ -r $APP_DIR/configurations/sphinx_conf_changed ];then
+# this is set by the kaltura-base %postinst to note that a schema upgrade is needed
+if [ -r $APP_DIR/configurations/sphinx_schema_update ];then
 	if /etc/init.d/kaltura-sphinx status;then
 		# disable Sphinx's monit monitoring
 		rm $APP_DIR/configurations/monit/monit.d/enabled.sphinx.rc 
@@ -42,10 +42,12 @@ fi
 	/etc/init.d/kaltura-sphinx start
 	ln -sf $APP_DIR/configurations/monit/monit.avail/sphinx.rc $APP_DIR/configurations/monit/monit.d/enabled.sphinx.rc
 	php $APP_DIR/deployment/base/scripts/populateSphinxEntries.php
-	if [ $? -ne 0 ];then
+	RC=$?
+	if [ $RC -ne 0 ];then
 
 		echo "Failed to run $APP_DIR/deployment/base/scripts/populateSphinxEntries.php.
 	Please try to run it manually and look at the logs"
+		exit $RC
 	fi
-	rm $APP_DIR/configurations/sphinx_conf_changed
-#fi
+	rm $APP_DIR/configurations/sphinx_schema_update
+fi

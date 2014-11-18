@@ -14,6 +14,7 @@ Refer to the [Deploying Kaltura Clusters Using Chef](https://github.com/kaltura/
 * [Batch servers](#the-batch)
 * [DWH server](#the-datawarehouse)
 * [Streaming Server](#the-streaming-server)
+* [Upgrade Kaltura](#upgrade-kaltura)
 * [Platform Monitoring](#platform-monitoring)
 * [Backup and Restore](#backup-and-restore-practices)
 
@@ -341,6 +342,32 @@ To install Red5:
 * Run: `# /opt/kaltura/bin/kaltura-red5-config.sh`
 
 Kaltura supports commercial encoders and streaming servers too. For more information about commercial alternatives see [Kaltura Commercial OnPrem Edition™](http://corp.kaltura.com/Deployment-Options/Kaltura-On-Prem-Edition).
+
+### Upgrade Kaltura
+On the first batch or front node only:
+```
+## This operates on the DB and hence only needs to be done one. It requires the kaltura-base package and so must be run on a node that has it installed.
+# /opt/kaltura/bin/kaltura-db-update.sh
+```
+
+
+On front machines:
+```
+# kaltura-base-config.sh [/path/to/ans/file]
+# kaltura-front-config.sh [/path/to/ans/file]
+```
+
+On batch machines:
+```
+# kaltura-base-config.sh [/path/to/ans/file]
+# kaltura-batch-config.sh [/path/to/ans/file]
+```
+
+On sphinx machines:
+```
+# kaltura-base-config.sh [/path/to/ans/file]
+# kaltura-sphinx-config.sh [/path/to/ans/file]
+```
 
 ### Platform Monitoring
 Please refer to the [Setting up Kaltura platform monitoring guide](https://github.com/kaltura/platform-install-packages/blob/master/doc/platform-monitors.md).

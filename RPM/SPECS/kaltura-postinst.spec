@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.21
-Release: 4
+Release: 5
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -81,6 +81,9 @@ fi
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Tue Nov 18 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.21-5
+- Added call to sphinx-schema-upgrade.sh from kaltura-sphinx-config.sh.
+
 * Wed Nov 12 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.21-3
 - Added validation for timezone value.
 

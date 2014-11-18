@@ -52,7 +52,10 @@ if [ ! -r "$RC_FILE" ];then
 	exit 2
 fi
 . $RC_FILE
-
+if [ -r "$APP_DIR/configurations/sphinx_schema_update" ];then
+	`dirname $0`/kaltura-sphinx-schema-update.sh
+	exit $?
+fi
 ln -sf $BASE_DIR/app/configurations/logrotate/kaltura_populate /etc/logrotate.d/
 trap 'my_trap_handler "${LINENO}" ${$?}' ERR
 send_install_becon `basename $0` $ZONE install_start 0 

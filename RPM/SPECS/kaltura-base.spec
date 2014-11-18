@@ -10,7 +10,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 9.19.7
-Release: 1
+Release: 2
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -220,6 +220,8 @@ if [ "$1" = 2 ];then
 		#if %{_sysconfdir}/init.d/kaltura-sphinx status;then
 		#	%{_sysconfdir}/init.d/kaltura-sphinx stop
 		#fi
+		# this is read by kaltura-sphinx-schema-update.sh to determine rather or not to run
+		touch %{prefix}/app/configurations/sphinx_schema_update
 		rm -rf %{prefix}/app/cache/*
 		php %{prefix}/app/generator/generate.php
 		find %{prefix}/app/cache/ %{prefix}/log -type d -exec chmod 775 {} \;
@@ -297,6 +299,9 @@ fi
 
 
 %changelog
+* Tue Nov 18 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.19.7-2
+- Added app/configurations/sphinx_schema_update which is read by kaltura-sphinx-schema-update.sh to determine rather or not to run
+
 * Mon Nov 17 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.19.7-1
 - Ver Bounce to 9.19.7
 - SUP-2768 - Recorded copy of Live Entry stream doesn't retain custom metadata
