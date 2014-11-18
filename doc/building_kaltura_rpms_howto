@@ -106,3 +106,5 @@ one more, no need to repackage for that.
 9. once all RPMs are built, use: 
 $ platform-install-packages/RPM/scripts/build/push_rpm.sh /path/to/rpm
 this will push the RPMs to the origin server using SCP, sign it and generate new metadata with createrepo.
+
+10. run sanity on the test machine using kaltura-sanity.sh and make sure all passes successfully.
