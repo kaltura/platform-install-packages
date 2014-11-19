@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.21
-Release: 5
+Release: 6
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -81,6 +81,9 @@ fi
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Wed Nov 19 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.21-6
+- Until they merge: https://github.com/kaltura/server/pull/1880..
+
 * Tue Nov 18 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.21-5
 - Added call to sphinx-schema-upgrade.sh from kaltura-sphinx-config.sh.
 
