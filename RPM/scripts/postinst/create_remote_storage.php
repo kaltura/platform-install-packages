@@ -65,7 +65,7 @@ try{
 	$delivery->streamerType = KalturaPlaybackProtocol::HTTP;
 	$delivery->systemName = $profile_name;
 	$delivery->url = $delivery_url;
-	$delivery->isDefault = KalturaNullableBoolean::FALSE_VALUE;
+	//$delivery->isDefault = KalturaNullableBoolean::FALSE_VALUE;
 	$delivery_obj=$client->deliveryProfile->add($delivery);
 	if ($protocols[$storage_protocol] === 'S3'){
 		$storageProfile = new KalturaAmazonS3StorageProfile();
