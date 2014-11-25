@@ -20,6 +20,5 @@ responsible for any damage to any computer system or loss of data
 that results from such activities.
 
 Should you encounter any bugs, glitches, lack of functionality or
-other problems on the website, please let us know immediately so we
-can rectify these accordingly. Your help in this regard is greatly
-appreciated.
+other problems, please let us know immediately so we can rectify 
+these accordingly. Your help in this regard is greatly appreciated.
