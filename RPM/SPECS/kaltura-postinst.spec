@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.21
-Release: 8
+Release: 9
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -81,6 +81,9 @@ fi
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Tue Nov 25 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.21-9
+- Init BEGINNERS_TUTORIAL_URL, QUICK_START_GUIDE_URL, FORUMS_URLS outside the interactive block as it applies to silent installs too.
+ 
 * Mon Nov 24 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.21-8
 - escape root's MySQL passwd with ".
 

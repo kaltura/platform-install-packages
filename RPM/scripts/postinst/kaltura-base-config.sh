@@ -83,6 +83,9 @@ BASE_DIR=/opt/kaltura
 LOCALHOST=127.0.0.1
 DISPLAY_NAME="Kaltura Server `rpm -q kaltura-base --queryformat %{version}`"
 KALT_CONF_DIR=$BASE_DIR/app/configurations/
+BEGINNERS_TUTORIAL_URL=http://bit.ly/KalturaUploadMenu
+QUICK_START_GUIDE_URL=http://bit.ly/KalturaKmcManual
+FORUMS_URLS=http://bit.ly/KalturaForums
 echo -e "${CYAN}Welcome to $DISPLAY_NAME post install setup.${NORMAL}"
 
 if [ -n "$1" -a -r "$1" ];then
@@ -267,9 +270,6 @@ ${NORMAL} "
         fi
 
 
-BEGINNERS_TUTORIAL_URL=http://bit.ly/KalturaUploadMenu
-QUICK_START_GUIDE_URL=http://bit.ly/KalturaKmcManual
-FORUMS_URLS=http://bit.ly/KalturaForums
 
 
 
