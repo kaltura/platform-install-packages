@@ -59,4 +59,12 @@ You can also use: `# allkaltlog` (using root), which will dump all the error lin
 This output can be used to analyze past failures but for active debugging use the kaltlog alias.   
 
 
+#### Cannot login to Admin Console
+To manually reset the passwd, following this procedure:
+mysql> select * from user_login_data where login_email='you@mail.com'\G
 
+Then, update sha1_password and salt to read:
+      sha1_password: 44e8c1db328d6d2f64de30a8285fb2a1c9337edb
+               salt: a6a3209b8827759fa4286d87a33f99df
+
+This should reset your passwd to 'admin123!'
