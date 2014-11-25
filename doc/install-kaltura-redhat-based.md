@@ -310,7 +310,7 @@ Your install will now automatically perform all install tasks.
 /opt/kaltura/bin/kaltura-red5-config.sh
 ```
 
-## Note
+## Note about using Wowza as media server
 you can use Wowza as media server instead of Red5. For webcam recording using Wowza, please follow:
 https://github.com/kaltura/media-server/blob/3.0.9/Installation.md#for-webcam-recording-servers
 And then run /opt/kaltura/bin/kaltura-red5-config.sh providing the Wowza IP/hostname.
