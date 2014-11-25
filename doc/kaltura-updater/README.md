@@ -1,5 +1,4 @@
-## Brought to you by VIXY Video. - Boost your online video
-http://www.vixyvideo.nl
+## Kaltura CE 5.x to 9.x Update Scripts
 
 ### This document is still in draft status
 
@@ -22,3 +21,5 @@ that results from such activities.
 Should you encounter any bugs, glitches, lack of functionality or
 other problems, please let us know immediately so we can rectify 
 these accordingly. Your help in this regard is greatly appreciated.
+
+@Author VixyVideo - http://www.vixyvideo.nl
