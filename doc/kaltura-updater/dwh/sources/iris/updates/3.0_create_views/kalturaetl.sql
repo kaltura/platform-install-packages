@@ -1,0 +1,7 @@
+USE `kalturaetl`;
+
+DROP VIEW IF EXISTS `update_step` ;
+DROP TABLE IF EXISTS `update_step`;
+
+CREATE ALGORITHM=UNDEFINED  SQL SECURITY DEFINER VIEW `update_step` AS (select `t`.`NAME` AS `tname`,(case when (`t`.`NAME` = 'Update entries') then 'dwh_dim_entries' when (`t`.`NAME` = 'Update Kusers') then 'dwh_dim_kusers' when (`t`.`NAME` = 'Update Partners') then 'dwh_dim_partners' when (`t`.`NAME` = 'Update UI Conf') then 'dwh_dim_ui_conf' when (`t`.`NAME` = 'Load Partner Activity') then 'dwh_fact_partner_activities' when (`t`.`NAME` = 'Update widget') then 'dwh_dim_widget' end) AS `dw_tn`,(case when (`t`.`NAME` = 'Update entries') then 'entry' when (`t`.`NAME` = 'Update Kusers') then 'kuser' when (`t`.`NAME` = 'Update Partners') then 'partner' when (`t`.`NAME` = 'Update UI Conf') then 'ui_conf' when (`t`.`NAME` = 'Load Partner Activity') then 'partner_activity' when (`t`.`NAME` = 'Update widget') then 'widget' end) AS `o_tn`,`sa`.`NR` AS `nr`,`sa`.`CODE` AS `code`,`sa`.`VALUE_STR` AS `value_str` from ((`r_transformation` `t` join `r_step` `s`) join `r_step_attribute` `sa`) where ((`t`.`NAME` in ('Update Kusers','update entries','Update Partners','Update UI Conf','Update widget','Load Partner Activity')) and (`s`.`ID_TRANSFORMATION` = `t`.`ID_TRANSFORMATION`) and ((`s`.`NAME` = 'Insert / Update') or (`s`.`NAME` = 'Write activities')) and (`s`.`ID_STEP` = `sa`.`ID_STEP`) and (`s`.`ID_TRANSFORMATION` = `sa`.`ID_TRANSFORMATION`) and (`sa`.`CODE` in ('value_name','value_rename','column_name','stream_name'))));
+
