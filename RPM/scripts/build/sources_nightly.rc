@@ -2,7 +2,7 @@
 # sometimes people package their archives in the stupidest way possible. In such cases, they are extracted here, re-assembled in a normal way and move to $RPM_SOURCES_DIR.
 SOURCE_PACKAGING_DIR=~/sources
 RPM_SOURCES_DIR=~/rpmbuild/SOURCES
-RPM_SPECS_DIR=~/rpmbuild/SPECS
+RPM_SPECS_DIR=~/nightly/platform-install-packages/RPM/SPECS
 PACKAGER_NAME="Jess Portnoy"
 PACKAGER_MAIL="jess.portnoy@kaltura.com"
 TMP_DIR=/tmp

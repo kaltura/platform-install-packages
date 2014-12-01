@@ -28,14 +28,15 @@ if [ ! -r $SOURCES_RC ];then
 fi
 . $SOURCES_RC 
 STAMP=`date "+%-a %b %-d %Y"`
-cd $RPM_SPECS_DIR
+BASE_DIR=`dirname $0`
 
-sed -i "s@\(^Version:\)\s*.*\$@\1 $NEWVER@g" kaltura-base.spec kaltura-batch.spec kaltura-front.spec kaltura-release.spec kaltura-server.spec
-sed -i "s@\(^Release:\)\s*.*\$@\1 1@g" kaltura-base.spec kaltura-batch.spec kaltura-front.spec kaltura-release.spec kaltura-server.spec
-sed -i "s^\(%changelog\)^\1\n* $STAMP $PACKAGER_NAME <$PACKAGER_MAIL> - $NEWVER-1\n- Ver Bounce to $NEWVER\n^" kaltura-base.spec kaltura-batch.spec kaltura-front.spec kaltura-release.spec kaltura-server.spec
 
-rpmbuild -ba kaltura-batch.spec
-rpmbuild -ba kaltura-front.spec
-rpmbuild -ba kaltura-release.spec
-rpmbuild -ba kaltura-server.spec
+for i in $RPM_SPECS_DIR/kaltura-batch.spec $RPM_SPECS_DIR/kaltura-front.spec $RPM_SPECS_DIR/kaltura-release.spec $RPM_SPECS_DIR/kaltura-server.spec;do
+	$BASE_DIR/bounce_rpm_ver.sh $i $NEWVER
+	rpmbuild -ba $i
+done
+
+# we run this one of the loop because we don't want to build it yet since we need to manually add the changelog to it.
+# the rest can do with the default "bounce to $VER" message since they'e just meta packages.
+`dirname $0`/bounce_rpm_ver.sh $RPM_SPECS_DIR/kaltura-base.spec $NEWVER
 
