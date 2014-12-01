@@ -57,15 +57,7 @@ The versions should be updated in platform-install-packages/RPM/scripts/build/so
 
 Step by step release process
 ============================
-0. Create the version directory under 54.211.235.142:/var/www/html/releases:
-# mkdir /var/www/html/releases/$CORE_VER/RPMS/noarch
-The x86_64 repo is the same for all versions so no need to clone each time, symlink instead:
-# ln -s /var/www/html/releases/x86_64 /var/www/html/releases/$CORE_VER/RPMS/
-Copy the noarch RPMs that did not change during this release from  /var/www/html/releases/$PREV_CORE_VER/RPMS/noarch, no point in rebuilding them:
-# cp /var/www/html/releases/$PREV_CORE_VER/RPMS/noarch/*rpm /var/www/html/releases/$CORE_VER/RPMS/noarch 
-Generate metadata with:
-# createrepo  /var/www/html/releases/$CORE_VER/RPMS/noarch/
-
+0. run RPM/scripts/build/setrep.sh on the repo server
 
 1. read instructions at: https://kaltura.atlassian.net/wiki/display/QAC/QA.Core+Production+Deployments
 
@@ -108,3 +100,5 @@ $ platform-install-packages/RPM/scripts/build/push_rpm.sh /path/to/rpm
 this will push the RPMs to the origin server using SCP, sign it and generate new metadata with createrepo.
 
 10. run sanity on the test machine using kaltura-sanity.sh and make sure all passes successfully.
+
+11. run RPM/scripts/build/set_stable_rep.sh on the repo machine.
