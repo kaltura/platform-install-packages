@@ -168,4 +168,5 @@ chown -R kaltura.apache $BASE_DIR/app/cache/ $BASE_DIR/log
 chmod 775 $BASE_DIR/web/content
 send_post_inst_msg $ADMIN_CONSOLE_ADMIN_MAIL 
 
+send_install_becon `basename $0` $ZONE install_success 
 
