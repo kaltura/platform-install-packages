@@ -15,12 +15,10 @@
 
 #set -o nounset                              # Treat unset variables as an error
 mkdir -p tmp
-NIGHTLY_V=`curl https://api.github.com/repos/kaltura/server -s |grep default_branch| sed 's/"default_branch":\s*"\(.*\)",/\1/' | sed 's@\s*@@g'`
-wget https://github.com/kaltura/server/archive/$NIGHTLY_V.zip -O /home/jess/rpmbuild/SOURCES/$NIGHTLY_V.zip 
-unzip -j /home/jess/rpmbuild/SOURCES/$NIGHTLY_V.zip server-$NIGHTLY_V/configurations/base.ini -d "tmp/"
-KMC_VER=`grep ^kmc_version tmp/base.ini |awk -F "=" '{print $2}'|sed 's@\s*@@g'`
-KMC_LOGIN_VER=`grep ^kmc_login_version tmp/base.ini |awk -F "=" '{print $2}'|sed 's@\s*@@g'`
-STUDIO_VER=`grep ^studio_version tmp/base.ini|awk -F "=" '{print $2}'|sed 's@\s*@@g'`
-# if kmc_version -ne version in sources.rc
-KMC_BRANCH=`curl https://api.github.com/repos/kaltura/kmc -s |grep default_branch| sed 's/"default_branch":\s*"\(.*\)",/\1/'| sed 's@\s*@@g'`
-
+KALTURA_SERVER_VERSION=`curl https://api.github.com/repos/kaltura/server -s |grep default_branch| sed 's/"default_branch":\s*"\(.*\)",/\1/' | sed 's@\s*@@g'`
+wget https://github.com/kaltura/server/archive/$KALTURA_SERVER_VERSION.zip -O /home/jess/rpmbuild/SOURCES/$CORE_NIGHTLY_V.zip 
+unzip -j /home/jess/rpmbuild/SOURCES/$KALTURA_SERVER_VERSION.zip server-$CORE_NIGHTLY_V/configurations/base.ini -d "tmp/"
+KMC_VERSION=`grep ^kmc_version tmp/base.ini |awk -F "=" '{print $2}'|sed 's@\s*@@g'`
+KMC_LOGIN_VERSION=`grep ^kmc_login_version tmp/base.ini |awk -F "=" '{print $2}'|sed 's@\s*@@g'`
+HTML5_APP_STUDIO_VERSION=`grep ^studio_version tmp/base.ini|awk -F "=" '{print $2}'|sed 's@\s*@@g'`
+HTML5LIB_VERSION=`curl https://api.github.com/repos/kaltura/mwembed -s |grep default_branch| sed 's/"default_branch":\s*"\(.*\)",/\1/' | sed 's@\s*@@g'`
