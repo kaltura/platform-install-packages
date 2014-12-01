@@ -31,6 +31,6 @@ REPO_IP=192.168.70.100
 REPO_PREFIX=/opt/vhosts/repo
 
 scp $BASE_RPM_DIR/$RPM root@$REPO_IP:$REPO_PREFIX/releases/$REPO_VER/RPMS/$SUB_PATH
-ssh root@$REPO_IP rpm --addsign  $REPO_PREFIX/releases/$REPO_VER/RPMS/$SUB_PATH/$RPM
+ssh root@$REPO_IP /usr/local/bin/signrpm.ex  $REPO_PREFIX/releases/$REPO_VER/RPMS/$SUB_PATH/$RPM
 ssh root@$REPO_IP createrepo $REPO_PREFIX/releases/$REPO_VER/RPMS/$SUB_PATH
 
