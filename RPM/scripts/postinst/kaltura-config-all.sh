@@ -76,6 +76,7 @@ if [ $? -ne 0 ];then
        exit 3 
 fi
 #send_install_becon kaltura-sphinx $ZONE install_success 
+trap - ERR
 echo "use kaltura" | mysql -h$DB1_HOST -P$DB1_PORT -u$SUPER_USER -p$SUPER_USER_PASSWD mysql 2> /dev/null
 if [ $? -ne 0 ];then
        echo "

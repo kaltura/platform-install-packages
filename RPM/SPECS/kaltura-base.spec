@@ -9,8 +9,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 9.19.7
-Release: 2
+Version: 9.19.8
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
@@ -299,6 +299,14 @@ fi
 
 
 %changelog
+* Mon Dec 1 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.19.8-1
+- Ver Bounce to 9.19.8
+- PLAT-1112 - LC - Add support for multiple video/audio substreams
+- SUP-2614 - Playlist description is missing from Tiny URL
+- SUP-2792 - Unable to update playlist 'orderBy' field
+- SUP-3152 - Entry is set as "Ready" for corrupted source file
+- PLAT-2080 - playList->execute - apply array manipulation only on manual playlists
+
 * Tue Nov 18 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.19.7-2
 - Added app/configurations/sphinx_schema_update which is read by kaltura-sphinx-schema-update.sh to determine rather or not to run
 

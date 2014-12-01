@@ -1,8 +1,8 @@
 %define prefix /opt/kaltura 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
-Version: 1.0.21
-Release: 9
+Version: 1.0.22
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -81,6 +81,9 @@ fi
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Fri Nov 28 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.22-1
+- Fix for https://github.com/kaltura/platform-install-packages/issues/234
+
 * Tue Nov 25 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.21-9
 - Init BEGINNERS_TUTORIAL_URL, QUICK_START_GUIDE_URL, FORUMS_URLS outside the interactive block as it applies to silent installs too.
  

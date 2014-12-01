@@ -2,8 +2,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.21
-Release: 2
+Version: v2.22
+Release: 1
 Epoch:0 
 License: AGPLv3+
 Group: Server/Platform 
@@ -86,6 +86,15 @@ rm -rf %{buildroot}
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Mon Dec 1 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.22-1
+- SUP-3001 - Pre-roll ads don't show and player freezes on iPad+iOS8+Safari (2.19.5)
+- SUP-3078 - Source Selector display in bitrate instead of pixels when using HDS/Akamai/RTMP delivery
+- SUP-2943 - Long titles wrap and distort elements on the top bar container
+- SUP-3128 - Video thumbnail stretch in the iOS 8 web view and lose it aspect ratio.
+- SUP-3132 - Control Bar Icons are not transparent
+- SUP-3175 - Playlist disappears and full screen icon is incorrect when returning from fullscreen mode
+- FEC-2150 - Buffer underrun should not cause "media not found" message
+
 * Mon Nov 17 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.21-1
 - SUP-2939 - Request cookies are missing in header 
 - SUP-2423 - Thumbnail in full screen looks bad due to resize
