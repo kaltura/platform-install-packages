@@ -10,11 +10,11 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 9.19.8
-Release: 1
+Release: 2
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
-#Source1: kaltura.apache.ssl.conf.template 
+Source1: kaltura.apache.ssl.conf.template 
 Source3: kaltura.apache.conf.template 
 Source4: emails_en.template.ini
 #Source6: 02.Permission.ini
@@ -123,7 +123,7 @@ rm $RPM_BUILD_ROOT%{prefix}/app/configurations/.project
 rm $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.d/*template*
 
 # we bring our own for kaltura-front and kaltura-batch.
-#cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/app/configurations/apache/kaltura.ssl.conf.template
+cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/app/configurations/apache/kaltura.ssl.conf.template
 cp %{SOURCE3} $RPM_BUILD_ROOT%{prefix}/app/configurations/apache/kaltura.conf.template
 cp %{SOURCE4} $RPM_BUILD_ROOT%{prefix}/app/batch/batches/Mailer/emails_en.template.ini
 #cp %{SOURCE6} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_data/02.Permission.ini
