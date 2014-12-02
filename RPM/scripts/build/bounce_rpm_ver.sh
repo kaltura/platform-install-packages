@@ -33,7 +33,7 @@ STAMP=`date "+%-a %b %-d %Y"`
 cd $RPM_SPECS_DIR
 
 sed -i "s@\(^Version:\)\s*.*\$@\1 $NEWVER@g" $SPEC_FILE
-sed -i "s@\(^Release:\)\s*.*\$@\1 1@g" $SPEC_FILE
+sed -i "s@\(^Release:\)\s*.*\$@\1 $NEWREV@g" $SPEC_FILE
 sed -i "s^\(%changelog\)^\1\n* $STAMP $PACKAGER_NAME <$PACKAGER_MAIL> - $NEWVER-$NEWREV\n- Ver Bounce to $NEWVER\n^" $SPEC_FILE
 
 

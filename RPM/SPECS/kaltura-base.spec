@@ -308,6 +308,9 @@ fi
 * Tue Dec 2 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 10.0.0-1
 - Ver Bounce to 10.0.0
 
+* Tue Dec 2 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 10.0.0-1
+- Ver Bounce to 10.0.0
+
 * Mon Dec 1 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.19.8-1
 - Ver Bounce to 9.19.8
 - PLAT-1112 - LC - Add support for multiple video/audio substreams

@@ -81,6 +81,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Tue Dec 2 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.27-5
+- Ver Bounce to v5.37.27
+
 * Tue Dec 2 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.27-1
 - Ver Bounce to v5.37.27
 

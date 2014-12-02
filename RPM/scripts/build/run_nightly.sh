@@ -61,6 +61,8 @@ if [ "$HTML5LIB_VERSION" = "$HTML5LIB_REMOTE_VERSION" ];then
 	HTML5LIB_NEXT_REVISION=`expr $HTML5LIB_REMOTE_REVISION + 1`
 fi
 
+mv ~/.rpmmacros ~/.rpmmacros.stable
+sed -e "s#@KMC_VERSION@#$KMC_VERSION#" -e "s#@KMC_LOGIN_VERSION@#$KMC_LOGIN_VERSION#" -e "s#@HTML5LIB_VERSION@#$HTML5LIB_VERSION#" `dirname $0`/.rpmmacros.tmplt > ~/.rpmmacros  
 
 . `dirname $0`/sources.rc 
 `dirname $0`/bounce_rpm_ver.sh kaltura-kmc.spec $KMC_VERSION $KMC_NEXT_REVISION
