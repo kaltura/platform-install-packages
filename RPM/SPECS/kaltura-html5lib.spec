@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.22
+Version: master
 Release: 1
 Epoch:0 
 License: AGPLv3+
@@ -86,6 +86,18 @@ rm -rf %{buildroot}
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Tue Dec 2 2014 Jess Portnoy <jess.portnoy@kaltura.com> - master-1
+- Ver Bounce to master
+
+* Tue Dec 2 2014 Jess Portnoy <jess.portnoy@kaltura.com> - master-1
+- Ver Bounce to master
+
+* Tue Dec 2 2014 Jess Portnoy <jess.portnoy@kaltura.com> - master-1
+- Ver Bounce to master
+
+* Tue Dec 2 2014 Jess Portnoy <jess.portnoy@kaltura.com> - master-1
+- Ver Bounce to master
+
 * Mon Dec 1 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.22-1
 - SUP-3001 - Pre-roll ads don't show and player freezes on iPad+iOS8+Safari (2.19.5)
 - SUP-3078 - Source Selector display in bitrate instead of pixels when using HDS/Akamai/RTMP delivery

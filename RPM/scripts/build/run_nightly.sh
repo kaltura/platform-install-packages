@@ -25,18 +25,48 @@ fi
 mkdir -p tmp
 RPMS_BASE_DIR=/home/jess/rpmbuild/RPMS
 KALTURA_SERVER_VERSION=`curl https://api.github.com/repos/kaltura/server -s |grep default_branch| sed 's/"default_branch":\s*"\(.*\)",/\1/' | sed 's@\s*@@g'`
+
+# set release [revision] to 1, if the new ver to push is the same as the one we currenly have on the nightly repo, however, then change to current revision + 1 instead.
+KALTURA_SERVER_NEXT_REVISION=1
+sudo yum clean all
+KALTURA_SERVER_REMOTE_VERSION=`yum info kaltura-base | grep Version|awk -F ": " '{print $2}'`
+if [ "$KALTURA_SERVER_VERSION" = "$KALTURA_SERVER_REMOTE_VERSION" ];then
+	KALTURA_SERVER_REMOTE_REVISION=`yum info kaltura-base | grep Release|awk -F ": " '{print $2}'`
+	KALTURA_SERVER_NEXT_REVISION=`expr $KALTURA_SERVER_REMOTE_REVISION + 1`
+fi
 wget https://github.com/kaltura/server/archive/$KALTURA_SERVER_VERSION.zip -O /home/jess/rpmbuild/SOURCES/$KALTURA_SERVER_VERSION.zip 
 unzip -qo -j /home/jess/rpmbuild/SOURCES/$KALTURA_SERVER_VERSION.zip server-$KALTURA_SERVER_VERSION/configurations/base.ini -d "tmp/"
-KMC_VERSION=`grep ^kmc_version tmp/base.ini |awk -F "=" '{print $2}'|sed 's@\s*@@g'`
 KMC_LOGIN_VERSION=`grep ^kmc_login_version tmp/base.ini |awk -F "=" '{print $2}'|sed 's@\s*@@g'`
+KMC_VERSION=`grep ^kmc_version tmp/base.ini |awk -F "=" '{print $2}'|sed 's@\s*@@g'`
+KMC_NEXT_REVISION=1
+KMC_REMOTE_VERSION=`yum info kaltura-kmc | grep Version|awk -F ": " '{print $2}'`
+if [ "$KMC_VERSION" = "$KMC_REMOTE_VERSION" ];then
+	KMC_REMOTE_REVISION=`yum info kaltura-kmc | grep Release|awk -F ": " '{print $2}'`
+	KMC_NEXT_REVISION=`expr $KMC_REMOTE_REVISION + 1`
+fi
+
 HTML5_APP_STUDIO_VERSION=`grep ^studio_version tmp/base.ini|awk -F "=" '{print $2}'|sed 's@\s*@@g'`
+HTML5_APP_STUDIO_NEXT_REVISION=1
+HTML5_APP_STUDIO_REMOTE_VERSION=`yum info kaltura-html5-studio | grep Version|awk -F ": " '{print $2}'`
+if [ "$HTML5_APP_STUDIO_VERSION" = "$HTML5_APP_STUDIO_REMOTE_VERSION" ];then
+	HTML5_APP_STUDIO_REMOTE_REVISION=`yum info kaltura-html5-studio | grep Release|awk -F ": " '{print $2}'`
+	HTML5_APP_STUDIO_NEXT_REVISION=`expr $HTML5_APP_STUDIO_REMOTE_REVISION + 1`
+fi
 HTML5LIB_VERSION=`curl https://api.github.com/repos/kaltura/mwembed -s |grep default_branch| sed 's/"default_branch":\s*"\(.*\)",/\1/' | sed 's@\s*@@g'`
 HTML5LIB_VERSION=v2.22
+HTML5LIB_NEXT_REVISION=1
+HTML5LIB_REMOTE_VERSION=`yum info kaltura-html5lib | grep Version|awk -F ": " '{print $2}'`
+if [ "$HTML5LIB_VERSION" = "$HTML5LIB_REMOTE_VERSION" ];then
+	HTML5LIB_REMOTE_REVISION=`yum info kaltura-html5lib | grep Release|awk -F ": " '{print $2}'`
+	HTML5LIB_NEXT_REVISION=`expr $HTML5LIB_REMOTE_REVISION + 1`
+fi
+
+
 . `dirname $0`/sources.rc 
-`dirname $0`/bounce_rpm_ver.sh kaltura-kmc.spec $KMC_VERSION
-`dirname $0`/bounce_rpm_ver.sh kaltura-html5lib.spec $HTML5LIB_VERSION
-`dirname $0`/bounce_rpm_ver.sh kaltura-html5-studio.spec $HTML5_APP_STUDIO_VERSION
-`dirname $0`/bounce_rpm_ver.sh kaltura-base.spec `echo $KALTURA_SERVER_VERSION|awk -F "-" '{print $2}'`
+`dirname $0`/bounce_rpm_ver.sh kaltura-kmc.spec $KMC_VERSION $KMC_NEXT_REVISION
+`dirname $0`/bounce_rpm_ver.sh kaltura-html5lib.spec $HTML5LIB_VERSION $HTML5LIB_NEXT_REVISION
+`dirname $0`/bounce_rpm_ver.sh kaltura-html5-studio.spec $HTML5_APP_STUDIO_VERSION $HTML5_APP_STUDIO_NEXT_REVISION
+`dirname $0`/bounce_rpm_ver.sh kaltura-base.spec `echo $KALTURA_SERVER_VERSION|awk -F "-" '{print $2}'` $KALTURA_SERVER_NEXT_REVISION
 
 rpmbuild -ba $RPM_SPECS_DIR/kaltura-base.spec
 ~/scripts/push_rpm.sh $RPMS_BASE_DIR/noarch/kaltura-base-$KALTURA_SERVER_VERSION-1.noarch.rpm nightly1

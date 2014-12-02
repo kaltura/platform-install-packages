@@ -9,11 +9,11 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 9.19.8
+Version: 10.0.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
-Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
+Source0: https://github.com/kaltura/server/archive/Jupiter-%{version}.zip 
 #Source1: kaltura.apache.ssl.conf.template 
 Source3: kaltura.apache.conf.template 
 Source4: emails_en.template.ini
@@ -42,7 +42,7 @@ Source26: kaltura_batch.template
 #Source27: kmc1Success.php 
 Source28: embedIframeJsAction.class.php
 
-URL: https://github.com/kaltura/server/tree/IX-%{version}
+URL: https://github.com/kaltura/server/tree/Jupiter-%{version}
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
 Requires: rsync,mysql,kaltura-monit,kaltura-postinst,cronie, php-cli, php-xml, php-curl, php-mysql,php-gd,php-gmp, php-imap, php-ldap,ntp,mailx
@@ -62,7 +62,7 @@ For more information visit: http://corp.kaltura.com, http://www.kaltura.org and 
 This is the base package, needed for any Kaltura server role.
 
 %prep
-%setup -qn server-IX-%{version}
+%setup -qn server-Jupiter-%{version}
 
 
 %install
@@ -103,7 +103,7 @@ project" "*.png" "*.properties" "*.sample" "*.swf" "*.sf" "*.swz" "*.uad" "*.pre
 done
 
 for i in admin_console alpha api_v3 batch configurations deployment generator infra plugins start tests ui_infra var_console vendor;do 
-	mv  %{_builddir}/server-IX-%{version}/$i $RPM_BUILD_ROOT%{prefix}/app
+	mv  %{_builddir}/server-Jupiter-%{version}/$i $RPM_BUILD_ROOT%{prefix}/app
 done
 find  $RPM_BUILD_ROOT%{prefix}/app -name "*.sh" -type f -exec chmod +x {} \;
 
@@ -299,6 +299,15 @@ fi
 
 
 %changelog
+* Tue Dec 2 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 10.0.0-1
+- Ver Bounce to 10.0.0
+
+* Tue Dec 2 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 10.0.0-1
+- Ver Bounce to 10.0.0
+
+* Tue Dec 2 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 10.0.0-1
+- Ver Bounce to 10.0.0
+
 * Mon Dec 1 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.19.8-1
 - Ver Bounce to 9.19.8
 - PLAT-1112 - LC - Add support for multiple video/audio substreams
