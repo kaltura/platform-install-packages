@@ -71,7 +71,7 @@ sed -e "s#@KMC_VERSION@#$KMC_VERSION#" -e "s#@KMC_LOGIN_VERSION@#$KMC_LOGIN_VERS
 `dirname $0`/bounce_rpm_ver.sh kaltura-base.spec `echo $KALTURA_SERVER_VERSION|awk -F "-" '{print $2}'` $KALTURA_SERVER_NEXT_REVISION
 
 rpmbuild -ba $RPM_SPECS_DIR/kaltura-base.spec
-~/scripts/push_rpm.sh $RPMS_BASE_DIR/noarch/kaltura-base-$KALTURA_SERVER_VERSION-1.noarch.rpm nightly1
+~/scripts/push_rpm.sh $RPMS_BASE_DIR/noarch/kaltura-base-$KALTURA_SERVER_VERSION-$KALTURA_SERVER_NEXT_REVISION.noarch.rpm nightly1
 
 svn export --force --quiet $KMC_UICONF_URI $SOURCE_PACKAGING_DIR/$KMC_RPM_NAME-$KMC_VERSION/uiconf/kaltura/kmc
 cd $SOURCE_PACKAGING_DIR
@@ -88,7 +88,7 @@ tar jcf $RPM_SOURCES_DIR/$KMC_RPM_NAME-$KMC_VERSION.tar.bz2 $KMC_RPM_NAME-$KMC_V
 # flash things DO NOT need exec perms.
 echo "Packaged into $RPM_SOURCES_DIR/$KMC_RPM_NAME-$KMC_VERSION.tar.bz2"
 rpmbuild -ba $RPM_SPECS_DIR/$KMC_RPM_NAME.spec
-~/scripts/push_rpm.sh $RPMS_BASE_DIR/noarch/$KMC_RPM_NAME-$KMC_VERSION-1.noarch.rpm nightly1
+~/scripts/push_rpm.sh $RPMS_BASE_DIR/noarch/$KMC_RPM_NAME-$KMC_VERSION-$KMC_NEXT_REVISION.noarch.rpm nightly1
 
 mkdir -p $SOURCE_PACKAGING_DIR/$HTML5_APP_STUDIO_RPM_NAME-$HTML5_APP_STUDIO_VERSION
 rm -rf $SOURCE_PACKAGING_DIR/$HTML5_APP_STUDIO_RPM_NAME-$HTML5_APP_STUDIO_VERSION/*
@@ -100,7 +100,7 @@ cd ../
 tar jcf  $RPM_SOURCES_DIR/$HTML5_APP_STUDIO_RPM_NAME-$HTML5_APP_STUDIO_VERSION.tar.bz2 $HTML5_APP_STUDIO_RPM_NAME-$HTML5_APP_STUDIO_VERSION
 echo "Packaged into $RPM_SOURCES_DIR/$HTML5_APP_STUDIO_RPM_NAME-$HTML5_APP_STUDIO_VERSION.tar.bz2"
 rpmbuild -ba $RPM_SPECS_DIR/$HTML5_APP_STUDIO_RPM_NAME.spec
-~/scripts/push_rpm.sh $RPMS_BASE_DIR/noarch/$HTML5_APP_STUDIO_RPM_NAME-$HTML5_APP_STUDIO_VERSION-1.noarch.rpm nightly1
+~/scripts/push_rpm.sh $RPMS_BASE_DIR/noarch/$HTML5_APP_STUDIO_RPM_NAME-$HTML5_APP_STUDIO_VERSION-$HTML5_APP_STUDIO_NEXT_REVISION.noarch.rpm nightly1
 
 
 HTML5LIB_VERSIONS="$HTML5LIB_VERSIONS $HTML5LIB_VERSION"
@@ -116,4 +116,4 @@ for HTML5LIB_VERSION in $HTML5LIB_VERSIONS;do
 	fi
 done
 rpmbuild -ba $RPM_SPECS_DIR/$HTML5LIB_RPM_NAME.spec
-~/scripts/push_rpm.sh $RPMS_BASE_DIR/noarch/$HTML5LIB_RPM_NAME-$HTML5LIB_VERSION-1.noarch.rpm nightly1
+~/scripts/push_rpm.sh $RPMS_BASE_DIR/noarch/$HTML5LIB_RPM_NAME-$HTML5LIB_VERSION-$HTML5LIB_NEXT_REVISION.noarch.rpm nightly1
