@@ -52,8 +52,9 @@ if [ "$HTML5_APP_STUDIO_VERSION" = "$HTML5_APP_STUDIO_REMOTE_VERSION" ];then
 	HTML5_APP_STUDIO_REMOTE_REVISION=`yum info kaltura-html5-studio | grep Release|awk -F ": " '{print $2}'`
 	HTML5_APP_STUDIO_NEXT_REVISION=`expr $HTML5_APP_STUDIO_REMOTE_REVISION + 1`
 fi
-HTML5LIB_VERSION=`curl https://api.github.com/repos/kaltura/mwembed -s |grep default_branch| sed 's/"default_branch":\s*"\(.*\)",/\1/' | sed 's@\s*@@g'`
-HTML5LIB_VERSION=v2.22
+HTML5LIB_DEFAULT_BRANCH=`curl https://api.github.com/repos/kaltura/mwembed -s |grep default_branch| sed 's/"default_branch":\s*"\(.*\)",/\1/' | sed 's@\s*@@g'`
+wget --no-check-certificate https://github.com/kaltura/mwEmbed/raw/$HTML5LIB_DEFAULT_BRANCH/includes/DefaultSettings.php -O tmp/DefaultSettings.php; 
+HTML5LIB_VERSION="v`grep wgMwEmbedVersion tmp/DefaultSettings.php |sed 's@^\s*$wgMwEmbedVersion\s*=\s*.\([0-9.]*\)..@\1@'`"
 HTML5LIB_NEXT_REVISION=1
 HTML5LIB_REMOTE_VERSION=`yum info kaltura-html5lib | grep Version|awk -F ": " '{print $2}'`
 if [ "$HTML5LIB_VERSION" = "$HTML5LIB_REMOTE_VERSION" ];then
@@ -72,7 +73,7 @@ sed -e "s#@KMC_VERSION@#$KMC_VERSION#" -e "s#@KMC_LOGIN_VERSION@#$KMC_LOGIN_VERS
 
 rpmbuild -ba $RPM_SPECS_DIR/kaltura-base.spec
 ~/scripts/push_rpm.sh $RPMS_BASE_DIR/noarch/kaltura-base-$KALTURA_SERVER_VERSION-$KALTURA_SERVER_NEXT_REVISION.noarch.rpm nightly1
-
+exit
 svn export --force --quiet $KMC_UICONF_URI $SOURCE_PACKAGING_DIR/$KMC_RPM_NAME-$KMC_VERSION/uiconf/kaltura/kmc
 cd $SOURCE_PACKAGING_DIR
 wget $KMC_URI -O $KMC_RPM_NAME-$KMC_VERSION.zip
@@ -117,3 +118,18 @@ for HTML5LIB_VERSION in $HTML5LIB_VERSIONS;do
 done
 rpmbuild -ba $RPM_SPECS_DIR/$HTML5LIB_RPM_NAME.spec
 ~/scripts/push_rpm.sh $RPMS_BASE_DIR/noarch/$HTML5LIB_RPM_NAME-$HTML5LIB_VERSION-$HTML5LIB_NEXT_REVISION.noarch.rpm nightly1
+
+INSTANCE_ID=`start_instances $NFS_IMG 1 $SECURITY_GROUP` 
+while ! get_instance_status $ID ;do 
+	echo "Waiting for instance to init.."
+	sleep 45
+done
+
+. ~/csi/csi.rc
+. ~/csi/csi-functions.rc
+IP=`get_instance_ip $INSTANCE_ID`
+scp -i ~/csi.pem ~/nightly/kaltura-install.sh ec2-user@$IP:/tmp
+ssh -t -i ~/csi.pem ec2-user@$IP sudo bash /tmp/kaltura-install.sh
+INSTANCE_HOSTNAME=`ssh -t -i ~/csi.pem ec2-user@$IP sudo bash /tmp/kaltura-install.sh hostname`
+#ec2-stop-instances $INSTANCE_ID
+scp -i ~/csi.pem ec2-user@$IP:/tmp/$INSTANCE_HOSTNAME-reportme.`date +%d_%m_%Y`.sql /tmp
