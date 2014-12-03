@@ -171,7 +171,7 @@ make %{?_smp_mflags}
 make %{?_smp_mflags}
 
 %install
-#%{__rm} -rf $RPM_BUILD_ROOT
+%{__rm} -rf $RPM_BUILD_ROOT
 %{__make} DESTDIR=$RPM_BUILD_ROOT install
 
 %{__mkdir} -p $RPM_BUILD_ROOT%{_datadir}/nginx
@@ -225,7 +225,7 @@ make %{?_smp_mflags}
    $RPM_BUILD_ROOT%{_sbindir}/nginx.debug
 
 %clean
-#%{__rm} -rf $RPM_BUILD_ROOT
+%{__rm} -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root)
