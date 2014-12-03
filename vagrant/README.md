@@ -4,7 +4,7 @@
 
 Please note that the created server is only meant for development / testing purposes and is **_NOT SECURED_** or performant enough to use for production.
 In order to better secure it: 
-* Please edit vagrant/kaltura-install.sh: comment out the iptables flushing, stopping and disable from init and replace with proper rules
+* Edit vagrant/kaltura-install.sh: comment out the iptables flushing, stopping and disable from init and replace with proper rules
 * Edit vagrant/kaltura-install-config.sh: set proper passwds for MySQL root user and the Kaltura admin user 
 
 #### Installation / Usage guide
