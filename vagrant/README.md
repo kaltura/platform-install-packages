@@ -7,7 +7,7 @@ In order to better secure it:
 * Edit vagrant/kaltura-install.sh: comment out the iptables flushing, stopping and disable from init and replace with proper rules
 * Edit vagrant/kaltura-install-config.sh: set proper passwds for MySQL root user and the Kaltura admin user 
 
-#### Installation / Usage guide
+#### Installation/Usage guide
 
 * [Install Vagrant](https://www.vagrantup.com/downloads.html)
 * [Install VirtualBox](https://www.virtualbox.org/wiki/Downloads) (Other virtual machine providers such as VMWare should work as well but we only tested it with VirtualBox)
