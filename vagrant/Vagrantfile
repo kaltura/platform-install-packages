@@ -5,7 +5,8 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "chef/centos-6.5"
-  config.vm.network "private_network", ip: "192.168.26.26"
+# set this to the IP addr you wish to set on the VM host
+  config.vm.network "private_network", ip: ""
   config.vm.provider "virtualbox" do |v|
     v.memory = 1024
   end

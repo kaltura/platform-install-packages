@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
-# stop on errors
+# exit on errors
 set -e
 source kaltura-install-config.sh
+# flush, stop and disable iptables from init. This for testing purposes ONLY. Make sure to replace with proper FW settings
 iptables -F
 service iptables stop
 chkconfig iptables off
 setenforce permissive
+yum -y clean all
 rpm -ihv --force http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
 yum -y install mysql mysql-server
 service mysqld start
@@ -20,8 +22,9 @@ mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "DELETE FROM mysql.user WHERE User=''"
 mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "DELETE FROM mysql.db WHERE Db='test' OR Db='test\_%'"
 mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "FLUSH PRIVILEGES"
 chkconfig mysqld on
+# if you prefer using a diff MTA, please relace accordingly
+yum install postfix
 service postfix restart
-yum -y clean all
 yum -y install kaltura-server
 /opt/kaltura/bin/kaltura-mysql-settings.sh
 service memcached restart
