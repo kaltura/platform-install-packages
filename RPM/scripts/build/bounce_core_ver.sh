@@ -32,11 +32,11 @@ BASE_DIR=`dirname $0`
 
 
 for i in $RPM_SPECS_DIR/kaltura-batch.spec $RPM_SPECS_DIR/kaltura-front.spec $RPM_SPECS_DIR/kaltura-release.spec $RPM_SPECS_DIR/kaltura-server.spec;do
-	$BASE_DIR/bounce_rpm_ver.sh $i $NEWVER 1
+	$BASE_DIR/bounce_rpm_ver.sh $i $NEWVER 1 "Ver Bounce to $NEWVER"
 	rpmbuild -ba $i
 done
 
 # we run this one of the loop because we don't want to build it yet since we need to manually add the changelog to it.
 # the rest can do with the default "bounce to $VER" message since they'e just meta packages.
-`dirname $0`/bounce_rpm_ver.sh $RPM_SPECS_DIR/kaltura-base.spec $NEWVER 1
+`dirname $0`/bounce_rpm_ver.sh $RPM_SPECS_DIR/kaltura-base.spec $NEWVER 1 "Ver Bounce to $NEWVER"
 
