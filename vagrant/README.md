@@ -2,6 +2,14 @@
 
 [Vagrant](https://www.vagrantup.com/) is a tool to create portable development environments. We provide a Vagrantfile and some shell scripts that allow to leverage that tool to easily create a virtual machine with a fully working Kaltura Server.
 
+#### Common use cases
+
+* You are developing an application which uses Kaltura Server (via the API), the easiest way is to develop your app with Kaltura's SAAS server (you can get a free trial account). However, if you want to work on the airplane or places with limited connectivty you are stuck, using the Vagrant machine you are not dependant on the network at all, everything runs locally from your pc.
+* You are developing an application which requires some special settings or you need to create multiple partners on the Kaltura Server. Using the Vagrant machine you have complete freedom to create partners and change settings.
+* You want to make some changes / develop plugins for the Kaltura Server, or just to debug a problem. Using the vagrant machine you have full acces to the server code and can modify it as you wish.
+
+#### Important notes
+
 Please note that the created server is only meant for development / testing purposes and is **_NOT SECURED_** or performant enough to use for production.
 In order to better secure it: 
 * Edit vagrant/kaltura-install.sh: comment out the iptables flushing, stopping and disable from init and replace with proper rules
