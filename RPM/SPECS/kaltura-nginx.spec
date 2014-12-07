@@ -47,7 +47,7 @@ Requires(pre): pwdutils
 Summary: High performance web server customized for Kaltura VOD
 Name: kaltura-nginx
 Version: 1.6.2
-Release: 1
+Release: 2
 Vendor: Kaltura inc.
 URL: http://nginx.org/
 
@@ -336,6 +336,9 @@ if [ $1 -ge 1 ]; then
 fi
 
 %changelog
+* Sun Dec 7 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.6.2-2
+- Nginx precompiled with https://github.com/kaltura/nginx-vod-module
+
 * Tue Sep 16 2014 Sergey Budnevitch <sb@nginx.com>
 - epoch added to the EPEL7/CentOS7 spec to override EPEL one
 - 1.6.2
