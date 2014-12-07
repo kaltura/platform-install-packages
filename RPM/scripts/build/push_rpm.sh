@@ -4,7 +4,6 @@
 #         USAGE: ./push_rpm.sh 
 #   DESCRIPTION: 
 #       OPTIONS: ---
-# 	LICENSE: AGPLv3+
 #  REQUIREMENTS: ---
 #          BUGS: ---
 #         NOTES: ---
@@ -27,7 +26,11 @@ if echo $RPM|grep -q noarch;then
 else
 	SUB_PATH=x86_64
 fi
-scp $BASE_RPM_DIR/$RPM root@54.211.235.142:/var/www/html/releases/$REPO_VER/RPMS/$SUB_PATH
-ssh root@54.211.235.142 rpm --addsign  /var/www/html/releases/$REPO_VER/RPMS/$SUB_PATH/$RPM
-ssh root@54.211.235.142 createrepo /var/www/html/releases/$REPO_VER/RPMS/$SUB_PATH
+#REPO_IP=54.211.235.142
+REPO_IP=192.168.70.100
+REPO_PREFIX=/opt/vhosts/repo
+
+scp $BASE_RPM_DIR/$RPM root@$REPO_IP:$REPO_PREFIX/releases/$REPO_VER/RPMS/$SUB_PATH
+ssh root@$REPO_IP /usr/local/bin/signrpm.ex  $REPO_PREFIX/releases/$REPO_VER/RPMS/$SUB_PATH/$RPM
+ssh root@$REPO_IP createrepo $REPO_PREFIX/releases/$REPO_VER/RPMS/$SUB_PATH
 
