@@ -1,6 +1,6 @@
 Required RPMS for build
 =======================
-rpm-build gcc gcc-c++ git redhat-rpm-config svn
+rpm-build gcc gcc-c++ git redhat-rpm-config svn wget dos2unix
 
 GIT repo
 ========
