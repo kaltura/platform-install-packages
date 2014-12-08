@@ -75,6 +75,7 @@ BuildRequires: yasm-devel
 BuildRequires: libass-devel 
 BuildRequires: kaltura-x264-devel 
 BuildRequires: openjpeg-devel
+BuildRequires: speex-devel
 Requires:kaltura-a52dec,kaltura-libfaac,kaltura-x264
 
 %description

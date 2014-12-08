@@ -14,6 +14,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildRequires: gettext
 BuildRequires: nasm
 BuildRequires: yasm
+BuildRequires: perl-Digest-MD5-File
 #BuildRequires: kaltura-ffmpeg-devel
 %{?_with_visualize:%{!?_without_modxorg:BuildRequires: libXt-devel}}
 %{?_with_visualize:%{?_without_modxorg:BuildRequires: XFree86-devel}}

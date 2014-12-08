@@ -2,7 +2,7 @@
 Summary: Toolkit for RTMP streams
 Name: kaltura-rtmpdump
 Version: 2.3
-Release: 2 
+Release: 5
 License: GPLv2+
 Group: Applications/Internet
 URL: http://rtmpdump.mplayerhq.hu/
@@ -12,6 +12,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
 BuildRequires: gnutls-devel >= 2.0
 BuildRequires: zlib-devel
+BuildRequires: libgcrypt-devel
 
 %description
 rtmpdump is a toolkit for RTMP streams. All forms of RTMP are supported,
@@ -21,6 +22,7 @@ including rtmp://, rtmpt://, rtmpe://, rtmpte://, and rtmps://.
 Summary: Support library for RTMP streams
 License: LGPLv2+
 Group: Applications/Internet
+Provides: librtmp
 
 %description -n kaltura-librtmp
 librtmp is a suport library for RTMP streams. All forms of RTMP are supported,
@@ -31,6 +33,7 @@ Summary: Files for librtmp development
 License: LGPLv2+
 Group: Applications/Internet
 Requires: librtmp = %{version}-%{release}
+Provides: librtmp-devel
 
 %description -n kaltura-librtmp-devel
 librtmp is a suport library for RTMP streams. The librtmp-devel package
@@ -77,5 +80,8 @@ contains include files needed to develop applications using librtmp.
 %exclude %{prefix}/lib/librtmp.a
 
 %changelog
+* Mon Dec 8 2014 Jess Portnoy <jess.portnoy@kaltura.com> 2.3-3
+- Added Provides librtmp-devel tag
+
 * Sun Jan 5 2014 Jess Portnoy <jess.portnoy@kaltura.com> 2.3-2
 - Adopted for Kaltura. Required for kaltura-ffmpeg. 
