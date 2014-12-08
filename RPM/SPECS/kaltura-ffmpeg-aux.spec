@@ -123,7 +123,7 @@ Install this package if you want to compile apps with ffmpeg support.
 sed -i 's|gsm.h|gsm/gsm.h|' configure libavcodec/libgsm.c
 
 %build
-export CFLAGS="%{optflags}"
+export CFLAGS="%{optflags} -Wno-unused-variable -Wno-implicit-function-declaration"
 ./configure \
     --prefix="%{base_prefix}-%{version}" \
     --libdir="%{base_prefix}-%{version}/lib" \
