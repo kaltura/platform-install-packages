@@ -41,6 +41,8 @@ BuildRequires: SDL-devel
 BuildRequires: freetype-devel
 BuildRequires: imlib2-devel
 BuildRequires: zlib-devel
+BuildRequires: libvorbis-devel
+BuildRequires: xvidcore-devel
 %{!?_without_a52dec:BuildRequires: a52dec-devel}
 %{!?_without_dc1394:BuildRequires: libdc1394-devel}
 %{!?_without_faac:BuildRequires: faac-devel}
@@ -255,7 +257,7 @@ fi
 * Mon Jul 7 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 2.1.3-1
 - 2.1.3.
 
-* Sun Jan 14 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.1.1-4
+* Sun Jan 12 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.1.1-4
 - Added qt-faststart.
 
 * Sun Jan 12 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.1.1-3
