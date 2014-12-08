@@ -6,8 +6,8 @@
 
 Summary: PHP Mcrypt extension. 
 Name: php-mcrypt
-Version: 5.3.3
-Release: 4 
+Version: 5.4.35
+Release: 1
 License: The PHP License
 Group: Development/Languages
 URL: http://www.php.net/
@@ -21,7 +21,7 @@ Requires: php-api = %{php_api}
 %{?_with_mcrypt:BuildRequires: libmcrypt-devel}
 
 
-BuildRequires: php-devel = %{version}
+BuildRequires: php-devel => 5.4.0 
 Provides: php-mcrypt 
 Requires: libmcrypt
 BuildRequires: libmcrypt-devel
@@ -45,6 +45,7 @@ for mod in %{php_modules}; do
     %configure \
         --with-libdir="%{_lib}" \
         --with-mcrypt \
+	--includedir=/opt/kaltura/include \
 
     # cause libtool to avoid passing -rpath when linking
     # (this hack is well-known as "libtool rpath workaround")
@@ -77,6 +78,9 @@ done
 
 
 %changelog
+* Mon Dec 8 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 5.4.35-1
+- First PHP 5_4 build.
+
 * Mon Jan 6 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 5.3.3-3
 - It does not PROVIDE libmcrypt, it requires it.
 
