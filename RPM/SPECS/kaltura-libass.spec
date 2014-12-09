@@ -64,5 +64,5 @@ EOF
 %exclude %{prefix}/lib/libass.la
 
 %changelog
-* Sun Jan 6 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 0.9.11-2
+* Sun Jan 5 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 0.9.11-2
 - Initial package.

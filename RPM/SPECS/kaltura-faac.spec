@@ -1,15 +1,15 @@
 %define prefix /opt/kaltura
 Summary: Reference encoder and encoding library for MPEG2/4 AAC
 Name: kaltura-libfaac
-Version: 1.26
+Version: 1.28
 Release: 1
 License: LGPL
 Group: Applications/Multimedia
 URL: http://www.audiocoding.com/
 
 
-Source: http://dl.sf.net/faac/faac-%{version}.tar.gz
-Patch0: faac-1.25-libmp4v2.patch
+Source: http://sourceforge.net/projects/faac/files/faac-src/faac-%{version}/faac-%{version}.tar.bz2
+#Patch0: faac-1.25-libmp4v2.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
 BuildRequires: libmp4v2-devel
@@ -34,7 +34,7 @@ multichannel and gapless encoding.
 This package contains development files and documentation for libfaac.
 
 %prep
-%setup -n faac 
+%setup -n faac-%{version} 
 #patch0 -p1 -b .libmp4v2
 # Don't ask...
 find . -type f -exec dos2unix {} \;
@@ -43,6 +43,7 @@ find . -type d -exec chmod 755 {} \;
 
 %build
 sh bootstrap
+chmod +x ./configure
 ./configure --prefix=%{prefix} --disable-static \
     --with-mp4v2
 %{__make} %{?_smp_mflags}
@@ -62,6 +63,7 @@ sh bootstrap
 %doc AUTHORS ChangeLog COPYING NEWS README TODO docs/*
 %{prefix}/bin/faac
 %{prefix}/lib/libfaac.so.*
+%{prefix}/share/man/man1/faac.1
 
 %files devel
 %defattr(-, root, root, 0755)
@@ -71,7 +73,10 @@ sh bootstrap
 %exclude %{prefix}/lib/libfaac.la
 
 %changelog
-* Mon Feb 5 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.26-2
+* Tue Dec 9 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.28-1
+- Ver bounce.
+
+* Wed Feb 5 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.26-2
 - Adopted for Kaltura, needed for kaltura-ffmpeg.
 
 * Mon Nov 10 2008 Dag Wieers <dag@wieers.com> - 1.26-1 - 7981/dag

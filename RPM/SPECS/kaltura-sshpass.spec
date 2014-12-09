@@ -7,7 +7,7 @@ License: GPLv2
 Group: Applications/Internet
 URL: http://sshpass.sourceforge.net/
 
-Source: http://dl.sf.net/sshpass/sshpass-%{version}.tar.gz
+Source: http://downloads.sourceforge.net/project/sshpass/sshpass/%{version}/sshpass-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-buildroot
 
 %description
