@@ -46,16 +46,6 @@ find  $RPM_BUILD_ROOT%{prefix}/dwh/ -name "*.sh" -type f -exec chmod +x {} \;
 %clean
 rm -rf %{buildroot}
 
-%pre
-# maybe one day we will support SELinux in which case this can be ommitted.
-if which getenforce >> /dev/null 2>&1; then
-	if [ `getenforce` = 'Enforcing' ];then
-		echo "You have SELinux enabled, please change to permissive mode with:
-# setenforce permissive
-and then edit /etc/selinux/config to make the change permanent."
-		exit 1;
-	fi
-fi
 
 %post
 if [ "$1" = 0 ];then

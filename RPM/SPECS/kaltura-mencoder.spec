@@ -17,6 +17,12 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
 BuildRequires: prelink
 Requires:kaltura-a52dec,kaltura-libfaac,kaltura-libass,kaltura-x264
+Provides: libmp3lame.so.0
+Provides: libtwolame.so.0
+Provides: libfaac.so.0
+Provides: libschroedinger-1.0.so.0
+Provides: libmad.so.0
+
 
 %description
 Utilities and libraries for MPlayer movie encoder
