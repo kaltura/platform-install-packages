@@ -62,7 +62,7 @@ Source7: nginx.suse.init
 Source8: nginx.service
 Source9: nginx.upgrade.sh
 Source10: nginx-vod-module-master.zip  
-Source11: nginx-akamai-token-module.zip
+Source11: nginx-akamai-token-module-master.zip
 Patch1: nginx_kaltura.diff 
 
 License: 2-clause BSD-like license
