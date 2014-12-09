@@ -10,7 +10,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 10.0.0
-Release: 1
+Release: 3
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/Jupiter-%{version}.zip 
@@ -299,16 +299,22 @@ fi
 
 
 %changelog
-* Tue Dec 2 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 10.0.0-1
+* Sat Dec 6 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 10.0.0-3
+- Kaltura night build
+
+* Sat Dec 6 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 10.0.0-3
+- Kaltura night build
+
+* Sat Dec 6 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 10.0.0-3
+- Kaltura night build
+
+* Thu Dec 4 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 10.0.0-2
+- Kaltura night build
+
+* Thu Dec 4 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 10.0.0-2
 - Ver Bounce to 10.0.0
 
-* Tue Dec 2 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 10.0.0-1
-- Ver Bounce to 10.0.0
-
-* Tue Dec 2 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 10.0.0-1
-- Ver Bounce to 10.0.0
-
-* Tue Dec 2 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 10.0.0-1
+* Thu Dec 4 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 10.0.0-1
 - Ver Bounce to 10.0.0
 
 * Mon Dec 1 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.19.8-1

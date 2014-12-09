@@ -3,7 +3,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5-studio
 Version: v1.9.1
-Release: 1
+Release: 5
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.bz2 
@@ -51,6 +51,63 @@ rm -rf %{buildroot}
 %{prefix}/apps/studio/%{version}
 
 %changelog
+* Sat Dec 6 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v1.9.1-5
+- Kaltura night build
+
+* Sat Dec 6 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v1.9.1-5
+- Kaltura night build
+
+* Sat Dec 6 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v1.9.1-5
+- Kaltura night build
+
+* Thu Dec 4 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v1.9.1-4
+- Kaltura night build
+
+* Thu Dec 4 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v1.9.1-4
+- Ver Bounce to v1.9.1
+
+* Thu Dec 4 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v1.9.1-3
+- Ver Bounce to v1.9.1
+
+* Thu Dec 4 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v1.9.1-3
+- Ver Bounce to v1.9.1
+
+* Thu Dec 4 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v1.9.1-3
+- Ver Bounce to v1.9.1
+
+* Thu Dec 4 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v1.9.1-3
+- Ver Bounce to v1.9.1
+
+* Thu Dec 4 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v1.9.1-3
+- Ver Bounce to v1.9.1
+
+* Thu Dec 4 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v1.9.1-3
+- Ver Bounce to v1.9.1
+
+* Thu Dec 4 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v1.9.1-3
+- Ver Bounce to v1.9.1
+
+* Thu Dec 4 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v1.9.1-3
+- Ver Bounce to v1.9.1
+
+* Wed Dec 3 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v1.9.1-3
+- Ver Bounce to v1.9.1
+
+* Wed Dec 3 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v1.9.1-3
+- Ver Bounce to v1.9.1
+
+* Wed Dec 3 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v1.9.1-3
+- Ver Bounce to v1.9.1
+
+* Tue Dec 2 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v1.9.1-2
+- Ver Bounce to v1.9.1
+
+* Tue Dec 2 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v1.9.1-2
+- Ver Bounce to v1.9.1
+
+* Tue Dec 2 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v1.9.1-2
+- Ver Bounce to v1.9.1
+
 * Tue Dec 2 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v1.9.1-2
 - Ver Bounce to v1.9.1
 

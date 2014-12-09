@@ -1,7 +1,7 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmc	
 Version: v5.37.27
-Release: 1
+Release: 9
 Summary: Kaltura Management Console
 
 Group: System Management	
@@ -81,6 +81,63 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sat Dec 6 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.27-9
+- Kaltura night build
+
+* Sat Dec 6 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.27-9
+- Kaltura night build
+
+* Sat Dec 6 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.27-9
+- Kaltura night build
+
+* Thu Dec 4 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.27-8
+- Kaltura night build
+
+* Thu Dec 4 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.27-8
+- Ver Bounce to v5.37.27
+
+* Thu Dec 4 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.27-7
+- Ver Bounce to v5.37.27
+
+* Thu Dec 4 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.27-7
+- Ver Bounce to v5.37.27
+
+* Thu Dec 4 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.27-7
+- Ver Bounce to v5.37.27
+
+* Thu Dec 4 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.27-7
+- Ver Bounce to v5.37.27
+
+* Thu Dec 4 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.27-7
+- Ver Bounce to v5.37.27
+
+* Thu Dec 4 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.27-7
+- Ver Bounce to v5.37.27
+
+* Thu Dec 4 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.27-7
+- Ver Bounce to v5.37.27
+
+* Thu Dec 4 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.27-7
+- Ver Bounce to v5.37.27
+
+* Wed Dec 3 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.27-6
+- Ver Bounce to v5.37.27
+
+* Wed Dec 3 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.27-6
+- Ver Bounce to v5.37.27
+
+* Wed Dec 3 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.27-6
+- Ver Bounce to v5.37.27
+
+* Tue Dec 2 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.27-5
+- Ver Bounce to v5.37.27
+
+* Tue Dec 2 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.27-5
+- Ver Bounce to v5.37.27
+
+* Tue Dec 2 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.27-5
+- Ver Bounce to v5.37.27
+
 * Tue Dec 2 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.27-5
 - Ver Bounce to v5.37.27
 

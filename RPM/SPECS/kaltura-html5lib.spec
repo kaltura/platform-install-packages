@@ -2,8 +2,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.22
-Release: 1
+Version: v2.22.1
+Release: 2
 Epoch:0 
 License: AGPLv3+
 Group: Server/Platform 
@@ -86,6 +86,69 @@ rm -rf %{buildroot}
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Sat Dec 6 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.22.1-2
+- Kaltura night build
+
+* Sat Dec 6 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.22.1-2
+- Kaltura night build
+
+* Sat Dec 6 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.22.1-2
+- Kaltura night build
+
+* Thu Dec 4 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.22.1-1
+- Kaltura night build
+
+* Thu Dec 4 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.22.1-1
+- Ver Bounce to v2.22.1
+
+* Thu Dec 4 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.22.1-1
+- Ver Bounce to v2.22.1
+
+* Thu Dec 4 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.22.1-1
+- Ver Bounce to v2.22.1
+
+* Thu Dec 4 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.22.1-1
+- Ver Bounce to v2.22.1
+
+* Thu Dec 4 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.22.1-1
+- Ver Bounce to v2.22.1
+
+* Thu Dec 4 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.22.1-1
+- Ver Bounce to v2.22.1
+
+* Thu Dec 4 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.22.1-1
+- Ver Bounce to v2.22.1
+
+* Thu Dec 4 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.22.1-1
+- Ver Bounce to v2.22.1
+
+* Thu Dec 4 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.22.1-1
+- Ver Bounce to v2.22.1
+
+* Thu Dec 4 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.22.1-1
+- Ver Bounce to v2.22.1
+
+* Thu Dec 4 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.22.1-1
+- Ver Bounce to v2.22.1
+
+* Wed Dec 3 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.22.1-1
+- Ver Bounce to v2.22.1
+
+* Wed Dec 3 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.22.1-1
+- Ver Bounce to v2.22.1
+
+* Wed Dec 3 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.22.1-1
+- Ver Bounce to v2.22.1
+
+* Tue Dec 2 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.22-2
+- Ver Bounce to v2.22
+
+* Tue Dec 2 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.22-2
+- Ver Bounce to v2.22
+
+* Tue Dec 2 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.22-2
+- Ver Bounce to v2.22
+
 * Tue Dec 2 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.22-2
 - Ver Bounce to v2.22
 

@@ -64,7 +64,7 @@ if [ "$HTML5LIB_VERSION" = "$HTML5LIB_REMOTE_VERSION" ];then
 	HTML5LIB_NEXT_REVISION=`expr $HTML5LIB_REMOTE_REVISION + 1`
 fi
 cp ~/rpmbuild/SOURCES/kmc_config.ini ~/rpmbuild/SOURCES/kmc_config.ini.stable
-sed "s@\(.*html5_version.*\)\s*=.*@\1= $HTML5LIB_VERSION@g" ~/rpmbuild/SOURCES/kmc_config.ini
+sed -i "s@\(.*html5_version.*\)\s*=.*@\1= $HTML5LIB_VERSION@g" ~/rpmbuild/SOURCES/kmc_config.ini
 mv ~/.rpmmacros ~/.rpmmacros.stable
 sed -e "s#@KMC_VERSION@#$KMC_VERSION#" -e "s#@KMC_LOGIN_VERSION@#$KMC_LOGIN_VERSION#" -e "s#@HTML5LIB_VERSION@#$HTML5LIB_VERSION#" `dirname $0`/.rpmmacros.tmplt > ~/.rpmmacros  
 
@@ -106,19 +106,19 @@ rpmbuild -ba $RPM_SPECS_DIR/$HTML5_APP_STUDIO_RPM_NAME.spec
 
 
 HTML5LIB_VERSIONS="$HTML5LIB_VERSIONS $HTML5LIB_VERSION"
-cd $SOURCE_PACKAGING_DIR
-for HTML5LIB_VERSION in $HTML5LIB_VERSIONS;do
-	if ! tar ztf  $HTML5LIB_RPM_NAME-$HTML5LIB_VERSION.tar.gz ;then
-		wget $HTML5LIB_BASE_URI/$HTML5LIB_VERSION -O $HTML5LIB_RPM_NAME-$HTML5LIB_VERSION.tar.gz
-		tar zxf $HTML5LIB_RPM_NAME-$HTML5LIB_VERSION.tar.gz 
-		rm -rf $HTML5LIB_RPM_NAME-$HTML5LIB_VERSION
-		mv `ls -rtd kaltura-mwEmbed-* | tail -1` $HTML5LIB_RPM_NAME-$HTML5LIB_VERSION
-		tar zcf $RPM_SOURCES_DIR/$HTML5LIB_RPM_NAME-$HTML5LIB_VERSION.tar.gz $HTML5LIB_RPM_NAME-$HTML5LIB_VERSION
-		echo "Packaged into $RPM_SOURCES_DIR/$HTML5LIB_RPM_NAME-$HTML5LIB_VERSION.tar.gz"
-	fi
-done
-rpmbuild -ba $RPM_SPECS_DIR/$HTML5LIB_RPM_NAME.spec
-~/scripts/push_rpm.sh $RPMS_BASE_DIR/noarch/$HTML5LIB_RPM_NAME-$HTML5LIB_VERSION-$HTML5LIB_NEXT_REVISION.noarch.rpm nightly1
+#cd $SOURCE_PACKAGING_DIR
+#for HTML5LIB_VERSION in $HTML5LIB_VERSIONS;do
+#	if ! tar ztf  $HTML5LIB_RPM_NAME-$HTML5LIB_VERSION.tar.gz ;then
+#		wget $HTML5LIB_BASE_URI/$HTML5LIB_VERSION -O $HTML5LIB_RPM_NAME-$HTML5LIB_VERSION.tar.gz
+#		tar zxf $HTML5LIB_RPM_NAME-$HTML5LIB_VERSION.tar.gz 
+#		rm -rf $HTML5LIB_RPM_NAME-$HTML5LIB_VERSION
+#		mv `ls -rtd kaltura-mwEmbed-* | tail -1` $HTML5LIB_RPM_NAME-$HTML5LIB_VERSION
+#		tar zcf $RPM_SOURCES_DIR/$HTML5LIB_RPM_NAME-$HTML5LIB_VERSION.tar.gz $HTML5LIB_RPM_NAME-$HTML5LIB_VERSION
+#		echo "Packaged into $RPM_SOURCES_DIR/$HTML5LIB_RPM_NAME-$HTML5LIB_VERSION.tar.gz"
+#	fi
+#done
+#rpmbuild -ba $RPM_SPECS_DIR/$HTML5LIB_RPM_NAME.spec
+#~/scripts/push_rpm.sh $RPMS_BASE_DIR/noarch/$HTML5LIB_RPM_NAME-$HTML5LIB_VERSION-$HTML5LIB_NEXT_REVISION.noarch.rpm nightly1
 
 . ~/csi/csi-functions.rc
 INSTANCE_ID=`start_instances $NFS_IMG 1 $SECURITY_GROUP` 
@@ -136,5 +136,9 @@ ec2-create-tags $INSTANCE_ID --tag Name="Kaltura-Sanity-`date`"
 scp $SSH_QUIET_OPTS -i ~/csi.pem ~/nightly/kaltura-install.sh ec2-user@$IP:/tmp
 ssh $SSH_QUIET_OPTS -t -i ~/csi.pem ec2-user@$IP sudo bash /tmp/kaltura-install.sh
 INSTANCE_HOSTNAME=`ssh $SSH_QUIET_OPTS -i ~/csi.pem ec2-user@$IP hostname 2>/dev/null`
-scp $SSH_QUIET_OPTS -i ~/csi.pem ec2-user@$IP:/tmp/$INSTANCE_HOSTNAME-reportme.`date +%d_%m_%Y`.sql /tmp
+SQL_FILE=/tmp/$INSTANCE_HOSTNAME-reportme.`date +%d_%m_%Y`.sql
+scp $SSH_QUIET_OPTS -i ~/csi.pem ec2-user@$IP:$SQL_FILE /tmp
 #ec2-terminate-instances $INSTANCE_ID
+CSI_MACHINE=ce-csi.dev.kaltura.com
+scp $SSH_QUIET_OPTS $SQL_FILE root@$CSI_MACHINE:/tmp 
+ssh $SSH_QUIET_OPTS root@$CSI_MACHINE /opt/vhosts/csi/update_csi_db.sh $SQL_FILE $KALTURA_SHORT_SERVER_VERSION

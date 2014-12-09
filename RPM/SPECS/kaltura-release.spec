@@ -1,9 +1,9 @@
 %define baseurl installrepo.kaltura.org
-%define testpath releases/nightly/RPMS
+%define testpath releases/nightly1/RPMS
 %define prefix /opt/kaltura 
 Summary: Kaltura Server release file and package configuration
 Name: kaltura-release
-Version: 9.19.8
+Version: 10.0.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -40,19 +40,19 @@ gpgcheck = 1
 enabled = 1
 
 # we currently do not have the nightly so commented. We do have plans to add that.
-#[Kaltura-testing]
-#name = Kaltura Server arch independent
-#baseurl = http://%{baseurl}/%{testpath}/\$basearch/
-#gpgkey = http://%{baseurl}/releases/RPM-GPG-KEY-kaltura
-#gpgcheck = 1 
-#enabled = 0
+[Kaltura-testing]
+name = Kaltura Server arch independent
+baseurl = http://%{baseurl}/%{testpath}/\$basearch/
+gpgkey = http://%{baseurl}/releases/RPM-GPG-KEY-kaltura
+gpgcheck = 1 
+enabled = 1
 
-#[Kaltura-testing-noarch]
-#name = Kaltura Server arch independent
-#baseurl = http://%{baseurl}/%{testpath}/noarch
-#gpgkey = http://%{baseurl}/releases/RPM-GPG-KEY-kaltura
-#gpgcheck = 1
-#enabled = 0
+[Kaltura-testing-noarch]
+name = Kaltura Server arch independent
+baseurl = http://%{baseurl}/%{testpath}/noarch
+gpgkey = http://%{baseurl}/releases/RPM-GPG-KEY-kaltura
+gpgcheck = 0
+enabled = 1
 EOF
 
 %install
