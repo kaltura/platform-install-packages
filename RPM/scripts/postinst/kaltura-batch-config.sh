@@ -83,10 +83,10 @@ find $BASE_DIR/app/cache/ $BASE_DIR/log -type f -exec chmod 664 {} \;
 chown -R kaltura.apache $BASE_DIR/app/cache/ $BASE_DIR/log
 
 chkconfig httpd on
-if /etc/init.d/httpd status >/dev/null 2>&1;then
-	/etc/init.d/httpd reload
+if service httpd status >/dev/null 2>&1;then
+	service httpd reload
 else
-	/etc/init.d/httpd start
+	service httpd start
 fi
 
 /etc/init.d/kaltura-batch restart >/dev/null 2>&1
