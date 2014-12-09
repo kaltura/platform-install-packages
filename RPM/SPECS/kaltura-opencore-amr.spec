@@ -1,13 +1,13 @@
 %define prefix /opt/kaltura
 Summary: Adaptive Multi-Rate Floating-point (AMR) Speech Codec
 Name: kaltura-libopencore-amr
-Version: 0.1.2
-Release: 2 
+Version: 0.1.3
+Release: 1
 License: Apache License V2.0
 Group: System Environment/Libraries
 URL: http://opencore-amr.sourceforge.net/
 
-Source: http://dl.sf.net/project/opencore-amr/opencore-amr/%{version}/opencore-amr-%{version}.tar.gz
+Source: http://downloads.sourceforge.net/project/opencore-amr/opencore-amr/opencore-amr-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
 BuildRequires: gcc-c++
@@ -70,7 +70,5 @@ EOF
 %exclude %{prefix}/lib/libopencore-amrwb.la
 
 %changelog
-* Sat Feb 15 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 0.9.11-2
-- Corrected path to ld.so.conf.d.
-* Sun Jan 6 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 0.9.11-1
-- Initial package.
+* Tue Dec 9 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 0.1.3-1
+- Bounce to 0.1.3
