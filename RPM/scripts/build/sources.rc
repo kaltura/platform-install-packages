@@ -59,6 +59,9 @@ KALTURA_TEMPLATES_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalsource
 KALTURA_NGINX_VOD_VERSION=master
 KALTURA_NGINX_VOD_URI="https://github.com/kaltura/nginx-vod-module/archive/$KALTURA_NGINX_VOD_VERSION.zip"
 
+KALTURA_NGINX_AKAMAI_TOKEN_VERSION=master
+KALTURA_NGINX_AKAMAI_TOKEN_URI="https://github.com/kaltura/nginx-akamai-token-module/archive/$KALTURA_NGINX_AKAMAI_TOKEN_VERSION.zip"
+
 # Kaltura Streaming lib build vars:
 KALTURA_MEDIASERVER_VERSION="2.2.2"
 KALTURA_MEDIASERVER_URI="https://github.com/kaltura/media-server/archive/$KALTURA_MEDIASERVER_VERSION.zip"
