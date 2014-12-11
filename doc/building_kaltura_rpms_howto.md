@@ -40,10 +40,11 @@ sources.rc - this file has the ENV vars needed for building from sources. When v
 package_*.sh - each component has a wrapper script that fetches the sources from the needed version and packages them so that the RPM can be built.
 
 You will need to edit sources.rc and change:
+```
 PACKAGER_NAME=""
 PACKAGER_MAIL=""
 SVN_USER=""
-
+```
 You may also change these two although defaults should be fine:
 TMP_DIR=/tmp
 SOURCE_PACKAGING_DIR=~/sources
