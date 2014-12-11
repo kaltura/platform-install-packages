@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 10.0.0
-Release: 1
+Release: 3
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -195,17 +195,14 @@ ln -sf %{prefix}/app/configurations/system.ini /etc/kaltura.d/system.ini
 ln -sf %{prefix}/app/api_v3/web %{prefix}/app/alpha/web/api_v3
 chown apache.kaltura -R %{prefix}/web/content/entry %{prefix}/web/content/uploads/  %{prefix}/web/tmp/
 find %{prefix}/web/content/entry %{prefix}/web/content/uploads/  %{prefix}/web/tmp/ -type d -exec chmod 775 {} \;
-/etc/init.d/ntpd start
+service ntpd start
 if [ "$1" = 2 ];then
 	if [ -r "%{prefix}/app/configurations/local.ini" -a -r "%{prefix}/app/configurations/base.ini" ];then
 		sed -i "s@^\(kaltura_version\).*@\1 = %{version}@g" %{prefix}/app/configurations/local.ini
 		echo "Regenarating client libs.. this will take up to 2 minutes to complete."
-		if %{_sysconfdir}/init.d/httpd status;then
-			%{_sysconfdir}/init.d/httpd stop
+		if service httpd status;then
+			service httpd stop
 		fi
-		#if %{_sysconfdir}/init.d/kaltura-sphinx status;then
-		#	%{_sysconfdir}/init.d/kaltura-sphinx stop
-		#fi
 		# this is read by kaltura-sphinx-schema-update.sh to determine rather or not to run
 		touch %{prefix}/app/configurations/sphinx_schema_update
 		rm -rf %{prefix}/app/cache/*
@@ -215,8 +212,8 @@ if [ "$1" = 2 ];then
 		chown -R %{kaltura_user}.%{apache_user} %{prefix}/app/cache/ %{prefix}/log
 		chmod 775 %{prefix}/web/content
 
-		if ! %{_sysconfdir}/init.d/httpd status;then
-			%{_sysconfdir}/init.d/httpd start
+		if ! service httpd status;then
+			service httpd start
 		fi
 
 		# we now need CREATE and DROP priv for 'kaltura' on kaltura.*
@@ -285,6 +282,9 @@ fi
 
 
 %changelog
+* Thu Dec 11 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 10.0.0-3
+- call service instead of /etc/init.d
+
 * Thu Dec 11 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 10.0.0-1
 - Ver Bounce to 10.0.0
 - Webcasting BE enhancements
