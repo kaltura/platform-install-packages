@@ -17,6 +17,7 @@ GIT repo
 To setup your build ENV please see here:
 http://wiki.centos.org/HowTos/SetupRpmBuildEnvironment
 
+```
 $ ll ~/rpmbuild/
 total 72
 drwxrwxr-x 88 jess jess  4096 Apr  7 03:06 BUILD
@@ -25,6 +26,7 @@ drwxrwxr-x  6 jess jess  4096 Jan 26 08:03 RPMS
 drwxr-xr-x  8 jess jess 12288 Apr  6 11:00 SOURCES -> /sym/link/to/platform-install-packages/RPM/SOURCES
 lrwxrwxrwx  1 jess jess    91 Mar 25 10:48 SPECS -> /sym/link/to/platform-install-packages/RPM/SPECS
 drwxrwxr-x  2 jess jess 36864 Apr  7 03:06 SRPMS
+```
 
 platform-install-packages/RPM/.rpmmacros
 ========================================
@@ -47,8 +49,9 @@ TMP_DIR=/tmp
 SOURCE_PACKAGING_DIR=~/sources
 
 And of course:
+```
 $ mkdir $SOURCE_PACKAGING_DIR
-
+```
 Utility scripts
 ===============
 push_rpm.sh - scp the RPM to repo origin and sign it over SSH, then, generate meta data with create repo
@@ -96,9 +99,13 @@ If a new package is introduces, make sure to create a wrapper script for it as w
 
 8. The package_*.sh scripts will retrieve the source archive from GIT/SVN/else and place it in the ~/rpmbuild/SOURCES dir.
 Then the script triggers:
+```
 $ rpmbuild -ba $SPEC
+```
 if the source retrieval succeeded but build failed, you can simply correct what needs correction and then run:
+```
 $ rpmbuild -ba $SPEC 
+```
 one more, no need to repackage for that.
 
 9. once all RPMs are built, use: 
