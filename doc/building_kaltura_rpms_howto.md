@@ -10,7 +10,7 @@ Alternatively, you can look up needed additional packages at http://pkgs.org
 
 GIT repo
 ========
-# git clone https://github.com/kaltura/platform-install-packages
+\# git clone https://github.com/kaltura/platform-install-packages
 
 ~/rpmbuild dir structure
 ========================
