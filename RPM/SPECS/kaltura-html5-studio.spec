@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5-studio
-Version: v1.9.1
+Version: v1.9.2
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -33,7 +33,7 @@ This package installs the Kaltura HTML5 Studio.
 
 %install
 mkdir -p $RPM_BUILD_ROOT%{prefix}/apps/studio/
-rm %{_builddir}/%{name}-%{version}/studio.ini
+rm -f %{_builddir}/%{name}-%{version}/studio.ini
 cp -r %{_builddir}/%{name}-%{version} $RPM_BUILD_ROOT%{prefix}/apps/studio/%{version}
 cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/apps/studio/%{version}/
 sed -i "s#@HTML5_STUDIO_VER@#%{version}#g" $RPM_BUILD_ROOT%{prefix}/apps/studio/%{version}/studio.template.ini
@@ -51,6 +51,9 @@ rm -rf %{buildroot}
 %{prefix}/apps/studio/%{version}
 
 %changelog
+* Thu Dec 11 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v1.9.2-1
+- FEC-2401 - Add Strings plugin to Studio
+
 * Mon Dec 1 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v1.9.1-1
 - SUP-3132 - Control Bar Icons are not transparent
 

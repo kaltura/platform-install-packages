@@ -1,7 +1,7 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmc	
-Version: v5.37.27
-Release: 4
+Version: v5.37.30
+Release: 1
 Summary: Kaltura Management Console
 
 Group: System Management	
@@ -81,6 +81,15 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Thu Dec 11 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.30-1
+- PLAT-2157 - Akamai live streaming exported XML should specify video format
+- PLAT-1703 - Add a warning in KMC when user trying to edit/delete one of KMS native categories
+- FEC-2282 - Lead with Universal studio ( instead of flash ) when pressing studio in KMC
+- SUP-3269 - Edit Entry window of live entry with Manager KMC role
+- PLAT-2081 - New live transcording profile is added to new streaming window just after refreshing KMC browser
+- PLAT-1908 - Missing exception on approve content when user does not have permission
+- PLAT-2223 - KMC - New Transcoding Profile - The creation of a new transcoding profile redirects the KMC to the Content tab (once per session) 
+
 * Mon Dec 1 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.27-4
 - HTML5lib bounce to v2.22.
 

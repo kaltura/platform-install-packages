@@ -15,7 +15,6 @@ Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
-Source3: kaltura.apache.conf.template 
 Source4: emails_en.template.ini
 #Source6: 02.Permission.ini
 Source7: dwh.template
@@ -122,7 +121,6 @@ rm $RPM_BUILD_ROOT%{prefix}/app/configurations/.project
 rm $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.d/*template*
 
 # we bring our own for kaltura-front and kaltura-batch.
-cp %{SOURCE3} $RPM_BUILD_ROOT%{prefix}/app/configurations/apache/kaltura.conf.template
 cp %{SOURCE4} $RPM_BUILD_ROOT%{prefix}/app/batch/batches/Mailer/emails_en.template.ini
 #cp %{SOURCE6} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_data/02.Permission.ini
 #cp %{SOURCE8} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_content/01.uiConf.99.template.xml
