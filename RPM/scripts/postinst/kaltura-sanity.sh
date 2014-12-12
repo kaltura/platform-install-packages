@@ -108,9 +108,9 @@ if [ $? -eq 0 ];then
 		MSG=`check_kmc_config_versions $COMP_NAME $KMC_VER`
 		RC=$?
 		END=`date +%s.%N`
-		report "$COMP_NAME ver in KMC config.ini" $RC "$MSG" "`bc <<< $END-$START`"
+		report "$COMP_NAME ver in KDP3 config.ini" $RC "$MSG" "`bc <<< $END-$START`"
 	else
-		echo -e "[${CYAN}$COMP_NAME ver in KMC config.ini${NORMAL}][${BRIGHT_YELLOW}SKIPPED as KMC is not installed${NORMAL}]"
+		echo -e "[${CYAN}$COMP_NAME ver in KDP3 config.ini${NORMAL}][${BRIGHT_YELLOW}SKIPPED as $COMP_NAME is not installed${NORMAL}]"
 	fi
 	COMP_NAME=kaltura-kmc
         COMP_VER=`rpm -q $COMP_NAME --queryformat %{version}`
@@ -127,7 +127,7 @@ if [ $? -eq 0 ];then
 		report "Get KMC SWFs" $RC "$OUT" "`bc <<< $END-$START`"
 		
 	else
-		echo -e "[${CYAN}$COMP_NAME ver in KMC config.ini${NORMAL}][${BRIGHT_YELLOW}SKIPPED as KMC is not installed${NORMAL}]"
+		echo -e "[${CYAN}$COMP_NAME ver in KMC config.ini${NORMAL}][${BRIGHT_YELLOW}SKIPPED as $COMP_NAME is not installed${NORMAL}]"
 	fi
 fi
 
