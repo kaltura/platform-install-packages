@@ -1,7 +1,7 @@
 #!/bin/bash -e 
 #===============================================================================
-#          FILE: package_kaltura_core.sh
-#         USAGE: ./package_kaltura_core.sh 
+#          FILE: package_kaltura_postinst.sh
+#         USAGE: ./package_kaltura_postinst.sh 
 #   DESCRIPTION: 
 #       OPTIONS: ---
 # 	LICENSE: AGPLv3+
