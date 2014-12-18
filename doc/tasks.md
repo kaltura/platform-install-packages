@@ -41,3 +41,4 @@ Need to catch the exception and display.
 
 ## Client libs
 - Add more client libs [http://knowledge.kaltura.com/adding-new-kaltura-api-client-library-generator]
+- Write tests for the new NodeJS client libs [http://www.kaltura.com/api_v3/testme/client-libs.php]
