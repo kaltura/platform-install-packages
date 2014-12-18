@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.22.1
+Version: v2.23
 Release: 1
 Epoch:0 
 License: AGPLv3+
@@ -86,6 +86,20 @@ rm -rf %{buildroot}
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Sun Dec 14 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.23-1
+- FEC-2316 - Support Akamai Media Analytics Logging for forceKPlayer flash mode
+- FEC-2315 - Create Strings plugin demo page expand override to all keys
+- FEC-2350 - DFP plugin should support pauseAdOnClick with default true
+- FEC-2281 - VAST plugin should support pauseAdOnClick with default true
+- SUP-28 - Design live UI buttons and user flow
+- FEC-869 - Playhead should dynamically adjust per available DVR 
+- FEC-1998 - Lecture Capture - select video stream
+- SUP-3319 - Ad beacon don't fire the 100% track | V2 player
+- SUP-3243 - Configure player logo to a non-clickable logo doesn't work on Firefox
+- SUP-2985 - changeMedia notification from audio entry to video entry causes first-frame-freeze
+- SUP-2604 - Player don't load when "Rate Selector" is enabled | V2 player | customer site only
+- SUP-3322 - Playlist entries list is not responsive even tough video section is responsive.| Player V2
+
 * Mon Dec 1 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.22-1
 - SUP-3001 - Pre-roll ads don't show and player freezes on iPad+iOS8+Safari (2.19.5)
 - SUP-3078 - Source Selector display in bitrate instead of pixels when using HDS/Akamai/RTMP delivery

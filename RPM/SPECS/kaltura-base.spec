@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 10.0.0
-Release:7 
+Release: 8
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -285,6 +285,10 @@ fi
 
 
 %changelog
+* Mon Dec 15 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 10.0.0-8
+- https://github.com/kaltura/server/pull/2009
+- https://github.com/kaltura/server/pull/2010
+ 
 * Thu Dec 11 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 10.0.0-3
 - call service instead of /etc/init.d
 
