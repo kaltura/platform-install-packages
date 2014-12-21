@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.22.1
+Version: v2.23
 Release: 1
 Epoch:0 
 License: AGPLv3+
@@ -86,6 +86,12 @@ rm -rf %{buildroot}
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Sun Dec 21 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.23-1
+- FEC-2491 - VOD VS.Live: unstable off line DVR mode after disconnecting broadcasting.
+- FEC-2455 - Live button & text are enabled when Live is on. CLOSED
+- FEC-2490 - "Jump to live" tooltip appear on Live entry without DVR CLOSED
+- FEC-2509 - Thumbnail is displayed on playing video. CLOSED
+
 * Mon Dec 1 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.22-1
 - SUP-3001 - Pre-roll ads don't show and player freezes on iPad+iOS8+Safari (2.19.5)
 - SUP-3078 - Source Selector display in bitrate instead of pixels when using HDS/Akamai/RTMP delivery

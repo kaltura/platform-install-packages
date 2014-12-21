@@ -69,7 +69,7 @@ KALTURA_MEDIASERVER_URI="https://github.com/kaltura/media-server/archive/$KALTUR
 KALTURA_MEDIASERVER_RPM_NAME=kaltura-media-server
 
 # Kaltura KMC:
-KMC_MINUS_V_VERSION=5.37.30
+KMC_MINUS_V_VERSION=5.37.32
 KMC_VERSION=v$KMC_MINUS_V_VERSION
 KMC_LOGIN_MINUS_V_VERSION=1.2.8
 KMC_LOGIN_VERSION=v$KMC_LOGIN_MINUS_V_VERSION
@@ -163,7 +163,7 @@ FLEX_WRAPPER_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/flash/
 FLEX_WRAPPER_RPM_NAME="kaltura-flexwrapper"
 
 # HTML5 lib
-HTML5LIB_VERSIONS="v2.1.1 v2.3 v2.4 v2.6 v2.9 v2.14 v2.15 v2.18.5 v2.20 v2.21 v2.22 v2.23"
+HTML5LIB_VERSIONS="v2.1.1 v2.3 v2.4 v2.6 v2.9 v2.14 v2.15 v2.18.5 v2.20 v2.21 v2.22 v2.23.2"
 HTML5LIB_BASE_URI="https://github.com/kaltura/mwEmbed/tarball/"
 HTML5LIB_RPM_NAME="kaltura-html5lib"
 
