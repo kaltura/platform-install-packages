@@ -1,7 +1,7 @@
 #!/bin/bash -e 
 #===============================================================================
-#          FILE: package_ffmpeg_source.sh
-#         USAGE: ./package_ffmpeg_source.sh 
+#          FILE: package_fdk_source.sh
+#         USAGE: ./package_fdk_source.sh 
 #   DESCRIPTION: 
 #       OPTIONS: ---
 # 	LICENSE: AGPLv3+
@@ -27,10 +27,11 @@ if [ ! -r $SOURCES_RC ];then
 	exit 1
 fi
 . $SOURCES_RC 
-cd $RPM_SOURCES_DIR
 cd $SOURCE_PACKAGING_DIR 
+
 git clone $FDK_URI 
 tar jcvf  $RPM_SOURCES_DIR/kaltura-fdk-aac-$FDK_VERSION.tar.bz2 fdk-aac 
-echo "written to: $RPM_SOURCES_DIR/kaltura-fdk-aac-$FDK_VERSION.tar.bz2"
-rpmbuild -ba $RPM_SPECS_DIR/$FDK_RPM_PACKAGE_NAME.spec
+echo "Written to: $RPM_SOURCES_DIR/kaltura-fdk-aac-$FDK_VERSION.tar.bz2"
+
+rpmbuild -ba $RPM_SPECS_DIR/kaltura-fdk-aac.spec
 
