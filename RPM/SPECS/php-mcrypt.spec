@@ -15,16 +15,16 @@ URL: http://www.php.net/
 Packager: Jess Portnoy <jess.portnoy@kaltura.com> 
 Vendor: Kaltura, Inc. 
 
-Source: http://www.php.net/distributions/php-%{version}.tar.bz2
+Source: http://museum.php.net/php5/php-%{version}.tar.bz2
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 Requires: php-api = %{php_api}
-%{?_with_mcrypt:BuildRequires: libmcrypt-devel}
+%{?_with_mcrypt:BuildRequires: kaltura-libmcrypt-devel}
 
 
 BuildRequires: php-devel = %{version}
 Provides: php-mcrypt 
-Requires: libmcrypt
-BuildRequires: libmcrypt-devel
+Requires: kaltura-libmcrypt
+BuildRequires: kaltura-libmcrypt-devel
 %description
 PHP is an HTML-embedded scripting language.
 

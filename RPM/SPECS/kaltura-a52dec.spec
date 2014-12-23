@@ -1,4 +1,4 @@
-%define prefix /opt/kaltura
+%define prefix /usr
 Summary: Library for decoding ATSC A/52 (aka AC-3) audio streams
 Name: kaltura-a52dec
 Version: 0.7.4

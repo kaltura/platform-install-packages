@@ -1,6 +1,9 @@
 # General ENV vars:
 # sometimes people package their archives in the stupidest way possible. In such cases, they are extracted here, re-assembled in a normal way and move to $RPM_SOURCES_DIR.
-SOURCE_PACKAGING_DIR=~/sources
+RUN_DIR=`dirname $0`
+RPM_BASE_DIR=`cd $RUN_DIR/../../; pwd`
+BUILD_DIR=$RPM_BASE_DIR/scripts/build
+SOURCE_PACKAGING_DIR=~/rpmbuild
 RPM_SOURCES_DIR=~/rpmbuild/SOURCES
 RPM_SPECS_DIR=~/rpmbuild/SPECS
 PACKAGER_NAME="Tan-Tan"
@@ -9,6 +12,41 @@ TMP_DIR=/tmp
 SVN_USER=tantan
 KALTURA_SERVER_VERSION="Jupiter-10.0.0"
 KALTURA_POSTINST_VERSION=1.0.22
+
+set -e
+
+# PHP:
+PHP_VERSION=5.3.3
+PHP_URI="http://museum.php.net/php5/php-$PHP_VERSION.tar.bz2"
+
+PHP_LIBMEMCACHED_VERSION=1.0.16
+PHP_LIBMEMCACHED_URI="http://launchpad.net/libmemcached/1.0/$PHP_LIBMEMCACHED_VERSION/+download/libmemcached-$PHP_LIBMEMCACHED_VERSION.tar.gz"
+
+PHP_MEMCACHED_VERSION=2.1.0
+PHP_MEMCACHED_URI="http://pecl.php.net/get/memcached-$PHP_MEMCACHED_VERSION.tgz"
+
+PHP_SSH_VERSION=0.12
+PHP_SSH_URI="http://pecl.php.net/get/ssh2-$PHP_SSH_VERSION.tgz"
+
+PHP_LIBMCRYPT_VERSION=2.5.7
+PHP_LIBMCRYPT_URI="http://garr.dl.sourceforge.net/project/mcrypt/Libmcrypt/Production/libmcrypt-$PHP_LIBMCRYPT_VERSION.tar.gz"
+
+
+# a52dec:
+A52DEC_VERSION=0.7.4
+A52DEC_URI="http://liba52.sourceforge.net/files/a52dec-$A52DEC_VERSION.tar.gz"
+
+# faac:
+FAAC_VERSION=1.28
+FAAC_URI="http://sourceforge.net/projects/faac/files/faac-src/faac-$FAAC_VERSION/faac-$FAAC_VERSION.tar.bz2"
+
+# libass:
+LIBASS_VERSION=0.9.11
+LIBASS_URI="http://libass.googlecode.com/files/libass-$LIBASS_VERSION.tar.bz2"
+
+# lame:
+LAME_VERSION=3.99.5
+LAME_URI="http://downloads.sourceforge.net/project/lame/lame/3.99/lame-$LAME_VERSION.tar.gz"
 
 # Sphinx build vars:
 SPHINX_URI="http://sphinxsearch.googlecode.com/svn/trunk/"
@@ -29,7 +67,7 @@ X264_VERSION=0.140
 X264_RPM_PACKAGE_NAME=kaltura-x264
 X264_SNAP_DATE=20140104
 X264_DEST_ARCHIVE_NAME="x264-snapshot-$X264_SNAP_DATE-2245.tar.bz2"
-X264_URI="http://downloads.videolan.org/pub/videolan/x264/snapshots/x264-snapshot-$X264_SNAP_DATE-2245.tar.bz2"
+X264_URI="http://ftp.via.ecp.fr/pub/videolan/x264/snapshots/x264-snapshot-$X264_SNAP_DATE-2245.tar.bz2"
 
 # libfdk build vars:
 FDK_VERSION=0.1.3

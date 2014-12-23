@@ -16,7 +16,7 @@ BuildRoot:    %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 # 5.2.10 required to HAVE_JSON enabled
 BuildRequires: php-devel >= 5.3.0, php-pear
-BuildRequires: libmemcached-devel >= 1.0 , zlib-devel
+BuildRequires: kaltura-libmemcached-devel >= 1.0 , zlib-devel
 
 Requires(post): %{__pecl}
 Requires(postun): %{__pecl}

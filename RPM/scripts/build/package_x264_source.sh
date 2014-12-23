@@ -1,7 +1,7 @@
 #!/bin/bash -e 
 #===============================================================================
-#          FILE: package_ffmpeg_source.sh
-#         USAGE: ./package_ffmpeg_source.sh 
+#          FILE: package_x264_source.sh
+#         USAGE: ./package_x264_source.sh 
 #   DESCRIPTION: 
 #       OPTIONS: ---
 # 	LICENSE: AGPLv3+
