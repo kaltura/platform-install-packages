@@ -6,9 +6,9 @@ Release: 2
 Summary: Kaltura Dynamic Player
 License: AGPLv3+	
 URL: https://github.com/kaltura/kdp/releases/tag/%{version}
-Source0: %{name}-%{version}.zip
-Source2: %{name}-v3.9.7.zip
-Source3: %{name}-v3.9.8.zip
+Source0: %{name}-%{version}.tar.gz
+Source2: %{name}-v3.9.7.tar.gz
+Source3: %{name}-v3.9.8.tar.gz
 BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 BuildArch: noarch
 
@@ -31,8 +31,8 @@ This package installs the KDP Flash player.
 %prep
 %setup -qn %{version} 
 cd %{_builddir}
-unzip -qn %{SOURCE2} 
-unzip -qn %{SOURCE3} 
+tar zxf %{SOURCE2} 
+tar zxf %{SOURCE3} 
 cd -
 %build
 
