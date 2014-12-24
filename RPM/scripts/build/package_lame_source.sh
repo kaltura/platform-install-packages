@@ -32,7 +32,7 @@ if [ $? -eq 0 ];then
 	echo "Packaged to lame-$LAME_VERSION.tar.gz"
 else
 	echo "Unable to download $LAME_URI" >&2
-	exit -1
+	exit 1
 fi
 
 rpmbuild -ba $RPM_SPECS_DIR/kaltura-lame.spec

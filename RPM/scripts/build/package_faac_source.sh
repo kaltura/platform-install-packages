@@ -32,7 +32,7 @@ if [ $? -eq 0 ];then
 	echo "Packaged to faac-$FAAC_VERSION.tar.bz2"
 else
 	echo "Unable to download $FAAC_URI" >&2
-	exit -1
+	exit 1
 fi
 
 rpmbuild -ba $RPM_SPECS_DIR/kaltura-faac.spec

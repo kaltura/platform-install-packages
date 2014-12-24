@@ -32,7 +32,7 @@ if [ $? -eq 0 ];then
 	echo "Packaged to php-$PHP_VERSION.tar.bz2"
 else
 	echo "Unable to download $PHP_URI" >&2
-	exit -1
+	exit 1
 fi
 
 wget $PHP_LIBMCRYPT_URI -O $RPM_SOURCES_DIR/libmcrypt-$PHP_LIBMCRYPT_VERSION.tar.gz
@@ -40,7 +40,7 @@ if [ $? -eq 0 ];then
 	echo "Packaged to libmcrypt-$PHP_LIBMCRYPT_VERSION.tar.gz"
 else
 	echo "Unable to download $PHP_LIBMCRYPT_URI" >&2
-	exit -1
+	exit 1
 fi
 rpmbuild -ba $RPM_SPECS_DIR/kaltura-libmcrypt.spec
 
@@ -55,7 +55,7 @@ if [ $? -eq 0 ];then
 	echo "Packaged to libmemcached-$PHP_LIBMEMCACHED_VERSION.tar.gz"
 else
 	echo "Unable to download $PHP_LIBMEMCACHED_URI" >&2
-	exit -1
+	exit 1
 fi
 cd $RPM_SOURCES_DIR
 tar -xzf $RPM_SOURCES_DIR/libmemcached-$PHP_LIBMEMCACHED_VERSION.tar.gz
@@ -72,7 +72,7 @@ if [ $? -eq 0 ];then
 	echo "Packaged to memcached-$PHP_MEMCACHED_VERSION.tgz"
 else
 	echo "Unable to download $PHP_MEMCACHED_URI" >&2
-	exit -1
+	exit 1
 fi
 rpmbuild -ba $RPM_SPECS_DIR/php-pecl-memcached.spec
 
@@ -83,7 +83,7 @@ if [ $? -eq 0 ];then
 	echo "Packaged to ssh2-$PHP_SSH_VERSION.tgz"
 else
 	echo "Unable to download $PHP_SSH_URI" >&2
-	exit -1
+	exit 1
 fi
 rpmbuild -ba $RPM_SPECS_DIR/php-pecl-ssh2.spec
 

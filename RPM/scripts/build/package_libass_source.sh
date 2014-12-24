@@ -32,7 +32,7 @@ if [ $? -eq 0 ];then
 	echo "Packaged to libass-$LIBASS_VERSION.tar.bz2"
 else
 	echo "Unable to download $LIBASS_URI" >&2
-	exit -1
+	exit 1
 fi
 
 rpmbuild -ba $RPM_SPECS_DIR/kaltura-libass.spec
