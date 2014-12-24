@@ -25,7 +25,8 @@ if [ ! -x `which svn 2>/dev/null` ];then
 	echo "Need to install svn."
 	exit 2
 fi
-svn export --force --quiet $FLEX_WRAPPER_URI $SOURCE_PACKAGING_DIR/$FLEX_WRAPPER_RPM_NAME
+
+kaltura_svn export --force --quiet $FLEX_WRAPPER_URI $SOURCE_PACKAGING_DIR/$FLEX_WRAPPER_RPM_NAME
 
 cd $SOURCE_PACKAGING_DIR
 # flash things DO NOT need exec perms.
