@@ -1,16 +1,16 @@
 #!/bin/bash -e 
 #===============================================================================
-#          FILE: package_ffmpeg_source.sh
-#         USAGE: ./package_ffmpeg_source.sh 
+#          FILE: package_ffmpeg_aux_source.sh
+#         USAGE: ./package_ffmpeg_aux_source.sh 
 #   DESCRIPTION: 
 #       OPTIONS: ---
 # 	LICENSE: AGPLv3+
 #  REQUIREMENTS: ---
 #          BUGS: ---
 #         NOTES: ---
-#        AUTHOR: Jess Portnoy (), <jess.portnoy@kaltura.com>
+#        AUTHOR: Tan-Tan, <Jonathan.Kanarek@kaltura.com>
 #  ORGANIZATION: Kaltura, inc.
-#       CREATED: 12/29/13 05:24:47 EST
+#       CREATED: 12/24/14
 #      REVISION:  ---
 #===============================================================================
 
@@ -28,15 +28,10 @@ if [ ! -r $SOURCES_RC ];then
 fi
 . $SOURCES_RC 
 
-
-sudo yum localinstall -y $SOURCE_PACKAGING_DIR/RPMS/x86_64/kaltura-lame-3.99.5-3.x86_64.rpm
-sudo yum localinstall -y $SOURCE_PACKAGING_DIR/RPMS/x86_64/kaltura-lame-devel-3.99.5-3.x86_64.rpm
-
-
 cd $RPM_SOURCES_DIR
-curl $FFMPEG_URI > ffmpeg-$FFMPEG_VERSION.tar.bz2
+curl $FFMPEG_AUX_URI > ffmpeg-$FFMPEG_AUX_VERSION.tar.bz2
 cd $SOURCE_PACKAGING_DIR 
-echo "Written to: $RPM_SOURCES_DIR/ffmpeg-$FFMPEG_VERSION.tar.bz2."
+echo "Written to: $RPM_SOURCES_DIR/ffmpeg-$FFMPEG_AUX_VERSION.tar.bz2."
 
-rpmbuild -ba $RPM_SPECS_DIR/$FFMPEG_RPM_PACKAGE_NAME.spec
+rpmbuild -ba $RPM_SPECS_DIR/$FFMPEG_AUX_RPM_PACKAGE_NAME.spec
 

@@ -38,6 +38,7 @@ cd $BUILD_DIR
 ./package_libass_source.sh
 ./package_faac_source.sh
 ./package_ffmpeg_source.sh
+./package_ffmpeg_aux_source.sh
 ./package_pentaho_source.sh
 ./package_red5_source.sh
 ./package_sphinx_source.sh
