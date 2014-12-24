@@ -70,7 +70,7 @@ check_mysql_settings()
 		RC=1
 	fi
 	#INNODB_LOG_FILE_SIZE=`echo "select @@innodb_log_file_size;" | mysql -u$DB_USER -p$DB_PASSWD -h$DB_HOST -P$DB_PORT -N`
-	#if [ "$INNODB_LOG_FILE_SIZE" -lt "" ];then
+	#if [ "$INNODB_LOG_FILE_SIZE" -lt "32M" ];then
 	#	echo "innodb_log_file_size => 32M"
 	#	return 1
 	#fi

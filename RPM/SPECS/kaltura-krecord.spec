@@ -34,10 +34,10 @@ This package installs the Kaltura kRecord - used for recording from web cam.
 
 %install
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/flash/%{widget_name}
-for i in %{krecord_vers};do
-	cp -r %{_builddir}/$i $RPM_BUILD_ROOT/%{prefix}/web/flash/%{widget_name}
+#for i in %{krecord_vers};do
+	cp -r %{_builddir}/%{version} $RPM_BUILD_ROOT/%{prefix}/web/flash/%{widget_name}
 	find $RPM_BUILD_ROOT/%{prefix}/web/flash/%{widget_name} -name ".project" -exec rm {} \;
-done
+#done
 
 %clean
 rm -rf %{buildroot}
