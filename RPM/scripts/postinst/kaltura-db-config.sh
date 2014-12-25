@@ -66,7 +66,7 @@ MYVER=`echo "select version();" | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYS
 MYMAJVER=`echo $MYVER| awk -F "." '{print $1}'`
 MYMINORVER=`echo $MYVER| awk -F "." '{print $2}'`
 
-if [ "$MYMAJVER" -ne 5 -o "$MYMINORVER" -ne 1 ];then
+if [ "$MYMAJVER" -ne 5 ];then
 	echo -e "${BRIGHT_RED}Your version of MySQL is not compatible with Kaltura at the moment. 
 Please install and configure MySQL 5.1 according to the instructions on the Kaltura install manual before proceeding with the Kaltura installation.${NORMAL}"
 	exit 1
@@ -83,7 +83,18 @@ EOF
 	exit 4
 fi
 if ! check_mysql_settings $MYSQL_SUPER_USER $MYSQL_SUPER_USER_PASSWD $MYSQL_HOST $MYSQL_PORT ;then
-	exit 7
+	if [ $MYSQL_HOST = 'localhost' -o $MYSQL_HOST = '127.0.0.1' ];then
+		echo "Your MySQL settings are incorrect, do you wish to run $BASE_DIR/bin/kaltura-mysql-settings.sh in order to correct them? [Y/n]"
+		read ANS
+		if [ "$ANS" = "Y" ];then
+			$BASE_DIR/bin/kaltura-mysql-settings.sh
+		else
+			echo "Please adjust your settings manually and re-run." 
+			exit 8
+		fi
+	else
+		exit 7
+	fi
 fi
 trap - ERR
 if [ -z "$POPULATE_ONLY" ];then
