@@ -63,12 +63,13 @@ BuildRequires: xvidcore-devel
 %{!?_without_xvid:BuildRequires: xvidcore-devel}
 %{!?_without_a52dec:Requires: a52dec}
 BuildRequires: yasm-devel
-BuildRequires: kaltura-libass-devel 
+BuildRequires: libass-devel 
 BuildRequires: kaltura-x264-devel 
 BuildRequires: gsm-devel
 BuildRequires: speex-devel
 BuildRequires: libvpx-devel
-Requires:kaltura-a52dec,kaltura-libfaac,kaltura-libass,kaltura-x264
+BuildRequires: kaltura-fdk-aac
+Requires:kaltura-a52dec,kaltura-libfaac,libass,kaltura-x264
 
 %description
 FFmpeg is a very fast video and audio converter. It can also grab from a
