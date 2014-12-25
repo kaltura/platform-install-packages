@@ -47,7 +47,7 @@ cd %{pecl_name}-%{version}
 %build
 cd %{pecl_name}-%{version}
 phpize
-%configure
+%configure --with-libmemcached-dir=/opt/kaltura
 %{__make} %{?_smp_mflags}
 
 
