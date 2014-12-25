@@ -16,7 +16,7 @@ Source: svn://svn.mplayerhq.hu/mplayer/trunk/%{name}-%{real_version}.tar.bz2
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
 BuildRequires: prelink
-Requires:kaltura-a52dec,kaltura-libfaac,kaltura-libass,kaltura-x264
+Requires:kaltura-a52dec,kaltura-libfaac,libass,kaltura-x264
 
 %description
 Utilities and libraries for MPlayer movie encoder

@@ -72,7 +72,7 @@ BuildRequires: zlib-devel
 %{!?_without_xvid:BuildRequires: xvidcore-devel}
 %{!?_without_a52dec:Requires: a52dec}
 BuildRequires: yasm-devel
-BuildRequires: kaltura-libass-devel 
+BuildRequires: libass-devel 
 BuildRequires: kaltura-x264-devel 
 BuildRequires: openjpeg-devel
 Requires:kaltura-a52dec,kaltura-libfaac,kaltura-x264
