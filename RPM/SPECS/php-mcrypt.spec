@@ -23,8 +23,9 @@ Requires: php-api = %{php_api}
 
 BuildRequires: php-devel => 5.4.0 
 Provides: php-mcrypt 
-Requires: libmcrypt
-BuildRequires: libmcrypt-devel
+Requires: kaltura-libmcrypt
+BuildRequires: kaltura-libmcrypt-devel
+BuildRequires: libxml2-devel
 %description
 PHP is an HTML-embedded scripting language.
 
@@ -44,8 +45,7 @@ for mod in %{php_modules}; do
     phpize
     %configure \
         --with-libdir="%{_lib}" \
-        --with-mcrypt \
-	--includedir=/opt/kaltura/include \
+        --with-mcrypt=shared,/opt/kaltura \
 
     # cause libtool to avoid passing -rpath when linking
     # (this hack is well-known as "libtool rpath workaround")
@@ -78,6 +78,9 @@ done
 
 
 %changelog
+* Thu Dec 25 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 5.3.3-4
+- Build using the kaltura-libmcrypt packages and make sure the linkage is done against /opt/kaltura/lib.
+
 * Mon Dec 8 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 5.4.35-1
 - First PHP 5_4 build.
 

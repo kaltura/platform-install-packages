@@ -127,6 +127,8 @@ export CFLAGS="%{optflags}"
 %ifarch x86_64
     --extra-cflags="%{optflags} -fPIC" \
 %endif
+    --extra-cflags="%{optflags} -fPIC -I/opt/kaltura/include" \
+    --extra-ldflags="-L/opt/kaltura/lib" \
     --enable-bzlib \
     --disable-devices \
     --enable-libfaac \

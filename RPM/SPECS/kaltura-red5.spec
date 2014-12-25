@@ -10,7 +10,7 @@ URL: http://www.red5.org/
 Group: Applications/Networking
 BuildRoot: %{_builddir}/%{name}-%{version}-%{release}-root
 BuildRequires: ant
-Requires: chkconfig,jre
+Requires: chkconfig,jre >= 1.7.0
 
 %define red5_lib    /usr/lib/red5
 %define red5_log    /var/log/red5
