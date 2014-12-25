@@ -23,10 +23,7 @@ if [ ! -r $SOURCES_RC ];then
 fi
 . $SOURCES_RC
 
-rm -rf $SOURCE_PACKAGING_DIR
-mkdir $SOURCE_PACKAGING_DIR
-cp -r $RPM_BASE_DIR/SOURCES $SOURCE_PACKAGING_DIR
-ln -s $RPM_BASE_DIR/SPECS $SOURCE_PACKAGING_DIR/SPECS
+mkdir -p $SOURCE_PACKAGING_DIR
 
 rm -f ~/.rpmmacros
 ln -s $RPM_BASE_DIR/.rpmmacros ~/.rpmmacros
