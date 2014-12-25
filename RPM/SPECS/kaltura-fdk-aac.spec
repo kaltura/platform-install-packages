@@ -7,7 +7,8 @@ Release: 1
 License: GPL
 Group: System Environment/Libraries
 URL: http://developers.videolan.org/x264.html
-Source: https://github.com/mstorsjo/fdk-aac/blob/master/%{name}-%{version}.tar.bz2 
+#Source: https://github.com/mstorsjo/fdk-aac/blob/master/%{name}-%{version}.tar.bz2 
+Source: https://github.com/mstorsjo/fdk-aac/archive/v%{version}.zip
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
 Provides: fdk-aac, libfdk-aac
@@ -26,7 +27,7 @@ Requires: %{name} = %{version}-%{release}, pkgconfig
 The FDK AAC Codec Library For Android contains an encoder implementation of the Advanced Audio Coding (AAC) audio codec.
 
 %prep
-%setup -qn fdk-aac 
+%setup -qn fdk-aac-%{version} 
 autoconf || true
 ./autogen.sh
 

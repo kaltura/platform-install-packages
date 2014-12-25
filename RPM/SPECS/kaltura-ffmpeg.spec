@@ -64,6 +64,10 @@ BuildRequires: kaltura-x264-devel
 BuildRequires: gsm-devel
 BuildRequires: speex-devel
 BuildRequires: libvpx-devel
+BuildRequires: schroedinger-devel 
+BuildRequires: kaltura-fdk-aac-devel
+BuildRequires: libtheora-devel
+BuildRequires: xvidcore-devel >= 1.3.2
 Requires:kaltura-a52dec,kaltura-libfaac,kaltura-libass,kaltura-x264
 
 %description
@@ -125,10 +129,12 @@ export CFLAGS="%{optflags}"
 %ifarch x86_64
     --extra-cflags="%{optflags} -fPIC" \
 %endif
-    --enable-bzlib \
-    --disable-devices \
+    --extra-cflags="%{optflags} -fPIC -I/opt/kaltura/include" \
+    --extra-ldflags="-L/opt/kaltura/lib" \
     --enable-libfaac \
     --enable-libgsm \
+    --disable-devices \
+    --enable-bzlib \
     --enable-libmp3lame \
     --enable-libschroedinger \
     --enable-libtheora \
@@ -158,8 +164,6 @@ export CFLAGS="%{optflags}"
 --enable-pthreads \
 --enable-swscale \
 --enable-vdpau \
---enable-bzlib \
---disable-devices \
 --enable-filter=movie \
     --enable-version3 \
 --enable-x11grab
