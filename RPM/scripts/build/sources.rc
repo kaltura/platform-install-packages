@@ -3,7 +3,7 @@
 RUN_DIR=`dirname $0`
 RPM_BASE_DIR=`cd $RUN_DIR/../../; pwd`
 BUILD_DIR=$RPM_BASE_DIR/scripts/build
-SOURCE_PACKAGING_DIR=~/rpmbuild
+SOURCE_PACKAGING_DIR=~/sources
 RPM_SOURCES_DIR=~/rpmbuild/SOURCES
 RPM_SPECS_DIR=~/rpmbuild/SPECS
 PACKAGER_NAME="Tan-Tan"
@@ -120,10 +120,7 @@ KMC_LOGIN_VERSION=v$KMC_LOGIN_MINUS_V_VERSION
 KMC_URI="https://github.com/kaltura/kmc/releases/download/$KMC_VERSION/$KMC_VERSION.zip"
 KMC_LOGIN_URI="https://github.com/kaltura/kmc-login/releases/download/$KMC_LOGIN_VERSION/$KMC_LOGIN_VERSION.zip"
 KMC_UICONF_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalsource/uiconf/kaltura/kmc"
-KMC_DOCS_URI="https://github.com/kaltura/kmc-docs/archive/IX_$KALTURA_SERVER_VERSION.tar.gz"
 KMC_RPM_NAME="kaltura-kmc"
-
-# Kaltura KMC docs:
 KMC_DOC_VERSION="master"
 KMC_DOC_URI="https://github.com/kaltura/kmc-docs/archive/$KMC_DOC_VERSION.zip"
 
