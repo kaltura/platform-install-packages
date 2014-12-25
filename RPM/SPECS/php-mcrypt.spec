@@ -14,17 +14,17 @@ URL: http://www.php.net/
 
 Packager: Jess Portnoy <jess.portnoy@kaltura.com> 
 Vendor: Kaltura, Inc. 
-
 Source: http://museum.php.net/php5/php-%{version}.tar.bz2
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 Requires: php-api = %{php_api}
 %{?_with_mcrypt:BuildRequires: kaltura-libmcrypt-devel}
 
-
 BuildRequires: php-devel = %{version}
 Provides: php-mcrypt 
 Requires: kaltura-libmcrypt
 BuildRequires: kaltura-libmcrypt-devel
+BuildRequires: libxml2-devel
+
 %description
 PHP is an HTML-embedded scripting language.
 
@@ -36,7 +36,8 @@ has not been included in the basic PHP package for CentOS/RHEL/Fedora.
 
 %build
 export CFLAGS="%{optflags} -fno-strict-aliasing -Wno-pointer-sign"
-
+export LDFLAGS="-L/opt/kaltura/lib"
+export C_INCLUDE_PATH="/opt/kaltura/include"
 for mod in %{php_modules}; do
     pushd ext/$mod/
     rm -rf tests/
@@ -44,7 +45,7 @@ for mod in %{php_modules}; do
     phpize
     %configure \
         --with-libdir="%{_lib}" \
-        --with-mcrypt \
+        --with-mcrypt=shared,/opt/kaltura \
 
     # cause libtool to avoid passing -rpath when linking
     # (this hack is well-known as "libtool rpath workaround")
