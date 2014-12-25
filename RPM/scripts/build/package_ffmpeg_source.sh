@@ -37,8 +37,6 @@ sudo yum localinstall -y $SOURCE_PACKAGING_DIR/RPMS/x86_64/kaltura-libopencore-a
 sudo yum localinstall -y $SOURCE_PACKAGING_DIR/RPMS/x86_64/kaltura-fdk-aac-*.x86_64.rpm
 
 
-
-
 cd $RPM_SOURCES_DIR
 curl $FFMPEG_URI > ffmpeg-$FFMPEG_VERSION.tar.bz2
 cd $SOURCE_PACKAGING_DIR 
