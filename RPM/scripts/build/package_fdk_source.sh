@@ -16,7 +16,7 @@
 
 #set -o nounset                              # Treat unset variables as an error
 
-if [ ! -x `which git 2>/dev/null` ];then
+if [ ! -x "`which git 2>/dev/null`" ];then
 	echo "Need to install git."
 	exit 2
 fi

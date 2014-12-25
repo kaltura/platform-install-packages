@@ -21,12 +21,11 @@ if [ ! -r $SOURCES_RC ];then
 	exit 1
 fi
 . $SOURCES_RC 
-if [ ! -x `which wget 2>/dev/null` ];then
+if [ ! -x "`which wget 2>/dev/null`" ];then
 	echo "Need to install wget."
 	exit 2
 fi
 mkdir -p $SOURCE_PACKAGING_DIR/$KDP3_RPM_NAME
-set -x
 for KDP3_VERSION in $KDP3_VERSIONS;do
 	wget $KDP3_BASE_URI/$KDP3_VERSION/$KDP3_VERSION.zip -O$SOURCE_PACKAGING_DIR/$KDP3_RPM_NAME/$KDP3_RPM_NAME-$KDP3_VERSION.zip
 	cd $SOURCE_PACKAGING_DIR/$KDP3_RPM_NAME
@@ -34,7 +33,6 @@ for KDP3_VERSION in $KDP3_VERSIONS;do
 	rm -rf $KDP3_VERSION/__MACOSX $KDP3_VERSION/.DS_Store
 	cd $SOURCE_PACKAGING_DIR/$KDP3_RPM_NAME/
 	tar zcf  $RPM_SOURCES_DIR/$KDP3_RPM_NAME-$KDP3_VERSION.tar.gz $KDP3_VERSION
-set +x
 	echo "Packaged into $RPM_SOURCES_DIR/$KDP3_RPM_NAME-$KDP3_VERSION.tar.gz"
 done
 rpmbuild -ba $RPM_SPECS_DIR/$KDP3_RPM_NAME.spec

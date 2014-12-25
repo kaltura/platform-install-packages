@@ -15,7 +15,7 @@
 #===============================================================================
 
 set -o nounset                              # Treat unset variables as an error
-if [ ! -x `which svn 2>/dev/null` ];then
+if [ ! -x "`which svn 2>/dev/null`" ];then
 	echo "Need to install subversion."
 	exit 2
 fi

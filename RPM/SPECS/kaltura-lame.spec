@@ -7,7 +7,7 @@ License: LGPL
 Group: Applications/Multimedia
 URL: http://lame.sourceforge.net/
 
-Source: http://dl.sf.net/project/lame/lame/3.99/lame-%{version}.tar.gz
+Source: http://sourceforge.net/projects/lame/files/lame/3.99/lame-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
 BuildRequires: gcc-c++
