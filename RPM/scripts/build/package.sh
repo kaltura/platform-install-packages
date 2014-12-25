@@ -28,6 +28,9 @@ mkdir $SOURCE_PACKAGING_DIR
 cp -r $RPM_BASE_DIR/SOURCES $SOURCE_PACKAGING_DIR
 ln -s $RPM_BASE_DIR/SPECS $SOURCE_PACKAGING_DIR/SPECS
 
+rm -f ~/.rpmmacros
+ln -s $RPM_BASE_DIR/.rpmmacros ~/.rpmmacros
+
 cd $BUILD_DIR
 
 ./package_php_source.sh
