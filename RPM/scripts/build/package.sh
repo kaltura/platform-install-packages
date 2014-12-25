@@ -36,6 +36,7 @@ cd $BUILD_DIR
 ./package_x264_source.sh
 ./package_lame_source.sh
 ./package_libass_source.sh
+./package_opencore-amr_source.sh
 ./package_faac_source.sh
 ./package_ffmpeg_source.sh
 ./package_ffmpeg_aux_source.sh
