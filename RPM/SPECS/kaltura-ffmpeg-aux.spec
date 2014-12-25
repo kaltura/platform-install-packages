@@ -60,7 +60,7 @@ BuildRequires: zlib-devel
 %{!?_without_gsm:BuildRequires: gsm-devel}
 %{!?_without_lame:BuildRequires: kaltura-lame-devel}
 %{!?_without_nut:BuildRequires: libnut-devel}
-%{!?_without_opencore_amr:BuildRequires: opencore-amr-devel}
+%{!?_without_opencore_amr:BuildRequires: kaltura-libopencore-amr-devel}
 %{!?_without_openjpeg:BuildRequires: openjpeg-devel}
 %{!?_without_rtmp:BuildRequires: librtmp-devel}
 %{!?_without_schroedinger:BuildRequires: schroedinger-devel}
@@ -72,7 +72,7 @@ BuildRequires: zlib-devel
 %{!?_without_xvid:BuildRequires: xvidcore-devel}
 %{!?_without_a52dec:Requires: a52dec}
 BuildRequires: yasm-devel
-BuildRequires: libass-devel 
+BuildRequires: kaltura-libass-devel 
 BuildRequires: kaltura-x264-devel 
 BuildRequires: openjpeg-devel
 Requires:kaltura-a52dec,kaltura-libfaac,kaltura-x264
