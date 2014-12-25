@@ -38,8 +38,6 @@ has not been included in the basic PHP package for CentOS/RHEL/Fedora.
 
 %build
 export CFLAGS="%{optflags} -fno-strict-aliasing -Wno-pointer-sign"
-export LDFLAGS="-L/opt/kaltura/lib"
-export C_INCLUDE_PATH="/opt/kaltura/include"
 for mod in %{php_modules}; do
     pushd ext/$mod/
     rm -rf tests/
@@ -80,6 +78,9 @@ done
 
 
 %changelog
+* Thu Dec 25 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 5.3.3-4
+- Build using the kaltura-libmcrypt packages and make sure the linkage is done against /opt/kaltura/lib.
+
 * Mon Jan 6 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 5.3.3-3
 - It does not PROVIDE libmcrypt, it requires it.
 

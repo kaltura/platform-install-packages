@@ -131,10 +131,10 @@ export CFLAGS="%{optflags}"
 %endif
     --extra-cflags="%{optflags} -fPIC -I/opt/kaltura/include" \
     --extra-ldflags="-L/opt/kaltura/lib" \
-    --enable-libfaac \
-    --enable-libgsm \
     --disable-devices \
     --enable-bzlib \
+    --enable-libfaac \
+    --enable-libgsm \
     --enable-libmp3lame \
     --enable-libschroedinger \
     --enable-libtheora \
@@ -164,6 +164,8 @@ export CFLAGS="%{optflags}"
 --enable-pthreads \
 --enable-swscale \
 --enable-vdpau \
+--enable-bzlib \
+--disable-devices \
 --enable-filter=movie \
     --enable-version3 \
 --enable-x11grab
@@ -259,7 +261,7 @@ fi
 * Mon Jul 7 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 2.1.3-1
 - 2.1.3.
 
-* Sun Jan 14 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.1.1-4
+* Sun Jan 12 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.1.1-4
 - Added qt-faststart.
 
 * Sun Jan 12 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.1.1-3

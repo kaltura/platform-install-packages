@@ -7,7 +7,6 @@ Release: 1
 License: GPL
 Group: System Environment/Libraries
 URL: http://developers.videolan.org/x264.html
-#Source: https://github.com/mstorsjo/fdk-aac/blob/master/%{name}-%{version}.tar.bz2 
 Source: https://github.com/mstorsjo/fdk-aac/archive/v%{version}.zip
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
