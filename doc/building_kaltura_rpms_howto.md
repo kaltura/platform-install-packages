@@ -5,7 +5,7 @@ rpm-build gcc gcc-c++ git redhat-rpm-config svn wget dos2unix
 Extra repos
 ===========
 Extra repos are not needed for installing Kaltura but MUST be configured in order to build some Kaltura dependencies:
-EPEL, http://dl.atrpms.net
+EPEL (https://fedoraproject.org/wiki/EPEL), rpmforge (http://repoforge.org/use) and ATRPMS (http://dl.atrpms.net)
 Alternatively, you can look up needed additional packages at http://pkgs.org
 
 GIT repo
