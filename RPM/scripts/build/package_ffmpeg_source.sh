@@ -27,12 +27,20 @@ if [ ! -r $SOURCES_RC ];then
 	exit 1
 fi
 . $SOURCES_RC 
+
+
+sudo yum localinstall -y $SOURCE_PACKAGING_DIR/RPMS/x86_64/kaltura-lame-*.x86_64.rpm
+sudo yum localinstall -y $SOURCE_PACKAGING_DIR/RPMS/x86_64/kaltura-a52dec-*.x86_64.rpm
+sudo yum localinstall -y $SOURCE_PACKAGING_DIR/RPMS/x86_64/kaltura-libfaac-*.x86_64.rpm
+sudo yum localinstall -y $SOURCE_PACKAGING_DIR/RPMS/x86_64/kaltura-x264-*.x86_64.rpm
+sudo yum localinstall -y $SOURCE_PACKAGING_DIR/RPMS/x86_64/kaltura-libopencore-amr-*.x86_64.rpm
+sudo yum localinstall -y $SOURCE_PACKAGING_DIR/RPMS/x86_64/kaltura-fdk-aac-*.x86_64.rpm
+
+
 cd $RPM_SOURCES_DIR
 curl $FFMPEG_URI > ffmpeg-$FFMPEG_VERSION.tar.bz2
-curl $FFMPEG_AUX_URI > ffmpeg-$FFMPEG_AUX_VERSION.tar.bz2
 cd $SOURCE_PACKAGING_DIR 
-echo "written to: $RPM_SOURCES_DIR/ffmpeg-$FFMPEG_VERSION.tar.bz2."
-echo "written to: $RPM_SOURCES_DIR/ffmpeg-$FFMPEG_AUX_VERSION.tar.bz2."
+echo "Written to: $RPM_SOURCES_DIR/ffmpeg-$FFMPEG_VERSION.tar.bz2."
+
 rpmbuild -ba $RPM_SPECS_DIR/$FFMPEG_RPM_PACKAGE_NAME.spec
-rpmbuild -ba $RPM_SPECS_DIR/$FFMPEG_AUX_RPM_PACKAGE_NAME.spec
 

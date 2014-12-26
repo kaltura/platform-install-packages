@@ -25,7 +25,8 @@ if [ ! -x "`which svn 2>/dev/null`" ];then
 	echo "Need to install svn."
 	exit 2
 fi
-svn export --force --quiet $KDPWRAPPER_URI/$KDPWRAPPER_VERSION $SOURCE_PACKAGING_DIR/$KDPWRAPPER_RPM_NAME/$KDPWRAPPER_VERSION 
+
+kaltura_svn export --force --quiet $KDPWRAPPER_URI/$KDPWRAPPER_VERSION $SOURCE_PACKAGING_DIR/$KDPWRAPPER_RPM_NAME/$KDPWRAPPER_VERSION 
 cd $SOURCE_PACKAGING_DIR
 # flash things DO NOT need exec perms.
 find $KDPWRAPPER_RPM_NAME -type f -exec chmod -x {} \;

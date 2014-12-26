@@ -1,4 +1,4 @@
-%define prefix /opt/kaltura
+%define prefix /usr
 
 Summary: Library for encoding and decoding H264/AVC video streams
 Name: kaltura-fdk-aac

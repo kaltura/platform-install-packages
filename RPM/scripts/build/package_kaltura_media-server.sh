@@ -1,7 +1,7 @@
 #!/bin/bash -e 
 #===============================================================================
-#          FILE: package_kaltura_web.sh
-#         USAGE: ./package_kaltura_web.sh 
+#          FILE: package_kaltura_media-server.sh
+#         USAGE: ./package_kaltura_media-server.sh 
 #   DESCRIPTION: 
 #       OPTIONS: ---
 # 	LICENSE: AGPLv3+
@@ -26,6 +26,8 @@ if [ ! -x "`which wget 2>/dev/null`" ];then
 	exit 2
 fi
 mkdir -p $RPM_SOURCES_DIR/$KALTURA_MEDIASERVER_RPM_NAME
-wget $KALTURA_MEDIASERVER_URI -O$RPM_SOURCES_DIR/$KALTURA_MEDIASERVER_RPM_NAME-$KALTURA_MEDIASERVER_VERSION.zip
-echo "Packaged into $RPM_SOURCES_DIR/$KALTURA_MEDIASERVER_RPM_NAME-$KALTURA_MEDIASERVER_VERSION.zip"
+
+wget $KALTURA_MEDIASERVER_URI -O$RPM_SOURCES_DIR/KalturaWowzaServer-install-$KALTURA_MEDIASERVER_VERSION.zip
+echo "Packaged into $RPM_SOURCES_DIR/KalturaWowzaServer-install-$KALTURA_MEDIASERVER_VERSION.zip"
+
 rpmbuild -ba $RPM_SPECS_DIR/$KALTURA_MEDIASERVER_RPM_NAME.spec

@@ -25,10 +25,8 @@ if [ ! -x "`which svn 2>/dev/null`" ];then
 	echo "Need to install svn."
 	exit 2
 fi
-#mkdir -p $SOURCE_PACKAGING_DIR/uiconf/kaltura/kmc
-#svn export --force --quiet $KMC_URI $SOURCE_PACKAGING_DIR/$KMC_RPM_NAME-$KMC_VERSION 
-#svn export --force --quiet $KMC_LOGIN_URI $SOURCE_PACKAGING_DIR/$KMC_RPM_NAME-$KMC_VERSION/login/$KMC_LOGIN_VERSION
-svn export --force --quiet $KMC_UICONF_URI $SOURCE_PACKAGING_DIR/$KMC_RPM_NAME-$KMC_VERSION/uiconf/kaltura/kmc
+
+kaltura_svn export --force --quiet $KMC_UICONF_URI $SOURCE_PACKAGING_DIR/$KMC_RPM_NAME-$KMC_VERSION/uiconf/kaltura/kmc
 cd $SOURCE_PACKAGING_DIR
 wget $KMC_URI -O $KMC_RPM_NAME-$KMC_VERSION.zip
 unzip -qo $KMC_RPM_NAME-$KMC_VERSION.zip

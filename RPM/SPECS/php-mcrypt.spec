@@ -14,13 +14,10 @@ URL: http://www.php.net/
 
 Packager: Jess Portnoy <jess.portnoy@kaltura.com> 
 Vendor: Kaltura, Inc. 
-
-#Source: http://www.php.net/distributions/php-%{version}.tar.bz2
 Source: http://museum.php.net/php5/php-%{version}.tar.bz2
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 Requires: php-api = %{php_api}
-%{?_with_mcrypt:BuildRequires: libmcrypt-devel}
-
+%{?_with_mcrypt:BuildRequires: kaltura-libmcrypt-devel}
 
 BuildRequires: php-devel = %{version}
 Provides: php-mcrypt 
@@ -38,6 +35,8 @@ has not been included in the basic PHP package for CentOS/RHEL/Fedora.
 
 %build
 export CFLAGS="%{optflags} -fno-strict-aliasing -Wno-pointer-sign"
+export LDFLAGS="-L/opt/kaltura/lib"
+export C_INCLUDE_PATH="/opt/kaltura/include"
 for mod in %{php_modules}; do
     pushd ext/$mod/
     rm -rf tests/

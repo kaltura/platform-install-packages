@@ -27,7 +27,7 @@ if [ ! -x "`which svn 2>/dev/null`" ];then
 fi
 
 for KDP_VERSION in $KDP_VERSIONS;do
-	svn export --force --quiet $KDP_URI/$KDP_VERSION $SOURCE_PACKAGING_DIR/$KDP_RPM_NAME/$KDP_VERSION 
+	kaltura_svn export --force --quiet $KDP_URI/$KDP_VERSION $SOURCE_PACKAGING_DIR/$KDP_RPM_NAME/$KDP_VERSION 
 done
 cd $SOURCE_PACKAGING_DIR
 # flash things DO NOT need exec perms.

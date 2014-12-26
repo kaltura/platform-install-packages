@@ -24,6 +24,10 @@ if [ ! -x "`which wget 2>/dev/null`" ];then
 	echo "Need to install wget."
 	exit 2
 fi
+if [ ! -x `which mvn 2>/dev/null` ];then
+	echo "Need to install maven."
+	exit 2
+fi
 
 SOURCES_RC=`dirname $0`/sources.rc
 if [ ! -r $SOURCES_RC ];then

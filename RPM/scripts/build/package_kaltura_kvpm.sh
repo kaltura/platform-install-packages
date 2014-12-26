@@ -25,8 +25,9 @@ if [ ! -x "`which svn 2>/dev/null`" ];then
 	echo "Need to install svn."
 	exit 2
 fi
-svn export --force --quiet $KVPM_URI $SOURCE_PACKAGING_DIR/$KVPM_RPM_NAME
-svn export --force --quiet $KVPM_UICONF_URI $SOURCE_PACKAGING_DIR/$KVPM_RPM_NAME/uiconf/ps/kaltura/kvpm/$KVPM_VERSION
+
+kaltura_svn export --force --quiet $KVPM_URI $SOURCE_PACKAGING_DIR/$KVPM_RPM_NAME
+kaltura_svn export --force --quiet $KVPM_UICONF_URI $SOURCE_PACKAGING_DIR/$KVPM_RPM_NAME/uiconf/ps/kaltura/kvpm/$KVPM_VERSION
 
 cd $SOURCE_PACKAGING_DIR
 # flash things DO NOT need exec perms.
