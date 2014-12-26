@@ -5,7 +5,7 @@
 Name:	kaltura-%{widget_name}
 Version: 1.0.0 
 Release: 6 
-Summary: Kaltura KCW - used for recording from web cam
+Summary: Kalture Contribution Wizard 
 License: AGPLv3+	
 URL: http://kaltura.org
 Source0: %{name}.tar.bz2
@@ -26,7 +26,7 @@ teachers by providing educational institutions disruptive online video solutions
 learning, and increased engagement across campuses and beyond. 
 For more information visit: http://corp.kaltura.com, http://www.kaltura.org and http://www.html5video.org.
 
-This package installs the Kaltura KCW - used for recording from web cam.
+This package installs the Kaltura Contribution Wizard.
 
 %prep
 %setup -qn %{name} 
