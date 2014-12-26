@@ -4,7 +4,7 @@
 
 Summary:      Extension to work with the Memcached caching daemon
 Name:         php-pecl-%{pecl_name}
-Version:      2.1.0
+Version:      2.2.0
 Release:      1
 License:      PHP
 Group:        Development/Languages
@@ -99,6 +99,10 @@ fi
 
 
 %changelog
+* Mon Dec 25 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 2.2.0-1
+- Version bounce.
+- Use kaltura-libmemcached instead of libmemcached.
+
 * Fri Jan 3 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 2.1.0-1
 - First build for Kaltura CE. 
 

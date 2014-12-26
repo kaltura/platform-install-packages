@@ -24,7 +24,6 @@ Provides: php-mcrypt
 Requires: kaltura-libmcrypt
 BuildRequires: kaltura-libmcrypt-devel
 BuildRequires: libxml2-devel
-
 %description
 PHP is an HTML-embedded scripting language.
 
@@ -78,6 +77,9 @@ done
 
 
 %changelog
+* Thu Dec 25 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 5.3.3-4
+- Build using the kaltura-libmcrypt packages and make sure the linkage is done against /opt/kaltura/lib.
+
 * Mon Jan 6 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 5.3.3-3
 - It does not PROVIDE libmcrypt, it requires it.
 

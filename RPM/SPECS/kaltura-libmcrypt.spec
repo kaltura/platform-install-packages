@@ -3,8 +3,8 @@
 
 Summary: Data encryption library
 Name: kaltura-libmcrypt
-Version: 2.5.7
-Release: 5 
+Version: 2.5.8
+Release: 2 
 License: LGPL
 Group: System Environment/Libraries
 URL: http://mcrypt.sourceforge.net/
@@ -14,6 +14,7 @@ Vendor: Kaltura, Inc.
 
 Source: http://dl.sf.net/mcrypt/libmcrypt-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
+Provides: libmcrypt = %{version}
 
 BuildRequires: libtool >= 1.3.4
 
@@ -29,7 +30,7 @@ TWOFISH, BLOWFISH, ARCFOUR, WAKE and more.
 Summary: Header files, libraries and development documentation for %{name}.
 Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
-Provides: libmcrypt = %{version}
+Provides: libmcrypt-devel = %{version}
 %description devel
 This package contains the header files, static libraries and development
 documentation for %{name}. If you like to develop programs using %{name},
@@ -78,11 +79,14 @@ EOF
 %{prefix}/bin/*
 %{prefix}/lib/*.a
 #%{prefix}/lib/*.so
-%{prefix}/include/*.h
+%{prefix}/include/*
 %{prefix}/share/aclocal/*.m4
 %exclude %{prefix}/lib/*.la
 
 %changelog
+* Mon Dec 8 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 2.5.8-1
+- Bounce to 2.5.8
+
 * Mon Jan 6 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 2.5.7-5
 - Corrected LD_LIBRARY_PATH
 

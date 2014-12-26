@@ -68,7 +68,10 @@ BuildRequires: kaltura-x264-devel
 BuildRequires: gsm-devel
 BuildRequires: speex-devel
 BuildRequires: libvpx-devel
-BuildRequires: kaltura-fdk-aac
+BuildRequires: schroedinger-devel 
+BuildRequires: kaltura-fdk-aac-devel
+BuildRequires: libtheora-devel
+BuildRequires: xvidcore-devel >= 1.3.2
 Requires:kaltura-a52dec,kaltura-libfaac,libass,kaltura-x264
 
 %description
@@ -130,8 +133,10 @@ export CFLAGS="%{optflags}"
 %ifarch x86_64
     --extra-cflags="%{optflags} -fPIC" \
 %endif
-    --enable-bzlib \
+    --extra-cflags="%{optflags} -fPIC -I/opt/kaltura/include" \
+    --extra-ldflags="-L/opt/kaltura/lib" \
     --disable-devices \
+    --enable-bzlib \
     --enable-libfaac \
     --enable-libgsm \
     --enable-libmp3lame \
@@ -260,7 +265,7 @@ fi
 * Mon Jul 7 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 2.1.3-1
 - 2.1.3.
 
-* Sun Jan 14 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.1.1-4
+* Sun Jan 12 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.1.1-4
 - Added qt-faststart.
 
 * Sun Jan 12 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.1.1-3

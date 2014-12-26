@@ -75,7 +75,13 @@ BuildRequires: yasm-devel
 BuildRequires: libass-devel 
 BuildRequires: kaltura-x264-devel 
 BuildRequires: openjpeg-devel
+BuildRequires: speex-devel
 Requires:kaltura-a52dec,kaltura-libfaac,kaltura-x264
+BuildRequires: libvpx-devel
+BuildRequires: schroedinger-devel 
+BuildRequires: kaltura-fdk-aac-devel
+BuildRequires: libtheora-devel
+BuildRequires: xvidcore-devel >= 1.3.2
 
 %description
 FFmpeg is a very fast video and audio converter. It can also grab from a
@@ -134,6 +140,8 @@ export CFLAGS="%{optflags}"
 %ifarch x86_64
     --extra-cflags="%{optflags} -fPIC" \
 %endif
+    --extra-cflags="%{optflags} -fPIC -I/opt/kaltura/include" \
+    --extra-ldflags="-L/opt/kaltura/lib" \
     --enable-avfilter \
 %{!?_without_schroedinger:--enable-libschroedinger} \
 %{!?_without_dc1394:--enable-libdc1394} \

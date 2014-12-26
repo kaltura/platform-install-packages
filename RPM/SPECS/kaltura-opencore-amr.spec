@@ -72,3 +72,6 @@ EOF
 %changelog
 * Tue Dec 9 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 0.1.3-1
 - Bounce to 0.1.3
+
+* Sun Jan 6 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 0.9.11-1
+- Initial package.
