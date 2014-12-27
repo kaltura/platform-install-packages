@@ -21,7 +21,7 @@ if [ ! -r $SOURCES_RC ];then
 	exit 1
 fi
 . $SOURCES_RC 
-if [ ! -x `which svn 2>/dev/null` ];then
+if [ ! -x "`which svn 2>/dev/null`" ];then
 	echo "Need to install svn."
 	exit 2
 fi
@@ -30,14 +30,14 @@ fi
 rm -rf $SOURCE_PACKAGING_DIR/$KSE_RPM_NAME/*
 
 for KSE_VERSION in $KSE_VERSIONS;do
-	svn export --force --quiet $KSE_URI/$KSE_VERSION $SOURCE_PACKAGING_DIR/$KSE_RPM_NAME/$KSE_VERSION 
+	kaltura_svn export --force --quiet $KSE_URI/$KSE_VERSION $SOURCE_PACKAGING_DIR/$KSE_RPM_NAME/$KSE_VERSION 
 done
 
 for KSE_UICONF_VERSION in $KSE_UICONF_VERSIONS;do
-	svn export --force --quiet $KSE_UICONF_URI/$KSE_UICONF_VERSION $SOURCE_PACKAGING_DIR/$KSE_RPM_NAME/uiconf/kaltura/kmc/kcw
+	kaltura_svn export --force --quiet $KSE_UICONF_URI/$KSE_UICONF_VERSION $SOURCE_PACKAGING_DIR/$KSE_RPM_NAME/uiconf/kaltura/kmc/kcw
 done
-svn export --force --quiet $KSE_UICONF_GENERIC_URI $SOURCE_PACKAGING_DIR/$KSE_RPM_NAME/uiconf/kaltura/kmc/generic
-svn export --force --quiet $KSE_UICONF_EDITOR_URI $SOURCE_PACKAGING_DIR/$KSE_RPM_NAME/uiconf/kcweditor/locales/en_US
+kaltura_svn export --force --quiet $KSE_UICONF_GENERIC_URI $SOURCE_PACKAGING_DIR/$KSE_RPM_NAME/uiconf/kaltura/kmc/generic
+kaltura_svn export --force --quiet $KSE_UICONF_EDITOR_URI $SOURCE_PACKAGING_DIR/$KSE_RPM_NAME/uiconf/kcweditor/locales/en_US
 cd $SOURCE_PACKAGING_DIR
 
 # flash things DO NOT need exec perms.

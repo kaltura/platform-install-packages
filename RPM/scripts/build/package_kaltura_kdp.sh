@@ -21,13 +21,13 @@ if [ ! -r $SOURCES_RC ];then
 	exit 1
 fi
 . $SOURCES_RC 
-if [ ! -x `which svn 2>/dev/null` ];then
+if [ ! -x "`which svn 2>/dev/null`" ];then
 	echo "Need to install svn."
 	exit 2
 fi
 
 for KDP_VERSION in $KDP_VERSIONS;do
-	svn export --force --quiet $KDP_URI/$KDP_VERSION $SOURCE_PACKAGING_DIR/$KDP_RPM_NAME/$KDP_VERSION 
+	kaltura_svn export --force --quiet $KDP_URI/$KDP_VERSION $SOURCE_PACKAGING_DIR/$KDP_RPM_NAME/$KDP_VERSION 
 done
 cd $SOURCE_PACKAGING_DIR
 # flash things DO NOT need exec perms.

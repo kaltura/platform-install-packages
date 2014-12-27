@@ -54,13 +54,13 @@ BuildRequires: SDL-devel
 BuildRequires: freetype-devel
 BuildRequires: imlib2-devel
 BuildRequires: zlib-devel
-%{!?_without_a52dec:BuildRequires: a52dec-devel}
+%{!?_without_a52dec:BuildRequires: kaltura-a52dec-devel}
 %{!?_without_dc1394:BuildRequires: libdc1394-devel}
 %{!?_without_faac:BuildRequires: faac-devel}
 %{!?_without_gsm:BuildRequires: gsm-devel}
-%{!?_without_lame:BuildRequires: lame-devel}
+%{!?_without_lame:BuildRequires: kaltura-lame-devel}
 %{!?_without_nut:BuildRequires: libnut-devel}
-%{!?_without_opencore_amr:BuildRequires: opencore-amr-devel}
+%{!?_without_opencore_amr:BuildRequires: kaltura-libopencore-amr-devel}
 %{!?_without_openjpeg:BuildRequires: openjpeg-devel}
 %{!?_without_rtmp:BuildRequires: librtmp-devel}
 %{!?_without_schroedinger:BuildRequires: schroedinger-devel}
@@ -75,7 +75,13 @@ BuildRequires: yasm-devel
 BuildRequires: libass-devel 
 BuildRequires: kaltura-x264-devel 
 BuildRequires: openjpeg-devel
+BuildRequires: speex-devel
 Requires:kaltura-a52dec,kaltura-libfaac,kaltura-x264
+BuildRequires: libvpx-devel
+BuildRequires: schroedinger-devel 
+BuildRequires: kaltura-fdk-aac-devel
+BuildRequires: libtheora-devel
+BuildRequires: xvidcore-devel >= 1.3.2
 
 %description
 FFmpeg is a very fast video and audio converter. It can also grab from a
@@ -91,12 +97,12 @@ Summary: Header files and static library for the ffmpeg codec library
 Group: Development/Libraries
 Requires: %{name} = %{version}
 Requires: imlib2-devel, SDL-devel, freetype-devel, zlib-devel, pkgconfig,kaltura-x264
-%{!?_without_a52dec:Requires: a52dec-devel}
+%{!?_without_a52dec:Requires: kaltura-a52dec-devel}
 %{!?_without_dc1394:Requires: libdc1394-devel}
 %{!?_without_faac:Requires: faac-devel}
 %{!?_without_faad:Requires: faad2-devel}
 %{!?_without_gsm:Requires: gsm-devel}
-%{!?_without_lame:Requires: lame-devel}
+%{!?_without_lame:Requires: kaltura-lame-devel}
 %{!?_without_openjpeg:Requires: openjpeg-devel}
 %{!?_without_rtmp:Requires: librtmp-devel}
 %{!?_without_schroedinger:Requires: schroedinger-devel}
@@ -134,6 +140,8 @@ export CFLAGS="%{optflags}"
 %ifarch x86_64
     --extra-cflags="%{optflags} -fPIC" \
 %endif
+    --extra-cflags="%{optflags} -fPIC -I/opt/kaltura/include" \
+    --extra-ldflags="-L/opt/kaltura/lib" \
     --enable-avfilter \
 %{!?_without_schroedinger:--enable-libschroedinger} \
 %{!?_without_dc1394:--enable-libdc1394} \

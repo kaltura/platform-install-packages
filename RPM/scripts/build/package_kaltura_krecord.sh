@@ -21,12 +21,12 @@ if [ ! -r $SOURCES_RC ];then
 	exit 1
 fi
 . $SOURCES_RC 
-if [ ! -x `which wget 2>/dev/null` ];then
+if [ ! -x "`which wget 2>/dev/null`" ];then
 	echo "Need to install wget."
 	exit 2
 fi
 mkdir -p $RPM_SOURCES_DIR/$KRECORD_RPM_NAME
-wget $KRECORD_URI -O$RPM_SOURCES_DIR/$KRECORD_RPM_NAME/$KRECORD_RPM_NAME-$KRECORD_VERSION.zip
+wget $KRECORD_URI -O$RPM_SOURCES_DIR/$KRECORD_RPM_NAME-$KRECORD_VERSION.zip
 
-echo "Packaged into $RPM_SOURCES_DIR/$KRECORD_RPM_NAME/$KRECORD_RPM_NAME-$KRECORD_VERSION.zip"
+echo "Packaged into $RPM_SOURCES_DIR/$KRECORD_RPM_NAME-$KRECORD_VERSION.zip"
 rpmbuild -ba $RPM_SPECS_DIR/$KRECORD_RPM_NAME.spec

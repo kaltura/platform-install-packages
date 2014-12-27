@@ -4,7 +4,7 @@
 
 Summary:      Extension to work with the Memcached caching daemon
 Name:         php-pecl-%{pecl_name}
-Version:      2.1.0
+Version:      2.2.0
 Release:      1
 License:      PHP
 Group:        Development/Languages
@@ -16,7 +16,7 @@ BuildRoot:    %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 # 5.2.10 required to HAVE_JSON enabled
 BuildRequires: php-devel >= 5.3.0, php-pear
-BuildRequires: libmemcached-devel >= 1.0 , zlib-devel
+BuildRequires: kaltura-libmemcached-devel >= 1.0 , zlib-devel
 
 Requires(post): %{__pecl}
 Requires(postun): %{__pecl}
@@ -47,7 +47,7 @@ cd %{pecl_name}-%{version}
 %build
 cd %{pecl_name}-%{version}
 phpize
-%configure
+%configure --with-libmemcached-dir=/opt/kaltura
 %{__make} %{?_smp_mflags}
 
 
@@ -99,6 +99,10 @@ fi
 
 
 %changelog
+* Mon Dec 25 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 2.2.0-1
+- Version bounce.
+- Use kaltura-libmemcached instead of libmemcached.
+
 * Fri Jan 3 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 2.1.0-1
 - First build for Kaltura CE. 
 

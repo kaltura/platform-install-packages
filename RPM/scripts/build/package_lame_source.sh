@@ -1,22 +1,22 @@
 #!/bin/bash -e 
 #===============================================================================
-#          FILE: package_pentaho_source.sh
-#         USAGE: ./package_pentaho_source.sh 
-#   DESCRIPTION: Retrieve Pentaho source
+#          FILE: package_lame_source.sh
+#         USAGE: ./package_lame_source.sh 
+#   DESCRIPTION: Retrieve lame source
 #       OPTIONS: ---
 # 	LICENSE: AGPLv3+
 #  REQUIREMENTS: ---
 #          BUGS: ---
 #         NOTES: ---
-#        AUTHOR: Jess Portnoy, <jess.portnoy@kaltura.com>
+#        AUTHOR: Tan-Tan, <jonathan.kanarek@kaltura.com>
 #  ORGANIZATION: Kaltura, inc.
-#       CREATED: 12/29/13 03:15:11 EST
+#       CREATED: 12/21/14
 #      REVISION:  ---
 #===============================================================================
 
 set -o nounset                              # Treat unset variables as an error
 if [ ! -x "`which wget 2>/dev/null`" ];then
-	echo "Need to install subversion."
+	echo "Need to install wget."
 	exit 2
 fi
 
@@ -25,8 +25,15 @@ if [ ! -r $SOURCES_RC ];then
 	echo "Could not find $SOURCES_RC"
 	exit 1
 fi
-. $SOURCES_RC 
-wget $PENTAHO_URI -O $RPM_SOURCES_DIR/pdi-ce-$PENTAHO_VERSION-stable.tar.gz
-echo "Packaged to pdi-ce-$PENTAHO_VERSION-stable.tar.gz"
-rpmbuild -ba $RPM_SPECS_DIR/$PENTAHO_RPM_PACKAGE_NAME.spec
+. $SOURCES_RC
+ 
+wget $LAME_URI -O $RPM_SOURCES_DIR/lame-$LAME_VERSION.tar.gz
+if [ $? -eq 0 ];then
+	echo "Packaged to lame-$LAME_VERSION.tar.gz"
+else
+	echo "Unable to download $LAME_URI" >&2
+	exit 1
+fi
+
+rpmbuild -ba $RPM_SPECS_DIR/kaltura-lame.spec
 

@@ -21,10 +21,9 @@ if [ ! -r $SOURCES_RC ];then
 	exit 1
 fi
 . $SOURCES_RC 
-if [ ! -x `which wget 2>/dev/null` ];then
+if [ ! -x "`which wget 2>/dev/null`" ];then
 	echo "Need to install wget."
 	exit 2
 fi
 wget $KALTURA_CORE_URI -O$RPM_SOURCES_DIR/$KALTURA_SERVER_VERSION.zip
 echo "Packaged into $RPM_SOURCES_DIR/$KALTURA_SERVER_VERSION.zip"
-#rpmbuild -ba $RPM_SPECS_DIR/kaltura-.spec

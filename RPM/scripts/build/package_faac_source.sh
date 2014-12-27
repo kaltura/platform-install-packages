@@ -1,16 +1,16 @@
 #!/bin/bash -e 
 #===============================================================================
-#          FILE: package_pentaho_source.sh
-#         USAGE: ./package_pentaho_source.sh 
-#   DESCRIPTION: Retrieve Pentaho source
+#          FILE: package_faac_source.sh
+#         USAGE: ./package_faac_source.sh 
+#   DESCRIPTION: Retrieve faac source
 #       OPTIONS: ---
 # 	LICENSE: AGPLv3+
 #  REQUIREMENTS: ---
 #          BUGS: ---
 #         NOTES: ---
-#        AUTHOR: Jess Portnoy, <jess.portnoy@kaltura.com>
+#        AUTHOR: Tan-Tan, <jonathan.kanarek@kaltura.com>
 #  ORGANIZATION: Kaltura, inc.
-#       CREATED: 12/29/13 03:15:11 EST
+#       CREATED: 12/21/14
 #      REVISION:  ---
 #===============================================================================
 
@@ -25,8 +25,15 @@ if [ ! -r $SOURCES_RC ];then
 	echo "Could not find $SOURCES_RC"
 	exit 1
 fi
-. $SOURCES_RC 
-wget $PENTAHO_URI -O $RPM_SOURCES_DIR/pdi-ce-$PENTAHO_VERSION-stable.tar.gz
-echo "Packaged to pdi-ce-$PENTAHO_VERSION-stable.tar.gz"
-rpmbuild -ba $RPM_SPECS_DIR/$PENTAHO_RPM_PACKAGE_NAME.spec
+. $SOURCES_RC
+ 
+wget $FAAC_URI -O $RPM_SOURCES_DIR/faac-$FAAC_VERSION.tar.bz2
+if [ $? -eq 0 ];then
+	echo "Packaged to faac-$FAAC_VERSION.tar.bz2"
+else
+	echo "Unable to download $FAAC_URI" >&2
+	exit 1
+fi
+
+rpmbuild -ba $RPM_SPECS_DIR/kaltura-faac.spec
 

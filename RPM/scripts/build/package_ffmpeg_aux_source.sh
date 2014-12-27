@@ -1,23 +1,23 @@
 #!/bin/bash -e 
 #===============================================================================
-#          FILE: package_x264_source.sh
-#         USAGE: ./package_x264_source.sh 
+#          FILE: package_ffmpeg_aux_source.sh
+#         USAGE: ./package_ffmpeg_aux_source.sh 
 #   DESCRIPTION: 
 #       OPTIONS: ---
 # 	LICENSE: AGPLv3+
 #  REQUIREMENTS: ---
 #          BUGS: ---
 #         NOTES: ---
-#        AUTHOR: Jess Portnoy (), <jess.portnoy@kaltura.com>
+#        AUTHOR: Tan-Tan, <Jonathan.Kanarek@kaltura.com>
 #  ORGANIZATION: Kaltura, inc.
-#       CREATED: 12/29/13 05:24:47 EST
+#       CREATED: 12/24/14
 #      REVISION:  ---
 #===============================================================================
 
 #set -o nounset                              # Treat unset variables as an error
 
-if [ ! -x "`which wget 2>/dev/null`" ];then
-	echo "Need to install wget."
+if [ ! -x "`which curl 2>/dev/null`" ];then
+	echo "Need to install curl."
 	exit 2
 fi
 
@@ -27,9 +27,11 @@ if [ ! -r $SOURCES_RC ];then
 	exit 1
 fi
 . $SOURCES_RC 
+
 cd $RPM_SOURCES_DIR
-wget $X264_URI -O $X264_DEST_ARCHIVE_NAME
+curl $FFMPEG_AUX_URI > ffmpeg-$FFMPEG_AUX_VERSION.tar.bz2
 cd $SOURCE_PACKAGING_DIR 
-echo "written to: $RPM_SOURCES_DIR/$X264_DEST_ARCHIVE_NAME"
-rpmbuild -ba $RPM_SPECS_DIR/$X264_RPM_PACKAGE_NAME.spec
+echo "Written to: $RPM_SOURCES_DIR/ffmpeg-$FFMPEG_AUX_VERSION.tar.bz2."
+
+rpmbuild -ba $RPM_SPECS_DIR/$FFMPEG_AUX_RPM_PACKAGE_NAME.spec
 

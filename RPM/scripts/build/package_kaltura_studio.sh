@@ -21,17 +21,18 @@ if [ ! -r $SOURCES_RC ];then
 	exit 1
 fi
 . $SOURCES_RC 
-if [ ! -x `which svn 2>/dev/null` ];then
+if [ ! -x "`which svn 2>/dev/null`" ];then
 	echo "Need to install svn."
 	exit 2
 fi
 # clean the source dir.
 rm -rf $SOURCE_PACKAGING_DIR/$KDP3_RPM_NAME/*
-svn export --force --quiet $KDP3PLUGINS_URI $SOURCE_PACKAGING_DIR/$KDP3PLUGINS_RPM_NAME
+
+kaltura_svn export --force --quiet $KDP3PLUGINS_URI $SOURCE_PACKAGING_DIR/$KDP3PLUGINS_RPM_NAME
 mkdir -p $SOURCE_PACKAGING_DIR/uiconf/kaltura/kmc/appstudio/kdp3 
-svn export --force --quiet $KDP3_UICONF_URI $SOURCE_PACKAGING_DIR/$KDP3_RPM_NAME/uiconf/kaltura/kmc/appstudio/kdp3
+kaltura_svn export --force --quiet $KDP3_UICONF_URI $SOURCE_PACKAGING_DIR/$KDP3_RPM_NAME/uiconf/kaltura/kmc/appstudio/kdp3
 for KDP3_VERSION in $KDP3_VERSIONS;do
-	svn export --force --quiet $KDP3_URI/$KDP3_VERSION $SOURCE_PACKAGING_DIR/$KDP3_RPM_NAME/$KDP3_VERSION 
+	kaltura_svn export --force --quiet $KDP3_URI/$KDP3_VERSION $SOURCE_PACKAGING_DIR/$KDP3_RPM_NAME/$KDP3_VERSION 
 	cp -r $SOURCE_PACKAGING_DIR/$KDP3PLUGINS_RPM_NAME $SOURCE_PACKAGING_DIR/$KDP3_RPM_NAME/$KDP3_VERSION/plugins 
 done
 cd $SOURCE_PACKAGING_DIR
