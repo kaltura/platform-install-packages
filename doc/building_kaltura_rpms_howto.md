@@ -36,8 +36,15 @@ In the build ENV, it should reside at ~/.rpmmacros
 
 platform-install-packages/RPM/scripts/build dir
 ================================================
-sources.rc - this file has the ENV vars needed for building from sources. When versions of components are upgraded, they should be modified there.
-package_*.sh - each component has a wrapper script that fetches the sources from the needed version and packages them so that the RPM can be built.
+* sources.rc - this file has the ENV vars needed for building from sources. When versions of components are upgraded, they should be modified there.
+
+* packager.rc - should have the following vars:
+```
+PACKAGER_NAME="First Last"
+PACKAGER_MAIL="packager@example.com"
+```
+
+* package_*.sh - each component has a wrapper script that fetches the sources from the needed version and packages them so that the RPM can be built.
 
 You will need to edit sources.rc and change:
 ```
