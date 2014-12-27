@@ -1,45 +1,34 @@
 #!/usr/bin/make -f
-include ~/sources/platform-install-packages/RPM/scripts/build/sources.rc
-COMP_NAME ?= kaltura-base 
+COMP_NAME ?= kaltura-base
 
 DEB_VERSION := $(shell dpkg-parsechangelog | egrep '^Version:' | cut -f 2 -d ' ')
+RC_FILE :=/home/jess/sources/platform-install-packages/RPM/scripts/build/sources.rc
+KALTURA_SERVER_VERSION ?= $(shell egrep '^KALTURA_SERVER_VERSION=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
+SOURCE_PACKAGING_DIR ?= $(shell egrep '^SOURCE_PACKAGING_DIR=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
+KALTURA_PREFIX ?= $(shell egrep '^KALTURA_PREFIX=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
 include ../includes/build-revision.mk
-targz := /usr/zlocal/packaging/data/components/$(COMP_NAME)/$(COMP_NAME)-$(REPO_VERSION).tar.gz
-tree := $(COMP_NAME)-$(REPO_VERSION)
-help_tree :=$(HELP_COMP_NAME)-$(HELP_VERSION)
+archive := $(SOURCE_PACKAGING_DIR)/$(KALTURA_SERVER_VERSION).zip 
+tree := server-$(KALTURA_SERVER_VERSION)
 
 clean:
+	echo $(KALTURA_SERVER_VERSION)
 	dh_clean
 	rm -rf $(tree) 
 	rm -rf debian/tmp
-	echo $(KALTURA_SERVER_VERSION)
-	exit 0  
 
-$(targz):
-	/usr/zlocal/packaging/bin/packaging.pl $(COMP_NAME) --systype $(SYSTYPE) --ver $(REPO_VERSION) --versfile /usr/zlocal/packaging/etc/versions-ce.ini
-	/usr/zlocal/packaging/bin/packaging.pl $(HELP_COMP_NAME) --systype $(SYSTYPE) --ver $(HELP_VERSION) --versfile /usr/zlocal/packaging/etc/versions-ce.ini
+$(archive):
+	~/sources/platform-install-packages/RPM/scripts/build/package_kaltura_core.sh	
 
-$(tree): $(targz)
-	tar zxf $(targz)
+$(tree): $(archive)
+	unzip -o $(archive)
 
 build: $(tree)
-	tar zxf /usr/zlocal/packaging/data/components/$(SCRIPTS)/$(SCRIPTS)-$(INSTALL_VERSION).tar.gz
-	tar zxf /usr/zlocal/packaging/data/components/$(HELP_COMP_NAME)/$(HELP_COMP_NAME)-$(HELP_VERSION).tar.gz
 
 install: build
 
 binary-indep: install
 	dh_installdirs
-	sed -i 's@ZCE_PREFIX.*>@/var/www/ZendServer>@g' $(SCRIPTS)-$(INSTALL_VERSION)/zwas/ce/etc/zendserver_gui.conf
-	#dh_install $(SCRIPTS)-$(INSTALL_VERSION)/zwas/ce/etc/zendserver_gui.conf /etc/apache2/conf.d
-	dh_install $(SCRIPTS)-$(INSTALL_VERSION)/zwas/share/etc/zendserver_gui.conf /etc/apache2/sites-available 
-	dh_install $(tree)/$(COMP_NAME)/* $(ZEND_PREFIX)/gui/
-	sed -i 's@ZCE_PREFIX@/$(ZEND_PREFIX)@g' $(SCRIPTS)-$(INSTALL_VERSION)/zwas/ce/etc/logfiles.xml
-	dh_install $(SCRIPTS)-$(INSTALL_VERSION)/zwas/ce/etc/logfiles.xml $(ZEND_PREFIX)/gui/application/data/
-	dh_install $(help_tree)/help $(ZEND_PREFIX)/gui/html/
-	dh_link $(ZEND_PREFIX)/gui/html $(ZEND_PREFIX)/gui/lighttpd/htdocs/ZendServer
-	dh_link /var/log/apache2/error.log $(ZEND_PREFIX)/var/log/error.log
-	dh_link /var/log/apache2/access.log $(ZEND_PREFIX)/var/log/access.log
+	dh_install $(tree)/* $(KALTURA_PREFIX)/app/
 	dh_gencontrol -u-v$(DEB_VERSION) 
 	dh_installdebconf
 	dh_installdeb

@@ -1,2 +1,2 @@
 /opt/kaltura/app/configurations/base.ini
-/opt/kaltura/app/configurations/local.ini
+/opt/kaltura/app/configurations/local.template.ini
