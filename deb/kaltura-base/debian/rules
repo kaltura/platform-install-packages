@@ -1,47 +1,49 @@
 #!/usr/bin/make -f
-# debian/rules for alien
+include ~/sources/platform-install-packages/RPM/scripts/build/sources.rc
+COMP_NAME ?= kaltura-base 
 
-PACKAGE=$(shell dh_listpackages)
-
-build:
-	dh_testdir
+DEB_VERSION := $(shell dpkg-parsechangelog | egrep '^Version:' | cut -f 2 -d ' ')
+include ../includes/build-revision.mk
+targz := /usr/zlocal/packaging/data/components/$(COMP_NAME)/$(COMP_NAME)-$(REPO_VERSION).tar.gz
+tree := $(COMP_NAME)-$(REPO_VERSION)
+help_tree :=$(HELP_COMP_NAME)-$(HELP_VERSION)
 
 clean:
-	dh_testdir
-	dh_testroot
-	dh_clean -d
+	dh_clean
+	rm -rf $(tree) 
+	rm -rf debian/tmp
+	echo $(KALTURA_SERVER_VERSION)
+	exit 0  
 
-binary-indep: build
+$(targz):
+	/usr/zlocal/packaging/bin/packaging.pl $(COMP_NAME) --systype $(SYSTYPE) --ver $(REPO_VERSION) --versfile /usr/zlocal/packaging/etc/versions-ce.ini
+	/usr/zlocal/packaging/bin/packaging.pl $(HELP_COMP_NAME) --systype $(SYSTYPE) --ver $(HELP_VERSION) --versfile /usr/zlocal/packaging/etc/versions-ce.ini
 
-binary-arch: build
-	dh_testdir
-	dh_testroot
-	dh_prep
+$(tree): $(targz)
+	tar zxf $(targz)
+
+build: $(tree)
+	tar zxf /usr/zlocal/packaging/data/components/$(SCRIPTS)/$(SCRIPTS)-$(INSTALL_VERSION).tar.gz
+	tar zxf /usr/zlocal/packaging/data/components/$(HELP_COMP_NAME)/$(HELP_COMP_NAME)-$(HELP_VERSION).tar.gz
+
+install: build
+
+binary-indep: install
 	dh_installdirs
-
-	dh_installdocs
-	dh_installchangelogs
-
-# Copy the packages's files.
-	find . -maxdepth 1 -mindepth 1 -not -name debian -print0 | \
-		xargs -0 -r -i cp -a {} debian/$(PACKAGE)
-
-#
-# If you need to move files around in debian/$(PACKAGE) or do some
-# binary patching, do it here
-#
-
-
-# This has been known to break on some wacky binaries.
-#	dh_strip
-	dh_compress
-#	dh_fixperms
-	dh_makeshlibs
+	sed -i 's@ZCE_PREFIX.*>@/var/www/ZendServer>@g' $(SCRIPTS)-$(INSTALL_VERSION)/zwas/ce/etc/zendserver_gui.conf
+	#dh_install $(SCRIPTS)-$(INSTALL_VERSION)/zwas/ce/etc/zendserver_gui.conf /etc/apache2/conf.d
+	dh_install $(SCRIPTS)-$(INSTALL_VERSION)/zwas/share/etc/zendserver_gui.conf /etc/apache2/sites-available 
+	dh_install $(tree)/$(COMP_NAME)/* $(ZEND_PREFIX)/gui/
+	sed -i 's@ZCE_PREFIX@/$(ZEND_PREFIX)@g' $(SCRIPTS)-$(INSTALL_VERSION)/zwas/ce/etc/logfiles.xml
+	dh_install $(SCRIPTS)-$(INSTALL_VERSION)/zwas/ce/etc/logfiles.xml $(ZEND_PREFIX)/gui/application/data/
+	dh_install $(help_tree)/help $(ZEND_PREFIX)/gui/html/
+	dh_link $(ZEND_PREFIX)/gui/html $(ZEND_PREFIX)/gui/lighttpd/htdocs/ZendServer
+	dh_link /var/log/apache2/error.log $(ZEND_PREFIX)/var/log/error.log
+	dh_link /var/log/apache2/access.log $(ZEND_PREFIX)/var/log/access.log
+	dh_gencontrol -u-v$(DEB_VERSION) 
+	dh_installdebconf
 	dh_installdeb
-	-dh_shlibdeps
-	dh_gencontrol
-	dh_md5sums
-	dh_builddeb
+	dh_builddeb 
 
-binary: binary-indep binary-arch
-.PHONY: build clean binary-indep binary-arch binary
+binary: binary-indep
+.PHONY: clean build binary-indep binary-arch binary
