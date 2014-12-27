@@ -34,7 +34,7 @@ This file specifies vars used in the RPM spec files, currently holds versions of
 When components are upgraded, this file needs to be edited.
 In the build ENV, it should reside at ~/.rpmmacros
 
-platform-install-packages/RPM/scripts/build dir
+platform-install-packages/build dir
 ================================================
 * sources.rc - this file has the ENV vars needed for building from sources. When versions of components are upgraded, they should be modified there.
 
@@ -70,19 +70,19 @@ Deployment instructions
 Each deployment has instructions here:
 https://kaltura.atlassian.net/wiki/display/QAC/QA.Core+Production+Deployments
 That includes the new versions for updated components as well as PHP/SQL scripts to run.
-The versions should be updated in platform-install-packages/RPM/scripts/build/sources.rc
+The versions should be updated in platform-install-packages/build/sources.rc
 
 Step by step release process
 ============================
-0. run RPM/scripts/build/setrep.sh on the repo server
+0. run build/setrep.sh on the repo server
 
 1. read instructions at: https://kaltura.atlassian.net/wiki/display/QAC/QA.Core+Production+Deployments
 
-2. update versions in platform-install-packages/RPM/scripts/build/sources.rc and ~/.rpmmacros if applicable.
+2. update versions in platform-install-packages/build/sources.rc and ~/.rpmmacros if applicable.
 
 3. if ~/.rpmmacros was updated, also commit under platform-install-packages/RPM/.rpmmacros
 
-4. run platform-install-packages/RPM/scripts/build/bounce_core_ver.sh $NEW_VER
+4. run platform-install-packages/build/bounce_core_ver.sh $NEW_VER
 This will update the Core version in the various relevant spec files
 
 5. update specs for additional components according to versions in the deployment doc, i.e:
@@ -99,9 +99,9 @@ if KMC is of a new version then update 'Version' in kaltura-kmc.spec, for kdp3, 
 - SUP-1625 - Avoid creating notification jobs when no notification email is configured
 
 7. for the modified components, run the respective package_*.sh script, for instance, if KMC was updated run:
-platform-install-packages/RPM/scripts/build/package_kaltura_kmc.sh
+platform-install-packages/build/package_kaltura_kmc.sh
 for KDP3 run:
-platform-install-packages/RPM/scripts/build/package_kaltura_kdp3.sh
+platform-install-packages/build/package_kaltura_kdp3.sh
 and so on.
 If a new package is introduces, make sure to create a wrapper script for it as well, in addition to the RPM spec file. 
 
@@ -117,9 +117,9 @@ $ rpmbuild -ba $SPEC
 one more, no need to repackage for that.
 
 9. once all RPMs are built, use: 
-$ platform-install-packages/RPM/scripts/build/push_rpm.sh /path/to/rpm
+$ platform-install-packages/build/push_rpm.sh /path/to/rpm
 this will push the RPMs to the origin server using SCP, sign it and generate new metadata with createrepo.
 
 10. run sanity on the test machine using kaltura-sanity.sh and make sure all passes successfully.
 
-11. run RPM/scripts/build/set_stable_rep.sh on the repo machine.
+11. run build/set_stable_rep.sh on the repo machine.
