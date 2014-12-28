@@ -16,8 +16,8 @@
 
 #set -o nounset                              # Treat unset variables as an error
 
-if [ ! -x "`which git 2>/dev/null`" ];then
-	echo "Need to install git."
+if [ ! -x "`which wget 2>/dev/null`" ];then
+	echo "Need to install wget."
 	exit 2
 fi
 
@@ -29,9 +29,13 @@ fi
 . $SOURCES_RC 
 cd $SOURCE_PACKAGING_DIR 
 
-git clone $FDK_URI 
-tar jcvf  $RPM_SOURCES_DIR/kaltura-fdk-aac-$FDK_VERSION.tar.bz2 fdk-aac 
-echo "Written to: $RPM_SOURCES_DIR/kaltura-fdk-aac-$FDK_VERSION.tar.bz2"
+wget $FDK_URI -O $RPM_SOURCES_DIR/v$FDK_VERSION.zip
+if [ $? -eq 0 ];then
+	echo "Packaged to v$FDK_VERSION.zip"
+else
+	echo "Unable to download $FDK_URI" >&2
+	exit 1
+fi
 
 rpmbuild -ba $RPM_SPECS_DIR/kaltura-fdk-aac.spec
 
