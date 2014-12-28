@@ -15,10 +15,81 @@ if [ $1 = configure ]; then
 	BEGINNERS_TUTORIAL_URL=http://bit.ly/KalturaUploadMenu
 	QUICK_START_GUIDE_URL=http://bit.ly/KalturaKmcManual
 	FORUMS_URLS=http://bit.ly/KalturaForums
-	db_input critical 'base/hostname' || true
+	db_input critical 'kaltura-base/cdn_hostname' || true
 	db_go || true
 	db_get 'kaltura-base/hostname'
+	CDN_HOST=$RET
 	
+	db_input critical 'kaltura-base/apache_hostname' || true
+	db_go || true
+	db_get 'kaltura-base/apache_hostname'
+	KALTURA_VIRTUAL_HOST_NAME=$RET
+	
+	db_input critical 'kaltura-base/vhost_port' || true
+	db_go || true
+	db_get 'kaltura-base/vhost_port'
+	KALTURA_VIRTUAL_HOST_PORT=$RET
+
+	db_input critical 'kaltura-base/db_hostname' || true
+	db_go || true
+	db_get 'kaltura-base/db_hostname'
+	DB1_HOST=$RET
+	
+	db_input critical 'kaltura-base/db_port' || true
+	db_go || true
+	db_get 'kaltura-base/db_port'
+	DB1_PORT=$RET
+	
+	db_input critical 'kaltura-base/mysql_super_user' || true
+	db_go || true
+	db_get 'kaltura-base/mysql_super_user'
+	SUPER_USER=$RET
+	
+	db_input critical 'kaltura-base/mysql_super_passwd' || true
+	db_go || true
+	db_get 'kaltura-base/mysql_super_passwd'
+	SUPER_USER_PASSWD=$RET
+
+	db_input critical 'kaltura-base/dwh_db_hostname' || true
+	db_go || true
+	db_get 'kaltura-base/dwh_db_hostname'
+	DWH_HOST=$RET
+
+	db_input critical 'kaltura-base/dwh_db_port' || true
+	db_go || true
+	db_get 'kaltura-base/dwh_db_port'
+	DWH_PORT=$RET
+
+	db_input critical 'kaltura-base/sphinx_hostname' || true
+	db_go || true
+	db_get 'kaltura-base/sphinx_hostname'
+	SPHINX_SERVER1=$RET
+
+	db_input critical 'kaltura-base/media_server_hostname' || true
+	db_go || true
+	db_get 'kaltura-base/media_server_hostname'
+	RED5_HOST=$RET
+
+	db_input critical 'kaltura-base/second_sphinx_hostname' || true
+	db_go || true
+	db_get 'kaltura-base/second_sphinx_hostname'
+	SPHINX_SERVER2=$RET
+
+	db_input critical 'kaltura-base/service_url' || true
+	db_go || true
+	db_get 'kaltura-base/service_url'
+	SERVICE_URL=$RET
+
+	db_input critical 'kaltura-base/admin_console_email' || true
+	db_go || true
+	db_get 'kaltura-base/admin_console_email'
+	ADMIN_CONSOLE_ADMIN_MAIL=$RET
+
+	db_input critical 'kaltura-base/admin_console_passwd' || true
+	db_go || true
+	db_get 'kaltura-base/admin_console_passwd'
+	ADMIN_CONSOLE_PASSWORD=$RET
+
 	if echo $ADMIN_CONSOLE_PASSWORD | grep -q "/" ;then
 		echo -en "${BRIGHT_RED}ERROR: Passwd can't have the '/' char in it. Please re-input.${NORMAL}"
 		unset ADMIN_CONSOLE_PASSWORD
@@ -30,13 +101,49 @@ if [ $1 = configure ]; then
 		echo -en "${BRIGHT_RED}ERROR: Admin user login password (must be minimum 8 chars and include at least one of each: upper-case, lower-case, number and a special character): ${NORMAL}"
 		read -s ADMIN_CONSOLE_PASSWORD
 	fi
+
+
+	db_input critical 'kaltura-base/admin_console_passwd_again' || true
+	db_go || true
+	db_get 'kaltura-base/admin_console_passwd_again'
+	AGAIN_ADMIN_CONSOLE_PASSWORD=$RET
+
+	db_input critical 'kaltura-base/time_zone' || true
+	db_go || true
+	db_get 'kaltura-base/time_zone'
+	TIME_ZONE=$RET
+
+	set +e
 	php -r "if (timezone_open('$TIME_ZONE') === false){exit(1);}" 2>/dev/null
 	RC=$?
-	trap 'my_trap_handler "${LINENO}" ${$?}' ERR
 	if [ $RC -ne 0 ];then
 		echo -e "${BRIGHT_RED}Bad Timezone value, please check valid options at http://php.net/date.timezone${NORMAL}"
 		unset TIME_ZONE
 	fi
+	set -e
+
+	db_input critical 'kaltura-base/env_name' || true
+	db_go || true
+	db_get 'kaltura-base/env_name'
+	ENVIRONMENT_NAME=$RET
+
+	db_input critical 'kaltura-base/contact_url' || true
+	db_go || true
+	db_get 'kaltura-base/contact_url'
+	CONTACT_URL=$RET
+
+	db_input critical 'kaltura-base/contact_phone' || true
+	db_go || true
+	db_get 'kaltura-base/contact_phone'
+	CONTACT_PHONE_NUMBER=$RET
+
+	db_input critical 'kaltura-base/install_analytics_consent' || true
+	db_go || true
+	db_get 'kaltura-base/install_analytics_consent'
+	USER_CONSENT=$RET
+
+
+
 
 	 for INI in /etc/php.ini /etc/php.d/*kaltura*ini;do
 		if [ -r "$INI" ];then
