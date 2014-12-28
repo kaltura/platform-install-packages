@@ -26,20 +26,27 @@ if [ ! -x "`which svn 2>/dev/null`" ];then
 	exit 2
 fi
 
+rm -rf $SOURCE_PACKAGING_DIR/$KMC_RPM_NAME-$KMC_VERSION
 kaltura_svn export --force --quiet $KMC_UICONF_URI $SOURCE_PACKAGING_DIR/$KMC_RPM_NAME-$KMC_VERSION/uiconf/kaltura/kmc
 cd $SOURCE_PACKAGING_DIR
 wget $KMC_URI -O $KMC_RPM_NAME-$KMC_VERSION.zip
 unzip -qo $KMC_RPM_NAME-$KMC_VERSION.zip
 wget $KMC_LOGIN_URI -O $KMC_RPM_NAME-$KMC_LOGIN_VERSION.zip
 unzip -oq $KMC_RPM_NAME-$KMC_LOGIN_VERSION.zip
+wget $KMC_DOC_URI -O $KMC_RPM_NAME-$KMC_DOC_VERSION.zip
+unzip -oq $KMC_RPM_NAME-$KMC_DOC_VERSION.zip
+
 rm -rf $SOURCE_PACKAGING_DIR/$KMC_RPM_NAME-$KMC_VERSION/login
 mkdir -p $SOURCE_PACKAGING_DIR/$KMC_RPM_NAME-$KMC_VERSION/login
 mv $KMC_LOGIN_VERSION $SOURCE_PACKAGING_DIR/$KMC_RPM_NAME-$KMC_VERSION/login
-mv kmc-$KMC_MINUS_V_VERSION $KMC_RPM_NAME-$KMC_VERSION
+mv $KMC_VERSION $KMC_RPM_NAME-$KMC_VERSION
+mv kmc-docs-$KMC_DOC_VERSION $SOURCE_PACKAGING_DIR/$KMC_RPM_NAME-$KMC_VERSION/doc
+
 find $KMC_RPM_NAME-$KMC_VERSION -type f -exec chmod -x {} \;
 tar jcf $RPM_SOURCES_DIR/$KMC_RPM_NAME-$KMC_VERSION.tar.bz2 $KMC_RPM_NAME-$KMC_VERSION
 # flash things DO NOT need exec perms.
 echo "Packaged into $RPM_SOURCES_DIR/$KMC_RPM_NAME-$KMC_VERSION.tar.bz2"
+
 if [ -x "`which rpmbuild 2>/dev/null`" ];then
 	rpmbuild -ba $RPM_SPECS_DIR/$KMC_RPM_NAME.spec
 fi

@@ -9,8 +9,6 @@ License: AGPLv3+
 URL: https://github.com/kaltura/kmc 
 Source0: %{name}-%{version}.tar.bz2
 Source1: kmc_config.ini
-Source2: kmc_doc.zip
-Source3: KMC_User_Manual.pdf
 BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 BuildArch: noarch
 
@@ -32,7 +30,6 @@ This package installs the KMC Flash web interface.
 
 %prep
 %setup -q 
-unzip %{SOURCE2}
 
 %build
 %post
@@ -51,17 +48,16 @@ cp -r %{prefix}/web/flash/kmc/%{version}/uiconf/kaltura/kmc %{prefix}/web/conten
 #fi
 
 %install
-mkdir -p $RPM_BUILD_ROOT%{prefix}/web/flash/kmc/login $RPM_BUILD_ROOT%{prefix}/app/alpha/web/lib $RPM_BUILD_ROOT%{prefix}/web/content/docs/pdf
-#$RPM_BUILD_ROOT%{prefix}/web/content/uiconf/kaltura/kmc
-mv kmc-docs-master/pdf $RPM_BUILD_ROOT%{prefix}/app/alpha/web/lib/ 
-cp -r %{_builddir}/%{name}-%{version}/kmc-docs-master/* $RPM_BUILD_ROOT%{prefix}/web/content/docs/
+mkdir -p $RPM_BUILD_ROOT%{prefix}/web/flash/kmc/login
+mkdir -p $RPM_BUILD_ROOT%{prefix}/app/alpha/web/lib
+mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content/docs/pdf
+cp doc/pdf/KMC_User_Manual.pdf $RPM_BUILD_ROOT%{prefix}/web/content/docs/pdf
+mv doc/pdf $RPM_BUILD_ROOT%{prefix}/app/alpha/web/lib/ 
 mv %{_builddir}/%{name}-%{version}/login/%{kmc_login_version} $RPM_BUILD_ROOT%{prefix}/web/flash/kmc/login/ 
 mkdir $RPM_BUILD_ROOT%{prefix}/web/flash/kmc/%{version}
 cp -r %{_builddir}/%{name}-%{version}/%{version}/* $RPM_BUILD_ROOT/%{prefix}/web/flash/kmc/%{version}/
 mv %{_builddir}/%{name}-%{version}/uiconf $RPM_BUILD_ROOT%{prefix}/web/flash/kmc/%{version}/
-#cp -r $RPM_BUILD_ROOT/%{prefix}/web/flash/kmc/%{version}/uiconf/kaltura/kmc/* $RPM_BUILD_ROOT%{prefix}/web/content/uiconf/kaltura/kmc/
 cp %{SOURCE1} $RPM_BUILD_ROOT/%{prefix}/web/flash/kmc/%{version}/config.ini
-cp %{SOURCE3} $RPM_BUILD_ROOT%{prefix}/web/content/docs/pdf
 
 %preun
 #if [ "$1" = 0 ] ; then

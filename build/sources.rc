@@ -127,7 +127,6 @@ KMC_RPM_NAME="kaltura-kmc"
 KMC_DOC_VERSION="master"
 KMC_DOC_URI="https://github.com/kaltura/kmc-docs/archive/$KMC_DOC_VERSION.zip"
 
-
 # Kaltura KDP3:
 # we bundle a few vers at each release:
 KDP3_VERSIONS="v3.9.7 v3.9.8 v3.9.9"
