@@ -23,10 +23,17 @@ fi
 
 SOURCES_RC=`dirname $0`/sources.rc
 if [ ! -r $SOURCES_RC ];then
-	echo "Could not find $SOURCES_RC"
+	echo "Could not find $SOURCES_RC" >&2
 	exit 1
 fi
 . $SOURCES_RC
+
+if [ ! -f ~/.rpmmacros ]; then
+	echo "Could not find ~/.rpmmacros
+To solve:
+ln -s $RPM_BASE_DIR/.rpmmacros ~/.rpmmacros" >&2
+	exit 1
+fi
 
 mkdir -p $SOURCE_PACKAGING_DIR
 mkdir -p $RPM_SOURCES_DIR
@@ -34,9 +41,6 @@ cp -f $RPM_BASE_DIR/SOURCES/* $RPM_SOURCES_DIR/
 if [ ! -L $RPM_SPECS_DIR ]; then
 	ln -s $RPM_BASE_DIR/SPECS $RPM_SPECS_DIR
 fi
-
-rm -f ~/.rpmmacros
-ln -s $RPM_BASE_DIR/.rpmmacros ~/.rpmmacros
 
 cd $BUILD_DIR
 
