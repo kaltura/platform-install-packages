@@ -1,8 +1,8 @@
 # General ENV vars:
 # sometimes people package their archives in the stupidest way possible. In such cases, they are extracted here, re-assembled in a normal way and move to $RPM_SOURCES_DIR.
 RUN_DIR=`dirname $0`
-RPM_BASE_DIR=`cd $RUN_DIR/../../; pwd`
-BUILD_DIR=$RPM_BASE_DIR/scripts/build
+RPM_BASE_DIR=`cd $RUN_DIR/../RPM/; pwd`
+BUILD_DIR=$RUN_DIR
 SOURCE_PACKAGING_DIR=~/sources
 RPM_SOURCES_DIR=~/rpmbuild/SOURCES
 RPM_SPECS_DIR=~/rpmbuild/SPECS
