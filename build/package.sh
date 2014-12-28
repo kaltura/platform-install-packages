@@ -25,6 +25,7 @@ fi
 
 mkdir -p $SOURCE_PACKAGING_DIR
 mkdir -p $RPM_SOURCES_DIR
+ln -s $RPM_BASE_DIR/SPECS $RPM_SPECS_DIR
 
 rm -f ~/.rpmmacros
 ln -s $RPM_BASE_DIR/.rpmmacros ~/.rpmmacros
