@@ -12,7 +12,7 @@ URL: http://mcrypt.sourceforge.net/
 Packager: Jess Portnoy <jess.portnoy@kaltura.com> 
 Vendor: Kaltura, Inc. 
 
-Source: http://dl.sf.net/mcrypt/libmcrypt-%{version}.tar.gz
+Source: http://sourceforge.net/projects/mcrypt/files/Libmcrypt/%{version}/libmcrypt-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 Provides: libmcrypt = %{version}
 

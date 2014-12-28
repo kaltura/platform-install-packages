@@ -35,33 +35,33 @@ else
 	exit 1
 fi
 
-wget $PHP_LIBMCRYPT_URI -O $RPM_SOURCES_DIR/libmcrypt-$PHP_LIBMCRYPT_VERSION.tar.gz
+wget $LIBMCRYPT_URI -O $RPM_SOURCES_DIR/libmcrypt-$LIBMCRYPT_VERSION.tar.gz
 if [ $? -eq 0 ];then
-	echo "Packaged to libmcrypt-$PHP_LIBMCRYPT_VERSION.tar.gz"
+	echo "Packaged to libmcrypt-$LIBMCRYPT_VERSION.tar.gz"
 else
 	echo "Unable to download $PHP_LIBMCRYPT_URI" >&2
 	exit 1
 fi
 
 if [ -x "`which rpmbuild 2>/dev/null`" ];then
-	sudo yum install -y kaltura-libmcrypt kaltura-libmcrypt-devel kaltura-libmemcached kaltura-libmemcached-devel
+	sudo yum install -y kaltura-libmcrypt kaltura-libmcrypt-devel kaltura-libmemcached kaltura-libmemcached-devel python-sphinx memcached systemtap-sdt-devel libevent-devel
 fi
 
 
 
 
-wget $PHP_LIBMEMCACHED_URI -O $RPM_SOURCES_DIR/libmemcached-$PHP_LIBMEMCACHED_VERSION.tar.gz
+wget $LIBMEMCACHED_URI -O $RPM_SOURCES_DIR/libmemcached-$LIBMEMCACHED_VERSION.tar.gz
 if [ $? -eq 0 ];then
-	echo "Packaged to libmemcached-$PHP_LIBMEMCACHED_VERSION.tar.gz"
+	echo "Packaged to libmemcached-$LIBMEMCACHED_VERSION.tar.gz"
 else
-	echo "Unable to download $PHP_LIBMEMCACHED_URI" >&2
+	echo "Unable to download $LIBMEMCACHED_URI" >&2
 	exit 1
 fi
 cd $RPM_SOURCES_DIR
-tar xzf $RPM_SOURCES_DIR/libmemcached-$PHP_LIBMEMCACHED_VERSION.tar.gz
-rm libmemcached-$PHP_LIBMEMCACHED_VERSION/libhashkit/hsieh.cc
-rm -f libmemcached-$PHP_LIBMEMCACHED_VERSION-exhsieh.tar.gz
-tar czf libmemcached-$PHP_LIBMEMCACHED_VERSION-exhsieh.tar.gz libmemcached-$PHP_LIBMEMCACHED_VERSION
+tar xzf $RPM_SOURCES_DIR/libmemcached-$LIBMEMCACHED_VERSION.tar.gz
+rm libmemcached-$LIBMEMCACHED_VERSION/libhashkit/hsieh.cc
+rm -f libmemcached-$LIBMEMCACHED_VERSION-exhsieh.tar.gz
+tar czf libmemcached-$LIBMEMCACHED_VERSION-exhsieh.tar.gz libmemcached-$LIBMEMCACHED_VERSION
 
 
 wget $PHP_MEMCACHED_URI -O $RPM_SOURCES_DIR/memcached-$PHP_MEMCACHED_VERSION.tgz

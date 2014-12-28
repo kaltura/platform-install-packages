@@ -27,17 +27,17 @@ kaltura_svn() (chmod 600 $SSH_KEY; eval "$SVN_BIN $@")
 PHP_VERSION=5.3.3
 PHP_URI="http://museum.php.net/php5/php-$PHP_VERSION.tar.bz2"
 
-PHP_LIBMEMCACHED_VERSION=1.0.16
-PHP_LIBMEMCACHED_URI="http://launchpad.net/libmemcached/1.0/$PHP_LIBMEMCACHED_VERSION/+download/libmemcached-$PHP_LIBMEMCACHED_VERSION.tar.gz"
+LIBMEMCACHED_VERSION=1.0.16
+LIBMEMCACHED_URI="http://launchpad.net/libmemcached/1.0/$LIBMEMCACHED_VERSION/+download/libmemcached-$LIBMEMCACHED_VERSION.tar.gz"
 
-PHP_MEMCACHED_VERSION=2.1.0
+PHP_MEMCACHED_VERSION=2.2.0
 PHP_MEMCACHED_URI="http://pecl.php.net/get/memcached-$PHP_MEMCACHED_VERSION.tgz"
 
 PHP_SSH_VERSION=0.12
 PHP_SSH_URI="http://pecl.php.net/get/ssh2-$PHP_SSH_VERSION.tgz"
 
-PHP_LIBMCRYPT_VERSION=2.5.8
-PHP_LIBMCRYPT_URI="http://garr.dl.sourceforge.net/project/mcrypt/Libmcrypt/Production/libmcrypt-$PHP_LIBMCRYPT_VERSION.tar.gz"
+LIBMCRYPT_VERSION=2.5.8
+LIBMCRYPT_URI="http://sourceforge.net/projects/mcrypt/files/Libmcrypt/$LIBMCRYPT_VERSION/libmcrypt-$LIBMCRYPT_VERSION.tar.gz"
 
 
 # a52dec:
