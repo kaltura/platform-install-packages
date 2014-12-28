@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.23
+Version: v2.24
 Release: 1
 Epoch:0 
 License: AGPLv3+
@@ -87,6 +87,21 @@ rm -rf %{buildroot}
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Sun Dec 28 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.24-1
+- FEC-1764 - Playback rate should support video tag interface switch.
+- PS-1987 - PostMedia: Failed to block playback of domain restricted entries
+- PS-1967 - (INTLKVP-133) Ads not played on Android stock browser
+- PS-1912 - (INTLKVP-114) Ad completed event is not reported for post-roll on iPad Air (iOS 8)
+- PS-1988 - PostMedia-iPad-iPhone-S4-nexus: Failed to load Geo Restricted playlist
+- SUP-3377 - Universal player download button doesn't work right with image
+- SUP-2991 - 508 v2 player - Audio description does not rewind
+- SUP-2604 - Player don't load when "Rate Selector" is enabled | V2 player | customer site only
+- SUP-3341 - [v2.22.1] changeMedia does not make player exit sharing
+- SUP-3344 - Android 5.0 playback doesn't work | HTML 5 player
+- SUP-3256 - [2.21] Fullscreen button does not lose focus; space exits fullscreen
+- SUP-3290 - DFP Vast not working in IE9
+- SUP-3393 - "changeMedia" notice failure to update segments or stream url
+
 * Sun Dec 14 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.23-1
 - FEC-2316 - Support Akamai Media Analytics Logging for forceKPlayer flash mode
 - FEC-2315 - Create Strings plugin demo page expand override to all keys

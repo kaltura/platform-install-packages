@@ -1,7 +1,7 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmc	
-Version: v5.37.30
-Release: 5
+Version: v5.38.4
+Release: 1
 Summary: Kaltura Management Console
 
 Group: System Management	
@@ -81,6 +81,12 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sun Dec 28 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.4-1
+- Support for Live Analytics
+- Prevent player v2 from throwing live events from KMC
+- PLAT-2157 - Akamai live streaming exported XML should specify video format 
+- PLAT-1703 - Add a warning in KMC when user trying to edit/delete one of KMS native categories 
+
 * Thu Dec 11 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.30-1
 - PLAT-2157 - Akamai live streaming exported XML should specify video format
 - PLAT-1703 - Add a warning in KMC when user trying to edit/delete one of KMS native categories
