@@ -6,6 +6,7 @@ BUILD_DIR=$RPM_BASE_DIR/scripts/build
 SOURCE_PACKAGING_DIR=~/sources
 RPM_SOURCES_DIR=~/rpmbuild/SOURCES
 RPM_SPECS_DIR=~/rpmbuild/SPECS
+DEB_SPECS_DIR=$SOURCE_PACKAGING_DIR/platform-install-packages/deb
 TMP_DIR=/tmp
 KALTURA_SERVER_VERSION="Jupiter-10.1.0"
 

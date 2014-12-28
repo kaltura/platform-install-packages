@@ -27,3 +27,6 @@ if [ ! -x "`which wget 2>/dev/null`" ];then
 fi
 wget $KALTURA_CORE_URI -O$RPM_SOURCES_DIR/$KALTURA_SERVER_VERSION.zip
 echo "Packaged into $RPM_SOURCES_DIR/$KALTURA_SERVER_VERSION.zip"
+if [ -x "`which rpmbuild 2>/dev/null`" ];then
+	rpmbuild -ba $RPM_SPECS_DIR/kaltura-base.spec
+fi

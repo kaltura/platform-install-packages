@@ -42,12 +42,15 @@ else
 	echo "Unable to download $PHP_LIBMCRYPT_URI" >&2
 	exit 1
 fi
-rpmbuild -ba $RPM_SPECS_DIR/kaltura-libmcrypt.spec
+
+if [ -x "`which rpmbuild 2>/dev/null`" ];then
+	sudo yum localinstall -y $SOURCE_PACKAGING_DIR/RPMS/x86_64/kaltura-libmcrypt-2.5.7-5.x86_64.rpm
+	sudo yum localinstall -y $SOURCE_PACKAGING_DIR/RPMS/x86_64/kaltura-libmcrypt-devel-2.5.7-5.x86_64.rpm
+	sudo yum localinstall -y $SOURCE_PACKAGING_DIR/RPMS/x86_64/kaltura-libmemcached-1.0.16-2.x86_64.rpm
+	sudo yum localinstall -y $SOURCE_PACKAGING_DIR/RPMS/x86_64/kaltura-libmemcached-devel-1.0.16-2.x86_64.rpm
+fi
 
 
-sudo yum localinstall -y $SOURCE_PACKAGING_DIR/RPMS/x86_64/kaltura-libmcrypt-2.5.7-5.x86_64.rpm
-sudo yum localinstall -y $SOURCE_PACKAGING_DIR/RPMS/x86_64/kaltura-libmcrypt-devel-2.5.7-5.x86_64.rpm
-rpmbuild -ba $RPM_SPECS_DIR/php-mcrypt.spec
 
 
 wget $PHP_LIBMEMCACHED_URI -O $RPM_SOURCES_DIR/libmemcached-$PHP_LIBMEMCACHED_VERSION.tar.gz
@@ -58,15 +61,12 @@ else
 	exit 1
 fi
 cd $RPM_SOURCES_DIR
-tar -xzf $RPM_SOURCES_DIR/libmemcached-$PHP_LIBMEMCACHED_VERSION.tar.gz
+tar xzf $RPM_SOURCES_DIR/libmemcached-$PHP_LIBMEMCACHED_VERSION.tar.gz
 rm libmemcached-$PHP_LIBMEMCACHED_VERSION/libhashkit/hsieh.cc
 rm -f libmemcached-$PHP_LIBMEMCACHED_VERSION-exhsieh.tar.gz
-tar -czf libmemcached-$PHP_LIBMEMCACHED_VERSION-exhsieh.tar.gz libmemcached-$PHP_LIBMEMCACHED_VERSION
-rpmbuild -ba $RPM_SPECS_DIR/kaltura-libmemcached.spec
+tar czf libmemcached-$PHP_LIBMEMCACHED_VERSION-exhsieh.tar.gz libmemcached-$PHP_LIBMEMCACHED_VERSION
 
 
-sudo yum localinstall -y $SOURCE_PACKAGING_DIR/RPMS/x86_64/kaltura-libmemcached-1.0.16-2.x86_64.rpm
-sudo yum localinstall -y $SOURCE_PACKAGING_DIR/RPMS/x86_64/kaltura-libmemcached-devel-1.0.16-2.x86_64.rpm
 wget $PHP_MEMCACHED_URI -O $RPM_SOURCES_DIR/memcached-$PHP_MEMCACHED_VERSION.tgz
 if [ $? -eq 0 ];then
 	echo "Packaged to memcached-$PHP_MEMCACHED_VERSION.tgz"
@@ -74,7 +74,6 @@ else
 	echo "Unable to download $PHP_MEMCACHED_URI" >&2
 	exit 1
 fi
-rpmbuild -ba $RPM_SPECS_DIR/php-pecl-memcached.spec
 
 
 
@@ -85,5 +84,11 @@ else
 	echo "Unable to download $PHP_SSH_URI" >&2
 	exit 1
 fi
-rpmbuild -ba $RPM_SPECS_DIR/php-pecl-ssh2.spec
 
+if [ -x "`which rpmbuild 2>/dev/null`" ];then
+	rpmbuild -ba $RPM_SPECS_DIR/kaltura-libmcrypt.spec
+	rpmbuild -ba $RPM_SPECS_DIR/php-mcrypt.spec
+	rpmbuild -ba $RPM_SPECS_DIR/kaltura-libmemcached.spec
+	rpmbuild -ba $RPM_SPECS_DIR/php-pecl-memcached.spec
+	rpmbuild -ba $RPM_SPECS_DIR/php-pecl-ssh2.spec
+fi
