@@ -62,8 +62,10 @@ $ mkdir $SOURCE_PACKAGING_DIR
 ```
 Utility scripts
 ===============
-push_rpm.sh - scp the RPM to repo origin and sign it over SSH, then, generate meta data with create repo
-bounce_core_ver.sh
+under build/rpm-specific:
+
+* push_rpm.sh - scp the RPM to repo origin and sign it over SSH, then, generate meta data with create repo
+* bounce_core_ver.sh
 
 Deployment instructions
 ================================
@@ -74,7 +76,7 @@ The versions should be updated in platform-install-packages/build/sources.rc
 
 Step by step release process
 ============================
-0. run build/setrep.sh on the repo server
+0. run build/rpm-specific/setrep.sh on the repo server
 
 1. read instructions at: https://kaltura.atlassian.net/wiki/display/QAC/QA.Core+Production+Deployments
 
@@ -82,7 +84,7 @@ Step by step release process
 
 3. if ~/.rpmmacros was updated, also commit under platform-install-packages/RPM/.rpmmacros
 
-4. run platform-install-packages/build/bounce_core_ver.sh $NEW_VER
+4. run platform-install-packages/build/rpm-specifc/bounce_core_ver.sh $NEW_VER
 This will update the Core version in the various relevant spec files
 
 5. update specs for additional components according to versions in the deployment doc, i.e:
