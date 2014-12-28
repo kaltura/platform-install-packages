@@ -39,5 +39,6 @@ cd $SOURCE_PACKAGING_DIR
 wget $RED5_JAVA_URI -O $RPM_SOURCES_DIR/$RED5_RPM_PACKAGE_NAME-$RED5_VERSION.zip 
 
 echo "written to: $RPM_SOURCES_DIR/$RED5_RPM_PACKAGE_NAME-$RED5_VERSION.zip"
-rpmbuild -ba $RPM_SPECS_DIR/$RED5_RPM_PACKAGE_NAME.spec
-
+if [ -x "`which rpmbuild 2>/dev/null`" ];then
+	rpmbuild -ba $RPM_SPECS_DIR/$RED5_RPM_PACKAGE_NAME.spec
+fi 

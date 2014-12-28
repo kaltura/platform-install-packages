@@ -1,7 +1,7 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmc	
 Version: v5.38.4
-Release: 1
+Release: 2
 Summary: Kaltura Management Console
 
 Group: System Management	
@@ -81,6 +81,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sun Dec 28 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.4-2
+- Bounce versions in config.
+
 * Sun Dec 28 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.4-1
 - Support for Live Analytics
 - Prevent player v2 from throwing live events from KMC

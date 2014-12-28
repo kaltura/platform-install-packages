@@ -40,4 +40,6 @@ find $KMC_RPM_NAME-$KMC_VERSION -type f -exec chmod -x {} \;
 tar jcf $RPM_SOURCES_DIR/$KMC_RPM_NAME-$KMC_VERSION.tar.bz2 $KMC_RPM_NAME-$KMC_VERSION
 # flash things DO NOT need exec perms.
 echo "Packaged into $RPM_SOURCES_DIR/$KMC_RPM_NAME-$KMC_VERSION.tar.bz2"
-rpmbuild -ba $RPM_SPECS_DIR/$KMC_RPM_NAME.spec
+if [ -x "`which rpmbuild 2>/dev/null`" ];then
+	rpmbuild -ba $RPM_SPECS_DIR/$KMC_RPM_NAME.spec
+fi

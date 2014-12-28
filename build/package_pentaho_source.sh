@@ -28,5 +28,7 @@ fi
 . $SOURCES_RC 
 wget $PENTAHO_URI -O $RPM_SOURCES_DIR/pdi-ce-$PENTAHO_VERSION-stable.tar.gz
 echo "Packaged to pdi-ce-$PENTAHO_VERSION-stable.tar.gz"
-rpmbuild -ba $RPM_SPECS_DIR/$PENTAHO_RPM_PACKAGE_NAME.spec
+if [ -x "`which rpmbuild 2>/dev/null`" ];then
+	rpmbuild -ba $RPM_SPECS_DIR/$PENTAHO_RPM_PACKAGE_NAME.spec
+fi
 

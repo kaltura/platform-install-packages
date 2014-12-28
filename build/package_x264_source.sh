@@ -31,5 +31,7 @@ cd $RPM_SOURCES_DIR
 wget $X264_URI -O $X264_DEST_ARCHIVE_NAME
 cd $SOURCE_PACKAGING_DIR 
 echo "written to: $RPM_SOURCES_DIR/$X264_DEST_ARCHIVE_NAME"
-rpmbuild -ba $RPM_SPECS_DIR/$X264_RPM_PACKAGE_NAME.spec
+if [ -x "`which rpmbuild 2>/dev/null`" ];then
+	rpmbuild -ba $RPM_SPECS_DIR/$X264_RPM_PACKAGE_NAME.spec
+fi
 

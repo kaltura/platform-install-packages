@@ -38,4 +38,6 @@ for HTML5LIB_VERSION in $HTML5LIB_VERSIONS;do
 		echo "Packaged into $RPM_SOURCES_DIR/$HTML5LIB_RPM_NAME-$HTML5LIB_VERSION.tar.gz"
 	fi
 done
-rpmbuild -ba $RPM_SPECS_DIR/$HTML5LIB_RPM_NAME.spec
+if [ -x "`which rpmbuild 2>/dev/null`" ];then
+	rpmbuild -ba $RPM_SPECS_DIR/$HTML5LIB_RPM_NAME.spec
+fi

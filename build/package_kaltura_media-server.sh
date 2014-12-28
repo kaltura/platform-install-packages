@@ -30,4 +30,6 @@ mkdir -p $RPM_SOURCES_DIR/$KALTURA_MEDIASERVER_RPM_NAME
 wget $KALTURA_MEDIASERVER_URI -O$RPM_SOURCES_DIR/KalturaWowzaServer-install-$KALTURA_MEDIASERVER_VERSION.zip
 echo "Packaged into $RPM_SOURCES_DIR/KalturaWowzaServer-install-$KALTURA_MEDIASERVER_VERSION.zip"
 
-rpmbuild -ba $RPM_SPECS_DIR/$KALTURA_MEDIASERVER_RPM_NAME.spec
+if [ -x "`which rpmbuild 2>/dev/null`" ];then
+	rpmbuild -ba $RPM_SPECS_DIR/$KALTURA_MEDIASERVER_RPM_NAME.spec
+fi
