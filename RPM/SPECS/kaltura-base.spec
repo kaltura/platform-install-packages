@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 10.0.0
-Release: 8
+Version: 10.1.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -96,7 +96,7 @@ project" "*.png" "*.properties" "*.sample" "*.swf" "*.sf" "*.swz" "*.uad" "*.pre
 	find . -iname "$i" -exec chmod 644 {} \;
 done
 
-for i in admin_console alpha api_v3 batch configurations deployment generator infra plugins start tests ui_infra var_console vendor;do 
+for i in admin_console alpha api_v3 batch configurations deployment generator infra plugins start tests ui_infra var_console vendor VERSION.txt  license.txt release-notes.md;do 
 	mv  %{_builddir}/server-%{codename}-%{version}/$i $RPM_BUILD_ROOT%{prefix}/app
 done
 find  $RPM_BUILD_ROOT%{prefix}/app -name "*.sh" -type f -exec chmod +x {} \;
@@ -282,9 +282,16 @@ fi
 %dir %{prefix}/lib
 %dir %{prefix}/include
 %dir %{prefix}/share
-
+%doc %{prefix}/app/release-notes.md
+%doc %{prefix}/app/license.txt
+%doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Sun Dec 28 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 10.1.0-1
+- Ver Bounce to 10.1.0
+- Changes to support RHEL7 and PHP 5_4.
+- Added app/release-notes.md and app/license.txt
+
 * Mon Dec 15 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 10.0.0-8
 - https://github.com/kaltura/server/pull/2009
 - https://github.com/kaltura/server/pull/2010
