@@ -36,7 +36,7 @@ PHP_MEMCACHED_URI="http://pecl.php.net/get/memcached-$PHP_MEMCACHED_VERSION.tgz"
 PHP_SSH_VERSION=0.12
 PHP_SSH_URI="http://pecl.php.net/get/ssh2-$PHP_SSH_VERSION.tgz"
 
-PHP_LIBMCRYPT_VERSION=2.5.7
+PHP_LIBMCRYPT_VERSION=2.5.8
 PHP_LIBMCRYPT_URI="http://garr.dl.sourceforge.net/project/mcrypt/Libmcrypt/Production/libmcrypt-$PHP_LIBMCRYPT_VERSION.tar.gz"
 
 

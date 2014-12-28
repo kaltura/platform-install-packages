@@ -44,10 +44,7 @@ else
 fi
 
 if [ -x "`which rpmbuild 2>/dev/null`" ];then
-	sudo yum localinstall -y $SOURCE_PACKAGING_DIR/RPMS/x86_64/kaltura-libmcrypt-2.5.7-5.x86_64.rpm
-	sudo yum localinstall -y $SOURCE_PACKAGING_DIR/RPMS/x86_64/kaltura-libmcrypt-devel-2.5.7-5.x86_64.rpm
-	sudo yum localinstall -y $SOURCE_PACKAGING_DIR/RPMS/x86_64/kaltura-libmemcached-1.0.16-2.x86_64.rpm
-	sudo yum localinstall -y $SOURCE_PACKAGING_DIR/RPMS/x86_64/kaltura-libmemcached-devel-1.0.16-2.x86_64.rpm
+	sudo yum install -y kaltura-libmcrypt kaltura-libmcrypt-devel kaltura-libmemcached kaltura-libmemcached-devel
 fi
 
 
