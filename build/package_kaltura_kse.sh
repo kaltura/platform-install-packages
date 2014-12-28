@@ -36,7 +36,7 @@ done
 for KSE_UICONF_VERSION in $KSE_UICONF_VERSIONS;do
 	kaltura_svn export --force --quiet $KSE_UICONF_URI/$KSE_UICONF_VERSION $SOURCE_PACKAGING_DIR/$KSE_RPM_NAME/uiconf/kaltura/kmc/kcw
 done
-kaltura_svn export --force --quiet $KSE_UICONF_GENERIC_URI $SOURCE_PACKAGING_DIR/$KSE_RPM_NAME/uiconf/kaltura/kmc/generic
+kaltura_svn export --force --quiet $KSE_UICONF_GENERIC_URI $SOURCE_PACKAGING_DIR/$KSE_RPM_NAME/uiconf/kaltura/generic
 kaltura_svn export --force --quiet $KSE_UICONF_EDITOR_URI $SOURCE_PACKAGING_DIR/$KSE_RPM_NAME/uiconf/kcweditor/locales/en_US
 cd $SOURCE_PACKAGING_DIR
 
