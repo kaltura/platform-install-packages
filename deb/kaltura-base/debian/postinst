@@ -1,0 +1,44 @@
+#!/bin/sh
+
+KALTURA_FUNCTIONS_RC=`dirname $0`/kaltura-functions.rc
+if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
+        OUT="${BRIGHT_RED}ERROR:could not find $KALTURA_FUNCTIONS_RC so, exiting..${NORMAL}"
+        echo -en $OUT
+        exit 3
+fi
+. $KALTURA_FUNCTIONS_RC
+
+set -e
+if [ $1 = configure ]; then
+	. /usr/share/debconf/confmodule
+	KALT_CONF_DIR=$APP_DIR/configurations/
+	BEGINNERS_TUTORIAL_URL=http://bit.ly/KalturaUploadMenu
+	QUICK_START_GUIDE_URL=http://bit.ly/KalturaKmcManual
+	FORUMS_URLS=http://bit.ly/KalturaForums
+	db_input critical 'base/hostname' || true
+	db_go || true
+	db_get 'kaltura-base/hostname'
+	
+	if echo $ADMIN_CONSOLE_PASSWORD | grep -q "/" ;then
+		echo -en "${BRIGHT_RED}ERROR: Passwd can't have the '/' char in it. Please re-input.${NORMAL}"
+		unset ADMIN_CONSOLE_PASSWORD
+	fi
+
+	if [ "$ADMIN_CONSOLE_PASSWORD" != "$AGAIN_ADMIN_CONSOLE_PASSWORD" ];then
+		echo -en "${BRIGHT_RED}ERROR: Passwds do not match, again please.${NORMAL}" 
+		unset AGAIN_ADMIN_CONSOLE_PASSWORD
+		echo -en "${BRIGHT_RED}ERROR: Admin user login password (must be minimum 8 chars and include at least one of each: upper-case, lower-case, number and a special character): ${NORMAL}"
+		read -s ADMIN_CONSOLE_PASSWORD
+	fi
+	php -r "if (timezone_open('$TIME_ZONE') === false){exit(1);}" 2>/dev/null
+	RC=$?
+	trap 'my_trap_handler "${LINENO}" ${$?}' ERR
+	if [ $RC -ne 0 ];then
+		echo -e "${BRIGHT_RED}Bad Timezone value, please check valid options at http://php.net/date.timezone${NORMAL}"
+		unset TIME_ZONE
+	fi
+
+
+    sed -i "s/\().*/\1$RET/" $CONFIGFILE
+
+fi
