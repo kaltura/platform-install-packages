@@ -30,6 +30,7 @@ fi
 
 mkdir -p $SOURCE_PACKAGING_DIR
 mkdir -p $RPM_SOURCES_DIR
+cp -f $RPM_BASE_DIR/SOURCES/* $RPM_SOURCES_DIR/
 if [ ! -L $RPM_SPECS_DIR ]; then
 	ln -s $RPM_BASE_DIR/SPECS $RPM_SPECS_DIR
 fi
