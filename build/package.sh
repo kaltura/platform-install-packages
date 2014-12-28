@@ -16,6 +16,11 @@
 
 #set -o nounset                              # Treat unset variables as an error
 
+if [ ! -f `dirname $0`/packager.rc ]; then
+	echo "Please copy `dirname $0`/packager.template.rc to `dirname $0`/packager.rc and change the tokens!" >&2
+	exit 1
+fi
+
 SOURCES_RC=`dirname $0`/sources.rc
 if [ ! -r $SOURCES_RC ];then
 	echo "Could not find $SOURCES_RC"
@@ -25,7 +30,9 @@ fi
 
 mkdir -p $SOURCE_PACKAGING_DIR
 mkdir -p $RPM_SOURCES_DIR
-ln -s $RPM_BASE_DIR/SPECS $RPM_SPECS_DIR
+if [ ! -L $RPM_SPECS_DIR ]; then
+	ln -s $RPM_BASE_DIR/SPECS $RPM_SPECS_DIR
+fi
 
 rm -f ~/.rpmmacros
 ln -s $RPM_BASE_DIR/.rpmmacros ~/.rpmmacros
