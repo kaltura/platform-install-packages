@@ -40,7 +40,6 @@ cd $BUILD_DIR
 ./package_kaltura_kmc_appstudio.sh
 ./package_kaltura_kmc.sh
 ./package_kaltura_krecord.sh
-./package_kaltura_kse.sh
 ./package_kaltura_ksr.sh
 ./package_kaltura_kupload.sh
 ./package_kaltura_kvpm.sh
