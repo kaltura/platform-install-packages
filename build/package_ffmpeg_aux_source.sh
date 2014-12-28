@@ -33,5 +33,7 @@ curl $FFMPEG_AUX_URI > ffmpeg-$FFMPEG_AUX_VERSION.tar.bz2
 cd $SOURCE_PACKAGING_DIR 
 echo "Written to: $RPM_SOURCES_DIR/ffmpeg-$FFMPEG_AUX_VERSION.tar.bz2."
 
-rpmbuild -ba $RPM_SPECS_DIR/$FFMPEG_AUX_RPM_PACKAGE_NAME.spec
+if [ -x "`which rpmbuild 2>/dev/null`" ];then
+	rpmbuild -ba $RPM_SPECS_DIR/$FFMPEG_AUX_RPM_PACKAGE_NAME.spec
+fi
 

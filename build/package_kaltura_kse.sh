@@ -36,7 +36,7 @@ done
 for KSE_UICONF_VERSION in $KSE_UICONF_VERSIONS;do
 	kaltura_svn export --force --quiet $KSE_UICONF_URI/$KSE_UICONF_VERSION $SOURCE_PACKAGING_DIR/$KSE_RPM_NAME/uiconf/kaltura/kmc/kcw
 done
-kaltura_svn export --force --quiet $KSE_UICONF_GENERIC_URI $SOURCE_PACKAGING_DIR/$KSE_RPM_NAME/uiconf/kaltura/kmc/generic
+kaltura_svn export --force --quiet $KSE_UICONF_GENERIC_URI $SOURCE_PACKAGING_DIR/$KSE_RPM_NAME/uiconf/kaltura/generic
 kaltura_svn export --force --quiet $KSE_UICONF_EDITOR_URI $SOURCE_PACKAGING_DIR/$KSE_RPM_NAME/uiconf/kcweditor/locales/en_US
 cd $SOURCE_PACKAGING_DIR
 
@@ -45,4 +45,6 @@ find $KSE_RPM_NAME -type f -exec chmod -x {} \;
 
 tar jcf $RPM_SOURCES_DIR/$KSE_RPM_NAME.tar.bz2 $KSE_RPM_NAME
 echo "Packaged into $RPM_SOURCES_DIR/$KSE_RPM_NAME.tar.bz2"
-rpmbuild -ba $RPM_SPECS_DIR/$KSE_RPM_NAME.spec
+if [ -x "`which rpmbuild 2>/dev/null`" ];then
+	rpmbuild -ba $RPM_SPECS_DIR/$KSE_RPM_NAME.spec
+fi

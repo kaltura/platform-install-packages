@@ -29,4 +29,6 @@ mkdir -p $RPM_SOURCES_DIR/$KRECORD_RPM_NAME
 wget $KRECORD_URI -O$RPM_SOURCES_DIR/$KRECORD_RPM_NAME-$KRECORD_VERSION.zip
 
 echo "Packaged into $RPM_SOURCES_DIR/$KRECORD_RPM_NAME-$KRECORD_VERSION.zip"
-rpmbuild -ba $RPM_SPECS_DIR/$KRECORD_RPM_NAME.spec
+if [ -x "`which rpmbuild 2>/dev/null`" ];then
+	rpmbuild -ba $RPM_SPECS_DIR/$KRECORD_RPM_NAME.spec
+fi

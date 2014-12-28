@@ -42,4 +42,6 @@ rm $KUPLOAD_RPM_NAME-$KUPLOAD_VERSION.zip
 cd $SOURCE_PACKAGING_DIR/
 tar zcf  $RPM_SOURCES_DIR/$KUPLOAD_RPM_NAME-$KUPLOAD_VERSION.tar.gz $KUPLOAD_RPM_NAME
 echo "Packaged into $RPM_SOURCES_DIR/$KUPLOAD_RPM_NAME-$KUPLOAD_VERSION.tar.gz"
-rpmbuild -ba $RPM_SPECS_DIR/$KUPLOAD_RPM_NAME.spec
+if [ -x "`which rpmbuild 2>/dev/null`" ];then
+	rpmbuild -ba $RPM_SPECS_DIR/$KUPLOAD_RPM_NAME.spec
+fi

@@ -43,7 +43,7 @@ else
 	exit 1
 fi
 
-if [ -x "`which rpmbuild 2>/dev/null`" ];then
+if [ -x "`which yum 2>/dev/null`" ];then
 	sudo yum install -y kaltura-libmcrypt kaltura-libmcrypt-devel kaltura-libmemcached kaltura-libmemcached-devel python-sphinx memcached systemtap-sdt-devel libevent-devel
 fi
 

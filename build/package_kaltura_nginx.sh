@@ -28,4 +28,6 @@ fi
 wget $KALTURA_NGINX_AKAMAI_TOKEN_URI -O$RPM_SOURCES_DIR/nginx-akamai-token-module-$KALTURA_NGINX_AKAMAI_TOKEN_VERSION.zip
 wget $KALTURA_NGINX_VOD_URI -O$RPM_SOURCES_DIR/nginx-vod-module-$KALTURA_NGINX_VOD_VERSION.zip
 echo "Packaged into $RPM_SOURCES_DIR/nginx-vod-module-$KALTURA_NGINX_VOD_VERSION.zip"
-rpmbuild -ba $RPM_SPECS_DIR/kaltura-nginx.spec
+if [ -x "`which rpmbuild 2>/dev/null`" ];then
+	rpmbuild -ba $RPM_SPECS_DIR/kaltura-nginx.spec
+fi
