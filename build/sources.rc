@@ -83,7 +83,7 @@ X264_URI="http://ftp.via.ecp.fr/pub/videolan/x264/snapshots/x264-snapshot-$X264_
 
 # libfdk build vars:
 FDK_VERSION=0.1.3
-FDK_URI=https://github.com/mstorsjo/fdk-aac.git
+FDK_URI=https://github.com/mstorsjo/fdk-aac/archive/v$FDK_VERSION.zip
 FDK_RPM_PACKAGE_NAME=kaltura-libfdk-aac
 
 # Red5 build vars:
