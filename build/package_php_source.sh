@@ -44,13 +44,10 @@ else
 fi
 
 if [ -x "`which rpmbuild 2>/dev/null`" ];then
-	sudo yum localinstall -y $SOURCE_PACKAGING_DIR/RPMS/x86_64/kaltura-libmcrypt-2.5.7-5.x86_64.rpm
-	sudo yum localinstall -y $SOURCE_PACKAGING_DIR/RPMS/x86_64/kaltura-libmcrypt-devel-2.5.7-5.x86_64.rpm
-	sudo yum localinstall -y $SOURCE_PACKAGING_DIR/RPMS/x86_64/kaltura-libmemcached-1.0.16-2.x86_64.rpm
-	sudo yum localinstall -y $SOURCE_PACKAGING_DIR/RPMS/x86_64/kaltura-libmemcached-devel-1.0.16-2.x86_64.rpm
+	rpmbuild -ba $RPM_SPECS_DIR/kaltura-libmcrypt.spec
+	sudo yum localinstall -y $RPMS_DIR/x86_64/kaltura-libmcrypt-*.x86_64.rpm
+	rpmbuild -ba $RPM_SPECS_DIR/php-mcrypt.spec
 fi
-
-
 
 
 wget $PHP_LIBMEMCACHED_URI -O $RPM_SOURCES_DIR/libmemcached-$PHP_LIBMEMCACHED_VERSION.tar.gz
@@ -65,6 +62,10 @@ tar xzf $RPM_SOURCES_DIR/libmemcached-$PHP_LIBMEMCACHED_VERSION.tar.gz
 rm libmemcached-$PHP_LIBMEMCACHED_VERSION/libhashkit/hsieh.cc
 rm -f libmemcached-$PHP_LIBMEMCACHED_VERSION-exhsieh.tar.gz
 tar czf libmemcached-$PHP_LIBMEMCACHED_VERSION-exhsieh.tar.gz libmemcached-$PHP_LIBMEMCACHED_VERSION
+if [ -x "`which rpmbuild 2>/dev/null`" ];then
+	rpmbuild -ba $RPM_SPECS_DIR/kaltura-libmemcached.spec
+	sudo yum localinstall -y $RPMS_DIR/x86_64/kaltura-libmemcached-*.x86_64.rpm
+fi
 
 
 wget $PHP_MEMCACHED_URI -O $RPM_SOURCES_DIR/memcached-$PHP_MEMCACHED_VERSION.tgz
@@ -73,6 +74,9 @@ if [ $? -eq 0 ];then
 else
 	echo "Unable to download $PHP_MEMCACHED_URI" >&2
 	exit 1
+fi
+if [ -x "`which rpmbuild 2>/dev/null`" ];then
+	rpmbuild -ba $RPM_SPECS_DIR/php-pecl-memcached.spec
 fi
 
 
@@ -84,11 +88,6 @@ else
 	echo "Unable to download $PHP_SSH_URI" >&2
 	exit 1
 fi
-
 if [ -x "`which rpmbuild 2>/dev/null`" ];then
-	rpmbuild -ba $RPM_SPECS_DIR/kaltura-libmcrypt.spec
-	rpmbuild -ba $RPM_SPECS_DIR/php-mcrypt.spec
-	rpmbuild -ba $RPM_SPECS_DIR/kaltura-libmemcached.spec
-	rpmbuild -ba $RPM_SPECS_DIR/php-pecl-memcached.spec
 	rpmbuild -ba $RPM_SPECS_DIR/php-pecl-ssh2.spec
 fi
