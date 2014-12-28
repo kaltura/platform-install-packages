@@ -24,6 +24,7 @@ fi
 . $SOURCES_RC
 
 mkdir -p $SOURCE_PACKAGING_DIR
+mkdir -p $RPM_SOURCES_DIR
 
 rm -f ~/.rpmmacros
 ln -s $RPM_BASE_DIR/.rpmmacros ~/.rpmmacros
