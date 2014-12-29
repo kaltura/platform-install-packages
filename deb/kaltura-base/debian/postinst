@@ -1,6 +1,6 @@
-#!/bin/sh
+#!/bin/sh 
 
-KALTURA_FUNCTIONS_RC=`dirname $0`/kaltura-functions.rc
+KALTURA_FUNCTIONS_RC=/opt/kaltura/bin/kaltura-functions.rc
 if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
         OUT="${BRIGHT_RED}ERROR:could not find $KALTURA_FUNCTIONS_RC so, exiting..${NORMAL}"
         echo -en $OUT
@@ -17,7 +17,7 @@ if [ $1 = configure ]; then
 	FORUMS_URLS=http://bit.ly/KalturaForums
 	db_input critical 'kaltura-base/cdn_hostname' || true
 	db_go || true
-	db_get 'kaltura-base/hostname'
+	db_get 'kaltura-base/cdn_hostname'
 	CDN_HOST=$RET
 	
 	db_input critical 'kaltura-base/apache_hostname' || true

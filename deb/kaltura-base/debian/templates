@@ -91,13 +91,13 @@ Description: Kaltura Admin user (email address):
 	Kaltura Admin user (email address):\n
 
 Template: kaltura-base/admin_console_passwd
-Type: string
+Type: password
 Default:
 Description: Admin user login password (must be minimum 8 chars and include at least one of each: upper-case, lower-case, number and a special character):
 	Admin user login password (must be minimum 8 chars and include at least one of each: upper-case, lower-case, number and a special character):\n
 
 Template: kaltura-base/admin_console_passwd_again
-Type: string
+Type: password
 Default:
 Description: Confirm passwd:
 	Confirm passwd:\n
