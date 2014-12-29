@@ -85,10 +85,25 @@ Type: password
 Default:
 Description: Confirm passwd:
 
+Template: kaltura-base/admin_console_passwd_invalid_char
+Type: note
+Default:
+Description: Passwd can't have the '/' char in it. Please re-input.
+
+Template: kaltura-base/admin_console_passwd_dont_match
+Type: note
+Default:
+Description: Passwds do not match, again please.
+
 Template: kaltura-base/time_zone
 Type: string
 Default:
 Description: Your time zone [see http://php.net/date.timezone]:
+
+Template: kaltura-base/bad_time_zone
+Type: note
+Default:
+Description: Bad Timezone value, please check valid options at http://php.net/date.timezone
 
 Template: kaltura-base/env_name
 Type: string
