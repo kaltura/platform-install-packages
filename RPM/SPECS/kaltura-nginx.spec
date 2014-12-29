@@ -51,7 +51,7 @@ Release: 2
 Vendor: Kaltura inc.
 URL: http://nginx.org/
 
-Source0: http://nginx.org/download/%{name}-%{version}.tar.gz
+Source0: %{name}-%{version}.tar.gz
 Source1: nginx.logrotate
 Source2: nginx.init
 Source3: nginx.sysconf
