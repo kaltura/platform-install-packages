@@ -2,7 +2,7 @@
 COMP_NAME ?= kaltura-base
 
 DEB_VERSION := $(shell dpkg-parsechangelog | egrep '^Version:' | cut -f 2 -d ' ')
-RC_FILE :=/home/jess/sources/platform-install-packages/build/sources.rc
+RC_FILE :=../../build/sources.rc
 KALTURA_SERVER_VERSION ?= $(shell egrep '^KALTURA_SERVER_VERSION=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
 SOURCE_PACKAGING_DIR ?= $(shell egrep '^SOURCE_PACKAGING_DIR=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
 KALTURA_PREFIX ?= $(shell egrep '^KALTURA_PREFIX=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
@@ -11,7 +11,6 @@ archive := $(SOURCE_PACKAGING_DIR)/$(KALTURA_SERVER_VERSION).zip
 tree := server-$(KALTURA_SERVER_VERSION)
 
 clean:
-	echo $(KALTURA_SERVER_VERSION)
 	dh_clean
 	rm -rf $(tree) 
 	rm -rf debian/tmp
@@ -20,7 +19,7 @@ $(archive):
 	~/sources/platform-install-packages/build/package_kaltura_core.sh	
 
 $(tree): $(archive)
-	unzip -o $(archive)
+	unzip -qq -o $(archive)
 
 build: $(tree)
 
