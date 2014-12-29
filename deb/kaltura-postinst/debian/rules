@@ -16,7 +16,7 @@ clean:
 	rm -rf debian/tmp
 
 $(archive):
-	~/sources/platform-install-packages/build/package_kaltura_postinst.sh	
+	~/sources/platform-install-packages/build/package_kaltura_postinst.sh
 
 $(tree): $(archive)
 	tar zxf $(archive)

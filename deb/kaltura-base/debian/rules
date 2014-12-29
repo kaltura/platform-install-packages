@@ -27,7 +27,30 @@ install: build
 
 binary-indep: install
 	dh_installdirs
-	dh_install $(tree)/* $(KALTURA_PREFIX)/app/
+	rm -rf $(KALTURA_PREFIX)
+	mkdir -p $(KALTURA_PREFIX)/log
+	mkdir -p $(KALTURA_PREFIX)/tmp
+	mkdir -p $(KALTURA_PREFIX)/web
+	mkdir -p $(KALTURA_PREFIX)/app/cache
+	mkdir -p $(KALTURA_PREFIX)/bin
+	mkdir -p $(KALTURA_PREFIX)/lib
+	mkdir -p $(KALTURA_PREFIX)/include
+	mkdir -p $(KALTURA_PREFIX)/share
+	mkdir -p $(KALTURA_PREFIX)/tmp/convert
+	mkdir -p $(KALTURA_PREFIX)/tmp/thumb/
+	mkdir -p $(KALTURA_PREFIX)/web/tmp/imports
+	mkdir -p $(KALTURA_PREFIX)/web/tmp/convert
+	mkdir -p $(KALTURA_PREFIX)/web/tmp/thumb
+	mkdir -p $(KALTURA_PREFIX)/web/tmp/xml
+	mkdir -p $(KALTURA_PREFIX)/web/dropfolders/monitor
+	mkdir -p $(KALTURA_PREFIX)/web/content/cacheswf
+	mkdir -p $(KALTURA_PREFIX)/web/content/uploads
+	mkdir -p $(KALTURA_PREFIX)/web/content/entry
+	mkdir -p $(KALTURA_PREFIX)web/content//metadata
+	mkdir -p $(KALTURA_PREFIX)/web/content/batchfiles
+	mkdir -p $(KALTURA_PREFIX)/web/content/templates
+	mv $(tree)/* $(KALTURA_PREFIX)/app/
+	dh_install $(KALTURA_PREFIX)
 	dh_gencontrol -u-v$(DEB_VERSION) 
 	dh_installdebconf
 	dh_installdeb
