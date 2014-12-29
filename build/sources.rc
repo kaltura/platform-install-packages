@@ -86,6 +86,10 @@ FDK_VERSION=0.1.3
 FDK_URI=https://github.com/mstorsjo/fdk-aac/archive/v$FDK_VERSION.zip
 FDK_RPM_PACKAGE_NAME=kaltura-libfdk-aac
 
+# mencoder
+MENCODER_VERSION=3.4.6
+MENCODER_URI="https://github.com/kaltura/server-bin-linux-64bit/releases/download/1.0.0/mencoder-dir-$MENCODER_VERSION.tar.bz2"
+
 # Red5 build vars:
 RED5_VERSION=v1.0.3-RELEASE
 

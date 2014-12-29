@@ -44,6 +44,7 @@ cd $BUILD_DIR
 ./package_kaltura_kupload.sh
 ./package_kaltura_kvpm.sh
 ./package_kaltura_media-server.sh
+./package_kaltura_monit.sh
 ./package_kaltura_nginx.sh
 ./package_kaltura_postinst.sh
 ./package_kaltura_studio.sh
@@ -53,9 +54,6 @@ if [ -x "`which rpmbuild 2>/dev/null`" ];then
 	rpmbuild -ba $RPM_SPECS_DIR/kaltura-base.spec
 	rpmbuild -ba $RPM_SPECS_DIR/kaltura-batch.spec
 	rpmbuild -ba $RPM_SPECS_DIR/kaltura-front.spec
-	rpmbuild -ba $RPM_SPECS_DIR/kaltura-kmc-docs.spec
-	rpmbuild -ba $RPM_SPECS_DIR/kaltura-mencoder.spec
-	rpmbuild -ba $RPM_SPECS_DIR/kaltura-monit.spec
 	rpmbuild -ba $RPM_SPECS_DIR/kaltura-mysql-config.spec
 	rpmbuild -ba $RPM_SPECS_DIR/kaltura-opencore-amr.spec
 	rpmbuild -ba $RPM_SPECS_DIR/kaltura-release.spec

@@ -81,12 +81,12 @@ trap 'my_trap_handler "${LINENO}" ${$?}' ERR
 send_install_becon `basename $0` $ZONE install_start 0
 BASE_DIR=/opt/kaltura
 LOCALHOST=127.0.0.1
-DISPLAY_NAME="Kaltura Server `rpm -q kaltura-base --queryformat %{version}`"
+DISPLAY_NAME=`rpm -q kaltura-base --queryformat %{version}`
 KALT_CONF_DIR=$BASE_DIR/app/configurations/
 BEGINNERS_TUTORIAL_URL=http://bit.ly/KalturaUploadMenu
 QUICK_START_GUIDE_URL=http://bit.ly/KalturaKmcManual
 FORUMS_URLS=http://bit.ly/KalturaForums
-echo -e "${CYAN}Welcome to $DISPLAY_NAME post install setup.${NORMAL}"
+echo -e "${CYAN}Welcome to Kaltura Server $DISPLAY_NAME post install setup.${NORMAL}"
 
 if [ -n "$1" -a -r "$1" ];then
         ANSFILE=$1
