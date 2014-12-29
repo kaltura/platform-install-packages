@@ -29,12 +29,12 @@ fi
 . $SOURCES_RC 
 
 if [ -x "`which yum 2>/dev/null`" ];then
-	sudo yum localinstall -y $SOURCE_PACKAGING_DIR/RPMS/x86_64/kaltura-lame-*.x86_64.rpm
-	sudo yum localinstall -y $SOURCE_PACKAGING_DIR/RPMS/x86_64/kaltura-a52dec-*.x86_64.rpm
-	sudo yum localinstall -y $SOURCE_PACKAGING_DIR/RPMS/x86_64/kaltura-libfaac-*.x86_64.rpm
-	sudo yum localinstall -y $SOURCE_PACKAGING_DIR/RPMS/x86_64/kaltura-x264-*.x86_64.rpm
-	sudo yum localinstall -y $SOURCE_PACKAGING_DIR/RPMS/x86_64/kaltura-libopencore-amr-*.x86_64.rpm
-	sudo yum localinstall -y $SOURCE_PACKAGING_DIR/RPMS/x86_64/kaltura-fdk-aac-*.x86_64.rpm
+	sudo yum localinstall -y $RPMS_DIR/x86_64/kaltura-lame-*.x86_64.rpm
+	sudo yum localinstall -y $RPMS_DIR/x86_64/kaltura-a52dec-*.x86_64.rpm
+	sudo yum localinstall -y $RPMS_DIR/x86_64/kaltura-libfaac-*.x86_64.rpm
+	sudo yum localinstall -y $RPMS_DIR/x86_64/kaltura-x264-*.x86_64.rpm
+	sudo yum localinstall -y $RPMS_DIR/x86_64/kaltura-libopencore-amr-*.x86_64.rpm
+	sudo yum localinstall -y $RPMS_DIR/x86_64/kaltura-fdk-aac-*.x86_64.rpm
 fi
 
 
