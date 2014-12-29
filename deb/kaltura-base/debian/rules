@@ -6,6 +6,9 @@ RC_FILE :=../../build/sources.rc
 KALTURA_SERVER_VERSION ?= $(shell egrep '^KALTURA_SERVER_VERSION=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
 SOURCE_PACKAGING_DIR ?= $(shell egrep '^SOURCE_PACKAGING_DIR=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
 KALTURA_PREFIX ?= $(shell egrep '^KALTURA_PREFIX=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
+HTML5LIB_VERSION ?= $(shell egrep '^HTML5LIB_LATEST_VERSION=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
+KMC_VERSION ?= v$(shell egrep '^KMC_MINUS_V_VERSION=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
+KMC_LOGIN_VERSION ?= v$(shell egrep '^KMC_LOGIN_MINUS_V_VERSION=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
 include ../includes/build-revision.mk
 archive := $(SOURCE_PACKAGING_DIR)/$(KALTURA_SERVER_VERSION).zip 
 tree := server-$(KALTURA_SERVER_VERSION)
@@ -49,6 +52,13 @@ binary-indep: install
 	mkdir -p $(KALTURA_PREFIX)web/content//metadata
 	mkdir -p $(KALTURA_PREFIX)/web/content/batchfiles
 	mkdir -p $(KALTURA_PREFIX)/web/content/templates
+	for i in "*.xml" "*.template" "*.ttf" "*.xsl" "*.xsd" "*.yml" "*.smil" "*.srt" "*.sql" "*.orig" "*.patch" "*.po" "*.pdf" "*.otf" "*.txt" "*.php" "*.phtml" "*.project" "*.png" "*.properties" "*.sample" "*.swf" "*.sf" "*.swz" "*.uad" "*.prefs" "*.psd" "*.rvmrc" "*.sln" "*.ini" "*.log" ;do find . -iname "$i" -exec chmod 644 {} \; ; done
+	find  $(tree) -name "*.sh" -type f -exec chmod +x {} \;
+	sed -i 's@^IsmIndex@;IsmIndex@g' $(tree)/configurations/plugins.template.ini
+	sed -i "s#^;kmc_version = @KMC_VERSION@#kmc_version = $(KMC_VERSION)#g" $(tree)/configurations/local.template.ini
+	sed -i "s#^;html5_version = @HTML5LIB_VERSION@#html5_version = $(HTML5LIB_VERSION)#g" $(tree)/configurations/local.template.ini
+	sed -i "s#^;kmc_login_version = @KMC_LOGIN_VERSION@#kmc_login_version = $(KMC_LOGIN_VERSION)#g" $(tree)/configurations/local.template.ini
+	sed -i 's@^writers.\(.*\).filters.priority.priority\s*=\s*7@writers.\1.filters.priority.priority=4@g' $(tree)/configurations/logger.template.ini
 	mv $(tree)/* $(KALTURA_PREFIX)/app/
 	dh_install $(KALTURA_PREFIX)
 	dh_gencontrol -u-v$(DEB_VERSION) 
