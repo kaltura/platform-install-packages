@@ -63,5 +63,6 @@ sudo yum install -y SDL-devel imlib2-devel schroedinger-devel libtheora-devel xv
 # sphinx
 sudo yum install -y mysql-devel expat-devel
 
-
+# nginx
+sudo yum install -y pcre-devel
 
