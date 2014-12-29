@@ -179,9 +179,6 @@ KCW_RPM_NAME="kaltura-kcw"
 
 
 # Kaltura kUpload
-# we bundle a few vers at each release:
-#KUPLOAD_VERSIONS="v1.2.8 v1.1.7 v1.0.23 v1.2.16"
-#KUPLOAD_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/flash/kupload"
 KUPLOAD_VERSION="v1.2.16"
 KUPLOAD_URI="https://github.com/kaltura/kupload/releases/download/$KUPLOAD_VERSION/$KUPLOAD_VERSION.zip"
 KUPLOAD_RPM_NAME="kaltura-kupload"

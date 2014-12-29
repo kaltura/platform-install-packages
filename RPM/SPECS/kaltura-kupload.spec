@@ -1,6 +1,5 @@
 %define prefix /opt/kaltura
 %define widget_name kupload
-#%define kupload_vers "v1.2.8 v1.1.7 v1.0.23"
 Name:	kaltura-%{widget_name}
 Version: v1.2.16 
 Release: 1 
@@ -8,7 +7,7 @@ Epoch:0
 Summary: Kaltura kupload widget
 License: AGPLv3+	
 URL: http://kaltura.org
-Source0: %{name}-%{version}.tar.gz
+Source0: %{name}-%{version}.zip
 BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 BuildArch: noarch
 
@@ -29,7 +28,7 @@ For more information visit: http://corp.kaltura.com, http://www.kaltura.org and 
 This package installs the Kaltura kupload.
 
 %prep
-%setup -qn %{name}
+%setup -qn %{version}
 
 %build
 
