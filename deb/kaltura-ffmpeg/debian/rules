@@ -7,7 +7,7 @@ SOURCE_PACKAGING_DIR ?= $(shell egrep '^SOURCE_PACKAGING_DIR=' $(RC_FILE) | cut 
 include ../includes/build-revision.mk
 archive := $(SOURCE_PACKAGING_DIR)/ffmpeg-$(FFMPEG_VERSION).tar.bz2 
 tree := ffmpeg-$(FFMPEG_VERSION) 
-BASE_PREFIX=$(tree)/opt/kaltura/ffmpeg-$(FFMPEG_VERSION)
+BASE_PREFIX=opt/kaltura
 BUILD_DIR=debian/build-tree
 INSTALL_DIR=debian/install-tree
 
@@ -78,7 +78,8 @@ install: build
 
 binary-arch: install
 	dh_installdirs
-	dh_install $(BASE_PREFIX)
+	dh_fixperms -i
+	dh_install $(tree)/$(BASE_PREFIX)
 	dh_gencontrol -u-v$(DEB_VERSION) 
 	dh_installdebconf
 	dh_installdeb
