@@ -1,4 +1,14 @@
 #!/bin/bash
+enable_apps_conf()
+{
+	for CONF in  apps.conf var.conf ;do
+		a2ensite $CONF
+	done
+}
+enable_admin_conf()
+{
+	a2ensite admin.conf
+}
 
 KALTURA_FUNCTIONS_RC=/opt/kaltura/bin/kaltura-functions.rc
 if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
@@ -53,8 +63,20 @@ if [ "$1" = "configure" ]; then
 			# configure SSL:
 			MAIN_APACHE_CONF=$KALTURA_APACHE_CONF/kaltura.ssl.conf
 			#db_get kaltura-front/apache_ssl_cert
-			#db_get kaltura-front/apache_ssl_key
-			#db_get kaltura-front/apache_ssl_chain
+			db_input medium kaltura-front/apache_ssl_cert || true
+			db_go || true
+			db_get kaltura-front/apache_ssl_cert
+			CRT_FILE=$RET
+
+			db_input medium kaltura-front/apache_ssl_key || true
+			db_go || true
+			db_get kaltura-front/apache_ssl_key
+			KEY_FILE=$RET
+
+			db_input medium kaltura-front/apache_ssl_chain || true
+			db_go || true
+			db_get kaltura-front/apache_ssl_chain
+			CHAIN_FILE=$RET
 			#if [ -z "$CA_FILE" ];then
 			#	echo -e "${CYAN}Please input path to your SSL CA file or leave empty in case you have none${CYAN}:${NORMAL}"
 			#	read -e CA_FILE
@@ -79,7 +101,12 @@ if [ "$1" = "configure" ]; then
 
 			# if cert is self signed:
 			if openssl verify  $CRT_FILE | grep 'self signed certificate' -q ;then
-				# db_get kaltura-front/self_signed_cert
+
+				db_input medium kaltura-front/self_signed_cert || true
+				db_go || true
+				db_get kaltura-front/self_signed_cert
+				KEY_FILE=$RET
+
 				echo -e "settings.clientConfig.verifySSL=0" >> $APP_DIR/configurations/admin.ini
 				sed -i  's@\(\[production\]\)@\1\nsettings.clientConfig.verifySSL=0@' $APP_DIR/configurations/admin.ini
 			fi
@@ -115,15 +142,22 @@ if [ "$1" = "configure" ]; then
 	else
 		DEFAULT_PORT=80
 	fi
+		db_input medium kaltura-front/vhost_port || true
+		db_go || true
+		db_get kaltura-front/vhost_port
+		KALTURA_VIRTUAL_HOST_PORT=$RET
 
-		# dh_get kaltura-base/vhost_port
 		if [ "$KALTURA_VIRTUAL_HOST_PORT" -eq 443 ];then
 			PROTOCOL="https"
 		else
 			PROTOCOL="http"
 		fi
 
-	# db_get kaltura-front/service_url
+		db_input medium kaltura-front/service_url || true
+		db_go || true
+		db_get kaltura-front/service_url
+		SERVICE_URL=$RET
+
 
 
 	cp $KALTURA_APACHE_CONFD/enabled.kaltura.conf.template $KALTURA_APACHE_CONFD/enabled.kaltura.conf 
@@ -149,11 +183,11 @@ Please select one of the following options [0]:
 	find $KALTURA_APACHE_CONFD -type l -exec rm {} \;
 
 	if [ "$CONFIG_CHOICE" = 1 ];then
-		enable_apps_conf $KALTURA_APACHE_CONFD
+		enable_apps_conf 
 	elif [ "$CONFIG_CHOICE" = 2 ];then
-		enable_admin_conf $KALTURA_APACHE_CONFD
+		enable_admin_conf
 	elif [ "$CONFIG_CHOICE" = 0 ];then
-		enable_apps_conf $KALTURA_APACHE_CONFD
+		enable_apps_conf
 		enable_admin_conf $KALTURA_APACHE_CONFD
 	else
 		enable_apps_conf $KALTURA_APACHE_CONFD
@@ -183,7 +217,7 @@ Please select one of the following options [0]:
 				php $BASE_DIR/app/deployment/uiconf/deploy_v2.php --ini=$BASE_DIR/apps/studio/`rpm -qa kaltura-html5-studio --queryformat %{version}`/studio.ini >> /dev/null
 				sed -i "s@^\(studio_version\s*=\)\(.*\)@\1 `rpm -qa kaltura-html5-studio --queryformat %{version}`@g" -i $BASE_DIR/app/configurations/local.ini
 			fi
-		# we can't use rpm -q kaltura-kmc because this node may not be the one where we installed the KMC RPM on, as it resides in the web dir and does not need to be installed on all front nodes.
+		# we can't use 'dpkg show kaltura-kmc' because this node may not be the one where we installed the KMC deb on, as it resides in the web dir and does not need to be installed on all front nodes.
 			KMC_PATH=`ls -ld $BASE_DIR/web/flash/kmc/v* 2>/dev/null|awk -F " " '{print $NF}' |tail -1`
 			php $BASE_DIR/app/deployment/uiconf/deploy_v2.php --ini=$KMC_PATH/config.ini >> /dev/null
 			HTML5_PATH=`ls -ld $BASE_DIR/web/html5/html5lib/v* 2>/dev/null|awk -F " " '{print $NF}' |tail -1`
