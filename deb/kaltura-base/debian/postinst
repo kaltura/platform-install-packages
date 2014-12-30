@@ -24,7 +24,7 @@ chown $APACHE_USER.kaltura -R $KALTURA_PREFIX/web/content/entry $KALTURA_PREFIX/
 find $KALTURA_PREFIX/web/content/entry $KALTURA_PREFIX/web/content/uploads/  $KALTURA_PREFIX/web/tmp/ -type d -exec chmod 775 {} \;
 service ntp start
 set -e
-if [ $1 = configure ]; then
+if [ "$1" = "configure" ]; then
 	. /usr/share/debconf/confmodule
 	KALT_CONF_DIR=$APP_DIR/configurations/
 	BEGINNERS_TUTORIAL_URL=http://bit.ly/KalturaUploadMenu

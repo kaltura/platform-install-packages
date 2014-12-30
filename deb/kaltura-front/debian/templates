@@ -1,0 +1,31 @@
+Template: kaltura-front/is_apache_ssl
+Type: boolean
+Default: 
+Description: Is your Apache working with SSL?
+
+Template: kaltura-front/web_interfaces
+Type: multiselect
+Choices: ${CHOICES}
+
+Template: kaltura-front/apache_ssl_cert
+Type: string
+Default: /etc/ssl/certs/ssl-cert-snakeoil.pem
+Description: Please input path to your SSL certificate:
+
+Template: kaltura-front/apache_ssl_key
+Type: string
+Default: /etc/ssl/private/ssl-cert-snakeoil.key
+Description: Please input path to your SSL key:
+
+Template: kaltura-front/apache_ssl_chain
+Type: string
+Default: 
+Description: Please input path to your SSL chain file or leave empty in case you have none:
+
+Template: kaltura-front/apache_ssl_chain
+Type: string
+Default: 
+Description: Please input path to your SSL chain file or leave empty in case you have none:
+
+
+
