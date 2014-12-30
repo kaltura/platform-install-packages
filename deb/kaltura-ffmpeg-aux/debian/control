@@ -1,4 +1,4 @@
-Source: kaltura-ffmpeg
+Source: kaltura-ffmpeg-aux
 Section: libs
 Priority: optional
 Maintainer: Jess Portnoy <jess.portnoy@kaltura.com>
@@ -11,9 +11,6 @@ Build-Depends:
  frei0r-plugins-dev,
  libasound2-dev [linux-any],
  libbz2-dev,
- libass-dev,
- libfaac-dev, 
- libfdk-aac-dev,
  libcdio-cdda-dev,
  libcdio-dev,
  libcdio-paranoia-dev,
@@ -53,7 +50,7 @@ Build-Depends:
  yasm [any-amd64 any-i386],
  zlib1g-dev
 
-Package: kaltura-ffmpeg
+Package: kaltura-ffmpeg-aux
 Section: video
 Architecture: any
 Pre-Depends:

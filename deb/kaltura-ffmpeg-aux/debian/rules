@@ -1,0 +1,86 @@
+#!/usr/bin/make -f
+
+DEB_VERSION := $(shell dpkg-parsechangelog | egrep '^Version:' | cut -f 2 -d ' ')
+RC_FILE :=../../build/sources.rc
+FFMPEG_VERSION ?= $(shell egrep '^FFMPEG_AUX_VERSION=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
+SOURCE_PACKAGING_DIR ?= $(shell egrep '^SOURCE_PACKAGING_DIR=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
+include ../includes/build-revision.mk
+archive := $(SOURCE_PACKAGING_DIR)/ffmpeg-$(FFMPEG_VERSION).tar.bz2 
+tree := ffmpeg-$(FFMPEG_VERSION) 
+BASE_PREFIX=opt/kaltura
+BUILD_DIR=debian/build-tree
+INSTALL_DIR=debian/install-tree
+
+clean:
+	dh_clean
+	rm -rf $(tree) 
+	rm -rf debian/tmp
+	rm -rf $(BUILD_DIR)
+	rm -rf $(INSTALL_DIR)
+
+$(archive):
+	~/sources/platform-install-packages/build/package_ffmpeg_aux_source.sh
+
+$(tree): $(archive)
+	mkdir -p debian/tmp
+	tar jxf $(archive) -C debian/tmp
+
+build: $(tree)
+	#mkdir $(BUILD_DIR)
+	#mkdir $(INSTALL_DIR)
+	cd debian/tmp/$(tree) && ./configure \
+	    --prefix="$(BASE_PREFIX)" \
+	    --libdir="$(BASE_PREFIX)/lib" \
+	    --shlibdir="$(BASE_PREFIX)/lib" \
+	    --extra-cflags=" -fPIC -I/opt/kaltura/include" \
+	    --extra-ldflags="-L/opt/kaltura/lib" \
+	    --disable-devices \
+	    --enable-bzlib \
+	    --enable-libfaac \
+	    --enable-libgsm \
+	    --enable-libmp3lame \
+	    --enable-libschroedinger \
+	    --enable-libtheora \
+	    --enable-libvorbis \
+	    --enable-libx264 \
+	    --enable-libxvid \
+	    --enable-filter=movie \
+	    --enable-avfilter \
+	    --enable-libopencore-amrnb \
+	    --enable-libopencore-amrwb \
+	    --enable-libopenjpeg \
+	    --enable-libvpx \
+	    --enable-libspeex \
+	    --enable-postproc \
+	    --enable-pthreads \
+	    --enable-static \
+	    --enable-shared \
+	    --enable-gpl \
+	     --disable-debug \
+	    --disable-optimizations \
+	--enable-nonfree \
+	--enable-gpl \
+	--enable-nonfree \
+	--enable-pthreads \
+	--enable-swscale \
+	--enable-vdpau \
+	--enable-bzlib \
+	--disable-devices \
+	--enable-filter=movie \
+	    --enable-version3 \
+	--enable-x11grab && make && make install
+
+install: build
+	
+
+binary-arch: install
+	dh_installdirs
+	dh_fixperms -i
+	dh_install $(tree)/$(BASE_PREFIX)
+	dh_gencontrol -u-v$(DEB_VERSION) 
+	dh_installdebconf
+	dh_installdeb
+	dh_builddeb 
+
+binary: binary-arch
+.PHONY: clean build binary-arch binary
