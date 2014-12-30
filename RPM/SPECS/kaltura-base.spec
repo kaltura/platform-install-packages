@@ -183,10 +183,10 @@ fi
 # create user/group, and update permissions
 groupadd -r %{kaltura_group} -g7373 2>/dev/null || true
 useradd -M -r -u7373 -d %{prefix} -s /bin/bash -c "Kaltura server" -g %{kaltura_group} %{kaltura_user} 2>/dev/null || true
-getent group apache >/dev/null || groupadd -g 48 -r apache
-getent passwd apache >/dev/null || \
-  useradd -r -u 48 -g apache -s /sbin/nologin \
-    -d /var/www -c "Apache" apache
+getent group %{apache_user} >/dev/null || groupadd -g 48 -r %{apache_group}
+getent passwd %{apache_user} >/dev/null || \
+  useradd -r -u 48 -g %{apache_group} -s /sbin/nologin \
+    -d /var/www -c "Apache" %{apache_user}
 usermod -a -G %{kaltura_group} %{apache_user}
 
 usermod -g %{kaltura_group} %{kaltura_user} 2>/dev/null || true
