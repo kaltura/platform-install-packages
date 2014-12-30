@@ -76,7 +76,7 @@ install: build
 binary-arch: install
 	dh_installdirs
 	dh_fixperms -i
-	dh_install $(tree)/$(BASE_PREFIX)
+	dh_install debian/tmp/$(tree)/$(BASE_PREFIX)
 	dh_gencontrol -u-v$(DEB_VERSION) 
 	dh_installdebconf
 	dh_installdeb
