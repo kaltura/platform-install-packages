@@ -3,6 +3,11 @@ Type: boolean
 Default: 
 Description: Is your Apache working with SSL?
 
+Template: kaltura-front/vhost_port
+Type: string
+Default: 80 
+Description: Vhost port to listen on:
+
 Template: kaltura-front/web_interfaces
 Type: multiselect
 Choices: ${CHOICES}
@@ -27,5 +32,13 @@ Type: string
 Default: 
 Description: Please input path to your SSL chain file or leave empty in case you have none:
 
+Template: kaltura-front/service_url
+Type: string
+Default:
+Description: Your Kaltura Service URL:
+	Base URL where the Kaltura API and Apps will be accessed from - this would be your Load Balancer URL on a cluster or same as your virtual host in an all-in-one Kaltura server - Must be accessible from both inside the machine and from any clients / browsers that will use Kaltura:\n
 
+Template: kaltura-front/self_signed_cert
+Type: note
+Description: WARNING: self signed cerificate detected. Will set settings.clientConfig.verifySSL=0 in configurations/admin.ini.
 

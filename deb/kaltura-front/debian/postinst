@@ -79,11 +79,7 @@ if [ "$1" = "configure" ]; then
 
 			# if cert is self signed:
 			if openssl verify  $CRT_FILE | grep 'self signed certificate' -q ;then
-				echo -e "${YELLOW}
-
-		WARNING: self signed cerificate detected. Will set settings.clientConfig.verifySSL=0 in $APP_DIR/configurations/admin.ini.
-			${NORMAL}
-			"
+				# db_get kaltura-front/self_signed_cert
 				echo -e "settings.clientConfig.verifySSL=0" >> $APP_DIR/configurations/admin.ini
 				sed -i  's@\(\[production\]\)@\1\nsettings.clientConfig.verifySSL=0@' $APP_DIR/configurations/admin.ini
 			fi
@@ -120,27 +116,14 @@ if [ "$1" = "configure" ]; then
 		DEFAULT_PORT=80
 	fi
 
-	if [ -z "$KALTURA_VIRTUAL_HOST_PORT" ];then
-		echo -e "${CYAN}Which port will this Vhost listen on? [${YELLOW}$DEFAULT_PORT${CYAN}]${NORMAL} "
-		read -e KALTURA_VIRTUAL_HOST_PORT
-		if [ -z "$KALTURA_VIRTUAL_HOST_PORT" ];then
-			KALTURA_VIRTUAL_HOST_PORT=$DEFAULT_PORT
-		fi
+		# dh_get kaltura-base/vhost_port
 		if [ "$KALTURA_VIRTUAL_HOST_PORT" -eq 443 ];then
 			PROTOCOL="https"
 		else
 			PROTOCOL="http"
 		fi
-	fi
 
-	if [ -z "$SERVICE_URL" ];then
-		echo -e "${CYAN}Service URL [${YELLOW}$PROTOCOL://$KALTURA_VIRTUAL_HOST_NAME:$KALTURA_VIRTUAL_HOST_PORT${CYAN}]:${NORMAL} "
-		read -e SERVICE_URL
-		if [ -z "$SERVICE_URL" ];then
-			SERVICE_URL=$PROTOCOL://$KALTURA_FULL_VIRTUAL_HOST_NAME
-		fi
-	fi
-
+	# db_get kaltura-front/service_url
 
 
 	cp $KALTURA_APACHE_CONFD/enabled.kaltura.conf.template $KALTURA_APACHE_CONFD/enabled.kaltura.conf 
@@ -186,14 +169,10 @@ Please select one of the following options [0]:
 	ln -sf $APP_DIR/configurations/logrotate/kaltura_apache /etc/logrotate.d/ 
 	ln -sf $APP_DIR/configurations/logrotate/kaltura_apps /etc/logrotate.d/
 
-	if [ -r "$NEWANSFILE" ];then
-		create_answer_file $NEWANSFILE
-	fi
 	find $BASE_DIR/app/cache/ $BASE_DIR/log -type d -exec chmod 775 {} \; 
 	find $BASE_DIR/app/cache/ $BASE_DIR/log -type f -exec chmod 664 {} \; 
-	chown -R kaltura.apache $BASE_DIR/app/cache/ $BASE_DIR/log
-	service httpd restart
-	chkconfig httpd on
+	chown -R $KALTURA_USER.$APACHE_USER $BASE_DIR/app/cache/ $BASE_DIR/log
+	service apache2 restart
 	ln -sf $BASE_DIR/app/configurations/monit/monit.avail/httpd.rc $BASE_DIR/app/configurations/monit/monit.d/enabled.httpd.rc
 	ln -sf $BASE_DIR/app/configurations/monit/monit.avail/memcached.rc $BASE_DIR/app/configurations/monit/monit.d/enabled.memcached.rc
 	/etc/init.d/kaltura-monit restart
@@ -206,9 +185,6 @@ Please select one of the following options [0]:
 			fi
 		# we can't use rpm -q kaltura-kmc because this node may not be the one where we installed the KMC RPM on, as it resides in the web dir and does not need to be installed on all front nodes.
 			KMC_PATH=`ls -ld $BASE_DIR/web/flash/kmc/v* 2>/dev/null|awk -F " " '{print $NF}' |tail -1`
-	#sed -i "s#\(@KMC_VERSION@\)\s*=.*#\1=%{_kmc_version}#g" $RPM_BUILD_ROOT%{prefix}/bin/sanity_config.template.ini
-	#sed -i "s#\(@KMC_LOGIN_VERSION@\)\s*=.*#\1=%{kmc_login_version}#g" $RPM_BUILD_ROOT%{prefix}/bin/sanity_config.template.ini
-			#ln -sf $KMC_PATH/uiconf/kaltura/kmc  $BASE_DIR/web/content/uiconf/kaltura
 			php $BASE_DIR/app/deployment/uiconf/deploy_v2.php --ini=$KMC_PATH/config.ini >> /dev/null
 			HTML5_PATH=`ls -ld $BASE_DIR/web/html5/html5lib/v* 2>/dev/null|awk -F " " '{print $NF}' |tail -1`
 			sed -i "s@^\(html5_version\s*=\)\(.*\)@\1 `rpm -qa kaltura-html5lib --queryformat %{version}`@g" -i $BASE_DIR/app/configurations/local.ini
