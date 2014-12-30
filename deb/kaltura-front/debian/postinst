@@ -34,6 +34,7 @@ APACHE_USER=www-data
 APACHE_GROUP=www-data
 
 KALTURA_VERSION="`dpkg-query -W -f'${Version}' kaltura-base|awk -F "+" '{print $1}'`"
+. /usr/share/debconf/confmodule
 
 chown -R $KALTURA_USER:$APACHE_GROUP $KALTURA_PREFIX/log 
 chown -R $KALTURA_USER:$APACHE_GROUP $KALTURA_PREFIX/tmp 
