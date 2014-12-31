@@ -215,8 +215,8 @@ Please select one of the following options [0]:
 	find $BASE_DIR/app/cache/ $BASE_DIR/log -type f -exec chmod 664 {} \; 
 	chown -R $KALTURA_USER.$APACHE_USER $BASE_DIR/app/cache/ $BASE_DIR/log
 	service apache2 reload
-	ln -sf $BASE_DIR/app/configurations/monit/monit.avail/httpd.rc /etc/monit/conf.d/ 
-	ln -sf $BASE_DIR/app/configurations/monit/monit.avail/memcached.rc /etc/monit/conf.d/
+	ln -sf $BASE_DIR/app/configurations/monit/monit.d/httpd.rc /etc/monit/conf.d/ 
+	ln -sf $BASE_DIR/app/configurations/monit/monit.d/memcached.rc /etc/monit/conf.d/
 	service monit restart
 		trap - ERR
 		echo "use kaltura" | mysql -h$DB1_HOST -u$DB1_USER -p$DB1_PASS -P$DB1_PORT $DB1_NAME 2> /dev/null
