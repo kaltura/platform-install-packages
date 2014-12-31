@@ -1,5 +1,4 @@
 #!/usr/bin/make -f
-# debian/rules for alien
 
 PACKAGE=$(shell dh_listpackages)
 

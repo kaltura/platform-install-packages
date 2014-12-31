@@ -1,15 +1,11 @@
 #!/bin/bash
 ldconfig
 # register service
-if [ "$1" = 1 ];
+if [ "$1" = "configure" ];
 then
-    /sbin/chkconfig --add kaltura-sphinx
+    update-rc.d kaltura-sphinx defaults
 fi
 
-# create user/group, and update permissions
-groupadd -r kaltura 2>/dev/null || true
-useradd -M -r -d /var/lib/sphinx -s /bin/bash -c "Sphinx server" -g kaltura kaltura 2>/dev/null || true
-usermod -g kaltura kaltura 2>/dev/null || true
 chown -R kaltura:kaltura /opt/kaltura/sphinx-2.2.1/var/lib/sphinx /opt/kaltura/sphinx-2.2.1/var/log/sphinx /opt/kaltura/sphinx-2.2.1/var/run/sphinx
 
 # print some further pointers
