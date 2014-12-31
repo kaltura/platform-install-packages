@@ -41,4 +41,3 @@ Description: Your Kaltura Service URL:
 Template: kaltura-front/self_signed_cert
 Type: note
 Description: WARNING: self signed cerificate detected. Will set settings.clientConfig.verifySSL=0 in configurations/admin.ini.
-
