@@ -1,5 +1,4 @@
 #!/bin/bash
-set -x
 enable_apps_conf()
 {
 	for CONF in  /opt/kaltura/app/configurations/apache/conf.d/apps.conf /opt/kaltura/app/configurations/apache/conf.d/var.conf ;do
@@ -215,7 +214,7 @@ Please select one of the following options [0]:
 	find $BASE_DIR/app/cache/ $BASE_DIR/log -type d -exec chmod 775 {} \; 
 	find $BASE_DIR/app/cache/ $BASE_DIR/log -type f -exec chmod 664 {} \; 
 	chown -R $KALTURA_USER.$APACHE_USER $BASE_DIR/app/cache/ $BASE_DIR/log
-	service apache2 restart
+	service apache2 reload
 	ln -sf $BASE_DIR/app/configurations/monit/monit.avail/httpd.rc /etc/monit/conf.d/ 
 	ln -sf $BASE_DIR/app/configurations/monit/monit.avail/memcached.rc /etc/monit/conf.d/
 	service monit restart
@@ -238,5 +237,3 @@ Please select one of the following options [0]:
 		send_install_becon `basename $0` $ZONE install_success 0 
 
 fi
-echo hi
-exit 0
