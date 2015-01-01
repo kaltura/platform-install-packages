@@ -6,6 +6,7 @@ BUILD_DIR=$RUN_DIR
 SOURCE_PACKAGING_DIR=~/sources
 RPM_SOURCES_DIR=~/rpmbuild/SOURCES
 RPM_SPECS_DIR=~/rpmbuild/SPECS
+RPMS_DIR=~/rpmbuild/RPMS
 DEB_SPECS_DIR=$SOURCE_PACKAGING_DIR/platform-install-packages/deb
 TMP_DIR=/tmp
 KALTURA_SERVER_VERSION="Jupiter-10.2.0"
@@ -36,8 +37,13 @@ PHP_MEMCACHED_URI="http://pecl.php.net/get/memcached-$PHP_MEMCACHED_VERSION.tgz"
 PHP_SSH_VERSION=0.12
 PHP_SSH_URI="http://pecl.php.net/get/ssh2-$PHP_SSH_VERSION.tgz"
 
+<<<<<<< HEAD
 LIBMCRYPT_VERSION=2.5.8
 LIBMCRYPT_URI="http://sourceforge.net/projects/mcrypt/files/Libmcrypt/$LIBMCRYPT_VERSION/libmcrypt-$LIBMCRYPT_VERSION.tar.gz"
+=======
+PHP_LIBMCRYPT_VERSION=2.5.8
+PHP_LIBMCRYPT_URI="http://garr.dl.sourceforge.net/project/mcrypt/Libmcrypt/$PHP_LIBMCRYPT_VERSION/libmcrypt-$PHP_LIBMCRYPT_VERSION.tar.gz"
+>>>>>>> Jupiter-10.1.0-php-package
 
 
 # a52dec:
@@ -124,7 +130,6 @@ KMC_MINUS_V_VERSION=5.38.4
 KMC_VERSION=v$KMC_MINUS_V_VERSION
 KMC_LOGIN_MINUS_V_VERSION=1.2.8
 KMC_LOGIN_VERSION=v$KMC_LOGIN_MINUS_V_VERSION
-#KMC_URI="https://github.com/kaltura/kmc/releases/download/$KMC_VERSION/$KMC_VERSION.zip"
 KMC_URI="https://github.com/kaltura/kmc/archive/$KMC_VERSION.zip"
 KMC_LOGIN_URI="https://github.com/kaltura/kmc-login/releases/download/$KMC_LOGIN_VERSION/$KMC_LOGIN_VERSION.zip"
 KMC_UICONF_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalsource/uiconf/kaltura/kmc"
