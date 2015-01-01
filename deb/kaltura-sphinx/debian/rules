@@ -81,8 +81,7 @@ binary-arch: build install
 	dh_testroot
 	#dh_installchangelogs ChangeLog
 	#dh_installdocs
-	dh_installexamples
-	#dh_gencontrol -u-v$(DEB_VERSION) 
+	#dh_installexamples
 	mv debian/$(tree)/$(BASE_PREFIX)/* $(BASE_PREFIX)
 	dh_install $(BASE_PREFIX)
 	dh_installdebconf	
@@ -94,7 +93,7 @@ binary-arch: build install
 	dh_fixperms
 	dh_installdeb
 	#LD_LIBRARY_PATH=$(BASE_PREFIX)/lib dh_shlibdeps
-	dh_gencontrol
+	dh_gencontrol -u-v$(DEB_VERSION) 
 	dh_md5sums
 	dh_builddeb
 
