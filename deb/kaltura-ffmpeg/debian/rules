@@ -1,89 +1,139 @@
 #!/usr/bin/make -f
 
+
 DEB_VERSION := $(shell dpkg-parsechangelog | egrep '^Version:' | cut -f 2 -d ' ')
 RC_FILE :=../../build/sources.rc
 FFMPEG_VERSION ?= $(shell egrep '^FFMPEG_VERSION=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
 SOURCE_PACKAGING_DIR ?= $(shell egrep '^SOURCE_PACKAGING_DIR=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
 include ../includes/build-revision.mk
 archive := $(SOURCE_PACKAGING_DIR)/ffmpeg-$(FFMPEG_VERSION).tar.bz2 
-tree := ffmpeg-$(FFMPEG_VERSION) 
-BASE_PREFIX=opt/kaltura
-BUILD_DIR=debian/build-tree
-INSTALL_DIR=debian/install-tree
+tree := ffmpeg-$(FFMPEG_VERSION)
+BASE_PREFIX=opt/kaltura/$(tree)
+# These are used for cross-compiling and for saving the configure script
+# from having to guess our platform (since we know it already)
+DEB_HOST_GNU_TYPE   ?= $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
+DEB_BUILD_GNU_TYPE  ?= $(shell dpkg-architecture -qDEB_BUILD_GNU_TYPE)
 
-clean:
-	dh_clean
-	rm -rf $(tree) 
-	rm -rf debian/tmp
-	rm -rf $(BUILD_DIR)
-	rm -rf $(INSTALL_DIR)
+PACKAGE=memcached
+PKGBASE=debian/$(PACKAGE)/usr/share/memcached/
+SCRIPTS=$(PKGBASE)/scripts
 
+CFLAGS = `dpkg-buildflags --get CFLAGS`
+CFLAGS += -Wall
+LDFLAGS = `dpkg-buildflags --get LDFLAGS`
+CPPFLAGS = `dpkg-buildflags --get CPPFLAGS`
+
+ifeq (,$(findstring nostrip,$(DEB_BUILD_OPTIONS)))
+	INSTALL_PROGRAM += -s
+endif
 $(archive):
 	~/sources/platform-install-packages/build/package_ffmpeg_source.sh
 
 $(tree): $(archive)
-	mkdir -p debian/tmp
-	tar jxf $(archive) -C debian/tmp
+	tar jxf $(archive) 
 
-build: $(tree)
-	#mkdir $(BUILD_DIR)
-	#mkdir $(INSTALL_DIR)
-	cd debian/tmp/$(tree) && ./configure \
-	    --prefix="$(BASE_PREFIX)" \
-	    --libdir="$(BASE_PREFIX)/lib" \
-	    --shlibdir="$(BASE_PREFIX)/lib" \
-	    --extra-cflags=" -fPIC -I/opt/kaltura/include" \
-	    --extra-ldflags="-L/opt/kaltura/lib" \
-	    --disable-devices \
-	    --enable-bzlib \
-	    --enable-libfaac \
-	    --enable-libgsm \
-	    --enable-libmp3lame \
-	    --enable-libschroedinger \
-	    --enable-libtheora \
-	    --enable-libvorbis \
-	    --enable-libx264 \
-	    --enable-libxvid \
-	    --enable-filter=movie \
-	    --enable-avfilter \
-	    --enable-libopencore-amrnb \
-	    --enable-libopencore-amrwb \
-	    --enable-libopenjpeg \
-	    --enable-libvpx \
-	    --enable-libspeex \
-	    --enable-libass \
-	    --enable-postproc \
-	    --enable-pthreads \
-	    --enable-static \
-	    --enable-shared \
-	    --enable-gpl \
-	     --disable-debug \
-	    --disable-optimizations \
-	 --enable-libfdk-aac \
-	--enable-nonfree \
-	--enable-gpl \
-	--enable-nonfree \
-	--enable-libfdk-aac \
-	--enable-pthreads \
-	--enable-swscale \
-	--enable-vdpau \
-	--enable-bzlib \
-	--disable-devices \
-	--enable-filter=movie \
-	    --enable-version3 \
-	--enable-x11grab && make && make install
+config.status: $(tree) 
+	dh_testdir
+	CFLAGS="$(CFLAGS)" CPPFLAGS="$(CPPFLAGS)" LDFLAGS="$(LDFLAGS)" cd $(tree) && ./configure \
+		    --prefix="$(BASE_PREFIX)" \
+		    --libdir="$(BASE_PREFIX)/lib" \
+		    --shlibdir="$(BASE_PREFIX)/lib" \
+		    --extra-cflags=" -fPIC -I/opt/kaltura/include" \
+		    --extra-ldflags="-L/opt/kaltura/lib" \
+		    --disable-devices \
+		    --enable-bzlib \
+		    --enable-libfaac \
+		    --enable-libgsm \
+		    --enable-libmp3lame \
+		    --enable-libschroedinger \
+		    --enable-libtheora \
+		    --enable-libvorbis \
+		    --enable-libx264 \
+		    --enable-libxvid \
+		    --enable-filter=movie \
+		    --enable-avfilter \
+		    --enable-libopencore-amrnb \
+		    --enable-libopencore-amrwb \
+		    --enable-libopenjpeg \
+		    --enable-libvpx \
+		    --enable-libspeex \
+		    --enable-libass \
+		    --enable-postproc \
+		    --enable-pthreads \
+		    --enable-static \
+		    --enable-shared \
+		    --enable-gpl \
+		     --disable-debug \
+		    --disable-optimizations \
+		 --enable-libfdk-aac \
+		--enable-nonfree \
+		--enable-gpl \
+		--enable-nonfree \
+		--enable-libfdk-aac \
+		--enable-pthreads \
+		--enable-swscale \
+		--enable-vdpau \
+		--enable-bzlib \
+		--disable-devices \
+		--enable-filter=movie \
+		--enable-version3 \
+		--enable-x11grab
+
+build: build-stamp
+
+build-stamp:  config.status
+	#dh_quilt_patch
+	dh_testdir
+
+	cd $(tree) && $(MAKE)
+
+	touch build-stamp
+
+clean:
+	dh_testdir
+	dh_testroot
+	rm -f build-stamp config.log
+	rm -f debian/memcached.init
+
+	dh_quilt_unpatch
+	dh_clean 
 
 install: build
-	
-
-binary-arch: install
+	dh_testdir
+	dh_testroot
+	dh_clean -k 
 	dh_installdirs
-	dh_fixperms -i
-	dh_install $(tree)/$(BASE_PREFIX)
-	dh_gencontrol -u-v$(DEB_VERSION) 
-	dh_installdebconf
-	dh_installdeb
-	dh_builddeb 
+	cd $(tree) && $(MAKE) -C . install DESTDIR=$(CURDIR)/debian/$(tree)/
 
-binary: binary-arch
-.PHONY: clean build binary-arch binary
+
+# Build architecture-independent files here.
+binary-indep:;
+# We have nothing to do by default.
+
+# Build architecture-dependent files here.
+binary-arch: build install
+	mkdir -p $(BASE_PREFIX)
+	dh_testdir
+	dh_testroot
+	#dh_installchangelogs ChangeLog
+	#dh_installdocs
+	dh_installexamples
+	#pwd
+	#ls -ald debian/$(tree)/$(BASE_PREFIX)/*
+	mv debian/$(tree)/$(BASE_PREFIX)/* $(BASE_PREFIX)
+	dh_install $(BASE_PREFIX)
+	dh_installdebconf	
+	dh_installinit
+	dh_installman
+	dh_link
+	dh_strip
+	dh_compress
+	dh_fixperms
+	dh_installdeb
+	#LD_LIBRARY_PATH=$(BASE_PREFIX)/lib dh_shlibdeps
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb
+
+binary: binary-indep binary-arch
+.PHONY: build clean binary-indep binary-arch binary install 
