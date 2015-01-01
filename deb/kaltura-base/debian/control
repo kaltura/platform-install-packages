@@ -5,7 +5,7 @@ Maintainer: Jess Portnoy <jess.portnoy@kaltura.com>
 
 Package: kaltura-base
 Architecture: amd64
-Depends: ${shlibs:Depends},rsync,mysql-client,cron,ntp,mail-transport-agent,monit,php5-cli,php5-curl,heirloom-mailx
+Depends: ${shlibs:Depends},rsync,mysql-client,cron,ntp,mail-transport-agent,monit,php5-cli,php5-curl,heirloom-mailx,kaltura-postinst,bash
 Description: Kaltura Open Source Video Platform 
  Kaltura is the world's first Open Source Online Video Platform, transforming the way people work, learn, 
  and entertain using online video. The Kaltura platform empowers media applications with advanced video 

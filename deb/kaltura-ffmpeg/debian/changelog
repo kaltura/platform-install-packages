@@ -1,4 +1,4 @@
-kaltura-ffmpeg (1.1.1-2) experimental; urgency=low
+kaltura-ffmpeg (2.1.3-1) experimental; urgency=low
   - Initial build.
 
- -- Jess Portnoy <jess.portnoy@kaltura.com>  Thu, 26 Dec 2013 18:03:20 +0200
+ -- Jess Portnoy <jess.portnoy@kaltura.com>  Tue, 30 Dec 2014 18:03:20 +0200

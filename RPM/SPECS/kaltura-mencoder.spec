@@ -12,7 +12,7 @@ URL: http://www.mplayerhq.hu
 Packager: Jess Portnoy <jess.portnoy@kaltura.com> 
 Vendor: Kaltura, Inc.
 
-Source: svn://svn.mplayerhq.hu/mplayer/trunk/%{name}-%{real_version}.tar.bz2
+Source: mencoder-%{real_version}.tar.bz2
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
 BuildRequires: prelink
@@ -22,17 +22,14 @@ Requires:kaltura-a52dec,kaltura-libfaac,libass,kaltura-x264
 Utilities and libraries for MPlayer movie encoder
 
 %prep
-%setup -qn %{name}-%{real_version} 
-rm -rf %{_builddir}/%{name}-%{real_version}/.svn
-rm %{_builddir}/%{name}-%{real_version}/mencoder-dir/libjpeg*
+%setup -qn mencoder-dir 
 
 %build
 
 %install
 mkdir -p  $RPM_BUILD_ROOT%{base_prefix}/bin
-ls -al %{_builddir}/%{name}-%{real_version}
-mv %{_builddir}/%{name}-%{real_version}/mencoder-dir/mencoder $RPM_BUILD_ROOT/%{base_prefix}/bin
-mv %{_builddir}/%{name}-%{real_version}/mencoder-dir/* $RPM_BUILD_ROOT/%{base_prefix}
+mv %{_builddir}/mencoder-dir/mencoder $RPM_BUILD_ROOT/%{base_prefix}/bin
+mv %{_builddir}/mencoder-dir/* $RPM_BUILD_ROOT/%{base_prefix}
 %{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
 cat > $RPM_BUILD_ROOT%{_sysconfdir}/profile.d/kaltura_mencoder.sh << EOF
 PATH=\$PATH:%{base_prefix}/bin

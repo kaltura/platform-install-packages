@@ -246,8 +246,20 @@ send_install_becon()
 	else
 		SUBSCRIBE4UPDATES=0
 	fi
-	curl -i -X POST -H 'Content-Type: application/json' -d '{"event_type": "'$ACTION'", "server_role": "'$ROLE'", "user_email": "'$CONTACT_MAIL'", "machine_id": "'$MACHINE_ID'", "installation_id": "'$INSTALL_ID'", "timestamp": "'$EPOCH'", "kernel_version": "'`uname -r`'", "machine_arch": "'`uname -m`'","linux_flavor":"'$RELEASE'","is_ssl": "'$IS_SSL'", "service_url": "'$SERVICE_URL'","install_err_line": "'$ERR_LINE'","timezone": "'$TIMEZONE'","package_type":"rpm","kaltura_version": "'`rpm -qa kaltura-base --queryformat %{version}`'","package_revision": "'`rpm -qa kaltura-base --queryformat %{release}`'"}' $ANALYTICS_SERVER_URI &>/dev/null
-	 curl --data "event_type=$ACTION&server_role=$ROLE&user_email=$CONTACT_MAIL&machine_id=$MACHINE_ID&installation_id=$INSTALL_ID&timestamp=`date +%s`&kernel_version=`uname -r`&machine_arch=`uname -m`&linux_flavor=$RELEASE&service_url=$SERVICE_URL&install_err_line=$ERR_LINE&timezone=$TIMEZONE&package_type=rpm&kaltura_version=`rpm -qa kaltura-base --queryformat %{version}`&package_revision=`rpm -qa kaltura-base --queryformat %{release}`&subscribed_for_ce_updates=$SUBSCRIBE4UPDATES" https://installytics.kaltura.org/report/add_rec.php 
+
+	# if this is an RHEL based distro then it would have this file.
+	# checking this instead of which rpm because it is possible to install rpm on a Debiab/Ubuntu system
+	if [ -f "/etc/redhat-release" ] ;then
+		KALTURA_VERSION=`rpm -qa kaltura-base --queryformat %{version}`
+		KALTURA_REVISION=`rpm -qa kaltura-base --queryformat %{release}`
+		PACKAGE_TYPE=rpm
+	elif [ -x "`which dpkg-query`" ];then
+		KALTURA_VERSION=`dpkg-query -W -f'${Version}' kaltura-base|awk -F "-" '{print $1}'`
+		KALTURA_REVISION=`dpkg-query -W -f'${Version}' kaltura-base | awk -F "+" '{print $2}'`
+		PACKAGE_TYPE=deb
+	fi
+	curl -i -X POST -H 'Content-Type: application/json' -d '{"event_type": "'$ACTION'", "server_role": "'$ROLE'", "user_email": "'$CONTACT_MAIL'", "machine_id": "'$MACHINE_ID'", "installation_id": "'$INSTALL_ID'", "timestamp": "'$EPOCH'", "kernel_version": "'`uname -r`'", "machine_arch": "'`uname -m`'","linux_flavor":"'$RELEASE'","is_ssl": "'$IS_SSL'", "service_url": "'$SERVICE_URL'","install_err_line": "'$ERR_LINE'","timezone": "'$TIMEZONE'","package_type":"'$PACKAGE_TYPE'","kaltura_version": "'$KALTURA_VERSION'","package_revision": "'$KALTURA_REVISION'"}' $ANALYTICS_SERVER_URI &>/dev/null
+	 curl --data "event_type=$ACTION&server_role=$ROLE&user_email=$CONTACT_MAIL&machine_id=$MACHINE_ID&installation_id=$INSTALL_ID&timestamp=`date +%s`&kernel_version=`uname -r`&machine_arch=`uname -m`&linux_flavor=$RELEASE&service_url=$SERVICE_URL&install_err_line=$ERR_LINE&timezone=$TIMEZONE&package_type=$PACKAGE_TYPE&kaltura_version=$KALTURA_VERSION&package_revision=$KALTURA_REVISION&subscribed_for_ce_updates=$SUBSCRIBE4UPDATES" https://installytics.kaltura.org/report/add_rec.php 
 
 #	set +x
 	trap 'my_trap_handler ${LINENO} ${$?}' ERR
@@ -258,7 +270,11 @@ my_trap_handler()
         MYSELF=`basename "$0"`               # equals to my script name
         LASTLINE="$1"            # argument 1: last line of error occurence
         LASTERR="$2"             # argument 2: error code of last command
-        RPM_VER=`rpm -q kaltura-postinst`
+	if [ -f "/etc/redhat-release" ] ;then
+        	POSTINST_VER=`rpm -q kaltura-postinst`
+	elif [ -x "`which dpkg-query`" ];then
+		POSTINST_VER=`dpkg-query -W -f'${Version}' kaltura-postinst|awk -F "-" '{print $1}'`
+	fi
 	if [ -d /opt/kaltura/log ];then
 		TAR_PATH=/opt/kaltura/log/log_`date +%d_%m_%y_%H_%M`.tar.gz	
 		echo -en "${BRIGHT_RED}$FAIL_MSG${NORMAL}
@@ -275,7 +291,7 @@ my_trap_handler()
 		. $CONSENT_FILE 
 	fi
 	
-       	send_install_becon ${MYSELF} $ZONE install_fail "${LASTLINE},${RPM_VER}"
+       	send_install_becon ${MYSELF} $ZONE install_fail "${LASTLINE},${POSTINST_VER}"
         exit 11
 }
 
@@ -341,7 +357,11 @@ get_newsletter_consent()
 check_if_upgrade()
 {
 	trap - ERR
-	CUR_BASE_VERSION=`rpm -qa kaltura-base --queryformat %{version}-%{release}`
+	if [ -f "/etc/redhat-release" ] ;then
+		CUR_BASE_VERSION=`rpm -qa kaltura-base --queryformat %{version}-%{release}`
+	elif [ -x "`which dpkg-query`" ];then
+		CUR_BASE_VERSION=`dpkg-query -W -f'${Version}' kaltura-base|awk -F "-" '{print $1}'`
+	fi
 	LAST_BASE_VERSION=`cat $BASE_DIR/bin/last_base_ver 2> /dev/null`
 	if [ "$CUR_BASE_VERSION" = "$LAST_BASE_VERSION" ];then
 		return 1 
@@ -352,7 +372,11 @@ check_if_upgrade()
 
 write_last_base_version()
 {
-	CUR_BASE_VERSION=`rpm -qa kaltura-base --queryformat %{version}-%{release}`
+	if [ -f "/etc/redhat-release" ] ;then
+		CUR_BASE_VERSION=`rpm -qa kaltura-base --queryformat %{version}-%{release}`
+	elif [ -x "`which dpkg-query`" ];then
+		CUR_BASE_VERSION=`dpkg-query -W -f'${Version}' kaltura-base|awk -F "-" '{print $1}'`
+	fi
 	echo "$CUR_BASE_VERSION" > $BASE_DIR/bin/last_base_ver
 }
 
@@ -446,7 +470,12 @@ check_kmc_index_page()
 check_studio_index_page()
 {
 	GOOD_STRING='Universal Studio'
-	curl -ks "$SERVICE_URL/apps/studio/`rpm -qa kaltura-html5-studio --queryformat %{version}`/index.html"  | grep -q "$GOOD_STRING"
+	if [ -f "/etc/redhat-release" ] ;then
+		HTML5_STUDIO_VERSION=`rpm -qa kaltura-html5-studio --queryformat %{version}-%{release}`
+	elif [ -x "`which dpkg-query`" ];then
+		HTML5_STUDIO_VERSION=`dpkg-query -W -f'${Version}' kaltura-html5-studio|awk -F "-" '{print $1}'`
+	fi
+	curl -ks "$SERVICE_URL/apps/studio/$HTML5_STUDIO_VERSION/index.html"  | grep -q "$GOOD_STRING"
 	if [ $? -eq 0 ];then
 		echo "Successfully found '$GOOD_STRING'"
 		return 0
@@ -495,7 +524,12 @@ report()
 
 	echo -e "[${CYAN}$TNAME${NORMAL}] [${COLOR}$STAT, RC: $RC${NORMAL}] - [$TIME]"
 #	echo -e "$TNAME,,`hostname`,$MESSAGE,$RC, $TIME" >> /tmp/`hostname`-reportme.`date +%d_%m_%Y`.csv
-	echo "INSERT INTO csi_log VALUES(NULL,'$TNAME','`hostname`',`date +%s`,\"$MESSAGE\",$RC,$TIME,'`rpm -qa kaltura-base --queryformat %{version}`');" >> /tmp/`hostname`-reportme.`date +%d_%m_%Y`.sql
+	if [ -f "/etc/redhat-release" ] ;then
+		CUR_BASE_VERSION=`rpm -qa kaltura-base --queryformat %{version}-%{release}`
+	elif [ -x "`which dpkg-query`" ];then
+		CUR_BASE_VERSION=`dpkg-query -W -f'${Version}' kaltura-base|awk -F "-" '{print $1}'`
+	fi
+	echo "INSERT INTO csi_log VALUES(NULL,'$TNAME','`hostname`',`date +%s`,\"$MESSAGE\",$RC,$TIME,'$CUR_BASE_VERSION');" >> /tmp/`hostname`-reportme.`date +%d_%m_%Y`.sql
 }
 
 check_missing_web_files()
@@ -534,7 +568,11 @@ check_kmc_config_versions()
         COMP_NAME=$1
         KMC_VER=$2
 #	set -x
+	if [ -f "/etc/redhat-release" ] ;then
         	COMP_VER=`rpm -q $COMP_NAME --queryformat %{version}`
+	elif [ -x "`which dpkg-query`" ];then
+		COMP_VER=`dpkg-query -W -f'${Version}' $COMP_NAME|awk -F "-" '{print $1}'`
+	fi
                 grep -q $COMP_VER /opt/kaltura/web/flash/kmc/$KMC_VER/config.ini -m1
                 RC=$?
 		if [ $RC -eq 0 ];then

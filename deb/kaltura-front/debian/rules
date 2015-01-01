@@ -1,47 +1,20 @@
 #!/usr/bin/make -f
-# debian/rules for alien
 
-PACKAGE=$(shell dh_listpackages)
-
-build:
-	dh_testdir
+DEB_VERSION := $(shell dpkg-parsechangelog | egrep '^Version:' | cut -f 2 -d ' ')
+include ../includes/build-revision.mk
 
 clean:
-	dh_testdir
-	dh_testroot
-	dh_clean -d
+	dh_clean
 
-binary-indep: build
+build:
 
-binary-arch: build
-	dh_testdir
-	dh_testroot
-	dh_prep
-	dh_installdirs
+install:
 
-	dh_installdocs
-	dh_installchangelogs
-
-# Copy the packages's files.
-	find . -maxdepth 1 -mindepth 1 -not -name debian -print0 | \
-		xargs -0 -r -i cp -a {} debian/$(PACKAGE)
-
-#
-# If you need to move files around in debian/$(PACKAGE) or do some
-# binary patching, do it here
-#
-
-
-# This has been known to break on some wacky binaries.
-#	dh_strip
-	dh_compress
-#	dh_fixperms
-	dh_makeshlibs
+binary-indep:
+	dh_gencontrol -u-v$(DEB_VERSION) 
+	dh_installdebconf
 	dh_installdeb
-	-dh_shlibdeps
-	dh_gencontrol
-	dh_md5sums
-	dh_builddeb
+	dh_builddeb 
 
-binary: binary-indep binary-arch
-.PHONY: build clean binary-indep binary-arch binary
+binary: binary-indep
+.PHONY: binary-indep binary

@@ -33,4 +33,6 @@ cd $SOURCE_PACKAGING_DIR
 find $KCLIP_RPM_NAME -type f -exec chmod -x {} \;
 tar jcf $RPM_SOURCES_DIR/$KCLIP_RPM_NAME.tar.bz2 $KCLIP_RPM_NAME
 echo "Packaged into $RPM_SOURCES_DIR/$KCLIP_RPM_NAME.tar.bz2"
-rpmbuild -ba $RPM_SPECS_DIR/$KCLIP_RPM_NAME.spec
+if [ -x "`which rpmbuild 2>/dev/null`" ];then
+	rpmbuild -ba $RPM_SPECS_DIR/$KCLIP_RPM_NAME.spec
+fi

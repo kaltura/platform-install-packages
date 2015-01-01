@@ -21,7 +21,9 @@ if [ ! -r $SOURCES_RC ];then
 	exit 1
 fi
 . $SOURCES_RC 
-cd $SOURCE_PACKAGING_DIR/platform-install-packages/RPM/scripts/ 
-tar zcvf ~/rpmbuild/SOURCES/kaltura-postinst-$KALTURA_POSTINST_VERSION.tar.gz postinst/
+cd $RPM_BASE_DIR/scripts/ 
+tar zcf $RPM_SOURCES_DIR/kaltura-postinst-$KALTURA_POSTINST_VERSION.tar.gz postinst/
 echo "Packaged into $RPM_SOURCES_DIR/kaltura-postinst-$KALTURA_POSTINST_VERSION.tar.gz"
-rpmbuild -ba $RPM_SPECS_DIR/kaltura-postinst.spec
+if [ -x "`which rpmbuild 2>/dev/null`" ];then
+	rpmbuild -ba $RPM_SPECS_DIR/kaltura-postinst.spec
+fi

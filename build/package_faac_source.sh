@@ -35,5 +35,7 @@ else
 	exit 1
 fi
 
-rpmbuild -ba $RPM_SPECS_DIR/kaltura-faac.spec
+if [ -x "`which rpmbuild 2>/dev/null`" ];then
+	rpmbuild -ba $RPM_SPECS_DIR/kaltura-faac.spec
+fi
 

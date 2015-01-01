@@ -57,7 +57,7 @@ sed -i 's/\r//' api/ruby/lib/sphinx/response.rb
 
 %build
 
-%configure --sysconfdir=/opt/kaltura/app/configurations/sphinx  --with-mysql --with-unixodbc --with-iconv --enable-id64 --with-syslog --prefix=/opt/kaltura/sphinx --mandir=/opt/kaltura/sphinx/share/man --bindir=/opt/kaltura/sphinx/bin
+%configure --sysconfdir=/opt/kaltura/app/configurations/sphinx  --with-mysql --with-unixodbc --with-iconv --enable-id64 --with-syslog --prefix=%{prefix} --mandir=%{prefix}/share/man --bindir=%{prefix}/bin
 make %{?_smp_mflags}
 
 

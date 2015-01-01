@@ -40,29 +40,28 @@ cd $BUILD_DIR
 ./package_kaltura_kmc_appstudio.sh
 ./package_kaltura_kmc.sh
 ./package_kaltura_krecord.sh
-./package_kaltura_kse.sh
 ./package_kaltura_ksr.sh
 ./package_kaltura_kupload.sh
 ./package_kaltura_kvpm.sh
 ./package_kaltura_media-server.sh
+./package_kaltura_monit.sh
 ./package_kaltura_nginx.sh
 ./package_kaltura_postinst.sh
 ./package_kaltura_studio.sh
 
 
-rpmbuild -ba $RPM_SPECS_DIR/kaltura-base.spec
-rpmbuild -ba $RPM_SPECS_DIR/kaltura-batch.spec
-rpmbuild -ba $RPM_SPECS_DIR/kaltura-front.spec
-rpmbuild -ba $RPM_SPECS_DIR/kaltura-kmc-docs.spec
-rpmbuild -ba $RPM_SPECS_DIR/kaltura-mencoder.spec
-rpmbuild -ba $RPM_SPECS_DIR/kaltura-monit.spec
-rpmbuild -ba $RPM_SPECS_DIR/kaltura-mysql-config.spec
-rpmbuild -ba $RPM_SPECS_DIR/kaltura-opencore-amr.spec
-rpmbuild -ba $RPM_SPECS_DIR/kaltura-release.spec
-rpmbuild -ba $RPM_SPECS_DIR/kaltura-rtmpdump.spec
-rpmbuild -ba $RPM_SPECS_DIR/kaltura-segmenter.spec
-rpmbuild -ba $RPM_SPECS_DIR/kaltura-server.spec
-rpmbuild -ba $RPM_SPECS_DIR/kaltura-sshpass.spec
-rpmbuild -ba $RPM_SPECS_DIR/kaltura-widgets.spec
+if [ -x "`which rpmbuild 2>/dev/null`" ];then
+	rpmbuild -ba $RPM_SPECS_DIR/kaltura-base.spec
+	rpmbuild -ba $RPM_SPECS_DIR/kaltura-batch.spec
+	rpmbuild -ba $RPM_SPECS_DIR/kaltura-front.spec
+	rpmbuild -ba $RPM_SPECS_DIR/kaltura-mysql-config.spec
+	rpmbuild -ba $RPM_SPECS_DIR/kaltura-opencore-amr.spec
+	rpmbuild -ba $RPM_SPECS_DIR/kaltura-release.spec
+	rpmbuild -ba $RPM_SPECS_DIR/kaltura-rtmpdump.spec
+	rpmbuild -ba $RPM_SPECS_DIR/kaltura-segmenter.spec
+	rpmbuild -ba $RPM_SPECS_DIR/kaltura-server.spec
+	rpmbuild -ba $RPM_SPECS_DIR/kaltura-sshpass.spec
+	rpmbuild -ba $RPM_SPECS_DIR/kaltura-widgets.spec
+fi
 
 

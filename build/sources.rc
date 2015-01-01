@@ -8,7 +8,7 @@ RPM_SOURCES_DIR=~/rpmbuild/SOURCES
 RPM_SPECS_DIR=~/rpmbuild/SPECS
 DEB_SPECS_DIR=$SOURCE_PACKAGING_DIR/platform-install-packages/deb
 TMP_DIR=/tmp
-KALTURA_SERVER_VERSION="Jupiter-10.1.0"
+KALTURA_SERVER_VERSION="Jupiter-10.2.0"
 
 KALTURA_POSTINST_VERSION=1.0.22
 KALTURA_PREFIX="opt/kaltura"
@@ -86,6 +86,10 @@ FDK_VERSION=0.1.3
 FDK_URI=https://github.com/mstorsjo/fdk-aac/archive/v$FDK_VERSION.zip
 FDK_RPM_PACKAGE_NAME=kaltura-libfdk-aac
 
+# mencoder
+MENCODER_VERSION=3.4.6
+MENCODER_URI="https://github.com/kaltura/server-bin-linux-64bit/releases/download/1.0.0/mencoder-dir-$MENCODER_VERSION.tar.bz2"
+
 # Red5 build vars:
 RED5_VERSION=v1.0.3-RELEASE
 
@@ -105,9 +109,10 @@ KALTURA_TEMPLATES_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalsource
 # Kaltura nginx-vod-module:
 KALTURA_NGINX_VOD_VERSION=master
 KALTURA_NGINX_VOD_URI="https://github.com/kaltura/nginx-vod-module/archive/$KALTURA_NGINX_VOD_VERSION.zip"
-
 KALTURA_NGINX_AKAMAI_TOKEN_VERSION=master
 KALTURA_NGINX_AKAMAI_TOKEN_URI="https://github.com/kaltura/nginx-akamai-token-module/archive/$KALTURA_NGINX_AKAMAI_TOKEN_VERSION.zip"
+NGINX_VERSION=1.6.2
+NGINX_URI="http://nginx.org/download/nginx-$NGINX_VERSION.tar.gz"
 
 # Kaltura Streaming lib build vars:
 KALTURA_MEDIASERVER_VERSION="3.1.5"
@@ -126,7 +131,6 @@ KMC_UICONF_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalsource/uiconf
 KMC_RPM_NAME="kaltura-kmc"
 KMC_DOC_VERSION="master"
 KMC_DOC_URI="https://github.com/kaltura/kmc-docs/archive/$KMC_DOC_VERSION.zip"
-
 
 # Kaltura KDP3:
 # we bundle a few vers at each release:
@@ -180,9 +184,6 @@ KCW_RPM_NAME="kaltura-kcw"
 
 
 # Kaltura kUpload
-# we bundle a few vers at each release:
-#KUPLOAD_VERSIONS="v1.2.8 v1.1.7 v1.0.23 v1.2.16"
-#KUPLOAD_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/flash/kupload"
 KUPLOAD_VERSION="v1.2.16"
 KUPLOAD_URI="https://github.com/kaltura/kupload/releases/download/$KUPLOAD_VERSION/$KUPLOAD_VERSION.zip"
 KUPLOAD_RPM_NAME="kaltura-kupload"
@@ -212,7 +213,8 @@ FLEX_WRAPPER_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/flash/
 FLEX_WRAPPER_RPM_NAME="kaltura-flexwrapper"
 
 # HTML5 lib
-HTML5LIB_VERSIONS="v2.1.1 v2.3 v2.4 v2.6 v2.9 v2.14 v2.15 v2.18.5 v2.20 v2.21 v2.22 v2.23 v2.24"
+HTML5LIB_LATEST_VERSION="v2.24"
+HTML5LIB_VERSIONS="v2.1.1 v2.3 v2.4 v2.6 v2.9 v2.14 v2.15 v2.18.5 v2.20 v2.21 v2.22 v2.23 $HTML5LIB_LATEST_VERSION"
 HTML5LIB_BASE_URI="https://github.com/kaltura/mwEmbed/tarball/"
 HTML5LIB_RPM_NAME="kaltura-html5lib"
 
