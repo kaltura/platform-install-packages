@@ -14,9 +14,6 @@ BASE_PREFIX=opt/kaltura/$(tree)
 DEB_HOST_GNU_TYPE   ?= $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
 DEB_BUILD_GNU_TYPE  ?= $(shell dpkg-architecture -qDEB_BUILD_GNU_TYPE)
 
-PACKAGE=memcached
-PKGBASE=debian/$(PACKAGE)/usr/share/memcached/
-SCRIPTS=$(PKGBASE)/scripts
 
 CFLAGS = `dpkg-buildflags --get CFLAGS`
 CFLAGS += -Wall
