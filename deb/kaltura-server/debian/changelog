@@ -1,5 +1,5 @@
-kaltura-server (10.0.0-1) experimental; urgency=low
+kaltura-server (10.2.0) jupiter; urgency=low
 
-  - First package
+  * Switching to 10.2.0
 
- -- Jess Portnoy <jess.portnoy@kaltura.com>  Thu, 18 Dec 2014 18:02:43 +0200
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Thu, 01 Jan 2015 16:17:14 +0000

@@ -1,5 +1,4 @@
 #!/usr/bin/make -f
-
 DEB_VERSION := $(shell dpkg-parsechangelog | egrep '^Version:' | cut -f 2 -d ' ')
 include ../includes/build-revision.mk
 
@@ -11,10 +10,11 @@ build:
 install:
 
 binary-indep:
-	dh_gencontrol -u-v$(DEB_VERSION) 
+	dh_gencontrol -u-v$(DEB_VERSION)
 	dh_installdebconf
 	dh_installdeb
-	dh_builddeb 
+	dh_builddeb
 
 binary: binary-indep
+
 .PHONY: binary-indep binary
