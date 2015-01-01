@@ -2,11 +2,23 @@ Source: kaltura-sphinx
 Section: misc
 Priority: extra
 Maintainer: Jess Portnoy <jess.portnoy@kaltura.com>
+Build-Depends: 
+ debhelper (>= 7.0.50),
+ autotools-dev,
+ libmysqlclient-dev,
+ libtool,
+ libexpat-dev,
 
 Package: kaltura-sphinx
-Architecture: amd64
-Build-Depends: debhelper (>= 7.0.50), autotools-dev, gawk, libmysqlclient-dev, libpq-dev, autoconf, libtool, automake, docbook-to-man, libexpat-dev, libstemmer-dev, dh-autoreconf, adduser 
-Depends: ${shlibs:Depends},libmysqlclient18,libmysqlclient-dev
+Section: misc
+Architecture: any
+Pre-Depends:
+ dpkg (>= 1.15.7.2~)
+Depends: 
+ libmysqlclient,
+ kaltura-base
+ ${misc:Depends},
+ ${shlibs:Depends}
 Description: Sphinx full-text search server - for Kaltura
  Sphinx is a full-text search server that adds many advanced features
  on top of plain old text searching. Data can be fetched directly from

@@ -1,46 +1,102 @@
 #!/usr/bin/make -f
 
-PACKAGE=$(shell dh_listpackages)
 
-build:
+DEB_VERSION := $(shell dpkg-parsechangelog | egrep '^Version:' | cut -f 2 -d ' ')
+RC_FILE :=../../build/sources.rc
+SPHINX_VERSION ?= $(shell egrep '^SPHINX_VERSION=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
+SOURCE_PACKAGING_DIR ?= $(shell egrep '^SOURCE_PACKAGING_DIR=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
+include ../includes/build-revision.mk
+tree := kaltura-sphinx-$(SPHINX_VERSION)
+archive := $(SOURCE_PACKAGING_DIR)/$(tree).tar.gz
+BASE_PREFIX=opt/kaltura/sphinx
+# These are used for cross-compiling and for saving the configure script
+# from having to guess our platform (since we know it already)
+DEB_HOST_GNU_TYPE   ?= $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
+DEB_BUILD_GNU_TYPE  ?= $(shell dpkg-architecture -qDEB_BUILD_GNU_TYPE)
+
+SCRIPTS=$(PKGBASE)/scripts
+
+CFLAGS = `dpkg-buildflags --get CFLAGS`
+CFLAGS += -Wall
+LDFLAGS = `dpkg-buildflags --get LDFLAGS`
+CPPFLAGS = `dpkg-buildflags --get CPPFLAGS`
+
+ifeq (,$(findstring nostrip,$(DEB_BUILD_OPTIONS)))
+	INSTALL_PROGRAM += -s
+endif
+$(archive):
+	~/sources/platform-install-packages/build/package_sphinx_source.sh
+
+$(tree): $(archive)
+	tar zxf $(archive) 
+
+config.status: $(tree) 
 	dh_testdir
+	CFLAGS="$(CFLAGS)" CPPFLAGS="$(CPPFLAGS)" LDFLAGS="$(LDFLAGS)" cd $(tree) && ./configure \
+	--sysconfdir=/opt/kaltura/app/configurations/sphinx \
+	--with-mysql \
+	--with-unixodbc \
+	--with-iconv \
+	--enable-id64 \
+	--with-syslog \
+	--prefix=/$(BASE_PREFIX) \
+	--mandir=/$(BASE_PREFIX)/share/man \
+	--bindir=/$(BASE_PREFIX)/bin
+
+build: build-stamp
+
+build-stamp:  config.status
+	#dh_quilt_patch
+	dh_testdir
+
+	cd $(tree) && $(MAKE)
+
+	touch build-stamp
 
 clean:
 	dh_testdir
 	dh_testroot
-	dh_clean -d
+	rm -f build-stamp config.log
+	rm -f debian/memcached.init
+	rm -rf opt/ kaltura-sphinx-$(SPHINX_VERSION)/
+	dh_quilt_unpatch
+	dh_clean 
 
-binary-indep: build
-
-binary-arch: build
+install: build
 	dh_testdir
 	dh_testroot
-	dh_prep
+	dh_clean -k 
 	dh_installdirs
-
-	dh_installdocs
-	dh_installchangelogs
-
-# Copy the packages's files.
-	find . -maxdepth 1 -mindepth 1 -not -name debian -print0 | \
-		xargs -0 -r -i cp -a {} debian/$(PACKAGE)
-
-#
-# If you need to move files around in debian/$(PACKAGE) or do some
-# binary patching, do it here
-#
+	cd $(tree) && $(MAKE) -C . install DESTDIR=$(CURDIR)/debian/$(tree)/
 
 
-# This has been known to break on some wacky binaries.
-#	dh_strip
+# Build architecture-independent files here.
+binary-indep:;
+# We have nothing to do by default.
+
+# Build architecture-dependent files here.
+binary-arch: build install
+	mkdir -p $(BASE_PREFIX)
+	dh_testdir
+	dh_testroot
+	#dh_installchangelogs ChangeLog
+	#dh_installdocs
+	dh_installexamples
+	#dh_gencontrol -u-v$(DEB_VERSION) 
+	mv debian/$(tree)/$(BASE_PREFIX)/* $(BASE_PREFIX)
+	dh_install $(BASE_PREFIX)
+	dh_installdebconf	
+	dh_installinit
+	dh_installman
+	dh_link
+	dh_strip
 	dh_compress
-#	dh_fixperms
-	dh_makeshlibs
+	dh_fixperms
 	dh_installdeb
-	-dh_shlibdeps
+	#LD_LIBRARY_PATH=$(BASE_PREFIX)/lib dh_shlibdeps
 	dh_gencontrol
 	dh_md5sums
 	dh_builddeb
 
 binary: binary-indep binary-arch
-.PHONY: build clean binary-indep binary-arch binary
+.PHONY: build clean binary-indep binary-arch binary install 
