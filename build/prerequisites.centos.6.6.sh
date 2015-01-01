@@ -66,3 +66,6 @@ sudo yum install -y mysql-devel expat-devel
 # nginx
 sudo yum install -y pcre-devel
 
+# monit
+sudo yum install -y byacc pam-devel
+
