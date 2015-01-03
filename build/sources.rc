@@ -91,11 +91,10 @@ MENCODER_VERSION=3.4.6
 MENCODER_URI="https://github.com/kaltura/server-bin-linux-64bit/releases/download/1.0.0/mencoder-dir-$MENCODER_VERSION.tar.bz2"
 
 # Red5 build vars:
-RED5_VERSION=v1.0.3-RELEASE
 
-RED5_VERSION=v1.0.3
+RED5_VERSION=1.0.4
 RED5_RPM_PACKAGE_NAME=kaltura-red5
-RED5_JAVA_URI=https://github.com/Red5/red5-server/archive/$RED5_VERSION-RELEASE.zip
+RED5_JAVA_URI=https://github.com/Red5/red5-server/releases/download/v$RED5_VERSION-RELEASE/red5-server-$RED5_VERSION-RELEASE-server.tar.gz
 
 # Pentaho:
 PENTAHO_VERSION=4.2.1

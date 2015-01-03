@@ -1,19 +1,19 @@
 Summary: Red5 Server
 Name: kaltura-red5
-Version: 1.0.3
-Release: 3 
-Source0: %{name}-v%{version}.zip
+Version: 1.0.4
+Release: 1
+Source0: %{name}-%{version}.tar.gz
 #Source1: %{name}-flash-%{version}.tar.bz2
 Source2: red5.init
 License: Apache Software License 2.0
 URL: http://www.red5.org/
 Group: Applications/Networking
 BuildRoot: %{_builddir}/%{name}-%{version}-%{release}-root
-BuildRequires: ant
 Requires: chkconfig,jre >= 1.7.0
 
 %define red5_lib    /usr/lib/red5
 %define red5_log    /var/log/red5
+%define debug_package %{nil}
 
 %description
 The Red5 open source Flash server allows you to record and stream video to the Flash Player.
@@ -22,23 +22,12 @@ The Red5 open source Flash server allows you to record and stream video to the F
 %setup -qn red5-server-%{version}-RELEASE
 
 %build
-#export LD_LIBRARY_PATH=/usr/lib/jvm/java-1.6.0-openjdk-1.6.0.0.x86_64/lib/amd64/jli
-#ant dist-installer
 
-mvn dependency:copy-dependencies
-mvn -Dmaven.test.skip=true install
-mvn -Dmaven.test.skip=true -Dmaven.buildNumber.doUpdate=false package
-tar zxf target/red5-server-%{version}-RELEASE-server.tar.gz -C %{_builddir}/usr/lib/
 %install
-#rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT/usr/lib/
-mv %{_builddir}/usr/lib/red5-server-%{version}-RELEASE $RPM_BUILD_ROOT/%{red5_lib}
+rm -rf $RPM_BUILD_ROOT
+mkdir -p $RPM_BUILD_ROOT/usr/lib
+cp -r %{_builddir}/red5-server-%{version}-RELEASE $RPM_BUILD_ROOT/%{red5_lib}
 rm $RPM_BUILD_ROOT/%{red5_lib}/*.bat
-# extra files
-#tar jxf %{SOURCE1}
-#cp -r %{name}-flash-%{version}/demos $RPM_BUILD_ROOT%{red5_lib}/webapps/root/  # recursively install
-#install -m 0755 -d $RPM_BUILD_ROOT%{red5_lib}/plugins
-#install -m 0755 plugins/* $RPM_BUILD_ROOT%{red5_lib}/plugins
 install -d $RPM_BUILD_ROOT/etc/rc.d/init.d
 install -m 0755 %{SOURCE2} $RPM_BUILD_ROOT/etc/rc.d/init.d/red5
 install -d $RPM_BUILD_ROOT%{red5_log}
@@ -86,6 +75,10 @@ if [ "$1" = 0 ]; then
 fi
 
 %changelog
+* Sat Jan 3 2014 Jess Portnoy <jess.portnoy@kaltura.com> 1.0.4-1
+- New ver.
+- No need to build anymore as Red5 offers prebuilt package.
+
 * Tue Nov 11 2014 Jess Portnoy <jess.portnoy@kaltura.com> 1.0.3-1
 - New ver.
 
