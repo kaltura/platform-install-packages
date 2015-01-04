@@ -32,7 +32,7 @@ kaltura_install() {
 		if [ $? -eq 0 ];then
 			echo "Installed package $PACKAGE"
 		else
-			sudo yum localinstall -y $RPMS_DIR/x86_64/$PACKAGE*.$HARDWARE.rpm
+			sudo yum localinstall -y $RPMS_DIR/$HARDWARE/$PACKAGE*.$HARDWARE.rpm
 		fi
 	fi
 }
