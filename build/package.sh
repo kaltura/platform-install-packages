@@ -57,6 +57,7 @@ cd $BUILD_DIR
 ./package_red5_source.sh
 ./package_sphinx_source.sh
 ./package_segmenter_source.sh
+./package_sshpass_source.sh
 
 ./package_kaltura.sh
 
