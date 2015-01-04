@@ -47,7 +47,6 @@ cd $BUILD_DIR
 ./package_kaltura_monit.sh
 ./package_kaltura_nginx.sh
 ./package_kaltura_postinst.sh
-./package_kaltura_studio.sh
 
 
 if [ -x "`which rpmbuild 2>/dev/null`" ];then
