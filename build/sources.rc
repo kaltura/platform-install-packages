@@ -117,6 +117,10 @@ MENCODER_URI="https://github.com/kaltura/server-bin-linux-64bit/releases/downloa
 SEGMENTER_VERSION=1.0
 SEGMENTER_URI="https://github.com/kaltura/server-bin-linux-64bit/raw/master/segmenter/segmenter.c"
 
+# sshpass
+SSHPASS_VERSION=1.05
+SSHPASS_URI="http://downloads.sourceforge.net/project/sshpass/sshpass/$SSHPASS_VERSION/sshpass-$SSHPASS_VERSION.tar.gz"
+
 # Red5 build vars:
 RED5_VERSION=1.0.4
 RED5_RPM_PACKAGE_NAME=kaltura-red5
