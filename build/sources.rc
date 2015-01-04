@@ -38,11 +38,11 @@ kaltura_install() {
 }
 
 #SVN 
-SSH_BIN=ssh
-SSH_KEY=$RPM_SOURCES_DIR/svn_private_key.rsa
+LIBSSH_BIN=ssh
+LIBSSH_KEY=$RPM_SOURCES_DIR/svn_private_key.rsa
 SVN_USER=svnread
-SVN_BIN='svn --config-option config:tunnels:ssh="$SSH_BIN -i $SSH_KEY"'
-kaltura_svn() (chmod 600 $SSH_KEY; eval "$SVN_BIN $@")
+SVN_BIN='svn --config-option config:tunnels:ssh="$LIBSSH_BIN -i $LIBSSH_KEY"'
+kaltura_svn() (chmod 600 $LIBSSH_KEY; eval "$SVN_BIN $@")
 
 # PHP:
 PHP_VERSION=5.3.3
@@ -54,8 +54,8 @@ LIBMEMCACHED_URI="http://launchpad.net/libmemcached/1.0/$LIBMEMCACHED_VERSION/+d
 MEMCACHED_VERSION=2.2.0
 MEMCACHED_URI="http://pecl.php.net/get/memcached-$MEMCACHED_VERSION.tgz"
 
-SSH_VERSION=0.12
-SSH_URI="http://pecl.php.net/get/ssh2-$SSH_VERSION.tgz"
+LIBSSH_VERSION=0.12
+LIBSSH_URI="http://pecl.php.net/get/ssh2-$LIBSSH_VERSION.tgz"
 
 LIBMCRYPT_VERSION=2.5.8
 LIBMCRYPT_URI="http://garr.dl.sourceforge.net/project/mcrypt/Libmcrypt/$LIBMCRYPT_VERSION/libmcrypt-$LIBMCRYPT_VERSION.tar.gz"
