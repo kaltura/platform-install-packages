@@ -38,7 +38,6 @@ else
 	exit 1
 fi
 
-BATCH_SCHED_CONF=$APP_DIR/configurations/batch/scheduler.conf
 BATCH_MAIN_CONF=$APP_DIR/configurations/batch/batch.ini
 
 # if we couldn't access the DB to retrieve the secret, assume the post install has not finished yet.
