@@ -35,46 +35,46 @@ else
 	exit 1
 fi
 
-wget $PHP_LIBMCRYPT_URI -O $RPM_SOURCES_DIR/libmcrypt-$PHP_LIBMCRYPT_VERSION.tar.gz
+wget $LIBMCRYPT_URI -O $RPM_SOURCES_DIR/libmcrypt-$LIBMCRYPT_VERSION.tar.gz
 if [ $? -eq 0 ];then
-	echo "Packaged to libmcrypt-$PHP_LIBMCRYPT_VERSION.tar.gz"
+	echo "Packaged to libmcrypt-$LIBMCRYPT_VERSION.tar.gz"
 else
-	echo "Unable to download $PHP_LIBMCRYPT_URI" >&2
+	echo "Unable to download $LIBMCRYPT_URI" >&2
 	exit 1
 fi
 
 if [ -x "`which rpmbuild 2>/dev/null`" ];then
 	rpmbuild -ba $RPM_SPECS_DIR/kaltura-libmcrypt.spec
-	kaltura_install kaltura-libmcrypt $PHP_LIBMCRYPT_VERSION
-	kaltura_install kaltura-libmcrypt-devel $PHP_LIBMCRYPT_VERSION
+	kaltura_install kaltura-libmcrypt $LIBMCRYPT_VERSION
+	kaltura_install kaltura-libmcrypt-devel $LIBMCRYPT_VERSION
 	rpmbuild -ba $RPM_SPECS_DIR/php-mcrypt.spec
 fi
 
 
-wget $PHP_LIBMEMCACHED_URI -O $RPM_SOURCES_DIR/libmemcached-$PHP_LIBMEMCACHED_VERSION.tar.gz
+wget $LIBMEMCACHED_URI -O $RPM_SOURCES_DIR/libmemcached-$LIBMEMCACHED_VERSION.tar.gz
 if [ $? -eq 0 ];then
-	echo "Packaged to libmemcached-$PHP_LIBMEMCACHED_VERSION.tar.gz"
+	echo "Packaged to libmemcached-$LIBMEMCACHED_VERSION.tar.gz"
 else
-	echo "Unable to download $PHP_LIBMEMCACHED_URI" >&2
+	echo "Unable to download $LIBMEMCACHED_URI" >&2
 	exit 1
 fi
 cd $RPM_SOURCES_DIR
-tar xzf $RPM_SOURCES_DIR/libmemcached-$PHP_LIBMEMCACHED_VERSION.tar.gz
-rm libmemcached-$PHP_LIBMEMCACHED_VERSION/libhashkit/hsieh.cc
-rm -f libmemcached-$PHP_LIBMEMCACHED_VERSION-exhsieh.tar.gz
-tar czf libmemcached-$PHP_LIBMEMCACHED_VERSION-exhsieh.tar.gz libmemcached-$PHP_LIBMEMCACHED_VERSION
+tar xzf $RPM_SOURCES_DIR/libmemcached-$LIBMEMCACHED_VERSION.tar.gz
+rm libmemcached-$LIBMEMCACHED_VERSION/libhashkit/hsieh.cc
+rm -f libmemcached-$LIBMEMCACHED_VERSION-exhsieh.tar.gz
+tar czf libmemcached-$LIBMEMCACHED_VERSION-exhsieh.tar.gz libmemcached-$LIBMEMCACHED_VERSION
 if [ -x "`which rpmbuild 2>/dev/null`" ];then
 	rpmbuild -ba $RPM_SPECS_DIR/kaltura-libmemcached.spec
-	kaltura_install kaltura-libmemcached $PHP_LIBMEMCACHED_VERSION
-	kaltura_install kaltura-libmemcached-devel $PHP_LIBMEMCACHED_VERSION
+	kaltura_install kaltura-libmemcached $LIBMEMCACHED_VERSION
+	kaltura_install kaltura-libmemcached-devel $LIBMEMCACHED_VERSION
 fi
 
 
-wget $PHP_MEMCACHED_URI -O $RPM_SOURCES_DIR/memcached-$PHP_MEMCACHED_VERSION.tgz
+wget $MEMCACHED_URI -O $RPM_SOURCES_DIR/memcached-$MEMCACHED_VERSION.tgz
 if [ $? -eq 0 ];then
-	echo "Packaged to memcached-$PHP_MEMCACHED_VERSION.tgz"
+	echo "Packaged to memcached-$MEMCACHED_VERSION.tgz"
 else
-	echo "Unable to download $PHP_MEMCACHED_URI" >&2
+	echo "Unable to download $MEMCACHED_URI" >&2
 	exit 1
 fi
 if [ -x "`which rpmbuild 2>/dev/null`" ];then
@@ -83,11 +83,11 @@ fi
 
 
 
-wget $PHP_SSH_URI -O $RPM_SOURCES_DIR/ssh2-$PHP_SSH_VERSION.tgz
+wget $SSH_URI -O $RPM_SOURCES_DIR/ssh2-$SSH_VERSION.tgz
 if [ $? -eq 0 ];then
-	echo "Packaged to ssh2-$PHP_SSH_VERSION.tgz"
+	echo "Packaged to ssh2-$SSH_VERSION.tgz"
 else
-	echo "Unable to download $PHP_SSH_URI" >&2
+	echo "Unable to download $SSH_URI" >&2
 	exit 1
 fi
 if [ -x "`which rpmbuild 2>/dev/null`" ];then
