@@ -3,7 +3,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
 Version: v2.24
-Release: 1
+Release: 2
 Epoch:0 
 License: AGPLv3+
 Group: Server/Platform 
@@ -18,6 +18,9 @@ Source7: kaltura-html5lib-v2.14.tar.gz
 Source8: kaltura-html5lib-v2.15.tar.gz
 Source9: kaltura-html5lib-v2.18.5.tar.gz
 Source10: kaltura-html5lib-v2.20.tar.gz
+Source11: kaltura-html5lib-v2.21.tar.gz
+Source12: kaltura-html5lib-v2.22.tar.gz
+
 URL: https://github.com/kaltura/mwEmbed 
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
@@ -48,31 +51,16 @@ tar zxf %{SOURCE7} -C %{_builddir}/
 tar zxf %{SOURCE8} -C %{_builddir}/
 tar zxf %{SOURCE9} -C %{_builddir}/
 tar zxf %{SOURCE10} -C %{_builddir}/
+tar zxf %{SOURCE11} -C %{_builddir}/
+tar zxf %{SOURCE12} -C %{_builddir}/
 
 
 %install
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib
-cp -r %{_builddir}/%{name}-%{version} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/%{version}
-cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/%{version}
-cp -r %{_builddir}/%{name}-v2.1.1 $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.1.1
-cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.1.1
-cp -r %{_builddir}/%{name}-v2.3 $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.3
-cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.3
-cp -r %{_builddir}/%{name}-v2.4 $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.4
-cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.4
-cp -r %{_builddir}/%{name}-v2.6 $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.6
-cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.6
-cp -r %{_builddir}/%{name}-v2.9 $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.9
-cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.9
-cp -r %{_builddir}/%{name}-v2.14 $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.14
-cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.14
-cp -r %{_builddir}/%{name}-v2.15 $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.15
-cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.15
-cp -r %{_builddir}/%{name}-v2.18.5 $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.18.5
-cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.18.5
-cp -r %{_builddir}/%{name}-v2.20 $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.20
-cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/v2.20
-
+for i in v2.1.1 v2.3 v2.4 v2.6 v2.9 v2.14 v2.15 v2.18.5 v2.20 v2.21 v2.22 v2.23 %{version};do
+	cp -r %{_builddir}/%{name}-$i $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i
+	cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i
+done
 %clean
 rm -rf %{buildroot}
 
@@ -87,6 +75,10 @@ rm -rf %{buildroot}
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Sun Jan 4 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v2.24-2
+- Neglected to include v2.21 v2.22 v2.23
+- Use a for loop to iterate on vers.
+
 * Sun Dec 28 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v2.24-1
 - FEC-1764 - Playback rate should support video tag interface switch.
 - PS-1987 - PostMedia: Failed to block playback of domain restricted entries
