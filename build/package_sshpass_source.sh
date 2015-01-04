@@ -1,25 +1,21 @@
 #!/bin/bash -e 
 #===============================================================================
-#          FILE: package_red5_source.sh
-#         USAGE: ./package_red5_source.sh 
+#          FILE: package_sshpass_source.sh
+#         USAGE: ./package_sshpass_source.sh 
 #   DESCRIPTION: 
 #       OPTIONS: ---
 # 	LICENSE: AGPLv3+
 #  REQUIREMENTS: ---
 #          BUGS: ---
 #         NOTES: ---
-#        AUTHOR: Jess Portnoy <jess.portnoy@kaltura.com>
+#        AUTHOR: Tan-Tan, <Jonathan.Kanarek@kaltura.com>
 #  ORGANIZATION: Kaltura, inc.
-#       CREATED: 12/29/13 05:24:47 EST
+#       CREATED: 01/04/15
 #      REVISION:  ---
 #===============================================================================
 
-set -o nounset                              # Treat unset variables as an error
+#set -o nounset                              # Treat unset variables as an error
 
-if [ ! -x "`which unzip 2>/dev/null`" ];then
-	echo "Need to install unzip."
-	exit 2
-fi
 if [ ! -x "`which wget 2>/dev/null`" ];then
 	echo "Need to install wget."
 	exit 2
@@ -31,10 +27,16 @@ if [ ! -r $SOURCES_RC ];then
 	exit 1
 fi
 . $SOURCES_RC 
-cd $SOURCE_PACKAGING_DIR 
-wget $RED5_JAVA_URI -O $RPM_SOURCES_DIR/$RED5_RPM_PACKAGE_NAME-$RED5_VERSION.tar.gz 
 
-echo "written to: $RPM_SOURCES_DIR/$RED5_RPM_PACKAGE_NAME-$RED5_VERSION.tar.gz"
+wget $SSHPASS_URI -O $RPM_SOURCES_DIR/sshpass-$SSHPASS_VERSION.tar.gz
+if [ $? -eq 0 ];then
+	echo "Packaged to sshpass-$SSHPASS_VERSION.tar.gz"
+else
+	echo "Unable to download $SSHPASS_URI" >&2
+	exit 1
+fi
+
 if [ -x "`which rpmbuild 2>/dev/null`" ];then
-	rpmbuild -ba $RPM_SPECS_DIR/$RED5_RPM_PACKAGE_NAME.spec
-fi 
+	rpmbuild -ba $RPM_SPECS_DIR/kaltura-sshpass.spec
+fi
+

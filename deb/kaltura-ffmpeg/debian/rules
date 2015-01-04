@@ -118,6 +118,7 @@ binary-arch: build install
 	#pwd
 	#ls -ald debian/$(tree)/$(BASE_PREFIX)/*
 	mv debian/$(tree)/$(BASE_PREFIX)/* $(BASE_PREFIX)
+	dh_gencontrol -u-v$(DEB_VERSION) 
 	dh_install $(BASE_PREFIX)
 	dh_installdebconf	
 	dh_installinit

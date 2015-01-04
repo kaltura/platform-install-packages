@@ -3,31 +3,42 @@ ldconfig
 # register service
 if [ "$1" = "configure" ];
 then
-    update-rc.d kaltura-sphinx defaults
+echo    update-rc.d kaltura-sphinx defaults
 fi
 
-chown -R kaltura:kaltura /opt/kaltura/sphinx-2.2.1/var/lib/sphinx /opt/kaltura/sphinx-2.2.1/var/log/sphinx /opt/kaltura/sphinx-2.2.1/var/run/sphinx
+KALTURA_FUNCTIONS_RC=/opt/kaltura/bin/kaltura-functions.rc
+if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
+        OUT="${BRIGHT_RED}ERROR:could not find $KALTURA_FUNCTIONS_RC so, exiting..${NORMAL}"
+        echo -en $OUT
+        exit 3
+fi
 
-# print some further pointers
-echo
-echo "Sphinx installed!"
-echo "Now create a full-text index, start the search daemon, and you're all set."
-echo
-echo "To manage indexes:"
-echo "    editor /etc/sphinx/sphinx.conf"
-echo
-echo "To rebuild all disk indexes:"
-echo "    sudo -u sphinx indexer --all --rotate"
-echo
-echo "To start/stop search daemon:"
-echo "    service kaltura-sphinx start/stop"
-echo
-echo "To query search daemon using MySQL client:"
-echo "    mysql -h 0 -P 9306"
-echo "    mysql> SELECT * FROM test1 WHERE MATCH('test');"
-echo
-echo "See the manual at /usr/share/doc/sphinx-2.2.1 for details."
-echo
-echo "For commercial support please contact Sphinx Technologies Inc at"
-echo "http://sphinxsearch.com/contacts.html"
-echo
+
+. $KALTURA_FUNCTIONS_RC
+if [ -r $CONSENT_FILE ];then
+	. $CONSENT_FILE
+fi
+RC_FILE=/etc/kaltura.d/system.ini
+if [ ! -r "$RC_FILE" ];then
+	echo -e "${BRIGHT_RED}ERROR: could not find $RC_FILE so, exiting..${NORMAL}"
+	exit 2
+fi
+. $RC_FILE
+# we might just want to include the sphinx.conf as part of this package instead of kaltura-base, this way, we could just call this code when $1 = 'upgrade'
+#if [ -r "$APP_DIR/configurations/sphinx_schema_update" ];then
+#	`dirname $0`/kaltura-sphinx-schema-update.sh
+#	exit $?
+#fi
+ln -sf $BASE_DIR/app/configurations/logrotate/kaltura_populate /etc/logrotate.d/
+trap 'my_trap_handler "${LINENO}" ${$?}' ERR
+send_install_becon `basename $0` $ZONE install_start 0 
+mkdir -p $LOG_DIR/sphinx/data $APP_DIR/cache//sphinx
+chown $OS_KALTURA_USER.$OS_KALTURA_USER $APP_DIR/cache/sphinx $LOG_DIR/sphinx/data $BASE_DIR/sphinx
+echo "sphinxServer = $SPHINX_HOST" > /opt/kaltura/app/configurations/sphinx/populate/`hostname`.ini
+# we should include these in the kaltura-sphinx package instead of kaltura-base.
+# /etc/init.d/kaltura-sphinx restart >/dev/null 2>&1
+# /etc/init.d/kaltura-populate restart >/dev/null 2>&1
+ln -sf $BASE_DIR/app/configurations/monit/monit.d/sphinx.rc /etc/monit/conf.d/
+service monit stop >> /dev/null 2>&1
+service monit start
+send_install_becon `basename $0` $ZONE install_success 0

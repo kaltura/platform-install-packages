@@ -10,7 +10,7 @@ Group: Applications/Multimedia
 Packager: Jess Portnoy <jess.portnoy@kaltura.com> 
 Vendor: Kaltura, Inc.
 
-Source: https://github.com/kaltura/server-bin-linux-64bit/tree/master/segmenter/%{name}-%{version}.tar.gz
+Source: %{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildRequires:kaltura-ffmpeg-aux-devel
 Requires: kaltura-ffmpeg-aux
@@ -20,7 +20,7 @@ Tool for HLS segmentation
 
 
 %prep
-%setup -qn segmenter 
+%setup -q 
 
 %build
 export CFLAGS="%{optflags}"
