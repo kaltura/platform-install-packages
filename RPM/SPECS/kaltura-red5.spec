@@ -75,7 +75,7 @@ if [ "$1" = 0 ]; then
 fi
 
 %changelog
-* Sat Jan 3 2014 Jess Portnoy <jess.portnoy@kaltura.com> 1.0.4-1
+* Sat Jan 3 2015 Jess Portnoy <jess.portnoy@kaltura.com> 1.0.4-1
 - New ver.
 - No need to build anymore as Red5 offers prebuilt package.
 
