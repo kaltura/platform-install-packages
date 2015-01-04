@@ -83,11 +83,11 @@ fi
 
 
 
-wget $SSH_URI -O $RPM_SOURCES_DIR/ssh2-$SSH_VERSION.tgz
+wget $LIBSSH_URI -O $RPM_SOURCES_DIR/ssh2-$LIBSSH_VERSION.tgz
 if [ $? -eq 0 ];then
-	echo "Packaged to ssh2-$SSH_VERSION.tgz"
+	echo "Packaged to ssh2-$LIBSSH_VERSION.tgz"
 else
-	echo "Unable to download $SSH_URI" >&2
+	echo "Unable to download $LIBSSH_URI" >&2
 	exit 1
 fi
 if [ -x "`which rpmbuild 2>/dev/null`" ];then
