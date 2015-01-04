@@ -6,6 +6,7 @@ BUILD_DIR=$RUN_DIR
 SOURCE_PACKAGING_DIR=~/sources
 RPM_SOURCES_DIR=~/rpmbuild/SOURCES
 RPM_SPECS_DIR=~/rpmbuild/SPECS
+RPMS_DIR=~/rpmbuild/RPMS
 DEB_SPECS_DIR=$SOURCE_PACKAGING_DIR/platform-install-packages/deb
 TMP_DIR=/tmp
 KALTURA_SERVER_VERSION="Jupiter-10.2.0"
@@ -15,6 +16,28 @@ KALTURA_PREFIX="opt/kaltura"
 
 set -e
 . $RUN_DIR/packager.rc
+
+#install 
+kaltura_install() {
+
+	set +e
+	HARDWARE=`uname -m`
+	PACKAGE=$1
+	if [ $# -gt 1 ];then
+		PACKAGE="$1-$2"
+	fi
+	
+	if [ -x "`which yum 2>/dev/null`" ];then
+		sudo yum install -y $PACKAGE
+		
+		if [ $? -eq 0 ];then
+			echo "Installed package $PACKAGE"
+		else
+			sudo yum localinstall -y $RPMS_DIR/$HARDWARE/$PACKAGE*.$HARDWARE.rpm
+		fi
+	fi
+	set -e
+}
 
 #SVN 
 SSH_BIN=ssh
@@ -30,14 +53,14 @@ PHP_URI="http://museum.php.net/php5/php-$PHP_VERSION.tar.bz2"
 LIBMEMCACHED_VERSION=1.0.16
 LIBMEMCACHED_URI="http://launchpad.net/libmemcached/1.0/$LIBMEMCACHED_VERSION/+download/libmemcached-$LIBMEMCACHED_VERSION.tar.gz"
 
-PHP_MEMCACHED_VERSION=2.2.0
-PHP_MEMCACHED_URI="http://pecl.php.net/get/memcached-$PHP_MEMCACHED_VERSION.tgz"
+MEMCACHED_VERSION=2.2.0
+MEMCACHED_URI="http://pecl.php.net/get/memcached-$MEMCACHED_VERSION.tgz"
 
-PHP_SSH_VERSION=0.12
-PHP_SSH_URI="http://pecl.php.net/get/ssh2-$PHP_SSH_VERSION.tgz"
+SSH_VERSION=0.12
+SSH_URI="http://pecl.php.net/get/ssh2-$SSH_VERSION.tgz"
 
 LIBMCRYPT_VERSION=2.5.8
-LIBMCRYPT_URI="http://sourceforge.net/projects/mcrypt/files/Libmcrypt/$LIBMCRYPT_VERSION/libmcrypt-$LIBMCRYPT_VERSION.tar.gz"
+LIBMCRYPT_URI="http://garr.dl.sourceforge.net/project/mcrypt/Libmcrypt/$LIBMCRYPT_VERSION/libmcrypt-$LIBMCRYPT_VERSION.tar.gz"
 
 
 # a52dec:
@@ -90,8 +113,11 @@ FDK_RPM_PACKAGE_NAME=kaltura-libfdk-aac
 MENCODER_VERSION=3.4.6
 MENCODER_URI="https://github.com/kaltura/server-bin-linux-64bit/releases/download/1.0.0/mencoder-dir-$MENCODER_VERSION.tar.bz2"
 
-# Red5 build vars:
+# segmenter
+SEGMENTER_VERSION=1.0
+SEGMENTER_URI="https://github.com/kaltura/server-bin-linux-64bit/raw/master/segmenter/segmenter.c"
 
+# Red5 build vars:
 RED5_VERSION=1.0.4
 RED5_RPM_PACKAGE_NAME=kaltura-red5
 RED5_JAVA_URI=https://github.com/Red5/red5-server/releases/download/v$RED5_VERSION-RELEASE/red5-server-$RED5_VERSION-RELEASE-server.tar.gz
@@ -127,7 +153,6 @@ KMC_MINUS_V_VERSION=5.38.4
 KMC_VERSION=v$KMC_MINUS_V_VERSION
 KMC_LOGIN_MINUS_V_VERSION=1.2.8
 KMC_LOGIN_VERSION=v$KMC_LOGIN_MINUS_V_VERSION
-#KMC_URI="https://github.com/kaltura/kmc/releases/download/$KMC_VERSION/$KMC_VERSION.zip"
 KMC_URI="https://github.com/kaltura/kmc/archive/$KMC_VERSION.zip"
 KMC_LOGIN_URI="https://github.com/kaltura/kmc-login/releases/download/$KMC_LOGIN_VERSION/$KMC_LOGIN_VERSION.zip"
 KMC_UICONF_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalsource/uiconf/kaltura/kmc"

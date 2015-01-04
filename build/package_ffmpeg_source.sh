@@ -28,14 +28,18 @@ if [ ! -r $SOURCES_RC ];then
 fi
 . $SOURCES_RC 
 
-if [ -x "`which yum 2>/dev/null`" ];then
-	sudo yum localinstall -y $SOURCE_PACKAGING_DIR/RPMS/x86_64/kaltura-lame-*.x86_64.rpm
-	sudo yum localinstall -y $SOURCE_PACKAGING_DIR/RPMS/x86_64/kaltura-a52dec-*.x86_64.rpm
-	sudo yum localinstall -y $SOURCE_PACKAGING_DIR/RPMS/x86_64/kaltura-libfaac-*.x86_64.rpm
-	sudo yum localinstall -y $SOURCE_PACKAGING_DIR/RPMS/x86_64/kaltura-x264-*.x86_64.rpm
-	sudo yum localinstall -y $SOURCE_PACKAGING_DIR/RPMS/x86_64/kaltura-libopencore-amr-*.x86_64.rpm
-	sudo yum localinstall -y $SOURCE_PACKAGING_DIR/RPMS/x86_64/kaltura-fdk-aac-*.x86_64.rpm
-fi
+kaltura_install kaltura-lame $LAME_VERSION
+kaltura_install kaltura-lame-devel $LAME_VERSION
+kaltura_install kaltura-a52dec $A52DEC_VERSION
+kaltura_install kaltura-a52dec-devel $A52DEC_VERSION
+kaltura_install kaltura-libfaac $FAAC_VERSION
+kaltura_install kaltura-libfaac-devel $FAAC_VERSION
+kaltura_install kaltura-x264 $X264_VERSION
+kaltura_install kaltura-x264-devel $X264_VERSION
+kaltura_install kaltura-libopencore-amr $OPENCORE_AMR_VERSION
+kaltura_install kaltura-libopencore-amr-devel $OPENCORE_AMR_VERSION
+kaltura_install kaltura-fdk-aac $FDK_VERSION
+kaltura_install kaltura-fdk-aac-devel $FDK_VERSION
 
 
 cd $RPM_SOURCES_DIR

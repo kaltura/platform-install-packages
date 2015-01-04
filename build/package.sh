@@ -56,6 +56,7 @@ cd $BUILD_DIR
 ./package_pentaho_source.sh
 ./package_red5_source.sh
 ./package_sphinx_source.sh
+./package_segmenter_source.sh
 
 ./package_kaltura.sh
 
