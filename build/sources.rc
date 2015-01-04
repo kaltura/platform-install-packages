@@ -21,7 +21,7 @@ set -e
 kaltura_install() {
 
 	set +e
-	HARDWARE=`uname -m`
+	ARCH=`uname -m`
 	PACKAGE=$1
 	if [ $# -gt 1 ];then
 		PACKAGE="$1-$2"
@@ -33,7 +33,7 @@ kaltura_install() {
 		if [ $? -eq 0 ];then
 			echo "Installed package $PACKAGE"
 		else
-			sudo yum localinstall -y $RPMS_DIR/$HARDWARE/$PACKAGE*.$HARDWARE.rpm
+			sudo yum localinstall -y $RPMS_DIR/$ARCH/$PACKAGE*.$ARCH.rpm
 		fi
 	fi
 	set -e
@@ -56,8 +56,8 @@ LIBMEMCACHED_URI="http://launchpad.net/libmemcached/1.0/$LIBMEMCACHED_VERSION/+d
 MEMCACHED_VERSION=2.2.0
 MEMCACHED_URI="http://pecl.php.net/get/memcached-$MEMCACHED_VERSION.tgz"
 
-SSH_VERSION=0.12
-SSH_URI="http://pecl.php.net/get/ssh2-$SSH_VERSION.tgz"
+LIBSSH_VERSION=0.12
+LIBSSH_URI="http://pecl.php.net/get/ssh2-$LIBSSH_VERSION.tgz"
 
 LIBMCRYPT_VERSION=2.5.8
 LIBMCRYPT_URI="http://garr.dl.sourceforge.net/project/mcrypt/Libmcrypt/$LIBMCRYPT_VERSION/libmcrypt-$LIBMCRYPT_VERSION.tar.gz"
