@@ -20,6 +20,7 @@ set -e
 #install 
 kaltura_install() {
 
+	HARDWARE=`uname -m`
 	PACKAGE=$1
 	if [ $# -gt 1 ];then
 		PACKAGE="$1-$2"
@@ -31,7 +32,7 @@ kaltura_install() {
 		if [ $? -eq 0 ];then
 			echo "Installed package $PACKAGE"
 		else
-			sudo yum localinstall -y $RPMS_DIR/x86_64/$PACKAGE*.x86_64.rpm
+			sudo yum localinstall -y $RPMS_DIR/x86_64/$PACKAGE*.$HARDWARE.rpm
 		fi
 	fi
 }
