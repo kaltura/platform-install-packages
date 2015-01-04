@@ -20,6 +20,7 @@ set -e
 #install 
 kaltura_install() {
 
+	set +e
 	HARDWARE=`uname -m`
 	PACKAGE=$1
 	if [ $# -gt 1 ];then
@@ -32,9 +33,10 @@ kaltura_install() {
 		if [ $? -eq 0 ];then
 			echo "Installed package $PACKAGE"
 		else
-			sudo yum localinstall -y $RPMS_DIR/x86_64/$PACKAGE*.$HARDWARE.rpm
+			sudo yum localinstall -y $RPMS_DIR/$HARDWARE/$PACKAGE*.$HARDWARE.rpm
 		fi
 	fi
+	set -e
 }
 
 #SVN 
@@ -111,8 +113,11 @@ FDK_RPM_PACKAGE_NAME=kaltura-libfdk-aac
 MENCODER_VERSION=3.4.6
 MENCODER_URI="https://github.com/kaltura/server-bin-linux-64bit/releases/download/1.0.0/mencoder-dir-$MENCODER_VERSION.tar.bz2"
 
-# Red5 build vars:
+# segmenter
+SEGMENTER_VERSION=1.0
+SEGMENTER_URI="https://github.com/kaltura/server-bin-linux-64bit/raw/master/segmenter/segmenter.c"
 
+# Red5 build vars:
 RED5_VERSION=1.0.4
 RED5_RPM_PACKAGE_NAME=kaltura-red5
 RED5_JAVA_URI=https://github.com/Red5/red5-server/releases/download/v$RED5_VERSION-RELEASE/red5-server-$RED5_VERSION-RELEASE-server.tar.gz
