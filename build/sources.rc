@@ -188,7 +188,7 @@ KDP3PLUGINS_RPM_NAME="kaltura-kdp3plugins"
 
 # Kaltura KDP:
 # we bundle a few vers at each release:
-KDP_VERSIONS="v2.7.0"
+KDP_VERSION="v2.7.0"
 KDP_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/flash/kdp"
 KDP_RPM_NAME="kaltura-kdp"
 
