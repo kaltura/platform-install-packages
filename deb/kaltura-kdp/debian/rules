@@ -2,7 +2,7 @@
 
 DEB_VERSION := $(shell dpkg-parsechangelog | egrep '^Version:' | cut -f 2 -d ' ')
 RC_FILE :=../../build/sources.rc
-KDP_VERSIONS ?= $(shell egrep '^KDP_VERSIONS=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
+KDP_VERSION ?= $(shell egrep '^KDP_VERSION=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
 SOURCE_PACKAGING_DIR ?= $(shell egrep '^SOURCE_PACKAGING_DIR=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
 KALTURA_PREFIX ?= $(shell egrep '^KALTURA_PREFIX=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
 KDP_PREFIX=$(KALTURA_PREFIX)/web/flash/kdp
