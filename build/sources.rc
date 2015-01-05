@@ -43,7 +43,7 @@ kaltura_install() {
 SSH_BIN=ssh
 SSH_KEY=$RPM_SOURCES_DIR/svn_private_key.rsa
 SVN_USER=svnread
-SVN_BIN='svn --config-option config:tunnels:ssh="$SSH_BIN -i $SSH_KEY"'
+SVN_BIN='svn --config-option config:tunnels:ssh="$SSH_BIN -i $SSH_KEY -o UserKnownHostsFile=/dev/null -o StrictHostKeychecking=no"'
 kaltura_svn() (chmod 600 $SSH_KEY; eval "$SVN_BIN $@")
 
 # PHP:
