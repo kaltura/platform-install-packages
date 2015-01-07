@@ -2,8 +2,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.24
-Release: 2
+Version: v2.25
+Release: 1
 Epoch:0 
 License: AGPLv3+
 Group: Server/Platform 
@@ -20,6 +20,8 @@ Source9: kaltura-html5lib-v2.18.5.tar.gz
 Source10: kaltura-html5lib-v2.20.tar.gz
 Source11: kaltura-html5lib-v2.21.tar.gz
 Source12: kaltura-html5lib-v2.22.tar.gz
+Source13: kaltura-html5lib-v2.23.tar.gz
+Source14: kaltura-html5lib-v2.24.tar.gz
 
 URL: https://github.com/kaltura/mwEmbed 
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -53,11 +55,13 @@ tar zxf %{SOURCE9} -C %{_builddir}/
 tar zxf %{SOURCE10} -C %{_builddir}/
 tar zxf %{SOURCE11} -C %{_builddir}/
 tar zxf %{SOURCE12} -C %{_builddir}/
+tar zxf %{SOURCE13} -C %{_builddir}/
+tar zxf %{SOURCE14} -C %{_builddir}/
 
 
 %install
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib
-for i in v2.1.1 v2.3 v2.4 v2.6 v2.9 v2.14 v2.15 v2.18.5 v2.20 v2.21 v2.22 v2.23 %{version};do
+for i in v2.1.1 v2.3 v2.4 v2.6 v2.9 v2.14 v2.15 v2.18.5 v2.20 v2.21 v2.22 v2.23 v2.24 %{version};do
 	cp -r %{_builddir}/%{name}-$i $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i
 	cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i
 done
@@ -75,6 +79,20 @@ rm -rf %{buildroot}
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Wed Jan 7 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v2.25-1
+- FEC-2611 - Chapters/Slides Menu (revised) - Playback
+- FEC-1997 - lecture Capture - search , search results, no results.
+- FEC-1971 - Support VPAID events mapping to VAST events
+- SUP-3067 - Default captions malfunction 
+- SUP-3396 - captions do not appear on v2 players
+- SUP-3252 - doStop() function malfunction.
+- SUP-3429 - Clipped duration not displayed on page load, but only after play 
+- SUP-2937 - Thumbnail message in the beginning of entries
+- SUP-3502 - HLS playback fails due to access control
+- SUP-3496 - Change image file name when download with Universal studio
+- SUP-3480 - Playlist player layout display issues in iOS/Android
+- FEC-2594 - Playhead segment doesn't works - the video started to play from beginning
+ 
 * Sun Jan 4 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v2.24-2
 - Neglected to include v2.21 v2.22 v2.23
 - Use a for loop to iterate on vers.

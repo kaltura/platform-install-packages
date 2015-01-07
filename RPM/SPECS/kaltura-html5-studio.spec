@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5-studio
-Version: v1.9.2
+Version: v1.9.3
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -51,6 +51,9 @@ rm -rf %{buildroot}
 %{prefix}/apps/studio/%{version}
 
 %changelog
+* Wed Jan 7 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v1.9.3-1
+- SUP-3132 - Control Bar Icons are not transparent
+
 * Thu Dec 11 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v1.9.2-1
 - FEC-2401 - Add Strings plugin to Studio
 

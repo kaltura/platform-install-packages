@@ -1,7 +1,7 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmc	
-Version: v5.38.4
-Release: 3
+Version: v5.38.7
+Release: 1
 Summary: Kaltura Management Console
 
 Group: System Management	
@@ -77,6 +77,10 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Wed Jan 7 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.7-1
+- PLAT-2243 - kmc - kms categories Bulk delete Warning message is incorrect
+- PLAT-2242 - KMS \ KMC _edit warning category- Warning is not provided when changing between catrgoried 
+
 * Sun Dec 28 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.4-2
 - Bounce versions in config.
 
