@@ -21,7 +21,7 @@ if [ $# -lt 1 ];then
 	exit 1
 fi
 NEWVER=$1
-SOURCES_RC=`dirname $0`/sources.rc
+SOURCES_RC=~/sources/platform-install-packages/build/sources.rc
 if [ ! -r $SOURCES_RC ];then
 	echo "Could not find $SOURCES_RC"
 	exit 1

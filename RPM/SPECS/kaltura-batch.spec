@@ -6,7 +6,7 @@
 %define apache_group	apache
 Summary: Kaltura Open Source Video Platform - batch server 
 Name: kaltura-batch
-Version: 10.1.0
+Version: 10.2.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -130,6 +130,15 @@ service httpd restart
 
 
 %changelog
+* Wed Jan 7 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.2.0-1
+- Ver Bounce to 10.2.0
+
+* Wed Jan 7 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.2.0-1
+- Ver Bounce to 10.2.0
+
+* Wed Jan 7 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.2.0-1
+- Ver Bounce to 10.2.0
+
 * Sun Dec 28 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 10.1.0-1
 - Ver Bounce to 10.1.0
 

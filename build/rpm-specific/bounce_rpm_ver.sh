@@ -22,7 +22,7 @@ if [ $# -lt 1 ];then
 fi
 SPEC_FILE=$1
 NEWVER=$2
-SOURCES_RC=`dirname $0`/sources.rc
+SOURCES_RC=~/sources/platform-install-packages/build/sources.rc
 if [ ! -r $SOURCES_RC ];then
 	echo "Could not find $SOURCES_RC"
 	exit 1

@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.22
-Release: 3
+Release: 4
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -81,6 +81,10 @@ fi
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Sun Jan 4 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.22-4
+- Support mariadb in kaltura-mysql-settings.sh
+- Remove resriction to MySQL 5.1 since it seems to work fine with it now
+
 * Fri Nov 28 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.22-1
 - Fix for https://github.com/kaltura/platform-install-packages/issues/234
 
