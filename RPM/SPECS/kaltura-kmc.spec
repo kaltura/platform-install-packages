@@ -1,7 +1,7 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmc	
 Version: v5.38.7
-Release: 3
+Release: 4
 Summary: Kaltura Management Console
 
 Group: System Management	
@@ -52,7 +52,7 @@ mkdir -p $RPM_BUILD_ROOT%{prefix}/web/flash/kmc/login
 mkdir -p $RPM_BUILD_ROOT%{prefix}/app/alpha/web/lib
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content/docs/pdf
 #cp doc/pdf/KMC_User_Manual.pdf $RPM_BUILD_ROOT%{prefix}/web/content/docs/pdf
-cp -r doc $RPM_BUILD_ROOT%{prefix}/web/content/docs/
+cp -r doc/* $RPM_BUILD_ROOT%{prefix}/web/content/docs/
 mv doc/pdf $RPM_BUILD_ROOT%{prefix}/app/alpha/web/lib/ 
 mv %{_builddir}/%{name}-%{version}/login/%{kmc_login_version} $RPM_BUILD_ROOT%{prefix}/web/flash/kmc/login/ 
 mkdir $RPM_BUILD_ROOT%{prefix}/web/flash/kmc/%{version}
@@ -78,7 +78,7 @@ rm -rf %{buildroot}
 
 
 %changelog
-* Wed Jan 7 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.7-3
+* Wed Jan 7 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.7-4
 - Copy the entire doc tree to web/content/docs.
 
 * Wed Jan 7 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.7-1
