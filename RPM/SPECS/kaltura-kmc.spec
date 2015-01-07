@@ -1,7 +1,7 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmc	
 Version: v5.38.7
-Release: 1
+Release: 3
 Summary: Kaltura Management Console
 
 Group: System Management	
@@ -51,7 +51,8 @@ cp -r %{prefix}/web/flash/kmc/%{version}/uiconf/kaltura/kmc %{prefix}/web/conten
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/flash/kmc/login
 mkdir -p $RPM_BUILD_ROOT%{prefix}/app/alpha/web/lib
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content/docs/pdf
-cp doc/pdf/KMC_User_Manual.pdf $RPM_BUILD_ROOT%{prefix}/web/content/docs/pdf
+#cp doc/pdf/KMC_User_Manual.pdf $RPM_BUILD_ROOT%{prefix}/web/content/docs/pdf
+cp -r doc $RPM_BUILD_ROOT%{prefix}/web/content/docs/
 mv doc/pdf $RPM_BUILD_ROOT%{prefix}/app/alpha/web/lib/ 
 mv %{_builddir}/%{name}-%{version}/login/%{kmc_login_version} $RPM_BUILD_ROOT%{prefix}/web/flash/kmc/login/ 
 mkdir $RPM_BUILD_ROOT%{prefix}/web/flash/kmc/%{version}
@@ -77,6 +78,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Wed Jan 7 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.7-3
+- Copy the entire doc tree to web/content/docs.
+
 * Wed Jan 7 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.7-1
 - PLAT-2243 - kmc - kms categories Bulk delete Warning message is incorrect
 - PLAT-2242 - KMS \ KMC _edit warning category- Warning is not provided when changing between catrgoried 

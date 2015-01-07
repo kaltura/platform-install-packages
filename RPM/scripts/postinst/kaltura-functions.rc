@@ -471,7 +471,7 @@ check_studio_index_page()
 {
 	GOOD_STRING='Universal Studio'
 	if [ -f "/etc/redhat-release" ] ;then
-		HTML5_STUDIO_VERSION=`rpm -qa kaltura-html5-studio --queryformat %{version}-%{release}`
+		HTML5_STUDIO_VERSION=`rpm -qa kaltura-html5-studio --queryformat %{version}`
 	elif [ -x "`which dpkg-query`" ];then
 		HTML5_STUDIO_VERSION=`dpkg-query -W -f'${Version}' kaltura-html5-studio|awk -F "-" '{print $1}'`
 	fi
