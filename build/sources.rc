@@ -183,7 +183,7 @@ KDPWRAPPER_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/flash/kd
 KDPWRAPPER_RPM_NAME="kaltura-kdpwrapper"
 
 # Kaltura KDP3 Wrapper:
-KDP3WRAPPER_VERSIONS="v34.0"
+KDP3WRAPPER_VERSION="v37.0"
 KDP3WRAPPER_URI="svn+ssh://$SVN_USER@kelev.kaltura.com//usr/local/kalprod/flash/kdp3wrapper"
 KDP3WRAPPER_RPM_NAME="kaltura-kdp3wrapper"
 

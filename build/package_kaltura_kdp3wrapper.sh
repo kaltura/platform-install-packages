@@ -27,9 +27,9 @@ if [ ! -x "`which svn 2>/dev/null`" ];then
 fi
 
 mkdir -p $RPM_SOURCES_DIR/$KDP3WRAPPER_RPM_NAME
-for KDP3WRAPPER_VERSION in $KDP3WRAPPER_VERSIONS;do
+#for KDP3WRAPPER_VERSION in $KDP3WRAPPER_VERSIONS;do
 	kaltura_svn export --force --quiet $KDP3WRAPPER_URI/$KDP3WRAPPER_VERSION $SOURCE_PACKAGING_DIR/$KDP3WRAPPER_RPM_NAME/$KDP3WRAPPER_VERSION
-done
+#done
 
 cd $SOURCE_PACKAGING_DIR
 # flash things DO NOT need exec perms.
