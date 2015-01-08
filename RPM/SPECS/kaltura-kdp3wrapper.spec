@@ -26,7 +26,7 @@ For more information visit: http://corp.kaltura.com, http://www.kaltura.org and 
 This package installs the KDP3 Wrapper.
 
 %prep
-%setup -qn %{name} 
+%setup -qn %{name}-%{version} 
 
 %build
 
