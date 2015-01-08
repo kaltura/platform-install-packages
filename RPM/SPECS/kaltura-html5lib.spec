@@ -2,8 +2,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.25
-Release: 1
+Version: v2.24
+Release: 3
 Epoch:0 
 License: AGPLv3+
 Group: Server/Platform 
@@ -79,6 +79,24 @@ rm -rf %{buildroot}
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Thu Jan 8 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v2.24-1
+- Ver Bounce to v2.24
+
+* Wed Jan 7 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v2.24-1
+- Ver Bounce to v2.24
+
+* Wed Jan 7 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v2.24-1
+- Ver Bounce to v2.24
+
+* Wed Jan 7 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v2.24-1
+- Ver Bounce to v2.24
+
+* Wed Jan 7 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v2.24-1
+- Ver Bounce to v2.24
+
+* Wed Jan 7 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v2.24-1
+- Ver Bounce to v2.24
+
 * Wed Jan 7 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v2.25-1
 - FEC-2611 - Chapters/Slides Menu (revised) - Playback
 - FEC-1997 - lecture Capture - search , search results, no results.

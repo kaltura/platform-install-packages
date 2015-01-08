@@ -525,7 +525,7 @@ report()
 	echo -e "[${CYAN}$TNAME${NORMAL}] [${COLOR}$STAT, RC: $RC${NORMAL}] - [$TIME]"
 #	echo -e "$TNAME,,`hostname`,$MESSAGE,$RC, $TIME" >> /tmp/`hostname`-reportme.`date +%d_%m_%Y`.csv
 	if [ -f "/etc/redhat-release" ] ;then
-		CUR_BASE_VERSION=`rpm -qa kaltura-base --queryformat %{version}-%{release}`
+		CUR_BASE_VERSION=`rpm -qa kaltura-base --queryformat %{version}`
 	elif [ -x "`which dpkg-query`" ];then
 		CUR_BASE_VERSION=`dpkg-query -W -f'${Version}' kaltura-base|awk -F "-" '{print $1}'`
 	fi

@@ -51,6 +51,24 @@ rm -rf %{buildroot}
 %{prefix}/apps/studio/%{version}
 
 %changelog
+* Thu Jan 8 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v1.9.3-1
+- Ver Bounce to v1.9.3
+
+* Wed Jan 7 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v1.9.3-1
+- Ver Bounce to v1.9.3
+
+* Wed Jan 7 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v1.9.3-1
+- Ver Bounce to v1.9.3
+
+* Wed Jan 7 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v1.9.3-1
+- Ver Bounce to v1.9.3
+
+* Wed Jan 7 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v1.9.3-1
+- Ver Bounce to v1.9.3
+
+* Wed Jan 7 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v1.9.3-1
+- Ver Bounce to v1.9.3
+
 * Wed Jan 7 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v1.9.3-1
 - SUP-3132 - Control Bar Icons are not transparent
 
