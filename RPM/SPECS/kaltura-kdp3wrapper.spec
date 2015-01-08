@@ -26,13 +26,14 @@ For more information visit: http://corp.kaltura.com, http://www.kaltura.org and 
 This package installs the KDP3 Wrapper.
 
 %prep
-%setup -qn %{name}-%{version} 
+%setup -qn %{name}/%{version} 
 
 %build
 
 %install
-mkdir -p $RPM_BUILD_ROOT%{prefix}/web/flash
-cp -r %{_builddir}/%{name} $RPM_BUILD_ROOT/%{prefix}/web/flash/kdp3wrapper
+mkdir -p $RPM_BUILD_ROOT%{prefix}/web/flash/kdp3wrapper/%{version}
+#cp -r %{_builddir}/%{name} $RPM_BUILD_ROOT/%{prefix}/web/flash/kdp3wrapper
+cp -r . $RPM_BUILD_ROOT/%{prefix}/web/flash/kdp3wrapper/%{version}
 
 %clean
 rm -rf %{buildroot}

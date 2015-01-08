@@ -35,7 +35,7 @@ cd $SOURCE_PACKAGING_DIR
 # flash things DO NOT need exec perms.
 find $KDP3WRAPPER_RPM_NAME -type f -exec chmod -x {} \;
 tar jcf $RPM_SOURCES_DIR/$KDP3WRAPPER_RPM_NAME-$KDP3WRAPPER_VERSION.tar.bz2 $KDP3WRAPPER_RPM_NAME
-echo "Packaged into $RPM_SOURCES_DIR/$KDP3WRAPPER_RPM_NAME.tar.bz2"
+echo "Packaged into $RPM_SOURCES_DIR/$KDP3WRAPPER_RPM_NAME-$KDP3WRAPPER_VERSION.tar.bz2"
 
 if [ -x "`which rpmbuild 2>/dev/null`" ];then
 	rpmbuild -ba $RPM_SPECS_DIR/$KDP3WRAPPER_RPM_NAME.spec
