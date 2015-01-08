@@ -22,7 +22,7 @@ sed -i '/^open_files_limit.*$/d' $MY_CNF
 sed -i '/^max_allowed_packet.*$/d' $MY_CNF
 sed -i 's@^\[mysqld\]$@[mysqld]\nlower_case_table_names = 1\n@' $MY_CNF
 sed -i 's@^\[mysqld\]$@[mysqld]\ninnodb_file_per_table\n@' $MY_CNF
-sed -i 's@^\[mysqld\]$@[mysqld]\ninnodb_log_file_size=32MB\n@' $MY_CNF
+sed -i 's@^\[mysqld\]$@[mysqld]\ninnodb_log_file_size=32M\n@' $MY_CNF
 sed -i 's@^\[mysqld\]$@[mysqld]\nopen_files_limit = 20000\n@' $MY_CNF
 sed -i 's@^\[mysqld\]$@[mysqld]\nmax_allowed_packet = 16M\n@' $MY_CNF
 
