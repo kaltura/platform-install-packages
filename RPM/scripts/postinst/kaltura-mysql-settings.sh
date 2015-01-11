@@ -26,8 +26,8 @@ sed -i 's@^\[mysqld\]$@[mysqld]\ninnodb_log_file_size=32M\n@' $MY_CNF
 sed -i 's@^\[mysqld\]$@[mysqld]\nopen_files_limit = 20000\n@' $MY_CNF
 sed -i 's@^\[mysqld\]$@[mysqld]\nmax_allowed_packet = 16M\n@' $MY_CNF
 
-if rpm -q mysql-server;then
+if rpm -q mysql-server 2>/dev/null;then
         service mysqld restart
-elif rpm -q mariadb-server;then
+elif rpm -q mariadb-server 2>/dev/null;then
         service mariadb restart
 fi
