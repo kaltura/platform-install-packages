@@ -389,7 +389,7 @@ ${NORMAL}"
 			OUTP=`echo $CLEANOUTPUT|sed "s@'@@g"`
 			END=`date +%s.%N`
 			TOTAL_T=`bc <<< $TIME`
-			report "Delete parnter" $RC "$OUTP" "`bc <<< $END-$START`"
+			report "Delete partner" $RC "$OUTP" "`bc <<< $END-$START`"
 	fi
 sed -i "1,/^adminConsolePartnerId/s/^adminConsolePartnerId\s*=.*/adminConsolePartnerId=@ADMIN_CONSOLE_PARTNER_ID@/" $DIRNAME/sanity_config.ini
 sed -i "1,/^adminConsoleSecret/s/^adminConsoleSecret\s*=.*/adminConsoleSecret=@ADMIN_CONSOLE_PARTNER_ADMIN_SECRET@/" $DIRNAME/sanity_config.ini
