@@ -58,14 +58,36 @@ This section is a step-by-step guide of a Kaltura installation without SSL.
 rpm -ihv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
 ```
 
+## Note on RHEL/CentOS 7 
+If you are using RHEL/CentOS 7, edit /etc/yum.repos.d/kaltura.repo and change:
+```
+baseurl = http://installrepo.kaltura.org/releases/latest/RPMS/$basearch/
+```
+to read:
+```
+baseurl = http://installrepo.kaltura.org/releases/rhel7/RPMS/$basearch/
+```
+RHEL/CentOS 7 is currently in beta stages, bug reports are most welcomed.
+
 #### MySQL Install and Configuration
 Please note that currently, only MySQL 5.1 is supported, we recommend using the official package supplied by the RHEL/CentOS repos which is currently 5.1.73.
 
+For RHEL/CentOS 7 which is currently in the beta stage, MariaDB version 5.5.40 is supported. 
+
+RHEL/CentOS 6 setup:
 ```bash
 yum install mysql mysql-server
 service mysqld start
 mysql_secure_installation
 chkconfig mysqld on
+```
+
+RHEL/CentOS 7 setup:
+```bash
+yum install mariadb-server
+service mariadb start
+mysql_secure_installation
+chkconfig mariadb on
 ```
 
 **Make sure to answer YES for all steps in the `mysql_secure_install` install, and follow through all the mysql install questions before continuing further.
@@ -208,11 +230,22 @@ rpm -ihv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
 #### MySQL Install and Configuration
 Please note that currently, only MySQL 5.1 is supported, we recommend using the official package supplied by the RHEL/CentOS repos which is currently 5.1.73.
 
+For RHEL/CentOS 7 which is currently in the beta stage, MariaDB version 5.5.40 is supported. 
+
+RHEL/CentOS 6 setup:
 ```bash
 yum install mysql mysql-server
 service mysqld start
 mysql_secure_installation
 chkconfig mysqld on
+```
+
+RHEL/CentOS 7 setup:
+```bash
+yum install mariadb-server
+service mariadb start
+mysql_secure_installation
+chkconfig mariadb on
 ```
 
 **Make sure to answer YES for all steps in the `mysql_secure_install` install, and follow through all the mysql install questions before continuing further.
