@@ -3,7 +3,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5-studio
 Version: v1.9.3
-Release: 1
+Release: 2
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.bz2 
@@ -51,27 +51,6 @@ rm -rf %{buildroot}
 %{prefix}/apps/studio/%{version}
 
 %changelog
-* Fri Jan 9 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v1.9.3-1
-- Ver Bounce to v1.9.3
-
-* Thu Jan 8 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v1.9.3-1
-- Ver Bounce to v1.9.3
-
-* Wed Jan 7 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v1.9.3-1
-- Ver Bounce to v1.9.3
-
-* Wed Jan 7 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v1.9.3-1
-- Ver Bounce to v1.9.3
-
-* Wed Jan 7 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v1.9.3-1
-- Ver Bounce to v1.9.3
-
-* Wed Jan 7 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v1.9.3-1
-- Ver Bounce to v1.9.3
-
-* Wed Jan 7 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v1.9.3-1
-- Ver Bounce to v1.9.3
-
 * Wed Jan 7 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v1.9.3-1
 - SUP-3132 - Control Bar Icons are not transparent
 
