@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 10.2.0
-Release: 3
+Release: 5
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -287,34 +287,13 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Thu Jan 8 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.2.0-1
-- Ver Bounce to 10.2.0
-
-* Wed Jan 7 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.2.0-1
-- Ver Bounce to 10.2.0
-
-* Wed Jan 7 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.2.0-1
-- Ver Bounce to 10.2.0
-
-* Wed Jan 7 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.2.0-1
-- Ver Bounce to 10.2.0
-
-* Wed Jan 7 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.2.0-1
-- Ver Bounce to 10.2.0
-
-* Wed Jan 7 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.2.0-1
-- Ver Bounce to 10.2.0
-
-* Wed Jan 7 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.2.0-1
+* Sun Jan 10 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.2.0-5
 - Ver Bounce to 10.2.0
 - SUP-2516 - Crop thumbnail after grab from video error
 - SUP-3282 - Multi-Account Management Console copy content from template account Error
 - PLAT-2347 - Failure in recognition of the long/lat in the location reports due to update to IP2Location
 - PLAT-2313 - Entitlements are not inherited from live entry to recorded entry (was "API error on kwebcast page")
 - PLAT-1631 - Support Media Repurposing use-case (time capsule) 
-
-* Wed Jan 7 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.2.0-1
-- Ver Bounce to 10.2.0
 
 * Wed Jan 7 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.2.0-1
 - Ver Bounce to 10.2.0

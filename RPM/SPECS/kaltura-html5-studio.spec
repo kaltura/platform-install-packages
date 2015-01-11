@@ -51,6 +51,9 @@ rm -rf %{buildroot}
 %{prefix}/apps/studio/%{version}
 
 %changelog
+* Fri Jan 9 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v1.9.3-1
+- Ver Bounce to v1.9.3
+
 * Thu Jan 8 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v1.9.3-1
 - Ver Bounce to v1.9.3
 

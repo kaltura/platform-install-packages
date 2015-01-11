@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.22
-Release: 8
+Release: 9
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -81,6 +81,9 @@ fi
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Fri Jan 9 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.22-9
+- Added create and remove flavor tests.
+
 * Sun Jan 4 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.22-4
 - Support mariadb in kaltura-mysql-settings.sh
 - Remove resriction to MySQL 5.1 since it seems to work fine with it now
