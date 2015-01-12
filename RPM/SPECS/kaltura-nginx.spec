@@ -72,6 +72,7 @@ BuildRequires: zlib-devel
 BuildRequires: pcre-devel
 
 Provides: webserver
+Conflicts: nginx
 
 %description
 nginx [engine x] is an HTTP and reverse proxy server, as well as
