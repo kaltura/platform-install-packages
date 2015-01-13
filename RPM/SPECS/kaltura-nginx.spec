@@ -47,7 +47,7 @@ Requires(pre): pwdutils
 Summary: High performance web server customized for Kaltura VOD
 Name: kaltura-nginx
 Version: 1.6.2
-Release: 3
+Release: 4
 Vendor: Kaltura inc.
 URL: http://nginx.org/
 
@@ -216,10 +216,10 @@ make %{?_smp_mflags}
 %{__mkdir} -p $RPM_BUILD_ROOT%{_initrddir}
 %if 0%{?suse_version}
 %{__install} -m755 %{SOURCE7} \
-   $RPM_BUILD_ROOT%{_initrddir}/nginx
+   $RPM_BUILD_ROOT%{_initrddir}/kaltura-nginx
 %else
 %{__install} -m755 %{SOURCE2} \
-   $RPM_BUILD_ROOT%{_initrddir}/nginx
+   $RPM_BUILD_ROOT%{_initrddir}/kaltura-nginx
 %endif
 %endif
 
@@ -255,11 +255,11 @@ make %{?_smp_mflags}
 %config(noreplace) %{_sysconfdir}/logrotate.d/nginx
 %config(noreplace) %{_sysconfdir}/sysconfig/nginx
 %if %{use_systemd}
-%{_unitdir}/nginx.service
+%{_unitdir}/kaltura-nginx.service
 %dir %{_libexecdir}/initscripts/legacy-actions/nginx
 %{_libexecdir}/initscripts/legacy-actions/nginx/*
 %else
-%{_initrddir}/nginx
+%{_initrddir}/kaltura-nginx
 %endif
 
 %dir %{_datadir}/nginx
