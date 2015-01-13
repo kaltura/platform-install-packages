@@ -27,22 +27,29 @@ if ! rpm -q kaltura-nginx;then
 	exit 0 
 fi
 
-echo -e "${CYAN}Kaltura API host [${YELLOW}`hostname`${CYAN}]:${NORMAL} "
-read -e WWW_HOST
-if [ -z "$WWW_HOST" ];then
-	WWW_HOST=`hostname`
-fi
+if [ -n "$1" -a -r "$1" ];then
+        ANSFILE=$1
+        verify_user_input $ANSFILE
+        . $ANSFILE
+        export ANSFILE
+else
+	echo -e "${CYAN}Kaltura API host [${YELLOW}`hostname`${CYAN}]:${NORMAL} "
+	read -e WWW_HOST
+	if [ -z "$WWW_HOST" ];then
+		WWW_HOST=`hostname`
+	fi
 
-echo -e "${CYAN}Nginx server name [${YELLOW}`hostname`${CYAN}]:${NORMAL} "
-read -e VOD_PACKAGER_HOST
-if [ -z "$VOD_PACKAGER_HOST" ];then
-	VOD_PACKAGER_HOST=`hostname`
-fi
+	echo -e "${CYAN}Nginx server name [${YELLOW}`hostname`${CYAN}]:${NORMAL} "
+	read -e VOD_PACKAGER_HOST
+	if [ -z "$VOD_PACKAGER_HOST" ];then
+		VOD_PACKAGER_HOST=`hostname`
+	fi
 
-echo -en "${CYAN}Nginx port to listen on [${YELLOW}88${CYAN}]:${NORMAL} "
-read -e VOD_PACKAGER_PORT
-if [ -z "$VOD_PACKAGER_PORT" ];then
-	VOD_PACKAGER_PORT=88
+	echo -en "${CYAN}Nginx port to listen on [${YELLOW}88${CYAN}]:${NORMAL} "
+	read -e VOD_PACKAGER_PORT
+	if [ -z "$VOD_PACKAGER_PORT" ];then
+		VOD_PACKAGER_PORT=88
+	fi
 fi
 if [ -f /etc/nginx/nginx.conf ];then
 	mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.old
