@@ -120,7 +120,12 @@ $BASE_DIR/bin/kaltura-batch-config.sh "$ANSFILE"
 if [ $? -ne 0 ];then
        echo -e "${BRIGHT_RED}ERROR: $BASE_DIR/bin/kaltura-batch-config.sh failed:( You can re-run it when the issue is fixed.${NORMAL}"
 	exit 113 
- #      send_install_becon kaltura-batch $ZONE "install_fail: $OUT"
+fi
+
+$BASE_DIR/bin/kaltura-nginx-config.sh "$ANSFILE"
+if [ $? -ne 0 ];then
+       echo -e "${BRIGHT_RED}ERROR: $BASE_DIR/bin/kaltura-nginx-config.sh failed:( You can re-run it when the issue is fixed.${NORMAL}"
+	exit 113 
 fi
 
 #echo "Running Red5 config...
