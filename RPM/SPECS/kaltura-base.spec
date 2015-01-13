@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 10.2.0
-Release: 5
+Version: 10.3.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -287,6 +287,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Tue Jan 13 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.3.0-1
+- Ver Bounce to 10.3.0
+
 * Sun Jan 10 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.2.0-5
 - Ver Bounce to 10.2.0
 - SUP-2516 - Crop thumbnail after grab from video error

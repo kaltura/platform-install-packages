@@ -47,7 +47,7 @@ Requires(pre): pwdutils
 Summary: High performance web server customized for Kaltura VOD
 Name: kaltura-nginx
 Version: 1.6.2
-Release: 2
+Release: 3
 Vendor: Kaltura inc.
 URL: http://nginx.org/
 
@@ -63,7 +63,7 @@ Source8: nginx.service
 Source9: nginx.upgrade.sh
 Source10: nginx-vod-module-master.zip  
 Source11: nginx-akamai-token-module-master.zip
-Patch1: nginx_kaltura.diff 
+#Patch1: nginx_kaltura.diff 
 
 License: 2-clause BSD-like license
 
@@ -89,7 +89,7 @@ Not stripped version of nginx built with the debugging log support.
 
 %prep
 %setup -qn nginx-%{version}
-%patch1 -p1 -b ngx_http_upstream.c.orig 
+#%patch1 -p1 -b ngx_http_upstream.c.orig 
 unzip %{SOURCE10}
 
 unzip %{SOURCE11}
@@ -194,8 +194,8 @@ make %{?_smp_mflags}
 %{__rm} $RPM_BUILD_ROOT%{_sysconfdir}/nginx/nginx.conf
 %{__install} -m 644 -p %{SOURCE4} \
    $RPM_BUILD_ROOT%{_sysconfdir}/nginx/nginx.conf
-%{__install} -m 644 -p %{SOURCE5} \
-   $RPM_BUILD_ROOT%{_sysconfdir}/nginx/conf.d/default.conf
+%{__install} -m 644 -p %{_builddir}/nginx-%{version}/nginx-vod-module-master/conf/kaltura.conf.template \
+   $RPM_BUILD_ROOT%{_sysconfdir}/nginx/conf.d/kaltura.conf.template
 %{__install} -m 644 -p %{SOURCE6} \
    $RPM_BUILD_ROOT%{_sysconfdir}/nginx/conf.d/example_ssl.conf
 
@@ -242,7 +242,7 @@ make %{?_smp_mflags}
 %dir %{_sysconfdir}/nginx/conf.d
 
 %config(noreplace) %{_sysconfdir}/nginx/nginx.conf
-%config(noreplace) %{_sysconfdir}/nginx/conf.d/default.conf
+%config %{_sysconfdir}/nginx/conf.d/kaltura.conf.template
 %config(noreplace) %{_sysconfdir}/nginx/conf.d/example_ssl.conf
 %config(noreplace) %{_sysconfdir}/nginx/mime.types
 %config(noreplace) %{_sysconfdir}/nginx/fastcgi_params
