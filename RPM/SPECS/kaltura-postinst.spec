@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.23
-Release: 1
+Release: 2
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -81,6 +81,9 @@ fi
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Wed Jan 14 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.23-2
+- Modifications to support VOD packager.
+
 * Sun Jan 11 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.22-10
 - Direct STDERR to /dev/null when rpm -q.
 

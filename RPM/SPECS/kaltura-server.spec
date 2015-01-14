@@ -7,7 +7,7 @@ Group: Server/Platform
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
-Requires: kaltura-front, kaltura-red5, kaltura-batch, kaltura-sphinx, kaltura-dwh, kaltura-widgets, kaltura-html5lib
+Requires: kaltura-front, kaltura-red5, kaltura-batch, kaltura-sphinx, kaltura-dwh, kaltura-widgets, kaltura-html5lib,kaltura-nginx
 
 %description
 Kaltura is the world's first Open Source Online Video Platform, transforming the way people work, 
