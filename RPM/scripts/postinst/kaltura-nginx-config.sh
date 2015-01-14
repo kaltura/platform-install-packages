@@ -15,6 +15,28 @@
 #===============================================================================
 
 #set -o nounset                              # Treat unset variables as an error
+verify_user_input()
+{
+        ANSFILE=$1
+        . $ANSFILE
+        RC=0
+        for VAL in WWW_HOST VOD_PACKAGER_HOST VOD_PACKAGER_PORT ; do
+                if [ -z "${!VAL}" ];then
+                        VALS="$VALS\n$VAL"
+                        RC=1
+                fi
+        done
+        if [ $RC -eq 1 ];then
+                OUT="ERROR: Missing the following params in $ANSFILE
+                $VALS
+                "
+                echo -en "${BRIGHT_RED}$OUT${NORMAL}\n"
+                send_install_becon kaltura-base $ZONE "install_fail"  "$OUT"
+                exit $RC 
+        fi
+}
+
+
 KALTURA_FUNCTIONS_RC=`dirname $0`/kaltura-functions.rc
 if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
 	OUT="ERROR: Could not find $KALTURA_FUNCTIONS_RC so, exiting.."
