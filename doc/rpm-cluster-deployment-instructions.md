@@ -324,6 +324,20 @@ The DWH is Kaltura's Analytics server.
 # /opt/kaltura/bin/kaltura-dwh-config.sh
 ```
 
+### Nginx VOD Server
+This is used to achieve on-the-fly repackaging of MP4 files to DASH, HDS, HLS, MSS.
+
+For more info about its features see:
+https://github.com/kaltura/nginx-vod-module/
+
+Installation:
+```
+yum install kaltura-nginx
+/opt/kaltura/bin/kaltura-nginx-config.sh
+```
+
+Note: Currently, the Nginx VOD module does not support integration with Kaltura over HTTPs, only HTTP is supported. 
+
 ### The Streaming Server
 To achieve RTMP/t/e playback, Live streaming, webcam recording, and etc. Kaltura requires a streaming server.   
 You can use the open source Red5 server which is available as a Kaltura package too, and follow the steps below.   
