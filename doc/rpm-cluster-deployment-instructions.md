@@ -13,6 +13,7 @@ Refer to the [Deploying Kaltura Clusters Using Chef](https://github.com/kaltura/
 * [Front servers](#the-front)
 * [Batch servers](#the-batch)
 * [DWH server](#the-datawarehouse)
+* [Nginx VOD server](#nginx-vod-server)
 * [Streaming Server](#the-streaming-server)
 * [Upgrade Kaltura](#upgrade-kaltura)
 * [Platform Monitoring](#platform-monitoring)
