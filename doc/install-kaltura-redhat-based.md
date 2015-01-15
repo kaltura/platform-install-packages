@@ -154,8 +154,12 @@ Analytics DB hostname [127.0.0.1]: "<127.0.0.1>"
 Analytics DB port [3306]: "<3306>"
 Sphinx hostname [127.0.0.1]: "<127.0.0.1>"
 
-Media Streaming Server host [kalrpm.lcl]: "<your hostname>"
 Secondary Sphinx hostname: [leave empty if none] "<empty>"
+
+VOD packager hostname [kalrpm.lcl]: 
+
+VOD packager port to listen on [88]: 
+
 Service URL [http://kalrpm.lcl:80]: "<http://your hostname:80>"
 
 Kaltura Admin user (email address): "<your email address>"

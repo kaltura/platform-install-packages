@@ -210,7 +210,7 @@ ${NORMAL} "
                         SERVICE_URL=$PROTOCOL://$KALTURA_FULL_VIRTUAL_HOST_NAME
                 fi
         done
-        echo -e "${CYAN}VOD packager hostname [${YELLOW}`hostname`${CYAN}]${NORMAL} "
+        echo -en "${CYAN}VOD packager hostname [${YELLOW}`hostname`${CYAN}]:${NORMAL} "
         read -e VOD_PACKAGER_HOST
         if [ -z "$VOD_PACKAGER_HOST" ];then
                 VOD_PACKAGER_HOST=`hostname`
