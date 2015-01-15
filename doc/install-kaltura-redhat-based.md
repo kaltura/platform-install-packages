@@ -144,7 +144,7 @@ The below is a sample question answer format, replace the input marked by <> wit
 [Email\NO]: "<your email address>"
 CDN hostname [kalrpm.lcl]: "<your hostname>"
 Apache virtual hostname [kalrpm.lcl]: "<your hostname>"
-Which port will this Vhost listen on [80]?: "<80>"
+Which port will this Vhost listen on [80]?:
 
 DB hostname [127.0.0.1]: "<127.0.0.1>"
 DB port [3306]: "<3306>"
@@ -156,11 +156,11 @@ Sphinx hostname [127.0.0.1]: "<127.0.0.1>"
 
 Secondary Sphinx hostname: [leave empty if none] "<empty>"
 
-VOD packager hostname [kalrpm.lcl]: 
+VOD packager hostname [kalrpm.lcl]: "<http://kaltura-nginx-hostname>"
 
 VOD packager port to listen on [88]: 
 
-Service URL [http://kalrpm.lcl:80]: "<http://your hostname:80>"
+Service URL [http://kalrpm.lcl:80]: "<http://apache-hostname:80>"
 
 Kaltura Admin user (email address): "<your email address>"
 Admin user login password (must be minimum 8 chars and include at least one of each: upper-case, lower-case, number and a special character): "<your kaltura admin password>"
@@ -305,7 +305,7 @@ The below is a sample question answer format, replace the input marked by <> wit
 [Email\NO]: "<your email address>"
 CDN hostname [kalrpm.lcl]: "<your hostname>"
 Apache virtual hostname [kalrpm.lcl]: "<your hostname>"
-Which port will this Vhost listen on [80]?: "<80>"
+Which port will this Vhost listen on [80]?: "<443>"
 
 DB hostname [127.0.0.1]: "<127.0.0.1>"
 DB port [3306]: "<3306>"
@@ -315,9 +315,13 @@ Analytics DB hostname [127.0.0.1]: "<127.0.0.1>"
 Analytics DB port [3306]: "<3306>"
 Sphinx hostname [127.0.0.1]: "<127.0.0.1>"
 
-Media Streaming Server host [kalrpm.lcl]: "<your hostname>"
 Secondary Sphinx hostname: [leave empty if none] "<empty>"
-Service URL [http://kalrpm.lcl:80]: "<http://your hostname:80>"
+
+VOD packager hostname [kalrpm.lcl]: "<http://kaltura-nginx-hostname>"
+
+VOD packager port to listen on [88]: 
+
+Service URL [http://kalrpm.lcl:443]: "<http://your-hostname:443>"
 
 Kaltura Admin user (email address): "<your email address>"
 Admin user login password (must be minimum 8 chars and include at least one of each: upper-case, lower-case, number and a special character): "<your kaltura admin password>"
