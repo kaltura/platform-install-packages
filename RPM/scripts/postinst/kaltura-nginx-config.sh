@@ -85,4 +85,3 @@ else
 	service kaltura-nginx start
 fi
 
-/etc/init.d/kaltura-nginx restart >/dev/null 2>&1
