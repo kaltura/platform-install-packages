@@ -1,7 +1,7 @@
 #
 %define nginx_home %{_localstatedir}/cache/nginx
-%define nginx_user nginx
-%define nginx_group nginx
+%define nginx_user kaltura
+%define nginx_group kaltura
 
 # distribution specific definitions
 %define use_systemd (0%{?fedora} && 0%{?fedora} >= 18) || (0%{?rhel} && 0%{?rhel} >= 7)
@@ -47,7 +47,7 @@ Requires(pre): pwdutils
 Summary: High performance web server customized for Kaltura VOD
 Name: kaltura-nginx
 Version: 1.6.2
-Release: 4
+Release: 5
 Vendor: Kaltura inc.
 URL: http://nginx.org/
 
@@ -274,11 +274,15 @@ make %{?_smp_mflags}
 
 %pre
 # Add the "nginx" user
-getent group %{nginx_group} >/dev/null || groupadd -r %{nginx_group}
-getent passwd %{nginx_user} >/dev/null || \
-    useradd -r -g %{nginx_group} -s /sbin/nologin \
-    -d %{nginx_home} -c "nginx user"  %{nginx_user}
-exit 0
+#getent group %{nginx_group} >/dev/null || groupadd -r %{nginx_group}
+#getent passwd %{nginx_user} >/dev/null || \
+#    useradd -r -g %{nginx_group} -s /sbin/nologin \
+#    -d %{nginx_home} -c "nginx user"  %{nginx_user}
+#exit 0
+if ! id -u %{nginx_user} >>/dev/null 2>&1 ;then
+	groupadd -r %{nginx_group} -g7373 2>/dev/null || true
+	useradd -M -r -u7373 -d %{prefix} -s /bin/bash -c "Kaltura server" -g %{nginx_group} %{nginx_user} 2>/dev/null || true
+fi
 
 %post
 # Register the nginx service
