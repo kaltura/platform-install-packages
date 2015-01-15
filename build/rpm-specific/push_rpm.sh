@@ -21,6 +21,9 @@ fi
 RPM=`basename $1`
 BASE_RPM_DIR=`dirname $1`
 REPO_VER=$2
+if [ "$3" = 'copy-only' ];then
+	JUST_COPY=1
+fi
 if echo $RPM|grep -q noarch;then
 	SUB_PATH=noarch
 else
@@ -31,6 +34,7 @@ REPO_IP=192.168.70.100
 REPO_PREFIX=/opt/vhosts/repo
 
 scp $BASE_RPM_DIR/$RPM root@$REPO_IP:$REPO_PREFIX/releases/$REPO_VER/RPMS/$SUB_PATH
-ssh root@$REPO_IP /usr/local/bin/signrpm.ex  $REPO_PREFIX/releases/$REPO_VER/RPMS/$SUB_PATH/$RPM
-ssh root@$REPO_IP createrepo $REPO_PREFIX/releases/$REPO_VER/RPMS/$SUB_PATH
-
+if [ -n $JUST_COPY ];then
+	ssh root@$REPO_IP /usr/local/bin/signrpm.ex  $REPO_PREFIX/releases/$REPO_VER/RPMS/$SUB_PATH/$RPM
+	ssh root@$REPO_IP createrepo $REPO_PREFIX/releases/$REPO_VER/RPMS/$SUB_PATH
+fi
