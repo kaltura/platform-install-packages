@@ -49,5 +49,6 @@ if [ -r $APP_DIR/configurations/sphinx_schema_update ];then
 	Please try to run it manually and look at the logs"
 		exit $RC
 	fi
+	/etc/init.d/kaltura-sphinx restart
 	rm $APP_DIR/configurations/sphinx_schema_update
 fi
