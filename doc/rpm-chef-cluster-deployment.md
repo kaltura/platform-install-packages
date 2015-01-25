@@ -165,6 +165,7 @@ An example cluster deployment will be:
 # knife node run_list add my-front-machine kaltura::front 
 # knife node run_list add my-dwh-machine nfs
 # knife node run_list add my-dwh-machine kaltura::dwh 
+# knife node run_list add my-vod-machine kaltura::vod-packager 
 ```
 
 
@@ -205,8 +206,14 @@ root@my-batch-machine:~# chef-client -ldebug
 
 $ ssh my-dwh-machine
 root@my-dwh-machine:~# chef-client -ldebug
+
+$ ssh my-vod-machine
+root@my-vod-machine:~# chef-client -ldebug
 ```
 
 ### EC2 automation
 Please this howto about auto provisioning EC2 images:
 https://learnchef.opscode.com/starter-use-cases/multi-node-ec2/
+
+### Automatic Scaling with Chef and Kaltura API:
+http://blog.kaltura.org/automatic-scaling-with-chef-kaltura-api/
