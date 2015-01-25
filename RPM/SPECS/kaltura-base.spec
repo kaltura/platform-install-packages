@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 10.3.0
-Release: 2
+Release: 3
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -287,6 +287,13 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Thu Jan 25 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.3.0-3
+- SUP-3065 - Cannot create category using CSV - "already exists" 
+- SUP-3161 - Source assets missing source tag
+- PLAT-1751 - Reduce cache when listing live cuepoints
+- PLAT-2082 - redirectEntryIdEqual filter causes an exception
+- KMS-5141 - Cannot perform search by Custom Data "Text Select List" field (Drop Down List)
+
 * Thu Jan 15 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.3.0-2
 - Added the VOD delivery profile.
 

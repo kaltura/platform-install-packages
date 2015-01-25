@@ -1,7 +1,7 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmc	
-Version: v5.38.7
-Release: 9
+Version: v5.38.8
+Release: 1
 Summary: Kaltura Management Console
 
 Group: System Management	
@@ -78,6 +78,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sun Jan 25 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.8-1
+- SUP-3531 - Analytic data inconsistency in certain scenario
+
 * Wed Jan 7 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.7-4
 - Copy the entire doc tree to web/content/docs.
 

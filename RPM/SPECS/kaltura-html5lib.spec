@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.25
+Version: v2.26
 Release: 1
 Epoch:0 
 License: AGPLv3+
@@ -22,6 +22,7 @@ Source11: kaltura-html5lib-v2.21.tar.gz
 Source12: kaltura-html5lib-v2.22.tar.gz
 Source13: kaltura-html5lib-v2.23.tar.gz
 Source14: kaltura-html5lib-v2.24.tar.gz
+Source15: kaltura-html5lib-v2.25.tar.gz
 
 URL: https://github.com/kaltura/mwEmbed 
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -57,11 +58,12 @@ tar zxf %{SOURCE11} -C %{_builddir}/
 tar zxf %{SOURCE12} -C %{_builddir}/
 tar zxf %{SOURCE13} -C %{_builddir}/
 tar zxf %{SOURCE14} -C %{_builddir}/
+tar zxf %{SOURCE15} -C %{_builddir}/
 
 
 %install
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib
-for i in v2.1.1 v2.3 v2.4 v2.6 v2.9 v2.14 v2.15 v2.18.5 v2.20 v2.21 v2.22 v2.23 v2.24 %{version};do
+for i in v2.1.1 v2.3 v2.4 v2.6 v2.9 v2.14 v2.15 v2.18.5 v2.20 v2.21 v2.22 v2.23 v2.24 v2.25 %{version};do
 	cp -r %{_builddir}/%{name}-$i $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i
 	cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i
 done
@@ -79,6 +81,10 @@ rm -rf %{buildroot}
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+
+* Sun Jan 25 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v2.26-1
+- SUP-3609 - Misplaced playback on iPad with 2.24 & 2.25
+- FEC-2611 - Chapters/Slides Menu (revised) - Playback
 
 * Sun Jan 11 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v2.25-1
 - FEC-2611 - Chapters/Slides Menu (revised) - Playback

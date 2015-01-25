@@ -91,6 +91,7 @@ trap 'my_trap_handler "${LINENO}" ${$?}' ERR
 send_install_becon `basename $0` $ZONE install_start 0 
 KALTURA_APACHE_CONF=$APP_DIR/configurations/apache
 KALTURA_APACHE_CONFD=$KALTURA_APACHE_CONF/conf.d
+#unset IS_SSL
 if [ -z "$IS_SSL" ];then
 #unset IS_SSL
 cat << EOF 

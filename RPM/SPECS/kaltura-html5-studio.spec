@@ -2,8 +2,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5-studio
-Version: v1.9.3
-Release: 2
+Version: v1.9.4
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.bz2 
@@ -51,6 +51,9 @@ rm -rf %{buildroot}
 %{prefix}/apps/studio/%{version}
 
 %changelog
+* Sun Jan 25 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v1.9.4-1
+- FEC-2673 - Universal Studio allows to save empty UIVars
+
 * Wed Jan 7 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v1.9.3-1
 - SUP-3132 - Control Bar Icons are not transparent
 
