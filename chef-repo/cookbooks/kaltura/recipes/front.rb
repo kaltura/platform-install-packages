@@ -8,6 +8,7 @@ end
 log "Installing Kaltura front"
 package "kaltura-front" do
   action :install
+  Chef::Config[:yum_timeout] = 3600
  end
 %w{ kaltura-front kaltura-widgets kaltura-html5lib kaltura-html5-studio }.each do |pkg|
   package pkg do
