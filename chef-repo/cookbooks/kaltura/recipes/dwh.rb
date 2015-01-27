@@ -7,6 +7,7 @@ template "/etc/yum.repos.d/kaltura.repo" do
 end
 package "kaltura-dwh" do
   action :install
+  Chef::Config[:yum_timeout] = 3600
  end
 #%w{ apr apr-util lynx }.each do |pkg|
 #  package pkg do
