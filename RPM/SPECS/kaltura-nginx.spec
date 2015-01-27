@@ -47,7 +47,7 @@ Requires(pre): pwdutils
 Summary: High performance web server customized for Kaltura VOD
 Name: kaltura-nginx
 Version: 1.6.2
-Release: 5
+Release: 6
 Vendor: Kaltura inc.
 URL: http://nginx.org/
 
@@ -290,7 +290,7 @@ if [ $1 -eq 1 ]; then
 %if %{use_systemd}
     /usr/bin/systemctl preset nginx.service >/dev/null 2>&1 ||:
 %else
-    /sbin/chkconfig --add nginx
+    /sbin/chkconfig --add kaltura-nginx
 %endif
     # print site info
     cat <<BANNER
@@ -313,13 +313,13 @@ BANNER
         if [ ! -e %{_localstatedir}/log/nginx/access.log ]; then
             touch %{_localstatedir}/log/nginx/access.log
             %{__chmod} 640 %{_localstatedir}/log/nginx/access.log
-            %{__chown} nginx:adm %{_localstatedir}/log/nginx/access.log
+            %{__chown} %{nginx_user}:adm %{_localstatedir}/log/nginx/access.log
         fi
 
         if [ ! -e %{_localstatedir}/log/nginx/error.log ]; then
             touch %{_localstatedir}/log/nginx/error.log
             %{__chmod} 640 %{_localstatedir}/log/nginx/error.log
-            %{__chown} nginx:adm %{_localstatedir}/log/nginx/error.log
+            %{__chown} %{nginx_user}:adm %{_localstatedir}/log/nginx/error.log
         fi
     fi
 fi
@@ -327,11 +327,11 @@ fi
 %preun
 if [ $1 -eq 0 ]; then
 %if %use_systemd
-    /usr/bin/systemctl --no-reload disable nginx.service >/dev/null 2>&1 ||:
-    /usr/bin/systemctl stop nginx.service >/dev/null 2>&1 ||:
+    /usr/bin/systemctl --no-reload disable kaltura-nginx.service >/dev/null 2>&1 ||:
+    /usr/bin/systemctl stop kaltura-nginx.service >/dev/null 2>&1 ||:
 %else
-    /sbin/service nginx stop > /dev/null 2>&1
-    /sbin/chkconfig --del nginx
+    /sbin/service kaltura-nginx stop > /dev/null 2>&1
+    /sbin/chkconfig --del kaltura-nginx
 %endif
 fi
 
@@ -340,8 +340,8 @@ fi
 /usr/bin/systemctl daemon-reload >/dev/null 2>&1 ||:
 %endif
 if [ $1 -ge 1 ]; then
-    /sbin/service nginx status  >/dev/null 2>&1 || exit 0
-    /sbin/service nginx upgrade >/dev/null 2>&1 || echo \
+    /sbin/service kaltura-nginx status  >/dev/null 2>&1 || exit 0
+    /sbin/service kaltura-nginx upgrade >/dev/null 2>&1 || echo \
         "Binary upgrade failed, please check nginx's error.log"
 fi
 
