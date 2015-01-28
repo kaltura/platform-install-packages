@@ -1,7 +1,7 @@
 <?php
 
 if (count($argv)<11){
-    echo 'Usage:' .__FILE__ .' <service_url> <partnerid> <minus_2_secret> <profile name> <delivery url> <storage host> <storage basedir> <remote storage username> <remote storage passwd> 
+    echo 'Usage:' .__FILE__ .' <service_url> <partnerid> <minus_2_admin_secret> <profile name> <delivery url> <storage host> <storage basedir> <remote storage username> <remote storage passwd> 
  <remote storage proto: FTP|SFTP|SCP|S3>
  <playback proto: APPLE_HTTP|HDS|RTMP|HTTP|AKAMAI_HD|AKAMAI_HDS>
  <delivery proto: APPLE_HTTP|HDS|HTTP|RTMP|AKAMAI_HD|AKAMAI_HDS|AKAMAI_HLS_DIRECT|AKAMAI_HLS_MANIFEST>'."\n";
