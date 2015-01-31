@@ -20,7 +20,7 @@ Tool for HLS segmentation
 
 
 %prep
-%setup -qn segmenter 
+%setup -q 
 
 %build
 export CFLAGS="%{optflags}"

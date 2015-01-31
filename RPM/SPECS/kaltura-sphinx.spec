@@ -17,8 +17,7 @@ Packager:       Kaltura Inc.
 
 Source0:       	%{name}-%{version}.tar.gz 
 Source1: 	%{name}
-Source4:	kaltura.conf.template
-Source5: 	kaltura-populate
+Source2: 	kaltura-populate
 Patch0:		config-main.patch
 Patch1:		config.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-build
@@ -46,8 +45,8 @@ client programs and libraries via SQL-like SphinxQL interface.
 %setup -n %{name}-%{version}
 %patch0 -p1
 %patch1 -p1
-%setup -D -T -a 2 -n %{name}-%{version}
-%setup -D -T -a 3 -n %{name}-%{version}
+#%setup -D -T -a 2 -n %{name}-%{version}
+#%setup -D -T -a 3 -n %{name}-%{version}
 
 # Fix wrong-file-end-of-line-encoding
 sed -i 's/\r//' api/ruby/spec/sphinx/sphinx_test.sql
@@ -58,7 +57,7 @@ sed -i 's/\r//' api/ruby/lib/sphinx/response.rb
 
 %build
 
-%configure --sysconfdir=/opt/kaltura/app/configurations/sphinx  --with-mysql --with-libstemmer --with-unixodbc --with-iconv --enable-id64 --with-syslog --prefix=/opt/kaltura/sphinx --mandir=/opt/kaltura/sphinx/share/man --bindir=/opt/kaltura/sphinx/bin
+%configure --sysconfdir=/opt/kaltura/app/configurations/sphinx  --with-mysql --with-unixodbc --with-iconv --enable-id64 --with-syslog --prefix=%{prefix} --mandir=%{prefix}/share/man --bindir=%{prefix}/bin
 make %{?_smp_mflags}
 
 
@@ -70,7 +69,7 @@ mkdir $RPM_BUILD_ROOT/opt/kaltura/sphinx/lib
 mkdir -p  $RPM_BUILD_ROOT%{_initrddir}
 # Install sphinx initscript
 install -p -D -m 0755 %{SOURCE1} $RPM_BUILD_ROOT%{_initrddir}/
-install -p -D -m 0755 %{SOURCE5} $RPM_BUILD_ROOT%{_initrddir}/
+install -p -D -m 0755 %{SOURCE2} $RPM_BUILD_ROOT%{_initrddir}/
 chmod +x $RPM_BUILD_ROOT%{_initrddir}/*
 mkdir -p $RPM_BUILD_ROOT/opt/kaltura/log/sphinx/data
 

@@ -1,0 +1,41 @@
+#!/usr/bin/make -f
+
+DEB_VERSION := $(shell dpkg-parsechangelog | egrep '^Version:' | cut -f 2 -d ' ')
+RC_FILE :=../../build/sources.rc
+HTML5LIB_LATEST_VERSION ?= $(shell egrep '^HTML5LIB_LATEST_VERSION=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
+HTML5LIB_VERSIONS ?= $(shell egrep '^HTML5LIB_PREV_VERSIONS=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
+SOURCE_PACKAGING_DIR ?= $(shell egrep '^SOURCE_PACKAGING_DIR=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
+KALTURA_PREFIX ?= $(shell egrep '^KALTURA_PREFIX=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
+HTML5LIB_PREFIX=$(KALTURA_PREFIX)/web/html5/html5lib
+include ../includes/build-revision.mk
+archive := $(SOURCE_PACKAGING_DIR)/kaltura-html5-$(HTML5LIB_LATEST_VERSION).tar.gz
+
+clean:
+	dh_clean
+	rm -rf kaltura-html5lib-*
+	rm -rf debian/tmp
+
+$(archive):
+	$(SOURCE_PACKAGING_DIR)/platform-install-packages/build/package_kaltura_html5lib.sh	
+
+$(tree): $(archive)
+	echo zzxzz
+	tar zxf $(SOURCE_PACKAGING_DIR)/kaltura-html5-*.tar.gz
+
+build: $(tree)
+
+install: build
+
+binary-indep: install
+	dh_installdirs
+	rm -rf $(HTML5LIB_PREFIX)
+	mkdir -p $(HTML5LIB_PREFIX)
+	mv kaltura-html5-* $(HTML5LIB_PREFIX)/ 
+	dh_install $(KALTURA_PREFIX)
+	dh_gencontrol -u-v$(DEB_VERSION) 
+	dh_installdebconf
+	dh_installdeb
+	dh_builddeb 
+
+binary: binary-indep
+.PHONY: clean build binary-indep binary-arch binary

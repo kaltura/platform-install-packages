@@ -1,10 +1,9 @@
 %define baseurl installrepo.kaltura.org
-%define path releases/latest/RPMS
 %define testpath releases/nightly/RPMS
 %define prefix /opt/kaltura 
 Summary: Kaltura Server release file and package configuration
 Name: kaltura-release
-Version: 9.18.0
+Version: 10.3.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -12,6 +11,8 @@ URL: http://kaltura.org
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildArch: noarch
+
+%define path releases/latest/RPMS
 
 %description
 Kaltura Server release file. This package contains yum 
@@ -38,19 +39,20 @@ gpgkey = http://%{baseurl}/releases/RPM-GPG-KEY-kaltura
 gpgcheck = 1
 enabled = 1
 
-[Kaltura-testing]
-name = Kaltura Server arch independent
-baseurl = http://%{baseurl}/%{testpath}/\$basearch/
-gpgkey = http://%{baseurl}/releases/RPM-GPG-KEY-kaltura
-gpgcheck = 1 
-enabled = 0
+# we currently do not have the nightly so commented. We do have plans to add that.
+#[Kaltura-testing]
+#name = Kaltura Server arch independent
+#baseurl = http://%{baseurl}/%{testpath}/\$basearch/
+#gpgkey = http://%{baseurl}/releases/RPM-GPG-KEY-kaltura
+#gpgcheck = 1 
+#enabled = 0
 
-[Kaltura-testing-noarch]
-name = Kaltura Server arch independent
-baseurl = http://%{baseurl}/%{testpath}/noarch
-gpgkey = http://%{baseurl}/releases/RPM-GPG-KEY-kaltura
-gpgcheck = 1
-enabled = 0
+#[Kaltura-testing-noarch]
+#name = Kaltura Server arch independent
+#baseurl = http://%{baseurl}/%{testpath}/noarch
+#gpgkey = http://%{baseurl}/releases/RPM-GPG-KEY-kaltura
+#gpgcheck = 1
+#enabled = 0
 EOF
 
 %install
@@ -79,6 +81,45 @@ exit 0
 %config %{_sysconfdir}/yum.repos.d/kaltura.repo
 
 %changelog
+* Tue Jan 13 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.3.0-1
+- Ver Bounce to 10.3.0
+
+* Wed Jan 7 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.2.0-1
+- Ver Bounce to 10.2.0
+
+* Wed Jan 7 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.2.0-1
+- Ver Bounce to 10.2.0
+
+* Wed Jan 7 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.2.0-1
+- Ver Bounce to 10.2.0
+
+* Sun Dec 28 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 10.1.0-1
+- Ver Bounce to 10.1.0
+
+* Thu Dec 11 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 10.0.0-1
+- Ver Bounce to 10.0.0
+
+* Mon Dec 1 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.19.8-1
+- Ver Bounce to 9.19.8
+
+* Mon Nov 17 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.19.7-1
+- Ver Bounce to 9.19.7
+
+* Sun Nov 2 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.19.6-1
+- Ver Bounce to 9.19.6
+
+* Sat Oct 18 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.19.5-1
+- Ver Bounce to 9.19.5
+
+* Sun Oct 5 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.19.4-1
+- Ver Bounce to 9.19.4
+
+* Sun Sep 21 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.19.3-1
+- Ver Bounce to 9.19.3
+
+* Thu Jul 10 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.19.0-1
+- Ver Bounce to 9.19.0
+
 * Sun Jun 29 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.18.0-1
 - Ver Bounce to 9.18.0
 

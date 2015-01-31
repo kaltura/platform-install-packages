@@ -1,0 +1,80 @@
+#!/bin/bash
+
+KALTURA_FUNCTIONS_RC=/opt/kaltura/bin/kaltura-functions.rc
+if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
+        OUT="${BRIGHT_RED}ERROR:could not find $KALTURA_FUNCTIONS_RC so, exiting..${NORMAL}"
+        echo -en $OUT
+        exit 3
+fi
+
+RC_FILE=/etc/kaltura.d/system.ini
+if [ ! -r "$RC_FILE" ];then
+	echo -e "${BRIGHT_RED}ERROR: could not find $RC_FILE so, exiting..${NORMAL}"
+	exit 1 
+fi
+. $RC_FILE
+
+
+. $KALTURA_FUNCTIONS_RC
+KALTURA_PREFIX=/opt/kaltura
+APP_DIR=/opt/kaltura/app
+KALTURA_GROUP=kaltura
+KALTURA_USER=kaltura
+APACHE_USER=www-data
+APACHE_GROUP=www-data
+if [ -r $CONSENT_FILE ];then
+	. $CONSENT_FILE
+#elif [ -z "$USER_CONSENT" ];then
+#	get_tracking_consent
+#fi
+#. $CONSENT_FILE
+trap 'my_trap_handler "${LINENO}" ${$?}' ERR
+send_install_becon `basename $0` $ZONE install_start 0 
+CONFIG_DIR=/opt/kaltura/app/configurations
+if [ -r $CONFIG_DIR/system.ini ];then
+	. $CONFIG_DIR/system.ini
+else
+	echo -e "${BRIGHT_RED}ERROR: Missing $CONFIG_DIR/system.ini. Exiting..${NORMAL}"
+	exit 1
+fi
+
+BATCH_MAIN_CONF=$APP_DIR/configurations/batch/batch.ini
+
+# if we couldn't access the DB to retrieve the secret, assume the post install has not finished yet.
+BATCH_PARTNER_ADMIN_SECRET=`echo "select admin_secret from partner where id=-1"|mysql -N -h$DB1_HOST -u$DB1_USER -p$DB1_PASS $DB1_NAME -P$DB1_PORT`
+if [ -z "$BATCH_PARTNER_ADMIN_SECRET" ];then
+	echo -e "${BRIGHT_RED}ERROR: could not retreive partner.admin_secret for id -1. It probably means you did not yet run $APP_DIR/kaltura-base-config.sh yet. Please do.${NORMAL}" 
+	exit 2
+fi
+
+sed -i "s#@BATCH_PARTNER_ADMIN_SECRET@#$BATCH_PARTNER_ADMIN_SECRET#" -i $BATCH_MAIN_CONF
+sed -i "s#@INSTALLED_HOSNAME@#`hostname`#" -i $BATCH_MAIN_CONF
+
+BATCH_SCHEDULER_ID=`< /dev/urandom tr -dc 0-9 | head -c5`
+sed "s#@BATCH_SCHEDULER_ID@#$BATCH_SCHEDULER_ID#"  -i $BATCH_MAIN_CONF 
+sed "s#@INSTALLED_HOSNAME@#`hostname`#g" -i  -i $BATCH_MAIN_CONF
+
+# logrotate:
+ln -sf $APP_DIR/configurations/logrotate/kaltura_batch /etc/logrotate.d/ 
+ln -sf $APP_DIR/configurations/logrotate/kaltura_apache /etc/logrotate.d/
+ln -sf $APP_DIR/configurations/logrotate/kaltura_apps /etc/logrotate.d/
+
+mkdir -p $LOG_DIR/batch 
+find $BASE_DIR/app/cache/ $BASE_DIR/log -type d -exec chmod 775 {} \; 
+find $BASE_DIR/app/cache/ $BASE_DIR/log -type f -exec chmod 664 {} \; 
+chown -R $KALTURA_USER.$APACHE_GROUP $BASE_DIR/app/cache/ $BASE_DIR/log
+
+if service apache2 status >/dev/null 2>&1;then
+	service apache2 reload
+else
+	service apache2 start
+fi
+
+/etc/init.d/kaltura-batch restart >/dev/null 2>&1
+ln -sf $BASE_DIR/app/configurations/monit/monit.d/httpd.rc /etc/monit/conf.d/ 
+ln -sf $BASE_DIR/app/configurations/monit/monit.d/batch.rc /etc/monit/conf.d/
+service monit stop >> /dev/null 2>&1
+service monit start
+
+send_install_becon `basename $0` $ZONE install_success 0 
+

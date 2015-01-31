@@ -1,0 +1,40 @@
+#!/usr/bin/make -f
+
+DEB_VERSION := $(shell dpkg-parsechangelog | egrep '^Version:' | cut -f 2 -d ' ')
+RC_FILE :=../../build/sources.rc
+KDPWRAPPER_VERSION ?= $(shell egrep '^KDPWRAPPER_VERSION=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
+SOURCE_PACKAGING_DIR ?= $(shell egrep '^SOURCE_PACKAGING_DIR=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
+KALTURA_PREFIX ?= $(shell egrep '^KALTURA_PREFIX=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
+KDPWRAPPER_PREFIX=$(KALTURA_PREFIX)/web/flash/kdpwrapper
+include ../includes/build-revision.mk
+archive := $(SOURCE_PACKAGING_DIR)/kaltura-kdpwrapper-$(KDPWRAPPER_VERSION).tar.bz2
+tree := kaltura-kdpwrapper
+
+clean:
+	dh_clean
+	rm -rf $(tree) 
+	rm -rf debian/tmp
+
+$(archive):
+	$(SOURCE_PACKAGING_DIR)/platform-install-packages/build/package_kaltura_kdpwrapper.sh	
+
+$(tree): $(archive)
+	tar jxf $(archive)
+
+build: $(tree)
+
+install: build
+
+binary-indep: install
+	dh_installdirs
+	rm -rf $(KDPWRAPPER_PREFIX)
+	mkdir -p $(KDPWRAPPER_PREFIX)
+	mv $(tree)/$(KDPWRAPPER_VERSION) $(KDPWRAPPER_PREFIX)/
+	dh_install $(KDPWRAPPER_PREFIX)
+	dh_gencontrol -u-v$(DEB_VERSION) 
+	dh_installdebconf
+	dh_installdeb
+	dh_builddeb 
+
+binary: binary-indep
+.PHONY: clean build binary-indep binary-arch binary

@@ -31,8 +31,13 @@ $DBS
 and remove users:
 $DB_USERS
 on $DB1_HOST
+${BRIGHT_RED}
+NOTE: this is not reversible. 
+It is recommended you also back up the current data using mysqldump before continuing.
+You can use /opt/kaltura/bin/kaltura-export-db.sh to export the data.
 
 Are you absolutely certain you want this? [n/Y]
+${NORMAL}
 "
 read AN
 if [ "$AN" != 'Y' ];then
@@ -43,8 +48,8 @@ echo "root DB passwd:"
 read -s DBPASSWD
 for i in $DBS;do
 	echo "Removing $i" 
-	echo "drop database $i" | mysql -h$DB1_HOST -p$DBPASSWD ;
+	echo "drop database $i" | mysql -h$DB1_HOST -p$DBPASSWD -P$DB1_PORT ;
 done
-for i in $DB_USERS;do echo "drop user $i" | mysql -h$DB1_HOST -p$DBPASSWD ;done
+for i in $DB_USERS;do echo "drop user $i" | mysql -h$DB1_HOST -p$DBPASSWD -P$DB1_PORT;done
 
 

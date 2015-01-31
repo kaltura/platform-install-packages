@@ -1,7 +1,7 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmc	
-Version: v5.37.21
-Release: 4
+Version: v5.38.8
+Release: 1
 Summary: Kaltura Management Console
 
 Group: System Management	
@@ -9,8 +9,6 @@ License: AGPLv3+
 URL: https://github.com/kaltura/kmc 
 Source0: %{name}-%{version}.tar.bz2
 Source1: kmc_config.ini
-Source2: kmc_doc.zip
-Source3: KMC_User_Manual.pdf
 BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 BuildArch: noarch
 
@@ -32,7 +30,6 @@ This package installs the KMC Flash web interface.
 
 %prep
 %setup -q 
-unzip %{SOURCE2}
 
 %build
 %post
@@ -51,17 +48,17 @@ cp -r %{prefix}/web/flash/kmc/%{version}/uiconf/kaltura/kmc %{prefix}/web/conten
 #fi
 
 %install
-mkdir -p $RPM_BUILD_ROOT%{prefix}/web/flash/kmc/login $RPM_BUILD_ROOT%{prefix}/app/alpha/web/lib $RPM_BUILD_ROOT%{prefix}/web/content/docs/pdf
-#$RPM_BUILD_ROOT%{prefix}/web/content/uiconf/kaltura/kmc
-mv kmc-docs-master/pdf $RPM_BUILD_ROOT%{prefix}/app/alpha/web/lib/ 
-cp -r %{_builddir}/%{name}-%{version}/kmc-docs-master/* $RPM_BUILD_ROOT%{prefix}/web/content/docs/
+mkdir -p $RPM_BUILD_ROOT%{prefix}/web/flash/kmc/login
+mkdir -p $RPM_BUILD_ROOT%{prefix}/app/alpha/web/lib
+mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content/docs/pdf
+#cp doc/pdf/KMC_User_Manual.pdf $RPM_BUILD_ROOT%{prefix}/web/content/docs/pdf
+cp -r doc/* $RPM_BUILD_ROOT%{prefix}/web/content/docs/
+mv doc/pdf $RPM_BUILD_ROOT%{prefix}/app/alpha/web/lib/ 
 mv %{_builddir}/%{name}-%{version}/login/%{kmc_login_version} $RPM_BUILD_ROOT%{prefix}/web/flash/kmc/login/ 
 mkdir $RPM_BUILD_ROOT%{prefix}/web/flash/kmc/%{version}
 cp -r %{_builddir}/%{name}-%{version}/%{version}/* $RPM_BUILD_ROOT/%{prefix}/web/flash/kmc/%{version}/
 mv %{_builddir}/%{name}-%{version}/uiconf $RPM_BUILD_ROOT%{prefix}/web/flash/kmc/%{version}/
-#cp -r $RPM_BUILD_ROOT/%{prefix}/web/flash/kmc/%{version}/uiconf/kaltura/kmc/* $RPM_BUILD_ROOT%{prefix}/web/content/uiconf/kaltura/kmc/
 cp %{SOURCE1} $RPM_BUILD_ROOT/%{prefix}/web/flash/kmc/%{version}/config.ini
-cp %{SOURCE3} $RPM_BUILD_ROOT%{prefix}/web/content/docs/pdf
 
 %preun
 #if [ "$1" = 0 ] ; then
@@ -81,7 +78,61 @@ rm -rf %{buildroot}
 
 
 %changelog
-* Sat Jun 14 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.17.0-1
+* Sun Jan 25 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.8-1
+- SUP-3531 - Analytic data inconsistency in certain scenario
+
+* Wed Jan 7 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.7-4
+- Copy the entire doc tree to web/content/docs.
+
+* Wed Jan 7 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.7-1
+- PLAT-2243 - kmc - kms categories Bulk delete Warning message is incorrect
+- PLAT-2242 - KMS \ KMC _edit warning category- Warning is not provided when changing between catrgoried 
+
+* Sun Dec 28 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.4-2
+- Bounce versions in config.
+
+* Sun Dec 28 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.4-1
+- Support for Live Analytics
+- Prevent player v2 from throwing live events from KMC
+- PLAT-2157 - Akamai live streaming exported XML should specify video format 
+- PLAT-1703 - Add a warning in KMC when user trying to edit/delete one of KMS native categories 
+
+* Thu Dec 11 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.30-1
+- PLAT-2157 - Akamai live streaming exported XML should specify video format
+- PLAT-1703 - Add a warning in KMC when user trying to edit/delete one of KMS native categories
+- FEC-2282 - Lead with Universal studio ( instead of flash ) when pressing studio in KMC
+- SUP-3269 - Edit Entry window of live entry with Manager KMC role
+- PLAT-2081 - New live transcording profile is added to new streaming window just after refreshing KMC browser
+- PLAT-1908 - Missing exception on approve content when user does not have permission
+- PLAT-2223 - KMC - New Transcoding Profile - The creation of a new transcoding profile redirects the KMC to the Content tab (once per session) 
+
+* Mon Dec 1 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.27-4
+- HTML5lib bounce to v2.22.
+
+* Tue Nov 18 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.27-3
+- Bounce HTML5 lib ver in config.ini to v2.21.
+
+* Sun Nov 2 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.27-2
+- Bounce HTML5 lib ver in config.ini to v2.20.
+
+* Sun Oct 5 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.27-1
+- PLAT-1681 - KMC- Manual livestream entry has "hdnetworkmanifest" livestream configuration though no HDS url was configured
+- SUP-2392 - Disable editing of existing webvtt captions as well as not allow adding new ones (was "Webvtt upload from the KMC is not working")
+- SUP-2817 - KMC Date/Time bug
+
+* Sun Sep 21 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.24-1
+- ver bounce.
+
+* Sun Aug 3 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.22-2
+- Upped HTML5 version
+
+* Thu Jul 10 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.22-1
+- PLAT-1342 - Reflect replacement ERROR status in the KMC
+- PLAT-1389 - New Access Control Profiles are missing "Allow All" settings for IPs (the default access control profile is missing it too)
+- FEC-1463 - on line help - broken links to live reports and live transcoding profiles' pages
+- PLAT-340 - B&S report is cut in KMC while using resolution low then 1400 * 1050 
+
+* Sat Jun 14 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.21-1
 - PLAT-974 - add partner Reference ID to KMC and Multi-Account console
 
 * Wed May 21 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.20-2

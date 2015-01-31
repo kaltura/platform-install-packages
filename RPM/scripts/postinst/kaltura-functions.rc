@@ -28,6 +28,15 @@ ALL_DAEMONS="$APACHE_DAEMON $SPHINX_DAEMON $BATCH_DAEMON $MONIT_DAEMON $MEMCACHE
 POST_INST_MAIL_SUBJECT='Your new Kaltura server is up! and 6 Quick Tips For Smooth Kaltura Maintenance'
 POST_INST_MAIL_TMPL=$BASE_DIR/app/configurations/post_inst_mail
 
+ANALYTICS_SERVER_URI="http://installytics.kaltura.org/report"
+NEWSLETTER_URL="https://agentcontribs.kaltura.org/newsletter_subscribe.php"
+NEWSLETTER_MSG="
+To keep up with the bi-weekly Kaltura releases, and stay up to date with 
+the latest news, security and bug updates, and connect with the global
+Kaltura community - sign up for our regular Kaltura Community updates.
+Please enter your email to sign up, or enter NO to pass.
+"
+
 call_base_config()
 {
 
@@ -50,21 +59,21 @@ check_mysql_settings()
 	DB_HOST=$3
 	DB_PORT=$4
 	RC=0
-	OPEN_FILES_LIMIT=`echo "select @@open_files_limit;" | mysql -u$DB_USER -p$DB_PASSWD -h$DB_HOST -P$DB_PORT -N`
-	if [ "$OPEN_FILES_LIMIT" -lt 20000 ];then
-		MSG="$MSG\nplease set the following in my.cnf and restart the daemon:\nopen_files_limit = 20000 in my.cnf"
-		RC=1
-	fi
+	#OPEN_FILES_LIMIT=`echo "select @@open_files_limit;" | mysql -u$DB_USER -p$DB_PASSWD -h$DB_HOST -P$DB_PORT -N`
+	#if [ "$OPEN_FILES_LIMIT" -lt 20000 ];then
+	#	MSG="$MSG\nplease set the following in my.cnf and restart the daemon:\nopen_files_limit = 20000 in my.cnf"
+	#	RC=1
+	#fi
 	LOWER_CASE_TABLE_NAMES=`echo "select @@lower_case_table_names;" | mysql -u$DB_USER -p$DB_PASSWD -h$DB_HOST -P$DB_PORT -N`
 	if [ "$LOWER_CASE_TABLE_NAMES" -ne 1 ];then
 		MSG="$MSG\nlower_case_table_names=1"
 		RC=1
 	fi
-	#INNODB_LOG_FILE_SIZE=`echo "select @@innodb_log_file_size;" | mysql -u$DB_USER -p$DB_PASSWD -h$DB_HOST -P$DB_PORT -N`
-	#if [ "$INNODB_LOG_FILE_SIZE" -lt "" ];then
-	#	echo "innodb_log_file_size => 32M"
-	#	return 1
-	#fi
+	INNODB_LOG_FILE_SIZE=`echo "select @@innodb_log_file_size;" | mysql -u$DB_USER -p$DB_PASSWD -h$DB_HOST -P$DB_PORT -N`
+	if [ "$INNODB_LOG_FILE_SIZE" -lt "33554432" ];then
+		echo "innodb_log_file_size => 32M"
+		return 1
+	fi
 	MAX_ALLOWED_PACKET=`echo "select @@max_allowed_packet;" | mysql -u$DB_USER -p$DB_PASSWD -h$DB_HOST -P$DB_PORT -N`
 	if [ "$MAX_ALLOWED_PACKET" -lt "16777216" ];then
 		MSG="$MSG\nmax_allowed_packet = 16M"
@@ -166,9 +175,9 @@ send_post_inst_msg()
 }
 send_install_becon()
 {
-	if ! check_if_upgrade;then
-		return 0 
-	fi
+#	if ! check_if_upgrade;then
+#		return 0 
+#	fi
 	trap - ERR
 	#echo $USER_CONSENT
 	if [ -r $CONSENT_FILE ];then
@@ -179,23 +188,43 @@ send_install_becon()
 	fi
 	#echo sending becobeep
         ROLE=$1
-        ACTION=$3
 	TIMEZONE=$2
+        ACTION=$3
 	ERR_LINE=$ACTION
 
 	if [ -n $4 ];then
 		ERR_LINE=$4
 	fi
 	#echo $ERR_LINE 
-	ANALYTICS_SERVER_URI="http://installytics.kaltura.org/report"
         RC_FILE=/etc/kaltura.d/system.ini
         if [ -r "$RC_FILE" ];then
         	. $RC_FILE
 	fi
-        BLKID=`blkid`
-        MACHINE_ID=`echo -n $BLKID | md5sum|awk -F " " '{print $1}'`
-        EPOCH=`date +%s`
-        INSTALL_ID=`echo $BLKID : $EPOCH | md5sum|awk -F " " '{print $1}'`
+	if which dmidecode >/dev/null 2>&1;then
+                UNIQ=`dmidecode -t 4`
+		# if it failed fallback to blkid
+			if [ $? -ne 0 ];then
+			    UNIQ=`blkid`
+			fi
+		# if it failed this way [still returns 0] then fallback
+			if echo $UNIQ |grep -q "No SMBIOS nor DMI entry";then
+				UNIQ=`blkid`
+			fi
+	# if the dmidecode is not installed..
+        elif which blkid >/dev/null 2>&1;then
+                UNIQ=`blkid`
+        fi
+
+        if [ -n "$UNIQ" ];then
+                MACHINE_ID=`echo -n $UNIQ | md5sum|awk -F " " '{print $1}'`
+                EPOCH=`date +%s`
+                INSTALL_ID=`echo $UNIQ : $EPOCH | md5sum|awk -F " " '{print $1}'`
+	# if, despite our efforts we got no uniq ID...
+        else
+                MACHINE_ID="did_not_find_blkid_or_dmidecode"
+                INSTALL_ID="did_not_find_blkid_or_dmidecode"
+        fi
+
 	#set -x
 
 	if  echo $SERVICE_URL | grep -q 'https://' ;then
@@ -203,9 +232,36 @@ send_install_becon()
 	else
 		IS_SSL=false
 	fi
-	curl -i -X POST -H 'Content-Type: application/json' -d '{"event_type": "'$ACTION'", "server_role": "'$ROLE'", "user_email": "'$CONTACT_MAIL'", "machine_id": "'$MACHINE_ID'", "installation_id": "'$INSTALL_ID'", "timestamp": "'$EPOCH'", "kernel_version": "'`uname -r`'", "machine_arch": "'`uname -m`'","linux_flavor":"'`head -1 /etc/issue|sed "s#\s#_#g"`'","is_ssl": "'$IS_SSL'", "service_url": "'$SERVICE_URL'","install_err_line": "'$ERR_LINE'","timezone": "'$TIMEZONE'","package_type":"rpm","kaltura_version": "'`rpm -qa kaltura-base --queryformat %{version}`'","package_revision": "'`rpm -qa kaltura-base --queryformat %{release}`'"}' $ANALYTICS_SERVER_URI &>/dev/null
+#set -x
+	if [ -r /etc/redhat-release ];then
+		RELEASE=`head -1 /etc/redhat-release |sed "s#\s#_#g"`
 
-	#set +x
+	elif [ -r /etc/os-release ];then
+		RELEASE=`head -1 /etc/os-release |sed "s#\s#_#g"`
+	else
+		RELEASE=`head -1 /etc/issue |sed "s#\s#_#g"`
+	fi
+	if [ -n "$GET_UPDATES_NEWSLETTER" ];then
+		SUBSCRIBE4UPDATES=1
+	else
+		SUBSCRIBE4UPDATES=0
+	fi
+
+	# if this is an RHEL based distro then it would have this file.
+	# checking this instead of which rpm because it is possible to install rpm on a Debiab/Ubuntu system
+	if [ -f "/etc/redhat-release" ] ;then
+		KALTURA_VERSION=`rpm -qa kaltura-base --queryformat %{version}`
+		KALTURA_REVISION=`rpm -qa kaltura-base --queryformat %{release}`
+		PACKAGE_TYPE=rpm
+	elif [ -x "`which dpkg-query`" ];then
+		KALTURA_VERSION=`dpkg-query -W -f'${Version}' kaltura-base|awk -F "-" '{print $1}'`
+		KALTURA_REVISION=`dpkg-query -W -f'${Version}' kaltura-base | awk -F "+" '{print $2}'`
+		PACKAGE_TYPE=deb
+	fi
+	curl -i -X POST -H 'Content-Type: application/json' -d '{"event_type": "'$ACTION'", "server_role": "'$ROLE'", "user_email": "'$CONTACT_MAIL'", "machine_id": "'$MACHINE_ID'", "installation_id": "'$INSTALL_ID'", "timestamp": "'$EPOCH'", "kernel_version": "'`uname -r`'", "machine_arch": "'`uname -m`'","linux_flavor":"'$RELEASE'","is_ssl": "'$IS_SSL'", "service_url": "'$SERVICE_URL'","install_err_line": "'$ERR_LINE'","timezone": "'$TIMEZONE'","package_type":"'$PACKAGE_TYPE'","kaltura_version": "'$KALTURA_VERSION'","package_revision": "'$KALTURA_REVISION'"}' $ANALYTICS_SERVER_URI &>/dev/null
+	 curl --data "event_type=$ACTION&server_role=$ROLE&user_email=$CONTACT_MAIL&machine_id=$MACHINE_ID&installation_id=$INSTALL_ID&timestamp=`date +%s`&kernel_version=`uname -r`&machine_arch=`uname -m`&linux_flavor=$RELEASE&service_url=$SERVICE_URL&install_err_line=$ERR_LINE&timezone=$TIMEZONE&package_type=$PACKAGE_TYPE&kaltura_version=$KALTURA_VERSION&package_revision=$KALTURA_REVISION&subscribed_for_ce_updates=$SUBSCRIBE4UPDATES" https://installytics.kaltura.org/report/add_rec.php 
+
+#	set +x
 	trap 'my_trap_handler ${LINENO} ${$?}' ERR
 }
 
@@ -214,7 +270,11 @@ my_trap_handler()
         MYSELF=`basename "$0"`               # equals to my script name
         LASTLINE="$1"            # argument 1: last line of error occurence
         LASTERR="$2"             # argument 2: error code of last command
-        RPM_VER=`rpm -q kaltura-postinst`
+	if [ -f "/etc/redhat-release" ] ;then
+        	POSTINST_VER=`rpm -q kaltura-postinst`
+	elif [ -x "`which dpkg-query`" ];then
+		POSTINST_VER=`dpkg-query -W -f'${Version}' kaltura-postinst|awk -F "-" '{print $1}'`
+	fi
 	if [ -d /opt/kaltura/log ];then
 		TAR_PATH=/opt/kaltura/log/log_`date +%d_%m_%y_%H_%M`.tar.gz	
 		echo -en "${BRIGHT_RED}$FAIL_MSG${NORMAL}
@@ -231,7 +291,7 @@ my_trap_handler()
 		. $CONSENT_FILE 
 	fi
 	
-       	send_install_becon ${MYSELF} $ZONE install_fail "${LASTLINE},${RPM_VER}"
+       	send_install_becon ${MYSELF} $ZONE install_fail "${LASTLINE},${POSTINST_VER}"
         exit 11
 }
 
@@ -271,10 +331,37 @@ get_tracking_consent()
 	. $CONSENT_FILE
 }
 
+get_newsletter_consent()
+{
+	echo -en "${BRIGHT_BLUE}$NEWSLETTER_MSG
+	
+
+[Email\NO]:${NORMAL}"
+
+	if [ -z CONTACT_MAIL ];then
+		CONTACT_MAIL="mailhere"
+	fi
+	read -e CONTACT_MAIL
+	while [ "$CONTACT_MAIL" != "NO" ];do
+		if validate_mail "$CONTACT_MAIL";then
+			echo -e "${BRIGHT_BLUE}Registering for the newsletter... this will take a few seconds.${NORMAL}"
+			curl "$NEWSLETTER_URL?email=$CONTACT_MAIL"
+			echo "GET_UPDATES_NEWSLETTER=$CONTACT_MAIL" >> $CONSENT_FILE
+			export CONTACT_MAIL
+			return 0
+		fi	
+		echo "Please input a valid mail address or 'NO'"
+		read -e CONTACT_MAIL
+	done
+}
 check_if_upgrade()
 {
 	trap - ERR
-	CUR_BASE_VERSION=`rpm -qa kaltura-base --queryformat %{version}-%{release}`
+	if [ -f "/etc/redhat-release" ] ;then
+		CUR_BASE_VERSION=`rpm -qa kaltura-base --queryformat %{version}-%{release}`
+	elif [ -x "`which dpkg-query`" ];then
+		CUR_BASE_VERSION=`dpkg-query -W -f'${Version}' kaltura-base|awk -F "-" '{print $1}'`
+	fi
 	LAST_BASE_VERSION=`cat $BASE_DIR/bin/last_base_ver 2> /dev/null`
 	if [ "$CUR_BASE_VERSION" = "$LAST_BASE_VERSION" ];then
 		return 1 
@@ -285,7 +372,11 @@ check_if_upgrade()
 
 write_last_base_version()
 {
-	CUR_BASE_VERSION=`rpm -qa kaltura-base --queryformat %{version}-%{release}`
+	if [ -f "/etc/redhat-release" ] ;then
+		CUR_BASE_VERSION=`rpm -qa kaltura-base --queryformat %{version}-%{release}`
+	elif [ -x "`which dpkg-query`" ];then
+		CUR_BASE_VERSION=`dpkg-query -W -f'${Version}' kaltura-base|awk -F "-" '{print $1}'`
+	fi
 	echo "$CUR_BASE_VERSION" > $BASE_DIR/bin/last_base_ver
 }
 
@@ -353,23 +444,43 @@ check_start_page()
 check_testme_page()
 {
 	TESTME_PAGE=`curl -ks "$SERVICE_URL/api_v3/testme"  | grep 'The document has moved '|sed 's@.*a href="\(.*\)".*@\1@g'`
-	curl -ks $TESTME_PAGE | grep 'Kaltura - Test Me Console' -q
+	GOOD_STRING='Kaltura - Test Me Console'
+	curl -ks $TESTME_PAGE | grep "$GOOD_STRING" -q
 	if [ $? -eq 0 ];then
-		echo "Successfully found 'Kaltura - Test Me Console' on page $TESTME_PAGE"
+		echo "Successfully found '$GOOD_STRING' on page $TESTME_PAGE"
 		return 0
 	else
-		echo "Did not find 'Kaltura - Test Me Console' on page $TESTME_PAGE :("
+		echo "Did not find '$GOOD_STRING' on page $TESTME_PAGE :("
 		return 1
 	fi	
 } 
 check_kmc_index_page()
 {
-	curl -ks "$SERVICE_URL/kmc"  | grep -q 'Kaltura - Open Source Video Platform'
+	GOOD_STRING='Kaltura - Open Source Video Platform'
+	curl -ks "$SERVICE_URL/kmc"  | grep -q "$GOOD_STRING"
 	if [ $? -eq 0 ];then
-		echo "Successfully found 'Kaltura - Open Source Video Platform'"
+		echo "Successfully found '$GOOD_STRING'"
 		return 0
 	else
-		echo "Did not find 'Kaltura - Open Source Video Platform' :("
+		echo "Did not find '$GOOD_STRING' :("
+		return 1
+	fi
+}
+
+check_studio_index_page()
+{
+	GOOD_STRING='Universal Studio'
+	if [ -f "/etc/redhat-release" ] ;then
+		HTML5_STUDIO_VERSION=`rpm -qa kaltura-html5-studio --queryformat %{version}`
+	elif [ -x "`which dpkg-query`" ];then
+		HTML5_STUDIO_VERSION=`dpkg-query -W -f'${Version}' kaltura-html5-studio|awk -F "-" '{print $1}'`
+	fi
+	curl -ks "$SERVICE_URL/apps/studio/$HTML5_STUDIO_VERSION/index.html"  | grep -q "$GOOD_STRING"
+	if [ $? -eq 0 ];then
+		echo "Successfully found '$GOOD_STRING'"
+		return 0
+	else
+		echo "Did not find '$GOOD_STRING' :("
 		return 1
 	fi
 }
@@ -377,12 +488,13 @@ check_kmc_index_page()
 check_admin_console_index_page()
 {
 	AC_PAGE=`curl -ks "$SERVICE_URL/admin_console"  | grep 'The document has moved '|sed 's@.*a href="\(.*\)".*@\1@g'`
-	curl -ks $AC_PAGE | grep 'Kaltura Admin Console' -q
+	GOOD_STRING='Kaltura Admin Console'
+	curl -ks $AC_PAGE | grep "$GOOD_STRING" -q
 	if [ $? -eq 0 ];then
-		echo "Successfully found 'Kaltura Admin Console' on page $AC_PAGE"
+		echo "Successfully found '$GOOD_STRING' on page $AC_PAGE"
 		return 0
 	else
-		echo "Did not find 'Kaltura Admin Console' on page $AC_PAGE :("
+		echo "Did not find '$GOOD_STRING' on page $AC_PAGE :("
 		return 1
 	fi	
 }
@@ -412,7 +524,12 @@ report()
 
 	echo -e "[${CYAN}$TNAME${NORMAL}] [${COLOR}$STAT, RC: $RC${NORMAL}] - [$TIME]"
 #	echo -e "$TNAME,,`hostname`,$MESSAGE,$RC, $TIME" >> /tmp/`hostname`-reportme.`date +%d_%m_%Y`.csv
-	echo "INSERT INTO csi_log VALUES(NULL,'$TNAME','`hostname`',`date +%s`,\"$MESSAGE\",$RC,$TIME,'`rpm -qa kaltura-base --queryformat %{version}`');" >> /tmp/`hostname`-reportme.`date +%d_%m_%Y`.sql
+	if [ -f "/etc/redhat-release" ] ;then
+		CUR_BASE_VERSION=`rpm -qa kaltura-base --queryformat %{version}`
+	elif [ -x "`which dpkg-query`" ];then
+		CUR_BASE_VERSION=`dpkg-query -W -f'${Version}' kaltura-base|awk -F "-" '{print $1}'`
+	fi
+	echo "INSERT INTO csi_log VALUES(NULL,'$TNAME','`hostname`',`date +%s`,\"$MESSAGE\",$RC,$TIME,'$CUR_BASE_VERSION');" >> /tmp/`hostname`-reportme.`date +%d_%m_%Y`.sql
 }
 
 check_missing_web_files()
@@ -420,7 +537,7 @@ check_missing_web_files()
 	MISSING_LIST="/tmp/missing_web_files_`date +%d_%m_%Y`"
 	TMP_MISSING_LIST="/tmp/missing_web_files_tmp_`date +%d_%m_%Y`"
 	# query to get all ui_confs
-	for i in `echo "select conf_file_path from ui_conf" | mysql -N -h $DB1_HOST -u $DB1_USER -p$DB1_PASS kaltura`;do 
+	for i in `echo "select conf_file_path from ui_conf" | mysql -N -h $DB1_HOST -u $DB1_USER -P$DB1_PORT -p$DB1_PASS kaltura`;do 
 		if [ -r "$WEB_DIR/$i" ];then 
 			# run line by line over the XML to find the paths
 			while read L;do 
@@ -451,7 +568,11 @@ check_kmc_config_versions()
         COMP_NAME=$1
         KMC_VER=$2
 #	set -x
+	if [ -f "/etc/redhat-release" ] ;then
         	COMP_VER=`rpm -q $COMP_NAME --queryformat %{version}`
+	elif [ -x "`which dpkg-query`" ];then
+		COMP_VER=`dpkg-query -W -f'${Version}' $COMP_NAME|awk -F "-" '{print $1}'`
+	fi
                 grep -q $COMP_VER /opt/kaltura/web/flash/kmc/$KMC_VER/config.ini -m1
                 RC=$?
 		if [ $RC -eq 0 ];then
@@ -462,3 +583,4 @@ check_kmc_config_versions()
 			return $RC
 		fi
 }
+

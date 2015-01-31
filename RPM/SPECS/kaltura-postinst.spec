@@ -1,7 +1,7 @@
 %define prefix /opt/kaltura 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
-Version: 1.0.16
+Version: 1.0.23
 Release: 3
 License: AGPLv3+
 Group: Server/Platform 
@@ -35,7 +35,7 @@ This package includes post install scripts to be run post RPM install as they re
 mkdir -p $RPM_BUILD_ROOT/%{prefix}/bin
 mkdir -p $RPM_BUILD_ROOT/%{prefix}/app/configurations $RPM_BUILD_ROOT/%{prefix}/app/deployment/updates/scripts
 chmod +x *.sh 
-mv  *.sh *.rc *.php *.ini *.xml $RPM_BUILD_ROOT/%{prefix}/bin
+mv  *.sh *.rc *.php *.ini *.xml *.jpg $RPM_BUILD_ROOT/%{prefix}/bin
 cp %{SOURCE1} $RPM_BUILD_ROOT/%{prefix}/app/configurations
 cp %{SOURCE2} $RPM_BUILD_ROOT%{prefix}/app/configurations/consent_msgs
 cp %{SOURCE3} $RPM_BUILD_ROOT%{prefix}/app/deployment/sql_updates
@@ -81,6 +81,109 @@ fi
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Wed Jan 14 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.23-2
+- Modifications to support VOD packager.
+
+* Sun Jan 11 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.22-10
+- Direct STDERR to /dev/null when rpm -q.
+
+* Fri Jan 9 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.22-9
+- Added create and remove flavor tests.
+
+* Sun Jan 4 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.22-4
+- Support mariadb in kaltura-mysql-settings.sh
+- Remove resriction to MySQL 5.1 since it seems to work fine with it now
+
+* Fri Nov 28 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.22-1
+- Fix for https://github.com/kaltura/platform-install-packages/issues/234
+
+* Tue Nov 25 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.21-9
+- Init BEGINNERS_TUTORIAL_URL, QUICK_START_GUIDE_URL, FORUMS_URLS outside the interactive block as it applies to silent installs too.
+ 
+* Mon Nov 24 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.21-8
+- escape root's MySQL passwd with ".
+
+* Wed Nov 19 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.21-6
+- Until they merge: https://github.com/kaltura/server/pull/1880..
+
+* Tue Nov 18 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.21-5
+- Added call to sphinx-schema-upgrade.sh from kaltura-sphinx-config.sh.
+
+* Wed Nov 12 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.21-3
+- Added validation for timezone value.
+
+* Mon Nov 10 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.21-2
+- Added script to handle the event of Sphinx being added a column
+
+* Tue Nov 4 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.21-1
+- Installytics moved to MySQL so curl call for reporting changed some
+- Added subscribed_for_ce_updates to the report
+
+* Mon Nov 3 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.20-10
+- Try to use dmidecode to generate uniq machine ID, if it exists..
+
+* Thu Oct 30 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.20-9
+- Fixes for Analytics.
+
+* Mon Oct 27 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.20-8
+- Added reconversion of entry to sanity.
+
+* Sun Oct 26 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.20-6
+- Call for Marketo takes a few sec to complete - added a message.
+
+* Sun Oct 26 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.20-5
+- Prompt about Community newsletter
+
+* Fri Oct 24 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.20-4
+- Only run studio test if kaltura-html5lib is installed
+
+* Thu Oct 23 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.20-3
+- Redirect ls' STDERR to /dev/null when looking for java
+- Added test for studio's index.html to kaltura-sanity.sh
+
+* Sun Oct 19 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.20-2
+- Correct /dev/null redirection.
+
+* Thu Oct 9 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.19-4
+- Better distro detection for analytics.
+
+* Mon Oct 6 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.19-2
+- redirect ls STDERR to dev/null
+- fix analytics.
+
+* Sun Sep 21 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.19-1
+- We do not want to reload Apache during base because if this is a reconfig, there would already be a symlink under /etc/httpd/conf.d/ pointing to the kaltura apache config, base will replace the actual values with the template and so, Apache will not load.
+
+* Sun Aug 31 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.18-1
+- Fix for https://github.com/kaltura/platform-install-packages/issues/215.
+
+* Sun Aug 24 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.17-16
+- Replace new tokens in init_data.
+
+* Wed Aug 13 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.17-14
+- With storage creation script.
+
+* Mon Aug 11 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.17-10
+- With thumb testing..
+
+* Mon Aug 11 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.17-5
+- Added dropfolder creation test.
+
+* Sun Aug 10 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.17-4
+- Added tests to sanity:
+  - clipping
+  - trimming
+  - mail sending post partner creation
+
+* Tue Aug 5 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.17-1
+- Starting support of alt port for Apache and CDN.
+
+* Tue Jul 15 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.16-5
+- Fixes for making the install work when MySQL is on alt port.
+
+* Thu  Jul 10 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.16-4
+- ls on the KMC dir may fail because this is running on Sphinx which needs no web mount so redirect STDERR to /dev/null
+
 * Mon Jul 2 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.16-3
 - KMC SWF tests added.
 

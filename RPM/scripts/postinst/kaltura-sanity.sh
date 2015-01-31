@@ -108,9 +108,9 @@ if [ $? -eq 0 ];then
 		MSG=`check_kmc_config_versions $COMP_NAME $KMC_VER`
 		RC=$?
 		END=`date +%s.%N`
-		report "$COMP_NAME ver in KMC config.ini" $RC "$MSG" "`bc <<< $END-$START`"
+		report "$COMP_NAME ver in KDP3 config.ini" $RC "$MSG" "`bc <<< $END-$START`"
 	else
-		echo -e "[${CYAN}$COMP_NAME ver in KMC config.ini${NORMAL}][${BRIGHT_YELLOW}SKIPPED as KMC is not installed${NORMAL}]"
+		echo -e "[${CYAN}$COMP_NAME ver in KDP3 config.ini${NORMAL}][${BRIGHT_YELLOW}SKIPPED as $COMP_NAME is not installed${NORMAL}]"
 	fi
 	COMP_NAME=kaltura-kmc
         COMP_VER=`rpm -q $COMP_NAME --queryformat %{version}`
@@ -127,7 +127,7 @@ if [ $? -eq 0 ];then
 		report "Get KMC SWFs" $RC "$OUT" "`bc <<< $END-$START`"
 		
 	else
-		echo -e "[${CYAN}$COMP_NAME ver in KMC config.ini${NORMAL}][${BRIGHT_YELLOW}SKIPPED as KMC is not installed${NORMAL}]"
+		echo -e "[${CYAN}$COMP_NAME ver in KMC config.ini${NORMAL}][${BRIGHT_YELLOW}SKIPPED as $COMP_NAME is not installed${NORMAL}]"
 	fi
 fi
 
@@ -149,23 +149,59 @@ RC=$?
 END=`date +%s.%N`
 report "check_admin_console_index_page" $RC "$MSG" "`bc <<< $END-$START`"
 
-ADMIN_PARTNER_SECRET=`echo "select admin_secret from partner where id=-2" | mysql -N -h $DB1_HOST -p$DB1_PASS $DB1_NAME -u$DB1_USER`
+if rpm -q kaltura-html5lib >/dev/null 2>&1 ;then
+	START=`date +%s.%N`
+	MSG=`check_studio_index_page`
+	RC=$?
+	END=`date +%s.%N`
+	report "check_studio_index_page" $RC "$MSG" "`bc <<< $END-$START`"
+fi
+
+ADMIN_PARTNER_SECRET=`echo "select admin_secret from partner where id=-2" | mysql -N -h $DB1_HOST -p$DB1_PASS $DB1_NAME -u$DB1_USER  -P$DB1_PORT`
 NOW=`date +%d-%H-%m-%S`
 START=`date +%s.%N`
 if rpm -q kaltura-batch >/dev/null 2>&1 || rpm -q kaltura-front >/dev/null 2>&1 ;then
-	PARTNER_ID=`php $DIRNAME/create_partner.php $ADMIN_PARTNER_SECRET mb-$NOW@kaltura.com testingpasswd $SERVICE_URL 2>&1`
+	PARTNER_ID=`php $DIRNAME/create_partner.php $ADMIN_PARTNER_SECRET mb-$HOSTNAME@kaltura.com testingpasswd $SERVICE_URL 2>&1`
 	RC=$?
 	END=`date +%s.%N`
 	report "Create Partner" $RC "New PID is $PARTNER_ID" "`bc <<< $END-$START`"
 	if [ $RC -ne 0 ];then
 		echo -e "${BRIGHT_RED}Partner creation failed. I will skip all tests that require it.${NORMAL}"
 	else
-		PARTNER_SECRET=`echo "select secret from partner where id=$PARTNER_ID" | mysql -N -h $DB1_HOST -p$DB1_PASS $DB1_NAME -u$DB1_USER`
-		PARTNER_ADMIN_SECRET=`echo "select admin_secret from partner where id=$PARTNER_ID" | mysql -N -h $DB1_HOST -p$DB1_PASS $DB1_NAME -u$DB1_USER`
+		START=`date +%s.%N`
+		OUT=`php $DIRNAME/dropbox_test.php $SERVICE_URL $PARTNER_ID $ADMIN_PARTNER_SECRET /tmp/sanity-drop-$NOW-$HOSTNAME 2>&1`
+		RC=$?
+		END=`date +%s.%N`
+		if [ $RC -ne 0 ];then
+		
+			report "Local dropfolder creation failed" $RC "$OUT" "`bc <<< $END-$START`" 
+		else
+			report "Local dropfolder creation succeeded" $RC "$OUT" "`bc <<< $END-$START`" 
+		
+		fi
+		PARTNER_SECRET=`echo "select secret from partner where id=$PARTNER_ID" | mysql -N -h $DB1_HOST -p$DB1_PASS $DB1_NAME -u$DB1_USER -P$DB1_PORT`
+		 PARTNER_ADMIN_SECRET=`echo "select admin_secret from partner where id=$PARTNER_ID" | mysql -N -h $DB1_HOST -p$DB1_PASS $DB1_NAME -u$DB1_USER -P$DB1_PORT`
+		 ZERO_PARTNER_ADMIN_SECRET=`echo "select admin_secret from partner where id=0" | mysql -N -h $DB1_HOST -p$DB1_PASS $DB1_NAME -u$DB1_USER -P$DB1_PORT`
 		sed -i "s#@PARTNER_ID@#$PARTNER_ID#g" $BASE_DIR/bin/sanity_config.ini
 		sed -i "s#@PARTNER_ADMIN_SECRET@#$PARTNER_ADMIN_SECRET#g" $BASE_DIR/bin/sanity_config.ini
 		sed -i "s#@ADMIN_CONSOLE_PARTNER_ID@#-2#g" $BASE_DIR/bin/sanity_config.ini
 		sed -i "s#@ADMIN_CONSOLE_PARTNER_ADMIN_SECRET@#$ADMIN_PARTNER_SECRET#g" $BASE_DIR/bin/sanity_config.ini
+			START=`date +%s.%N`
+			FLAVOR_PARAM_ID=`php $DIRNAME/create_flavor_params.php $ZERO_PARTNER_ADMIN_SECRET $SERVICE_URL 2>&1`
+			#echo "$DIRNAME/create_flavor_params.php $ZERO_PARTNER_ADMIN_SECRET $SERVICE_URL 2>&1"
+			RC=$?
+			END=`date +%s.%N`
+			TOTAL_T=`bc <<< $TIME`
+			report "Create flavor param" $RC "$FLAVOR_PARAM_ID" "`bc <<< $END-$START`"
+			if [ "$RC" -eq 0 ];then
+				START=`date +%s.%N`
+				OUT=`php  $DIRNAME/delete_flavor_params.php $ZERO_PARTNER_ADMIN_SECRET $SERVICE_URL $FLAVOR_PARAM_ID 2>&1`
+				#echo  "$DIRNAME/delete_flavor_params.php $ZERO_PARTNER_ADMIN_SECRET $SERVICE_URL $FLAVOR_PARAM_ID 2>&1"
+				RC=$?
+				END=`date +%s.%N`
+				TOTAL_T=`bc <<< $TIME`
+				report "Delete flavor param" $RC "$FLAVOR_PARAM_ID" "`bc <<< $END-$START`"
+			fi
 			START=`date +%s.%N`
 			UPLOADED_ENT=`php $DIRNAME/upload_test.php $SERVICE_URL $PARTNER_ID $PARTNER_SECRET $WEB_DIR/content/templates/entry/data/kaltura_logo_animated_blue.flv 2>&1`
 			RC=$?
@@ -190,6 +226,40 @@ if rpm -q kaltura-batch >/dev/null 2>&1 || rpm -q kaltura-front >/dev/null 2>&1 
 			if [ "$CONVERT_SUCCESS" -eq 1 ];then
 				report "kaltura_logo_animated_blue.flv - $UPLOADED_ENT status" $RC "$UPLOADED_ENT converted" "`bc <<< $END-$START`"
 				START=`date +%s.%N`
+				OUT=` php $DIRNAME/create_thumbnail.php $SERVICE_URL $PARTNER_ID $PARTNER_ADMIN_SECRET $UPLOADED_ENT 1 2>&1`
+				curl -s $OUT > /tmp/$UPLOADED_ENT.jpg
+				compare -verbose -metric mae /tmp/$UPLOADED_ENT.jpg $DIRNAME/kaltura_logo_animated_blue_1_sec.jpg /tmp/$UPLOADED_ENT-diff.jpg  2>&1 | grep -q "all: 0 (0)" 
+				RC=$?
+				END=`date +%s.%N`
+				TOTAL_T=`bc <<< $END-$START`
+				if [ $RC -ne 0 ];then
+					report "Thumb for $UPLOADED_ENT does not match the signature of $DIRNAME/kaltura_logo_animated_blue_1_sec.jpg" $RC "$OUT" "$TOTAL_T"
+				else
+					report "Thumb for $UPLOADED_ENT identical to $DIRNAME/kaltura_logo_animated_blue_1_sec.jpg" $RC "$OUT" "$TOTAL_T"
+				fi	
+				START=`date +%s.%N`
+				OUT=`php $DIRNAME/clip_test.php $SERVICE_URL $PARTNER_ID $PARTNER_SECRET  $UPLOADED_ENT 0`
+				RC=$?
+				END=`date +%s.%N`
+				TOTAL_T=`bc <<< $END-$START`
+				if [ $RC -eq 0 ];then
+					report "Clipping $UPLOADED_ENT Succeeded" $RC "$OUT" "$TOTAL_T"
+				else
+					report "Clipping $UPLOADED_ENT failed" $RC "$OUT" "$TOTAL_T"
+				fi	
+
+				START=`date +%s.%N`
+				OUT=`php $DIRNAME/clip_test.php $SERVICE_URL $PARTNER_ID $PARTNER_SECRET  $UPLOADED_ENT 1`
+				RC=$?
+				END=`date +%s.%N`
+				TOTAL_T=`bc <<< $END-$START`
+				if [ $RC -eq 0 ];then
+					report "Trimming $UPLOADED_ENT Succeeded" $RC "$OUT" "$TOTAL_T"
+				else
+					report "Trimming $UPLOADED_ENT failed" $RC "$OUT" "$TOTAL_T"
+				fi	
+				
+				START=`date +%s.%N`
 				OUT=`php $DIRNAME/play.php --service-url=$SERVICE_URL --entry-id=$UPLOADED_ENT  --partner=$PARTNER_ID --secret=$PARTNER_SECRET|sed "s@\"@@g"`
 				RC=$?
 				END=`date +%s.%N`
@@ -200,8 +270,52 @@ if rpm -q kaltura-batch >/dev/null 2>&1 || rpm -q kaltura-front >/dev/null 2>&1 
 					report "Mock playback $UPLOADED_ENT succeeded" $RC "$OUT" "$TOTAL_T"
 				fi	
 				
+				START=`date +%s.%N`
+				OUT=`php $DIRNAME/recon.php $SERVICE_URL $PARTNER_ID $PARTNER_ADMIN_SECRET $UPLOADED_ENT`
+				RC=$?
+				if [ $RC -eq 0 ];then
+					CONVERT_SUCCESS=0
+					for i in `seq 1 9`;do
+						php $DIRNAME/check_entry_status.php $SERVICE_URL $PARTNER_ID $PARTNER_SECRET $UPLOADED_ENT
+						# for us, status 2 is good
+						if [ $? -eq 2 ];then
+							RC=0
+							END=`date +%s.%N`
+							TOTAL_T=`bc <<< $TIME`
+							CONVERT_SUCCESS=1
+							break;
+						fi
+						echo -e "${CYAN}Napping 10 seconds to allow entry $UPLOADED_ENT to digest.. ${NORMAL}"
+						sleep 10
+					done
+					END=`date +%s.%N`
+					TOTAL_T=`bc <<< $END-$START`
+					if [ "$CONVERT_SUCCESS" -eq 1 ];then
+						report "Entry reconversion of $UPLOADED_ENT succeeded" $RC "$OUT" "$TOTAL_T"
+					else
+						report "Entry reconversion of $UPLOADED_ENT failed" $RC "$OUT" "$TOTAL_T"
+					fi	
+				else
+					END=`date +%s.%N`
+					TOTAL_T=`bc <<< $END-$START`
+					report "Calling media->convert on $UPLOADED_ENT failed" $RC "$OUT" "$TOTAL_T"
+					
+				fi
 			else
 				report "kaltura_logo_animated_blue.flv - $UPLOADED_ENT status" 1 "$UPLOADED_ENT failed to convert." "`bc <<< $END-$START`"
+			fi
+			START=`date +%s.%N`
+			echo "Testing mail sending" |mail -s "Kaltura sanity test email" mb-$HOSTNAME@kaltura.com
+			echo -e "${CYAN}Napping 30 seconds to allow mail to be sent out.. ${NORMAL}"
+			sleep 30
+			MSG=`grep mb-$HOSTNAME@kaltura.com /var/log/maillog `
+			RC=$?
+			END=`date +%s.%N`
+			if [ $RC -ne 0 ];then
+				report "Could not find an email sending entry for mb-$HOSTNAME@kaltura.com [PID is $PARTNER_ID] in /var/log/maillog" $RC "" "`bc <<< $END-$START`"
+			else
+				report "Found an email sending entry for mb-$HOSTNAME@kaltura.com[PID is $PARTNER_ID] in /var/log/maillog" $RC "$MSG" "`bc <<< $END-$START`"
+
 			fi
 
 			if rpm -q kaltura-dwh >> /dev/null 2>&1;then
@@ -275,7 +389,7 @@ ${NORMAL}"
 			OUTP=`echo $CLEANOUTPUT|sed "s@'@@g"`
 			END=`date +%s.%N`
 			TOTAL_T=`bc <<< $TIME`
-			report "Delete parnter" $RC "$OUTP" "`bc <<< $END-$START`"
+			report "Delete partner" $RC "$OUTP" "`bc <<< $END-$START`"
 	fi
 sed -i "1,/^adminConsolePartnerId/s/^adminConsolePartnerId\s*=.*/adminConsolePartnerId=@ADMIN_CONSOLE_PARTNER_ID@/" $DIRNAME/sanity_config.ini
 sed -i "1,/^adminConsoleSecret/s/^adminConsoleSecret\s*=.*/adminConsoleSecret=@ADMIN_CONSOLE_PARTNER_ADMIN_SECRET@/" $DIRNAME/sanity_config.ini

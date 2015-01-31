@@ -9,6 +9,10 @@ The Open Source Kaltura Platform is provided under the [AGPLv3 license](http://w
 
 [Kaltura Inc.](http://corp.kaltura.com) also provides commercial solutions and services including pro-active platform monitoring, applications, SLA, 24/7 support and professional services. If you're looking for a commercially supported video platform  with integrations to commercial encoders, streaming servers, eCDN, DRM and more - Start a [Free Trial of the Kaltura.com Hosted Platform](http://corp.kaltura.com/free-trial) or learn more about [Kaltura' Commercial OnPrem Edition™](http://corp.kaltura.com/Deployment-Options/Kaltura-On-Prem-Edition). For existing RPM based users, Kaltura offers commercial upgrade options.
 
+### How to contribute
+We value contributions from our CE user base very much. To make a contribution, follow the [See our CONTRIBUTERS doc](https://github.com/kaltura/platform-install-packages/blob/IX-9.19.0/doc/CONTRIBUTERS.md).
+
+
 ### Changing Apache configurations post install.
 
 Sometimes, you may want to change deployment settings post installation, for example: replacing the domain, port or protocol, or changing the system to use SSL or stop using SSL.   
@@ -39,40 +43,6 @@ On occasions where you'd like to drop the database and content and re-install Ka
 
 ### Troubleshooting Help
 
-#### No playback on iOS
-This is a known issue resolved in 9.13.0.
-However, if your DB was created earlier, the solution is this:
-
-
-Dump the flavor_asset table as bck with:
-```bash
-mysqldump -uroot -p flavor_asset > /tmp/flavor_asset.sql
-mysql> update flavor_params set tags='mobile,web,mbr,iphone' where id in (2,3);
-mysql> update flavor_params set tags='mobile,web,mbr,ipad' where id in (5,6);
-mysql> update flavor_params set tags='mbr' where id in (35,34);
-mysql> update flavor_asset set tags='mobile,web,mbr,ipad' where tags='mobile,web,mbr,ipad,ipadnew';
-mysql> update flavor_asset set tags='mobile,web,mbr,iphone' where tags='mobile,web,mbr,iphone,iphonenew';
-```
-Entries should now play on iOS.
-If something went wrong, restore the original data using:
-```bash
-mysql -uroot -p < /tmp/flavor_asset.sql
-```
-#### Creating Distribution profile
-We will get the error "The usage of feature [contentDistribution] is forbidden" while creating the distributing profile, unless the feature is enabled in Publicher's configuration settings. Please follow the below steps to enable it and to create a distribution profile.
-
-1. Login to Kaltura Admin Console.
-2. In Publishers tab, click on 'Actions' dropdown for a perticular publisher anf select 'Configure' option.
-3. Publisher Specific Configuration window will be opened and in 'Enable/Disable Features' section, check the box for 'Content Distribution Module'.
-4. Click on 'Save'.
-5. Click on 'Profiles' dropdown in Publishers tab, for a perticular publisher and select 'Distribution Profiles'.
-6. Select 'Provider' as YoutubeApi or Tvinci or Generic as per the provider and click on 'Create New'.
-7. Fill the required information in 'Profile Setup Configuration' window. Eg. for YoutubeApi, provide Youtube user name, password and click on save. Now Distribution Profile is created.
-8. Login to KMC and go to the 'Content' tab.
-9. Select the 'View Details' option for the desired Vidoe and click on the 'Distribution' option in left side menu.
-10. Select the required Distributor.
-11. Click on 'Save and Close'
-12. We can track the initiated Distribution jobs, in the 'Batch Process Control' tab in Admin Console.
 
 #### General troubleshoot procedure
 
@@ -89,4 +59,12 @@ You can also use: `# allkaltlog` (using root), which will dump all the error lin
 This output can be used to analyze past failures but for active debugging use the kaltlog alias.   
 
 
+#### Cannot login to Admin Console
+To manually reset the passwd, following this procedure:
+mysql> select * from user_login_data where login_email='you@mail.com'\G
 
+Then, update sha1_password and salt to read:
+      sha1_password: 44e8c1db328d6d2f64de30a8285fb2a1c9337edb
+               salt: a6a3209b8827759fa4286d87a33f99df
+
+This should reset your passwd to 'admin123!'

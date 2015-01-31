@@ -44,8 +44,8 @@ if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
 	exit 3
 fi
 . $KALTURA_FUNCTIONS_RC
-trap 'my_trap_handler ${LINENO} ${$?}' ERR
-send_install_becon `basename $0` $ZONE install_start 
+trap 'my_trap_handler "${LINENO}" ${$?}' ERR
+send_install_becon `basename $0` $ZONE install_start 0 
 
 MYSQL_HOST=$1
 MYSQL_SUPER_USER=$2
@@ -66,7 +66,7 @@ MYVER=`echo "select version();" | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYS
 MYMAJVER=`echo $MYVER| awk -F "." '{print $1}'`
 MYMINORVER=`echo $MYVER| awk -F "." '{print $2}'`
 
-if [ "$MYMAJVER" -ne 5 -o "$MYMINORVER" -ne 1 ];then
+if [ "$MYMAJVER" -ne 5 ];then
 	echo -e "${BRIGHT_RED}Your version of MySQL is not compatible with Kaltura at the moment. 
 Please install and configure MySQL 5.1 according to the instructions on the Kaltura install manual before proceeding with the Kaltura installation.${NORMAL}"
 	exit 1
@@ -83,7 +83,18 @@ EOF
 	exit 4
 fi
 if ! check_mysql_settings $MYSQL_SUPER_USER $MYSQL_SUPER_USER_PASSWD $MYSQL_HOST $MYSQL_PORT ;then
-	exit 7
+	if [ $MYSQL_HOST = 'localhost' -o $MYSQL_HOST = '127.0.0.1' ];then
+		echo "Your MySQL settings are incorrect, do you wish to run $BASE_DIR/bin/kaltura-mysql-settings.sh in order to correct them? [Y/n]"
+		read ANS
+		if [ "$ANS" = "Y" ];then
+			$BASE_DIR/bin/kaltura-mysql-settings.sh
+		else
+			echo "Please adjust your settings manually and re-run." 
+			exit 8
+		fi
+	else
+		exit 7
+	fi
 fi
 trap - ERR
 if [ -z "$POPULATE_ONLY" ];then
@@ -106,16 +117,18 @@ EOF
 			exit 5
 		fi
 	fi 
-trap 'my_trap_handler ${LINENO} ${$?}' ERR
+trap 'my_trap_handler "${LINENO}" ${$?}' ERR
 
 	# this is the DB creation part, we want to exit if something fails here:
 	set -e
 
 	# create users:
-	for DB_USER in $DB_USERS;do
-		echo "CREATE USER ${DB_USER};"
-		echo "CREATE USER ${DB_USER} IDENTIFIED BY '$DB1_PASS' ;"  | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT
-	done
+	#for DB_USER in $DB_USERS;do
+		echo "CREATE USER kaltura;"
+		echo "CREATE USER kaltura IDENTIFIED BY '$DB1_PASS' ;"  | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT
+		echo "CREATE USER etl;"
+		echo "CREATE USER etl IDENTIFIED BY '$DWH_PASS' ;"  | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT
+	#done
 	# create the DBs:
 	for DB in $DBS;do 
 		echo "CREATE DATABASE $DB;"
@@ -139,6 +152,15 @@ set +e
 echo "Checking connectivity to needed daemons..."
 if ! check_connectivity $DB1_USER $DB1_PASS $DB1_HOST $DB1_PORT $SPHINX_HOST $SERVICE_URL;then
 	echo -e "${BRIGHT_RED}Please check your setup and then run $0 again.${NORMAL}"
+cat << EOF
+
+Do you wish to remove the existing DB or keep for debugging puropses [n/Y]?
+
+EOF
+	read REMOVE
+	if [ $REMOVE = "Y" ];then
+		`dirname $0`/kaltura-drop-db.sh
+	fi
 	exit 6
 fi
 
@@ -167,7 +189,7 @@ if [ -n "$IS_SSL" ];then
 	php $APP_DIR/deployment/base/scripts/insertPermissions.php -d $APP_DIR/deployment/permissions/ssl/ > /dev/null 2>&1
 fi
 
-KMC_VERSION=`grep "^kmc_version" /opt/kaltura/app/configurations/base.ini|awk -F "=" '{print $2}'|sed 's@\s*@@g'`
+KMC_VERSION=`grep "^kmc_version" /opt/kaltura/app/configurations/local.ini|awk -F "=" '{print $2}'|sed 's@\s*@@g'`
 echo -e "${BRIGHT_BLUE}Generating UI confs..${NORMAL}"
 php $APP_DIR/deployment/uiconf/deploy_v2.php --ini=$WEB_DIR/flash/kmc/$KMC_VERSION/config.ini >> $LOG_DIR/deploy_v2.log  2>&1
 for i in $APP_DIR/deployment/updates/scripts/patches/*.sh;do
@@ -186,4 +208,4 @@ if [ "$DB1_HOST" = `hostname` -o "$DB1_HOST" = '127.0.0.1' -o "$DB1_HOST" = 'loc
 	/etc/init.d/kaltura-monit stop >> /dev/null 2>&1
 	/etc/init.d/kaltura-monit restart
 fi
-send_install_becon `basename $0` $ZONE install_success 
+send_install_becon `basename $0` $ZONE install_success 0 

@@ -33,7 +33,7 @@ enable_admin_conf()
 create_answer_file()
 {
 	ANSFILE="$1"
-        for VAL in CONFIG_CHOICE IS_SSL CRT_FILE KEY_FILE CHAIN_FILE; do
+        for VAL in CONFIG_CHOICE IS_SSL CRT_FILE KEY_FILE CHAIN_FILE CA_FILE; do
                 if [ -n "${!VAL}" ];then
 			sed "/^$VAL=.*/d" -i $ANSFILE
 			echo "$VAL=\"${!VAL}\"" >> $ANSFILE 
@@ -87,10 +87,11 @@ if ! rpm -q kaltura-front;then
 	echo -e "${BRIGHT_BLUE}Skipping as kaltura-front is not installed.${NORMAL}"
 	exit 0 
 fi
-trap 'my_trap_handler ${LINENO} ${$?}' ERR
-send_install_becon `basename $0` $ZONE install_start 
+trap 'my_trap_handler "${LINENO}" ${$?}' ERR
+send_install_becon `basename $0` $ZONE install_start 0 
 KALTURA_APACHE_CONF=$APP_DIR/configurations/apache
 KALTURA_APACHE_CONFD=$KALTURA_APACHE_CONF/conf.d
+#unset IS_SSL
 if [ -z "$IS_SSL" ];then
 #unset IS_SSL
 cat << EOF 
@@ -107,7 +108,7 @@ echo "use kaltura" | mysql -h$DB1_HOST -u$DB1_USER -p$DB1_PASS -P$DB1_PORT $DB1_
 if [ $? -eq 0 ];then
 	echo "update permission set STATUS=3 WHERE permission.NAME='FEATURE_KMC_ENFORCE_HTTPS' ;" | mysql $DB1_NAME -h$DB1_HOST -u$DB1_USER -P$DB1_PORT -p$DB1_PASS 2> /dev/null 
 fi
-trap 'my_trap_handler ${LINENO} ${$?}' ERR
+trap 'my_trap_handler "${LINENO}" ${$?}' ERR
 
 	if [ -z "$AUTO_YES" ];then
 		echo -e "${YELLOW}It is recommended that you do work using HTTPs. Would you like to continue anyway?[N/y]${NORMAL}"
@@ -142,6 +143,10 @@ else
 		echo -e "${CYAN}Please input path to your SSL chain file or leave empty in case you have none${CYAN}:${NORMAL}"
 		read -e CHAIN_FILE
 	fi
+	#if [ -z "$CA_FILE" ];then
+	#	echo -e "${CYAN}Please input path to your SSL CA file or leave empty in case you have none${CYAN}:${NORMAL}"
+	#	read -e CA_FILE
+	#fi
 	# check key and crt match
 	CRT_SUM=`openssl x509 -in $CRT_FILE -modulus -noout | openssl md5`
 	KEY_SUM=`openssl rsa -in $KEY_FILE -modulus -noout | openssl md5`
@@ -170,20 +175,28 @@ WARNING: self signed cerificate detected. Will set settings.clientConfig.verifyS
 		echo -e "settings.clientConfig.verifySSL=0" >> $APP_DIR/configurations/admin.ini
 		sed -i  's@\(\[production\]\)@\1\nsettings.clientConfig.verifySSL=0@' $APP_DIR/configurations/admin.ini
 	fi
-	if [ -f /etc/httpd/conf.d/ssl.conf ];then
-		echo "Moving /etc/httpd/conf.d/ssl.conf to /etc/httpd/conf.d/ssl.conf.ks.bak."
-		mv /etc/httpd/conf.d/ssl.conf /etc/httpd/conf.d/ssl.conf.ks.bak
-	fi
-	sed "s#@SSL_CERTIFICATE_FILE@#$CRT_FILE#g" $MAIN_APACHE_CONF.template > $MAIN_APACHE_CONF
+	#if [ -f /etc/httpd/conf.d/ssl.conf ];then
+	#	echo "Moving /etc/httpd/conf.d/ssl.conf to /etc/httpd/conf.d/ssl.conf.ks.bak."
+	#	mv /etc/httpd/conf.d/ssl.conf /etc/httpd/conf.d/ssl.conf.ks.bak
+	#fi
+	sed "s#@SSL_CERTIFICATE_FILE@#$CRT_FILE#g" -i $MAIN_APACHE_CONF
 	sed -i "s#@SSL_CERTIFICATE_KEY_FILE@#$KEY_FILE#g" $MAIN_APACHE_CONF
 	if [ -r "$CHAIN_FILE" ];then
-		sed -i "s^#SSLCertificateChainFile @SSL_CERTIFICATE_CHAIN_FILE@^SSLCertificateChainFile $CHAIN_FILE^" $MAIN_APACHE_CONF
+		sed -i "s^SSLCertificateChainFile @SSL_CERTIFICATE_CHAIN_FILE@^SSLCertificateChainFile $CHAIN_FILE^" $MAIN_APACHE_CONF
 	else
 		CHAIN_FILE="NO_CHAIN"
+		sed -i "s^SSLCertificateChainFile @SSL_CERTIFICATE_CHAIN_FILE@^#SSLCertificateChainFile @SSL_CERTIFICATE_CHAIN_FILE@^" $MAIN_APACHE_CONF
+	fi
+	if [ -r "$CA_FILE" ];then
+		sed -i "s^SSLCACertificateFile @SSL_CERTIFICATE_CA_FILE@^SSLCACertificateFile $CA_FILE^" $MAIN_APACHE_CONF
+	else
+		CA_FILE="NO_CA"
+		sed -i "s^SSLCACertificateFile @SSL_CERTIFICATE_CA_FILE@^#SSLCACertificateFile @SSL_CERTIFICATE_CA_FILE@^" $MAIN_APACHE_CONF
 	fi
 	echo "IS_SSL=y" >> $RC_FILE 
 	echo "CRT_FILE=$CRT_FILE" >> $RC_FILE
         echo "KEY_FILE=$KEY_FILE" >> $RC_FILE
+        echo "CA_FILE=$CA_FILE" >> $RC_FILE
         echo "CHAIN_FILE=$CHAIN_FILE" >> $RC_FILE
 
 fi
@@ -193,9 +206,9 @@ if [ "$IS_SSL" = 'Y' -o "$IS_SSL" = 1 -o "$IS_SSL" = 'y' -o "$IS_SSL" = 'true' ]
 	trap - ERR
 	echo "use kaltura" | mysql -h$DB1_HOST -u$DB1_USER -p$DB1_PASS -P$DB1_PORT $DB1_NAME 2> /dev/null
 	if [ $? -eq 0 ];then
-		echo "update permission set STATUS=2 WHERE permission.PARTNER_ID IN ('0') AND permission.NAME='FEATURE_KMC_ENFORCE_HTTPS' ORDER BY permission.STATUS ASC LIMIT 1;" | mysql $DB1_NAME -h$DB1_HOST -u$DB1_USER -P$DB1_PORT -p$DB1_PASS 
+		echo "update permission set STATUS=1 WHERE permission.PARTNER_ID IN ('0') AND permission.NAME='FEATURE_KMC_ENFORCE_HTTPS' ORDER BY permission.STATUS ASC LIMIT 1;" | mysql $DB1_NAME -h$DB1_HOST -u$DB1_USER -P$DB1_PORT -p$DB1_PASS 
 	fi
-	trap 'my_trap_handler ${LINENO} ${$?}' ERR
+	trap 'my_trap_handler "${LINENO}" ${$?}' ERR
 else
 	DEFAULT_PORT=80
 fi
@@ -285,18 +298,18 @@ ln -sf $BASE_DIR/app/configurations/monit/monit.avail/memcached.rc $BASE_DIR/app
 	if [ $? -eq 0 ];then
 		if [ -r $BASE_DIR/apps/studio/`rpm -qa kaltura-html5-studio --queryformat %{version}`/studio.ini ];then
 			php $BASE_DIR/app/deployment/uiconf/deploy_v2.php --ini=$BASE_DIR/apps/studio/`rpm -qa kaltura-html5-studio --queryformat %{version}`/studio.ini >> /dev/null
-			sed -i "s@^\(studio_version\s*=\)\(.*\)@\1 `rpm -qa kaltura-html5-studio --queryformat %{version}`@g" -i $BASE_DIR/app/configurations/base.ini
+			sed -i "s@^\(studio_version\s*=\)\(.*\)@\1 `rpm -qa kaltura-html5-studio --queryformat %{version}`@g" -i $BASE_DIR/app/configurations/local.ini
 		fi
 	# we can't use rpm -q kaltura-kmc because this node may not be the one where we installed the KMC RPM on, as it resides in the web dir and does not need to be installed on all front nodes.
-		KMC_PATH=`ls -ld $BASE_DIR/web/flash/kmc/v*|awk -F " " '{print $NF}' |tail -1`
+		KMC_PATH=`ls -ld $BASE_DIR/web/flash/kmc/v* 2>/dev/null|awk -F " " '{print $NF}' |tail -1`
 #sed -i "s#\(@KMC_VERSION@\)\s*=.*#\1=%{_kmc_version}#g" $RPM_BUILD_ROOT%{prefix}/bin/sanity_config.template.ini
 #sed -i "s#\(@KMC_LOGIN_VERSION@\)\s*=.*#\1=%{kmc_login_version}#g" $RPM_BUILD_ROOT%{prefix}/bin/sanity_config.template.ini
 		#ln -sf $KMC_PATH/uiconf/kaltura/kmc  $BASE_DIR/web/content/uiconf/kaltura
 		php $BASE_DIR/app/deployment/uiconf/deploy_v2.php --ini=$KMC_PATH/config.ini >> /dev/null
-		HTML5_PATH=`ls -ld $BASE_DIR/web/html5/html5lib/v*|awk -F " " '{print $NF}' |tail -1`
-		sed -i "s@^\(html5_version\s*=\)\(.*\)@\1 `rpm -qa kaltura-html5lib --queryformat %{version}`@g" -i $BASE_DIR/app/configurations/base.ini
+		HTML5_PATH=`ls -ld $BASE_DIR/web/html5/html5lib/v* 2>/dev/null|awk -F " " '{print $NF}' |tail -1`
+		sed -i "s@^\(html5_version\s*=\)\(.*\)@\1 `rpm -qa kaltura-html5lib --queryformat %{version}`@g" -i $BASE_DIR/app/configurations/local.ini
 		# https://github.com/kaltura/mwEmbed/issues/574
 		# find $BASE_DIR/web/html5/html5lib/ -type f -exec sed -i "s@http://cdnapi.kaltura.com@$SERVICE_URL@g" {} \;
 	fi
-	trap 'my_trap_handler ${LINENO} ${$?}' ERR
-send_install_becon `basename $0` $ZONE install_success 
+	trap 'my_trap_handler "${LINENO}" ${$?}' ERR
+send_install_becon `basename $0` $ZONE install_success 0 

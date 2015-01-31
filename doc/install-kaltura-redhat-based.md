@@ -30,7 +30,7 @@ This guide describes RPM installation of an all-in-one Kaltura server and applie
 
 #### Firewall requirements
 Kaltura requires certain ports to be open for proper operation. [See the list of required open ports](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura-required-ports.md).
-If you're just testing and don't mind an open system, you can use the below to disable iptables altogether:
+If you're just testing and don't mind an open system, you can use the below to disbale iptables altogether:
 ```bash
 iptables -F
 service iptables stop
@@ -58,14 +58,39 @@ This section is a step-by-step guide of a Kaltura installation without SSL.
 rpm -ihv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
 ```
 
+## Note on RHEL/CentOS 7 
+If you are using RHEL/CentOS 7, edit /etc/yum.repos.d/kaltura.repo and change:
+```
+baseurl = http://installrepo.kaltura.org/releases/latest/RPMS/$basearch/
+```
+to read:
+```
+baseurl = http://installrepo.kaltura.org/releases/rhel7/RPMS/$basearch/
+```
+
+Also note that version 7 no longer has MySQL server and instead includes MariaDB in its official repos.
+
+RHEL/CentOS 7 is currently in beta stages, bug reports are most welcomed.
+
 #### MySQL Install and Configuration
 Please note that currently, only MySQL 5.1 is supported, we recommend using the official package supplied by the RHEL/CentOS repos which is currently 5.1.73.
 
+For RHEL/CentOS 7 which is currently in the beta stage, MariaDB version 5.5.40 is supported. 
+
+RHEL/CentOS 6 setup:
 ```bash
 yum install mysql mysql-server
 service mysqld start
 mysql_secure_installation
 chkconfig mysqld on
+```
+
+RHEL/CentOS 7 setup:
+```bash
+yum install mariadb-server
+service mariadb start
+mysql_secure_installation
+chkconfig mariadb on
 ```
 
 **Make sure to answer YES for all steps in the `mysql_secure_install` install, and follow through all the mysql install questions before continuing further.
@@ -119,7 +144,7 @@ The below is a sample question answer format, replace the input marked by <> wit
 [Email\NO]: "<your email address>"
 CDN hostname [kalrpm.lcl]: "<your hostname>"
 Apache virtual hostname [kalrpm.lcl]: "<your hostname>"
-Which port will this Vhost listen on [80]?: "<80>"
+Which port will this Vhost listen on [80]?:
 
 DB hostname [127.0.0.1]: "<127.0.0.1>"
 DB port [3306]: "<3306>"
@@ -129,9 +154,13 @@ Analytics DB hostname [127.0.0.1]: "<127.0.0.1>"
 Analytics DB port [3306]: "<3306>"
 Sphinx hostname [127.0.0.1]: "<127.0.0.1>"
 
-Media Streaming Server host [kalrpm.lcl]: "<your hostname>"
 Secondary Sphinx hostname: [leave empty if none] "<empty>"
-Service URL [http://kalrpm.lcl:80]: "<http://your hostname:80>"
+
+VOD packager hostname [kalrpm.lcl]: "<http://kaltura-nginx-hostname>"
+
+VOD packager port to listen on [88]: 
+
+Service URL [http://kalrpm.lcl:80]: "<http://apache-hostname:80>"
 
 Kaltura Admin user (email address): "<your email address>"
 Admin user login password (must be minimum 8 chars and include at least one of each: upper-case, lower-case, number and a special character): "<your kaltura admin password>"
@@ -151,7 +180,6 @@ Please select one of the following options [0]: "<0>"
 Your install will now automatically perform all install tasks.
 
 #### Configure Red5 server
-1. Restart red5 `service red5 restart`
 1. Request http://hostname:5080
 1. Click 'Install a ready-made application'
 1. Mark 'OFLA Demo' and click 'Install'
@@ -162,6 +190,8 @@ Your install will now automatically perform all install tasks.
 ```bash
 /opt/kaltura/bin/kaltura-red5-config.sh
 ```
+
+
 
 **Your Kaltura installation is now complete.**
 
@@ -207,11 +237,22 @@ rpm -ihv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
 #### MySQL Install and Configuration
 Please note that currently, only MySQL 5.1 is supported, we recommend using the official package supplied by the RHEL/CentOS repos which is currently 5.1.73.
 
+For RHEL/CentOS 7 which is currently in the beta stage, MariaDB version 5.5.40 is supported. 
+
+RHEL/CentOS 6 setup:
 ```bash
 yum install mysql mysql-server
 service mysqld start
 mysql_secure_installation
 chkconfig mysqld on
+```
+
+RHEL/CentOS 7 setup:
+```bash
+yum install mariadb-server
+service mariadb start
+mysql_secure_installation
+chkconfig mariadb on
 ```
 
 **Make sure to answer YES for all steps in the `mysql_secure_install` install, and follow through all the mysql install questions before continuing further.
@@ -264,7 +305,7 @@ The below is a sample question answer format, replace the input marked by <> wit
 [Email\NO]: "<your email address>"
 CDN hostname [kalrpm.lcl]: "<your hostname>"
 Apache virtual hostname [kalrpm.lcl]: "<your hostname>"
-Which port will this Vhost listen on [80]?: "<80>"
+Which port will this Vhost listen on [80]?: "<443>"
 
 DB hostname [127.0.0.1]: "<127.0.0.1>"
 DB port [3306]: "<3306>"
@@ -274,9 +315,13 @@ Analytics DB hostname [127.0.0.1]: "<127.0.0.1>"
 Analytics DB port [3306]: "<3306>"
 Sphinx hostname [127.0.0.1]: "<127.0.0.1>"
 
-Media Streaming Server host [kalrpm.lcl]: "<your hostname>"
 Secondary Sphinx hostname: [leave empty if none] "<empty>"
-Service URL [http://kalrpm.lcl:80]: "<http://your hostname:80>"
+
+VOD packager hostname [kalrpm.lcl]: "<http://kaltura-nginx-hostname>"
+
+VOD packager port to listen on [88]: 
+
+Service URL [http://kalrpm.lcl:443]: "<http://your-hostname:443>"
 
 Kaltura Admin user (email address): "<your email address>"
 Admin user login password (must be minimum 8 chars and include at least one of each: upper-case, lower-case, number and a special character): "<your kaltura admin password>"
@@ -308,6 +353,11 @@ Your install will now automatically perform all install tasks.
 ```bash
 /opt/kaltura/bin/kaltura-red5-config.sh
 ```
+
+## Note about using Wowza as media server
+you can use Wowza as media server instead of Red5. For webcam recording using Wowza, please follow:
+https://github.com/kaltura/media-server/blob/3.0.9/Installation.md#for-webcam-recording-servers
+And then run /opt/kaltura/bin/kaltura-red5-config.sh providing the Wowza IP/hostname.
 
 ### SSL Certificate Configuration
 
@@ -344,6 +394,13 @@ Once the upgrade completes, please run:
 /opt/kaltura/bin/kaltura-db-update.sh
 /opt/kaltura/bin/kaltura-config-all.sh
 ```
+
+In the event you would like to see what changes the package includes before deciding whether or not you wish to upgrade, run:
+```bash
+yum install yum-plugin-changelog
+yum changelog all kaltura-package-name-here
+```
+
 To upgrade your DB schema.
 
 ## Remove Kaltura
@@ -381,6 +438,8 @@ Or output all logged information to a file for analysis:
 allkaltlog > /path/to/mylogfile.log
 ```
 
+For posting questions, please go to:
+(http://forum.kaltura.org)
 
 ## Additional Information
 * Please review the [frequently answered questions](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura-packages-faq.md) document for general help before posting to the forums or issue queue.

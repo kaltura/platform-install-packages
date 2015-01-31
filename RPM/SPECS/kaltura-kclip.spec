@@ -2,7 +2,7 @@
 Name:	kaltura-kclip	
 Version: v1.1.2.1 
 Release: 3 
-Summary: Kaltura Video Presentations Manager
+Summary: Kaltura Video Clipper
 License: AGPLv3+	
 URL: http://kaltura.org
 Source0: %{name}.tar.bz2
@@ -23,7 +23,7 @@ teachers by providing educational institutions disruptive online video solutions
 learning, and increased engagement across campuses and beyond. 
 For more information visit: http://corp.kaltura.com, http://www.kaltura.org and http://www.html5video.org.
 
-This package installs the Kaltura Video Presentations Manager.
+This package installs the Kaltura Video Clipper.
 
 %prep
 %setup -qn %{name} 

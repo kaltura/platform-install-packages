@@ -1,0 +1,41 @@
+#!/usr/bin/make -f
+DEB_VERSION := $(shell dpkg-parsechangelog | egrep '^Version:' | cut -f 2 -d ' ')
+RC_FILE :=../../build/sources.rc
+PENTAHO_VERSION ?= $(shell egrep '^PENTAHO_VERSION=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
+SOURCE_PACKAGING_DIR ?= $(shell egrep '^SOURCE_PACKAGING_DIR=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
+KALTURA_PREFIX ?= $(shell egrep '^KALTURA_PREFIX=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
+PENTAHO_PREFIX ?= $(KALTURA_PREFIX)/pentaho/pdi
+include ../includes/build-revision.mk
+archive := $(SOURCE_PACKAGING_DIR)/pdi-ce-$(PENTAHO_VERSION)-stable.tar.gz
+tree := data-integration
+
+clean:
+	dh_clean
+	rm -rf $(tree) 
+	rm -rf debian/tmp
+	rm -rf $(PENTAHO_PREFIX)
+
+$(archive):
+	~/sources/platform-install-packages/build/package_pentaho_source.sh	
+
+$(tree): $(archive)
+	tar zxf $(archive)
+
+build: $(tree)
+
+install: build
+
+binary-indep: install
+	dh_installdirs
+	mkdir -p $(PENTAHO_PREFIX)
+	mv $(tree)/* $(PENTAHO_PREFIX)/
+	dh_install $(KALTURA_PREFIX)
+	dh_gencontrol -u-v$(DEB_VERSION) 
+	dh_installdebconf
+	#dh_makeshlibs
+	dh_installdeb
+	#dh_shlibdeps
+	dh_builddeb 
+
+binary: binary-indep
+.PHONY: clean build binary-indep binary-arch binary

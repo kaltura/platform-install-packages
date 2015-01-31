@@ -6,7 +6,7 @@
 %define apache_group	apache
 Summary: Kaltura Open Source Video Platform - batch server 
 Name: kaltura-batch
-Version: 9.18.0
+Version: 10.3.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -16,7 +16,7 @@ Source1: kaltura-batch
 Source3: batch.ini.template 
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires: kaltura-base, kaltura-ffmpeg, kaltura-ffmpeg-aux, php, curl, httpd, sox, ImageMagick, kaltura-sshpass, php-pecl-memcached,  php-pecl-ssh2,php-mcrypt,php-pecl-memcached,mediainfo, kaltura-segmenter, mod_ssl,kaltura-mencoder
+Requires: kaltura-base, kaltura-ffmpeg, kaltura-ffmpeg-aux, php, curl, httpd, sox, ImageMagick, kaltura-sshpass, php-pecl-memcached,  php-pecl-ssh2,php-mcrypt,memcached,mediainfo, kaltura-segmenter, mod_ssl,kaltura-mencoder
 #PreReq: httpd
 Requires(post): chkconfig
 Requires(preun): chkconfig
@@ -94,6 +94,7 @@ chown -R %{kaltura_user}:%{apache_group} %{prefix}/app/cache
 chmod -R 775 %{prefix}/log %{prefix}/tmp %{prefix}/app/cache %{prefix}/web
 
 chown %{kaltura_user}:%{kaltura_group} %{prefix}/app/batch
+echo "PATH=$PATH:/opt/kaltura/bin;export PATH" >> /etc/sysconfig/httpd
 service httpd restart
 # don't start it if its a fresh install, it will fail. It needs to go through postinst config first.
 if [ "$1" = 0 ];then
@@ -129,6 +130,53 @@ service httpd restart
 
 
 %changelog
+* Tue Jan 13 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.3.0-1
+- Ver Bounce to 10.3.0
+
+* Wed Jan 7 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.2.0-1
+- Ver Bounce to 10.2.0
+
+* Wed Jan 7 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.2.0-1
+- Ver Bounce to 10.2.0
+
+* Wed Jan 7 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.2.0-1
+- Ver Bounce to 10.2.0
+
+* Sun Dec 28 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 10.1.0-1
+- Ver Bounce to 10.1.0
+
+* Thu Dec 11 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 10.0.0-1
+- Ver Bounce to 10.0.0
+
+* Mon Dec 1 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.19.8-1
+- Ver Bounce to 9.19.8
+
+* Mon Nov 17 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.19.7-1
+- Ver Bounce to 9.19.7
+
+* Sun Nov 2 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.19.6-1
+- Ver Bounce to 9.19.6
+
+* Sat Oct 18 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.19.5-1
+- Ver Bounce to 9.19.5
+
+* Sun Oct 5 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.19.4-1
+- Ver Bounce to 9.19.4
+
+* Sun Sep 21 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.19.3-1
+- Ver Bounce to 9.19.3
+
+* Tue Aug 12 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.19.0-2
+- PATH="/sbin:/usr/sbin:/bin:/usr/bin"
+  * export PATH
+   /etc/init.d/httpd:
+   # Source function library.
+   .  /etc/rc.d/init.d/functions
+
+   to make a long story short: we need to have /opt/kaltura/bin in the PATH so echo it to /etc/sysconfig/httpd
+* Thu Jul 10 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.19.0-1
+- Ver Bounce to 9.19.0
+
 * Sun Jun 29 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.18.0-1
 - Ver Bounce to 9.18.0
 

@@ -6,45 +6,40 @@
 %define confdir %{prefix}/app/configurations
 %define logdir %{prefix}/log
 %define webdir %{prefix}/web
+%define codename Jupiter
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 9.18.0
-Release: 5 
+Version: 10.3.0
+Release: 3
 License: AGPLv3+
 Group: Server/Platform 
-Source0: https://github.com/kaltura/server/archive/IX-%{version}.zip 
-Source1: kaltura.apache.ssl.conf.template 
-Source3: kaltura.apache.conf.template 
+Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
 Source4: emails_en.template.ini
-Source6: 02.Permission.ini
 Source7: dwh.template
-Source8: 01.uiConf.99.template.xml
-Source9: plugins.template.ini
 Source10: entry_and_uiconf_templates.tar.gz
 # fixes https://github.com/kaltura/platform-install-packages/issues/37
 Source11: clear_cache.sh
 # monit templates
-Source12: mysqld.template.rc
 Source13: sphinx.template.rc 
 Source14: httpd.template.rc 
 Source15: batch.template.rc 
-Source16: memcached.template.rc
 Source17: navigation.xml 
 Source18: monit.phtml 
 Source19: IndexController.php
 Source20: sphinx.populate.template.rc
-Source22: 01.UserRole.99.template.xml
+#Source22: 01.UserRole.99.template.xml
 Source23: 04.flavorParams.ini
 Source24: 04.liveParams.ini
 Source25: kaltura_populate.template
 Source26: kaltura_batch.template
 #Source27: kmc1Success.php 
+Source28: embedIframeJsAction.class.php
 
-URL: https://github.com/kaltura/server/tree/IX-%{version}
+URL: https://github.com/kaltura/server/tree/%{codename}-%{version}
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
-Requires: rsync,mysql,kaltura-monit,kaltura-postinst,cronie, php-cli, php-xml, php-curl, php-mysql,php-gd,php-gmp, php-imap, php-ldap,ntp,mailx
+Requires: rsync,mysql,kaltura-monit,kaltura-postinst,cronie, php-cli, php-xml, php-curl, php-mysql, php-gd, php-gmp, php-ldap, php-mbstring, ntp, mailx
 
 %description
 Kaltura is the world's first Open Source Online Video Platform, transforming the way people work, 
@@ -61,7 +56,7 @@ For more information visit: http://corp.kaltura.com, http://www.kaltura.org and 
 This is the base package, needed for any Kaltura server role.
 
 %prep
-%setup -qn server-IX-%{version}
+%setup -qn server-%{codename}-%{version}
 
 
 %install
@@ -101,45 +96,40 @@ project" "*.png" "*.properties" "*.sample" "*.swf" "*.sf" "*.swz" "*.uad" "*.pre
 	find . -iname "$i" -exec chmod 644 {} \;
 done
 
-for i in admin_console alpha api_v3 batch configurations deployment generator infra plugins start tests ui_infra var_console vendor;do 
-	mv  %{_builddir}/server-IX-%{version}/$i $RPM_BUILD_ROOT%{prefix}/app
+for i in admin_console alpha api_v3 batch configurations deployment generator infra plugins start tests ui_infra var_console vendor VERSION.txt  license.txt release-notes.md;do 
+	mv  %{_builddir}/server-%{codename}-%{version}/$i $RPM_BUILD_ROOT%{prefix}/app
 done
 find  $RPM_BUILD_ROOT%{prefix}/app -name "*.sh" -type f -exec chmod +x {} \;
 
 
-sed -i "s@\(^kmc_version\)\s*=.*@\1=%{_kmc_version}@g" $RPM_BUILD_ROOT%{prefix}/app/configurations/base.ini
-sed -i "s@\(^clipapp_version\)\s*=.*@\1=%{clipapp_version}@g" $RPM_BUILD_ROOT%{prefix}/app/configurations/base.ini
-sed -i "s@\(^html5_version\)\s*=.*@\1=%{html5_version}@g" $RPM_BUILD_ROOT%{prefix}/app/configurations/base.ini
-sed -i "s@\(^kdp3_wrapper_version\)\s*=.*@\1=%{kdp3_wrapper_version}@g" $RPM_BUILD_ROOT%{prefix}/app/configurations/base.ini
-sed -i "s@\(^kmc_login_version\)\s*=.*@\1=%{kmc_login_version}@g" $RPM_BUILD_ROOT%{prefix}/app/configurations/base.ini
-sed -i 's@^IsmIndex@;IsmIndex@g' %{SOURCE9}
+sed -i 's@^IsmIndex@;IsmIndex@g' $RPM_BUILD_ROOT%{prefix}/app/configurations/plugins.template.ini
+sed -i "s#^;kmc_version = @KMC_VERSION@#kmc_version = %{_kmc_version}#g" $RPM_BUILD_ROOT%{prefix}/app/configurations/local.template.ini
+sed -i "s#^;html5_version = @HTML5LIB_VERSION@#html5_version = %{html5_version}#g" $RPM_BUILD_ROOT%{prefix}/app/configurations/local.template.ini
+sed -i "s#^;kmc_login_version = @KMC_LOGIN_VERSION@#kmc_login_version = %{kmc_login_version}#g" $RPM_BUILD_ROOT%{prefix}/app/configurations/local.template.ini
+sed -i "s@clipapp_version = @CLIPPAPP_VERSION@#clipapp_version = %{clipapp_version}#g" $RPM_BUILD_ROOT%{prefix}/app/configurations/local.template.ini
+sed -i "s#^;kdp3_wrapper_version = @KDP3_WRAPPER_VERSION@#kdp3_wrapper_version = %{kdp3_wrapper_version}#g" $RPM_BUILD_ROOT%{prefix}/app/configurations/local.template.ini
 sed -i 's@^writers.\(.*\).filters.priority.priority\s*=\s*7@writers.\1.filters.priority.priority=4@g' $RPM_BUILD_ROOT%{prefix}/app/configurations/logger.template.ini 
 # our Pentaho is correctly installed under its own dir and not %prefix/bin which is the known default so, adding -k path to kitchen.sh
 sed -i 's#\(@DWH_DIR@\)$#\1 -k %{prefix}/pentaho/pdi/kitchen.sh#g' $RPM_BUILD_ROOT%{prefix}/app/configurations/cron/dwh.template
 rm $RPM_BUILD_ROOT%{prefix}/app/generator/sources/android/DemoApplication/libs/libWVphoneAPI.so
 rm $RPM_BUILD_ROOT%{prefix}/app/configurations/.project
 # see https://github.com/kaltura/platform-install-packages/issues/58 - these are taken care of on lines 139 though 144:
-rm $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.d/*template*
 
 # we bring our own for kaltura-front and kaltura-batch.
-cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/app/configurations/apache/kaltura.ssl.conf.template
-cp %{SOURCE3} $RPM_BUILD_ROOT%{prefix}/app/configurations/apache/kaltura.conf.template
 cp %{SOURCE4} $RPM_BUILD_ROOT%{prefix}/app/batch/batches/Mailer/emails_en.template.ini
-cp %{SOURCE6} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_data/02.Permission.ini
-cp %{SOURCE8} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_content/01.uiConf.99.template.xml
 cp %{SOURCE7} $RPM_BUILD_ROOT%{prefix}/app/configurations/cron/dwh.template
-cp %{SOURCE9} $RPM_BUILD_ROOT%{prefix}/app/configurations/plugins.template.ini
-cp %{SOURCE22} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_content/01.UserRole.99.template.xml
 cp %{SOURCE23} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_data/
 cp %{SOURCE24} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_data/
 cp %{SOURCE11} $RPM_BUILD_ROOT%{prefix}/app/alpha/crond/kaltura/clear_cache.sh
 mkdir -p $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail
-cp %{SOURCE12} $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/
 cp %{SOURCE13} $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/
 cp %{SOURCE20} $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/
 cp %{SOURCE14} $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/
 cp %{SOURCE15} $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/
-cp %{SOURCE16} $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/
+cp $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.d/memcached.template.rc $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/memcached.rc
+cp $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.d/mysqld.template.rc $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/mysqld.rc
+cp $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.d/mariadb.template.rc $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/mariadb.rc
+rm $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.d/*template*
 cp %{SOURCE25} $RPM_BUILD_ROOT%{prefix}/app/configurations/logrotate/
 cp %{SOURCE26} $RPM_BUILD_ROOT%{prefix}/app/configurations/logrotate/
 #cp %{SOURCE27} $RPM_BUILD_ROOT%{prefix}/app/alpha/apps/kaltura/modules/kmc/templates/
@@ -149,7 +139,8 @@ cp %{SOURCE26} $RPM_BUILD_ROOT%{prefix}/app/configurations/logrotate/
 cp %{SOURCE17} $RPM_BUILD_ROOT%{prefix}/app/admin_console/configs/navigation.xml
 cp %{SOURCE18} $RPM_BUILD_ROOT%{prefix}/app/admin_console/views/scripts/index/monit.phtml
 cp %{SOURCE19} $RPM_BUILD_ROOT%{prefix}/app/admin_console/controllers/IndexController.php
-
+# patch for auto embed to work, should be dropped when core merge.
+cp %{SOURCE28} $RPM_BUILD_ROOT%{prefix}/app/alpha/apps/kaltura/modules/extwidget/actions/embedIframeJsAction.class.php
 # we bring another in kaltura-batch
 rm $RPM_BUILD_ROOT%{prefix}/app/configurations/batch/batch.ini.template
 
@@ -192,10 +183,10 @@ fi
 # create user/group, and update permissions
 groupadd -r %{kaltura_group} -g7373 2>/dev/null || true
 useradd -M -r -u7373 -d %{prefix} -s /bin/bash -c "Kaltura server" -g %{kaltura_group} %{kaltura_user} 2>/dev/null || true
-getent group apache >/dev/null || groupadd -g 48 -r apache
-getent passwd apache >/dev/null || \
-  useradd -r -u 48 -g apache -s /sbin/nologin \
-    -d /var/www -c "Apache" apache
+getent group %{apache_user} >/dev/null || groupadd -g 48 -r %{apache_group}
+getent passwd %{apache_user} >/dev/null || \
+  useradd -r -u 48 -g %{apache_group} -s /sbin/nologin \
+    -d /var/www -c "Apache" %{apache_user}
 usermod -a -G %{kaltura_group} %{apache_user}
 
 usermod -g %{kaltura_group} %{kaltura_user} 2>/dev/null || true
@@ -207,23 +198,25 @@ ln -sf %{prefix}/app/configurations/system.ini /etc/kaltura.d/system.ini
 ln -sf %{prefix}/app/api_v3/web %{prefix}/app/alpha/web/api_v3
 chown apache.kaltura -R %{prefix}/web/content/entry %{prefix}/web/content/uploads/  %{prefix}/web/tmp/
 find %{prefix}/web/content/entry %{prefix}/web/content/uploads/  %{prefix}/web/tmp/ -type d -exec chmod 775 {} \;
-/etc/init.d/ntpd start
+service ntpd start
 if [ "$1" = 2 ];then
 	if [ -r "%{prefix}/app/configurations/local.ini" -a -r "%{prefix}/app/configurations/base.ini" ];then
 		sed -i "s@^\(kaltura_version\).*@\1 = %{version}@g" %{prefix}/app/configurations/local.ini
 		echo "Regenarating client libs.. this will take up to 2 minutes to complete."
-		rm -rf %{prefix}/app/cache/*
-		if %{_sysconfdir}/init.d/httpd status;then
-			/etc/init.d/httpd stop
+		if service httpd status;then
+			service httpd stop
 		fi
+		# this is read by kaltura-sphinx-schema-update.sh to determine rather or not to run
+		touch %{prefix}/app/configurations/sphinx_schema_update
+		rm -rf %{prefix}/app/cache/*
 		php %{prefix}/app/generator/generate.php
 		find %{prefix}/app/cache/ %{prefix}/log -type d -exec chmod 775 {} \;
 		find %{prefix}/app/cache/ %{prefix}/log -type f -exec chmod 664 {} \;
 		chown -R %{kaltura_user}.%{apache_user} %{prefix}/app/cache/ %{prefix}/log
 		chmod 775 %{prefix}/web/content
 
-		if ! %{_sysconfdir}/init.d/httpd status;then
-			%{_sysconfdir}/init.d/httpd start
+		if ! service httpd status;then
+			service httpd start
 		fi
 
 		# we now need CREATE and DROP priv for 'kaltura' on kaltura.*
@@ -289,9 +282,153 @@ fi
 %dir %{prefix}/lib
 %dir %{prefix}/include
 %dir %{prefix}/share
-
+%doc %{prefix}/app/release-notes.md
+%doc %{prefix}/app/license.txt
+%doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Thu Jan 25 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.3.0-3
+- SUP-3065 - Cannot create category using CSV - "already exists" 
+- SUP-3161 - Source assets missing source tag
+- PLAT-1751 - Reduce cache when listing live cuepoints
+- PLAT-2082 - redirectEntryIdEqual filter causes an exception
+- KMS-5141 - Cannot perform search by Custom Data "Text Select List" field (Drop Down List)
+
+* Thu Jan 15 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.3.0-2
+- Added the VOD delivery profile.
+
+* Tue Jan 13 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.3.0-1
+- Ver Bounce to 10.3.0
+
+* Sun Jan 10 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.2.0-5
+- Ver Bounce to 10.2.0
+- SUP-2516 - Crop thumbnail after grab from video error
+- SUP-3282 - Multi-Account Management Console copy content from template account Error
+- PLAT-2347 - Failure in recognition of the long/lat in the location reports due to update to IP2Location
+- PLAT-2313 - Entitlements are not inherited from live entry to recorded entry (was "API error on kwebcast page")
+- PLAT-1631 - Support Media Repurposing use-case (time capsule) 
+
+* Wed Jan 7 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.2.0-1
+- Ver Bounce to 10.2.0
+
+* Sun Dec 28 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 10.1.0-2
+- Bounce KMC ver.
+
+* Sun Dec 28 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 10.1.0-1
+- Ver Bounce to 10.1.0
+- Changes to support RHEL7 and PHP 5_4.
+- Added app/release-notes.md and app/license.txt
+
+* Mon Dec 15 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 10.0.0-8
+- https://github.com/kaltura/server/pull/2009
+- https://github.com/kaltura/server/pull/2010
+ 
+* Thu Dec 11 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 10.0.0-3
+- call service instead of /etc/init.d
+
+* Thu Dec 11 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 10.0.0-1
+- Ver Bounce to 10.0.0
+- Webcasting BE enhancements
+- Kaltura Media Server supporting Webcasting BE enhancements
+- Kaltura-Live DVR Window change to 24 hours
+- Allow searching cuepoints in categories
+- SUP-2899 - User sessions cannot view their own user data
+- SUP-2810 - ARF ingestion issue - audio garbled
+- PLAT-2151 - report->getTable data amount restriction
+
+
+* Mon Dec 8 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.19.8-3
+- We do not need php-imap which is particularily important for RHEL/Cent 7 where this package does not exist.
+
+* Mon Dec 1 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.19.8-1
+- Ver Bounce to 9.19.8
+- PLAT-1112 - LC - Add support for multiple video/audio substreams
+- SUP-2614 - Playlist description is missing from Tiny URL
+- SUP-2792 - Unable to update playlist 'orderBy' field
+- SUP-3152 - Entry is set as "Ready" for corrupted source file
+- PLAT-2080 - playList->execute - apply array manipulation only on manual playlists
+
+* Tue Nov 18 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.19.7-2
+- Added app/configurations/sphinx_schema_update which is read by kaltura-sphinx-schema-update.sh to determine rather or not to run
+
+* Mon Nov 17 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.19.7-1
+- Ver Bounce to 9.19.7
+- SUP-2768 - Recorded copy of Live Entry stream doesn't retain custom metadata
+- SUP-3144 - Manifest delivery returns HTTP 500 code - Es3
+- PLAT-1952 - Using CloudTranscode transcoding profile - recording entry of live entry shorter than original live entry (in ~11 seconds)
+- PLAT-2021 - Read permissions for Delivery profiles
+- PLAT-2078 - First Entry of the Playlist does not appear as First entry on related video card 
+- PLAT-889 - Support RTP and RTSP Wowza GoCoder ingest
+- SUP-2935 - Remove Kaltura from being automatically added to the whitelisted domains
+- PLAT-2069 - Add sub type for thumb cue point
+
+* Sun Nov 2 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.19.6-1
+- Ver Bounce to 9.19.6
+- PLAT-1735 - Security checks missing in flavorAsset.getDownloadUrl
+- PLAT-1965 - preventing useless AsyncDelete jobs creation
+- SUP-2767 - The peak usage Summary usage totals are wrong in Multiacct Admin
+- SUP-2935 - Remove Kaltura from being automatically added to the whitelisted domains
+- PLAT-934 - Bulk-download job stuck if no source or source not 'ready' & no conversion
+- PLAT-1973 - search media by user first name, last name, screen name 
+
+* Sat Oct 18 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.19.5-1
+- Ver Bounce to 9.19.5
+- PLAT-1897 - Enable users to play-out the remaining DVR even with recording disabled
+- PLAT-1459 - DVR take over during live broadcast
+- PLAT-1886 - Support Live to VOD flow with no "down time" where DVR + Recording is enabled.
+- PLAT-1476 - Stability issues around live recording / appending
+- PLAT-1114 - Test Wirecast Encoder with Kaltura Live Platform
+- SUP-2553 - Bulk upload URL problem 
+- SUP-2202 - Live stream recording issue
+- PLAT-1830 - Add access to the "Attachment" service to the "PLAYBACK_BASE_ROLE"
+- PLAT-1957 - ERROR on log - Failed to list entries cue-points.
+
+* Sun Oct 5 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.19.4-1
+- Ver Bounce to 9.19.4
+- PLAT-1556 - BACKMS5SecAudit - Add ability to invalidate KS by a session ID
+- PLAT-1834 - Add support for the clipTo / seekFrom playManifest parameters in Akamai HDN2 deliveries
+- PLAT-1928 - adding an entry several times to category reports batch error
+- SUP-2489 - SF 48088 - Unable to download a Video
+- SUP-2764 - sf 50841| Telepictures-Ellen| analytics does not match
+- No email notification when removing member from channel
+
+* Tue Sep 30 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.19.3-4
+- http://forum.kaltura.org/t/upgrade-from-9-18-x-to-9-19-x-latest-release-as-on-date-caused-ssl-to-break/662
+
+* Mon Sep 29 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.19.3-3
+- Patch for auto embed to work, should be dropped when core merge.
+
+* Sun Sep 21 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.19.3-2
+- PLAT-1649 - Allow the option to disable KMC "forgot password" functionality per partner
+- PLAT-1559 - KMC-login to ignore "remember me" checkbox per partner configuration
+- PLAT-1558 - Add partner configuration to "disable" the "remember me" functionality in KMC login
+- PLAT-1555 - add XSS protection in API to not allow HTML
+- PLAT-1554 - Add ability to change the KS expiration for KMC login per partner
+- PLAT-1548 - analytics reports downloaded from KMC do not enforce any access-control policies or any other means of authentication
+- PLAT-1547 - stored XSS vulnerability in "my user settings" in the KMC
+- PLAT-1886 - Support Live to VOD flow with no "down time" where DVR + Recording is enabled.
+- PLAT-1663 - Create an API service that returns the version of the server
+- SUP-2447 - Clipping entries throws an error
+- API isCountryRestricted parameter returns-0
+
+* Mon Sep 1 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.19.2-3
+- Dropping patches that were already merged to Core.
+
+* Fri Aug 23 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.19.2-1
+- SUP-2591 - Application Error in Canvas iFRAME EMBED
+- SUP-2581 - User Unable to Set Thumbnails /KMC
+- PLAT-1543 - Replacing entry distribute the temporary entry
+
+* Thu Jul 10 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.19.0-1
+- Ver Bounce to 9.19.0
+- SUP-2290 - API endDate and startDate issues
+- SUP-2369 - executeplaylist service does not escape characters in the 'tag' field
+- SUP-2422 - UserID cannot be removed from a category
+- PLAT-1525 - key and iv in widevine configuration are switched 
+- PLAT-1442 - Create template for "Entry Changed" email notification
+- PLAT-1256 - Entry does not update replacement status properly if replacement fails to convert all flavors
+- PLAT-1510 - Multi-stream sources and Watermarking
+
 * Tue Jul 1 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.18.0-3
 - https://github.com/kaltura/server/pull/1397/files#diff-0
 

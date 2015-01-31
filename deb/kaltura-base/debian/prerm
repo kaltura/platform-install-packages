@@ -1,0 +1,9 @@
+#!/bin/sh
+set -e
+if [ "$1" = "remove" ] ;then
+	rm -f /etc/kaltura.d/system.ini
+	rm -f /opt/kaltura/app/alpha/web/api_v3
+	rm -f /etc/logrotate.d/kaltura_base
+	# get rid of stray symlinks.
+	find /opt/kaltura/app -maxdepth 1 -name "*.lock" -exec rm {} \;
+fi

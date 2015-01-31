@@ -7,13 +7,15 @@ Refer to the [Deploying Kaltura Clusters Using Chef](https://github.com/kaltura/
 ### Instructions here are for a cluster with the following members:
 
 * [Load Balancer](#apache-load-balancer)
-* [NFS server](#the-nfs)
+* [NFS server](#the-nfs-server)
 * [MySQL Database](#the-mysql-database)
 * [Sphinx Indexing](#the-sphinx-indexing-server)
 * [Front servers](#the-front)
 * [Batch servers](#the-batch)
 * [DWH server](#the-datawarehouse)
+* [Nginx VOD server](#nginx-vod-server)
 * [Streaming Server](#the-streaming-server)
+* [Upgrade Kaltura](#upgrade-kaltura)
 * [Platform Monitoring](#platform-monitoring)
 * [Backup and Restore](#backup-and-restore-practices)
 
@@ -111,8 +113,10 @@ The following server roles should not be load-balanced:
 ### The NFS server
 The NFS is the shared network storage between all machines in the cluster. To learn more about NFS read [this wikipedia article about NFS](http://en.wikipedia.org/wiki/Network_File_System).
 ```
-# yum install nfs-utils-lib
+# yum install nfs-utils-lib ntp
 # chkconfig nfs on
+# chkconfig ntp on
+# service ntpd start
 # service rpcbind start
 # service nfs start
 # mkdir -p /opt/kaltura/web
@@ -158,9 +162,11 @@ Escape character is '^]'.
 Please note that currently, only MySQL 5.1 is supported, we recommend using the official package supplied by the RHEL/CentOS repos which is currently 5.1.73.
 ```
 # rpm -Uhv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
-# yum install mysql-server kaltura-postinst 
+# yum install mysql-server kaltura-postinst ntp 
 # /opt/kaltura/bin/kaltura-mysql-settings.sh
 # mysql_secure_installation
+# chkconfig ntp on
+# service ntpd start
 ```
 **Make sure to say Y** for the `mysql_secure_installation` install, and follow through all the mysql install questions before continuing further.    
 Failing to properly run `mysql_secure_installation` will cause the kaltura mysql user to run without proper permissions to access your mysql DB.    
@@ -287,7 +293,7 @@ Front in Kaltura represents the machines hosting the user-facing components, inc
 # rpm -Uhv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
 # yum install kaltura-postinst
 # /opt/kaltura/bin/kaltura-nfs-client-config.sh <NFS host> <domain> <nobody-user> <nobody-group>
-# yum install kaltura-front
+# yum install kaltura-front kaltura-html5-studio kaltura-clipapp
 # /opt/kaltura/bin/kaltura-front-config.sh
 ```
 **NOTE: you can now configure the balancer to have the node in its pull.**
@@ -295,7 +301,7 @@ Front in Kaltura represents the machines hosting the user-facing components, inc
 ### The Batch node
 Batch in Kaltura represents the machines running all async operations. To learn more, read: [Introduction to Kaltura Batch Processes](http://knowledge.kaltura.com/node/230).
 
-It is strongly recommended that you install at least 2 Sphinx nodes for redundancy.
+It is strongly recommended that you install at least 2 batch nodes for redundancy.
 
 ```
 # rpm -Uhv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
@@ -319,6 +325,20 @@ The DWH is Kaltura's Analytics server.
 # /opt/kaltura/bin/kaltura-dwh-config.sh
 ```
 
+### Nginx VOD Server
+This is used to achieve on-the-fly repackaging of MP4 files to DASH, HDS, HLS, MSS.
+
+For more info about its features see:
+https://github.com/kaltura/nginx-vod-module/
+
+Installation:
+```
+yum install kaltura-nginx
+/opt/kaltura/bin/kaltura-nginx-config.sh
+```
+
+Note: Currently, the Nginx VOD module does not support integration with Kaltura over HTTPs, only HTTP is supported. 
+
 ### The Streaming Server
 To achieve RTMP/t/e playback, Live streaming, webcam recording, and etc. Kaltura requires a streaming server.   
 You can use the open source Red5 server which is available as a Kaltura package too, and follow the steps below.   
@@ -337,6 +357,32 @@ To install Red5:
 * Run: `# /opt/kaltura/bin/kaltura-red5-config.sh`
 
 Kaltura supports commercial encoders and streaming servers too. For more information about commercial alternatives see [Kaltura Commercial OnPrem Edition™](http://corp.kaltura.com/Deployment-Options/Kaltura-On-Prem-Edition).
+
+### Upgrade Kaltura
+On the first batch or front node only:
+```
+## This operates on the DB and hence only needs to be done one. It requires the kaltura-base package and so must be run on a node that has it installed.
+# /opt/kaltura/bin/kaltura-db-update.sh
+```
+
+
+On front machines:
+```
+# kaltura-base-config.sh [/path/to/ans/file]
+# kaltura-front-config.sh [/path/to/ans/file]
+```
+
+On batch machines:
+```
+# kaltura-base-config.sh [/path/to/ans/file]
+# kaltura-batch-config.sh [/path/to/ans/file]
+```
+
+On sphinx machines:
+```
+# kaltura-base-config.sh [/path/to/ans/file]
+# kaltura-sphinx-config.sh [/path/to/ans/file]
+```
 
 ### Platform Monitoring
 Please refer to the [Setting up Kaltura platform monitoring guide](https://github.com/kaltura/platform-install-packages/blob/master/doc/platform-monitors.md).

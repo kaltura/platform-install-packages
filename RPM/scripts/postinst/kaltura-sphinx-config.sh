@@ -27,6 +27,12 @@ if ! rpm -q kaltura-sphinx;then
 	echo -e "${BRIGHT_RED}ERROR: First install kaltura-sphinx.${NORMAL}"
 	exit 0
 fi
+if [ -r $CONSENT_FILE ];then
+	. $CONSENT_FILE
+elif [ -z "$USER_CONSENT" ];then
+	get_tracking_consent
+fi
+. $CONSENT_FILE
 if [ -n "$1" -a -r "$1" ];then
 	ANSFILE=$1
 	. $ANSFILE
@@ -46,16 +52,19 @@ if [ ! -r "$RC_FILE" ];then
 	exit 2
 fi
 . $RC_FILE
-
+if [ -r "$APP_DIR/configurations/sphinx_schema_update" ];then
+	`dirname $0`/kaltura-sphinx-schema-update.sh
+	exit $?
+fi
 ln -sf $BASE_DIR/app/configurations/logrotate/kaltura_populate /etc/logrotate.d/
-trap 'my_trap_handler ${LINENO} ${$?}' ERR
-send_install_becon `basename $0` $ZONE install_start 
+trap 'my_trap_handler "${LINENO}" ${$?}' ERR
+send_install_becon `basename $0` $ZONE install_start 0 
 mkdir -p $LOG_DIR/sphinx/data $APP_DIR/cache//sphinx
-chown $OS_KALTURA_USER.$OS_KALTURA_USER $APP_DIR/cache/sphinx $LOG_DIR/sphinx/data
+chown $OS_KALTURA_USER.$OS_KALTURA_USER $APP_DIR/cache/sphinx $LOG_DIR/sphinx/data $BASE_DIR/sphinx
 echo "sphinxServer = $SPHINX_HOST" > /opt/kaltura/app/configurations/sphinx/populate/`hostname`.ini
 /etc/init.d/kaltura-sphinx restart >/dev/null 2>&1
 /etc/init.d/kaltura-populate restart >/dev/null 2>&1
 ln -sf $BASE_DIR/app/configurations/monit/monit.avail/sphinx.rc $BASE_DIR/app/configurations/monit/monit.d/enabled.sphinx.rc
 /etc/init.d/kaltura-monit stop >> /dev/null 2>&1
 /etc/init.d/kaltura-monit start
-send_install_becon `basename $0` $ZONE install_success
+send_install_becon `basename $0` $ZONE install_success 0

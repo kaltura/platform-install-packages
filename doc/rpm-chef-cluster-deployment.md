@@ -2,7 +2,7 @@
 
 This guide is intended for users of Chef that would like to deploy Kaltura clusters using [Chef recipes](http://docs.opscode.com/essentials_cookbook_recipes.html).   
 
-### Before You Get Strated Notes
+### Before You Get Started Notes
 
 * Please review the [frequently answered questions](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura-packages-faq.md) document for general help before posting to the forums or issue queue.
 * If you don't know what Chef is, start by reading [An Overview of Chef](http://docs.opscode.com/chef_overview.html).
@@ -73,7 +73,52 @@ Download NFS and MySQL recipes:
 
 **These recipes have dependencies you will need as well. Please follow documentation on the above URLs.**
 
-**Note that the MySQL recipe configures MySQL to listen on localhost only. You need to change this here: mysql/templates/default/my.cnf.erb:bind-address as the various nodes in your cluster will need access to it.**
+**Configuring NFS and MySQL Recipes**
+Before you upload the MySQL and NFS recipes to your chef server you need to configure them.
+
+**NFS Recipe**
+
+Add your mount point to the NFS recipe so each client that need access to it will be able to access.
+
+Edit:`path/to/your-chef-repo/cookbooks/nfs/recipes/_common.rb`
+
+At the end of the file add:
+```
+mount "/opt/kaltura/web" do
+  device "nfs.yourdomain.com:/opt/kaltura/web"
+  fstype "nfs"
+  options "rw"
+  action [:mount, :enable]
+end
+```
+This will mount the shared folder automatically even if you restart the server.
+
+**MySQL Recipe**
+
+The MySQL recipe configures MySQL to listen on localhost only, you need to change this as the various nodes in your cluster will need access to it, also, set the master password for root here:
+
+Edit:`path/to/your-chef-repo/cookbooks/mysql/attributes/default.rb`
+
+```
+default['mysql']['server_root_password'] = 'yourpassword'
+default['mysql']['allow_remote_root'] = true
+```
+Now edit:`path/to/your-chef-repo/cookbooks/mysql/templates/default/5.1/my.cnf.erb`
+
+Note: navigate into the "default" folder to configure as your mysql version if not 5.1.
+
+Inside the [mysqld] tag at the last line add:
+
+```
+open_files_limit = 20000
+lower_case_table_names=1
+max_allowed_packet = 16M
+```
+Finally navigate to `path/to/your-chef-repo/cookbooks/` and upload your configured cookbooks
+```
+knife cookbook upload nfs
+knife cookbook upload mysql
+```
 
 ## Loading the Kaltura recipes to your Chef server
 ```
@@ -116,10 +161,11 @@ An example cluster deployment will be:
 # knife node run_list add my-batch-machine kaltura::batch 
 # knife node run_list add my-sphinx-machine kaltura::sphinx
 # knife node run_list add my-sphinx-machine kaltura::db_config
-# knife node run_list add my-front-machine  nfs 
-# knife node run_list add my-front-machine  kaltura::front 
-# knife node run_list add my-dwh-machine  kaltura::nfs
-# knife node run_list add my-dwh-machine  kaltura::dwh 
+# knife node run_list add my-front-machine nfs 
+# knife node run_list add my-front-machine kaltura::front 
+# knife node run_list add my-dwh-machine nfs
+# knife node run_list add my-dwh-machine kaltura::dwh 
+# knife node run_list add my-vod-machine kaltura::vod-packager 
 ```
 
 
@@ -147,21 +193,27 @@ Note that the order in which you install the nodes matters!
 It should be as following:
 ```
 $ ssh my-mysql-machine
-root@my-mysql-machine:~# chef-client
+root@my-mysql-machine:~# chef-client -ldebug
 
 $ ssh my-front-machine
-root@my-front-machine:~# chef-client
+root@my-front-machine:~# chef-client -ldebug
 
 $ ssh my-sphinx-machine
-root@my-sphinx-machine:~# chef-client
+root@my-sphinx-machine:~# chef-client -ldebug
 
 $ ssh my-batch-machine
-root@my-batch-machine:~# chef-client
+root@my-batch-machine:~# chef-client -ldebug
 
 $ ssh my-dwh-machine
-root@my-dwh-machine:~# chef-client
+root@my-dwh-machine:~# chef-client -ldebug
+
+$ ssh my-vod-machine
+root@my-vod-machine:~# chef-client -ldebug
 ```
 
 ### EC2 automation
 Please this howto about auto provisioning EC2 images:
 https://learnchef.opscode.com/starter-use-cases/multi-node-ec2/
+
+### Automatic Scaling with Chef and Kaltura API:
+http://blog.kaltura.org/automatic-scaling-with-chef-kaltura-api/

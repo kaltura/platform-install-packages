@@ -38,7 +38,7 @@ else
        ZONE="unknown"
 fi  
 OUT="1"
-#send_install_becon `basename $0` $ZONE install_start 
+send_install_becon `basename $0` $ZONE install_start 
 $BASE_DIR/bin/kaltura-base-config.sh "$ANSFILE"
 if [ $? -ne 0 ];then
        echo -e "${BRIGHT_RED}ERROR: $BASE_DIR/bin/kaltura-base-config.sh failed:( You can re-run it when the issue is fixed.${NORMAL}"
@@ -76,6 +76,7 @@ if [ $? -ne 0 ];then
        exit 3 
 fi
 #send_install_becon kaltura-sphinx $ZONE install_success 
+trap - ERR
 echo "use kaltura" | mysql -h$DB1_HOST -P$DB1_PORT -u$SUPER_USER -p$SUPER_USER_PASSWD mysql 2> /dev/null
 if [ $? -ne 0 ];then
        echo "
@@ -118,7 +119,13 @@ echo "Running Batch config...
 $BASE_DIR/bin/kaltura-batch-config.sh "$ANSFILE"
 if [ $? -ne 0 ];then
        echo -e "${BRIGHT_RED}ERROR: $BASE_DIR/bin/kaltura-batch-config.sh failed:( You can re-run it when the issue is fixed.${NORMAL}"
- #      send_install_becon kaltura-batch $ZONE "install_fail: $OUT"
+	exit 113 
+fi
+
+$BASE_DIR/bin/kaltura-nginx-config.sh "$ANSFILE"
+if [ $? -ne 0 ];then
+       echo -e "${BRIGHT_RED}ERROR: $BASE_DIR/bin/kaltura-nginx-config.sh failed:( You can re-run it when the issue is fixed.${NORMAL}"
+	exit 114 
 fi
 
 #echo "Running Red5 config...
@@ -166,4 +173,5 @@ chown -R kaltura.apache $BASE_DIR/app/cache/ $BASE_DIR/log
 chmod 775 $BASE_DIR/web/content
 send_post_inst_msg $ADMIN_CONSOLE_ADMIN_MAIL 
 
+send_install_becon `basename $0` $ZONE install_success 
 

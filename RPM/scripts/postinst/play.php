@@ -8,6 +8,7 @@ class KalturaManifestException extends Exception
 $config = array();
 $client = null;
 $serviceUrl = null;
+$error=null;
 /* @var $client KalturaMonitorClient */
 require_once dirname(__FILE__) .'/common.php';
 
@@ -581,6 +582,12 @@ catch(Exception $ex)
 }
 
 echo "$monitorResult";
+if (file_exists($manifestLocalPath)){
+	unlink($manifestLocalPath);
+}
+if (file_exists($mediaLocalPath)){
+	unlink($mediaLocalPath);
+}
 if (isset($error)){
 	exit(1);
 }

@@ -2,8 +2,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5-studio
-Version: v1.4
-Release: 1 
+Version: v1.9.4
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.bz2 
@@ -33,7 +33,7 @@ This package installs the Kaltura HTML5 Studio.
 
 %install
 mkdir -p $RPM_BUILD_ROOT%{prefix}/apps/studio/
-rm %{_builddir}/%{name}-%{version}/studio.ini
+rm -f %{_builddir}/%{name}-%{version}/studio.ini
 cp -r %{_builddir}/%{name}-%{version} $RPM_BUILD_ROOT%{prefix}/apps/studio/%{version}
 cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/apps/studio/%{version}/
 sed -i "s#@HTML5_STUDIO_VER@#%{version}#g" $RPM_BUILD_ROOT%{prefix}/apps/studio/%{version}/studio.template.ini
@@ -51,6 +51,30 @@ rm -rf %{buildroot}
 %{prefix}/apps/studio/%{version}
 
 %changelog
+* Sun Jan 25 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v1.9.4-1
+- FEC-2673 - Universal Studio allows to save empty UIVars
+
+* Wed Jan 7 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v1.9.3-1
+- SUP-3132 - Control Bar Icons are not transparent
+
+* Thu Dec 11 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v1.9.2-1
+- FEC-2401 - Add Strings plugin to Studio
+
+* Mon Dec 1 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v1.9.1-1
+- SUP-3132 - Control Bar Icons are not transparent
+
+* Sun Nov 2 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v1.9-1
+- FEC-2049 - Send a notification of an error when the s_code in omniture fails to load
+
+* Sun Sep 21 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v1.8-1
+- Bouncing.
+
+* Sun Aug 31 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v1.5-2
+- https://github.com/kaltura/platform-install-packages/issues/214
+
+* Thu Jul 10 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v1.5-1
+- Disable player upgrade in case of playlist
+
 * Sat Jun 14 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v1.1-4
 - Bouncing.
  

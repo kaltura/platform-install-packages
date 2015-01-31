@@ -14,7 +14,7 @@ Source0:	http://sourceforge.net/projects/pentaho/files/Data%20Integration/%{vers
 BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 #BuildArch: 	noarch
 
-Requires:	java
+Requires:	jre >= 1.7.0
 
 %description
 Pentaho Open Source Data Integration Community Edition (CE).
