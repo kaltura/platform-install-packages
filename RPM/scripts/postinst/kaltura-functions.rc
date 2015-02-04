@@ -70,12 +70,12 @@ check_mysql_settings()
 		RC=1
 	fi
 	INNODB_LOG_FILE_SIZE=`echo "select @@innodb_log_file_size;" | mysql -u$DB_USER -p$DB_PASSWD -h$DB_HOST -P$DB_PORT -N`
-	if [ "$INNODB_LOG_FILE_SIZE" -lt "33554432" ];then
+	if [ "$INNODB_LOG_FILE_SIZE" -lt 33554432 ];then
 		echo "innodb_log_file_size => 32M"
 		return 1
 	fi
 	MAX_ALLOWED_PACKET=`echo "select @@max_allowed_packet;" | mysql -u$DB_USER -p$DB_PASSWD -h$DB_HOST -P$DB_PORT -N`
-	if [ "$MAX_ALLOWED_PACKET" -lt "16777216" ];then
+	if [ "$MAX_ALLOWED_PACKET" -lt 16777216 ];then
 		MSG="$MSG\nmax_allowed_packet = 16M"
 		RC=1
 	fi
