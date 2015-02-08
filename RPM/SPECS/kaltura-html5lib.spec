@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.26
+Version: v2.27
 Release: 1
 Epoch:0 
 License: AGPLv3+
@@ -23,6 +23,7 @@ Source12: kaltura-html5lib-v2.22.tar.gz
 Source13: kaltura-html5lib-v2.23.tar.gz
 Source14: kaltura-html5lib-v2.24.tar.gz
 Source15: kaltura-html5lib-v2.25.tar.gz
+Source16: kaltura-html5lib-v2.26.tar.gz
 
 URL: https://github.com/kaltura/mwEmbed 
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -59,11 +60,12 @@ tar zxf %{SOURCE12} -C %{_builddir}/
 tar zxf %{SOURCE13} -C %{_builddir}/
 tar zxf %{SOURCE14} -C %{_builddir}/
 tar zxf %{SOURCE15} -C %{_builddir}/
+tar zxf %{SOURCE16} -C %{_builddir}/
 
 
 %install
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib
-for i in v2.1.1 v2.3 v2.4 v2.6 v2.9 v2.14 v2.15 v2.18.5 v2.20 v2.21 v2.22 v2.23 v2.24 v2.25 %{version};do
+for i in v2.1.1 v2.3 v2.4 v2.6 v2.9 v2.14 v2.15 v2.18.5 v2.20 v2.21 v2.22 v2.23 v2.24 v2.25 v2.26 %{version};do
 	cp -r %{_builddir}/%{name}-$i $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i
 	cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i
 done
@@ -81,6 +83,16 @@ rm -rf %{buildroot}
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Sun Feb 8 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v2.27-1
+- SUP-3485 - Chapter playlist gaps and unresponsive in external URL (standalon page) | V2 player | Chapters plugin
+- SUP-3559 - Player gives a "No source video was found"
+- SUP-3616 - JS player API. changeMedia doesnt work
+- SUP-3687 - HDS\HLS mediaPlayFrom\To does not work.
+- SUP-3772 - preferred bitrate
+- FEC-2055 - Playhead switch events are missing on all browsers (was: "Playhead switch events - Duration line has not been added under video on IE8") 
+- FEC-2753 - Lecture capture Multiple stream: black screen instead of video when change stream on iPad
+- FEC-2773 - Lecture capture : Chapters and switching streams - Timer & slide is wrong on iPad
+- FEC-2809 - Related video does not work in FireFox on production
 
 * Sun Jan 25 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v2.26-1
 - SUP-3609 - Misplaced playback on iPad with 2.24 & 2.25

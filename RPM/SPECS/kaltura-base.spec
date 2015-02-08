@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 10.3.0
-Release: 3
+Version: 10.4.0
+Release: 2
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -227,6 +227,7 @@ if [ "$1" = 2 ];then
 		php %{prefix}/app/deployment/updates/update.php -i -d >> /opt/kaltura/log/kalt_up.log 2>&1
 		php %{prefix}/app/deployment/updates/update.php -i -s >> /opt/kaltura/log/kalt_up.log 2>&1
 		php %{prefix}/app/deployment/base/scripts/installPlugins.php >> /opt/kaltura/log/kalt_up.log 2>&1
+		php %{prefix}/app/tests/standAloneClient/exec.php %{prefix}/app/tests/standAloneClient/emailDropFolderFileFailedStatus.xml
 	#	php %{prefix}/app/deployment/updates/scripts/2014_05_27_create_delivery_profiles.php  >> /opt/kaltura/log/kalt_up.log 2>&1
 
 	fi
@@ -287,6 +288,14 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Wed Feb 4 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.4.0-1
+- Ver Bounce to 10.4.0
+- SUP-3505 - Player not working in Chrome with entries that are shorter then 5 mins (KS PREVIEW)
+- SUP-2485 - can't change USER_LOGIN_ATTEMPTS maximum value in admin console
+- SUP-2974 - Image file extension lost when uploading via bulk upload
+- PLAT-2452 - EBU - Fixing in-accurate aspect ratio (partner 1844091)
+- PLAT-2451 - slides triplicate on copy to vod entry (EBU)
+
 * Thu Jan 25 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.3.0-3
 - SUP-3065 - Cannot create category using CSV - "already exists" 
 - SUP-3161 - Source assets missing source tag
