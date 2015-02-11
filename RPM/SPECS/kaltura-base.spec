@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 10.4.0
-Release: 2
+Release: 3
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -227,7 +227,7 @@ if [ "$1" = 2 ];then
 		php %{prefix}/app/deployment/updates/update.php -i -d >> /opt/kaltura/log/kalt_up.log 2>&1
 		php %{prefix}/app/deployment/updates/update.php -i -s >> /opt/kaltura/log/kalt_up.log 2>&1
 		php %{prefix}/app/deployment/base/scripts/installPlugins.php >> /opt/kaltura/log/kalt_up.log 2>&1
-		php %{prefix}/app/tests/standAloneClient/exec.php %{prefix}/app/tests/standAloneClient/emailDropFolderFileFailedStatus.xml
+	#	#php %{prefix}/app/tests/standAloneClient/exec.php %{prefix}/app/tests/standAloneClient/emailDropFolderFileFailedStatus.xml
 	#	php %{prefix}/app/deployment/updates/scripts/2014_05_27_create_delivery_profiles.php  >> /opt/kaltura/log/kalt_up.log 2>&1
 
 	fi
