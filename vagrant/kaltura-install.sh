@@ -23,7 +23,7 @@ mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "DELETE FROM mysql.db WHERE Db='test' 
 mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "FLUSH PRIVILEGES"
 chkconfig mysqld on
 # if you prefer using a diff MTA, please relace accordingly
-yum install postfix
+yum install -y postfix
 service postfix restart
 yum -y install kaltura-server
 /opt/kaltura/bin/kaltura-mysql-settings.sh
