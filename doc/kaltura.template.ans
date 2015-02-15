@@ -59,7 +59,8 @@ SUPER_USER_PASSWD="@MYSQL_SUPER_USER_PASSWD@"
 # For nginx packager module
 VOD_PACKAGER_HOST="@NGINX_HOST@"
 VOD_PACKAGER_PORT="@NGINX_PORT@"
-
 WWW_HOST="@API_HOST_TO_USE_FOR_NGINX@"
-# Allowed API IP range:
+# Range of ip addresses belonging to internal kaltura servers
+# The range is used when checking service actions permissions and allowing to access certain services without KS from the internal servers.
+# The default is only good for testing, on a production ENV you should adjust according to your network.
 IP_RANGE="0.0.0.0-255.255.255.255"
