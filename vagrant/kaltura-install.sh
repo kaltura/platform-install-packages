@@ -9,7 +9,7 @@ chkconfig iptables off
 setenforce permissive
 yum -y clean all
 rpm -ihv --force http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
-yum -y install mysql-server kaltura-server postfix
+yum -y install mysql mysql-server
 service mysqld start
 # this might fail if we already set the root password previously
 set +e
@@ -22,7 +22,10 @@ mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "DELETE FROM mysql.user WHERE User=''"
 mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "DELETE FROM mysql.db WHERE Db='test' OR Db='test\_%'"
 mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "FLUSH PRIVILEGES"
 chkconfig mysqld on
+# if you prefer using a diff MTA, please relace accordingly
+yum install -y postfix
 service postfix restart
+yum -y install kaltura-server
 /opt/kaltura/bin/kaltura-mysql-settings.sh
 service memcached restart
 service ntpd restart
@@ -48,20 +51,36 @@ SPHINX_DB_PORT=\"3306\"
 ADMIN_CONSOLE_ADMIN_MAIL=\"$KALTURA_ADMIN_EMAIL\"
 ADMIN_CONSOLE_PASSWORD=\"$KALTURA_ADMIN_PASSWORD\"
 CDN_HOST=\"$KALTURA_DOMAIN\"
+WWW_HOST=\"$KALTURA_DOMAIN\"
 KALTURA_VIRTUAL_HOST_PORT=\"80\"
 SUPER_USER=\"root\"
 SUPER_USER_PASSWD=\"vagrant\"
 ENVIRONMENT_NAME=\"$KALTURA_ENVIRONMENT_NAME\"
 DWH_PASS=\"$MYSQL_ROOT_PASSWORD\"
+DWH_USER=\"etl\"
 PROTOCOL=\"http\"
 RED5_HOST=\"$KALTURA_DOMAIN\"
-USER_CONSENT=\"0\"
+USER_CONSENT=\"1\"
 CONFIG_CHOICE=\"0\"
-IS_SSL=\"N\"
+ENABLE_TESTING=\"1\"
 VOD_PACKAGER_HOST=\"$KALTURA_DOMAIN\"
 VOD_PACKAGER_PORT=\"88\"
 IP_RANGE=\"0.0.0.0-255.255.255.255\"
-" > kaltura.ans
+BASE_DIR=\"/opt/kaltura\"
+PARTNER_MAIL=\"partner@domain.com\"
+BATCH_MAIL_SENDER=\"kaltura@kaltura.com\"
+NOTIFICATION_MAIL=\"notification-service@kaltura.com\"
+PARTNERSECRET=\"partnerSecret\"
+BATCHSECRET=\"batchSecret\"
+ADMINSECRET=\"adminSecret\"
+MONITORSECRET=\"monitorSecret\"
+FLAVORSECRET=\"flavorSecret\"
+CRT_FILE=\"/etc/ssl/certs/localhost.crt\"
+KEY_FILE=\"/etc/pki/tls/private/localhost.key\"
+CHAIN_FILE=\"NOCHAIN\"
+REPO_URL=\"http://installrepo.kaltura.org\"
+NFS_SERVER=\"\"
+IS_SSL=\"N\"" > kaltura.ans
 /opt/kaltura/bin/kaltura-config-all.sh kaltura.ans
 unzip oflaDemo-r4472-java6.war -d/usr/lib/red5/webapps/oflaDemo
 service red5 restart
