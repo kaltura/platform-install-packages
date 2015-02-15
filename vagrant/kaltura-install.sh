@@ -9,7 +9,7 @@ chkconfig iptables off
 setenforce permissive
 yum -y clean all
 rpm -ihv --force http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
-yum -y install mysql mysql-server
+yum -y install mysql-server kaltura-server postfix
 service mysqld start
 # this might fail if we already set the root password previously
 set +e
@@ -22,10 +22,7 @@ mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "DELETE FROM mysql.user WHERE User=''"
 mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "DELETE FROM mysql.db WHERE Db='test' OR Db='test\_%'"
 mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "FLUSH PRIVILEGES"
 chkconfig mysqld on
-# if you prefer using a diff MTA, please relace accordingly
-yum install postfix
 service postfix restart
-yum -y install kaltura-server
 /opt/kaltura/bin/kaltura-mysql-settings.sh
 service memcached restart
 service ntpd restart
