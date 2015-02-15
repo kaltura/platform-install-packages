@@ -59,14 +59,14 @@ USER_CONSENT=\"0\"
 CONFIG_CHOICE=\"0\"
 CONTACT_MAIL=\"$KALTURA_ADMIN_EMAIL\"
 
-# for SSL - change:
+#for SSL - change:
 #IS_SSL=Y
 #and uncomment and set correct paths for the following directives
-# SSL cert path
+#SSL cert path
 #CRT_FILE=/etc/ssl/certs/localhost.crt
-# SSL key path
+#SSL key path
 #KEY_FILE=/etc/pki/tls/private/localhost.key
-# if such exists enter path here, otherwise leave as is.
+#if such exists enter path here, otherwise leave as is.
 #CHAIN_FILE=NONE
 
 IS_SSL=\"N\"
