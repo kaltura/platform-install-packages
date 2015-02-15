@@ -23,6 +23,10 @@ if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
 	exit 1
 fi
 . $KALTURA_FUNCTIONS_RC
+if [ `id -u` != 0 ];then 
+	echo -e "${BRIGHT_RED}ERROR: please run as super user, exiting..${NORMAL}"
+	exit 3
+fi
 RC_FILE=/etc/kaltura.d/system.ini
 if [ ! -r "$RC_FILE" ];then
 	echo -e "${BRIGHT_RED}ERROR: could not find $RC_FILE so, exiting..${NORMAL}"
