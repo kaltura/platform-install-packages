@@ -57,7 +57,11 @@ PROTOCOL=\"http\"
 RED5_HOST=\"$KALTURA_DOMAIN\"
 USER_CONSENT=\"0\"
 CONFIG_CHOICE=\"0\"
-IS_SSL=\"N\"" > kaltura.ans
+IS_SSL=\"N\"
+VOD_PACKAGER_HOST=\"$KALTURA_DOMAIN\"
+VOD_PACKAGER_PORT=\"88\"
+IP_RANGE=\"0.0.0.0-255.255.255.255\"
+" > kaltura.ans
 /opt/kaltura/bin/kaltura-config-all.sh kaltura.ans
 unzip oflaDemo-r4472-java6.war -d/usr/lib/red5/webapps/oflaDemo
 service red5 restart
