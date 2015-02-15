@@ -28,7 +28,7 @@ service memcached restart
 service ntpd restart
 chkconfig memcached on
 chkconfig ntpd on
-echo "USER_CONSENT=0" > /opt/kaltura/bin/contact.rc
+echo "USER_CONSENT=1" > /opt/kaltura/bin/contact.rc
 echo "127.0.0.1 $KALTURA_DOMAIN" >> /etc/hosts
 echo "TIME_ZONE=\"UTC\"
 KALTURA_FULL_VIRTUAL_HOST_NAME=\"$KALTURA_DOMAIN:80\"
@@ -57,9 +57,22 @@ PROTOCOL=\"http\"
 RED5_HOST=\"$KALTURA_DOMAIN\"
 USER_CONSENT=\"0\"
 CONFIG_CHOICE=\"0\"
+CONTACT_MAIL=\"$KALTURA_ADMIN_EMAIL\"
+
+# for SSL - change:
+#IS_SSL=Y
+#and uncomment and set correct paths for the following directives
+# SSL cert path
+#CRT_FILE=/etc/ssl/certs/localhost.crt
+# SSL key path
+#KEY_FILE=/etc/pki/tls/private/localhost.key
+# if such exists enter path here, otherwise leave as is.
+#CHAIN_FILE=NONE
+
 IS_SSL=\"N\"
 VOD_PACKAGER_HOST=\"$KALTURA_DOMAIN\"
 VOD_PACKAGER_PORT=\"88\"
+WWW_HOST=\"$KALTURA_DOMAIN\"
 IP_RANGE=\"0.0.0.0-255.255.255.255\"
 " > kaltura.ans
 /opt/kaltura/bin/kaltura-config-all.sh kaltura.ans
