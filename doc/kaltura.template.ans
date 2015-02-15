@@ -56,3 +56,9 @@ DWH_PASS="@KALT_DB_PASS@"
 # MySQL super user, this is only used for bootstrap, the app itself will not connect with it.
 SUPER_USER="@MYSQL_SUPER_USER@"
 SUPER_USER_PASSWD="@MYSQL_SUPER_USER_PASSWD@"
+# For nginx packager module
+VOD_PACKAGER_HOST="@NGINX_HOST@"
+VOD_PACKAGER_PORT="@NGINX_PORT@"
+
+# Allowed API IP range:
+IP_RANGE="0.0.0.0-255.255.255.255"
