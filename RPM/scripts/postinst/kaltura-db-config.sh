@@ -26,6 +26,7 @@ if [ "$#" -lt 4 ];then
 	exit 1
 fi
 
+
 MYSQL_HOST=$1
 MYSQL_SUPER_USER=$2
 MYSQL_SUPER_USER_PASSWD=$3
