@@ -2,7 +2,7 @@
 if($argc<5){
     die('Usage: '.$argv[0] .' <partner id> <admin secret> <service_url> <path/to/xsd>'."\n");
 }
-require_once('/usr/local/lib/php5/KalturaClient.php');
+require_once('/opt/kaltura/web/content/clientlibs/php5/KalturaClient.php');
 $userId = null;
 $expiry = null;
 $privileges = null;
