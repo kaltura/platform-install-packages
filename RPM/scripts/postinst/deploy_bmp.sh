@@ -135,9 +135,9 @@ cd $WEB_DIR/content/clientlibs/bpmn
 sed -i 's@target name="deploy" depends="verify-version, jar, bar, compile, set-home"@target name="deploy" depends="jar, bar, compile, set-home"@g' $WEB_DIR/content/clientlibs/bpmn/build.xml
 ant
 php $APP_DIR/tests/standAloneClient/exec.php $APP_DIR/tests/standAloneClient/activitiServer.xml
-MINUS_TWO_ADMIN_PARTNER_SECRET=`echo "select admin_secret from partner where id=-2" | mysql -N -h $DB1_HOST -p$DB1_PASS $DB1_NAME -u$DB1_USER  -P$DB1_PORT`
-PARTNER_ID=`php $BASE_DIR/bin/create_partner.php $ADMIN_PARTNER_SECRET bmp_partner@kaltura.com testingpasswd $SERVICE_URL 2>&1`
-ADMIN_PARTNER_SECRET=`echo "select admin_secret from partner where id=$PARTNER_ID" | mysql -N -h $DB1_HOST -p$DB1_PASS $DB1_NAME -u$DB1_USER  -P$DB1_PORT`
-$BASE_DIR/bin/create_metadata.php $PARTNER_ID $MINUS_TWO_ADMIN_PARTNER_SECRET $SERVICE_URL $BASE_DIR/bin/Transcript.xml
-echo -e "${CYAN}Created partner $PARTNER_ID [bmp_partner@kaltura.com] and generated custom metadata needed for BPM${NORMAL}"
-$BASE_DIR/bin/create_bpmn_notifications.php $PARTNER_ID $MINUS_TWO_ADMIN_PARTNER_SECRET $SERVICE_URL
+#MINUS_TWO_ADMIN_PARTNER_SECRET=`echo "select admin_secret from partner where id=-2" | mysql -N -h $DB1_HOST -p$DB1_PASS $DB1_NAME -u$DB1_USER  -P$DB1_PORT`
+#PARTNER_ID=`php $BASE_DIR/bin/create_partner.php $ADMIN_PARTNER_SECRET bmp_partner@kaltura.com testingpasswd $SERVICE_URL 2>&1`
+#ADMIN_PARTNER_SECRET=`echo "select admin_secret from partner where id=$PARTNER_ID" | mysql -N -h $DB1_HOST -p$DB1_PASS $DB1_NAME -u$DB1_USER  -P$DB1_PORT`
+#$BASE_DIR/bin/create_metadata.php $PARTNER_ID $MINUS_TWO_ADMIN_PARTNER_SECRET $SERVICE_URL $BASE_DIR/bin/Transcript.xml
+#echo -e "${CYAN}Created partner $PARTNER_ID [bmp_partner@kaltura.com] and generated custom metadata needed for BPM${NORMAL}"
+#$BASE_DIR/bin/create_bpmn_notifications.php $PARTNER_ID $MINUS_TWO_ADMIN_PARTNER_SECRET $SERVICE_URL
