@@ -22,7 +22,6 @@ When prompted, please provide the Kaltura API host, the admin console partner ma
 * Under 'Action' for the newly created profile set as enabled
 * Get your profile ID and hit 'configure' under 'Actions'
 * Set the profile ID for the 'templateId' key and save
-
 * Select 'Signal business-process' and 'Entry Integration Job Finished' in the select boxes and click 'Add from template'
 * Check 'Automatic dispatch enabled:'
 * Select your activiti server
