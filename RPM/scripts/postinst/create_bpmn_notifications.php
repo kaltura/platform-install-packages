@@ -19,18 +19,19 @@ $client->setKs($ks);
 $filter = null;
 $pager = null;
 $eventNotificationTemplate = new KalturaBusinessProcessStartNotificationTemplate();
-$id = 37;
+/*$id = 35;
 $eventnotificationPlugin = KalturaEventnotificationClientPlugin::get($client);
 $result = $eventnotificationPlugin->eventNotificationTemplate->get($id);
  var_dump($result);
  exit();
-$eventNotificationTemplate->name = 'Flavor Status Equals1';
-$eventNotificationTemplate->systemName = 'Flavor Status Equals1';
+*/
+$eventNotificationTemplate->name = 'Flavor Status Equals';
+$eventNotificationTemplate->systemName = 'Flavor Status Equals';
 $eventNotificationTemplate->description = 'Flavor life-cycle';
 $eventNotificationTemplate->type = KalturaEventNotificationTemplateType::BPM_START;
 $eventNotificationTemplate->eventObjectType = 4;
 $eventNotificationTemplate->manualDispatchEnabled = false;
-$eventNotificationTemplate->automaticDispatchEnabled = true;
+$eventNotificationTemplate->automaticDispatchEnabled = 1;
 $eventNotificationTemplate->eventType = KalturaEventNotificationEventType::OBJECT_CREATED;
 $eventNotificationTemplate->eventConditions = array();
 $cond=new KalturaEventFieldCondition();
@@ -124,7 +125,35 @@ $eventNotificationTemplate->abortOnDeletion = false;
 $eventnotificationPlugin = KalturaEventnotificationClientPlugin::get($client);
 $result = $eventnotificationPlugin->eventNotificationTemplate->add($eventNotificationTemplate);
 
-var_dump($result);exit;
+//var_dump($result);
 
+$eventNotificationTemplate = new KalturaBusinessProcessStartNotificationTemplate();
+$eventNotificationTemplate->name = 'entry_integration_job_finished';
+$eventNotificationTemplate->systemName = 'entry_integration_job_finished';
+$eventNotificationTemplate->description = 'entry_integration_job_finished';
+$eventNotificationTemplate->type = 'businessProcessNotification.BusinessProcessSignal';
+$eventNotificationTemplate->message='jobClosed';
+$eventNotificationTemplate->eventId='jobClosedEvent';
+$eventNotificationTemplate->eventObjectType = 1;
+$eventNotificationTemplate->manualDispatchEnabled = false;
+$eventNotificationTemplate->automaticDispatchEnabled = 1;
+$eventNotificationTemplate->eventType = 'integrationEventNotifications.INTEGRATION_JOB_CLOSED';
+$eventNotificationTemplate->eventConditions = null;
+$kenp=new KalturaEventNotificationParameter();
+$kenp->key='jobStatus';
+$kenp->description='Job Status';
+$kesf=new KalturaEvalStringField(array('code'=>'$scope->getEvent()->getBatchJob()->getStatus()','value'=>null,'description'=>null));
+$kenp->value=$kesf;
+
+$eventNotificationTemplate->contentParameters=array($kenp);
+$eventNotificationTemplate->userParameters=array();
+
+$eventNotificationTemplate->serverId = 1;
+$eventNotificationTemplate->processId = 'kaltura-integrate';
+$eventNotificationTemplate->mainObjectCode = NULL;
+$eventNotificationTemplate->abortOnDeletion = false;
+$eventnotificationPlugin = KalturaEventnotificationClientPlugin::get($client);
+echo "pooooo\n";
+$result = $eventnotificationPlugin->eventNotificationTemplate->add($eventNotificationTemplate);
 
 ?>
