@@ -6,7 +6,7 @@
 When prompted, please provide the Kaltura API host, the admin console partner mail and passwd and the activiti hostname [same as API host for an all in one install], its port [8080] and protocol [http], username [kermit], passwd [kermit].
 *NOTE: these are all default values for the activiti app, you may want to modify them later*
 
-* Obtain flow.transcript.bpmn and request: $HOSTNAME:8080/activiti-explorer
+* Obtain https://github.com/kaltura/platform-install-packages/blob/Jupiter-10.5.0/doc/flow.transcript.bpmn and request: $HOSTNAME:8080/activiti-explorer
 * Login with user: kermit;passwd: kermit
 * Swith to the 'Manage' tab and under the sub tab 'Deployments' hit 'Upload new'.
 * Choose the flow.transcript.bpmn from your disk to upload
