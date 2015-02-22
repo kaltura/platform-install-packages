@@ -12,6 +12,10 @@ When prompted, please provide the Kaltura API host, the admin console partner ma
 * Swith to the 'Manage' tab and under the sub tab 'Deployments' hit 'Upload new'.
 * Choose the flow.transcript.bpmn from your disk to upload
 * Create a partner
+* Run:
+```
+$BASE_DIR/bin/create_metadata.php $PARTNER_ID $MINUS_TWO_ADMIN_PARTNER_SECRET $SERVICE_URL $BASE_DIR/bin/Transcript.xml
+```
 * Under 'Profile' in the 'Publishers' tab for your partner, select 'Event Notifications'
 * Select 'Start business-process' and 'Flavor status equal' in the select boxes and click 'Add from template'
 * Check 'Automatic dispatch enabled:'
