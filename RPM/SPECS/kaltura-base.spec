@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 10.5.0
-Release: 3
+Release: 5
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -288,6 +288,15 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Sun Feb 22 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.5.0-5
+- SUP-2942 - Audio-Video Sync Issue on Kaltura Live stream
+- SUP-3443 - VOD entry missing after livestream (from Kaplan) - "race condition"
+- SUP-3251 - Update Syndication XSD to Comply With the media->getMrss API Call
+- SUP-3572 - Email notifications send all addresses in the "To" field
+- SUP-3927 - TMZ - Analytics report request
+- SUP-3608 - Kaltura java client fail on test
+- SUP-3644 - Changing feed's XML without changing the feed's url
+
 * Tue Feb 15 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.5.0-3
 - For this one: https://github.com/kaltura/server/pull/2258
 
