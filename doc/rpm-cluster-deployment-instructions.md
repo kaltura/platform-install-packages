@@ -115,7 +115,7 @@ The NFS is the shared network storage between all machines in the cluster. To le
 ```
 # yum install nfs-utils-lib ntp
 # chkconfig nfs on
-# chkconfig ntp on
+# chkconfig ntpd on
 # service ntpd start
 # service rpcbind start
 # service nfs start
@@ -165,7 +165,7 @@ Please note that currently, only MySQL 5.1 is supported, we recommend using the 
 # yum install mysql-server kaltura-postinst ntp 
 # /opt/kaltura/bin/kaltura-mysql-settings.sh
 # mysql_secure_installation
-# chkconfig ntp on
+# chkconfig ntpd on
 # service ntpd start
 ```
 **Make sure to say Y** for the `mysql_secure_installation` install, and follow through all the mysql install questions before continuing further.    
