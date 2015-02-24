@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 10.5.0
-Release: 3
+Release: 6
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -107,6 +107,7 @@ sed -i "s#^;kmc_version = @KMC_VERSION@#kmc_version = %{_kmc_version}#g" $RPM_BU
 sed -i "s#^;html5_version = @HTML5LIB_VERSION@#html5_version = %{html5_version}#g" $RPM_BUILD_ROOT%{prefix}/app/configurations/local.template.ini
 sed -i "s#^;kmc_login_version = @KMC_LOGIN_VERSION@#kmc_login_version = %{kmc_login_version}#g" $RPM_BUILD_ROOT%{prefix}/app/configurations/local.template.ini
 sed -i "s@clipapp_version = @CLIPPAPP_VERSION@#clipapp_version = %{clipapp_version}#g" $RPM_BUILD_ROOT%{prefix}/app/configurations/local.template.ini
+sed -i "s#^clipapp_version =.*#clipapp_version = %{clipapp_version}#g" $RPM_BUILD_ROOT%{prefix}/app/configurations/base.ini
 sed -i "s#^;kdp3_wrapper_version = @KDP3_WRAPPER_VERSION@#kdp3_wrapper_version = %{kdp3_wrapper_version}#g" $RPM_BUILD_ROOT%{prefix}/app/configurations/local.template.ini
 sed -i 's@^writers.\(.*\).filters.priority.priority\s*=\s*7@writers.\1.filters.priority.priority=4@g' $RPM_BUILD_ROOT%{prefix}/app/configurations/logger.template.ini 
 # our Pentaho is correctly installed under its own dir and not %prefix/bin which is the known default so, adding -k path to kitchen.sh
@@ -288,6 +289,18 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Tue Feb 24 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.5.0-6
+- Fix clipapp ver
+
+* Sun Feb 22 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.5.0-5
+- SUP-2942 - Audio-Video Sync Issue on Kaltura Live stream
+- SUP-3443 - VOD entry missing after livestream (from Kaplan) - "race condition"
+- SUP-3251 - Update Syndication XSD to Comply With the media->getMrss API Call
+- SUP-3572 - Email notifications send all addresses in the "To" field
+- SUP-3927 - TMZ - Analytics report request
+- SUP-3608 - Kaltura java client fail on test
+- SUP-3644 - Changing feed's XML without changing the feed's url
+
 * Tue Feb 15 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.5.0-3
 - For this one: https://github.com/kaltura/server/pull/2258
 
