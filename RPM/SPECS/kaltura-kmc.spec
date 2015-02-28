@@ -1,7 +1,7 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmc
-Version: v5.38.9
-Release: 2
+Version: v5.38.10
+Release: 1
 Summary: Kaltura Management Console
 
 Group: System Management	
@@ -78,6 +78,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sat Feb 28 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.10-1
+- Ver bounce.
+
 * Sun Feb 8 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.9-1
 - SUP-3658 - KMC Error Message and Crash
 - SUP-3681 - KMC doesn't set required tags when logging as a "Content Moderator" role
