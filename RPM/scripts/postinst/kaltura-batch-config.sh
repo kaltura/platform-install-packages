@@ -78,8 +78,9 @@ ln -sf $APP_DIR/configurations/logrotate/kaltura_apache /etc/logrotate.d/
 ln -sf $APP_DIR/configurations/logrotate/kaltura_apps /etc/logrotate.d/
 
 mkdir -p $LOG_DIR/batch 
-find $BASE_DIR/app/cache/ $BASE_DIR/log -type d -exec chmod 775 {} \; 
-find $BASE_DIR/app/cache/ $BASE_DIR/log -type f -exec chmod 664 {} \; 
+rm -rf $BASE_DIR/app/cache/*
+find $BASE_DIR/log -type d -exec chmod 775 {} \; 
+find $BASE_DIR/log -type f -exec chmod 664 {} \; 
 chown -R kaltura.apache $BASE_DIR/app/cache/ $BASE_DIR/log
 
 chkconfig httpd on
