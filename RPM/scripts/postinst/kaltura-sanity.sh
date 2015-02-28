@@ -411,7 +411,7 @@ sed -i "1,/^adminSecret/s/^adminSecret\s*=.*/adminSecret=@PARTNER_ADMIN_SECRET@/
 fi
 WEBCAM_SYNLINK=`readlink -f $WEB_DIR/content/webcam`
 TEST_NAME="Red5 file upload"
-if [ $WEBCAM_SYNLINK = /usr/lib/red5/webapps/oflaDemo/streams ]; then
+if [ "$WEBCAM_SYNLINK" = /usr/lib/red5/webapps/oflaDemo/streams ]; then
 	START=`date +%s.%N`
 	OUTP=`test_red5_conn`
 	RC=$?
