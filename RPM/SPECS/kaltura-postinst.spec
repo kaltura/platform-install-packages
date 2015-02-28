@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.24
-Release: 5
+Release: 6
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -81,6 +81,9 @@ fi
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Sat Feb 28 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.24-6
+- instead of chmoding in cache dir just get rid of it.
+
 * Sat Feb 28 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.24-5
 - push WWW_HOST var to ans file.
 
