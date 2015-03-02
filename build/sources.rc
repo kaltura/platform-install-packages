@@ -154,7 +154,7 @@ NGINX_VERSION=1.6.2
 NGINX_URI="http://nginx.org/download/nginx-$NGINX_VERSION.tar.gz"
 
 # Kaltura Streaming lib build vars:
-KALTURA_MEDIASERVER_VERSION="3.1.5"
+KALTURA_MEDIASERVER_VERSION="3.1.14"
 KALTURA_MEDIASERVER_URI="https://github.com/kaltura/media-server/releases/download/rel-$KALTURA_MEDIASERVER_VERSION/KalturaWowzaServer-install-$KALTURA_MEDIASERVER_VERSION.zip"
 KALTURA_MEDIASERVER_RPM_NAME=kaltura-media-server
 
