@@ -9,7 +9,7 @@ chkconfig iptables off
 setenforce permissive
 yum -y clean all
 rpm -ihv --force http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
-yum -y install mysql-server kaltura-server postfix
+yum -y install mysql-server kaltura-server kaltura-red5 postfix
 service mysqld start
 # this might fail if we already set the root password previously
 set +e
