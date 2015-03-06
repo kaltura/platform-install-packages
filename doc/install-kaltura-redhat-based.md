@@ -182,7 +182,7 @@ Your install will now automatically perform all install tasks.
 #### Configure Red5 server
 1. install the kaltura-red5 package:
 ```
-\# yum install kaltura-red5
+# yum install kaltura-red5
 ```
 1. Request http://hostname:5080
 1. Click 'Install a ready-made application'
