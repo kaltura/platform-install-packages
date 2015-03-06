@@ -1,7 +1,7 @@
 Summary: Kaltura Open Source Video Platform all in 1 package 
 Name: kaltura-server
-Version: 10.5.0
-Release: 2
+Version: 10.6.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 URL: http://kaltura.org
@@ -46,6 +46,9 @@ fi
 %files
 
 %changelog
+* Fri Mar 6 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.6.0-1
+- Ver Bounce to 10.6.0
+
 * Fri Mar 6 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.5.0-2
 - Dropped red5 dep.
 

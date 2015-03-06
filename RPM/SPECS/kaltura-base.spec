@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 10.5.0
-Release: 7
+Version: 10.6.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -289,6 +289,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Fri Mar 6 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.6.0-1
+- Ver Bounce to 10.6.0
+
 * Tue Feb 24 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.5.0-7
 - Fix clipapp ver
 
