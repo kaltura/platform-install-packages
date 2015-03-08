@@ -21,17 +21,13 @@ if [ ! -r $SOURCES_RC ];then
 	exit 1
 fi
 . $SOURCES_RC 
-if [ ! -x "`which svn 2>/dev/null`" ];then
-	echo "Need to install svn."
+if [ ! -x "`which unzip 2>/dev/null`" ];then
+	echo "Need to install unzip."
 	exit 2
 fi
 
-for CLIPAPP_VERSION in $CLIPAPP_VERSIONS;do
-	kaltura_svn export --force --quiet $CLIPAPP_URI/$CLIPAPP_VERSION $SOURCE_PACKAGING_DIR/$CLIPAPP_RPM_NAME/$CLIPAPP_VERSION 
-done
-cd $SOURCE_PACKAGING_DIR
-tar jcf $RPM_SOURCES_DIR/$CLIPAPP_RPM_NAME.tar.bz2 $CLIPAPP_RPM_NAME
-echo "Packaged into $RPM_SOURCES_DIR/$CLIPAPP_RPM_NAME.tar.bz2"
+wget $CLIPAPP_URI -O $RPM_SOURCES_DIR/$CLIPAPP_RPM_NAME-$CLIPAPP_VERSION.zip 
+echo "Packaged into $RPM_SOURCES_DIR/$CLIPAPP_RPM_NAME-$CLIPAPP_VERSION.zip "
 
 if [ -x "`which rpmbuild 2>/dev/null`" ];then
 	rpmbuild -ba $RPM_SPECS_DIR/$CLIPAPP_RPM_NAME.spec

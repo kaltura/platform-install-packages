@@ -1,12 +1,12 @@
 %define prefix /opt/kaltura
 Name:	kaltura-clipapp
-Version: v1.0.7
+Version: 1.3
 Release: 1
 Epoch: 1
 Summary: Kaltura Clipper App 
 License: AGPLv3+	
 URL: http://kaltura.org
-Source0: %{name}.tar.bz2
+Source0: %{name}-v%{version}.zip
 BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 
 Requires: kaltura-base, httpd	
@@ -27,14 +27,14 @@ For more information visit: http://corp.kaltura.com, http://www.kaltura.org and 
 This package installs the Kaltura Clipper App, used for clipping segments from a video.
 
 %prep
-%setup -qn %{name} 
+%setup -qn clipapp-%{version} 
 
 %build
 
 %install
 mkdir -p $RPM_BUILD_ROOT%{prefix}/apps/clipapp
-cp -r %{_builddir}/%{name}/%{version} $RPM_BUILD_ROOT/%{prefix}/apps/clipapp
-cp %{_builddir}/%{name}/%{version}_saas/config.local.php $RPM_BUILD_ROOT/%{prefix}/apps/clipapp/%{version}/config.local.php
+cp -r %{_builddir}/clipapp-%{version} $RPM_BUILD_ROOT/%{prefix}/apps/clipapp/v%{version}
+#cp %{_builddir}/%{name}/%{version}_saas/config.local.php $RPM_BUILD_ROOT/%{prefix}/apps/clipapp/%{version}/config.local.php
 
 %clean
 rm -rf %{buildroot}
@@ -45,6 +45,7 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sun Mar 8 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.3-1
 * Tue Feb 18 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v1.0.7-1
 - Need the cnfig.local.php from saas for this one to work.
 

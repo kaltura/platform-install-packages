@@ -200,8 +200,8 @@ KDP_RPM_NAME="kaltura-kdp"
 
 # Kaltura Clipapp:
 # we bundle a few vers at each release:
-CLIPAPP_VERSIONS="v1.0.5 v1.0.5_saas v1.0.7 v1.0.7_saas"
-CLIPAPP_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/apps/clipapp"
+CLIPAPP_VERSION="v1.3"
+CLIPAPP_URI="https://github.com/kaltura/clipapp/archive/$CLIPAPP_VERSION.zip"
 CLIPAPP_RPM_NAME="kaltura-clipapp"
 
 # Kaltura kRecord
