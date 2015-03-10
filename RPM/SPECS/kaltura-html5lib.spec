@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.27
+Version: v2.28
 Release: 1
 Epoch:0 
 License: AGPLv3+
@@ -24,6 +24,7 @@ Source13: kaltura-html5lib-v2.23.tar.gz
 Source14: kaltura-html5lib-v2.24.tar.gz
 Source15: kaltura-html5lib-v2.25.tar.gz
 Source16: kaltura-html5lib-v2.26.tar.gz
+Source17: kaltura-html5lib-v2.27.tar.gz
 
 URL: https://github.com/kaltura/mwEmbed 
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -62,10 +63,11 @@ tar zxf %{SOURCE14} -C %{_builddir}/
 tar zxf %{SOURCE15} -C %{_builddir}/
 tar zxf %{SOURCE16} -C %{_builddir}/
 
+tar zxf %{SOURCE17} -C %{_builddir}/
 
 %install
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib
-for i in v2.1.1 v2.3 v2.4 v2.6 v2.9 v2.14 v2.15 v2.18.5 v2.20 v2.21 v2.22 v2.23 v2.24 v2.25 v2.26 %{version};do
+for i in v2.1.1 v2.3 v2.4 v2.6 v2.9 v2.14 v2.15 v2.18.5 v2.20 v2.21 v2.22 v2.23 v2.24 v2.25 v2.26 v2.27 %{version};do
 	cp -r %{_builddir}/%{name}-$i $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i
 	cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i
 done
@@ -83,6 +85,25 @@ rm -rf %{buildroot}
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Sun Mar 8 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v2.28-1
+- FEC-417 - Player 2.0 - Share & Embed functionality
+- FEC-2866 - Enable multi-stream for iPad viewers
+- FEC-2918 - Add uiconf id to Google Analytics
+- FEC-2620 - Support vast loadAdsOnPlay property
+- SUP-3996 - Playlist player issus, BOA
+- SUP-3967 - Player requests undefined ciu_szs param
+- SUP-3649 - Adding Class to Spinner using Custom CSS | HTML5 Player
+- SUP-3888 - [2.27.1] Captions cookie does not take any effect
+- SUP-3830 - Player stuck on spinning in iOS after changeMedia is called
+- SUP-3783 - Player and KMC not showing all the captions available
+- SUP-3641 - playlist section vs. video section
+- SUP-3849 - Downloading from player causes no extension on Firefox+Mac
+- SUP-3858 - [2.26-2.27] Captions text color doesn't apply
+- SUP-3850 - HDS source selector broken in 2.24-2.27
+- SUP-3781 - Captions supported in KDP does not in HTML5
+- SUP-3629 - Postmedia No playerPlayed event after prerolls and before contnet with DFP ads
+- SUP-3340 - Live stream freezes for a few seconds when streaming with KRecord
+
 * Sun Feb 8 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v2.27-1
 - SUP-3485 - Chapter playlist gaps and unresponsive in external URL (standalon page) | V2 player | Chapters plugin
 - SUP-3559 - Player gives a "No source video was found"

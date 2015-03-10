@@ -1,7 +1,7 @@
 %define prefix /opt/kaltura
 Name:	kaltura-clipapp
 Version: 1.3
-Release: 1
+Release: 2
 Epoch: 1
 Summary: Kaltura Clipper App 
 License: AGPLv3+	
@@ -34,6 +34,7 @@ This package installs the Kaltura Clipper App, used for clipping segments from a
 %install
 mkdir -p $RPM_BUILD_ROOT%{prefix}/apps/clipapp
 cp -r %{_builddir}/clipapp-%{version} $RPM_BUILD_ROOT/%{prefix}/apps/clipapp/v%{version}
+cp $RPM_BUILD_ROOT/%{prefix}/apps/clipapp/v%{version}/config.kmc.php $RPM_BUILD_ROOT/%{prefix}/apps/clipapp/v%{version}/config.local.php
 #cp %{_builddir}/%{name}/%{version}_saas/config.local.php $RPM_BUILD_ROOT/%{prefix}/apps/clipapp/%{version}/config.local.php
 
 %clean
@@ -42,6 +43,7 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root,-)
 %{prefix}/apps/clipapp
+%config %{prefix}/apps/clipapp/v%{version}/config.local.php
 
 
 %changelog
