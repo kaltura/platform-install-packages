@@ -268,7 +268,7 @@ Front in Kaltura represents the machines hosting the user-facing components, inc
 # yum install kaltura-postinst
 # /opt/kaltura/bin/kaltura-nfs-client-config.sh <NFS host> <domain> <nobody-user> <nobody-group>
 # yum install kaltura-front kaltura-widgets kaltura-html5lib kaltura-html5-studio 
-# /opt/kaltura/bin/kaltura-front-config.sh
+# /opt/kaltura/bin/kaltura-front-config.sh [/path/to/answer/file]
 # . /etc/kaltura.d/system.ini
 Make certain this call returs 200
 # curl -I $SERVICE_URL/api_v3/index.php
@@ -294,7 +294,7 @@ Front in Kaltura represents the machines hosting the user-facing components, inc
 # yum install kaltura-postinst
 # /opt/kaltura/bin/kaltura-nfs-client-config.sh <NFS host> <domain> <nobody-user> <nobody-group>
 # yum install kaltura-front kaltura-html5-studio kaltura-clipapp
-# /opt/kaltura/bin/kaltura-front-config.sh
+# /opt/kaltura/bin/kaltura-front-config.sh  [/path/to/answer/file]
 ```
 **NOTE: you can now configure the balancer to have the node in its pull.**
 
@@ -307,7 +307,7 @@ It is strongly recommended that you install at least 2 batch nodes for redundanc
 # rpm -Uhv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
 # yum install kaltura-postinst
 # /opt/kaltura/bin/kaltura-nfs-client-config.sh <NFS host> <domain> <nobody-user> <nobody-group>
-# yum install kaltura-batch
+# yum install kaltura-batch [/path/to/answer/file]
 # /opt/kaltura/bin/kaltura-batch-config.sh
 ```
 
@@ -322,7 +322,7 @@ The DWH is Kaltura's Analytics server.
 # rpm -Uhv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
 # yum install kaltura-dwh kaltura-postinst
 # /opt/kaltura/bin/kaltura-nfs-client-config.sh <NFS host> <domain> <nobody-user> <nobody-group>
-# /opt/kaltura/bin/kaltura-dwh-config.sh
+# /opt/kaltura/bin/kaltura-dwh-config.sh [/path/to/answer/file]
 ```
 
 ### Nginx VOD Server
