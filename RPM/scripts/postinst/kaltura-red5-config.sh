@@ -40,7 +40,7 @@ if [ ! -r "$RC_FILE" ];then
         exit 2
 fi
 . $RC_FILE
-UI_CONF=`echo "select conf_file_path from ui_conf where tags like '%kmc_uploadWebCam%';"|mysql -u$DB1_USER -P$DB1_PORT -p$DB1_PASS $DB1_NAME -h$DB1_HOST --skip-column-names`
+UI_CONF=`echo "select conf_file_path from ui_conf where tags like '%kmc_uploadWebCam%' LIMIT 1;"|mysql -u$DB1_USER -P$DB1_PORT -p$DB1_PASS $DB1_NAME -h$DB1_HOST --skip-column-names`
 sed -i "s@{HOST_NAME}@$RED5_HOST@g" "$BASE_DIR/web/$UI_CONF"
 
 if [ ! -d /usr/lib/red5/webapps/oflaDemo/streams ];then
