@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.24
-Release: 6
+Release: 7
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -81,6 +81,10 @@ fi
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Sat Mar 14 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.24-7
+- added limit 1 to select conf_file_path from ui_conf where tags like '%kmc_uploadWebCam%' LIMIT 1; 
+  reported by Kinglok, Fong - thank you.
+
 * Sat Feb 28 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.24-6
 - instead of chmoding in cache dir just get rid of it.
 
