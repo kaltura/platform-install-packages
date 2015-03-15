@@ -76,6 +76,7 @@ sed "s#@INSTALLED_HOSNAME@#`hostname`#g" -i  -i $BATCH_MAIN_CONF
 ln -sf $APP_DIR/configurations/logrotate/kaltura_batch /etc/logrotate.d/ 
 ln -sf $APP_DIR/configurations/logrotate/kaltura_apache /etc/logrotate.d/
 ln -sf $APP_DIR/configurations/logrotate/kaltura_apps /etc/logrotate.d/
+ln -sf $APP_DIR/configurations/apache/kaltura.conf /etc/httpd/conf.d/zzzkaltura.conf
 
 mkdir -p $LOG_DIR/batch 
 rm -rf $BASE_DIR/app/cache/*

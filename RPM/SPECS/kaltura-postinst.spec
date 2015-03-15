@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.24
-Release: 7
+Release: 8
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -81,6 +81,9 @@ fi
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Sun Mar 15 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.24-8
+- Symlink Kaltura vhost config to apache conf.d when installing batch.
+
 * Sat Mar 14 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.24-7
 - added limit 1 to select conf_file_path from ui_conf where tags like '%kmc_uploadWebCam%' LIMIT 1; 
   reported by Kinglok, Fong - thank you.
