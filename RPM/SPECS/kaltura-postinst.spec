@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.24
-Release: 8
+Release: 9
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -81,6 +81,9 @@ fi
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Tue Mar 17 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.24-9
+- corrected clipapp sanity check.
+
 * Sun Mar 15 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.24-8
 - Symlink Kaltura vhost config to apache conf.d when installing batch.
 
