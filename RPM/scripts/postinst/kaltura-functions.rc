@@ -494,7 +494,7 @@ check_clipapp_index_page()
 	elif [ -x "`which dpkg-query`" ];then
 		CLIPAPP_VERSION=`dpkg-query -W -f'${Version}' kaltura-clipapp|awk -F "-" '{print $1}'`
 	fi
-	curl -ks "$SERVICE_URL/apps/clipapp/$CLIPAPP_VERSION/index.php"  | grep -q "$GOOD_STRING"
+	curl -ks "$SERVICE_URL/apps/clipapp/v$CLIPAPP_VERSION/index.php"  | grep -q "$GOOD_STRING"
 	if [ $? -eq 0 ];then
 		echo "Successfully found '$GOOD_STRING'"
 		return 0
