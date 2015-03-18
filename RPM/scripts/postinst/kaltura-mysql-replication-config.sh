@@ -18,7 +18,7 @@ if [ $# -lt 4 ];then
 fi
 
 if grep -q '^#.*configured by Kaltura' /etc/my.cnf ;then
-	echo -en "$0 already ran here.\nIf you want to re-run, please edit /etc/my.cnf and remove the comment: 'configured by Kaltura' and re-run $0.\n"
+	echo -e "$0 already ran here.\nIf you want to re-run, please edit /etc/my.cnf and remove the comment: 'configured by Kaltura' and re-run $0."
 	exit 1
 fi
 KALT_REP_USER=$1

@@ -62,8 +62,8 @@ if [ ! -r "$RC_FILE" ];then
 fi
 . $RC_FILE
 
-send_install_becon `basename $0` $ZONE install_start 0
+send_install_beacon `basename $0` $ZONE install_start 0
 ant
 /etc/init.d/WowzaStreamingEngine stop >> /dev/null 2>&1
 /etc/init.d/WowzaStreamingEngine start
-send_install_becon `basename $0` $ZONE install_success 0
+send_install_beacon `basename $0` $ZONE install_success 0

@@ -18,12 +18,12 @@
 KALTURA_FUNCTIONS_RC=`dirname $0`/kaltura-functions.rc
 if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
 	OUT="ERROR: Could not find $KALTURA_FUNCTIONS_RC so, exiting.."
-	echo -e $OUT
+	echo -en $OUT
 	exit 3
 fi
 . $KALTURA_FUNCTIONS_RC
 if ! rpm -q kaltura-batch;then
-	echo -e "${BRIGHT_BLUE}Skipping as kaltura-batch is not installed.${NORMAL}"
+	echo -en "${BRIGHT_BLUE}Skipping as kaltura-batch is not installed.${NORMAL}"
 	exit 0 
 fi
 if [ -r $CONSENT_FILE ];then
@@ -39,19 +39,19 @@ fi
 if [ ! -r /opt/kaltura/app/base-config.lock ];then
 	`dirname $0`/kaltura-base-config.sh "$ANSFILE"
 else
-	echo -e "${BRIGHT_BLUE}base-config completed successfully, if you ever want to re-configure your system (e.g. change DB hostname) run the following script:
+	echo -en "${BRIGHT_BLUE}base-config completed successfully, if you ever want to re-configure your system (e.g. change DB hostname) run the following script:
 # rm /opt/kaltura/app/base-config.lock
 # $BASE_DIR/bin/kaltura-base-config.sh
 ${NORMAL}
 "
 fi
 trap 'my_trap_handler "${LINENO}" ${$?}' ERR
-send_install_becon `basename $0` $ZONE install_start 0 
+send_install_beacon `basename $0` $ZONE install_start 0 
 CONFIG_DIR=/opt/kaltura/app/configurations
 if [ -r $CONFIG_DIR/system.ini ];then
 	. $CONFIG_DIR/system.ini
 else
-	echo -e "${BRIGHT_RED}ERROR: Missing $CONFIG_DIR/system.ini. Exiting..${NORMAL}"
+	echo -en "${BRIGHT_RED}ERROR: Missing $CONFIG_DIR/system.ini. Exiting..${NORMAL}"
 	exit 1
 fi
 
@@ -61,7 +61,7 @@ BATCH_MAIN_CONF=$APP_DIR/configurations/batch/batch.ini
 # if we couldn't access the DB to retrieve the secret, assume the post install has not finished yet.
 BATCH_PARTNER_ADMIN_SECRET=`echo "select admin_secret from partner where id=-1"|mysql -N -h$DB1_HOST -u$DB1_USER -p$DB1_PASS $DB1_NAME -P$DB1_PORT`
 if [ -z "$BATCH_PARTNER_ADMIN_SECRET" ];then
-	echo -e "${BRIGHT_RED}ERROR: could not retreive partner.admin_secret for id -1. It probably means you did not yet run $APP_DIR/kaltura-base-config.sh yet. Please do.${NORMAL}" 
+	echo -en "${BRIGHT_RED}ERROR: could not retreive partner.admin_secret for id -1. It probably means you did not yet run $APP_DIR/kaltura-base-config.sh yet. Please do.${NORMAL}" 
 	exit 2
 fi
 
@@ -96,4 +96,4 @@ ln -sf $BASE_DIR/app/configurations/monit/monit.avail/batch.rc $BASE_DIR/app/con
 ln -sf $BASE_DIR/app/configurations/monit/monit.avail/httpd.rc $BASE_DIR/app/configurations/monit/monit.d/enabled.httpd.rc
 /etc/init.d/kaltura-monit stop >> /dev/null 2>&1
 /etc/init.d/kaltura-monit start
-send_install_becon `basename $0` $ZONE install_success 0 
+send_install_beacon `basename $0` $ZONE install_success 0 

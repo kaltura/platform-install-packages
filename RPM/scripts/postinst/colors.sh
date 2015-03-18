@@ -78,9 +78,3 @@ BRIGHT_WHITE="\033[${BRIGHT};${FG_WHITE}m"
 # REV TEXT as an example
 REV_CYAN="\033[${DULL};${BG_WHITE};${BG_CYAN}m"
 REV_RED="\033[${DULL};${FG_YELLOW}; ${BG_RED}m"
-
-JESS="Jess likes this one :)"
-#echo -e "${BRIGHT_BLUE}What's up?${NORMAL}"
-#echo -e "${BRIGHT_BLUE}$JESS${NORMAL}"
-#echo -e "${YELLOW}Jess likes this one :)${NORMAL}"
-

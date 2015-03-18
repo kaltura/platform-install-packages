@@ -21,17 +21,17 @@ verify_user_input()
         . $ANSFILE
         RC=0
         for VAL in TIME_ZONE KALTURA_FULL_VIRTUAL_HOST_NAME KALTURA_VIRTUAL_HOST_NAME DB1_HOST DB1_PORT DB1_NAME DB1_USER SERVICE_URL SPHINX_SERVER1 SPHINX_SERVER2 DWH_HOST DWH_PORT SPHINX_DB_HOST SPHINX_DB_PORT ADMIN_CONSOLE_ADMIN_MAIL ADMIN_CONSOLE_PASSWORD SUPER_USER SUPER_USER_PASSWD CDN_HOST KALTURA_VIRTUAL_HOST_PORT DB1_PASS DWH_PASS PROTOCOL RED5_HOST USER_CONSENT VOD_PACKAGER_HOST VOD_PACKAGER_PORT IP_RANGE; do
-                if [ -z "${!VAL}" ];then
-                        VALS="$VALS\n$VAL"
-                        RC=1
-                fi
+			if [ -z "${!VAL}" ];then
+					VALS="$VALS\n$VAL"
+					RC=1
+			fi
         done
         if [ $RC -eq 1 ];then
                 OUT="ERROR: Missing the following params in $ANSFILE
                 $VALS
                 "
-                echo -en "${BRIGHT_RED}$OUT${NORMAL}\n"
-                send_install_becon kaltura-base $ZONE "install_fail"  "$OUT"
+                echo -e "${BRIGHT_RED}$OUT${NORMAL}"
+                send_install_beacon kaltura-base $ZONE "install_fail"  "$OUT"
                 exit $RC 
         fi
 }
@@ -49,7 +49,7 @@ create_answer_file()
                         sed -i "s#@ANSFILE@#$ANSFILE#g" $POST_INST_MAIL_TMPL 
         fi
 	chmod 600 $ANSFILE
-        echo -en "${CYAN}
+        echo -e "${CYAN}
 ========================================================================================================================
 Kaltura install answer file written to $ANSFILE  -  Please save it!
 This answers file can be used to silently-install re-install this machine or deploy other hosts in your cluster.
@@ -62,7 +62,7 @@ ${NORMAL}
 KALTURA_FUNCTIONS_RC=`dirname $0`/kaltura-functions.rc
 if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
         OUT="${BRIGHT_RED}ERROR:could not find $KALTURA_FUNCTIONS_RC so, exiting..${NORMAL}"
-        echo -en $OUT
+        echo -e $OUT
         exit 3
 fi
 . $KALTURA_FUNCTIONS_RC
@@ -77,7 +77,7 @@ ${NORMAL}"
         exit 0 
 fi
 trap 'my_trap_handler "${LINENO}" ${$?}' ERR
-send_install_becon `basename $0` $ZONE install_start 0
+send_install_beacon `basename $0` $ZONE install_start 0
 BASE_DIR=/opt/kaltura
 LOCALHOST=127.0.0.1
 DISPLAY_NAME=`rpm -q kaltura-base --queryformat %{version}`
@@ -88,226 +88,217 @@ FORUMS_URLS=http://bit.ly/KalturaForums
 echo -e "${CYAN}Welcome to Kaltura Server $DISPLAY_NAME post install setup.${NORMAL}"
 
 if [ -n "$1" -a -r "$1" ];then
-        ANSFILE=$1
-        verify_user_input $ANSFILE
-        . $ANSFILE
-        export ANSFILE
+	ANSFILE=$1
+	verify_user_input $ANSFILE
+	. $ANSFILE
+	export ANSFILE
 else
-        if [ -r $CONSENT_FILE ];then
-                . $CONSENT_FILE
-        elif [ -z "$USER_CONSENT" ];then
-                get_tracking_consent
-        fi
-        . $CONSENT_FILE
+	get_tracking_consent
 	get_newsletter_consent
-       # echo "Welcome to Kaltura Server $DISPLAY_NAME post install setup.
-echo -e "\n${CYAN}In order to finalize the system configuration, please input the following:
+	. $CONSENT_FILE
 
-
-CDN hostname [${YELLOW}`hostname`${CYAN}]:${NORMAL}"
-        read -e CDN_HOST
-        if [ -z "$CDN_HOST" ];then
-                CDN_HOST=`hostname`
-
-        fi
-
-        echo -e "${CYAN}Apache virtual hostname [${YELLOW}`hostname`${CYAN}]
-(Must be accessible from both inside the machine and from any clients / browsers that will use Kaltura):
-${NORMAL} "
-        read -e KALTURA_VIRTUAL_HOST_NAME
-        if [ -z "$KALTURA_VIRTUAL_HOST_NAME" ];then
-                KALTURA_VIRTUAL_HOST_NAME=`hostname`
-                #echo $KALTURA_VIRTUAL_HOST_NAME
-        fi
-
-        echo -en "${CYAN}Vhost port to listen on [${YELLOW}80${CYAN}]:${NORMAL} "
-        read -e KALTURA_VIRTUAL_HOST_PORT
-        if [ -z "$KALTURA_VIRTUAL_HOST_PORT" ];then
-                KALTURA_VIRTUAL_HOST_PORT=80
-        fi
-        KALTURA_FULL_VIRTUAL_HOST_NAME="$KALTURA_VIRTUAL_HOST_NAME:$KALTURA_VIRTUAL_HOST_PORT"
-
-        if [ -z "$DB1_HOST" ];then
-                echo -en "${CYAN}DB hostname [${YELLOW}$LOCALHOST${CYAN}]:${NORMAL} "
-                read -e DB1_HOST
-                if [ -z "$DB1_HOST" ];then
-                        DB1_HOST=$LOCALHOST
-                fi
-        fi
-
-
-        echo -en "${CYAN}range of ip addresses belonging to internal kaltura servers [${YELLOW}0.0.0.0-255.255.255.255${CYAN}]:${NORMAL} 
-The range is used when checking service actions permissions and allowing to access certain services without KS from the internal servers.
-The default is only good for testing, on a production ENV you should adjust according to your network.
-"
-	read IP_RANGE
-	if [ -z "$IP_RANGE" ];then
-		IP_RANGE="0.0.0.0-255.255.255.255"
+	echo -e "${CYAN}In order to finalize the system configuration, please answer the below questions.${NORMAL}"
+	echo -en "${CYAN}Apache virtual hostname [${YELLOW}`hostname`${CYAN}]:${NORMAL}"
+	read -e KALTURA_VIRTUAL_HOST_NAME
+	if [ -z "$KALTURA_VIRTUAL_HOST_NAME" ];then
+		KALTURA_VIRTUAL_HOST_NAME=`hostname`
+	fi
+	if ping -c1 $KALTURA_VIRTUAL_HOST_NAME >> /dev/null 2>&1 ];then
+		echo -e "${BRIGHT_RED}Host could not be reached, please make sure that the host can be reached before installing"
+		exit 1
+	fi
+	echo -en "${CYAN}CDN hostname [${YELLOW}`hostname`${CYAN}]:${NORMAL} "
+	read -e CDN_HOST
+	if [ -z "$CDN_HOST" ];then
+			CDN_HOST=`hostname`
 	fi
 
+	echo -en "${CYAN}Vhost port to listen on [${YELLOW}80${CYAN}]:${NORMAL} "
+	read -e KALTURA_VIRTUAL_HOST_PORT
+	if [ -z "$KALTURA_VIRTUAL_HOST_PORT" ];then
+			KALTURA_VIRTUAL_HOST_PORT=80
+	fi
+	if [ $KALTURA_VIRTUAL_HOST_PORT -eq 80 ];then
+		KALTURA_FULL_VIRTUAL_HOST_NAME="$KALTURA_VIRTUAL_HOST_NAME"
+		PROTOCOL="http"
+	elif [ $KALTURA_VIRTUAL_HOST_PORT -eq 443 ];then
+		KALTURA_FULL_VIRTUAL_HOST_NAME="$KALTURA_VIRTUAL_HOST_NAME"
+		PROTOCOL="https"
+	else
+		KALTURA_FULL_VIRTUAL_HOST_NAME="$KALTURA_VIRTUAL_HOST_NAME:$KALTURA_VIRTUAL_HOST_PORT"
+	fi
 
-        echo -en "${CYAN}DB port [${YELLOW}3306${CYAN}]:${NORMAL} "
-        read -e DB1_PORT
-        if [ -z "$DB1_PORT" ];then
-                DB1_PORT=3306
-        fi
+	if [ -z "$DB1_HOST" ];then
+		echo -en "${CYAN}DB hostname [${YELLOW}$LOCALHOST${CYAN}]:${NORMAL} "
+		read -e DB1_HOST
+		if [ -z "$DB1_HOST" ];then
+			DB1_HOST=$LOCALHOST
+		fi
+	fi
 
-	echo -en "${CYAN}MySQL super user [only for install, default root]:${NORMAL} "
+	echo -e "The below range is used when checking service actions permissions and allowing to access certain services without KS from the internal servers."
+	echo -e "The default is only good for testing, on a production ENV you should adjust according to your network."
+	
+	echo -en "${CYAN}range of ip addresses belonging to internal kaltura servers [${YELLOW}127.0.0.1${CYAN}]:${NORMAL} "
+		read -e IP_RANGE
+	if [ -z "$IP_RANGE" ];then
+		IP_RANGE="127.0.0.1"
+	fi
+
+	echo -en "${CYAN}DB port [${YELLOW}3306${CYAN}]:${NORMAL} "
+	read -e DB1_PORT
+	if [ -z "$DB1_PORT" ];then
+			DB1_PORT=3306
+	fi
+
+	echo -en "${CYAN}MySQL super user (only for install) [${YELLOW}root${CYAN}]:${NORMAL} "
 	read -e SUPER_USER
 	if [ -z "$SUPER_USER" ];then
 		SUPER_USER=root
 	fi
-        while [ -z "$SUPER_USER_PASSWD" ];do
-                echo -en "${CYAN}MySQL super user passwd [only for install]:${NORMAL}\n "
-                read -s SUPER_USER_PASSWD
-        done
+	while [ -z "$SUPER_USER_PASSWD" ];do
+			echo -en "${CYAN}MySQL super user passwd [only for install]:${NORMAL} "
+			read -e SUPER_USER_PASSWD
+	done
 
-        echo -en "${CYAN}Analytics DB hostname [${YELLOW}$DB1_HOST${CYAN}]:${NORMAL}"
-        read -e DWH_HOST
-        if [ -z "$DWH_HOST" ];then
-                DWH_HOST=$DB1_HOST
-        fi
+	echo -en "${CYAN}Analytics DB hostname [${YELLOW}$DB1_HOST${CYAN}]:${NORMAL} "
+	read -e DWH_HOST
+	if [ -z "$DWH_HOST" ];then
+			DWH_HOST=$DB1_HOST
+	fi
 
-        echo -en "${CYAN}Analytics DB port [${YELLOW}$DB1_PORT${CYAN}]:${NORMAL}"
-        read -e DWH_PORT
-        if [ -z "$DWH_PORT" ];then
-                DWH_PORT=$DB1_PORT
-        fi
+	echo -en "${CYAN}Analytics DB port [${YELLOW}$DB1_PORT${CYAN}]:${NORMAL} "
+	read -e DWH_PORT
+	if [ -z "$DWH_PORT" ];then
+			DWH_PORT=$DB1_PORT
+	fi
 
-        if [ -z "$SPHINX_SERVER1" ];then
-                echo -en "${CYAN}Sphinx hostname [${YELLOW}$LOCALHOST${CYAN}]:${NORMAL} "
-                read -e SPHINX_SERVER1
-                if [ -z $SPHINX_SERVER1 ];then
-                        SPHINX_SERVER1="$LOCALHOST"
-                fi
-        fi
+	echo -en "${CYAN}Sphinx hostname [${YELLOW}$LOCALHOST${CYAN}]:${NORMAL} "
+	read -e SPHINX_SERVER1
+	if [ -z $SPHINX_SERVER1 ];then
+		SPHINX_SERVER1="$LOCALHOST"
+	fi
 
-        if [ -z "$RED5_HOST" ];then
-                echo -en "${CYAN}Media Streaming Server host [${YELLOW}`hostname`${CYAN}]:${NORMAL} "
-                read -e RED5_HOST
-                if [ -z $RED5_HOST ];then
-                        RED5_HOST=`hostname`
-                fi
-        fi
-        echo -en "${CYAN}Secondary Sphinx hostname [leave empty if none]: ${NORMAL} "
-        read -e SPHINX_SERVER2
-        if [ -z $SPHINX_SERVER2 ];then
-                SPHINX_SERVER2=" "
-        fi
+	echo -en "${CYAN}Media Streaming Server host [${YELLOW}`hostname`${CYAN}]:${NORMAL} "
+	read -e RED5_HOST
+	if [ -z $RED5_HOST ];then
+		RED5_HOST=`hostname`
+	fi
 
-        while [ -z "$SERVICE_URL" ];do
-                if [ "$KALTURA_VIRTUAL_HOST_PORT" -eq 443 ];then
-                        PROTOCOL="https"
-                else
-                        PROTOCOL="http"
-                fi
-                echo -e "${CYAN}Your Kaltura Service URL [${YELLOW}$PROTOCOL://$KALTURA_FULL_VIRTUAL_HOST_NAME${CYAN}]
-(Base URL where the Kaltura API and Apps will be accessed from - this would be your Load Balancer URL on a cluster or same as your virtual host in an all-in-one Kaltura server - Must be accessible from both inside the machine and from any clients / browsers that will use Kaltura):
-${NORMAL} "
-                read -e SERVICE_URL
-                if [ -z "$SERVICE_URL" ];then
-                        SERVICE_URL=$PROTOCOL://$KALTURA_FULL_VIRTUAL_HOST_NAME
-                fi
-        done
-        echo -en "${CYAN}VOD packager hostname [${YELLOW}`hostname`${CYAN}]:${NORMAL} "
-        read -e VOD_PACKAGER_HOST
-        if [ -z "$VOD_PACKAGER_HOST" ];then
-                VOD_PACKAGER_HOST=`hostname`
-        fi
+	echo -en "${CYAN}Secondary Sphinx hostname [leave empty if none]: ${NORMAL} "
+	read -e SPHINX_SERVER2
+	if [ -z "$SPHINX_SERVER2" ];then
+		SPHINX_SERVER2=""
+	fi
 
-        echo -en "${CYAN}VOD packager port to listen on [${YELLOW}88${CYAN}]:${NORMAL} "
-        read -e VOD_PACKAGER_PORT
-        if [ -z "$VOD_PACKAGER_PORT" ];then
-                VOD_PACKAGER_PORT=88
-        fi
-        while [ -z "$ADMIN_CONSOLE_ADMIN_MAIL" ];do
-                echo -en "${CYAN}Kaltura Admin user (email address):${NORMAL} "
-                read -e ADMIN_CONSOLE_ADMIN_MAIL
-        done
-        while [ -z "$ADMIN_CONSOLE_PASSWORD" ];do
-                echo -en "${CYAN}Admin user login password (must be minimum 8 chars and include at least one of each: upper-case, lower-case, number and a special character):${NORMAL}"
-                read -s ADMIN_CONSOLE_PASSWORD
-                if echo $ADMIN_CONSOLE_PASSWORD | grep -q "/" ;then
-                        echo -en "${BRIGHT_RED}ERROR: Passwd can't have the '/' char in it. Please re-input.${NORMAL}"
-                        unset ADMIN_CONSOLE_PASSWORD
-                fi
-        done
-
-        while [ -z "$ANSFILE" -a -z "$AGAIN_ADMIN_CONSOLE_PASSWORD" ];do
-                echo -en "\n${CYAN}Confirm passwd:${NORMAL} \n"
-                read -s AGAIN_ADMIN_CONSOLE_PASSWORD
-                if [ "$ADMIN_CONSOLE_PASSWORD" != "$AGAIN_ADMIN_CONSOLE_PASSWORD" ];then
-                        echo -en "${BRIGHT_RED}ERROR: Passwds do not match, again please.${NORMAL}" 
-                        unset AGAIN_ADMIN_CONSOLE_PASSWORD
-                        echo -en "${BRIGHT_RED}ERROR: Admin user login password (must be minimum 8 chars and include at least one of each: upper-case, lower-case, number and a special character): ${NORMAL}"
-                        read -s ADMIN_CONSOLE_PASSWORD
-                fi
-        done
-        if [ -r /etc/sysconfig/clock ];then
-                . /etc/sysconfig/clock
-        fi
-        while [ -z "$TIME_ZONE" ];do
-                if [ -n "$ZONE" ];then
-                        echo -en "${CYAN}Your time zone [see http://php.net/date.timezone], or press enter for [${YELLOW}$ZONE${CYAN}]: ${NORMAL}"
-                else
-                        echo -en "${CYAN}Your time zone [see http://php.net/date.timezone]: ${NORMAL}"
-                fi
-                read -e TIME_ZONE
-                if [ -z "$TIME_ZONE" -a -n "$ZONE" ];then
-                        TIME_ZONE="$ZONE"
-                fi
-		trap - ERR
-		php -r "if (timezone_open('$TIME_ZONE') === false){exit(1);}" 2>/dev/null
-		RC=$?
-		trap 'my_trap_handler "${LINENO}" ${$?}' ERR
-		if [ $RC -ne 0 ];then
-			echo -e "${BRIGHT_RED}Bad Timezone value, please check valid options at http://php.net/date.timezone${NORMAL}"
-			unset TIME_ZONE
+	while [ -z "$SERVICE_URL" ];do
+		echo -e "Please enter the URL where the Kaltura API and Apps will be accessed from - this would be your Load Balancer URL on a cluster or same as your virtual host in an all-in-one Kaltura server."
+		echo -e	"This URL must be accessible from both inside the machine and from any clients / browsers that will use Kaltura)"
+		echo -en "${CYAN}Kaltura Service URL [${YELLOW}$PROTOCOL://$KALTURA_FULL_VIRTUAL_HOST_NAME${CYAN}]:${NORMAL} "
+		read -e SERVICE_URL
+		if [ -z "$SERVICE_URL" ];then
+				SERVICE_URL=$PROTOCOL://$KALTURA_FULL_VIRTUAL_HOST_NAME
 		fi
-        done
+	done
+	
+	echo -en "${CYAN}VOD packager hostname [${YELLOW}`hostname`${CYAN}]:${NORMAL} "
+	read -e VOD_PACKAGER_HOST
+	if [ -z "$VOD_PACKAGER_HOST" ];then
+			VOD_PACKAGER_HOST=`hostname`
+	fi
+
+	echo -en "${CYAN}VOD packager port to listen on [${YELLOW}88${CYAN}]:${NORMAL} "
+	read -e VOD_PACKAGER_PORT
+	if [ -z "$VOD_PACKAGER_PORT" ];then
+			VOD_PACKAGER_PORT=88
+	fi
+	
+	while [ -z "$ADMIN_CONSOLE_ADMIN_MAIL" ];do
+			echo -en "${CYAN}Kaltura Admin user (email address):${NORMAL} "
+			read -e ADMIN_CONSOLE_ADMIN_MAIL
+	done
+	
+	while [ -z "$ADMIN_CONSOLE_PASSWORD" ];do
+		echo -en "${CYAN}Admin user login password (at least one upper-case, lower-case, number and special character):${NORMAL} "
+		read -e ADMIN_CONSOLE_PASSWORD
+		if echo $ADMIN_CONSOLE_PASSWORD | grep -q "/" ;then
+			echo -e "${BRIGHT_RED}ERROR: Password can't have the '/' char in it. Please try again.${NORMAL}"
+			unset ADMIN_CONSOLE_PASSWORD
+		fi
+		score=0
+		for re in '[[:digit:]]' '[[:lower:]]' '[[:punct:]]' '[[:space:]]' '[[:upper:]]';do
+			if [[ $ADMIN_CONSOLE_PASSWORD =~ $re ]];then 
+				let score=score+1
+			fi
+		done
+		if [ $score -lt 4 ];then
+			echo -e "${BRIGHT_RED}ERROR: Password does not meet minimum security requirements. Please try again.${NORMAL}"
+			unset ADMIN_CONSOLE_PASSWORD
+		fi
+	done
+
+	while [ -z "$AGAIN_ADMIN_CONSOLE_PASSWORD" ];do
+		echo -en "${CYAN}Confirm password:${NORMAL} "
+		read -e AGAIN_ADMIN_CONSOLE_PASSWORD
+		if [ "$ADMIN_CONSOLE_PASSWORD" != "$AGAIN_ADMIN_CONSOLE_PASSWORD" ];then
+			echo -e "${BRIGHT_RED}ERROR: Passwords do not match, again please.${NORMAL}" 
+			unset AGAIN_ADMIN_CONSOLE_PASSWORD
+		fi
+	done
+
+	if [ -r /etc/sysconfig/clock ];then
+			. /etc/sysconfig/clock
+	fi
+	while [ -z "$TIME_ZONE" ];do
+			if [ -n "$ZONE" ];then
+					echo -ne "${CYAN}Your time zone [see http://php.net/date.timezone], or press enter for [${YELLOW}$ZONE${CYAN}]: ${NORMAL}"
+			else
+					echo -ne "${CYAN}Your time zone [see http://php.net/date.timezone]: ${NORMAL}"
+			fi
+			read -e TIME_ZONE
+			if [ -z "$TIME_ZONE" -a -n "$ZONE" ];then
+					TIME_ZONE="$ZONE"
+			fi
+	trap - ERR
+	php -r "if (timezone_open('$TIME_ZONE') === false){exit(1);}" 2>/dev/null
+	RC=$?
+	trap 'my_trap_handler "${LINENO}" ${$?}' ERR
+	if [ $RC -ne 0 ];then
+		echo -e "${BRIGHT_RED}Bad Timezone value, please check valid options at http://php.net/date.timezone${NORMAL}"
+		unset TIME_ZONE
+	fi
+	done
 
 
-        if [ -z "$ENVIRONMENT_NAME" ];then
-                echo -en "${CYAN}Your Kaltura install name (this name will show as the From field in emails sent by the system) [${YELLOW}Kaltura Video Platform${CYAN}]:${NORMAL}"
-                read ENVIRONMENT_NAME
-                if [ -z "$ENVIRONMENT_NAME" ];then
-                        ENVIRONMENT_NAME="Kaltura Video Platform"
-                fi
-        fi
+	echo -en "${CYAN}Your Kaltura install name (this name will show as the From field in emails sent by the system) [${YELLOW}Kaltura Video Platform${CYAN}]:${NORMAL}"
+	read -e ENVIRONMENT_NAME
+	if [ -z "$ENVIRONMENT_NAME" ];then
+			ENVIRONMENT_NAME="Kaltura Video Platform"
+	fi
 
-        if [ -z "$CONTACT_URL" ];then
-                echo -en "${CYAN}Your website Contact Us URL [${YELLOW}http://corp.kaltura.com/company/contact-us${CYAN}]:${NORMAL} "
-                read CONTACT_URL
-                if [ -z "$CONTACT_URL" ];then
-                        CONTACT_URL="http://corp.kaltura.com/company/contact-us"
-                fi
-        fi
-        if [ -z "$CONTACT_PHONE_NUMBER" ];then
-                echo -en "${CYAN}Your 'Contact us' phone number [${YELLOW}+1 800 871 5224${CYAN}]:${NORMAL}"
-                read CONTACT_PHONE_NUMBER
-                if [ -z "$CONTACT_PHONE_NUMBER" ];then
-                        CONTACT_PHONE_NUMBER="+1 800 871 5224"
-                fi
-        fi
-
-
-
-
-
-
+	echo -en "${CYAN}Your website Contact Us URL [${YELLOW}http://corp.kaltura.com/company/contact-us${CYAN}]:${NORMAL} "
+	read -e CONTACT_URL
+	if [ -z "$CONTACT_URL" ];then
+			CONTACT_URL="http://corp.kaltura.com/company/contact-us"
+	fi
+	
+	echo -en "${CYAN}Your 'Contact us' phone number [${YELLOW}+1 800 871 5224${CYAN}]:${NORMAL} "
+	read -e CONTACT_PHONE_NUMBER
+	if [ -z "$CONTACT_PHONE_NUMBER" ];then
+			CONTACT_PHONE_NUMBER="+1 800 871 5224"
+	fi
 
 fi
 
-# need to check if we even have PHP as Sphinx and DWH can be installed without thank heavens.
-# reported by David Bezemer:
- for INI in /etc/php.ini /etc/php.d/*kaltura*ini;do
-        if [ -r "$INI" ];then
-                sed -i "s#\(date.timezone\)\s*=.*#\1='$TIME_ZONE'#g" $INI
-        fi
+# Need to check if we have PHP as Sphinx and DWH can be installed without PHP installed.
+for INI in /etc/php.ini /etc/php.d/*kaltura*ini;do
+	if [ -r "$INI" ];then
+		sed -i "s#\(date.timezone\)\s*=.*#\1='$TIME_ZONE'#g" $INI
+	fi
 done
 if [ -z "$DB1_PASS" ];then
-        DB1_PASS=`< /dev/urandom tr -dc A-Za-z0-9 | head -c15`
-        echo "update mysql.user set password=PASSWORD('$DB1_PASS') WHERE user='kaltura';flush PRIVILEGES" | mysql -h$DB1_HOST -P$DB1_PORT -u$SUPER_USER -p$SUPER_USER_PASSWD mysql
+	DB1_PASS=`< /dev/urandom tr -dc A-Za-z0-9 | head -c15`
+	echo "update mysql.user set password=PASSWORD('$DB1_PASS') WHERE user='kaltura';flush PRIVILEGES" | mysql -h$DB1_HOST -P$DB1_PORT -u$SUPER_USER -p$SUPER_USER_PASSWD mysql
 	if [ -z "$DWH_PASS" ];then
 		DWH_PASS=$DB1_PASS
 	fi
@@ -448,7 +439,7 @@ for TMPL in $CONFS;do
 done
 
 if [ ! -r "$BASE_DIR/app/base-config-generator.lock" ];then
-        echo -en "
+        echo -e "
 ${CYAN}Generating client libs...
 This can take a few minutes to complete, see log at $BASE_DIR/log/generate.php.log.
 ${NORMAL}
@@ -481,9 +472,5 @@ fi
 
 
 echo -e "${BRIGHT_BLUE}Configuration of $DISPLAY_NAME finished successfully!${NORMAL}"
-send_install_becon `basename $0` $ZONE install_success 0
+send_install_beacon `basename $0` $ZONE install_success 0
 write_last_base_version
-#if [ -x /etc/init.d/httpd ];then
-#	service httpd reload
-#fi
-
