@@ -30,7 +30,7 @@ fi
 KALTURA_FUNCTIONS_RC=`dirname $0`/kaltura-functions.rc
 if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
 	OUT="ERROR:could not find $KALTURA_FUNCTIONS_RC so, exiting.."
-	echo -en $OUT
+	echo -e $OUT
 	exit 3
 fi
 . $KALTURA_FUNCTIONS_RC

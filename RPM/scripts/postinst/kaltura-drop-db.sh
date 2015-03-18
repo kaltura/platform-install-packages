@@ -39,13 +39,13 @@ You can use /opt/kaltura/bin/kaltura-export-db.sh to export the data.
 Are you absolutely certain you want this? [n/Y]
 ${NORMAL}
 "
-read AN
+read -e AN
 if [ "$AN" != 'Y' ];then
 	echo "Aborting. To remove hit UPPER CASED 'Y'"
 	exit 1
 fi
 echo "root DB passwd:"
-read -s DBPASSWD
+read -e DBPASSWD
 for i in $DBS;do
 	echo "Removing $i" 
 	echo "drop database $i" | mysql -h$DB1_HOST -p$DBPASSWD -P$DB1_PORT ;

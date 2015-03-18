@@ -18,11 +18,11 @@ XERCES_VER=2.8.1
 rpm -ihv http://mirrors.coreix.net/fedora-epel/6/x86_64/epel-release-6-8.noarch.rpm
 yum install -y ant tomcat java-$JAVA_VER-openjdk-devel
 if [ -z "$CATALINA_HOME" ];then
-        echo -e "${CYAN}Input path to CATALINA_HOME:${NORMAL}"
+        echo -en "${CYAN}Input path to CATALINA_HOME:${NORMAL}"
         read -e CATALINA_HOME
 fi
 if [ -z "$JAVA_HOME" ];then
-        echo -e "${CYAN}Input path to JAVA_HOME:${NORMAL}"
+        echo -en "${CYAN}Input path to JAVA_HOME:${NORMAL}"
         read -e JAVA_HOME
 fi
 echo "
@@ -78,7 +78,7 @@ params.maxTimeBeforeFail                                                        
 " >> $APP_DIR/configurations/batch/batch.ini
 /etc/init.d/kaltura-batch restart
 service httpd reload
-echo -e "${CYAN}Deploying BPM related population code..${NORMAL}"
+echo -en "${CYAN}Deploying BPM related population code..${NORMAL}"
 mysql -u$DB1_USER -p$DB1_PASS $DB1_NAME <  $APP_DIR/deployment/updates/sql/2014_11_20_business_process_server.sql
 cd $APP_DIR
 php deployment/updates/scripts/add_permissions/2014_11_20_business_process_server_permissions.php
@@ -104,7 +104,7 @@ set +e
 /etc/init.d/tomcat restart
 sleep 20
 while [ ! -d /usr/share/tomcat/webapps/activiti-rest ];do
-	echo -e "${CYAN}Waiting for Tomcat to finish deploying activiti-rest..${NORMAL}"
+	echo -en "${CYAN}Waiting for Tomcat to finish deploying activiti-rest..${NORMAL}"
 	sleep 10
 done
 echo "jdbc.driver=com.mysql.jdbc.Driver
@@ -112,7 +112,7 @@ jdbc.url=jdbc:mysql://$DB1_HOST:$DB1_PORT/activiti
 jdbc.username=$DB1_USER
 jdbc.password=$DB1_PASS" > $CATALINA_HOME/webapps/activiti-rest/WEB-INF/classes/db.properties
 while [ ! -d /usr/share/tomcat/webapps/activiti-explorer ];do
-	echo -e "${CYAN}Waiting for Tomcat to finish deploying activiti-rest..${NORMAL}"
+	echo -en "${CYAN}Waiting for Tomcat to finish deploying activiti-rest..${NORMAL}"
 	sleep 10
 done
 echo "jdbc.driver=com.mysql.jdbc.Driver
@@ -123,9 +123,9 @@ jdbc.password=$DB1_PASS" > $CATALINA_HOME/webapps/activiti-explorer/WEB-INF/clas
 #read ready
 set -e
 # Allow tomcat to start listeners 
-echo -e "${CYAN}Checking availability of http://127.0.0.1:8080/activiti-explorer..${NORMAL}"
+echo -en "${CYAN}Checking availability of http://127.0.0.1:8080/activiti-explorer..${NORMAL}"
 curl  -I -v http://127.0.0.1:8080/activiti-explorer/
-echo -e "${CYAN}Initializing activiti database..${NORMAL}"
+echo -en "${CYAN}Initializing activiti database..${NORMAL}"
 echo "CREATE DATABASE activiti;
 GRANT ALL ON activiti.* TO '$DB1_USER'@'%';
 FLUSH PRIVILEGES;" | mysql -uroot -p$SUPER_USER_PASSWD 
@@ -139,5 +139,5 @@ php $APP_DIR/tests/standAloneClient/exec.php $APP_DIR/tests/standAloneClient/act
 #PARTNER_ID=`php $BASE_DIR/bin/create_partner.php $ADMIN_PARTNER_SECRET bmp_partner@kaltura.com testingpasswd $SERVICE_URL 2>&1`
 #ADMIN_PARTNER_SECRET=`echo "select admin_secret from partner where id=$PARTNER_ID" | mysql -N -h $DB1_HOST -p$DB1_PASS $DB1_NAME -u$DB1_USER  -P$DB1_PORT`
 #$BASE_DIR/bin/create_metadata.php $PARTNER_ID $MINUS_TWO_ADMIN_PARTNER_SECRET $SERVICE_URL $BASE_DIR/bin/Transcript.xml
-#echo -e "${CYAN}Created partner $PARTNER_ID [bmp_partner@kaltura.com] and generated custom metadata needed for BPM${NORMAL}"
+#echo -en "${CYAN}Created partner $PARTNER_ID [bmp_partner@kaltura.com] and generated custom metadata needed for BPM${NORMAL}"
 #$BASE_DIR/bin/create_bpmn_notifications.php $PARTNER_ID $MINUS_TWO_ADMIN_PARTNER_SECRET $SERVICE_URL

@@ -22,30 +22,30 @@ if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
 fi
 . $KALTURA_FUNCTIONS_RC
 if [ "$#" -lt 4 ];then
-	echo -e "${BRIGHT_RED}Usage: $0 <mysql-hostname> <mysql-super-user> <mysql-super-user-passwd> <mysql-port> [upgrade]${NORMAL}"
+	echo -en "${BRIGHT_RED}Usage: $0 <mysql-hostname> <mysql-super-user> <mysql-super-user-passwd> <mysql-port> [upgrade]${NORMAL}"
 	exit 1
 fi
 
 RC_FILE=/etc/kaltura.d/system.ini
 if [ ! -r "$RC_FILE" ];then
-	echo -e "${BRIGHT_RED}ERROR: could not find $RC_FILE so, exiting..${NORMAL}"
+	echo -en "${BRIGHT_RED}ERROR: could not find $RC_FILE so, exiting..${NORMAL}"
 	exit 2
 fi
 . $RC_FILE
 DB_ACTIONS_RC=`dirname $0`/db_actions.rc
 if [ ! -r "$DB_ACTIONS_RC" ];then
-	echo -e "${BRIGHT_RED}ERROR: could not find $DB_ACTIONS_RC so, exiting..${NORMAL}"
+	echo -en "${BRIGHT_RED}ERROR: could not find $DB_ACTIONS_RC so, exiting..${NORMAL}"
 	exit 3
 fi
 . $DB_ACTIONS_RC
 KALTURA_FUNCTIONS_RC=`dirname $0`/kaltura-functions.rc
 if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
-	echo -e "${BRIGHT_RED}ERROR: could not find $KALTURA_FUNCTIONS_RC so, exiting..${NORMAL}"
+	echo -en "${BRIGHT_RED}ERROR: could not find $KALTURA_FUNCTIONS_RC so, exiting..${NORMAL}"
 	exit 3
 fi
 . $KALTURA_FUNCTIONS_RC
 trap 'my_trap_handler "${LINENO}" ${$?}' ERR
-send_install_becon `basename $0` $ZONE install_start 0 
+send_install_beacon `basename $0` $ZONE install_start 0 
 
 MYSQL_HOST=$1
 MYSQL_SUPER_USER=$2
@@ -61,17 +61,17 @@ fi
 KALTURA_DB=$DB1_NAME
 
 # check DB connectivity:
-echo -e "${CYAN}Checking MySQL version..${NORMAL}"
+echo -en "${CYAN}Checking MySQL version..${NORMAL}"
 MYVER=`echo "select version();" | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT -N`
 MYMAJVER=`echo $MYVER| awk -F "." '{print $1}'`
 MYMINORVER=`echo $MYVER| awk -F "." '{print $2}'`
 
 if [ "$MYMAJVER" -ne 5 ];then
-	echo -e "${BRIGHT_RED}Your version of MySQL is not compatible with Kaltura at the moment. 
+	echo -en "${BRIGHT_RED}Your version of MySQL is not compatible with Kaltura at the moment. 
 Please install and configure MySQL 5.1 according to the instructions on the Kaltura install manual before proceeding with the Kaltura installation.${NORMAL}"
 	exit 1
 else
-	echo -e "${CYAN}Ver $MYVER found compatible${NORMAL}"
+	echo -en "${CYAN}Ver $MYVER found compatible${NORMAL}"
 fi
 
 if [ $? -ne 0 ];then
@@ -85,7 +85,7 @@ fi
 if ! check_mysql_settings $MYSQL_SUPER_USER $MYSQL_SUPER_USER_PASSWD $MYSQL_HOST $MYSQL_PORT ;then
 	if [ $MYSQL_HOST = 'localhost' -o $MYSQL_HOST = '127.0.0.1' ];then
 		echo "Your MySQL settings are incorrect, do you wish to run $BASE_DIR/bin/kaltura-mysql-settings.sh in order to correct them? [Y/n]"
-		read ANS
+		read -e ANS
 		if [ "$ANS" = "Y" ];then
 			$BASE_DIR/bin/kaltura-mysql-settings.sh
 		else
@@ -110,7 +110,7 @@ if you meant to perform an upgrade? run with:
 Otherwise, do you wish to remove the existing DB [n/Y]?
 
 EOF
-		read REMOVE
+		read -e REMOVE
 		if [ $REMOVE = "Y" ];then
 			`dirname $0`/kaltura-drop-db.sh
 		else
@@ -152,12 +152,8 @@ set +e
 echo "Checking connectivity to needed daemons..."
 if ! check_connectivity $DB1_USER $DB1_PASS $DB1_HOST $DB1_PORT $SPHINX_HOST $SERVICE_URL;then
 	echo -e "${BRIGHT_RED}Please check your setup and then run $0 again.${NORMAL}"
-cat << EOF
-
-Do you wish to remove the existing DB or keep for debugging puropses [n/Y]?
-
-EOF
-	read REMOVE
+	echo -en "Do you wish to remove the existing DB or keep for debugging purposes [n/Y]?"
+	read -e REMOVE
 	if [ $REMOVE = "Y" ];then
 		`dirname $0`/kaltura-drop-db.sh
 	fi
@@ -166,21 +162,21 @@ fi
 
 echo "Cleaning cache.."
 rm -rf $APP_DIR/cache/*
-echo -e "${CYAN}Populating DB with data.. please wait..${NORMAL}"
-echo -e "${CYAN}Output for $APP_DIR/deployment/base/scripts/installPlugins.php being logged into $LOG_DIR/installPlugins.log ${NORMAL}"
+echo -en "${CYAN}Populating DB with data.. please wait..${NORMAL}"
+echo -en "${CYAN}Output for $APP_DIR/deployment/base/scripts/installPlugins.php being logged into $LOG_DIR/installPlugins.log ${NORMAL}"
 php $APP_DIR/deployment/base/scripts/installPlugins.php >> $LOG_DIR/installPlugins.log  2>&1
-echo -e "${CYAN}Output for $APP_DIR/deployment/base/scripts/insertDefaults.php being logged into $LOG_DIR/insertDefaults.log ${NORMAL}"
+echo -en "${CYAN}Output for $APP_DIR/deployment/base/scripts/insertDefaults.php being logged into $LOG_DIR/insertDefaults.log ${NORMAL}"
 php $APP_DIR/deployment/base/scripts/insertDefaults.php $APP_DIR/deployment/base/scripts/init_data >> $LOG_DIR/insertDefaults.log  2>&1
-echo -e "${CYAN}Output for $APP_DIR/deployment/base/scripts/insertPermissions.php being logged into $LOG_DIR/insertPermissions.log ${NORMAL}"
+echo -en "${CYAN}Output for $APP_DIR/deployment/base/scripts/insertPermissions.php being logged into $LOG_DIR/insertPermissions.log ${NORMAL}"
 php $APP_DIR/deployment/base/scripts/insertPermissions.php  >> $LOG_DIR/insertPermissions.log 2>&1
-echo -e "${CYAN}Output for $APP_DIR/deployment/base/scripts/insertContent.php being logged into $LOG_DIR/insertContent.log ${NORMAL}"
+echo -en "${CYAN}Output for $APP_DIR/deployment/base/scripts/insertContent.php being logged into $LOG_DIR/insertContent.log ${NORMAL}"
 php $APP_DIR/deployment/base/scripts/insertContent.php >> $LOG_DIR/insertContent.log  2>&1
 if [ $? -ne 0 ];then
 cat << EOF
 Failed to run:
 php $APP_DIR/deployment/base/scripts/insertContent.php >> $LOG_DIR/insertContent.log  2>&1
 EOF
-	echo -e "${BRIGHT_RED}Please check your setup and then run $0 again.${NORMAL}"
+	echo -en "${BRIGHT_RED}Please check your setup and then run $0 again.${NORMAL}"
 	exit 8
 fi
 
@@ -190,7 +186,7 @@ if [ -n "$IS_SSL" ];then
 fi
 
 KMC_VERSION=`grep "^kmc_version" /opt/kaltura/app/configurations/local.ini|awk -F "=" '{print $2}'|sed 's@\s*@@g'`
-echo -e "${BRIGHT_BLUE}Generating UI confs..${NORMAL}"
+echo -en "${BRIGHT_BLUE}Generating UI confs..${NORMAL}"
 php $APP_DIR/deployment/uiconf/deploy_v2.php --ini=$WEB_DIR/flash/kmc/$KMC_VERSION/config.ini >> $LOG_DIR/deploy_v2.log  2>&1
 for i in $APP_DIR/deployment/updates/scripts/patches/*.sh;do
 	$i
@@ -208,4 +204,4 @@ if [ "$DB1_HOST" = `hostname` -o "$DB1_HOST" = '127.0.0.1' -o "$DB1_HOST" = 'loc
 	/etc/init.d/kaltura-monit stop >> /dev/null 2>&1
 	/etc/init.d/kaltura-monit restart
 fi
-send_install_becon `basename $0` $ZONE install_success 0 
+send_install_beacon `basename $0` $ZONE install_success 0 

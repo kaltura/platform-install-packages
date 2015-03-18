@@ -19,7 +19,7 @@
 KALTURA_FUNCTIONS_RC=`dirname $0`/kaltura-functions.rc
 if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
 	OUT="${BRIGHT_RED}ERROR:could not find $KALTURA_FUNCTIONS_RC so, exiting..${NORMAL}"
-	echo -en $OUT
+	echo -e $OUT
 	exit 1
 fi
 . $KALTURA_FUNCTIONS_RC

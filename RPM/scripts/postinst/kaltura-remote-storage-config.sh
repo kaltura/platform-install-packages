@@ -33,21 +33,21 @@ fi
 echo -e "${BRIGHT_BLUE}Welcome to the remote storage configuration script!${NORMAL}"
 while [ -z "$PARTNERID" ];do
 	echo -e "${CYAN}Please enter the partner id of the Kaltura account you'd like to configure the CDN for, or enter ALL (in caps) to set it as the default for all accounts:${NORMAL}"
-	read PARTNERID
+	read -e PARTNERID
 done
 echo -e "${CYAN}Please enter your admin console user email address [$ADMIN_CONSOLE_ADMIN_MAIL]:${NORMAL}"
-read MINUS2_MAIL
+read -e MINUS2_MAIL
 if [ -z "$MINUS2_MAIL" ];then
 	MINUS2_MAIL=$ADMIN_CONSOLE_ADMIN_MAIL
 fi
 echo -e "${CYAN}Please enter the password you use to login to the admin console:${NORMAL}"
-read -s MINUS2_PASSWD
+read -e MINUS2_PASSWD
 while [ -z "$STOR_TYPE" ];do
 	echo -e "${CYAN}Please input storage type:
 0. Amazon S3
 1. Akamai
 ${NORMAL}"
-	read STOR_TYPE
+	read -e STOR_TYPE
 done
 if [ "$STOR_TYPE" -ne 0 ];then
 	echo -e "${CYAN}Please choose the protocol you'd like to use to upload to the remote storage profile [SFTP]:
@@ -55,7 +55,7 @@ if [ "$STOR_TYPE" -ne 0 ];then
 	FTP
 	SCP
 	S3 [Amazon]${NORMAL}"
-	read PROTOCOL
+	read -e PROTOCOL
 	if [ -z "$PROTOCOL" ];then
 		PROTOCOL='SFTP'
 	fi
@@ -95,7 +95,7 @@ done
 
 while [ -z "$STOR_PASSWD" ];do
 	echo -e "${CYAN}Please input storage account passwd:${NORMAL}"
-	read -s STOR_PASSWD
+	read -e STOR_PASSWD
 done
 
 # make the API call to create it

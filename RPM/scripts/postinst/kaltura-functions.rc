@@ -31,10 +31,8 @@ POST_INST_MAIL_TMPL=$BASE_DIR/app/configurations/post_inst_mail
 ANALYTICS_SERVER_URI="http://installytics.kaltura.org/report"
 NEWSLETTER_URL="https://agentcontribs.kaltura.org/newsletter_subscribe.php"
 NEWSLETTER_MSG="
-To keep up with the bi-weekly Kaltura releases, and stay up to date with 
-the latest news, security and bug updates, and connect with the global
-Kaltura community - sign up for our regular Kaltura Community updates.
-Please enter your email to sign up, or enter NO to pass.
+Please enter your email to sign up for new about bi-weekly Kaltura releases.
+This will give you the latest news, security and bug updates, and connect with the global Kaltura community
 "
 
 call_base_config()
@@ -80,7 +78,7 @@ check_mysql_settings()
 		RC=1
 	fi
 
-	echo -en "${BRIGHT_RED}$MSG${NORMAL}\n"
+	echo -e "${BRIGHT_RED}$MSG${NORMAL}\n"
 	return $RC
 	
 }
@@ -112,7 +110,7 @@ check_connectivity()
 		RC=1
 	fi
 
-	echo -en "$MSG\n"
+	echo -e "$MSG\n"
 	return $RC
 	
 }
@@ -145,7 +143,7 @@ is_self_signed()
 	# check if cert is self signed:
 	CRT_FILE=$1
 	if openssl verify  $CRT_FILE | grep 'self signed certificate' -q ;then
-		echo -en "
+		echo -e "
 
 	${YELLOW}WARNING: self signed cerificate detected. Will set settings.clientConfig.verifySSL=0 in $APP_DIR/configurations/admin.ini.${NORMAL}
 
@@ -160,7 +158,6 @@ configure_apache_ssl()
 	KALTURA_SSL_CONFFILE=$1
 	if [ -f /etc/httpd/conf.d/ssl.conf ];then
 		echo "Moving /etc/httpd/conf.d/ssl.conf to /etc/httpd/conf.d/ssl.conf.ks.bak."
-		mv /etc/httpd/conf.d/ssl.conf /etc/httpd/conf.d/ssl.conf.ks.bak
 	fi
 	sed -i "s#@SSL_CERTIFICATE_FILE@#$CRT_FILE#g" $KALTURA_SSL_CONFFILE
 	sed -i "s#@SSL_CERTIFICATE_KEY_FILE@#$KEY_FILE#g" $KALTURA_SSL_CONFFILE
@@ -173,7 +170,7 @@ send_post_inst_msg()
 	mail -s "$POST_INST_MAIL_SUBJECT" -r "Kaltura Video Platform <kaltura@$KALTURA_VIRTUAL_HOST_NAME>" $MAILTO < $POST_INST_MAIL_TMPL 
 	
 }
-send_install_becon()
+send_install_beacon()
 {
 #	if ! check_if_upgrade;then
 #		return 0 
@@ -277,11 +274,8 @@ my_trap_handler()
 	fi
 	if [ -d /opt/kaltura/log ];then
 		TAR_PATH=/opt/kaltura/log/log_`date +%d_%m_%y_%H_%M`.tar.gz	
-		echo -en "${BRIGHT_RED}$FAIL_MSG${NORMAL}
-
-
-		"
-		echo "Archving logs to $TAR_PATH..."
+		echo -e "${BRIGHT_RED}$FAIL_MSG${NORMAL}"
+		echo -e "Archving logs to $TAR_PATH..."
 		mkdir -p /tmp/tmpdir_kaltura
 		cp /opt/kaltura/log/*log /tmp/tmpdir_kaltura
 		cd /tmp/tmpdir_kaltura
@@ -291,7 +285,7 @@ my_trap_handler()
 		. $CONSENT_FILE 
 	fi
 	
-       	send_install_becon ${MYSELF} $ZONE install_fail "${LASTLINE},${POSTINST_VER}"
+       	send_install_beacon ${MYSELF} $ZONE install_fail "${LASTLINE},${POSTINST_VER}"
         exit 11
 }
 
@@ -308,50 +302,39 @@ validate_mail()
 
 get_tracking_consent()
 {
-
-	echo -en "${BRIGHT_BLUE}$PRE_CONSENT 
-	
-
-[Email\NO]:${NORMAL}"
-
-	CONTACT_MAIL="mailhere"
-	read -e CONTACT_MAIL
-	while [ "$CONTACT_MAIL" != "NO" ];do
+	while [ -z "$CONTACT_MAIL" ];do
+		echo -en "${BRIGHT_BLUE}$PRE_CONSENT\n[Email\NO]:${NORMAL}"
+		read -e CONTACT_MAIL
 		if validate_mail "$CONTACT_MAIL";then
-			echo "USER_CONSENT=1" >> $CONSENT_FILE
+			echo "USER_CONSENT=1" > $CONSENT_FILE
 			echo "CONTACT_MAIL=$CONTACT_MAIL" >> $CONSENT_FILE
 			return 0
-		fi	
-		echo "Please input a valid mail address or 'NO'"
-		read -e CONTACT_MAIL
+		elif [[ $CONTACT_MAIL = "NO" ]];then
+			echo "USER_CONSENT=0" > $CONSENT_FILE
+		else
+			echo -e "Please input a valid mail address or 'NO'"
+			unset CONTACT_MAIL
+		fi
 	done
-	if [ "$CONTACT_MAIL" = "NO" ];then
-		echo "USER_CONSENT=0" > $CONSENT_FILE
-	fi
 	. $CONSENT_FILE
 }
 
 get_newsletter_consent()
 {
-	echo -en "${BRIGHT_BLUE}$NEWSLETTER_MSG
-	
-
-[Email\NO]:${NORMAL}"
-
-	if [ -z CONTACT_MAIL ];then
-		CONTACT_MAIL="mailhere"
-	fi
-	read -e CONTACT_MAIL
-	while [ "$CONTACT_MAIL" != "NO" ];do
+	unset CONTACT_MAIL
+	while [ -z "$CONTACT_MAIL" ];do
+		echo -en "${BRIGHT_BLUE}$NEWSLETTER_MSG\n[Email\NO]:${NORMAL}"
+		read -e CONTACT_MAIL
 		if validate_mail "$CONTACT_MAIL";then
 			echo -e "${BRIGHT_BLUE}Registering for the newsletter... this will take a few seconds.${NORMAL}"
 			curl "$NEWSLETTER_URL?email=$CONTACT_MAIL"
 			echo "GET_UPDATES_NEWSLETTER=$CONTACT_MAIL" >> $CONSENT_FILE
 			export CONTACT_MAIL
 			return 0
+		elif [[ $CONTACT_MAIL != "NO" ]];then
+			echo -e "Please input a valid mail address or 'NO'"
+			unset CONTACT_MAIL
 		fi	
-		echo "Please input a valid mail address or 'NO'"
-		read -e CONTACT_MAIL
 	done
 }
 check_if_upgrade()

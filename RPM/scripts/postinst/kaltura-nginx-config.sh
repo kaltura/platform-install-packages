@@ -30,8 +30,8 @@ verify_user_input()
                 OUT="ERROR: Missing the following params in $ANSFILE
                 $VALS
                 "
-                echo -en "${BRIGHT_RED}$OUT${NORMAL}\n"
-                send_install_becon kaltura-base $ZONE "install_fail"  "$OUT"
+                echo -e "${BRIGHT_RED}$OUT${NORMAL}"
+                send_install_beacon kaltura-base $ZONE "install_fail"  "$OUT"
                 exit $RC 
         fi
 }
@@ -67,7 +67,7 @@ else
 		VOD_PACKAGER_HOST=`hostname`
 	fi
 
-	echo -en "${CYAN}Nginx port to listen on [${YELLOW}88${CYAN}]:${NORMAL} "
+	echo -e "${CYAN}Nginx port to listen on [${YELLOW}88${CYAN}]:${NORMAL} "
 	read -e VOD_PACKAGER_PORT
 	if [ -z "$VOD_PACKAGER_PORT" ];then
 		VOD_PACKAGER_PORT=88
