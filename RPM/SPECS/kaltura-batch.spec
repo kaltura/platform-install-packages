@@ -12,7 +12,6 @@ License: AGPLv3+
 Group: Server/Platform 
 Source0: zz-%{name}.ini
 Source1: kaltura-batch
-#Source2: kaltura.ssl.conf.template 
 Source3: batch.ini.template 
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)

@@ -28,12 +28,10 @@ Source17: navigation.xml
 Source18: monit.phtml 
 Source19: IndexController.php
 Source20: sphinx.populate.template.rc
-#Source22: 01.UserRole.99.template.xml
 Source23: 04.flavorParams.ini
 Source24: 04.liveParams.ini
 Source25: kaltura_populate.template
 Source26: kaltura_batch.template
-#Source27: kmc1Success.php 
 Source28: embedIframeJsAction.class.php
 
 URL: https://github.com/kaltura/server/tree/%{codename}-%{version}

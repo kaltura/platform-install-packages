@@ -9,9 +9,6 @@ Version: 10.7.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
-#Source0: kaltura.ssl.conf.template 
-#Source1: kaltura-kmc.conf
-#Source2: kaltura-admin-console.conf
 Source3: zz-%{name}.ini 
 
 URL: http://kaltura.org
