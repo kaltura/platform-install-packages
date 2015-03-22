@@ -267,7 +267,7 @@ Front in Kaltura represents the machines hosting the user-facing components, inc
 # rpm -Uhv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
 # yum install kaltura-postinst
 # /opt/kaltura/bin/kaltura-nfs-client-config.sh <NFS host> <domain> <nobody-user> <nobody-group>
-# yum install kaltura-front kaltura-widgets kaltura-html5lib kaltura-html5-studio 
+# yum install kaltura-front kaltura-widgets kaltura-html5lib kaltura-html5-studio kaltura-clipapp 
 # /opt/kaltura/bin/kaltura-front-config.sh
 # . /etc/kaltura.d/system.ini
 Make certain this call returs 200
