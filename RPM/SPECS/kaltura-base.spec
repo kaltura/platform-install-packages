@@ -10,7 +10,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 10.7.0
+Version: 10.8.0
 Release: 2
 License: AGPLv3+
 Group: Server/Platform 
@@ -168,7 +168,12 @@ EOF
 rm -rf %{buildroot}
 
 %pre
-
+if [ "$1" = 2 ];then
+	if service httpd status;then
+		service httpd stop
+	fi
+	rm -rf %{prefix}/app/cache/*
+fi
 # maybe one day we will support SELinux in which case this can be ommitted.
 if which getenforce >> /dev/null 2>&1; then
 	
@@ -287,6 +292,12 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Mar 23 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.8.0-2
+- If upgrade, lets try to stop apache at %pre phase, seems that writing new files while its runnign cause it to hang.
+
+* Mon Mar 23 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.8.0-1
+- Ver Bounce to 10.8.0
+
 * Sun Mar 22 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.7.0-2
 - PLAT-2550 - owner of an entry should be able to update entitledUsersEdit & entitledUsersPublish
 - PLAT-2542 - kFileSyncUtils::moveFromFile crashes on "object already exists"
