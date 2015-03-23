@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 10.8.0
-Release: 2
+Release: 3
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -169,6 +169,7 @@ rm -rf %{buildroot}
 
 %pre
 if [ "$1" = 2 ];then
+	service kaltura-monit stop
 	if service httpd status;then
 		service httpd stop
 	fi
@@ -219,6 +220,7 @@ if [ "$1" = 2 ];then
 		chown -R %{kaltura_user}.%{apache_user} %{prefix}/app/cache/ %{prefix}/log
 		chmod 775 %{prefix}/web/content
 
+		service kaltura-monit start
 		if ! service httpd status;then
 			service httpd start
 		fi
@@ -292,6 +294,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Mar 23 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.8.0-3
+- Stop monit before starting upgrade, restart when done.
+
 * Mon Mar 23 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.8.0-2
 - If upgrade, lets try to stop apache at %pre phase, seems that writing new files while its runnign cause it to hang.
 
