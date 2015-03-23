@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 10.8.0
-Release: 3
+Release: 4
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -169,9 +169,11 @@ rm -rf %{buildroot}
 
 %pre
 if [ "$1" = 2 ];then
-	service kaltura-monit stop
-	if service httpd status;then
-		service httpd stop
+	if rpm -q httpd >> /dev/null;then
+		service kaltura-monit stop
+		if service httpd status;then
+			service httpd stop
+		fi
 	fi
 	rm -rf %{prefix}/app/cache/*
 fi
@@ -221,8 +223,10 @@ if [ "$1" = 2 ];then
 		chmod 775 %{prefix}/web/content
 
 		service kaltura-monit start
-		if ! service httpd status;then
-			service httpd start
+		if rpm -q httpd >> /dev/null;then
+			if ! service httpd status;then
+				service httpd start
+			fi
 		fi
 
 		# we now need CREATE and DROP priv for 'kaltura' on kaltura.*
