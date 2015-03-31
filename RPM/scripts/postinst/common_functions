@@ -1,0 +1,36 @@
+#!bash
+
+if [[ -r ./install.ini ]];then
+	. ./install.ini
+fi
+
+resolve_url()
+{
+  ${!2}=$(curl -Ls -o /dev/null -w %{url_effective} $1)
+}
+
+
+# install cronjob in case it hasn't been there already
+install_cronjob()
+{
+        local cronjob=$1
+	if [ -n $2 ]; then
+		local user="-u $2"
+	fi
+         cat <(fgrep -i -v "$cronjob" <(sudo crontab $user -l)) <(echo "$cronjob") | sudo crontab $user -
+}
+
+_S()
+{
+	local result=$?
+	if [[  $result -ne 0  ]] ; then
+       		 echo "${RED}
+=======================================================================
+failed  ${1}. 
+error: $result
+=======================================================================
+${NORMAL}"
+        	exit $result;
+	fi
+}
+
