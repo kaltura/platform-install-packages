@@ -4,7 +4,7 @@
 %define postinst_dir ../../RPM/scripts/postinst
 
 Name:           kaltura-async-uploader
-Version:         %{?media_server_version}
+Version:         1.0
 Release:        1%{?dist}
 Summary:       Kaltura Open Source Video Platform - Media Server 
 Group:          Server/Platform 

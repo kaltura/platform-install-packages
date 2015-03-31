@@ -3,6 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="2f5176dc-9da0-48de-83b2-e8c70ee5c5f1" name="Default" comment="">
       <change type="DELETED" beforePath="$PROJECT_DIR$/RPM/scripts/postinst/common_functions" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RPM/SPECS/kaltura-async-uploader.spec" afterPath="$PROJECT_DIR$/RPM/SPECS/kaltura-async-uploader.spec" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/sources.rc" afterPath="$PROJECT_DIR$/build/sources.rc" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="platform-install-packages.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -26,11 +29,61 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="sources.rc" pinned="false" current-in-tab="true">
+      <file leaf-file-name="sources.rc" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/build/sources.rc">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.47209302" vertical-offset="2212" max-vertical-offset="4275">
-              <caret line="161" column="48" selection-start-line="161" selection-start-column="48" selection-end-line="161" selection-end-column="48" />
+            <state vertical-scroll-proportion="-10.296296" vertical-offset="2062" max-vertical-offset="4275">
+              <caret line="156" column="27" selection-start-line="156" selection-start-column="0" selection-end-line="156" selection-end-column="27" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="kaltura-media-server.spec" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/RPM/SPECS/kaltura-media-server.spec">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1260">
+              <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="105">
+              <caret line="0" column="6" selection-start-line="0" selection-start-column="6" selection-end-line="0" selection-end-column="6" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="package.sh" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/build/package.sh">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-5.24" vertical-offset="139" max-vertical-offset="1050">
+              <caret line="18" column="23" selection-start-line="18" selection-start-column="23" selection-end-line="18" selection-end-column="23" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="setrep.sh" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/build/rpm-specific/setrep.sh">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-11.4" vertical-offset="30" max-vertical-offset="540">
+              <caret line="21" column="10" selection-start-line="21" selection-start-column="10" selection-end-line="21" selection-end-column="10" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="push_rpm.sh" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/build/rpm-specific/push_rpm.sh">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="7.8" vertical-offset="195" max-vertical-offset="690">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -39,48 +92,18 @@
       <file leaf-file-name="package_kaltura-async-uploader.sh" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/build/package_kaltura-async-uploader.sh">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.3625" vertical-offset="181" max-vertical-offset="615">
-              <caret line="30" column="101" selection-start-line="30" selection-start-column="70" selection-end-line="30" selection-end-column="101" />
+            <state vertical-scroll-proportion="-2.8" vertical-offset="181" max-vertical-offset="615">
+              <caret line="27" column="9" selection-start-line="21" selection-start-column="0" selection-end-line="27" selection-end-column="9" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="kaltura-async-uploader.spec" pinned="false" current-in-tab="false">
+      <file leaf-file-name="kaltura-async-uploader.spec" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/RPM/SPECS/kaltura-async-uploader.spec">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="480" max-vertical-offset="1275">
-              <caret line="14" column="43" selection-start-line="14" selection-start-column="43" selection-end-line="14" selection-end-column="43" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="db_config.rb" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/RPM/chef-repo/cookbooks/kaltura/recipes/db_config.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.04" vertical-offset="184" max-vertical-offset="660">
-              <caret line="14" column="7" selection-start-line="14" selection-start-column="7" selection-end-line="14" selection-end-column="7" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="sphinx.rb" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/RPM/chef-repo/cookbooks/kaltura/recipes/sphinx.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.0" vertical-offset="0" max-vertical-offset="645">
-              <caret line="15" column="3" selection-start-line="15" selection-start-column="3" selection-end-line="15" selection-end-column="3" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name=".rpmmacros" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/RPM/.rpmmacros">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="285">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.25477707" vertical-offset="0" max-vertical-offset="1275">
+              <caret line="8" column="39" selection-start-line="8" selection-start-column="39" selection-end-line="8" selection-end-column="39" />
               <folding />
             </state>
           </provider>
@@ -106,26 +129,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="kaltura-async-uploader-config.sh" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/RPM/scripts/postinst/kaltura-async-uploader-config.sh">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.8" vertical-offset="0" max-vertical-offset="525">
-              <caret line="18" column="10" selection-start-line="18" selection-start-column="10" selection-end-line="18" selection-end-column="10" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="run_nightly.sh" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/build/run_nightly.sh">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.75" vertical-offset="256" max-vertical-offset="2175">
-              <caret line="37" column="23" selection-start-line="37" selection-start-column="23" selection-end-line="37" selection-end-column="23" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="Git.Settings">
@@ -136,9 +139,9 @@
       <list>
         <option value="$PROJECT_DIR$/RPM/SPECS/kaltura_async_uploader.spec" />
         <option value="$PROJECT_DIR$/RPM/scripts/postinst/kaltura_async_uploader_configure.sh" />
-        <option value="$PROJECT_DIR$/build/sources.rc" />
         <option value="$PROJECT_DIR$/build/package_kaltura-async-uploader.sh" />
         <option value="$PROJECT_DIR$/RPM/scripts/postinst/kaltura-async-uploader-configure.sh" />
+        <option value="$PROJECT_DIR$/build/sources.rc" />
         <option value="$PROJECT_DIR$/RPM/SPECS/kaltura-async-uploader.spec" />
       </list>
     </option>
@@ -220,29 +223,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="scripts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="platform-install-packages" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="platform-install-packages" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="RPM" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scripts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="postinst" />
+              <option name="myItemId" value="SPECS" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -319,12 +300,12 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32984293" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.34816754" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32984293" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -357,14 +338,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/RPM/SPECS/kaltura-media-server.spec">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="435" max-vertical-offset="1260">
-          <caret line="46" column="0" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/common/stub">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="514">
@@ -469,26 +442,66 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RPM/SPECS/kaltura-async-uploader.spec">
+    <entry file="file://$PROJECT_DIR$/build/rpm-specific/setrep.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="480" max-vertical-offset="1275">
-          <caret line="14" column="43" selection-start-line="14" selection-start-column="43" selection-end-line="14" selection-end-column="43" />
+        <state vertical-scroll-proportion="-11.4" vertical-offset="30" max-vertical-offset="540">
+          <caret line="21" column="10" selection-start-line="21" selection-start-column="10" selection-end-line="21" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build/rpm-specific/push_rpm.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="7.8" vertical-offset="195" max-vertical-offset="690">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="484">
+          <caret line="0" column="6" selection-start-line="0" selection-start-column="6" selection-end-line="0" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build/package.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.24" vertical-offset="139" max-vertical-offset="1050">
+          <caret line="18" column="23" selection-start-line="18" selection-start-column="23" selection-end-line="18" selection-end-column="23" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/build/package_kaltura-async-uploader.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.3625" vertical-offset="181" max-vertical-offset="615">
-          <caret line="30" column="101" selection-start-line="30" selection-start-column="70" selection-end-line="30" selection-end-column="101" />
+        <state vertical-scroll-proportion="-2.8" vertical-offset="181" max-vertical-offset="615">
+          <caret line="27" column="9" selection-start-line="21" selection-start-column="0" selection-end-line="27" selection-end-column="9" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/build/sources.rc">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.47209302" vertical-offset="2212" max-vertical-offset="4275">
-          <caret line="161" column="48" selection-start-line="161" selection-start-column="48" selection-end-line="161" selection-end-column="48" />
+        <state vertical-scroll-proportion="-10.296296" vertical-offset="2062" max-vertical-offset="4275">
+          <caret line="156" column="27" selection-start-line="156" selection-start-column="0" selection-end-line="156" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RPM/SPECS/kaltura-media-server.spec">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1260">
+          <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RPM/SPECS/kaltura-async-uploader.spec">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.25477707" vertical-offset="0" max-vertical-offset="1275">
+          <caret line="8" column="39" selection-start-line="8" selection-start-column="39" selection-end-line="8" selection-end-column="39" />
           <folding />
         </state>
       </provider>
