@@ -9,7 +9,7 @@ chkconfig iptables off
 setenforce permissive
 yum -y clean all
 rpm -ihv --force http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
-yum -y install mysql mysql-server
+yum -y install mysql-server kaltura-server kaltura-red5 postfix
 service mysqld start
 # this might fail if we already set the root password previously
 set +e
@@ -22,16 +22,13 @@ mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "DELETE FROM mysql.user WHERE User=''"
 mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "DELETE FROM mysql.db WHERE Db='test' OR Db='test\_%'"
 mysql -u root -p"$MYSQL_ROOT_PASSWORD" -e "FLUSH PRIVILEGES"
 chkconfig mysqld on
-# if you prefer using a diff MTA, please relace accordingly
-yum install postfix
 service postfix restart
-yum -y install kaltura-server
 /opt/kaltura/bin/kaltura-mysql-settings.sh
 service memcached restart
 service ntpd restart
 chkconfig memcached on
 chkconfig ntpd on
-echo "USER_CONSENT=0" > /opt/kaltura/bin/contact.rc
+echo "USER_CONSENT=1" > /opt/kaltura/bin/contact.rc
 echo "127.0.0.1 $KALTURA_DOMAIN" >> /etc/hosts
 echo "TIME_ZONE=\"UTC\"
 KALTURA_FULL_VIRTUAL_HOST_NAME=\"$KALTURA_DOMAIN:80\"
@@ -60,7 +57,24 @@ PROTOCOL=\"http\"
 RED5_HOST=\"$KALTURA_DOMAIN\"
 USER_CONSENT=\"0\"
 CONFIG_CHOICE=\"0\"
-IS_SSL=\"N\"" > kaltura.ans
+CONTACT_MAIL=\"$KALTURA_ADMIN_EMAIL\"
+
+#for SSL - change:
+#IS_SSL=Y
+#and uncomment and set correct paths for the following directives
+#SSL cert path
+#CRT_FILE=/etc/ssl/certs/localhost.crt
+#SSL key path
+#KEY_FILE=/etc/pki/tls/private/localhost.key
+#if such exists enter path here, otherwise leave as is.
+#CHAIN_FILE=NONE
+
+IS_SSL=\"N\"
+VOD_PACKAGER_HOST=\"$KALTURA_DOMAIN\"
+VOD_PACKAGER_PORT=\"88\"
+WWW_HOST=\"$KALTURA_DOMAIN\"
+IP_RANGE=\"0.0.0.0-255.255.255.255\"
+" > kaltura.ans
 /opt/kaltura/bin/kaltura-config-all.sh kaltura.ans
 unzip oflaDemo-r4472-java6.war -d/usr/lib/red5/webapps/oflaDemo
 service red5 restart

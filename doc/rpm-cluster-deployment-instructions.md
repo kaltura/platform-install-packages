@@ -115,7 +115,7 @@ The NFS is the shared network storage between all machines in the cluster. To le
 ```
 # yum install nfs-utils-lib ntp
 # chkconfig nfs on
-# chkconfig ntpd on
+# chkconfig ntp on
 # service ntpd start
 # service rpcbind start
 # service nfs start
@@ -165,7 +165,7 @@ Please note that currently, only MySQL 5.1 is supported, we recommend using the 
 # yum install mysql-server kaltura-postinst ntp 
 # /opt/kaltura/bin/kaltura-mysql-settings.sh
 # mysql_secure_installation
-# chkconfig ntpd on
+# chkconfig ntp on
 # service ntpd start
 ```
 **Make sure to say Y** for the `mysql_secure_installation` install, and follow through all the mysql install questions before continuing further.    
@@ -258,8 +258,8 @@ After installing the first cluster node, obtain the auto generated file placed u
 ### The first Front node
 
 ####NOTES: 
-0. /opt/kaltura/bin/kaltura-db-config.sh and kaltura-widgets kaltura-html5lib kaltura-html5-studio which are installed on the web mount only need to run on the first node.
-1. Before starting, make sure the balancer does direct to the second front node as it is not yet installed.
+0. /opt/kaltura/bin/kaltura-db-config.sh and kaltura-widgets kaltura-html5lib which are installed on the web mount only need to run on the first node.
+1. Before starting, make sure the balancer does not direct to the second front node since it's not yet installed.
 
 
 Front in Kaltura represents the machines hosting the user-facing components, including the Kaltura API, the KMC and Admin Console, MediaSpace and all client-side widgets. 
@@ -267,22 +267,25 @@ Front in Kaltura represents the machines hosting the user-facing components, inc
 # rpm -Uhv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
 # yum install kaltura-postinst
 # /opt/kaltura/bin/kaltura-nfs-client-config.sh <NFS host> <domain> <nobody-user> <nobody-group>
-# yum install kaltura-front kaltura-widgets kaltura-html5lib kaltura-html5-studio 
+# yum install kaltura-front kaltura-widgets kaltura-html5lib kaltura-html5-studio kaltura-clipapp 
 # /opt/kaltura/bin/kaltura-front-config.sh
 # . /etc/kaltura.d/system.ini
 Make certain this call returs 200
 # curl -I $SERVICE_URL/api_v3/index.php
 Output should be similar to:
-< HTTP/1.1 302 Found
-HTTP/1.1 302 Found
-< Date: Tue, 10 Jun 2014 09:32:33 GMT
-Date: Tue, 10 Jun 2014 09:32:33 GMT
-< Server: Apache/2.2.15 (Red Hat)
-Server: Apache/2.2.15 (Red Hat)
-< Location: http://162.209.63.118/start/index.php
-Location: http://162.209.63.118/start/index.php
-< Connection: close
+HTTP/1.1 200 OK
+Date: Sat, 14 Mar 2015 17:59:40 GMT
+Server: Apache/2.2.15 (CentOS)
+X-Powered-By: PHP/5.3.3
+X-Kaltura: cached-dispatcher,cache_v3-baf38b7adced7cbac99d06b983aaf654,0.00048708915710449
+Access-Control-Allow-Origin: *
+Expires: Sun, 19 Nov 2000 08:52:00 GMT
+Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+Pragma: no-cache
+Vary: Accept-Encoding
+X-Me: $SERVICE_URL
 Connection: close
+Content-Type: text/xml
 
 # /opt/kaltura/bin/kaltura-db-config.sh <mysql-hostname> <mysql-super-user> <mysql-super-user-passwd> <mysql-port> [upgrade]
 ```

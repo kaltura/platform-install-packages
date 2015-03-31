@@ -180,6 +180,10 @@ Please select one of the following options [0]: "<0>"
 Your install will now automatically perform all install tasks.
 
 #### Configure Red5 server
+1. install the kaltura-red5 package:
+```
+# yum install kaltura-red5
+```
 1. Request http://hostname:5080
 1. Click 'Install a ready-made application'
 1. Mark 'OFLA Demo' and click 'Install'
@@ -198,6 +202,7 @@ Your install will now automatically perform all install tasks.
 ## SSL Step-by-step Installation
 ### Pre-Install notes
 * This install guides assumes that you did a clean, basic install of one of the support RHEL based OS's in 64bit architecture.
+* Currently, the Nginx VOD module does not support integration with Kaltura over HTTPs, only HTTP is supported. 
 * When installing, you will be prompted for each server's resolvable hostname. Note that it is crucial that all host names will be resolvable by other servers in the cluster (and outside the cluster for front machines). Before installing, verify that your /etc/hosts file is properly configured and that all Kaltura server hostnames are resolvable in your network.
 * Before you begin, make sure you're logged in as the system root. Root access is required to install Kaltura, and you should execute ```sudo -i``` or ```su -``` to make sure that you are indeed root.
 * It is recommended that you use a properly signed certificate and avoid self-signed certificates due to limitations of various browsers in properly loading websites using self-signed certificates.

@@ -1,8 +1,8 @@
 %define prefix /opt/kaltura 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
-Version: 1.0.23
-Release: 3
+Version: 1.0.24
+Release: 9
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -81,6 +81,28 @@ fi
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Tue Mar 17 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.24-9
+- corrected clipapp sanity check.
+
+* Sun Mar 15 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.24-8
+- Symlink Kaltura vhost config to apache conf.d when installing batch.
+
+* Sat Mar 14 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.24-7
+- added limit 1 to select conf_file_path from ui_conf where tags like '%kmc_uploadWebCam%' LIMIT 1; 
+  reported by Kinglok, Fong - thank you.
+
+* Sat Feb 28 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.24-6
+- instead of chmoding in cache dir just get rid of it.
+
+* Sat Feb 28 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.24-5
+- push WWW_HOST var to ans file.
+
+* Sat Feb 28 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.24-4
+- Added test for clipapp url.
+
+* Wed Feb 18 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.24-1
+- Added BPM deploy script.
+
 * Wed Jan 14 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.23-2
 - Modifications to support VOD packager.
 

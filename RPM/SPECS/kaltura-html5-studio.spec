@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5-studio
-Version: v1.9.4
+Version: v1.9.5
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -51,6 +51,9 @@ rm -rf %{buildroot}
 %{prefix}/apps/studio/%{version}
 
 %changelog
+* Sun Mar 8 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v1.9.5-1
+- SUP-3496 - Change file name when download with Universal studio
+
 * Sun Jan 25 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v1.9.4-1
 - FEC-2673 - Universal Studio allows to save empty UIVars
 

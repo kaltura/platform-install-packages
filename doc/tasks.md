@@ -4,34 +4,14 @@ If you decide to take on a challenge, please open a bug with the details of the 
 
 Thanks!
 
-# Installer
-- Add support for mixed mode server operation (both SSL and non-SSL) in the installer
-- Add kaltura.ans update mechanism to the installer that detects and updates missing variables in /opt/kaltura/kaltura.ans
-- Help us with translations and update guides
-- Cleanup install tree
-
 ## Port Kaltura's Core to PHP 5_5
-- Create Client Library for PHP5.5
-- Update Zend Framework
-- Update Symfony framework
-- Update Google APIs Client Library for PHP
-- Update PHPMailer
-- Update propel
-- Update nuSoap
-- Port Infra to PHP 5.5
-- Port Core components to PHP 5.5
-- Port Player to PHP 5.5
-- Port Admin Console to PHP 5.5
 
 ## Fix Core's SQL init scripts to support MySQL 5.5
-- Missing data (strict requirement)
-- Validate stored procedures
-- lowercase_table names (DWH)
 
 ## Admin Console
+
 - Mask passwds in admin console
 - Mark mandatory field with '*', red, whatever. For example - the 'Add publisher' form.
-- Extend and secure monitoring
 - Testme fixes
 - format output of testme console in tree-like XML structure
 - allow configuration of package and publisher types from admin console
@@ -62,9 +42,4 @@ Need to catch the exception and display.
 ## Client libs
 - Add more client libs [http://knowledge.kaltura.com/adding-new-kaltura-api-client-library-generator]
 - Write tests for the new NodeJS client libs [http://www.kaltura.com/api_v3/testme/client-libs.php]
-
-## Analytics (aka the good stuff)
-- Create Kibana dashboard for analytics
-- Create Logstash parser for Kaltura log format
-- Create Elasticsearch storage mapper for extracted log data
-- Create installation document for ELK stack for Kaltura
+- Fix Python units for version 2.6.n and >= 3.0.n

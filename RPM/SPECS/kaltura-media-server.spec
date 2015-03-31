@@ -2,7 +2,7 @@
 %define kaltura_user kaltura
 Summary: Kaltura Open Source Video Platform - Media Server 
 Name: kaltura-media-server
-Version: 3.1.5
+Version: 3.1.14
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 

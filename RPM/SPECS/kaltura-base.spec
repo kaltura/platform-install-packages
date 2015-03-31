@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 10.3.0
-Release: 3
+Version: 10.8.0
+Release: 4
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -28,12 +28,10 @@ Source17: navigation.xml
 Source18: monit.phtml 
 Source19: IndexController.php
 Source20: sphinx.populate.template.rc
-#Source22: 01.UserRole.99.template.xml
 Source23: 04.flavorParams.ini
 Source24: 04.liveParams.ini
 Source25: kaltura_populate.template
 Source26: kaltura_batch.template
-#Source27: kmc1Success.php 
 Source28: embedIframeJsAction.class.php
 
 URL: https://github.com/kaltura/server/tree/%{codename}-%{version}
@@ -107,6 +105,7 @@ sed -i "s#^;kmc_version = @KMC_VERSION@#kmc_version = %{_kmc_version}#g" $RPM_BU
 sed -i "s#^;html5_version = @HTML5LIB_VERSION@#html5_version = %{html5_version}#g" $RPM_BUILD_ROOT%{prefix}/app/configurations/local.template.ini
 sed -i "s#^;kmc_login_version = @KMC_LOGIN_VERSION@#kmc_login_version = %{kmc_login_version}#g" $RPM_BUILD_ROOT%{prefix}/app/configurations/local.template.ini
 sed -i "s@clipapp_version = @CLIPPAPP_VERSION@#clipapp_version = %{clipapp_version}#g" $RPM_BUILD_ROOT%{prefix}/app/configurations/local.template.ini
+sed -i "s#^clipapp_version =.*#clipapp_version = %{clipapp_version}#g" $RPM_BUILD_ROOT%{prefix}/app/configurations/base.ini
 sed -i "s#^;kdp3_wrapper_version = @KDP3_WRAPPER_VERSION@#kdp3_wrapper_version = %{kdp3_wrapper_version}#g" $RPM_BUILD_ROOT%{prefix}/app/configurations/local.template.ini
 sed -i 's@^writers.\(.*\).filters.priority.priority\s*=\s*7@writers.\1.filters.priority.priority=4@g' $RPM_BUILD_ROOT%{prefix}/app/configurations/logger.template.ini 
 # our Pentaho is correctly installed under its own dir and not %prefix/bin which is the known default so, adding -k path to kitchen.sh
@@ -169,7 +168,15 @@ EOF
 rm -rf %{buildroot}
 
 %pre
-
+if [ "$1" = 2 ];then
+	if rpm -q httpd >> /dev/null;then
+		service kaltura-monit stop
+		if service httpd status;then
+			service httpd stop
+		fi
+	fi
+	rm -rf %{prefix}/app/cache/*
+fi
 # maybe one day we will support SELinux in which case this can be ommitted.
 if which getenforce >> /dev/null 2>&1; then
 	
@@ -215,8 +222,11 @@ if [ "$1" = 2 ];then
 		chown -R %{kaltura_user}.%{apache_user} %{prefix}/app/cache/ %{prefix}/log
 		chmod 775 %{prefix}/web/content
 
-		if ! service httpd status;then
-			service httpd start
+		service kaltura-monit start
+		if rpm -q httpd >> /dev/null;then
+			if ! service httpd status;then
+				service httpd start
+			fi
 		fi
 
 		# we now need CREATE and DROP priv for 'kaltura' on kaltura.*
@@ -227,6 +237,7 @@ if [ "$1" = 2 ];then
 		php %{prefix}/app/deployment/updates/update.php -i -d >> /opt/kaltura/log/kalt_up.log 2>&1
 		php %{prefix}/app/deployment/updates/update.php -i -s >> /opt/kaltura/log/kalt_up.log 2>&1
 		php %{prefix}/app/deployment/base/scripts/installPlugins.php >> /opt/kaltura/log/kalt_up.log 2>&1
+	#	#php %{prefix}/app/tests/standAloneClient/exec.php %{prefix}/app/tests/standAloneClient/emailDropFolderFileFailedStatus.xml
 	#	php %{prefix}/app/deployment/updates/scripts/2014_05_27_create_delivery_profiles.php  >> /opt/kaltura/log/kalt_up.log 2>&1
 
 	fi
@@ -287,6 +298,58 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Mar 23 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.8.0-3
+- Stop monit before starting upgrade, restart when done.
+
+* Mon Mar 23 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.8.0-2
+- If upgrade, lets try to stop apache at %pre phase, seems that writing new files while its runnign cause it to hang.
+
+* Mon Mar 23 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.8.0-1
+- Ver Bounce to 10.8.0
+
+* Sun Mar 22 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.7.0-2
+- PLAT-2550 - owner of an entry should be able to update entitledUsersEdit & entitledUsersPublish
+- PLAT-2542 - kFileSyncUtils::moveFromFile crashes on "object already exists"
+- PLAT-2536 - Request of max available flavorIds or flavorParamIds gets 404
+- PLAT-2601 - Enable retry for Webex imports
+
+* Sun Mar 15 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.7.0-1
+- Ver Bounce to 10.7.0
+
+* Mon Mar 8 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.6.0-2
+- SUP-3864 - Download gets cut for large flavors
+- PLAT-2524 - sphinxFilter code relocation - (KMS-5141)
+- PLAT-2540 - Live - A/V out of sync in second part of recorded entry after restart streaming (regression)
+
+* Fri Mar 6 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.6.0-1
+- Ver Bounce to 10.6.0
+
+* Tue Feb 24 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.5.0-6
+- Fix clipapp ver
+
+* Sun Feb 22 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.5.0-5
+- SUP-2942 - Audio-Video Sync Issue on Kaltura Live stream
+- SUP-3443 - VOD entry missing after livestream (from Kaplan) - "race condition"
+- SUP-3251 - Update Syndication XSD to Comply With the media->getMrss API Call
+- SUP-3572 - Email notifications send all addresses in the "To" field
+- SUP-3927 - TMZ - Analytics report request
+- SUP-3608 - Kaltura java client fail on test
+- SUP-3644 - Changing feed's XML without changing the feed's url
+
+* Tue Feb 15 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.5.0-3
+- For this one: https://github.com/kaltura/server/pull/2258
+
+* Wed Feb 11 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.5.0-1
+- Ver Bounce to 10.5.0
+
+* Wed Feb 4 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.4.0-1
+- Ver Bounce to 10.4.0
+- SUP-3505 - Player not working in Chrome with entries that are shorter then 5 mins (KS PREVIEW)
+- SUP-2485 - can't change USER_LOGIN_ATTEMPTS maximum value in admin console
+- SUP-2974 - Image file extension lost when uploading via bulk upload
+- PLAT-2452 - EBU - Fixing in-accurate aspect ratio (partner 1844091)
+- PLAT-2451 - slides triplicate on copy to vod entry (EBU)
+
 * Thu Jan 25 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.3.0-3
 - SUP-3065 - Cannot create category using CSV - "already exists" 
 - SUP-3161 - Source assets missing source tag

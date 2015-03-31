@@ -25,6 +25,8 @@ sed -i 's@^\[mysqld\]$@[mysqld]\ninnodb_file_per_table\n@' $MY_CNF
 sed -i 's@^\[mysqld\]$@[mysqld]\ninnodb_log_file_size=32M\n@' $MY_CNF
 sed -i 's@^\[mysqld\]$@[mysqld]\nopen_files_limit = 20000\n@' $MY_CNF
 sed -i 's@^\[mysqld\]$@[mysqld]\nmax_allowed_packet = 16M\n@' $MY_CNF
+mv /var/lib/mysql/ib_logfile0 /var/lib/mysql/ib_logfile0.old
+mv /var/lib/mysql/ib_logfile1 /var/lib/mysql/ib_logfile1.old
 
 if rpm -q mysql-server 2>/dev/null;then
         service mysqld restart

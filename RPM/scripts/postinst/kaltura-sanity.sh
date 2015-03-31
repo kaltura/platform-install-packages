@@ -23,6 +23,10 @@ if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
 	exit 1
 fi
 . $KALTURA_FUNCTIONS_RC
+if [ `id -u` != 0 ];then 
+	echo -e "${BRIGHT_RED}ERROR: please run as super user, exiting..${NORMAL}"
+	exit 3
+fi
 RC_FILE=/etc/kaltura.d/system.ini
 if [ ! -r "$RC_FILE" ];then
 	echo -e "${BRIGHT_RED}ERROR: could not find $RC_FILE so, exiting..${NORMAL}"
@@ -155,6 +159,14 @@ if rpm -q kaltura-html5lib >/dev/null 2>&1 ;then
 	RC=$?
 	END=`date +%s.%N`
 	report "check_studio_index_page" $RC "$MSG" "`bc <<< $END-$START`"
+fi
+
+if rpm -q kaltura-clipapp >/dev/null 2>&1 ;then
+	START=`date +%s.%N`
+	MSG=`check_clipapp_index_page`
+	RC=$?
+	END=`date +%s.%N`
+	report "check_clipapp_index_page" $RC "$MSG" "`bc <<< $END-$START`"
 fi
 
 ADMIN_PARTNER_SECRET=`echo "select admin_secret from partner where id=-2" | mysql -N -h $DB1_HOST -p$DB1_PASS $DB1_NAME -u$DB1_USER  -P$DB1_PORT`
@@ -399,7 +411,7 @@ sed -i "1,/^adminSecret/s/^adminSecret\s*=.*/adminSecret=@PARTNER_ADMIN_SECRET@/
 fi
 WEBCAM_SYNLINK=`readlink -f $WEB_DIR/content/webcam`
 TEST_NAME="Red5 file upload"
-if [ $WEBCAM_SYNLINK = /usr/lib/red5/webapps/oflaDemo/streams ]; then
+if [ "$WEBCAM_SYNLINK" = /usr/lib/red5/webapps/oflaDemo/streams ]; then
 	START=`date +%s.%N`
 	OUTP=`test_red5_conn`
 	RC=$?

@@ -1,7 +1,7 @@
 %define prefix /opt/kaltura
-Name:	kaltura-kmc	
-Version: v5.38.8
-Release: 1
+Name:	kaltura-kmc
+Version: v5.38.10
+Release: 2
 Summary: Kaltura Management Console
 
 Group: System Management	
@@ -78,6 +78,18 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Mar 9 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.10-2
+- new HTML5 lib ver.
+
+* Sat Feb 28 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.10-1
+- Ver bounce.
+
+* Sun Feb 8 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.9-1
+- SUP-3658 - KMC Error Message and Crash
+- SUP-3681 - KMC doesn't set required tags when logging as a "Content Moderator" role
+- FEC-2653 - KMC: after click on Studio tab, the flash studio appears for 1-2 seconds and after U.studio loaded
+- FEC-2654 - KMC: If select Flash Studio, after U. Studio and refresh the web page - Flash studio loaded
+
 * Sun Jan 25 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.8-1
 - SUP-3531 - Analytic data inconsistency in certain scenario
 

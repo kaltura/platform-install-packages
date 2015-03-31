@@ -154,9 +154,14 @@ Setup completed successfully!
 To access your Kaltura tools visit:
 ${BRIGHT_BLUE}$SERVICE_URL${CYAN}
 
+To verify the integrity of your deployment and that all components are fully configured and installed,
+you can run the sanity tests using the following command:
+$BASE_DIR/bin/kaltura-sanity.sh 
+
 To begin, access the Admin Console using the Admin email and password you've entered while installing.
 When logged in to the KAC, create a new publisher account to being using Kaltura.
 Visit ${BRIGHT_BLUE}http://www.kaltura.org${CYAN} to join the community and get help!
+Visit ${BRIGHT_BLUE}http://forum.kaltura.org${CYAN} to post issues and help others with theirs.
 Visit ${BRIGHT_BLUE}http://knowledge.kaltura.com${CYAN} to read documentation and learn more.
 =====================================================================================================================
 
