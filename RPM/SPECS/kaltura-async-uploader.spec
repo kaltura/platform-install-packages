@@ -1,7 +1,7 @@
 %define prefix /opt/kaltura
 %define kaltura_user kaltura
 %define kaltura_rootdir %{_topdir}/../
-%define postinst_dir ../../RPM/scripts/postinst
+%define postinst_dir %{_topdir}/scripts/postinst
 
 Name:           kaltura-async-uploader
 Version:         1.0
@@ -13,6 +13,7 @@ URL:            https://github.com/kaltura/media-server-async-process
 Source0:        https://github.com/kaltura/media-server-async-process/releases/download/rel-%{version}/AsyncMediaServerProcessClientApp-%{version}.zip
 #Source1: %{postinst_dir}/%{name}-config.sh
 #Source2: %{postinst_dir}/%{name}-config.sh
+Source3:  kaltura_media_server_async_process.template.sh
 
 BuildArch: 	noarch
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n) 
@@ -44,9 +45,9 @@ This package configures the AsyncMediaServerProcessClientApp component used in E
 mkdir -p $RPM_BUILD_ROOT/%{prefix}/AsyncMediaServerProcessClientApp
 unzip -d $RPM_BUILD_ROOT/%{prefix}/AsyncMediaServerProcessClientApp %{SOURCE0}
 mkdir -p $RPM_BUILD_ROOT/%{prefix}/bin
-mkdir -p $RPM_BUILD_ROOT/%{prefix}/bin/utils
-%{__install}  %{postinst_dir}/kaltura_async_uploader_config.sh   $RPM_BUILD_ROOT/%{prefix}/bin/
-%{__install}   %{postinst_dir}/common_functions   $RPM_BUILD_ROOT/%{prefix}/bin/utils/
+mkdir -p $RPM_BUILD_ROOT/etc/profile.d/
+%{__install}  %{postinst_dir}/kaltura-async-uploader-config.sh   $RPM_BUILD_ROOT/%{prefix}/bin/
+%{__install}  %{SOURCE3}   $RPM_BUILD_ROOT/etc/profile.d/
 
 
 %clean
@@ -58,8 +59,8 @@ rm -rf %{buildroot}
 %{prefix}/AsyncMediaServerProcessClientApp/*
 %{prefix}/bin
 %{prefix}/bin/*
-%{prefix}/bin/utils
-%{prefix}/bin/utils/*
+%dir /etc/profile.d/
+%dir /etc/profile.d/*
 
 %post
 

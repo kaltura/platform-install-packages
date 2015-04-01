@@ -22,8 +22,13 @@ if[ ! -r $1 ]; then
 
 . $1
 
+if[ !-e /etc/profile.d/kaltura_media_server_async_process.template.sh ]; then
+  sed -e "s#@KALTURA_ECDN_CONFIG_FILE_PATH@#$1#g" \
+      /etc/profile.d/kaltura_media_server_async_process.template.sh > /etc/profile.d/kaltura_media_server_async_process.sh
+fi
+
 cd $ASYNC_CLIENT_APP_DIR
-ant -Dproperties_file_path=/opt/kaltura/app/configurations/ecdn.ini
+ant
 /etc/init.d/WowzaStreamingEngine stop >> /dev/null 2>&1
 /etc/init.d/WowzaStreamingEngine start
 
