@@ -13,7 +13,7 @@ URL:            https://github.com/kaltura/media-server-async-process
 Source0:        https://github.com/kaltura/media-server-async-process/releases/download/rel-%{version}/AsyncMediaServerProcessClientApp-%{version}.zip
 #Source1: %{postinst_dir}/%{name}-config.sh
 #Source2: %{postinst_dir}/%{name}-config.sh
-Source3:  kaltura_media_server_async_process.template.sh
+Source3:  kaltura_media_server_async_process.sh
 
 BuildArch: 	noarch
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n) 
@@ -47,7 +47,7 @@ unzip -d $RPM_BUILD_ROOT/%{prefix}/AsyncMediaServerProcessClientApp %{SOURCE0}
 mkdir -p $RPM_BUILD_ROOT/%{prefix}/bin
 mkdir -p $RPM_BUILD_ROOT/etc/profile.d/
 %{__install}  %{postinst_dir}/kaltura-async-uploader-config.sh   $RPM_BUILD_ROOT/%{prefix}/bin/
-%{__install}  %{SOURCE3}   $RPM_BUILD_ROOT/etc/profile.d/
+%{__install}  %{SOURCE3}   $RPM_BUILD_ROOT/%{prefix}/bin/
 
 
 %clean
@@ -58,9 +58,9 @@ rm -rf %{buildroot}
 %dir %{prefix}/AsyncMediaServerProcessClientApp
 %{prefix}/AsyncMediaServerProcessClientApp/*
 %{prefix}/bin
+%config %{prefix}/bin/kaltura_media_server_async_process.sh
 %{prefix}/bin/*
-%dir /etc/profile.d/
-%dir /etc/profile.d/*
+
 
 %post
 
