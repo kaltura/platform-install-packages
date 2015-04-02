@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 10.8.0
-Release: 4
+Release: 10
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -33,6 +33,7 @@ Source24: 04.liveParams.ini
 Source25: kaltura_populate.template
 Source26: kaltura_batch.template
 Source28: embedIframeJsAction.class.php
+Source29: kaltura.ssl.conf.template
 
 URL: https://github.com/kaltura/server/tree/%{codename}-%{version}
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -140,6 +141,8 @@ cp %{SOURCE18} $RPM_BUILD_ROOT%{prefix}/app/admin_console/views/scripts/index/mo
 cp %{SOURCE19} $RPM_BUILD_ROOT%{prefix}/app/admin_console/controllers/IndexController.php
 # patch for auto embed to work, should be dropped when core merge.
 cp %{SOURCE28} $RPM_BUILD_ROOT%{prefix}/app/alpha/apps/kaltura/modules/extwidget/actions/embedIframeJsAction.class.php
+# tmp patch due to https://github.com/kaltura/platform-install-packages/issues/367
+cp %{SOURCE29} $RPM_BUILD_ROOT%{prefix}/app/configurations/apache/
 # we bring another in kaltura-batch
 rm $RPM_BUILD_ROOT%{prefix}/app/configurations/batch/batch.ini.template
 
@@ -216,6 +219,7 @@ if [ "$1" = 2 ];then
 		# this is read by kaltura-sphinx-schema-update.sh to determine rather or not to run
 		touch %{prefix}/app/configurations/sphinx_schema_update
 		rm -rf %{prefix}/app/cache/*
+		rm -f %{prefix}/app/base-config-generator.lock
 		php %{prefix}/app/generator/generate.php
 		find %{prefix}/app/cache/ %{prefix}/log -type d -exec chmod 775 {} \;
 		find %{prefix}/app/cache/ %{prefix}/log -type f -exec chmod 664 {} \;
@@ -298,6 +302,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Thu Apr 2 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.8.0-10
+- Tmp patch due to https://github.com/kaltura/platform-install-packages/issues/367
+
 * Mon Mar 23 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.8.0-3
 - Stop monit before starting upgrade, restart when done.
 
