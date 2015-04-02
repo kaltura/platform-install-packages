@@ -13,7 +13,7 @@ URL:            https://github.com/kaltura/media-server-async-process
 Source0:        https://github.com/kaltura/media-server-async-process/releases/download/rel-%{version}/AsyncMediaServerProcessClientApp-%{version}.zip
 #Source1: %{postinst_dir}/%{name}-config.sh
 #Source2: %{postinst_dir}/%{name}-config.sh
-Source3:  kaltura_media_server_async_process.sh
+Source3:  kaltura_media_server_async_process.template.sh
 
 BuildArch: 	noarch
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n) 
@@ -58,7 +58,6 @@ rm -rf %{buildroot}
 %dir %{prefix}/AsyncMediaServerProcessClientApp
 %{prefix}/AsyncMediaServerProcessClientApp/*
 %{prefix}/bin
-%config %{prefix}/bin/kaltura_media_server_async_process.sh
 %{prefix}/bin/*
 
 

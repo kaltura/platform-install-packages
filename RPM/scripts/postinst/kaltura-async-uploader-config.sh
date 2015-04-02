@@ -14,21 +14,20 @@
 #      REVISION:  ---
 #===============================================================================
 
-if [ ! -r $1 ]; then
+if [ ! -r $KALTURA_ECDN_CONFIG_FILE_PATH ]; then
     echo "no ini file path provided! exiting"
     exit 1
  fi
 
-. $1
+. $KALTURA_ECDN_CONFIG_FILE_PATH
 
-if [  -r $BIN_DIR/kaltura_media_server_async_process.sh ]; then
-  sed -e "s#@KALTURA_ECDN_CONFIG_FILE_PATH@#$1#g" $BIN_DIR/kaltura_media_server_async_process.sh > $BIN_DIR/kaltura_media_server_async_process.sh
-
+if [  -r $BIN_DIR/kaltura_media_server_async_processi.template.sh ]; then
+  sed -e "s#@KALTURA_ECDN_CONFIG_FILE_PATH@#$KALTURA_ECDN_CONFIG_FILE_PATH#g" $BIN_DIR/kaltura_media_server_async_process.template.sh > $BIN_DIR/kaltura_media_server_async_process.sh
    ln -sf  $BIN_DIR/kaltura_media_server_async_process.sh /etc/profile.d/
 fi
 
 cd $ASYNC_CLIENT_APP_DIR
 ant
 /etc/init.d/WowzaStreamingEngine stop >> /dev/null 2>&1
-/etc/init.d/WowzaStreamingEngine start
+/etc/init.d/WowzaStreamingEngine start >> /dev/null 2>&1
 
