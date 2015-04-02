@@ -14,16 +14,17 @@
 #      REVISION:  ---
 #===============================================================================
 
-if [ ! -r $KALTURA_ECDN_CONFIG_FILE_PATH ]; then
+if [ ! -r $1 ]; then
     echo "no ini file path provided! exiting"
     exit 1
  fi
 
-. $KALTURA_ECDN_CONFIG_FILE_PATH
+. $1
 
-if [  -r $BIN_DIR/kaltura_media_server_async_processi.template.sh ]; then
-  sed -e "s#@KALTURA_ECDN_CONFIG_FILE_PATH@#$KALTURA_ECDN_CONFIG_FILE_PATH#g" $BIN_DIR/kaltura_media_server_async_process.template.sh > $BIN_DIR/kaltura_media_server_async_process.sh
+if [  -r $BIN_DIR/kaltura_media_server_async_process.template.sh ]; then
+  sed -e "s#@KALTURA_ECDN_CONFIG_FILE_PATH@#$1#g" $BIN_DIR/kaltura_media_server_async_process.template.sh > $BIN_DIR/kaltura_media_server_async_process.sh
    ln -sf  $BIN_DIR/kaltura_media_server_async_process.sh /etc/profile.d/
+   . /etc/profile.d/kaltura_media_server_async_process.sh
 fi
 
 cd $ASYNC_CLIENT_APP_DIR
