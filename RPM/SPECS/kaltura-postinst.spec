@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.24
-Release: 10
+Release: 12
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -73,6 +73,7 @@ if [ "$1" = 2 ];then
 	fi
 fi
 %preun
+find %{_sysconfdir}/logrotate.d -type l -name "kaltura_*" -exec rm {} \;
 
 %files
 %{prefix}/bin/*
@@ -81,6 +82,12 @@ fi
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Fri Apr 3 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.24-12
+- Remove logrotate syms during preun.
+
+* Thu Apr 2 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.24-11
+- Added script to clean all data from the DWH DBs. Useful for when you want to keep the operational 'kaltura' DB but clear analytics.
+
 * Tue Mar 17 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.24-9
 - corrected clipapp sanity check.
 
