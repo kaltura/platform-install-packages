@@ -67,7 +67,7 @@ echo "
 #####################################################################################################################################
 Installation of %{name} %{version} completed
 Please run 
-# /opt/kaltura/bin/config_ecdn.sh [/path/to/answer/file]
+# /opt/kaltura/bin/kaltura-async-uploader-config.sh [/path/to/answer/file]
 To finalize the setup.
 #####################################################################################################################################
 "
