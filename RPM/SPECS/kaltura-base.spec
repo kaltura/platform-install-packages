@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 10.8.0
-Release: 11
+Release: 13
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -113,6 +113,7 @@ sed -i 's@^writers.\(.*\).filters.priority.priority\s*=\s*7@writers.\1.filters.p
 sed -i 's#\(@DWH_DIR@\)$#\1 -k %{prefix}/pentaho/pdi/kitchen.sh#g' $RPM_BUILD_ROOT%{prefix}/app/configurations/cron/dwh.template
 rm $RPM_BUILD_ROOT%{prefix}/app/generator/sources/android/DemoApplication/libs/libWVphoneAPI.so
 rm $RPM_BUILD_ROOT%{prefix}/app/configurations/.project
+rm $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_content/04.dropFolder.-4.template.xml
 # see https://github.com/kaltura/platform-install-packages/issues/58 - these are taken care of on lines 139 though 144:
 
 # we bring our own for kaltura-front and kaltura-batch.
@@ -221,6 +222,7 @@ if [ "$1" = 2 ];then
 		rm -rf %{prefix}/app/cache/*
 		rm -f %{prefix}/app/base-config-generator.lock
 		php %{prefix}/app/generator/generate.php
+		php %{prefix}/app/deployment/base/scripts/installPlugins.php
 		find %{prefix}/app/cache/ %{prefix}/log -type d -exec chmod 775 {} \;
 		find %{prefix}/app/cache/ %{prefix}/log -type f -exec chmod 664 {} \;
 		chown -R %{kaltura_user}.%{apache_user} %{prefix}/app/cache/ %{prefix}/log
@@ -302,6 +304,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Sun Apr 5 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.8.0-12
+- Run installPlugins.php post upgrade.
+
 * Sun Apr 5 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.8.0-11
 - SUP-3451 - KMC error - The language 'sv_SE' has to be added before it can be used.
 - SUP-4124 - Adding support for video file extension .m2ts

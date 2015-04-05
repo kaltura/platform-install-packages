@@ -20,13 +20,14 @@ if [ ! -r /opt/kaltura/bin/db_actions.rc ];then
 	exit 1
 fi
 . /opt/kaltura/bin/db_actions.rc
+. /opt/kaltura/bin/colors.sh
 RC_FILE=/etc/kaltura.d/system.ini
 if [ ! -r "$RC_FILE" ];then
 	echo "Could not find $RC_FILE so, exiting.."
 	exit 1 
 fi
 . $RC_FILE
-echo "This will drop the following DBs: 
+echo -en "This will drop the following DBs: 
 $DBS 
 and remove users:
 $DB_USERS
