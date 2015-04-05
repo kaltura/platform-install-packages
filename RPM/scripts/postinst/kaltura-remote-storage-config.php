@@ -36,7 +36,7 @@ $ks = $client->user->login(-2,$minus2_mail, $minus2_passwd, $expiry, $privileges
 
 $client->setKs($ks);
 $config->partnerId=$partner_id;
-$client->setConfig($config);
+$client->setPartnerId($partner_id);
 if ($storage_type == S3){
 	$storageProfile = new KalturaAmazonS3StorageProfile();
 	$storageProfile->filesPermissionInS3 = KalturaAmazonS3StorageProfileFilesPermissionLevel::ACL_PUBLIC_READ;

@@ -13,7 +13,7 @@ $config = new KalturaConfiguration($partnerId);
 $config->serviceUrl = $argv[3];
 $client = new KalturaClient($config);
 $config->partnerId=$partnerId;
-$client->setConfig($config);
+$client->setPartnerId($partnerId);
 $ks = $client->session->start($secret, $userId,KalturaSessionType::ADMIN , -2, $expiry, $privileges);
 $client->setKs($ks);
 $filter = null;
