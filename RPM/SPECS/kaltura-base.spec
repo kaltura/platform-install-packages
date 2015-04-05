@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 10.8.0
-Release: 10
+Release: 11
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -302,6 +302,19 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Sun Apr 5 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.8.0-11
+- SUP-3451 - KMC error - The language 'sv_SE' has to be added before it can be used.
+- SUP-4124 - Adding support for video file extension .m2ts
+- SUP-3916 - [2.27.1] AutoEmbed+HTTPS+streamerType=auto does not play on HTTP sites
+- SUP-3864 - Download gets cut for large flavors
+- PLAT-2653 - DVR audience missing on calculation audience on entry cube
+- PLAT-2616 - Entries on "All Viewed Live Entries" dashboard do not sorted
+- PLAT-2630 - location map enhancements
+- PLAT-1680 - Server KalturaMediaEntryFilterForPlaylist call does not respect filter limit or pagging
+- PLAT-2005 - Can't use Amazon remote storage
+- PLAT-2654 - DVR audience missing on total audience calculation on CSV report
+- PLAT-2646 - Predictive Tags: Suggested tags displayed twice
+
 * Thu Apr 2 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.8.0-10
 - Tmp patch due to https://github.com/kaltura/platform-install-packages/issues/367
 
