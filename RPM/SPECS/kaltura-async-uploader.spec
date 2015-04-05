@@ -1,20 +1,23 @@
 %define prefix /opt/kaltura
 %define kaltura_user kaltura
+%define kaltura_rootdir %{_topdir}/../
 %define postinst_dir %{_topdir}/scripts/postinst
-Summary: Kaltura Open Source Video Platform - Media Server 
-Name: kaltura-media-server
-Version: 3.2.0
-Release: 1
-License: AGPLv3+
-Group: Server/Platform 
-Source0: https://github.com/kaltura/media-server/releases/download/rel-%{version}/KalturaWowzaServer-install-%{version}.zip 
-#Source1: %{postinst_dir}/%{name}-config.sh
-#Source2: %{postinst_dir}/kaltura-functions.rc
 
-URL: https://github.com/kaltura/media-server 
-Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires:  jre >= 1.7.0, ant , php >= 5 
-BuildArch: noarch
+Name:           kaltura-async-uploader
+Version:         1.0
+Release:        1%{?dist}
+Summary:       Kaltura Open Source Video Platform - Media Server 
+Group:          Server/Platform 
+License:        AGPLv3+
+URL:            https://github.com/kaltura/media-server-async-process
+Source0:        https://github.com/kaltura/media-server-async-process/releases/download/rel-%{version}/AsyncMediaServerProcessClientApp-%{version}.zip
+#Source1: %{postinst_dir}/%{name}-config.sh
+#Source2: %{postinst_dir}/%{name}-config.sh
+Source3:  kaltura_media_server_async_process.template.sh
+
+BuildArch: 	noarch
+Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n) 
+Requires:       php php-common php-mcrypt kaltura-media-server cronie ant >= 1.8.2 
 
 %description
 Kaltura is the world's first Open Source Online Video Platform, transforming the way people work, 
@@ -28,51 +31,49 @@ teachers by providing educational institutions disruptive online video solutions
 learning, and increased engagement across campuses and beyond. 
 For more information visit: http://corp.kaltura.com, http://www.kaltura.org and http://www.html5video.org.
 
-
 The Kaltura platform enables video management, publishing, syndication and monetization, 
 as well as providing a robust framework for managing rich-media applications, 
 and developing a variety of online workflows for video. 
 
-This package configures the Media Server component. 
+This package configures the AsyncMediaServerProcessClientApp component used in ECDN installation of Media Server. 
 
 %prep
-
-%build
+#%setup
 
 %install
-mkdir -p $RPM_BUILD_ROOT/%{prefix}/media-server
-unzip -d $RPM_BUILD_ROOT/%{prefix}/media-server %{SOURCE0}
+
+mkdir -p $RPM_BUILD_ROOT/%{prefix}/AsyncMediaServerProcessClientApp
+unzip -d $RPM_BUILD_ROOT/%{prefix}/AsyncMediaServerProcessClientApp %{SOURCE0}
 mkdir -p $RPM_BUILD_ROOT/%{prefix}/bin
-%{__install} %{postinst_dir}/%{name}-config.sh  $RPM_BUILD_ROOT/%{prefix}/bin/
-%{__install} %{postinst_dir}/kaltura-functions.rc  $RPM_BUILD_ROOT/%{prefix}/bin/
+mkdir -p $RPM_BUILD_ROOT/etc/profile.d/
+%{__install}  %{postinst_dir}/kaltura-async-uploader-config.sh   $RPM_BUILD_ROOT/%{prefix}/bin/
+%{__install}  %{SOURCE3}   $RPM_BUILD_ROOT/%{prefix}/bin/
+
 
 %clean
 rm -rf %{buildroot}
 
-%pre
+
+%files
+%dir %{prefix}/AsyncMediaServerProcessClientApp
+%{prefix}/AsyncMediaServerProcessClientApp/*
+%{prefix}/bin
+%{prefix}/bin/*
+
 
 %post
+
 echo "
 #####################################################################################################################################
 Installation of %{name} %{version} completed
 Please run 
-# /opt/kaltura/bin/%{name}-config.sh [/path/to/answer/file]
+# /opt/kaltura/bin/kaltura-async-uploader-config.sh [/path/to/answer/file]
 To finalize the setup.
 #####################################################################################################################################
 "
 
-%preun
-
-%files
-%dir %{prefix}/media-server
-%{prefix}/media-server/*
-%dir %{prefix}/bin/
-%{prefix}/bin/*
+chmod +x %{prefix}/bin/kss_configure_firewall.sh
 
 %changelog
-* Fri Dec 12 2014 Tan-Tan <jonathan.kanarek@kaltura.com> - v3.1.5
-- Package jar instead of zip
-
-* Thu May 8 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 3.0.8.5-1
-- Initial release.
-
+* Mon Mar 9 2015 Igor Shevach <igor.shevach@kaltura.com> -  PLAT-2494
+	 Initial release.
