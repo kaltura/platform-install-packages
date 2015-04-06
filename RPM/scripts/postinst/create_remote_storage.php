@@ -55,7 +55,7 @@ try{
 	$config->serviceUrl = $service_url;  
 	$client = new KalturaClient($config);
 	$config->partnerId=$partnerId;
-	$client->setConfig($config);
+	$client->setPartnerId($partnerId);
 	$ks = $client->session->start($secret, null, KalturaSessionType::ADMIN, -2, null,null);
 	$client->setKs($ks);
 	$delivery = new KalturaDeliveryProfile();

@@ -26,7 +26,7 @@
 Summary: Utilities and libraries to record, convert and stream audio and video
 Name: kaltura-ffmpeg
 Version: 2.1.3
-Release: 2 
+Release: 3 
 License: GPL
 Group: Applications/Multimedia
 URL: http://ffmpeg.org/
@@ -63,7 +63,7 @@ BuildRequires: xvidcore-devel
 %{!?_without_xvid:BuildRequires: xvidcore-devel}
 %{!?_without_a52dec:Requires: a52dec}
 BuildRequires: yasm-devel
-BuildRequires: kaltura-libass-devel 
+BuildRequires: libass-devel 
 BuildRequires: kaltura-x264-devel 
 BuildRequires: gsm-devel
 BuildRequires: speex-devel
@@ -241,18 +241,19 @@ fi
 %{base_prefix}-%{version}/include/libavformat/
 %{base_prefix}-%{version}/include/libavutil/
 %{base_prefix}-%{version}/include/libswscale/
-%{base_prefix}-%{version}/lib/libavcodec.a
-%{base_prefix}-%{version}/lib/libavdevice.a
-%{base_prefix}-%{version}/lib/libavfilter.a
-%{base_prefix}-%{version}/lib/libavformat.a
-%{base_prefix}-%{version}/lib/libavutil.a
-%{base_prefix}-%{version}/lib/libswscale.a
-%{base_prefix}-%{version}/lib/libavcodec.so
-%{base_prefix}-%{version}/lib/libavdevice.so
-%{base_prefix}-%{version}/lib/libavfilter.so
-%{base_prefix}-%{version}/lib/libavformat.so
-%{base_prefix}-%{version}/lib/libavutil.so
-%{base_prefix}-%{version}/lib/libswscale.so
+#%{base_prefix}-%{version}/lib/libavcodec.a
+#%{base_prefix}-%{version}/lib/libavdevice.a
+#%{base_prefix}-%{version}/lib/libavfilter.a
+#%{base_prefix}-%{version}/lib/libavformat.a
+#%{base_prefix}-%{version}/lib/libavutil.a
+#%{base_prefix}-%{version}/lib/libswscale.a
+#%{base_prefix}-%{version}/lib/libavcodec.so
+#%{base_prefix}-%{version}/lib/libavdevice.so
+#%{base_prefix}-%{version}/lib/libavfilter.so
+#%{base_prefix}-%{version}/lib/libavformat.so
+#%{base_prefix}-%{version}/lib/libavutil.so
+#%{base_prefix}-%{version}/lib/libswscale.so
+%{base_prefix}-%{version}/lib/*so*
 %{base_prefix}-%{version}/lib/pkgconfig/libavcodec.pc
 %{base_prefix}-%{version}/lib/pkgconfig/libavdevice.pc
 %{base_prefix}-%{version}/lib/pkgconfig/libavfilter.pc

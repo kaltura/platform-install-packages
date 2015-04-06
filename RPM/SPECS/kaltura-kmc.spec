@@ -1,7 +1,7 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmc
-Version: v5.38.10
-Release: 2
+Version: v5.38.11
+Release: 1
 Summary: Kaltura Management Console
 
 Group: System Management	
@@ -78,6 +78,12 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sun Apr 5 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.11-1
+- SUP-3963 - Issue with Date time field in the Video Metadata
+- SUP-4105 - Error is thrown when accessing upload center
+- SUP-4009 - Unable to change account owner
+- PLAT-2608 - Link to live analytics exits on content tab when user dont have permissions to analytics
+
 * Mon Mar 9 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.10-2
 - new HTML5 lib ver.
 

@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 10.6.0
-Release: 3
+Version: 10.8.0
+Release: 14
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -28,13 +28,12 @@ Source17: navigation.xml
 Source18: monit.phtml 
 Source19: IndexController.php
 Source20: sphinx.populate.template.rc
-#Source22: 01.UserRole.99.template.xml
 Source23: 04.flavorParams.ini
 Source24: 04.liveParams.ini
 Source25: kaltura_populate.template
 Source26: kaltura_batch.template
-#Source27: kmc1Success.php 
 Source28: embedIframeJsAction.class.php
+Source29: kaltura.ssl.conf.template
 
 URL: https://github.com/kaltura/server/tree/%{codename}-%{version}
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -114,6 +113,7 @@ sed -i 's@^writers.\(.*\).filters.priority.priority\s*=\s*7@writers.\1.filters.p
 sed -i 's#\(@DWH_DIR@\)$#\1 -k %{prefix}/pentaho/pdi/kitchen.sh#g' $RPM_BUILD_ROOT%{prefix}/app/configurations/cron/dwh.template
 rm $RPM_BUILD_ROOT%{prefix}/app/generator/sources/android/DemoApplication/libs/libWVphoneAPI.so
 rm $RPM_BUILD_ROOT%{prefix}/app/configurations/.project
+rm $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_content/04.dropFolder.-4.template.xml
 # see https://github.com/kaltura/platform-install-packages/issues/58 - these are taken care of on lines 139 though 144:
 
 # we bring our own for kaltura-front and kaltura-batch.
@@ -142,6 +142,8 @@ cp %{SOURCE18} $RPM_BUILD_ROOT%{prefix}/app/admin_console/views/scripts/index/mo
 cp %{SOURCE19} $RPM_BUILD_ROOT%{prefix}/app/admin_console/controllers/IndexController.php
 # patch for auto embed to work, should be dropped when core merge.
 cp %{SOURCE28} $RPM_BUILD_ROOT%{prefix}/app/alpha/apps/kaltura/modules/extwidget/actions/embedIframeJsAction.class.php
+# tmp patch due to https://github.com/kaltura/platform-install-packages/issues/367
+cp %{SOURCE29} $RPM_BUILD_ROOT%{prefix}/app/configurations/apache/
 # we bring another in kaltura-batch
 rm $RPM_BUILD_ROOT%{prefix}/app/configurations/batch/batch.ini.template
 
@@ -170,7 +172,15 @@ EOF
 rm -rf %{buildroot}
 
 %pre
-
+if [ "$1" = 2 ];then
+	if rpm -q httpd >> /dev/null;then
+		service kaltura-monit stop
+		if service httpd status;then
+			service httpd stop
+		fi
+	fi
+	rm -rf %{prefix}/app/cache/*
+fi
 # maybe one day we will support SELinux in which case this can be ommitted.
 if which getenforce >> /dev/null 2>&1; then
 	
@@ -210,14 +220,20 @@ if [ "$1" = 2 ];then
 		# this is read by kaltura-sphinx-schema-update.sh to determine rather or not to run
 		touch %{prefix}/app/configurations/sphinx_schema_update
 		rm -rf %{prefix}/app/cache/*
+		rm -f %{prefix}/app/base-config-generator.lock
 		php %{prefix}/app/generator/generate.php
+		php %{prefix}/app/deployment/base/scripts/installPlugins.php
+		php %{prefix}/app/deployment/base/scripts/populateSphinxMetadata.php
 		find %{prefix}/app/cache/ %{prefix}/log -type d -exec chmod 775 {} \;
 		find %{prefix}/app/cache/ %{prefix}/log -type f -exec chmod 664 {} \;
 		chown -R %{kaltura_user}.%{apache_user} %{prefix}/app/cache/ %{prefix}/log
 		chmod 775 %{prefix}/web/content
 
-		if ! service httpd status;then
-			service httpd start
+		service kaltura-monit start
+		if rpm -q httpd >> /dev/null;then
+			if ! service httpd status;then
+				service httpd start
+			fi
 		fi
 
 		# we now need CREATE and DROP priv for 'kaltura' on kaltura.*
@@ -289,6 +305,43 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Sun Apr 5 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.8.0-12
+- Run installPlugins.php post upgrade.
+
+* Sun Apr 5 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.8.0-11
+- SUP-3451 - KMC error - The language 'sv_SE' has to be added before it can be used.
+- SUP-4124 - Adding support for video file extension .m2ts
+- SUP-3916 - [2.27.1] AutoEmbed+HTTPS+streamerType=auto does not play on HTTP sites
+- SUP-3864 - Download gets cut for large flavors
+- PLAT-2653 - DVR audience missing on calculation audience on entry cube
+- PLAT-2616 - Entries on "All Viewed Live Entries" dashboard do not sorted
+- PLAT-2630 - location map enhancements
+- PLAT-1680 - Server KalturaMediaEntryFilterForPlaylist call does not respect filter limit or pagging
+- PLAT-2005 - Can't use Amazon remote storage
+- PLAT-2654 - DVR audience missing on total audience calculation on CSV report
+- PLAT-2646 - Predictive Tags: Suggested tags displayed twice
+
+* Thu Apr 2 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.8.0-10
+- Tmp patch due to https://github.com/kaltura/platform-install-packages/issues/367
+
+* Mon Mar 23 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.8.0-3
+- Stop monit before starting upgrade, restart when done.
+
+* Mon Mar 23 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.8.0-2
+- If upgrade, lets try to stop apache at %pre phase, seems that writing new files while its runnign cause it to hang.
+
+* Mon Mar 23 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.8.0-1
+- Ver Bounce to 10.8.0
+
+* Sun Mar 22 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.7.0-2
+- PLAT-2550 - owner of an entry should be able to update entitledUsersEdit & entitledUsersPublish
+- PLAT-2542 - kFileSyncUtils::moveFromFile crashes on "object already exists"
+- PLAT-2536 - Request of max available flavorIds or flavorParamIds gets 404
+- PLAT-2601 - Enable retry for Webex imports
+
+* Sun Mar 15 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.7.0-1
+- Ver Bounce to 10.7.0
+
 * Mon Mar 8 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.6.0-2
 - SUP-3864 - Download gets cut for large flavors
 - PLAT-2524 - sphinxFilter code relocation - (KMS-5141)

@@ -38,6 +38,6 @@ cd $RPM_SPECS_DIR
 
 sed -i "s@\(^Version:\)\s*.*\$@\1 $NEWVER@g" $SPEC_FILE
 sed -i "s@\(^Release:\)\s*.*\$@\1 $REV@g" $SPEC_FILE
-sed -i "s^\(%changelog\)^\1\n* $STAMP $PACKAGER_NAME <$PACKAGER_MAIL> - $NEWVER-1\n- Ver Bounce to $NEWVER\n^" $SPEC_FILE
+sed -i "s^\(%changelog\)^\1\n* $STAMP $PACKAGER_NAME <$PACKAGER_MAIL> - $NEWVER-$REV\n- Ver Bounce to $NEWVER\n^" $SPEC_FILE
 
 

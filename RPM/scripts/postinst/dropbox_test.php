@@ -8,12 +8,22 @@ if (count($argv)<4){
 function enable_dropbox_permission($client,$config,$partner_id)
 {
 
-	$config->partnerId=$partner_id;
-	$client->setConfig($config);
-	$permission = new KalturaPermission();
-	$permission->name = 'DROPFOLDER_PLUGIN_PERMISSION';
-	$result = $client->permission->add($permission);
+        $config->partnerId=$partner_id;
+        //$client->setConfig($config);
+        $client->setPartnerId($partner_id);
+        $permission = new KalturaPermission();
+        $permission->name = 'DROPFOLDER_PLUGIN_PERMISSION';
+
+        $filter = new KalturaPermissionFilter();
+        $filter->nameEqual = $permission->name;
+        $pager = null;
+        $result = $client->permission->listAction($filter, $pager);
+        if (!isset($result->objects[0]->status)|| $result->objects[0]->status!==1){
+                $result = $client->permission->add($permission);
+        }
 }
+
+
 
 function create_dropbox($client,$partnerId, $droppath)
 {

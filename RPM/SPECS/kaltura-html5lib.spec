@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.28
+Version: v2.29
 Release: 1
 Epoch:0 
 License: AGPLv3+
@@ -25,6 +25,7 @@ Source14: kaltura-html5lib-v2.24.tar.gz
 Source15: kaltura-html5lib-v2.25.tar.gz
 Source16: kaltura-html5lib-v2.26.tar.gz
 Source17: kaltura-html5lib-v2.27.tar.gz
+Source18: kaltura-html5lib-v2.28.tar.gz
 
 URL: https://github.com/kaltura/mwEmbed 
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -64,10 +65,11 @@ tar zxf %{SOURCE15} -C %{_builddir}/
 tar zxf %{SOURCE16} -C %{_builddir}/
 
 tar zxf %{SOURCE17} -C %{_builddir}/
+tar zxf %{SOURCE18} -C %{_builddir}/
 
 %install
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib
-for i in v2.1.1 v2.3 v2.4 v2.6 v2.9 v2.14 v2.15 v2.18.5 v2.20 v2.21 v2.22 v2.23 v2.24 v2.25 v2.26 v2.27 %{version};do
+for i in v2.1.1 v2.3 v2.4 v2.6 v2.9 v2.14 v2.15 v2.18.5 v2.20 v2.21 v2.22 v2.23 v2.24 v2.25 v2.26 v2.27 v2.28 %{version};do
 	cp -r %{_builddir}/%{name}-$i $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i
 	cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i
 done
@@ -85,6 +87,23 @@ rm -rf %{buildroot}
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Sun Apr 5 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v2.29-1
+- SUP-3340 - Live stream freezes for a few seconds when streaming with KRecord
+- SUP-4096 - [2.27.1] document.onclick is kept even after player is gone
+- SUP-3793 - No video playing
+- SUP-4018 - Thumbnail isn't Displayed in Audio Playlist
+- SUP-3984 - [2.28-rc8] Previous captions <track> elements not removed from <video> upon changeMedia
+- SUP-3944 - [2.27.1] EmbedPlayerYouTube fails with an exception
+- SUP-4137 - v2.28 broken hotkey functionality (End Key)
+- SUP-4119 - Handle hidden iframe player loading and display
+- SUP-4198 - [BankOfAmericaSaaS] Captions request is being blocked
+- SUP-3684 - Thumbnail at the end of a live stream
+- SUP-4189 - Kaltura Player versions greater than 2.22 don't handle onTextData event data properly - Kaplan
+- SUP-4118 - issues with SpotXchange integration
+- SUP-3367 - V2 player fires 2~3 'doPlay' events when using the related videos
+- SUP-3369 - Captions on live stream don't show (manual live streaming)
+- SUP-3960 - Ad tag issue - KDP
+
 * Sun Mar 8 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v2.28-1
 - FEC-417 - Player 2.0 - Share & Embed functionality
 - FEC-2866 - Enable multi-stream for iPad viewers
