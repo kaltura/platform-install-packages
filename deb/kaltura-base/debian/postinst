@@ -37,6 +37,8 @@ if [ "$1" = "configure" ]; then
 	
 	db_input critical 'kaltura-base/apache_hostname' || true
 	db_go || true
+	#echo "set kaltura-base/apache_hostname $CDN_HOST" | debconf-communicate
+
 	db_get 'kaltura-base/apache_hostname'
 	KALTURA_FULL_VIRTUAL_HOST_NAME=$RET
 	
@@ -66,6 +68,7 @@ if [ "$1" = "configure" ]; then
 	SUPER_USER_PASSWD=$RET
 
 	db_input critical 'kaltura-base/dwh_db_hostname' || true
+	#db_set 'kaltura-base/dwh_db_hostname' $DB1_HOST
 	db_go || true
 	db_get 'kaltura-base/dwh_db_hostname'
 	DWH_HOST=$RET
