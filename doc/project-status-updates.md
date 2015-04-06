@@ -1,5 +1,26 @@
 **[Track milestones progress](https://github.com/kaltura/platform-install-packages/issues/milestones)**.
 
+#### 2015-01-10:
+
+2015 roadmap in the works. big items below:
+
++ Testing and stabilization of new versions of PHP and MariaDB (compliant with new CentOS and RHEL versions)
++ Release deb packages for Debian and Ubuntu support
++ Packages for [Nginx server](https://github.com/kaltura/nginx-vod-module) (for VOD repackaging, and eCDN caching server)
++ Packages for [Media Server](https://github.com/kaltura/media-server) (for Live Streaming)
++ Packages for Play Server (for stream stitching capabilities such Ad Stitching)
++ Integration points and support for Kaltura on [OpenStack](http://www.openstack.org/) and [CloudFoundry](http://www.cloudfoundry.org) - discovery and integration hooks to virtualize resource management and launch cluster node scaling.
++ API Client Libraries testing using TravisCI post successful CI tests. 
++ Automatic distribution of API Client Libraries, (upon successful CI and after official package releases) to respective repositories, including: [RubyGems](http://rubygems.org), [Node npm](https://www.npmjs.org), [PHP composer](https://getcomposer.org), [pypi](https://pypi.python.org), etc.
++ Packages for the Live Analytics project. 
+
+Much more to come... please send ideas or suggestions to community@kaltura.org or post to the [community forums](http://forum.kaltura.org).
+
+#### 2014-11-01:
+
+Release announcements will be made through the forums from now on.
+Please visit the [New Release Updates forum category](http://forum.kaltura.org/category/new-release-updates) for all release notes.
+
 #### 2014-07-29:
 
 + Stable version is now 9.18.0, 9.19 is unstable beta ([see CI reports](http://installrepo.kaltura.org/reports/ci/)). 

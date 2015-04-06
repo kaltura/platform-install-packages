@@ -181,10 +181,27 @@ if rpm -q kaltura-batch >/dev/null 2>&1 || rpm -q kaltura-front >/dev/null 2>&1 
 		fi
 		PARTNER_SECRET=`echo "select secret from partner where id=$PARTNER_ID" | mysql -N -h $DB1_HOST -p$DB1_PASS $DB1_NAME -u$DB1_USER -P$DB1_PORT`
 		 PARTNER_ADMIN_SECRET=`echo "select admin_secret from partner where id=$PARTNER_ID" | mysql -N -h $DB1_HOST -p$DB1_PASS $DB1_NAME -u$DB1_USER -P$DB1_PORT`
+		 ZERO_PARTNER_ADMIN_SECRET=`echo "select admin_secret from partner where id=0" | mysql -N -h $DB1_HOST -p$DB1_PASS $DB1_NAME -u$DB1_USER -P$DB1_PORT`
 		sed -i "s#@PARTNER_ID@#$PARTNER_ID#g" $BASE_DIR/bin/sanity_config.ini
 		sed -i "s#@PARTNER_ADMIN_SECRET@#$PARTNER_ADMIN_SECRET#g" $BASE_DIR/bin/sanity_config.ini
 		sed -i "s#@ADMIN_CONSOLE_PARTNER_ID@#-2#g" $BASE_DIR/bin/sanity_config.ini
 		sed -i "s#@ADMIN_CONSOLE_PARTNER_ADMIN_SECRET@#$ADMIN_PARTNER_SECRET#g" $BASE_DIR/bin/sanity_config.ini
+			START=`date +%s.%N`
+			FLAVOR_PARAM_ID=`php $DIRNAME/create_flavor_params.php $ZERO_PARTNER_ADMIN_SECRET $SERVICE_URL 2>&1`
+			#echo "$DIRNAME/create_flavor_params.php $ZERO_PARTNER_ADMIN_SECRET $SERVICE_URL 2>&1"
+			RC=$?
+			END=`date +%s.%N`
+			TOTAL_T=`bc <<< $TIME`
+			report "Create flavor param" $RC "$FLAVOR_PARAM_ID" "`bc <<< $END-$START`"
+			if [ "$RC" -eq 0 ];then
+				START=`date +%s.%N`
+				OUT=`php  $DIRNAME/delete_flavor_params.php $ZERO_PARTNER_ADMIN_SECRET $SERVICE_URL $FLAVOR_PARAM_ID 2>&1`
+				#echo  "$DIRNAME/delete_flavor_params.php $ZERO_PARTNER_ADMIN_SECRET $SERVICE_URL $FLAVOR_PARAM_ID 2>&1"
+				RC=$?
+				END=`date +%s.%N`
+				TOTAL_T=`bc <<< $TIME`
+				report "Delete flavor param" $RC "$FLAVOR_PARAM_ID" "`bc <<< $END-$START`"
+			fi
 			START=`date +%s.%N`
 			UPLOADED_ENT=`php $DIRNAME/upload_test.php $SERVICE_URL $PARTNER_ID $PARTNER_SECRET $WEB_DIR/content/templates/entry/data/kaltura_logo_animated_blue.flv 2>&1`
 			RC=$?
@@ -372,7 +389,7 @@ ${NORMAL}"
 			OUTP=`echo $CLEANOUTPUT|sed "s@'@@g"`
 			END=`date +%s.%N`
 			TOTAL_T=`bc <<< $TIME`
-			report "Delete parnter" $RC "$OUTP" "`bc <<< $END-$START`"
+			report "Delete partner" $RC "$OUTP" "`bc <<< $END-$START`"
 	fi
 sed -i "1,/^adminConsolePartnerId/s/^adminConsolePartnerId\s*=.*/adminConsolePartnerId=@ADMIN_CONSOLE_PARTNER_ID@/" $DIRNAME/sanity_config.ini
 sed -i "1,/^adminConsoleSecret/s/^adminConsoleSecret\s*=.*/adminConsoleSecret=@ADMIN_CONSOLE_PARTNER_ADMIN_SECRET@/" $DIRNAME/sanity_config.ini
