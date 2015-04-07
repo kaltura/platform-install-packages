@@ -26,7 +26,7 @@ if [ -r $CONSENT_FILE ];then
 	. $CONSENT_FILE
 #elif [ -z "$USER_CONSENT" ];then
 #	get_tracking_consent
-#fi
+fi
 #. $CONSENT_FILE
 trap 'my_trap_handler "${LINENO}" ${$?}' ERR
 send_install_becon `basename $0` $ZONE install_start 0 

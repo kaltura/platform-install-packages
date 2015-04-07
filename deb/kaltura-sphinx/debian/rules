@@ -91,6 +91,7 @@ binary-arch: build install
 	dh_strip
 	dh_compress
 	dh_fixperms
+	dh_installinit
 	dh_installdeb
 	#LD_LIBRARY_PATH=$(BASE_PREFIX)/lib dh_shlibdeps
 	dh_gencontrol -u-v$(DEB_VERSION) 
