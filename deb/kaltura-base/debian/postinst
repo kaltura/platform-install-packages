@@ -29,21 +29,25 @@ if [ "$1" = "configure" ]; then
 	BEGINNERS_TUTORIAL_URL=http://bit.ly/KalturaUploadMenu
 	QUICK_START_GUIDE_URL=http://bit.ly/KalturaKmcManual
 	FORUMS_URLS=http://bit.ly/KalturaForums
+	db_set 'kaltura-base/cdn_hostname' "`hostname`"
 	db_input critical 'kaltura-base/cdn_hostname' || true
 	db_go || true
 	db_get 'kaltura-base/cdn_hostname'
 	CDN_HOST=$RET
 	
+	db_set 'kaltura-base/apache_hostname' "`hostname`"
 	db_input critical 'kaltura-base/apache_hostname' || true
 	db_go || true
 	db_get 'kaltura-base/apache_hostname'
 	KALTURA_FULL_VIRTUAL_HOST_NAME=$RET
 	
+	db_set 'kaltura-base/vhost_port' 80
 	db_input critical 'kaltura-base/vhost_port' || true
 	db_go || true
 	db_get 'kaltura-base/vhost_port'
 	KALTURA_VIRTUAL_HOST_PORT=$RET
 
+	db_set 'kaltura-base/db_hostname' "`hostname`"
 	db_input critical 'kaltura-base/db_hostname' || true
 	db_go || true
 	db_get 'kaltura-base/db_hostname'
@@ -64,6 +68,7 @@ if [ "$1" = "configure" ]; then
 	db_get 'kaltura-base/mysql_super_passwd'
 	SUPER_USER_PASSWD=$RET
 
+	db_set 'kaltura-base/dwh_db_hostname' "`hostname`"
 	db_input critical 'kaltura-base/dwh_db_hostname' || true
 	db_go || true
 	db_get 'kaltura-base/dwh_db_hostname'
@@ -74,21 +79,30 @@ if [ "$1" = "configure" ]; then
 	db_get 'kaltura-base/dwh_db_port'
 	DWH_PORT=$RET
 
+	db_set 'kaltura-base/sphinx_hostname' "`hostname`"
 	db_input critical 'kaltura-base/sphinx_hostname' || true
 	db_go || true
 	db_get 'kaltura-base/sphinx_hostname'
 	SPHINX_SERVER1=$RET
 
-	db_input critical 'kaltura-base/media_server_hostname' || true
-	db_go || true
-	db_get 'kaltura-base/media_server_hostname'
-	RED5_HOST=$RET
+	#db_set 'kaltura-base/media_server_hostname' "`hostname`"
+	#db_input critical 'kaltura-base/media_server_hostname' || true
+	#db_go || true
+	#db_get 'kaltura-base/media_server_hostname'
+	#RED5_HOST=$RET
 
+	db_set 'kaltura-base/second_sphinx_hostname' "`hostname`"
 	db_input critical 'kaltura-base/second_sphinx_hostname' || true
 	db_go || true
 	db_get 'kaltura-base/second_sphinx_hostname'
 	SPHINX_SERVER2=$RET
 
+	db_get 'kaltura-base/apache_hostname'
+	APACHE_HOST="$RET"
+	db_get 'kaltura-base/vhost_port'
+	APACHE_PORT="$RET"
+	DEF_SERVICE_URL="$APACHE_HOST:$APACHE_PORT"
+	db_set 'kaltura-base/service_url' $DEF_SERVICE_URL
 	db_input critical 'kaltura-base/service_url' || true
 	db_go || true
 	db_get 'kaltura-base/service_url'
@@ -125,14 +139,16 @@ if [ "$1" = "configure" ]; then
 
 		fi
 	done
-
-	while php -r "if (timezone_open('$TIME_ZONE') === false){exit(1);}" 2>/dev/null;do 
+	LOCALTIME_MD5=`md5sum /etc/localtime|awk -F " " '{print $1}'`
+	TZGUESS=`find /usr/share/zoneinfo -type f | xargs md5sum | grep $LOCALTIME_MD5|awk -F " " '{print $2}'|sed 's@/usr/share/zoneinfo/@@g'`
+	
+	db_set 'kaltura-base/time_zone' $TZGUESS
+	while ! php -r "if (timezone_open('$TIME_ZONE') === false){exit(1);}" 2>/dev/null;do 
 		db_input critical 'kaltura-base/time_zone' || true
 		db_go || true
 		db_get 'kaltura-base/time_zone'
 		TIME_ZONE=$RET
 	done
-
 	db_input critical 'kaltura-base/env_name' || true
 	db_go || true
 	db_get 'kaltura-base/env_name'
@@ -155,8 +171,7 @@ if [ "$1" = "configure" ]; then
 
 
 
-
-	 for INI in /etc/php5/cli/php.ini /etc/php5/apache2/php.ini /etc/php.d/*kaltura*ini;do
+	 for INI in /etc/php5/cli/php.ini /etc/php5/apache2/php.ini;do
 		if [ -r "$INI_FILE" ];then
 			sed -i "s#\(date.timezone\)\s*=.*#\1='$TIME_ZONE'#g" $INI_FILE
 		fi
