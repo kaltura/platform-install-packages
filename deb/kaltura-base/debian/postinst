@@ -22,7 +22,6 @@ fi
 ln -sf $KALTURA_PREFIX/app/api_v3/web $KALTURA_PREFIX/app/alpha/web/api_v3
 chown $APACHE_USER.kaltura -R $KALTURA_PREFIX/web/content/entry $KALTURA_PREFIX/web/content/uploads/  $KALTURA_PREFIX/web/tmp/
 find $KALTURA_PREFIX/web/content/entry $KALTURA_PREFIX/web/content/uploads/  $KALTURA_PREFIX/web/tmp/ -type d -exec chmod 775 {} \;
-service ntp start
 set -e
 if [ "$1" = "configure" ]; then
 	. /usr/share/debconf/confmodule
@@ -40,7 +39,7 @@ if [ "$1" = "configure" ]; then
 	db_get 'kaltura-base/apache_hostname'
 	KALTURA_FULL_VIRTUAL_HOST_NAME=$RET
 	
-	db_input medium 'kaltura-base/vhost_port' || true
+	db_input critical 'kaltura-base/vhost_port' || true
 	db_go || true
 	db_get 'kaltura-base/vhost_port'
 	KALTURA_VIRTUAL_HOST_PORT=$RET
@@ -50,12 +49,12 @@ if [ "$1" = "configure" ]; then
 	db_get 'kaltura-base/db_hostname'
 	DB1_HOST=$RET
 	
-	db_input medium 'kaltura-base/db_port' || true
+	db_input critical 'kaltura-base/db_port' || true
 	db_go || true
 	db_get 'kaltura-base/db_port'
 	DB1_PORT=$RET
 	
-	db_input medium 'kaltura-base/mysql_super_user' || true
+	db_input critical 'kaltura-base/mysql_super_user' || true
 	db_go || true
 	db_get 'kaltura-base/mysql_super_user'
 	SUPER_USER=$RET
@@ -70,7 +69,7 @@ if [ "$1" = "configure" ]; then
 	db_get 'kaltura-base/dwh_db_hostname'
 	DWH_HOST=$RET
 
-	db_input medium 'kaltura-base/dwh_db_port' || true
+	db_input critical 'kaltura-base/dwh_db_port' || true
 	db_go || true
 	db_get 'kaltura-base/dwh_db_port'
 	DWH_PORT=$RET
@@ -80,12 +79,12 @@ if [ "$1" = "configure" ]; then
 	db_get 'kaltura-base/sphinx_hostname'
 	SPHINX_SERVER1=$RET
 
-	db_input low 'kaltura-base/media_server_hostname' || true
+	db_input critical 'kaltura-base/media_server_hostname' || true
 	db_go || true
 	db_get 'kaltura-base/media_server_hostname'
 	RED5_HOST=$RET
 
-	db_input low 'kaltura-base/second_sphinx_hostname' || true
+	db_input critical 'kaltura-base/second_sphinx_hostname' || true
 	db_go || true
 	db_get 'kaltura-base/second_sphinx_hostname'
 	SPHINX_SERVER2=$RET
@@ -127,20 +126,11 @@ if [ "$1" = "configure" ]; then
 		fi
 	done
 
-	while [ -z "$TIME_ZONE" ];do
+	while php -r "if (timezone_open('$TIME_ZONE') === false){exit(1);}" 2>/dev/null;do 
 		db_input critical 'kaltura-base/time_zone' || true
 		db_go || true
 		db_get 'kaltura-base/time_zone'
 		TIME_ZONE=$RET
-		set +e
-		php -r "if (timezone_open('$TIME_ZONE') === false){exit(1);}" 2>/dev/null
-		RC=$?
-		if [ $RC -ne 0 ];then
-			db_input critical 'kaltura-base/bad_time_zone' || true
-			db_go || true
-			unset TIME_ZONE
-		fi
-		set +e
 	done
 
 	db_input critical 'kaltura-base/env_name' || true
@@ -213,22 +203,8 @@ if [ "$1" = "configure" ]; then
 	done
 
 
-if ! getent group $KALTURA_GROUP >/dev/null; then
-        addgroup --system --force-badname --quiet $KALTURA_GROUP --gid 7373 
-fi
-
-if ! getent passwd $KALTURA_USER >/dev/null; then
-        adduser --system --force-badname --quiet \
-            --home $KALTURA_PREFIX --no-create-home \
-            --shell /bin/bash \
-    --uid 7373 \
-            --group $KALTURA_GROUP
-        usermod -c "Kaltura server" $KALTURA_USER
-fi
-
-
 	# these two have passwds in them.
-	chown kaltura.www-data $BASE_DIR/app/configurations/system.ini $BASE_DIR/app/configurations/db.ini
+	chown $KALTURA_USER.$APACHE_USER $BASE_DIR/app/configurations/system.ini $BASE_DIR/app/configurations/db.ini
 	chmod 640 $BASE_DIR/app/configurations/system.ini $BASE_DIR/app/configurations/db.ini
 
 
@@ -336,7 +312,7 @@ fi
 
 	find $BASE_DIR/app/cache/ $BASE_DIR/log -type d -exec chmod 775 {} \; 
 	find $BASE_DIR/app/cache/ $BASE_DIR/log -type f -exec chmod 664 {} \; 
-	chown -R kaltura.www-data $BASE_DIR/app/cache/ $BASE_DIR/log
+	chown -R $KALTURA_USER.$APACHE_USER $BASE_DIR/app/cache/ $BASE_DIR/log
 	chmod 775 $BASE_DIR/web/content
 	if [ -d /usr/lib/red5/webapps/oflaDemo ];then
 		ln -sf $BASE_DIR/web/content/webcam /usr/lib/red5/webapps/oflaDemo/streams
