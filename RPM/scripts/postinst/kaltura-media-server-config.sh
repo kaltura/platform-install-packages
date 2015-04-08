@@ -64,8 +64,8 @@ else
 fi
 
 if [ ! -r "$RC_FILE" ];then
- echo -e "${BRIGHT_RED}ERROR: could not find $RC_FILE so, exiting..${NORMAL}"
- exit 2
+    echo -e "${BRIGHT_RED}ERROR: could not find $RC_FILE so, exiting..${NORMAL}"
+    exit 2
 fi
 . $RC_FILE
 

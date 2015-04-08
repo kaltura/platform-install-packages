@@ -13,7 +13,7 @@ Source0: https://github.com/kaltura/media-server/releases/download/rel-%{version
 
 URL: https://github.com/kaltura/media-server 
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires:  jre >= 1.7.0, ant , php >= 5 
+Requires:  jre >= 1.7.0, kaltura-postinst, ant >= 1.8.2 , php >= 5.3.0
 BuildArch: noarch
 
 %description
@@ -44,7 +44,7 @@ mkdir -p $RPM_BUILD_ROOT/%{prefix}/media-server
 unzip -d $RPM_BUILD_ROOT/%{prefix}/media-server %{SOURCE0}
 mkdir -p $RPM_BUILD_ROOT/%{prefix}/bin
 %{__install} %{postinst_dir}/%{name}-config.sh  $RPM_BUILD_ROOT/%{prefix}/bin/
-%{__install} %{postinst_dir}/kaltura-functions.rc  $RPM_BUILD_ROOT/%{prefix}/bin/
+
 
 %clean
 rm -rf %{buildroot}
