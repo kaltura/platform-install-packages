@@ -86,12 +86,12 @@ binary-arch: build install
 	dh_install $(BASE_PREFIX)
 	dh_installdebconf	
 	dh_installinit
+	dh_installinit --init-script=kaltura-populate.init --name=kaltura-populate
 	dh_installman
 	dh_link
 	dh_strip
 	dh_compress
 	dh_fixperms
-	dh_installinit
 	dh_installdeb
 	#LD_LIBRARY_PATH=$(BASE_PREFIX)/lib dh_shlibdeps
 	dh_gencontrol -u-v$(DEB_VERSION) 
