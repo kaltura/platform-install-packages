@@ -1,5 +1,6 @@
 %define prefix /opt/kaltura
 %define kaltura_user kaltura
+%define postinst_dir %{_topdir}/scripts/postinst
 Summary: Kaltura Open Source Video Platform - Media Server 
 Name: kaltura-media-server
 Version: 3.2.0
@@ -7,9 +8,12 @@ Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/media-server/releases/download/rel-%{version}/KalturaWowzaServer-install-%{version}.zip 
+#Source1: %{postinst_dir}/%{name}-config.sh
+#Source2: %{postinst_dir}/kaltura-functions.rc
+
 URL: https://github.com/kaltura/media-server 
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires: kaltura-base, kaltura-postinst, jre >= 1.7.0, ant
+Requires:  jre >= 1.7.0, ant , php >= 5 
 BuildArch: noarch
 
 %description
@@ -38,6 +42,9 @@ This package configures the Media Server component.
 %install
 mkdir -p $RPM_BUILD_ROOT/%{prefix}/media-server
 unzip -d $RPM_BUILD_ROOT/%{prefix}/media-server %{SOURCE0}
+mkdir -p $RPM_BUILD_ROOT/%{prefix}/bin
+%{__install} %{postinst_dir}/%{name}-config.sh  $RPM_BUILD_ROOT/%{prefix}/bin/
+%{__install} %{postinst_dir}/kaltura-functions.rc  $RPM_BUILD_ROOT/%{prefix}/bin/
 
 %clean
 rm -rf %{buildroot}
@@ -59,7 +66,8 @@ To finalize the setup.
 %files
 %dir %{prefix}/media-server
 %{prefix}/media-server/*
-
+%dir %{prefix}/bin/
+%{prefix}/bin/*
 
 %changelog
 * Fri Dec 12 2014 Tan-Tan <jonathan.kanarek@kaltura.com> - v3.1.5
