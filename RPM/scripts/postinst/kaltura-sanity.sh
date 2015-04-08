@@ -173,7 +173,7 @@ ADMIN_PARTNER_SECRET=`echo "select admin_secret from partner where id=-2" | mysq
 NOW=`date +%d-%H-%m-%S`
 START=`date +%s.%N`
 if rpm -q kaltura-batch >/dev/null 2>&1 || rpm -q kaltura-front >/dev/null 2>&1 ;then
-	PARTNER_ID=`php $DIRNAME/create_partner.php $ADMIN_PARTNER_SECRET mb-$HOSTNAME@kaltura.com testingpasswd $SERVICE_URL 2>&1`
+	PARTNER_ID=`php $DIRNAME/create_partner.php $ADMIN_PARTNER_SECRET mb-$HOSTNAME@example.com testingpasswd $SERVICE_URL 2>&1`
 	RC=$?
 	END=`date +%s.%N`
 	report "Create Partner" $RC "New PID is $PARTNER_ID" "`bc <<< $END-$START`"

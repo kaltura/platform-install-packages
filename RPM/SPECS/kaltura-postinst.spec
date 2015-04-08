@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.25
-Release: 1
+Release: 2
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -82,6 +82,9 @@ find %{_sysconfdir}/logrotate.d -type l -name "kaltura_*" -exec rm {} \;
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Mon Apr 6 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.25-2
+- Use example.com for test partner. example.com is ignored by MTAs.
+
 * Fri Apr 3 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.24-12
 - Remove logrotate syms during preun.
 
