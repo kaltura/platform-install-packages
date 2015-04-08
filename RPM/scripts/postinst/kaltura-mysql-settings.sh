@@ -15,7 +15,15 @@
 #===============================================================================
 
 #set -o nounset                              # Treat unset variables as an error
-MY_CNF=/etc/my.cnf
+if [ -r /etc/my.cnf ];then
+        MY_CNF=/etc/my.cnf
+elif [ -r /etc/mysql/my.cnf ];then
+        MY_CNF=/etc/mysql/my.cnf
+else
+        echo "I could not find your my.cnf file. Exiting."
+        exit 1
+fi
+
 cp $MY_CNF $MY_CNF.orig
 sed -i '/^lower_case_table_names = 1$/d' $MY_CNF
 sed -i '/^open_files_limit.*$/d' $MY_CNF
