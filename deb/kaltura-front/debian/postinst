@@ -149,11 +149,6 @@ if [ "$1" = "configure" ]; then
 	else
 		DEFAULT_PORT=80
 	fi
-		db_get kaltura-front/vhost_port
-		if [ -n "$RET" ];then
-			DEFAULT_PORT=$RET
-		fi
-		db_set kaltura-front/vhost_port $DEFAULT_PORT
 		db_input critical kaltura-front/vhost_port || true
 		db_go || true
 		db_get kaltura-front/vhost_port
@@ -165,16 +160,12 @@ if [ "$1" = "configure" ]; then
 			PROTOCOL="http"
 		fi
 
-		db_get kaltura-front/service_url
-		DEF_SERVICE_URL=$RET
-		if [ -z "$DEF_SERVICE_URL" ] ;then
-			db_get 'kaltura-base/apache_hostname'
-                	APACHE_HOST="$RET"
-	                db_get 'kaltura-base/vhost_port'
-        	        APACHE_PORT="$RET"
-                	DEF_SERVICE_URL="$APACHE_HOST:$APACHE_PORT"
-		fi
-                db_set 'kaltura-front/service_url' $DEF_SERVICE_URL
+		db_get 'kaltura-base/apache_hostname'
+		APACHE_HOST="$RET"
+		db_get 'kaltura-base/vhost_port'
+		APACHE_PORT="$RET"
+		DEF_SERVICE_URL="$APACHE_HOST:$APACHE_PORT"
+		db_set 'kaltura-front/service_url' $DEF_SERVICE_URL
 		db_input critical kaltura-front/service_url || true
 		db_go || true
 		db_get kaltura-front/service_url
@@ -236,15 +227,18 @@ Please select one of the following options [0]:
 		trap - ERR
 		echo "use kaltura" | mysql -h$DB1_HOST -u$DB1_USER -p$DB1_PASS -P$DB1_PORT $DB1_NAME 2> /dev/null
 		if [ $? -eq 0 ];then
-			if [ -r $BASE_DIR/apps/studio/`rpm -qa kaltura-html5-studio --queryformat %{version}`/studio.ini ];then
-				php $BASE_DIR/app/deployment/uiconf/deploy_v2.php --ini=$BASE_DIR/apps/studio/`rpm -qa kaltura-html5-studio --queryformat %{version}`/studio.ini >> /dev/null
-				sed -i "s@^\(studio_version\s*=\)\(.*\)@\1 `rpm -qa kaltura-html5-studio --queryformat %{version}`@g" -i $BASE_DIR/app/configurations/local.ini
+			STUDIO_VER=`dpkg-query -W -f'${Version}' kaltura-html5-studio|awk -F "+" '{print $1}'`
+			if [ -r "$BASE_DIR/apps/studio/$STUDIO_VER/studio.ini" ];then
+				php $BASE_DIR/app/deployment/uiconf/deploy_v2.php --ini=$BASE_DIR/apps/studio/$STUDIO_VER/studio.ini >> /dev/null
+				sed -i "s@^\(studio_version\s*=\)\(.*\)@\1 $STUDIO_VER@g" -i $BASE_DIR/app/configurations/local.ini
 			fi
 		# we can't use 'dpkg show kaltura-kmc' because this node may not be the one where we installed the KMC deb on, as it resides in the web dir and does not need to be installed on all front nodes.
 			KMC_PATH=`ls -ld $BASE_DIR/web/flash/kmc/v* 2>/dev/null|awk -F " " '{print $NF}' |tail -1`
-			php $BASE_DIR/app/deployment/uiconf/deploy_v2.php --ini=$KMC_PATH/config.ini >> /dev/null
+			if [ -d "$KMC_PATH" ];then
+				php $BASE_DIR/app/deployment/uiconf/deploy_v2.php --ini=$KMC_PATH/config.ini >> /dev/null
+			fi
 			HTML5_PATH=`ls -ld $BASE_DIR/web/html5/html5lib/v* 2>/dev/null|awk -F " " '{print $NF}' |tail -1`
-			sed -i "s@^\(html5_version\s*=\)\(.*\)@\1 `rpm -qa kaltura-html5lib --queryformat %{version}`@g" -i $BASE_DIR/app/configurations/local.ini
+			sed -i "s@^\(html5_version\s*=\)\(.*\)@\1 `dpkg-query -W -f'${Version}' kaltura-html5lib|awk -F "+" '{print $1}'`@g" -i $BASE_DIR/app/configurations/local.ini
 			# https://github.com/kaltura/mwEmbed/issues/574
 			# find $BASE_DIR/web/html5/html5lib/ -type f -exec sed -i "s@http://cdnapi.kaltura.com@$SERVICE_URL@g" {} \;
 		fi

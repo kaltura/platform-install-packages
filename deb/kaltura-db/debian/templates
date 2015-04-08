@@ -18,3 +18,21 @@ Type: password
 Default:  
 Description: MySQL super user passwd [only for install]:
 
+Template: kaltura-db/fix_mysql_settings
+Type: boolean
+Default: 
+Description: Your MySQL settings are incorrect, do you wish to run kaltura-mysql-settings.sh in order to correct them?  
+
+Template: kaltura-db/remove_db
+Type: boolean
+Default: 
+Description: Failed to connect to DB. 
+	Please check your setup and then run dpkg-reconfigure kaltura-db. 
+	Do you wish to remove the existing DB or keep for debugging puropses? 
+
+Template: kaltura-db/db_already_installed
+Type: boolean
+Default: 
+Description: The kaltura DB seems to already be installed
+	Do you wish to remove the existing DB?
+
