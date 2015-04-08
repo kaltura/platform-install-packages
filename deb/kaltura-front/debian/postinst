@@ -149,6 +149,11 @@ if [ "$1" = "configure" ]; then
 	else
 		DEFAULT_PORT=80
 	fi
+		db_get kaltura-front/vhost_port
+		if [ -n "$RET" ];then
+			DEFAULT_PORT=$RET
+		fi
+		db_set kaltura-front/vhost_port $DEFAULT_PORT
 		db_input critical kaltura-front/vhost_port || true
 		db_go || true
 		db_get kaltura-front/vhost_port
@@ -160,6 +165,16 @@ if [ "$1" = "configure" ]; then
 			PROTOCOL="http"
 		fi
 
+		db_get kaltura-front/service_url
+		DEF_SERVICE_URL=$RET
+		if [ -z "$DEF_SERVICE_URL" ] ;then
+			db_get 'kaltura-base/apache_hostname'
+                	APACHE_HOST="$RET"
+	                db_get 'kaltura-base/vhost_port'
+        	        APACHE_PORT="$RET"
+                	DEF_SERVICE_URL="$APACHE_HOST:$APACHE_PORT"
+		fi
+                db_set 'kaltura-front/service_url' $DEF_SERVICE_URL
 		db_input critical kaltura-front/service_url || true
 		db_go || true
 		db_get kaltura-front/service_url
@@ -215,7 +230,7 @@ Please select one of the following options [0]:
 	find $BASE_DIR/app/cache/ $BASE_DIR/log -type f -exec chmod 664 {} \; 
 	chown -R $KALTURA_USER.$APACHE_USER $BASE_DIR/app/cache/ $BASE_DIR/log
 	service apache2 reload
-	ln -sf $BASE_DIR/app/configurations/monit/monit.d/httpd.rc /etc/monit/conf.d/ 
+	ln -sf /usr/share/doc/apache2/examples/apache2.monit /etc/monit/conf.d/apache2.rc 
 	ln -sf $BASE_DIR/app/configurations/monit/monit.d/memcached.rc /etc/monit/conf.d/
 	service monit restart
 		trap - ERR

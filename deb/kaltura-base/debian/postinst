@@ -45,7 +45,7 @@ if [ "$1" = "configure" ]; then
 	db_input critical 'kaltura-base/apache_hostname' || true
 	db_go || true
 	db_get 'kaltura-base/apache_hostname'
-	KALTURA_FULL_VIRTUAL_HOST_NAME=$RET
+	KALTURA_VIRTUAL_HOST_NAME=$RET
 	
 	db_get 'kaltura-base/vhost_port'
 	if [ -z "$RET" ];then
@@ -55,6 +55,7 @@ if [ "$1" = "configure" ]; then
 	db_go || true
 	db_get 'kaltura-base/vhost_port'
 	KALTURA_VIRTUAL_HOST_PORT=$RET
+	KALTURA_FULL_VIRTUAL_HOST_NAME="$KALTURA_VIRTUAL_HOST_NAME:$KALTURA_VIRTUAL_HOST_PORT"
 
 	db_get 'kaltura-base/db_hostname'
 	if [ -z "$RET" ];then
@@ -195,13 +196,11 @@ if [ "$1" = "configure" ]; then
 
 
 
-set -x
 	 for INI in /etc/php5/cli/php.ini /etc/php5/apache2/php.ini;do
 		if [ -r "$INI_FILE" ];then
 			sed -i "s#\(date.timezone\)\s*=.*#\1='$TIME_ZONE'#g" $INI_FILE
 		fi
 	done
-set +x
 	if [ -z "$DB1_PASS" ];then
 		DB1_PASS=`< /dev/urandom tr -dc A-Za-z0-9 | head -c15`
 		set +e

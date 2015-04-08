@@ -12,6 +12,7 @@ install:
 binary-indep:
 	dh_gencontrol -u-v$(DEB_VERSION)
 	dh_installdebconf
+	dh_installinit
 	dh_installdeb
 	dh_builddeb
 
