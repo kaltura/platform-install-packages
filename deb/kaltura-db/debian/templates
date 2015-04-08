@@ -1,0 +1,20 @@
+Template: kaltura-db/db_hostname
+Type: string
+Default:
+Description: DB hostname:
+
+Template: kaltura-db/db_port
+Type: string
+Default: 3306 
+Description: DB port:
+
+Template: kaltura-db/mysql_super_user
+Type: string
+Default: root 
+Description: MySQL super use [only needed for install]:
+
+Template: kaltura-db/mysql_super_passwd
+Type: password
+Default:  
+Description: MySQL super user passwd [only for install]:
+
