@@ -169,8 +169,8 @@ EOF
 	php $APP_DIR/deployment/base/scripts/insertDefaults.php $APP_DIR/deployment/base/scripts/init_data >> $LOG_DIR/insertDefaults.log  2>&1
 	echo -e "${CYAN}Output for $APP_DIR/deployment/base/scripts/insertPermissions.php being logged into $LOG_DIR/insertPermissions.log ${NORMAL}"
 	php $APP_DIR/deployment/base/scripts/insertPermissions.php  >> $LOG_DIR/insertPermissions.log 2>&1
-	echo -e "${CYAN}Output for $APP_DIR/deployment/base/scripts/insertContent.php being logged into $LOG_DIR/insertContent.log ${NORMAL}"
-	php $APP_DIR/deployment/base/scripts/insertContent.php >> $LOG_DIR/insertContent.log  2>&1
+	#echo -e "${CYAN}Output for $APP_DIR/deployment/base/scripts/insertContent.php being logged into $LOG_DIR/insertContent.log ${NORMAL}"
+	#php $APP_DIR/deployment/base/scripts/insertContent.php >> $LOG_DIR/insertContent.log  2>&1
 	if [ $? -ne 0 ];then
 cat << EOF
 Failed to run:
@@ -187,10 +187,12 @@ EOF
 
 	KMC_VERSION=`grep "^kmc_version" /opt/kaltura/app/configurations/local.ini|awk -F "=" '{print $2}'|sed 's@\s*@@g'`
 	echo -e "${BRIGHT_BLUE}Generating UI confs..${NORMAL}"
-	php $APP_DIR/deployment/uiconf/deploy_v2.php --ini=$WEB_DIR/flash/kmc/$KMC_VERSION/config.ini >> $LOG_DIR/deploy_v2.log  2>&1
-	for i in $APP_DIR/deployment/updates/scripts/patches/*.sh;do
-		$i
-	done
+	php $APP_DIR/deployment/uiconf/deploy_v2.php --ini=$WEB_DIR/flash/kmc/$KMC_VERSION/config.ini --user=www-data >> $LOG_DIR/deploy_v2.log  2>&1
+	if [ -d $APP_DIR/deployment/updates/scripts/patches ];then
+		for i in $APP_DIR/deployment/updates/scripts/patches/*.sh;do
+			$i
+		done
+	fi
 	find  $WEB_DIR/content/generatedUiConf -type d -exec chmod 775 {} \;
 
 	set +e
@@ -201,8 +203,8 @@ EOF
 
 	if [ "$DB1_HOST" = `hostname` -o "$DB1_HOST" = '127.0.0.1' -o "$DB1_HOST" = 'localhost' ];then
 		ln -sf $BASE_DIR/app/configurations/monit/monit.avail/mysqld.rc $BASE_DIR/app/configurations/monit/monit.d/enabled.mysqld.rc
-		/etc/init.d/kaltura-monit stop >> /dev/null 2>&1
-		/etc/init.d/kaltura-monit restart
+		/etc/init.d/monit stop >> /dev/null 2>&1
+		/etc/init.d/monit restart
 	fi
 	send_install_becon `basename $0` $ZONE install_success 0 
 fi
