@@ -47,7 +47,7 @@ Requires(pre): pwdutils
 Summary: High performance web server customized for Kaltura VOD
 Name: kaltura-nginx
 Version: 1.6.2
-Release: 6
+Release: 7 
 Vendor: Kaltura inc.
 URL: http://nginx.org/
 
@@ -62,7 +62,8 @@ Source7: nginx.suse.init
 Source8: nginx.service
 Source9: nginx.upgrade.sh
 Source10: nginx-vod-module-master.zip  
-Source11: nginx-akamai-token-module-master.zip
+Source11: nginx-secure-token-module-master.zip
+Source12: nginx-akamai-token-validate-module-master.zip
 #Patch1: nginx_kaltura.diff 
 
 License: 2-clause BSD-like license
@@ -90,9 +91,11 @@ Not stripped version of nginx built with the debugging log support.
 %prep
 %setup -qn nginx-%{version}
 #%patch1 -p1 -b ngx_http_upstream.c.orig 
-unzip %{SOURCE10}
+unzip -o %{SOURCE10}
 
-unzip %{SOURCE11}
+unzip -o %{SOURCE11}
+
+unzip -o %{SOURCE12}
 
 
 %build
@@ -132,7 +135,8 @@ unzip %{SOURCE11}
         %{?with_spdy:--with-http_spdy_module} \
         --with-cc-opt="%{optflags} $(pcre-config --cflags)" \
 	--add-module=./nginx-vod-module-master \
-	--add-module=./nginx-akamai-token-module-master \
+	--add-module=./nginx-secure-token-module-master \
+	--add-module=./nginx-akamai-token-validate-module-master \
         $*
 make %{?_smp_mflags}
 %{__mv} %{_builddir}/nginx-%{version}/objs/nginx \
@@ -172,7 +176,8 @@ make %{?_smp_mflags}
         %{?with_spdy:--with-http_spdy_module} \
         --with-cc-opt="%{optflags} $(pcre-config --cflags)" \
 	--add-module=./nginx-vod-module-master \
-	--add-module=./nginx-akamai-token-module-master \
+	--add-module=./nginx-secure-token-module-master \
+	--add-module=./nginx-akamai-token-validate-module-master \
         $*
 make %{?_smp_mflags}
 

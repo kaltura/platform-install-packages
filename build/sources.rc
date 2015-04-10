@@ -148,8 +148,12 @@ KALTURA_TEMPLATES_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalsource
 # Kaltura nginx-vod-module:
 KALTURA_NGINX_VOD_VERSION=master
 KALTURA_NGINX_VOD_URI="https://github.com/kaltura/nginx-vod-module/archive/$KALTURA_NGINX_VOD_VERSION.zip"
-KALTURA_NGINX_AKAMAI_TOKEN_VERSION=master
-KALTURA_NGINX_AKAMAI_TOKEN_URI="https://github.com/kaltura/nginx-akamai-token-module/archive/$KALTURA_NGINX_AKAMAI_TOKEN_VERSION.zip"
+
+KALTURA_NGINX_AKAMAI_TOKEN_VALIDATE_VERSION=master
+KALTURA_NGINX_AKAMAI_TOKEN_VALIDATE_URI="https://github.com/kaltura/nginx-akamai-token-validate-module/archive/$KALTURA_NGINX_AKAMAI_TOKEN_VALIDATE_VERSION.zip"
+
+KALTURA_NGINX_SECURE_TOKEN_VERSION=master
+KALTURA_NGINX_SECURE_TOKEN_URI="https://github.com/kaltura/nginx-secure-token-module/archive/$KALTURA_NGINX_SECURE_TOKEN_VERSION.zip"
 NGINX_VERSION=1.6.2
 NGINX_URI="http://nginx.org/download/nginx-$NGINX_VERSION.tar.gz"
 
