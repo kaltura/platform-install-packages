@@ -100,7 +100,10 @@ install: build
 	dh_testroot
 	dh_clean -k 
 	dh_installdirs
+	#cd $(tree)/tools && gcc qt-faststart.c -o $(CURDIR)/debian/$(tree)/qt-faststart && cd -
 	cd $(tree) && $(MAKE) -C . install DESTDIR=$(CURDIR)/debian/$(tree)/
+	cd $(tree) && $(MAKE) tools/qt-faststart 
+#&& mv $(tree)/qt-faststart $(CURDIR)/debian/$(tree)/
 
 
 # Build architecture-independent files here.
@@ -118,6 +121,7 @@ binary-arch: build install
 	#pwd
 	#ls -ald debian/$(tree)/$(BASE_PREFIX)/*
 	mv debian/$(tree)/$(BASE_PREFIX)/* $(BASE_PREFIX)
+	mv debian/$(tree)/qt-faststart $(BASE_PREFIX)/bin/
 	dh_gencontrol -u-v$(DEB_VERSION) 
 	dh_install $(BASE_PREFIX)
 	dh_installdebconf	
@@ -129,7 +133,6 @@ binary-arch: build install
 	dh_fixperms
 	dh_installdeb
 	LD_LIBRARY_PATH=$(BASE_PREFIX)/lib dh_shlibdeps
-	dh_gencontrol
 	dh_md5sums
 	dh_builddeb
 
