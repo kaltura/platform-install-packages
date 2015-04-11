@@ -121,7 +121,7 @@ binary-arch: build install
 	#pwd
 	#ls -ald debian/$(tree)/$(BASE_PREFIX)/*
 	mv debian/$(tree)/$(BASE_PREFIX)/* $(BASE_PREFIX)
-	mv debian/$(tree)/qt-faststart $(BASE_PREFIX)/bin/
+	mv $(tree)/tools/qt-faststart $(BASE_PREFIX)/bin/
 	dh_gencontrol -u-v$(DEB_VERSION) 
 	dh_install $(BASE_PREFIX)
 	dh_installdebconf	
