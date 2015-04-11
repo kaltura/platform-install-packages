@@ -126,7 +126,7 @@ binary-arch: build install
 	dh_compress
 	dh_fixperms
 	dh_installdeb
-	#LD_LIBRARY_PATH=$(BASE_PREFIX)/lib dh_shlibdeps
+	LD_LIBRARY_PATH=$(BASE_PREFIX)/lib dh_shlibdeps
 	dh_gencontrol
 	dh_md5sums
 	dh_builddeb

@@ -234,7 +234,7 @@ if [ "$1" = "configure" ]; then
 
 	CONF_FILES=`find $KALT_CONF_DIR  -type f -name "*template*"`
 	CONF_FILES="$CONF_FILES $BASE_DIR/app/batch/batches/Mailer/emails_en.template.ini $BASE_DIR/app/tests/monitoring/config.template.ini $BASE_DIR/bin/sanity_config.template.ini"
-	if STUDIO_VER=`dpkg-query -W -f'${Version}' kaltura-html5-studio 2>/dev/null`;then 
+	if STUDIO_VER=`dpkg-query -W -f'${Version}' kaltura-html5-studio |awk -F "+" '{print $1}' 2>/dev/null`;then 
 		CONF_FILES="$CONF_FILES $BASE_DIR/apps/studio/$STUDIO_VER/studio.template.ini"
 	fi 
 	CONF_FILES="$CONF_FILES `find $BASE_DIR/app/plugins/monitor/nagios/config -type f -name "*template*"`"
