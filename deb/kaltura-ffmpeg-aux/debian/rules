@@ -107,7 +107,8 @@ binary-indep:;
 
 # Build architecture-dependent files here.
 binary-arch: build install
-	mkdir -p $(BASE_PREFIX)
+	mkdir -p $(BASE_PREFIX) debian/kaltura-ffmpeg-aux/opt/kaltura/bin/ 
+	dh_link $(BASE_PREFIX)/bin/ffmpeg opt/kaltura/bin/ffmpeg-aux
 	dh_testdir
 	dh_testroot
 	#dh_installchangelogs ChangeLog
@@ -127,7 +128,6 @@ binary-arch: build install
 	dh_fixperms
 	dh_installdeb
 	LD_LIBRARY_PATH=$(BASE_PREFIX)/lib dh_shlibdeps
-	dh_gencontrol
 	dh_md5sums
 	dh_builddeb
 

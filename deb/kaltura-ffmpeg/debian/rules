@@ -81,17 +81,13 @@ build: build-stamp
 build-stamp:  config.status
 	#dh_quilt_patch
 	dh_testdir
-
 	cd $(tree) && $(MAKE)
-
 	touch build-stamp
 
 clean:
 	dh_testdir
 	dh_testroot
 	rm -f build-stamp config.log
-	rm -f debian/memcached.init
-
 	dh_quilt_unpatch
 	dh_clean 
 
@@ -112,7 +108,7 @@ binary-indep:;
 
 # Build architecture-dependent files here.
 binary-arch: build install
-	mkdir -p $(BASE_PREFIX)
+	mkdir -p $(BASE_PREFIX) debian/kaltura-ffmpeg/opt/kaltura/bin/ 
 	dh_testdir
 	dh_testroot
 	#dh_installchangelogs ChangeLog
@@ -127,7 +123,8 @@ binary-arch: build install
 	dh_installdebconf	
 	dh_installinit
 	dh_installman
-	dh_link
+	dh_link $(BASE_PREFIX)/bin/ffmpeg opt/kaltura/bin/ffmpeg
+	dh_link $(BASE_PREFIX)/bin/qt-faststart opt/kaltura/bin/qt-faststart
 	dh_strip
 	dh_compress
 	dh_fixperms
