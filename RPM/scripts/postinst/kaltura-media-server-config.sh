@@ -29,38 +29,45 @@ if ! rpm -q kaltura-media-server;then
 	exit 0
 fi
 
-if [ -r $CONSENT_FILE ];then
-	. $CONSENT_FILE
-elif [ -z "$USER_CONSENT" ];then
-	get_tracking_consent
-fi
-. $CONSENT_FILE
+if [ ! -r /opt/kaltura/app/configurations/ecdn.ini ];then 
 
-if [ -n "$1" -a -r "$1" ];then
-	ANSFILE=$1
-	. $ANSFILE
-fi
-
-if [ ! -r /opt/kaltura/app/base-config.lock ];then
-	`dirname $0`/kaltura-base-config.sh "$ANSFILE"
-	if [ $? -ne 0 ];then
-		echo -e "${BRIGHT_RED}ERROR: Base config failed. Please correct and re-run $0.${NORMAL}"
-		exit 21
+	if [ -r $CONSENT_FILE ];then
+		. $CONSENT_FILE
+	elif [ -z "$USER_CONSENT" ];then
+		get_tracking_consent
 	fi
-else
-	echo -e "${BRIGHT_BLUE}base-config completed successfully, if you ever want to re-configure your system (e.g. change DB hostname) run the following script:
-# rm /opt/kaltura/app/base-config.lock
-# $BASE_DIR/bin/kaltura-base-config.sh
-${NORMAL}
-"
-fi
+	. $CONSENT_FILE
 
-RC_FILE=/etc/kaltura.d/system.ini
-if [ ! -r "$RC_FILE" ];then
-	echo -e "${BRIGHT_RED}ERROR: could not find $RC_FILE so, exiting..${NORMAL}"
-	exit 2
-fi
+	if [ -n "$1" -a -r "$1" ];then
+		ANSFILE=$1
+		. $ANSFILE
+	fi
+
+	if [ ! -r /opt/kaltura/app/base-config.lock ];then
+		`dirname $0`/kaltura-base-config.sh "$ANSFILE"
+		if [ $? -ne 0 ];then
+			echo -e "${BRIGHT_RED}ERROR: Base config failed. Please correct and re-run $0.${NORMAL}"
+			exit 21
+		fi
+		
+	else
+		echo -e "${BRIGHT_BLUE}base-config completed successfully, if you ever want to re-configure your system (e.g. change DB hostname) run the following script:
+		# rm /opt/kaltura/app/base-config.lock
+		# $BASE_DIR/bin/kaltura-base-config.sh
+		${NORMAL}
+		"
+	fi
+
+	RC_FILE=/etc/kaltura.d/system.ini
+
+    if [ ! -r "$RC_FILE" ];then
+        echo -e "${BRIGHT_RED}ERROR: could not find $RC_FILE so, exiting..${NORMAL}"
+        exit 2
+    fi
+
 . $RC_FILE
+
+fi
 
 send_install_becon `basename $0` $ZONE install_start 0
 ant
