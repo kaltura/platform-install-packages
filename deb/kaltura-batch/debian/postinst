@@ -16,6 +16,9 @@ fi
 
 
 . $KALTURA_FUNCTIONS_RC
+if [ "$1" = "configure" ];then
+	update-rc.d kaltura-batch defaults
+fi
 KALTURA_PREFIX=/opt/kaltura
 APP_DIR=/opt/kaltura/app
 KALTURA_GROUP=kaltura
