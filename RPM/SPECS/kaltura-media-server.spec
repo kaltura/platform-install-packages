@@ -70,6 +70,9 @@ To finalize the setup.
 %{prefix}/bin/*
 
 %changelog
+* Sun Apr 12 2015 Igor Shevach <igor.shevach@kaltura.com> - v3.2.0
+- Added support for eCDN (kaltura.ini is replaced with ecdn.ini)
+
 * Fri Dec 12 2014 Tan-Tan <jonathan.kanarek@kaltura.com> - v3.1.5
 - Package jar instead of zip
 

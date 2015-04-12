@@ -59,15 +59,15 @@ if [ ! -r /opt/kaltura/app/configurations/ecdn.ini ];then
 	fi
 
 	RC_FILE=/etc/kaltura.d/system.ini
-else
-	RC_FILE=/opt/kaltura/app/configurations/ecdn.ini
-fi
 
-if [ ! -r "$RC_FILE" ];then
+    if [ ! -r "$RC_FILE" ];then
         echo -e "${BRIGHT_RED}ERROR: could not find $RC_FILE so, exiting..${NORMAL}"
         exit 2
-fi
+    fi
+
 . $RC_FILE
+
+fi
 
 send_install_becon `basename $0` $ZONE install_start 0
 ant
