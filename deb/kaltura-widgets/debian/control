@@ -1,12 +1,12 @@
-Source: kaltura-server
+Source: kaltura-widgets
 Section: net
 Priority: extra
 Maintainer: Jess Portnoy <jess.portnoy@kaltura.com>
 
-Package: kaltura-server
+Package: kaltura-widgets
 Architecture: all
-Depends: ${shlibs:Depends},kaltura-front, kaltura-batch, kaltura-sphinx, kaltura-dwh, kaltura-widgets, kaltura-html5lib
-Description: Kaltura Open Source Video Platform 
+Depends: kaltura-krecord, kaltura-kupload, kaltura-clipapp, kaltura-kmc, kaltura-kdp, kaltura-kcw, kaltura-kdp3, kaltura-kdp3wrapper kaltura-kclip kaltura-kdpwrapper,kaltura-flexwrapper
+Description: Kaltura Open Source Video Platform - widgets meta package
  Kaltura is the world's first Open Source Online Video Platform, transforming the way people work, learn, 
  and entertain using online video. The Kaltura platform empowers media applications with advanced video 
  management, publishing, and monetization tools that increase their reach and monetization and simplify 
@@ -17,5 +17,5 @@ Description: Kaltura Open Source Video Platform
  increased engagement across campuses and beyond. 
  For more information visit: http://corp.kaltura.com, http://www.kaltura.org and http://www.html5video.org.
  .
- This is a meta package to install all packages required for an all in 1 kaltura instance.
+ This package installs the Kaltura widgets.
  .

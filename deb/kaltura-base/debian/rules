@@ -29,7 +29,6 @@ build: $(tree)
 install: build
 
 binary-indep: install
-	dh_installdirs
 	rm -rf $(KALTURA_PREFIX)
 	mkdir -p $(KALTURA_PREFIX)/log
 	mkdir -p $(KALTURA_PREFIX)/tmp
@@ -52,6 +51,7 @@ binary-indep: install
 	mkdir -p $(KALTURA_PREFIX)web/content//metadata
 	mkdir -p $(KALTURA_PREFIX)/web/content/batchfiles
 	mkdir -p $(KALTURA_PREFIX)/web/content/templates
+	dh_installdirs
 	for i in "*.xml" "*.template" "*.ttf" "*.xsl" "*.xsd" "*.yml" "*.smil" "*.srt" "*.sql" "*.orig" "*.patch" "*.po" "*.pdf" "*.otf" "*.txt" "*.php" "*.phtml" "*.project" "*.png" "*.properties" "*.sample" "*.swf" "*.sf" "*.swz" "*.uad" "*.prefs" "*.psd" "*.rvmrc" "*.sln" "*.ini" "*.log" ;do find . -iname "$i" -exec chmod 644 {} \; ; done
 	find  $(tree) -name "*.sh" -type f -exec chmod +x {} \;
 	sed -i 's@^IsmIndex@;IsmIndex@g' $(tree)/configurations/plugins.template.ini
@@ -63,8 +63,10 @@ binary-indep: install
 	sed -i 's@kaltura_sphinx@kaltura-sphinx@g' $(tree)/configurations/monit/monit.d/sphinx.template.rc
 	sed -i 's@kaltura_batch@kaltura-batch@g' $(tree)/configurations/monit/monit.d/batch.template.rc
 	sed -i 's@kaltura_populate@kaltura-populate@g' $(tree)/configurations/monit/monit.d/sphinx.populate.template.rc
-	sed -i "s@^\(params.ImageMagickCmd\)\s*=.*@\1=convert@" $(tree)/configurations/batch.ini.template
-	sed -i "s@^\(params.mencderCmd\)\s*=.*@\1=mencoder@" $(tree)/configurations/batch.ini.template
+	sed -i 's@httpd@apache2@g' $(tree)/configurations/monit/monit.d/httpd.template.rc
+	sed -i 's@/var/run/memcached/memcached.pid@/var/run/memcached.pid@g' $(tree)/configurations/monit/monit.d/memcached.template.rc
+	sed -i "s@^\(params.ImageMagickCmd\)\s*=.*@\1=convert@" $(tree)/configurations/batch/batch.ini.template
+	sed -i "s@^\(params.mencderCmd\)\s*=.*@\1=mencoder@" $(tree)/configurations/batch/batch.ini.template
 	mv $(tree)/* $(KALTURA_PREFIX)/app/
 	dh_install $(KALTURA_PREFIX)
 	dh_gencontrol -u-v$(DEB_VERSION) 
