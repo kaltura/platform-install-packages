@@ -2,7 +2,7 @@
 Name:	kaltura-flexwrapper	
 Version: v1.2 
 Release: 1 
-Summary: Kaltura Video Presentations Manager
+Summary: Kaltura Flex Wrapper
 License: AGPLv3+	
 URL: http://kaltura.org
 Source0: %{name}.tar.bz2
