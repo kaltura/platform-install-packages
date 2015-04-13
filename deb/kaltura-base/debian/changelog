@@ -1,5 +1,19 @@
+<<<<<<< HEAD
 kaltura-base (10.9.0-1) experimental; urgency=low
+=======
+kaltura-base (10.9.0) jupiter; urgency=low
+>>>>>>> fc461bd323aa08a06112ec885b96e1b0b89c1a71
 
-  - First package
+  * Switching to 10.9.0
 
+<<<<<<< HEAD
  -- Jess Portnoy <jess.portnoy@kaltura.com>  Mon, 6 Apr 2015 20:18:43 +0200
+=======
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 06 Apr 2015 20:00:04 +0000
+
+kaltura-base (10.2.0) jupiter; urgency=low
+
+  * Switching to 10.2.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Thu, 01 Jan 2015 16:17:04 +0000
+>>>>>>> fc461bd323aa08a06112ec885b96e1b0b89c1a71

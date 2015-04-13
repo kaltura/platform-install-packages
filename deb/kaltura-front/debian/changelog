@@ -1,5 +1,5 @@
 kaltura-front (10.9.0-1) experimental; urgency=low
 
-  - First package
+  * Switching to 10.2.0
 
  -- Jess Portnoy <jess.portnoy@kaltura.com>  Tue, 7 Apr 2015 16:02:43 +0200

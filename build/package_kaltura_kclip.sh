@@ -31,8 +31,8 @@ kaltura_svn export --force --quiet $KCLIP_URI $SOURCE_PACKAGING_DIR/$KCLIP_RPM_N
 cd $SOURCE_PACKAGING_DIR
 # flash things DO NOT need exec perms.
 find $KCLIP_RPM_NAME -type f -exec chmod -x {} \;
-tar jcf $RPM_SOURCES_DIR/$KCLIP_RPM_NAME.tar.bz2 $KCLIP_RPM_NAME
-echo "Packaged into $RPM_SOURCES_DIR/$KCLIP_RPM_NAME.tar.bz2"
+tar jcf $RPM_SOURCES_DIR/$KCLIP_RPM_NAME-$KCLIP_VERSION.tar.bz2 $KCLIP_RPM_NAME
+echo "Packaged into $RPM_SOURCES_DIR/$KCLIP_RPM_NAME-$KCLIP_VERSION.tar.bz2"
 if [ -x "`which rpmbuild 2>/dev/null`" ];then
 	rpmbuild -ba $RPM_SPECS_DIR/$KCLIP_RPM_NAME.spec
 fi
