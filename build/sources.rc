@@ -204,7 +204,8 @@ KDP_RPM_NAME="kaltura-kdp"
 
 # Kaltura Clipapp:
 # we bundle a few vers at each release:
-CLIPAPP_VERSION="v1.3"
+CLIPAPP_NO_V_VERSION="1.3"
+CLIPAPP_VERSION="v$CLIPAPP_NO_V_VERSION"
 CLIPAPP_URI="https://github.com/kaltura/clipapp/archive/$CLIPAPP_VERSION.zip"
 CLIPAPP_RPM_NAME="kaltura-clipapp"
 
