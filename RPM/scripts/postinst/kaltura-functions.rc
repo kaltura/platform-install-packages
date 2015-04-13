@@ -31,6 +31,7 @@ if [ "$DISTRO" = "Ubuntu" -o "$DISTRO" = "Debian" ];then
 	INIT_CONFIG_UTIL=sysv-rc-conf
 	PACKAGE_TYPE=deb
 	QUERY_COMMAND="dpkg -l"
+	MAIL_LOG=/var/log/mail.log
 else
 	APACHE_DAEMON=httpd
 	MYSQL_DAEMON=mysqld
@@ -39,6 +40,7 @@ else
 	ALL_DAEMONS="$APACHE_DAEMON $SPHINX_DAEMON $BATCH_DAEMON $MONIT_DAEMON $MEMCACHE_DAEMON"
 	PACKAGE_TYPE=rpm
 	QUERY_COMMAND="rpm -q"
+	MAIL_LOG=/var/log/maillog
 fi
 POST_INST_MAIL_SUBJECT='Your new Kaltura server is up! and 6 Quick Tips For Smooth Kaltura Maintenance'
 POST_INST_MAIL_TMPL=$BASE_DIR/app/configurations/post_inst_mail

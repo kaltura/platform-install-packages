@@ -215,7 +215,7 @@ if $QUERY_COMMAND kaltura-batch >/dev/null 2>&1 || $QUERY_COMMAND kaltura-front 
 				report "Delete flavor param" $RC "$FLAVOR_PARAM_ID" "`bc <<< $END-$START`"
 			fi
 			START=`date +%s.%N`
-			UPLOADED_ENT=`php $DIRNAME/upload_test.php $SERVICE_URL $PARTNER_ID $PARTNER_SECRET $WEB_DIR/content/clientlibs/php5/TestCode/DemoVideo.flv 2>&1`
+			UPLOADED_ENT=`php $DIRNAME/upload_test.php $SERVICE_URL $PARTNER_ID $PARTNER_SECRET $WEB_DIR/content/templates/entry/data/kaltura_logo_animated_blue.flv 2>&1`
 			RC=$?
 			END=`date +%s.%N`
 			TOTAL_T=`bc <<< $TIME`
@@ -324,9 +324,9 @@ if $QUERY_COMMAND kaltura-batch >/dev/null 2>&1 || $QUERY_COMMAND kaltura-front 
 			RC=$?
 			END=`date +%s.%N`
 			if [ $RC -ne 0 ];then
-				report "Could not find an email sending entry for mb-$HOSTNAME@kaltura.com [PID is $PARTNER_ID] in /var/log/mail.log" $RC "" "`bc <<< $END-$START`"
+				report "Could not find an email sending entry for mb-$HOSTNAME@kaltura.com [PID is $PARTNER_ID] in $MAIL_LOG" $RC "" "`bc <<< $END-$START`"
 			else
-				report "Found an email sending entry for mb-$HOSTNAME@kaltura.com[PID is $PARTNER_ID] in /var/log/maillog" $RC "$MSG" "`bc <<< $END-$START`"
+				report "Found an email sending entry for mb-$HOSTNAME@kaltura.com[PID is $PARTNER_ID] in $MAIL_LOG" $RC "$MSG" "`bc <<< $END-$START`"
 
 			fi
 
