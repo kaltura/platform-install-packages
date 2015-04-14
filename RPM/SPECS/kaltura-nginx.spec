@@ -42,12 +42,15 @@ BuildRequires: libopenssl-devel
 Requires(pre): pwdutils
 %endif
 
+%define nginx_vod_module_ver 1.0
+%define nginx_secure_token_ver 1.0
+%define nginx_token_validate_ver 1.0
 # end of distribution specific definitions
 
 Summary: High performance web server customized for Kaltura VOD
 Name: kaltura-nginx
 Version: 1.6.2
-Release: 7 
+Release: 8 
 Vendor: Kaltura inc.
 URL: http://nginx.org/
 
@@ -61,9 +64,9 @@ Source6: nginx.vh.example_ssl.conf
 Source7: nginx.suse.init
 Source8: nginx.service
 Source9: nginx.upgrade.sh
-Source10: nginx-vod-module-master.zip  
-Source11: nginx-secure-token-module-master.zip
-Source12: nginx-akamai-token-validate-module-master.zip
+Source10: nginx-vod-module-%{nginx_vod_module_ver}.zip  
+Source11: nginx-secure-token-module-%{nginx_secure_token_ver}.zip
+Source12: nginx-akamai-token-validate-module-%{nginx_token_validate_ver}.zip
 #Patch1: nginx_kaltura.diff 
 
 License: 2-clause BSD-like license
@@ -134,9 +137,9 @@ unzip -o %{SOURCE12}
         --with-debug \
         %{?with_spdy:--with-http_spdy_module} \
         --with-cc-opt="%{optflags} $(pcre-config --cflags)" \
-	--add-module=./nginx-vod-module-master \
-	--add-module=./nginx-secure-token-module-master \
-	--add-module=./nginx-akamai-token-validate-module-master \
+	--add-module=./nginx-vod-module-%{nginx_vod_module_ver} \
+	--add-module=./nginx-secure-token-module-%{nginx_secure_token_ver} \
+	--add-module=./nginx-akamai-token-validate-module-%{nginx_token_validate_ver} \
         $*
 make %{?_smp_mflags}
 %{__mv} %{_builddir}/nginx-%{version}/objs/nginx \
@@ -175,9 +178,9 @@ make %{?_smp_mflags}
         --with-ipv6 \
         %{?with_spdy:--with-http_spdy_module} \
         --with-cc-opt="%{optflags} $(pcre-config --cflags)" \
-	--add-module=./nginx-vod-module-master \
-	--add-module=./nginx-secure-token-module-master \
-	--add-module=./nginx-akamai-token-validate-module-master \
+	--add-module=./nginx-vod-module-%{nginx_vod_module_ver} \
+	--add-module=./nginx-secure-token-module-%{nginx_secure_token_ver} \
+	--add-module=./nginx-akamai-token-validate-module-%{nginx_token_validate_ver} \
         $*
 make %{?_smp_mflags}
 
@@ -199,7 +202,7 @@ make %{?_smp_mflags}
 %{__rm} $RPM_BUILD_ROOT%{_sysconfdir}/nginx/nginx.conf
 %{__install} -m 644 -p %{SOURCE4} \
    $RPM_BUILD_ROOT%{_sysconfdir}/nginx/nginx.conf
-%{__install} -m 644 -p %{_builddir}/nginx-%{version}/nginx-vod-module-master/conf/kaltura.conf.template \
+%{__install} -m 644 -p %{_builddir}/nginx-%{version}/nginx-vod-module-%{nginx_vod_module_ver}/conf/kaltura.conf.template \
    $RPM_BUILD_ROOT%{_sysconfdir}/nginx/conf.d/kaltura.conf.template
 %{__install} -m 644 -p %{SOURCE6} \
    $RPM_BUILD_ROOT%{_sysconfdir}/nginx/conf.d/example_ssl.conf
@@ -351,6 +354,9 @@ if [ $1 -ge 1 ]; then
 fi
 
 %changelog
+* Tue Apr 14 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.6.2-8
+- Kaltura Nginx modules are now tagged.
+
 * Sun Dec 7 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.6.2-2
 - Nginx precompiled with https://github.com/kaltura/nginx-vod-module
 
