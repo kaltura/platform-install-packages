@@ -221,7 +221,7 @@ Please select one of the following options [0]:
 	find $BASE_DIR/app/cache/ $BASE_DIR/log -type f -exec chmod 664 {} \; 
 	chown -R $KALTURA_USER.$APACHE_USER $BASE_DIR/app/cache/ $BASE_DIR/log
 	service apache2 reload
-	ln -sf /usr/share/doc/apache2/examples/apache2.monit /etc/monit/conf.d/apache2.rc 
+	ln -sf $BASE_DIR/app/configurations/monit/monit.d/httpd.rc /etc/monit/conf.d/apache2.rc 
 	ln -sf $BASE_DIR/app/configurations/monit/monit.d/memcached.rc /etc/monit/conf.d/
 	service monit restart
 		trap - ERR

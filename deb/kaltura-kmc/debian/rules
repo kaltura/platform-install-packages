@@ -6,6 +6,7 @@ KMC_VERSION ?= v$(shell egrep '^KMC_MINUS_V_VERSION=' $(RC_FILE) | cut -d = -f 2
 SOURCE_PACKAGING_DIR ?= $(shell egrep '^SOURCE_PACKAGING_DIR=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
 KALTURA_PREFIX ?= $(shell egrep '^KALTURA_PREFIX=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
 KMC_PREFIX=$(KALTURA_PREFIX)/web/flash/kmc
+HTML5LIB_VERSION ?= $(shell egrep '^HTML5LIB_LATEST_VERSION=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
 include ../includes/build-revision.mk
 archive := $(SOURCE_PACKAGING_DIR)/kaltura-kmc-$(KMC_VERSION).tar.bz2
 tree := kaltura-kmc-$(KMC_VERSION)
@@ -30,6 +31,7 @@ binary-indep: install
 	rm -rf $(KMC_PREFIX)
 	mkdir -p $(KMC_PREFIX) $(KALTURA_PREFIX)/web/content/docs
 	mv $(tree)/* $(KMC_PREFIX)/
+	sed -i "s#html5_version = @HTML5LIB_VERSION@#html5_version = $(HTML5LIB_VERSION)#g" $(KMC_PREFIX)/$(KMC_VERSION)/config.ini 
 	cp -r $(KMC_PREFIX)/doc/* $(KALTURA_PREFIX)/web/content/docs
 	dh_install $(KALTURA_PREFIX)
 	dh_gencontrol -u-v$(DEB_VERSION) 

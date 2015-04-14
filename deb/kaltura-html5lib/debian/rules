@@ -31,6 +31,7 @@ binary-indep: install
 	rm -rf $(HTML5LIB_PREFIX)
 	mkdir -p $(HTML5LIB_PREFIX)
 	mv kaltura-html5lib-$(HTML5LIB_LATEST_VERSION) $(HTML5LIB_PREFIX)/$(HTML5LIB_LATEST_VERSION)
+	cp debian/LocalSettings.php $(HTML5LIB_PREFIX)/$(HTML5LIB_LATEST_VERSION)/
 	dh_install $(KALTURA_PREFIX)
 	dh_gencontrol -u-v$(DEB_VERSION) 
 	dh_installdebconf

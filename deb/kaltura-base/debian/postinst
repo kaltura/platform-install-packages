@@ -17,6 +17,7 @@ APACHE_USER=www-data
 KALTURA_VERSION="`dpkg-query -W -f'${Version}' kaltura-base|awk -F "+" '{print $1}'`"
 
 if [ -f "$KALTURA_PREFIX/app/configurations/system.ini" ];then
+	mkdir -p /etc/kaltura.d
 	ln -sf $KALTURA_PREFIX/app/configurations/system.ini /etc/kaltura.d/system.ini
 fi
 ln -sf $KALTURA_PREFIX/app/api_v3/web $KALTURA_PREFIX/app/alpha/web/api_v3
@@ -187,12 +188,15 @@ if [ "$1" = "configure" ]; then
 		LOCALTIME_MD5=`md5sum /etc/localtime|awk -F " " '{print $1}'`
 		TZGUESS=`find /usr/share/zoneinfo -type f | xargs md5sum | grep $LOCALTIME_MD5|awk -F " " '{print $2}'|sed 's@/usr/share/zoneinfo/@@g'`
 	fi
-	while ! php -r "if (timezone_open('$TIME_ZONE') === false){exit(1);}" 2>/dev/null;do 
+	set +e
+	TIME_ZONE="$TZGUESS"
+	while ! php -r "if (timezone_open('$TIME_ZONE') === false){exit(1);}" >>/dev/null 2>&1;do 
 		db_input critical 'kaltura-base/time_zone' || true
 		db_go || true
 		db_get 'kaltura-base/time_zone'
 		TIME_ZONE=$RET
 	done
+	set -e
 	db_input critical 'kaltura-base/env_name' || true
 	db_go || true
 	db_get 'kaltura-base/env_name'
@@ -238,9 +242,9 @@ if [ "$1" = "configure" ]; then
 
 	CONF_FILES=`find $KALT_CONF_DIR  -type f -name "*template*"`
 	CONF_FILES="$CONF_FILES $BASE_DIR/app/batch/batches/Mailer/emails_en.template.ini $BASE_DIR/app/tests/monitoring/config.template.ini $BASE_DIR/bin/sanity_config.template.ini"
-	if STUDIO_VER=`dpkg-query -W -f'${Version}' kaltura-html5-studio |awk -F "+" '{print $1}' 2>/dev/null`;then 
-		CONF_FILES="$CONF_FILES $BASE_DIR/apps/studio/$STUDIO_VER/studio.template.ini"
-	fi 
+	#if STUDIO_VER=`dpkg-query -W -f'${Version}' kaltura-html5-studio |awk -F "+" '{print $1}' 2>/dev/null`;then 
+	#	CONF_FILES="$CONF_FILES $BASE_DIR/apps/studio/$STUDIO_VER/studio.template.ini"
+	#fi 
 	CONF_FILES="$CONF_FILES `find $BASE_DIR/app/plugins/monitor/nagios/config -type f -name "*template*"`"
 	 
 	if [ -d "$BASE_DIR/dwh" ];then
@@ -353,7 +357,7 @@ if [ "$1" = "configure" ]; then
 		sed -e "s#@ENVIRONMENT_PROTOCOL@#$PROTOCOL#g" -e "s#@WEB_DIR@#$BASE_DIR/web#g" -e "s#@TEMPLATE_PARTNER_ADMIN_SECRET@#$ADMIN_SECRET#g" -e "s#@ADMIN_CONSOLE_PARTNER_ADMIN_SECRET@#$ADMIN_SECRET#g" -e "s#@MONITOR_PARTNER_ADMIN_SECRET@#$MONITOR_PARTNER_ADMIN_SECRET#g" -e "s#@SERVICE_URL@#$SERVICE_URL#g" -e "s#@ADMIN_CONSOLE_ADMIN_MAIL@#$ADMIN_CONSOLE_ADMIN_MAIL#g" -e "s#@MONITOR_PARTNER_SECRET@#$MONITOR_PARTNER_SECRET#g" -e "s#@PARTNER_ZERO_ADMIN_SECRET@#$PARTNER_ZERO_ADMIN_SECRET#g" -e "s#@BATCH_PARTNER_ADMIN_SECRET@#$BATCH_PARTNER_ADMIN_SECRET#g" -e "s#@MEDIA_PARTNER_ADMIN_SECRET@#$MEDIA_PARTNER_ADMIN_SECRET#g" -e "s#@TEMPLATE_PARTNER_ADMIN_SECRET@#$TEMPLATE_PARTNER_ADMIN_SECRET#g" -e "s#@KALTURA_VERSION@#$KALTURA_VERSION#g" -e "s#@HOSTED_PAGES_PARTNER_ADMIN_SECRET@#$HOSTED_PAGES_PARTNER_ADMIN_SECRET#g" -e "s#@STORAGE_BASE_DIR@#$BASE_DIR/web#g" -e "s#@DELIVERY_HTTP_BASE_URL@#https://dontknow.com#g" -e "s#@DELIVERY_RTMP_BASE_URL@#rtmp://reallydontknow.com#g" -e "s#@DELIVERY_ISS_BASE_URL@#https://honesttogodihavenoidea.com#g"  -e "s/@ADMIN_CONSOLE_PASSWORD@/$ADMIN_CONSOLE_PASSWORD/g"  -e "s/@PLAY_PARTNER_ADMIN_SECRET@/$PLAY_PARTNER_ADMIN_SECRET/g" -e "s#@WWW_HOST@#$KALTURA_FULL_VIRTUAL_HOST_NAME#g" -e "s#@TEMPLATE_PARTNER_ADMIN_PASSWORD@#$TEMPLATE_PARTNER_ADMIN_PASSWORD#g" -e "s#@HOSTED_PAGES_PARTNER_SECRET@#$HOSTED_PAGES_PARTNER_SECRER#g" -e "s#@MEDIA_PARTNER_SECRET@#$MEDIA_PARTNER_SECRET#g" -e "s#@PLAY_PARTNER_SECRET@#$PLAY_PARTNER_SECRET#g" -e "s#@TEMPLATE_PARTNER_SECRET@#$TEMPLATE_PARTNER_SECRET#g" -e "s#@PARTNER_ZERO_SECRET@#$PARTNER_ZERO_SECRET#g" -e "s#@BATCH_PARTNER_SECRET@#$BATCH_PARTNER_SECRET#g" -e "s#@ADMIN_CONSOLE_PARTNER_SECRET@#$ADMIN_CONSOLE_PARTNER_SECRET#g"  -e "s#@VOD_PACKAGER_HOST@#$VOD_PACKAGER_HOST#g" -e "s#@VOD_PACKAGER_PORT@#$VOD_PACKAGER_PORT#g" -e "s#@IP_RANGE@#$IP_RANGE#g" -i $DEST_FILE 
 	done
 
-	db_input critical 'kaltura-base/generating_client_libs' || true
+	#db_input critical 'kaltura-base/generating_client_libs' || true
 	php $BASE_DIR/app/deployment/base/scripts/installPlugins.php >> $BASE_DIR/log/installPlugins.php.log
 	php $BASE_DIR/app/generator/generate.php >> $BASE_DIR/log/generate.php.log 2>&1
 
