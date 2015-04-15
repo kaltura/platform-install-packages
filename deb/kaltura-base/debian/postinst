@@ -358,7 +358,6 @@ if [ "$1" = "configure" ]; then
 	done
 
 	#db_input critical 'kaltura-base/generating_client_libs' || true
-	php $BASE_DIR/app/deployment/base/scripts/installPlugins.php >> $BASE_DIR/log/installPlugins.php.log
 	php $BASE_DIR/app/generator/generate.php >> $BASE_DIR/log/generate.php.log 2>&1
 
 	set +e
@@ -366,6 +365,7 @@ if [ "$1" = "configure" ]; then
 
 	ln -sf $BASE_DIR/app/configurations/logrotate/kaltura_base /etc/logrotate.d/
 	ln -sf $BASE_DIR/app/configurations/logrotate/kaltura_api /etc/logrotate.d/
+	ln -sf $APP_DIR/configurations/php/kaltura.ini /etc/php5/mods-available/zz-kaltura.ini
 	touch  "$BASE_DIR/app/base-config.lock"
 
 	find $BASE_DIR/app/cache/ $BASE_DIR/log -type d -exec chmod 775 {} \; 
