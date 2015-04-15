@@ -228,15 +228,15 @@ Please select one of the following options [0]:
 		trap - ERR
 		echo "use kaltura" | mysql -h$DB1_HOST -u$DB1_USER -p$DB1_PASS -P$DB1_PORT $DB1_NAME 2> /dev/null
 		if [ $? -eq 0 ];then
-			STUDIO_VER=`dpkg-query -W -f'${Version}' kaltura-html5-studio|awk -F "+" '{print $1}'`
+			STUDIO_VER=v`dpkg-query -W -f'${Version}' kaltura-html5-studio|awk -F "+" '{print $1}'`
 			if [ -r "$BASE_DIR/apps/studio/$STUDIO_VER/studio.ini" ];then
-				php $BASE_DIR/app/deployment/uiconf/deploy_v2.php --ini=$BASE_DIR/apps/studio/$STUDIO_VER/studio.ini >> /dev/null
+				php $BASE_DIR/app/deployment/uiconf/deploy_v2.php --user=www-data --ini=$BASE_DIR/apps/studio/$STUDIO_VER/studio.ini >> /dev/null
 				sed -i "s@^\(studio_version\s*=\)\(.*\)@\1 $STUDIO_VER@g" -i $BASE_DIR/app/configurations/local.ini
 			fi
 		# we can't use 'dpkg show kaltura-kmc' because this node may not be the one where we installed the KMC deb on, as it resides in the web dir and does not need to be installed on all front nodes.
 			KMC_PATH=`ls -ld $BASE_DIR/web/flash/kmc/v* 2>/dev/null|awk -F " " '{print $NF}' |tail -1`
 			if [ -d "$KMC_PATH" ];then
-				php $BASE_DIR/app/deployment/uiconf/deploy_v2.php --ini=$KMC_PATH/config.ini >> /dev/null
+				php $BASE_DIR/app/deployment/uiconf/deploy_v2.php --user=www-data --ini=$KMC_PATH/config.ini >> /dev/null
 			fi
 			HTML5_PATH=`ls -ld $BASE_DIR/web/html5/html5lib/v* 2>/dev/null|awk -F " " '{print $NF}' |tail -1`
 			sed -i "s@^\(html5_version\s*=\)\(.*\)@\1 `dpkg-query -W -f'${Version}' kaltura-html5lib|awk -F "+" '{print $1}'`@g" -i $BASE_DIR/app/configurations/local.ini

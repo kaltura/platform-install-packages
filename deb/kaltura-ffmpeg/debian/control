@@ -65,7 +65,7 @@ Depends:
  libx264-123,
  libopencore-amrnb0,
  libfdk-aac0,
- libfaac0
+ libass4
 Description: 
  FFmpeg is a very fast video and audio converter. It can also grab from a
  live audio/video source.

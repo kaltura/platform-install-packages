@@ -188,6 +188,11 @@ EOF
 	KMC_VERSION=`grep "^kmc_version" /opt/kaltura/app/configurations/local.ini|awk -F "=" '{print $2}'|sed 's@\s*@@g'`
 	echo -e "${BRIGHT_BLUE}Generating UI confs..${NORMAL}"
 	php $APP_DIR/deployment/uiconf/deploy_v2.php --ini=$WEB_DIR/flash/kmc/$KMC_VERSION/config.ini --user=www-data >> $LOG_DIR/deploy_v2.log  2>&1
+	STUDIO_VERSION=`grep "^studio_version" /opt/kaltura/app/configurations/local.ini|awk -F "=" '{print $2}'|sed 's@\s*@@g'`
+	if [ -r "$BASE_DIR/apps/studio/$STUDIO_VERSION/studio.ini" ];then
+		echo -e "${BRIGHT_BLUE}Generating Studio UI confs..${NORMAL}"
+		php $APP_DIR/deployment/uiconf/deploy_v2.php --ini=$BASE_DIR/apps/studio/$STUDIO_VERSION/studio.ini --user=www-data >> $LOG_DIR/deploy_v2.log  2>&1
+	fi
 	if [ -d $APP_DIR/deployment/updates/scripts/patches ];then
 		for i in $APP_DIR/deployment/updates/scripts/patches/*.sh;do
 			$i
