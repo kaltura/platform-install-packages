@@ -42,6 +42,7 @@ You can use /opt/kaltura/bin/kaltura-export-db.sh to export the data.
 
 Are you absolutely certain you want this? [n/Y]
 ${NORMAL}
+
 "
 	read AN
 	if [ "$AN" != 'Y' ];then
