@@ -23,6 +23,39 @@ if [ ! -r "$RC_FILE" ];then
 	exit 2
 fi
 . $RC_FILE
+
+if [ "$1" = "configure" ]; then
+	. /usr/share/debconf/confmodule
+	db_get 'kaltura-nginx/nginx_hostname'
+	if [ -z "$RET" ];then
+		db_set 'kaltura-nginx/nginx_hostname' "`hostname`"
+	fi
+	db_input critical 'kaltura-nginx/nginx_hostname' || true
+	db_go || true
+	db_get 'kaltura-nginx/nginx_hostname'
+	VOD_PACKAGER_HOST=$RET
+
+	db_input critical 'kaltura-nginx/nginx_port' || true
+	db_go || true
+	db_get 'kaltura-nginx/nginx_port'
+	VOD_PACKAGER_PORT=$RET
+
+	db_get 'kaltura-nginx/kaltura_service_url'
+	if [ -z "$RET" ];then
+		db_get 'kaltura-base/kaltura_service_url'
+		if [ -z "$RET" ];then
+			db_set 'kaltura-nginx/nginx_hostname' "`hostname`"
+		else
+			db_set 'kaltura-nginx/nginx_hostname' $RET
+		fi
+	fi
+
+	sed -e 's#@STATIC_FILES_PATH@#/opt/kaltura/nginx/static#g' -e "s#@VOD_PACKAGER_HOST@#$VOD_PACKAGER_HOST#g" -e "s#@VOD_PACKAGER_PORT@#$VOD_PACKAGER_PORT#g" -e "s#@LOG_DIR@#/var/log/nginx#" -e "s#@WWW_HOST@#$WWW_HOST#g" /opt/kaltura/nginx/conf/nginx.conf.template > /opt/kaltura/nginx/conf/nginx.conf
+
+
+fi
+
+
 #ln -sf $BASE_DIR/app/configurations/logrotate/kaltura_populate /etc/logrotate.d/
 trap 'my_trap_handler "${LINENO}" ${$?}' ERR
 send_install_becon `basename $0` $ZONE install_start 0 

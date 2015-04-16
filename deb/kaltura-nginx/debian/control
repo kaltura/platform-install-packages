@@ -18,6 +18,7 @@ Build-Depends:
  libxslt1-dev,
  po-debconf,
  zlib1g-dev,
+ kaltura-ffmpeg,
  unzip
 
 Package: kaltura-nginx

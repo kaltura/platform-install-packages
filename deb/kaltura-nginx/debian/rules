@@ -27,7 +27,7 @@ SCRIPTS=$(PKGBASE)/scripts
 
 CFLAGS = `dpkg-buildflags --get CFLAGS`
 CFLAGS += -Wall
-LDFLAGS = `dpkg-buildflags --get LDFLAGS`
+LDFLAGS = `dpkg-buildflags --get LDFLAGS -L/opt/kaltura/ffmpeg-2.1.3/lib`
 CPPFLAGS = `dpkg-buildflags --get CPPFLAGS`
 
 ifeq (,$(findstring nostrip,$(DEB_BUILD_OPTIONS)))
@@ -105,10 +105,10 @@ binary-indep:;
 
 # Build architecture-dependent files here.
 binary-arch: build install
-	mkdir -p $(BASE_PREFIX) opt/kaltura/log/nginx
+	mkdir -p $(BASE_PREFIX) opt/kaltura/log/nginx $(BASE_PREFIX)/static
 	dh_testdir
 	dh_testroot
-	dh_installchangelogs ChangeLog
+	#dh_installchangelogs $(BASE_PREFIX)/CHANGES
 	mv debian/$(tree)/$(BASE_PREFIX)/* $(BASE_PREFIX)
 	dh_install $(BASE_PREFIX) opt/kaltura/log/nginx
 	cp debian/logrotate $(BASE_PREFIX)/conf/
