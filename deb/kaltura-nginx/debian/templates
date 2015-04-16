@@ -1,5 +1,5 @@
 Template: kaltura-nginx/nginx_hostname
-Type: boolean
+Type: string
 Default: 
 Description: Server name
 

@@ -50,7 +50,7 @@ if [ "$1" = "configure" ]; then
 		fi
 	fi
 
-	sed -e 's#@STATIC_FILES_PATH@#/opt/kaltura/nginx/static#g' -e "s#@VOD_PACKAGER_HOST@#$VOD_PACKAGER_HOST#g" -e "s#@VOD_PACKAGER_PORT@#$VOD_PACKAGER_PORT#g" -e "s#@LOG_DIR@#/var/log/nginx#" -e "s#@WWW_HOST@#$WWW_HOST#g" /opt/kaltura/nginx/conf/nginx.conf.template > /opt/kaltura/nginx/conf/nginx.conf
+	sed -e 's#@STATIC_FILES_PATH@#/opt/kaltura/nginx/static#g' -e "s#@VOD_PACKAGER_HOST@#$VOD_PACKAGER_HOST#g" -e "s#@VOD_PACKAGER_PORT@#$VOD_PACKAGER_PORT#g" -e "s#@LOG_DIR@#/var/log/nginx#" -e "s#@WWW_HOST@#$WWW_HOST#g" /opt/kaltura/nginx/conf/kaltura.template > /opt/kaltura/nginx/conf/nginx.conf
 
 
 fi
