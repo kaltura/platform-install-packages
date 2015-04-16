@@ -1,0 +1,34 @@
+#!/bin/bash
+ldconfig
+# register service
+if [ "$1" = "configure" ];then
+	update-rc.d kaltura-nginx defaults
+fi
+
+KALTURA_FUNCTIONS_RC=/opt/kaltura/bin/kaltura-functions.rc
+if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
+        OUT="${BRIGHT_RED}ERROR:could not find $KALTURA_FUNCTIONS_RC so, exiting..${NORMAL}"
+        echo -en $OUT
+        exit 3
+fi
+
+
+. $KALTURA_FUNCTIONS_RC
+if [ -r $CONSENT_FILE ];then
+	. $CONSENT_FILE
+fi
+RC_FILE=/etc/kaltura.d/system.ini
+if [ ! -r "$RC_FILE" ];then
+	echo -e "${BRIGHT_RED}ERROR: could not find $RC_FILE so, exiting..${NORMAL}"
+	exit 2
+fi
+. $RC_FILE
+#ln -sf $BASE_DIR/app/configurations/logrotate/kaltura_populate /etc/logrotate.d/
+trap 'my_trap_handler "${LINENO}" ${$?}' ERR
+send_install_becon `basename $0` $ZONE install_start 0 
+chown -R $OS_KALTURA_USER /opt/kaltura/log/nginx
+service kaltura-nginx restart >/dev/null 2>&1
+#ln -sf $BASE_DIR/app/configurations/monit/monit.d/nginx.rc /etc/monit/conf.d/
+#service monit stop >> /dev/null 2>&1
+#service monit start
+send_install_becon `basename $0` $ZONE install_success 0
