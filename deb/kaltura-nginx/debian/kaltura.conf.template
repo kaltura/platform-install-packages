@@ -4,7 +4,7 @@ worker_processes  4;
 
 error_log  @LOG_DIR@/error_log;
 
-pid		/var/run/nginx.pid;
+pid		/opt/kaltura/nginx/logs/nginx.pid;
 
 events {
 	worker_connections  1024;

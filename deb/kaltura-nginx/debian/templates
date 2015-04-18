@@ -3,7 +3,7 @@ Type: string
 Default: 
 Description: Server name
 
-Template: kaltura-nginx/vhost_port
+Template: kaltura-nginx/nginx_port
 Type: string
 Default: 88
 Description: Vhost port to listen on:
