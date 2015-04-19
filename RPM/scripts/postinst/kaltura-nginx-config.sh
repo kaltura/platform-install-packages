@@ -76,7 +76,7 @@ fi
 if [ -f /etc/nginx/nginx.conf ];then
 	mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.old
 fi
-sed -e 's#@STATIC_FILES_PATH@#/etc/nginx/static#g' -e "s#@VOD_PACKAGER_HOST@#$VOD_PACKAGER_HOST#g" -e "s#@VOD_PACKAGER_PORT@#$VOD_PACKAGER_PORT#g" -e "s#@LOG_DIR@#/var/log/nginx#" -e "s#@WWW_HOST@#$WWW_HOST#g" /etc/nginx/conf.d/kaltura.conf.template > /etc/nginx/nginx.conf
+sed -e 's#@STATIC_FILES_PATH@#/etc/nginx/static#g' -e "s#@VOD_PACKAGER_HOST@#$VOD_PACKAGER_HOST#g" -e "s#@VOD_PACKAGER_PORT@#$VOD_PACKAGER_PORT#g" -e "s#@LOG_DIR@#/var/log/nginx#" -e "s#@WWW_HOST@#$WWW_HOST#g" /etc/nginx/conf.d/kaltura.conf.template > /opt/kaltura/nginx/conf/nginx.conf
 
 chkconfig kaltura-nginx on
 if service kaltura-nginx status >/dev/null 2>&1;then
