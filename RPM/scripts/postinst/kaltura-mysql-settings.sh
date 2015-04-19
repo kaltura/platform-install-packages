@@ -43,6 +43,6 @@ if rpm -q mysql-server 2>/dev/null;then
         service mysqld restart
 elif rpm -q mariadb-server 2>/dev/null;then
         service mariadb restart
-elif dpkg -l mysql-server 2>/dev/null;then
+elif dpkg -l mysql-server >>/dev/null 2>&1 ;then
         service mysql restart
 fi

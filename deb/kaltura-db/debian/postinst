@@ -193,7 +193,7 @@ EOF
 		echo -e "${BRIGHT_BLUE}Generating Studio UI confs..${NORMAL}"
 		php $APP_DIR/deployment/uiconf/deploy_v2.php --ini=$BASE_DIR/apps/studio/$STUDIO_VERSION/studio.ini --user=www-data >> $LOG_DIR/deploy_v2.log  2>&1
 	fi
-	chown -R $APACHE_USER.$KALTURA_GROUP $WEB_DIR/content/generatedUiConf/
+	chown -R apache.kaltura $WEB_DIR/content
 	if [ -d $APP_DIR/deployment/updates/scripts/patches ];then
 		for i in $APP_DIR/deployment/updates/scripts/patches/*.sh;do
 			$i
