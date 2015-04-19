@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:tns="http://www.kaltura.com/bpm" xmlns:yaoqiang="http://bpmn.sourceforge.net" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.kaltura.com/bpm" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd" id="_1421308331967" exporter="camunda modeler" exporterVersion="2.7.0">
+  <message id="captionAssetAdded" name="captionAssetAdded"></message>
+  <message id="humanTranscriptDone" name="humanTranscriptDone"></message>
+  <process id="flow-transcript" name="flow-transcript" isExecutable="true">
+    <startEvent id="theStart" name="Start"></startEvent>
+    <sequenceFlow id="flow1" sourceRef="theStart" targetRef="setVars"></sequenceFlow>
+    <scriptTask id="setVars" name="Set Variables" scriptFormat="javascript" activiti:autoStoreVariables="false">
+      <script>importPackage(com.kaltura.client.enums);
+importPackage(com.kaltura.client.types);
+
+println("Initializing variables, entry id[" + entryId + "], partner id [" + partnerId + "], template id [" + templateId + "]");
+
+execution.setVariable("sessionType", KalturaSessionType.ADMIN);
+
+var captionAssetFilter = new KalturaCaptionAssetFilter();
+captionAssetFilter.entryIdEqual = entryId;
+execution.setVariable("captionAssetFilter", captionAssetFilter);
+
+var captionAssetPager = new KalturaFilterPager();
+captionAssetPager.pageSize = 1;
+execution.setVariable("captionAssetPager", captionAssetPager);
+
+println("Variables initialized");
+</script>
+    </scriptTask>
+    <sequenceFlow id="flow10" sourceRef="setVars" targetRef="initClient"></sequenceFlow>
+    <callActivity id="initClient" name="Init Client" calledElement="kaltura-client">
+      <extensionElements>
+        <activiti:in source="endPoint" target="endPoint"></activiti:in>
+        <activiti:in source="partnerId" target="partnerId"></activiti:in>
+        <activiti:in source="adminSecret" target="adminSecret"></activiti:in>
+        <activiti:in source="sessionType" target="sessionType"></activiti:in>
+        <activiti:out source="client" target="client"></activiti:out>
+      </extensionElements>
+    </callActivity>
+    <sequenceFlow id="flow11" sourceRef="initClient" targetRef="getMetadata"></sequenceFlow>
+    <callActivity id="captionAsset.list" name="captionAsset.list" calledElement="kaltura-captionAsset-list">
+      <extensionElements>
+        <activiti:in source="client" target="client"></activiti:in>
+        <activiti:in source="captionAssetFilter" target="filter"></activiti:in>
+        <activiti:in source="captionAssetPager" target="pager"></activiti:in>
+        <activiti:out source="response" target="captionAssets"></activiti:out>
+      </extensionElements>
+    </callActivity>
+    <sequenceFlow id="flow9" sourceRef="captionAsset.list" targetRef="captionsFound"></sequenceFlow>
+    <exclusiveGateway id="captionsFound" name="Captions Found"></exclusiveGateway>
+    <sequenceFlow id="flow12" name="Yes" sourceRef="captionsFound" targetRef="setTranscriptAlignment">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${captionAssets.totalCount > 0}]]></conditionExpression>
+    </sequenceFlow>
+    <callActivity id="transcriptAlignment" name="Run Transcript Alignment" calledElement="kaltura-integrate">
+      <extensionElements>
+        <activiti:in source="client" target="client"></activiti:in>
+        <activiti:in source="templateId" target="templateId"></activiti:in>
+        <activiti:in source="transcriptAlignmentData" target="data"></activiti:in>
+        <activiti:in source="transcriptAlignmentObjectType" target="objectType"></activiti:in>
+        <activiti:in source="transcriptAlignmentObjectId" target="objectId"></activiti:in>
+        <activiti:out source="jobStatus" target="transcriptAlignmentJobStatus"></activiti:out>
+      </extensionElements>
+    </callActivity>
+    <sequenceFlow id="flow14" sourceRef="transcriptAlignment" targetRef="captionsFoundJoin"></sequenceFlow>
+    <sequenceFlow id="flow13" name="No" sourceRef="captionsFound" targetRef="setMachineSpeech2text">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${captionAssets.totalCount == 0}]]></conditionExpression>
+    </sequenceFlow>
+    <callActivity id="machineSpeech2text" name="Run Machine Speech2Text" calledElement="kaltura-integrate">
+      <extensionElements>
+        <activiti:in source="client" target="client"></activiti:in>
+        <activiti:in source="templateId" target="templateId"></activiti:in>
+        <activiti:in source="speach2TextData" target="data"></activiti:in>
+        <activiti:in source="speach2TextObjectType" target="objectType"></activiti:in>
+        <activiti:in source="speach2TextObjectId" target="objectId"></activiti:in>
+        <activiti:out source="jobStatus" target="speach2TextJobStatus"></activiti:out>
+      </extensionElements>
+    </callActivity>
+    <sequenceFlow id="flow15" sourceRef="machineSpeech2text" targetRef="captionsFoundJoin"></sequenceFlow>
+    <exclusiveGateway id="captionsFoundJoin" name="Captions Found - Join"></exclusiveGateway>
+    <sequenceFlow id="flow16" sourceRef="captionsFoundJoin" targetRef="secondPass"></sequenceFlow>
+    <dataObject id="endPoint" name="endPoint" itemSubjectRef="xsd:string"></dataObject>
+    <dataObject id="partnerId" name="partnerId" itemSubjectRef="xsd:string"></dataObject>
+    <dataObject id="adminSecret" name="adminSecret" itemSubjectRef="xsd:string"></dataObject>
+    <dataObject id="templateId" name="templateId" itemSubjectRef="xsd:int"></dataObject>
+    <dataObject id="entryId" name="entryId" itemSubjectRef="xsd:string"></dataObject>
+    <dataObject id="flavorId" name="flavorId" itemSubjectRef="xsd:string"></dataObject>
+    <endEvent id="theEnd" name="End"></endEvent>
+    <scriptTask id="setTranscriptAlignment" name="Set Transcript Alignment" scriptFormat="javascript" activiti:autoStoreVariables="false">
+      <script>importPackage(com.kaltura.client.enums);
+	importPackage(com.kaltura.client.types);
+	
+	println("Setting variables for transcript alignment");
+	
+	var transcriptAlignmentData = new KalturaIntegrationJobData();
+	transcriptAlignmentData.providerType = KalturaIntegrationProviderType.EXAMPLE;
+	transcriptAlignmentData.providerData = new KalturaExampleIntegrationJobProviderData();
+	transcriptAlignmentData.providerData.exampleUrl = "http://transcript.align";
+	
+	execution.setVariable("transcriptAlignmentData", transcriptAlignmentData);
+	execution.setVariable("transcriptAlignmentObjectType", KalturaBatchJobObjectType.ASSET);
+	execution.setVariable("transcriptAlignmentObjectId", flavorId);
+	
+	println("Variables for transcript alignment defined");
+	</script>
+    </scriptTask>
+    <sequenceFlow id="flow17" sourceRef="setTranscriptAlignment" targetRef="transcriptAlignment"></sequenceFlow>
+    <scriptTask id="setMachineSpeech2text" name="Set Machine Speech2Text" scriptFormat="javascript" activiti:autoStoreVariables="false">
+      <script>importPackage(com.kaltura.client.enums);
+	importPackage(com.kaltura.client.types);
+	
+	println("Setting variables for speach to text");
+	
+	var speach2TextData = new KalturaIntegrationJobData();
+	speach2TextData.providerType = KalturaIntegrationProviderType.EXAMPLE;
+	speach2TextData.providerData = new KalturaExampleIntegrationJobProviderData();
+	speach2TextData.providerData.exampleUrl = "http://speach.2.text";
+	
+	execution.setVariable("speach2TextData", speach2TextData);
+	execution.setVariable("speach2TextObjectType", KalturaBatchJobObjectType.ASSET);
+	execution.setVariable("speach2TextObjectId", flavorId);
+	
+	println("Variables for speach to text defined");
+	</script>
+    </scriptTask>
+    <sequenceFlow id="flow18" sourceRef="setMachineSpeech2text" targetRef="machineSpeech2text"></sequenceFlow>
+    <sequenceFlow id="SequenceFlow_1" name="No Human" sourceRef="secondPass" targetRef="secondPassJoin">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${contributorSource == "No Human"}]]></conditionExpression>
+    </sequenceFlow>
+    <scriptTask id="getMetadata" name="Get Metadata" scriptFormat="javascript" activiti:autoStoreVariables="false">
+      <script>importPackage(com.kaltura.client.utils);
+importPackage(com.kaltura.client.enums);
+
+var objectType = KalturaMetadataObjectType.ENTRY;
+var profileSystemName = "Transcript";
+var xPath = "/metadata/ContributorSource";
+var contributorSource = MetadataUtils.getValue(client, entryId, objectType, profileSystemName, xPath);
+execution.setVariable("contributorSource", contributorSource);
+
+println("Metadata initialized, contributorSource [" + contributorSource + "]");
+</script>
+    </scriptTask>
+    <sequenceFlow id="flow20" sourceRef="getMetadata" targetRef="captionAsset.list"></sequenceFlow>
+    <scriptTask id="setMetadataManila" name="Set Metadata - Wait for Manila" scriptFormat="javascript" activiti:autoStoreVariables="false">
+      <script>importPackage(com.kaltura.client.utils);
+importPackage(com.kaltura.client.enums);
+
+var objectType = KalturaMetadataObjectType.ENTRY;
+var profileSystemName = "Transcript";
+var xPath = "/metadata/WaitingForHumanTranscript";
+var metadataValue = "Waiting for Publisher";
+var contributorSource = MetadataUtils.setValue(client, entryId, objectType, profileSystemName, xPath, metadataValue);
+
+println("Metadata changed, WaitingForHumanTranscript [" + metadataValue + "]");
+</script>
+    </scriptTask>
+    <scriptTask id="setCielo24EventNotification" name="Set Cielo24 Event-Notification" scriptFormat="javascript" activiti:autoStoreVariables="false">
+      <script>importPackage(com.kaltura.client.enums);
+
+var cielo24DispatchSystemName = "dispatch_cielo24_human_transcript";
+execution.setVariable("cielo24DispatchSystemName", cielo24DispatchSystemName);
+
+var cielo24DispatchObjectType = KalturaEventNotificationEventObjectType.ENTRY;
+execution.setVariable("cielo24DispatchObjectType", cielo24DispatchObjectType);
+</script>
+    </scriptTask>
+    <sequenceFlow id="flow21" name="Publisher " sourceRef="secondPass" targetRef="setMetadataManila">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${contributorSource == "Publisher"}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow22" name="Cielo24" sourceRef="secondPass" targetRef="setCielo24EventNotification">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${contributorSource == "Cielo24"}]]></conditionExpression>
+    </sequenceFlow>
+    <callActivity id="eventNotificationTemplate.dispath" name="eventNotificationTemplate.dispath" calledElement="kaltura-eventNotificationTemplate-dispatchBySystemName">
+      <extensionElements>
+        <activiti:in source="client" target="client"></activiti:in>
+        <activiti:in source="cielo24DispatchSystemName" target="systemName"></activiti:in>
+        <activiti:in source="cielo24DispatchObjectType" target="objectType"></activiti:in>
+        <activiti:in source="entryId" target="objectId"></activiti:in>
+      </extensionElements>
+    </callActivity>
+    <intermediateCatchEvent id="humanTranscriptDoneEvent" name="Human Transcript Done">
+      <messageEventDefinition messageRef="humanTranscriptDone"></messageEventDefinition>
+    </intermediateCatchEvent>
+    <intermediateCatchEvent id="captionAssetAddedEvent" name="Message Catch Event">
+      <messageEventDefinition messageRef="captionAssetAdded"></messageEventDefinition>
+    </intermediateCatchEvent>
+    <sequenceFlow id="flow23" sourceRef="setMetadataManila" targetRef="humanTranscriptDoneEvent"></sequenceFlow>
+    <sequenceFlow id="flow24" sourceRef="setCielo24EventNotification" targetRef="eventNotificationTemplate.dispath"></sequenceFlow>
+    <sequenceFlow id="flow25" sourceRef="eventNotificationTemplate.dispath" targetRef="captionAssetAddedEvent"></sequenceFlow>
+    <exclusiveGateway id="secondPass" name="Exclusive Gateway"></exclusiveGateway>
+    <exclusiveGateway id="secondPassJoin" name="Exclusive Gateway"></exclusiveGateway>
+    <sequenceFlow id="flow26" sourceRef="captionAssetAddedEvent" targetRef="secondPassJoin"></sequenceFlow>
+    <sequenceFlow id="flow27" sourceRef="humanTranscriptDoneEvent" targetRef="secondPassJoin"></sequenceFlow>
+    <sequenceFlow id="flow28" sourceRef="secondPassJoin" targetRef="secondPassDone"></sequenceFlow>
+    <scriptTask id="secondPassDone" name="Second Pass Done" scriptFormat="javascript" activiti:autoStoreVariables="false">
+      <script>println("Second pass done");</script>
+    </scriptTask>
+    <sequenceFlow id="flow29" sourceRef="secondPassDone" targetRef="theEnd"></sequenceFlow>
+    <textAnnotation id="captionsFoundText">
+      <text>Ingested partner transcript?</text>
+    </textAnnotation>
+    <textAnnotation id="secondPassText">
+      <text>Second pass transcript by human?</text>
+    </textAnnotation>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_flow-transcript">
+    <bpmndi:BPMNPlane bpmnElement="flow-transcript" id="BPMNPlane_flow-transcript">
+      <bpmndi:BPMNShape bpmnElement="theStart" id="BPMNShape_theStart">
+        <omgdc:Bounds height="35.0" width="35.0" x="373.0" y="20.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="setVars" id="BPMNShape_setVars">
+        <omgdc:Bounds height="55.0" width="161.0" x="310.0" y="80.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="initClient" id="BPMNShape_initClient">
+        <omgdc:Bounds height="55.0" width="105.0" x="338.0" y="166.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="captionAsset.list" id="BPMNShape_captionAsset.list">
+        <omgdc:Bounds height="55.0" width="206.0" x="288.0" y="340.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="captionsFound" id="BPMNShape_captionsFound">
+        <omgdc:Bounds height="42.0" width="42.0" x="370.0" y="420.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="transcriptAlignment" id="BPMNShape_transcriptAlignment">
+        <omgdc:Bounds height="55.0" width="195.0" x="493.0" y="580.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="machineSpeech2text" id="BPMNShape_machineSpeech2text">
+        <omgdc:Bounds height="55.0" width="245.0" x="44.0" y="580.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="captionsFoundJoin" id="BPMNShape_captionsFoundJoin">
+        <omgdc:Bounds height="42.0" width="42.0" x="370.0" y="660.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="theEnd" id="BPMNShape_theEnd">
+        <omgdc:Bounds height="35.0" width="35.0" x="373.0" y="1220.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="setTranscriptAlignment" id="BPMNShape_setTranscriptAlignment">
+        <omgdc:Bounds height="55.0" width="183.0" x="499.0" y="498.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="setMachineSpeech2text" id="BPMNShape_setMachineSpeech2text">
+        <omgdc:Bounds height="55.0" width="253.0" x="40.0" y="487.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="getMetadata" id="BPMNShape_getMetadata">
+        <omgdc:Bounds height="55.0" width="105.0" x="338.0" y="250.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="setMetadataManila" id="BPMNShape_setMetadataManila">
+        <omgdc:Bounds height="55.0" width="231.0" x="475.0" y="800.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="setCielo24EventNotification" id="BPMNShape_setCielo24EventNotification">
+        <omgdc:Bounds height="55.0" width="231.0" x="51.0" y="800.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="eventNotificationTemplate.dispath" id="BPMNShape_eventNotificationTemplate.dispath">
+        <omgdc:Bounds height="55.0" width="281.0" x="26.0" y="900.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="humanTranscriptDoneEvent" id="BPMNShape_humanTranscriptDoneEvent">
+        <omgdc:Bounds height="35.0" width="35.0" x="573.0" y="1000.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="captionAssetAddedEvent" id="BPMNShape_captionAssetAddedEvent">
+        <omgdc:Bounds height="35.0" width="35.0" x="149.0" y="1000.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="secondPass" id="BPMNShape_secondPass">
+        <omgdc:Bounds height="40.0" width="40.0" x="370.0" y="720.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="secondPassJoin" id="BPMNShape_secondPassJoin">
+        <omgdc:Bounds height="40.0" width="40.0" x="370.0" y="1060.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="secondPassDone" id="BPMNShape_secondPassDone">
+        <omgdc:Bounds height="55.0" width="191.0" x="295.0" y="1130.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="captionsFoundText" id="BPMNShape_captionsFoundText">
+        <omgdc:Bounds height="50.0" width="171.0" x="212.0" y="404.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="secondPassText" id="BPMNShape_secondPassText">
+        <omgdc:Bounds height="50.0" width="211.0" x="160.0" y="703.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow1" id="BPMNEdge_flow1">
+        <omgdi:waypoint x="390.0" y="55.0"></omgdi:waypoint>
+        <omgdi:waypoint x="390.0" y="80.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow10" id="BPMNEdge_flow10">
+        <omgdi:waypoint x="390.0" y="135.0"></omgdi:waypoint>
+        <omgdi:waypoint x="390.0" y="166.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow11" id="BPMNEdge_flow11">
+        <omgdi:waypoint x="390.0" y="221.0"></omgdi:waypoint>
+        <omgdi:waypoint x="390.0" y="250.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow9" id="BPMNEdge_flow9">
+        <omgdi:waypoint x="391.0" y="395.0"></omgdi:waypoint>
+        <omgdi:waypoint x="391.0" y="420.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow12" id="BPMNEdge_flow12">
+        <omgdi:waypoint x="412.0" y="441.0"></omgdi:waypoint>
+        <omgdi:waypoint x="590.0" y="440.0"></omgdi:waypoint>
+        <omgdi:waypoint x="590.0" y="498.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="16.0" width="23.0" x="598.0" y="454.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow14" id="BPMNEdge_flow14">
+        <omgdi:waypoint x="590.0" y="635.0"></omgdi:waypoint>
+        <omgdi:waypoint x="591.0" y="679.0"></omgdi:waypoint>
+        <omgdi:waypoint x="412.0" y="681.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow13" id="BPMNEdge_flow13">
+        <omgdi:waypoint x="370.0" y="441.0"></omgdi:waypoint>
+        <omgdi:waypoint x="166.0" y="440.0"></omgdi:waypoint>
+        <omgdi:waypoint x="166.0" y="487.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="16.0" width="16.0" x="146.0" y="446.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow15" id="BPMNEdge_flow15">
+        <omgdi:waypoint x="166.0" y="635.0"></omgdi:waypoint>
+        <omgdi:waypoint x="166.0" y="679.0"></omgdi:waypoint>
+        <omgdi:waypoint x="370.0" y="681.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow16" id="BPMNEdge_flow16">
+        <omgdi:waypoint x="391.0" y="702.0"></omgdi:waypoint>
+        <omgdi:waypoint x="390.0" y="720.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow17" id="BPMNEdge_flow17">
+        <omgdi:waypoint x="590.0" y="553.0"></omgdi:waypoint>
+        <omgdi:waypoint x="590.0" y="580.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow18" id="BPMNEdge_flow18">
+        <omgdi:waypoint x="166.0" y="542.0"></omgdi:waypoint>
+        <omgdi:waypoint x="166.0" y="580.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="SequenceFlow_1" id="BPMNEdge_SequenceFlow_1">
+        <omgdi:waypoint x="390.0" y="760.0"></omgdi:waypoint>
+        <omgdi:waypoint x="390.0" y="1060.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="16.0" width="61.0" x="398.0" y="767.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow20" id="BPMNEdge_flow20">
+        <omgdi:waypoint x="390.0" y="305.0"></omgdi:waypoint>
+        <omgdi:waypoint x="391.0" y="340.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow21" id="BPMNEdge_flow21">
+        <omgdi:waypoint x="410.0" y="740.0"></omgdi:waypoint>
+        <omgdi:waypoint x="590.0" y="740.0"></omgdi:waypoint>
+        <omgdi:waypoint x="590.0" y="800.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="16.0" width="58.0" x="598.0" y="770.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow22" id="BPMNEdge_flow22">
+        <omgdi:waypoint x="370.0" y="740.0"></omgdi:waypoint>
+        <omgdi:waypoint x="166.0" y="740.0"></omgdi:waypoint>
+        <omgdi:waypoint x="166.0" y="800.0"></omgdi:waypoint>
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds height="16.0" width="43.0" x="171.0" y="770.0"></omgdc:Bounds>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow23" id="BPMNEdge_flow23">
+        <omgdi:waypoint x="590.0" y="855.0"></omgdi:waypoint>
+        <omgdi:waypoint x="590.0" y="1000.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow24" id="BPMNEdge_flow24">
+        <omgdi:waypoint x="166.0" y="855.0"></omgdi:waypoint>
+        <omgdi:waypoint x="166.0" y="900.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow25" id="BPMNEdge_flow25">
+        <omgdi:waypoint x="166.0" y="955.0"></omgdi:waypoint>
+        <omgdi:waypoint x="166.0" y="1000.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow26" id="BPMNEdge_flow26">
+        <omgdi:waypoint x="166.0" y="1035.0"></omgdi:waypoint>
+        <omgdi:waypoint x="166.0" y="1080.0"></omgdi:waypoint>
+        <omgdi:waypoint x="370.0" y="1080.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow27" id="BPMNEdge_flow27">
+        <omgdi:waypoint x="590.0" y="1035.0"></omgdi:waypoint>
+        <omgdi:waypoint x="590.0" y="1080.0"></omgdi:waypoint>
+        <omgdi:waypoint x="410.0" y="1080.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow28" id="BPMNEdge_flow28">
+        <omgdi:waypoint x="390.0" y="1100.0"></omgdi:waypoint>
+        <omgdi:waypoint x="390.0" y="1130.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow29" id="BPMNEdge_flow29">
+        <omgdi:waypoint x="390.0" y="1185.0"></omgdi:waypoint>
+        <omgdi:waypoint x="390.0" y="1220.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>
