@@ -5,6 +5,8 @@ Maintainer: Jess Portnoy <jess.portnoy@kaltura.com>
 
 Package: kaltura-kmc
 Architecture: all
+Build-Depends-Indep:
+ dos2unix
 Depends: ${shlibs:Depends},kaltura-base,apache2-mpm-prefork,kaltura-html5-studio
 Description: Kaltura Management Console 
  Kaltura is the world's first Open Source Online Video Platform, transforming the way people work, learn, 

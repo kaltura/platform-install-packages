@@ -128,7 +128,7 @@ if [ "$1" = "configure" ]; then
 	APACHE_HOST="$RET"
 	db_get 'kaltura-base/vhost_port'
 	APACHE_PORT="$RET"
-	DEF_SERVICE_URL="$APACHE_HOST:$APACHE_PORT"
+	DEF_SERVICE_URL="http://$APACHE_HOST:$APACHE_PORT"
 	db_set 'kaltura-base/service_url' $DEF_SERVICE_URL
 	db_input critical 'kaltura-base/service_url' || true
 	db_go || true
