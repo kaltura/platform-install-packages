@@ -67,11 +67,7 @@ https://support.realtyna.com/index.php?/Knowledgebase/Article/View/535/0/how-can
 
 
 #### Install Kaltura Server
-
-Install the Kaltura Packages:
-
 You can use this process to auto install an all in 1 server.
-
 In order to perform a manual step by step install, simply copy the commands and run them one by one.
 
 *NOTE: the script calls aptitude with -y which means you will not be prompted to confirm the packages about to be installed.*
