@@ -5,10 +5,10 @@ RC_FILE :=../../build/sources.rc
 KCW_VERSION ?= $(shell egrep '^KCW_VERSION=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
 SOURCE_PACKAGING_DIR ?= $(shell egrep '^RPM_SOURCES_DIR=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
 KALTURA_PREFIX ?= $(shell egrep '^KALTURA_PREFIX=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
-KDP3_PREFIX=$(KALTURA_PREFIX)/web/flash/kcw
+KCW_PREFIX=$(KALTURA_PREFIX)/web/flash/kcw
 include ../includes/build-revision.mk
-archive := $(SOURCE_PACKAGING_DIR)/kaltura-kcw-$(KDP3_VERSION).tar.gz
-tree := $(KDP3_VERSION)
+archive := $(SOURCE_PACKAGING_DIR)/kaltura-kcw-$(KCW_VERSION).tar.bz2
+tree := kaltura-kcw
 
 clean:
 	dh_clean
@@ -19,7 +19,7 @@ $(archive):
 	$(SOURCE_PACKAGING_DIR)/platform-install-packages/build/package_kaltura_kcw.sh	
 
 $(tree): $(archive)
-	tar zxf $(archive)
+	tar jxf $(archive)
 
 build: $(tree)
 
@@ -27,9 +27,11 @@ install: build
 
 binary-indep: install
 	dh_installdirs
-	rm -rf $(KDP3_PREFIX)
-	mkdir -p $(KDP3_PREFIX)
-	mv $(tree) $(KDP3_PREFIX)/
+	rm -rf $(KCW_PREFIX)
+	mkdir -p $(KCW_PREFIX) $(KALTURA_PREFIX)/web/content/uiconf/kaltura/generic
+	mv $(tree)/uiconf/kaltura/generic/kcw_2.1.5 $(KALTURA_PREFIX)/web/content/uiconf/kaltura/generic/
+	mv $(tree)/$(KCW_VERSION) $(KCW_PREFIX)
+	find $(KALTURA_PREFIX)/web/flash/kcw -name ".project" -exec rm {} \;
 	dh_install $(KALTURA_PREFIX)
 	dh_gencontrol -u-v$(DEB_VERSION) 
 	dh_installdebconf
