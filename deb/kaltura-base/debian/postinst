@@ -1,4 +1,4 @@
-#!/bin/bash 
+#!/bin/bash
 
 KALTURA_FUNCTIONS_RC=/opt/kaltura/bin/kaltura-functions.rc
 if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
@@ -21,373 +21,373 @@ chown $APACHE_USER.kaltura -R $KALTURA_PREFIX/web/content/entry $KALTURA_PREFIX/
 find $KALTURA_PREFIX/web/content/entry $KALTURA_PREFIX/web/content/uploads/  $KALTURA_PREFIX/web/tmp/ -type d -exec chmod 775 {} \;
 set -e
 if [ "$1" = "configure" ]; then
-	php5enmod mcrypt
-	. /usr/share/debconf/confmodule
-	KALT_CONF_DIR=$APP_DIR/configurations/
-	BEGINNERS_TUTORIAL_URL=http://bit.ly/KalturaUploadMenu
-	QUICK_START_GUIDE_URL=http://bit.ly/KalturaKmcManual
-	FORUMS_URLS=http://bit.ly/KalturaForums
-	db_get 'kaltura-base/cdn_hostname'
-	if [ -z "$RET" ];then
-		db_set 'kaltura-base/cdn_hostname' "`hostname`"
-	fi
-	db_input critical 'kaltura-base/cdn_hostname' || true
-	db_go || true
-	db_get 'kaltura-base/cdn_hostname'
-	CDN_HOST=$RET
-	
-	db_get 'kaltura-base/apache_hostname'
-	if [ -z "$RET" ];then
-		db_set 'kaltura-base/apache_hostname' "`hostname`"
-	fi
-	db_input critical 'kaltura-base/apache_hostname' || true
-	db_go || true
-	#echo "set kaltura-base/apache_hostname $CDN_HOST" | debconf-communicate
+        php5enmod mcrypt
+        . /usr/share/debconf/confmodule
+        KALT_CONF_DIR=$APP_DIR/configurations/
+        BEGINNERS_TUTORIAL_URL=http://bit.ly/KalturaUploadMenu
+        QUICK_START_GUIDE_URL=http://bit.ly/KalturaKmcManual
+        FORUMS_URLS=http://bit.ly/KalturaForums
+        db_get 'kaltura-base/cdn_hostname'
+        if [ -z "$RET" ];then
+                db_set 'kaltura-base/cdn_hostname' "`hostname`"
+        fi
+        db_input critical 'kaltura-base/cdn_hostname' || true
+        db_go || true
+        db_get 'kaltura-base/cdn_hostname'
+        CDN_HOST=$RET
 
-	db_get 'kaltura-base/apache_hostname'
-	KALTURA_VIRTUAL_HOST_NAME=$RET
-	
-	db_get 'kaltura-base/vhost_port'
-	if [ -z "$RET" ];then
-		db_set 'kaltura-base/vhost_port' 80
-	fi
-	db_input critical 'kaltura-base/vhost_port' || true
-	db_go || true
-	db_get 'kaltura-base/vhost_port'
-	KALTURA_VIRTUAL_HOST_PORT=$RET
-	KALTURA_FULL_VIRTUAL_HOST_NAME="$KALTURA_VIRTUAL_HOST_NAME:$KALTURA_VIRTUAL_HOST_PORT"
+        db_get 'kaltura-base/apache_hostname'
+        if [ -z "$RET" ];then
+                db_set 'kaltura-base/apache_hostname' "`hostname`"
+        fi
+        db_input critical 'kaltura-base/apache_hostname' || true
+        db_go || true
+        #echo "set kaltura-base/apache_hostname $CDN_HOST" | debconf-communicate
 
-	db_get 'kaltura-base/db_hostname'
-	if [ -z "$RET" ];then
-		db_set 'kaltura-base/db_hostname' "`hostname`"
-	fi
-	db_input critical 'kaltura-base/db_hostname' || true
-	db_go || true
-	db_get 'kaltura-base/db_hostname'
-	DB1_HOST=$RET
-	
-	db_input critical 'kaltura-base/db_port' || true
-	db_go || true
-	db_get 'kaltura-base/db_port'
-	DB1_PORT=$RET
-	
-	db_input critical 'kaltura-base/mysql_super_user' || true
-	db_go || true
-	db_get 'kaltura-base/mysql_super_user'
-	SUPER_USER=$RET
-	
-	db_input critical 'kaltura-base/mysql_super_passwd' || true
-	db_go || true
-	db_get 'kaltura-base/mysql_super_passwd'
-	SUPER_USER_PASSWD=$RET
+        db_get 'kaltura-base/apache_hostname'
+        KALTURA_VIRTUAL_HOST_NAME=$RET
 
-	db_get 'kaltura-base/dwh_db_hostname'
-	if [ -z "$RET" ];then
-		db_set 'kaltura-base/dwh_db_hostname' "`hostname`"
-	fi
-	db_input critical 'kaltura-base/dwh_db_hostname' || true
-	#db_set 'kaltura-base/dwh_db_hostname' $DB1_HOST
-	db_go || true
-	db_get 'kaltura-base/dwh_db_hostname'
-	DWH_HOST=$RET
+        db_get 'kaltura-base/vhost_port'
+        if [ -z "$RET" ];then
+                db_set 'kaltura-base/vhost_port' 80
+        fi
+        db_input critical 'kaltura-base/vhost_port' || true
+        db_go || true
+        db_get 'kaltura-base/vhost_port'
+        KALTURA_VIRTUAL_HOST_PORT=$RET
+        KALTURA_FULL_VIRTUAL_HOST_NAME="$KALTURA_VIRTUAL_HOST_NAME:$KALTURA_VIRTUAL_HOST_PORT"
 
-	db_input critical 'kaltura-base/dwh_db_port' || true
-	db_go || true
-	db_get 'kaltura-base/dwh_db_port'
-	DWH_PORT=$RET
+        db_get 'kaltura-base/db_hostname'
+        if [ -z "$RET" ];then
+                db_set 'kaltura-base/db_hostname' "`hostname`"
+        fi
+        db_input critical 'kaltura-base/db_hostname' || true
+        db_go || true
+        db_get 'kaltura-base/db_hostname'
+        DB1_HOST=$RET
 
-	db_get 'kaltura-base/sphinx_hostname'
-	if [ -z "$RET" ];then
-		db_set 'kaltura-base/sphinx_hostname' "`hostname`"
-	fi
-	db_input critical 'kaltura-base/sphinx_hostname' || true
-	db_go || true
-	db_get 'kaltura-base/sphinx_hostname'
-	SPHINX_SERVER1=$RET
+        db_input critical 'kaltura-base/db_port' || true
+        db_go || true
+        db_get 'kaltura-base/db_port'
+        DB1_PORT=$RET
 
-	#db_set 'kaltura-base/media_server_hostname' "`hostname`"
-	#db_input critical 'kaltura-base/media_server_hostname' || true
-	#db_go || true
-	#db_get 'kaltura-base/media_server_hostname'
-	#RED5_HOST=$RET
+        db_input critical 'kaltura-base/mysql_super_user' || true
+        db_go || true
+        db_get 'kaltura-base/mysql_super_user'
+        SUPER_USER=$RET
 
-	db_get 'kaltura-base/second_sphinx_hostname'
-	if [ -z "$RET" ];then
-		db_set 'kaltura-base/second_sphinx_hostname' "`hostname`"
-	fi
-	db_input critical 'kaltura-base/second_sphinx_hostname' || true
-	db_go || true
-	db_get 'kaltura-base/second_sphinx_hostname'
-	SPHINX_SERVER2=$RET
+        db_input critical 'kaltura-base/mysql_super_passwd' || true
+        db_go || true
+        db_get 'kaltura-base/mysql_super_passwd'
+        SUPER_USER_PASSWD=$RET
 
-	db_get 'kaltura-base/apache_hostname'
-	APACHE_HOST="$RET"
-	db_get 'kaltura-base/vhost_port'
-	APACHE_PORT="$RET"
-	DEF_SERVICE_URL="http://$APACHE_HOST:$APACHE_PORT"
-	db_set 'kaltura-base/service_url' $DEF_SERVICE_URL
-	db_input critical 'kaltura-base/service_url' || true
-	db_go || true
-	db_get 'kaltura-base/service_url'
-	SERVICE_URL=$RET
+        db_get 'kaltura-base/dwh_db_hostname'
+        if [ -z "$RET" ];then
+                db_set 'kaltura-base/dwh_db_hostname' "`hostname`"
+        fi
+        db_input critical 'kaltura-base/dwh_db_hostname' || true
+        #db_set 'kaltura-base/dwh_db_hostname' $DB1_HOST
+        db_go || true
+        db_get 'kaltura-base/dwh_db_hostname'
+        DWH_HOST=$RET
 
-	db_input critical 'kaltura-base/ip_range' || true
-	db_go || true
-	db_get 'kaltura-base/ip_range'
-	IP_RANGE=$RET
+        db_input critical 'kaltura-base/dwh_db_port' || true
+        db_go || true
+        db_get 'kaltura-base/dwh_db_port'
+        DWH_PORT=$RET
 
-	db_input critical 'kaltura-base/vod_packager_hostname' || true
-	db_go || true
-	db_get 'kaltura-base/vod_packager_hostname'
-	VOD_PACKAGER_HOST=$RET
+        db_get 'kaltura-base/sphinx_hostname'
+        if [ -z "$RET" ];then
+                db_set 'kaltura-base/sphinx_hostname' "`hostname`"
+        fi
+        db_input critical 'kaltura-base/sphinx_hostname' || true
+        db_go || true
+        db_get 'kaltura-base/sphinx_hostname'
+        SPHINX_SERVER1=$RET
 
-	db_input critical 'kaltura-base/vod_packager_port' || true
-	db_go || true
-	db_get 'kaltura-base/vod_packager_port'
-	VOD_PACKAGER_PORT=$RET
+        #db_set 'kaltura-base/media_server_hostname' "`hostname`"
+        #db_input critical 'kaltura-base/media_server_hostname' || true
+        #db_go || true
+        #db_get 'kaltura-base/media_server_hostname'
+        #RED5_HOST=$RET
 
-	db_input critical 'kaltura-base/admin_console_email' || true
-	db_go || true
-	db_get 'kaltura-base/admin_console_email'
-	ADMIN_CONSOLE_ADMIN_MAIL=$RET
+        db_get 'kaltura-base/second_sphinx_hostname'
+        if [ -z "$RET" ];then
+                db_set 'kaltura-base/second_sphinx_hostname' "`hostname`"
+        fi
+        db_input critical 'kaltura-base/second_sphinx_hostname' || true
+        db_go || true
+        db_get 'kaltura-base/second_sphinx_hostname'
+        SPHINX_SERVER2=$RET
+
+        db_get 'kaltura-base/apache_hostname'
+        APACHE_HOST="$RET"
+        db_get 'kaltura-base/vhost_port'
+        APACHE_PORT="$RET"
+        DEF_SERVICE_URL="http://$APACHE_HOST:$APACHE_PORT"
+        db_set 'kaltura-base/service_url' $DEF_SERVICE_URL
+        db_input critical 'kaltura-base/service_url' || true
+        db_go || true
+        db_get 'kaltura-base/service_url'
+        SERVICE_URL=$RET
+
+        db_input critical 'kaltura-base/ip_range' || true
+        db_go || true
+        db_get 'kaltura-base/ip_range'
+        IP_RANGE=$RET
+
+        db_input critical 'kaltura-base/vod_packager_hostname' || true
+        db_go || true
+        db_get 'kaltura-base/vod_packager_hostname'
+        VOD_PACKAGER_HOST=$RET
+
+        db_input critical 'kaltura-base/vod_packager_port' || true
+        db_go || true
+        db_get 'kaltura-base/vod_packager_port'
+        VOD_PACKAGER_PORT=$RET
+
+        db_input critical 'kaltura-base/admin_console_email' || true
+        db_go || true
+        db_get 'kaltura-base/admin_console_email'
+        ADMIN_CONSOLE_ADMIN_MAIL=$RET
 
 
 
-	while [ -z "$AGAIN_ADMIN_CONSOLE_PASSWORD" ];do
-		db_input critical 'kaltura-base/admin_console_passwd' || true
-		db_go || true
-		db_get 'kaltura-base/admin_console_passwd'
-		ADMIN_CONSOLE_PASSWORD=$RET
-		if echo $ADMIN_CONSOLE_PASSWORD | grep -q "/" ;then
-			db_input critical kaltura-base/admin_console_passwd_invalid_char || true
-			db_go
+        while [ -z "$AGAIN_ADMIN_CONSOLE_PASSWORD" ];do
+                db_input critical 'kaltura-base/admin_console_passwd' || true
+                db_go || true
+                db_get 'kaltura-base/admin_console_passwd'
+                ADMIN_CONSOLE_PASSWORD=$RET
+                if echo $ADMIN_CONSOLE_PASSWORD | grep -q "/" ;then
+                        db_input critical kaltura-base/admin_console_passwd_invalid_char || true
+                        db_go
                         unset ADMIN_CONSOLE_PASSWORD
-			continue
+                        continue
                 fi
 
 
-		db_input critical 'kaltura-base/admin_console_passwd_again' || true
-		db_go || true
-		db_get 'kaltura-base/admin_console_passwd_again'
-		AGAIN_ADMIN_CONSOLE_PASSWORD=$RET
-		if [ "$ADMIN_CONSOLE_PASSWORD" != "$AGAIN_ADMIN_CONSOLE_PASSWORD" ];then
-			db_input critical kaltura-base/admin_console_passwd_dont_match || true 
-  			db_go
-			unset AGAIN_ADMIN_CONSOLE_PASSWORD
+                db_input critical 'kaltura-base/admin_console_passwd_again' || true
+                db_go || true
+                db_get 'kaltura-base/admin_console_passwd_again'
+                AGAIN_ADMIN_CONSOLE_PASSWORD=$RET
+                if [ "$ADMIN_CONSOLE_PASSWORD" != "$AGAIN_ADMIN_CONSOLE_PASSWORD" ];then
+                        db_input critical kaltura-base/admin_console_passwd_dont_match || true 
+                        db_go
+                        unset AGAIN_ADMIN_CONSOLE_PASSWORD
 
-		fi
-	done
-	
-	db_get 'kaltura-base/time_zone'
-	if [ -z "$RET" ];then
-		db_set 'kaltura-base/time_zone' $TZGUESS
-		LOCALTIME_MD5=`md5sum /etc/localtime|awk -F " " '{print $1}'`
-		TZGUESS=`find /usr/share/zoneinfo -type f | xargs md5sum | grep $LOCALTIME_MD5|awk -F " " '{print $2}'|sed 's@/usr/share/zoneinfo/@@g'`
-	fi
-	set +e
-	TIME_ZONE="$TZGUESS"
-	while ! php -r "if (timezone_open('$TIME_ZONE') === false){exit(1);}" >>/dev/null 2>&1;do 
-		db_input critical 'kaltura-base/time_zone' || true
-		db_go || true
-		db_get 'kaltura-base/time_zone'
-		TIME_ZONE=$RET
-	done
-	set -e
-	db_input critical 'kaltura-base/env_name' || true
-	db_go || true
-	db_get 'kaltura-base/env_name'
-	ENVIRONMENT_NAME=$RET
+                fi
+        done
 
-	db_input critical 'kaltura-base/contact_url' || true
-	db_go || true
-	db_get 'kaltura-base/contact_url'
-	CONTACT_URL=$RET
+        db_get 'kaltura-base/time_zone'
+        if [ -z "$RET" ];then
+                db_set 'kaltura-base/time_zone' $TZGUESS
+                LOCALTIME_MD5=`md5sum /etc/localtime|awk -F " " '{print $1}'`
+                TZGUESS=`find /usr/share/zoneinfo -type f | xargs md5sum | grep $LOCALTIME_MD5|awk -F " " '{print $2}'|sed 's@/usr/share/zoneinfo/@@g'`
+        fi
+        set +e
+        TIME_ZONE="$TZGUESS"
+        while ! php -r "if (timezone_open('$TIME_ZONE') === false){exit(1);}" >>/dev/null 2>&1;do 
+                db_input critical 'kaltura-base/time_zone' || true
+                db_go || true
+                db_get 'kaltura-base/time_zone'
+                TIME_ZONE=$RET
+        done
+        set -e
+        db_input critical 'kaltura-base/env_name' || true
+        db_go || true
+        db_get 'kaltura-base/env_name'
+        ENVIRONMENT_NAME=$RET
 
-	db_input critical 'kaltura-base/contact_phone' || true
-	db_go || true
-	db_get 'kaltura-base/contact_phone'
-	CONTACT_PHONE_NUMBER=$RET
+        db_input critical 'kaltura-base/contact_url' || true
+        db_go || true
+        db_get 'kaltura-base/contact_url'
+        CONTACT_URL=$RET
 
-	db_input critical 'kaltura-base/install_analytics_consent' || true
-	db_go || true
-	db_get 'kaltura-base/install_analytics_consent'
-	USER_CONSENT=$RET
+        db_input critical 'kaltura-base/contact_phone' || true
+        db_go || true
+        db_get 'kaltura-base/contact_phone'
+        CONTACT_PHONE_NUMBER=$RET
 
-
-
-	 for INI in /etc/php5/cli/php.ini /etc/php5/apache2/php.ini;do
-		if [ -r "$INI_FILE" ];then
-			sed -i "s#\(date.timezone\)\s*=.*#\1='$TIME_ZONE'#g" $INI_FILE
-		fi
-	done
-	if [ -z "$DB1_PASS" ];then
-		DB1_PASS=`< /dev/urandom tr -dc A-Za-z0-9 | head -c15`
-		set +e
-		echo "update mysql.user set password=PASSWORD('$DB1_PASS') WHERE user='kaltura';flush PRIVILEGES" | mysql -h$DB1_HOST -P$DB1_PORT -u$SUPER_USER -p$SUPER_USER_PASSWD mysql
-		set -e
-		if [ -z "$DWH_PASS" ];then
-			DWH_PASS=$DB1_PASS
-		fi
-	fi
-	DB1_NAME=kaltura
-	DB1_USER=kaltura
-
-	# no added value in putting this on a separate server..
-	SPHINX_DB_HOST=$DB1_HOST
-	SPHINX_DB_PORT=$DB1_PORT
-
-	CONF_FILES=`find $KALT_CONF_DIR  -type f -name "*template*"`
-	CONF_FILES="$CONF_FILES $BASE_DIR/app/batch/batches/Mailer/emails_en.template.ini $BASE_DIR/app/tests/monitoring/config.template.ini $BASE_DIR/bin/sanity_config.template.ini"
-	#if STUDIO_VER=`dpkg-query -W -f'${Version}' kaltura-html5-studio |awk -F "+" '{print $1}' 2>/dev/null`;then 
-	#	CONF_FILES="$CONF_FILES $BASE_DIR/apps/studio/$STUDIO_VER/studio.template.ini"
-	#fi 
-	CONF_FILES="$CONF_FILES `find $BASE_DIR/app/plugins/monitor/nagios/config -type f -name "*template*"`"
-	 
-	if [ -d "$BASE_DIR/dwh" ];then
-		CONF_FILES="$CONF_FILES `find $BASE_DIR/dwh  -type f -name "*template*"`"
-	fi
-
-	# Now we will sed.
-
-	for TMPL_CONF_FILE in $CONF_FILES;do
-		CONF_FILE=`echo $TMPL_CONF_FILE | sed 's@\(.*\)\.template\(.*\)@\1\2@'`
-		if [ -r $CONF_FILE ];then
-			cp $CONF_FILE $CONF_FILE.backup
-		fi
-		if `echo $TMPL_CONF_FILE|grep -q template`;then
-			cp  $TMPL_CONF_FILE $CONF_FILE
-		fi
-
-		sed  -e "s#@ENVIRONMENT_PROTOCOL@#$PROTOCOL#g" -e "s#@CDN_HOST@#$CDN_HOST#g" -e "s#@DB[1-9]_HOST@#$DB1_HOST#g" -e "s#@DB[1-9]_NAME@#$DB1_NAME#g" -e "s#@DB[1-9]_USER@#$DB1_USER#g" -e "s#@DB[1-9]_PASS@#$DB1_PASS#g" -e "s#@DB[1-9]_PORT@#$DB1_PORT#g" -e "s#@TIME_ZONE@#$TIME_ZONE#g" -e "s#@KALTURA_FULL_VIRTUAL_HOST_NAME@#$KALTURA_FULL_VIRTUAL_HOST_NAME#g" -e "s#@KALTURA_VIRTUAL_HOST_NAME@#$KALTURA_VIRTUAL_HOST_NAME#g" -e "s#@SERVICE_URL@#$SERVICE_URL#g" -e "s#@WWW_HOST@#$KALTURA_FULL_VIRTUAL_HOST_NAME#g" -e "s#@SPHINX_DB_NAME@#kaltura_sphinx_log#g" -e "s#@SPHINX_DB_HOST@#$SPHINX_DB_HOST#g" -e "s#@SPHINX_DB_PORT@#$DB1_PORT#g" -e "s#@DWH_HOST@#$DWH_HOST#g" -e "s#@DWH_PORT@#$DWH_PORT#g" -e "s#@SPHINX_SERVER1@#$SPHINX_SERVER1#g" -e "s#@SPHINX_SERVER2@#$SPHINX_SERVER2#g" -e "s#@DWH_DATABASE_NAME@#kalturadw#g" -e "s#@DWH_USER@#etl#g" -e "s#@DWH_PASS@#$DWH_PASS#g" -e "s#@ADMIN_CONSOLE_ADMIN_MAIL@#$ADMIN_CONSOLE_ADMIN_MAIL#g" -e "s#@WEB_DIR@#$BASE_DIR/web#g" -e "s#@LOG_DIR@#$BASE_DIR/log#g" -e "s#$BASE_DIR/app#$BASE_DIR/app#g" -e "s#@PHP_BIN@#/usr/bin/php#g" -e "s#@OS_KALTURA_USER@#kaltura#g" -e "s#@BASE_DIR@#$BASE_DIR#" -e "s#@APP_DIR@#$BASE_DIR/app#g" -e "s#@DWH_DIR@#$BASE_DIR/dwh#g" -e "s#@EVENTS_LOGS_DIR@#$BASE_DIR/web/logs#g" -e "s#@TMP_DIR@#$BASE_DIR/tmp#g" -e "s#@APACHE_SERVICE@#apache2#g" -e "s#@KALTURA_VIRTUAL_HOST_PORT@#$KALTURA_VIRTUAL_HOST_PORT#g" -e "s#@BIN_DIR@#$BASE_DIR/bin#g" -e "s#@KALTURA_VERSION@#$KALTURA_VERSION#g" -e "s#@SPHINX_SERVER@#$SPHINX_SERVER#g" -e "s#@IMAGE_MAGICK_BIN_DIR@#/usr/bin#g" -e "s#@CURL_BIN_DIR@#/usr/bin#g" -e "s@^\(bin_path_mediainfo\).*@\1=/usr/bin/mediainfo@g" -e "s#@CONTACT_URL@#$CONTACT_URL#g" -e "s#@ENVIRONMENT_NAME@#$ENVIRONMENT_NAME#g" -e "s#@BEGINNERS_TUTORIAL_URL@#$BEGINNERS_TUTORIAL_URL#g" -e "s#@BEGINNERS_TUTORIAL_URL@#$BEGINNERS_TUTORIAL_URL#g" -e "s#@QUICK_START_GUIDE_URL@#$QUICK_START_GUIDE_URL#g" -e "s#@FORUMS_URLS@#$FORUMS_URLS#g" -e "s#@CONTACT_PHONE_NUMBER@#$CONTACT_PHONE_NUMBER#g" -e "s#@UNSUBSCRIBE_EMAIL_URL@#$SERVICE_URL/index.php/extwidget/blockMail?e=#g" -e "s#@UICONF_TAB_ACCESS@#SYSTEM_ADMIN_BATCH_CONTROL#g"  -e "s#@EVENTS_FETCH_METHOD@#local#g" -e "s#@HTML5_VER@#$HTML5_VER#g" -e "s#@MONIT_PASSWD@#$DB1_PASS#g" -i $CONF_FILE
-	done
+        db_input critical 'kaltura-base/install_analytics_consent' || true
+        db_go || true
+        db_get 'kaltura-base/install_analytics_consent'
+        USER_CONSENT=$RET
 
 
-	# these two have passwds in them.
-	chown $KALTURA_USER.$APACHE_USER $BASE_DIR/app/configurations/system.ini $BASE_DIR/app/configurations/db.ini
-	chmod 640 $BASE_DIR/app/configurations/system.ini $BASE_DIR/app/configurations/db.ini
+
+         for INI in /etc/php5/cli/php.ini /etc/php5/apache2/php.ini;do
+                if [ -r "$INI_FILE" ];then
+                        sed -i "s#\(date.timezone\)\s*=.*#\1='$TIME_ZONE'#g" $INI_FILE
+                fi
+        done
+        if [ -z "$DB1_PASS" ];then
+                DB1_PASS=`< /dev/urandom tr -dc A-Za-z0-9 | head -c15`
+                set +e
+                echo "update mysql.user set password=PASSWORD('$DB1_PASS') WHERE user='kaltura';flush PRIVILEGES" | mysql -h$DB1_HOST -P$DB1_PORT -u$SUPER_USER -p$SUPER_USER_PASSWD mysql
+                set -e
+                if [ -z "$DWH_PASS" ];then
+                        DWH_PASS=$DB1_PASS
+                fi
+        fi
+        DB1_NAME=kaltura
+        DB1_USER=kaltura
+
+        # no added value in putting this on a separate server..
+        SPHINX_DB_HOST=$DB1_HOST
+        SPHINX_DB_PORT=$DB1_PORT
+
+        CONF_FILES=`find $KALT_CONF_DIR  -type f -name "*template*"`
+        CONF_FILES="$CONF_FILES $BASE_DIR/app/batch/batches/Mailer/emails_en.template.ini $BASE_DIR/app/tests/monitoring/config.template.ini $BASE_DIR/bin/sanity_config.template.ini"
+        #if STUDIO_VER=`dpkg-query -W -f'${Version}' kaltura-html5-studio |awk -F "+" '{print $1}' 2>/dev/null`;then 
+        #       CONF_FILES="$CONF_FILES $BASE_DIR/apps/studio/$STUDIO_VER/studio.template.ini"
+        #fi 
+        CONF_FILES="$CONF_FILES `find $BASE_DIR/app/plugins/monitor/nagios/config -type f -name "*template*"`"
+         
+        if [ -d "$BASE_DIR/dwh" ];then
+                CONF_FILES="$CONF_FILES `find $BASE_DIR/dwh  -type f -name "*template*"`"
+        fi
+
+        # Now we will sed.
+
+        for TMPL_CONF_FILE in $CONF_FILES;do
+                CONF_FILE=`echo $TMPL_CONF_FILE | sed 's@\(.*\)\.template\(.*\)@\1\2@'`
+                if [ -r $CONF_FILE ];then
+                        cp $CONF_FILE $CONF_FILE.backup
+                fi
+                if `echo $TMPL_CONF_FILE|grep -q template`;then
+                        cp  $TMPL_CONF_FILE $CONF_FILE
+                fi
+
+                sed  -e "s#@ENVIRONMENT_PROTOCOL@#$PROTOCOL#g" -e "s#@CDN_HOST@#$CDN_HOST#g" -e "s#@DB[1-9]_HOST@#$DB1_HOST#g" -e "s#@DB[1-9]_NAME@#$DB1_NAME#g" -e "s#@DB[1-9]_USER@#$DB1_USER#g" -e "s#@DB[1-9]_PASS@#$DB1_PASS#g" -e "s#@DB[1-9]_PORT@#$DB1_PORT#g" -e "s#@TIME_ZONE@#$TIME_ZONE#g" -e "s#@KALTURA_FULL_VIRTUAL_HOST_NAME@#$KALTURA_FULL_VIRTUAL_HOST_NAME#g" -e "s#@KALTURA_VIRTUAL_HOST_NAME@#$KALTURA_VIRTUAL_HOST_NAME#g" -e "s#@SERVICE_URL@#$SERVICE_URL#g" -e "s#@WWW_HOST@#$KALTURA_FULL_VIRTUAL_HOST_NAME#g" -e "s#@SPHINX_DB_NAME@#kaltura_sphinx_log#g" -e "s#@SPHINX_DB_HOST@#$SPHINX_DB_HOST#g" -e "s#@SPHINX_DB_PORT@#$DB1_PORT#g" -e "s#@DWH_HOST@#$DWH_HOST#g" -e "s#@DWH_PORT@#$DWH_PORT#g" -e "s#@SPHINX_SERVER1@#$SPHINX_SERVER1#g" -e "s#@SPHINX_SERVER2@#$SPHINX_SERVER2#g" -e "s#@DWH_DATABASE_NAME@#kalturadw#g" -e "s#@DWH_USER@#etl#g" -e "s#@DWH_PASS@#$DWH_PASS#g" -e "s#@ADMIN_CONSOLE_ADMIN_MAIL@#$ADMIN_CONSOLE_ADMIN_MAIL#g" -e "s#@WEB_DIR@#$BASE_DIR/web#g" -e "s#@LOG_DIR@#$BASE_DIR/log#g" -e "s#$BASE_DIR/app#$BASE_DIR/app#g" -e "s#@PHP_BIN@#/usr/bin/php#g" -e "s#@OS_KALTURA_USER@#kaltura#g" -e "s#@BASE_DIR@#$BASE_DIR#" -e "s#@APP_DIR@#$BASE_DIR/app#g" -e "s#@DWH_DIR@#$BASE_DIR/dwh#g" -e "s#@EVENTS_LOGS_DIR@#$BASE_DIR/web/logs#g" -e "s#@TMP_DIR@#$BASE_DIR/tmp#g" -e "s#@APACHE_SERVICE@#apache2#g" -e "s#@KALTURA_VIRTUAL_HOST_PORT@#$KALTURA_VIRTUAL_HOST_PORT#g" -e "s#@BIN_DIR@#$BASE_DIR/bin#g" -e "s#@KALTURA_VERSION@#$KALTURA_VERSION#g" -e "s#@SPHINX_SERVER@#$SPHINX_SERVER#g" -e "s#@IMAGE_MAGICK_BIN_DIR@#/usr/bin#g" -e "s#@CURL_BIN_DIR@#/usr/bin#g" -e "s@^\(bin_path_mediainfo\).*@\1=/usr/bin/mediainfo@g" -e "s#@CONTACT_URL@#$CONTACT_URL#g" -e "s#@ENVIRONMENT_NAME@#$ENVIRONMENT_NAME#g" -e "s#@BEGINNERS_TUTORIAL_URL@#$BEGINNERS_TUTORIAL_URL#g" -e "s#@BEGINNERS_TUTORIAL_URL@#$BEGINNERS_TUTORIAL_URL#g" -e "s#@QUICK_START_GUIDE_URL@#$QUICK_START_GUIDE_URL#g" -e "s#@FORUMS_URLS@#$FORUMS_URLS#g" -e "s#@CONTACT_PHONE_NUMBER@#$CONTACT_PHONE_NUMBER#g" -e "s#@UNSUBSCRIBE_EMAIL_URL@#$SERVICE_URL/index.php/extwidget/blockMail?e=#g" -e "s#@UICONF_TAB_ACCESS@#SYSTEM_ADMIN_BATCH_CONTROL#g"  -e "s#@EVENTS_FETCH_METHOD@#local#g" -e "s#@HTML5_VER@#$HTML5_VER#g" -e "s#@MONIT_PASSWD@#$DB1_PASS#g" -e "s#@VOD_PACKAGER_HOST@#$VOD_PACKAGER_HOST#g" -e "s#@VOD_PACKAGER_PORT@#$VOD_PACKAGER_PORT#g" -e "s#@IP_RANGE@#$IP_RANGE#g" -i $CONF_FILE
+        done
 
 
-	# gen secrets
-	ADMIN_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@#$%^*()_+-=" | head -c20`
-	HASHED_ADMIN_SECRET=`echo $ADMIN_SECRET|md5sum`
-	ADMIN_SECRET=`echo $HASHED_ADMIN_SECRET|awk -F " " '{print $1}'`
-
-	ADMIN_CONSOLE_PARTNER_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@#$%^*()_+-=" | head -c20`
-	HASHED_ADMIN_CONSOLE_PARTNER_SECRET=`echo $ADMIN_CONSOLE_PARTNER_SECRET|md5sum`
-	ADMIN_CONSOLE_PARTNER_SECRET=`echo $HASHED_ADMIN_CONSOLE_PARTNER_SECRET|awk -F " " '{print $1}'`
-
-	MONITOR_PARTNER_ADMIN_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c20`
-	HASHED_MONITOR_PARTNER_ADMIN_SECRET=`echo $HASHED_MONITOR_PARTNER_ADMIN_SECRET | md5sum`
-	MONITOR_PARTNER_ADMIN_SECRET=`echo $HASHED_MONITOR_PARTNER_ADMIN_SECRET | awk -F " " '{print $1}'` 
-
-	MONITOR_PARTNER_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c20`
-	HASHED_MONITOR_PARTNER_SECRET=`echo $HASHED_MONITOR_PARTNER_SECRET | md5sum`
-	MONITOR_PARTNER_SECRET=`echo $HASHED_MONITOR_PARTNER_SECRET | awk -F " " '{print $1}'` 
-
-	PARTNER_ZERO_ADMIN_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c20`
-	HASHED_PARTNER_ZERO_ADMIN_SECRET=`echo $PARTNER_ZERO_ADMIN_SECRET|md5sum`
-	PARTNER_ZERO_ADMIN_SECRET=`echo $HASHED_PARTNER_ZERO_ADMIN_SECRET|awk -F " " '{print $1}'`
-
-	PARTNER_ZERO_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c20`
-	HASHED_PARTNER_ZERO_SECRET=`echo $PARTNER_ZERO_SECRET|md5sum`
-	PARTNER_ZERO_SECRET=`echo $HASHED_PARTNER_ZERO_SECRET|awk -F " " '{print $1}'`
+        # these two have passwds in them.
+        chown $KALTURA_USER.$APACHE_USER $BASE_DIR/app/configurations/system.ini $BASE_DIR/app/configurations/db.ini
+        chmod 640 $BASE_DIR/app/configurations/system.ini $BASE_DIR/app/configurations/db.ini
 
 
-	BATCH_PARTNER_ADMIN_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c20`
-	HASHED_BATCH_PARTNER_ADMIN_SECRET=`echo $BATCH_PARTNER_ADMIN_SECRET|md5sum`
-	BATCH_PARTNER_ADMIN_SECRET=`echo $HASHED_BATCH_PARTNER_ADMIN_SECRET|awk -F " " '{print $1}'`
+        # gen secrets
+        ADMIN_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@#$%^*()_+-=" | head -c20`
+        HASHED_ADMIN_SECRET=`echo $ADMIN_SECRET|md5sum`
+        ADMIN_SECRET=`echo $HASHED_ADMIN_SECRET|awk -F " " '{print $1}'`
 
-	BATCH_PARTNER_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c20`
-	HASHED_BATCH_PARTNER_SECRET=`echo $BATCH_PARTNER_SECRET|md5sum`
-	BATCH_PARTNER_SECRET=`echo $HASHED_BATCH_PARTNER_SECRET|awk -F " " '{print $1}'`
+        ADMIN_CONSOLE_PARTNER_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@#$%^*()_+-=" | head -c20`
+        HASHED_ADMIN_CONSOLE_PARTNER_SECRET=`echo $ADMIN_CONSOLE_PARTNER_SECRET|md5sum`
+        ADMIN_CONSOLE_PARTNER_SECRET=`echo $HASHED_ADMIN_CONSOLE_PARTNER_SECRET|awk -F " " '{print $1}'`
 
-	MEDIA_PARTNER_ADMIN_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c20`
-	HASHED_MEDIA_PARTNER_ADMIN_SECRET=`echo $MEDIA_PARTNER_ADMIN_SECRET|md5sum`
-	MEDIA_PARTNER_ADMIN_SECRET=`echo $HASHED_MEDIA_PARTNER_ADMIN_SECRET|awk -F " " '{print $1}'`
+        MONITOR_PARTNER_ADMIN_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c20`
+        HASHED_MONITOR_PARTNER_ADMIN_SECRET=`echo $HASHED_MONITOR_PARTNER_ADMIN_SECRET | md5sum`
+        MONITOR_PARTNER_ADMIN_SECRET=`echo $HASHED_MONITOR_PARTNER_ADMIN_SECRET | awk -F " " '{print $1}'` 
 
-	MEDIA_PARTNER_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c20`
-	HASHED_MEDIA_PARTNER_SECRET=`echo $MEDIA_PARTNER_SECRET|md5sum`
-	MEDIA_PARTNER_SECRET=`echo $HASHED_MEDIA_PARTNER_SECRET|awk -F " " '{print $1}'`
+        MONITOR_PARTNER_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c20`
+        HASHED_MONITOR_PARTNER_SECRET=`echo $HASHED_MONITOR_PARTNER_SECRET | md5sum`
+        MONITOR_PARTNER_SECRET=`echo $HASHED_MONITOR_PARTNER_SECRET | awk -F " " '{print $1}'` 
 
-	TEMPLATE_PARTNER_ADMIN_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c20`
-	HASHED_TEMPLATE_PARTNER_ADMIN_SECRET=`echo $TEMPLATE_PARTNER_ADMIN_SECRET|md5sum`
-	TEMPLATE_PARTNER_ADMIN_SECRET=`echo $HASHED_TEMPLATE_PARTNER_ADMIN_SECRET|awk -F " " '{print $1}'`
-	TEMPLATE_PARTNER_ADMIN_PASSWORD="0+`< /dev/urandom tr -dc "A-Za-z0-9_=@%$" | head -c8`=*1"
+        PARTNER_ZERO_ADMIN_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c20`
+        HASHED_PARTNER_ZERO_ADMIN_SECRET=`echo $PARTNER_ZERO_ADMIN_SECRET|md5sum`
+        PARTNER_ZERO_ADMIN_SECRET=`echo $HASHED_PARTNER_ZERO_ADMIN_SECRET|awk -F " " '{print $1}'`
 
-	TEMPLATE_PARTNER_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c20`
-	HASHED_TEMPLATE_PARTNER_SECRET=`echo $TEMPLATE_PARTNER_SECRET|md5sum`
-	TEMPLATE_PARTNER_SECRET=`echo $HASHED_TEMPLATE_PARTNER_SECRET|awk -F " " '{print $1}'`
-
-	HOSTED_PAGES_PARTNER_ADMIN_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c20`
-	HASHED_HOSTED_PAGES_PARTNER_ADMIN_SECRET=`echo $HOSTED_PAGES_PARTNER_ADMIN_SECRET|md5sum`
-	HOSTED_PAGES_PARTNER_ADMIN_SECRET=`echo $HASHED_HOSTED_PAGES_PARTNER_ADMIN_SECRET|awk -F " " '{print $1}'`
-
-	HOSTED_PAGES_PARTNER_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c20`
-	HASHED_HOSTED_PAGES_PARTNER_SECRET=`echo $HOSTED_PAGES_PARTNER_SECRET|md5sum`
-	HOSTED_PAGES_PARTNER_SECRET=`echo $HASHED_HOSTED_PAGES_PARTNER_SECRET|awk -F " " '{print $1}'`
-
-	PLAY_PARTNER_ADMIN_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c20`
-	HASHED_PLAY_PARTNER_ADMIN_SECRET=`echo $PLAY_PARTNER_ADMIN_SECRET|md5sum`
-	PLAY_PARTNER_ADMIN_SECRET=`echo $HASHED_PLAY_PARTNER_ADMIN_SECRET|awk -F " " '{print $1}'`
-
-	PLAY_PARTNER_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c20`
-	HASHED_PLAY_PARTNER_SECRET=`echo $PLAY_PARTNER_SECRET|md5sum`
-	PLAY_PARTNER_SECRET=`echo $HASHED_PLAY_PARTNER_SECRET=|awk -F " " '{print $1}'`
+        PARTNER_ZERO_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c20`
+        HASHED_PARTNER_ZERO_SECRET=`echo $PARTNER_ZERO_SECRET|md5sum`
+        PARTNER_ZERO_SECRET=`echo $HASHED_PARTNER_ZERO_SECRET|awk -F " " '{print $1}'`
 
 
-	# SQL statement files tokens:
-	for TMPL in `find $BASE_DIR/app/deployment/base/scripts/init_content/ -name "*template*"`;do
-		DEST_FILE=`echo $TMPL | sed 's@\(.*\)\.template\(.*\)@\1\2@'`
-		cp  $TMPL $DEST_FILE
-		sed -e "s#@WEB_DIR@#$BASE_DIR/web#g" -e "s#@TEMPLATE_PARTNER_ADMIN_SECRET@#$ADMIN_SECRET#g" -e "s#@ADMIN_CONSOLE_PARTNER_ADMIN_SECRET@#$ADMIN_SECRET#g" -e "s#@MONITOR_PARTNER_ADMIN_SECRET@#$MONITOR_PARTNER_ADMIN_SECRET#g" -e "s#@SERVICE_URL@#$SERVICE_URL#g" -e "s#@ADMIN_CONSOLE_ADMIN_MAIL@#$ADMIN_CONSOLE_ADMIN_MAIL#g" -e "s#@MONITOR_PARTNER_SECRET@#$MONITOR_PARTNER_SECRET#g" -e "s#@PARTNER_ZERO_ADMIN_SECRET@#$PARTNER_ZERO_ADMIN_SECRET#g" -e "s#@BATCH_PARTNER_ADMIN_SECRET@#$BATCH_PARTNER_ADMIN_SECRET#g" -e "s#@MEDIA_PARTNER_ADMIN_SECRET@#$MEDIA_PARTNER_ADMIN_SECRET#g" -e "s#@TEMPLATE_PARTNER_ADMIN_SECRET@#$TEMPLATE_PARTNER_ADMIN_SECRET#g" -e "s#@HOSTED_PAGES_PARTNER_ADMIN_SECRET@#$HOSTED_PAGES_PARTNER_ADMIN_SECRET#g" -e "s#@STORAGE_BASE_DIR@#$BASE_DIR/web#g" -e "s#@DELIVERY_HTTP_BASE_URL@#https://dontknow.com#g" -e "s#@DELIVERY_RTMP_BASE_URL@#rtmp://reallydontknow.com#g" -e "s#@DELIVERY_ISS_BASE_URL@#https://honesttogodihavenoidea.com#g" -e "s/@ADMIN_CONSOLE_PASSWORD@/$ADMIN_CONSOLE_PASSWORD/g"  -e "s#@WWW_HOST@#$KALTURA_FULL_VIRTUAL_HOST_NAME#g" -e "s/@PLAY_PARTNER_ADMIN_SECRET@/$PLAY_PARTNER_ADMIN_SECRET/g"   -e "s#@TEMPLATE_PARTNER_ADMIN_PASSWORD@#$TEMPLATE_PARTNER_ADMIN_PASSWORD#g" -e "s#@PARTNER_ZERO_SECRET@#$PARTNER_ZERO_SECRET#g" -e "s#@BATCH_PARTNER_SECRET@#$BATCH_PARTNER_SECRET#g" -e "s#@ADMIN_CONSOLE_PARTNER_SECRET@#$ADMIN_CONSOLE_PARTNER_SECRET#g" -e "s#@HOSTED_PAGES_PARTNER_SECRET@#$HOSTED_PAGES_PARTNER_SECRER#g" -e "s#@MEDIA_PARTNER_SECRET@#$MEDIA_PARTNER_SECRET#g" -e "s#@PLAY_PARTNER_SECRET@#$PLAY_PARTNER_SECRET#g" -e "s#@TEMPLATE_PARTNER_SECRET@#$TEMPLATE_PARTNER_SECRET#g"  -e "s#@VOD_PACKAGER_HOST@#$VOD_PACKAGER_HOST#g" -e "s#@VOD_PACKAGER_PORT@#$VOD_PACKAGER_PORT#g" -e "s#@IP_RANGE@#$IP_RANGE#g" -i $DEST_FILE
-	done
+        BATCH_PARTNER_ADMIN_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c20`
+        HASHED_BATCH_PARTNER_ADMIN_SECRET=`echo $BATCH_PARTNER_ADMIN_SECRET|md5sum`
+        BATCH_PARTNER_ADMIN_SECRET=`echo $HASHED_BATCH_PARTNER_ADMIN_SECRET|awk -F " " '{print $1}'`
+
+        BATCH_PARTNER_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c20`
+        HASHED_BATCH_PARTNER_SECRET=`echo $BATCH_PARTNER_SECRET|md5sum`
+        BATCH_PARTNER_SECRET=`echo $HASHED_BATCH_PARTNER_SECRET|awk -F " " '{print $1}'`
+
+        MEDIA_PARTNER_ADMIN_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c20`
+        HASHED_MEDIA_PARTNER_ADMIN_SECRET=`echo $MEDIA_PARTNER_ADMIN_SECRET|md5sum`
+        MEDIA_PARTNER_ADMIN_SECRET=`echo $HASHED_MEDIA_PARTNER_ADMIN_SECRET|awk -F " " '{print $1}'`
+
+        MEDIA_PARTNER_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c20`
+        HASHED_MEDIA_PARTNER_SECRET=`echo $MEDIA_PARTNER_SECRET|md5sum`
+        MEDIA_PARTNER_SECRET=`echo $HASHED_MEDIA_PARTNER_SECRET|awk -F " " '{print $1}'`
+
+        TEMPLATE_PARTNER_ADMIN_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c20`
+        HASHED_TEMPLATE_PARTNER_ADMIN_SECRET=`echo $TEMPLATE_PARTNER_ADMIN_SECRET|md5sum`
+        TEMPLATE_PARTNER_ADMIN_SECRET=`echo $HASHED_TEMPLATE_PARTNER_ADMIN_SECRET|awk -F " " '{print $1}'`
+        TEMPLATE_PARTNER_ADMIN_PASSWORD="0+`< /dev/urandom tr -dc "A-Za-z0-9_=@%$" | head -c8`=*1"
+
+        TEMPLATE_PARTNER_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c20`
+        HASHED_TEMPLATE_PARTNER_SECRET=`echo $TEMPLATE_PARTNER_SECRET|md5sum`
+        TEMPLATE_PARTNER_SECRET=`echo $HASHED_TEMPLATE_PARTNER_SECRET|awk -F " " '{print $1}'`
+
+        HOSTED_PAGES_PARTNER_ADMIN_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c20`
+        HASHED_HOSTED_PAGES_PARTNER_ADMIN_SECRET=`echo $HOSTED_PAGES_PARTNER_ADMIN_SECRET|md5sum`
+        HOSTED_PAGES_PARTNER_ADMIN_SECRET=`echo $HASHED_HOSTED_PAGES_PARTNER_ADMIN_SECRET|awk -F " " '{print $1}'`
+
+        HOSTED_PAGES_PARTNER_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c20`
+        HASHED_HOSTED_PAGES_PARTNER_SECRET=`echo $HOSTED_PAGES_PARTNER_SECRET|md5sum`
+        HOSTED_PAGES_PARTNER_SECRET=`echo $HASHED_HOSTED_PAGES_PARTNER_SECRET|awk -F " " '{print $1}'`
+
+        PLAY_PARTNER_ADMIN_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c20`
+        HASHED_PLAY_PARTNER_ADMIN_SECRET=`echo $PLAY_PARTNER_ADMIN_SECRET|md5sum`
+        PLAY_PARTNER_ADMIN_SECRET=`echo $HASHED_PLAY_PARTNER_ADMIN_SECRET|awk -F " " '{print $1}'`
+
+        PLAY_PARTNER_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c20`
+        HASHED_PLAY_PARTNER_SECRET=`echo $PLAY_PARTNER_SECRET|md5sum`
+        PLAY_PARTNER_SECRET=`echo $HASHED_PLAY_PARTNER_SECRET=|awk -F " " '{print $1}'`
 
 
-	CONFS=`find $BASE_DIR/app/deployment/base/scripts/init_data/ -name "*template*"`
-	CONFS="$CONFS $BASE_DIR/app/tests/monitoring/config.ini"
-	for TMPL in $CONFS;do
-		DEST_FILE=`echo $TMPL | sed 's@\(.*\)\.template\(.*\)@\1\2@'`
-		if `echo $TMPL|grep -q template`;then
-			cp $TMPL $DEST_FILE
-		fi
-		sed -e "s#@ENVIRONMENT_PROTOCOL@#$PROTOCOL#g" -e "s#@WEB_DIR@#$BASE_DIR/web#g" -e "s#@TEMPLATE_PARTNER_ADMIN_SECRET@#$ADMIN_SECRET#g" -e "s#@ADMIN_CONSOLE_PARTNER_ADMIN_SECRET@#$ADMIN_SECRET#g" -e "s#@MONITOR_PARTNER_ADMIN_SECRET@#$MONITOR_PARTNER_ADMIN_SECRET#g" -e "s#@SERVICE_URL@#$SERVICE_URL#g" -e "s#@ADMIN_CONSOLE_ADMIN_MAIL@#$ADMIN_CONSOLE_ADMIN_MAIL#g" -e "s#@MONITOR_PARTNER_SECRET@#$MONITOR_PARTNER_SECRET#g" -e "s#@PARTNER_ZERO_ADMIN_SECRET@#$PARTNER_ZERO_ADMIN_SECRET#g" -e "s#@BATCH_PARTNER_ADMIN_SECRET@#$BATCH_PARTNER_ADMIN_SECRET#g" -e "s#@MEDIA_PARTNER_ADMIN_SECRET@#$MEDIA_PARTNER_ADMIN_SECRET#g" -e "s#@TEMPLATE_PARTNER_ADMIN_SECRET@#$TEMPLATE_PARTNER_ADMIN_SECRET#g" -e "s#@KALTURA_VERSION@#$KALTURA_VERSION#g" -e "s#@HOSTED_PAGES_PARTNER_ADMIN_SECRET@#$HOSTED_PAGES_PARTNER_ADMIN_SECRET#g" -e "s#@STORAGE_BASE_DIR@#$BASE_DIR/web#g" -e "s#@DELIVERY_HTTP_BASE_URL@#https://dontknow.com#g" -e "s#@DELIVERY_RTMP_BASE_URL@#rtmp://reallydontknow.com#g" -e "s#@DELIVERY_ISS_BASE_URL@#https://honesttogodihavenoidea.com#g"  -e "s/@ADMIN_CONSOLE_PASSWORD@/$ADMIN_CONSOLE_PASSWORD/g"  -e "s/@PLAY_PARTNER_ADMIN_SECRET@/$PLAY_PARTNER_ADMIN_SECRET/g" -e "s#@WWW_HOST@#$KALTURA_FULL_VIRTUAL_HOST_NAME#g" -e "s#@TEMPLATE_PARTNER_ADMIN_PASSWORD@#$TEMPLATE_PARTNER_ADMIN_PASSWORD#g" -e "s#@HOSTED_PAGES_PARTNER_SECRET@#$HOSTED_PAGES_PARTNER_SECRER#g" -e "s#@MEDIA_PARTNER_SECRET@#$MEDIA_PARTNER_SECRET#g" -e "s#@PLAY_PARTNER_SECRET@#$PLAY_PARTNER_SECRET#g" -e "s#@TEMPLATE_PARTNER_SECRET@#$TEMPLATE_PARTNER_SECRET#g" -e "s#@PARTNER_ZERO_SECRET@#$PARTNER_ZERO_SECRET#g" -e "s#@BATCH_PARTNER_SECRET@#$BATCH_PARTNER_SECRET#g" -e "s#@ADMIN_CONSOLE_PARTNER_SECRET@#$ADMIN_CONSOLE_PARTNER_SECRET#g"  -e "s#@VOD_PACKAGER_HOST@#$VOD_PACKAGER_HOST#g" -e "s#@VOD_PACKAGER_PORT@#$VOD_PACKAGER_PORT#g" -e "s#@IP_RANGE@#$IP_RANGE#g" -i $DEST_FILE 
-	done
-	if [ -f "$KALTURA_PREFIX/app/configurations/system.ini" ];then
-		mkdir -p /etc/kaltura.d
-		ln -sf $KALTURA_PREFIX/app/configurations/system.ini /etc/kaltura.d/system.ini
-	fi
-
-	#db_input critical 'kaltura-base/generating_client_libs' || true
-	php $BASE_DIR/app/generator/generate.php >> $BASE_DIR/log/generate.php.log 2>&1
-
-	set +e
+        # SQL statement files tokens:
+        for TMPL in `find $BASE_DIR/app/deployment/base/scripts/init_content/ -name "*template*"`;do
+                DEST_FILE=`echo $TMPL | sed 's@\(.*\)\.template\(.*\)@\1\2@'`
+                cp  $TMPL $DEST_FILE
+                sed -e "s#@WEB_DIR@#$BASE_DIR/web#g" -e "s#@TEMPLATE_PARTNER_ADMIN_SECRET@#$ADMIN_SECRET#g" -e "s#@ADMIN_CONSOLE_PARTNER_ADMIN_SECRET@#$ADMIN_SECRET#g" -e "s#@MONITOR_PARTNER_ADMIN_SECRET@#$MONITOR_PARTNER_ADMIN_SECRET#g" -e "s#@SERVICE_URL@#$SERVICE_URL#g" -e "s#@ADMIN_CONSOLE_ADMIN_MAIL@#$ADMIN_CONSOLE_ADMIN_MAIL#g" -e "s#@MONITOR_PARTNER_SECRET@#$MONITOR_PARTNER_SECRET#g" -e "s#@PARTNER_ZERO_ADMIN_SECRET@#$PARTNER_ZERO_ADMIN_SECRET#g" -e "s#@BATCH_PARTNER_ADMIN_SECRET@#$BATCH_PARTNER_ADMIN_SECRET#g" -e "s#@MEDIA_PARTNER_ADMIN_SECRET@#$MEDIA_PARTNER_ADMIN_SECRET#g" -e "s#@TEMPLATE_PARTNER_ADMIN_SECRET@#$TEMPLATE_PARTNER_ADMIN_SECRET#g" -e "s#@HOSTED_PAGES_PARTNER_ADMIN_SECRET@#$HOSTED_PAGES_PARTNER_ADMIN_SECRET#g" -e "s#@STORAGE_BASE_DIR@#$BASE_DIR/web#g" -e "s#@DELIVERY_HTTP_BASE_URL@#https://dontknow.com#g" -e "s#@DELIVERY_RTMP_BASE_URL@#rtmp://reallydontknow.com#g" -e "s#@DELIVERY_ISS_BASE_URL@#https://honesttogodihavenoidea.com#g" -e "s/@ADMIN_CONSOLE_PASSWORD@/$ADMIN_CONSOLE_PASSWORD/g"  -e "s#@WWW_HOST@#$KALTURA_FULL_VIRTUAL_HOST_NAME#g" -e "s/@PLAY_PARTNER_ADMIN_SECRET@/$PLAY_PARTNER_ADMIN_SECRET/g"   -e "s#@TEMPLATE_PARTNER_ADMIN_PASSWORD@#$TEMPLATE_PARTNER_ADMIN_PASSWORD#g" -e "s#@PARTNER_ZERO_SECRET@#$PARTNER_ZERO_SECRET#g" -e "s#@BATCH_PARTNER_SECRET@#$BATCH_PARTNER_SECRET#g" -e "s#@ADMIN_CONSOLE_PARTNER_SECRET@#$ADMIN_CONSOLE_PARTNER_SECRET#g" -e "s#@HOSTED_PAGES_PARTNER_SECRET@#$HOSTED_PAGES_PARTNER_SECRER#g" -e "s#@MEDIA_PARTNER_SECRET@#$MEDIA_PARTNER_SECRET#g" -e "s#@PLAY_PARTNER_SECRET@#$PLAY_PARTNER_SECRET#g" -e "s#@TEMPLATE_PARTNER_SECRET@#$TEMPLATE_PARTNER_SECRET#g"  -e "s#@VOD_PACKAGER_HOST@#$VOD_PACKAGER_HOST#g" -e "s#@VOD_PACKAGER_PORT@#$VOD_PACKAGER_PORT#g" -e "s#@IP_RANGE@#$IP_RANGE#g" -i $DEST_FILE
+        done
 
 
-	ln -sf $BASE_DIR/app/configurations/logrotate/kaltura_base /etc/logrotate.d/
-	ln -sf $BASE_DIR/app/configurations/logrotate/kaltura_api /etc/logrotate.d/
-	ln -sf $APP_DIR/configurations/php/kaltura.ini /etc/php5/mods-available/zz-kaltura.ini
-	touch  "$BASE_DIR/app/base-config.lock"
+        CONFS=`find $BASE_DIR/app/deployment/base/scripts/init_data/ -name "*template*"`
+        CONFS="$CONFS $BASE_DIR/app/tests/monitoring/config.ini"
+        for TMPL in $CONFS;do
+                DEST_FILE=`echo $TMPL | sed 's@\(.*\)\.template\(.*\)@\1\2@'`
+                if `echo $TMPL|grep -q template`;then
+                        cp $TMPL $DEST_FILE
+                fi
+                sed -e "s#@ENVIRONMENT_PROTOCOL@#$PROTOCOL#g" -e "s#@WEB_DIR@#$BASE_DIR/web#g" -e "s#@TEMPLATE_PARTNER_ADMIN_SECRET@#$ADMIN_SECRET#g" -e "s#@ADMIN_CONSOLE_PARTNER_ADMIN_SECRET@#$ADMIN_SECRET#g" -e "s#@MONITOR_PARTNER_ADMIN_SECRET@#$MONITOR_PARTNER_ADMIN_SECRET#g" -e "s#@SERVICE_URL@#$SERVICE_URL#g" -e "s#@ADMIN_CONSOLE_ADMIN_MAIL@#$ADMIN_CONSOLE_ADMIN_MAIL#g" -e "s#@MONITOR_PARTNER_SECRET@#$MONITOR_PARTNER_SECRET#g" -e "s#@PARTNER_ZERO_ADMIN_SECRET@#$PARTNER_ZERO_ADMIN_SECRET#g" -e "s#@BATCH_PARTNER_ADMIN_SECRET@#$BATCH_PARTNER_ADMIN_SECRET#g" -e "s#@MEDIA_PARTNER_ADMIN_SECRET@#$MEDIA_PARTNER_ADMIN_SECRET#g" -e "s#@TEMPLATE_PARTNER_ADMIN_SECRET@#$TEMPLATE_PARTNER_ADMIN_SECRET#g" -e "s#@KALTURA_VERSION@#$KALTURA_VERSION#g" -e "s#@HOSTED_PAGES_PARTNER_ADMIN_SECRET@#$HOSTED_PAGES_PARTNER_ADMIN_SECRET#g" -e "s#@STORAGE_BASE_DIR@#$BASE_DIR/web#g" -e "s#@DELIVERY_HTTP_BASE_URL@#https://dontknow.com#g" -e "s#@DELIVERY_RTMP_BASE_URL@#rtmp://reallydontknow.com#g" -e "s#@DELIVERY_ISS_BASE_URL@#https://honesttogodihavenoidea.com#g"  -e "s/@ADMIN_CONSOLE_PASSWORD@/$ADMIN_CONSOLE_PASSWORD/g"  -e "s/@PLAY_PARTNER_ADMIN_SECRET@/$PLAY_PARTNER_ADMIN_SECRET/g" -e "s#@WWW_HOST@#$KALTURA_FULL_VIRTUAL_HOST_NAME#g" -e "s#@TEMPLATE_PARTNER_ADMIN_PASSWORD@#$TEMPLATE_PARTNER_ADMIN_PASSWORD#g" -e "s#@HOSTED_PAGES_PARTNER_SECRET@#$HOSTED_PAGES_PARTNER_SECRER#g" -e "s#@MEDIA_PARTNER_SECRET@#$MEDIA_PARTNER_SECRET#g" -e "s#@PLAY_PARTNER_SECRET@#$PLAY_PARTNER_SECRET#g" -e "s#@TEMPLATE_PARTNER_SECRET@#$TEMPLATE_PARTNER_SECRET#g" -e "s#@PARTNER_ZERO_SECRET@#$PARTNER_ZERO_SECRET#g" -e "s#@BATCH_PARTNER_SECRET@#$BATCH_PARTNER_SECRET#g" -e "s#@ADMIN_CONSOLE_PARTNER_SECRET@#$ADMIN_CONSOLE_PARTNER_SECRET#g"  -e "s#@VOD_PACKAGER_HOST@#$VOD_PACKAGER_HOST#g" -e "s#@VOD_PACKAGER_PORT@#$VOD_PACKAGER_PORT#g" -e "s#@IP_RANGE@#$IP_RANGE#g" -i $DEST_FILE 
+        done
+        if [ -f "$KALTURA_PREFIX/app/configurations/system.ini" ];then
+                mkdir -p /etc/kaltura.d
+                ln -sf $KALTURA_PREFIX/app/configurations/system.ini /etc/kaltura.d/system.ini
+        fi
 
-	find $BASE_DIR/app/cache/ $BASE_DIR/log -type d -exec chmod 775 {} \; 
-	find $BASE_DIR/app/cache/ $BASE_DIR/log -type f -exec chmod 664 {} \; 
-	chown -R $KALTURA_USER.$APACHE_USER $BASE_DIR/app/cache/ $BASE_DIR/log
-	chmod 775 $BASE_DIR/web/content
-	if [ -d /usr/lib/red5/webapps/oflaDemo ];then
-		ln -sf $BASE_DIR/web/content/webcam /usr/lib/red5/webapps/oflaDemo/streams
-	fi
-	KMC_PATH=`ls -ld $BASE_DIR/web/flash/kmc/v* 2>/dev/null|awk -F " " '{print $NF}' |tail -1`
-	KMC_LOGIN_PATH=`ls -ld $BASE_DIR/web/flash/kmc/login/v* 2>/dev/null|awk -F " " '{print $NF}' |tail -1`
-	if [ -d "$KMC_PATH" -a -d "$KMC_LOGIN_PATH" ];then
-		KMC_VERSION=`basename $KMC_PATH`
-		KMC_LOGIN_VERSION=`basename $KMC_LOGIN_PATH`
-		sed -i "s#\(@KMC_VERSION@\)#$KMC_VERSION#g" $BASE_DIR/bin/sanity_config.ini
-		sed -i "s#\(@KMC_LOGIN_VERSION@\)#$KMC_LOGIN_VERSION#g" $BASE_DIR/bin/sanity_config.ini
-	fi
+        #db_input critical 'kaltura-base/generating_client_libs' || true
+        php $BASE_DIR/app/generator/generate.php >> $BASE_DIR/log/generate.php.log 2>&1
+
+        set +e
 
 
-	#echo -e "${BRIGHT_BLUE}Configuration of $KALTURA_VERSION finished successfully!${NORMAL}"
-	send_install_becon `basename $0` $ZONE install_success 0
-	echo "
+        ln -sf $BASE_DIR/app/configurations/logrotate/kaltura_base /etc/logrotate.d/
+        ln -sf $BASE_DIR/app/configurations/logrotate/kaltura_api /etc/logrotate.d/
+        ln -sf $APP_DIR/configurations/php/kaltura.ini /etc/php5/mods-available/zz-kaltura.ini
+        touch  "$BASE_DIR/app/base-config.lock"
+
+        find $BASE_DIR/app/cache/ $BASE_DIR/log -type d -exec chmod 775 {} \; 
+        find $BASE_DIR/app/cache/ $BASE_DIR/log -type f -exec chmod 664 {} \; 
+        chown -R $KALTURA_USER.$APACHE_USER $BASE_DIR/app/cache/ $BASE_DIR/log
+        chmod 775 $BASE_DIR/web/content
+        if [ -d /usr/lib/red5/webapps/oflaDemo ];then
+                ln -sf $BASE_DIR/web/content/webcam /usr/lib/red5/webapps/oflaDemo/streams
+        fi
+        KMC_PATH=`ls -ld $BASE_DIR/web/flash/kmc/v* 2>/dev/null|awk -F " " '{print $NF}' |tail -1`
+        KMC_LOGIN_PATH=`ls -ld $BASE_DIR/web/flash/kmc/login/v* 2>/dev/null|awk -F " " '{print $NF}' |tail -1`
+        if [ -d "$KMC_PATH" -a -d "$KMC_LOGIN_PATH" ];then
+                KMC_VERSION=`basename $KMC_PATH`
+                KMC_LOGIN_VERSION=`basename $KMC_LOGIN_PATH`
+                sed -i "s#\(@KMC_VERSION@\)#$KMC_VERSION#g" $BASE_DIR/bin/sanity_config.ini
+                sed -i "s#\(@KMC_LOGIN_VERSION@\)#$KMC_LOGIN_VERSION#g" $BASE_DIR/bin/sanity_config.ini
+        fi
+
+
+        #echo -e "${BRIGHT_BLUE}Configuration of $KALTURA_VERSION finished successfully!${NORMAL}"
+        send_install_becon `basename $0` $ZONE install_success 0
+        echo "
 SERVICE_URL=$SERVICE_URL
 SPHINX_HOST=$SPHINX_SERVER1
 DB1_PORT=$DB1_PORT
@@ -395,40 +395,41 @@ SUPER_USER=$SUPER_USER
 SUPER_USER_PASSWD=\"$SUPER_USER_PASSWD\"
 KALTURA_VIRTUAL_HOST_NAME=$KALTURA_FULL_VIRTUAL_HOST_NAME
 RED5_HOST=$RED5_HOST">> $BASE_DIR/app/configurations/system.ini
-	
+
 
 
 fi
 
 if [ "$1" = "upgrade" ];then
-	if [ -r "$KALTURA_PREFIX/app/configurations/local.ini" -a -r "$KALTURA_PREFIX/app/configurations/base.ini" ];then
-		sed -i "s@^\(kaltura_version\).*@\1 = $KALTURA_VERSION@g" $KALTURA_PREFIX/app/configurations/local.ini
-		echo "Regenarating client libs.. this will take up to 2 minutes to complete."
-		if service apache2 status;then
-			service apache2 stop
-		fi
-		# this is read by kaltura-sphinx-schema-update.sh to determine rather or not to run
-		touch $KALTURA_PREFIX/app/configurations/sphinx_schema_update
-		rm -rf $KALTURA_PREFIX/app/cache/*
-		php $KALTURA_PREFIX/app/generator/generate.php
-		find $KALTURA_PREFIX/app/cache/ $KALTURA_PREFIX/log -type d -exec chmod 775 {} \;
-		find $KALTURA_PREFIX/app/cache/ $KALTURA_PREFIX/log -type f -exec chmod 664 {} \;
-		chown -R $KALTURA_USER.$APACHE_USER $KALTURA_PREFIX/app/cache/ $KALTURA_PREFIX/log
-		chmod 775 $KALTURA_PREFIX/web/content
+        if [ -r "$KALTURA_PREFIX/app/configurations/local.ini" -a -r "$KALTURA_PREFIX/app/configurations/base.ini" ];then
+                sed -i "s@^\(kaltura_version\).*@\1 = $KALTURA_VERSION@g" $KALTURA_PREFIX/app/configurations/local.ini
+                echo "Regenarating client libs.. this will take up to 2 minutes to complete."
+                if service apache2 status;then
+                        service apache2 stop
+                fi
+                # this is read by kaltura-sphinx-schema-update.sh to determine rather or not to run
+                touch $KALTURA_PREFIX/app/configurations/sphinx_schema_update
+                rm -rf $KALTURA_PREFIX/app/cache/*
+                php $KALTURA_PREFIX/app/generator/generate.php
+                find $KALTURA_PREFIX/app/cache/ $KALTURA_PREFIX/log -type d -exec chmod 775 {} \;
+                find $KALTURA_PREFIX/app/cache/ $KALTURA_PREFIX/log -type f -exec chmod 664 {} \;
+                chown -R $KALTURA_USER.$APACHE_USER $KALTURA_PREFIX/app/cache/ $KALTURA_PREFIX/log
+                chmod 775 $KALTURA_PREFIX/web/content
 
-		if ! service apache2 status;then
-			service apache2 start
-		fi
+                if ! service apache2 status;then
+                        service apache2 start
+                fi
 
-		# we now need CREATE and DROP priv for 'kaltura' on kaltura.*
-		if [ -r /etc/kaltura.d/system.ini ];then
-			. /etc/kaltura.d/system.ini
-			echo "GRANT INSERT,UPDATE,DELETE,SELECT,ALTER,DROP,CREATE ON kaltura.* TO 'kaltura'@'%';FLUSH PRIVILEGES;"|mysql -h$DB1_HOST -u $SUPER_USER -p$SUPER_USER_PASSWD -P$DB1_PORT
-		fi
-		php $KALTURA_PREFIX/app/deployment/updates/update.php -i -d >> /opt/kaltura/log/kalt_up.log 2>&1
-		php $KALTURA_PREFIX/app/deployment/updates/update.php -i -s >> /opt/kaltura/log/kalt_up.log 2>&1
-		php $KALTURA_PREFIX/app/deployment/base/scripts/installPlugins.php >> /opt/kaltura/log/kalt_up.log 2>&1
+                # we now need CREATE and DROP priv for 'kaltura' on kaltura.*
+                if [ -r /etc/kaltura.d/system.ini ];then
+                        . /etc/kaltura.d/system.ini
+                        echo "GRANT INSERT,UPDATE,DELETE,SELECT,ALTER,DROP,CREATE ON kaltura.* TO 'kaltura'@'%';FLUSH PRIVILEGES;"|mysql -h$DB1_HOST -u $SUPER_USER -p$SUPER_USER_PASSWD -P$DB1_PORT
+                fi
+                php $KALTURA_PREFIX/app/deployment/updates/update.php -i -d >> /opt/kaltura/log/kalt_up.log 2>&1
+                php $KALTURA_PREFIX/app/deployment/updates/update.php -i -s >> /opt/kaltura/log/kalt_up.log 2>&1
+                php $KALTURA_PREFIX/app/deployment/base/scripts/installPlugins.php >> /opt/kaltura/log/kalt_up.log 2>&1
 
-	fi
+        fi
 
 fi
+
