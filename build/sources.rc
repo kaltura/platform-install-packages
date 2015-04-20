@@ -217,7 +217,7 @@ KRECORD_RPM_NAME="kaltura-krecord"
 
 # Kaltura KCW
 # we bundle a few vers at each release:
-KCW_VERSIONS="v2.1.6.7 v2.1.5 v2.2.1 v2.2.3 v2.1.4 v1.5.4 v2.1.2 v2.1.6.3 v2.2.4"
+KCW_VERSION="v2.2.4"
 KCW_UICONF_VERSIONS="v2.1.4 v2.1.5"
 KCW_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/flash/kcw"
 KCW_UICONF_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalsource/uiconf/kaltura/kmc/kcw"

@@ -29,9 +29,7 @@ fi
 # remove left overs:
 rm -rf $SOURCE_PACKAGING_DIR/$KCW_RPM_NAME/*
 
-for KCW_VERSION in $KCW_VERSIONS;do
-	kaltura_svn export --force --quiet $KCW_URI/$KCW_VERSION $SOURCE_PACKAGING_DIR/$KCW_RPM_NAME/$KCW_VERSION 
-done
+kaltura_svn export --force --quiet $KCW_URI/$KCW_VERSION $SOURCE_PACKAGING_DIR/$KCW_RPM_NAME/$KCW_VERSION 
 
 for KCW_UICONF_VERSION in $KCW_UICONF_VERSIONS;do
 	kaltura_svn export --force --quiet $KCW_UICONF_URI/$KCW_UICONF_VERSION $SOURCE_PACKAGING_DIR/$KCW_RPM_NAME/uiconf/kaltura/kmc/kcw
