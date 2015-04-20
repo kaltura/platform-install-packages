@@ -75,6 +75,7 @@ binary-indep: install
 	sed -i "s@^\(params.ImageMagickCmd\)\s*=.*@\1=convert@" $(tree)/configurations/batch/batch.ini.template
 	sed -i "s@^\(params.mediaInfoCmd\)\s*=.*@\1=mediainfo@" $(tree)/configurations/batch/batch.ini.template
 	sed -i "s@^\(params.mencderCmd\)\s*=.*@\1=mencoder@" $(tree)/configurations/batch/batch.ini.template
+	tar zxf debian/entry_and_uiconf_templates.tar.gz -C $(KALTURA_PREFIX)/web/content 
 	mv $(tree)/* $(KALTURA_PREFIX)/app/
 	dh_install $(KALTURA_PREFIX)
 	dh_install etc/profile.d

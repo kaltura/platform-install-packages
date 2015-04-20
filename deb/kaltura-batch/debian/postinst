@@ -66,7 +66,7 @@ php5enmod zz-kaltura
 mkdir -p $LOG_DIR/batch 
 find $BASE_DIR/app/cache/ $BASE_DIR/log -type d -exec chmod 775 {} \; 
 find $BASE_DIR/app/cache/ $BASE_DIR/log -type f -exec chmod 664 {} \; 
-chown -R $KALTURA_USER.$APACHE_GROUP $BASE_DIR/app/cache/ $BASE_DIR/log
+chown -R $KALTURA_USER.$APACHE_GROUP $BASE_DIR/app/cache/ $BASE_DIR/log $WEB_DIR/content/entry
 
 if service apache2 status >/dev/null 2>&1;then
 	service apache2 reload
