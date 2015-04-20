@@ -10,6 +10,7 @@ HTML5LIB_VERSION ?= $(shell egrep '^HTML5LIB_LATEST_VERSION=' $(RC_FILE) | cut -
 HTML5_STUDIO_VERSION ?= $(shell egrep '^HTML5_APP_STUDIO_VERSION=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
 KMC_VERSION ?= v$(shell egrep '^KMC_MINUS_V_VERSION=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
 KMC_LOGIN_VERSION ?= v$(shell egrep '^KMC_LOGIN_MINUS_V_VERSION=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
+KDP3WRAPPER_VERSION ?=$(shell egrep '^KDP3WRAPPER_VERSION=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
 include ../includes/build-revision.mk
 archive := $(SOURCE_PACKAGING_DIR)/$(KALTURA_SERVER_VERSION).zip 
 tree := server-$(KALTURA_SERVER_VERSION)
@@ -60,6 +61,7 @@ binary-indep: install
 	sed -i "s#^;kmc_version = @KMC_VERSION@#kmc_version = $(KMC_VERSION)#g" $(tree)/configurations/local.template.ini
 	sed -i "s#^;html5_version = @HTML5LIB_VERSION@#html5_version = $(HTML5LIB_VERSION)#g" $(tree)/configurations/local.template.ini
 	sed -i "s#^;studio_version = @STUDIO_VERSION@#studio_version = $(HTML5_STUDIO_VERSION)#g" $(tree)/configurations/local.template.ini
+	sed -i "s#^;kdp3_wrapper_version = @KDP3_WRAPPER_VERSION@#kdp3_wrapper_version = $(KDP3WRAPPER_VERSION)#g" $(tree)/configurations/local.template.ini
 	sed -i "s#^bin_path_mediainfo = .*#bin_path_mediainfo = mediainfo#g" $(tree)/configurations/local.template.ini
 	sed -i "s#^;kmc_login_version = @KMC_LOGIN_VERSION@#kmc_login_version = $(KMC_LOGIN_VERSION)#g" $(tree)/configurations/local.template.ini
 	sed -i 's@^writers.\(.*\).filters.priority.priority\s*=\s*7@writers.\1.filters.priority.priority=4@g' $(tree)/configurations/logger.template.ini
