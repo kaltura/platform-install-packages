@@ -320,7 +320,7 @@ if $QUERY_COMMAND kaltura-batch >/dev/null 2>&1 || $QUERY_COMMAND kaltura-front 
 			echo "Testing mail sending" |mail -s "Kaltura sanity test email" mb-$HOSTNAME@kaltura.com
 			echo -e "${CYAN}Napping 30 seconds to allow mail to be sent out.. ${NORMAL}"
 			sleep 30
-			MSG=`grep mb-$HOSTNAME@kaltura.com /var/log/mail.log `
+			MSG=`grep mb-$HOSTNAME@kaltura.com $MAIL_LOG `
 			RC=$?
 			END=`date +%s.%N`
 			if [ $RC -ne 0 ];then
@@ -350,7 +350,7 @@ ${NORMAL}"
 			fi
 
 			START=`date +%s.%N`
-			OUTP=`php $DIRNAME/upload_test.php $SERVICE_URL $PARTNER_ID $PARTNER_SECRET $WEB_DIR/content/clientlibs/php5/TestCode/DemoVideo.flv 2>&1`
+			OUTP=`php $DIRNAME/upload_test.php $SERVICE_URL $PARTNER_ID $PARTNER_SECRET $WEB_DIR/content/templates/entry/data/kaltura_logo_animated_blue.flv 2>&1`
 			RC=$?
 			CLEANOUTPUT=`echo $OUTP|sed 's@"@@g'`
 			OUTP=`echo $CLEANOUTPUT|sed "s@'@@g"`

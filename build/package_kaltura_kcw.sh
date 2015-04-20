@@ -29,9 +29,7 @@ fi
 # remove left overs:
 rm -rf $SOURCE_PACKAGING_DIR/$KCW_RPM_NAME/*
 
-for KCW_VERSION in $KCW_VERSIONS;do
-	kaltura_svn export --force --quiet $KCW_URI/$KCW_VERSION $SOURCE_PACKAGING_DIR/$KCW_RPM_NAME/$KCW_VERSION 
-done
+kaltura_svn export --force --quiet $KCW_URI/$KCW_VERSION $SOURCE_PACKAGING_DIR/$KCW_RPM_NAME/$KCW_VERSION 
 
 for KCW_UICONF_VERSION in $KCW_UICONF_VERSIONS;do
 	kaltura_svn export --force --quiet $KCW_UICONF_URI/$KCW_UICONF_VERSION $SOURCE_PACKAGING_DIR/$KCW_RPM_NAME/uiconf/kaltura/kmc/kcw
@@ -43,8 +41,8 @@ cd $SOURCE_PACKAGING_DIR
 # flash things DO NOT need exec perms.
 find $KCW_RPM_NAME -type f -exec chmod -x {} \;
 
-tar jcf $RPM_SOURCES_DIR/$KCW_RPM_NAME.tar.bz2 $KCW_RPM_NAME
-echo "Packaged into $RPM_SOURCES_DIR/$KCW_RPM_NAME.tar.bz2"
+tar jcf $RPM_SOURCES_DIR/$KCW_RPM_NAME-$KCW_VERSION.tar.bz2 $KCW_RPM_NAME
+echo "Packaged into $RPM_SOURCES_DIR/$KCW_RPM_NAME-$KCW_VERSION.tar.bz2"
 if [ -x "`which rpmbuild 2>/dev/null`" ];then
 	rpmbuild -ba $RPM_SPECS_DIR/$KCW_RPM_NAME.spec
 fi
