@@ -1,0 +1,4 @@
+#!/bin/sh
+if [ "$1" = "configure" ];then
+	ln -sf /opt/kaltura/web/flash/kmc/uiconf/kaltura/kmc /opt/kaltura/web/content/uiconf/kaltura/kmc
+fi
