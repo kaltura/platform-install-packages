@@ -87,7 +87,7 @@ Please see: https://github.com/kaltura/nginx-vod-module for more info.
 %package debug
 Summary: debug version of nginx
 Group: System Environment/Daemons
-Requires: kaltura-nginx
+Requires: kaltura-nginx, kaltura-postinst
 %description debug
 Not stripped version of nginx built with the debugging log support.
 
