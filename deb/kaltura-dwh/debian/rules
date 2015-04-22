@@ -31,7 +31,9 @@ binary-indep: install
 	rm -rf $(KALTURA_PREFIX)
 	mkdir -p $(KALTURA_PREFIX)/dwh 
 	mkdir -p $(KALTURA_PREFIX)/web/logs
+	mv $(tree)/.kettle $(KALTURA_PREFIX)/dwh/
 	mv $(tree)/* $(KALTURA_PREFIX)/dwh/
+	chmod +x $(KALTURA_PREFIX)/dwh/etlsource/execute/*sh
 	dh_install $(KALTURA_PREFIX)
 	dh_gencontrol -u-v$(DEB_VERSION) 
 	dh_installdebconf

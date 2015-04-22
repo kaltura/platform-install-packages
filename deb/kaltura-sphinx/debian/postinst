@@ -2,8 +2,8 @@
 ldconfig
 # register service
 if [ "$1" = "configure" ];then
-	update-rc.d kaltura-sphinx defaults
-	update-rc.d kaltura-populate defaults
+	update-rc.d kaltura-sphinx defaults || true
+	update-rc.d kaltura-populate defaults || true
 fi
 
 KALTURA_FUNCTIONS_RC=/opt/kaltura/bin/kaltura-functions.rc

@@ -40,9 +40,10 @@ $(archive):
 
 $(tree): $(archive)
 	tar zxf $(archive) 
-	unzip -qo $(vod_module_archive) -d $(tree)
-	unzip -qo $(secure_token_module_archive) -d $(tree) 
-	unzip -qo $(akamai_token_validate_module_archive) -d $(tree)
+	unzip -o $(vod_module_archive) -d $(tree)
+	echo unzip -o $(vod_module_archive) -d $(tree)
+	unzip -o $(secure_token_module_archive) -d $(tree) 
+	unzip -o $(akamai_token_validate_module_archive) -d $(tree)
 
 config.status: $(tree) 
 	dh_testdir

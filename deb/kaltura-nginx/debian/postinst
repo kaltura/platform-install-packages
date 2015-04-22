@@ -17,21 +17,21 @@ if [ "$1" = "configure" ]; then
         VOD_PACKAGER_PORT=$RET
 
         db_get 'kaltura-nginx/kaltura_service_url'
-        if [ -z "$RET" ];then
-                db_get 'kaltura-base/service_url'
-                if [ -z "$RET" ];then
-                        db_set 'kaltura-nginx/kaltura_service_url' "`hostname`"
-                else
-                        db_set 'kaltura-nginx/kaltura_service_url' $RET
-                fi
-        fi
+        #if [ -z "$RET" ];then
+        #        db_get 'kaltura-base/service_url'
+        #        if [ -z "$RET" ];then
+        #                db_set 'kaltura-nginx/kaltura_service_url' "`hostname`"
+        #        else
+        #                db_set 'kaltura-nginx/kaltura_service_url' $RET
+        #        fi
+        #fi
         db_input critical 'kaltura-nginx/kaltura_service_url' || true
         db_go || true
         db_get 'kaltura-nginx/kaltura_service_url'
         WWW_HOST=$RET
 
         sed -e 's#@STATIC_FILES_PATH@#/opt/kaltura/nginx/static#g' -e "s#@VOD_PACKAGER_HOST@#$VOD_PACKAGER_HOST#g" -e "s#@VOD_PACKAGER_PORT@#$VOD_PACKAGER_PORT#g" -e "s#@LOG_DIR@#/opt/kaltura/log/nginx#" -e "s#@WWW_HOST@#$WWW_HOST#g" /opt/kaltura/nginx/conf/kaltura.conf.template > /opt/kaltura/nginx/conf/nginx.conf
-        update-rc.d kaltura-nginx defaults
+        update-rc.d kaltura-nginx defaults || true
 
 fi
 KALTURA_FUNCTIONS_RC=/opt/kaltura/bin/kaltura-functions.rc
@@ -58,7 +58,7 @@ fi
 trap 'my_trap_handler "${LINENO}" ${$?}' ERR
 send_install_becon `basename $0` $ZONE install_start 0 
 chown -R $OS_KALTURA_USER /opt/kaltura/log/nginx
-service kaltura-nginx restart >/dev/null 2>&1
+service kaltura-nginx reload 
 #ln -sf $BASE_DIR/app/configurations/monit/monit.d/nginx.rc /etc/monit/conf.d/
 #service monit stop >> /dev/null 2>&1
 #service monit start

@@ -13,4 +13,5 @@ Template: kaltura-nginx/kaltura_service_url
 Type: string
 Default:
 Description: Your Kaltura Service URL:
-	Base URL where the Kaltura API will be accessed from - this would be your Load Balancer URL on a cluster or same as your virtual host in an all-in-one Kaltura server
+	Base URL where the Kaltura API will be accessed from - this would be your Load Balancer URL on a cluster or same as your virtual host in an all-in-one Kaltura server.
+	Note that currently, only HTTP is supported and make sure to insert the host without the http:// prefix.
