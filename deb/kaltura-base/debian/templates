@@ -147,6 +147,11 @@ Default:
 Description: Should we collect stats?
 	To improve your Kaltura experience and provide you with the best service, Kaltura would like your consent to collect necessary data and information regarding your installation and use of Kaltura and analyze it to provide an upgraded and more stable platform and services.\n
 
+Template: kaltura-base/install_analytics_email
+Type: string
+Default: 
+Description: Please enter your email
+
 Template: kaltura-base/generating_client_libs
 Type: text
 Default:  

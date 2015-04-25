@@ -214,6 +214,16 @@ if [ "$1" = "configure" ]; then
         USER_CONSENT=$RET
 
 
+	if [ "$USER_CONSENT" = true ];then
+		db_input critical 'kaltura-base/install_analytics_email' || true
+		db_go || true
+		db_get 'kaltura-base/install_analytics_email'
+		CONTACT_MAIL=$RET
+		echo "USER_CONSENT=1" > $CONSENT_FILE
+		echo "CONTACT_MAIL=$CONTACT_MAIL" >> $CONSENT_FILE
+	else
+		echo "USER_CONSENT=0" > $CONSENT_FILE
+	fi
 
          for INI in /etc/php5/cli/php.ini /etc/php5/apache2/php.ini;do
                 if [ -r "$INI_FILE" ];then
