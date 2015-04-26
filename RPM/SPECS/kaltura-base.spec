@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 10.9.0
-Release: 7
+Version: 10.10.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -305,6 +305,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Sun Apr 26 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.10.0-1
+- Ver Bounce to 10.10.0
+
 * Sun Apr 26 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.9.0-7
 - SUP-4081 - distributing from remote storage
 - PLAT-2055 - Trim is not performed on Kaltura Live recorded VOD entry.
