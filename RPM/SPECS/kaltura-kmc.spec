@@ -1,6 +1,6 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmc
-Version: v5.38.11
+Version: v5.39.1
 Release: 1
 Summary: Kaltura Management Console
 
@@ -78,7 +78,12 @@ rm -rf %{buildroot}
 
 
 %changelog
-* Sun Apr 5 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v5.37.11-1
+* Sat Apr 25 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v5.39.1-1
+- SUP-4303 - A redundant message when creating or editing a conversion profile
+- PLAT-2796 - User get error messages on transcoding setting screen when user role sets with "transcoding setting-view only"
+- PLAT-2815 - Cannot save current transcoding profile without flavors
+
+* Sun Apr 5 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v5.38.11-1
 - SUP-3963 - Issue with Date time field in the Video Metadata
 - SUP-4105 - Error is thrown when accessing upload center
 - SUP-4009 - Unable to change account owner

@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 10.9.0
-Release: 6
+Release: 7
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -305,6 +305,13 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Sun Apr 26 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.9.0-7
+- SUP-4081 - distributing from remote storage
+- PLAT-2055 - Trim is not performed on Kaltura Live recorded VOD entry.
+- PLAT-2593 - Live - Passthrough recorded entries sometimes missing Source and Ingest3 flavors
+- PLAT-2762 - Sometimes live entries are not synced between DC
+- PLAT-2489 - image extension - set according to original file
+
 * Mon Apr 13 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.9.0-5
 - merged https://github.com/phansys/server/commit/9e24777565cf21bf65f327c1406fa2cb8ff70dc3
 
