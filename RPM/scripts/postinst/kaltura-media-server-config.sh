@@ -43,29 +43,29 @@ if [ -n "$1" -a -r "$1" ];then
 fi
 
 
-BROADCAST_TEMPLATE_FILE=$BASE_DIR/app/configurations/broadcast.template.ini
-BROADCAST_FILE=$BASE_DIR/app/configurations/broadcast.ini
+BROADCAST_TEMPLATE_FILE=$APP_DIR/app/configurations/broadcast.template.ini
+BROADCAST_FILE=$APP_DIR/app/configurations/broadcast.ini
 TEMP_BROADCAST=/tmp/temp_broadcast.ini
 # In case no primary server is configured, there is no point running.
 
-if [ -z $KALTURA_FULL_VIRTUAL_HOST_NAME ];
+if [ -z "$KALTURA_FULL_VIRTUAL_HOST_NAME" ];
 then
 	echo -e "${BRIGHT_RED} KALTURA_FULL_VIRTUAL_HOST_NAME value was not found in $1 answer file. \nPlease fix the used answer file.${NORMAL}"
 	exit 2
 else
-	echo "Copying broadcast.template.ini"
+	echo -e "${CYAN}Copying broadcast.template.ini${NORMAL}"
 	cp $BROADCAST_TEMPLATE_FILE $TEMP_BROADCAST
 	# Resetting the KALTURA_FULL_VIRTUAL_HOST_NAME after template copy
 	sed -i s/@KALTURA_FULL_VIRTUAL_HOST_NAME@/$KALTURA_FULL_VIRTUAL_HOST_NAME/ $TEMP_BROADCAST
 fi
 
 # Setting the primary server setting. No point of continuing the setup in case there is no server.
-if [ -z $PRIMARY_MEDIA_SERVER_HOST ]; then
+if [ -z "$PRIMARY_MEDIA_SERVER_HOST" ]; then
 	echo -e "${BRIGHT_RED}PRIMARY_MEDIA_SERVER_HOST value was not found in $1 answer file. \nPlease fix the $BROADCAST_FILE if needed.${NORMAL}"
 	echo -e "You can fix this later by running kaltura-media-server-config.sh <answer file>\n"
 	exit 2
 else
-	echo "Setting PRIMARY_MEDIA_SERVER_HOST"
+	echo -e "${CYAN}Setting PRIMARY_MEDIA_SERVER_HOST${NORMAL}"
 	sed -i s/@PRIMARY_MEDIA_SERVER_HOST@/$PRIMARY_MEDIA_SERVER_HOST/ $TEMP_BROADCAST
 fi
 
@@ -87,7 +87,7 @@ fi
 
 # temp file for line removal
 BROADCAST_FILE_TEMP=/tmp/temp_broadcast_line_removal
-if [ -z $SECONDARY_MEDIA_SERVER_HOST ] ; 
+if [ -z "$SECONDARY_MEDIA_SERVER_HOST" ] ; 
 then 
 	echo -e "${BRIGHT_RED}Warning: SECONDARY_MEDIA_SERVER_HOST was not found in $1 answer file.\n ${NORMAL}"
 	
@@ -101,7 +101,7 @@ then
 	}' $TEMP_BROADCAST > $BROADCAST_FILE_TEMP
 	[ -f $BROADCAST_FILE_TEMP ] && mv $BROADCAST_FILE_TEMP $TEMP_BROADCAST
 
-elif [ $SECONDARY_MEDIA_SERVER_HOST == $PRIMARY_MEDIA_SERVER_HOST ];
+elif [ "$SECONDARY_MEDIA_SERVER_HOST" == "$PRIMARY_MEDIA_SERVER_HOST" ];
 then
 	echo -e "${BRIGHT_RED}Warning: SECONDARY_MEDIA_SERVER_HOST & PRIMARY_MEDIA_SERVER_HOST have the same value in $1 answer file ($PRIMARY_MEDIA_SERVER_HOST). No secondary server will be configured under $BROADCAST_FILE."
 	echo -e "You can fix this later by running kaltura-media-server-config.sh <answer file> ${NORMAL}"
@@ -114,14 +114,14 @@ then
 	    if (NR < start_line || NR > end_line)
 	        print $0 
 	}' $TEMP_BROADCAST > $BROADCAST_FILE_TEMP
-	[ -f $BROADCAST_FILE_TEMP ] && mv $BROADCAST_FILE_TEMP $TEMP_BROADCAST
+	[ -f "$BROADCAST_FILE_TEMP" ] && mv $BROADCAST_FILE_TEMP $TEMP_BROADCAST
 else
-	echo "Setting SECONDARY_MEDIA_SERVER_HOST"
+	echo -e "${CYAN}Setting SECONDARY_MEDIA_SERVER_HOST${NORMAL}"
 	sed -i s/@SECONDARY_MEDIA_SERVER_HOST@/$SECONDARY_MEDIA_SERVER_HOST/ $TEMP_BROADCAST
 fi
 
 if [ -f $TEMP_BROADCAST ]; then
-	echo "Replacing $BROADCAST_FILE"
+	echo -e "${CYAN}Replacing $BROADCAST_FILE${NORMAL}"
 	mv $TEMP_BROADCAST $BROADCAST_FILE
 fi
 
