@@ -43,14 +43,14 @@ Requires(pre): pwdutils
 %endif
 
 %define nginx_vod_module_ver 1.0.1
-%define nginx_secure_token_ver 1.0
-%define nginx_token_validate_ver 1.0
+%define nginx_secure_token_ver 1.0.1
+%define nginx_token_validate_ver 1.0.1
 # end of distribution specific definitions
 
 Summary: High performance web server customized for Kaltura VOD
 Name: kaltura-nginx
-Version: 1.6.2
-Release: 10 
+Version: 1.6.3
+Release: 1
 Vendor: Kaltura inc.
 URL: http://nginx.org/
 
@@ -354,6 +354,19 @@ if [ $1 -ge 1 ]; then
 fi
 
 %changelog
+* Tue Apr 28 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.6.2-1
+- 1.6.3 is now stable:
+- Feature: now the "tcp_nodelay" directive works with SPDY connections.
+- Bugfix: in error handling. Thanks to Yichun Zhang and Daniil Bondarev.
+- Bugfix: alerts "header already sent" appeared in logs if the "post_action" directive was used; the bug had appeared in 1.5.4.
+- Bugfix: alerts "sem_post() failed" might appear in logs.
+- Bugfix: in hash table handling. Thanks to Chris West.
+- Bugfix: in integer overflow handling. Thanks to Régis Leroy.
+
+
+* Tue Apr 28 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.6.2-11
+- Kaltura modules tag 1.0.1
+
 * Tue Apr 14 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.6.2-8
 - Kaltura Nginx modules are now tagged.
 
