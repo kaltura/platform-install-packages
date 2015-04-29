@@ -36,7 +36,8 @@ fi
 #fi
 #. $CONSENT_FILE
 trap - ERR
-send_install_becon `basename $0` $ZONE install_start 0 
+TIMEZ=`get_tz`
+send_install_becon `basename $0` $TIMEZ install_start 0 
         #db_get 'kaltura-base/db_hostname'
         #if [ -z "$RET" ];then
         #        db_set 'kaltura-dwh/db_hostname' "`hostname`"
@@ -103,4 +104,4 @@ sed -i -e "s#@DWH_DIR@#$BASE_DIR/dwh#g" -e "s#@APP_DIR@#$APP_DIR#g" -e "s#@EVENT
 chown -R $OS_KALTURA_USER $BASE_DIR/dwh/cycles/
 ln -sf $APP_DIR/configurations/cron/dwh /etc/cron.d/kaltura-dwh
 echo -e "${CYAN}DWH configured.${NORMAL}"
-send_install_becon `basename $0` $ZONE install_success 0 
+send_install_becon `basename $0` $TIMEZ install_success 0 

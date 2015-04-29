@@ -396,7 +396,7 @@ if [ "$1" = "configure" ]; then
 
 
         #echo -e "${BRIGHT_BLUE}Configuration of $KALTURA_VERSION finished successfully!${NORMAL}"
-        send_install_becon `basename $0` $ZONE install_success 0
+        send_install_becon `basename $0` $TIME_ZONE install_success 0
         echo "
 SERVICE_URL=$SERVICE_URL
 SPHINX_HOST=$SPHINX_SERVER1
