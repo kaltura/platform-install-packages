@@ -49,7 +49,7 @@ Requires(pre): pwdutils
 
 Summary: High performance web server customized for Kaltura VOD
 Name: kaltura-nginx
-Version: 1.6.3
+Version: 1.8.0
 Release: 1
 Vendor: Kaltura inc.
 URL: http://nginx.org/
@@ -136,6 +136,7 @@ unzip -o %{SOURCE12}
         --with-ipv6 \
         --with-debug \
         %{?with_spdy:--with-http_spdy_module} \
+	--with-threads \
         --with-cc-opt="%{optflags} $(pcre-config --cflags)" \
 	--add-module=./nginx-vod-module-%{nginx_vod_module_ver} \
 	--add-module=./nginx-secure-token-module-%{nginx_secure_token_ver} \
@@ -177,6 +178,7 @@ make %{?_smp_mflags}
         --with-file-aio \
         --with-ipv6 \
         %{?with_spdy:--with-http_spdy_module} \
+	--with-threads \
         --with-cc-opt="%{optflags} $(pcre-config --cflags)" \
 	--add-module=./nginx-vod-module-%{nginx_vod_module_ver} \
 	--add-module=./nginx-secure-token-module-%{nginx_secure_token_ver} \
