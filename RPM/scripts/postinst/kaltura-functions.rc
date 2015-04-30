@@ -69,6 +69,13 @@ call_base_config()
 
 }
 
+function get_tz()
+{
+        LOCALTIME_MD5=`md5sum /etc/localtime|awk -F " " '{print $1}'`
+        TZGUESS=`find /usr/share/zoneinfo -type f | xargs md5sum | grep $LOCALTIME_MD5|awk -F " " '{print $2}'|sed 's@/usr/share/zoneinfo/@@g'`
+        echo $TZGUESS
+}
+
 check_mysql_settings()
 {
 	DB_USER=$1

@@ -1,3 +1,9 @@
+kaltura-base (10.10.0-1) experimental; urgency=low
+
+  * Switching to 10.10.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.com>  Mon, 27 Apr 2015 13:38:43 +0200
+
 kaltura-base (10.9.0-1) experimental; urgency=low
 
   * Switching to 10.9.0

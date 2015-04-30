@@ -50,7 +50,8 @@ chmod -R 775 $KALTURA_PREFIX/log $KALTURA_PREFIX/tmp $KALTURA_PREFIX/app/cache $
 if [ "$1" = "configure" ]; then
 	#update-rc.d memcache defaults
 	trap 'my_trap_handler "${LINENO}" ${$?}' ERR
-	send_install_becon `basename $0` $ZONE install_start 0 
+	TIMEZ=`get_tz`
+	send_install_becon `basename $0` $TIMEZ install_start 0 
 	KALTURA_APACHE_CONF=$APP_DIR/configurations/apache
 	KALTURA_APACHE_CONFD=$KALTURA_APACHE_CONF/conf.d
 	db_input critical kaltura-front/is_apache_ssl || true
@@ -244,6 +245,6 @@ Please select one of the following options [0]:
 			sed -i "s@^\(html5_version\s*=\)\(.*\)@\1 `dpkg-query -W -f'${Version}' kaltura-html5lib|awk -F "+" '{print $1}'`@g" -i $BASE_DIR/app/configurations/local.ini
 		fi
 		trap 'my_trap_handler "${LINENO}" ${$?}' ERR
-		send_install_becon `basename $0` $ZONE install_success 0 
+		send_install_becon `basename $0` $TIMEZ install_success 0 
 
 fi

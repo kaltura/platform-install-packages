@@ -56,11 +56,12 @@ fi
 
 #ln -sf $BASE_DIR/app/configurations/logrotate/kaltura_populate /etc/logrotate.d/
 trap 'my_trap_handler "${LINENO}" ${$?}' ERR
-send_install_becon `basename $0` $ZONE install_start 0 
+TIMEZ=`get_tz`
+send_install_becon `basename $0` $TIMEZ install_start 0 
 chown -R $OS_KALTURA_USER /opt/kaltura/log/nginx
 service kaltura-nginx reload 
 #ln -sf $BASE_DIR/app/configurations/monit/monit.d/nginx.rc /etc/monit/conf.d/
 #service monit stop >> /dev/null 2>&1
 #service monit start
-send_install_becon `basename $0` $ZONE install_success 0
+send_install_becon `basename $0` $TIMEZ install_success 0
 

@@ -1,3 +1,9 @@
+kaltura-batch (10.10.0-1) jupiter; urgency=low
+
+  * fix call to send_install_becon()
+
+ -- Jess Portnoy <jess.portnoy@kaltura.com>  Mon, 27 Apr 2015 18:02:43 +0200
+
 kaltura-batch (10.9.0-1) jupiter; urgency=low
 
   * Switching to 10.9.0

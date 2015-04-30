@@ -64,7 +64,8 @@ if [ "$1" = "configure" ]; then
 
 
 	trap 'my_trap_handler "${LINENO}" ${$?}' ERR
-	send_install_becon `basename $0` $ZONE install_start 0 
+	TIMEZ=`get_tz`
+	send_install_becon `basename $0` $TIMEZ install_start 0 
 
 
 	if [ "$IS_UPGRADE" = 'upgrade' ];then
@@ -213,5 +214,5 @@ EOF
 		/etc/init.d/monit stop >> /dev/null 2>&1
 		/etc/init.d/monit restart
 	fi
-	send_install_becon `basename $0` $ZONE install_success 0 
+	send_install_becon `basename $0` $TIMEZ install_success 0 
 fi

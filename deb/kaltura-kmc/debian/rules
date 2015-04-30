@@ -33,7 +33,7 @@ binary-indep: install
 	mkdir -p $(KMC_PREFIX) $(KALTURA_PREFIX)/web/content/docs
 	mv $(tree)/* $(KMC_PREFIX)/
 	sed -i "s#html5_version =.*#html5_version = $(HTML5LIB_VERSION)#g" $(KMC_PREFIX)/$(KMC_VERSION)/config.ini 
-	sed -i "s#\(widgets.kClip1.*\) =.*#\1 = $(KCLIP_VERSION)#g" $(KMC_PREFIX)/$(KMC_VERSION)/config.ini 
+	sed -i "s#\(widgets.kClip.*version\) =.*#\1 = $(KCLIP_VERSION)#g" $(KMC_PREFIX)/$(KMC_VERSION)/config.ini 
 	dos2unix $(KMC_PREFIX)/$(KMC_VERSION)/config.ini
 	cp -r $(KMC_PREFIX)/doc/* $(KALTURA_PREFIX)/web/content/docs
 	dh_install $(KALTURA_PREFIX)
