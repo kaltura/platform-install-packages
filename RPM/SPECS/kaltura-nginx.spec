@@ -217,7 +217,7 @@ make %{?_smp_mflags}
 # install systemd-specific files
 %{__mkdir} -p $RPM_BUILD_ROOT%{_unitdir}
 %{__install} -m644 %SOURCE8 \
-        $RPM_BUILD_ROOT%{_unitdir}/nginx.service
+        $RPM_BUILD_ROOT%{_unitdir}/kaltura-nginx.service
 %{__mkdir} -p $RPM_BUILD_ROOT%{_libexecdir}/initscripts/legacy-actions/nginx
 %{__install} -m755 %SOURCE9 \
         $RPM_BUILD_ROOT%{_libexecdir}/initscripts/legacy-actions/nginx/upgrade
@@ -355,6 +355,12 @@ if [ $1 -ge 1 ]; then
         "Binary upgrade failed, please check nginx's error.log"
 fi
 
+    bogus date in %changelog: Thu Aug  5 2014 Sergey Budnevitch <sb@nginx.com>
+    bogus date in %changelog: Thu Jul 12 2014 Sergey Budnevitch <sb@nginx.com>
+    bogus date in %changelog: Tue Jul 17 2013 Sergey Budnevitch <sb@nginx.com>
+    bogus date in %changelog: Tue May  6 2013 Sergey Budnevitch <sb@nginx.com>
+    bogus date in %changelog: Tue Aug 10 2011 Sergey Budnevitch
+
 %changelog
 * Tue Apr 28 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.6.2-1
 - 1.6.3 is now stable:
@@ -379,10 +385,10 @@ fi
 - epoch added to the EPEL7/CentOS7 spec to override EPEL one
 - 1.6.2
 
-* Thu Aug  5 2014 Sergey Budnevitch <sb@nginx.com>
+* Tue Aug  5 2014 Sergey Budnevitch <sb@nginx.com>
 - 1.6.1
 
-* Thu Jul 12 2014 Sergey Budnevitch <sb@nginx.com>
+* Sat Jul 12 2014 Sergey Budnevitch <sb@nginx.com>
 - incorrect sysconfig filename finding in the initscript fixed
 
 * Thu Apr 24 2014 Konstantin Pavlov <thresh@nginx.com>
@@ -408,10 +414,10 @@ fi
 * Tue Oct  8 2013 Sergey Budnevitch <sb@nginx.com>
 - 1.4.3
 
-* Tue Jul 17 2013 Sergey Budnevitch <sb@nginx.com>
+* Wed Jul 17 2013 Sergey Budnevitch <sb@nginx.com>
 - 1.4.2
 
-* Tue May  6 2013 Sergey Budnevitch <sb@nginx.com>
+* Mon May 6 2013 Sergey Budnevitch <sb@nginx.com>
 - 1.4.1
 
 * Wed Apr 24 2013 Sergey Budnevitch <sb@nginx.com>
@@ -491,5 +497,5 @@ fi
 - 1.0.6
 - replace "conf.d/*" config include with "conf.d/*.conf" in default nginx.conf
 
-* Tue Aug 10 2011 Sergey Budnevitch
+* Wed Aug 10 2011 Sergey Budnevitch
 - Initial release
