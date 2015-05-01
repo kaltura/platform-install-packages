@@ -1,7 +1,7 @@
 #!/bin/sh -e
 set -e
 wget -O - http://installrepo.kaltura.org/repo/apt/debian/kaltura-deb.gpg.key|apt-key add -
-echo "deb http://installrepo.kaltura.org/repo/apt/debian jupiter main" > /etc/apt/sources.list.d/kaltura.list
+echo "deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/debian jupiter main" > /etc/apt/sources.list.d/kaltura.list
 
 # aptitude has a more advanced API then apt-get and is better at resolving deps. For some reason, it is not installed on all deb based system so lets see if we haveit.
 
