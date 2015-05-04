@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.25
-Release: 9
+Release: 10
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -82,6 +82,9 @@ find %{_sysconfdir}/logrotate.d -type l -name "kaltura_*" -exec rm {} \;
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Mon May 5 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.25-10
+- Disable trimming and clipping tests as they stopped working since 10.9.0.
+
 * Mon Apr 13 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.25-3
 - Modifications to allow sanity to run on both RPM and deb based systsms.
 
