@@ -105,12 +105,6 @@ if [ "$1" = "configure" ]; then
         db_get 'kaltura-base/sphinx_hostname'
         SPHINX_SERVER1=$RET
 
-        #db_set 'kaltura-base/media_server_hostname' "`hostname`"
-        #db_input critical 'kaltura-base/media_server_hostname' || true
-        #db_go || true
-        #db_get 'kaltura-base/media_server_hostname'
-        #RED5_HOST=$RET
-
         db_get 'kaltura-base/second_sphinx_hostname'
         if [ -z "$RET" ];then
                 db_set 'kaltura-base/second_sphinx_hostname' "`hostname`"
@@ -405,17 +399,14 @@ SUPER_USER=$SUPER_USER
 SUPER_USER_PASSWD=\"$SUPER_USER_PASSWD\"
 KALTURA_VIRTUAL_HOST_NAME=$KALTURA_FULL_VIRTUAL_HOST_NAME
 RED5_HOST=$RED5_HOST">> $BASE_DIR/app/configurations/system.ini
-
-
-
 fi
-
-if [ "$1" = "upgrade" ];then
+if [ -r "$KALTURA_PREFIX/bin/kaltura-base-upgrading" ];then
         if [ -r "$KALTURA_PREFIX/app/configurations/local.ini" -a -r "$KALTURA_PREFIX/app/configurations/base.ini" ];then
                 sed -i "s@^\(kaltura_version\).*@\1 = $KALTURA_VERSION@g" $KALTURA_PREFIX/app/configurations/local.ini
                 echo "Regenarating client libs.. this will take up to 2 minutes to complete."
                 if service apache2 status;then
                         service apache2 stop
+                        service monit stop
                 fi
                 # this is read by kaltura-sphinx-schema-update.sh to determine rather or not to run
                 touch $KALTURA_PREFIX/app/configurations/sphinx_schema_update
@@ -429,6 +420,7 @@ if [ "$1" = "upgrade" ];then
                 if ! service apache2 status;then
                         service apache2 start
                 fi
+                service monit start
 
                 # we now need CREATE and DROP priv for 'kaltura' on kaltura.*
                 if [ -r /etc/kaltura.d/system.ini ];then
@@ -440,6 +432,7 @@ if [ "$1" = "upgrade" ];then
                 php $KALTURA_PREFIX/app/deployment/base/scripts/installPlugins.php >> /opt/kaltura/log/kalt_up.log 2>&1
 
         fi
+	rm $KALTURA_PREFIX/bin/kaltura-base-upgrading
 
 fi
 
