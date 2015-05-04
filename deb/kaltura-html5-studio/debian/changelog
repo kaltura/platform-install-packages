@@ -1,3 +1,9 @@
+kaltura-html5-studio (1.9.7-1) jupiter; urgency=low
+
+  * Version bounce 
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 04 May 2015 19:40:14 +0000
+
 kaltura-html5-studio (1.9.6) jupiter; urgency=low
 
   * Initial package.
