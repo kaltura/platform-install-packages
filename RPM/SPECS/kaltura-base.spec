@@ -305,7 +305,7 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Mon May 5 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.10.0-2
+* Mon May 4 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.10.0-2
 - PLAT-2042 - Kaltura MRSS Ingest for PostMedia (TR next)
 - PLAT-2829 - New feature: Add a pager to playlist->execute
 - SUP-3584 - Ellentv.com V2 playlist is out of sync
