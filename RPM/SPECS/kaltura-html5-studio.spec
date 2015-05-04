@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5-studio
-Version: v1.9.6
+Version: v1.9.7
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -51,6 +51,9 @@ rm -rf %{buildroot}
 %{prefix}/apps/studio/%{version}
 
 %changelog
+* Sun May 5 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v1.9.7-1
+- Ver bounce.
+
 * Sun Apr 5 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v1.9.6-1
 - Ver bounce.
 

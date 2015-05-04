@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.29
+Version: v2.30
 Release: 1
 Epoch:0 
 License: AGPLv3+
@@ -26,6 +26,7 @@ Source15: kaltura-html5lib-v2.25.tar.gz
 Source16: kaltura-html5lib-v2.26.tar.gz
 Source17: kaltura-html5lib-v2.27.tar.gz
 Source18: kaltura-html5lib-v2.28.tar.gz
+Source19: kaltura-html5lib-v2.29.tar.gz
 
 URL: https://github.com/kaltura/mwEmbed 
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -66,10 +67,11 @@ tar zxf %{SOURCE16} -C %{_builddir}/
 
 tar zxf %{SOURCE17} -C %{_builddir}/
 tar zxf %{SOURCE18} -C %{_builddir}/
+tar zxf %{SOURCE19} -C %{_builddir}/
 
 %install
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib
-for i in v2.1.1 v2.3 v2.4 v2.6 v2.9 v2.14 v2.15 v2.18.5 v2.20 v2.21 v2.22 v2.23 v2.24 v2.25 v2.26 v2.27 v2.28 %{version};do
+for i in v2.1.1 v2.3 v2.4 v2.6 v2.9 v2.14 v2.15 v2.18.5 v2.20 v2.21 v2.22 v2.23 v2.24 v2.25 v2.26 v2.27 v2.28 v2.29 %{version};do
 	cp -r %{_builddir}/%{name}-$i $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i
 	cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i
 done
@@ -87,6 +89,26 @@ rm -rf %{buildroot}
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Mon May 4 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v2.30-1
+- FEC-3100 - Support DFP player identification
+- SUP-3177 - [v2.20] Player stuck when seeking on Firefox/OSX, webm flavor
+- SUP-3404 - Youtube videos will not load if Audio Description Plugin Enabled
+- SUP-3569 - Flicking TTML captions
+- SUP-3648 - Pausing on iPhone jumps to 00:00:15
+- SUP-3684 - Thumbnail at the end of a live stream
+- SUP-3864 - Download gets cut for large flavors
+- SUP-4003 - language of default captions will be chosen by browser language
+- SUP-4077 - Video Player Voice Over Accessibility Issue
+- SUP-4168 - [2.28] No progress or countdown indication for a DoubleClick ad
+- SUP-4213 - Video quality drop with player version 2.28 - preferedFlavorBR not respected
+- SUP-4250 - VAST preroll not respected in 2.28 on mobile.
+- SUP-4277 - Mediahuis - Windows Phone 8.1 black screen on playback
+- SUP-4473 - 2.29: "Stack overflow at line: 0" at end of playback on IE8
+- SUP-4546 - Embed code for video with chaptering is not loading
+- SUP-3314 - Player dimensions in Universal Studio 
+- SUP-4232 - Black screen in IE when viewing videos in full screen
+- SUP-4051 - Downloading from player yields 0 bytes files
+
 * Sun Apr 5 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v2.29-1
 - SUP-3340 - Live stream freezes for a few seconds when streaming with KRecord
 - SUP-4096 - [2.27.1] document.onclick is kept even after player is gone

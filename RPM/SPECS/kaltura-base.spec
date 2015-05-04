@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 10.10.0
-Release: 1
+Release: 2
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -305,6 +305,17 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon May 5 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.10.0-2
+- PLAT-2042 - Kaltura MRSS Ingest for PostMedia (TR next)
+- PLAT-2829 - New feature: Add a pager to playlist->execute
+- SUP-3584 - Ellentv.com V2 playlist is out of sync
+- SUP-4358 - [Pearson] Java API SDK throws a NumberFormatException
+- PLAT-2865 - Live - isLive remains on true after stop streaming (regression)
+- PLAT-1600 - Duplicate VOD entry is created when stopping streaming before live entry starts to play. 
+- PLAT-2497 - randomly the HLS flavors in the cloud transcode are not in sync
+- PLAT-2885 - Kaltura Live with DVR: Player stuck for a few minutes after loading page
+- WEBC-467 - Application error received when attempting to edit a webcast 
+
 * Sun Apr 26 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.10.0-1
 - Ver Bounce to 10.10.0
 

@@ -1,7 +1,7 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmc
 Version: v5.39.1
-Release: 1
+Release: 2
 Summary: Kaltura Management Console
 
 Group: System Management	
@@ -78,6 +78,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon May 5 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v5.39.1-2
+- New HTML5 lib.
+
 * Sat Apr 25 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v5.39.1-1
 - SUP-4303 - A redundant message when creating or editing a conversion profile
 - PLAT-2796 - User get error messages on transcoding setting screen when user role sets with "transcoding setting-view only"
