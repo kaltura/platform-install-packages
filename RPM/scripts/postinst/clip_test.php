@@ -1,7 +1,7 @@
 <?php
 
 if (count($argv)<5){
-    echo 'Usage:' .__FILE__ .' <service_url> <partnerid> <secret> <entry_id to clip>'."\n";
+    echo 'Usage:' .__FILE__ .' <service_url> <partnerid> <admin_secret> <entry_id to clip>'."\n";
     exit (1);
 }
 function clipi($client,$entry_id,$overwrite)
@@ -58,5 +58,5 @@ $entry_id = $argv[4];
 $overwrite = $argv[5];
 $basedir=dirname(__FILE__);
 require_once($basedir.'/create_session.php');
-$client=generate_ks($service_url,$partnerId,$secret,$type=KalturaSessionType::USER,$userId=null);
+$client=generate_ks($service_url,$partnerId,$secret,$type=KalturaSessionType::ADMIN,$userId=null);
 echo(clipi($client,$entry_id,$overwrite)). " was created.\n";
