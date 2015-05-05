@@ -1,4 +1,29 @@
-kaltura-html5lib (2.29-1) experimental; urgency=low
+kaltura-html5lib (2.30-1) jupiter; urgency=low
+
+  * FEC-3100 - Support DFP player identification
+  * SUP-3177 - [v2.20] Player stuck when seeking on Firefox/OSX, webm flavor
+  * SUP-3404 - Youtube videos will not load if Audio Description Plugin Enabled
+  * SUP-3569 - Flicking TTML captions
+  * SUP-3648 - Pausing on iPhone jumps to 00:00:15
+  * SUP-3684 - Thumbnail at the end of a live stream
+  * SUP-3864 - Download gets cut for large flavors
+  * SUP-4003 - language of default captions will be chosen by browser language
+  * SUP-4077 - Video Player Voice Over Accessibility Issue
+  * SUP-4168 - [2.28] No progress or countdown indication for a DoubleClick ad
+  * SUP-4213 - Video quality drop with player version 2.28 - preferedFlavorBR not respected
+  * SUP-4250 - VAST preroll not respected in 2.28 on mobile.
+  * SUP-4277 - Mediahuis - Windows Phone 8.1 black screen on playback
+  * SUP-4473 - 2.29: "Stack overflow at line: 0" at end of playback on IE8
+  * SUP-4546 - Embed code for video with chaptering is not loading
+  * SUP-3314 - Player dimensions in Universal Studio
+  * SUP-4232 - Black screen in IE when viewing videos in full screen
+  * SUP-4051 - Downloading from player yields 0 bytes files
+
+
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Tue, 05 May 2015 22:10:55 +0000
+
+kaltura-html5lib (2.29-1) jupiter; urgency=low
 
   - First package
 
