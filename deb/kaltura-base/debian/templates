@@ -72,7 +72,7 @@ Description: Your Kaltura Service URL:
 
 Template: kaltura-base/ip_range
 Type: string
-Default: 127.0.0.1
+Default: 0.0.0.0-255.255.255.255
 Description: Range of ip addresses belonging to internal kaltura servers 
 	The range is used when checking service actions permissions and allowing to access certain services without KS from the internal servers.
 
