@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 10.10.0
-Release: 3
+Version: 10.11.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -307,6 +307,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Tue May 5 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.11.0-1
+- Ver Bounce to 10.11.0
+
 * Tue May 5 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.10.0-3
 - Tmp patch for https://github.com/kaltura/server/pull/2522 and https://github.com/kaltura/server/pull/2521
 
