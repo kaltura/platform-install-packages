@@ -101,7 +101,7 @@ rm -rf %{buildroot}
 %config %{_sysconfdir}/php.d/zz-%{name}.ini
 
 %changelog
-* Mon May 4 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.11.0-1
+* Tue May 5 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.11.0-1
 - Ver Bounce to 10.11.0
 
 * Sun Apr 26 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.10.0-1

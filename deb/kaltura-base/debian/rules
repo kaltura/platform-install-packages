@@ -73,6 +73,7 @@ binary-indep: install
 	sed -i 's@/var/run/memcached/memcached.pid@/var/run/memcached.pid@g' $(tree)/configurations/monit/monit.d/memcached.template.rc
 	rm $(tree)/deployment/base/scripts/init_content/04.dropFolder.-4.template.xml
 	cp debian/batch.ini.template $(tree)/configurations/batch/batch.ini.template
+	cp debian/01.kaltura_ce_tables.sql $(tree)/deployment/base/sql/01.kaltura_ce_tables.sql
 	cp debian/kaltura-base.sh etc/profile.d/
 	sed -i "s@^\(params.ImageMagickCmd\)\s*=.*@\1=convert@" $(tree)/configurations/batch/batch.ini.template
 	sed -i "s@^\(params.mediaInfoCmd\)\s*=.*@\1=mediainfo@" $(tree)/configurations/batch/batch.ini.template

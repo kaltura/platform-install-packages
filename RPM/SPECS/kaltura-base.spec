@@ -34,6 +34,7 @@ Source25: kaltura_populate.template
 Source26: kaltura_batch.template
 Source28: embedIframeJsAction.class.php
 #Source29: kaltura.ssl.conf.template
+Source30: 01.kaltura_ce_tables.sql
 
 URL: https://github.com/kaltura/server/tree/%{codename}-%{version}
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -142,6 +143,7 @@ cp %{SOURCE18} $RPM_BUILD_ROOT%{prefix}/app/admin_console/views/scripts/index/mo
 cp %{SOURCE19} $RPM_BUILD_ROOT%{prefix}/app/admin_console/controllers/IndexController.php
 # patch for auto embed to work, should be dropped when core merge.
 cp %{SOURCE28} $RPM_BUILD_ROOT%{prefix}/app/alpha/apps/kaltura/modules/extwidget/actions/embedIframeJsAction.class.php
+cp %{SOURCE30} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/sql/01.kaltura_ce_tables.sql
 # tmp patch due to https://github.com/kaltura/platform-install-packages/issues/367
 # cp %{SOURCE29} $RPM_BUILD_ROOT%{prefix}/app/configurations/apache/
 # we bring another in kaltura-batch
@@ -305,8 +307,11 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Mon May 4 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.11.0-1
+* Tue May 5 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.11.0-1
 - Ver Bounce to 10.11.0
+
+* Tue May 5 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.10.0-3
+- Tmp patch for https://github.com/kaltura/server/pull/2522 and https://github.com/kaltura/server/pull/2521
 
 * Mon May 4 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.10.0-2
 - PLAT-2042 - Kaltura MRSS Ingest for PostMedia (TR next)
