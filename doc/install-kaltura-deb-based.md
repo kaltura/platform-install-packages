@@ -58,7 +58,12 @@ This section is a step-by-step guide of a Kaltura installation.
 wget -O - http://installrepo.kaltura.org/repo/apt/debian/kaltura-deb.gpg.key|apt-key add -
 echo "deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/debian jupiter main" > /etc/apt/sources.list.d/kaltura.list
 ```
-*NOTE: You must also make sure the multiverse repo is enabled in /etc/apt/sources.list*
+*Ubuntu NOTE: You must also make sure the multiverse repo is enabled in /etc/apt/sources.list*
+*Debian NOTE: You must also make sure the following are enabled in /etc/apt/sources.list*
+```
+deb htp://ftp.debian.org/debian/ wheezy main
+deb htp://security.debian.org/ wheezy/updates main
+```
 
 
 #### MySQL Install and Configuration
