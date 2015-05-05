@@ -59,6 +59,7 @@ wget -O - http://installrepo.kaltura.org/repo/apt/debian/kaltura-deb.gpg.key|apt
 echo "deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/debian jupiter main" > /etc/apt/sources.list.d/kaltura.list
 ```
 *Ubuntu NOTE: You must also make sure the multiverse repo is enabled in /etc/apt/sources.list*
+
 *Debian Jessie [8] NOTE: You must also make sure the following are enabled in /etc/apt/sources.list*
 ```
 deb htp://ftp.debian.org/debian/ wheezy main
