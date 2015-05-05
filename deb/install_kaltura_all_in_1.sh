@@ -20,5 +20,6 @@ $APT_TOOL install kaltura-sphinx
 $APT_TOOL install kaltura-db
 $APT_TOOL install kaltura-batch
 $APT_TOOL install kaltura-dwh
-
+$APT_TOOL install kaltura-nginx
+/etc/init.d/kaltura-nginx start
 
