@@ -139,6 +139,7 @@ if [ ! -r "$BROADCAST_FILE" ];then
 	exit 2
 fi
 
+
 send_install_becon `basename $0` $ZONE install_start 0
 cd $BASE_DIR/media-server
 ant
