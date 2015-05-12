@@ -360,13 +360,6 @@ if [ $1 -ge 1 ]; then
     /sbin/service kaltura-nginx upgrade >/dev/null 2>&1 || echo \
         "Binary upgrade failed, please check nginx's error.log"
 fi
-
-    bogus date in %changelog: Thu Aug  5 2014 Sergey Budnevitch <sb@nginx.com>
-    bogus date in %changelog: Thu Jul 12 2014 Sergey Budnevitch <sb@nginx.com>
-    bogus date in %changelog: Tue Jul 17 2013 Sergey Budnevitch <sb@nginx.com>
-    bogus date in %changelog: Tue May  6 2013 Sergey Budnevitch <sb@nginx.com>
-    bogus date in %changelog: Tue Aug 10 2011 Sergey Budnevitch
-
 %changelog
 * Tue May 11 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.8.0-2
 - Now with the VTS module from https://github.com/vozlt/nginx-module-vts
@@ -375,7 +368,7 @@ fi
 - Upgraded nginx to 1.8.0 and enabled threads. Needed by Ks new feature.
 - See http://nginx.org/en/CHANGES-1.8 for changelog.
 
-* Tue Apr 28 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.6.2-1
+* Tue Apr 28 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.6.3-1
 - 1.6.3 is now stable:
 - Feature: now the "tcp_nodelay" directive works with SPDY connections.
 - Bugfix: in error handling. Thanks to Yichun Zhang and Daniil Bondarev.
