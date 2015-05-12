@@ -45,12 +45,13 @@ Requires(pre): pwdutils
 %define nginx_vod_module_ver 1.0.1
 %define nginx_secure_token_ver 1.0.1
 %define nginx_token_validate_ver 1.0.1
+%define nginx_vts_ver master
 # end of distribution specific definitions
 
 Summary: High performance web server customized for Kaltura VOD
 Name: kaltura-nginx
 Version: 1.8.0
-Release: 1
+Release: 2
 Vendor: Kaltura inc.
 URL: http://nginx.org/
 
@@ -67,6 +68,7 @@ Source9: nginx.upgrade.sh
 Source10: nginx-vod-module-%{nginx_vod_module_ver}.zip  
 Source11: nginx-secure-token-module-%{nginx_secure_token_ver}.zip
 Source12: nginx-akamai-token-validate-module-%{nginx_token_validate_ver}.zip
+Source13: nginx-module-vts-%{nginx_vts_ver}.zip
 #Patch1: nginx_kaltura.diff 
 
 License: 2-clause BSD-like license
@@ -99,6 +101,8 @@ unzip -o %{SOURCE10}
 unzip -o %{SOURCE11}
 
 unzip -o %{SOURCE12}
+
+unzip -o %{SOURCE13}
 
 
 %build
@@ -141,6 +145,7 @@ unzip -o %{SOURCE12}
 	--add-module=./nginx-vod-module-%{nginx_vod_module_ver} \
 	--add-module=./nginx-secure-token-module-%{nginx_secure_token_ver} \
 	--add-module=./nginx-akamai-token-validate-module-%{nginx_token_validate_ver} \
+	--add-module=./nginx-module-vts-%{nginx_vts_ver} \
         $*
 make %{?_smp_mflags}
 %{__mv} %{_builddir}/nginx-%{version}/objs/nginx \
@@ -183,6 +188,7 @@ make %{?_smp_mflags}
 	--add-module=./nginx-vod-module-%{nginx_vod_module_ver} \
 	--add-module=./nginx-secure-token-module-%{nginx_secure_token_ver} \
 	--add-module=./nginx-akamai-token-validate-module-%{nginx_token_validate_ver} \
+	--add-module=./nginx-module-vts-%{nginx_vts_ver} \
         $*
 make %{?_smp_mflags}
 
@@ -362,6 +368,13 @@ fi
     bogus date in %changelog: Tue Aug 10 2011 Sergey Budnevitch
 
 %changelog
+* Tue May 11 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.8.0-2
+- Now with the VTS module from https://github.com/vozlt/nginx-module-vts
+
+* Thu Apr 30 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.8.0-1
+- Upgraded nginx to 1.8.0 and enabled threads. Needed by Ks new feature.
+- See http://nginx.org/en/CHANGES-1.8 for changelog.
+
 * Tue Apr 28 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.6.2-1
 - 1.6.3 is now stable:
 - Feature: now the "tcp_nodelay" directive works with SPDY connections.
@@ -370,7 +383,6 @@ fi
 - Bugfix: alerts "sem_post() failed" might appear in logs.
 - Bugfix: in hash table handling. Thanks to Chris West.
 - Bugfix: in integer overflow handling. Thanks to Régis Leroy.
-
 
 * Tue Apr 28 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.6.2-11
 - Kaltura modules tag 1.0.1
