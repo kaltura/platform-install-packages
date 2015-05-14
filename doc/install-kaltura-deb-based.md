@@ -66,6 +66,23 @@ deb htp://ftp.debian.org/debian/ wheezy main
 deb htp://security.debian.org/ wheezy/updates main
 ```
 
+*IMPORTANT NOTE: depending on your current Apache configuration, you may need to disable your default site configuration.
+Use:
+```
+# apachectl -t -DDUMP_VHOSTS
+```
+to check your current configuration and:
+```
+a2dissite $SITENAME
+```
+to disable any site that might be set in a way by which $YOUR_SERVICE_URL/api_v3 will reach it instead of the Kaltura vhost config.
+
+In such case, the postinst script for kaltrua-db will fail, if so, adjust it and run:
+```
+# dpkg-reconfigure kaltura-db
+```
+
+*
 
 #### MySQL Install and Configuration
 Please note that for MySQL version 5.5 and above, you must first disable strict mode enforcement.
