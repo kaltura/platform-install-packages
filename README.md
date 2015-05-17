@@ -32,7 +32,7 @@ Contact the authors or email community@kaltura.org if you have other ideas.
 * [Single-server All-In-One RedHat based Linux distros Installation (including FC, RHEL and CentOS)](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-redhat-based.md).
 * [Single-server All-In-One deb based Linux distros Installation (Debian/Ubuntu)](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-deb-based.md).
 * [Deploying Kaltura Clusters (RPM)](https://github.com/kaltura/platform-install-packages/blob/master/doc/rpm-cluster-deployment-instructions.md)
-* [Single-server All-In-One deb based Linux distros Installation (Debian/Ubuntu)](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-deb-based.md).
+.
 * [Deploying Kaltura using Opscode Chef (RPM)](https://github.com/kaltura/platform-install-packages/blob/master/doc/rpm-chef-cluster-deployment.md)
 * [Setting up Kaltura platform monitoring](https://github.com/kaltura/platform-install-packages/blob/master/doc/platform-monitors.md)
 * [Required Open Ports to run Kaltura](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura-required-ports.md)
