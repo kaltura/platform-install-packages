@@ -138,6 +138,8 @@ In order to perform a manual step by step install, simply copy the commands and 
 ```bash
 # aptitude update
 # aptitude install ~Nkaltura
+# dpkg-reconfigure kaltura-batch
+# dpkg-reconfigure kaltura-front
 ```
 
 ## Remove Kaltura

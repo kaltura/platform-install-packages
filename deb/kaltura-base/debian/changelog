@@ -1,3 +1,20 @@
+kaltura-base (10.11.0-1) jupiter; urgency=low
+
+  * PLAT-2871 - Caption search using KalutraBaseEntryFilter::advancedSearch and cross metadata search
+  * PLAT-1998 - Avoid the need to update many metadata objects
+  * PLAT-2850 - API Changes for Q&A
+  * PLAT-2946 - Hide default template uiconfs from partner preview&&embed
+  * SUP-3451 - KMC error - The language 'sv_SE' has to be added before it can be used.
+  * SUP-3965 - Telepictures - high storage usage, flavors are not deleted after export?
+  * PLAT-2914 - Too many logs are written to file
+  * PLAT-2906 - Json serializer causing Studio crash
+  * PLAT-2387 - manual dispatch error
+  * PLAT-2934 - clip_test script fails
+  * PLAT-2940 - groupUser->list return fatal error
+  * https://github.com/kaltura/server/pull/2561
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Sun, 17 May 2015 12:31:51 +0000
+
 kaltura-base (10.10.0-2) jupiter; urgency=low
 
   * PLAT-2042 - Kaltura MRSS Ingest for PostMedia (TR next)

@@ -421,7 +421,7 @@ if [ -r "$KALTURA_PREFIX/bin/kaltura-base-upgrading" ];then
                         service apache2 start
                 fi
                 service monit start
-
+		sleep 70
                 # we now need CREATE and DROP priv for 'kaltura' on kaltura.*
                 if [ -r /etc/kaltura.d/system.ini ];then
                         . /etc/kaltura.d/system.ini
