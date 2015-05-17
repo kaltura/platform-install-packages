@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 10.11.0
-Release: 6
+Release: 7
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -306,6 +306,20 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Sun May 17 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.11.0-7
+- PLAT-2871 - Caption search using KalutraBaseEntryFilter::advancedSearch and cross metadata search
+- PLAT-1998 - Avoid the need to update many metadata objects 
+- PLAT-2850 - API Changes for Q&A 
+- PLAT-2946 - Hide default template uiconfs from partner preview&&embed 
+- SUP-3451 - KMC error - The language 'sv_SE' has to be added before it can be used. 
+- SUP-3965 - Telepictures - high storage usage, flavors are not deleted after export? 
+- PLAT-2914 - Too many logs are written to file 
+- PLAT-2906 - Json serializer causing Studio crash 
+- PLAT-2387 - manual dispatch error 
+- PLAT-2934 - clip_test script fails 
+- PLAT-2940 - groupUser->list return fatal error
+- https://github.com/kaltura/server/pull/2561 
+
 * Tue May 5 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.11.0-1
 - Ver Bounce to 10.11.0
 
