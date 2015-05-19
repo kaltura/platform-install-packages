@@ -24,7 +24,7 @@ The processes was tested on Debian 8 and Ubuntu 14.04 but is expected to work on
 ## Step-by-step Installation
 
 ### Pre-Install notes
-* This install guides assumes that you did a clean, basic install of one of the RHEL based OS's in 64bit architecture.
+* This install guides assumes that you did a clean, basic install of one of the deb based OSes in 64bit architecture.
 * When installing, you will be prompted for each server's resolvable hostname. Note that it is crucial that all host names will be resolvable by other servers in the cluster (and outside the cluster for front machines). Before installing, verify that your /etc/hosts file is properly configured and that all Kaltura server hostnames are resolvable in your network.
 * Before you begin, make sure you're logged in as the system root. Root access is required to install Kaltura, and you should execute ```sudo -i``` or ```su -```to make sure that you are indeed root.
 
@@ -58,6 +58,33 @@ This section is a step-by-step guide of a Kaltura installation.
 wget -O - http://installrepo.kaltura.org/repo/apt/debian/kaltura-deb.gpg.key|apt-key add -
 echo "deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/debian jupiter main" > /etc/apt/sources.list.d/kaltura.list
 ```
+*Ubuntu NOTE: You must also make sure the multiverse repo is enabled in /etc/apt/sources.list*
+
+*Debian Jessie [8] NOTE: You must also make sure the following are enabled in /etc/apt/sources.list*
+```
+deb htp://ftp.debian.org/debian/ wheezy main
+deb htp://security.debian.org/ wheezy/updates main
+```
+
+IMPORTANT NOTE: 
+
+depending on your current Apache configuration, you may need to disable your default site configuration.
+
+Use:
+```
+# apachectl -t -DDUMP_VHOSTS
+```
+to check your current configuration and:
+```
+a2dissite $SITENAME
+```
+to disable any site that might be set in a way by which $YOUR_SERVICE_URL/api_v3 will reach it instead of the Kaltura vhost config.
+
+In such case, the postinst script for kaltrua-db will fail, if so, adjust it and run:
+```
+# dpkg-reconfigure kaltura-db
+```
+
 
 
 #### MySQL Install and Configuration
@@ -100,7 +127,6 @@ In order to perform a manual step by step install, simply copy the commands and 
 
 ## SSL Step-by-step Installation
 ### Pre-Install notes
-* This install guides assumes that you did a clean, basic install of one of the support RHEL based OS's in 64bit architecture.
 * Currently, the Nginx VOD module does not support integration with Kaltura over HTTPs, only HTTP is supported. 
 ### SSL Certificate Configuration
 
@@ -112,6 +138,8 @@ In order to perform a manual step by step install, simply copy the commands and 
 ```bash
 # aptitude update
 # aptitude install ~Nkaltura
+# dpkg-reconfigure kaltura-batch
+# dpkg-reconfigure kaltura-front
 ```
 
 ## Remove Kaltura

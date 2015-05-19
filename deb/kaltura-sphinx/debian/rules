@@ -57,7 +57,6 @@ clean:
 	dh_testdir
 	dh_testroot
 	rm -f build-stamp config.log
-	rm -f debian/memcached.init
 	rm -rf opt/ kaltura-sphinx-$(SPHINX_VERSION)/
 	dh_quilt_unpatch
 	dh_clean 
@@ -86,6 +85,7 @@ binary-arch: build install
 	dh_install $(BASE_PREFIX)
 	dh_installdebconf	
 	dh_installinit
+	dh_installinit --init-script=kaltura-populate.init --name=kaltura-populate
 	dh_installman
 	dh_link
 	dh_strip

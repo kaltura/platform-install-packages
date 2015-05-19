@@ -1,9 +1,9 @@
 #!/bin/bash
 ldconfig
 # register service
-if [ "$1" = "configure" ];
-then
-echo    update-rc.d kaltura-sphinx defaults
+if [ "$1" = "configure" ];then
+	update-rc.d kaltura-sphinx defaults || true
+	update-rc.d kaltura-populate defaults || true
 fi
 
 KALTURA_FUNCTIONS_RC=/opt/kaltura/bin/kaltura-functions.rc
@@ -31,14 +31,14 @@ fi
 #fi
 ln -sf $BASE_DIR/app/configurations/logrotate/kaltura_populate /etc/logrotate.d/
 trap 'my_trap_handler "${LINENO}" ${$?}' ERR
-send_install_becon `basename $0` $ZONE install_start 0 
+TIMEZ=`get_tz`  
+send_install_becon `basename $0` $TIMEZ install_start 0 
 mkdir -p $LOG_DIR/sphinx/data $APP_DIR/cache//sphinx
-chown $OS_KALTURA_USER.$OS_KALTURA_USER $APP_DIR/cache/sphinx $LOG_DIR/sphinx/data $BASE_DIR/sphinx
+chown -R $OS_KALTURA_USER.$OS_KALTURA_USER $APP_DIR/cache/sphinx $LOG_DIR/sphinx $BASE_DIR/sphinx
 echo "sphinxServer = $SPHINX_HOST" > /opt/kaltura/app/configurations/sphinx/populate/`hostname`.ini
-# we should include these in the kaltura-sphinx package instead of kaltura-base.
-# /etc/init.d/kaltura-sphinx restart >/dev/null 2>&1
-# /etc/init.d/kaltura-populate restart >/dev/null 2>&1
-ln -sf $BASE_DIR/app/configurations/monit/monit.d/sphinx.rc /etc/monit/conf.d/
+service kaltura-sphinx restart >/dev/null 2>&1
+service kaltura-populate restart >/dev/null 2>&1
+#ln -sf $BASE_DIR/app/configurations/monit/monit.d/sphinx.rc /etc/monit/conf.d/
 service monit stop >> /dev/null 2>&1
 service monit start
-send_install_becon `basename $0` $ZONE install_success 0
+send_install_becon `basename $0` $TIMEZ install_success 0

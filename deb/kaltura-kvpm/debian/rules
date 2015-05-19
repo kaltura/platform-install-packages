@@ -7,7 +7,7 @@ SOURCE_PACKAGING_DIR ?= $(shell egrep '^SOURCE_PACKAGING_DIR=' $(RC_FILE) | cut 
 KALTURA_PREFIX ?= $(shell egrep '^KALTURA_PREFIX=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
 KVPM_PREFIX=$(KALTURA_PREFIX)/web/flash/kvpm
 include ../includes/build-revision.mk
-archive := $(SOURCE_PACKAGING_DIR)/kaltura-kvpm-$(KVPM_VERSION).zip
+archive := $(SOURCE_PACKAGING_DIR)/kaltura-kvpm-$(KVPM_VERSION).tar.bz2
 tree := $(KVPM_VERSION)
 
 clean:
@@ -19,7 +19,7 @@ $(archive):
 	$(SOURCE_PACKAGING_DIR)/platform-install-packages/build/package_kaltura_kvpm.sh	
 
 $(tree): $(archive)
-	unzip -qq -o $(archive)
+	tar jxf $(archive)
 
 build: $(tree)
 

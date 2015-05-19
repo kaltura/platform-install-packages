@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 10.8.0
-Release: 4
+Version: 10.11.0
+Release: 7
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -33,6 +33,8 @@ Source24: 04.liveParams.ini
 Source25: kaltura_populate.template
 Source26: kaltura_batch.template
 Source28: embedIframeJsAction.class.php
+#Source29: kaltura.ssl.conf.template
+#Source30: 01.kaltura_ce_tables.sql
 
 URL: https://github.com/kaltura/server/tree/%{codename}-%{version}
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -112,6 +114,7 @@ sed -i 's@^writers.\(.*\).filters.priority.priority\s*=\s*7@writers.\1.filters.p
 sed -i 's#\(@DWH_DIR@\)$#\1 -k %{prefix}/pentaho/pdi/kitchen.sh#g' $RPM_BUILD_ROOT%{prefix}/app/configurations/cron/dwh.template
 rm $RPM_BUILD_ROOT%{prefix}/app/generator/sources/android/DemoApplication/libs/libWVphoneAPI.so
 rm $RPM_BUILD_ROOT%{prefix}/app/configurations/.project
+rm $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_content/04.dropFolder.-4.template.xml
 # see https://github.com/kaltura/platform-install-packages/issues/58 - these are taken care of on lines 139 though 144:
 
 # we bring our own for kaltura-front and kaltura-batch.
@@ -140,6 +143,8 @@ cp %{SOURCE18} $RPM_BUILD_ROOT%{prefix}/app/admin_console/views/scripts/index/mo
 cp %{SOURCE19} $RPM_BUILD_ROOT%{prefix}/app/admin_console/controllers/IndexController.php
 # patch for auto embed to work, should be dropped when core merge.
 cp %{SOURCE28} $RPM_BUILD_ROOT%{prefix}/app/alpha/apps/kaltura/modules/extwidget/actions/embedIframeJsAction.class.php
+# tmp patch due to https://github.com/kaltura/platform-install-packages/issues/367
+# cp %{SOURCE29} $RPM_BUILD_ROOT%{prefix}/app/configurations/apache/
 # we bring another in kaltura-batch
 rm $RPM_BUILD_ROOT%{prefix}/app/configurations/batch/batch.ini.template
 
@@ -216,7 +221,10 @@ if [ "$1" = 2 ];then
 		# this is read by kaltura-sphinx-schema-update.sh to determine rather or not to run
 		touch %{prefix}/app/configurations/sphinx_schema_update
 		rm -rf %{prefix}/app/cache/*
+		rm -f %{prefix}/app/base-config-generator.lock
 		php %{prefix}/app/generator/generate.php
+		php %{prefix}/app/deployment/base/scripts/installPlugins.php
+		php %{prefix}/app/deployment/base/scripts/populateSphinxMetadata.php
 		find %{prefix}/app/cache/ %{prefix}/log -type d -exec chmod 775 {} \;
 		find %{prefix}/app/cache/ %{prefix}/log -type f -exec chmod 664 {} \;
 		chown -R %{kaltura_user}.%{apache_user} %{prefix}/app/cache/ %{prefix}/log
@@ -298,6 +306,72 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Sun May 17 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.11.0-7
+- PLAT-2871 - Caption search using KalutraBaseEntryFilter::advancedSearch and cross metadata search
+- PLAT-1998 - Avoid the need to update many metadata objects 
+- PLAT-2850 - API Changes for Q&A 
+- PLAT-2946 - Hide default template uiconfs from partner preview&&embed 
+- SUP-3451 - KMC error - The language 'sv_SE' has to be added before it can be used. 
+- SUP-3965 - Telepictures - high storage usage, flavors are not deleted after export? 
+- PLAT-2914 - Too many logs are written to file 
+- PLAT-2906 - Json serializer causing Studio crash 
+- PLAT-2387 - manual dispatch error 
+- PLAT-2934 - clip_test script fails 
+- PLAT-2940 - groupUser->list return fatal error
+- https://github.com/kaltura/server/pull/2561 
+
+* Tue May 5 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.11.0-1
+- Ver Bounce to 10.11.0
+
+* Tue May 5 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.10.0-3
+- Tmp patch for https://github.com/kaltura/server/pull/2522 and https://github.com/kaltura/server/pull/2521
+
+* Mon May 4 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.10.0-2
+- PLAT-2042 - Kaltura MRSS Ingest for PostMedia (TR next)
+- PLAT-2829 - New feature: Add a pager to playlist->execute
+- SUP-3584 - Ellentv.com V2 playlist is out of sync
+- SUP-4358 - [Pearson] Java API SDK throws a NumberFormatException
+- PLAT-2865 - Live - isLive remains on true after stop streaming (regression)
+- PLAT-1600 - Duplicate VOD entry is created when stopping streaming before live entry starts to play. 
+- PLAT-2497 - randomly the HLS flavors in the cloud transcode are not in sync
+- PLAT-2885 - Kaltura Live with DVR: Player stuck for a few minutes after loading page
+- WEBC-467 - Application error received when attempting to edit a webcast 
+
+* Sun Apr 26 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.10.0-1
+- Ver Bounce to 10.10.0
+
+* Sun Apr 26 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.9.0-7
+- SUP-4081 - distributing from remote storage
+- PLAT-2055 - Trim is not performed on Kaltura Live recorded VOD entry.
+- PLAT-2593 - Live - Passthrough recorded entries sometimes missing Source and Ingest3 flavors
+- PLAT-2762 - Sometimes live entries are not synced between DC
+- PLAT-2489 - image extension - set according to original file
+
+* Mon Apr 13 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.9.0-5
+- merged https://github.com/phansys/server/commit/9e24777565cf21bf65f327c1406fa2cb8ff70dc3
+
+* Mon Apr 6 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.9.0-1
+- Ver Bounce to 10.9.0
+
+* Sun Apr 5 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.8.0-12
+- Run installPlugins.php post upgrade.
+
+* Sun Apr 5 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.8.0-11
+- SUP-3451 - KMC error - The language 'sv_SE' has to be added before it can be used.
+- SUP-4124 - Adding support for video file extension .m2ts
+- SUP-3916 - [2.27.1] AutoEmbed+HTTPS+streamerType=auto does not play on HTTP sites
+- SUP-3864 - Download gets cut for large flavors
+- PLAT-2653 - DVR audience missing on calculation audience on entry cube
+- PLAT-2616 - Entries on "All Viewed Live Entries" dashboard do not sorted
+- PLAT-2630 - location map enhancements
+- PLAT-1680 - Server KalturaMediaEntryFilterForPlaylist call does not respect filter limit or pagging
+- PLAT-2005 - Can't use Amazon remote storage
+- PLAT-2654 - DVR audience missing on total audience calculation on CSV report
+- PLAT-2646 - Predictive Tags: Suggested tags displayed twice
+
+* Thu Apr 2 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.8.0-10
+- Tmp patch due to https://github.com/kaltura/platform-install-packages/issues/367
+
 * Mon Mar 23 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.8.0-3
 - Stop monit before starting upgrade, restart when done.
 

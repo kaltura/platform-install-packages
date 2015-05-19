@@ -412,6 +412,7 @@ To upgrade your DB schema.
 Use this in cases where you want to clear the database and start from fresh.
 ```bash
 /opt/kaltura/bin/kaltura-drop-db.sh
+/opt/kaltura/bin/kaltura-drop-db.sh
 yum remove "*kaltura*"
 rm -rf /opt/kaltura
 ```

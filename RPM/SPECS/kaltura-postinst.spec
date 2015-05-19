@@ -1,8 +1,8 @@
 %define prefix /opt/kaltura 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
-Version: 1.0.24
-Release: 9
+Version: 1.0.25
+Release: 14
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -12,7 +12,7 @@ Source3: sql_updates
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
-Requires: bc,unzip
+Requires: bc,unzip,redhat-lsb-core
 
 %description
 Kaltura is the world's first Open Source Online Video Platform, transforming the way people work, 
@@ -73,6 +73,7 @@ if [ "$1" = 2 ];then
 	fi
 fi
 %preun
+find %{_sysconfdir}/logrotate.d -type l -name "kaltura_*" -exec rm {} \;
 
 %files
 %{prefix}/bin/*
@@ -81,6 +82,24 @@ fi
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Tue May 5 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.25-11
+- Reinstated clipping checks.
+
+* Mon May 4 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.25-10
+- Disable trimming and clipping tests as they stopped working since 10.9.0.
+
+* Mon Apr 13 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.25-3
+- Modifications to allow sanity to run on both RPM and deb based systsms.
+
+* Mon Apr 6 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.25-2
+- Use example.com for test partner. example.com is ignored by MTAs.
+
+* Fri Apr 3 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.24-12
+- Remove logrotate syms during preun.
+
+* Thu Apr 2 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.24-11
+- Added script to clean all data from the DWH DBs. Useful for when you want to keep the operational 'kaltura' DB but clear analytics.
+
 * Tue Mar 17 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.24-9
 - corrected clipapp sanity check.
 

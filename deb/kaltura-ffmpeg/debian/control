@@ -60,7 +60,25 @@ Pre-Depends:
  dpkg (>= 1.15.7.2~)
 Depends:
  ${misc:Depends},
- ${shlibs:Depends}
+ ${shlibs:Depends},
+ libopencore-amrwb0,
+ libx264-123,
+ libopencore-amrnb0,
+ libfdk-aac0,
+ libass4,
+ libfaac0,
+ libgsm1,
+ libmp3lame0,
+ libopenjpeg2,
+ libschroedinger-1.0-0,
+ libspeex1,
+ libtheora0,
+ libva1,
+ libvpx1,
+ libxvidcore4,
+ libvorbis0a, 
+ libvorbisenc2, 
+ libvorbisfile3
 Description: 
  FFmpeg is a very fast video and audio converter. It can also grab from a
  live audio/video source.

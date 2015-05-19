@@ -215,7 +215,7 @@ params.fastStartCmd									= @BIN_DIR@/qt-faststart
 params.avidemuxCmd									= @BIN_DIR@/avidemux2_cli
 params.segmenterCmd									= @BIN_DIR@/segmenter
 params.pdf2SwfCmd									= @BIN_DIR@/pdf2swf
-params.ImageMagickCmd=%{bindir}/convert
+params.ImageMagickCmd=convert
 
 params.EncodingComUserId							= should-fail
 params.EncodingComUserKey							= should-fail
