@@ -1,0 +1,28 @@
+#!/bin/bash
+
+KALTURA_FUNCTIONS_RC=/opt/kaltura/bin/kaltura-functions.rc
+if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
+        OUT="${BRIGHT_RED}ERROR:could not find $KALTURA_FUNCTIONS_RC so, exiting..${NORMAL}"
+        echo -en $OUT
+        exit 3
+fi
+
+
+. $KALTURA_FUNCTIONS_RC
+set -e
+if [ "$1" = "configure" ]; then
+        . /usr/share/debconf/confmodule
+	if [ -r /etc/kaltura.d/system.ini ];then
+		. /etc/kaltura.d/system.ini
+		HTML5_STUDIO_VER=`grep "^studio_version" /opt/kaltura/app/configurations/local.ini|awk -F "=" '{print $2}'|sed 's@\s*@@g'`
+		HTML5_DIR=`ls -ld $BASE_DIR/web/html5/html5lib/v* 2>/dev/null|awk -F " " '{print $NF}' |tail -1`
+		HTML5_VER=`basename $HTML5_DIR`
+        	db_get 'kaltura-base/cdn_hostname'
+        	CDN_HOST=$RET
+		sed -e "s#@HTML5_STUDIO_VER@#$HTML5_STUDIO_VER#g" -e "s#@HTML5_VER@#$HTML5_VER#g" -e "s#@CDN_HOST@#$CDN_HOST#g" $BASE_DIR/apps/studio/$HTML5_STUDIO_VER/studio.template.ini > $BASE_DIR/apps/studio/$HTML5_STUDIO_VER/studio.ini
+                php $BASE_DIR/app/deployment/uiconf/deploy_v2.php --user=www-data --ini=$BASE_DIR/apps/studio/$HTML5_STUDIO_VER/studio.ini >> /dev/null
+                chown -R www-data.kaltura $WEB_DIR/content/generatedUiConf/
+                sed -i "s@^\(studio_version\s*=\)\(.*\)@\1 $STUDIO_VER@g" -i $BASE_DIR/app/configurations/local.ini
+		service apache2 reload		
+	fi
+fi
