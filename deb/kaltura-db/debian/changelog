@@ -1,0 +1,11 @@
+kaltura-db (10.10.0) jupiter; urgency=low
+
+  * fix call to send_install_becon to correctly provide TZ.
+
+ -- Jess Portnoy <jess.portnoy@kaltura.com>  Thu, 07 Apr 2015 17:07:13 +0000
+
+kaltura-db (10.9.0) jupiter; urgency=low
+
+  * Switching to 10.9.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.com>  Thu, 07 Apr 2015 17:07:13 +0000

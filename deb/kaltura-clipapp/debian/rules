@@ -1,0 +1,41 @@
+#!/usr/bin/make -f
+
+DEB_VERSION := $(shell dpkg-parsechangelog | egrep '^Version:' | cut -f 2 -d ' ')
+RC_FILE :=../../build/sources.rc
+CLIPAPP_VERSION ?= $(shell egrep '^CLIPAPP_NO_V_VERSION=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
+RPM_SOURCES_DIR ?= $(shell egrep '^RPM_SOURCES_DIR=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
+KALTURA_PREFIX ?= $(shell egrep '^KALTURA_PREFIX=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
+CLIPAPP_PREFIX=$(KALTURA_PREFIX)/apps/clipapp
+include ../includes/build-revision.mk
+archive := $(RPM_SOURCES_DIR)/kaltura-clipapp-v$(CLIPAPP_VERSION).zip
+tree := clipapp-$(CLIPAPP_VERSION)
+
+clean:
+	dh_clean
+	rm -rf $(tree) 
+	rm -rf debian/tmp
+
+$(archive):
+	$(RPM_SOURCES_DIR)/platform-install-packages/build/package_kaltura_clipapp.sh	
+
+$(tree): $(archive)
+	unzip -qqo $(archive)
+
+build: $(tree)
+
+install: build
+
+binary-indep: install
+	dh_installdirs
+	rm -rf $(CLIPAPP_PREFIX)
+	mkdir -p $(CLIPAPP_PREFIX)
+	mv $(tree) $(CLIPAPP_PREFIX)/v$(CLIPAPP_VERSION)
+	cp $(CLIPAPP_PREFIX)/v$(CLIPAPP_VERSION)/config.kmc.php $(CLIPAPP_PREFIX)/v$(CLIPAPP_VERSION)/config.local.php
+	dh_install $(CLIPAPP_PREFIX)
+	dh_gencontrol -u-v$(DEB_VERSION) 
+	dh_installdebconf
+	dh_installdeb
+	dh_builddeb 
+
+binary: binary-indep
+.PHONY: clean build binary-indep binary-arch binary

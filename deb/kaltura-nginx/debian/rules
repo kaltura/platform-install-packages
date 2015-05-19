@@ -1,0 +1,133 @@
+#!/usr/bin/make -f
+
+
+DEB_VERSION := $(shell dpkg-parsechangelog | egrep '^Version:' | cut -f 2 -d ' ')
+RC_FILE :=../../build/sources.rc
+NGINX_VERSION ?= $(shell egrep '^NGINX_VERSION=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
+KALTURA_NGINX_VOD_VERSION ?= $(shell egrep '^KALTURA_NGINX_VOD_VERSION=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
+KALTURA_NGINX_AKAMAI_TOKEN_VALIDATE_VERSION ?= $(shell egrep '^KALTURA_NGINX_AKAMAI_TOKEN_VALIDATE_VERSION=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
+KALTURA_NGINX_SECURE_TOKEN_VERSION ?= $(shell egrep '^KALTURA_NGINX_SECURE_TOKEN_VERSION=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
+SOURCE_PACKAGING_DIR ?= $(shell egrep '^RPM_SOURCES_DIR=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
+include ../includes/build-revision.mk
+tree := nginx-$(NGINX_VERSION)
+archive := $(SOURCE_PACKAGING_DIR)/kaltura-$(tree).tar.gz
+vod_module_archive := $(SOURCE_PACKAGING_DIR)/nginx-vod-module-$(KALTURA_NGINX_VOD_VERSION).zip
+secure_token_module_archive := $(SOURCE_PACKAGING_DIR)/nginx-secure-token-module-$(KALTURA_NGINX_SECURE_TOKEN_VERSION).zip
+akamai_token_validate_module_archive := $(SOURCE_PACKAGING_DIR)/nginx-akamai-token-validate-module-$(KALTURA_NGINX_AKAMAI_TOKEN_VALIDATE_VERSION).zip
+
+BASE_PREFIX=opt/kaltura/nginx
+NGINX_USER=kaltura
+NGINX_GROUP=kaltura
+# These are used for cross-compiling and for saving the configure script
+# from having to guess our platform (since we know it already)
+DEB_HOST_GNU_TYPE   ?= $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
+DEB_BUILD_GNU_TYPE  ?= $(shell dpkg-architecture -qDEB_BUILD_GNU_TYPE)
+
+CFLAGS = `dpkg-buildflags --get CFLAGS`
+CFLAGS += -Wall
+LDFLAGS = `dpkg-buildflags --get LDFLAGS -L/opt/kaltura/ffmpeg-2.1.3/lib`
+CPPFLAGS = `dpkg-buildflags --get CPPFLAGS`
+   
+ifeq (,$(findstring nostrip,$(DEB_BUILD_OPTIONS)))
+	INSTALL_PROGRAM += -s
+endif
+#LD_LIBRARY_PATH=/opt/kaltura/ffmpeg-2.1.3/lib 
+#LIBRARY_PATH=/opt/kaltura/ffmpeg-2.1.3/lib 
+#C_INCLUDE_PATH=/opt/kaltura/ffmpeg-2.1.3/include
+#export LD_LIBRARY_PATH LIBRARY_PATH C_INCLUDE_PATH
+$(archive):
+	~/sources/platform-install-packages/build/package_kaltura_nginx.sh
+
+$(tree): $(archive)
+	tar zxf $(archive) 
+	unzip -o $(vod_module_archive) -d $(tree)
+	echo unzip -o $(vod_module_archive) -d $(tree)
+	unzip -o $(secure_token_module_archive) -d $(tree) 
+	unzip -o $(akamai_token_validate_module_archive) -d $(tree)
+
+config.status: $(tree) 
+	dh_testdir
+	cd $(tree) && CFLAGS="$(CFLAGS)" CPPFLAGS="$(CPPFLAGS)" LDFLAGS="$(LDFLAGS)" LD_LIBRARY_PATH=/opt/kaltura/ffmpeg-2.1.3/lib LIBRARY_PATH=/opt/kaltura/ffmpeg-2.1.3/lib C_INCLUDE_PATH=/opt/kaltura/ffmpeg-2.1.3/include ./configure \
+        --prefix=/$(BASE_PREFIX) \
+        --error-log-path=/opt/kaltura/log/nginx/error.log \
+        --http-log-path=/opt/kaltura/log/nginx/access.log \
+        --user=$(NGINX_USER) \
+        --group=$(NGINX_GROUP) \
+        --with-http_ssl_module \
+        --with-http_realip_module \
+        --with-http_addition_module \
+        --with-http_sub_module \
+        --with-http_dav_module \
+        --with-http_flv_module \
+        --with-http_mp4_module \
+        --with-http_gunzip_module \
+        --with-http_gzip_static_module \
+        --with-http_random_index_module \
+        --with-http_secure_link_module \
+        --with-http_stub_status_module \
+        --with-http_auth_request_module \
+        --with-mail \
+        --with-mail_ssl_module \
+        --with-file-aio \
+        --with-ipv6 \
+        --with-debug \
+	--add-module=./nginx-vod-module-$(KALTURA_NGINX_VOD_VERSION) \
+	--add-module=./nginx-secure-token-module-$(KALTURA_NGINX_SECURE_TOKEN_VERSION) \
+	--add-module=./nginx-akamai-token-validate-module-$(KALTURA_NGINX_AKAMAI_TOKEN_VALIDATE_VERSION) \
+        $*
+
+build: build-stamp
+
+build-stamp:  config.status
+	#dh_quilt_patch
+	dh_testdir
+
+	cd $(tree) && LD_LIBRARY_PATH=/opt/kaltura/ffmpeg-2.1.3/lib LIBRARY_PATH=/opt/kaltura/ffmpeg-2.1.3/lib C_INCLUDE_PATH=/opt/kaltura/ffmpeg-2.1.3/include  $(MAKE)
+
+	touch build-stamp
+
+clean:
+	dh_testdir
+	dh_testroot
+	rm -f build-stamp config.log
+	rm -rf opt/ kaltura-nginx-$(NGINX_VERSION)/
+	dh_quilt_unpatch
+	dh_clean 
+
+install: build
+	dh_testdir
+	dh_testroot
+	dh_clean -k 
+	dh_installdirs
+	cd $(tree) && LD_LIBRARY_PATH=/opt/kaltura/ffmpeg-2.1.3/lib LIBRARY_PATH=/opt/kaltura/ffmpeg-2.1.3/lib C_INCLUDE_PATH=/opt/kaltura/ffmpeg-2.1.3/include $(MAKE) -C . install DESTDIR=$(CURDIR)/debian/$(tree)/
+
+
+# Build architecture-independent files here.
+binary-indep:;
+# We have nothing to do by default.
+
+# Build architecture-dependent files here.
+binary-arch: build install
+	mkdir -p $(BASE_PREFIX) opt/kaltura/log/nginx $(BASE_PREFIX)/static
+	dh_testdir
+	dh_testroot
+	#dh_installchangelogs $(BASE_PREFIX)/CHANGES
+	mv debian/$(tree)/$(BASE_PREFIX)/* $(BASE_PREFIX)
+	cp debian/logrotate $(BASE_PREFIX)/conf/
+	cp debian/kaltura.conf.template $(BASE_PREFIX)/conf/
+	dh_install $(BASE_PREFIX) 
+	dh_install opt/kaltura/log/nginx
+	dh_installdebconf	
+	dh_installinit
+	dh_installman
+	dh_link
+	dh_strip
+	dh_compress
+	dh_installdeb
+	#LD_LIBRARY_PATH=$(BASE_PREFIX)/lib dh_shlibdeps
+	dh_gencontrol -u-v$(DEB_VERSION) 
+	dh_md5sums
+	dh_builddeb
+
+binary: binary-indep binary-arch
+.PHONY: build clean binary-indep binary-arch binary install 
