@@ -19,10 +19,16 @@ if [ "$1" = "configure" ]; then
 		HTML5_VER=`basename $HTML5_DIR`
         	db_get 'kaltura-base/cdn_hostname'
         	CDN_HOST=$RET
-		sed -e "s#@HTML5_STUDIO_VER@#$HTML5_STUDIO_VER#g" -e "s#@HTML5_VER@#$HTML5_VER#g" -e "s#@CDN_HOST@#$CDN_HOST#g" $BASE_DIR/apps/studio/$HTML5_STUDIO_VER/studio.template.ini > $BASE_DIR/apps/studio/$HTML5_STUDIO_VER/studio.ini
-                php $BASE_DIR/app/deployment/uiconf/deploy_v2.php --user=www-data --ini=$BASE_DIR/apps/studio/$HTML5_STUDIO_VER/studio.ini >> /dev/null
-                chown -R www-data.kaltura $WEB_DIR/content/generatedUiConf/
-                sed -i "s@^\(studio_version\s*=\)\(.*\)@\1 $STUDIO_VER@g" -i $BASE_DIR/app/configurations/local.ini
-		service apache2 reload		
+		if [ -r $BASE_DIR/apps/studio/$HTML5_STUDIO_VER/studio.template.ini ];then
+			sed -e "s#@HTML5_STUDIO_VER@#$HTML5_STUDIO_VER#g" -e "s#@HTML5_VER@#$HTML5_VER#g" -e "s#@CDN_HOST@#$CDN_HOST#g" $BASE_DIR/apps/studio/$HTML5_STUDIO_VER/studio.template.ini > $BASE_DIR/apps/studio/$HTML5_STUDIO_VER/studio.ini
+
+			php $BASE_DIR/app/deployment/uiconf/deploy_v2.php --user=www-data --ini=$BASE_DIR/apps/studio/$HTML5_STUDIO_VER/studio.ini >> /dev/null 2>&1 || true
+			if [ -d $WEB_DIR/content/generatedUiConf ];then
+				chown -R www-data.kaltura $WEB_DIR/content/generatedUiConf/
+			fi
+                	sed -i "s@^\(studio_version\s*=\)\(.*\)@\1 $STUDIO_VER@g" -i $BASE_DIR/app/configurations/local.ini
+			service apache2 reload		
+		fi
+
 	fi
 fi
