@@ -1,3 +1,10 @@
+kaltura-postinst (1.0.26) jupiter; urgency=low
+
+  * Fix studio sanity on deb
+  * Redirect errors Can't DROP| already exists| Duplicate column name to /dev/null for db-update.sh since they stem from the fact these update SQLs were already prev. processed and are therefore not actual errors.
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Thu, 21 May 2015 14:37:45 +0000
+
 kaltura-postinst (1.0.25-1) experimental; urgency=low
 
   - First package

@@ -1,8 +1,8 @@
 %define prefix /opt/kaltura 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
-Version: 1.0.25
-Release: 14
+Version: 1.0.26
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -82,6 +82,10 @@ find %{_sysconfdir}/logrotate.d -type l -name "kaltura_*" -exec rm {} \;
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Thu May 21 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.26-1
+- Fix studio sanity on deb
+- Redirect errors Can't DROP| already exists| Duplicate column name to /dev/null for db-update.sh since they stem from the fact these update SQLs were already prev. processed and are therefore not actual errors.
+
 * Tue May 5 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.25-11
 - Reinstated clipping checks.
 
