@@ -1,3 +1,9 @@
+kaltura-front (10.11.0-1) jupiter; urgency=low
+
+  * fix detection of HTML5lib and studio vers.
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Wed, 20 May 2015 17:29:39 +0000
+
 kaltura-front (10.10.0-1) experimental; urgency=low
 
   * fix call to send_install_becon

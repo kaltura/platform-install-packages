@@ -491,13 +491,10 @@ check_kmc_index_page()
 check_studio_index_page()
 {
 	GOOD_STRING='Universal Studio'
-	if [ "$PACKAGE_TYPE" = rpm ];then
-		HTML5_STUDIO_VERSION=`rpm -qa kaltura-html5-studio --queryformat %{version}`
-		STUDIO_URL="$SERVICE_URL/apps/studio/$HTML5_STUDIO_VERSION/index.html"
-	elif [ "$PACKAGE_TYPE" = deb ];then
-		HTML5_STUDIO_VERSION=`dpkg-query -W -f'${Version}' kaltura-html5-studio|awk -F "+" '{print $1}'`
-		STUDIO_URL="$SERVICE_URL/apps/studio/v$HTML5_STUDIO_VERSION/index.html"
-	fi
+	HTML5_STUDIO_DIR=`ls -ld $BASE_DIR/apps/studio/v* 2>/dev/null|awk -F " " '{print $NF}' |tail -1`
+	STUDIO_VER=`basename $HTML5_STUDIO_DIR`
+	STUDIO_URL="$SERVICE_URL/apps/studio/$STUDIO_VER/index.html"
+
 	curl -ks $STUDIO_URL  | grep -q "$GOOD_STRING"
 	if [ $? -eq 0 ];then
 		echo "Successfully found '$GOOD_STRING'"

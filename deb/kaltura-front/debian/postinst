@@ -229,7 +229,10 @@ Please select one of the following options [0]:
 		trap - ERR
 		echo "use kaltura" | mysql -h$DB1_HOST -u$DB1_USER -p$DB1_PASS -P$DB1_PORT $DB1_NAME 2> /dev/null
 		if [ $? -eq 0 ];then
-			STUDIO_VER=v`dpkg-query -W -f'${Version}' kaltura-html5-studio|awk -F "+" '{print $1}'`
+			HTML5_DIR=`ls -ld $BASE_DIR/web/html5/html5lib/v* 2>/dev/null|awk -F " " '{print $NF}' |tail -1`
+			HTML5_VER=`basename $HTML5_DIR`
+			HTML5_DIR=`ls -ld $BASE_DIR/apps/studio/v* 2>/dev/null|awk -F " " '{print $NF}' |tail -1`
+			STUDIO_VER=`basename $HTML5_DIR`
 			if [ -r "$BASE_DIR/apps/studio/$STUDIO_VER/studio.ini" ];then
 				php $BASE_DIR/app/deployment/uiconf/deploy_v2.php --user=www-data --ini=$BASE_DIR/apps/studio/$STUDIO_VER/studio.ini >> /dev/null
 				chown -R $APACHE_USER.$KALTURA_GROUP $WEB_DIR/content/generatedUiConf/
@@ -241,8 +244,7 @@ Please select one of the following options [0]:
 				php $BASE_DIR/app/deployment/uiconf/deploy_v2.php --user=www-data --ini=$KMC_PATH/config.ini >> /dev/null
 				chown -R $APACHE_USER.$KALTURA_GROUP $WEB_DIR/content/generatedUiConf/
 			fi
-			HTML5_PATH=`ls -ld $BASE_DIR/web/html5/html5lib/v* 2>/dev/null|awk -F " " '{print $NF}' |tail -1`
-			sed -i "s@^\(html5_version\s*=\)\(.*\)@\1 `dpkg-query -W -f'${Version}' kaltura-html5lib|awk -F "+" '{print $1}'`@g" -i $BASE_DIR/app/configurations/local.ini
+			sed -i "s@^\(html5_version\s*=\)\(.*\)@\1 $HTML5_VER@g" -i $BASE_DIR/app/configurations/local.ini
 		fi
 		trap 'my_trap_handler "${LINENO}" ${$?}' ERR
 		send_install_becon `basename $0` $TIMEZ install_success 0 

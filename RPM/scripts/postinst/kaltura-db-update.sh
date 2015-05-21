@@ -30,7 +30,7 @@ if [ -r "/opt/kaltura/app/configurations/system.ini" -a -r /opt/kaltura/app/depl
 				if [ -z "$DB_PORT" ];then
 					DB1_PORT=3306
 				fi
-				OUT="$OUT || `mysql kaltura -h $DB1_HOST -u $DB1_USER -P $DB1_PORT -p$DB1_PASS < $SQL  2>&1`"
+				OUT=`mysql kaltura -h $DB1_HOST -u $DB1_USER -P $DB1_PORT -p$DB1_PASS < $SQL  2>&1 |grep -v "Can't DROP\|already exists\|Duplicate column name"`
 				RC=$?
 		done
 		if [ $RC -eq 0 ];then
