@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 10.11.0
-Release: 7
+Release: 8
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -35,6 +35,7 @@ Source26: kaltura_batch.template
 Source28: embedIframeJsAction.class.php
 #Source29: kaltura.ssl.conf.template
 #Source30: 01.kaltura_ce_tables.sql
+Source31: kMetadataManager.php
 
 URL: https://github.com/kaltura/server/tree/%{codename}-%{version}
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -143,6 +144,7 @@ cp %{SOURCE18} $RPM_BUILD_ROOT%{prefix}/app/admin_console/views/scripts/index/mo
 cp %{SOURCE19} $RPM_BUILD_ROOT%{prefix}/app/admin_console/controllers/IndexController.php
 # patch for auto embed to work, should be dropped when core merge.
 cp %{SOURCE28} $RPM_BUILD_ROOT%{prefix}/app/alpha/apps/kaltura/modules/extwidget/actions/embedIframeJsAction.class.php
+cp %{SOURCE31} $RPM_BUILD_ROOT%{prefix}/app/plugins/metadata/lib/kMetadataManager.php
 # tmp patch due to https://github.com/kaltura/platform-install-packages/issues/367
 # cp %{SOURCE29} $RPM_BUILD_ROOT%{prefix}/app/configurations/apache/
 # we bring another in kaltura-batch
@@ -306,6 +308,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Sun May 25 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.11.0-8
+- Backporting https://github.com/kaltura/server/pull/2574
+
 * Sun May 17 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.11.0-7
 - PLAT-2871 - Caption search using KalutraBaseEntryFilter::advancedSearch and cross metadata search
 - PLAT-1998 - Avoid the need to update many metadata objects 
