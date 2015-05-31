@@ -45,13 +45,13 @@ Requires(pre): pwdutils
 %define nginx_vod_module_ver 1.1
 %define nginx_secure_token_ver 1.0.1
 %define nginx_token_validate_ver 1.0.1
-%define nginx_vts_ver master
+%define nginx_vts_ver 0.1.1
 # end of distribution specific definitions
 
 Summary: High performance web server customized for Kaltura VOD
 Name: kaltura-nginx
 Version: 1.8.0
-Release: 3
+Release: 4
 Vendor: Kaltura inc.
 URL: http://nginx.org/
 
@@ -68,7 +68,7 @@ Source9: nginx.upgrade.sh
 Source10: nginx-vod-module-%{nginx_vod_module_ver}.zip  
 Source11: nginx-secure-token-module-%{nginx_secure_token_ver}.zip
 Source12: nginx-akamai-token-validate-module-%{nginx_token_validate_ver}.zip
-Source13: nginx-module-vts-%{nginx_vts_ver}.zip
+Source13: nginx-module-vts-v%{nginx_vts_ver}.zip
 #Patch1: nginx_kaltura.diff 
 
 License: 2-clause BSD-like license
@@ -361,6 +361,9 @@ if [ $1 -ge 1 ]; then
         "Binary upgrade failed, please check nginx's error.log"
 fi
 %changelog
+* Sun May 31 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.8.0-4
+- VTS module now tagged.
+
 * Wed May 13 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.8.0-3
 - nginx-vod-module tag 1.1
 
