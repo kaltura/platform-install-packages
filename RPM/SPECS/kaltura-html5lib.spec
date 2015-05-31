@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.30
+Version: v2.31
 Release: 1
 Epoch:0 
 License: AGPLv3+
@@ -89,6 +89,12 @@ rm -rf %{buildroot}
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Sun May 31 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v2.31-1
+- FEC-3185 - Add paging ability to core playlist
+- FEC-3504 - Add playSessionId to each playmanifest
+- FEC-3502 - Do not display slides, scubber or chapters when no DVR info is avalaible
+- FEC-2412 - Support configuration on flavor selector to display bitrate instead of size
+
 * Mon May 4 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v2.30-1
 - FEC-3100 - Support DFP player identification
 - SUP-3177 - [v2.20] Player stuck when seeking on Firefox/OSX, webm flavor
