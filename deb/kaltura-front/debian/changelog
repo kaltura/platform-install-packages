@@ -1,3 +1,9 @@
+kaltura-front (10.12.0-1) jupiter; urgency=low
+
+  * Ver bounce.
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Sun, 31 May 2015 13:00:24 +0000
+
 kaltura-front (10.11.0-1) jupiter; urgency=low
 
   * fix detection of HTML5lib and studio vers.

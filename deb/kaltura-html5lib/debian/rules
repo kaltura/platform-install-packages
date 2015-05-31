@@ -21,6 +21,7 @@ $(archive):
 
 $(tree): $(archive)
 	tar zxf $(RPM_SOURCES_DIR)/kaltura-html5lib-$(HTML5LIB_LATEST_VERSION).tar.gz
+	tar zxf $(RPM_SOURCES_DIR)/kaltura-html5lib-v2.30.tar.gz
 	tar zxf $(RPM_SOURCES_DIR)/kaltura-html5lib-v2.29.tar.gz
 
 build: $(tree)
@@ -33,8 +34,10 @@ binary-indep: install
 	mkdir -p $(HTML5LIB_PREFIX)
 	mv kaltura-html5lib-$(HTML5LIB_LATEST_VERSION) $(HTML5LIB_PREFIX)/$(HTML5LIB_LATEST_VERSION)
 	mv kaltura-html5lib-v2.29 $(HTML5LIB_PREFIX)/v2.29
+	mv kaltura-html5lib-v2.30 $(HTML5LIB_PREFIX)/v2.30
 	cp debian/LocalSettings.php $(HTML5LIB_PREFIX)/$(HTML5LIB_LATEST_VERSION)/
 	cp debian/LocalSettings.php $(HTML5LIB_PREFIX)/v2.29/
+	cp debian/LocalSettings.php $(HTML5LIB_PREFIX)/v2.30/
 	dh_install $(KALTURA_PREFIX)
 	dh_gencontrol -u-v$(DEB_VERSION) 
 	dh_installdebconf

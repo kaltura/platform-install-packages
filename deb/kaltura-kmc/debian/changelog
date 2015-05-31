@@ -1,3 +1,9 @@
+kaltura-kmc (5.39.1-2) jupiter; urgency=low
+
+  * HTML5lib ver bounce to v2.31.
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Sun, 31 May 2015 12:40:25 +0000
+
 kaltura-kmc (5.39.1-1) experimental; urgency=low
 
   - ver 5.39.1
