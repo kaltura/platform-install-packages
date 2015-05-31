@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 10.12.0
-Release: 4
+Release: 5
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -35,6 +35,7 @@ Source26: kaltura_batch.template
 Source28: embedIframeJsAction.class.php
 #Source29: kaltura.ssl.conf.template
 #Source30: 01.kaltura_ce_tables.sql
+Source31: KalturaTypeReflector.php
 
 URL: https://github.com/kaltura/server/tree/%{codename}-%{version}
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -147,6 +148,7 @@ cp %{SOURCE28} $RPM_BUILD_ROOT%{prefix}/app/alpha/apps/kaltura/modules/extwidget
 # cp %{SOURCE29} $RPM_BUILD_ROOT%{prefix}/app/configurations/apache/
 # we bring another in kaltura-batch
 rm $RPM_BUILD_ROOT%{prefix}/app/configurations/batch/batch.ini.template
+cp %{SOURCE31} $RPM_BUILD_ROOT%{prefix}/app/api_v3/lib/KalturaTypeReflector.php
 
 
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content
@@ -306,6 +308,15 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Sun May 31 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.12.0-5
+- SUP-4016 - Cannot find category in analytics "Select Categories" drop down menu
+- SUP-4408 - Specific WMV file not transcoding 
+- SUP-4695 - Entry does not display as expected
+- SUP-4739 - Player's download button does not work in KMS
+- PLAT-2204 - Can't add thumb cuepoint of sub type chapter without a slide
+- PLAT-2987 - Auto-Intermediate-source flow for sources that processable only by Mencoder
+- https://github.com/kaltura/server/blob/Jupiter-10.12.0-typeReflectorError/api_v3/lib/KalturaTypeReflector.php
+
 * Tue May 19 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.12.0-1
 - Ver Bounce to 10.12.0
 

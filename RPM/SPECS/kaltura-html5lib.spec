@@ -94,6 +94,17 @@ rm -rf %{buildroot}
 - FEC-3504 - Add playSessionId to each playmanifest
 - FEC-3502 - Do not display slides, scubber or chapters when no DVR info is avalaible
 - FEC-2412 - Support configuration on flavor selector to display bitrate instead of size
+- SUP-4030 - Letterboxing bug when setting player for live stream
+- SUP-4589 - GroovyGecko - Google Analytics urchinCode plugin
+- SUP-4509 - Downloading a specific flavor
+- SUP-4237 - Rate Selector - speed conversion not working properly 
+- SUP-3568 - Change Iframe title from "Kaltura Embed Player iFrame" to the player's title
+- SUP-4621 - Player Analytics regression around statistics properties
+- SUP-3383 - "Install Flash" message not shown on IE8
+- SUP-3590 - Translating error message from English to Dutch 
+- SUP-4572 - issue with video on application for iOS devices
+- SUP-4129 - Page zoomed in after exiting fullscreen
+- SUP-4678 - Full screen issue in Android Galaxy Note and Galaxy S3
 
 * Mon May 4 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v2.30-1
 - FEC-3100 - Support DFP player identification
