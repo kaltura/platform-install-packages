@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 10.12.0
-Release: 5
+Version: 10.13.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -308,6 +308,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Jun 1 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.13.0-1
+- Ver Bounce to 10.13.0
+
 * Sun May 31 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.12.0-5
 - SUP-4016 - Cannot find category in analytics "Select Categories" drop down menu
 - SUP-4408 - Specific WMV file not transcoding 
