@@ -2,7 +2,7 @@
 #===============================================================================
 #          FILE: kaltura-nginx-config.sh
 #         USAGE: ./kaltura-nginx-config.sh 
-#   DESCRIPTION: configure server as a batch node.
+#   DESCRIPTION: configure server as an Nginx  node.
 #       OPTIONS: ---
 # 	LICENSE: AGPLv3+
 #  REQUIREMENTS: ---
@@ -31,7 +31,7 @@ verify_user_input()
                 $VALS
                 "
                 echo -en "${BRIGHT_RED}$OUT${NORMAL}\n"
-                send_install_becon kaltura-base $ZONE "install_fail"  "$OUT"
+                send_install_becon kaltura-nginx $ZONE "install_fail"  "$OUT"
                 exit $RC 
         fi
 }

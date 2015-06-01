@@ -27,8 +27,8 @@ if [ ! -x "`which wget 2>/dev/null`" ];then
 fi
 mkdir -p $RPM_SOURCES_DIR/$KALTURA_PLAYSERVER_RPM_NAME
 
-wget $KALTURA_PLAYSERVER_URI -O$RPM_SOURCES_DIR/KalturaWowzaServer-install-$KALTURA_PLAYSERVER_VERSION.zip
-echo "Packaged into $RPM_SOURCES_DIR/KalturaWowzaServer-install-$KALTURA_PLAYSERVER_VERSION.zip"
+wget $KALTURA_PLAYSERVER_URI -O$RPM_SOURCES_DIR/$KALTURA_PLAYSERVER_RPM_NAME-$KALTURA_PLAYSERVER_VERSION.zip
+echo "Packaged into $RPM_SOURCES_DIR/$KALTURA_PLAYSERVER_RPM_NAME-$KALTURA_PLAYSERVER_VERSION.zip"
 
 if [ -x "`which rpmbuild 2>/dev/null`" ];then
 	rpmbuild -ba $RPM_SPECS_DIR/$KALTURA_PLAYSERVER_RPM_NAME.spec

@@ -1,16 +1,16 @@
-%define prefix /opt/kaltura
+%define prefix /opt/kaltura/play-server
 %define kaltura_user kaltura
 Summary: Kaltura Open Source Video Platform - Play Server 
 Name: kaltura-play-server
 Version: 1.1
-Release: 1
+Release: 2
 License: AGPLv3+
 Group: Server/Platform 
-Source0: https://github.com/kaltura/play-server/archive/v%{version}.zip 
+Source0: https://github.com/kaltura/play-server/archive/kaltura-play-server-v%{version}.zip
 
 URL: https://github.com/kaltura/play-server 
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires:  jre >= 1.7.0, kaltura-postinst, ant >= 1.8.2 , memcached
+Requires:  jre >= 1.7.0, kaltura-postinst, ant >= 1.7.0, memcached, npm, nodejs
 BuildArch: noarch
 
 %description
@@ -33,14 +33,13 @@ and developing a variety of online workflows for video.
 This package configures the Play Server component. 
 
 %prep
+%setup -qn play-server-%{version}
 
 %build
 
 %install
-mkdir -p $RPM_BUILD_ROOT/%{prefix}/play-server
-unzip -d $RPM_BUILD_ROOT/%{prefix}/play-server %{SOURCE0}
-mkdir -p $RPM_BUILD_ROOT/%{prefix}/bin
-
+mkdir -p $RPM_BUILD_ROOT%{prefix}
+mv  %{_builddir}/play-server-%{version}/* $RPM_BUILD_ROOT%{prefix}/
 
 %clean
 rm -rf %{buildroot}
@@ -48,6 +47,7 @@ rm -rf %{buildroot}
 %pre
 
 %post
+npm install -g node-gyp
 echo "
 #####################################################################################################################################
 Installation of %{name} %{version} completed
@@ -60,8 +60,8 @@ To finalize the setup.
 %preun
 
 %files
-%dir %{prefix}/play-server
-%{prefix}/play-server/*
+%dir %{prefix}
+%{prefix}
 %dir %{prefix}/bin/
 %{prefix}/bin/*
 
