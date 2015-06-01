@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.26
-Release: 1
+Release: 3
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -82,6 +82,10 @@ find %{_sysconfdir}/logrotate.d -type l -name "kaltura_*" -exec rm {} \;
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Sun Jun 1 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.26-2
+- Corrected typo in nginx-config
+- Added script for kaltura-play-server
+
 * Thu May 21 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.26-1
 - Fix studio sanity on deb
 - Redirect errors Can't DROP| already exists| Duplicate column name to /dev/null for db-update.sh since they stem from the fact these update SQLs were already prev. processed and are therefore not actual errors.

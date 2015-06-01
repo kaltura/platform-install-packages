@@ -3,7 +3,7 @@
 Summary: Kaltura Open Source Video Platform - Play Server 
 Name: kaltura-play-server
 Version: 1.1
-Release: 2
+Release: 4
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/play-server/archive/kaltura-play-server-v%{version}.zip
@@ -38,7 +38,13 @@ This package configures the Play Server component.
 %build
 
 %install
-mkdir -p $RPM_BUILD_ROOT%{prefix}
+mkdir -p $RPM_BUILD_ROOT%{prefix}/share
+mkdir -p $RPM_BUILD_ROOT%{prefix}/log
+mkdir $RPM_BUILD_ROOT%{prefix}/share/ad_download
+mkdir $RPM_BUILD_ROOT%{prefix}/share/ad_transcode
+mkdir $RPM_BUILD_ROOT%{prefix}/share/segments
+mkdir $RPM_BUILD_ROOT%{prefix}/share/tmp
+mkdir $RPM_BUILD_ROOT%{prefix}/share/ad_ts
 mv  %{_builddir}/play-server-%{version}/* $RPM_BUILD_ROOT%{prefix}/
 
 %clean
@@ -47,7 +53,6 @@ rm -rf %{buildroot}
 %pre
 
 %post
-npm install -g node-gyp
 echo "
 #####################################################################################################################################
 Installation of %{name} %{version} completed
@@ -56,16 +61,31 @@ Please run
 To finalize the setup.
 #####################################################################################################################################
 "
+ln -s %{prefix}/bin/play-server.sh %{_initrddir}/kaltura-play-server
+chmod +x %{prefix}/bin/play-server.sh
+if [ $1 -eq 1 ]; then
+	/sbin/chkconfig --add kaltura-play-server
+	npm install -g node-gyp
+else
+	service kaltura-play-server restart
+fi
 
 %preun
+if [ $1 -eq 0 ]; then
+    /sbin/service kaltura-play-server stop > /dev/null 2>&1
+    /sbin/chkconfig --del kaltura-play-server
+fi
 
 %files
 %dir %{prefix}
 %{prefix}
 %dir %{prefix}/bin/
-%{prefix}/bin/*
 
 %changelog
+* Sun Jun 1 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.1-3
+- Added needed dirs
+- Add to init
+
 * Thu May 28 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.1-1
 - Initial release.
 

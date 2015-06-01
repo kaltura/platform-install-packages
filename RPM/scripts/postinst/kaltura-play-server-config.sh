@@ -71,4 +71,8 @@ mysql> select admin_secret from kaltura.partner where id=-6;${NORMAL}"
 		read CLOUD_SECRET
 fi
 PLAY_PREFIX=/opt/kaltura/play-server
-sed -e "s#@CLOUD_SHARED_BASE_PATH@#$PLAY_PREFIX/share#g" -e "s#@LOG_DIR@#$PLAY_PREFIX/log#g" -e "s#@SERVICE_URL@#$SERVICE_URL#g" -e "s#@PLAY_PARTNER_ADMIN_SECRET@#$PLAY_PARTNER_ADMIN_SECRET#g" -e "s#@CLOUD_HOSTNAME@#$CLOUD_HOSTNAME#g" -e "s#@CLOUD_SECRET@#$CLOUD_SECRET#g" /opt/kaltura/play-server/config/user_input.ini.template > /opt/kaltura/play-server/config/user_input.ini 
+sed -e "s#@CLOUD_SHARED_BASE_PATH@#$PLAY_PREFIX/share#g" -e "s#@LOG_DIR@#$PLAY_PREFIX/log#g" -e "s#@SERVICE_URL@#$SERVICE_URL#g" -e "s#@PLAY_PARTNER_ADMIN_SECRET@#$PLAY_PARTNER_ADMIN_SECRET#g" -e "s#@CLOUD_HOSTNAME@#$CLOUD_HOSTNAME#g" -e "s#@CLOUD_SECRET@#$CLOUD_SECRET#g" $PLAY_PREFIX/config/user_input.ini.template > $PLAY_PREFIX/config/user_input.ini
+cd $PLAY_PREFIX
+npm install
+ant -Dversion=v`rpm -q kaltura-play-server --queryformat %{version}` -DconfigFilePath=$PLAY_PREFIX/config/user_input.ini
+service kaltura-play-server start
