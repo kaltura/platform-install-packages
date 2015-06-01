@@ -35,7 +35,6 @@ Source26: kaltura_batch.template
 Source28: embedIframeJsAction.class.php
 #Source29: kaltura.ssl.conf.template
 #Source30: 01.kaltura_ce_tables.sql
-Source31: KalturaTypeReflector.php
 
 URL: https://github.com/kaltura/server/tree/%{codename}-%{version}
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -148,7 +147,6 @@ cp %{SOURCE28} $RPM_BUILD_ROOT%{prefix}/app/alpha/apps/kaltura/modules/extwidget
 # cp %{SOURCE29} $RPM_BUILD_ROOT%{prefix}/app/configurations/apache/
 # we bring another in kaltura-batch
 rm $RPM_BUILD_ROOT%{prefix}/app/configurations/batch/batch.ini.template
-cp %{SOURCE31} $RPM_BUILD_ROOT%{prefix}/app/api_v3/lib/KalturaTypeReflector.php
 
 
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content
