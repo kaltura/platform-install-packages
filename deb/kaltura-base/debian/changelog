@@ -1,3 +1,16 @@
+kaltura-base (10.12.0-1) jupiter; urgency=low
+
+  * SUP-4016 - Cannot find category in analytics "Select Categories" drop down menu
+  * SUP-4408 - Specific WMV file not transcoding
+  * SUP-4695 - Entry does not display as expected
+  * SUP-4739 - Player's download button does not work in KMS
+  * PLAT-2204 - Can't add thumb cuepoint of sub type chapter without a slide
+  * PLAT-2987 - Auto-Intermediate-source flow for sources that processable only by Mencoder
+  * https://github.com/kaltura/server/blob/Jupiter-10.12.0-typeReflectorError/api_v3/lib/KalturaTypeReflector.php
+
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Sun, 31 May 2015 12:13:26 +0000
+
 kaltura-base (10.11.0-1) jupiter; urgency=low
 
   * PLAT-2871 - Caption search using KalutraBaseEntryFilter::advancedSearch and cross metadata search

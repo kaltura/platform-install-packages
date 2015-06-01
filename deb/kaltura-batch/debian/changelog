@@ -1,3 +1,9 @@
+kaltura-batch (10.12.0-1) jupiter; urgency=low
+
+  * Ver bounce.
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Sun, 31 May 2015 13:01:05 +0000
+
 kaltura-batch (10.10.0-1) jupiter; urgency=low
 
   * fix call to send_install_becon()
