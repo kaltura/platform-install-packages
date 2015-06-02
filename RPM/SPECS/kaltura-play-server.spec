@@ -3,14 +3,15 @@
 Summary: Kaltura Open Source Video Platform - Play Server 
 Name: kaltura-play-server
 Version: 1.1
-Release: 4
+Release: 5
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/play-server/archive/kaltura-play-server-v%{version}.zip
 
 URL: https://github.com/kaltura/play-server 
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires:  jre >= 1.7.0, kaltura-postinst, ant >= 1.7.0, memcached, npm, nodejs
+Requires:  kaltura-postinst, memcached, npm, nodejs, kaltura-ffmpeg
+BuildRequires: memcached-devel, node-gyp
 BuildArch: noarch
 
 %description
@@ -36,6 +37,21 @@ This package configures the Play Server component.
 %setup -qn play-server-%{version}
 
 %build
+cd native/vendor/id3lib-3.8.3
+./configure --prefix=/opt/kaltura
+make
+make DESTDIR=$RPM_BUILD_ROOT install
+cd -
+cd native/node_addons/TsPreparer
+node-gyp configure
+node-gyp build
+cd native/node_addons/TsStitcher
+node-gyp configure
+node-gyp build
+
+cd native/node_addons/TsId3Reader
+node-gyp configure
+node-gyp build
 
 %install
 mkdir -p $RPM_BUILD_ROOT%{prefix}/share
@@ -45,6 +61,7 @@ mkdir $RPM_BUILD_ROOT%{prefix}/share/ad_transcode
 mkdir $RPM_BUILD_ROOT%{prefix}/share/segments
 mkdir $RPM_BUILD_ROOT%{prefix}/share/tmp
 mkdir $RPM_BUILD_ROOT%{prefix}/share/ad_ts
+rm $RPM_BUILD_ROOT%{prefix}/ffmpeg-2.1.3-bin.tar.gz
 mv  %{_builddir}/play-server-%{version}/* $RPM_BUILD_ROOT%{prefix}/
 
 %clean
@@ -61,9 +78,10 @@ Please run
 To finalize the setup.
 #####################################################################################################################################
 "
-ln -s %{prefix}/bin/play-server.sh %{_initrddir}/kaltura-play-server
 chmod +x %{prefix}/bin/play-server.sh
 if [ $1 -eq 1 ]; then
+	ln -sf %{prefix}/bin/play-server.sh %{_initrddir}/kaltura-play-server
+	ln -s /opt/kaltura/bin/ffmpeg %{prefix}/bin/
 	/sbin/chkconfig --add kaltura-play-server
 	npm install -g node-gyp
 else
@@ -82,6 +100,11 @@ fi
 %dir %{prefix}/bin/
 
 %changelog
+* Mon Jun 2 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.1-5
+- Precompile needed modules.
+- Added build deps
+- symlink ffmpeg from kaltura-ffmpeg to /play-server/prefix/bin ffmpeg
+
 * Sun Jun 1 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.1-3
 - Added needed dirs
 - Add to init
