@@ -11,8 +11,7 @@ Source0: https://github.com/kaltura/play-server/archive/kaltura-play-server-v%{v
 URL: https://github.com/kaltura/play-server 
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:  kaltura-postinst, memcached, npm, nodejs, kaltura-ffmpeg
-BuildRequires: memcached-devel, node-gyp
-BuildArch: noarch
+BuildRequires: memcached-devel, node-gyp, id3lib-devel,npm
 
 %description
 Kaltura is the world's first Open Source Online Video Platform, transforming the way people work, 
@@ -37,33 +36,36 @@ This package configures the Play Server component.
 %setup -qn play-server-%{version}
 
 %build
-cd native/vendor/id3lib-3.8.3
-./configure --prefix=/opt/kaltura
-make
-make DESTDIR=$RPM_BUILD_ROOT install
-cd -
-cd native/node_addons/TsPreparer
-node-gyp configure
-node-gyp build
-cd native/node_addons/TsStitcher
-node-gyp configure
-node-gyp build
-
-cd native/node_addons/TsId3Reader
-node-gyp configure
-node-gyp build
+npm install nan
+rm %{_builddir}/play-server-%{version}/bin/ffmpeg-*-bin.tar.gz
 
 %install
 mkdir -p $RPM_BUILD_ROOT%{prefix}/share
 mkdir -p $RPM_BUILD_ROOT%{prefix}/log
-mkdir $RPM_BUILD_ROOT%{prefix}/share/ad_download
-mkdir $RPM_BUILD_ROOT%{prefix}/share/ad_transcode
-mkdir $RPM_BUILD_ROOT%{prefix}/share/segments
-mkdir $RPM_BUILD_ROOT%{prefix}/share/tmp
-mkdir $RPM_BUILD_ROOT%{prefix}/share/ad_ts
-rm $RPM_BUILD_ROOT%{prefix}/ffmpeg-2.1.3-bin.tar.gz
-mv  %{_builddir}/play-server-%{version}/* $RPM_BUILD_ROOT%{prefix}/
+mkdir -p $RPM_BUILD_ROOT%{prefix}/share/ad_download
+mkdir -p $RPM_BUILD_ROOT%{prefix}/share/ad_transcode
+mkdir -p $RPM_BUILD_ROOT%{prefix}/share/segments
+mkdir -p $RPM_BUILD_ROOT%{prefix}/share/tmp
+mkdir -p $RPM_BUILD_ROOT%{prefix}/share/ad_ts
+ROOT_CWD=`pwd`
+cd %{_builddir}/play-server-%{version}/native/vendor/id3lib-3.8.3
+./configure --prefix=%{prefix}
+make
+%{__make} DESTDIR=$RPM_BUILD_ROOT install
+%{__make} clean
+cd $ROOT_CWD/native/node_addons/TsPreparer
+node-gyp configure
+node-gyp build
+cd $ROOT_CWD/native/node_addons/TsStitcher
+node-gyp configure
+node-gyp build
 
+cd $ROOT_CWD/native/node_addons/TsId3Reader
+node-gyp configure
+node-gyp build
+cp -r %{_builddir}/play-server-%{version}/* $RPM_BUILD_ROOT%{prefix}/
+find $RPM_BUILD_ROOT%{prefix}/ -name ".gitignore" -exec rm {} \;
+find $RPM_BUILD_ROOT%{prefix}/ -name "build" -type d -exec rm -rf {} \; || true
 %clean
 rm -rf %{buildroot}
 
@@ -95,17 +97,15 @@ if [ $1 -eq 0 ]; then
 fi
 
 %files
-%dir %{prefix}
 %{prefix}
-%dir %{prefix}/bin/
 
 %changelog
-* Mon Jun 2 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.1-5
+* Tue Jun 2 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.1-5
 - Precompile needed modules.
 - Added build deps
 - symlink ffmpeg from kaltura-ffmpeg to /play-server/prefix/bin ffmpeg
 
-* Sun Jun 1 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.1-3
+* Sun May 31 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.1-3
 - Added needed dirs
 - Add to init
 
