@@ -1,10 +1,10 @@
 #!/bin/bash
 
-KALTURA_FUNCTIONS_RC=`dirname $0`/kaltura-functions.rc
+KALTURA_FUNCTIONS_RC=/opt/kaltura/bin/kaltura-functions.rc
 if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
-	OUT="ERROR:could not find $KALTURA_FUNCTIONS_RC so, exiting.."
-	echo -en $OUT
-	exit 3
+        OUT="${BRIGHT_RED}ERROR:could not find $KALTURA_FUNCTIONS_RC so, exiting..${NORMAL}"
+        echo -en $OUT
+        exit 3
 fi
 . $KALTURA_FUNCTIONS_RC
 RC_FILE=/etc/kaltura.d/system.ini
@@ -22,9 +22,9 @@ https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kal
 Once done run dpkg-reconfigure kaltura-red5 ${NORMAL}"
 fi
 if [ ! -L $BASE_DIR/web/content/webcam ];then
-        ln -sf /usr/lib/red5/webapps/oflaDemo/streams $BASE_DIR/web/content/webcam
+        ln -sf /usr/share/red5/webapps/oflaDemo/streams $BASE_DIR/web/content/webcam
 fi
 
 
-chown www-data /usr/lib/red5/webapps/oflaDemo/streams
+chown www-data /usr/share/red5/webapps/
 

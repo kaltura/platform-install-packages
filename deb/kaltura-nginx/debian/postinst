@@ -1,0 +1,67 @@
+#!/bin/bash
+ldconfig
+if [ "$1" = "configure" ]; then
+        . /usr/share/debconf/confmodule
+        db_get 'kaltura-nginx/nginx_hostname'
+        if [ -z "$RET" ];then
+                db_set 'kaltura-nginx/nginx_hostname' "`hostname`"
+        fi
+        db_input critical 'kaltura-nginx/nginx_hostname' || true
+        db_go || true
+        db_get 'kaltura-nginx/nginx_hostname'
+        VOD_PACKAGER_HOST=$RET
+
+        db_input critical 'kaltura-nginx/nginx_port' || true
+        db_go || true
+        db_get 'kaltura-nginx/nginx_port'
+        VOD_PACKAGER_PORT=$RET
+
+        db_get 'kaltura-nginx/kaltura_service_url'
+        #if [ -z "$RET" ];then
+        #        db_get 'kaltura-base/service_url'
+        #        if [ -z "$RET" ];then
+        #                db_set 'kaltura-nginx/kaltura_service_url' "`hostname`"
+        #        else
+        #                db_set 'kaltura-nginx/kaltura_service_url' $RET
+        #        fi
+        #fi
+        db_input critical 'kaltura-nginx/kaltura_service_url' || true
+        db_go || true
+        db_get 'kaltura-nginx/kaltura_service_url'
+        WWW_HOST=$RET
+
+        sed -e 's#@STATIC_FILES_PATH@#/opt/kaltura/nginx/static#g' -e "s#@VOD_PACKAGER_HOST@#$VOD_PACKAGER_HOST#g" -e "s#@VOD_PACKAGER_PORT@#$VOD_PACKAGER_PORT#g" -e "s#@LOG_DIR@#/opt/kaltura/log/nginx#" -e "s#@WWW_HOST@#$WWW_HOST#g" /opt/kaltura/nginx/conf/kaltura.conf.template > /opt/kaltura/nginx/conf/nginx.conf
+        update-rc.d kaltura-nginx defaults || true
+
+fi
+KALTURA_FUNCTIONS_RC=/opt/kaltura/bin/kaltura-functions.rc
+if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
+        OUT="${BRIGHT_RED}ERROR:could not find $KALTURA_FUNCTIONS_RC so, exiting..${NORMAL}"
+        echo -en $OUT
+        exit 3
+fi
+
+
+. $KALTURA_FUNCTIONS_RC
+if [ -r $CONSENT_FILE ];then
+        . $CONSENT_FILE
+fi
+RC_FILE=/etc/kaltura.d/system.ini
+if [ ! -r "$RC_FILE" ];then
+        echo -e "${BRIGHT_RED}ERROR: could not find $RC_FILE so, exiting..${NORMAL}"
+        exit 2
+fi
+. $RC_FILE
+
+
+#ln -sf $BASE_DIR/app/configurations/logrotate/kaltura_populate /etc/logrotate.d/
+trap 'my_trap_handler "${LINENO}" ${$?}' ERR
+TIMEZ=`get_tz`
+send_install_becon `basename $0` $TIMEZ install_start 0 
+chown -R $OS_KALTURA_USER /opt/kaltura/log/nginx
+service kaltura-nginx reload 
+#ln -sf $BASE_DIR/app/configurations/monit/monit.d/nginx.rc /etc/monit/conf.d/
+#service monit stop >> /dev/null 2>&1
+#service monit start
+send_install_becon `basename $0` $TIMEZ install_success 0
+

@@ -1,5 +1,11 @@
-kaltura-kmc (5.38.7-1) experimental; urgency=low
+kaltura-kmc (5.39.1-1) experimental; urgency=low
+
+  - ver 5.39.1
+
+ -- Jess Portnoy <jess.portnoy@kaltura.com>  Fri, 10 Apr 2015 17:52:43 +0200
+
+kaltura-kmc (5.38.11-1) experimental; urgency=low
 
   - First package
 
- -- Jess Portnoy <jess.portnoy@kaltura.com>  Thu, 8 Jan 2015 19:52:43 +0200
+ -- Jess Portnoy <jess.portnoy@kaltura.com>  Fri, 10 Apr 2015 17:52:43 +0200

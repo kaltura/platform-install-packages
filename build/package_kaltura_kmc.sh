@@ -1,4 +1,4 @@
-#!/bin/bash -e 
+#!/bin/bash -ex 
 #===============================================================================
 #          FILE: package_kaltura_web.sh
 #         USAGE: ./package_kaltura_web.sh 

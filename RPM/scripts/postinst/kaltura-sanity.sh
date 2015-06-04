@@ -52,7 +52,7 @@ for PARTITION in '/' $WEB_DIR;do
 done
 for D in $ALL_DAEMONS; do
 # if this package is installed check daemon status
-        if rpm -q $D >/dev/null;then
+        if $QUERY_COMMAND $D >/dev/null;then
 		START=`date +%s.%N`
 		if check_daemon_status  $D;then
 			END=`date +%s.%N`
@@ -64,7 +64,7 @@ for D in $ALL_DAEMONS; do
 			report "Check $D daemon status" 1 "Daemon $D is NOT running" "`bc <<< $END-$START`"
 		fi
 		START=`date +%s.%N`
-		if [ $D != 'kaltura-monit' ];then
+		if [ $D != $MONIT_DAEMON ];then
 		if check_monit  $D;then
 			END=`date +%s.%N`
 			TOTAL_T=`bc <<< $TIME`
@@ -91,11 +91,11 @@ for D in $ALL_DAEMONS; do
 	fi
 done
 
-rpm -q kaltura-kmc --queryformat %{version} >/dev/null 2>&1
+$QUERY_COMMAND kaltura-kmc --queryformat %{version} >/dev/null 2>&1
 if [ $? -eq 0 ];then
-	KMC_VER=`rpm -q kaltura-kmc --queryformat %{version} `
+	KMC_VER=`$QUERY_COMMAND kaltura-kmc --queryformat %{version} `
 	COMP_NAME=kaltura-html5lib
-        COMP_VER=`rpm -q $COMP_NAME --queryformat %{version} >/dev/null 2>&1`
+        COMP_VER=`$QUERY_COMMAND $COMP_NAME --queryformat %{version} >/dev/null 2>&1`
 	if [ $? -eq 0 ];then
 		START=`date +%s.%N`
 		MSG=`check_kmc_config_versions $COMP_NAME $KMC_VER`
@@ -106,7 +106,7 @@ if [ $? -eq 0 ];then
 		echo -e "[${CYAN}$COMP_NAME ver in KMC config.ini${NORMAL}][${BRIGHT_YELLOW}SKIPPED as $COMP_NAME is not installed${NORMAL}]"
 	fi
 	COMP_NAME=kaltura-kdp3	
-        COMP_VER=`rpm -q $COMP_NAME --queryformat %{version} >/dev/null 2>&1`
+        COMP_VER=`$QUERY_COMMAND $COMP_NAME --queryformat %{version} >/dev/null 2>&1`
 	if [ $? -eq 0 ];then
 		START=`date +%s.%N`
 		MSG=`check_kmc_config_versions $COMP_NAME $KMC_VER`
@@ -117,7 +117,7 @@ if [ $? -eq 0 ];then
 		echo -e "[${CYAN}$COMP_NAME ver in KDP3 config.ini${NORMAL}][${BRIGHT_YELLOW}SKIPPED as $COMP_NAME is not installed${NORMAL}]"
 	fi
 	COMP_NAME=kaltura-kmc
-        COMP_VER=`rpm -q $COMP_NAME --queryformat %{version}`
+        COMP_VER=`$QUERY_COMMAND $COMP_NAME --queryformat %{version}`
 	if [ $? -eq 0 ];then
 		START=`date +%s.%N`
 		MSG=`check_kmc_config_versions kaltura-kmc $KMC_VER`
@@ -153,7 +153,7 @@ RC=$?
 END=`date +%s.%N`
 report "check_admin_console_index_page" $RC "$MSG" "`bc <<< $END-$START`"
 
-if rpm -q kaltura-html5lib >/dev/null 2>&1 ;then
+if $QUERY_COMMAND kaltura-html5lib >/dev/null 2>&1 ;then
 	START=`date +%s.%N`
 	MSG=`check_studio_index_page`
 	RC=$?
@@ -161,7 +161,7 @@ if rpm -q kaltura-html5lib >/dev/null 2>&1 ;then
 	report "check_studio_index_page" $RC "$MSG" "`bc <<< $END-$START`"
 fi
 
-if rpm -q kaltura-clipapp >/dev/null 2>&1 ;then
+if $QUERY_COMMAND kaltura-clipapp >/dev/null 2>&1 ;then
 	START=`date +%s.%N`
 	MSG=`check_clipapp_index_page`
 	RC=$?
@@ -172,7 +172,7 @@ fi
 ADMIN_PARTNER_SECRET=`echo "select admin_secret from partner where id=-2" | mysql -N -h $DB1_HOST -p$DB1_PASS $DB1_NAME -u$DB1_USER  -P$DB1_PORT`
 NOW=`date +%d-%H-%m-%S`
 START=`date +%s.%N`
-if rpm -q kaltura-batch >/dev/null 2>&1 || rpm -q kaltura-front >/dev/null 2>&1 ;then
+if $QUERY_COMMAND kaltura-batch >/dev/null 2>&1 || $QUERY_COMMAND kaltura-front >/dev/null 2>&1 ;then
 	PARTNER_ID=`php $DIRNAME/create_partner.php $ADMIN_PARTNER_SECRET mb-$HOSTNAME@kaltura.com testingpasswd $SERVICE_URL 2>&1`
 	RC=$?
 	END=`date +%s.%N`
@@ -250,7 +250,7 @@ if rpm -q kaltura-batch >/dev/null 2>&1 || rpm -q kaltura-front >/dev/null 2>&1 
 					report "Thumb for $UPLOADED_ENT identical to $DIRNAME/kaltura_logo_animated_blue_1_sec.jpg" $RC "$OUT" "$TOTAL_T"
 				fi	
 				START=`date +%s.%N`
-				OUT=`php $DIRNAME/clip_test.php $SERVICE_URL $PARTNER_ID $PARTNER_SECRET  $UPLOADED_ENT 0`
+				OUT=`php $DIRNAME/clip_test.php $SERVICE_URL $PARTNER_ID $PARTNER_ADMIN_SECRET  $UPLOADED_ENT 0`
 				RC=$?
 				END=`date +%s.%N`
 				TOTAL_T=`bc <<< $END-$START`
@@ -261,7 +261,7 @@ if rpm -q kaltura-batch >/dev/null 2>&1 || rpm -q kaltura-front >/dev/null 2>&1 
 				fi	
 
 				START=`date +%s.%N`
-				OUT=`php $DIRNAME/clip_test.php $SERVICE_URL $PARTNER_ID $PARTNER_SECRET  $UPLOADED_ENT 1`
+				OUT=`php $DIRNAME/clip_test.php $SERVICE_URL $PARTNER_ID $PARTNER_ADMIN_SECRET  $UPLOADED_ENT 1`
 				RC=$?
 				END=`date +%s.%N`
 				TOTAL_T=`bc <<< $END-$START`
@@ -320,17 +320,17 @@ if rpm -q kaltura-batch >/dev/null 2>&1 || rpm -q kaltura-front >/dev/null 2>&1 
 			echo "Testing mail sending" |mail -s "Kaltura sanity test email" mb-$HOSTNAME@kaltura.com
 			echo -e "${CYAN}Napping 30 seconds to allow mail to be sent out.. ${NORMAL}"
 			sleep 30
-			MSG=`grep mb-$HOSTNAME@kaltura.com /var/log/maillog `
+			MSG=`grep mb-$HOSTNAME@kaltura.com $MAIL_LOG `
 			RC=$?
 			END=`date +%s.%N`
 			if [ $RC -ne 0 ];then
-				report "Could not find an email sending entry for mb-$HOSTNAME@kaltura.com [PID is $PARTNER_ID] in /var/log/maillog" $RC "" "`bc <<< $END-$START`"
+				report "Could not find an email sending entry for mb-$HOSTNAME@kaltura.com [PID is $PARTNER_ID] in $MAIL_LOG" $RC "" "`bc <<< $END-$START`"
 			else
-				report "Found an email sending entry for mb-$HOSTNAME@kaltura.com[PID is $PARTNER_ID] in /var/log/maillog" $RC "$MSG" "`bc <<< $END-$START`"
+				report "Found an email sending entry for mb-$HOSTNAME@kaltura.com[PID is $PARTNER_ID] in $MAIL_LOG" $RC "$MSG" "`bc <<< $END-$START`"
 
 			fi
 
-			if rpm -q kaltura-dwh >> /dev/null 2>&1;then
+			if $QUERY_COMMAND kaltura-dwh >> /dev/null 2>&1;then
 				echo -e "${CYAN}Testing analytics, be patient..
 
 Please note: if you are running this test on a clustered ENV, it will fail but this does not mean there is an actual problem.
@@ -350,7 +350,7 @@ ${NORMAL}"
 			fi
 
 			START=`date +%s.%N`
-			OUTP=`php $DIRNAME/upload_test.php $SERVICE_URL $PARTNER_ID $PARTNER_SECRET $WEB_DIR/content/templates/entry/data/kaltura_logo_animated_green.flv 2>&1`
+			OUTP=`php $DIRNAME/upload_test.php $SERVICE_URL $PARTNER_ID $PARTNER_SECRET $WEB_DIR/content/templates/entry/data/kaltura_logo_animated_blue.flv 2>&1`
 			RC=$?
 			CLEANOUTPUT=`echo $OUTP|sed 's@"@@g'`
 			OUTP=`echo $CLEANOUTPUT|sed "s@'@@g"`

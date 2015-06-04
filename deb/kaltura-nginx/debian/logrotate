@@ -1,0 +1,18 @@
+/opt/kaltura/log/nginx/*.log {
+	daily
+	missingok
+	rotate 52
+	compress
+	delaycompress
+	notifempty
+	create 0640 www-data adm
+	sharedscripts
+	prerotate
+		if [ -d /etc/logrotate.d/httpd-prerotate ]; then \
+			run-parts /etc/logrotate.d/httpd-prerotate; \
+		fi; \
+	endscript
+	postrotate
+		[ ! -f /opt/kaltura/nginx/logs/nginx.pid ] || kill -USR1 `cat /opt/kaltura/nginx/logs/nginx.pid`
+	endscript
+}

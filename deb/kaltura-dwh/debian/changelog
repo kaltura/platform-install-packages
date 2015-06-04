@@ -1,4 +1,10 @@
-kaltura-dwh (10.0.0-1) experimental; urgency=low
+kaltura-dwh (10.10.0-1) jupiter; urgency=low
+
+  * fix call to send_install_becon()
+
+ -- Jess Portnoy <jess.portnoy@kaltura.com>  Mon, 27 Apr 2015 18:02:43 +0200
+
+kaltura-dwh (10.0.0-1) jupiter; urgency=low
 
   - First package
 

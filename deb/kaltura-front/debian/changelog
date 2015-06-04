@@ -1,5 +1,11 @@
-kaltura-front (10.0.0-1) experimental; urgency=low
+kaltura-front (10.10.0-1) experimental; urgency=low
 
-  - First package
+  * fix call to send_install_becon
 
- -- Jess Portnoy <jess.portnoy@kaltura.com>  Thu, 18 Dec 2014 18:02:43 +0200
+ -- Jess Portnoy <jess.portnoy@kaltura.com>  Mon, 27 Apr 2015 16:02:43 +0200
+
+kaltura-front (10.9.0-1) experimental; urgency=low
+
+  * Switching to 10.9.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.com>  Tue, 7 Apr 2015 16:02:43 +0200

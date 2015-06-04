@@ -16,7 +16,7 @@ Description: Vhost port to listen on:
 
 Template: kaltura-base/db_hostname
 Type: string
-Default:
+Default: localhost
 Description: DB hostname:
 
 Template: kaltura-base/db_port
@@ -36,7 +36,7 @@ Description: MySQL super user passwd [only for install]:
 
 Template: kaltura-base/dwh_db_hostname
 Type: string
-Default:
+Default: localhost
 Description: Analytics DB hostname:
 
 Template: kaltura-base/dwh_db_port
@@ -46,7 +46,7 @@ Description: Analytics DB port:
 
 Template: kaltura-base/sphinx_hostname
 Type: string
-Default:
+Default: 127.0.0.1
 Description: Sphinx hostname:
 
 Template: kaltura-base/media_server_hostname
@@ -69,6 +69,22 @@ Type: string
 Default:
 Description: Your Kaltura Service URL:
 	Base URL where the Kaltura API and Apps will be accessed from - this would be your Load Balancer URL on a cluster or same as your virtual host in an all-in-one Kaltura server - Must be accessible from both inside the machine and from any clients / browsers that will use Kaltura:\n
+
+Template: kaltura-base/ip_range
+Type: string
+Default: 0.0.0.0-255.255.255.255
+Description: Range of ip addresses belonging to internal kaltura servers 
+	The range is used when checking service actions permissions and allowing to access certain services without KS from the internal servers.
+
+Template: kaltura-base/vod_packager_hostname
+Type: string
+Default: 127.0.0.1
+Description: VOD packager hostname
+
+Template: kaltura-base/vod_packager_port
+Type: string
+Default: 88
+Description: VOD packager port
 
 Template: kaltura-base/admin_console_email
 Type: string
@@ -130,4 +146,15 @@ Type: Boolean
 Default:  
 Description: Should we collect stats?
 	To improve your Kaltura experience and provide you with the best service, Kaltura would like your consent to collect necessary data and information regarding your installation and use of Kaltura and analyze it to provide an upgraded and more stable platform and services.\n
+
+Template: kaltura-base/install_analytics_email
+Type: string
+Default: 
+Description: Please enter your email
+
+Template: kaltura-base/generating_client_libs
+Type: text
+Default:  
+Description: Generating client libs...
+	This can take a few minutes to complete, see log at $BASE_DIR/log/generate.php.log.
 

@@ -81,17 +81,13 @@ build: build-stamp
 build-stamp:  config.status
 	#dh_quilt_patch
 	dh_testdir
-
 	cd $(tree) && $(MAKE)
-
 	touch build-stamp
 
 clean:
 	dh_testdir
 	dh_testroot
 	rm -f build-stamp config.log
-	rm -f debian/memcached.init
-
 	dh_quilt_unpatch
 	dh_clean 
 
@@ -100,7 +96,10 @@ install: build
 	dh_testroot
 	dh_clean -k 
 	dh_installdirs
+	#cd $(tree)/tools && gcc qt-faststart.c -o $(CURDIR)/debian/$(tree)/qt-faststart && cd -
 	cd $(tree) && $(MAKE) -C . install DESTDIR=$(CURDIR)/debian/$(tree)/
+	cd $(tree) && $(MAKE) tools/qt-faststart 
+#&& mv $(tree)/qt-faststart $(CURDIR)/debian/$(tree)/
 
 
 # Build architecture-independent files here.
@@ -109,7 +108,7 @@ binary-indep:;
 
 # Build architecture-dependent files here.
 binary-arch: build install
-	mkdir -p $(BASE_PREFIX)
+	mkdir -p $(BASE_PREFIX) debian/kaltura-ffmpeg/opt/kaltura/bin/ 
 	dh_testdir
 	dh_testroot
 	#dh_installchangelogs ChangeLog
@@ -118,18 +117,19 @@ binary-arch: build install
 	#pwd
 	#ls -ald debian/$(tree)/$(BASE_PREFIX)/*
 	mv debian/$(tree)/$(BASE_PREFIX)/* $(BASE_PREFIX)
+	mv $(tree)/tools/qt-faststart $(BASE_PREFIX)/bin/
 	dh_gencontrol -u-v$(DEB_VERSION) 
 	dh_install $(BASE_PREFIX)
 	dh_installdebconf	
 	dh_installinit
 	dh_installman
-	dh_link
+	dh_link $(BASE_PREFIX)/bin/ffmpeg opt/kaltura/bin/ffmpeg
+	dh_link $(BASE_PREFIX)/bin/qt-faststart opt/kaltura/bin/qt-faststart
 	dh_strip
 	dh_compress
 	dh_fixperms
 	dh_installdeb
-	#LD_LIBRARY_PATH=$(BASE_PREFIX)/lib dh_shlibdeps
-	dh_gencontrol
+	LD_LIBRARY_PATH=$(BASE_PREFIX)/lib dh_shlibdeps
 	dh_md5sums
 	dh_builddeb
 
