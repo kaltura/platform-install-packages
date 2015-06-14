@@ -25,7 +25,8 @@ Package: kaltura-nginx
 Section: misc
 Architecture: any
 Pre-Depends:
- dpkg (>= 1.15.7.2~)
+ dpkg (>= 1.15.7.2~),
+ kaltura-ffmpeg
 Provides: httpd,
           nginx
 Conflicts: nginx

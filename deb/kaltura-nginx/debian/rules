@@ -46,6 +46,11 @@ $(tree): $(archive)
 	unzip -o $(akamai_token_validate_module_archive) -d $(tree)
 
 config.status: $(tree) 
+	tar zxf $(archive) 
+	unzip -o $(vod_module_archive) -d $(tree)
+	echo unzip -o $(vod_module_archive) -d $(tree)
+	unzip -o $(secure_token_module_archive) -d $(tree) 
+	unzip -o $(akamai_token_validate_module_archive) -d $(tree)
 	dh_testdir
 	cd $(tree) && CFLAGS="$(CFLAGS)" CPPFLAGS="$(CPPFLAGS)" LDFLAGS="$(LDFLAGS)" LD_LIBRARY_PATH=/opt/kaltura/ffmpeg-2.1.3/lib LIBRARY_PATH=/opt/kaltura/ffmpeg-2.1.3/lib C_INCLUDE_PATH=/opt/kaltura/ffmpeg-2.1.3/include ./configure \
         --prefix=/$(BASE_PREFIX) \
