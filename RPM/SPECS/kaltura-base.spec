@@ -1,5 +1,5 @@
 %define kaltura_user	kaltura
-%define kaltura_group	kaltura
+%define kaltuea_group	kaltura
 %define apache_user	apache
 %define apache_group	apache
 %define prefix /opt/kaltura
@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 10.13.0
-Release: 2
+Release: 5
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -306,6 +306,15 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Sun Jun 14 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.13.0-5
+- SUP-4515 - Widevine Media Transcoding Errors
+- SUP-4362 - Adding Tags with less than 2 letters when uploading 
+- SUP-4491 - Entry ID containing # sign causing entries not to load
+- SUP-4264 - Thumbnail rotation not working with ARF files
+- SUP-4001 - Category listing options is not filtering on KMC
+- PLAT-2983 - externalSourceType isn't being cloned
+- PLAT-2872 - Refactor media server to suit SyncPoints requirements
+
 * Mon Jun 1 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.13.0-1
 - Ver Bounce to 10.13.0
 

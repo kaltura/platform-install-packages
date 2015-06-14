@@ -26,7 +26,7 @@
 Summary: Utilities and libraries to record, convert and stream audio and video
 Name: kaltura-ffmpeg
 Version: 2.1.3
-Release: 3 
+Release: 6
 License: GPL
 Group: Applications/Multimedia
 URL: http://ffmpeg.org/
@@ -172,6 +172,7 @@ export CFLAGS="%{optflags}"
 --disable-devices \
 --enable-filter=movie \
     --enable-version3 \
+--enable-indev=lavfi \
 --enable-x11grab
 
 %{__make} %{?_smp_mflags}
@@ -218,7 +219,8 @@ fi
 
 %files
 %defattr(-, root, root, 0755)
-%doc Changelog COPYING* CREDITS INSTALL MAINTAINERS README
+#%doc Changelog COPYING* CREDITS INSTALL.md MAINTAINERS RELEASE RELEASE_NOTES README.md 
+%doc Changelog COPYING* CREDITS INSTALL MAINTAINERS RELEASE README
 %doc %{base_prefix}-%{version}/share/man/man1
 %config %{_sysconfdir}/profile.d/kaltura_ffmpeg.sh
 %config %{_sysconfdir}/ld.so.conf.d/kaltura_ffmpeg.conf

@@ -1,7 +1,7 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmc
-Version: v5.39.1
-Release: 3
+Version: v5.39.3
+Release: 1
 Summary: Kaltura Management Console
 
 Group: System Management	
@@ -78,6 +78,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sun Jun 14 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v5.39.1-3
+- SUP-4926 - Wrong KMC owner accounts - change to right account not saved
+
 * Sun May 31 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v5.39.1-3
 - New HTML5 lib - v2.31.
 
