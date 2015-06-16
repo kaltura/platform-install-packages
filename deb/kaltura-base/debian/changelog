@@ -1,3 +1,15 @@
+kaltura-base (10.13.0-1) jupiter; urgency=low
+
+  * SUP-4515 - Widevine Media Transcoding Errors
+  * SUP-4362 - Adding Tags with less than 2 letters when uploading
+  * SUP-4491 - Entry ID containing # sign causing entries not to load
+  * SUP-4264 - Thumbnail rotation not working with ARF files
+  * SUP-4001 - Category listing options is not filtering on KMC
+  * PLAT-2983 - externalSourceType isn't being cloned
+  * PLAT-2872 - Refactor media server to suit SyncPoints requirements
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 15 Jun 2015 08:54:22 +0000
+
 kaltura-base (10.12.0-1) jupiter; urgency=low
 
   * SUP-4016 - Cannot find category in analytics "Select Categories" drop down menu
