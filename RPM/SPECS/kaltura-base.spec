@@ -1,5 +1,5 @@
 %define kaltura_user	kaltura
-%define kaltuea_group	kaltura
+%define kaltura_group	kaltura
 %define apache_user	apache
 %define apache_group	apache
 %define prefix /opt/kaltura
@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 10.13.0
-Release: 5
+Release: 7
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
