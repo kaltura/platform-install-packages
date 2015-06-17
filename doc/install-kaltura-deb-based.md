@@ -60,10 +60,10 @@ echo "deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/debian jupiter ma
 ```
 *Ubuntu NOTE: You must also make sure the multiverse repo is enabled in /etc/apt/sources.list*
 
-*Debian Jessie [8] NOTE: You must also make sure the following are enabled in /etc/apt/sources.list*
+*Debian Jessie [8] NOTE: You must also make sure the following Wheezy repos are enabled in /etc/apt/sources.list*
 ```
-deb htp://ftp.debian.org/debian/ wheezy main
-deb htp://security.debian.org/ wheezy/updates main
+deb http://ftp.debian.org/debian/ wheezy main
+deb http://security.debian.org/ wheezy/updates main
 ```
 
 IMPORTANT NOTE: 
