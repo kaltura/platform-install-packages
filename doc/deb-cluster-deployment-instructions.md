@@ -121,7 +121,8 @@ Edit `/etc/exports` to have the desired settings, for example:
 `/opt/kaltura/web *(rw,sync,no_root_squash)`
 
 Edit `/etc/idmapd.conf` and add your domain, for example:
-`Domain = kaltura.dev`
+```
+Domain = kaltura.dev
 ```
 
 Note that you may choose different NFS settings which is fine so long as:
