@@ -54,8 +54,8 @@ ${NORMAL}
 fi
 for i in $DBS;do
 	echo "Removing $i" 
-	echo "drop database $i" | mysql -h$DB1_HOST -p$DBPASSWD -P$DB1_PORT ;
+	echo "drop database $i" | mysql -u$SUPER_USER -h$DB1_HOST -p$DBPASSWD -P$DB1_PORT ;
 done
-for i in $DB_USERS;do echo "drop user $i" | mysql -h$DB1_HOST -p$DBPASSWD -P$DB1_PORT;done
+for i in $DB_USERS;do echo "drop user $i" | mysql -u$SUPER_USER -h$DB1_HOST -p$DBPASSWD -P$DB1_PORT;done
 
 
