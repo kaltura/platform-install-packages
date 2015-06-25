@@ -3,7 +3,7 @@
 Summary: Kaltura Open Source Video Platform - Play Server 
 Name: kaltura-play-server
 Version: 1.1
-Release: 5
+Release: 6
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/play-server/archive/kaltura-play-server-v%{version}.zip
@@ -100,6 +100,9 @@ fi
 %{prefix}
 
 %changelog
+* Thu Jun 25 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.1-6
+- https://github.com/kaltura/play-server/pull/172 merged.
+
 * Tue Jun 2 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.1-5
 - Precompile needed modules.
 - Added build deps

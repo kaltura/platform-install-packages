@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5-studio
-Version: v1.9.8
+Version: v1.9.9
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -51,6 +51,17 @@ rm -rf %{buildroot}
 %{prefix}/apps/studio/%{version}
 
 %changelog
+* Sun Jun 28 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v1.9.9-1
+- Add Studio support for Embed.ly embeds and Multi DRM plugins
+- FEC-3611 Studio v2: after adding new boolean plugin, grey square displayed over 'delete' icon
+- FEC-3612 Studio v2: need to add validation for Rate Selector selectable speeds
+- FEC-3615 Give more width to player in studio better support on page plugins
+- FEC-3628 Studio v2: need to click twice "Play" button after change player size, if 'auto preview' selected
+- FEC-3613 Studio v2: Strings plugin - possible to add new strings, even if the plugin unchecked
+- FEC-3609 Studio v2: incorrect aspect ratio selected ,if "Auto Preview" was checked
+- SUP-4846 Cannot set mediaProxy.preferedFlavorBR without turning the SourceSelector on
+- FEC-3628 Studio v2: need to click twice "Play" button after change player size, if 'auto preview' selected
+
 * Sun May 31 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v1.9.8-1
 - Ver bounce.
 
