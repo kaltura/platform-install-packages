@@ -28,10 +28,7 @@ if ! rpm -q kaltura-batch;then
 fi
 if [ -r $CONSENT_FILE ];then
 	. $CONSENT_FILE
-elif [ -z "$USER_CONSENT" ];then
-	get_tracking_consent
 fi
-. $CONSENT_FILE
 if [ -n "$1" -a -r "$1" ];then
 	ANSFILE=$1
 	. $ANSFILE

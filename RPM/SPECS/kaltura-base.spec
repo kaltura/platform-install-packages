@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 10.14.0
-Release: 5
+Release: 7
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -306,6 +306,17 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Sun Jun 28 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.14.0-7
+- https://github.com/kaltura/server/pull/2751
+
+* Sun Jun 28 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.14.0-6
+- SUP-4393 - Downloading screen recording from KMS saved as tmp file
+- SUP-4339 - Email notifications send all addresses in the "To" field
+- PLAT-3215 - ES3 - UnMuxed Solution Project
+- PLAT-2908 - syndication feeds using playManifest not working with Access Control 
+- PLAT-3072 - many kuser_kgroup queries
+- PLAT-3059 - KalturaNullableBoolean in format=json
+
 * Sun Jun 21 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.14.0-3
 - https://github.com/kaltura/server/pull/2707
 
