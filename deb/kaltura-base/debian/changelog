@@ -1,3 +1,14 @@
+kaltura-base (10.14.0-1) jupiter; urgency=low
+
+  * SUP-4393 - Downloading screen recording from KMS saved as tmp file
+  * SUP-4339 - Email notifications send all addresses in the "To" field
+  * PLAT-3215 - ES3 - UnMuxed Solution Project
+  * PLAT-2908 - syndication feeds using playManifest not working with Access Control
+  * PLAT-3072 - many kuser_kgroup queries
+  * PLAT-3059 - KalturaNullableBoolean in format=json
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Sun, 28 Jun 2015 08:39:13 +0000
+
 kaltura-base (10.13.0-1) jupiter; urgency=low
 
   * SUP-4515 - Widevine Media Transcoding Errors

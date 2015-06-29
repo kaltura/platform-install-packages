@@ -1,4 +1,26 @@
-kaltura-html5lib (2.31-1) UNRELEASED; urgency=low
+kaltura-html5lib (2.32-1) jupiter; urgency=low
+
+  * FEC-3632 - Supprot all tremor ad substitutions
+  * FEC-3640 - Support large play button when DFP ads are paused.
+  * SUP-4897 - Download button leads to error
+  * SUP-4856 - SRT files with Mac line endings do not load
+  * SUP-4845 - YouTubePlayer should forceIframe by default
+  * SUP-4843 - Low quality in bumper ads
+  * SUP-4825 - SRT captions color change dynamically
+  * SUP-4277 - Mediahuis - Windows Phone 8.1 black screen on playback
+  * SUP-4182 - Firefox issue with right click menu
+  * SUP-4564 - Image while broadcasting live audio stream
+  * SUP-3568 - Change Iframe title from "Kaltura Embed Player iFrame" to the player's title
+  * SUP-4998 - Query - Defining one thumbnail URL for all entries while using thumbnail embed
+  * SUP-5070 - abChecker plugin not working
+  * SUP-4857 - Accessibility issue
+  * SUP-5051 - Universal Player probes for Java's runtime
+  * SUP-5002 - Captions issue with player version 2.31 in Desktop and Android
+  * SUP-3590 - Translating error message from English to Dutch
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Sun, 28 Jun 2015 08:47:47 +0000
+
+kaltura-html5lib (2.31-1) jupiter; urgency=low
 
   * FEC-3185 - Add paging ability to core playlist
   * FEC-3504 - Add playSessionId to each playmanifest
@@ -15,6 +37,7 @@ kaltura-html5lib (2.31-1) UNRELEASED; urgency=low
   * SUP-4572 - issue with video on application for iOS devices
   * SUP-4129 - Page zoomed in after exiting fullscreen
   * SUP-4678 - Full screen issue in Android Galaxy Note and Galaxy S3
+  * 
 
  -- Jess Portnoy <jess.portnoy@kaltura.org>  Sun, 31 May 2015 12:18:40 +0000
 
