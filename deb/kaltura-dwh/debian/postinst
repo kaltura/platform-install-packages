@@ -38,51 +38,6 @@ fi
 trap - ERR
 TIMEZ=`get_tz`
 send_install_becon `basename $0` $TIMEZ install_start 0 
-        #db_get 'kaltura-base/db_hostname'
-        #if [ -z "$RET" ];then
-        #        db_set 'kaltura-dwh/db_hostname' "`hostname`"
-	#else
-	#	db_set 'kaltura-dwh/db_hostname' $RET
-        #fi
-        #db_input critical 'kaltura-dwh/db_hostname' || true
-        #db_go || true
-        #db_get 'kaltura-dwh/db_hostname'
-        #DB1_HOST=$RET
-
-	#db_get 'kaltura-base/db_port'
-        #if [ "$RET" ];then
-	#	db_set 'kaltura-dwh/db_port' $RET
-	#fi
-        #db_input critical 'kaltura-dwh/db_port' || true
-        #db_go || true
-        #db_get 'kaltura-dwh/db_port'
-        #DB1_PORT=$RET
-
-        #db_input critical 'kaltura-dwh/mysql_super_user' || true
-        #db_go || true
-        #db_get 'kaltura-dwh/mysql_super_user'
-        #SUPER_USER=$RET
-
-        #db_input critical 'kaltura-dwh/mysql_super_passwd' || true
-        #db_go || true
-        #db_get 'kaltura-dwh/mysql_super_passwd'
-        #SUPER_USER_PASSWD=$RET
-
-        #db_get 'kaltura-base/dwh_db_hostname'
-        #if [ -z "$RET" ];then
-        #        db_set 'kaltura-dwh/dwh_db_hostname' "`hostname`"
-	#else
-	#	db_set 'kaltura-dwh/dwh_db_hostname' $RET
-        #fi
-        #db_input critical 'kaltura-dwh/dwh_db_hostname' || true
-        #db_go || true
-        #db_get 'kaltura-dwh/dwh_db_hostname'
-        #DWH_HOST=$RET
-
-        #db_input critical 'kaltura-dwh/dwh_db_port' || true
-        #db_go || true
-        #db_get 'kaltura-dwh/dwh_db_port'
-        #DWH_PORT=$RET
 
 TABLES=`echo "show tables" | mysql -h$DWH_HOST -u$SUPER_USER -p$SUPER_USER_PASSWD -P$DWH_PORT kalturadw 2> /dev/null`
 if [ -z "$TABLES" ];then 
@@ -98,10 +53,11 @@ DB creation will be skipped.
 EOF
 fi
 
-sed  's#\(@DWH_DIR@\)$#\1 -k /opt/kaltura/pentaho/pdi/kitchen.sh#g' $APP_DIR/configurations/cron/dwh.template >$APP_DIR/configurations/cron/dwh
+sed  "s#\(@DWH_DIR@\)#\1 -k $BASE_DIR/pentaho/pdi/kitchen.sh#g" $APP_DIR/configurations/cron/dwh.template >$APP_DIR/configurations/cron/dwh
 cp $BASE_DIR/dwh/.kettle/kettle.template.properties $BASE_DIR/dwh/.kettle/kettle.properties
 sed -i -e "s#@DWH_DIR@#$BASE_DIR/dwh#g" -e "s#@APP_DIR@#$APP_DIR#g" -e "s#@EVENTS_FETCH_METHOD@#local#g" -e "s#@LOG_DIR@#$LOG_DIR#g" -e "s#@DB1_HOST@#$DB1_HOST#g" -e "s#@DB1_PORT@#$DB1_PORT#g" -e "s#@DWH_HOST@#$DWH_HOST#g" -e "s#@DB1_PORT@#$DWH_PORT#g"  -e "s#@DB1_USER@#$DB1_USER#g" -e "s#@DWH_USER@#$DWH_USER#g" -e "s#@DWH_PASS@#$DWH_PASS#g" -e "s#@DWH_PORT@#$DWH_PORT#g" -e "s#@EVENTS_LOGS_DIR@#$WEB_DIR/logs#g" $APP_DIR/configurations/cron/dwh $BASE_DIR/dwh/.kettle/kettle.properties
 chown -R $OS_KALTURA_USER $BASE_DIR/dwh/cycles/
 ln -sf $APP_DIR/configurations/cron/dwh /etc/cron.d/kaltura-dwh
 echo -e "${CYAN}DWH configured.${NORMAL}"
+chown $OS_KALTURA_USER $BASE_DIR/dwh/logs
 send_install_becon `basename $0` $TIMEZ install_success 0 
