@@ -73,9 +73,9 @@ Also note that version 7 no longer has MySQL server and instead includes MariaDB
 RHEL/CentOS 7 is currently in beta stages, bug reports are most welcomed.
 
 #### MySQL Install and Configuration
-Please note that currently, only MySQL 5.1 is supported, we recommend using the official package supplied by the RHEL/CentOS repos which is currently 5.1.73.
-
-For RHEL/CentOS 7 which is currently in the beta stage, MariaDB version 5.5.40 is supported. 
+For MySQL versions higher 5.5 and above, note that you must disable strict mode for the deployment to succeed.
+Please see the following document:
+https://support.realtyna.com/index.php?/Knowledgebase/Article/View/535/0/how-can-i-turn-off-mysql-strict-mode
 
 RHEL/CentOS 6 setup:
 ```bash
