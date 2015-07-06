@@ -119,7 +119,7 @@ ${NORMAL} "
                 KALTURA_VIRTUAL_HOST_NAME=`hostname`
                 #echo $KALTURA_VIRTUAL_HOST_NAME
         fi
-
+	WWW_HOST=$KALTURA_VIRTUAL_HOST_NAME
         echo -en "${CYAN}Vhost port to listen on [${YELLOW}80${CYAN}]:${NORMAL} "
         read -e KALTURA_VIRTUAL_HOST_PORT
         if [ -z "$KALTURA_VIRTUAL_HOST_PORT" ];then
