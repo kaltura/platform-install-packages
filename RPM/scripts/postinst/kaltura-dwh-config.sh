@@ -62,7 +62,8 @@ The Kaltura DWH DB seems to already be installed.
 DB creation will be skipped.
 EOF
 fi
-sed  's#\(@DWH_DIR@\)$#\1 -k /opt/kaltura/pentaho/pdi/kitchen.sh#g' $APP_DIR/configurations/cron/dwh.template >$APP_DIR/configurations/cron/dwh
+chown -R $OS_KALTURA_USER $BASE_DIR/pentaho/pdi/
+sed  "s#\(@DWH_DIR@\)$#\1 -k $BASE_DIR/pentaho/pdi/kitchen.sh#g" $APP_DIR/configurations/cron/dwh.template >$APP_DIR/configurations/cron/dwh
 sed -i -e "s#@DWH_DIR@#$BASE_DIR/dwh#g" -e "s#@APP_DIR@#$APP_DIR#g" -e "s#@EVENTS_FETCH_METHOD@#local#g" -e "s#@LOG_DIR@#$LOG_DIR#g" $APP_DIR/configurations/cron/dwh
 ln -sf $APP_DIR/configurations/cron/dwh /etc/cron.d/kaltura-dwh
 # Alas, we only work well with Sun's Java so, first lets find the latest version we have for it [this package is included in Kaltura's repo, as taken from Oracle's site

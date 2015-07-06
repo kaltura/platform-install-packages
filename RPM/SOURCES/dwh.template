@@ -1,5 +1,5 @@
-00 * * * * root @DWH_DIR@/etlsource/execute/etl_hourly.sh -p @DWH_DIR@
-00 * * * * root @DWH_DIR@/etlsource/execute/etl_update_dims.sh -p @DWH_DIR@
+00 * * * * kaltura @DWH_DIR@/etlsource/execute/etl_hourly.sh -p @DWH_DIR@
+00 * * * * kaltura @DWH_DIR@/etlsource/execute/etl_update_dims.sh -p @DWH_DIR@
 59 0,4,8,12,16,20 * * * kaltura @DWH_DIR@/etlsource/execute/etl_daily.sh -p @DWH_DIR@
-30 12 * * * root @DWH_DIR@/etlsource/execute/etl_perform_retention_policy.sh -p @DWH_DIR@
-0 10 * * * root @APP_DIR@/alpha/scripts/dwh/dwh_plays_views_sync.sh >> @LOG_DIR@/cron.log
+30 12 * * * kaltura @DWH_DIR@/etlsource/execute/etl_perform_retention_policy.sh -p @DWH_DIR@
+0 10 * * * kaltura @APP_DIR@/alpha/scripts/dwh/dwh_plays_views_sync.sh >> @LOG_DIR@/cron.log
