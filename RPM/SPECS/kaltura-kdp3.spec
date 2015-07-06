@@ -2,13 +2,16 @@
 Name:	kaltura-kdp3	
 Version: v3.9.9
 Epoch: 1 
-Release: 2
+Release: 3
 Summary: Kaltura Dynamic Player
 License: AGPLv3+	
 URL: https://github.com/kaltura/kdp/releases/tag/%{version}
 Source0: %{name}-%{version}.tar.gz
-Source2: %{name}-v3.9.7.tar.gz
-Source3: %{name}-v3.9.8.tar.gz
+Source2: %{name}-v3.5.9.tar.gz
+Source3: %{name}-v3.6.7.tar.gz
+Source4: %{name}-v3.8.9.tar.gz
+Source5: %{name}-v3.9.7.tar.gz
+Source6: %{name}-v3.9.8.tar.gz
 BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 BuildArch: noarch
 
@@ -29,17 +32,21 @@ For more information visit: http://corp.kaltura.com, http://www.kaltura.org and 
 This package installs the KDP Flash player.
 
 %prep
-%setup -qn %{version} 
+%setup -n %{version} 
 cd %{_builddir}
 tar zxf %{SOURCE2} 
 tar zxf %{SOURCE3} 
+tar zxf %{SOURCE4} 
+tar zxf %{SOURCE5} 
+tar zxf %{SOURCE6} 
 cd -
 %build
 
 %install
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/flash/kdp3
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content
-for i in %{kdp3_vers};do
+#for i in %{kdp3_vers};do
+for i in v3.9.7 v3.9.8 v3.5.9 v3.6.7 v3.8.9;do
 	cp -r %{_builddir}/$i $RPM_BUILD_ROOT/%{prefix}/web/flash/kdp3/
 done
 	cp -r %{_builddir}/%{version} $RPM_BUILD_ROOT/%{prefix}/web/flash/kdp3/
@@ -50,8 +57,10 @@ rm -rf %{buildroot}
 %defattr(-,root,root,-)
 %{prefix}/web/flash/kdp3
 
-
 %changelog
+ * Mon Jun 3 2015 Kobi Michaeli <kobi.michaeli@kaltura.com> - v3.9.9-3
+ - Added v3.5.9 v3.6.7 v3.8.9 to the package
+
 * Thu Jul 10 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v3.9.9-1
 - New rel.
 

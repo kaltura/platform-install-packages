@@ -3,7 +3,7 @@
 Name:	kaltura-%{widget_name}
 Version: v1.7 
 Epoch: 1
-Release: 2
+Release: 3
 Summary: Kaltura kRecord - used for recording from web cam
 License: AGPLv3+	
 URL: http://kaltura.org
@@ -34,10 +34,13 @@ This package installs the Kaltura kRecord - used for recording from web cam.
 
 %install
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/flash/%{widget_name}
-#for i in %{krecord_vers};do
+for i in %{krecord_vers};do
 	cp -r %{_builddir}/%{version} $RPM_BUILD_ROOT/%{prefix}/web/flash/%{widget_name}
 	find $RPM_BUILD_ROOT/%{prefix}/web/flash/%{widget_name} -name ".project" -exec rm {} \;
-#done
+done
+
+cp -r %{_builddir}/v1.5.12 $RPM_BUILD_ROOT/%{prefix}/web/flash/%{widget_name}
+cp -r %{_builddir}/v1.5.13 $RPM_BUILD_ROOT/%{prefix}/web/flash/%{widget_name}
 
 %clean
 rm -rf %{buildroot}
@@ -48,6 +51,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Jun 3 2015 Kobi Michaeli <kobi.michaeli@kaltura.com> - v1.7.0-3
+- Added v1.5.12 & v1.5.13 to the package
+
 * Mon Feb 3 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v1.7.0-2
 - Since these widgets typically reside on NFS and served from another machine there is not need for the Apache dep.
 

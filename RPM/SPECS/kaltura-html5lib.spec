@@ -2,8 +2,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.27
-Release: 1
+Version: v2.32
+Release: 2
 Epoch:0 
 License: AGPLv3+
 Group: Server/Platform 
@@ -24,6 +24,13 @@ Source13: kaltura-html5lib-v2.23.tar.gz
 Source14: kaltura-html5lib-v2.24.tar.gz
 Source15: kaltura-html5lib-v2.25.tar.gz
 Source16: kaltura-html5lib-v2.26.tar.gz
+Source17: kaltura-html5lib-v2.27.tar.gz
+Source18: kaltura-html5lib-v2.28.tar.gz
+Source19: kaltura-html5lib-v2.29.tar.gz
+Source20: kaltura-html5lib-v2.30.tar.gz
+Source21: kaltura-html5lib-v2.31.tar.gz
+source22: kaltura-html5lib-v2.11.tar.gz
+Source23: kaltura-html5lib-v1.7.1.11.tar.gz
 
 URL: https://github.com/kaltura/mwEmbed 
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -62,10 +69,17 @@ tar zxf %{SOURCE14} -C %{_builddir}/
 tar zxf %{SOURCE15} -C %{_builddir}/
 tar zxf %{SOURCE16} -C %{_builddir}/
 
+tar zxf %{SOURCE17} -C %{_builddir}/
+tar zxf %{SOURCE18} -C %{_builddir}/
+tar zxf %{SOURCE19} -C %{_builddir}/
+tar zxf %{SOURCE20} -C %{_builddir}/
+tar zxf %{SOURCE21} -C %{_builddir}/
+tar zxf %{SOURCE22} -C %{_builddir}/
+tar zxf %{SOURCE23} -C %{_builddir}/
 
 %install
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib
-for i in v2.1.1 v2.3 v2.4 v2.6 v2.9 v2.14 v2.15 v2.18.5 v2.20 v2.21 v2.22 v2.23 v2.24 v2.25 v2.26 %{version};do
+for i in v1.7.1.11 v2.1.1 v2.3 v2.4 v2.6 v2.9 v2.14 v2.15 v2.18.5 v2.20 v2.21 v2.22 v2.23 v2.24 v2.25 v2.26 v2.27 v2.28 v2.29 v2.30 v2.31 v2.27 %{version};do
 	cp -r %{_builddir}/%{name}-$i $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i
 	cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i
 done
@@ -83,6 +97,103 @@ rm -rf %{buildroot}
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Mon Jun 3 2015 Kobi Michaeli <kobi.michaeli@kaltura.com> - v2.32-2
+- Added  v1.7.1.11 v2.11 v2.27 to the package
+
+
+* Sun Jun 28 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v2.32-1
+- FEC-3632 - Supprot all tremor ad substitutions
+- FEC-3640 - Support large play button when DFP ads are paused.
+- SUP-4897 - Download button leads to error
+- SUP-4856 - SRT files with Mac line endings do not load
+- SUP-4845 - YouTubePlayer should forceIframe by default
+- SUP-4843 - Low quality in bumper ads
+- SUP-4825 - SRT captions color change dynamically
+- SUP-4277 - Mediahuis - Windows Phone 8.1 black screen on playback
+- SUP-4182 - Firefox issue with right click menu
+- SUP-4564 - Image while broadcasting live audio stream
+- SUP-3568 - Change Iframe title from "Kaltura Embed Player iFrame" to the player's title
+- SUP-4998 - Query - Defining one thumbnail URL for all entries while using thumbnail embed
+- SUP-5070 - abChecker plugin not working
+- SUP-4857 - Accessibility issue
+- SUP-5051 - Universal Player probes for Java's runtime
+- SUP-5002 - Captions issue with player version 2.31 in Desktop and Android
+- SUP-3590 - Translating error message from English to Dutch
+
+
+* Sun May 31 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v2.31-1
+- FEC-3185 - Add paging ability to core playlist
+- FEC-3504 - Add playSessionId to each playmanifest
+- FEC-3502 - Do not display slides, scubber or chapters when no DVR info is avalaible
+- FEC-2412 - Support configuration on flavor selector to display bitrate instead of size
+- SUP-4030 - Letterboxing bug when setting player for live stream
+- SUP-4589 - GroovyGecko - Google Analytics urchinCode plugin
+- SUP-4509 - Downloading a specific flavor
+- SUP-4237 - Rate Selector - speed conversion not working properly 
+- SUP-3568 - Change Iframe title from "Kaltura Embed Player iFrame" to the player's title
+- SUP-4621 - Player Analytics regression around statistics properties
+- SUP-3383 - "Install Flash" message not shown on IE8
+- SUP-3590 - Translating error message from English to Dutch 
+- SUP-4572 - issue with video on application for iOS devices
+- SUP-4129 - Page zoomed in after exiting fullscreen
+- SUP-4678 - Full screen issue in Android Galaxy Note and Galaxy S3
+
+* Mon May 4 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v2.30-1
+- FEC-3100 - Support DFP player identification
+- SUP-3177 - [v2.20] Player stuck when seeking on Firefox/OSX, webm flavor
+- SUP-3404 - Youtube videos will not load if Audio Description Plugin Enabled
+- SUP-3569 - Flicking TTML captions
+- SUP-3648 - Pausing on iPhone jumps to 00:00:15
+- SUP-3684 - Thumbnail at the end of a live stream
+- SUP-3864 - Download gets cut for large flavors
+- SUP-4003 - language of default captions will be chosen by browser language
+- SUP-4077 - Video Player Voice Over Accessibility Issue
+- SUP-4168 - [2.28] No progress or countdown indication for a DoubleClick ad
+- SUP-4213 - Video quality drop with player version 2.28 - preferedFlavorBR not respected
+- SUP-4250 - VAST preroll not respected in 2.28 on mobile.
+- SUP-4277 - Mediahuis - Windows Phone 8.1 black screen on playback
+- SUP-4473 - 2.29: "Stack overflow at line: 0" at end of playback on IE8
+- SUP-4546 - Embed code for video with chaptering is not loading
+- SUP-3314 - Player dimensions in Universal Studio 
+- SUP-4232 - Black screen in IE when viewing videos in full screen
+- SUP-4051 - Downloading from player yields 0 bytes files
+
+* Sun Apr 5 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v2.29-1
+- SUP-3340 - Live stream freezes for a few seconds when streaming with KRecord
+- SUP-4096 - [2.27.1] document.onclick is kept even after player is gone
+- SUP-3793 - No video playing
+- SUP-4018 - Thumbnail isn't Displayed in Audio Playlist
+- SUP-3984 - [2.28-rc8] Previous captions <track> elements not removed from <video> upon changeMedia
+- SUP-3944 - [2.27.1] EmbedPlayerYouTube fails with an exception
+- SUP-4137 - v2.28 broken hotkey functionality (End Key)
+- SUP-4119 - Handle hidden iframe player loading and display
+- SUP-4198 - [BankOfAmericaSaaS] Captions request is being blocked
+- SUP-3684 - Thumbnail at the end of a live stream
+- SUP-4189 - Kaltura Player versions greater than 2.22 don't handle onTextData event data properly - Kaplan
+- SUP-4118 - issues with SpotXchange integration
+- SUP-3367 - V2 player fires 2~3 'doPlay' events when using the related videos
+- SUP-3369 - Captions on live stream don't show (manual live streaming)
+- SUP-3960 - Ad tag issue - KDP
+
+* Sun Mar 8 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v2.28-1
+- FEC-417 - Player 2.0 - Share & Embed functionality
+- FEC-2866 - Enable multi-stream for iPad viewers
+- FEC-2918 - Add uiconf id to Google Analytics
+- FEC-2620 - Support vast loadAdsOnPlay property
+- SUP-3996 - Playlist player issus, BOA
+- SUP-3967 - Player requests undefined ciu_szs param
+- SUP-3649 - Adding Class to Spinner using Custom CSS | HTML5 Player
+- SUP-3888 - [2.27.1] Captions cookie does not take any effect
+- SUP-3830 - Player stuck on spinning in iOS after changeMedia is called
+- SUP-3783 - Player and KMC not showing all the captions available
+- SUP-3641 - playlist section vs. video section
+- SUP-3849 - Downloading from player causes no extension on Firefox+Mac
+- SUP-3858 - [2.26-2.27] Captions text color doesn't apply
+- SUP-3850 - HDS source selector broken in 2.24-2.27
+- SUP-3781 - Captions supported in KDP does not in HTML5
+- SUP-3629 - Postmedia No playerPlayed event after prerolls and before contnet with DFP ads
+- SUP-3340 - Live stream freezes for a few seconds when streaming with KRecord
+
 * Sun Feb 8 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v2.27-1
 - SUP-3485 - Chapter playlist gaps and unresponsive in external URL (standalon page) | V2 player | Chapters plugin
 - SUP-3559 - Player gives a "No source video was found"

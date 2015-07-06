@@ -2,12 +2,13 @@
 %define widget_name kupload
 Name:	kaltura-%{widget_name}
 Version: v1.2.16 
-Release: 1 
+Release: 2 
 Epoch:0
 Summary: Kaltura kupload widget
 License: AGPLv3+	
 URL: http://kaltura.org
 Source0: %{name}-%{version}.zip
+Source1: kaltura-kupload-v1.2.8.zip
 BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 BuildArch: noarch
 
@@ -46,6 +47,9 @@ rm -rf %{buildroot}
 %{prefix}/web/flash/%{widget_name}
 
 %changelog
+* Mon Jun 3 2015 Kobi Michaeli <kobi.michaeli@kaltura.com> - v1.2.8-2
+- Added v1.2.16 & v1.2.8 to the package
+
 * Mon Nov 17 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v1.2.16
 - Bounce ver and also moved to GitHub.
 
