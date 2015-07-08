@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.27
-Release: 3
+Release: 7
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -83,7 +83,9 @@ find %{_sysconfdir}/logrotate.d -type l -name "kaltura_*" -exec rm {} \;
 
 %changelog
 * Wed Jul 8 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.27-3
-- Added test to upload captions and search entry
+- Added upload captions test 
+- Added search entry test
+- Added notification tests
 
 * Fri Jun 19 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.26-5
 - use $SUPER_USER when dropping db, do not assume root

@@ -185,13 +185,7 @@ if $QUERY_COMMAND kaltura-batch >/dev/null 2>&1 || $QUERY_COMMAND kaltura-front 
 		OUT=`php $DIRNAME/dropbox_test.php $SERVICE_URL $PARTNER_ID $ADMIN_PARTNER_SECRET /tmp/sanity-drop-$NOW-$HOSTNAME 2>&1`
 		RC=$?
 		END=`date +%s.%N`
-		if [ $RC -ne 0 ];then
-		
-			report "Local dropfolder creation failed" $RC "$OUT" "`bc <<< $END-$START`" 
-		else
-			report "Local dropfolder creation succeeded" $RC "$OUT" "`bc <<< $END-$START`" 
-		
-		fi
+		report "Local dropfolder creation" $RC "$OUT" "`bc <<< $END-$START`" 
 		PARTNER_SECRET=`echo "select secret from partner where id=$PARTNER_ID" | mysql -N -h $DB1_HOST -p$DB1_PASS $DB1_NAME -u$DB1_USER -P$DB1_PORT`
 		 PARTNER_ADMIN_SECRET=`echo "select admin_secret from partner where id=$PARTNER_ID" | mysql -N -h $DB1_HOST -p$DB1_PASS $DB1_NAME -u$DB1_USER -P$DB1_PORT`
 		 ZERO_PARTNER_ADMIN_SECRET=`echo "select admin_secret from partner where id=0" | mysql -N -h $DB1_HOST -p$DB1_PASS $DB1_NAME -u$DB1_USER -P$DB1_PORT`
@@ -215,6 +209,12 @@ if $QUERY_COMMAND kaltura-batch >/dev/null 2>&1 || $QUERY_COMMAND kaltura-front 
 				TOTAL_T=`bc <<< $TIME`
 				report "Delete flavor param" $RC "$FLAVOR_PARAM_ID" "`bc <<< $END-$START`"
 			fi
+			START=`date +%s.%N`
+			OUT=`php $DIRNAME/http_notifications.php $PARTNER_ID $PARTNER_ADMIN_SECRET  $SERVICE_URL`
+			report "HTTP notification: $OUT" $RC "$OUT" "$TOTAL_T"
+			START=`date +%s.%N`
+			OUT=`php $DIRNAME/mail_notifications.php $PARTNER_ID $PARTNER_ADMIN_SECRET  $SERVICE_URL`
+			report "Mail notification: $OUT" $RC "$OUT" "$TOTAL_T"
 			START=`date +%s.%N`
 			UPLOADED_ENT=`php $DIRNAME/upload_test.php $SERVICE_URL $PARTNER_ID $PARTNER_SECRET $WEB_DIR/content/templates/entry/data/kaltura_logo_animated_blue.flv 2>&1`
 			RC=$?
@@ -255,54 +255,35 @@ if $QUERY_COMMAND kaltura-batch >/dev/null 2>&1 || $QUERY_COMMAND kaltura-front 
 				RC=$?
 				END=`date +%s.%N`
 				TOTAL_T=`bc <<< $END-$START`
-				if [ $RC -eq 0 ];then
-					report "Clipping $UPLOADED_ENT Succeeded" $RC "$OUT" "$TOTAL_T"
-				else
-					report "Clipping $UPLOADED_ENT failed" $RC "$OUT" "$TOTAL_T"
-				fi	
+				report "Clipping $UPLOADED_ENT" $RC "$OUT" "$TOTAL_T"
 
 				START=`date +%s.%N`
 				OUT=`php $DIRNAME/clip_test.php $SERVICE_URL $PARTNER_ID $PARTNER_ADMIN_SECRET  $UPLOADED_ENT 1`
 				RC=$?
 				END=`date +%s.%N`
 				TOTAL_T=`bc <<< $END-$START`
-				if [ $RC -eq 0 ];then
-					report "Trimming $UPLOADED_ENT Succeeded" $RC "$OUT" "$TOTAL_T"
-				else
-					report "Trimming $UPLOADED_ENT failed" $RC "$OUT" "$TOTAL_T"
-				fi	
+				report "Trimming $UPLOADED_ENT" $RC "$OUT" "$TOTAL_T"
 				
 				START=`date +%s.%N`
 				OUT=`php $DIRNAME/play.php --service-url=$SERVICE_URL --entry-id=$UPLOADED_ENT  --partner=$PARTNER_ID --secret=$PARTNER_SECRET|sed "s@\"@@g"`
 				RC=$?
 				END=`date +%s.%N`
 				TOTAL_T=`bc <<< $END-$START`
-				if [ $RC -ne 0 ];then
-					report "Mock playback $UPLOADED_ENT failed" $RC "$OUT" "$TOTAL_T"
-				else
-					report "Mock playback $UPLOADED_ENT succeeded" $RC "$OUT" "$TOTAL_T"
-				fi	
+				report "Mock playback $UPLOADED_ENT" $RC "$OUT" "$TOTAL_T"
 				START=`date +%s.%N`
 				OUT=`php $DIRNAME/add_caption.php $PARTNER_ID $PARTNER_ADMIN_SECRET $SERVICE_URL $UPLOADED_ENT $CAPTIONS_FILE EN`
 				RC=$?
 				END=`date +%s.%N`
 				TOTAL_T=`bc <<< $END-$START`
-				if [ $RC -ne 0 ];then
-					report "Adding captions to $UPLOADED_ENT failed" $RC "$OUT" "$TOTAL_T"
-				else
-					report "Addition captions to $UPLOADED_ENT succeeded" $RC "$OUT" "$TOTAL_T"
-				fi	
+				report "Addition captions to $UPLOADED_ENT" $RC "$OUT" "$TOTAL_T"
+				sleep 2
 				START=`date +%s.%N`
 				# ',' means search for either one of these strings, i.e: logical OR
 				OUT=`php $DIRNAME/search_entry.php $PARTNER_ID $PARTNER_SECRET $SERVICE_URL "Example,Deja,Bold"`	
 				RC=$?
 				END=`date +%s.%N`
 				TOTAL_T=`bc <<< $END-$START`
-				if [ $RC -ne 0 ];then
-					report "Searching for Example||Deja||Bold in $UPLOADED_ENT metadata failed" $RC "$OUT" "$TOTAL_T"
-				else
-					report "Searching for Example||Deja||Bold in $UPLOADED_ENT metadata succeded" $RC "$OUT" "$TOTAL_T"
-				fi	
+				report "Searching for Example||Deja||Bold in $UPLOADED_ENT metadata" $RC "$OUT" "$TOTAL_T"
 				START=`date +%s.%N`
 				OUT=`php $DIRNAME/recon.php $SERVICE_URL $PARTNER_ID $PARTNER_ADMIN_SECRET $UPLOADED_ENT`
 				RC=$?
