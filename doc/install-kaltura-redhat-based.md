@@ -68,9 +68,9 @@ to read:
 baseurl = http://installrepo.kaltura.org/releases/rhel7/RPMS/$basearch/
 ```
 
-Also note that version 7 no longer has MySQL server and instead includes MariaDB in its official repos.
+*Note for RHEL7: depending on what repos you have enabled, you may also need to add the EPEL or CentOS repos to resolve all dependencies.*
 
-RHEL/CentOS 7 is currently in beta stages, bug reports are most welcomed.
+
 
 #### MySQL Install and Configuration
 For MySQL versions higher 5.5 and above, note that you must disable strict mode for the deployment to succeed.
