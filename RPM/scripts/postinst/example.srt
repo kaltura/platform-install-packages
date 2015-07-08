@@ -1,0 +1,64 @@
+1
+00:00:01,478 --> 00:00:04,020
+SrtPlayer Example
+
+2
+00:00:05,045 --> 00:00:09,545
+Support for <i>italic</i> font
+
+3
+00:00:09,378 --> 00:00:13,745
+Support for <b>bold</b> font
+
+4
+00:00:14,812 --> 00:00:16,144
+Multi
+Line
+Support ;)
+
+5
+00:00:18,211 --> 00:00:21,211
+Fonts: DejaVu
+http://dejavu-fonts.org
+
+6
+00:00:22,278 --> 00:00:25,678 
+Dejavu Sans
+
+7
+00:00:26,478 --> 00:00:31,079
+<b>DejaVu Sans Condensed Bold</b>
+
+8
+00:00:32,144 --> 00:00:38,178
+<i>DejaVu Sans Oblique</i>
+ 
+9
+00:00:39,812 --> 00:00:45,745
+[de.derhess.video.vimeo]
+http://blog.derhess.de
+
+10
+00:00:46,812 --> 00:00:52,745
+[nl.inlet42.data.subtitles]
+http://blog.base42.nl
+
+11
+00:00:53,812 --> 00:00:59,745
+[[ VimeoSrtPlayer ]]
+http://mindpirates.org
+
+12
+00:01:01,812 --> 00:01:05,745
+Video by Kevin Klein
+http://vimeo.com/user4167888
+
+13
+00:01:006,812 --> 00:01:13,745
+dedicated to
+http://problema-thefilm.org
+
+14
+00:01:11,812 --> 00:01:15,745
+END OF EXAMPLE FILE
+
