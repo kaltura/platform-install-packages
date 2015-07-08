@@ -16,6 +16,8 @@ function upload($client,$fileData,$title,$conv_profile=null,$type=null)
 		$result = $client->uploadToken->upload($tok, $fileData, $resume, $finalChunk, $resumeAt);
 		$entry = new KalturaBaseEntry();
 		$entry->name = $title;
+		$entry->tags = 'Example';
+		$entry->description = 'Example Entry Description';
 		if (isset($conv_profile)){
 			$entry->conversionProfileId = $conv_profile;	
 		}

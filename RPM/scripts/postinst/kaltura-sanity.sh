@@ -35,6 +35,7 @@ fi
 . $RC_FILE
 
 DIRNAME=`dirname $0`
+CAPTIONS_FILE=$DIRNAME/example.srt
 rm  /tmp/`hostname`-reportme.`date +%d_%m_%Y`.sql 2> /dev/null
 rm $LOG_DIR/log/*log  $LOG_DIR/log/batch/*log 2> /dev/null
 for PARTITION in '/' $WEB_DIR;do
@@ -281,7 +282,27 @@ if $QUERY_COMMAND kaltura-batch >/dev/null 2>&1 || $QUERY_COMMAND kaltura-front 
 				else
 					report "Mock playback $UPLOADED_ENT succeeded" $RC "$OUT" "$TOTAL_T"
 				fi	
-				
+				START=`date +%s.%N`
+				OUT=`php $DIRNAME/add_caption.php $PARTNER_ID $PARTNER_ADMIN_SECRET $SERVICE_URL $UPLOADED_ENT $CAPTIONS_FILE EN`
+				RC=$?
+				END=`date +%s.%N`
+				TOTAL_T=`bc <<< $END-$START`
+				if [ $RC -ne 0 ];then
+					report "Adding captions to $UPLOADED_ENT failed" $RC "$OUT" "$TOTAL_T"
+				else
+					report "Addition captions to $UPLOADED_ENT succeeded" $RC "$OUT" "$TOTAL_T"
+				fi	
+				START=`date +%s.%N`
+				# ',' means search for either one of these strings, i.e: logical OR
+				OUT=`php $DIRNAME/search_entry.php $PARTNER_ID $PARTNER_SECRET $SERVICE_URL "Example,Deja,Bold"`	
+				RC=$?
+				END=`date +%s.%N`
+				TOTAL_T=`bc <<< $END-$START`
+				if [ $RC -ne 0 ];then
+					report "Searching for Example||Deja||Bold in $UPLOADED_ENT metadata failed" $RC "$OUT" "$TOTAL_T"
+				else
+					report "Searching for Example||Deja||Bold in $UPLOADED_ENT metadata succeded" $RC "$OUT" "$TOTAL_T"
+				fi	
 				START=`date +%s.%N`
 				OUT=`php $DIRNAME/recon.php $SERVICE_URL $PARTNER_ID $PARTNER_ADMIN_SECRET $UPLOADED_ENT`
 				RC=$?
