@@ -275,7 +275,7 @@ if $QUERY_COMMAND kaltura-batch >/dev/null 2>&1 || $QUERY_COMMAND kaltura-front 
 				RC=$?
 				END=`date +%s.%N`
 				TOTAL_T=`bc <<< $END-$START`
-				report "Addition captions to $UPLOADED_ENT" $RC "$OUT" "$TOTAL_T"
+				report "Adding captions to $UPLOADED_ENT" $RC "$OUT" "$TOTAL_T"
 				sleep 2
 				START=`date +%s.%N`
 				# ',' means search for either one of these strings, i.e: logical OR

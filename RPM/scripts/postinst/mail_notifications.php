@@ -47,5 +47,5 @@ $eventNotificationTemplate->subject = 'Your video is ready to be played!';
 $eventNotificationTemplate->body = 'Hello world:)';
 $eventnotificationPlugin = KalturaEventnotificationClientPlugin::get($client);
 $result = $eventnotificationPlugin->eventNotificationTemplate->update($notification_id, $eventNotificationTemplate);
-echo('ID: '. $result->id. ', Subject: "'.$result->subject.'", Mail body: "'.$result->body.'"');
+echo('ID: '. $result->id. ', Subject: '.$result->subject.', Mail body: '.$result->body);
 ?>

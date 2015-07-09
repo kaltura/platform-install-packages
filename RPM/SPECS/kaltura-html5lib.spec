@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.32
+Version: v2.32.1
 Release: 1
 Epoch:0 
 License: AGPLv3+
@@ -29,6 +29,7 @@ Source18: kaltura-html5lib-v2.28.tar.gz
 Source19: kaltura-html5lib-v2.29.tar.gz
 Source20: kaltura-html5lib-v2.30.tar.gz
 Source21: kaltura-html5lib-v2.31.tar.gz
+Source22: kaltura-html5lib-v2.32.tar.gz
 
 URL: https://github.com/kaltura/mwEmbed 
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -72,10 +73,11 @@ tar zxf %{SOURCE18} -C %{_builddir}/
 tar zxf %{SOURCE19} -C %{_builddir}/
 tar zxf %{SOURCE20} -C %{_builddir}/
 tar zxf %{SOURCE21} -C %{_builddir}/
+tar zxf %{SOURCE22} -C %{_builddir}/
 
 %install
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib
-for i in v2.1.1 v2.3 v2.4 v2.6 v2.9 v2.14 v2.15 v2.18.5 v2.20 v2.21 v2.22 v2.23 v2.24 v2.25 v2.26 v2.27 v2.28 v2.29 v2.30 v2.31 %{version};do
+for i in v2.1.1 v2.3 v2.4 v2.6 v2.9 v2.14 v2.15 v2.18.5 v2.20 v2.21 v2.22 v2.23 v2.24 v2.25 v2.26 v2.27 v2.28 v2.29 v2.30 v2.31 v2.32.1 %{version};do
 	cp -r %{_builddir}/%{name}-$i $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i
 	cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i
 done

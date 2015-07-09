@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 10.15.0
-Release: 4
+Release: 6
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -306,6 +306,35 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Thu Jul 9 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.15.0-6
+- Disable MySQL strict mode when deploying DB
+- Added HTTP notification templates to deployment
+- PLAT-3178 - eCDN: KES multicast
+- PLAT-3180 - eCDN: KES non-flat multicast support from backend
+- PLAT-3214 - eCDN: KES multicast - player changes
+- PLAT-2924 - OTT DIstribution Module enhancements for MediaPrep Phase 1
+- PLAT-3326 - Developer Account
+- SUP-4344 - Presentation not uploaded to CaptureSpace
+- SUP-3031 - Uploading issue
+- SUP-3117 - getting an error on bulk category upload
+- SUP-3867 - TechSmith relay issue
+- SUP-4641 - Wrong content type returned for JS documententry in Chrome 42
+- SUP-4776 - Dynamically retrieve the updated default thumbnail asset
+- SUP-5236 - WeatherNation - Media server becoming unavailable 
+- SUP-4191 - Live stream stopped
+- SUP-5228 - Cannot live stream with specific entry
+- SUP-5257 - Live Stream presents still image of a previously streamed content
+- PS-2287 - New HTTP notification fired when change is made to entry custom data
+- PLAT-3387 - Spark stopped processing events when failed to parse a log line
+- PLAT-3304 - Devices stopped to play Live(Ad stitching) after 90 min
+- PLAT-3066 - Anonymous analytics 
+- PLAT-3014 - Converison profile default entry should not copy type and media type
+- PLAT-3016 - entitlement prevent from load Conversion Profile Default entry
+- PLAT-3287 - removeGroupSmils concurrent modification
+- PLAT-3292 - Playlist API - Cannot save CategoryEntryAdvancedFilter as an advanced search filter
+- PLAT-3294 - OR between KalturaCategoryEntryAdvancedFilter and KalturaMetadataSearchItem produces AND
+- PLAT-3295 - Playlist API - Advanced filter items are duplicated
+
 * Mon Jun 29 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.15.0-1
 - Ver Bounce to 10.15.0
 
