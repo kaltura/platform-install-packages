@@ -90,7 +90,12 @@ In order to remove the Analytics DBs and repopulate them:
 0. Backup all Kaltura DBs using: https://github.com/kaltura/platform-install-packages/blob/Jupiter-10.2.0/doc/rpm-cluster-deployment-instructions.md#backup-and-restore-practices 
 1. Drop the current DWH DBs: 
 ```
-PASSW=$MYSQL_SUPER_USER_PASSWD for i in `mysql -N -p$PASSWD kalturadw -e "show tables"`;do mysql -p$PASSWD kalturadw -e "drop table $i";done for i in `mysql -N -p$PASSWD kalturadw_ds -e "show tables"`;do mysql -p$PASSWD kalturadw_ds -e "drop table $i";done for i in `mysql -N -p$PASSWD kalturalog -e "show tables"`;do mysql -p$PASSWD kalturalog -e "drop table $i";done for i in `mysql -p$PASSWD -e "Show procedure status" |grep kalturadw|awk -F " " '{print $2}'`;do mysql kalturadw -p$PASSWD -e "drop procedure $i;";done for i in `mysql -p$PASSWD -e "Show procedure status" |grep kalturadw_ds|awk -F " " '{print $2}'`;do mysql kalturadw_ds -p$PASSWD -e "drop procedure $i;";done 
+PASSW=$MYSQL_SUPER_USER_PASSWD for i in `mysql -N -p$PASSWD kalturadw -e "show tables"`;
+do mysql -p$PASSWD kalturadw -e "drop table $i";done 
+for i in `mysql -N -p$PASSWD kalturadw_ds -e "show tables"`;do mysql -p$PASSWD kalturadw_ds -e "drop table $i";done 
+for i in `mysql -N -p$PASSWD kalturalog -e "show tables"`;do mysql -p$PASSWD kalturalog -e "drop table $i";done 
+for i in `mysql -p$PASSWD -e "Show procedure status" |grep kalturadw|awk -F " " '{print $2}'`;do mysql kalturadw -p$PASSWD -e "drop procedure $i;";done 
+for i in `mysql -p$PASSWD -e "Show procedure status" |grep kalturadw_ds|awk -F " " '{print $2}'`;do mysql kalturadw_ds -p$PASSWD -e "drop procedure $i;";done 
 ```
 
 2. Reinstall and config DWH:
