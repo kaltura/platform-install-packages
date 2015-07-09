@@ -58,6 +58,45 @@ Run `# kaltlog`, which will continuously track (using `tail`) an error grep from
 You can also use: `# allkaltlog` (using root), which will dump all the error lines from the Kaltura logs once. Note that this can result in a lot of output, so the best way to use it will be to redirect to a file: `# allkaltlog > errors.txt`.
 This output can be used to analyze past failures but for active debugging use the kaltlog alias.   
 
+#### Analytics issues
+check if a process lock is stuck:
+```
+mysql> select * from kalturadw_ds.locks ;
+```
+if lock_state says 1 for any of these, make sure you have no stuck dwh procs running, update it to read 0 and retry.
+
+check if access files were processed:
+```
+mysql> select * from kalturadw_ds.files where insert_time >=%Y%m%d;
+```
+check if actual data about entries play and views was inserted:
+```
+mysql> select * from kalturadw.dwh_fact_events where event_date_id >=%Y%m%d ;
+```
+
+Try to run each step manually:
+```
+rm /opt/kaltura/dwh/logs/*
+logrotate -vvv -f /etc/logrotate.d/kaltura_apache
+su kaltura -c "/opt/kaltura/dwh/etlsource/execute/etl_hourly.sh -p /opt/kaltura/dwh -k /opt/kaltura/pentaho/pdi/kitchen.sh"
+su kaltura -c "/opt/kaltura/dwh/etlsource/execute/etl_update_dims.sh -p /opt/kaltura/dwh -k /opt/kaltura/pentaho/pdi/kitchen.sh"
+su kaltura -c "/opt/kaltura/dwh/etlsource/execute/etl_daily.sh -p /opt/kaltura/dwh -k /opt/kaltura/pentaho/pdi/kitchen.sh"
+su kaltura -c "/opt/kaltura/dwh/etlsource/execute/etl_perform_retention_policy.sh -p /opt/kaltura/dwh -k /opt/kaltura/pentaho/pdi/kitchen.sh"
+su kaltura -c "/opt/kaltura/app/alpha/scripts/dwh/dwh_plays_views_sync.sh >> /opt/kaltura/log/cron.log"
+```
+
+In order to remove the Analytics DBs and repopulate them:
+0. Backup all Kaltura DBs using: https://github.com/kaltura/platform-install-packages/blob/Jupiter-10.2.0/doc/rpm-cluster-deployment-instructions.md#backup-and-restore-practices 
+1. Drop the current DWH DBs: 
+```
+PASSW=$MYSQL_SUPER_USER_PASSWD for i in `mysql -N -p$PASSWD kalturadw -e "show tables"`;do mysql -p$PASSWD kalturadw -e "drop table $i";done for i in `mysql -N -p$PASSWD kalturadw_ds -e "show tables"`;do mysql -p$PASSWD kalturadw_ds -e "drop table $i";done for i in `mysql -N -p$PASSWD kalturalog -e "show tables"`;do mysql -p$PASSWD kalturalog -e "drop table $i";done for i in `mysql -p$PASSWD -e "Show procedure status" |grep kalturadw|awk -F " " '{print $2}'`;do mysql kalturadw -p$PASSWD -e "drop procedure $i;";done for i in `mysql -p$PASSWD -e "Show procedure status" |grep kalturadw_ds|awk -F " " '{print $2}'`;do mysql kalturadw_ds -p$PASSWD -e "drop procedure $i;";done 
+```
+
+2. Reinstall and config DWH:
+```
+# yum reinstall kaltura-dwh 
+# kaltura-dwh-config.sh
+```
 
 #### Cannot login to Admin Console
 To manually reset the passwd, following this procedure:
