@@ -86,6 +86,7 @@ su kaltura -c "/opt/kaltura/app/alpha/scripts/dwh/dwh_plays_views_sync.sh >> /op
 ```
 
 In order to remove the Analytics DBs and repopulate them:
+
 0. Backup all Kaltura DBs using: https://github.com/kaltura/platform-install-packages/blob/Jupiter-10.2.0/doc/rpm-cluster-deployment-instructions.md#backup-and-restore-practices 
 1. Drop the current DWH DBs: 
 ```
