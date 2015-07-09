@@ -76,13 +76,13 @@ mysql> select * from kalturadw.dwh_fact_events where event_date_id >=%Y%m%d ;
 
 Try to run each step manually:
 ```
-rm /opt/kaltura/dwh/logs/*
-logrotate -vvv -f /etc/logrotate.d/kaltura_apache
-su kaltura -c "/opt/kaltura/dwh/etlsource/execute/etl_hourly.sh -p /opt/kaltura/dwh -k /opt/kaltura/pentaho/pdi/kitchen.sh"
-su kaltura -c "/opt/kaltura/dwh/etlsource/execute/etl_update_dims.sh -p /opt/kaltura/dwh -k /opt/kaltura/pentaho/pdi/kitchen.sh"
-su kaltura -c "/opt/kaltura/dwh/etlsource/execute/etl_daily.sh -p /opt/kaltura/dwh -k /opt/kaltura/pentaho/pdi/kitchen.sh"
-su kaltura -c "/opt/kaltura/dwh/etlsource/execute/etl_perform_retention_policy.sh -p /opt/kaltura/dwh -k /opt/kaltura/pentaho/pdi/kitchen.sh"
-su kaltura -c "/opt/kaltura/app/alpha/scripts/dwh/dwh_plays_views_sync.sh >> /opt/kaltura/log/cron.log"
+# rm /opt/kaltura/dwh/logs/*
+# logrotate -vvv -f /etc/logrotate.d/kaltura_apache
+# su kaltura -c "/opt/kaltura/dwh/etlsource/execute/etl_hourly.sh -p /opt/kaltura/dwh -k /opt/kaltura/pentaho/pdi/kitchen.sh"
+# su kaltura -c "/opt/kaltura/dwh/etlsource/execute/etl_update_dims.sh -p /opt/kaltura/dwh -k /opt/kaltura/pentaho/pdi/kitchen.sh"
+# su kaltura -c "/opt/kaltura/dwh/etlsource/execute/etl_daily.sh -p /opt/kaltura/dwh -k /opt/kaltura/pentaho/pdi/kitchen.sh"
+# su kaltura -c "/opt/kaltura/dwh/etlsource/execute/etl_perform_retention_policy.sh -p /opt/kaltura/dwh -k /opt/kaltura/pentaho/pdi/kitchen.sh"
+# su kaltura -c "/opt/kaltura/app/alpha/scripts/dwh/dwh_plays_views_sync.sh >> /opt/kaltura/log/cron.log"
 ```
 
 In order to remove the Analytics DBs and repopulate them:
@@ -90,7 +90,8 @@ In order to remove the Analytics DBs and repopulate them:
 0. Backup all Kaltura DBs using: https://github.com/kaltura/platform-install-packages/blob/Jupiter-10.2.0/doc/rpm-cluster-deployment-instructions.md#backup-and-restore-practices 
 1. Drop the current DWH DBs: 
 ```
-PASSW=$MYSQL_SUPER_USER_PASSWD for i in `mysql -N -p$PASSWD kalturadw -e "show tables"`;
+PASSW=$MYSQL_SUPER_USER_PASSWD 
+for i in `mysql -N -p$PASSWD kalturadw -e "show tables"`;
 do mysql -p$PASSWD kalturadw -e "drop table $i";done 
 for i in `mysql -N -p$PASSWD kalturadw_ds -e "show tables"`;do mysql -p$PASSWD kalturadw_ds -e "drop table $i";done 
 for i in `mysql -N -p$PASSWD kalturalog -e "show tables"`;do mysql -p$PASSWD kalturalog -e "drop table $i";done 
