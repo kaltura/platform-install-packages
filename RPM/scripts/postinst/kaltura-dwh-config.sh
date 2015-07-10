@@ -24,10 +24,7 @@ fi
 . $KALTURA_FUNCTIONS_RC
 if [ -r $CONSENT_FILE ];then
 	. $CONSENT_FILE
-elif [ -z "$USER_CONSENT" ];then
-	get_tracking_consent
 fi
-. $CONSENT_FILE
 if ! rpm -q kaltura-dwh;then
 	echo -e "${BRIGHT_BLUE}Skipping as kaltura-dwh is not installed.${NORMAL}"
 	exit 0 
