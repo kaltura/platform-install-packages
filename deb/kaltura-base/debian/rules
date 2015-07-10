@@ -75,7 +75,7 @@ binary-indep: install
 	cp debian/batch.ini.template $(tree)/configurations/batch/batch.ini.template
 # manual fix for https://github.com/kaltura/server/commit/1e1d6127a14ce8a76859473839a9c447b1805dcf#diff-c251e3f90040c98158075b713c8394b1R2444
 # TYPE = InnoDB was deprecated in MySQL 5.0 and was removed in My SQL 5.1 and later versions
-	cp debian/01.kaltura_ce_tables.sql $(tree)/deployment/base/sql/01.kaltura_ce_tables.sql
+	cp debian/01.UserRole.99.template.xml $(tree)/deployment/base/scripts/init_content
 	cp debian/kaltura-base.sh etc/profile.d/
 	sed -i "s@^\(params.ImageMagickCmd\)\s*=.*@\1=convert@" $(tree)/configurations/batch/batch.ini.template
 	sed -i "s@^\(params.mediaInfoCmd\)\s*=.*@\1=mediainfo@" $(tree)/configurations/batch/batch.ini.template
