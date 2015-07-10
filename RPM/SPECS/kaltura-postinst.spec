@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.27
-Release: 10
+Release: 11
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -82,6 +82,9 @@ find %{_sysconfdir}/logrotate.d -type l -name "kaltura_*" -exec rm {} \;
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Fri Jul 10 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.27-11
+- Added script that clears old dwh logs, runs the logrotate and then all the jobs from /etc/cron.d/kaltura-dwh.. Useful for when debugging analytics.
+
 * Thu Jul 9 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.27-10
 - Thumb signature test was only relevant when we only supported RHEL/CentOS 6. Now that we support RHEL7, Debian and Ubuntu of multiple versions, it will fail cause the hash will be different per platform and so - disabling it.
 
