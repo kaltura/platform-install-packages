@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 10.15.0
-Release: 6
+Release: 7
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -35,7 +35,7 @@ Source26: kaltura_batch.template
 Source28: embedIframeJsAction.class.php
 #Source29: kaltura.ssl.conf.template
 #Source30: 01.kaltura_ce_tables.sql
-
+Source31: 01.UserRole.99.template.xml 
 URL: https://github.com/kaltura/server/tree/%{codename}-%{version}
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
@@ -145,9 +145,9 @@ cp %{SOURCE19} $RPM_BUILD_ROOT%{prefix}/app/admin_console/controllers/IndexContr
 cp %{SOURCE28} $RPM_BUILD_ROOT%{prefix}/app/alpha/apps/kaltura/modules/extwidget/actions/embedIframeJsAction.class.php
 # tmp patch due to https://github.com/kaltura/platform-install-packages/issues/367
 # cp %{SOURCE29} $RPM_BUILD_ROOT%{prefix}/app/configurations/apache/
-# we bring another in kaltura-batch
+# we bring a1nother in kaltura-batch
 rm $RPM_BUILD_ROOT%{prefix}/app/configurations/batch/batch.ini.template
-
+cp %{SOURCE30} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_content/01.UserRole.99.template.xml
 
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content
 tar zxf %{SOURCE10} -C $RPM_BUILD_ROOT%{prefix}/web/content
@@ -306,6 +306,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Fri Jul 10 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.15.0-7
+- Local patch for https://github.com/kaltura/server/pull/2838
+
 * Thu Jul 9 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.15.0-6
 - Disable MySQL strict mode when deploying DB
 - Added HTTP notification templates to deployment
