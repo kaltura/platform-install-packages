@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.27
-Release: 9
+Release: 10
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -82,6 +82,9 @@ find %{_sysconfdir}/logrotate.d -type l -name "kaltura_*" -exec rm {} \;
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Thu Jul 9 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.27-10
+- Thumb signature test was only relevant when we only supported RHEL/CentOS 6. Now that we support RHEL7, Debian and Ubuntu of multiple versions, it will fail cause the hash will be different per platform and so - disabling it.
+
 * Wed Jul 8 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.27-3
 - Added upload captions test 
 - Added search entry test

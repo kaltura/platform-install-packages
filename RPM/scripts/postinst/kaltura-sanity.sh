@@ -241,15 +241,13 @@ if $QUERY_COMMAND kaltura-batch >/dev/null 2>&1 || $QUERY_COMMAND kaltura-front 
 				START=`date +%s.%N`
 				OUT=` php $DIRNAME/create_thumbnail.php $SERVICE_URL $PARTNER_ID $PARTNER_ADMIN_SECRET $UPLOADED_ENT 1 2>&1`
 				curl -s $OUT > /tmp/$UPLOADED_ENT.jpg
-				compare -verbose -metric mae /tmp/$UPLOADED_ENT.jpg $DIRNAME/kaltura_logo_animated_blue_1_sec.jpg /tmp/$UPLOADED_ENT-diff.jpg  2>&1 | grep -q "all: 0 (0)" 
+				# this test was relevant when we only supported RHEL/CentOS 6. Now that we support RHEL7, Debian and Ubuntu of multiple versions, it will fail cause the hash will be different per platform and so - disabling it.
+
+				#compare -verbose -metric mae /tmp/$UPLOADED_ENT.jpg $DIRNAME/kaltura_logo_animated_blue_1_sec.jpg /tmp/$UPLOADED_ENT-diff.jpg  2>&1 | grep -q "all: 0 (0)" 
 				RC=$?
 				END=`date +%s.%N`
 				TOTAL_T=`bc <<< $END-$START`
-				if [ $RC -ne 0 ];then
-					report "Thumb for $UPLOADED_ENT does not match the signature of $DIRNAME/kaltura_logo_animated_blue_1_sec.jpg" $RC "$OUT" "$TOTAL_T"
-				else
-					report "Thumb for $UPLOADED_ENT identical to $DIRNAME/kaltura_logo_animated_blue_1_sec.jpg" $RC "$OUT" "$TOTAL_T"
-				fi	
+				report "Create thumb for $UPLOADED_ENT" $RC "$OUT" "$TOTAL_T"
 				START=`date +%s.%N`
 				OUT=`php $DIRNAME/clip_test.php $SERVICE_URL $PARTNER_ID $PARTNER_ADMIN_SECRET  $UPLOADED_ENT 0`
 				RC=$?
