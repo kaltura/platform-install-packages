@@ -95,6 +95,9 @@ rm -rf %{buildroot}
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Sun Jul 12 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v2.32.1-1
+- Support MSE/EME only on Chrome
+
 * Sun Jun 28 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v2.32-1
 - FEC-3632 - Supprot all tremor ad substitutions
 - FEC-3640 - Support large play button when DFP ads are paused.

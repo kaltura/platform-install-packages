@@ -147,7 +147,7 @@ cp %{SOURCE28} $RPM_BUILD_ROOT%{prefix}/app/alpha/apps/kaltura/modules/extwidget
 # cp %{SOURCE29} $RPM_BUILD_ROOT%{prefix}/app/configurations/apache/
 # we bring a1nother in kaltura-batch
 rm $RPM_BUILD_ROOT%{prefix}/app/configurations/batch/batch.ini.template
-cp %{SOURCE30} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_content/01.UserRole.99.template.xml
+cp %{SOURCE31} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_content/01.UserRole.99.template.xml
 
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content
 tar zxf %{SOURCE10} -C $RPM_BUILD_ROOT%{prefix}/web/content
