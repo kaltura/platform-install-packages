@@ -362,8 +362,16 @@ if [ "$1" = "configure" ]; then
         fi
 
         #db_input critical 'kaltura-base/generating_client_libs' || true
+	if service apache2 status;then
+		service apache2 stop
+		service monit stop
+	fi
+        rm -rf $KALTURA_PREFIX/app/cache/*
         php $BASE_DIR/app/generator/generate.php >> $BASE_DIR/log/generate.php.log 2>&1
 
+	if ! service apache2 status;then
+		service apache2 start
+	fi
         set +e
 
 

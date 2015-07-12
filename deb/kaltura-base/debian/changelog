@@ -1,5 +1,6 @@
 kaltura-base (10.15.0-1) jupiter; urgency=low
 
+  * Local patch for https://github.com/kaltura/server/pull/2838 
   * Disable MySQL strict mode when deploying DB
   * Added HTTP notification templates to deployment
   * PLAT-3178 - eCDN: KES multicast
@@ -28,7 +29,7 @@ kaltura-base (10.15.0-1) jupiter; urgency=low
   * PLAT-3294 - OR between KalturaCategoryEntryAdvancedFilter and KalturaMetadataSearchItem produces AND
   * PLAT-3295 - Playlist API - Advanced filter items are duplicated
 
- -- Jess Portnoy <jess.portnoy@kaltura.org>  Thu, 09 Jul 2015 15:35:42 +0000
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Sun, 12 Jul 2015 05:39:34 +0000
 
 kaltura-base (10.14.0-1) jupiter; urgency=low
 
