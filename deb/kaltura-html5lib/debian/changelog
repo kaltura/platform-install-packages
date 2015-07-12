@@ -1,3 +1,9 @@
+kaltura-html5lib (2.32.1-1) jupiter; urgency=low
+
+  * Support MSE/EME only on Chrome 
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Sun, 12 Jul 2015 05:42:41 +0000
+
 kaltura-html5lib (2.32-1) jupiter; urgency=low
 
   * FEC-3632 - Supprot all tremor ad substitutions

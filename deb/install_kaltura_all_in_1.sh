@@ -27,7 +27,6 @@ elif [ "$DISTRO" = 'Debian' ];then
 		apt-add-repository "deb http://security.debian.org/ wheezy/updates main"
 	fi
 fi
-exit;
 $APT_TOOL install mysql-server
 $APT_TOOL install kaltura-postinst
 $APT_TOOL install kaltura-base
