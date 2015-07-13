@@ -209,7 +209,7 @@ Please select one of the following options [0]:
 		enable_apps_conf $KALTURA_APACHE_CONFD
 		enable_admin_conf $KALTURA_APACHE_CONFD
 	fi
-
+	db_stop
 	# cronjobs:
 	ln -sf $APP_DIR/configurations/cron/api /etc/cron.d/kaltura-api
 	# currently causing issues, commenting
