@@ -21,6 +21,20 @@ chown $APACHE_USER.kaltura -R $KALTURA_PREFIX/web/content/entry $KALTURA_PREFIX/
 find $KALTURA_PREFIX/web/content/entry $KALTURA_PREFIX/web/content/uploads/  $KALTURA_PREFIX/web/tmp/ -type d -exec chmod 775 {} \;
 if [ -r $KALTURA_PREFIX/bin/kaltura-base-upgrading ];then
         if [ -r "$KALTURA_PREFIX/app/configurations/local.ini" -a -r "$KALTURA_PREFIX/app/configurations/base.ini" ];then
+                if [ -r  $KALTURA_PREFIX/bin/kaltura-functions.rc ];then
+                        . $KALTURA_PREFIX/bin/kaltura-functions.rc
+                        . /usr/share/debconf/confmodule
+                        db_get 'kaltura-base/time_zone'
+                        if [ -n "$RET" ];then
+                                TIME_ZONE=$RET
+                        else
+                                db_set 'kaltura-base/time_zone' $TZGUESS
+                                LOCALTIME_MD5=`md5sum /etc/localtime|awk -F " " '{print $1}'`
+                                TIME_ZONE=`find /usr/share/zoneinfo -type f | xargs md5sum | grep $LOCALTIME_MD5|awk -F " " '{print $2}'|sed 's@/usr/share/zoneinfo/@@g'`
+                        fi
+                        db_stop
+                        send_install_becon kaltura-base-`dpkg-query -W -f'${Version}' kaltura-base` $TIME_ZONE install_upgrade
+                fi
                 sed -i "s@^\(kaltura_version\).*@\1 = $KALTURA_VERSION@g" $KALTURA_PREFIX/app/configurations/local.ini
                 echo "Regenarating client libs.. this will take up to 2 minutes to complete."
                 if service apache2 status;then
