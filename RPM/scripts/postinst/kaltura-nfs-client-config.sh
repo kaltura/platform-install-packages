@@ -32,7 +32,7 @@ if [ "$DISTRO" = "Ubuntu" -o "$DISTRO" = "Debian" ];then
 	apt-get install nfs-common -y
 	SERVICES="rpcidmapd"
 else
-	yum install nfs-utils-lib -y
+	yum install nfs-utils-lib nfs-utils -y
 	getent group apache >/dev/null || groupadd -g 48 -r apache
 	getent passwd apache >/dev/null || \
 	  useradd -r -u 48 -g apache -s /sbin/nologin \
