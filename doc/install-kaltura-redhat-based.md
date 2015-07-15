@@ -1,4 +1,4 @@
-# Installing Kaltura on a Single Server (RPM)
+﻿# Installing Kaltura on a Single Server (RPM)
 This guide describes RPM installation of an all-in-one Kaltura server and applies to all major RH based Linux distros including Fedora Core, RHEL, CentOS, etc.
 ([Note the supported distros and versions](http://kaltura.github.io/platform-install-packages/#supported-distros)).
 
@@ -10,6 +10,8 @@ This guide describes RPM installation of an all-in-one Kaltura server and applie
 [Non-SSL Step-by-step Installation](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-redhat-based.md#non-ssl-step-by-step-installation)
 
 [SSL Step-by-step Installation](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-redhat-based.md#ssl-step-by-step-installation)
+
+[Unattended Installation](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-redhat-based.md#unattended-installation)
 
 [Upgrade Kaltura](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-redhat-based.md#upgrade-kaltura)
 
@@ -384,6 +386,10 @@ PEMFILE /path/to/your/certificate.pem
 Finally, run: ```/etc/init.d/kaltura-monit restart```
 
 **Your Kaltura installation is now complete.**
+
+## Unattended Installation
+All Kaltura scripts accept an answer file as their first argument.
+In order to preform an unattended [silent] install, simply edit the [template](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura.template.ans) and pass it along to kaltura-config-all.sh.
 
 ## Upgrade Kaltura
 *This will only work if the initial install was using this packages based install, it will not work for old Kaltura deployments using the PHP installers*
