@@ -13,7 +13,7 @@ echo kaltura-base    kaltura-base/db_port    string  @DB1_PORT@ | debconf-set-se
 echo kaltura-base    kaltura-base/dwh_db_hostname    string  @DB1_HOST@ | debconf-set-selections
 echo kaltura-base    kaltura-base/dwh_db_port        string  @DB1_PORT@ | debconf-set-selections
 echo kaltura-base    kaltura-base/env_name   string  Kaltura Video Platform | debconf-set-selections
-echo kaltura-base    kaltura-base/install_analytics_consent  Boolean false | debconf-set-selections
+echo kaltura-base    kaltura-base/install_analytics_consent  boolean false | debconf-set-selections
 echo kaltura-base    kaltura-base/install_analytics_email    string @YOUR_EMAIL@ | debconf-set-selections
 echo kaltura-base    kaltura-base/ip_range   string  @IP_RANGE@ | debconf-set-selections
 echo kaltura-base    kaltura-base/media_server_hostname      string | debconf-set-selections
