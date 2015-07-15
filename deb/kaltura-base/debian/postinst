@@ -40,6 +40,7 @@ if [ -r $KALTURA_PREFIX/bin/kaltura-base-upgrading ];then
                 if service apache2 status;then
                         service apache2 stop
                         service monit stop
+			RESTART_APACHE=true
                 fi
                 # this is read by kaltura-sphinx-schema-update.sh to determine rather or not to run
                 touch $KALTURA_PREFIX/app/configurations/sphinx_schema_update
@@ -50,7 +51,7 @@ if [ -r $KALTURA_PREFIX/bin/kaltura-base-upgrading ];then
                 chown -R $KALTURA_USER.$APACHE_USER $KALTURA_PREFIX/app/cache/ $KALTURA_PREFIX/log
                 chmod 775 $KALTURA_PREFIX/web/content
 
-                if ! service apache2 status;then
+                if [ -n "$RESTART_APACHE" ];then
                         service apache2 start
                 fi
                 service monit start
@@ -414,12 +415,13 @@ if [ "$1" = "configure" ]; then
         #db_input critical 'kaltura-base/generating_client_libs' || true
 	if service apache2 status;then
 		service apache2 stop
+		RESTART_APACHE=true
 		service monit stop
 	fi
         rm -rf $KALTURA_PREFIX/app/cache/*
         php $BASE_DIR/app/generator/generate.php >> $BASE_DIR/log/generate.php.log 2>&1
 
-	if ! service apache2 status;then
+	if [ -n "$RESTART_APACHE" ];then
 		service apache2 start
 	fi
         set +e

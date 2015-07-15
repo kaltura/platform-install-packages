@@ -29,6 +29,7 @@ binary-indep: install
 	dh_installdirs
 	rm -rf $(KALTURA_PREFIX)
 	mkdir -p $(STUDIO_PREFIX)
+	cp debian/studio.template.ini $(tree)/
 	mv $(tree) $(STUDIO_PREFIX)/$(HTML5_APP_STUDIO_VERSION)
 	dh_install $(STUDIO_PREFIX)
 	dh_gencontrol -u-v$(DEB_VERSION) 
