@@ -41,3 +41,12 @@ Description: Your Kaltura Service URL:
 Template: kaltura-front/self_signed_cert
 Type: note
 Description: WARNING: self signed cerificate detected. Will set settings.clientConfig.verifySSL=0 in configurations/admin.ini.
+
+Template: kaltura-front/disable_default_vhost
+Type: Boolean
+Default:
+Description: Disable pre-defined vhosts?
+	In order for Kaltura to work, the service URL you've entered must point to its vhost.\n\n
+	You seem to have other vhosts defined which are preventing this.\n
+	If Kaltura is the only site you plan to run on this machine [recommended] it is safe to answer YES.\n\n
+	If you have additional sites other than Kaltura currently running on this machine - BE VERY CAREFUL BEFORE ANSWERING YES.\n
