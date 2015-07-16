@@ -223,7 +223,6 @@ Please select one of the following options [0]:
 	chown -R $KALTURA_USER.$APACHE_USER $BASE_DIR/app/cache/ $BASE_DIR/log
 	service apache2 reload
 	trap - ERR
-	set +e
 	curl "$SERVICE_URL/api_v3/index.php?service=system&action=ping" -k  2> /dev/null >/tmp/ping_$$.xml
 	xmllint /tmp/ping_$$.xml >/dev/null 2>&1
 	if [ $? -ne 0 ];then
@@ -238,7 +237,6 @@ Please select one of the following options [0]:
 		fi
 	fi	
 	rm /tmp/ping_$$.xml
-	set -e
 	db_stop
 	ln -sf $BASE_DIR/app/configurations/monit/monit.d/httpd.rc /etc/monit/conf.d/apache2.rc 
 	ln -sf $BASE_DIR/app/configurations/monit/monit.d/memcached.rc /etc/monit/conf.d/

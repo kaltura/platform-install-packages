@@ -101,12 +101,12 @@ Type: password
 Default:
 Description: Confirm passwd:
 
-Template: kaltura-base/admin_console_passwd_invalid_char
+Template: kaltura-base/passwd_invalid_char
 Type: note
 Default:
 Description: Passwd can't have the '/' char in it. Please re-input.
 
-Template: kaltura-base/admin_console_passwd_dont_match
+Template: kaltura-base/passwd_dont_match
 Type: note
 Default:
 Description: Passwds do not match, again please.
@@ -146,6 +146,25 @@ Type: Boolean
 Default:  
 Description: Should we collect stats?
 	To improve your Kaltura experience and provide you with the best service, Kaltura would like your consent to collect necessary data and information regarding your installation and use of Kaltura and analyze it to provide an upgraded and more stable platform and services.\n
+
+Template: kaltura-base/auto_generate_kaltura_mysql_passwd
+Type: Boolean
+Default:  
+Description: Auto generate MySQL kaltura password?
+	The Kaltura platform uses a dedicated MySQL user 'kaltura' for its operations.\n
+	If you are installing a standalone machine, it is recommended that you select YES.\n
+	If this node is part of a cluster, select NO and then input the password you set previously.\n
+	The current password can be found in /opt/kaltura/app/configurations/db.ini on the first node you installed.\n
+
+Template: kaltura-base/kaltura_mysql_passwd
+Type: password
+Default:
+Description: Kaltura user MySQL password (must be minimum 8 chars and include at least one of each: upper-case, lower-case, number and a special character):
+
+Template: kaltura-base/kaltura_mysql_passwd_again
+Type: password
+Default:
+Description: Confirm passwd:
 
 Template: kaltura-base/install_analytics_email
 Type: string
