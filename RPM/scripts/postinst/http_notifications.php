@@ -52,5 +52,6 @@ $KalturaHttpNotificationDataFields=new KalturaHttpNotificationDataFields();
 $eventNotificationTemplate->data = $KalturaHttpNotificationDataFields;
 $eventnotificationPlugin = KalturaEventnotificationClientPlugin::get($client);
 $result = $eventnotificationPlugin->eventNotificationTemplate->update($notification_id, $eventNotificationTemplate);
+$eventnotificationPlugin->eventNotificationTemplate->delete($notification_id);
 echo('ID: '. $result->id. ', URL: '.$result->url);
 ?>
