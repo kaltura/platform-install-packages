@@ -40,6 +40,7 @@ if [ -r $KALTURA_PREFIX/bin/kaltura-base-upgrading ];then
                 if service apache2 status;then
                         service apache2 stop
                         service monit stop
+			RESTART_APACHE=true
                 fi
                 # this is read by kaltura-sphinx-schema-update.sh to determine rather or not to run
                 touch $KALTURA_PREFIX/app/configurations/sphinx_schema_update
@@ -50,7 +51,7 @@ if [ -r $KALTURA_PREFIX/bin/kaltura-base-upgrading ];then
                 chown -R $KALTURA_USER.$APACHE_USER $KALTURA_PREFIX/app/cache/ $KALTURA_PREFIX/log
                 chmod 775 $KALTURA_PREFIX/web/content
 
-                if ! service apache2 status;then
+                if [ -n "$RESTART_APACHE" ];then
                         service apache2 start
                 fi
                 service monit start
@@ -203,7 +204,7 @@ if [ "$1" = "configure" ]; then
                 db_get 'kaltura-base/admin_console_passwd'
                 ADMIN_CONSOLE_PASSWORD=$RET
                 if echo $ADMIN_CONSOLE_PASSWORD | grep -q "/" ;then
-                        db_input critical kaltura-base/admin_console_passwd_invalid_char || true
+                        db_input critical kaltura-base/passwd_invalid_char || true
                         db_go
                         unset ADMIN_CONSOLE_PASSWORD
                         continue
@@ -215,7 +216,7 @@ if [ "$1" = "configure" ]; then
                 db_get 'kaltura-base/admin_console_passwd_again'
                 AGAIN_ADMIN_CONSOLE_PASSWORD=$RET
                 if [ "$ADMIN_CONSOLE_PASSWORD" != "$AGAIN_ADMIN_CONSOLE_PASSWORD" ];then
-                        db_input critical kaltura-base/admin_console_passwd_dont_match || true 
+                        db_input critical kaltura-base/passwd_dont_match || true 
                         db_go
                         unset AGAIN_ADMIN_CONSOLE_PASSWORD
 
@@ -268,23 +269,55 @@ if [ "$1" = "configure" ]; then
 	else
 		echo "USER_CONSENT=0" > $CONSENT_FILE
 	fi
+        if [ -z "$DB1_PASS" ];then
+		db_input critical 'kaltura-base/auto_generate_kaltura_mysql_passwd' || true
+		db_go || true
+		db_get 'kaltura-base/auto_generate_kaltura_mysql_passwd'
+		if [ "$RET" = true ];then
+			DB1_PASS=`< /dev/urandom tr -dc A-Za-z0-9 | head -c15`
+			set +e
+			echo "update mysql.user set password=PASSWORD('$DB1_PASS') WHERE user='kaltura';flush PRIVILEGES" | mysql -h$DB1_HOST -P$DB1_PORT -u$SUPER_USER -p$SUPER_USER_PASSWD mysql
+			set -e
+			if [ -z "$DWH_PASS" ];then
+				DWH_PASS=$DB1_PASS
+			fi
+		else
+			while [ -z "$AGAIN_DB1_PASS" ];do
+				db_input critical 'kaltura-base/kaltura_mysql_passwd' || true
+				db_go || true
+				db_get 'kaltura-base/kaltura_mysql_passwd'
+				DB1_PASS=$RET
+				if echo $DB1_PASS | grep -q "/" ;then
+					db_input critical kaltura-base/passwd_invalid_char || true
+					db_go
+					unset DB1_PASS
+					continue
+				fi
+
+
+				db_input critical 'kaltura-base/kaltura_mysql_passwd_again' || true
+				db_go || true
+				db_get 'kaltura-base/kaltura_mysql_passwd_again'
+				AGAIN_DB1_PASS=$RET
+				if [ "$DB1_PASS" != "$AGAIN_DB1_PASS" ];then
+					db_input critical kaltura-base/passwd_dont_match || true 
+					db_go
+					unset AGAIN_DB1_PASS
+
+				fi
+			done
+		fi
+
+        fi
+        DB1_NAME=kaltura
+        DB1_USER=kaltura
+
 	db_stop
         for INI in /etc/php5/cli/php.ini /etc/php5/apache2/php.ini;do
                 if [ -r "$INI_FILE" ];then
                         sed -i "s#\(date.timezone\)\s*=.*#\1='$TIME_ZONE'#g" $INI_FILE
                 fi
         done
-        if [ -z "$DB1_PASS" ];then
-                DB1_PASS=`< /dev/urandom tr -dc A-Za-z0-9 | head -c15`
-                set +e
-                echo "update mysql.user set password=PASSWORD('$DB1_PASS') WHERE user='kaltura';flush PRIVILEGES" | mysql -h$DB1_HOST -P$DB1_PORT -u$SUPER_USER -p$SUPER_USER_PASSWD mysql
-                set -e
-                if [ -z "$DWH_PASS" ];then
-                        DWH_PASS=$DB1_PASS
-                fi
-        fi
-        DB1_NAME=kaltura
-        DB1_USER=kaltura
 
         # no added value in putting this on a separate server..
         SPHINX_DB_HOST=$DB1_HOST
@@ -414,12 +447,13 @@ if [ "$1" = "configure" ]; then
         #db_input critical 'kaltura-base/generating_client_libs' || true
 	if service apache2 status;then
 		service apache2 stop
+		RESTART_APACHE=true
 		service monit stop
 	fi
         rm -rf $KALTURA_PREFIX/app/cache/*
         php $BASE_DIR/app/generator/generate.php >> $BASE_DIR/log/generate.php.log 2>&1
 
-	if ! service apache2 status;then
+	if [ -n "$RESTART_APACHE" ];then
 		service apache2 start
 	fi
         set +e

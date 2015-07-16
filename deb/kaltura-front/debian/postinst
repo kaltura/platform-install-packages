@@ -209,7 +209,6 @@ Please select one of the following options [0]:
 		enable_apps_conf $KALTURA_APACHE_CONFD
 		enable_admin_conf $KALTURA_APACHE_CONFD
 	fi
-
 	# cronjobs:
 	ln -sf $APP_DIR/configurations/cron/api /etc/cron.d/kaltura-api
 	# currently causing issues, commenting
@@ -223,20 +222,40 @@ Please select one of the following options [0]:
 	find $BASE_DIR/app/cache/ $BASE_DIR/log -type f -exec chmod 664 {} \; 
 	chown -R $KALTURA_USER.$APACHE_USER $BASE_DIR/app/cache/ $BASE_DIR/log
 	service apache2 reload
+	trap - ERR
+	set +e
+	curl "$SERVICE_URL/api_v3/index.php?service=system&action=ping" -k  2> /dev/null >/tmp/ping_$$.xml
+	xmllint /tmp/ping_$$.xml >/dev/null 2>&1
+	if [ $? -ne 0 ];then
+		db_input critical kaltura-front/disable_default_vhost || true
+		db_go || true
+		db_get kaltura-front/disable_default_vhost 
+		if [ "$RET" = true ];then
+			for SITE in 000-default.conf default-ssl.conf;do
+				a2dissite $SITE
+			done
+			service apache2 reload
+		fi
+	fi	
+	rm /tmp/ping_$$.xml
+	set -e
+	db_stop
 	ln -sf $BASE_DIR/app/configurations/monit/monit.d/httpd.rc /etc/monit/conf.d/apache2.rc 
 	ln -sf $BASE_DIR/app/configurations/monit/monit.d/memcached.rc /etc/monit/conf.d/
 	service monit restart
-		trap - ERR
 		echo "use kaltura" | mysql -h$DB1_HOST -u$DB1_USER -p$DB1_PASS -P$DB1_PORT $DB1_NAME 2> /dev/null
 		if [ $? -eq 0 ];then
 			HTML5_DIR=`ls -ld $BASE_DIR/web/html5/html5lib/v* 2>/dev/null|awk -F " " '{print $NF}' |tail -1`
 			HTML5_VER=`basename $HTML5_DIR`
-			HTML5_DIR=`ls -ld $BASE_DIR/apps/studio/v* 2>/dev/null|awk -F " " '{print $NF}' |tail -1`
-			STUDIO_VER=`basename $HTML5_DIR`
+			HTML5_STUDIO_DIR=`ls -ld $BASE_DIR/apps/studio/v* 2>/dev/null|awk -F " " '{print $NF}' |tail -1`
+			HTML5_STUDIO_VER=`basename $HTML5_STUDIO_DIR`
+			if [ -f "$BASE_DIR/apps/studio/$HTML5_STUDIO_VER/studio.template.ini" ];then
+				sed -e "s#@HTML5_STUDIO_VER@#$HTML5_STUDIO_VER#g" -e "s#@HTML5_VER@#$HTML5_VER#g" -e "s#@CDN_HOST@#$KALTURA_VIRTUAL_HOST_NAME#g" $BASE_DIR/apps/studio/$HTML5_STUDIO_VER/studio.template.ini > $BASE_DIR/apps/studio/$HTML5_STUDIO_VER/studio.ini		      
+			fi
 			if [ -r "$BASE_DIR/apps/studio/$STUDIO_VER/studio.ini" ];then
-				php $BASE_DIR/app/deployment/uiconf/deploy_v2.php --user=www-data --ini=$BASE_DIR/apps/studio/$STUDIO_VER/studio.ini >> /dev/null
+				php $BASE_DIR/app/deployment/uiconf/deploy_v2.php --user=www-data --ini=$BASE_DIR/apps/studio/$HTML5_STUDIO_VER/studio.ini >> /dev/null
 				chown -R $APACHE_USER.$KALTURA_GROUP $WEB_DIR/content/generatedUiConf/
-				sed -i "s@^\(studio_version\s*=\)\(.*\)@\1 $STUDIO_VER@g" -i $BASE_DIR/app/configurations/local.ini
+				sed -i "s@^\(studio_version\s*=\)\(.*\)@\1 $HTML5_STUDIO_VER@g" -i $BASE_DIR/app/configurations/local.ini
 			fi
 		# we can't use 'dpkg show kaltura-kmc' because this node may not be the one where we installed the KMC deb on, as it resides in the web dir and does not need to be installed on all front nodes.
 			KMC_PATH=`ls -ld $BASE_DIR/web/flash/kmc/v* 2>/dev/null|awk -F " " '{print $NF}' |tail -1`
