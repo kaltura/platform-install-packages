@@ -87,6 +87,8 @@ if service httpd status >/dev/null 2>&1;then
 else
 	service httpd start
 fi
+chkconfig memcached on
+service memcached restart
 
 /etc/init.d/kaltura-batch restart >/dev/null 2>&1
 ln -sf $BASE_DIR/app/configurations/monit/monit.avail/batch.rc $BASE_DIR/app/configurations/monit/monit.d/enabled.batch.rc

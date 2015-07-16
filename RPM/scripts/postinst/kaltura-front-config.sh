@@ -290,6 +290,8 @@ find $BASE_DIR/app/cache/ $BASE_DIR/log -type f -exec chmod 664 {} \;
 chown -R kaltura.apache $BASE_DIR/app/cache/ $BASE_DIR/log
 service httpd restart
 chkconfig httpd on
+chkconfig memcached on
+service memcached restart
 ln -sf $BASE_DIR/app/configurations/monit/monit.avail/httpd.rc $BASE_DIR/app/configurations/monit/monit.d/enabled.httpd.rc
 ln -sf $BASE_DIR/app/configurations/monit/monit.avail/memcached.rc $BASE_DIR/app/configurations/monit/monit.d/enabled.memcached.rc
 /etc/init.d/kaltura-monit restart

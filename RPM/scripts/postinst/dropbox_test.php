@@ -46,7 +46,12 @@ function create_dropbox($client,$partnerId, $droppath)
 		chown($dropFolder->path,'kaltura');
 		chgrp($dropFolder->path,'apache');
 		chmod($dropFolder->path,0775);
-		return $dropfolderPlugin->dropFolder->add($dropFolder);
+		$drop_obj = $dropfolderPlugin->dropFolder->add($dropFolder);
+		$drop_id=$drop_obj->id;
+		$status_msg="'".$drop_obj->name.' successfully created for partner:' .$drop_obj->partnerId;
+		$dropfolderPlugin->dropFolder->delete($drop_id);
+		return $status_msg;
+		
 	}catch(exception $e){
 		throw $e;
 	}
@@ -77,5 +82,5 @@ $pager = null;
 $result = $client->permission->listAction($filter, $pager);
 var_dump($result) ;exit(0);*/
 
-$drop_obj=create_dropbox($client,$partnerId,$droppath);
-echo "'".$drop_obj->name.' successfully created for partner:' .$drop_obj->partnerId;
+$out=create_dropbox($client,$partnerId,$droppath);
+echo $out;
