@@ -19,6 +19,9 @@ echo kaltura-base    kaltura-base/ip_range   string  @IP_RANGE@ | debconf-set-se
 echo kaltura-base    kaltura-base/media_server_hostname      string | debconf-set-selections
 echo kaltura-base    kaltura-base/mysql_super_passwd password        @MYSQL_ROOT_PASSWD@ | debconf-set-selections
 echo kaltura-base    kaltura-base/mysql_super_user   string  root | debconf-set-selections
+echo kaltura-base    kaltura-base/kaltura_mysql_passwd       password        @DB1_PASS@ | deconf-set-selections
+echo kaltura-base    kaltura-base/kaltura_mysql_passwd_again password        @DB1_PASS@ | deconf-set-selections
+echo kaltura-base    kaltura-base/auto_generate_kaltura_mysql_passwd boolean false | debconf-set-selections
 echo kaltura-base    kaltura-base/second_sphinx_hostname     string  @SPHINX_SERVER1@ | debconf-set-selections
 echo kaltura-base    kaltura-base/service_url        string  @SERVICE_URL@ | debconf-set-selections
 echo kaltura-base    kaltura-base/sphinx_hostname    string  @SPHINX_SERVER2@ | debconf-set-selections
