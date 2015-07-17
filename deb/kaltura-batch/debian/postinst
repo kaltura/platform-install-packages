@@ -77,6 +77,8 @@ fi
 
 /etc/init.d/kaltura-batch restart >/dev/null 2>&1
 ln -sf $BASE_DIR/app/configurations/monit/monit.d/batch.rc /etc/monit/conf.d/
+ln -sf $BASE_DIR/app/configurations/monit/monit.d/httpd.rc /etc/monit/conf.d/apache2.rc
+ln -sf $BASE_DIR/app/configurations/monit/monit.d/memcached.rc /etc/monit/conf.d/
 service monit stop >> /dev/null 2>&1
 service monit start
 

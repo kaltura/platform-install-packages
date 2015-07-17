@@ -5,7 +5,7 @@ Maintainer: Jess Portnoy <jess.portnoy@kaltura.com>
 
 Package: kaltura-batch
 Architecture: all
-Depends: ${shlibs:Depends},apache2-mpm-prefork,php-pear,php5-cli,php5-mysql,php5-gd,php5-xsl,php5-curl,php5-gmp, php5-ldap, php5-mcrypt, php-apc, php5-memcached, imagemagick, libapache2-mod-php5,libssh2-php,libapache2-mod-xsendfile,libjpeg62,sshpass,kaltura-ffmpeg,kaltura-ffmpeg-aux,mencoder,mediainfo
+Depends: ${shlibs:Depends},apache2-mpm-prefork,php-pear,php5-cli,php5-mysql,php5-gd,php5-xsl,php5-curl,php5-gmp, php5-ldap, php5-mcrypt, php-apc, php5-memcached, imagemagick, libapache2-mod-php5,libssh2-php,libapache2-mod-xsendfile,libjpeg62,sshpass,kaltura-ffmpeg,kaltura-ffmpeg-aux,mencoder,mediainfo,memcached,kaltura-base
 Description: Kaltura Open Source Video Platform - batch server 
  Kaltura is the world's first Open Source Online Video Platform, transforming the way people work, learn, 
  and entertain using online video. The Kaltura platform empowers media applications with advanced video 

@@ -1,3 +1,9 @@
+kaltura-postinst (1.0.28-1) jupiter; urgency=low
+
+  * dropfolder test: delete() afterwards.
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Thu, 16 Jul 2015 14:38:54 +0000
+
 kaltura-postinst (1.0.27-1) jupiter; urgency=low
 
   * Changed script name to match script naming convention.
