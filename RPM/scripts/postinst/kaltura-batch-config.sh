@@ -33,6 +33,8 @@ if [ -n "$1" -a -r "$1" ];then
 	ANSFILE=$1
 	. $ANSFILE
 fi
+
+
 if [ ! -r /opt/kaltura/app/base-config.lock ];then
 	`dirname $0`/kaltura-base-config.sh "$ANSFILE"
 else
@@ -73,7 +75,14 @@ sed "s#@INSTALLED_HOSNAME@#`hostname`#g" -i  -i $BATCH_MAIN_CONF
 ln -sf $APP_DIR/configurations/logrotate/kaltura_batch /etc/logrotate.d/ 
 ln -sf $APP_DIR/configurations/logrotate/kaltura_apache /etc/logrotate.d/
 ln -sf $APP_DIR/configurations/logrotate/kaltura_apps /etc/logrotate.d/
-ln -sf $APP_DIR/configurations/apache/kaltura.conf /etc/httpd/conf.d/zzzkaltura.conf
+
+
+if [ $PROTOCOL=="https" ]; then
+	ln -sf $APP_DIR/configurations/apache/kaltura.ssl.conf /etc/httpd/conf.d/zzzkaltura.ssl.conf
+else
+	ln -sf $APP_DIR/configurations/apache/kaltura.conf /etc/httpd/conf.d/zzzkaltura.conf
+fi
+
 
 mkdir -p $LOG_DIR/batch 
 rm -rf $BASE_DIR/app/cache/*
@@ -87,6 +96,7 @@ if service httpd status >/dev/null 2>&1;then
 else
 	service httpd start
 fi
+
 chkconfig memcached on
 service memcached restart
 
