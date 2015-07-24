@@ -1,3 +1,9 @@
+kaltura-html5-studio (2.0.0-1) jupiter; urgency=low
+
+  * Aligned with player v2.33.
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Fri, 24 Jul 2015 22:28:02 +0000
+
 kaltura-html5-studio (1.9.9-1) jupiter; urgency=low
 
   * Add Studio support for Embed.ly embeds and Multi DRM plugins
