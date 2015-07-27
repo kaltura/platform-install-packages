@@ -1,3 +1,9 @@
+kaltura-kmc (5.39.6-1) jupiter; urgency=low
+
+  * PLAT-3409 - CustomData.System name with underscore is not supported by KMC->Mapping fields fail. 
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Fri, 24 Jul 2015 22:21:32 +0000
+
 kaltura-kmc (5.39.3-1) jupiter; urgency=low
 
   * SUP-4926 - Wrong KMC owner accounts - change to right account not saved 
