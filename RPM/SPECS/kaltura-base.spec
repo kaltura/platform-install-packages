@@ -156,7 +156,7 @@ tar zxf %{SOURCE10} -C $RPM_BUILD_ROOT%{prefix}/web/content
 cat > $RPM_BUILD_ROOT%{_sysconfdir}/profile.d/kaltura_base.sh << EOF
 PATH=\$PATH:%{prefix}/bin
 export PATH
-alias allkaltlog='grep --color "ERR:\|PHP\|trace\|CRIT\|\[error\]" %{prefix}/log/*.log %{prefix}/log/batch/*.log'
+alias allkaltlog='grep --color "ERR:\|PHP \|trace\|CRIT\|\[error\]" %{prefix}/log/*.log %{prefix}/log/batch/*.log'
 alias kaltlog='tail -f %{prefix}/log/*.log %{prefix}/log/batch/*.log | grep -A 1 -B 1 --color "ERR:\|PHP\|trace\|CRIT\|\[error\]"'
 if [ -r /etc/kaltura.d/system.ini ];then
 	. /etc/kaltura.d/system.ini
@@ -306,6 +306,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Jul 27 2015 jess.portnoy@kaltura.com <Jess Portnoy> - 10.17.0-2
+- Changed kaltlog alias to grep pattern 'PHP ' and not 'PHP' since that catches things like 'IZLe9ciBPHPcaiToJfOgv0w96eKrocGEm4oiL8piQreTaUmKbZaUk6wop7RM' which arent errors at all.
+
 * Mon Jul 27 2015 jess.portnoy@kaltura.com <Jess Portnoy> - 10.17.0-1
 - Ver Bounce to 10.17.0
 
