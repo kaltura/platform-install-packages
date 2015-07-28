@@ -29,6 +29,8 @@ binary-indep: install
 	dh_installdirs
 	mkdir -p $(PENTAHO_PREFIX)
 	mv $(tree)/* $(PENTAHO_PREFIX)/
+	cp debian/mysql-connector-java-5.1.35/mysql-connector-java-5.1.35-bin.jar $(PENTAHO_PREFIX)/libext/JDBC
+	rm $(PENTAHO_PREFIX)/libext/JDBC/mysql-connector-java-5.1.17.jar
 	dh_install $(KALTURA_PREFIX)
 	dh_gencontrol -u-v$(DEB_VERSION) 
 	dh_installdebconf
