@@ -58,7 +58,7 @@ Run `# kaltlog`, which will continuously track (using `tail`) an error grep from
 You can also use: `# allkaltlog` (using root), which will dump all the error lines from the Kaltura logs once. Note that this can result in a lot of output, so the best way to use it will be to redirect to a file: `# allkaltlog > errors.txt`.
 This output can be used to analyze past failures but for active debugging use the kaltlog alias.   
 
-#### Analytics issues
+### Analytics issues
 check if a process lock is stuck:
 ```
 mysql> select * from kalturadw_ds.locks ;
@@ -123,7 +123,7 @@ Should resolve the issue.
 - Run /opt/kaltura/dwh/etlsource/execute/etl_daily.sh
 
 
-#### Cannot login to Admin Console
+### Cannot login to Admin Console
 To manually reset the passwd, following this procedure:
 mysql> select * from user_login_data where login_email='you@mail.com'\G
 
