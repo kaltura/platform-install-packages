@@ -108,7 +108,7 @@ for i in `mysql -p$PASSWD -e "Show procedure status" |grep kalturadw_ds|awk -F "
 #### Couldn't execute SQL: CALL move_innodb_to_archive()
 Running:
 ```
-mysql> kalturadw.add_partitions();
+mysql> call kalturadw.add_partitions();
 ```
 Should resolve the issue.
 
