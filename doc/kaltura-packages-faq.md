@@ -105,6 +105,24 @@ for i in `mysql -p$PASSWD -e "Show procedure status" |grep kalturadw_ds|awk -F "
 # kaltura-dwh-config.sh
 ```
 
+#### Couldn't execute SQL: CALL move_innodb_to_archive()
+Running:
+```
+mysql> call kalturadw.add_partitions();
+```
+Should resolve the issue.
+
+#### Table has no partition for value
+
+- verify that your DB timezone settings are the same as PHP timezone settings (php.ini)
+- Re-sync dimension tables from the day you installed your server:
+    - Update kalturadw_ds.parameters where parameter_name = 'dim_sync_last_update'. You need to set date_value to the date you installed your server.
+    - Run /opt/kaltura/dwh/etlsource/execute/etl_update_dims.sh
+    -Verify that kalturadw.dwh_dim_entries was populated (If not check /opt/kaltura/dwh/logs/etl_update_dims-YYYTMMDD-HH.log for errors)
+- Update kalturadw.aggr_managment to run all aggregation again. Update kalturadw.aggr_managment set data_insert_time = NOW();
+- Run /opt/kaltura/dwh/etlsource/execute/etl_daily.sh
+
+
 #### Cannot login to Admin Console
 To manually reset the passwd, following this procedure:
 mysql> select * from user_login_data where login_email='you@mail.com'\G

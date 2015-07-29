@@ -1,4 +1,4 @@
-# Installing Kaltura on a Single Server (deb)
+﻿# Installing Kaltura on a Single Server (deb)
 This guide describes deb installation of an all-in-one Kaltura server and applies to deb based Linux distros.
 
 The processes was tested on Debian 8 and Ubuntu 14.04 but is expected to work on other versions. If you tried a deb based distro and failed, please report it.
@@ -10,6 +10,8 @@ The processes was tested on Debian 8 and Ubuntu 14.04 but is expected to work on
 [Prerequites](https://github.com/kaltura/platform-install-packages/blob/master/doc/pre-requisites.md)
 
 [Step-by-step Installation](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-deb-based.md#step-by-step-installation)
+
+[Unattended Installation](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-deb-based.md#unattended-installation)
 
 [Upgrade Kaltura](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-deb-based.md#upgrade-kaltura)
 
@@ -135,6 +137,19 @@ In order to perform a manual step by step install, simply copy the commands and 
 
 
 **Your Kaltura installation is now complete.**
+
+## Unattended Installation
+Edit the debconf [response file template](https://github.com/kaltura/platform-install-packages/blob/Jupiter-10.16.0/deb/kaltura_debconf_response.sh) by replacing all tokens with relevant values.
+and run it as root:
+```
+./kaltura_debconf_response.sh
+```
+the set the DEBIAN_FRONTEND ENV var:
+```
+export DEBIAN_FRONTEND=noninteractive
+```
+
+And install as described above. 
 
 ## Upgrade Kaltura
 *This will only work if the initial install was using this packages based install, it will not work for old Kaltura deployments using the PHP installers*
