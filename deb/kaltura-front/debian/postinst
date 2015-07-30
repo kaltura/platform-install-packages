@@ -221,7 +221,7 @@ Please select one of the following options [0]:
 	find $BASE_DIR/app/cache/ $BASE_DIR/log -type d -exec chmod 775 {} \; 
 	find $BASE_DIR/app/cache/ $BASE_DIR/log -type f -exec chmod 664 {} \; 
 	chown -R $KALTURA_USER.$APACHE_USER $BASE_DIR/app/cache/ $BASE_DIR/log
-	service apache2 reload
+	service apache2 reload || service apache2 restart
 	trap - ERR
 	set +e
 	curl "$SERVICE_URL/api_v3/index.php?service=system&action=ping" -k  2> /dev/null >/tmp/ping_$$.xml
@@ -234,7 +234,7 @@ Please select one of the following options [0]:
 			for SITE in 000-default.conf default-ssl.conf;do
 				a2dissite $SITE
 			done
-			service apache2 reload
+			service apache2 reload  || service apache2 restart
 		fi
 	fi	
 	rm /tmp/ping_$$.xml
