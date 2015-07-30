@@ -156,8 +156,8 @@ tar zxf %{SOURCE10} -C $RPM_BUILD_ROOT%{prefix}/web/content
 cat > $RPM_BUILD_ROOT%{_sysconfdir}/profile.d/kaltura_base.sh << EOF
 PATH=\$PATH:%{prefix}/bin
 export PATH
-alias allkaltlog='grep --color "ERR:\|PHP \|trace\|CRIT\|\[error\]" %{prefix}/log/*.log %{prefix}/log/batch/*.log'
-alias kaltlog='tail -f %{prefix}/log/*.log %{prefix}/log/batch/*.log | grep -A 1 -B 1 --color "ERR:\|PHP\|trace\|CRIT\|\[error\]"'
+alias allkaltlog='grep --color "ERR:\|PHP \|Stack trace:\|CRIT\|\[error\]" %{prefix}/log/*.log %{prefix}/log/batch/*.log'
+alias kaltlog='tail -f %{prefix}/log/*.log %{prefix}/log/batch/*.log | grep -A 1 -B 1 --color "ERR:\|PHP \|Stack trace:\|CRIT\|\[error\]"'
 if [ -r /etc/kaltura.d/system.ini ];then
 	. /etc/kaltura.d/system.ini
 fi
