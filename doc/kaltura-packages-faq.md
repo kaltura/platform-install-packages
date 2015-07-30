@@ -104,11 +104,18 @@ for i in `mysql -p$PASSWD -e "Show procedure status" |grep kalturadw|awk -F " " 
 for i in `mysql -p$PASSWD -e "Show procedure status" |grep kalturadw_ds|awk -F " " '{print $2}'`;do mysql kalturadw_ds -p$PASSWD -e "drop procedure $i;";done 
 ```
 
-2. Reinstall and config DWH:
+2. Reinstall and config DWH
+
+on RPM based systems:
 ```
 # yum reinstall kaltura-dwh 
 # kaltura-dwh-config.sh
 ```
+
+on deb based systems:
+```
+# dpkg-reconfigure kaltura-dwh
+``` 
 
 #### Couldn't execute SQL: CALL move_innodb_to_archive()
 Running:
