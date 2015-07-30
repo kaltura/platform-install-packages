@@ -14,6 +14,9 @@ BASE_PREFIX=opt/kaltura/$(tree)
 DEB_HOST_GNU_TYPE   ?= $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
 DEB_BUILD_GNU_TYPE  ?= $(shell dpkg-architecture -qDEB_BUILD_GNU_TYPE)
 
+#--enable-libfdk-aac \
+#--enable-libfaac \
+#--enable-nonfree \
 
 CFLAGS = `dpkg-buildflags --get CFLAGS`
 CFLAGS += -Wall
@@ -39,7 +42,6 @@ config.status: $(tree)
 		    --extra-ldflags="-L/opt/kaltura/lib" \
 		    --disable-devices \
 		    --enable-bzlib \
-		    --enable-libfaac \
 		    --enable-libgsm \
 		    --enable-libmp3lame \
 		    --enable-libschroedinger \
@@ -62,11 +64,7 @@ config.status: $(tree)
 		    --enable-gpl \
 		     --disable-debug \
 		    --disable-optimizations \
-		 --enable-libfdk-aac \
-		--enable-nonfree \
 		--enable-gpl \
-		--enable-nonfree \
-		--enable-libfdk-aac \
 		--enable-pthreads \
 		--enable-swscale \
 		--enable-vdpau \
