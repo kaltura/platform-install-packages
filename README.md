@@ -1,3 +1,4 @@
+[![License](https://img.shields.io/badge/license-AGPLv3-blue.svg)](http://www.gnu.org/licenses/agpl-3.0.html)
 # Kaltura Installation Packages Project
 To enable the of use standard binary packages and package managers to deploy the Kaltura platform.
 
