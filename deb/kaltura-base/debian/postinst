@@ -281,9 +281,6 @@ if [ "$1" = "configure" ]; then
 			set +e
 			echo "update mysql.user set password=PASSWORD('$DB1_PASS') WHERE user='kaltura';flush PRIVILEGES" | mysql -h$DB1_HOST -P$DB1_PORT -u$SUPER_USER -p$SUPER_USER_PASSWD mysql
 			set -e
-			if [ -z "$DWH_PASS" ];then
-				DWH_PASS=$DB1_PASS
-			fi
 		else
 			while [ -z "$AGAIN_DB1_PASS" ];do
 				db_input critical 'kaltura-base/kaltura_mysql_passwd' || true
@@ -309,6 +306,9 @@ if [ "$1" = "configure" ]; then
 
 				fi
 			done
+		fi
+		if [ -z "$DWH_PASS" ];then
+			DWH_PASS=$DB1_PASS
 		fi
 
         fi
