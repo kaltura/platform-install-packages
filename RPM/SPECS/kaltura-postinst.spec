@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.28
-Release: 2
+Release: 4
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -82,6 +82,9 @@ find %{_sysconfdir}/logrotate.d -type l -name "kaltura_*" -exec rm {} \;
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Fri Jul 31 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.28-3
+- Increase waiting period for daemons to be started by monit to 120s.
+
 * Thu Jul 16 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.28-2
 - notifications tests: delete() in the end of test.
 
