@@ -427,7 +427,7 @@ check_monit()
 {
         DAEMON=$1
         service $DAEMON stop >/dev/null
-	for i in `seq 1 75`;do
+	for i in `seq 1 120`;do
         	if service $DAEMON status >/dev/null;then
                 	return 0
         	fi

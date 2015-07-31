@@ -1,3 +1,9 @@
+kaltura-front (10.17.0-1) UNRELEASED; urgency=low
+
+  * if service apache2 reload failed lets try service apache2 restart
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Thu, 30 Jul 2015 18:52:39 +0000
+
 kaltura-front (10.15.0-1) jupiter; urgency=low
 
   * call db_stop post input stage
