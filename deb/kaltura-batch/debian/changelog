@@ -1,3 +1,9 @@
+kaltura-batch (10.17.0) jupiter; urgency=low
+
+  * Switching to 10.17.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Sun, 02 Aug 2015 13:35:32 +0000
+
 kaltura-batch (10.15.0-1) jupiter; urgency=low
 
   * Added dep on memcached 

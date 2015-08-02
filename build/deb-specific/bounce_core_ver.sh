@@ -8,10 +8,10 @@ VER=$1
 DIST=$2
 BASE_CHECKOUT=/home/jess/sources/platform-install-packages/deb/
 cd $BASE_CHECKOUT
-for COMP in kaltura-base kaltura-front kaltura-batch kaltura-release kaltura-server ;do  
+for COMP in kaltura-base kaltura-front kaltura-batch ;do  
 	CHLOG_FILE=$COMP/debian/changelog
 	if [ -f $CHLOG_FILE ];then
-		dch -v --force-distribution $VER "Switching to $VER" -D $DIST -c $CHLOG_FILE 
+		dch -v $VER-1 "Switching to $VER" -D $DIST -c $CHLOG_FILE 
 		rm -f $BASE_CHECKOUT/$COMP/debian/br.* $BASE_CHECKOUT/$COMP/rev.*
 	fi
 done

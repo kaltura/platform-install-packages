@@ -1,4 +1,4 @@
-kaltura-front (10.17.0-1) UNRELEASED; urgency=low
+kaltura-front (10.17.0-1) jupiter; urgency=low
 
   * if service apache2 reload failed lets try service apache2 restart
 
