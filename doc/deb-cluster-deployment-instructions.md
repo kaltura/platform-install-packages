@@ -46,7 +46,7 @@ It is recommended that you use a properly signed certificate and avoid self-sign
 You can generate a free valid cert using [http://cert.startcom.org/](http://cert.startcom.org/).    
 To verify the validity of your certificate, you can then use [SSLShoper's SSL Check Utility](http://www.sslshopper.com/ssl-checker.html).  
 
-Depending on your certificate, you may also need to set the following directives in `/etc/httpd/conf.d/zzzkaltura.ssl.conf`: 
+Depending on your certificate, you may also need to set the following directives in `/etc/apache2/sites-enabled/zzzkaltura.ssl.conf`: 
 ```
 SSLCertificateChainFile
 SSLCACertificateFile
