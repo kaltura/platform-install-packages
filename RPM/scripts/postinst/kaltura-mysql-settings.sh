@@ -16,8 +16,6 @@
 
 #set -o nounset                              # Treat unset variables as an error
 
-CNF_TEMPLATE="`dirname $0`/my.cnf.template"
-
 if [ -r /etc/my.cnf ];then
 	MY_CNF=/etc/my.cnf
 elif [ -r /etc/mysql/my.cnf ];then
