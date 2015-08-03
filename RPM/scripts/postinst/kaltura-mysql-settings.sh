@@ -49,6 +49,6 @@ elif rpm -q mariadb-server 2>/dev/null;then
         service mariadb restart
 elif dpkg -l mysql-server >>/dev/null 2>&1 ;then
         service mysql restart
-elif [ `rpm -qa | grep Percona-Server-server -c` -eq 1 ]; then     # Running with -qa because Percona attached the version to the package name.
+elif rpm -qa "Percona-Server-server*" 2>/dev/null;then
         service mysql restart
 fi
