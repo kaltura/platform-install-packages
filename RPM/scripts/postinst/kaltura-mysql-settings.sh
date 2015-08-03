@@ -15,10 +15,14 @@
 #===============================================================================
 
 #set -o nounset                              # Treat unset variables as an error
+
 if [ -r /etc/my.cnf ];then
 	MY_CNF=/etc/my.cnf
 elif [ -r /etc/mysql/my.cnf ];then
 	MY_CNF=/etc/mysql/my.cnf
+elif [ -r /usr/share/mysql/my-medium.cnf ];then
+ 	cp /usr/share/mysql/my-medium.cnf /etc/my.cnf
+ 	MY_CNF=/etc/my.cnf	
 else
 	echo "I could not find your my.cnf file. Exiting."
 	exit 1
@@ -44,5 +48,7 @@ if rpm -q mysql-server 2>/dev/null;then
 elif rpm -q mariadb-server 2>/dev/null;then
         service mariadb restart
 elif dpkg -l mysql-server >>/dev/null 2>&1 ;then
+        service mysql restart
+elif rpm -qa "Percona-Server-server*" 2>/dev/null;then
         service mysql restart
 fi
