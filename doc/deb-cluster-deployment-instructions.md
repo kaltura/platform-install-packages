@@ -2,7 +2,6 @@
 
 Below are **deb** based instructions for deploying Kaltura Clusters.    
 Refer to the [All-In-One Kaltura Server Installation Guide](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-deb-based.md) for more notes about deploying Kaltura in deb supported environments.    
-Refer to the [Deploying Kaltura Clusters Using Chef](https://github.com/kaltura/platform-install-packages/blob/master/doc/deb-chef-cluster-deployment.md) for automated Chef based deployments.
 
 ### Instructions here are for a cluster with the following members:
 
