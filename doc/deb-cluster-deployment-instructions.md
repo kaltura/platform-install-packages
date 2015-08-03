@@ -255,6 +255,11 @@ propel3.connection.password = KALTURA_DB_USER_PASSWORD
 propel3.connection.dsn = "mysql:host=THIRD_DB_HOST;port=3306;dbname=kaltura;"
 ```
 
+In addition, you should also set up [query cache](https://github.com/kaltura/platform-install-packages/blob/master/doc/query_cache.md) 
+
+When query cache is enabled, the server intelligently chooses between master / slave. Anything that was not changed recently is read from slave and otherwise from master.
+
+
 ### The Sphinx Indexing Server
 ```
 # wget -O - http://installrepo.kaltura.org/repo/apt/debian/kaltura-deb.gpg.key|apt-key add -
