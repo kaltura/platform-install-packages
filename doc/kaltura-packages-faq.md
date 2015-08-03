@@ -58,7 +58,7 @@ Run `# kaltlog`, which will continuously track (using `tail`) an error grep from
 You can also use: `# allkaltlog` (using root), which will dump all the error lines from the Kaltura logs once. Note that this can result in a lot of output, so the best way to use it will be to redirect to a file: `# allkaltlog > errors.txt`.
 This output can be used to analyze past failures but for active debugging use the kaltlog alias.   
 
-#### Analytics issues
+### Analytics issues
 check if a process lock is stuck:
 ```
 mysql> select * from kalturadw_ds.locks ;
@@ -85,6 +85,11 @@ Try to run each step manually:
 # su kaltura -c "/opt/kaltura/app/alpha/scripts/dwh/dwh_plays_views_sync.sh >> /opt/kaltura/log/cron.log"
 ```
 
+Or use the wrapper script to run all steps:
+```
+/opt/kaltura/bin/kaltura-run-dwh.sh
+```
+
 In order to remove the Analytics DBs and repopulate them:
 
 0. Backup all Kaltura DBs using: https://github.com/kaltura/platform-install-packages/blob/Jupiter-10.2.0/doc/rpm-cluster-deployment-instructions.md#backup-and-restore-practices 
@@ -99,11 +104,18 @@ for i in `mysql -p$PASSWD -e "Show procedure status" |grep kalturadw|awk -F " " 
 for i in `mysql -p$PASSWD -e "Show procedure status" |grep kalturadw_ds|awk -F " " '{print $2}'`;do mysql kalturadw_ds -p$PASSWD -e "drop procedure $i;";done 
 ```
 
-2. Reinstall and config DWH:
+2. Reinstall and config DWH
+
+on RPM based systems:
 ```
 # yum reinstall kaltura-dwh 
 # kaltura-dwh-config.sh
 ```
+
+on deb based systems:
+```
+# dpkg-reconfigure kaltura-dwh
+``` 
 
 #### Couldn't execute SQL: CALL move_innodb_to_archive()
 Running:
@@ -123,7 +135,7 @@ Should resolve the issue.
 - Run /opt/kaltura/dwh/etlsource/execute/etl_daily.sh
 
 
-#### Cannot login to Admin Console
+### Cannot login to Admin Console
 To manually reset the passwd, following this procedure:
 mysql> select * from user_login_data where login_email='you@mail.com'\G
 

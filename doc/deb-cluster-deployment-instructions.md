@@ -2,7 +2,6 @@
 
 Below are **deb** based instructions for deploying Kaltura Clusters.    
 Refer to the [All-In-One Kaltura Server Installation Guide](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-deb-based.md) for more notes about deploying Kaltura in deb supported environments.    
-Refer to the [Deploying Kaltura Clusters Using Chef](https://github.com/kaltura/platform-install-packages/blob/master/doc/deb-chef-cluster-deployment.md) for automated Chef based deployments.
 
 ### Instructions here are for a cluster with the following members:
 
@@ -46,7 +45,7 @@ It is recommended that you use a properly signed certificate and avoid self-sign
 You can generate a free valid cert using [http://cert.startcom.org/](http://cert.startcom.org/).    
 To verify the validity of your certificate, you can then use [SSLShoper's SSL Check Utility](http://www.sslshopper.com/ssl-checker.html).  
 
-Depending on your certificate, you may also need to set the following directives in `/etc/httpd/conf.d/zzzkaltura.ssl.conf`: 
+Depending on your certificate, you may also need to set the following directives in `/etc/apache2/sites-enabled/zzzkaltura.ssl.conf`: 
 ```
 SSLCertificateChainFile
 SSLCACertificateFile
@@ -163,7 +162,6 @@ Escape character is '^]'.
 
 
 ### The MySQL Database
-Please note that currently, only MySQL 5.1 is supported, we recommend using the official package supplied by the RHEL/CentOS repos which is currently 5.1.73.
 ```
 # wget -O - http://installrepo.kaltura.org/repo/apt/debian/kaltura-deb.gpg.key|apt-key add -
 # echo "deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/debian jupiter main" > /etc/apt/sources.list.d/kaltura.list 
