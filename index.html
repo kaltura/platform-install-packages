@@ -115,8 +115,9 @@
           
           <p>Following results from a recent Kaltura community usage survey, we've set this project to target the most popular Linux distros among Kaltura users, which includes:</p>
           <ul>
-            <li>RHEL/CentOS 5.n and 6.n, and Fedora-Core 18 and above. <a href="http://bit.ly/kaltura-install-redhat-linux" target="_blank">Try it now! Install Kaltura on RH based systems.</a></li>
-            <li>Ubuntu versions 12.04 [LTS] and above.</li>
+            <li>RHEL/CentOS 6 and above <a href="http://bit.ly/kaltura-install-redhat-linux" target="_blank">Install Kaltura on RH based systems.</a></li>
+            <li>Ubuntu 12.04 and above.</li> <a href="https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-deb-based.md" target="_blank">Install Kaltura on deb based systems.</a></li>
+            <li>Debian Wheezy and above.</li> <a href="https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-deb-based.md" target="_blank">Install Kaltura on deb based systems.</a></li>
           </ul>
 
           <span style="color: #666;font-style: italic;font-size:0.8em;">We would love to have every known linux distribution supported! However the reality is that there’s a lot of work in maintaining each package. We hope that the larger community could help port and extend the packages into more distros as the project progresses.</span>
@@ -141,16 +142,15 @@
           </h4>
           
           <ul>
-            <li>Kaltura Common (aka kaltura-base) - files and actions needed by all Kaltura server roles.</li>
+            <li>Kaltura Core (aka kaltura-base) - files and actions needed by all Kaltura server roles.</li>
             <li>Kaltura API node (aka kaltura-front) - files and actions needed for an API-Front server role.</li>
             <li>Kaltura Batch Server (aka kaltura-batch) - files and actions needed for a asynchronous batch processing (transcoding, metadata extraction, emails, notifications, etc.) Kaltura server role.</li>
             <li>Kaltura Sphinx node (aka kaltura-sphinx) - files and actions needed for a Sphinx Kaltura Indexing server role.</li>
             <li>Kaltura DB node - files and actions needed for a MySQL DB Kaltura server role.</li>
             <li>Kaltura Data Warehouse (aka kaltura-dwh) - files and actions needed for the Kaltura analytics data warehouse server role.</li>
             <li>Kaltura Streaming Server - This package configures the files required to run the base <a href="https://github.com/kaltura/media-server" target="_blank">Kaltura Media Server</a> handling all actions for creation and management of live streams using Kaltura.</li>
+            <li>Kaltura VOD packager - This package configures the NGINX-based VOD Packager <a href="https://github.com/kaltura/nginx-vod-module" target="_blank">NGINX-based VOD Packager</a>.</li>
             <li>Red5 Streaming Server - files and actions needed for Red5 server configuration to be used by the Kaltura Platform.</li>
-            <li>Kaltura monitoring common - Linux distro independant shell and PHP scripts to monitor the Kaltura environment.</li>
-            <li>Kaltura monitoring Nagios  - Nagios specific configuration for monitoring Kaltura.</li>
             <li>Meta-Package Kaltura Server (aka kaltura-server) - This will be a meta package linking all other required packages to run an All-In-One Kaltura environment.</li>
           </ul>
           
