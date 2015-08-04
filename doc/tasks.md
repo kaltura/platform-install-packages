@@ -4,10 +4,6 @@ If you decide to take on a challenge, please open a bug with the details of the 
 
 Thanks!
 
-## Port Kaltura's Core to PHP 5_5
-
-## Fix Core's SQL init scripts to support MySQL 5.5
-
 ## Admin Console
 
 - Mask passwds in admin console
