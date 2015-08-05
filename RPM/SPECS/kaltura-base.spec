@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 10.17.0
-Release: 7
+Release: 8
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -36,6 +36,7 @@ Source28: embedIframeJsAction.class.php
 #Source29: kaltura.ssl.conf.template
 #Source30: 01.kaltura_ce_tables.sql
 #Source31: 01.UserRole.99.template.xml 
+Source32: KDLOperatorFfmpeg1_1_1.php
 URL: https://github.com/kaltura/server/tree/%{codename}-%{version}
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
@@ -148,6 +149,7 @@ cp %{SOURCE28} $RPM_BUILD_ROOT%{prefix}/app/alpha/apps/kaltura/modules/extwidget
 # we bring a1nother in kaltura-batch
 rm $RPM_BUILD_ROOT%{prefix}/app/configurations/batch/batch.ini.template
 #cp %{SOURCE31} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_content/01.UserRole.99.template.xml
+cp %{SOURCE32} $RPM_BUILD_ROOT%{prefix}/app/infra/cdl/kdl/KDLOperatorFfmpeg1_1_1.php
 
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content
 tar zxf %{SOURCE10} -C $RPM_BUILD_ROOT%{prefix}/web/content
@@ -306,6 +308,12 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Wed Aug 5 2015 jess.portnoy@kaltura.com <Jess Portnoy> - 10.17.0-8
+- Do not compile against FDK and faac as distributing the binary with such support violates license.
+  See:
+  https://github.com/kaltura/platform-install-packages/issues/392
+  https://trac.ffmpeg.org/ticket/4735
+
 * Thu Jul 30 2015 jess.portnoy@kaltura.com <Jess Portnoy> - 10.17.0-4
 - https://github.com/kaltura/server/pull/2943
 

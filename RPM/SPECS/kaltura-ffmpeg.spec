@@ -26,7 +26,7 @@
 Summary: Utilities and libraries to record, convert and stream audio and video
 Name: kaltura-ffmpeg
 Version: 2.1.3
-Release: 6
+Release: 7
 License: GPL
 Group: Applications/Multimedia
 URL: http://ffmpeg.org/
@@ -69,10 +69,9 @@ BuildRequires: gsm-devel
 BuildRequires: speex-devel
 BuildRequires: libvpx-devel
 BuildRequires: schroedinger-devel 
-BuildRequires: kaltura-fdk-aac-devel
 BuildRequires: libtheora-devel
 BuildRequires: xvidcore-devel >= 1.3.2
-Requires:kaltura-a52dec,kaltura-libfaac,libass,kaltura-x264
+Requires:kaltura-a52dec,libass,kaltura-x264
 
 %description
 FFmpeg is a very fast video and audio converter. It can also grab from a
@@ -137,7 +136,6 @@ export CFLAGS="%{optflags}"
     --extra-ldflags="-L/opt/kaltura/lib" \
     --disable-devices \
     --enable-bzlib \
-    --enable-libfaac \
     --enable-libgsm \
     --enable-libmp3lame \
     --enable-libschroedinger \
@@ -160,11 +158,7 @@ export CFLAGS="%{optflags}"
     --enable-gpl \
      --disable-debug \
     --disable-optimizations \
- --enable-libfdk-aac \
---enable-nonfree \
 --enable-gpl \
---enable-nonfree \
---enable-libfdk-aac \
 --enable-pthreads \
 --enable-swscale \
 --enable-vdpau \
@@ -265,6 +259,12 @@ fi
 %{base_prefix}-%{version}/share
 
 %changelog
+* Wed Aug 5 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 2.1.3-7
+- Do not compile against FDK and faac as distributing the binary with such support violates license.
+  See:
+  https://github.com/kaltura/platform-install-packages/issues/392
+  https://trac.ffmpeg.org/ticket/4735
+
 * Mon Jul 7 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 2.1.3-1
 - 2.1.3.
 
