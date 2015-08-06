@@ -39,7 +39,7 @@
 Summary: Utilities and libraries to record, convert and stream audio and video
 Name: kaltura-ffmpeg-aux
 Version: 0.6 
-Release: 2 
+Release: 3 
 License: GPL
 Group: Applications/Multimedia
 URL: http://ffmpeg.org/
@@ -56,7 +56,6 @@ BuildRequires: imlib2-devel
 BuildRequires: zlib-devel
 %{!?_without_a52dec:BuildRequires: kaltura-a52dec-devel}
 %{!?_without_dc1394:BuildRequires: libdc1394-devel}
-%{!?_without_faac:BuildRequires: faac-devel}
 %{!?_without_gsm:BuildRequires: gsm-devel}
 %{!?_without_lame:BuildRequires: kaltura-lame-devel}
 %{!?_without_nut:BuildRequires: libnut-devel}
@@ -76,7 +75,7 @@ BuildRequires: libass-devel
 BuildRequires: kaltura-x264-devel 
 BuildRequires: openjpeg-devel
 BuildRequires: speex-devel
-Requires:kaltura-a52dec,kaltura-libfaac,kaltura-x264
+Requires:kaltura-a52dec
 BuildRequires: libvpx-devel
 BuildRequires: schroedinger-devel 
 BuildRequires: kaltura-fdk-aac-devel
@@ -99,7 +98,6 @@ Requires: %{name} = %{version}
 Requires: imlib2-devel, SDL-devel, freetype-devel, zlib-devel, pkgconfig,kaltura-x264
 %{!?_without_a52dec:Requires: kaltura-a52dec-devel}
 %{!?_without_dc1394:Requires: libdc1394-devel}
-%{!?_without_faac:Requires: faac-devel}
 %{!?_without_faad:Requires: faad2-devel}
 %{!?_without_gsm:Requires: gsm-devel}
 %{!?_without_lame:Requires: kaltura-lame-devel}
@@ -145,7 +143,6 @@ export CFLAGS="%{optflags}"
     --enable-avfilter \
 %{!?_without_schroedinger:--enable-libschroedinger} \
 %{!?_without_dc1394:--enable-libdc1394} \
-%{!?_without_faac:--enable-libfaac} \
 %{!?_without_gsm:--enable-libgsm} \
 %{!?_without_lame:--enable-libmp3lame} \
 %{!?_without_nut:--enable-libnut} \
@@ -158,7 +155,6 @@ export CFLAGS="%{optflags}"
 %{!?_without_x264:--enable-libx264} \
 %{!?_without_xvid:--enable-libxvid} \
     --enable-gpl \
-    --enable-nonfree \
 %{!?_without_openjpeg:--enable-libopenjpeg} \
     --enable-postproc \
     --enable-pthreads \

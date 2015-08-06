@@ -1,7 +1,7 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmc
-Version: v5.39.6
-Release: 3
+Version: v5.39.8
+Release: 1
 Summary: Kaltura Management Console
 
 Group: System Management	
@@ -78,6 +78,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Thu Aug 6 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v5.39.8-1
+- Version bounce to align with server 10.17.0.
+
 * Fri Jul 24 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v5.39.6-1
 - PLAT-3409 - CustomData.System name with underscore is not supported by KMC->Mapping fields fail.
 

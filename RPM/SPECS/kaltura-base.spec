@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 10.17.0
-Release: 8
+Release: 10
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -308,6 +308,16 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Thu Aug 6 2015 jess.portnoy@kaltura.com <Jess Portnoy> - 10.17.0-10
+- SUP-5223 - KMS uploads do not inherit entry's 'Default Metadata Settings'
+- PS-2298 - Custom Metadata HTTP notification - JSON with special chars
+- SUP-4363 - API - captionAsset - serveByEntryId issue
+- PLAT-3182 - eCDN: silverlight multicast plugin doesn't produce 30fps
+- PLAT-3293 - provider name is too long
+- PLAT-3523 - Extract Input validation to its own thread
+- PLAT-3576 - Remove TTL From Register_File
+- PLAT-3546 - TR Reverse Proxy support - validate domain from "x-forwarded-host" header against white-list
+
 * Wed Aug 5 2015 jess.portnoy@kaltura.com <Jess Portnoy> - 10.17.0-8
 - Do not compile against FDK and faac as distributing the binary with such support violates license.
   See:
