@@ -37,7 +37,6 @@ config.status: $(tree)
 	    --extra-ldflags="-L/opt/kaltura/lib" \
 	    --disable-devices \
 	    --enable-bzlib \
-	    --enable-libfaac \
 	    --enable-libgsm \
 	    --enable-libmp3lame \
 	    --enable-libschroedinger \
@@ -59,9 +58,7 @@ config.status: $(tree)
 	    --enable-gpl \
 	     --disable-debug \
 	    --disable-optimizations \
-	--enable-nonfree \
 	--enable-gpl \
-	--enable-nonfree \
 	--enable-pthreads \
 	--enable-swscale \
 	--enable-vdpau \

@@ -1,3 +1,23 @@
+kaltura-base (10.17.0-3) UNRELEASED; urgency=low
+
+  * SUP-5223 - KMS uploads do not inherit entry's 'Default Metadata Settings'
+  * PS-2298 - Custom Metadata HTTP notification - JSON with special chars
+  * SUP-4363 - API - captionAsset - serveByEntryId issue
+  * PLAT-3182 - eCDN: silverlight multicast plugin doesn't produce 30fps
+  * PLAT-3293 - provider name is too long
+  * PLAT-3523 - Extract Input validation to its own thread
+  * PLAT-3576 - Remove TTL From Register_File
+  * PLAT-3546 - TR Reverse Proxy support - validate domain from "x-forwarded-host" header against white-list
+ 
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Thu, 06 Aug 2015 13:13:10 +0000
+
+kaltura-base (10.17.0-2) jupiter; urgency=low
+
+  * Do not compile against FDK and faac as distributing the binary with such support violates license.   
+    See:   https://github.com/kaltura/platform-install-packages/issues/392, https://trac.ffmpeg.org/ticket/4735 
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Wed, 05 Aug 2015 14:17:56 +0000
+
 kaltura-base (10.17.0-1) jupiter; urgency=low
 
   * Initial build for 10.17.0

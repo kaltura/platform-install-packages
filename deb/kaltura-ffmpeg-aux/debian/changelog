@@ -1,3 +1,10 @@
+kaltura-ffmpeg-aux (0.6-2) jupiter; urgency=low
+
+  * Compile without libfaac since that makes the binary undistributable.
+  See: https://github.com/kaltura/platform-install-packages/issues/392
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Thu, 06 Aug 2015 12:26:50 +0000
+
 kaltura-ffmpeg-aux (0.6-1) experimental; urgency=low
   - Initial build.
 
