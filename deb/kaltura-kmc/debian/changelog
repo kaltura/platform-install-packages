@@ -1,3 +1,9 @@
+kaltura-kmc (5.39.8-1) jupiter; urgency=low
+
+  * Version bounce to align with server 10.17.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Thu, 06 Aug 2015 13:08:10 +0000
+
 kaltura-kmc (5.39.6-1) jupiter; urgency=low
 
   * PLAT-3409 - CustomData.System name with underscore is not supported by KMC->Mapping fields fail. 
