@@ -26,7 +26,7 @@
 Summary: Utilities and libraries to record, convert and stream audio and video
 Name: kaltura-ffmpeg
 Version: 2.1.3
-Release: 7
+Release: 9 
 License: GPL
 Group: Applications/Multimedia
 URL: http://ffmpeg.org/
@@ -57,7 +57,7 @@ BuildRequires: xvidcore-devel
 %{!?_without_texi2html:BuildRequires: texi2html}
 %{!?_without_theora:BuildRequires: libogg-devel, libtheora-devel}
 %{!?_without_vorbis:BuildRequires: libogg-devel, libvorbis-devel}
-%{!?_without_vpx:BuildRequires: libvpx-devel}
+%{!?_without_vpx:BuildRequires: libvpx-devel >= 1.3.0}
 %{!?_without_x264:BuildRequires: kaltura-x264-devel}
 %{!?_without_xvid:BuildRequires: xvidcore-devel}
 %{!?_without_a52dec:Requires: a52dec}
@@ -66,11 +66,12 @@ BuildRequires: libass-devel
 BuildRequires: kaltura-x264-devel 
 BuildRequires: gsm-devel
 BuildRequires: speex-devel
-BuildRequires: libvpx-devel
+BuildRequires: libvpx-devel >= 1.3.0
 BuildRequires: schroedinger-devel 
 BuildRequires: libtheora-devel
 BuildRequires: xvidcore-devel >= 1.3.2
 Requires:kaltura-a52dec,libass,kaltura-x264
+Requires: libvpx >= 1.3.0
 
 %description
 FFmpeg is a very fast video and audio converter. It can also grab from a
@@ -256,6 +257,9 @@ fi
 %{base_prefix}-%{version}/share
 
 %changelog
+* Thu Aug 6 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 2.1.3-8
+- Require libvpx >=1.3.0 since CentOS 6 also had 1.2.0 at some stage and they are not binary compatible.
+
 * Wed Aug 5 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 2.1.3-7
 - Do not compile against FDK and faac as distributing the binary with such support violates license.
   See:
