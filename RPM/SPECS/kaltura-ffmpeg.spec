@@ -47,7 +47,6 @@ BuildRequires: libvorbis-devel
 BuildRequires: xvidcore-devel
 %{!?_without_a52dec:BuildRequires: kaltura-a52dec-devel}
 %{!?_without_dc1394:BuildRequires: libdc1394-devel}
-%{!?_without_faac:BuildRequires: faac faac-devel}
 %{!?_without_gsm:BuildRequires: gsm-devel}
 %{!?_without_lame:BuildRequires: kaltura-lame-devel}
 %{!?_without_nut:BuildRequires: libnut-devel}
@@ -89,7 +88,6 @@ Requires: %{name} = %{version}
 Requires: imlib2-devel, SDL-devel, freetype-devel, zlib-devel, pkgconfig,kaltura-x264
 %{!?_without_a52dec:Requires: kaltura-a52dec-devel}
 %{!?_without_dc1394:Requires: libdc1394-devel}
-%{!?_without_faac:Requires: faac faac-devel}
 %{!?_without_faad:Requires: faad2-devel}
 %{!?_without_gsm:Requires: gsm-devel}
 %{!?_without_lame:Requires: kaltura-lame-devel}
