@@ -118,7 +118,6 @@ Install this package if you want to compile apps with ffmpeg support.
 export CFLAGS="%{optflags}"
 
 
-# ./configure --extra-cflags=-O2 --enable-bzlib --disable-devices --enable-libfaac --enable-libaacplus --enable-libgsm --enable-libmp3lame --enable-libschroedinger --enable-libtheora --enable-libvorbis --enable-libx264 --enable-libxvid --enable-filter=movie --enable-avfilter --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-libvpx --enable-libspeex --enable-libass --enable-postproc --enable-pthreads --disable-static --enable-shared --enable-gpl --disable-debug --disable-optimizations --disable-stripping --extra-cflags=-fPIC --extra-ldflags=-fPIC --enable-nonfree --enable-version3 --libdir=/usr/local/lib64
 ./configure \
     --prefix="%{base_prefix}-%{version}" \
     --libdir="%{base_prefix}-%{version}/lib" \
