@@ -156,6 +156,7 @@ And install as described above.
 ```bash
 # aptitude update
 # aptitude install ~Nkaltura
+# dpkg-reconfigure kaltura-base
 # dpkg-reconfigure kaltura-batch
 # dpkg-reconfigure kaltura-front
 ```
