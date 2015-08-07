@@ -26,7 +26,7 @@
 Summary: Utilities and libraries to record, convert and stream audio and video
 Name: kaltura-ffmpeg
 Version: 2.1.3
-Release: 7
+Release: 9 
 License: GPL
 Group: Applications/Multimedia
 URL: http://ffmpeg.org/
@@ -47,7 +47,6 @@ BuildRequires: libvorbis-devel
 BuildRequires: xvidcore-devel
 %{!?_without_a52dec:BuildRequires: kaltura-a52dec-devel}
 %{!?_without_dc1394:BuildRequires: libdc1394-devel}
-%{!?_without_faac:BuildRequires: faac faac-devel}
 %{!?_without_gsm:BuildRequires: gsm-devel}
 %{!?_without_lame:BuildRequires: kaltura-lame-devel}
 %{!?_without_nut:BuildRequires: libnut-devel}
@@ -58,7 +57,7 @@ BuildRequires: xvidcore-devel
 %{!?_without_texi2html:BuildRequires: texi2html}
 %{!?_without_theora:BuildRequires: libogg-devel, libtheora-devel}
 %{!?_without_vorbis:BuildRequires: libogg-devel, libvorbis-devel}
-%{!?_without_vpx:BuildRequires: libvpx-devel}
+%{!?_without_vpx:BuildRequires: libvpx-devel >= 1.3.0}
 %{!?_without_x264:BuildRequires: kaltura-x264-devel}
 %{!?_without_xvid:BuildRequires: xvidcore-devel}
 %{!?_without_a52dec:Requires: a52dec}
@@ -67,11 +66,12 @@ BuildRequires: libass-devel
 BuildRequires: kaltura-x264-devel 
 BuildRequires: gsm-devel
 BuildRequires: speex-devel
-BuildRequires: libvpx-devel
+BuildRequires: libvpx-devel >= 1.3.0
 BuildRequires: schroedinger-devel 
 BuildRequires: libtheora-devel
 BuildRequires: xvidcore-devel >= 1.3.2
 Requires:kaltura-a52dec,libass,kaltura-x264
+Requires: libvpx >= 1.3.0
 
 %description
 FFmpeg is a very fast video and audio converter. It can also grab from a
@@ -89,7 +89,6 @@ Requires: %{name} = %{version}
 Requires: imlib2-devel, SDL-devel, freetype-devel, zlib-devel, pkgconfig,kaltura-x264
 %{!?_without_a52dec:Requires: kaltura-a52dec-devel}
 %{!?_without_dc1394:Requires: libdc1394-devel}
-%{!?_without_faac:Requires: faac faac-devel}
 %{!?_without_faad:Requires: faad2-devel}
 %{!?_without_gsm:Requires: gsm-devel}
 %{!?_without_lame:Requires: kaltura-lame-devel}
@@ -120,7 +119,6 @@ Install this package if you want to compile apps with ffmpeg support.
 export CFLAGS="%{optflags}"
 
 
-# ./configure --extra-cflags=-O2 --enable-bzlib --disable-devices --enable-libfaac --enable-libaacplus --enable-libgsm --enable-libmp3lame --enable-libschroedinger --enable-libtheora --enable-libvorbis --enable-libx264 --enable-libxvid --enable-filter=movie --enable-avfilter --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-libvpx --enable-libspeex --enable-libass --enable-postproc --enable-pthreads --disable-static --enable-shared --enable-gpl --disable-debug --disable-optimizations --disable-stripping --extra-cflags=-fPIC --extra-ldflags=-fPIC --enable-nonfree --enable-version3 --libdir=/usr/local/lib64
 ./configure \
     --prefix="%{base_prefix}-%{version}" \
     --libdir="%{base_prefix}-%{version}/lib" \
@@ -259,6 +257,9 @@ fi
 %{base_prefix}-%{version}/share
 
 %changelog
+* Thu Aug 6 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 2.1.3-8
+- Require libvpx >=1.3.0 since CentOS 6 also had 1.2.0 at some stage and they are not binary compatible.
+
 * Wed Aug 5 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 2.1.3-7
 - Do not compile against FDK and faac as distributing the binary with such support violates license.
   See:
