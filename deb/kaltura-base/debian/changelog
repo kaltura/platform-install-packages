@@ -1,3 +1,9 @@
+kaltura-base (10.18.0-1) jupiter; urgency=low
+
+  * Switching to 10.18.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 10 Aug 2015 10:41:04 +0000
+
 kaltura-base (10.17.0-3) UNRELEASED; urgency=low
 
   * SUP-5223 - KMS uploads do not inherit entry's 'Default Metadata Settings'
