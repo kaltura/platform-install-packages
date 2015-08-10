@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 10.17.0
-Release: 11
+Version: 10.18.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -308,6 +308,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Aug 10 2015 jess.portnoy@kaltura.com <Jess Portnoy> - 10.18.0-1
+- Ver Bounce to 10.18.0
+
 * Thu Aug 6 2015 jess.portnoy@kaltura.com <Jess Portnoy> - 10.17.0-10
 - SUP-5223 - KMS uploads do not inherit entry's 'Default Metadata Settings'
 - PS-2298 - Custom Metadata HTTP notification - JSON with special chars
