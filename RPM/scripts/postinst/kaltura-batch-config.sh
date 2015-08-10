@@ -74,6 +74,12 @@ ln -sf $APP_DIR/configurations/logrotate/kaltura_batch /etc/logrotate.d/
 ln -sf $APP_DIR/configurations/logrotate/kaltura_apache /etc/logrotate.d/
 ln -sf $APP_DIR/configurations/logrotate/kaltura_apps /etc/logrotate.d/
 ln -sf $APP_DIR/configurations/apache/kaltura.conf /etc/httpd/conf.d/zzzkaltura.conf
+if [ $PROTOCOL = "https" ]; then
+	ln -sf $APP_DIR/configurations/apache/kaltura.ssl.conf /etc/httpd/conf.d/zzzkaltura.ssl.conf
+else
+	ln -sf $APP_DIR/configurations/apache/kaltura.conf /etc/httpd/conf.d/zzzkaltura.conf
+fi
+
 
 mkdir -p $LOG_DIR/batch 
 rm -rf $BASE_DIR/app/cache/*
