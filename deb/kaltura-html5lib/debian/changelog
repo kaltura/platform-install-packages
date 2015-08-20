@@ -1,3 +1,23 @@
+kaltura-html5lib (2.34-1) jupiter; urgency=low
+
+  * SUP-5551 - Source selector doesn't work after changing media
+  * SUP-5535 - Large Play button - Bug in "Custom styles"
+  * SUP-5468 - Font color change in chapters
+  * SUP-5428 - Image player causes insecure content to load
+  * SUP-5398 - If flash disabled, player fallback to http progressive and displays auto only in source selector
+  * SUP-5397 - Scrubber is not released from the cursor after seeking
+  * SUP-5377 - Cannot change the time label font color
+  * SUP-5357 - Pause button stop working
+  * SUP-5356 - Disney - No playback when DoubleClick ad tag is null
+  * SUP-5262 - VAST Ads - Cause Endless Loop on iPhones 
+  * SUP-5260 - KMS - editing Clip not working properly
+  * SUP-5120 - Playback rate selector starts video from beginning when changing rate for first time
+  * SUP-4913 - Embed code does not play and the player's wheel keep spinning
+  * SUP-4911 - Postmedia - autoMute parameter is cached
+  * SUP-4721 - Play button disappears in 2.30 player in IE + iframe embed when in full screen 
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Thu, 20 Aug 2015 15:52:52 +0000
+
 kaltura-html5lib (2.33-1) jupiter; urgency=low
 
   * FEC-677 - volumeControl plugin should support verical layout

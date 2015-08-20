@@ -1,3 +1,15 @@
+kaltura-base (10.18.0-2) jupiter; urgency=low
+
+  * PLAT-3659 - baseEntry->addfromUploadedFile fails for data entry 
+  * SUP-2038 - Multiple Playlists - API inquiry
+  * SUP-5243 - KMC strips KalturaEndUserReportInputFilter when generating CSV
+  * SUP-4380 - Comments in e-mail notification
+  * PLAT-3522 - TR Reverse Proxy - pass "od" parameter when redirecting to mwEmbedLoader.php
+  * PLAT-3558 - Add Support for AIFF File Format in base.ini
+  * PLAT-3575 - Main file should be ism not a4m
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Thu, 20 Aug 2015 16:10:25 +0000
+
 kaltura-base (10.18.0-1) jupiter; urgency=low
 
   * Switching to 10.18.0
