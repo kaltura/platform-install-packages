@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 10.18.0
-Release: 1
+Release: 10
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -308,6 +308,15 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Thu Aug 20 2015 jess.portnoy@kaltura.com <Jess Portnoy> - 10.18.0-10
+- PLAT-3659 - baseEntry->addfromUploadedFile fails for data entry 
+- SUP-2038 - Multiple Playlists - API inquiry
+- SUP-5243 - KMC strips KalturaEndUserReportInputFilter when generating CSV
+- SUP-4380 - Comments in e-mail notification
+- PLAT-3522 - TR Reverse Proxy - pass "od" parameter when redirecting to mwEmbedLoader.php
+- PLAT-3558 - Add Support for AIFF File Format in base.ini
+- PLAT-3575 - Main file should be ism not a4m
+
 * Mon Aug 10 2015 jess.portnoy@kaltura.com <Jess Portnoy> - 10.18.0-1
 - Ver Bounce to 10.18.0
 
