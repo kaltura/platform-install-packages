@@ -140,7 +140,7 @@ else
 
 	fi
 	if [ -z "$CHAIN_FILE" ];then
-		echo -e "${CYAN}Please input path to your SSL chain file or leave empty in case you have none${CYAN}:${NORMAL}"
+		echo -e "${CYAN}Please input path to your SSL CA file or leave empty in case you have none${CYAN}:${NORMAL}"
 		read -e CHAIN_FILE
 	fi
 	#if [ -z "$CA_FILE" ];then
