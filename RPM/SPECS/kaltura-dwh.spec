@@ -2,8 +2,8 @@
 %define kaltura_user kaltura
 Summary: Kaltura Open Source Video Platform - Analytics 
 Name: kaltura-dwh
-Version: 9.4.0
-Release: 2
+Version: 9.5.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/dwh/archive/%{name}-IX-%{version}.zip
@@ -74,6 +74,10 @@ fi
 
 
 %changelog
+* Mon Aug 24 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 9.5.0-1
+- Don't use preserved word MAX as query alias.
+- Make sure that file_size is int value like in DB
+
 * Wed Jan 29 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 9.2.0-2
 %%{prefix}/bin/kaltura-dwh-config.sh does not require user interaction, if this is an upgrade just run it at %%post.
 
