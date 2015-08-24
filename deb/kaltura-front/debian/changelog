@@ -1,3 +1,9 @@
+kaltura-front (10.18.0-1) jupiter; urgency=low
+
+  * Switching to 10.18.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 10 Aug 2015 10:41:05 +0000
+
 kaltura-front (10.17.0-1) jupiter; urgency=low
 
   * if service apache2 reload failed lets try service apache2 restart

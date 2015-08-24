@@ -25,7 +25,7 @@ Description: Please input path to your SSL key:
 Template: kaltura-front/apache_ssl_chain
 Type: string
 Default: 
-Description: Please input path to your SSL chain file or leave empty in case you have none:
+Description: Please input path to your SSL CA cert or leave empty in case you have none:
 
 Template: kaltura-front/apache_ssl_chain
 Type: string

@@ -1,3 +1,9 @@
+kaltura-batch (10.18.0-1) jupiter; urgency=low
+
+  * Switching to 10.18.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 10 Aug 2015 10:41:05 +0000
+
 kaltura-batch (10.17.0) jupiter; urgency=low
 
   * Switching to 10.17.0
