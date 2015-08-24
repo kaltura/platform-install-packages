@@ -1,3 +1,9 @@
+kaltura-base (10.19.0-1) jupiter; urgency=low
+
+  * Switching to 10.19.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 24 Aug 2015 10:30:35 +0000
+
 kaltura-base (10.18.0-2) jupiter; urgency=low
 
   * PLAT-3659 - baseEntry->addfromUploadedFile fails for data entry 
