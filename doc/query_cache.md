@@ -101,7 +101,8 @@ mysql -u root -p --database kaltura < memcached_functions_mysql-1.1/sql/install_
 Configure memcached server
 =======
 ```
-echo "memc_servers_set('<global memcache host>:<global memcache port>');'" > /var/lib/mysql/mysql.init
+echo "select memc_servers_set('<global memcache host>:<global memcache port>');" > /var/lib/mysql/mysql.init
+chown mysql:mysql /var/lib/mysql/mysql.init
 ```
 
 Configure init script
