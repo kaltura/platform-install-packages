@@ -1,3 +1,12 @@
+kaltura-base (10.19.0-2) jupiter; urgency=low
+
+  * PLAT-3752 - Live Analytics | Driver hangs when handling events with empty partnerId/entryId
+  * PLAT-3733 - Notifier job- remove write of the notification result to the DB
+  * PLAT-3477 - Allow hash function to use for appToken.startSession to be defined on appToken.add
+ 
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 07 Sep 2015 09:59:29 +0000
+
 kaltura-base (10.19.0-1) jupiter; urgency=low
 
   * Switching to 10.19.0
