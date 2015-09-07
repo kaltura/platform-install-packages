@@ -1,3 +1,9 @@
+kaltura-front (10.20.0-1) jupiter; urgency=low
+
+  * Switching to 10.20.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 07 Sep 2015 14:32:58 +0000
+
 kaltura-front (10.19.0-1) jupiter; urgency=low
 
   * Switching to 10.19.0
