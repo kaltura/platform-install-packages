@@ -61,12 +61,12 @@ Pre-requisites
 
 CentOS / RHEL:
 ```
-# yum install libmemcached-devel mysql-devel
+# yum install libmemcached-devel mysql-devel gcc
 ```
 
 Ubuntu/Debian:
 ```
-apt-get install libmemcached-dev libmysqld-dev
+apt-get install libmemcached-dev libmysqld-dev build-essential
 ```
 Compile
 =======
