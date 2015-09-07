@@ -47,13 +47,14 @@ On all servers, set query_cache_enabled and query_cache_invalidate_on_change to 
 Multi datacenter environment only
 Perform the following on one of the mysql slaves in each datacenter:
 
-* Compile and install 'Memcached Functions for MySQL'. To install a precompiled version:
-* Copy /usr/lib64/mysql/plugin/libmemcached_functions_mysql.so and /usr/local/lib64/libmemcached.so.
-* Install the functions by running: mysql kaltura < memcached_functions_mysql-1.1/sql/install_functions.sql 
+* Install memcached on a dedicated server, and configure two memcached instances
+* Make sure you have a mysql master and slave replication pair
+* Compile and install 'Memcached Functions for MySQL'
+* Install the functions on the database slave by running: mysql kaltura < memcached_functions_mysql-1.1/sql/install_functions.sql 
 * Configure the 'Memcached Functions for MySQL' library to use the shared memcache server by adding the command 'select memc_servers_set('<global memcache host>:<global memcache port>');' to the mysql init script.
     Note: To add an init script for mysql, add the switch 'init-file=<mysql init script path>' to the section [mysqld] in my.cnf and make sure that mysql user has acess to this file
-* Restart mysql.
-* Install the triggers by running from deployment/base/scripts: php createQueryCacheTriggers.php create <host> <user> <password> 
+* Restart mysql
+* Install the triggers by running from deployment/base/scripts: php createQueryCacheTriggers.php create <slave-host> <user> <password> 
 * On all servers, set query_cache_enabled to true in local.ini (query_cache_invalidate_on_change should be left false).
 
 Pre-requisites
@@ -79,7 +80,8 @@ Compile
 #./configure --with-mysql=/usr/bin/mysql_config 
 # make install
 ```
-Install
+
+Install plugin
 =======
 CentOS / RHEL:
 ```
@@ -88,4 +90,75 @@ CentOS / RHEL:
 Ubuntu/Debian:
 ```
 # cp /usr/local/lib/libmemcached_functions_mysql.so /usr/lib/mysql/plugin/
+```
+
+Install plugin functions
+=======
+```
+mysql -u root -p --database kaltura < memcached_functions_mysql-1.1/sql/install_functions.sql 
+```
+
+Configure memcached server
+=======
+```
+echo "memc_servers_set('<global memcache host>:<global memcache port>');'" > /var/lib/mysql/mysql.init
+```
+
+Configure init script
+=======
+Add to my.cnf in [mysqld] section:
+```
+init-file=/var/lib/mysql/mysql.init
+```
+
+Install Kaltura Triggers
+=======
+On API server:
+```
+php /opt/kaltura/app/deployment/base/scripts/createQueryCacheTriggers.php create <db-slave-host> <db-user> <db-password> realrun
+```
+
+Configure API servers to use Query Cache
+=======
+In /opt/kaltura/app/configurations/local.ini
+```
+query_cache_enabled = true
+query_cache_invalidate_on_change = true
+```
+
+In /opt/kaltura/app/configurations/cache.ini
+```
+[memcacheBig:memcacheBase]
+port = <global memcache port>
+host = <global memcache host>
+
+[memcacheKeys:memcacheBase]
+port = <global memcache port+1>
+host = <global memcache host>
+
+[mapping]
+fileSync = memcacheBig
+permissionManager = apcSerialized,memcacheBig
+queryCacheKeys = memcacheKeys
+queryCacheQueries = memcacheBig
+sphinxStickySessions = memcacheBig
+feedEntry = memcacheBig
+apiExtraFieldsCache = apc
+ps2Cache = memcacheLocal
+apiV3Cache = memcacheLocal,memcacheBig
+playManifest = memcacheLocal,memcacheBig
+apiV3Feed = filesystemApiV3Feed
+lockKeys = memcacheKeys
+apiWarmup = apc,memcacheBig
+kwidgetSwf = memcacheBig
+partnerSecrets = apc,memcacheBig
+liveMediaServer_0 = memcacheBig
+liveMediaServer_1 = memcacheBig
+sphinxExecutedServer = apc
+```
+
+Activate configuration
+=======
+```
+touch /opt/kaltura/app/cache/base.reload
 ```
