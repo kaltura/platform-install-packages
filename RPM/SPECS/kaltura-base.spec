@@ -11,12 +11,12 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 10.19.0
-Release: 9
+Release: 10 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
 Source4: emails_en.template.ini
-Source7: dwh.template
+#Source7: dwh.template
 Source10: entry_and_uiconf_templates.tar.gz
 # fixes https://github.com/kaltura/platform-install-packages/issues/37
 Source11: clear_cache.sh
@@ -112,7 +112,7 @@ sed -i "s#^clipapp_version =.*#clipapp_version = %{clipapp_version}#g" $RPM_BUIL
 sed -i "s#^;kdp3_wrapper_version = @KDP3_WRAPPER_VERSION@#kdp3_wrapper_version = %{kdp3_wrapper_version}#g" $RPM_BUILD_ROOT%{prefix}/app/configurations/local.template.ini
 sed -i 's@^writers.\(.*\).filters.priority.priority\s*=\s*7@writers.\1.filters.priority.priority=4@g' $RPM_BUILD_ROOT%{prefix}/app/configurations/logger.template.ini 
 # our Pentaho is correctly installed under its own dir and not %prefix/bin which is the known default so, adding -k path to kitchen.sh
-sed -i 's#\(@DWH_DIR@\)$#\1 -k %{prefix}/pentaho/pdi/kitchen.sh#g' $RPM_BUILD_ROOT%{prefix}/app/configurations/cron/dwh.template
+# sed -i 's#\(@DWH_DIR@\)$#\1 -k %{prefix}/pentaho/pdi/kitchen.sh#g' $RPM_BUILD_ROOT%{prefix}/app/configurations/cron/dwh.template
 rm $RPM_BUILD_ROOT%{prefix}/app/generator/sources/android/DemoApplication/libs/libWVphoneAPI.so
 rm $RPM_BUILD_ROOT%{prefix}/app/configurations/.project
 rm $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_content/04.dropFolder.-4.template.xml
@@ -120,7 +120,7 @@ rm $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_content/04.dropFold
 
 # we bring our own for kaltura-front and kaltura-batch.
 cp %{SOURCE4} $RPM_BUILD_ROOT%{prefix}/app/batch/batches/Mailer/emails_en.template.ini
-cp %{SOURCE7} $RPM_BUILD_ROOT%{prefix}/app/configurations/cron/dwh.template
+#cp %{SOURCE7} $RPM_BUILD_ROOT%{prefix}/app/configurations/cron/dwh.template
 cp %{SOURCE23} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_data/
 cp %{SOURCE24} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_data/
 cp %{SOURCE11} $RPM_BUILD_ROOT%{prefix}/app/alpha/crond/kaltura/clear_cache.sh
@@ -308,6 +308,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Thu Sep 10 2015 jess.portnoy@kaltura.com <Jess Portnoy> - 10.19.0-10 
+- Fix Analytics following merge of https://github.com/kaltura/server/pull/2943
+
 * Mon Sep 7 2015 jess.portnoy@kaltura.com <Jess Portnoy> - 10.19.0-9
 - PLAT-3752 - Live Analytics | Driver hangs when handling events with empty partnerId/entryId
 - PLAT-3733 - Notifier job- remove write of the notification result to the DB
