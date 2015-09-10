@@ -1,3 +1,10 @@
+kaltura-dwh (10.10.0-2) jupiter; urgency=low
+
+  *  Don't use preserved word MAX as query alias
+  *  Make sure that file_size is int value like in DB
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 24 Aug 2015 17:52:28 +0000
+
 kaltura-dwh (10.10.0-1) jupiter; urgency=low
 
   * fix call to send_install_becon()
