@@ -70,6 +70,7 @@ if [ "$1" = "configure" ]; then
 			a2enmod ssl
 			# configure SSL:
 			MAIN_APACHE_CONF=$KALTURA_APACHE_CONF/kaltura.ssl.conf
+			cp $KALTURA_APACHE_CONF/kaltura.ssl.conf.template $MAIN_APACHE_CONF 
 			#db_get kaltura-front/apache_ssl_cert
 			db_input critical kaltura-front/apache_ssl_cert || true
 			db_go || true
@@ -118,13 +119,12 @@ if [ "$1" = "configure" ]; then
 				sed -i  's@\(\[production\]\)@\1\nsettings.clientConfig.verifySSL=0@' $APP_DIR/configurations/admin.ini
 			fi
 			sed "s#@SSL_CERTIFICATE_FILE@#$CRT_FILE#g" -i $MAIN_APACHE_CONF
-			echo "@@@@@@@2$KEY_FILE@@@@@@@@@@@2"
 			sed -i "s#@SSL_CERTIFICATE_KEY_FILE@#$KEY_FILE#g" $MAIN_APACHE_CONF
 			if [ -r "$CHAIN_FILE" ];then
-				sed -i "s^SSLCertificateChainFile @SSL_CERTIFICATE_CHAIN_FILE@^SSLCertificateChainFile $CHAIN_FILE^" $MAIN_APACHE_CONF
+				sed -i "s^SSLCACertificateFile @SSL_CERTIFICATE_CHAIN_FILE@^SSLCertificateChainFile $CHAIN_FILE^" $MAIN_APACHE_CONF
 			else
 				CHAIN_FILE="NO_CHAIN"
-				sed -i "s^SSLCertificateChainFile @SSL_CERTIFICATE_CHAIN_FILE@^#SSLCertificateChainFile @SSL_CERTIFICATE_CHAIN_FILE@^" $MAIN_APACHE_CONF
+				sed -i "s^SSLCACertificateFile @SSL_CERTIFICATE_CHAIN_FILE@^#SSLCertificateChainFile @SSL_CERTIFICATE_CHAIN_FILE@^" $MAIN_APACHE_CONF
 			fi
 			if [ -r "$CA_FILE" ];then
 				sed -i "s^SSLCACertificateFile @SSL_CERTIFICATE_CA_FILE@^SSLCACertificateFile $CA_FILE^" $MAIN_APACHE_CONF
@@ -165,7 +165,11 @@ if [ "$1" = "configure" ]; then
 		APACHE_HOST="$RET"
 		db_get 'kaltura-base/vhost_port'
 		APACHE_PORT="$RET"
-		DEF_SERVICE_URL="http://$APACHE_HOST:$APACHE_PORT"
+		if [ "$APACHE_PORT" -eq 443 -o "$APACHE_PORT" -eq 80 ];then
+			DEF_SERVICE_URL="$PROTOCOL://$APACHE_HOST"
+		else
+			DEF_SERVICE_URL="$PROTOCOL://$APACHE_HOST:$KALTURA_VIRTUAL_HOST_PORT"
+		fi
 		db_set 'kaltura-front/service_url' $DEF_SERVICE_URL
 		db_input critical kaltura-front/service_url || true
 		db_go || true
@@ -176,7 +180,7 @@ if [ "$1" = "configure" ]; then
 
 	cp $KALTURA_APACHE_CONFD/enabled.kaltura.conf.template $KALTURA_APACHE_CONFD/enabled.kaltura.conf 
 	cp $KALTURA_APACHE_CONF/kaltura.conf.template $KALTURA_APACHE_CONF/kaltura.conf
-	sed -e "s#@APP_DIR@#$APP_DIR#g" -e "s#@LOG_DIR@#$LOG_DIR#g" -e "s#@WEB_DIR@#$WEB_DIR#g" -e "s#@KALTURA_VIRTUAL_HOST_NAME@#$KALTURA_VIRTUAL_HOST_NAME#g" -e "s#@KALTURA_VIRTUAL_HOST_PORT@#$KALTURA_VIRTUAL_HOST_PORT#g" -e "s#@SERVICE_URL@#$SERVICE_URL#g" -i $MAIN_APACHE_CONF $KALTURA_APACHE_CONFD/enabled.kaltura.conf
+	sed -e "s#@APP_DIR@#$APP_DIR#g" -e "s#@LOG_DIR@#$LOG_DIR#g" -e "s#@WEB_DIR@#$WEB_DIR#g" -e "s#@KALTURA_VIRTUAL_HOST_NAME@#$KALTURA_VIRTUAL_HOST_NAME#g" -e "s#@KALTURA_VIRTUAL_HOST_PORT@#$KALTURA_VIRTUAL_HOST_PORT#g" -e "s#@SERVICE_URL@#$SERVICE_URL#g" -e "s#@KALTURA_FULL_VIRTUAL_HOST_NAME@#$APACHE_HOST:$KALTURA_VIRTUAL_HOST_PORT#g" -i $MAIN_APACHE_CONF $KALTURA_APACHE_CONFD/enabled.kaltura.conf
 
 	CONF_FILES=`find $APP_DIR/configurations  -type f| grep -v template`
 	for i in settings.serviceUrl \$wgKalturaServiceUrl \$wgKalturaCDNUrl \$wgKalturaStatsServiceUrl apphome_url admin_console_url admin_console SERVICE_URL settings.serviceUrl; do sed -i "s#\($i\)\s*=.*#\1=$SERVICE_URL#g" $CONF_FILES;done

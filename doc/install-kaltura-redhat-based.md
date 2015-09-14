@@ -61,7 +61,7 @@ rpm -ihv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
 ```
 
 ## Note on RHEL/CentOS 7 
-If you are using RHEL/CentOS 7, edit /etc/yum.repos.d/kaltura.repo and change:
+If you are using RHEL/CentOS 7, edit /etc/yum.repos.d/kaltura.repo and change the ```[Kaltura]``` section:
 ```
 baseurl = http://installrepo.kaltura.org/releases/latest/RPMS/$basearch/
 ```
@@ -69,6 +69,8 @@ to read:
 ```
 baseurl = http://installrepo.kaltura.org/releases/rhel7/RPMS/$basearch/
 ```
+
+The ```[Kaltura-noarch]``` repo should remain as is. 
 
 *Note for RHEL7: depending on what repos you have enabled, you may also need to add the EPEL or CentOS repos to resolve all dependencies.*
 

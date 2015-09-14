@@ -106,7 +106,11 @@ if [ "$1" = "configure" ]; then
         db_go || true
         db_get 'kaltura-base/vhost_port'
         KALTURA_VIRTUAL_HOST_PORT=$RET
-        KALTURA_FULL_VIRTUAL_HOST_NAME="$KALTURA_VIRTUAL_HOST_NAME:$KALTURA_VIRTUAL_HOST_PORT"
+	if [ "$KALTURA_VIRTUAL_HOST_PORT" -eq 443 -o "$KALTURA_VIRTUAL_HOST_PORT" -eq 80 ];then
+        	KALTURA_FULL_VIRTUAL_HOST_NAME="$KALTURA_VIRTUAL_HOST_NAME"
+	else
+        	KALTURA_FULL_VIRTUAL_HOST_NAME="$KALTURA_VIRTUAL_HOST_NAME:$KALTURA_VIRTUAL_HOST_PORT"
+	fi
 
         db_get 'kaltura-base/db_hostname'
         if [ -z "$RET" ];then
@@ -171,7 +175,13 @@ if [ "$1" = "configure" ]; then
         APACHE_PORT="$RET"
         db_get 'kaltura-base/service_url'
         if [ -z "$RET" ] ;then
-                DEF_SERVICE_URL="http://$APACHE_HOST:$APACHE_PORT"
+		if [ "$APACHE_PORT" -eq 443 ];then
+                	DEF_SERVICE_URL="https://$APACHE_HOST"
+		elif [ "$APACHE_PORT" -eq 80 ];then
+                	DEF_SERVICE_URL="http://$APACHE_HOST"
+		else
+                	DEF_SERVICE_URL="http://$APACHE_HOST:$APACHE_PORT"
+		fi
                 db_set 'kaltura-base/service_url' $DEF_SERVICE_URL
         fi
         db_input critical 'kaltura-base/service_url' || true
@@ -493,6 +503,7 @@ DB1_PORT=$DB1_PORT
 SUPER_USER=$SUPER_USER
 SUPER_USER_PASSWD=\"$SUPER_USER_PASSWD\"
 KALTURA_VIRTUAL_HOST_NAME=$KALTURA_FULL_VIRTUAL_HOST_NAME
-RED5_HOST=$RED5_HOST">> $BASE_DIR/app/configurations/system.ini
+RED5_HOST=$RED5_HOST
+">> $BASE_DIR/app/configurations/system.ini
 fi
 
