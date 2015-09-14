@@ -165,7 +165,11 @@ if [ "$1" = "configure" ]; then
 		APACHE_HOST="$RET"
 		db_get 'kaltura-base/vhost_port'
 		APACHE_PORT="$RET"
-		DEF_SERVICE_URL="$PROTOCOL://$APACHE_HOST:$KALTURA_VIRTUAL_HOST_PORT"
+		if [ "$APACHE_PORT" -eq 443 -o "$APACHE_PORT" -eq 80 ];then
+			DEF_SERVICE_URL="$PROTOCOL://$APACHE_HOST"
+		else
+			DEF_SERVICE_URL="$PROTOCOL://$APACHE_HOST:$KALTURA_VIRTUAL_HOST_PORT"
+		fi
 		db_set 'kaltura-front/service_url' $DEF_SERVICE_URL
 		db_input critical kaltura-front/service_url || true
 		db_go || true
