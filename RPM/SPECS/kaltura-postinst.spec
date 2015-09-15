@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.28
-Release: 11
+Release: 14
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -82,6 +82,9 @@ find %{_sysconfdir}/logrotate.d -type l -name "kaltura_*" -exec rm {} \;
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Tue Sep 15 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.28-12
+- replace @APP_REMOTE_ADDR_HEADER_SALT@ token.
+
 * Mon Sep 14 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.28-11
 - When the port is 80 or 443, do not concat the port to the service URL.
   This is important when you want to do SSL offloading..
