@@ -3,7 +3,9 @@ set -e
 if [ "$1" != "remove" -a "$1" != "purge" ]; then
         exit 0
 fi
+a2dissite admin.conf apps.conf var.conf zzzkaltura.conf zzzkaltura.ssl.conf || true
 rm -f /etc/cron.d/kaltura-api
 rm -f /etc/cron.d/kaltura-cleanup
 rm -f /etc/logrotate.d/kaltura_api
 rm -f /etc/logrotate.d/kaltura_apache
+
