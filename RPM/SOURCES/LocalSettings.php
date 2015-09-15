@@ -66,6 +66,14 @@ $wgKalturaAllowIframeRemoteService = true;
 // Set debug for true (testing only)
 $wgEnableScriptDebug = false;
 
+// Get PlayReady License URL
+if( $kConf->hasMap('playReady') ) {
+  $playReadyMap = $kConf->getMap('playReady');
+  if($playReadyMap)
+	  $wgKalturaLicenseServerUrl = $playReadyMap['license_server_url'];
+}
+
+
 // A helper function to get full URL of host
 function wgGetUrl( $hostKey = null ) {
 	global $wgHTTPProtocol, $wgServerPort, $kConf;
