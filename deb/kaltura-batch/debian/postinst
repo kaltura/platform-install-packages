@@ -75,11 +75,12 @@ else
 	service apache2 start
 fi
 
-/etc/init.d/kaltura-batch restart >/dev/null 2>&1
+/etc/init.d/kaltura-batch stop >/dev/null 2>&1 || true
+/etc/init.d/kaltura-batch start
 ln -sf $BASE_DIR/app/configurations/monit/monit.d/batch.rc /etc/monit/conf.d/
 ln -sf $BASE_DIR/app/configurations/monit/monit.d/httpd.rc /etc/monit/conf.d/apache2.rc
 ln -sf $BASE_DIR/app/configurations/monit/monit.d/memcached.rc /etc/monit/conf.d/
-service monit stop >> /dev/null 2>&1
+service monit stop >> /dev/null 2>&1 || true
 service monit start
 
 send_install_becon `basename $0` $TIMEZ install_success 0 
