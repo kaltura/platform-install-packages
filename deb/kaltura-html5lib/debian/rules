@@ -47,6 +47,7 @@ binary-indep: install
 	cp debian/LocalSettings.php $(HTML5LIB_PREFIX)/v2.31/
 	cp debian/LocalSettings.php $(HTML5LIB_PREFIX)/v2.32.1/
 	cp debian/LocalSettings.php $(HTML5LIB_PREFIX)/v2.33/
+	mkdir $(HTML5LIB_PREFIX)/$(HTML5LIB_LATEST_VERSION)/cache $(HTML5LIB_PREFIX)/v2.33/cache $(HTML5LIB_PREFIX)/v2.32.1/cache $(HTML5LIB_PREFIX)/v2.31/cache $(HTML5LIB_PREFIX)/v2.30/cache $(HTML5LIB_PREFIX)/v2.29/cache
 	dh_install $(KALTURA_PREFIX)
 	dh_gencontrol -u-v$(DEB_VERSION) 
 	dh_installdebconf
