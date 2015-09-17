@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5-studio
-Version: v2.0.0
+Version: v2.0.1
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -51,6 +51,10 @@ rm -rf %{buildroot}
 %{prefix}/apps/studio/%{version}
 
 %changelog
+* Thu Sep 16 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v2.0.1-1
+- SUP-5016 - KMC doesn't save player strings override.
+- Aligned with HTML5 lib v2.35
+
 * Fri Jul 24 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v2.0.0-1
 - Ver bounce. Aligned with HTML5lib 2.33.
 

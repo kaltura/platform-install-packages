@@ -66,15 +66,15 @@ start() {
             echo "Removing stale lock file $LOCKFILE"
             rm -f $LOCKFILE
             start_scheduler
-            return 1
+            return $?
         fi
     elif [ -n "$KP" ]; then
         echo "Batch Manager is running as $KP without $LOCKFILE"
         start_scheduler
-        return 0
+        return $?
     else
         start_scheduler
-        return 1
+        return $? 
     fi
 }
 
