@@ -2,8 +2,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.34
-Release: 3
+Version: v2.35
+Release: 1
 Epoch:0 
 License: AGPLv3+
 Group: Server/Platform 
@@ -31,6 +31,7 @@ Source20: kaltura-html5lib-v2.30.tar.gz
 Source21: kaltura-html5lib-v2.31.tar.gz
 Source22: kaltura-html5lib-v2.32.1.tar.gz
 Source23: kaltura-html5lib-v2.33.tar.gz
+Source24: kaltura-html5lib-v2.34.tar.gz
 
 URL: https://github.com/kaltura/mwEmbed 
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -76,10 +77,11 @@ tar zxf %{SOURCE20} -C %{_builddir}/
 tar zxf %{SOURCE21} -C %{_builddir}/
 tar zxf %{SOURCE22} -C %{_builddir}/
 tar zxf %{SOURCE23} -C %{_builddir}/
+tar zxf %{SOURCE24} -C %{_builddir}/
 
 %install
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib
-for i in v2.1.1 v2.3 v2.4 v2.6 v2.9 v2.14 v2.15 v2.18.5 v2.20 v2.21 v2.22 v2.23 v2.24 v2.25 v2.26 v2.27 v2.28 v2.29 v2.30 v2.31 v2.32.1 v2.33 %{version};do
+for i in v2.1.1 v2.3 v2.4 v2.6 v2.9 v2.14 v2.15 v2.18.5 v2.20 v2.21 v2.22 v2.23 v2.24 v2.25 v2.26 v2.27 v2.28 v2.29 v2.30 v2.31 v2.32.1 v2.33 v2.34 %{version};do
 	cp -r %{_builddir}/%{name}-$i $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i
 	ln -sf %{prefix}/app/configurations/html5.php $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i/LocalSettings.php 
 	mkdir $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i/cache
@@ -99,6 +101,70 @@ find /opt/kaltura/web/html5/html5lib -type d -name cache -exec chown -R 48 {} \;
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Thu Sep 17 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v2.35-1
+- FEC-4021 - Video is not playing on IOS9 while it has overly
+- FEC-4012 - Seek on ios 9 : presents only sound on DFP midroll
+- FEC-4010 - Main video on playlist slides down
+- FEC-4030 - Switching between slides stack the video on spinner, on IOS-9
+- FEC-4032 - Video is not replayed on : Vast pre-roll with interval (IOS-9)
+- FEC-4031 - Seek is not working on IOS-9 - spinner is shown
+- FEC-4026 - video can't be replayed on IOS-9 in API player
+- FEC-4025 - PlaylistReady event is sent untimely (looped) on playlist on IOS-9
+- FEC-4028 - Vast postroll playing twice - video does not play and keeps loading forever on IOS-9
+- FEC-4029 - Video is not playing while has vast tracking on non-linear ad
+- FEC-4016 - Playhead is not updated to progress time on IOS-9 after DFP midroll (audio entry)
+- FEC-4011 - Fullscreen is not enlarged to the ios 9 screen entirely
+- FEC-3814 - Share & Embed basic - User not able log in to any social media on Microsoft Edge
+- FEC-4013 - While seek on IOS-9 in player with DFP pre-mid-postroll - Replay will not work
+- FEC-4019 - VMAP_post_linear is not skipped
+- FEC-4064 - YouTube playlist - can't change entry
+- PLAT-3588 - Add playMainfest paramater for timealign removal of source flavor for wowza live streaming
+- SUP-5515 - VPAID Overlay positioning issue
+- FEC-4039 - Green marks on the video and video freezes on Firefox
+- FEC-3720 - External stream: plugin crushes and the stream is no longer playable
+- FEC-4040 - Video is not smooth and jumps
+- FEC-4067 - Omniture is not sending additional evars and props to view events
+- FEC-4069 - Support load with KS with slashes parameterization ( does not work ?ks param )
+- SUP-5512 - Download link not working in versions 2.33
+- FEC-4066 - The player don`t display the sync point and the Admin player plays HLS instead of HDS.
+- FEC-2522 - Support DFP VAST VPAID engine: Kaltura cuePoints, API invocation and partial mediaProxy cuePoint override
+- FEC-4087 - Re-evaluate mediaName before sending the 1st event
+- FEC-2693 - Lecture Capture: the LC menu appears also for VOD entries, if LC and VOD included in playlist
+- FEC-4088 - The mixed playlist with youtube entries doesn't work properly
+- SUP-4784 - Entry duration presented with an additional second
+- SUP-5206 - Player CC button - UI issue
+- SUP-5184 - Player CC - UI issues
+- SUP-5353 - emebed - Full Screen playback on IE9 fails due to domain restrictions
+- SUP-5635 - Large button size in a custom style causes misalignment in "Share" screen
+- FEC-3173 - Google Analytics: Support custom event category and custom labels
+- FEC-4038 - Update Buffer documentation and add buffer duration to events and mediaProxy
+- FEC-3905 - Support NPAW youbora analytics plugin
+- FEC-4079 - Some entries play with interrupts
+- FEC-4094 - In-Video Quizzes: YouTube entry: Playback time & scrubber synchronization issue
+- SUP-5573 - Question - player events and logs
+- FEC-4091 - Auto play and auto continue don't work for YouTube playlist
+- FEC-4090 - spinner stuck on youtube entry after seek
+- FEC-4074 - Tokenization for v2.34
+- FEC-4096 - YouTube playlist: the playlist doesn't load if delivery type is Kaltura auto or HDS
+- FEC-4095 - Source not found player error
+- FEC-3820 - ad pod events are not sent to reporting server
+- FEC-3559 - allow overriding the ServiceUrl and CdnUrl completely by passing respective flashvars
+- FEC-3820 - ad pod events are not sent to reporting server
+- SUP-5849 - Scrubber arrow location with aspect ratio
+- KMS-8879 - Channel Playlist - Cannot handle upcoming Live/Webcast event
+- FEC-4100 - YouTube playlist: need to tap twice on screen in order to pause YouTube entry on Android and iOS
+- FEC-4099 - Youtube and KMC playlist: impossible to change playing entry from YouTube to KMC or vice versa on Android and iOS
+- FEC-4098 - YouTube playlist disabled after player loads on Android or iOS devices
+- FEC-4097 - YouTube playlist with auto play - the video doesn't start, black screen appears on Android and iOS devices
+- FEC-4092 - YouTube playlist: black screen in player area appears after refreshing the test page
+- FEC-4093 - Lecture Capture: the LC menu/controls appear also for Kaltura live entries in combined playlist
+- FEC-3974 - "wrong reference id" message does not appear when using wrong reference id as source
+- FEC-4131 - can't play live with ad stitching specific stream
+- FEC-4122 - Lecture capture - Video plays in the main screen when stream is selected
+- FEC-4120 - Multiple Playlists Monetization - Clicking an overlay ad pauses the video instead of open the target page
+- New HLS-OSMF plugin
+- Improved IE8 detection *
+
 * Tue Sep 15 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v2.34-3
 - Create cache dir under web/html5/html5lib/$i/cache and set write perms for Apache
 - Symlink LocalSettings.php to /opt/kaltura/app/configurations/html5.php
