@@ -1,3 +1,10 @@
+kaltura-html5-studio (2.0.1-1) jupiter; urgency=low
+
+  * SUP-5016 - KMC doesn't save player strings override.
+  * Aligned with HTML5 lib v2.35
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Thu, 17 Sep 2015 14:39:33 +0000
+
 kaltura-html5-studio (2.0.0-1) jupiter; urgency=low
 
   * Aligned with player v2.33.
