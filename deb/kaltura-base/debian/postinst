@@ -210,6 +210,14 @@ if [ "$1" = "configure" ]; then
         ADMIN_CONSOLE_ADMIN_MAIL=$RET
 
 
+        db_get 'kaltura-base/admin_console_passwd'
+	ADMIN_CONSOLE_PASSWORD=$RET
+        db_get 'kaltura-base/admin_console_passwd_again'
+	AGAIN_ADMIN_CONSOLE_PASSWORD=$RET
+	if [ "$ADMIN_CONSOLE_PASSWORD" != "$AGAIN_ADMIN_CONSOLE_PASSWORD" ];then
+		unset ADMIN_CONSOLE_PASSWORD
+		unset AGAIN_ADMIN_CONSOLE_PASSWORD
+	fi
 
         while [ -z "$AGAIN_ADMIN_CONSOLE_PASSWORD" ];do
                 db_input critical 'kaltura-base/admin_console_passwd' || true
