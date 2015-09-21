@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 10.20.0
-Release: 10
+Release: 11
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -308,6 +308,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Sep 21 2015 jess.portnoy@kaltura.com <Jess Portnoy> - 10.20.0-11
+- SUP-3920 - Downloading Error when trying to download the original CSV file
+
 * Wed Sep 16 2015 jess.portnoy@kaltura.com <Jess Portnoy> - 10.20.0-9
 - https://github.com/kaltura/server/pull/3194
 - https://github.com/kaltura/server/pull/3187
