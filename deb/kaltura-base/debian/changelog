@@ -1,3 +1,11 @@
+kaltura-base (10.20.0-2) jupiter; urgency=low
+
+  * SUP-3920 - Downloading Error when trying to download the original CSV file
+  * https://github.com/kaltura/server/pull/3194
+  * https://github.com/kaltura/server/pull/3187
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 21 Sep 2015 08:18:30 +0000
+
 kaltura-base (10.20.0-1) jupiter; urgency=low
 
   * Switching to 10.20.0
