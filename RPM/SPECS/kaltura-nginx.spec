@@ -45,13 +45,13 @@ Requires(pre): pwdutils
 %define nginx_vod_module_ver 1.2
 %define nginx_secure_token_ver 1.0.1
 %define nginx_token_validate_ver 1.0.1
-%define nginx_vts_ver 0.1.1
+%define nginx_vts_ver 0.1.2
 # end of distribution specific definitions
 
 Summary: High performance web server customized for Kaltura VOD
 Name: kaltura-nginx
 Version: 1.8.0
-Release: 5
+Release: 6
 Vendor: Kaltura inc.
 URL: http://nginx.org/
 
@@ -68,7 +68,7 @@ Source9: nginx.upgrade.sh
 Source10: nginx-vod-module-%{nginx_vod_module_ver}.zip  
 Source11: nginx-secure-token-module-%{nginx_secure_token_ver}.zip
 Source12: nginx-akamai-token-validate-module-%{nginx_token_validate_ver}.zip
-#Source13: nginx-module-vts-v%{nginx_vts_ver}.zip
+Source13: nginx-module-vts-v%{nginx_vts_ver}.zip
 #Patch1: nginx_kaltura.diff 
 
 License: 2-clause BSD-like license
@@ -102,7 +102,7 @@ unzip -o %{SOURCE11}
 
 unzip -o %{SOURCE12}
 
-#unzip -o %{SOURCE13}
+unzip -o %{SOURCE13}
 
 
 %build
@@ -145,7 +145,7 @@ unzip -o %{SOURCE12}
 	--add-module=./nginx-vod-module-%{nginx_vod_module_ver} \
 	--add-module=./nginx-secure-token-module-%{nginx_secure_token_ver} \
 	--add-module=./nginx-akamai-token-validate-module-%{nginx_token_validate_ver} \
-	#--add-module=./nginx-module-vts-%{nginx_vts_ver} \
+	--add-module=./nginx-module-vts-%{nginx_vts_ver} \
         $*
 make %{?_smp_mflags}
 %{__mv} %{_builddir}/nginx-%{version}/objs/nginx \
@@ -188,7 +188,7 @@ make %{?_smp_mflags}
 	--add-module=./nginx-vod-module-%{nginx_vod_module_ver} \
 	--add-module=./nginx-secure-token-module-%{nginx_secure_token_ver} \
 	--add-module=./nginx-akamai-token-validate-module-%{nginx_token_validate_ver} \
-	#--add-module=./nginx-module-vts-%{nginx_vts_ver} \
+	--add-module=./nginx-module-vts-%{nginx_vts_ver} \
         $*
 make %{?_smp_mflags}
 
@@ -361,6 +361,9 @@ if [ $1 -ge 1 ]; then
         "Binary upgrade failed, please check nginx's error.log"
 fi
 %changelog
+* Wed Sep 23 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.8.0-6
+- With VTS v0.1.2 - https://github.com/vozlt/nginx-module-vts/issues/19
+
 * Mon Sep 21 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.8.0-5
 - nginx-vod-module tag 1.2
 - disabled vts until https://github.com/vozlt/nginx-module-vts/commit/47b07ac42c8f9f895774318e7d117bb2dbf88403 is included in a new tag
