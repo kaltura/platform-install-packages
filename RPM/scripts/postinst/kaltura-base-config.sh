@@ -335,7 +335,7 @@ fi
 
 HTML5_VER="`rpm -qa kaltura-html5lib --queryformat %{version}`"
 create_answer_file $POST_INST_MAIL_TMPL
-APP_REMOTE_ADDR_HEADER_SALT=`echo $SERVICE_URL|base64`
+APP_REMOTE_ADDR_HEADER_SALT=`echo $SERVICE_URL|base64 -w0`
 # Now we will sed.
 for TMPL_CONF_FILE in $CONF_FILES;do
         CONF_FILE=`echo $TMPL_CONF_FILE | sed 's@\(.*\)\.template\(.*\)@\1\2@'`

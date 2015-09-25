@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.28
-Release: 16
+Release: 17
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -82,6 +82,9 @@ find %{_sysconfdir}/logrotate.d -type l -name "kaltura_*" -exec rm {} \;
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Fri Sep 25 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.28-16
+- https://github.com/kaltura/platform-install-packages/issues/60
+
 * Fri Sep 18 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.28-15
 - https://github.com/kaltura/platform-install-packages/issues/443
 
