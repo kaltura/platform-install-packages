@@ -6,7 +6,9 @@ source kaltura-install-config.sh
 iptables -F
 service iptables stop
 chkconfig iptables off
-setenforce permissive
+if [ `getenforce` = 'Enforcing' ] ;then
+        setenforce permissive
+fi
 yum -y clean all
 rpm -ihv --force http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
 yum -y install mysql-server kaltura-server kaltura-red5 postfix

@@ -343,7 +343,7 @@ if [ "$1" = "configure" ]; then
         # no added value in putting this on a separate server..
         SPHINX_DB_HOST=$DB1_HOST
         SPHINX_DB_PORT=$DB1_PORT
-	APP_REMOTE_ADDR_HEADER_SALT=`echo $SERVICE_URL|base64`
+	APP_REMOTE_ADDR_HEADER_SALT=`echo $SERVICE_URL|base64 -w0`
         CONF_FILES=`find $KALT_CONF_DIR  -type f -name "*template*"`
         CONF_FILES="$CONF_FILES $BASE_DIR/app/batch/batches/Mailer/emails_en.template.ini $BASE_DIR/app/tests/monitoring/config.template.ini $BASE_DIR/bin/sanity_config.template.ini"
         #if STUDIO_VER=`dpkg-query -W -f'${Version}' kaltura-html5-studio |awk -F "+" '{print $1}' 2>/dev/null`;then 
