@@ -34,7 +34,7 @@ Source22: kaltura-html5lib-v2.32.tar.gz
 URL: https://github.com/kaltura/mwEmbed 
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
-Requires: php
+Requires: php, kaltura-base
 
 %description
 Kaltura is the world's first Open Source Online Video Platform, transforming the way people work, 
@@ -80,7 +80,9 @@ mkdir -p $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib
 for i in v2.1.1 v2.3 v2.4 v2.6 v2.9 v2.14 v2.15 v2.18.5 v2.20 v2.21 v2.22 v2.23 v2.24 v2.25 v2.26 v2.27 v2.28 v2.29 v2.30 v2.31 v2.32.1 %{version};do
 	cp -r %{_builddir}/%{name}-$i $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i
 	cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i
+	mkdir $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i/cache
 done
+
 %clean
 rm -rf %{buildroot}
 
