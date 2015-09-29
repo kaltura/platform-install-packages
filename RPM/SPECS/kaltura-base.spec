@@ -131,6 +131,7 @@ cp %{SOURCE15} $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/
 cp $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.d/memcached.template.rc $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/memcached.rc
 cp $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.d/mysqld.template.rc $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/mysqld.rc
 cp $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.d/mariadb.template.rc $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/mariadb.rc
+cp $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.d/percona.template.rc $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/percona.rc
 rm $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.d/*template*
 cp %{SOURCE25} $RPM_BUILD_ROOT%{prefix}/app/configurations/logrotate/
 cp %{SOURCE26} $RPM_BUILD_ROOT%{prefix}/app/configurations/logrotate/
