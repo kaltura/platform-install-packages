@@ -105,6 +105,7 @@ echo -e "\n${CYAN}In order to finalize the system configuration, please input th
 
 
 CDN hostname [${YELLOW}`hostname`${CYAN}]:${NORMAL}"
+	echo -e "\n${CYAN}The host will be accessed over http(s). In case your CDN operates on a non-default port, please input CDNHOST:PORT.  ${NORMAL}"
         read -e CDN_HOST
         if [ -z "$CDN_HOST" ];then
                 CDN_HOST=`hostname`
