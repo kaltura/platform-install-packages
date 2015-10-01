@@ -1,3 +1,19 @@
+kaltura-base (10.16.0-2) jupiter; urgency=low
+
+  * SUPPS-299 - Notifications issue - replacement video event
+  * SUP-5363 - WebEx Connector Errors - during and after Cisco BACKUP 
+  * PLAT-3504 - Zombie cleaner check
+  * PLAT-3458 - WV flavor does not created
+ 
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Fri, 24 Jul 2015 21:46:54 +0000
+
+kaltura-base (10.16.0-1) jupiter; urgency=low
+
+  * Initial build for 10.16.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Fri, 17 Jul 2015 11:37:27 +0000
+
 kaltura-base (10.15.0-1) jupiter; urgency=low
 
   * Local patch for https://github.com/kaltura/server/pull/2838 

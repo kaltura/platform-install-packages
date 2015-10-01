@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 10.16.0
-Release: 3
+Release: 7
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -193,8 +193,8 @@ and then edit /etc/selinux/config to make the change permanent."
 	fi
 fi
 # create user/group, and update permissions
-groupadd -r %{kaltura_group} -g7373 2>/dev/null || true
-useradd -M -r -u7373 -d %{prefix} -s /bin/bash -c "Kaltura server" -g %{kaltura_group} %{kaltura_user} 2>/dev/null || true
+groupadd -r %{kaltura_group} -g613 2>/dev/null || true
+useradd -M -r -u613 -d %{prefix} -s /bin/bash -c "Kaltura server" -g %{kaltura_group} %{kaltura_user} 2>/dev/null || true
 getent group %{apache_user} >/dev/null || groupadd -g 48 -r %{apache_group}
 getent passwd %{apache_user} >/dev/null || \
   useradd -r -u 48 -g %{apache_group} -s /sbin/nologin \
@@ -306,6 +306,12 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Fri Jul 24 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.16.0-6
+- SUPPS-299 - Notifications issue - replacement video event
+- SUP-5363 - WebEx Connector Errors - during and after Cisco BACKUP
+- PLAT-3504 - Zombie cleaner check
+- PLAT-3458 - WV flavor does not created
+
 * Mon Jul 13 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.16.0-2
 - https://github.com/kaltura/server/pull/2838 merged so SOURCE31 is no longer needed.
 

@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.32.1
+Version: v2.33
 Release: 1
 Epoch:0 
 License: AGPLv3+
@@ -34,7 +34,7 @@ Source22: kaltura-html5lib-v2.32.tar.gz
 URL: https://github.com/kaltura/mwEmbed 
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
-Requires: php
+Requires: php, kaltura-base
 
 %description
 Kaltura is the world's first Open Source Online Video Platform, transforming the way people work, 
@@ -80,7 +80,9 @@ mkdir -p $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib
 for i in v2.1.1 v2.3 v2.4 v2.6 v2.9 v2.14 v2.15 v2.18.5 v2.20 v2.21 v2.22 v2.23 v2.24 v2.25 v2.26 v2.27 v2.28 v2.29 v2.30 v2.31 v2.32.1 %{version};do
 	cp -r %{_builddir}/%{name}-$i $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i
 	cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i
+	mkdir $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i/cache
 done
+
 %clean
 rm -rf %{buildroot}
 
@@ -95,6 +97,27 @@ rm -rf %{buildroot}
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Fri Jul 24 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v2.33-1
+- FEC-677 - volumeControl plugin should support verical layout
+- FEC-3331 - Support server side playback Rate where not available client side or no progressive stream
+- FEC-3678 - Make the entryList param dynamic for the related data 
+- FEC-1755 - Adobe Analytics Omniture Heartbeat AppMeasurement player implmenation
+- FEC-3509 - Design OTT Player Skin
+- FEC-3733 - Anonymous user
+- FEC-2900 - Implement embedly player.js interface for player API against kaltura player
+- SUP-4886 - Disabling the Livstream redirect
+- SUP-5119 - Playback rate selector issue
+- SUP-4976 - changeMedia issue on Android 5.0
+- SUP-5142 - VPAID Issues, clickthrough, portrait and playback
+- SUP-4014 - Adtag link not working on HTML5 players
+- SUP-4904 - Chapters names on menu not so visible on IE9
+- SUP-5120 - Playback rate selector starts video from beginning when changing rate for first time
+- SUP-5312 - Vast ads are not filling the player area
+- SUP-4277 - Mediahuis - Windows Phone 8.1 black screen on playbac
+- SUP-5278 - VPAID Overlay dimensions/position issue in full screen
+- SUP-5357 - Pause button stop working
+- SUP-5349 - Unable to change preferred bitrate in source selector
+
 * Sun Jul 12 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v2.32.1-1
 - Support MSE/EME only on Chrome
 

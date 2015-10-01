@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5-studio
-Version: v1.9.9
+Version: v2.0.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -51,6 +51,9 @@ rm -rf %{buildroot}
 %{prefix}/apps/studio/%{version}
 
 %changelog
+* Fri Jul 24 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v2.0.0-1
+- Ver bounce. Aligned with HTML5lib 2.33.
+
 * Sun Jun 28 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v1.9.9-1
 - Add Studio support for Embed.ly embeds and Multi DRM plugins
 - FEC-3611 Studio v2: after adding new boolean plugin, grey square displayed over 'delete' icon
