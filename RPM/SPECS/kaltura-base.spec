@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 10.21.0
-Release: 4
+Release: 5
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -195,8 +195,9 @@ and then edit /etc/selinux/config to make the change permanent."
 	fi
 fi
 # create user/group, and update permissions
-groupadd -r %{kaltura_group} -g7373 2>/dev/null || true
-useradd -M -r -u7373 -d %{prefix} -s /bin/bash -c "Kaltura server" -g %{kaltura_group} %{kaltura_user} 2>/dev/null || true
+getent group %{kaltura_group} >/dev/null || groupadd -r %{kaltura_group} -g7373 2>/dev/null
+getent passwd %{kaltura_user} >/dev/null || useradd -M -r -u7373 -d %{prefix} -s /bin/bash -c "Kaltura server" -g %{kaltura_group} %{kaltura_user} 2>/dev/null
+
 getent group %{apache_user} >/dev/null || groupadd -g 48 -r %{apache_group}
 getent passwd %{apache_user} >/dev/null || \
   useradd -r -u 48 -g %{apache_group} -s /sbin/nologin \
