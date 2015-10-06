@@ -89,6 +89,10 @@ if ! rpm -q kaltura-front;then
 fi
 trap 'my_trap_handler "${LINENO}" ${$?}' ERR
 send_install_becon `basename $0` $ZONE install_start 0 
+
+# Removal of older ssl line settings from the file. They are appended in the following lines again
+sed -e '/IS_SSL/d' -e '/CA_FILE/d' -e '/CRT_FILE/d' -e '/CHAIN_FILE/d' -e '/KEY_FILE/d' -i $RC_FILE
+
 KALTURA_APACHE_CONF=$APP_DIR/configurations/apache
 KALTURA_APACHE_CONFD=$KALTURA_APACHE_CONF/conf.d
 #unset IS_SSL
