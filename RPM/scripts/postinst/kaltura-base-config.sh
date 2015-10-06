@@ -428,6 +428,13 @@ PLAY_PARTNER_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c20`
 HASHED_PLAY_PARTNER_SECRET=`echo $PLAY_PARTNER_SECRET|md5sum`
 PLAY_PARTNER_SECRET=`echo $HASHED_PLAY_PARTNER_SECRET=|awk -F " " '{print $1}'`
 
+# Dropping the port when it's a standard one
+if [ "$KALTURA_VIRTUAL_HOST_PORT" -eq 443 -o "$KALTURA_VIRTUAL_HOST_PORT" -eq 80 ];then
+        KALTURA_FULL_VIRTUAL_HOST_NAME="$KALTURA_VIRTUAL_HOST_NAME"
+        SERVICE_URL=$PROTOCOL://$KALTURA_FULL_VIRTUAL_HOST_NAME
+else
+        KALTURA_FULL_VIRTUAL_HOST_NAME="$KALTURA_VIRTUAL_HOST_NAME:$KALTURA_VIRTUAL_HOST_PORT"
+fi
 
 # SQL statement files tokens:
 for TMPL in `find $BASE_DIR/app/deployment/base/scripts/init_content/ -name "*template*"`;do
