@@ -231,6 +231,15 @@ if [ -z "$KALTURA_VIRTUAL_HOST_PORT" ];then
 	fi
 fi
 
+
+# Dropping the port when it's a standard one
+if [ "$KALTURA_VIRTUAL_HOST_PORT" -eq 443 -o "$KALTURA_VIRTUAL_HOST_PORT" -eq 80 ];then
+        KALTURA_FULL_VIRTUAL_HOST_NAME="$KALTURA_VIRTUAL_HOST_NAME"
+else
+        KALTURA_FULL_VIRTUAL_HOST_NAME="$KALTURA_VIRTUAL_HOST_NAME:$KALTURA_VIRTUAL_HOST_PORT"
+fi
+
+
 if [ -z "$SERVICE_URL" ];then
 	echo -e "${CYAN}Service URL [${YELLOW}$PROTOCOL://$KALTURA_FULL_VIRTUAL_HOST_NAME${CYAN}]:${NORMAL} "
 	read -e SERVICE_URL
@@ -240,12 +249,12 @@ if [ -z "$SERVICE_URL" ];then
 fi
 
 
-
 cp $KALTURA_APACHE_CONFD/enabled.kaltura.conf.template $KALTURA_APACHE_CONFD/enabled.kaltura.conf 
 cp $KALTURA_APACHE_CONF/kaltura.conf.template $KALTURA_APACHE_CONF/kaltura.conf
 sed -e "s#@APP_DIR@#$APP_DIR#g" -e "s#@LOG_DIR@#$LOG_DIR#g" -e "s#@WEB_DIR@#$WEB_DIR#g" -e "s#@KALTURA_VIRTUAL_HOST_NAME@#$KALTURA_VIRTUAL_HOST_NAME#g" -e "s#@KALTURA_VIRTUAL_HOST_PORT@#$KALTURA_VIRTUAL_HOST_PORT#g" -e "s#@SERVICE_URL@#$SERVICE_URL#g" -i $MAIN_APACHE_CONF $KALTURA_APACHE_CONFD/enabled.kaltura.conf
 
 CONF_FILES=`find $APP_DIR/configurations  -type f| grep -v template`
+
 for i in settings.serviceUrl \$wgKalturaServiceUrl \$wgKalturaCDNUrl \$wgKalturaStatsServiceUrl apphome_url admin_console_url admin_console SERVICE_URL settings.serviceUrl; do sed -i "s#\($i\)\s*=.*#\1=$SERVICE_URL#g" $CONF_FILES;done
 
 find /etc/httpd/conf.d -type l -name "zzzkaltura*" -exec rm {} \;
