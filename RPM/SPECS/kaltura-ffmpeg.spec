@@ -25,8 +25,8 @@
 
 Summary: Utilities and libraries to record, convert and stream audio and video
 Name: kaltura-ffmpeg
-Version: 2.1.3
-Release: 9 
+Version: 2.7.2 
+Release: 1 
 License: GPL
 Group: Applications/Multimedia
 URL: http://ffmpeg.org/
@@ -211,8 +211,8 @@ fi
 
 %files
 %defattr(-, root, root, 0755)
-#%doc Changelog COPYING* CREDITS INSTALL.md MAINTAINERS RELEASE RELEASE_NOTES README.md 
-%doc Changelog COPYING* CREDITS INSTALL MAINTAINERS RELEASE README
+%doc Changelog COPYING* CREDITS INSTALL.md MAINTAINERS RELEASE RELEASE_NOTES README.md 
+#%doc Changelog COPYING* CREDITS INSTALL MAINTAINERS RELEASE README
 %doc %{base_prefix}-%{version}/share/man/man1
 %config %{_sysconfdir}/profile.d/kaltura_ffmpeg.sh
 %config %{_sysconfdir}/ld.so.conf.d/kaltura_ffmpeg.conf
@@ -257,6 +257,9 @@ fi
 %{base_prefix}-%{version}/share
 
 %changelog
+* Wed Oct 7 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 2.7.2-1
+- 2.7.2
+
 * Thu Aug 6 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 2.1.3-8
 - Require libvpx >=1.3.0 since CentOS 6 also had 1.2.0 at some stage and they are not binary compatible.
 
