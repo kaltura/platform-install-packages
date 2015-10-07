@@ -1,3 +1,9 @@
+kaltura-front (10.21.0-2) jupiter; urgency=low
+
+  * if a CA cert was provided, use -CAfile when execing openssl verify.
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Wed, 07 Oct 2015 17:37:05 +0000
+
 kaltura-front (10.21.0-1) jupiter; urgency=low
 
   * Switching to 10.21.0
