@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.28
-Release: 18
+Release: 19
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -82,6 +82,9 @@ find %{_sysconfdir}/logrotate.d -type l -name "kaltura_*" -exec rm {} \;
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Wed Oct 10 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.28-19
+- if a CA cert was provided, use -CAfile when execing openssl verify.
+
 * Thu Oct 1 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.28-18
 - http://forum.kaltura.org/t/kaltura-fails-to-install-on-ubuntu-14-04-3-lts/3491/6
 

@@ -166,7 +166,14 @@ else
 	php $APP_DIR/deployment/base/scripts/insertPermissions.php -d $APP_DIR/deployment/permissions/ssl/ >/dev/null 2>&1 ||true
 
 	# if cert is self signed:
-	if openssl verify  $CRT_FILE | grep 'self signed certificate' -q ;then
+	if [ -r "$CHAIN_FILE" ];then
+		VERIFY_COMMAND="openssl verify -CAfile $CHAIN_FILE $CRT_FILE"
+	elif [ -r "$CA_FILE" ];then
+		VERIFY_COMMAND="openssl verify -CAfile $CA_FILE $CRT_FILE"
+	else
+		VERIFY_COMMAND="openssl verify $CRT_FILE"
+	fi  
+	if $VERIFY_COMMAND | grep 'self signed certificate' -q ;then
 		echo -e "${YELLOW}
 
 WARNING: self signed cerificate detected. Will set settings.clientConfig.verifySSL=0 in $APP_DIR/configurations/admin.ini.

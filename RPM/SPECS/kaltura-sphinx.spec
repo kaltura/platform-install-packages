@@ -6,7 +6,7 @@
 
 Name:           kaltura-sphinx
 Version:        2.2.1
-Release:        16
+Release:        17
 Summary:        Sphinx full-text search server - for Kaltura
 
 Group:          Applications/Text
@@ -166,6 +166,9 @@ fi
 
 
 %changelog
+* Wed Oct 10 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 2.2.1.r4097-17
+- https://github.com/kaltura/platform-install-packages/issues/454
+
 * Mon Feb 3 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 2.2.1.r4097-15 
 - Start Sphinx and pop at init.
 
