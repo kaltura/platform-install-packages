@@ -82,7 +82,7 @@ find %{_sysconfdir}/logrotate.d -type l -name "kaltura_*" -exec rm {} \;
 %config %{prefix}/app/configurations/*
 
 %changelog
-* Wed Oct 10 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.28-19
+* Wed Oct 7 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.28-19
 - if a CA cert was provided, use -CAfile when execing openssl verify.
 
 * Thu Oct 1 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.28-18

@@ -29,7 +29,7 @@ Requires(post): chkconfig
 Requires(preun): chkconfig
 # This is for /sbin/service
 Requires(preun): initscripts
-Requires(preinst): mysql-libs zlib openssl expat libgcc krb5-libs, kaltura-base
+#Requires(preinst): mysql-libs zlib openssl expat libgcc krb5-libs
 
 
 %description
@@ -166,7 +166,7 @@ fi
 
 
 %changelog
-* Wed Oct 10 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 2.2.1.r4097-17
+* Wed Oct 7 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 2.2.1.r4097-17
 - https://github.com/kaltura/platform-install-packages/issues/454
 
 * Mon Feb 3 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 2.2.1.r4097-15 
