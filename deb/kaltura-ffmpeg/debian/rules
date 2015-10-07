@@ -82,6 +82,7 @@ clean:
 	dh_testdir
 	dh_testroot
 	rm -f build-stamp config.log
+	rm -rf opt/ ffmpeg-$(FFMPEG_VERSION)/
 	dh_quilt_unpatch
 	dh_clean 
 
