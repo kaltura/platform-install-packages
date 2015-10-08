@@ -443,7 +443,7 @@ else
         PROTOCOL="http"
 fi
 SERVICE_URL="$PROTOCOL://$KALTURA_FULL_VIRTUAL_HOST_NAME"
-echo "service URL is: $SERVICE_URL
+echo "service URL is: $SERVICE_URL"
 
 # Dropping the port when it's a standard one
 if [ "$KALTURA_VIRTUAL_HOST_PORT" -eq 443 -o "$KALTURA_VIRTUAL_HOST_PORT" -eq 80 ];then
@@ -483,6 +483,9 @@ fi
 
 set +e
 
+if rpm -qa "Percona-Server-server*" 2>/dev/null;then
+    sed -i s/@HOSTNAME@/`hostname`/ $BASE_DIR/app/configurations/monit/monit.d/enabled.mysqld.rc
+fi
 
 ln -sf $BASE_DIR/app/configurations/logrotate/kaltura_base /etc/logrotate.d/
 ln -sf $BASE_DIR/app/configurations/logrotate/kaltura_api /etc/logrotate.d/
