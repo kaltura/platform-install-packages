@@ -26,7 +26,7 @@
 Summary: Utilities and libraries to record, convert and stream audio and video
 Name: kaltura-ffmpeg
 Version: 2.7.2 
-Release: 1 
+Release: 2
 License: GPL
 Group: Applications/Multimedia
 URL: http://ffmpeg.org/
@@ -199,6 +199,7 @@ EOF
 /sbin/ldconfig
 chcon -t textrel_shlib_t %{base_prefix}-%{version}/lib/libav{codec,device,format,util}.so.*.*.* &>/dev/null || :
 ln -fs %{base_prefix}-%{version}/bin/ffmpeg /opt/kaltura/bin 
+ln -fs %{base_prefix}-%{version}/bin/ffprobe /opt/kaltura/bin 
 ln -fs %{base_prefix}-%{version}/bin/qt-faststart /opt/kaltura/bin 
 
 %postun 
@@ -257,6 +258,9 @@ fi
 %{base_prefix}-%{version}/share
 
 %changelog
+* Thu Oct 8 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 2.7.2-2
+- symlink ffprobe to /opt/kaltura/bin
+
 * Wed Oct 7 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 2.7.2-1
 - 2.7.2
 

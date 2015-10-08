@@ -208,6 +208,7 @@ scriptPath											= batches/Convert/KAsyncConvertExe.php
 maximumExecutionTime								= 36000
 
 params.ffmpegCmd									= @BIN_DIR@/ffmpeg
+params.ffprobeCmd									= @BIN_DIR@/ffprobe
 params.mencderCmd									= @BIN_DIR@/mencoder
 params.on2Cmd										= @BIN_DIR@/cli_encode
 params.ffmpegAuxCmd									= @BIN_DIR@/ffmpeg-aux

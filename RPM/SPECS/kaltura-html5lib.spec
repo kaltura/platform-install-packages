@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.35
+Version: v2.35.5
 Release: 1
 Epoch:0 
 License: AGPLv3+
@@ -101,6 +101,9 @@ find /opt/kaltura/web/html5/html5lib -type d -name cache -exec chown -R 48 {} \;
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Thu Oct 8 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v2.35.5-1
+- IVQ release
+
 * Thu Sep 17 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v2.35-1
 - FEC-4021 - Video is not playing on IOS9 while it has overly
 - FEC-4012 - Seek on ios 9 : presents only sound on DFP midroll
