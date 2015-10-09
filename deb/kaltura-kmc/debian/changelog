@@ -1,3 +1,9 @@
+kaltura-kmc (5.39.9-2) jupiter; urgency=low
+
+  * Version bounce to align with kaltura-html5lib v2.35.5. 
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Fri, 09 Oct 2015 11:52:05 +0000
+
 kaltura-kmc (5.39.9-1) jupiter; urgency=low
 
   * Update KMC listing of live streaming ingest points to use _1 instead of _%i

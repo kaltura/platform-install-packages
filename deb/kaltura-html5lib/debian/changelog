@@ -1,3 +1,10 @@
+kaltura-html5lib (2.35.5-1) jupiter; urgency=low
+
+  * IVQ release
+
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Fri, 09 Oct 2015 11:43:52 +0000
+
 kaltura-html5lib (2.35-1) jupiter; urgency=low
 
   * FEC-4021 - Video is not playing on IOS9 while it has overly
