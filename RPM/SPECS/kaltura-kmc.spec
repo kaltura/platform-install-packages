@@ -1,7 +1,7 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmc
 Version: v5.39.9
-Release: 1
+Release: 2
 Summary: Kaltura Management Console
 
 Group: System Management	
@@ -78,6 +78,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Fri Oct 9 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v5.39.9-2
+- Ver bounce of HTML5 to v2.35.5
+ 
 * Thu Sep 17 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v5.39.9-1
 - Update KMC listing of live streaming ingest points to use _1 instead of _%i
 - Version bounce to align with kaltura-html5lib v2.35.
