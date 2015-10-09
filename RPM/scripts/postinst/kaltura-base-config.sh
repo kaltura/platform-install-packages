@@ -484,6 +484,17 @@ fi
 set +e
 
 if rpm -qa "Percona-Server-server*" 2>/dev/null;then
+    cp $BASE_DIR/app/configurations/monit/monit.avail/percona.rc $BASE_DIR/app/configurations/monit/monit.avail/percona.rc.backup
+    sed -i s/@HOSTNAME@/`hostname`/ $BASE_DIR/app/configurations/monit/monit.avail/percona.rc
+    if [ `ps -ef | grep monit | grep -v grep | wc -l` -ne 0 ]; then
+        echo "Reloading monit"
+        /opt/kaltura/bin/monit reload
+    fi
+fi
+
+
+
+if rpm -qa "Percona-Server-server*" 2>/dev/null;then
     sed -i s/@HOSTNAME@/`hostname`/ $BASE_DIR/app/configurations/monit/monit.d/enabled.mysqld.rc
     /opt/kaltura/bin/monit reload
 fi
