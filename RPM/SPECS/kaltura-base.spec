@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 10.21.0
-Release: 8
+Release: 9
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -310,6 +310,13 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Sun Oct 11 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.21.0-9
+- SUP-5280 - "userId" flashvar to player?
+- SUP-5457 - TMZ - Reduce cache age for certain partner
+- SUP-5523 - Authentication error for youtube API distribution PID 1895531, connector ID 1420071
+- SUP-5673 - HLS URL
+- New ffmpeg version [2.7.2]
+
 * Mon Oct 5 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.21.0-6
 - https://github.com/kaltura/platform-install-packages/issues/455
 
