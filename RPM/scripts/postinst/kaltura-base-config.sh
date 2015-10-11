@@ -483,6 +483,7 @@ fi
 
 set +e
 
+# in case we use Percona, change the motnit rc file
 if rpm -qa "Percona-Server-server*" 2>/dev/null;then
     cp $BASE_DIR/app/configurations/monit/monit.avail/percona.rc $BASE_DIR/app/configurations/monit/monit.avail/percona.rc.backup
     sed -i s/@HOSTNAME@/`hostname`/ $BASE_DIR/app/configurations/monit/monit.avail/percona.rc
@@ -490,13 +491,6 @@ if rpm -qa "Percona-Server-server*" 2>/dev/null;then
         echo "Reloading monit"
         /opt/kaltura/bin/monit reload
     fi
-fi
-
-
-
-if rpm -qa "Percona-Server-server*" 2>/dev/null;then
-    sed -i s/@HOSTNAME@/`hostname`/ $BASE_DIR/app/configurations/monit/monit.d/enabled.mysqld.rc
-    /opt/kaltura/bin/monit reload
 fi
 
 ln -sf $BASE_DIR/app/configurations/logrotate/kaltura_base /etc/logrotate.d/
