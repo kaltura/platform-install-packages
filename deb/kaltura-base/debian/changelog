@@ -1,3 +1,9 @@
+kaltura-base (11.0.0-1) kajam; urgency=low
+
+  * Switching to 11.0.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 12 Oct 2015 12:54:56 +0000
+
 kaltura-base (10.21.0-1) jupiter; urgency=low
 
   * Switching to 10.21.0
