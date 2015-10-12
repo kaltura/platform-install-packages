@@ -6,12 +6,12 @@
 %define confdir %{prefix}/app/configurations
 %define logdir %{prefix}/log
 %define webdir %{prefix}/web
-%define codename Jupiter
+%define codename Kajam 
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 10.21.0
-Release: 9
+Version: 11.0.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -310,6 +310,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Oct 12 2015 jess.portnoy@kaltura.com <Jess Portnoy> - 11.0.0-1
+- Ver Bounce to 11.0.0
+
 * Sun Oct 11 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.21.0-9
 - SUP-5280 - "userId" flashvar to player?
 - SUP-5457 - TMZ - Reduce cache age for certain partner
