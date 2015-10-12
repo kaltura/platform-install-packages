@@ -74,7 +74,7 @@ And re-run:
 # yum install kaltura-server
 
 ${NORMAL}"
-        exit 0 
+        exit 2 
 fi
 trap 'my_trap_handler "${LINENO}" ${$?}' ERR
 send_install_becon `basename $0` $ZONE install_start 0
@@ -300,6 +300,29 @@ ${NORMAL} "
 
 
 
+fi
+
+# check DB connectivity:
+echo -e "${CYAN}Checking MySQL version..${NORMAL}"
+MYVER=`echo "select version();" | mysql -h$DB1_HOST -u$SUPER_USER -p$SUPER_USER_PASSWD -P$DB1_PORT -N`
+MYMAJVER=`echo $MYVER| awk -F "." '{print $1}'`
+MYMINORVER=`echo $MYVER| awk -F "." '{print $2}'`
+
+if [ "$MYMAJVER" -ne 5 ];then
+	echo -e "${BRIGHT_RED}Your version of MySQL is not compatible with Kaltura at the moment. 
+Please install and configure MySQL 5.1 according to the instructions on the Kaltura install manual before proceeding with the Kaltura installation.${NORMAL}"
+	exit 4 
+else
+	echo -e "${CYAN}Ver $MYVER found compatible${NORMAL}"
+fi
+
+if [ $? -ne 0 ];then
+cat << EOF
+Failed to run:
+# mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT."
+Check your settings."
+EOF
+	exit 5
 fi
 
 # need to check if we even have PHP as Sphinx and DWH can be installed without thank heavens.

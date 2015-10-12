@@ -1,8 +1,8 @@
 %define prefix /opt/kaltura 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
-Version: 1.0.28
-Release: 19
+Version: 1.0.29
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -82,6 +82,9 @@ find %{_sysconfdir}/logrotate.d -type l -name "kaltura_*" -exec rm {} \;
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Mon Oct 12 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.29-1
+- Check mysql connectivity during base-config and exit on failure.
+
 * Wed Oct 7 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.28-19
 - if a CA cert was provided, use -CAfile when execing openssl verify.
 
