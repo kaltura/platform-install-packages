@@ -1,6 +1,6 @@
 Summary: Red5 Server
 Name: kaltura-red5
-Version: 1.0.4
+Version: 1.0.6
 Release: 1
 Source0: %{name}-%{version}.tar.gz
 #Source1: %{name}-flash-%{version}.tar.bz2
@@ -75,6 +75,9 @@ if [ "$1" = 0 ]; then
 fi
 
 %changelog
+* Tue Oct 13  2015 Jess Portnoy <jess.portnoy@kaltura.com> 1.0.6-1
+- https://github.com/Red5/red5-server/releases/tag/v1.0.6-RELEASE
+
 * Sat Jan 3 2015 Jess Portnoy <jess.portnoy@kaltura.com> 1.0.4-1
 - New ver.
 - No need to build anymore as Red5 offers prebuilt package.
