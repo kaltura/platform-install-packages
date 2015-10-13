@@ -11,7 +11,7 @@ Refer to the [Deploying Kaltura Clusters Using Chef](https://github.com/kaltura/
 * [MySQL Database](#the-mysql-database)
 * [Sphinx Indexing](#the-sphinx-indexing-server)
 * [Front servers](#the-front)
-* [Batch servers](#the-batch)
+* [Batch servers](#the-batch-node)
 * [DWH server](#the-datawarehouse)
 * [Nginx VOD server](#nginx-vod-server)
 * [Streaming Server](#the-streaming-server)
