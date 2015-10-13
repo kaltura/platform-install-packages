@@ -340,7 +340,7 @@ https://github.com/kaltura/nginx-vod-module/
 
 Installation:
 ```
-yum install kaltura-nginx
+yum install kaltura-nginx kaltura-postinst
 /opt/kaltura/bin/kaltura-nginx-config.sh
 ```
 
