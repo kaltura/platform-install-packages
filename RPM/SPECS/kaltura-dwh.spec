@@ -3,7 +3,7 @@
 Summary: Kaltura Open Source Video Platform - Analytics 
 Name: kaltura-dwh
 Version: 9.5.0
-Release: 1
+Release: 2
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/dwh/archive/%{name}-IX-%{version}.zip
@@ -74,6 +74,9 @@ fi
 
 
 %changelog
+* Thu Oct 15 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 9.5.0-2
+- Live entry aggregation ddl changes 
+
 * Mon Aug 24 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 9.5.0-1
 - Don't use preserved word MAX as query alias.
 - Make sure that file_size is int value like in DB
