@@ -1,3 +1,4 @@
+
 %define base_prefix /opt/kaltura/ffmpeg
 %define _without_gsm 1
 %define _without_nut 1
@@ -11,8 +12,6 @@
 ### Use native xvid
 %define _without_xvid 1
 
-### Disabled speex support as ffmpeg needs speex 1.2 and RHEL5 ships with 1.0.5
-
 
 %{?el6:%define _without_dc1394 1}
 %{?el6:%define _without_schroedinger 1}
@@ -24,22 +23,10 @@
 %{?el5:%define _without_speex 1}
 %{?el5:%define _without_theora 1}
 
-%{?el4:%define _without_dc1394 1}
-%{?el4:%define _without_speex 1}
-%{?el4:%define _without_texi2html 1}
-%{?el4:%define _without_theora 1}
-%{?el4:%define _without_v4l 1}
-
-%{?el3:%define _without_dc1394 1}
-%{?el3:%define _without_schroedinger 1}
-%{?el3:%define _without_speex 1}
-%{?el3:%define _without_texi2html 1}
-%{?el3:%define _without_theora 1}
-
 Summary: Utilities and libraries to record, convert and stream audio and video
 Name: kaltura-ffmpeg-aux
-Version: 0.6 
-Release: 3 
+Version: 2.1.3
+Release: 1
 License: GPL
 Group: Applications/Multimedia
 URL: http://ffmpeg.org/
@@ -54,6 +41,10 @@ BuildRequires: SDL-devel
 BuildRequires: freetype-devel
 BuildRequires: imlib2-devel
 BuildRequires: zlib-devel
+BuildRequires: schroedinger-devel
+BuildRequires: libtheora-devel
+BuildRequires: libvorbis-devel
+BuildRequires: xvidcore-devel
 %{!?_without_a52dec:BuildRequires: kaltura-a52dec-devel}
 %{!?_without_dc1394:BuildRequires: libdc1394-devel}
 %{!?_without_gsm:BuildRequires: gsm-devel}
@@ -66,21 +57,21 @@ BuildRequires: zlib-devel
 %{!?_without_texi2html:BuildRequires: texi2html}
 %{!?_without_theora:BuildRequires: libogg-devel, libtheora-devel}
 %{!?_without_vorbis:BuildRequires: libogg-devel, libvorbis-devel}
-%{!?_without_vpx:BuildRequires: libvpx-devel}
+%{!?_without_vpx:BuildRequires: libvpx-devel >= 1.3.0}
 %{!?_without_x264:BuildRequires: kaltura-x264-devel}
 %{!?_without_xvid:BuildRequires: xvidcore-devel}
 %{!?_without_a52dec:Requires: a52dec}
 BuildRequires: yasm-devel
 BuildRequires: libass-devel 
 BuildRequires: kaltura-x264-devel 
-BuildRequires: openjpeg-devel
+BuildRequires: gsm-devel
 BuildRequires: speex-devel
-Requires:kaltura-a52dec
-BuildRequires: libvpx-devel
+BuildRequires: libvpx-devel >= 1.3.0
 BuildRequires: schroedinger-devel 
-BuildRequires: kaltura-fdk-aac-devel
 BuildRequires: libtheora-devel
 BuildRequires: xvidcore-devel >= 1.3.2
+Requires:kaltura-a52dec,libass,kaltura-x264
+Requires: libvpx >= 1.3.0
 
 %description
 FFmpeg is a very fast video and audio converter. It can also grab from a
@@ -123,10 +114,11 @@ Install this package if you want to compile apps with ffmpeg support.
 %prep
 %setup -qn ffmpeg-%{version}
 
-sed -i 's|gsm.h|gsm/gsm.h|' configure libavcodec/libgsm.c
 
 %build
 export CFLAGS="%{optflags}"
+
+
 ./configure \
     --prefix="%{base_prefix}-%{version}" \
     --libdir="%{base_prefix}-%{version}/lib" \
@@ -140,52 +132,61 @@ export CFLAGS="%{optflags}"
 %endif
     --extra-cflags="%{optflags} -fPIC -I/opt/kaltura/include" \
     --extra-ldflags="-L/opt/kaltura/lib" \
+    --disable-devices \
+    --enable-bzlib \
+    --enable-libgsm \
+    --enable-libmp3lame \
+    --enable-libschroedinger \
+    --enable-libtheora \
+    --enable-libvorbis \
+    --enable-libx264 \
+    --enable-libxvid \
+    --enable-filter=movie \
     --enable-avfilter \
-%{!?_without_schroedinger:--enable-libschroedinger} \
-%{!?_without_dc1394:--enable-libdc1394} \
-%{!?_without_gsm:--enable-libgsm} \
-%{!?_without_lame:--enable-libmp3lame} \
-%{!?_without_nut:--enable-libnut} \
-%{!?_without_opencore_amr:--enable-libopencore-amrnb --enable-libopencore-amrwb} \
-%{!?_without_rtmp: --enable-librtmp} \
-%{!?_without_speex:--enable-libspeex} \
-%{!?_without_theora:--enable-libtheora} \
-%{!?_without_vorbis: --enable-libvorbis} \
-%{!?_without_vpx: --enable-libvpx} \
-%{!?_without_x264:--enable-libx264} \
-%{!?_without_xvid:--enable-libxvid} \
-    --enable-gpl \
-%{!?_without_openjpeg:--enable-libopenjpeg} \
+    --enable-libopencore-amrnb \
+    --enable-libopencore-amrwb \
+    --enable-libopenjpeg \
+    --enable-libvpx \
+    --enable-libspeex \
+    --enable-libass \
     --enable-postproc \
     --enable-pthreads \
+    --enable-static \
     --enable-shared \
-    --enable-swscale \
-    --enable-vdpau \
+    --enable-gpl \
+     --disable-debug \
+    --disable-optimizations \
+--enable-gpl \
+--enable-pthreads \
+--enable-swscale \
+--enable-vdpau \
+--enable-bzlib \
+--disable-devices \
+--enable-filter=movie \
     --enable-version3 \
-    --enable-bzlib \
-    --disable-devices \
-    --enable-filter=movie \
-    --enable-x11grab
+--enable-indev=lavfi \
+--enable-x11grab
 
 %{__make} %{?_smp_mflags}
 
 %install
 %{__rm} -rf %{buildroot} _docs
 %{__make} install DESTDIR="%{buildroot}"
-
+cd tools && gcc qt-faststart.c -o qt-faststart
+mv qt-faststart %{buildroot}%{base_prefix}-%{version}/bin
+cd - 
 # Remove unwanted files from the included docs
 %{__cp} -a doc _docs
 %{__rm} -rf _docs/{Makefile,*.texi,*.pl}
 
 # The <postproc/postprocess.h> is now at <ffmpeg/postprocess.h>, so provide
 # a compatibility symlink
-%{__mkdir_p} %{buildroot}%{_includedir}/postproc/
-#%{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
-#cat > $RPM_BUILD_ROOT%{_sysconfdir}/profile.d/kaltura_ffmpeg-aux.sh << EOF
-#PATH=$PATH:%{base_prefix}-%{version}/bin
-#export PATH
-#EOF
-
+%{__mkdir_p} %{buildroot}%{base_prefix}-%{version}/include/postproc/
+%{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
+cat > $RPM_BUILD_ROOT%{_sysconfdir}/profile.d/kaltura_ffmpeg_aux.sh << EOF
+PATH=\$PATH:%{base_prefix}-%{version}/bin
+export PATH
+EOF
 %{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/ld.so.conf.d
 cat > $RPM_BUILD_ROOT%{_sysconfdir}/ld.so.conf.d/kaltura_ffmpeg_aux.conf << EOF
 %{base_prefix}-%{version}/lib
@@ -196,22 +197,27 @@ EOF
 
 %post
 /sbin/ldconfig
-chcon -t textrel_shlib_t %{prefix}/lib/libav{codec,device,format,util}.so.*.*.* &>/dev/null || :
+chcon -t textrel_shlib_t %{base_prefix}-%{version}/lib/libav{codec,device,format,util}.so.*.*.* &>/dev/null || :
 ln -fs %{base_prefix}-%{version}/bin/ffmpeg /opt/kaltura/bin/ffmpeg-aux 
 
 %postun 
 /sbin/ldconfig
 if [ "$1" = 0 ] ; then
 	rm -f /opt/kaltura/bin/ffmpeg-aux
+	rm -f /opt/kaltura/bin/qt-faststart
 fi
+
 
 %files
 %defattr(-, root, root, 0755)
-%doc Changelog COPYING* CREDITS INSTALL MAINTAINERS README
+%doc Changelog COPYING* CREDITS INSTALL MAINTAINERS RELEASE README
 %doc %{base_prefix}-%{version}/share/man/man1
-#%config %{_sysconfdir}/profile.d/kaltura_ffmpeg-aux.sh
+%config %{_sysconfdir}/profile.d/kaltura_ffmpeg_aux.sh
 %config %{_sysconfdir}/ld.so.conf.d/kaltura_ffmpeg_aux.conf
+#%{base_prefix}-%{version}/bin/ffprobe
 %{base_prefix}-%{version}/bin/*
+#%{base_prefix}-%{version}/bin/ffplay
+#%{base_prefix}-%{version}/bin/ffserver
 %{base_prefix}-%{version}/share/ffmpeg/
 %{base_prefix}-%{version}/lib/*.so*
 %{base_prefix}-%{version}/lib/pkgconfig/
@@ -227,27 +233,32 @@ fi
 %{base_prefix}-%{version}/include/libavformat/
 %{base_prefix}-%{version}/include/libavutil/
 %{base_prefix}-%{version}/include/libswscale/
-%{base_prefix}-%{version}/lib/libavcodec.a
-%{base_prefix}-%{version}/lib/libavdevice.a
-%{base_prefix}-%{version}/lib/libavfilter.a
-%{base_prefix}-%{version}/lib/libavformat.a
-%{base_prefix}-%{version}/lib/libavutil.a
-%{base_prefix}-%{version}/lib/libswscale.a
-%{base_prefix}-%{version}/lib/libavcodec.so
-%{base_prefix}-%{version}/lib/libavdevice.so
-%{base_prefix}-%{version}/lib/libavfilter.so
-%{base_prefix}-%{version}/lib/libavformat.so
-%{base_prefix}-%{version}/lib/libavutil.so
-%{base_prefix}-%{version}/lib/libswscale.so
+#%{base_prefix}-%{version}/lib/libavcodec.a
+#%{base_prefix}-%{version}/lib/libavdevice.a
+#%{base_prefix}-%{version}/lib/libavfilter.a
+#%{base_prefix}-%{version}/lib/libavformat.a
+#%{base_prefix}-%{version}/lib/libavutil.a
+#%{base_prefix}-%{version}/lib/libswscale.a
+#%{base_prefix}-%{version}/lib/libavcodec.so
+#%{base_prefix}-%{version}/lib/libavdevice.so
+#%{base_prefix}-%{version}/lib/libavfilter.so
+#%{base_prefix}-%{version}/lib/libavformat.so
+#%{base_prefix}-%{version}/lib/libavutil.so
+#%{base_prefix}-%{version}/lib/libswscale.so
+%{base_prefix}-%{version}/lib/*so*
 %{base_prefix}-%{version}/lib/pkgconfig/libavcodec.pc
 %{base_prefix}-%{version}/lib/pkgconfig/libavdevice.pc
 %{base_prefix}-%{version}/lib/pkgconfig/libavfilter.pc
 %{base_prefix}-%{version}/lib/pkgconfig/libavformat.pc
 %{base_prefix}-%{version}/lib/pkgconfig/libavutil.pc
 %{base_prefix}-%{version}/lib/pkgconfig/libswscale.pc
+%{base_prefix}-%{version}/share
 
 %changelog
-* Sun Jan 12 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.1.1-2
+* Thu Oct 15 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 2.1.3-1
+- Upgraded to 2.1.3
+
+* Sun Jan 12 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 0.6-2
 - Remove symlink to /opt/kaltura/bin at %%postun.
 
 * Wed Dec 25 2013 Jess Portnoy <jess.portnoy@kaltura.com> - 0.6-1
