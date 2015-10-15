@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.28
-Release: 19
+Release: 20
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -82,6 +82,9 @@ find %{_sysconfdir}/logrotate.d -type l -name "kaltura_*" -exec rm {} \;
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Thu Oct 15 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.28-20
+- Activate populate monit config.
+
 * Wed Oct 7 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.28-19
 - if a CA cert was provided, use -CAfile when execing openssl verify.
 
