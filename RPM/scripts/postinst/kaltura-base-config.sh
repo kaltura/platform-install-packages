@@ -20,7 +20,7 @@ verify_user_input()
         ANSFILE=$1
         . $ANSFILE
         RC=0
-        for VAL in TIME_ZONE KALTURA_FULL_VIRTUAL_HOST_NAME KALTURA_VIRTUAL_HOST_NAME DB1_HOST DB1_PORT DB1_NAME DB1_USER SERVICE_URL SPHINX_SERVER1 SPHINX_SERVER2 DWH_HOST DWH_PORT SPHINX_DB_HOST SPHINX_DB_PORT ADMIN_CONSOLE_ADMIN_MAIL ADMIN_CONSOLE_PASSWORD SUPER_USER SUPER_USER_PASSWD CDN_HOST KALTURA_VIRTUAL_HOST_PORT DB1_PASS DWH_PASS PROTOCOL RED5_HOST USER_CONSENT VOD_PACKAGER_HOST VOD_PACKAGER_PORT IP_RANGE; do
+        for VAL in TIME_ZONE KALTURA_FULL_VIRTUAL_HOST_NAME KALTURA_VIRTUAL_HOST_NAME DB1_HOST DB1_PORT DB1_NAME DB1_USER SERVICE_URL SPHINX_SERVER1 SPHINX_SERVER2 DWH_HOST DWH_PORT SPHINX_DB_HOST SPHINX_DB_PORT ADMIN_CONSOLE_ADMIN_MAIL ADMIN_CONSOLE_PASSWORD SUPER_USER SUPER_USER_PASSWD CDN_HOST KALTURA_VIRTUAL_HOST_PORT DB1_PASS DWH_PASS PROTOCOL RED5_HOST USER_CONSENT VOD_PACKAGER_HOST VOD_PACKAGER_PORT IP_RANGE IS_SSL; do
                 if [ -z "${!VAL}" ];then
                         VALS="$VALS\n$VAL"
                         RC=1
@@ -99,7 +99,7 @@ else
                 get_tracking_consent
         fi
         . $CONSENT_FILE
-	get_newsletter_consent
+	# get_newsletter_consent
        # echo "Welcome to Kaltura Server $DISPLAY_NAME post install setup.
 echo -e "\n${CYAN}In order to finalize the system configuration, please input the following:
 
@@ -341,6 +341,14 @@ HTML5_VER="`rpm -qa kaltura-html5lib --queryformat %{version}`"
 create_answer_file $POST_INST_MAIL_TMPL
 APP_REMOTE_ADDR_HEADER_SALT=`echo $SERVICE_URL|base64 -w0`
 
+if [ "$IS_SSL" == 'Y' ];then
+        PROTOCOL="https"
+else
+        PROTOCOL="http"
+fi
+SERVICE_URL="$PROTOCOL://$KALTURA_FULL_VIRTUAL_HOST_NAME"
+echo "service URL is: $SERVICE_URL"
+
 # Now we will sed.
 
 for TMPL_CONF_FILE in $CONF_FILES;do
@@ -437,13 +445,13 @@ PLAY_PARTNER_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c20`
 HASHED_PLAY_PARTNER_SECRET=`echo $PLAY_PARTNER_SECRET|md5sum`
 PLAY_PARTNER_SECRET=`echo $HASHED_PLAY_PARTNER_SECRET=|awk -F " " '{print $1}'`
 
-if [ "$IS_SSL" == 'Y' ];then
-        PROTOCOL="https"
-else
-        PROTOCOL="http"
-fi
-SERVICE_URL="$PROTOCOL://$KALTURA_FULL_VIRTUAL_HOST_NAME"
-echo "service URL is: $SERVICE_URL"
+# if [ "$IS_SSL" == 'Y' ];then
+#         PROTOCOL="https"
+# else
+#         PROTOCOL="http"
+# fi
+# SERVICE_URL="$PROTOCOL://$KALTURA_FULL_VIRTUAL_HOST_NAME"
+# echo "service URL is: $SERVICE_URL"
 
 # Dropping the port when it's a standard one
 if [ "$KALTURA_VIRTUAL_HOST_PORT" -eq 443 -o "$KALTURA_VIRTUAL_HOST_PORT" -eq 80 ];then
@@ -478,7 +486,7 @@ ${CYAN}Generating client libs...
 This can take a few minutes to complete, see log at $BASE_DIR/log/generate.php.log.
 ${NORMAL}
         "
-        php $BASE_DIR/app/generator/generate.php >> $BASE_DIR/log/generate.php.log 2>&1 && touch "$BASE_DIR/app/base-config-generator.lock"
+         php $BASE_DIR/app/generator/generate.php >> $BASE_DIR/log/generate.php.log 2>&1 && touch "$BASE_DIR/app/base-config-generator.lock"
 fi
 
 set +e
