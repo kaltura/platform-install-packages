@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 10.21.0
-Release: 10
+Release: 11
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -310,6 +310,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Oct 19 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.21.0-11
+- https://kaltura.atlassian.net/wiki/display/MAN/Metadata+profile+is+currently+transforming+never+ends
+ 
 * Thu Oct 15 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 10.21.0-10
 - local patches to 04.*Params.ini no longer needed and in fact, cause an issue - back to using original from the server repo.
 

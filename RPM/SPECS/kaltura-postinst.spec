@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.28
-Release: 20
+Release: 21
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -82,6 +82,11 @@ find %{_sysconfdir}/logrotate.d -type l -name "kaltura_*" -exec rm {} \;
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Mon Oct 19 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.28-21
+- Replace @INSTALLED_HOSTNAME@ token for populate monit config
+- Symlink sphinx logrotate config to /etc/logrotate.d/
+- Check mysql connectivity during base-config and exit on failure.
+
 * Thu Oct 15 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.28-20
 - Activate populate monit config.
 
