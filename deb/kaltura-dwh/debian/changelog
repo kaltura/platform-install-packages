@@ -1,3 +1,9 @@
+kaltura-dwh (10.10.0-2) jupiter; urgency=low
+
+  * live entry aggregation ddl changes
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Thu, 15 Oct 2015 13:26:55 +0000
+
 kaltura-dwh (10.10.0-1) jupiter; urgency=low
 
   * fix call to send_install_becon()
