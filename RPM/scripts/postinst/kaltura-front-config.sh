@@ -307,6 +307,10 @@ chkconfig memcached on
 service memcached restart
 ln -sf $BASE_DIR/app/configurations/monit/monit.avail/httpd.rc $BASE_DIR/app/configurations/monit/monit.d/enabled.httpd.rc
 ln -sf $BASE_DIR/app/configurations/monit/monit.avail/memcached.rc $BASE_DIR/app/configurations/monit/monit.d/enabled.memcached.rc
+
+#Making sure that there are no PHP code errors in the hostname of html5.php
+sed -i -e "s#http://`hostname`#\"http://`hostname`\"\;#g" -e "s#https://`hostname`#\"https://`hostname`\"\;#g" $BASE_DIR/app/configurations/html5.php
+
 /etc/init.d/kaltura-monit restart
 	trap - ERR
 	echo "use kaltura" | mysql -h$DB1_HOST -u$DB1_USER -p$DB1_PASS -P$DB1_PORT $DB1_NAME 2> /dev/null
