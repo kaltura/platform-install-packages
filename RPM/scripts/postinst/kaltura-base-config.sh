@@ -127,6 +127,16 @@ ${NORMAL} "
                 KALTURA_VIRTUAL_HOST_PORT=80
         fi
 
+    if [ "$KALTURA_VIRTUAL_HOST_PORT" -ne 80 -a "$IS_SSL" != 'Y' -a "$IS_SSL" != 'N' ];then
+        echo -en "${CYAN}Vhost port will be set on [${YELLOW}$KALTURA_VIRTUAL_HOST_PORT${CYAN}]. Are you using https? (Y/N)${NORMAL}"
+        read -e IS_SSL
+        while [ "$IS_SSL" != 'Y' -a "$IS_SSL" != 'N' ];do
+            echo -en "${CYAN}Please provide either 'Y' or 'N'.\nAre you using https? (Y/N) ${NORMAL}"
+            read -e IS_SSL
+        done
+    fi
+
+
 	if [ "$KALTURA_VIRTUAL_HOST_PORT" -eq 80 -o "$KALTURA_VIRTUAL_HOST_PORT" -eq 443 ];then
 		KALTURA_FULL_VIRTUAL_HOST_NAME=$KALTURA_VIRTUAL_HOST_NAME
 	else
