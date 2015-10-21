@@ -81,7 +81,7 @@ fi
 
 
 mkdir -p $LOG_DIR/batch 
-rm -rf $BASE_DIR/app/cache/*
+find $APP_DIR/cache/ -type f -exec rm {} \;
 find $BASE_DIR/log -type d -exec chmod 775 {} \; 
 find $BASE_DIR/log -type f -exec chmod 664 {} \; 
 chown -R kaltura.apache $BASE_DIR/app/cache/ $BASE_DIR/log

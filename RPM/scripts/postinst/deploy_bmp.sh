@@ -54,12 +54,11 @@ echo -e "${CYAN}Generating clientlibs, please wait${NORMAL}"
 php $APP_DIR/generator/generate.php 
 # gen additional needed clients
 php /opt/kaltura/app/generator/generate.php pojo,bpmn
-rm -rf $APP_DIR/cache/*
+find $APP_DIR/cache/ -type f -exec rm {} \;
 php $APP_DIR/deployment/base/scripts/installPlugins.php 
 service httpd reload
 #we basically only need pojo,bpmn,testsClient but there is some bug with testsClient not being generated explicitely so lets generate all
 
-rm -rf $APP_DIR/cache/*
 #vi $APP_DIR/configurations/batch/batch.ini
 echo "[KAsyncIntegrate : JobHandlerWorker]
 id                                                                                                      = 570
