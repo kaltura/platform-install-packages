@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 11.0.0
-Release: 5
+Release: 9
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -65,7 +65,10 @@ mkdir -p $RPM_BUILD_ROOT%{prefix}/app
 mkdir -p $RPM_BUILD_ROOT%{prefix}/log
 mkdir -p $RPM_BUILD_ROOT%{prefix}/tmp
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web
-mkdir -p $RPM_BUILD_ROOT%{prefix}/app/cache
+for i in alpha api_v3 batch generator infra scripts sphinx testme thumb deploy testmeDoc html5;do
+	mkdir -p $RPM_BUILD_ROOT%{prefix}/app/cache/$i
+done
+
 mkdir -p $RPM_BUILD_ROOT%{prefix}/bin
 mkdir -p $RPM_BUILD_ROOT%{prefix}/lib
 mkdir -p $RPM_BUILD_ROOT%{prefix}/include
@@ -283,6 +286,7 @@ fi
 %{prefix}/app/start
 %{prefix}/app/vendor
 %{prefix}/app/tests
+%{prefix}/app/cache
 
 %config %{prefix}/app/configurations/*
 %config %{_sysconfdir}/profile.d/kaltura_base.sh
@@ -310,6 +314,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Wed Oct 21 2015 jess.portnoy@kaltura.com <Jess Portnoy> - 11.0.0-7
+- Pre create dirs under app/cache in order to set them to proper permissions
+
 * Thu Oct 15 2015 jess.portnoy@kaltura.com <Jess Portnoy> - 11.0.0-4
 - Trying to use current default 04.*Params.ini
 

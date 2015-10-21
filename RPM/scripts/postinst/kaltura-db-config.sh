@@ -166,7 +166,7 @@ EOF
 fi
 
 echo "Cleaning cache.."
-rm -rf $APP_DIR/cache/*
+find $APP_DIR/cache/ -type f -exec rm {} \;
 echo -e "${CYAN}Populating DB with data.. please wait..${NORMAL}"
 echo -e "${CYAN}Output for $APP_DIR/deployment/base/scripts/installPlugins.php being logged into $LOG_DIR/installPlugins.log ${NORMAL}"
 php $APP_DIR/deployment/base/scripts/installPlugins.php >> $LOG_DIR/installPlugins.log  2>&1
@@ -200,6 +200,7 @@ find  $WEB_DIR/content/generatedUiConf -type d -exec chmod 775 {} \;
 
 set +e
 rm -rf $BASE_DIR/cache/*
+find $APP_DIR/cache/ -type f -exec rm {} \;
 rm -f $APP_DIR/log/kaltura-*.log
 
 

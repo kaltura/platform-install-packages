@@ -143,7 +143,7 @@ if [ $? -ne 0 ];then
  #      send_install_becon kaltura-dwh $ZONE "install_fail: $OUT"
 fi
 #send_install_becon kaltura-dwh $ZONE install_success
-rm -rf $APP_DIR/cache/*
+find $APP_DIR/cache/ -type f -exec rm {} \;
 rm -f $APP_DIR/log/kaltura-*.log
 
 echo -e "${CYAN}
