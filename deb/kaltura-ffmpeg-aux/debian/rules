@@ -51,6 +51,7 @@ config.status: $(tree)
 	    --enable-libopenjpeg \
 	    --enable-libvpx \
 	    --enable-libspeex \
+	    --enable-libass \
 	    --enable-postproc \
 	    --enable-pthreads \
 	    --enable-static \
@@ -65,7 +66,7 @@ config.status: $(tree)
 	--enable-bzlib \
 	--disable-devices \
 	--enable-filter=movie \
-	    --enable-version3 \
+	--enable-version3 \
 	--enable-x11grab
 
 
@@ -85,7 +86,7 @@ clean:
 	dh_testdir
 	dh_testroot
 	rm -f build-stamp config.log
-	rm -f debian/memcached.init
+	rm -rf opt/ ffmpeg-$(FFMPEG_VERSION)/
 
 	dh_quilt_unpatch
 	dh_clean 
