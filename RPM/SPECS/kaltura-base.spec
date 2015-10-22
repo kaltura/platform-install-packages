@@ -11,12 +11,11 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 11.0.0
-Release: 9
+Release: 10
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
 Source4: emails_en.template.ini
-#Source7: dwh.template
 Source10: entry_and_uiconf_templates.tar.gz
 # fixes https://github.com/kaltura/platform-install-packages/issues/37
 Source11: clear_cache.sh
@@ -28,14 +27,9 @@ Source17: navigation.xml
 Source18: monit.phtml 
 Source19: IndexController.php
 Source20: sphinx.populate.template.rc
-#Source23: 04.flavorParams.ini
-#Source24: 04.liveParams.ini
 Source25: kaltura_populate.template
 Source26: kaltura_batch.template
 Source28: embedIframeJsAction.class.php
-#Source29: kaltura.ssl.conf.template
-#Source30: 01.kaltura_ce_tables.sql
-#Source31: 01.UserRole.99.template.xml 
 Source32: KDLOperatorFfmpeg1_1_1.php
 URL: https://github.com/kaltura/server/tree/%{codename}-%{version}
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -119,13 +113,9 @@ sed -i 's#\(@DWH_DIR@\)$#\1 -k %{prefix}/pentaho/pdi/kitchen.sh#g' $RPM_BUILD_RO
 rm $RPM_BUILD_ROOT%{prefix}/app/generator/sources/android/DemoApplication/libs/libWVphoneAPI.so
 rm $RPM_BUILD_ROOT%{prefix}/app/configurations/.project
 rm $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_content/04.dropFolder.-4.template.xml
-# see https://github.com/kaltura/platform-install-packages/issues/58 - these are taken care of on lines 139 though 144:
 
 # we bring our own for kaltura-front and kaltura-batch.
 cp %{SOURCE4} $RPM_BUILD_ROOT%{prefix}/app/batch/batches/Mailer/emails_en.template.ini
-#cp %{SOURCE7} $RPM_BUILD_ROOT%{prefix}/app/configurations/cron/dwh.template
-#cp %{SOURCE23} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_data/
-#cp %{SOURCE24} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_data/
 cp %{SOURCE11} $RPM_BUILD_ROOT%{prefix}/app/alpha/crond/kaltura/clear_cache.sh
 mkdir -p $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail
 cp %{SOURCE13} $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/
@@ -139,7 +129,6 @@ cp $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.d/percona.template.rc
 rm $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.d/*template*
 cp %{SOURCE25} $RPM_BUILD_ROOT%{prefix}/app/configurations/logrotate/
 cp %{SOURCE26} $RPM_BUILD_ROOT%{prefix}/app/configurations/logrotate/
-#cp %{SOURCE27} $RPM_BUILD_ROOT%{prefix}/app/alpha/apps/kaltura/modules/kmc/templates/
 
 
 # David Bezemer's Admin console and monit patches:
@@ -148,11 +137,8 @@ cp %{SOURCE18} $RPM_BUILD_ROOT%{prefix}/app/admin_console/views/scripts/index/mo
 cp %{SOURCE19} $RPM_BUILD_ROOT%{prefix}/app/admin_console/controllers/IndexController.php
 # patch for auto embed to work, should be dropped when core merge.
 cp %{SOURCE28} $RPM_BUILD_ROOT%{prefix}/app/alpha/apps/kaltura/modules/extwidget/actions/embedIframeJsAction.class.php
-# tmp patch due to https://github.com/kaltura/platform-install-packages/issues/367
-# cp %{SOURCE29} $RPM_BUILD_ROOT%{prefix}/app/configurations/apache/
 # we bring a1nother in kaltura-batch
 rm $RPM_BUILD_ROOT%{prefix}/app/configurations/batch/batch.ini.template
-#cp %{SOURCE31} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_content/01.UserRole.99.template.xml
 cp %{SOURCE32} $RPM_BUILD_ROOT%{prefix}/app/infra/cdl/kdl/KDLOperatorFfmpeg1_1_1.php
 
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content
@@ -252,8 +238,6 @@ if [ "$1" = 2 ];then
 		php %{prefix}/app/deployment/updates/update.php -i -d >> /opt/kaltura/log/kalt_up.log 2>&1
 		php %{prefix}/app/deployment/updates/update.php -i -s >> /opt/kaltura/log/kalt_up.log 2>&1
 		php %{prefix}/app/deployment/base/scripts/installPlugins.php >> /opt/kaltura/log/kalt_up.log 2>&1
-	#	#php %{prefix}/app/tests/standAloneClient/exec.php %{prefix}/app/tests/standAloneClient/emailDropFolderFileFailedStatus.xml
-	#	php %{prefix}/app/deployment/updates/scripts/2014_05_27_create_delivery_profiles.php  >> /opt/kaltura/log/kalt_up.log 2>&1
 
 	fi
 
