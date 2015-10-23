@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.35.5
+Version: v2.36
 Release: 1
 Epoch:0 
 License: AGPLv3+
@@ -32,6 +32,7 @@ Source21: kaltura-html5lib-v2.31.tar.gz
 Source22: kaltura-html5lib-v2.32.1.tar.gz
 Source23: kaltura-html5lib-v2.33.tar.gz
 Source24: kaltura-html5lib-v2.34.tar.gz
+Source25: kaltura-html5lib-v2.35.5.tar.gz
 
 URL: https://github.com/kaltura/mwEmbed 
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -78,10 +79,11 @@ tar zxf %{SOURCE21} -C %{_builddir}/
 tar zxf %{SOURCE22} -C %{_builddir}/
 tar zxf %{SOURCE23} -C %{_builddir}/
 tar zxf %{SOURCE24} -C %{_builddir}/
+tar zxf %{SOURCE25} -C %{_builddir}/
 
 %install
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib
-for i in v2.1.1 v2.3 v2.4 v2.6 v2.9 v2.14 v2.15 v2.18.5 v2.20 v2.21 v2.22 v2.23 v2.24 v2.25 v2.26 v2.27 v2.28 v2.29 v2.30 v2.31 v2.32.1 v2.33 v2.34 %{version};do
+for i in v2.1.1 v2.3 v2.4 v2.6 v2.9 v2.14 v2.15 v2.18.5 v2.20 v2.21 v2.22 v2.23 v2.24 v2.25 v2.26 v2.27 v2.28 v2.29 v2.30 v2.31 v2.32.1 v2.33 v2.34 v2.35.5 %{version};do
 	cp -r %{_builddir}/%{name}-$i $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i
 	ln -sf %{prefix}/app/configurations/html5.php $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i/LocalSettings.php 
 	mkdir $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i/cache
@@ -101,6 +103,43 @@ find /opt/kaltura/web/html5/html5lib -type d -name cache -exec chown -R 48 {} \;
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Thu Oct 22 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v2.36-1
+- SUP-5808 - Watermark test page uses outdated attribute names
+- SUP-5902 - Video Invisible For Contrast Function of Windows OS
+- FEC-3786 - Captions- 'Set as default' button does not work
+- FEC-4162 - Channel playlist - playlist button look disabled in live event that had not start
+- SUP-5515 - VPAID Overlay positioning issue
+- KMS-8968 - In Video Quizzes: Questions are not pop-upped in youtube entry
+- KMS-8929 - Channel Playlist - when Live/Webcast Live event should start to play, all playlists entries displayed grey out
+- FEC-4155 - regression : HLSMultiAudioFlashTest test page not working
+- FEC-3938 - Start Over + Catchup + VOD test support
+- FEC-4055 - Android not being able to play stream on Onprem solution, and works fine on SaaS
+- SUP-5971 - [2.34 Regression] EmbedPlayer.EnableIpadHTMLControls=false no longer shows native controls
+- FEC-4162 - Channel playlist - playlist button look disabled in live event that had not start
+- FEC-4151 - v2.35 Error: Using non-prodcution version of kaltura player library.
+- FEC-4179 - airPlay plugin doesn't work
+- FEC-4080 - Kaltura Live with DVR through HLS failed to be load
+- FEC-4200 - Channel playlist: No Vast pre-roll playing before LC entries on iPad
+- FEC-4219 - Channel playlist: YouTube entry failed to be start on iPhone if previous entry also has been YouTube
+- FEC-3127 - Playlist should support playlist scroll to current entry
+- FEC-4255 - Audio starting no from beginning for specific customer's stream
+- FEC-4219 - Channel playlist: YouTube entry failed to be start on iPhone if previous entry also has been YouTube
+- FEC-4211 - Seek is not not released if performing seek to current position
+- FEC-4185 - omniture: name of ad is not reported in the omniture events (vast)
+- WEBC-627 - Support multiple presenters/moderators
+- FEC-4258 - Google Analytics playr plug-in - setAlllowLinker attribute support
+- FEC-3127 - Playlist should support playlist scroll to current entry
+- FEC-3967 - scubber doesn't make any progress when playing the AES stream
+- FEC-4297 - Playlist with DFP: after seek video, possible to select other entry during Ad that causes to unexpected behavior
+- Enable suppressing non production URLs error message
+- New Chromecast custom receiver app
+- Youbora fixes
+- Smart Client fixes
+- New HLS plugin
+- Correcting Impression and Tracking URL calling for multiple Vast Wrapper feeds.
+- Channel playlist dual screen support
+- Changed checking for Vast Element in ad XML to explicitely look for an element node.
+
 * Thu Oct 8 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v2.35.5-1
 - IVQ release
 
