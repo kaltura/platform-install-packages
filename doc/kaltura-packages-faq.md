@@ -146,7 +146,8 @@ Then, update sha1_password and salt to read:
 This should reset your passwd to 'admin123!'
 
 ### kmc is routed to a SSL link
-If you access /kmc and get routed to https://vod.linnovate.net/index.php/kmc/kmc4 (wven if you prompted to work in non SSL mode...
+If you try to access /kmc and get routed to https://vod.linnovate.net/index.php/kmc/kmc4 -
+(even if you prompted to work in non SSL mode...
 
 run the following commands...
 ```
