@@ -309,7 +309,7 @@ ln -sf $BASE_DIR/app/configurations/monit/monit.avail/httpd.rc $BASE_DIR/app/con
 ln -sf $BASE_DIR/app/configurations/monit/monit.avail/memcached.rc $BASE_DIR/app/configurations/monit/monit.d/enabled.memcached.rc
 
 #Making sure that there are no PHP code errors in the hostname of html5.php
-sed -i -e "s#http://`hostname`#\"http://`hostname`\"\;#g" -e "s#https://`hostname`#\"https://`hostname`\"\;#g" $BASE_DIR/app/configurations/html5.php
+sed -i "s#$SERVICE_URL#\"$SERVICE_URL\"\;#g" $BASE_DIR/app/configurations/html5.php
 
 /etc/init.d/kaltura-monit restart
 	trap - ERR
