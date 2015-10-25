@@ -1,3 +1,43 @@
+kaltura-html5lib (2.36-1) kajam; urgency=low
+
+  * SUP-5808 - Watermark test page uses outdated attribute names
+  * SUP-5902 - Video Invisible For Contrast Function of Windows OS
+  * FEC-3786 - Captions- 'Set as default' button does not work
+  * FEC-4162 - Channel playlist - playlist button look disabled in live event that had not start
+  * SUP-5515 - VPAID Overlay positioning issue
+  * KMS-8968 - In Video Quizzes: Questions are not pop-upped in youtube entry
+  * KMS-8929 - Channel Playlist - when Live/Webcast Live event should start to play, all playlists entries displayed grey out
+  * FEC-4155 - regression : HLSMultiAudioFlashTest test page not working
+  * FEC-3938 - Start Over + Catchup + VOD test support
+  * FEC-4055 - Android not being able to play stream on Onprem solution, and works fine on SaaS
+  * SUP-5971 - [2.34 Regression] EmbedPlayer.EnableIpadHTMLControls=false no longer shows native controls
+  * FEC-4162 - Channel playlist - playlist button look disabled in live event that had not start
+  * FEC-4151 - v2.35 Error: Using non-prodcution version of kaltura player library.
+  * FEC-4179 - airPlay plugin doesn't work
+  * FEC-4080 - Kaltura Live with DVR through HLS failed to be load
+  * FEC-4200 - Channel playlist: No Vast pre-roll playing before LC entries on iPad
+  * FEC-4219 - Channel playlist: YouTube entry failed to be start on iPhone if previous entry also has been YouTube
+  * FEC-3127 - Playlist should support playlist scroll to current entry
+  * FEC-4255 - Audio starting no from beginning for specific customer's stream
+  * FEC-4219 - Channel playlist: YouTube entry failed to be start on iPhone if previous entry also has been YouTube
+  * FEC-4211 - Seek is not not released if performing seek to current position
+  * FEC-4185 - omniture: name of ad is not reported in the omniture events (vast)
+  * WEBC-627 - Support multiple presenters/moderators
+  * FEC-4258 - Google Analytics playr plug-in - setAlllowLinker attribute support
+  * FEC-3127 - Playlist should support playlist scroll to current entry
+  * FEC-3967 - scubber doesn't make any progress when playing the AES stream
+  * FEC-4297 - Playlist with DFP: after seek video, possible to select other entry during Ad that causes to unexpected behavior
+  * Enable suppressing non production URLs error message
+  * New Chromecast custom receiver app
+  * Youbora fixes
+  * Smart Client fixes
+  * New HLS plugin
+  * Correcting Impression and Tracking URL calling for multiple Vast Wrapper feeds.
+  * Channel playlist dual screen support
+  * Changed checking for Vast Element in ad XML to explicitely look for an element node.
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Fri, 23 Oct 2015 12:39:51 +0000
+
 kaltura-html5lib (2.35.5-1) jupiter; urgency=low
 
   * IVQ release
