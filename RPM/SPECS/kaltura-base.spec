@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 11.0.0
-Release: 11
+Release: 12
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -298,6 +298,10 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Sun Oct 25 2015 jess.portnoy@kaltura.com <Jess Portnoy> - 11.0.0-12
+- SUP-6102 - Default Metadata not working via Krecord (BB/ KMS)
+- PLAT-3920 - add Like->list
+
 * Wed Oct 21 2015 jess.portnoy@kaltura.com <Jess Portnoy> - 11.0.0-7
 - Pre create dirs under app/cache in order to set them to proper permissions
 
