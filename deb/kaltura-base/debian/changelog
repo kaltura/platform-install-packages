@@ -1,3 +1,10 @@
+kaltura-base (11.0.0-2) kajam; urgency=low
+
+  * SUP-6102 - Default Metadata not working via Krecord (BB/ KMS)
+  * PLAT-3920 - add Like->list
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Sun, 25 Oct 2015 10:43:03 +0000
+
 kaltura-base (11.0.0-1) kajam; urgency=low
 
   * Switching to 11.0.0
