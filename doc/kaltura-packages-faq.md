@@ -144,3 +144,17 @@ Then, update sha1_password and salt to read:
                salt: a6a3209b8827759fa4286d87a33f99df
 
 This should reset your passwd to 'admin123!'
+
+### kmc is routed to a SSL link
+If you access /kmc and get routed to https://vod.linnovate.net/index.php/kmc/kmc4 (wven if you prompted to work in non SSL mode...
+
+run the following commands...
+```
+  mysql kaltura
+  select id from permission WHERE permission.NAME='FEATURE_KMC_ENFORCE_HTTPS';
+```
+If you get a response use that in the next query
+```
+  delete from permission where id = NUM_YOU_GOT_ABOVE
+```
+
