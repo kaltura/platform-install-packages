@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.29
-Release: 9
+Release: 10
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -82,6 +82,9 @@ find %{_sysconfdir}/logrotate.d -type l -name "kaltura_*" -exec rm {} \;
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Wed Oct 28 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.29-10
+- Added -f to curl command testing connectivity to $SERVICE_URL.
+
 * Wed Oct 21 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.29-5
 - when cleaning cache, only remove files, not dirs.
 

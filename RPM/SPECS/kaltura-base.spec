@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 11.1.0
-Release: 1
+Release: 3
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -27,7 +27,7 @@ Source17: navigation.xml
 Source18: monit.phtml 
 Source19: IndexController.php
 Source20: sphinx.populate.template.rc
-#Source25: kaltura_populate.template
+Source25: kaltura_populate.template
 Source26: kaltura_batch.template
 Source28: embedIframeJsAction.class.php
 Source32: KDLOperatorFfmpeg1_1_1.php
@@ -127,7 +127,7 @@ cp $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.d/mysqld.template.rc 
 cp $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.d/mariadb.template.rc $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/mariadb.rc
 cp $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.d/percona.template.rc $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/percona.rc
 rm $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.d/*template*
-#cp %{SOURCE25} $RPM_BUILD_ROOT%{prefix}/app/configurations/logrotate/
+cp %{SOURCE25} $RPM_BUILD_ROOT%{prefix}/app/configurations/logrotate/
 cp %{SOURCE26} $RPM_BUILD_ROOT%{prefix}/app/configurations/logrotate/
 
 

@@ -130,7 +130,7 @@ check_connectivity()
 		MSG="$MSG\n${BRIGHT_RED}ERROR: Couldn't connect to Sphinx with mysql -h$SPHINX_SERVER -P9312.${NORMAL}"
 		RC=1
 	fi
-	curl "$SERVICE_URL/api_v3/index.php?service=system&action=ping" -k  > /dev/null 2>&1
+	curl -f "$SERVICE_URL/api_v3/index.php?service=system&action=ping" -k  > /dev/null 2>&1
 	if [ $? -ne 0 ];then
 		MSG="$MSG\n${BRIGHT_RED}ERROR: Couldn't make an API request to $SERVICE_URL/api_v3/index.php?service=system&action=ping.${NORMAL}"
 		RC=1
