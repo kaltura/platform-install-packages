@@ -371,8 +371,8 @@ if [ "$1" = "configure" ]; then
 
 
         # these two have passwds in them.
-        chown $KALTURA_USER.$APACHE_USER $BASE_DIR/app/configurations/system.ini $BASE_DIR/app/configurations/db.ini
-        chmod 640 $BASE_DIR/app/configurations/system.ini $BASE_DIR/app/configurations/db.ini
+        chown $KALTURA_USER.$APACHE_USER $BASE_DIR/app/configurations/system.ini $BASE_DIR/app/configurations/db.ini $BASE_DIR/app/configurations/batch/batch.ini
+        chmod 640 $BASE_DIR/app/configurations/system.ini $BASE_DIR/app/configurations/db.ini $BASE_DIR/app/configurations/batch/batch.ini
 
 
         # gen secrets
