@@ -12,8 +12,7 @@ Vendor: Kaltura, Inc.
 
 Source: %{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
-BuildRequires:kaltura-ffmpeg-aux-devel
-Requires: kaltura-ffmpeg-aux = 0.6
+BuildRequires:kaltura-ffmpeg-aux-devel = 0.6
 
 %description
 Tool for HLS segmentation 
