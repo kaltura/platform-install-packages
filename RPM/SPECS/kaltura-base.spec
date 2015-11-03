@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 11.1.0
-Release: 7
+Release: 8
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -298,6 +298,11 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Nov 2 2015 jess.portnoy@kaltura.com <Jess Portnoy> - 11.1.0-8
+- Fix manual HLS live streaming:
+  https://github.com/kaltura/server/pull/3430
+  http://forum.kaltura.org/t/manual-live-stream-not-happening/3782/11
+
 * Mon Nov 2 2015 jess.portnoy@kaltura.com <Jess Portnoy> - 11.1.0-7
 - https://github.com/kaltura/server/pull/3420
 - https://github.com/kaltura/server/pull/3421
