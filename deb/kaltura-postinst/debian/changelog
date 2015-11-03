@@ -1,3 +1,9 @@
+kaltura-postinst (1.0.29-1) kajam; urgency=low
+
+  * use -f when calling curl to verify connectivity to $SERVICE_URL/api_v3 
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Wed, 28 Oct 2015 11:46:41 +0000
+
 kaltura-postinst (1.0.28-1) jupiter; urgency=low
 
   * dropfolder test: delete() afterwards.
