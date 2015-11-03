@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.29
-Release: 10
+Release: 12
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -82,6 +82,14 @@ find %{_sysconfdir}/logrotate.d -type l -name "kaltura_*" -exec rm {} \;
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Thu Oct 29 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.29-12
+- Actually 600 is hardly good since apache and kaltura users need to read many of these files.
+Set proper ownership and permissions on sensitive files instead.
+
+* Thu Oct 29 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.29-11
+- Set config files permissions to 600 since some of them contain sensitive info, such as -1's admin secret.
+Templates can still have default umask since there's nothing secret there.
+
 * Wed Oct 28 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.29-10
 - Added -f to curl command testing connectivity to $SERVICE_URL.
 
