@@ -298,7 +298,15 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Mon Nov 2 2015 jess.portnoy@kaltura.com <Jess Portnoy> - 11.1.0-8
+* Thu Nov 5 2015 jess.portnoy@kaltura.com <Jess Portnoy> - 11.1.0-10
+- SUP-5976 - Channel - kuser_id is '0' Causing Redundant Errors Sent to Users
+- SUP-4924 - API changes 'KalturaFlavorAssetFilter'
+- SUP-6003 - Setting the frameRate parameter to float
+- PLAT-3078 - TestMe should output JSON rather than XML
+- PLAT-4067 - Like->List - adding "creation-date" field 
+- PLAT-3593 - DVR refactoring
+
+* Tue Nov 3 2015 jess.portnoy@kaltura.com <Jess Portnoy> - 11.1.0-8
 - Fix manual HLS live streaming:
   https://github.com/kaltura/server/pull/3430
   http://forum.kaltura.org/t/manual-live-stream-not-happening/3782/11
