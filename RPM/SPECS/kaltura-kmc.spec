@@ -1,7 +1,7 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmc
-Version: v5.39.9
-Release: 3
+Version: v5.39.10
+Release: 1
 Summary: Kaltura Management Console
 
 Group: System Management	
@@ -78,6 +78,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Thu Nov 5 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v5.39.10-1
+- SUP-5939 - Missing players when listing players for syndication
+
 * Fri Oct 23 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v5.39.9-3
 - Ver bounce of HTML5 to v2.36
 
