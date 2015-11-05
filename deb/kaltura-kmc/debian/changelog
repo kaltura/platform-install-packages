@@ -1,4 +1,10 @@
-kaltura-kmc (5.39.9-4) UNRELEASED; urgency=low
+kaltura-kmc (5.39.10-1) kajam; urgency=low
+
+  * SUP-5939 - Missing players when listing players for syndication
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Thu, 05 Nov 2015 12:56:01 +0000
+
+kaltura-kmc (5.39.9-4) jupiter; urgency=low
 
   * Version bounce to align with kaltura-html5lib v2.36. 
 

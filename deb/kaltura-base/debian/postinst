@@ -224,7 +224,7 @@ if [ "$1" = "configure" ]; then
                 db_go || true
                 db_get 'kaltura-base/admin_console_passwd'
                 ADMIN_CONSOLE_PASSWORD=$RET
-                if echo $ADMIN_CONSOLE_PASSWORD | grep -q "/" ;then
+                if echo $ADMIN_CONSOLE_PASSWORD | grep -q "/\|&" ;then
                         db_input critical kaltura-base/passwd_invalid_char || true
                         db_go
                         unset ADMIN_CONSOLE_PASSWORD
