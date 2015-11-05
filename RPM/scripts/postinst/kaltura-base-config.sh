@@ -231,8 +231,8 @@ ${NORMAL} "
         while [ -z "$ADMIN_CONSOLE_PASSWORD" ];do
                 echo -en "${CYAN}Admin user login password (must be minimum 8 chars and include at least one of each: upper-case, lower-case, number and a special character):${NORMAL}"
                 read -s ADMIN_CONSOLE_PASSWORD
-                if echo $ADMIN_CONSOLE_PASSWORD | grep -q "/" ;then
-                        echo -en "${BRIGHT_RED}ERROR: Passwd can't have the '/' char in it. Please re-input.${NORMAL}"
+                if echo $ADMIN_CONSOLE_PASSWORD | grep -q "/\|&" ;then
+                        echo -en "${BRIGHT_RED}ERROR: Passwd can't have the '/' or '&' chars in it. Please re-input.${NORMAL}"
                         unset ADMIN_CONSOLE_PASSWORD
                 fi
         done
