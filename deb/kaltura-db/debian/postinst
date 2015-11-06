@@ -187,10 +187,10 @@ EOF
 		php $APP_DIR/deployment/base/scripts/insertPermissions.php -d $APP_DIR/deployment/permissions/ssl/ > /dev/null 2>&1
 	fi
 
-	KMC_VERSION=`grep "^kmc_version" /opt/kaltura/app/configurations/local.ini|awk -F "=" '{print $2}'|sed 's@\s*@@g'`
+	KMC_VERSION=`grep "^kmc_version" $APP_DIR/configurations/local.ini|awk -F "=" '{print $2}'|sed 's@\s*@@g'`
 	echo -e "${BRIGHT_BLUE}Generating UI confs..${NORMAL}"
 	php $APP_DIR/deployment/uiconf/deploy_v2.php --ini=$WEB_DIR/flash/kmc/$KMC_VERSION/config.ini --user=www-data >> $LOG_DIR/deploy_v2.log  2>&1
-	STUDIO_VERSION=`grep "^studio_version" /opt/kaltura/app/configurations/local.ini|awk -F "=" '{print $2}'|sed 's@\s*@@g'`
+	STUDIO_VERSION=`grep "^studio_version" $APP_DIR/configurations/local.ini|awk -F "=" '{print $2}'|sed 's@\s*@@g'`
 	if [ -r "$BASE_DIR/apps/studio/$STUDIO_VERSION/studio.ini" ];then
 		echo -e "${BRIGHT_BLUE}Generating Studio UI confs..${NORMAL}"
 		php $APP_DIR/deployment/uiconf/deploy_v2.php --ini=$BASE_DIR/apps/studio/$STUDIO_VERSION/studio.ini --user=www-data >> $LOG_DIR/deploy_v2.log  2>&1
