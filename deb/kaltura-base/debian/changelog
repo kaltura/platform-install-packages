@@ -1,3 +1,14 @@
+kaltura-base (11.1.0-2) kajam; urgency=low
+
+  * SUP-5976 - Channel - kuser_id is '0' Causing Redundant Errors Sent to Users
+  * SUP-4924 - API changes 'KalturaFlavorAssetFilter'
+  * SUP-6003 - Setting the frameRate parameter to float
+  * PLAT-3078 - TestMe should output JSON rather than XML
+  * PLAT-4067 - Like->List - adding "creation-date" field 
+  * PLAT-3593 - DVR refactoring
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 09 Nov 2015 10:27:39 +0000
+
 kaltura-base (11.1.0-1) kajam; urgency=low
 
   * Switching to 11.1.0
