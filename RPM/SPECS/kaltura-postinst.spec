@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.29
-Release: 13
+Release: 14
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -82,6 +82,10 @@ find %{_sysconfdir}/logrotate.d -type l -name "kaltura_*" -exec rm {} \;
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Mon Nov 9 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.29-14
+- Added Community survey URL to welcome message
+- Corrected other URLs to be over HTTPs
+
 * Thu Nov 5 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.29-13
 - Using '&' in the ADMIN_CONSOLE_PASSWORD will cause sed to incorrectly replace the token. There are plenty of other special chars which can be used so, rather than start escaping '&' in the original string, simply disallow it.
 

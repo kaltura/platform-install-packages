@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 11.1.0
-Release: 10
+Release: 11
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -298,6 +298,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Nov 9 2015 jess.portnoy@kaltura.com <Jess Portnoy> - 11.1.0-11
+- Final 11.1.0 release
+
 * Fri Nov 6 2015 jess.portnoy@kaltura.com <Jess Portnoy> - 11.1.0-10
 - SUP-5976 - Channel - kuser_id is '0' Causing Redundant Errors Sent to Users
 - SUP-4924 - API changes 'KalturaFlavorAssetFilter'
