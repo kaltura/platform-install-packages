@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.29
-Release: 15
+Release: 16
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -82,6 +82,9 @@ find %{_sysconfdir}/logrotate.d -type l -name "kaltura_*" -exec rm {} \;
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Mon Nov 16 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.29-16
+- Set SPHINX_SERVER2 to localhost if not specified.
+
 * Mon Nov 9 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.29-14
 - Added Community survey URL to welcome message
 - Corrected other URLs to be over HTTPs
