@@ -56,7 +56,7 @@ Description: Media Streaming Server hostname:
 
 Template: kaltura-base/second_sphinx_hostname
 Type: string
-Default:
+Default: 127.0.0.1
 Description: Secondary Sphinx hostname:
 
 Template: kaltura-base/second_sphinx_hostname
