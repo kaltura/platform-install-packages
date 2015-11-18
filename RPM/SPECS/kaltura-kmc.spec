@@ -1,7 +1,7 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmc
-Version: v5.39.10
-Release: 1
+Version: v5.39.11
+Release: 2
 Summary: Kaltura Management Console
 
 Group: System Management	
@@ -78,6 +78,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Wed Nov 18 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v5.39.11-1
+- SUP-4977 - Administration tab in KMC does not load on Mac in chrome, safari, or firefox
+
 * Thu Nov 5 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v5.39.10-1
 - SUP-5939 - Missing players when listing players for syndication
 

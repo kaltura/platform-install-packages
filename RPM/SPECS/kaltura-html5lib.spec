@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.36
+Version: v2.37
 Release: 1
 Epoch:0 
 License: AGPLv3+
@@ -33,6 +33,7 @@ Source22: kaltura-html5lib-v2.32.1.tar.gz
 Source23: kaltura-html5lib-v2.33.tar.gz
 Source24: kaltura-html5lib-v2.34.tar.gz
 Source25: kaltura-html5lib-v2.35.5.tar.gz
+Source26: kaltura-html5lib-v2.36.tar.gz
 
 URL: https://github.com/kaltura/mwEmbed 
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -54,7 +55,7 @@ For more information visit: http://corp.kaltura.com, http://www.kaltura.org and 
 This package installs the Kaltura HTML5 library.
 
 %prep
-%setup -q
+%setup -q 
 tar zxf %{SOURCE2} -C %{_builddir}/
 tar zxf %{SOURCE3} -C %{_builddir}/
 tar zxf %{SOURCE4} -C %{_builddir}/
@@ -80,10 +81,11 @@ tar zxf %{SOURCE22} -C %{_builddir}/
 tar zxf %{SOURCE23} -C %{_builddir}/
 tar zxf %{SOURCE24} -C %{_builddir}/
 tar zxf %{SOURCE25} -C %{_builddir}/
+tar zxf %{SOURCE26} -C %{_builddir}/
 
 %install
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib
-for i in v2.1.1 v2.3 v2.4 v2.6 v2.9 v2.14 v2.15 v2.18.5 v2.20 v2.21 v2.22 v2.23 v2.24 v2.25 v2.26 v2.27 v2.28 v2.29 v2.30 v2.31 v2.32.1 v2.33 v2.34 v2.35.5 %{version};do
+for i in v2.1.1 v2.3 v2.4 v2.6 v2.9 v2.14 v2.15 v2.18.5 v2.20 v2.21 v2.22 v2.23 v2.24 v2.25 v2.26 v2.27 v2.28 v2.29 v2.30 v2.31 v2.32.1 v2.33 v2.34 v2.35.5 v2.36 %{version};do
 	cp -r %{_builddir}/%{name}-$i $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i
 	ln -sf %{prefix}/app/configurations/html5.php $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i/LocalSettings.php 
 	mkdir $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i/cache
@@ -103,6 +105,15 @@ find /opt/kaltura/web/html5/html5lib -type d -name cache -exec chown -R 48 {} \;
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Wed Nov 18 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v2.37-1
+- SUP-5072 - YouTube player autoplay fails
+- FEC-4417 - IMA issue - When preroll ended the media content ended the player can't replay
+- FEC-4414 - Scrubber head is sometimes cut during playback in Chrome latest version
+- FEC-4413 - multiple "doStop" notifications causes the video to load in iOS mobile devices
+- SUP-6540 - Fallback from Flash to HTML5 v2.36 causes an endless wheel GUI issue
+- FEC-3844 - Rate selector: the video started to play at beginning, if seek it and after increase speed
+- SUP-6312 - mwe-embedplayer-no-source not respected
+
 * Thu Oct 22 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v2.36-1
 - SUP-5808 - Watermark test page uses outdated attribute names
 - SUP-5902 - Video Invisible For Contrast Function of Windows OS

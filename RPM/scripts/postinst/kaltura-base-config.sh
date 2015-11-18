@@ -295,11 +295,6 @@ ${NORMAL} "
         fi
 
 
-
-
-
-
-
 fi
 
 # check DB connectivity:
