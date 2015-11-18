@@ -1,8 +1,8 @@
 %define prefix /opt/kaltura 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
-Version: 1.0.29
-Release: 17
+Version: 1.0.30
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -82,6 +82,9 @@ find %{_sysconfdir}/logrotate.d -type l -name "kaltura_*" -exec rm {} \;
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Wed Nov 18 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.30-1
+- Output failure message in trap handler.
+
 * Mon Nov 16 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.29-16
 - Set SPHINX_SERVER2 to localhost if not specified.
 

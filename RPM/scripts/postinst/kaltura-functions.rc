@@ -293,11 +293,13 @@ my_trap_handler()
 	fi
 	if [ -d /opt/kaltura/log ];then
 		TAR_PATH=/opt/kaltura/log/log_`date +%d_%m_%y_%H_%M`.tar.gz	
-		echo -en "${BRIGHT_RED}$FAIL_MSG${NORMAL}
+                echo -en "
 
+${BRIGHT_RED}$MYSELF FAILED with: $LASTERR on line $LASTLINE${NORMAL}
 
-		"
-		echo "Archving logs to $TAR_PATH..."
+Archving logs to $TAR_PATH...
+"
+
 		mkdir -p /tmp/tmpdir_kaltura
 		cp /opt/kaltura/log/*log /tmp/tmpdir_kaltura
 		cd /tmp/tmpdir_kaltura
