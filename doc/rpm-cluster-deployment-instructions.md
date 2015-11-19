@@ -136,8 +136,8 @@ Note that you may choose different NFS settings which is fine so long as:
 
 Then set priviliges accordingly:
 ```
-# groupadd -r kaltura -g7373
-# useradd -M -r -u7373 -d /opt/kaltura -s /bin/bash -c "Kaltura server" -g kaltura kaltura
+# groupadd -r kaltura -g613
+# useradd -M -r -u613 -d /opt/kaltura -s /bin/bash -c "Kaltura server" -g kaltura kaltura
 # groupadd -g 48 -r apache
 # useradd -r -u 48 -g apache -s /sbin/nologin -d /var/www -c "Apache" apache
 # usermod -a -G kaltura apache
@@ -263,8 +263,8 @@ After installing the first cluster node, obtain the auto generated file placed u
 
 
 Front in Kaltura represents the machines hosting the user-facing components, including the Kaltura API, the KMC and Admin Console, MediaSpace and all client-side widgets. 
+In case you're using a self signed certificate, add the '-k' flag to the curl command (so the validity of the certificate wil be ignored)
 ```
-# rpm -Uhv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
 # yum install kaltura-postinst
 # /opt/kaltura/bin/kaltura-nfs-client-config.sh <NFS host> <domain> <nobody-user> <nobody-group>
 # yum install kaltura-front kaltura-widgets kaltura-html5lib kaltura-html5-studio kaltura-clipapp 
