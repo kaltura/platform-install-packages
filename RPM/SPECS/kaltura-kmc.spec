@@ -1,7 +1,7 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmc
 Version: v5.39.11
-Release: 2
+Release: 3
 Summary: Kaltura Management Console
 
 Group: System Management	
@@ -78,6 +78,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Fri Nov 20 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v5.39.11-3
+- Ver bounce of HTML5 to v2.37.1
+
 * Wed Nov 18 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v5.39.11-1
 - SUP-4977 - Administration tab in KMC does not load on Mac in chrome, safari, or firefox
 

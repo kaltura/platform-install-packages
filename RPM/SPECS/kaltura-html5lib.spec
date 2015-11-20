@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.37
+Version: v2.37.1
 Release: 1
 Epoch:0 
 License: AGPLv3+
@@ -105,7 +105,7 @@ find /opt/kaltura/web/html5/html5lib -type d -name cache -exec chown -R 48 {} \;
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
-* Wed Nov 18 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v2.37-1
+* Fri Nov 20 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v2.37.1-1
 - SUP-5072 - YouTube player autoplay fails
 - FEC-4417 - IMA issue - When preroll ended the media content ended the player can't replay
 - FEC-4414 - Scrubber head is sometimes cut during playback in Chrome latest version
