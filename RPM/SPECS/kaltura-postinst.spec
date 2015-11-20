@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.30
-Release: 1
+Release: 2
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -82,6 +82,9 @@ find %{_sysconfdir}/logrotate.d -type l -name "kaltura_*" -exec rm {} \;
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Fri Nov 20 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.30-2
+- Use 100 bytes instead of 20 when generating the partner secrets.
+
 * Wed Nov 18 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.30-1
 - Output failure message in trap handler.
 

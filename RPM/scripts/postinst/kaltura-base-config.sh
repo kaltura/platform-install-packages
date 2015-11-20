@@ -384,69 +384,69 @@ chmod 600 $BASE_DIR/app/configurations/monit/monit.conf
 
 
 # gen secrets
-ADMIN_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@#$%^*()_+-=" | head -c20`
+ADMIN_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@#$%^*()_+-=" | head -c100`
 HASHED_ADMIN_SECRET=`echo $ADMIN_SECRET|md5sum`
 ADMIN_SECRET=`echo $HASHED_ADMIN_SECRET|awk -F " " '{print $1}'`
 
-ADMIN_CONSOLE_PARTNER_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@#$%^*()_+-=" | head -c20`
+ADMIN_CONSOLE_PARTNER_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@#$%^*()_+-=" | head -c100`
 HASHED_ADMIN_CONSOLE_PARTNER_SECRET=`echo $ADMIN_CONSOLE_PARTNER_SECRET|md5sum`
 ADMIN_CONSOLE_PARTNER_SECRET=`echo $HASHED_ADMIN_CONSOLE_PARTNER_SECRET|awk -F " " '{print $1}'`
 
-MONITOR_PARTNER_ADMIN_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c20`
+MONITOR_PARTNER_ADMIN_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c100`
 HASHED_MONITOR_PARTNER_ADMIN_SECRET=`echo $HASHED_MONITOR_PARTNER_ADMIN_SECRET | md5sum`
 MONITOR_PARTNER_ADMIN_SECRET=`echo $HASHED_MONITOR_PARTNER_ADMIN_SECRET | awk -F " " '{print $1}'` 
 
-MONITOR_PARTNER_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c20`
+MONITOR_PARTNER_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c100`
 HASHED_MONITOR_PARTNER_SECRET=`echo $HASHED_MONITOR_PARTNER_SECRET | md5sum`
 MONITOR_PARTNER_SECRET=`echo $HASHED_MONITOR_PARTNER_SECRET | awk -F " " '{print $1}'` 
 
-PARTNER_ZERO_ADMIN_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c20`
+PARTNER_ZERO_ADMIN_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c100`
 HASHED_PARTNER_ZERO_ADMIN_SECRET=`echo $PARTNER_ZERO_ADMIN_SECRET|md5sum`
 PARTNER_ZERO_ADMIN_SECRET=`echo $HASHED_PARTNER_ZERO_ADMIN_SECRET|awk -F " " '{print $1}'`
 
-PARTNER_ZERO_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c20`
+PARTNER_ZERO_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c100`
 HASHED_PARTNER_ZERO_SECRET=`echo $PARTNER_ZERO_SECRET|md5sum`
 PARTNER_ZERO_SECRET=`echo $HASHED_PARTNER_ZERO_SECRET|awk -F " " '{print $1}'`
 
 
-BATCH_PARTNER_ADMIN_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c20`
+BATCH_PARTNER_ADMIN_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c100`
 HASHED_BATCH_PARTNER_ADMIN_SECRET=`echo $BATCH_PARTNER_ADMIN_SECRET|md5sum`
 BATCH_PARTNER_ADMIN_SECRET=`echo $HASHED_BATCH_PARTNER_ADMIN_SECRET|awk -F " " '{print $1}'`
 
-BATCH_PARTNER_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c20`
+BATCH_PARTNER_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c100`
 HASHED_BATCH_PARTNER_SECRET=`echo $BATCH_PARTNER_SECRET|md5sum`
 BATCH_PARTNER_SECRET=`echo $HASHED_BATCH_PARTNER_SECRET|awk -F " " '{print $1}'`
 
-MEDIA_PARTNER_ADMIN_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c20`
+MEDIA_PARTNER_ADMIN_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c100`
 HASHED_MEDIA_PARTNER_ADMIN_SECRET=`echo $MEDIA_PARTNER_ADMIN_SECRET|md5sum`
 MEDIA_PARTNER_ADMIN_SECRET=`echo $HASHED_MEDIA_PARTNER_ADMIN_SECRET|awk -F " " '{print $1}'`
 
-MEDIA_PARTNER_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c20`
+MEDIA_PARTNER_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c100`
 HASHED_MEDIA_PARTNER_SECRET=`echo $MEDIA_PARTNER_SECRET|md5sum`
 MEDIA_PARTNER_SECRET=`echo $HASHED_MEDIA_PARTNER_SECRET|awk -F " " '{print $1}'`
 
-TEMPLATE_PARTNER_ADMIN_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c20`
+TEMPLATE_PARTNER_ADMIN_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c100`
 HASHED_TEMPLATE_PARTNER_ADMIN_SECRET=`echo $TEMPLATE_PARTNER_ADMIN_SECRET|md5sum`
 TEMPLATE_PARTNER_ADMIN_SECRET=`echo $HASHED_TEMPLATE_PARTNER_ADMIN_SECRET|awk -F " " '{print $1}'`
 TEMPLATE_PARTNER_ADMIN_PASSWORD="0+`< /dev/urandom tr -dc "A-Za-z0-9_=@%$" | head -c8`=*1"
 
-TEMPLATE_PARTNER_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c20`
+TEMPLATE_PARTNER_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c100`
 HASHED_TEMPLATE_PARTNER_SECRET=`echo $TEMPLATE_PARTNER_SECRET|md5sum`
 TEMPLATE_PARTNER_SECRET=`echo $HASHED_TEMPLATE_PARTNER_SECRET|awk -F " " '{print $1}'`
 
-HOSTED_PAGES_PARTNER_ADMIN_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c20`
+HOSTED_PAGES_PARTNER_ADMIN_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c100`
 HASHED_HOSTED_PAGES_PARTNER_ADMIN_SECRET=`echo $HOSTED_PAGES_PARTNER_ADMIN_SECRET|md5sum`
 HOSTED_PAGES_PARTNER_ADMIN_SECRET=`echo $HASHED_HOSTED_PAGES_PARTNER_ADMIN_SECRET|awk -F " " '{print $1}'`
 
-HOSTED_PAGES_PARTNER_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c20`
+HOSTED_PAGES_PARTNER_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c100`
 HASHED_HOSTED_PAGES_PARTNER_SECRET=`echo $HOSTED_PAGES_PARTNER_SECRET|md5sum`
 HOSTED_PAGES_PARTNER_SECRET=`echo $HASHED_HOSTED_PAGES_PARTNER_SECRET|awk -F " " '{print $1}'`
 
-PLAY_PARTNER_ADMIN_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c20`
+PLAY_PARTNER_ADMIN_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c100`
 HASHED_PLAY_PARTNER_ADMIN_SECRET=`echo $PLAY_PARTNER_ADMIN_SECRET|md5sum`
 PLAY_PARTNER_ADMIN_SECRET=`echo $HASHED_PLAY_PARTNER_ADMIN_SECRET|awk -F " " '{print $1}'`
 
-PLAY_PARTNER_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c20`
+PLAY_PARTNER_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c100`
 HASHED_PLAY_PARTNER_SECRET=`echo $PLAY_PARTNER_SECRET|md5sum`
 PLAY_PARTNER_SECRET=`echo $HASHED_PLAY_PARTNER_SECRET=|awk -F " " '{print $1}'`
 
