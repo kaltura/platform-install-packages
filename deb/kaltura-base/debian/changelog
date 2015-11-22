@@ -1,3 +1,9 @@
+kaltura-base (11.2.0-2) kajam; urgency=low
+
+  * SUP-6218 - Live entry, VOD entry stuck on "Pending" status
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Sun, 22 Nov 2015 13:04:34 +0000
+
 kaltura-base (11.2.0-1) kajam; urgency=low
 
   * Switching to 11.2.0

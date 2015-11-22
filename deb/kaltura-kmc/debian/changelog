@@ -1,3 +1,9 @@
+kaltura-kmc (5.39.11-1) kajam; urgency=low
+
+  * SUP-4977 - Administration tab in KMC does not load on Mac in chrome, safari, or firefox 
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Fri, 20 Nov 2015 12:00:17 +0000
+
 kaltura-kmc (5.39.10-1) kajam; urgency=low
 
   * SUP-5939 - Missing players when listing players for syndication
