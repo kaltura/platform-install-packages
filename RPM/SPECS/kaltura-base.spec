@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 11.2.0
-Release: 11
+Release: 12
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -298,6 +298,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Sun Nov 22 2015 jess.portnoy@kaltura.com <Jess Portnoy> - 11.2.0-12
+- 11.2.0 final
+
 * Wed Nov 18 2015 jess.portnoy@kaltura.com <Jess Portnoy> - 11.2.0-8
 - SUP-6218 - Live entry, VOD entry stuck on "Pending" status
 - PLAT-4028 - Enable adding categories with privacy context to syndication feeds
