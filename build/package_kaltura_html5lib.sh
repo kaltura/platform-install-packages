@@ -41,5 +41,5 @@ for HTML5LIB_VERSION in $HTML5LIB_VERSIONS;do
 	set -e
 done
 if [ -x "`which rpmbuild 2>/dev/null`" ];then
-	rpmbuild -ba $RPM_SPECS_DIR/$HTML5LIB_RPM_NAME.spec
+	rpmbuild -bb $RPM_SPECS_DIR/$HTML5LIB_RPM_NAME.spec
 fi

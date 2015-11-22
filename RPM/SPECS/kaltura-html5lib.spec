@@ -3,7 +3,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
 Version: v2.37.1
-Release: 1
+Release: 2
 Epoch:0 
 License: AGPLv3+
 Group: Server/Platform 
@@ -86,6 +86,7 @@ tar zxf %{SOURCE26} -C %{_builddir}/
 %install
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib
 for i in v2.1.1 v2.3 v2.4 v2.6 v2.9 v2.14 v2.15 v2.18.5 v2.20 v2.21 v2.22 v2.23 v2.24 v2.25 v2.26 v2.27 v2.28 v2.29 v2.30 v2.31 v2.32.1 v2.33 v2.34 v2.35.5 v2.36 %{version};do
+	rm -rf %{_builddir}/%{name}-$i/modules/Widevine
 	cp -r %{_builddir}/%{name}-$i $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i
 	ln -sf %{prefix}/app/configurations/html5.php $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i/LocalSettings.php 
 	mkdir $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i/cache
@@ -105,7 +106,39 @@ find /opt/kaltura/web/html5/html5lib -type d -name cache -exec chown -R 48 {} \;
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Sun Nov 22 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v2.37.1-2
+- Remove unneeded and yet very big modules/Widevine dir while packaging.
+
 * Fri Nov 20 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v2.37.1-1
+- FEC-2823 - Google Analytics configuration in Studio is wrong
+- FEC-3724 - uDRM: Modular DRM p2 is not working on IE11 & Edge
+- FEC-3937 - Player Share is hardcoded to cdnapi.kaltura.com
+- FEC-3982 - Related videos are stretched on fullscreen
+- FEC-4063 - Share&Embed: white lines appear after click on some social network icon on FireFox
+- FEC-4158 - Strings plugin should support per localization key overrides
+- FEC-4236 - Add logic to the flavor selection in Android
+- FEC-4253 - Captioning flyout does not disappear as expected
+- FEC-4296 - Playlists should support setting playlist width in percentage
+- FEC-4328 - Support hide cursor durring fullscreen playback
+- FEC-4336 - evars and props do not get updated in playlist
+- FEC-4349 - Fix native callout on Android
+- FEC-4367 - moderation plugin: Thank you message not localized
+- FEC-4394 - Seek race condition prevent seek events propagation in native player
+- IVQ integration
+- OPF-1572 - Issues with Sub-titles
+- PLAT-3590 - Replace existing og:tags in KMC Preview & Embed links to support HTML5 playback on Facebook and Embedly
+- Remove unneeded and yet very big modules/Widevine dir while packaging.
+- SUP-5575 - Google analytics page display
+- SUP-5910 - "EmbedPlayer.HidePosterOnStart" Attribute Overrides "EmbedPlayer.ShowPosterOnStop"
+- SUP-5984 - URL Top syndicators
+- SUP-5991 - "video content" tooltip is showing while the player loads
+- SUP-6057 - Logo stretched on IE 9
+- SUP-6097 - Changing playbackRate modifies number of captions
+- SUP-6143 - Player v2.35 - Icons Display
+- SUP-6313 - Live steam - the stream doesn't starts after the first click on the play button with embed type - thumbnail and embed
+- SUP-6372 - Size of cookie request header field exceeds server limit.
+- WEBC-581 - keyboard shortcuts are not disabled in in-player Q&A
+- fix chromecast HLS support*
 - SUP-5072 - YouTube player autoplay fails
 - FEC-4417 - IMA issue - When preroll ended the media content ended the player can't replay
 - FEC-4414 - Scrubber head is sometimes cut during playback in Chrome latest version

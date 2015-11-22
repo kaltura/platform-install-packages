@@ -33,7 +33,7 @@ BASE_DIR=`dirname $0`
 
 for i in $RPM_SPECS_DIR/kaltura-batch.spec $RPM_SPECS_DIR/kaltura-front.spec $RPM_SPECS_DIR/kaltura-release.spec $RPM_SPECS_DIR/kaltura-server.spec;do
 	$BASE_DIR/bounce_rpm_ver.sh $i $NEWVER
-	rpmbuild -ba $i
+	rpmbuild -bb $i
 done
 
 # we run this one of the loop because we don't want to build it yet since we need to manually add the changelog to it.
