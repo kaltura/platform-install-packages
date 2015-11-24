@@ -123,12 +123,16 @@ trap 'my_trap_handler "${LINENO}" ${$?}' ERR
 	set -e
 
 	# create users:
-	#for DB_USER in $DB_USERS;do
+	USER_EXISTS=`echo "SELECT EXISTS(SELECT 1 FROM mysql.user WHERE user = 'kaltura');" | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT`
+	if [ "$USER_EXISTS" -ne 1 ];then
 		echo "CREATE USER kaltura;"
 		echo "CREATE USER kaltura@'%' IDENTIFIED BY '$DB1_PASS' ;"  | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT
+	fi
+	USER_EXISTS=`echo "SELECT EXISTS(SELECT 1 FROM mysql.user WHERE user = 'etl');" | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT`
+	if [ "$USER_EXISTS" -ne 1 ];then
 		echo "CREATE USER etl;"
 		echo "CREATE USER etl@'%' IDENTIFIED BY '$DWH_PASS' ;"  | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT
-	#done
+	fi
 	# create the DBs:
 	for DB in $DBS;do 
 		echo "CREATE DATABASE $DB;"
