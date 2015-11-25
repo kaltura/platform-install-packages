@@ -1,0 +1,17 @@
+#!/bin/sh
+
+set -e
+
+#DEBHELPER#
+
+if [ "$1" != "configure" ]; then
+    exit 0
+fi
+
+for i in php-config phpize; do
+	update-alternatives \
+	  --install /usr/bin/"$i" $i /usr/bin/"$i"5 50 \
+	  --slave /usr/share/man/man1/"$i".1.gz "$i".1.gz /usr/share/man/man1/"$i"5.1.gz
+done
+
+exit 0

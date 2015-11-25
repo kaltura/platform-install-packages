@@ -1,0 +1,458 @@
+Source: kaltura-php7
+Section: php
+Priority: optional
+Maintainer: Jess Portnoy <jess.portnoy@kaltura.com>
+Build-Depends: apache2-dev (>= 2.4),
+	       dh-apache2,
+	       libsystemd-daemon-dev [linux-any],
+	       autoconf (>= 2.63),
+	       automake (>= 1.11) | automake1.11,
+	       bison,
+	       chrpath,
+	       debhelper (>= 5),
+	       dpkg-dev (>= 1.16.1~),
+	       flex,
+	       freetds-dev,
+	       libapr1-dev (>= 1.2.7-8),
+	       libbz2-dev,
+	       libcurl4-openssl-dev | libcurl-dev,
+	       libdb-dev,
+	       libedit-dev (>= 2.11-20080614-4),
+	       libevent-dev (>= 1.4.11),
+	       libexpat1-dev (>= 1.95.2-2.1),
+	       libfreetype6-dev,
+	       libgcrypt11-dev,
+	       libgd-dev | libgd2-dev,
+	       libglib2.0-dev,
+	       libgmp3-dev,
+	       libicu-dev,
+	       libjpeg-dev | libjpeg62-dev,
+	       libkrb5-dev,
+	       libldap2-dev,
+	       libmagic-dev,
+	       libmhash-dev (>= 0.8.8),
+	       libmysqlclient-dev | libmysqlclient15-dev,
+	       libpam0g-dev,
+	       libpcre3-dev (>= 6.6),
+	       libpng-dev | libpng12-dev,
+	       libpq-dev,
+	       libpspell-dev,
+	       librecode-dev,
+	       libsasl2-dev,
+	       libsnmp-dev,
+	       libsqlite3-dev,
+	       libssl-dev,
+	       libtidy-dev,
+	       libtool (>= 2.2),
+	       libwrap0-dev,
+	       libxmltok1-dev,
+	       libxml2-dev,
+	       libxslt1-dev (>= 1.0.18),
+	       systemtap-sdt-dev [amd64 i386 powerpc armel armhf ia64],
+	       netbase,
+	       netcat-openbsd | netcat,
+	       re2c,
+	       unixodbc-dev,
+	       zlib1g-dev,
+	       libonig-dev,
+	       tzdata
+Build-Conflicts: bind-dev
+Standards-Version: 3.9.3
+Vcs-Git: git://git.debian.org/pkg-php/php.git
+Vcs-Browser: http://git.debian.org/?p=pkg-php/php.git
+Homepage: http://www.php.net/
+
+Package: kaltura-php7
+Architecture: all
+Depends: ${misc:Depends}, kaltura-libapache2-mod-php7 (>= ${source:Version}) | kaltura-libapache2-mod-php7filter (>= ${source:Version}) | kaltura-php7-cgi (>= ${source:Version}) | kaltura-php7-fpm (>= ${source:Version}), kaltura-php7-common (>= ${source:Version})
+Description: server-side, HTML-embedded scripting language (metapackage)
+ This package is a metapackage that, when installed, guarantees that you
+ have at least one of the four server-side versions of the PHP7 interpreter
+ installed. Removing this package won't remove PHP7 from your system, however
+ it may remove other packages that depend on this one.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+
+Package: kaltura-php7-common
+Architecture: any
+Depends: ${misc:Depends},
+	 ${shlibs:Depends},
+	 sed (>= 4.1.1-1),
+	 psmisc (>= 22.15-1~),
+	 lsof [!kfreebsd-any !hurd-any],
+	 ucf,
+	 php5-json
+Provides: php5-mhash, ${php:Provides}
+Conflicts: php5-mhash
+Suggests: php5-user-cache
+Breaks: php5-xdebug (<< 2.2.2),
+	php-apc (<< 4.0.0),
+	php5-xcache (<< 3.1~),
+	php5-suhosin (<< 0.9.34),
+	php5-json (<< 1.3.1-1~),
+	php-crypt-gpg (<< 1.3.2)
+Description: Common files for packages built from the kaltura-php7 source
+ This package contains the documentation and example files relevant to all
+ the other packages built from the kaltura-php7 source.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+
+Package: kaltura-libapache2-mod-php7
+Section: httpd
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, mime-support, ${apache2:Depends}, kaltura-php7-common (= ${binary:Version}), libmagic1, ucf, tzdata
+Provides: ${php:Provides}
+Recommends: kaltura-php7-cli
+Suggests: php-pear
+Description: server-side, HTML-embedded scripting language (Apache 2 module)
+ This package provides the PHP7 module for the Apache 2 webserver (as
+ found in the apache2-mpm-prefork package).  Please note that this package
+ ONLY works with Apache's prefork MPM, as it is not compiled thread-safe.
+ .
+ ${php:Extensions}
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+
+Package: kaltura-libapache2-mod-php7filter
+Section: httpd
+Priority: extra
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, mime-support, ${apache2:Depends}, kaltura-php7-common (= ${binary:Version}), libmagic1, ucf, tzdata
+Conflicts: kaltura-libapache2-mod-php7
+Provides: ${php:Provides}
+Suggests: kaltura-php-pear
+Description: server-side, HTML-embedded scripting language (apache 2 filter module)
+ This package provides the PHP7 Filter module for the Apache 2 webserver (as 
+ found in the apache2-mpm-prefork package).  Please note that this package
+ ONLY works with Apache's prefork MPM, as it is not compiled thread-safe.
+ .
+ Unless you specifically need filter-module support, you most likely
+ should instead install kaltura-libapache2-mod-php7.
+ .
+ ${php:Extensions}
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+
+Package: kaltura-php7-cgi
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, mime-support, kaltura-php7-common (= ${binary:Version}), libmagic1, ucf, tzdata
+Provides: ${php:Provides}
+Suggests: php-pear
+Description: server-side, HTML-embedded scripting language (CGI binary)
+ This package provides the /usr/lib/cgi-bin/php7 CGI interpreter built
+ for use in Apache 2 with mod_actions, or any other CGI httpd that
+ supports a similar mechanism.  Note that MOST Apache users probably
+ want the kaltura-libapache2-mod-php7 package.
+ .
+ ${php:Extensions}
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+
+Package: kaltura-php7-cli
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, mime-support, kaltura-php7-common (= ${binary:Version}), libmagic1, ucf, tzdata
+Provides: ${php:Provides}
+Suggests: php-pear
+Description: command-line interpreter for the kaltura-php7 scripting language
+ This package provides the /usr/bin/php7 command interpreter, useful for
+ testing PHP scripts from a shell or performing general shell scripting tasks.
+ .
+ ${php:Extensions}
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+
+Package: kaltura-php7-fpm
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, mime-support, kaltura-php7-common (= ${binary:Version}), libmagic1, ucf, tzdata
+Provides: ${php:Provides}
+Suggests: php-pear
+Pre-Depends: dpkg (>= 1.16.1~)
+Description: server-side, HTML-embedded scripting language (FPM-CGI binary)
+ This package provides the Fast Process Manager interpreter that runs
+ as a daemon and receives Fast/CGI requests.  Note that MOST Apache users
+ probably want the kaltura-libapache2-mod-php7 package.
+ .
+ ${php:Extensions}
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+
+Package: kaltura-libphp7-embed
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, mime-support, kaltura-php7-common (= ${binary:Version}), libmagic1, ucf, tzdata
+Provides: ${php:Provides}
+Suggests: php-pear
+Description: HTML-embedded scripting language (Embedded SAPI library)
+ This package provides the library /usr/lib/libphp7.so which can
+ be used by application developers to embed PHP scripting functionality.
+ .
+ ${php:Extensions}
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+
+Package: kaltura-php7-dev
+Depends: ${misc:Depends}, autoconf (>= 2.63), automake (>= 1.11), libssl-dev, libtool (>= 2.2), shtool, kaltura-php7-common (>= ${binary:Version})
+Conflicts: ${libtool:Conflicts}
+Architecture: any
+Description: Files for PHP7 module development
+ This package provides the files from the PHP7 source needed for compiling
+ additional modules.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+
+Package: kaltura-php7-dbg
+Depends: ${misc:Depends}, kaltura-php7-common (= ${binary:Version}), kaltura-libapache2-mod-php7 (= ${binary:Version}) | kaltura-libapache2-mod-php7filter (= ${binary:Version}) | kaltura-php7-cgi (= ${binary:Version}) | kaltura-php7-cli (= ${binary:Version}) | kaltura-php7-fpm (= ${binary:Version}) | kaltura-php7-curl (= ${binary:Version}) | kaltura-php7-gd (= ${binary:Version}) | kaltura-php7-gmp (= ${binary:Version}) | kaltura-php7-imap (= ${binary:Version}) | kaltura-php7-intl (= ${binary:Version}) | kaltura-php7-ldap (= ${binary:Version}) | kaltura-php7-mcrypt (= ${binary:Version}) | kaltura-php7-mysql (= ${binary:Version}) | kaltura-php7-odbc (= ${binary:Version}) | kaltura-php7-pgsql (= ${binary:Version}) | kaltura-php7-pspell (= ${binary:Version}) | kaltura-php7-recode (= ${binary:Version}) | kaltura-php7-snmp (= ${binary:Version}) | kaltura-php7-sqlite (= ${binary:Version})  | kaltura-php7-tidy (= ${binary:Version}) | kaltura-php7-xmlrpc (= ${binary:Version}) | kaltura-php7-xsl (= ${binary:Version})
+Recommends: gdb
+Section: debug
+Priority: extra
+Architecture: any
+Description: Debug symbols for PHP7
+ This package provides the debug symbols for PHP7 needed for properly
+ debugging errors in PHP7 with gdb.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+
+Package: kaltura-php-pear
+Architecture: all
+Depends: ${misc:Depends}, kaltura-php7-common (>= ${source:Version}), kaltura-php7-cli
+Recommends: gnupg
+Conflicts: php-xml-util
+Suggests: kaltura-php7-dev
+Provides: php-xml-util
+Description: PEAR - PHP Extension and Application Repository
+ This package contains the base PEAR classes for PHP, as well as the PEAR
+ installer.  Many PEAR classes are already packaged for Debian, and can be
+ easily identified by names beginning with "php-", such as php-db and
+ php-auth.  Note: to build and install precompiled PECL extensions, you
+ will need one of the php development packages installed.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+
+Package: kaltura-php7-curl
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${php:Depends}, kaltura-php7-common (= ${binary:Version}), ucf
+Pre-Depends: dpkg (>= 1.16.1~)
+Description: CURL module for kaltura-php7
+ CURL is a library for getting files from  FTP, GOPHER, HTTP server.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+
+Package: kaltura-php7-gmp
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${php:Depends}, kaltura-php7-common (= ${binary:Version}), ucf
+Pre-Depends: dpkg (>= 1.16.1~)
+Description: GMP module for kaltura-php7
+ This package provides a module for arbitrary precision arithmetic via the 
+ GNU Multiple Precision (GMP) Arithmetic Library.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+
+Package: kaltura-php7-intl
+Architecture: any
+Depends: ${shlibs:Depends}, ${php:Depends}, ${misc:Depends}, kaltura-php7-common (= ${binary:Version}), ucf
+Conflicts: kaltura-php7-idn
+Replaces: kaltura-php7-idn
+Provides: kaltura-php7-idn
+Pre-Depends: dpkg (>= 1.16.1~)
+Description: internationalisation module for kaltura-php7
+ This package provides a module to ease internationalisation of PHP scripts.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+
+Package: kaltura-php7-ldap
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${php:Depends}, kaltura-php7-common (= ${binary:Version}), ucf
+Pre-Depends: dpkg (>= 1.16.1~)
+Description: LDAP module for kaltura-php7
+ This package provides a module for LDAP functions in PHP scripts.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+
+Package: kaltura-php7-mcrypt
+Architecture: any
+Depends: ${shlibs:Depends}, ${php:Depends}, ${misc:Depends}, kaltura-php7-common (= ${binary:Version}), ucf
+Pre-Depends: dpkg (>= 1.16.1~)
+Description: MCrypt module for kaltura-php7
+ This package provides a module for MCrypt functions in PHP scripts.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+
+Package: kaltura-php7-mysql
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${php:Depends}, kaltura-php7-common (= ${binary:Version}), ucf
+Conflicts: kaltura-php7-mysqli, kaltura-php7-mysqlnd
+Replaces: kaltura-php7-mysqli, kaltura-php7-mysqlnd
+Pre-Depends: dpkg (>= 1.16.1~)
+Description: MySQL module for kaltura-php7
+ This package provides modules for MySQL database connections directly from
+ PHP scripts.  It includes the generic "mysql" module which can be used
+ to connect to all versions of MySQL, an improved "mysqli" module for
+ MySQL version 4.1 or later, and the pdo_mysql module for use with
+ the PHP Data Object extension.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+
+Package: kaltura-php7-mysqlnd
+Architecture: any
+Priority: extra
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${php:Depends}, kaltura-php7-common (= ${binary:Version}), ucf
+Conflicts: kaltura-php7-mysqli, kaltura-php7-mysql
+Replaces: kaltura-php7-mysqli, kaltura-php7-mysql
+Pre-Depends: dpkg (>= 1.16.1~)
+Description: MySQL module for kaltura-php7 (Native Driver)
+ This package provides modules for MySQL database connections directly from
+ PHP scripts.  It includes the generic "mysql" module which can be used
+ to connect to all versions of MySQL, an improved "mysqli" module for
+ MySQL version 4.1 or later, and the pdo_mysql module for use with
+ the PHP Data Object extension.
+ .
+ This package use the MySQL Native Driver.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+
+Package: kaltura-php7-odbc
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${php:Depends}, kaltura-php7-common (= ${binary:Version}), ucf
+Pre-Depends: dpkg (>= 1.16.1~)
+Description: ODBC module for kaltura-php7
+ This package provides a module for database access through ODBC drivers.
+ It uses the unixODBC library as an ODBC provider.  It also contains the
+ pdo_odbc module, for use with the PHP Data Object extension.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+
+Package: kaltura-php7-pgsql
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${php:Depends}, kaltura-php7-common (= ${binary:Version}), ucf
+Pre-Depends: dpkg (>= 1.16.1~)
+Description: PostgreSQL module for kaltura-php7
+ This package provides a module for PostgreSQL database connections
+ directly from PHP scripts.  It also includes the pdo_pgsql module for
+ use with the PHP Data Object extension.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+
+Package: kaltura-php7-pspell
+Architecture: any
+Depends: ${shlibs:Depends}, ${php:Depends}, ${misc:Depends}, kaltura-php7-common (= ${binary:Version}), ucf
+Pre-Depends: dpkg (>= 1.16.1~)
+Description: pspell module for kaltura-php7
+ This package provides a module for pspell functions in PHP scripts.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+
+Package: kaltura-php7-recode
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${php:Depends}, kaltura-php7-common (= ${binary:Version}), ucf
+Pre-Depends: dpkg (>= 1.16.1~)
+Description: recode module for kaltura-php7
+ This package provides a module for recode - character set recoding.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+
+Package: kaltura-php7-snmp
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${php:Depends}, kaltura-php7-common (= ${binary:Version}), ucf
+Pre-Depends: dpkg (>= 1.16.1~)
+Description: SNMP module for kaltura-php7
+ This package provides a module for SNMP functions in PHP scripts.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+
+Package: kaltura-php7-sqlite
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${php:Depends}, kaltura-php7-common (= ${binary:Version}), ucf
+Breaks: roundcube-sqlite (<< 0.7.1-2)
+Pre-Depends: dpkg (>= 1.16.1~)
+Description: SQLite module for kaltura-php7
+ This package provides a module allowing you to use the SQLite self-contained
+ database engine from within your PHP scripts, eliminating the need for a full
+ SQL server installation like MySQL or PostgreSQL.  It also includes the
+ pdo_sqlite module, for use with the PHP Data Object extension.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+
+Package: kaltura-php7-tidy
+Architecture: any
+Depends: ${shlibs:Depends}, ${php:Depends}, ${misc:Depends}, kaltura-php7-common (= ${binary:Version}), ucf
+Pre-Depends: dpkg (>= 1.16.1~)
+Description: tidy module for kaltura-php7
+ This package provides a module for tidy functions in PHP scripts.
+ .
+ Tidy is an extension based on Libtidy (http://tidy.sf.net/) and allows
+ a PHP developer to clean, repair, and traverse HTML, XHTML, and XML
+ documents -- including ones with embedded scripting languages such as PHP
+ or ASP within them using OO constructs.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+
+Package: kaltura-php7-xmlrpc
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${php:Depends}, kaltura-php7-common (= ${binary:Version}), ucf
+Pre-Depends: dpkg (>= 1.16.1~)
+Description: XML-RPC module for kaltura-php7
+ This package provides a module for XML-RPC functions in PHP scripts.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+
+Package: kaltura-php7-xsl
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${php:Depends}, kaltura-php7-common (= ${binary:Version}), ucf
+Pre-Depends: dpkg (>= 1.16.1~)
+Description: XSL module for kaltura-php7
+ This package provides a module for XSL using the libxslt XSL parser.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.

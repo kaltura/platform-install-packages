@@ -1,0 +1,48 @@
+#!/bin/sh
+
+set -e
+
+#DEBHELPER#
+
+reload_apache()
+{
+	if apache2ctl configtest 2>/dev/null; then
+		invoke-rc.d apache2 $1 || true
+	else
+		echo "Your apache2 configuration is broken, so we're not restarting it for you."
+	fi
+}
+
+# we've registered a trigger to handle extension updates.
+if [ "$1" = "triggered" ] && [ "$2" = "/etc/php5/conf.d" ]; then
+  reload_apache force-reload
+  exit 0
+elif [ "$1" != "configure" ]; then
+  exit 0
+fi
+
+phpini="/etc/php5/apache2filter/php.ini"
+
+ucf /usr/share/php5/php.ini-production $phpini
+ucfr libapache2-mod-php5filter $phpini
+
+if [ -n "$2" ]; then
+	# recover the previous state
+	if [ -e /etc/php5/apache2filter/.start ]; then
+	    a2enmod php5filter >/dev/null || true
+	fi
+# we're upgrading. test if we're enabled, and if so, restart to reload the module.
+	if [ -e /etc/apache2/mods-enabled/php5filter.load ]; then
+		reload_apache force-reload
+	fi
+        exit 0
+fi
+
+if [ -e /etc/apache2/apache2.conf ]; then
+# Enable the module, but hide a2enmod's misleading message about apachectl
+# and force-reload the thing ourselves.
+        a2enmod php5filter >/dev/null || true
+	reload_apache restart
+fi
+
+exit 0

@@ -1,0 +1,801 @@
+#!/usr/bin/make -f
+# Sample debian/rules that uses debhelper. 
+# GNU copyright 1997 by Joey Hess.
+#
+# This version is for a hypothetical package that builds an
+# architecture-dependant package, as well as an architecture-independent
+# package.
+
+# Uncomment this to turn on verbose mode. 
+#export DH_VERBOSE=1
+
+# This has to be exported to make some magic below work.
+export DH_OPTIONS
+
+# Set this flag to 'yes' if you want to disable all modifications breaking abi 
+# compatibility to upstream
+PHP7_COMPAT=no
+
+# Set this flag to 'yes' if you want to compile PHP5 with suhosin patch
+PHP7_SUHOSIN=no
+
+DEB_HOST_GNU_TYPE    ?= $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
+DEB_BUILD_GNU_TYPE   ?= $(shell dpkg-architecture -qDEB_BUILD_GNU_TYPE)
+DEB_HOST_ARCH        ?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
+
+PHP7_SOURCE_VERSION   = $(shell dpkg-parsechangelog | grep ^Version | sed "s/Version: //")
+PHP7_UPSTREAM_VERSION = $(shell echo $(PHP7_SOURCE_VERSION) | sed -e "s/-.*//" -e "s/.*://")
+PHP7_DEBIAN_REVISION  = $(shell echo $(PHP7_SOURCE_VERSION) | sed "s/.*-//")
+
+RUN_TESTS = yes
+ifeq (nocheck,$(findstring nocheck,$(DEB_BUILD_OPTIONS)))
+  $(warning Disabling checks due DEB_BUILD_OPTIONS)
+  RUN_TESTS = no
+endif
+ifeq ($(DEB_HOST_ARCH),$(filter $(DEB_HOST_ARCH),hurd-i386))
+  $(warning Disabling checks on hurd-i386)
+  RUN_TESTS = no
+endif
+
+
+ifeq (yes,$(RUN_TESTS))
+  MYSQL_PORT := $(shell for i in $$(seq 1025 3600 | sort -R); do nc -z localhost $$i || { echo $$i; exit; } ; done)
+  MYSQL_DATA_DIR ?= $(shell readlink -f mysql_db)
+  ifeq (,$(MYSQL_PORT))
+      $(error Could not find available port for mysql server)
+  endif
+  MYSQL_SOCKET = $(MYSQL_DATA_DIR)/mysql.sock
+endif
+
+# specify some options to our patch system
+QUILT_DIFF_OPTS=-p
+QUILT_NO_DIFF_TIMESTAMPS=1 
+export QUILT_DIFF_OPTS QUILT_NO_DIFF_TIMESTAMPS
+
+PROG_SENDMAIL = /usr/sbin/sendmail
+ifeq (,$(findstring noopt,$(DEB_BUILD_OPTIONS)))
+  CFLAGS += -O2
+else
+  CFLAGS += -O0
+endif
+CFLAGS += -Wall -fsigned-char -fno-strict-aliasing 
+# LFS support
+ifneq (yes,$(PHP7_COMPAT))
+  CFLAGS += $(shell getconf LFS_CFLAGS)
+endif
+
+# Enable IEEE-conformant floating point math on alphas (not the default)
+ifeq (alpha-linux-gnu,$(DEB_HOST_GNU_TYPE))
+  CFLAGS += -mieee
+endif
+
+ifeq ($(DEB_HOST_GNU_TYPE),$(filter $(DEB_HOST_GNU_TYPE),ia64-linux-gnu powerpc64-linux-gnu avr32-linux-gnu))
+  CFLAGS += -g
+else
+  CFLAGS += -gstabs
+endif
+
+# some other helpful (for readability at least) shorthand variables
+PHPIZE_BUILDDIR = debian/php7-dev/usr/lib/php7/build
+
+# support new (>= 2.2) and older versions of libtool for backporting ease
+LIBTOOL_DIRS = /usr/share/libtool/config /usr/share/libtool
+LTMAIN = $(firstword $(wildcard $(foreach d,$(LIBTOOL_DIRS),$d/ltmain.sh)))
+LTMAIN_DIR = $(dir $(LTMAIN))
+
+ifeq ($(LTMAIN_DIR), /usr/share/libtool/)
+LIBTOOL_CONFLICTS:=libtool (>= 2.2)
+else ifeq ($(LTMAIN_DIR), /usr/share/libtool/config/)
+LIBTOOL_CONFLICTS:=libtool (<< 2.2)
+else
+LIBTOOL_CONFLICTS:=$(error "could not resolve path to ltmain.sh")
+endif
+
+ifneq (,$(filter parallel=%,$(DEB_BUILD_OPTIONS)))
+    NUMJOBS = $(patsubst parallel=%,%,$(filter parallel=%,$(DEB_BUILD_OPTIONS)))
+    MAKEFLAGS += -j$(NUMJOBS)
+endif
+
+# enable the hardening wrapper
+DEB_BUILD_HARDENING = 1
+# but disable PIE
+DEB_BUILD_HARDENING_PIE = 0
+export DEB_BUILD_HARDENING DEB_BUILD_HARDENING_PIE
+
+COMMON_CONFIG=--build=$(DEB_BUILD_GNU_TYPE) \
+		--host=$(DEB_HOST_GNU_TYPE) \
+		--sysconfdir=/opt/kaltura/app/configurations/php \
+		--localstatedir=/opt/kaltura/var \
+		--mandir=/opt/kaltura/share/man \
+		--disable-debug \
+		--disable-rpath \
+		--disable-static \
+		--with-pic \
+		--with-layout=GNU \
+		--with-pear \
+		--enable-calendar \
+		--enable-sysvsem \
+		--enable-sysvshm \
+		--enable-sysvmsg \
+		--enable-bcmath \
+		--with-bz2 \
+		--enable-ctype \
+		--with-iconv \
+		--enable-exif \
+		--enable-ftp \
+		--with-gettext \
+		--enable-mbstring \
+		--with-onig=/usr \
+		--with-pcre-regex=/usr \
+		--enable-shmop \
+		--enable-sockets \
+		--enable-wddx \
+		--with-libxml-dir=/usr \
+		--with-zlib \
+		--with-kerberos=/usr \
+		--with-openssl=/usr \
+		--enable-soap \
+		--enable-zip \
+		--with-mhash=yes \
+		--with-mysql-sock=/var/run/mysqld/mysqld.sock
+
+BUILTIN_EXTENSION_CHECK=$$e=get_loaded_extensions(); natcasesort($$e); \
+			$$s="The following extensions are built in:"; \
+			foreach($$e as $$i) { $$s .= " $$i"; } \
+			echo("php:Extensions=" . wordwrap($$s . ".\n", 75, "\$${Newline}"));
+
+# include the patch/unpatch rules from quilt
+include /usr/share/quilt/quilt.make
+
+prepared: prepared-stamp
+prepared-stamp: $(QUILT_STAMPFN)
+	dh_testdir
+ifeq (yes,$(PHP7_SUHOSIN))
+	QUILT_PATCHES=$(QUILT_PATCH_DIR) \
+		quilt --quiltrc /dev/null import debian/patches/suhosin.patch
+	QUILT_PATCHES=$(QUILT_PATCH_DIR) \
+		quilt --quiltrc /dev/null push -a || test $$? = 2
+endif
+	sed -i -e 's/EXTRA_VERSION=""/EXTRA_VERSION="-$(PHP7_DEBIAN_REVISION)"/' configure.in
+	./buildconf --force
+	touch prepared-stamp
+
+unprepared:
+	dh_testdir
+	sed -i -e 's/EXTRA_VERSION="-$(PHP7_DEBIAN_REVISION)"/EXTRA_VERSION=""/' configure.in
+	rm -f prepared-stamp
+
+test-results.txt: build-apache2-stamp build-cli-stamp build-cgi-stamp
+ifeq (yes,$(RUN_TESTS))
+	mkdir -p temp_session_store
+	# start our own mysql server for the tests
+	$(SHELL) -x debian/setup-mysql.sh $(MYSQL_PORT) $(MYSQL_DATA_DIR)
+	extensions=""; \
+	for f in $(CURDIR)/apache2-build/modules/*.so; do \
+	    ext=`basename "$$f"`; \
+	    test -d "$(CURDIR)/ext/$${ext%.so}/tests" || continue; \
+	    test "$$ext" != "imap.so" || continue; \
+	    test "$$ext" != "ldap.so" || continue; \
+	    test "$$ext" != "odbc.so" || continue; \
+	    test "$$ext" != "pgsql.so" || continue; \
+	    test "$$ext" != "pdo_dblib.so" || continue; \
+	    test "$$ext" != "pdo_firebird.so" || continue; \
+	    test "$$ext" != "pdo_odbc.so" || continue; \
+	    test "$$ext" != "pdo_pgsql.so" || continue; \
+	    test "$$ext" != "snmp.so" || continue; \
+	    extensions="$$extensions -d extension=$$ext"; \
+	done; \
+	[ "$$extensions" ] || { echo "extensions list is empty"; exit 1; }; \
+	env MYSQL_TEST_HOST=127.0.0.1 MYSQL_TEST_PORT=$(MYSQL_PORT) MYSQL_TEST_SOCKET=$(MYSQL_SOCKET) PDO_MYSQL_TEST_HOST=127.0.0.1 PDO_MYSQL_TEST_PORT=$(MYSQL_PORT) PDO_MYSQL_TEST_SOCKET=$(MYSQL_SOCKET) NO_INTERACTION=1 TEST_PHP_CGI_EXECUTABLE=$(CURDIR)/cgi-build/sapi/cgi/cgi-bin.php7 TEST_PHP_EXECUTABLE=$(CURDIR)/cli-build/sapi/cli/php \
+	$(CURDIR)/cli-build/sapi/cli/php run-tests.php -d mysql.default_host=127.0.0.1 -d mysql.default_socket=$(MYSQL_SOCKET) -d mysqli.default_socket=$(MYSQL_SOCKET) -d extension_dir=$(CURDIR)/apache2-build/modules/ $$extensions| tee test-results.txt
+	rm -rf temp_session_store
+	@for test in `find . -name '*.log' -a '!' -name 'config.log' -a '!' -name 'bootstrap.log' -a '!' -name 'run.log'`; do \
+	    echo; \
+	    echo -n "$${test#./}:"; \
+	    cat $$test; \
+	    echo; \
+	done | tee -a test-results.txt
+	$(SHELL) -x debian/setup-mysql.sh $(MYSQL_PORT) $(MYSQL_DATA_DIR) stop
+else
+	echo 'nocheck found in DEB_BUILD_OPTIONS or unsupported architecture' | tee test-results.txt
+endif
+
+#build: build-apache2-stamp build-apache2filter-stamp build-cgi-stamp build-cli-stamp build-embed-stamp build-fpm-stamp build-pear-stamp test-results.txt
+build: build-apache2-stamp build-cli-stamp build-fpm-stamp build-pear-stamp
+
+build-apache2-stamp: configure-apache2-stamp
+	dh_testdir
+	cd apache2-build && $(MAKE)
+
+	touch build-apache2-stamp
+
+build-apache2filter-stamp: configure-apache2filter-stamp
+	dh_testdir
+	cd apache2filter-build && $(MAKE)
+
+	touch build-apache2filter-stamp
+
+build-cli-stamp: configure-cli-stamp
+	dh_testdir
+	cd cli-build && $(MAKE)
+
+	touch build-cli-stamp
+
+build-embed-stamp: configure-embed-stamp
+	dh_testdir
+	cd embed-build && $(MAKE)
+
+	touch build-embed-stamp
+
+build-fpm-stamp: configure-fpm-stamp
+	dh_testdir
+	cd fpm-build && $(MAKE)
+
+	touch build-fpm-stamp
+
+
+build-cgi-stamp: configure-cgi-stamp
+	dh_testdir
+	cd cgi-build && $(MAKE) && mv sapi/cgi/php-cgi sapi/cgi/cgi-bin.php7
+
+	# Dirty hack to not rebuild everything twice
+	cd cgi-build/main && \
+		sed -i -e 's/FORCE_CGI_REDIRECT 1/FORCE_CGI_REDIRECT 0/' \
+		       -e 's/DISCARD_PATH 0/DISCARD_PATH 1/' php_config.h && \
+		sed -i -e 's/--enable-force-cgi-redirect/--enable-discard-path/' build-defs.h && \
+		touch ../../ext/standard/info.c && \
+		touch ../../sapi/cgi/cgi_main.c
+
+	cd cgi-build && $(MAKE) && mv sapi/cgi/php-cgi sapi/cgi/usr.bin.php7-cgi
+
+	touch build-cgi-stamp
+
+build-pear-stamp: build-cgi-stamp
+	dh_testdir
+	-mkdir pear-build
+	-mkdir pear-build-download
+	cd cgi-build && PHP_PEAR_DOWNLOAD_DIR=$(CURDIR)/pear-build-download $(MAKE) install-pear PHP_PEAR_PHP_BIN=/opt/kaltura/bin/php PHP_PEAR_INSTALL_DIR=/opt/kaltura/share/pear PHP_PEAR_SYSCONF_DIR=/etc/pear PHP_PEAR_SIG_BIN=/usr/bin/gpg INSTALL_ROOT=$(CURDIR)/pear-build
+	sed -i -e 's/-d output_buffering=1 -d open_basedir="" -d safe_mode=0/-d output_buffering=1 -d open_basedir="" -d safe_mode=0 -d memory_limit="-1"/' \
+	       $(CURDIR)/pear-build/opt/kaltura/bin/pear && \
+	sed -i -e 's/-d output_buffering=1 -d safe_mode=0/-d output_buffering=1 -d open_basedir="" -d safe_mode=0 -d memory_limit="-1"/' \
+	       $(CURDIR)/pear-build/opt/kaltura/bin/pecl && \
+	sed -i -e 's/-d memory_limit="-1"//' \
+	       -e 's/-d output_buffering=1 -d open_basedir="" -d safe_mode=0/-d output_buffering=1 -d open_basedir="" -d safe_mode=0 -d memory_limit="-1"/' \
+	       $(CURDIR)/pear-build/opt/kaltura/bin/peardev
+	sed -i -re "s#('PEAR_CONFIG_SYSCONFDIR', PHP_SYSCONFDIR)#\1 . '/pear'#" $(CURDIR)/pear-build/opt/kaltura/share/pear/PEAR/Config.php
+	patch -s -d $(CURDIR)/pear-build/opt/kaltura/share/pear/ -p1 -i $(CURDIR)/debian/PEAR-Builder-print-info-about-php7-dev.patch
+	touch build-pear-stamp
+
+configure: configure-apache2-stamp configure-apache2filter-stamp configure-cli-stamp configure-embed-stamp configure-fpm-stamp configure-cgi-stamp
+
+configure-apache2-stamp: prepared-stamp
+	dh_testdir
+	if [ -d apache2-build ]; then rm -rf apache2-build; fi
+	-mkdir apache2-build
+	sed -i 's@PHP_LIBDIR=lib@PHP_LIBDIR=lib/x86_64-linux-gnu@g' configure
+	sed -i 's@php_with_libdir=lib@php_with_libdir=lib/x86_64-linux-gnu@g' configure
+	sed -i 's@ tsrm_virtual_cwd.c@@g' configure
+	cd apache2-build && \
+        CFLAGS="$(CFLAGS)" PROG_SENDMAIL="$(PROG_SENDMAIL)" ../configure \
+		--prefix=/opt/kaltura --with-apxs2=/usr/bin/apxs2 \
+		--with-config-file-path=/opt/kaltura/app/configurations/php/apache2 \
+		--with-config-file-scan-dir=/opt/kaltura/app/configurations/php/apache2/conf.d \
+		$(COMMON_CONFIG) \
+		--without-mm \
+		--with-curl=shared,/usr \
+		--with-zlib-dir=/usr \
+		--with-gmp=shared,/usr \
+		--with-jpeg-dir=shared,/usr \
+		--with-xpm-dir=shared,/usr/X11R6 \
+		--with-png-dir=shared,/usr \
+		--with-freetype-dir=shared,/usr \
+		--enable-intl=shared \
+		--without-t1lib \
+		--with-ldap=shared,/usr \
+		--with-ldap-sasl=/usr \
+		--with-mcrypt=shared,/usr \
+		--with-mysqli=shared,/usr/bin/mysql_config \
+		--with-pspell=shared,/usr \
+		--with-unixODBC=shared,/usr \
+		--with-recode=shared,/usr \
+		--with-xsl=shared,/usr \
+		--with-snmp=shared,/usr \
+		--with-sqlite3=shared,/usr \
+		--with-mssql=shared,/usr \
+		--with-tidy=shared,/usr \
+		--with-xmlrpc=shared \
+		--with-pgsql=shared,/usr PGSQL_INCLUDE=`pg_config --includedir` \
+		--enable-pdo=shared \
+		--without-pdo-dblib \
+		--with-pdo-mysql=shared,/usr \
+		--with-pdo-odbc=shared,unixODBC,/usr \
+		--with-pdo-pgsql=shared,/usr/bin/pg_config \
+		--with-pdo-sqlite=shared,/usr \
+		--with-pdo-dblib=shared,/usr \
+		$(CONFIGURE_APACHE_ARGS)
+	cd apache2-build && \
+	cp ../Zend/zend_ini_scanner.c ../Zend/zend_language_scanner.c \
+	   ../Zend/zend_ini_parser.h ../Zend/zend_language_parser.h \
+	   ../Zend/zend_ini_parser.c ../Zend/zend_language_parser.c \
+	   Zend/
+	touch configure-apache2-stamp
+
+configure-apache2filter-stamp: prepared-stamp
+	dh_testdir
+	if [ -d apache2filter-build ]; then rm -rf apache2filter-build; fi
+	-mkdir apache2filter-build
+	cd apache2filter-build && \
+        CFLAGS="$(CFLAGS)" PROG_SENDMAIL="$(PROG_SENDMAIL)" ../configure \
+		--prefix=/opt/kaltura --with-apxs2filter=/usr/bin/apxs2 \
+		--with-config-file-path=/opt/kaltura/app/configurations/php/apache2filter \
+		--with-config-file-scan-dir=/opt/kaltura/app/configurations/php/apache2filter/conf.d \
+		$(COMMON_CONFIG) \
+		--without-mm \
+		--disable-pdo \
+		--without-mysql  \
+		--without-sqlite3
+	cd apache2filter-build && \
+	cp ../Zend/zend_ini_scanner.c ../Zend/zend_language_scanner.c \
+	   ../Zend/zend_ini_parser.h ../Zend/zend_language_parser.h \
+	   ../Zend/zend_ini_parser.c ../Zend/zend_language_parser.c \
+	   Zend/
+	touch configure-apache2filter-stamp
+
+configure-cgi-stamp: prepared-stamp
+	dh_testdir
+	if [ -d cgi-build ]; then rm -rf cgi-build; fi
+	-mkdir cgi-build
+	cd cgi-build && \
+        CFLAGS="$(CFLAGS)" PROG_SENDMAIL="$(PROG_SENDMAIL)" ../configure \
+		--prefix=/opt/kaltura \
+		--with-config-file-path=/opt/kaltura/app/configurations/php/cgi \
+		--with-config-file-scan-dir=/opt/kaltura/app/configurations/php/cgi/conf.d \
+		$(COMMON_CONFIG) \
+		--without-mm \
+		--enable-pdo=shared \
+		--enable-mysqlnd=shared \
+		--with-mysqli=shared,mysqlnd \
+		--with-pdo-mysql=shared,mysqlnd \
+		--without-pdo-sqlite \
+		--without-sqlite3 \
+		--enable-pcntl
+	cd cgi-build && \
+	cp ../Zend/zend_ini_scanner.c ../Zend/zend_language_scanner.c \
+	   ../Zend/zend_ini_parser.h ../Zend/zend_language_parser.h \
+	   ../Zend/zend_ini_parser.c ../Zend/zend_language_parser.c \
+	   Zend/
+	touch configure-cgi-stamp
+
+configure-cli-stamp: prepared-stamp
+	dh_testdir
+	if [ -d cli-build ]; then rm -rf cli-build; fi
+	-mkdir cli-build
+	cd cli-build && \
+        CFLAGS="$(CFLAGS)" PROG_SENDMAIL="$(PROG_SENDMAIL)" ../configure \
+		--prefix=/opt/kaltura --disable-cgi \
+		--with-config-file-path=/opt/kaltura/app/configurations/php/cli \
+		--with-config-file-scan-dir=/opt/kaltura/app/configurations/php/cli/conf.d \
+		$(COMMON_CONFIG) \
+		--without-mm \
+		--disable-pdo \
+		--without-sqlite3 --enable-pcntl
+	cd cli-build && \
+	cp ../Zend/zend_ini_scanner.c ../Zend/zend_language_scanner.c \
+	   ../Zend/zend_ini_parser.h ../Zend/zend_language_parser.h \
+	   ../Zend/zend_ini_parser.c ../Zend/zend_language_parser.c \
+	   Zend/
+	touch configure-cli-stamp
+
+configure-embed-stamp: prepared-stamp
+	dh_testdir
+	if [ -d embed-build ]; then rm -rf embed-build; fi
+	-mkdir embed-build
+	cd embed-build && \
+        CFLAGS="$(CFLAGS)" PROG_SENDMAIL="$(PROG_SENDMAIL)" ../configure \
+		--prefix=/opt/kaltura --enable-embed --disable-cgi \
+		--with-config-file-path=/opt/kaltura/app/configurations/php/embed \
+		--with-config-file-scan-dir=/opt/kaltura/app/configurations/php/embed/conf.d \
+		$(COMMON_CONFIG) \
+		--without-mm \
+		--disable-pdo \
+		--without-sqlite3 --enable-pcntl
+	cd embed-build && \
+	cp ../Zend/zend_ini_scanner.c ../Zend/zend_language_scanner.c \
+	   ../Zend/zend_ini_parser.h ../Zend/zend_language_parser.h \
+	   ../Zend/zend_ini_parser.c ../Zend/zend_language_parser.c \
+	   Zend/
+	touch configure-embed-stamp
+
+configure-fpm-stamp: prepared-stamp
+	dh_testdir
+	if [ -d fpm-build ]; then rm -rf fpm-build; fi
+	-mkdir fpm-build
+	cd fpm-build && \
+        CFLAGS="$(CFLAGS)" PROG_SENDMAIL="$(PROG_SENDMAIL)" ../configure \
+		--prefix=/opt/kaltura --enable-fpm --disable-cgi \
+		--with-fpm-user=www-data --with-fpm-group=www-data \
+		--with-config-file-path=/opt/kaltura/app/configurations/php/fpm \
+		--with-config-file-scan-dir=/opt/kaltura/app/configurations/php/fpm/conf.d \
+		$(COMMON_CONFIG) \
+		--with-libevent-dir=/usr \
+		--without-mm \
+		--disable-pdo \
+		--without-sqlite3
+	cd fpm-build && \
+	cp ../Zend/zend_ini_scanner.c ../Zend/zend_language_scanner.c \
+	   ../Zend/zend_ini_parser.h ../Zend/zend_language_parser.h \
+	   ../Zend/zend_ini_parser.c ../Zend/zend_language_parser.c \
+	   Zend/
+	touch configure-fpm-stamp
+
+clean: unprepared unpatch
+	dh_testdir
+	dh_testroot
+
+ifeq (yes,$(PHP7_SUHOSIN))
+	QUILT_PATCHES=$(QUILT_PATCH_DIR) \
+		quilt --quiltrc /dev/null delete debian/patches/suhosin.patch \
+	        || return 0
+endif
+
+	rm -f configure-apache2-stamp build-apache2-stamp
+	rm -f configure-apache2filter-stamp build-apache2filter-stamp
+	rm -f configure-cgi-stamp build-cgi-stamp
+	rm -f configure-cli-stamp build-cli-stamp
+	rm -f configure-embed-stamp build-embed-stamp
+	rm -f configure-fpm-stamp build-fpm-stamp
+	rm -f build-pear-stamp
+	rm -f install-stamp
+	rm -rf apache2-build
+	rm -rf apache2filter-build
+	rm -rf cgi-build
+	rm -rf cli-build
+	rm -rf embed-build
+	rm -rf fpm-build
+	rm -rf pear-build pear-build-download
+	rm -f debian/copyright
+	rm -rf test-results.txt $(MYSQL_DATA_DIR)
+	dh_clean -Xorig
+
+	# clean up autogenerated cruft
+	cat debian/modulelist | while read package extname dsoname priority; do \
+		rm -f debian/php7-$$package.postinst; \
+		rm -f debian/php7-$$package.preinst; \
+		rm -f debian/php7-$$package.prerm; \
+		rm -f debian/php7-$$package.postrm; \
+	done
+	for sapi in libapache2-mod-php7 libapache2-mod-php7filter php7-cgi php7-cli libphp7-embed php7-fpm; do \
+		for cruft in postrm links; do \
+			rm -f debian/$${sapi}.$${cruft}; \
+		done; \
+	done
+
+PCNTL_FUNCTIONS := $(shell < ext/pcntl/php_pcntl.h sed -ne "/^PHP_FUNCTION/ s/PHP_FUNCTION(\(.*\));/\1/;t end;d;:end p" | tr '\n' ',')
+
+install: DH_OPTIONS=
+install: build
+	dh_testdir
+	dh_testroot
+	dh_prep
+	dh_installdirs
+
+
+	cp debian/php7_cgi.conf \
+		debian/php7-cgi/etc/apache2/mods-available/php7_cgi.conf
+	cp debian/php7_cgi.load \
+	        debian/php7-cgi/etc/apache2/mods-available/php7_cgi.load
+
+	# install apache2 DSO module
+	cp apache2-build/.libs/libphp7.so \
+		debian/libapache2-mod-php7/`apxs2 -q LIBEXECDIR`/
+	cp debian/libapache2-mod-php7.load \
+		debian/libapache2-mod-php7/etc/apache2/mods-available/php7.load
+	cp debian/libapache2-mod-php7.conf \
+		debian/libapache2-mod-php7/etc/apache2/mods-available/php7.conf
+
+	# Add here commands to install the package into debian/php7.
+	# install apache2 DSO filter module
+	cp apache2filter-build/.libs/libphp7.so \
+		debian/libapache2-mod-php7filter/`apxs2 -q LIBEXECDIR`/libphp7filter.so
+	cp debian/libapache2-mod-php7filter.load \
+		debian/libapache2-mod-php7filter/etc/apache2/mods-available/php7filter.load
+	cp debian/libapache2-mod-php7filter.conf \
+		debian/libapache2-mod-php7filter/etc/apache2/mods-available/php7filter.conf
+
+	# sanitize php.ini file
+	cat php.ini-production | tr "\t" " " | sed -e'/short_open_tag =/ s/Off/On/g;/session.gc_probability =/ s/1/0/g;/disable_functions =/ s/$$/ $(PCNTL_FUNCTIONS)/g;' > debian/php7-common/opt/kaltura/share/php7/php.ini-production
+	cat php.ini-production | tr "\t" " " | sed -e'/memory_limit =/ s/128M/-1/g;/short_open_tag =/ s/Off/On/g;/session.gc_probability =/ s/1/0/g' > debian/php7-common/opt/kaltura/share/php7/php.ini-production.cli
+	cat php.ini-development | tr "\t" " " | sed -e'/short_open_tag =/ s/Off/On/g;/session.gc_probability =/ s/1/0/g;/disable_functions =/ s/$$/ $(PCNTL_FUNCTIONS)/g;' > debian/php7-common/opt/kaltura/share/php7/php.ini-development
+	cp test-results.txt debian/php7-common/opt/kaltura/share/doc/php7-common/
+
+	# install embed SAPI
+	cd embed-build && make install-headers install-build install-sapi install-programs INSTALL_ROOT=$(CURDIR)/debian/libphp7-embed
+	rm $(CURDIR)/debian/libphp7-embed/opt/kaltura/lib/php7/*.la
+
+	# install the apache modules' files
+	cd apache2-build && $(MAKE) install-headers install-build install-modules install-programs INSTALL_ROOT=$(CURDIR)/debian/libapache2-mod-php7
+	# remove netware and win32 headers that we don't want
+	cd debian/libapache2-mod-php7/opt/kaltura/include/php7/ && \
+		  $(RM) TSRM/readdir.h \
+			TSRM/tsrm_config.nw.h TSRM/tsrm_config.w32.h\
+			TSRM/tsrm_nw.h TSRM/tsrm_win32.h\
+			Zend/zend_config.nw.h Zend/zend_config.w32.h\
+			main/config.nw.h main/config.w32.h\
+			main/win95nt.h
+
+	# install PEAR
+	cp -a pear-build/* debian/php-pear/
+
+	# everything under usr/share/php/data except 'PEAR' is b0rken
+	# and actually needs to be fixed
+	[ ! -f debian/php-pear/opt/kaltura/share/pear/data/Structures_Graph/LICENSE ] || \
+		$(RM) debian/php-pear/opt/kaltura/share/pear/data/Structures_Graph/LICENSE
+	[ ! -f debian/php-pear/opt/kaltura/share/pear/doc/PEAR/INSTALL ] || \
+		$(RM) debian/php-pear/opt/kaltura/share/pear/doc/PEAR/INSTALL
+	[ ! -f debian/php-pear/opt/kaltura/share/pear/doc/Structures_Graph/docs/generate.sh ] || \
+		$(RM) debian/php-pear/opt/kaltura/share/pear/doc/Structures_Graph/docs/generate.sh
+	for f in Structures_Graph/publish.sh Structures_Graph/package.sh \
+		Structures_Graph/genpackage.xml.pl; do \
+		$(RM) debian/php-pear/opt/kaltura/share/pear/data/$$f; \
+	done
+	# we don't want test suites
+	$(RM) -r debian/php-pear/opt/kaltura/share/pear/test/
+	[ -d debian/php-pear/opt/kaltura/share/pear/doc ] && { \
+		mkdir -p debian/php-pear/opt/kaltura/share/doc/php7-common/PEAR; \
+		mv debian/php-pear/opt/kaltura/share/pear/doc/* \
+			debian/php-pear/opt/kaltura/share/doc/php7-common/PEAR/; \
+		$(RM) -r debian/php-pear/opt/kaltura/share/pear/doc; \
+		ln -s ../doc/php-pear/PEAR debian/php-pear/opt/kaltura/share/pear/doc; \
+		echo "Dummy placeholder to prevent the directory's deletion" > \
+			debian/php-pear/opt/kaltura/share/doc/php7-common/PEAR/.placeholder; \
+	}
+
+	# install extensions
+	ext=`./debian/libapache2-mod-php7/usr/bin/php-config --extension-dir`;\
+	for i in libapache2-mod-php7 libapache2-mod-php7filter php7-cgi php7-cli libphp7-embed php7-fpm; do \
+		mkdir -p debian/$$i/$${ext}; \
+	done; \
+	cat debian/modulelist debian/extramodulelist | while read package extname dsoname priority; do \
+		if [ "$$package" = "mysqlnd" ]; then \
+			modulepath=cgi-build/modules; \
+		else \
+			modulepath=debian/libapache2-mod-php7/$${ext}; \
+		fi; \
+		if [ -z "$$dsoname" ]; then dsoname=$$package; fi; \
+		mkdir -p debian/php7-$$package$${ext}; \
+		install -m 644 -o root -g root \
+			$${modulepath}/$$dsoname.so \
+			debian/php7-$$package$${ext}/$$dsoname.so; \
+		rm $${modulepath}/$$dsoname.so; \
+	done
+
+	# install CGI
+	cp cgi-build/sapi/cgi/cgi-bin.php7 debian/php7-cgi/usr/lib/cgi-bin/php7
+	cp cgi-build/sapi/cgi/usr.bin.php7-cgi debian/php7-cgi/usr/bin/php7-cgi
+	cp cli-build/sapi/cli/php.1 debian/php7-cgi/usr/share/man/man1/php7-cgi.1
+
+	# install CLI
+	cp cli-build/sapi/cli/php debian/php7-cli/usr/bin/php7
+	cp cli-build/sapi/cli/php.1 debian/php7-cli/usr/share/man/man1/php7.1
+
+	# install FPM
+	mkdir -p debian/php7-fpm/usr/sbin debian/php7-fpm/usr/share/man/man8/ debian/php7-fpm/opt/kaltura/app/configurations/php/fpm/pool.d
+	cp fpm-build/sapi/fpm/php-fpm debian/php7-fpm/usr/sbin/php7-fpm
+	cp fpm-build/sapi/fpm/php-fpm.8 debian/php7-fpm/usr/share/man/man8/php7-fpm.8
+	# we don't want the pool definitions on the main file itself:
+	sed -r '/('"'"'|\[)www('"'"'|\])/Q' < fpm-build/sapi/fpm/php-fpm.conf > \
+	    debian/php7-fpm/opt/kaltura/app/configurations/php/fpm/php-fpm.conf
+	# extract the first pool, called "www," from the config file:
+	sed -nr '/('"'"'|\[)www('"'"'|\])/{h;p;d};x;/www/{x;p}' < fpm-build/sapi/fpm/php-fpm.conf | \
+	sed -e's{^;listen\.owner{listen.owner{;' \
+            -e's{^;listen\.group{listen.group{;' \
+	    > debian/php7-fpm/opt/kaltura/app/configurations/php/fpm/pool.d/www.conf
+
+	# move and install -dev files
+	dh_movefiles --sourcedir=debian/libphp7-embed
+	dh_movefiles --sourcedir=debian/libapache2-mod-php7
+	rm -rf debian/libphp7-embed/usr/include/ \
+	       debian/libphp7-embed/usr/bin/
+	rm -rf debian/libapache2-mod-php7/usr/lib/php7/build/ \
+	       debian/libapache2-mod-php7/usr/include/ \
+	       debian/libapache2-mod-php7/usr/bin/
+	rm -rf debian/libapache2-mod-php7filter/usr/lib/php7/build/ \
+	       debian/libapache2-mod-php7filter/usr/include/ \
+	       debian/libapache2-mod-php7filter/usr/bin/
+	for i in Makefile.global acinclude.m4 mkdep.awk phpize.m4 scan_makefile_in.awk; do \
+		chmod 644 debian/php7-dev/usr/lib/php7/build/$$i; \
+	done
+	mkdir -p debian/php7-dev/opt/kaltura/share/php7
+	cp -a ext/skeleton ext/ext_skel debian/php7-dev/opt/kaltura/share/php7
+	sed -i 's/skel_dir="skeleton"/skel_dir="\/usr\/share\/php7\/skeleton"/' \
+	    debian/php7-dev/opt/kaltura/share/php7/ext_skel
+	# shipping duplicate files from other packages is hell for security audits
+	ln -sf /usr/share/misc/config.guess $(PHPIZE_BUILDDIR)/config.guess
+	ln -sf /usr/share/misc/config.sub $(PHPIZE_BUILDDIR)/config.sub
+	ln -sf /usr/share/aclocal/libtool.m4 $(PHPIZE_BUILDDIR)/libtool.m4
+	ln -sf $(LTMAIN_DIR)ltmain.sh $(PHPIZE_BUILDDIR)/ltmain.sh
+	ln -sf /usr/bin/shtool $(PHPIZE_BUILDDIR)/shtool
+	# make php-dev stuff versioned
+	for i in php-config phpize; do \
+		mv debian/php7-dev/usr/bin/$$i debian/php7-dev/usr/bin/"$$i"5; \
+		mv debian/php7-dev/usr/share/man/man1/"$$i".1 debian/php7-dev/usr/share/man/man1/"$$i"5.1; \
+	done
+	# remove windows devel file
+	rm $(CURDIR)/debian/php7-dev/opt/kaltura/share/php7/skeleton/skeleton.dsp
+
+	# install common files
+	install -m755 debian/sessionclean debian/php7-common/usr/lib/php7
+	install -m755 debian/maxlifetime debian/php7-common/usr/lib/php7
+	install -m755 debian/php7enmod debian/php7-common/usr/sbin/php7enmod
+	ln -s php7enmod debian/php7-common/usr/sbin/php7dismod
+
+	# install lintian overrides
+	cp debian/php7.lintian-overrides $(CURDIR)/debian/php7-common/usr/share/lintian/overrides/php7-common
+	cp debian/php7-dev.lintian-overrides $(CURDIR)/debian/php7-dev/usr/share/lintian/overrides/php7-dev
+	cp debian/php-pear.lintian-overrides $(CURDIR)/debian/php-pear/usr/share/lintian/overrides/php-pear
+
+	# install some generic lintian overrides
+	ext=`debian/php7-dev/usr/bin/php-config5 --extension-dir | cut -b2- `; \
+	for sapi in php7-cli php7-fpm php7-cgi libapache2-mod-php7 libapache2-mod-php7filter libphp7-embed; do \
+		mkdir -p $(CURDIR)/debian/"$$sapi"/usr/share/lintian/overrides/; \
+		sed "s/@sapi@/$$sapi/g;s,@extdir@,$$ext,g" \
+		    < $(CURDIR)/debian/php7-sapi.lintian-overrides | \
+		grep -E "^$${sapi}: " \
+		    >> $(CURDIR)/debian/"$$sapi"/usr/share/lintian/overrides/"$$sapi"; \
+	done
+
+	# directories cleanup:
+	-rmdir -p debian/libapache2-mod-php7/usr/share/man/man1
+	-find debian/php-pear -type d -exec rmdir --ignore-fail-on-non-empty -p '{}' \; >/dev/null 2>&1
+
+	touch install-stamp
+
+# Build architecture-independent files here.
+# Pass -i to all debhelper commands in this target to reduce clutter.
+binary-indep: DH_OPTIONS=-i
+binary-indep: build install
+	# Need this version of debhelper for DH_OPTIONS to work.
+	dh_testdir
+	dh_testroot
+	cat debian/copyright.header LICENSE Zend/LICENSE > debian/copyright
+
+	dh_installdocs
+
+	for package in php7 php-pear; do \
+		rm -rf debian/$$package/opt/kaltura/share/doc/$$package; \
+		ln -s php7-common debian/$$package/opt/kaltura/share/doc/$$package; \
+	done
+
+	dh_link
+	dh_compress -Xphp.ini
+	dh_fixperms
+	dh_installdeb
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb
+
+# Build architecture-dependent files here.
+binary-arch: build install
+	# Need this version of debhelper for DH_OPTIONS to work.
+	dh_testdir
+	dh_testroot
+	# Do this first so we don't overwrite any debhelper-generated files
+	#
+	# generate the config snippets for various php
+	# modules from the templates.
+	cat debian/modulelist debian/extramodulelist | while read package extname dsoname priority; do \
+		if [ -z "$${dsoname}" ]; then dsoname=$$package; fi; \
+		if [ -z "$${priority}" ]; then priority=20; fi; \
+		mkdir -p debian/php7-$$package/opt/kaltura/share/php7/$$package; \
+		sed -e"s|@extname@|$${extname}|g; \
+		       s/@dsoname@/$${dsoname}/g; \
+		       s/@priority@/$${priority}/g" \
+		  < debian/php7-module.ini \
+		  > debian/php7-$$package/opt/kaltura/share/php7/$$package/$${dsoname}.ini; \
+		echo -n "$$dsoname " >> debian/php7-$$package.modules; \
+	done
+
+	# generate the maintscripts for various php
+	# modules from the templates.
+	cat debian/modulelist | while read package extname dsoname priority; do \
+	    modules=$$(cat debian/php7-$$package.modules); \
+	    for script in postinst preinst postrm prerm; do \
+	        sed -e"s/@package@/$${package}/g; \
+	               s/@modules@/$${modules}/g; \
+	                /#EXTRA#/ r debian/php7-$${package}.$${script}.extra" \
+	          < debian/php7-module.$${script} \
+	        | sed -e'/#EXTRA#/ d' \
+	          > debian/php7-$${package}.$${script}; \
+	    done; \
+	    cp debian/php7-module.triggers debian/php7-$${package}.triggers; \
+	    rm debian/php7-$$package.modules; \
+	done
+
+	# likewise, for the different sapi implementations
+	for tmpl in postrm links; do \
+		for sapi in cgi cli fpm; do \
+			sed -e "s/@sapi@/$${sapi}/g; \
+	                        s/@package@/php7-$${sapi}/g; \
+	                         /#EXTRA#/ r debian/php7-$${sapi}.$${tmpl}.extra" \
+		  	< debian/php7-sapi.$${tmpl} \
+	                | sed -e'/#EXTRA#/ d' \
+		  	> debian/php7-$${sapi}.$${tmpl}; \
+		done; \
+		for sapi in embed; do \
+			sed -e "s/@sapi@/$${sapi}/g; \
+	                        s/@package@/libphp7-$${sapi}/g; \
+	                         /#EXTRA#/ r debian/libphp7-$${sapi}.$${tmpl}.extra" \
+		  	< debian/php7-sapi.$${tmpl} \
+	                | sed -e'/#EXTRA#/ d' \
+		  	> debian/libphp7-$${sapi}.$${tmpl}; \
+		done; \
+	        for sapi in "" "filter"; do \
+		        sed -e "s/@sapi@/apache2$${sapi}/g; \
+	                        s/@package@/libapache2-mod-php7$${sapi}/g; \
+	                         /#EXTRA#/ r debian/libapache2-mod-php7$${sapi}.$${tmpl}.extra" \
+		        < debian/php7-sapi.$${tmpl} \
+	                | sed -e'/#EXTRA#/ d' \
+		        > debian/libapache2-mod-php7$${sapi}.$${tmpl}; \
+	        done; \
+	done
+
+	cat debian/copyright.header LICENSE Zend/LICENSE > debian/copyright
+	dh_installdocs -s
+
+	cat debian/modulelist | grep -v common | while read package extname dsoname priority; do \
+		rm -rf debian/php7-$$package/opt/kaltura/share/doc/php7-$$package; \
+		ln -s php7-common debian/php7-$$package/opt/kaltura/share/doc/php7-$$package; \
+	done
+
+	for package in php7-dbg php7-dev php7-cgi php7-cli php7-fpm libapache2-mod-php7 libapache2-mod-php7filter libphp7-embed; do \
+		rm -rf debian/$$package/opt/kaltura/share/doc/$$package; \
+		ln -s php7-common debian/$$package/opt/kaltura/share/doc/$$package; \
+	done
+	dh_installlogrotate -pphp7-fpm
+	dh_installcron -pphp7-common --name=php7
+	dh_installchangelogs -pphp7-common NEWS
+	dh_installinit
+	dh_strip -s --dbg-package=php7-dbg
+	dh_link -s
+	dh_compress -s -Xphp.ini
+	dh_installdeb -s
+	dh_shlibdeps -s
+
+	phpapi=`./debian/php7-dev/opt/kaltura/bin/php-config5 --phpapi`; \
+	stored=`cat debian/phpapi`; \
+	[ "$${phpapi%+lfs}" = "$${stored}" ] || echo "PHPAPI has changed, please modify debian/phpapi"; \
+	for i in libapache2-mod-php7 libapache2-mod-php7filter php7-cgi php7-cli libphp7-embed php7-fpm; do \
+		echo "php:Provides=phpapi-$${phpapi}" >> debian/$$i.substvars; \
+	done; \
+	cat debian/modulelist | while read package extname dsoname priority; do \
+		echo "php:Depends=phpapi-$${phpapi}" >> debian/php7-$$package.substvars; \
+	done
+
+	for i in cgi cli fpm; do \
+		"$$i"-build/sapi/cli/php -n -r '$(BUILTIN_EXTENSION_CHECK)' \
+			>> debian/php7-"$$i".substvars; \
+	done
+	for i in embed; do \
+		"$$i"-build/sapi/cli/php -n -r '$(BUILTIN_EXTENSION_CHECK)' \
+			>> debian/libphp7-"$$i".substvars; \
+	done
+	for i in apache2; do \
+		"$$i"-build/sapi/cli/php -n -r '$(BUILTIN_EXTENSION_CHECK)' \
+			>> debian/lib"$$i"-mod-php7.substvars; \
+		"$$i"filter-build/sapi/cli/php -n -r '$(BUILTIN_EXTENSION_CHECK)' \
+			>> debian/lib"$$i"-mod-php7filter.substvars; \
+	done
+
+	echo "apache2:Depends=apache2-mpm-prefork (>> 2.0.52) | apache2-mpm-itk, apache2.2-common" >>debian/libapache2-mod-php7.substvars
+	echo "apache2:Depends=apache2-mpm-prefork (>> 2.0.52) | apache2-mpm-itk, apache2.2-common" >>debian/libapache2-mod-php7filter.substvars
+
+	echo "libtool:Conflicts=$(LIBTOOL_CONFLICTS)" >>debian/php7-dev.substvars
+	dh_gencontrol -s
+	dh_md5sums -s
+	dh_builddeb -s
+
+binary: binary-arch binary-indep
+build-arch: build
+build-indep: build
+
+.PHONY: build build-arch build-indep clean binary-indep binary-arch binary install configure

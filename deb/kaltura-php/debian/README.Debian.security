@@ -1,0 +1,23 @@
+The Debian stable security team does not provide security support for
+certain configurations known to be inherently insecure. This includes
+the interpreter itself, extensions, and user scripts written in the PHP
+language. Most specifically, but not exclusively, the security team will
+not provide support for the following.
+
+ * Security issues which are caused by careless programming, such as:
+   - extracting a tar file without first checking the contents;
+   - using unserialize() on untrusted data;
+   - relying on a specific value of short_open_tag.
+
+ * Vulnerabilities involving any kind of open_basedir violation, as
+   this feature is not considered a security model either by us or by
+   PHP upstream.
+
+ * Any "works as expected" vulnerabilities, such as "user can cause
+   PHP to crash by writing a malicious PHP script", unless such
+   vulnerabilities involve some kind of higher-level DoS or privilege
+   escalation that would not otherwise be available.
+
+PHP upstream has published a statement regarding their view on security
+and the PHP interpreter:
+http://www.php.net/security-note.php
