@@ -1,0 +1,5 @@
+kaltura-php7-memcache (2.2.7-1) kajam; urgency=low
+
+  * Initial release for PHP7, based on the source from https://github.com/websupport-sk/pecl-memcache/tree/php7
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Wed, 25 Nov 2015 15:10:52 +0000

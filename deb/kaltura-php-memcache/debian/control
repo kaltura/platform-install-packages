@@ -1,0 +1,20 @@
+Source: php-memcache
+Section: php
+Priority: optional
+Maintainer: Jess Portnoy <jess.portnoy@kaltura.com>
+DM-Upload-Allowed: yes
+Build-Depends: debhelper (>= 9), php5-dev (>= 5.4.1), zlib1g-dev
+Standards-Version: 3.9.3
+Homepage: https://github.com/websupport-sk/pecl-memcache/tree/php7
+
+Package: kaltura-php7-memcache
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${php:Depends},
+         ucf
+Suggests: memcached
+Description: memcache extension module for PHP7
+ Memcached is a caching daemon designed especially for dynamic web applications
+ to decrease database load by storing objects in memory.
+ .
+ This extension allows you to work with memcached through handy OO and
+ procedural interfaces in your php5 applications.

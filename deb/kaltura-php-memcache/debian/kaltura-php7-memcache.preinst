@@ -1,0 +1,29 @@
+#! /bin/sh
+
+set -e
+
+case "$1" in
+  install|upgrade)
+    if [ -n "$2" ] && dpkg --compare-versions "$2" lt 3.0.6-1
+    then
+      ucf --purge /etc/php5/conf.d/memcache.ini
+    fi
+    if test -e /etc/php5/conf.d/memcache.ini
+    then
+      sed s/^\;extension/extension/ -i /etc/php5/conf.d/memcache.ini
+      dpkg-maintscript-helper mv_conffile /etc/php5/conf.d/memcache.ini \
+          /etc/php5/mods-available/memcache.ini 3.0.6-4 -- "$@"
+      rm -f /etc/php5/conf.d/memcache.ini
+    fi
+    ;;
+  abort-upgrade)
+    ;;
+  *)
+    echo "preinst called with unknown argument \`$1'" >&2
+    exit 1
+    ;;
+esac
+
+#DEBHELPER#
+
+exit 0
