@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.30
-Release: 3
+Release: 4
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -82,6 +82,9 @@ find %{_sysconfdir}/logrotate.d -type l -name "kaltura_*" -exec rm {} \;
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Wed Nov 25 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.30-4
+- the value returned into USER_EXISTS is a string so "!=" and not "-ne".
+
 * Tue Nov 24 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.30-3
 - Do not attempt to create the kaltura and etl DB users if they already exist.
 
