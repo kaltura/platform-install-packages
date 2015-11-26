@@ -13,7 +13,6 @@
 #       CREATED: 01/06/14 11:27:00 EST
 #      REVISION:  ---
 #===============================================================================
-
 #set -o nounset                              # Treat unset variables as an error
 verify_user_input()
 {
@@ -99,7 +98,7 @@ else
                 get_tracking_consent
         fi
         . $CONSENT_FILE
-	get_newsletter_consent
+#	get_newsletter_consent
        # echo "Welcome to Kaltura Server $DISPLAY_NAME post install setup.
 echo -e "\n${CYAN}In order to finalize the system configuration, please input the following:
 
@@ -126,6 +125,17 @@ ${NORMAL} "
         if [ -z "$KALTURA_VIRTUAL_HOST_PORT" ];then
                 KALTURA_VIRTUAL_HOST_PORT=80
         fi
+
+    if [ "$KALTURA_VIRTUAL_HOST_PORT" -ne 80 ];then
+        echo -en "${CYAN}Vhost port will be set on [${YELLOW}$KALTURA_VIRTUAL_HOST_PORT${CYAN}]. Are you using https? (Y/N)${NORMAL}"
+        read -e IS_SSL
+        while [ "$IS_SSL" != 'Y' -a "$IS_SSL" != 'N' ];do
+            echo -en "${CYAN}Please provide either 'Y' or 'N'.\nAre you using https? (Y/N) ${NORMAL}"
+            read -e IS_SSL
+        done
+    fi
+
+
 	if [ "$KALTURA_VIRTUAL_HOST_PORT" -eq 80 -o "$KALTURA_VIRTUAL_HOST_PORT" -eq 443 ];then
 		KALTURA_FULL_VIRTUAL_HOST_NAME=$KALTURA_VIRTUAL_HOST_NAME
 	else
@@ -228,11 +238,18 @@ ${NORMAL} "
                 echo -en "${CYAN}Kaltura Admin user (email address):${NORMAL} "
                 read -e ADMIN_CONSOLE_ADMIN_MAIL
         done
+
+    # This check will be relevant only if there's an answer file
+        if echo $ADMIN_CONSOLE_PASSWORD | grep -q -E "&|>|<|\/" ;then
+                echo "EMPTY"
+                echo -en "${BRIGHT_RED}ERROR: password can't have one of the following chars in it: '/' , '&' '>' '<'. Please re-input.${NORMAL}"
+                unset ADMIN_CONSOLE_PASSWORD
+        fi
         while [ -z "$ADMIN_CONSOLE_PASSWORD" ];do
                 echo -en "${CYAN}Admin user login password (must be minimum 8 chars and include at least one of each: upper-case, lower-case, number and a special character):${NORMAL}"
                 read -s ADMIN_CONSOLE_PASSWORD
-                if echo $ADMIN_CONSOLE_PASSWORD | grep -q "/\|&\|>\|<" ;then
-                        echo -en "${BRIGHT_RED}ERROR: Passwd can't have the '/' or '&' chars in it. Please re-input.${NORMAL}"
+                if echo $ADMIN_CONSOLE_PASSWORD | grep -q -E "&|>|<|\/" ;then
+                        echo -en "\n${BRIGHT_RED}ERROR: password can't have one of the following chars in it: '/' , '&' '>' '<'. Please re-input.${NORMAL}"
                         unset ADMIN_CONSOLE_PASSWORD
                 fi
         done
@@ -355,6 +372,16 @@ fi
 HTML5_VER="`rpm -qa kaltura-html5lib --queryformat %{version}`"
 create_answer_file $POST_INST_MAIL_TMPL
 APP_REMOTE_ADDR_HEADER_SALT=`echo $SERVICE_URL|base64 -w0`
+
+
+if [ "$IS_SSL" == 'Y' ];then
+        PROTOCOL="https"
+else
+        PROTOCOL="http"
+fi
+SERVICE_URL="$PROTOCOL://$KALTURA_FULL_VIRTUAL_HOST_NAME"
+echo "service URL is: $SERVICE_URL"
+
 # Now we will sed.
 for TMPL_CONF_FILE in $CONF_FILES;do
         CONF_FILE=`echo $TMPL_CONF_FILE | sed 's@\(.*\)\.template\(.*\)@\1\2@'`
@@ -479,6 +506,17 @@ ${NORMAL}
 fi
 
 set +e
+
+# in case we use Percona, change the monit rc file
+if rpm -qa "Percona-Server-server*" 2>/dev/null;then
+    cp $BASE_DIR/app/configurations/monit/monit.avail/percona.rc $BASE_DIR/app/configurations/monit/monit.avail/percona.rc.backup
+    sed -i s/@HOSTNAME@/`hostname`/ $BASE_DIR/app/configurations/monit/monit.avail/percona.rc
+    if [ `ps -ef | grep monit | grep -v grep | wc -l` -ne 0 ]; then
+        echo "Reloading monit"
+        /opt/kaltura/bin/monit reload
+    fi
+fi
+
 
 
 ln -sf $BASE_DIR/app/configurations/logrotate/kaltura_base /etc/logrotate.d/

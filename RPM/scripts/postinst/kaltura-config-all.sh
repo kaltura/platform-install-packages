@@ -144,6 +144,10 @@ if [ $? -ne 0 ];then
 fi
 #send_install_becon kaltura-dwh $ZONE install_success
 find $APP_DIR/cache/ -type f -exec rm {} \;
+
+# Running any temporay patches
+kaltura-on_prem_temp_patches.sh
+
 rm -f $APP_DIR/log/kaltura-*.log
 
 echo -e "${CYAN}
