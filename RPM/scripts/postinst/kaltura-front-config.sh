@@ -89,6 +89,10 @@ if ! rpm -q kaltura-front;then
 fi
 trap 'my_trap_handler "${LINENO}" ${$?}' ERR
 send_install_becon `basename $0` $ZONE install_start 0 
+
+# Removal of older ssl line settings from the file. They are appended in the following lines again
+sed --follow-symlinks -e '/IS_SSL/d' -e '/CA_FILE/d' -e '/CRT_FILE/d' -e '/CHAIN_FILE/d' -e '/KEY_FILE/d' -i $RC_FILE
+
 KALTURA_APACHE_CONF=$APP_DIR/configurations/apache
 KALTURA_APACHE_CONFD=$KALTURA_APACHE_CONF/conf.d
 #unset IS_SSL
@@ -232,6 +236,13 @@ if [ -z "$KALTURA_VIRTUAL_HOST_PORT" ];then
 	else
 		PROTOCOL="http"
 	fi
+fi
+
+# Dropping the port when it's a standard one (this code segment may be relevant only on a config re-run)
+if [ "$KALTURA_VIRTUAL_HOST_PORT" -eq 443 -o "$KALTURA_VIRTUAL_HOST_PORT" -eq 80 ];then
+        KALTURA_FULL_VIRTUAL_HOST_NAME="$KALTURA_VIRTUAL_HOST_NAME"
+else
+        KALTURA_FULL_VIRTUAL_HOST_NAME="$KALTURA_VIRTUAL_HOST_NAME:$KALTURA_VIRTUAL_HOST_PORT"
 fi
 
 if [ -z "$SERVICE_URL" ];then

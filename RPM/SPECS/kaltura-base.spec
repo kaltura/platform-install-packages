@@ -185,8 +185,8 @@ and then edit /etc/selinux/config to make the change permanent."
 	fi
 fi
 # create user/group, and update permissions
-getent group %{kaltura_group} >/dev/null || groupadd -r %{kaltura_group} -g7373 2>/dev/null
-getent passwd %{kaltura_user} >/dev/null || useradd -M -r -u7373 -d %{prefix} -s /bin/bash -c "Kaltura server" -g %{kaltura_group} %{kaltura_user} 2>/dev/null
+getent group %{kaltura_group} >/dev/null || groupadd -r %{kaltura_group} -g613 2>/dev/null
+getent passwd %{kaltura_user} >/dev/null || useradd -M -r -u613 -d %{prefix} -s /bin/bash -c "Kaltura server" -g %{kaltura_group} %{kaltura_user} 2>/dev/null
 
 getent group %{apache_user} >/dev/null || groupadd -g 48 -r %{apache_group}
 getent passwd %{apache_user} >/dev/null || \

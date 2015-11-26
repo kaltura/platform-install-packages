@@ -73,12 +73,35 @@ sed "s#@INSTALLED_HOSNAME@#`hostname`#g" -i  -i $BATCH_MAIN_CONF
 ln -sf $APP_DIR/configurations/logrotate/kaltura_batch /etc/logrotate.d/ 
 ln -sf $APP_DIR/configurations/logrotate/kaltura_apache /etc/logrotate.d/
 ln -sf $APP_DIR/configurations/logrotate/kaltura_apps /etc/logrotate.d/
-if [ "$PROTOCOL" = "https" ]; then
-	ln -sf $APP_DIR/configurations/apache/kaltura.ssl.conf /etc/httpd/conf.d/zzzkaltura.ssl.conf
-else
-	ln -sf $APP_DIR/configurations/apache/kaltura.conf /etc/httpd/conf.d/zzzkaltura.conf
-fi
 
+
+if [ `echo "$SERVICE_URL" | grep "https"` ];then
+        PROTOCOL="https"
+        ln -sf $APP_DIR/configurations/apache/kaltura.ssl.conf /etc/httpd/conf.d/zzzkaltura.ssl.conf
+        MAIN_APACHE_CONF=$APP_DIR/configurations/apache/kaltura.ssl.conf
+    	sed "s#@SSL_CERTIFICATE_FILE@#$CRT_FILE#g" -i $MAIN_APACHE_CONF
+		sed -i "s#@SSL_CERTIFICATE_KEY_FILE@#$KEY_FILE#g" $MAIN_APACHE_CONF
+		if [ -r "$CHAIN_FILE" ];then
+			sed -i "s^SSLCertificateChainFile @SSL_CERTIFICATE_CHAIN_FILE@^SSLCertificateChainFile $CHAIN_FILE^" $MAIN_APACHE_CONF
+		else
+			CHAIN_FILE="NO_CHAIN"
+			sed -i "s^SSLCertificateChainFile @SSL_CERTIFICATE_CHAIN_FILE@^#SSLCertificateChainFile @SSL_CERTIFICATE_CHAIN_FILE@^" $MAIN_APACHE_CONF
+		fi
+		if [ -r "$CA_FILE" ];then
+			sed -i "s^SSLCACertificateFile @SSL_CERTIFICATE_CA_FILE@^SSLCACertificateFile $CA_FILE^" $MAIN_APACHE_CONF
+		else
+			CA_FILE="NO_CA"
+			sed -i "s^SSLCACertificateFile @SSL_CERTIFICATE_CA_FILE@^#SSLCACertificateFile @SSL_CERTIFICATE_CA_FILE@^" $MAIN_APACHE_CONF
+		fi
+		echo "IS_SSL=y" >> $RC_FILE 
+		echo "CRT_FILE=$CRT_FILE" >> $RC_FILE
+	        echo "KEY_FILE=$KEY_FILE" >> $RC_FILE
+	        echo "CA_FILE=$CA_FILE" >> $RC_FILE
+	        echo "CHAIN_FILE=$CHAIN_FILE" >> $RC_FILE
+else
+        PROTOCOL="http"
+        ln -sf $APP_DIR/configurations/apache/kaltura.conf /etc/httpd/conf.d/zzzkaltura.conf
+fi
 
 mkdir -p $LOG_DIR/batch 
 find $APP_DIR/cache/ -type f -exec rm {} \;

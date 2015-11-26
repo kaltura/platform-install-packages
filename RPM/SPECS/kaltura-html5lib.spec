@@ -100,12 +100,13 @@ find /opt/kaltura/web/html5/html5lib -type d -name cache -exec chown -R 48 {} \;
 %postun
 
 %files
-%defattr(-, root, root, 0755)
+%defattr(-, root, root, 0775)
 %doc COPYING README.markdown 
 %{prefix}/web/html5/html5lib
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+
 * Sun Nov 22 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v2.37.1-2
 - Remove unneeded and yet very big modules/Widevine dir while packaging.
 
