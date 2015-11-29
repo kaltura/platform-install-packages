@@ -11,10 +11,10 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 11.2.0
-Release: 12
+Release: 14
 License: AGPLv3+
 Group: Server/Platform 
-Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
+Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}-TM.zip 
 Source4: emails_en.template.ini
 Source10: entry_and_uiconf_templates.tar.gz
 # fixes https://github.com/kaltura/platform-install-packages/issues/37
@@ -31,7 +31,7 @@ Source25: kaltura_populate.template
 Source26: kaltura_batch.template
 Source28: embedIframeJsAction.class.php
 Source32: KDLOperatorFfmpeg1_1_1.php
-URL: https://github.com/kaltura/server/tree/%{codename}-%{version}
+URL: https://github.com/kaltura/server/tree/%{codename}-%{version}-TM
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
 Requires: rsync,mysql,kaltura-monit,kaltura-postinst,cronie, php-cli, php-xml, php-curl, php-mysql, php-gd, php-gmp, php-ldap, php-mbstring, ntp, mailx
@@ -51,7 +51,7 @@ For more information visit: http://corp.kaltura.com, http://www.kaltura.org and 
 This is the base package, needed for any Kaltura server role.
 
 %prep
-%setup -qn server-%{codename}-%{version}
+%setup -qn server-%{codename}-%{version}-TM
 
 
 %install
@@ -95,7 +95,7 @@ project" "*.png" "*.properties" "*.sample" "*.swf" "*.sf" "*.swz" "*.uad" "*.pre
 done
 
 for i in admin_console alpha api_v3 batch configurations deployment generator infra plugins start tests ui_infra var_console vendor VERSION.txt  license.txt release-notes.md;do 
-	mv  %{_builddir}/server-%{codename}-%{version}/$i $RPM_BUILD_ROOT%{prefix}/app
+	mv  %{_builddir}/server-%{codename}-%{version}-TM/$i $RPM_BUILD_ROOT%{prefix}/app
 done
 find  $RPM_BUILD_ROOT%{prefix}/app -name "*.sh" -type f -exec chmod +x {} \;
 
