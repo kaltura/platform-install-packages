@@ -1,0 +1,42 @@
+This package was debianized by Gergely Madarasz <gorgo@sztaki.hu> on
+Tue, 16 Nov 1999 19:33:42 +0100.
+
+Previous maintainers of the package also include:
+	Petr Cech <cech@debian.org>, who did a LOT of work on these packages.
+	Adam Conrad <adconrad@0c3.net>, who got a significant chunk of input and 
+		help from Steve Langasek <vorlon@debian.org> and 
+		Andres Salomon <dilinger@debian.org>.
+	
+The current maintainers can be contacted via the debian php packaging list:
+	pkg-php-maint@lists.alioth.debian.org
+
+It was downloaded from www.php.net/version5/downloads
+Changes: removed ext/dbase dir (non-free)
+
+Noteworthy/non-trivial patches:
+	patch: suhosin.patch
+	contributor: http://www.hardened-php.net/
+	copyright © 2006-2007 Stefan Esser <sesser@hardened-php.net>
+	may be used/modified/redistributed under the terms of PHP itself
+
+	patch: use_embedded_timezonedb.patch
+	contributor: Joe Orton <jorton@redhat.com>
+	copyright © 2008 Red Hat, Inc.
+	may be used/modified/redistributed under the terms of PHP itself
+
+Upstream Authors: The PHP group for PHP5, Andi Gutmans and Zeev Suraski
+for libzend
+
+The file ext/standard/rand.c contains the following clause with a statement
+that isn't compatible with the DFSG:
+  "The code as Shawn received it included the following notice:
+
+     Copyright (C) 1997 Makoto Matsumoto and Takuji Nishimura.  When
+     you use this, send an e-mail to <matumoto@math.keio.ac.jp> with
+     an appropriate reference to your work."
+However, this requirement has been rescinded by the copyright holder in
+message <48E334A2.6050301@math.sci.hiroshima-u.ac.jp> to bug #498621.
+
+Two different licences apply to this package, one for PHP5, the other for
+libzend. Both licences are shown here below.
+

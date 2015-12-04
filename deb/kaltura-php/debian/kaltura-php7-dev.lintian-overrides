@@ -1,0 +1,2 @@
+php5-dev: script-not-executable ./usr/lib/php5/build/run-tests.php
+php5-dev: script-not-executable usr/lib/php5/build/run-tests.php

@@ -1,0 +1,9 @@
+#!/bin/sh
+
+set -e
+
+#DEBHELPER#
+
+dpkg-maintscript-helper mv_conffile /etc/php5/fpm/main.conf /etc/php5/fpm/php-fpm.conf 5.3.5-1 -- "$@"
+
+exit 0

@@ -1,0 +1,1 @@
+[ "$1" = "purge" ] && rm -rf /var/lib/php5

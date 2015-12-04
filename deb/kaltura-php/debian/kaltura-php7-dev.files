@@ -1,0 +1,6 @@
+usr/bin/php-config
+usr/bin/phpize
+usr/share/man/man1/php-config.1
+usr/share/man/man1/phpize.1
+usr/include
+usr/lib/php5/build

@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+dpkg-maintscript-helper mv_conffile /etc/php5/conf.d/memcache.ini \
+    /etc/php5/mods-available/memcache.ini 3.0.6-4 -- "$@"
+rm -f /etc/php5/conf.d/memcache.ini
+
+[ "$1" = "configure" ] && php5enmod memcache
+
+#DEBHELPER#
+
+exit 0

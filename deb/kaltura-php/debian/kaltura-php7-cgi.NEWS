@@ -1,0 +1,36 @@
+php5 (5.4.4-5) unstable; urgency=low
+
+ Please be aware that the mime-support package has dropped non-standard
+ definitions for PHP, which might affect any systems using PHP 5
+ running as CGI or FastCGI.  The following definitions were dropped:
+ 
+  application/x-httpd-php                        phtml pht php
+  application/x-httpd-php-source                 phps
+  application/x-httpd-php3                       php3
+  application/x-httpd-php3-preprocessed          php3p
+  application/x-httpd-php4                       php4
+  application/x-httpd-php5                       php5
+
+ The php5-cgi package mitigates any known issues by creating a (dummy)
+ apache2 module php5_cgi with a configuration containing handlers for
+ all previously defined extensions.  Even though we believe that this
+ configuration should keep your PHP scripts working, it might be a
+ good idea to check your apache2 site-wide configuration as well as
+ any specific PHP configuration for websites running on your system.
+
+ The new (dummy) php5_cgi configuration uses the SetHandler directive,
+ which might interfere with existing custom configurations such as
+ FastCGI (mod_fcgid or mod_fastcgi).  If so, you can reenable the
+ existing functionality of your custom configuration by disabling the
+ php5_cgi module (a2dismod php5_cgi), but you are also advised to
+ check whether your custom configuration is vulnerable to foo.php.jpeg
+ attacks.  The php5_cgi configuration snippet can be used as a base -
+ it's important to use the FilesMatch or Files directive to limit the
+ handling to the last extension.
+
+ As far as we know definitions from the mime-support packages are not
+ used in any other webserver included in Debian, but it might affect
+ any application which relies on system MIME types to interpret PHP
+ files.
+
+ -- Ondřej Surý <ondrej@debian.org>  Wed, 15 Aug 2012 10:31:31 +0200

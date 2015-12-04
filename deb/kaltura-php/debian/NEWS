@@ -1,0 +1,222 @@
+php5 (5.4.45-0+deb7u2) wheezy-security; urgency=medium
+
+  * PHP 5.4 has reached end-of-life on 14 Sep 2015 and as a result there
+    will be no more new upstream releases.  The security support of PHP
+    5.4 in Debian will be best effort only and you are strongly advised
+    to upgrade to latest stable Debian release that includes PHP 5.6 that
+    will reach end of security support on 28 Aug 2017.
+
+ -- Ondřej Surý <ondrej@debian.org>  Sun, 04 Oct 2015 17:05:37 +0200
+
+php5 (5.4.4-14+deb7u9) stable; urgency=medium
+
+  * The default PHP FPM socket permission has been changed from 0666
+    to 0660 to mitigate security vulnerability (CVE-2014-0185) in PHP
+    FPM that allowed any local user to run a PHP code under the active
+    user of FPM process via crafted FastCGI client.
+
+    The default Debian setup now correctly sets the listen.owner and
+    listen.group to www-data:www-data in default www pool configuration
+    (/etc/php5/fpm/pool.d/www.conf).  If you have more FPM instances or
+    a webserver not running under www-data user you need to adjust the
+    configuration of FPM pools in /etc/php5/fpm/pool.d/ so the accessing
+    process has rights to access the socket.
+
+ -- Ondřej Surý <ondrej@debian.org>  Mon, 12 May 2014 14:23:05 +0200
+
+php5 (5.4.4-7) unstable; urgency=low
+
+  * As a side effect of the MIME-Type changes in the mime-support package,
+    the default Apache 2 configuration will no longer perform HTTP content
+    negotiation on the PHP file extensions, which was very questionable
+    anyway.  If you really want to re-enable this support then please read
+    /usr/share/doc/php5-common/README.Debian file for further
+    instructions.
+  
+ -- Ondřej Surý <ondrej@debian.org>  Wed, 29 Aug 2012 09:18:41 +0200
+
+php5 (5.4.4-5) unstable; urgency=low
+
+  * As a security measure the default configuration for Apache 2 has been
+    changed to a stricter model.  Only files which have the correct
+    rightmost extension, and at least one character in the filename before
+    that extension, are now interpreted by PHP.  For a full list of
+    handled extensions please see the Apache 2 configuration.  At the time
+    of writing this paragraph, the list includes the following regular
+    expressions:
+  
+      1. .+\.ph(p[345]?|t|tml)$ for PHP files (application/x-httpd-php)
+      2. .+\.phps$ for PHP source files (application/x-httpd-php-source)
+
+    Previously, as a side effect of system MIME type definitions, the
+    default configuration would allow the interpreting of files with a
+    double extension, where the second extension was either unrecognised
+    or a language or content encoding to be interpreted; e.g. an uploaded
+    file named blackhat.php.foobar or index.php.cs would be interpreted by
+    PHP.  These non-standard definitions have been removed from the
+    mime-support packages and all configuration of PHP handlers is now
+    defined in the Apache 2 configuration files.
+  
+    The standard configuration now also denies access to files with names
+    which consist of an extension and nothing more; e.g. accessing '/.php'
+    will now return Access Denied instead of the output of the PHP script.
+  
+    You can use the following command to find whether there are any files
+    on your system which would be affected by this change (change <base>
+    to the directory name where you store PHP files on your system):
+
+    # find <base> -name '*.ph[pt].*' -o -name '*.php[345s].*' -o \
+                  -name '*.phtml.*' -o -name '.ph[pt]' -o \
+                  -name '.php[345s]' -o -name '.phtml'
+
+ -- Ondřej Surý <ondrej@debian.org>  Tue, 21 Aug 2012 09:14:47 +0200
+
+php5 (5.4.0~rc8-1) unstable; urgency=low
+
+  php5-fpm default www spool now listens on unix socket located
+  in /var/run/php5-fpm.sock instead of localhost:9000.  If you
+  have configured your webserver to use localhost:9000, you will
+  have to change your settings.
+
+ -- Ondřej Surý <ondrej@debian.org>  Wed, 08 Feb 2012 08:25:30 +0100
+
+php5 (5.4.0~rc6-2) unstable; urgency=low
+
+  t1lib support was removed from PHP 5.4.  t1lib has many security
+  issues and is unmaintained by upstream for a very long time (3 years).
+
+  For more information see:
+    + http://bugs.debian.org/637488
+    + http://bugs.debian.org/638755
+  
+  This unfortunately also means that following functions are not
+  available in PHP5 from now:
+  
+    - imagepsloadfont
+    - imagepsfreefont
+    - imagepsencodefont
+    - imagepsextendfont
+    - imagepsslantfont
+    - imagepstext
+    - imagepsbbox
+
+  If you really need those functions you will need to install t1lib from
+  sources.  You will need to install php5-dev and recompile GD extension
+  (roughly) using following commands:
+
+    cd <path_to_php5_sources>/ext/gd/
+    phpize
+    configure --with-gd=shared,/usr --enable-gd-native-ttf \
+      --with-t1lib=<location_of_your_t1lib>
+    make
+    make install
+
+ -- Ondřej Surý <ondrej@debian.org>  Wed, 01 Feb 2012 18:19:45 +0100
+
+php5 (5.3.9-4) unstable; urgency=low
+
+  * The Suhosin patch is now disabled in the default build.
+
+  If you want to re-enable it again for your installation, you can
+  set the option PHP5_SUHOSIN=yes in debian/rules and recompile PHP.
+
+ -- Ondřej Surý <ondrej@debian.org>  Sat, 28 Jan 2012 08:39:36 +0100
+
+php5 (5.3.6-13) unstable; urgency=low
+
+  * Updated blowfish crypt() algorithm fixes the 8-bit character handling
+    vulnerability (CVE-2011-2483) and adds more self-tests.  Unfortunately
+    this change is incompatible with some old (wrong) generated hashes for
+    passwords containing 8-bit characters.
+
+    It is recommended that any passwords containing characters with
+    the 8th bit set be changed after this upgrade. In order to allow users
+    to log in after the upgrade even if they have a potentially affected
+    password, the newly introduced backwards compatibility hash encoding
+    prefix of "$2x$" may be used (in place of the usual "$2a$"). Such
+    password hashes should only be used during a transition period; when
+    passwords are changed, the usual "$2a$" prefix is used, denoting the
+    correct algorithm.
+
+ -- Ondřej Surý <ondrej@debian.org>  Mon, 04 Jul 2011 10:31:16 +0200
+
+php5 (5.3.1-3) unstable; urgency=low
+
+  * mod_php disabled in userdirs.
+
+  The default Debian libapache2-mod-php5 package now disables the PHP
+  engine on ~/public_html directories when mod_userdir is enabled, for
+  security reasons.  Although discouraged, it can be re-enabled by
+  commenting the <IfModule mod_userdir.c> block in
+  /etc/apache2/mods-available/php5.conf
+
+  * PHP 5.2 compatibility settings
+
+  Given the short time to the Squeeze release freeze, the
+  short_open_tag setting has been turned On again (upstream now
+  defaults to Off on the php.ini files.) However, the request_order and
+  auto_globals_jit settings continue to be the default from upstream
+  ("GP" and On, respectively.)
+
+ -- Raphael Geissert <geissert@debian.org>  Mon, 11 Jan 2010 16:49:28 -0600
+
+php5 (5.2.11.dfsg.1-2) unstable; urgency=high
+
+  * Maximum number of file uploads per request limited
+
+  To prevent Denial of Service attacks by exhausting the number of
+  available temporary file names, upstream introduced the max_file_uploads
+  option in 5.3.1 and 5.2.12.
+
+  Due to the nature of this new option a default limit has been set
+  to 50, hoping it is sensible enough to not to cause disruptions on
+  existing services.
+  The value of this new limit can be changed in the php.ini file.
+
+  If you installed the php5-suhosin extension there was a limiting
+  mechanism in place already. In this case you may want to make sure
+  the new limit imposed by PHP itself is not smaller than suhosin's.
+
+ -- Raphael Geissert <geissert@debian.org>  Sat, 21 Nov 2009 13:37:51 -0600
+
+php5 (5.2.6-1) unstable; urgency=medium
+
+  * Now uses system timezone database.
+
+  Debian PHP now makes use of the system wide timezone database from the
+  tzdata package, making sure any updates there are automatically used
+  by PHP aswell. Note that this requires that the PHP process has access
+  to /etc/localtime and /usr/share/zoneinfo (this is usually the case).
+
+  * New php5-dbg package.
+
+  We are now shipping a php5-dgb package which will greatly aid in finding
+  the cause of many crashes that you may experience.  So if you are going to
+  report a bug for a reproducible crash, please install this package before
+  sending a backtrace.
+
+  * New libapache2-mod-php5filter package.
+
+  We are now also shipping a new libapache2-mod-php5filter package which
+  uses the "Apache 2.0 filter-module support via DSO through APXS".
+
+ -- Thijs Kinkhorst <thijs@debian.org>  Wed, 23 Jul 2008 17:42:06 +0200
+
+php5 (5.2.3-2) unstable; urgency=low
+
+  The Suhosin patch is now enabled by default!
+
+  For more information, see
+  <http://www.hardened-php.net/suhosin/index.html>.
+
+  Special thanks to Blars Blarson for providing a sparc machine for testing
+  that the patch seems to work okay on that architecture.  If you experience
+  otherwise let us know!
+
+  Suggestions are welcome for default configuration options, examples,
+  documentation, etc.
+
+  In any event please report successes and/or failures to us at
+  pkg-php-maint@lists.alioth.debian.org. 
+
+ -- sean finney <seanius@debian.org>  Thu, 12 Jul 2007 23:38:43 +0200

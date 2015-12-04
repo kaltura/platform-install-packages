@@ -1,0 +1,140 @@
+#!/bin/sh
+#
+#  php5enmod - a php5 module manager for Debian
+#
+#  Copyright 2012 Canonical Ltd., All Rights Reserved.
+#
+#  This program is free software: you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation, either version 3 of the License, or
+#  (at your option) any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  On Debian systems the full text of the GPL version 3 is available at
+#  /usr/share/common-licenses/GPL-3.
+#
+set -ue
+
+SCRIPT_NAME=${0##*/}
+ENABLED=0
+DISABLED=0
+VERBOSE=no
+
+cleanup() {
+    if [ "${VERBOSE}" != "no" ]; then
+	if [ ${ENABLED} -gt 0 ] ; then
+            echo "Enabled ${ENABLED} module(s), you may need to restart any running PHP processes."
+	fi
+	if [ ${DISABLED} -gt 0 ] ; then
+            echo "Disabled ${DISABLED} module(s), you may need to restart any running PHP processes."
+	fi
+    fi
+}
+
+trap cleanup EXIT
+
+usage() {
+    echo "usage: ${SCRIPT_NAME} module_name [ module_name_2 ]"
+    exit 1
+}
+
+warning() {
+    echo "WARNING: ${@}" >&2
+}
+
+enmods() {
+    local modname=""
+    ENABLED=0
+    for modname in ${@} ; do
+        enmod ${modname}
+    done
+}
+
+dismods() {
+    DISABLED=0
+    local modname=""
+    for modname in ${@} ; do
+        dismod "${modname}"
+    done
+}
+
+enmod() {
+    local modname="$(basename "${1%/[0-9]*}")"
+    local priority="$(basename "${1#[a-z]*/}")"
+    [ "${modname}" = "${priority}" ] && priority=20
+    # assert $modname is in /etc/php5/mods-available
+    local source_ini="/etc/php5/mods-available/${modname}.ini"
+    [ -z "${priority}" ] && priority=20
+
+    if [ ! -e "${source_ini}" ]; then
+	warning "${source_ini} does not exist."
+	warning "You might have removed it manually, not touching the module."
+	warning "If you want to re-enable the module ${modname},"
+	warning "you will have to reinstall the ${modname}.ini from /usr/share/php5"
+	return
+    fi
+        
+    # assert $modname is not present in /etc/php5/conf.d, or already symlink to /etc/php5/mods-available
+    local live_link="/etc/php5/conf.d/$priority-$modname.ini"
+    local live_link_content="../mods-available/$modname.ini"
+    if [ -e "${live_link}" ] ; then
+        if [ -h "${live_link}" ] ; then
+            local content="$(readlink "${live_link}")"
+            if [ "${content}" = "${live_link_content}" ] ; then
+                return
+            fi
+        fi
+        warning "Not enabling the modules ${modname} since module symlink already exists"
+	warning "in /etc/php5/conf.d with different content."
+	return
+    fi
+    ln -s "${live_link_content}" "${live_link}"
+    ENABLED=$((${ENABLED}+1))
+}
+
+dismod() {
+    local modname="$(basename "${1%/[0-9]*}")"
+    local live_link=""
+    local live_link_content="../mods-available/${modname}.ini"
+    local FOUND=0
+    for live_link in $(ls -1 /etc/php5/conf.d/*.ini); do
+        # assert $modname is in /etc/php5/conf.d
+	[ -h "${live_link}" ] || continue
+        # assert $modname is a symlink to /etc/php5/mods-available
+	[ "$(readlink "${live_link}")" != "${live_link_content}" ] && continue
+	[ -e "${live_link}" ] || warning "removing dangling symlink ${live_link}"
+	# remove the symlink
+	rm -f "${live_link}"
+	FOUND=1
+    done
+    if [ "${FOUND}" -gt 0 ]; then
+	DISABLED=$(($DISABLED+1))
+    else
+	if [ -e /etc/php5/mods-available/${modname}.ini ]; then
+		warning "$modname module already disabled"
+	else
+		warning "$modname module does not exist!"
+	fi
+    fi
+}
+
+# parse args
+# modname
+[ -n ${1:-""} ] || usage
+
+case "${SCRIPT_NAME}" in
+php5enmod)
+    enmods $@
+    ;;
+php5dismod)
+    dismods $@
+    ;;
+*)
+    usage
+    ;;
+esac
+exit 0

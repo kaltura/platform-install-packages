@@ -1,0 +1,23 @@
+#!/bin/sh -e
+
+max=1440
+
+if which php5 >/dev/null 2>&1; then
+    for sapi in apache2 apache2filter cgi fpm; do
+	if [ -e /etc/php5/${sapi}/php.ini ]; then
+	    cur=$(php5 -c /etc/php5/${sapi}/php.ini -d "error_reporting='~E_ALL'" -r 'print ini_get("session.gc_maxlifetime");')
+	    [ -z "$cur" ] && cur=0
+	    [ "$cur" -gt "$max" ] && max=$cur
+	fi
+    done
+else
+    for ini in /etc/php5/*/php.ini /etc/php5/conf.d/*.ini; do
+        cur=$(sed -n -e 's/^[[:space:]]*session.gc_maxlifetime[[:space:]]*=[[:space:]]*\([0-9]\+\).*$/\1/p' $ini 2>/dev/null || true);
+        [ -z "$cur" ] && cur=0
+        [ "$cur" -gt "$max" ] && max=$cur
+    done
+fi
+
+echo $(($max/60))
+
+exit 0

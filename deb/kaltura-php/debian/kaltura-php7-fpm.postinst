@@ -1,0 +1,21 @@
+#!/bin/sh
+
+set -e
+
+#DEBHELPER#
+
+dpkg-maintscript-helper mv_conffile /etc/php5/fpm/main.conf /etc/php5/fpm/php-fpm.conf 5.3.5-1 -- "$@"
+
+if [ "$1" = "triggered" ] && [ "$2" = "/etc/php5/conf.d" ]; then
+    invoke-rc.d php5-fpm restart
+    exit 0
+elif [ "$1" != "configure" ]; then
+    exit 0
+fi
+
+phpini="/etc/php5/fpm/php.ini"
+
+ucf /usr/share/php5/php.ini-production $phpini
+ucfr php5-fpm $phpini
+
+exit 0

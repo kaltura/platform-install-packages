@@ -1,0 +1,10 @@
+mysql MySQL mysqli
+mysql MySQL pdo_mysql
+mysqlnd MySQL mysql
+mysqlnd MySQL mysqli
+mysqlnd MySQL pdo_mysql
+interbase InterBase/Firebird pdo_firebird
+odbc ODBC pdo_odbc
+pgsql PostgreSQL pdo_pgsql
+sqlite SQLite pdo_sqlite
+sybase Sybase pdo_dblib
