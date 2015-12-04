@@ -82,6 +82,9 @@ find %{_sysconfdir}/logrotate.d -type l -name "kaltura_*" -exec rm {} \;
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Fri Dec 4 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.30-5
+- https://github.com/kaltura/platform-install-packages/issues/497
+
 * Wed Nov 25 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.30-4
 - the value returned into USER_EXISTS is a string so "!=" and not "-ne".
 
