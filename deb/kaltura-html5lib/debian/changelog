@@ -1,3 +1,54 @@
+kaltura-html5lib (2.37.3-1) kajam; urgency=low
+
+  * patch simplePhpXMLProxy.php to disallow requests that are not over HTTP[s]
+  * patch UiConfResult.php - https://github.com/kaltura/mwEmbed/pull/2308/files
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Sun, 06 Dec 2015 16:05:40 +0000
+
+kaltura-html5lib (2.37-1) kajam; urgency=low
+
+  * FEC-4253 - Captioning flyout does not disappear as expected
+  * FEC-4063 - Share&Embed: white lines appear after click on some social network icon on FireFox
+  * FEC-3982 - Related videos are stretched on fullscreen
+  * FEC-3937 - Player Share is hardcoded to cdnapi.kaltura.com
+  * FEC-4158 - Strings plugin should support per localization key overrides
+  * FEC-2823 - Google Analytics configuration in Studio is wrong
+  * FEC-4296 - Playlists should support setting playlist width in percentage
+  * OPF-1572 - Issues with Sub-titles
+  * FEC-3724 - uDRM: Modular DRM p2 is not working on IE11 & Edge
+  * SUP-6372 - Size of cookie request header field exceeds server limit.
+  * SUP-5984 - URL Top syndicators
+  * SUP-5910 - "EmbedPlayer.HidePosterOnStart" Attribute Overrides "EmbedPlayer.ShowPosterOnStop"
+  * SUP-6057 - Logo stretched on IE 9
+  * SUP-6313 - Live steam - the stream doesn't starts after the first click on the play button with embed type - thumbnail and embed
+  * SUP-6143 - Player v2.35 - Icons Display
+  * SUP-5575 - Google analytics page display
+  * SUP-5991 - "video content" tooltip is showing while the player loads
+  * SUP-6097 - Changing playbackRate modifies number of captions
+  * WEBC-581 - keyboard shortcuts are not disabled in in-player Q&A
+  * FEC-4349 - Fix native callout on Android
+  * FEC-4336 - evars and props do not get updated in playlist
+  * SUP-6097 - Changing playbackRate modifies number of captions
+  * PLAT-3590 - Replace existing og:tags in KMC Preview & Embed links to support HTML5 playback on Facebook and Embedly
+  * FEC-4394 - Seek race condition prevent seek events propagation in native player
+  * FEC-4367 - moderation plugin: Thank you message not localized
+  * FEC-4328 - Support hide cursor durring fullscreen playback
+  * FEC-4236 - Add logic to the flavor selection in Android
+  * FEC-3844 - Rate selector: the video started to play at beginning, if seek it and after increase speed
+  * SUP-5072 - YouTube player autoplay fails
+  * FEC-4417 - IMA issue - When preroll ended the media content ended the player can't replay
+  * FEC-4414 - Scrubber head is sometimes cut during playback in Chrome latest version
+  * FEC-4413 - multiple "doStop" notifications causes the video to load in iOS mobile devices
+  * SUP-6540 - Fallback from Flash to HTML5 v2.36 causes an endless wheel GUI issue
+  * FEC-3844 - Rate selector: the video started to play at beginning, if seek it and after increase speed
+  * SUP-6312 - mwe-embedplayer-no-source not respected
+  * IVQ integration
+  * fix chromecast HLS support*
+
+
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Fri, 20 Nov 2015 14:11:22 +0000
+
 kaltura-html5lib (2.36-1) kajam; urgency=low
 
   * SUP-5808 - Watermark test page uses outdated attribute names
