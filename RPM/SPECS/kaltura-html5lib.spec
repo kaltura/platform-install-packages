@@ -2,8 +2,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.37.1
-Release: 2
+Version: v2.37.3
+Release: 1
 Epoch:0 
 License: AGPLv3+
 Group: Server/Platform 
@@ -34,6 +34,7 @@ Source23: kaltura-html5lib-v2.33.tar.gz
 Source24: kaltura-html5lib-v2.34.tar.gz
 Source25: kaltura-html5lib-v2.35.5.tar.gz
 Source26: kaltura-html5lib-v2.36.tar.gz
+Source27: kaltura-html5lib-v2.37.1.tar.gz
 
 URL: https://github.com/kaltura/mwEmbed 
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -82,10 +83,11 @@ tar zxf %{SOURCE23} -C %{_builddir}/
 tar zxf %{SOURCE24} -C %{_builddir}/
 tar zxf %{SOURCE25} -C %{_builddir}/
 tar zxf %{SOURCE26} -C %{_builddir}/
+tar zxf %{SOURCE27} -C %{_builddir}/
 
 %install
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib
-for i in v2.1.1 v2.3 v2.4 v2.6 v2.9 v2.14 v2.15 v2.18.5 v2.20 v2.21 v2.22 v2.23 v2.24 v2.25 v2.26 v2.27 v2.28 v2.29 v2.30 v2.31 v2.32.1 v2.33 v2.34 v2.35.5 v2.36 %{version};do
+for i in v2.1.1 v2.3 v2.4 v2.6 v2.9 v2.14 v2.15 v2.18.5 v2.20 v2.21 v2.22 v2.23 v2.24 v2.25 v2.26 v2.27 v2.28 v2.29 v2.30 v2.31 v2.32.1 v2.33 v2.34 v2.35.5 v2.36 v2.37.1 %{version};do
 	rm -rf %{_builddir}/%{name}-$i/modules/Widevine
 	cp -r %{_builddir}/%{name}-$i $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i
 	ln -sf %{prefix}/app/configurations/html5.php $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i/LocalSettings.php 
@@ -106,6 +108,9 @@ find /opt/kaltura/web/html5/html5lib -type d -name cache -exec chown -R 48 {} \;
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Fri Dec 4 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v2.37.3-1
+- FEC-4446 - Fix issue with playback engine fail resolving URL redirect(HTTP 302)
+
 * Sun Nov 22 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v2.37.1-2
 - Remove unneeded and yet very big modules/Widevine dir while packaging.
 
