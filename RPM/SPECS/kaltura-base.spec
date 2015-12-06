@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 11.3.0
-Release: 11
+Release: 12
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -298,6 +298,14 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Sun Dec 6 2015 jess.portnoy@kaltura.com <Jess Portnoy> - 11.3.0-12
+- SUP-4598 - Infinite entry creation when using "Create new entry for every broadcast session"
+- SUP-5438 - Converting Live Stream to VOD Not Working at all
+- SUP-6536 - Entries Not in "Ready" Status - Fail to Clone
+- SUP-6614 - ARF transcoding failure
+- PLAT-3386 - Stream is rewinded on HLS when stopping and starting the stream with FMLE
+- PLAT-4068 - When streaming with FMLE, first chunk has invalid duration (mostly after stop-start)
+ 
 * Mon Nov 23 2015 jess.portnoy@kaltura.com <Jess Portnoy> - 11.3.0-1
 - Ver Bounce to 11.3.0
 

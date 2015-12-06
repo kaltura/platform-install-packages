@@ -49,5 +49,5 @@ tar jcf $RPM_SOURCES_DIR/$KMC_RPM_NAME-$KMC_VERSION.tar.bz2 $KMC_RPM_NAME-$KMC_V
 echo "Packaged into $RPM_SOURCES_DIR/$KMC_RPM_NAME-$KMC_VERSION.tar.bz2"
 
 if [ -x "`which rpmbuild 2>/dev/null`" ];then
-	rpmbuild -ba $RPM_SPECS_DIR/$KMC_RPM_NAME.spec
+	rpmbuild -bb $RPM_SPECS_DIR/$KMC_RPM_NAME.spec
 fi
