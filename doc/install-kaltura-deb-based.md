@@ -169,8 +169,8 @@ And install as described above.
 # aptitude update
 # aptitude install ~Nkaltura
 # dpkg-reconfigure kaltura-base
-# dpkg-reconfigure kaltura-batch
 # dpkg-reconfigure kaltura-front
+# dpkg-reconfigure kaltura-batch
 ```
 
 ## Remove Kaltura

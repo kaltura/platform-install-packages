@@ -74,8 +74,6 @@ The ```[Kaltura-noarch]``` repo should remain as is.
 
 *Note for RHEL7: depending on what repos you have enabled, you may also need to add the EPEL or CentOS repos to resolve all dependencies.*
 
-
-
 #### MySQL Install and Configuration
 For MySQL versions higher 5.5 and above, note that you must disable strict mode for the deployment to succeed.
 Please see the following document:
