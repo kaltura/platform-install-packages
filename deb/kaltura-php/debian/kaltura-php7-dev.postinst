@@ -9,9 +9,8 @@ if [ "$1" != "configure" ]; then
 fi
 
 for i in php-config phpize; do
-	update-alternatives \
-	  --install /usr/bin/"$i" $i /usr/bin/"$i"5 50 \
-	  --slave /usr/share/man/man1/"$i".1.gz "$i".1.gz /usr/share/man/man1/"$i"5.1.gz
+        update-alternatives \
+          --install /usr/bin/"$i" $i /opt/kaltura/bin/"$i" 50 \
+          --slave /opt/kaltura/share/man/man1/"$i".1.gz "$i".1.gz /opt/kaltura/share/man/man1/"$i"7.1.gz
 done
-
 exit 0

@@ -1,9 +1,9 @@
-/usr/lib/php5/libexec
-/usr/share/lintian/overrides
-/usr/share/doc/php5-common
-/usr/share/php5
-/var/lib/php5
-/usr/lib/php5
-/etc/php5/conf.d
-/etc/php5/mods-available
+/opt/kaltura/lib/php7/libexec
+/opt/kaltura/share/lintian/overrides
+/opt/kaltura/share/doc/php7-common
+/opt/kaltura/share/php7
+/var/lib/php7
+/opt/kaltura/lib/php7
+/opt/kaltura/app/configurations/php/conf.d
+/opt/kaltura/app/configurations/php/mods-available
 /usr/sbin

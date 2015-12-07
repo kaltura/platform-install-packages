@@ -1,0 +1,79 @@
+php:Depends=phpapi-
+php:Depends=phpapi-
+php:Depends=phpapi-Usage: ./debian/kaltura-libapache2-mod-php7/opt/kaltura/bin/php-config [OPTION]
+Options:
+  --prefix            [/opt/kaltura]
+  --includes          [-I/opt/kaltura/include/php -I/opt/kaltura/include/php/main -I/opt/kaltura/include/php/TSRM -I/opt/kaltura/include/php/Zend -I/opt/kaltura/include/php/ext -I/opt/kaltura/include/php/ext/date/lib]
+  --ldflags           []
+  --libs              [-lcrypt   -lz -lresolv -lcrypt -lonig -lstdc++ -lcrypto -lssl -lcrypto -lbz2 -lz -lpcre -lcrypto -lssl -lcrypto -lrt -lm -ldl -lnsl  -lxml2 -lgssapi_krb5 -lkrb5 -lk5crypto -lcom_err -lxml2 -lxml2 -lxml2 -lcrypt -lxml2 -lxml2 -lxml2 -lxml2 -lcrypt ]
+  --extension-dir     [/opt/kaltura/lib/php/20151012]
+  --include-dir       [/opt/kaltura/include/php]
+  --man-dir           [/opt/kaltura/share/man]
+  --php-binary        [/opt/kaltura/bin/php]
+  --php-sapis         [ apache2handler cli phpdbg cgi]
+  --configure-options [--prefix=/opt/kaltura --with-apxs2=/usr/bin/apxs2 --with-config-file-path=/opt/kaltura/app/configurations/php/apache2 --with-config-file-scan-dir=/opt/kaltura/app/configurations/php/apache2/conf.d --build=x86_64-linux-gnu --host=x86_64-linux-gnu --sysconfdir=/opt/kaltura/app/configurations/php --localstatedir=/opt/kaltura/var --mandir=/opt/kaltura/share/man --disable-debug --disable-rpath --disable-static --with-pic --with-layout=GNU --with-pear --enable-calendar --enable-sysvsem --enable-sysvshm --enable-sysvmsg --enable-bcmath --with-bz2 --enable-ctype --with-iconv --enable-exif --enable-ftp --with-gettext --enable-mbstring --with-onig=/usr --with-pcre-regex=/usr --enable-shmop --enable-sockets --enable-wddx --with-libxml-dir=/usr --with-zlib --with-kerberos=/usr --with-openssl=/usr --enable-soap --enable-zip --with-mhash=yes --with-mysql-sock=/var/run/mysqld/mysqld.sock --without-mm --with-curl=shared,/usr --with-zlib-dir=/usr --with-gmp=shared,/usr --with-jpeg-dir=shared,/usr --with-xpm-dir=shared,/usr/X11R6 --with-png-dir=shared,/usr --with-freetype-dir=shared,/usr --enable-intl=shared --without-t1lib --with-ldap=shared,/usr --with-ldap-sasl=/usr --with-mcrypt=shared,/usr --with-mysqli=shared,/usr/bin/mysql_config --with-pspell=shared,/usr --with-recode=shared,/usr --with-xsl=shared,/usr --with-snmp=shared,/usr --with-sqlite3=shared,/usr --with-tidy=shared,/usr --with-xmlrpc=shared --with-pgsql=shared,/usr PGSQL_INCLUDE=/usr/include/postgresql --enable-pdo=shared --without-pdo-dblib --with-pdo-mysql=shared,/usr --with-pdo-pgsql=shared,/usr/bin/pg_config --with-pdo-sqlite=shared,/usr --with-pdo-dblib=shared,/usr build_alias=x86_64-linux-gnu host_alias=x86_64-linux-gnu CFLAGS=-O2 -Wall -fsigned-char -fno-strict-aliasing -gstabs]
+  --version           [7.0.0RC8]
+  --vernum            [70000]
+php:Depends=phpapi-Usage: ./debian/kaltura-libapache2-mod-php7/opt/kaltura/bin/php-config [OPTION]
+Options:
+  --prefix            [/opt/kaltura]
+  --includes          [-I/opt/kaltura/include/php -I/opt/kaltura/include/php/main -I/opt/kaltura/include/php/TSRM -I/opt/kaltura/include/php/Zend -I/opt/kaltura/include/php/ext -I/opt/kaltura/include/php/ext/date/lib]
+  --ldflags           []
+  --libs              [-lcrypt   -lz -lresolv -lcrypt -lonig -lstdc++ -lcrypto -lssl -lcrypto -lbz2 -lz -lpcre -lcrypto -lssl -lcrypto -lrt -lm -ldl -lnsl  -lxml2 -lgssapi_krb5 -lkrb5 -lk5crypto -lcom_err -lxml2 -lxml2 -lxml2 -lcrypt -lxml2 -lxml2 -lxml2 -lxml2 -lcrypt ]
+  --extension-dir     [/opt/kaltura/lib/php/20151012]
+  --include-dir       [/opt/kaltura/include/php]
+  --man-dir           [/opt/kaltura/share/man]
+  --php-binary        [/opt/kaltura/bin/php]
+  --php-sapis         [ apache2handler cli phpdbg cgi]
+  --configure-options [--prefix=/opt/kaltura --with-apxs2=/usr/bin/apxs2 --with-config-file-path=/opt/kaltura/app/configurations/php/apache2 --with-config-file-scan-dir=/opt/kaltura/app/configurations/php/apache2/conf.d --build=x86_64-linux-gnu --host=x86_64-linux-gnu --sysconfdir=/opt/kaltura/app/configurations/php --localstatedir=/opt/kaltura/var --mandir=/opt/kaltura/share/man --disable-debug --disable-rpath --disable-static --with-pic --with-layout=GNU --with-pear --enable-calendar --enable-sysvsem --enable-sysvshm --enable-sysvmsg --enable-bcmath --with-bz2 --enable-ctype --with-iconv --enable-exif --enable-ftp --with-gettext --enable-mbstring --with-onig=/usr --with-pcre-regex=/usr --enable-shmop --enable-sockets --enable-wddx --with-libxml-dir=/usr --with-zlib --with-kerberos=/usr --with-openssl=/usr --enable-soap --enable-zip --with-mhash=yes --with-mysql-sock=/var/run/mysqld/mysqld.sock --without-mm --with-curl=shared,/usr --with-zlib-dir=/usr --with-gmp=shared,/usr --with-jpeg-dir=shared,/usr --with-xpm-dir=shared,/usr/X11R6 --with-png-dir=shared,/usr --with-freetype-dir=shared,/usr --enable-intl=shared --without-t1lib --with-ldap=shared,/usr --with-ldap-sasl=/usr --with-mcrypt=shared,/usr --with-mysqli=shared,/usr/bin/mysql_config --with-pspell=shared,/usr --with-recode=shared,/usr --with-xsl=shared,/usr --with-snmp=shared,/usr --with-sqlite3=shared,/usr --with-tidy=shared,/usr --with-xmlrpc=shared --with-pgsql=shared,/usr PGSQL_INCLUDE=/usr/include/postgresql --enable-pdo=shared --without-pdo-dblib --with-pdo-mysql=shared,/usr --with-pdo-pgsql=shared,/usr/bin/pg_config --with-pdo-sqlite=shared,/usr --with-pdo-dblib=shared,/usr build_alias=x86_64-linux-gnu host_alias=x86_64-linux-gnu CFLAGS=-O2 -Wall -fsigned-char -fno-strict-aliasing -gstabs]
+  --version           [7.0.0RC8]
+  --vernum            [70000]
+php:Depends=phpapi-Usage: ./debian/kaltura-libapache2-mod-php7/opt/kaltura/bin/php-config [OPTION]
+Options:
+  --prefix            [/opt/kaltura]
+  --includes          [-I/opt/kaltura/include/php -I/opt/kaltura/include/php/main -I/opt/kaltura/include/php/TSRM -I/opt/kaltura/include/php/Zend -I/opt/kaltura/include/php/ext -I/opt/kaltura/include/php/ext/date/lib]
+  --ldflags           []
+  --libs              [-lcrypt   -lz -lresolv -lcrypt -lonig -lstdc++ -lcrypto -lssl -lcrypto -lbz2 -lz -lpcre -lcrypto -lssl -lcrypto -lrt -lm -ldl -lnsl  -lxml2 -lgssapi_krb5 -lkrb5 -lk5crypto -lcom_err -lxml2 -lxml2 -lxml2 -lcrypt -lxml2 -lxml2 -lxml2 -lxml2 -lcrypt ]
+  --extension-dir     [/opt/kaltura/lib/php/20151012]
+  --include-dir       [/opt/kaltura/include/php]
+  --man-dir           [/opt/kaltura/share/man]
+  --php-binary        [/opt/kaltura/bin/php]
+  --php-sapis         [ apache2handler cli phpdbg cgi]
+  --configure-options [--prefix=/opt/kaltura --with-apxs2=/usr/bin/apxs2 --with-config-file-path=/opt/kaltura/app/configurations/php/apache2 --with-config-file-scan-dir=/opt/kaltura/app/configurations/php/apache2/conf.d --build=x86_64-linux-gnu --host=x86_64-linux-gnu --sysconfdir=/opt/kaltura/app/configurations/php --localstatedir=/opt/kaltura/var --mandir=/opt/kaltura/share/man --disable-debug --disable-rpath --disable-static --with-pic --with-layout=GNU --with-pear --enable-calendar --enable-sysvsem --enable-sysvshm --enable-sysvmsg --enable-bcmath --with-bz2 --enable-ctype --with-iconv --enable-exif --enable-ftp --with-gettext --enable-mbstring --with-onig=/usr --with-pcre-regex=/usr --enable-shmop --enable-sockets --enable-wddx --with-libxml-dir=/usr --with-zlib --with-kerberos=/usr --with-openssl=/usr --enable-soap --enable-zip --with-mhash=yes --with-mysql-sock=/var/run/mysqld/mysqld.sock --without-mm --with-curl=shared,/usr --with-zlib-dir=/usr --with-gmp=shared,/usr --with-jpeg-dir=shared,/usr --with-xpm-dir=shared,/usr/X11R6 --with-png-dir=shared,/usr --with-freetype-dir=shared,/usr --enable-intl=shared --without-t1lib --with-ldap=shared,/usr --with-ldap-sasl=/usr --with-mcrypt=shared,/usr --with-mysqli=shared,/usr/bin/mysql_config --with-pspell=shared,/usr --with-recode=shared,/usr --with-xsl=shared,/usr --with-snmp=shared,/usr --with-sqlite3=shared,/usr --with-tidy=shared,/usr --with-xmlrpc=shared --with-pgsql=shared,/usr PGSQL_INCLUDE=/usr/include/postgresql --enable-pdo=shared --without-pdo-dblib --with-pdo-mysql=shared,/usr --with-pdo-pgsql=shared,/usr/bin/pg_config --with-pdo-sqlite=shared,/usr --with-pdo-dblib=shared,/usr build_alias=x86_64-linux-gnu host_alias=x86_64-linux-gnu CFLAGS=-O2 -Wall -fsigned-char -fno-strict-aliasing -gstabs]
+  --version           [7.0.0RC8]
+  --vernum            [70000]
+php:Depends=phpapi-Usage: ./debian/kaltura-libapache2-mod-php7/opt/kaltura/bin/php-config [OPTION]
+Options:
+  --prefix            [/opt/kaltura]
+  --includes          [-I/opt/kaltura/include/php -I/opt/kaltura/include/php/main -I/opt/kaltura/include/php/TSRM -I/opt/kaltura/include/php/Zend -I/opt/kaltura/include/php/ext -I/opt/kaltura/include/php/ext/date/lib]
+  --ldflags           []
+  --libs              [-lcrypt   -lz -lresolv -lcrypt -lonig -lstdc++ -lcrypto -lssl -lcrypto -lbz2 -lz -lpcre -lcrypto -lssl -lcrypto -lrt -lm -ldl -lnsl  -lxml2 -lgssapi_krb5 -lkrb5 -lk5crypto -lcom_err -lxml2 -lxml2 -lxml2 -lcrypt -lxml2 -lxml2 -lxml2 -lxml2 -lcrypt ]
+  --extension-dir     [/opt/kaltura/lib/php/20151012]
+  --include-dir       [/opt/kaltura/include/php]
+  --man-dir           [/opt/kaltura/share/man]
+  --php-binary        [/opt/kaltura/bin/php]
+  --php-sapis         [ apache2handler cli phpdbg cgi]
+  --configure-options [--prefix=/opt/kaltura --with-apxs2=/usr/bin/apxs2 --with-config-file-path=/opt/kaltura/app/configurations/php/apache2 --with-config-file-scan-dir=/opt/kaltura/app/configurations/php/apache2/conf.d --build=x86_64-linux-gnu --host=x86_64-linux-gnu --sysconfdir=/opt/kaltura/app/configurations/php --localstatedir=/opt/kaltura/var --mandir=/opt/kaltura/share/man --disable-debug --disable-rpath --disable-static --with-pic --with-layout=GNU --with-pear --enable-calendar --enable-sysvsem --enable-sysvshm --enable-sysvmsg --enable-bcmath --with-bz2 --enable-ctype --with-iconv --enable-exif --enable-ftp --with-gettext --enable-mbstring --with-onig=/usr --with-pcre-regex=/usr --enable-shmop --enable-sockets --enable-wddx --with-libxml-dir=/usr --with-zlib --with-kerberos=/usr --with-openssl=/usr --enable-soap --enable-zip --with-mhash=yes --with-mysql-sock=/var/run/mysqld/mysqld.sock --without-mm --with-curl=shared,/usr --with-zlib-dir=/usr --with-gmp=shared,/usr --with-jpeg-dir=shared,/usr --with-xpm-dir=shared,/usr/X11R6 --with-png-dir=shared,/usr --with-freetype-dir=shared,/usr --enable-intl=shared --without-t1lib --with-ldap=shared,/usr --with-ldap-sasl=/usr --with-mcrypt=shared,/usr --with-mysqli=shared,/usr/bin/mysql_config --with-pspell=shared,/usr --with-recode=shared,/usr --with-xsl=shared,/usr --with-snmp=shared,/usr --with-sqlite3=shared,/usr --with-tidy=shared,/usr --with-xmlrpc=shared --with-pgsql=shared,/usr PGSQL_INCLUDE=/usr/include/postgresql --enable-pdo=shared --without-pdo-dblib --with-pdo-mysql=shared,/usr --with-pdo-pgsql=shared,/usr/bin/pg_config --with-pdo-sqlite=shared,/usr --with-pdo-dblib=shared,/usr build_alias=x86_64-linux-gnu host_alias=x86_64-linux-gnu CFLAGS=-O2 -Wall -fsigned-char -fno-strict-aliasing -gstabs]
+  --version           [7.0.0RC8]
+  --vernum            [70000]
+php:Depends=phpapi- 20151012
+php:Depends=phpapi-20151012
+php:Depends=phpapi-20151012
+php:Depends=phpapi-20151012
+php:Depends=phpapi-20151012
+php:Depends=phpapi-20151012
+php:Depends=phpapi-20151012
+php:Depends=phpapi-20151012
+php:Depends=phpapi-20151012
+php:Depends=phpapi-20151012
+php:Depends=phpapi-20151012
+php:Depends=phpapi-20151012
+php:Depends=phpapi-20151012
+php:Depends=phpapi-20151012
+php:Depends=phpapi-20151012
+php:Depends=phpapi-20151012
+php:Depends=phpapi-20151012
+php:Depends=phpapi-20151012
+php:Depends=phpapi-20151012
+php:Depends=phpapi-20151012
+php:Depends=phpapi-20151012

@@ -17,9 +17,9 @@ if [ "$1" != "configure" ]; then
     exit 0
 fi
 
-phpini="/etc/php5/cgi/php.ini"
+phpini="/opt/kaltura/app/configurations/php/cgi/php.ini"
 
-ucf /usr/share/php5/php.ini-production $phpini
+ucf /opt/kaltura/share/php7/php.ini-production $phpini
 ucfr php5-cgi $phpini
 
 # Enable php5_cgi if upgrading from older versions of php5-cgi

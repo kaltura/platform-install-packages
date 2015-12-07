@@ -1,0 +1,2 @@
+libtool:Conflicts=libtool (<< 2.2)
+misc:Depends=

@@ -1,0 +1,279 @@
+# php7-maintscript-helper - Php5 helper function for maintainer scripts
+# Copyright (C) 2012 Arno Töll <debian@toell.net>
+#               2013 Ondřej Surý <ondrej@sury.org>
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy of
+# this software and associated documentation files (the "Software"), to deal in
+# the Software without restriction, including without limitation the rights to
+# use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+# the Software, and to permit persons to whom the Software is furnished to do so,
+# subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+# FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+# COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+# IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+# CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+#
+# VARIABLES
+#
+
+
+# global environment variables used by php7-maintscript-helper:
+# * PHP5_MAINTSCRIPT_DEBUG:
+#				set this to any non-zero value to get debug output
+# * PHP5_MAINTSCRIPT_HELPER_QUIET:
+#				set this to any non-zero value to omit any output
+# * EXPORT_PHP5_MAINTSCRIPT_HELPER:
+#				will be defined by php7-maintscript-helper
+#				to avoid inclusion loops. Do not set this
+#				variable manually
+# * PHP5_NEED_ACTION:
+#				will be defined if a function call wants to
+#				override the behavior of php7_needs_action.
+#				Do not rely on this variable. It is considered
+#				an implementation detail.
+# * PHP5_MAINTSCRIPT_NAME
+# * PHP5_MAINTSCRIPT_PACKAGE
+# * PHP5_MAINTSCRIPT_METHOD
+# * PHP5_MAINTSCRIPT_ARGUMENT
+#				these variables contain information about the
+#				maintainer script which is calling the
+#				maintscript-helper. It contains arguments which
+#				dpkg supplies to maintainer scripts and similar
+#				information. These variables are an
+#				implementation detail and not to be changed.
+#
+#				You might want to set them manually only if you
+#				are calling php7-maintscript-helper from
+#				some place which does not preserve the original
+#				script arguments for example when calling from
+#				a subfunction instead of the main function in
+#				your maintainer script
+
+#
+# INITIALIZATION
+#
+
+if [ -n "${EXPORT_PHP5_MAINTSCRIPT_HELPER:-}" ] ; then
+	return
+else
+	EXPORT_PHP5_MAINTSCRIPT_HELPER=1
+
+	if [ -n "${PHP5_MAINTSCRIPT_DEBUG:-}" ] ; then
+		set -x
+	fi
+
+	if [ -z "$1" ] ; then
+		echo "You must invoke php7-maintscript-helper with an unmodified environment when sourcing it" >&2
+		return 1
+	fi
+
+	PHP5_MAINTSCRIPT_NAME="$DPKG_MAINTSCRIPT_NAME"
+	[ "$PHP5_MAINTSCRIPT_NAME" ] || PHP5_MAINTSCRIPT_NAME="${0##*.}"
+
+	case "$PHP5_MAINTSCRIPT_NAME" in
+		preinst|prerm|postrm|postinst)
+			# yay - recognized script
+		;;
+		*)
+			echo "php7-maintscript-helper invoked from an unrecognized maintainer script: exiting" >&2
+			return 1
+		;;
+	esac
+
+	PHP5_MAINTSCRIPT_PACKAGE="$DPKG_MAINTSCRIPT_PACKAGE"
+	if [ -z "$PHP5_MAINTSCRIPT_PACKAGE" ]; then
+		PHP5_MAINTSCRIPT_PACKAGE="${0##*/}"
+		PHP5_MAINTSCRIPT_PACKAGE="${PHP5_MAINTSCRIPT_PACKAGE%.*}"
+	fi
+
+	if [ -z "$PHP5_MAINTSCRIPT_METHOD" ] ; then
+		PHP5_MAINTSCRIPT_METHOD="$1"
+	fi
+
+	case "$PHP5_MAINTSCRIPT_METHOD" in
+		install|upgrade|abort-upgrade|configure|abort-remove|abort-remove|abort-deconfigure|remove|failed-upgrade|purge|disappear|abort-install)
+			# yay - recognized script
+		;;
+		*)
+			echo "php7-maintscript-helper invoked from a modified environment. Please hint required arguments manually" >&2
+			return 1
+		;;
+	esac
+
+
+
+	if [ -z "$PHP5_MAINTSCRIPT_ARGUMENT" ] ; then
+		PHP5_MAINTSCRIPT_ARGUMENT="${2:-}"
+	fi
+
+fi
+
+#
+# FUNCTIONS
+#
+
+#
+# Function php7_msg
+#	print out a warning to both, the syslog and a local standard output.
+#	This function should generally be used to display messages related to
+#	the web server in maintainer scripts.
+# Parameters:
+#	priority
+#		The message priority. Recognized values are the same as defined
+#		by syslog(3), thus: one among debug, info, notice, warning,
+#		err, crit, alert, emerg.
+#		If no known priority is recognized, the priority is set to
+#		"warning".
+#	message
+#		The message as a string. It is printed out verbatim.
+# Behavior:
+#	No message is displayed if PHP5_MAINTSCRIPT_HELPER_QUIET is defined
+# Returns:
+#	this function always returns 0
+# Since: 5.5.0+dfsg-7
+php7_msg()
+{
+	local PRIORITY="$1"
+	local MSG="$2"
+	case "$PRIORITY" in
+		debug|info|notice|warning|err|crit|alert|emerg)
+		;;
+		*)
+			PRIORITY="warning"
+		;;
+	esac
+	[ -z "$PHP5_MAINTSCRIPT_HELPER_QUIET" ] && ( [ -n "${PHP5_MAINTSCRIPT_DEBUG:-}" ] || [ "$PRIORITY" != "debug" ] ) && echo "$MSG" >&2
+	[ -x /usr/bin/logger ] || return 0
+	local LOGGER="/usr/bin/logger -p daemon.$PRIORITY -t $PHP5_MAINTSCRIPT_PACKAGE "
+	$LOGGER "$MSG" || return 0
+}
+
+#
+# Function php7_invoke
+#	invokes an Apache 2 configuration helper to enable or disable a
+#	particular piece of configuration, a site or a module. It carefully
+#	checks whether the supplied configuration snippet exists and reloads the
+#	web server if the site administrator desires that by call dpkg trigger
+#       /opt/kaltura/app/configurations/php/SAPI/conf.d which is defined for apache2, apache2filter and fpm.
+#
+# Parameters:
+#	command - The command to invoke. Recognized commands are "enconf",
+#		"enmod", "ensite", "disconf", "dismod", "dissite"
+#
+#       sapi - Either the specific SAPI (apache2, apache2filter, fpm,
+#              cgi, cli, embed) or ALL
+#
+#	arguments
+#		- A single argument (e.g. a module) which shall be
+#		  enabled or disabled respectively.
+#
+# Returns
+#	0 if the changes could be activated
+#	1 otherwise
+# Since: 5.5.0+dsfg-7
+php7_invoke()
+{
+    local CMD=$1
+    local SAPI=$2
+    local MOD=$3
+    local check_switch=""
+    local invoke_string=""
+    local rcd_action=""
+    local rcd_scripts=""
+    local sapi_list=""
+
+    [ -x "/usr/sbin/php7$CMD" ] || return 1
+    [ -x "/usr/sbin/php7query" ] || return 1
+
+    sapi_list="$SAPI"
+    case "$SAPI" in
+	apache2|apache2filter|fpm|cli|cgi|embed)
+	    ;;
+	ALL)
+	    sapi_list=$(php7query -S)
+	    case "$CMD" in
+		enmod|dismod)
+		    php7$CMD -q -m -r "$MOD" || return 1
+		    ;;
+		*)
+		    return 1
+		    ;;
+	    esac
+	    ;;
+	*)
+	    return 1
+	    ;;
+    esac
+
+    for SAPI in $sapi_list; do
+	case "$CMD" in
+	    enmod)
+		local php7query_ret=0
+		php7query -s "$SAPI" -m "$MOD" > /dev/null 2>&1 || php7query_ret=$?
+		if [ "$php7query_ret" -eq 0 ] ; then
+		    # configuration is already enabled
+ 		    php7$CMD -m -s "$SAPI" -q "$MOD" > /dev/null 2>&1 || return 1
+		    php7_msg "info" "php7_invoke $MOD: already enabled for $SAPI SAPI"
+		    PHP5_NEED_ACTION=1
+		elif [ "$php7query_ret" -eq 32	 ] ; then
+		    # the maintainer disabled the module
+		    php7_msg "info" "php7_invoke $MOD: no action - module was disabled by maintainer for $SAPI SAPI"
+		    return 0
+		else
+		    # coming here either means:
+		    # a) we have no clue about the module (e.g. for upgrades prior to maintscript-helper
+		    # b) it's a fresh install
+		    PHP5_NEED_ACTION=1
+ 		    php7$CMD -m -s "$SAPI" -q "$MOD" > /dev/null 2>&1 || return 1
+		    php7_msg "info" "php7_invoke: Enable module $MOD for $SAPI SAPI"
+		fi
+		;;
+	    dismod)
+		local php7query_ret=0
+		php7query -s "$SAPI" -m "$MOD" > /dev/null 2>&1 || php7query_ret=$?
+		if [ "$php7query_ret" -eq 0 ] ; then
+		    if [ "$PHP5_MAINTSCRIPT_NAME" = 'postrm' ] && [ "$PHP5_MAINTSCRIPT_METHOD" = "purge" ] ; then
+			php7$CMD -p -f -s "$SAPI" -q "$MOD" || return 1
+			php7_msg "info" "php7_invoke $PHP5_MAINTSCRIPT_NAME: Purging module $MOD for $SAPI SAPI"
+			PHP5_NEED_ACTION=1
+		    elif [ "$PHP5_MAINTSCRIPT_NAME" = 'postrm' ] || [ "$PHP5_MAINTSCRIPT_NAME" = 'prerm' ] ; then
+			if [ "$PHP5_MAINTSCRIPT_METHOD" = "remove" ] ; then
+			    php7$CMD -m -f -s "$SAPI" -q "$MOD" || return 1
+			    php7_msg "info" "php7_invoke $PHP5_MAINTSCRIPT_NAME: Disable module $MOD for $SAPI SAPI"
+			    PHP5_NEED_ACTION=1
+			fi
+		    else
+			php7_msg "error" "php7_invoke: module $MOD not supported in $PHP5_MAINTSCRIPT_NAME for $SAPI SAPI"
+			return 1
+		    fi
+		elif [ "$php7query_ret" -eq 32 ] || [ "$php7query_ret" -eq 33 ] ; then
+		    if [ "$PHP5_MAINTSCRIPT_NAME" = 'postrm' ] && [ "$PHP5_MAINTSCRIPT_METHOD" = "purge" ] ; then
+			php7_msg "info" "php7_invoke $PHP5_MAINTSCRIPT_NAME: Purging state for $MOD for $SAPI SAPI"
+			# this will return RC=1
+			( php7$CMD -p -f -s "$SAPI" -q "$MOD" > /dev/null 2>&1 )
+		    else
+			php7_msg "debug" "php7_invoke $MOD $PHP5_MAINTSCRIPT_NAME: No action required for $SAPI SAPI"
+		    fi
+		else
+		    php7_msg "debug" "php7_invoke $MOD $PHP5_MAINTSCRIPT_NAME: No action required for $SAPI SAPI"
+		fi
+		;;
+	    *)
+		return 1
+		;;
+	esac
+	if [ -n "${PHP_NEED_ACTION:-}" -a -n "$rcd_action" ]; then
+	    dpkg-trigger /opt/kaltura/app/configurations/php/$SAPI/conf.d
+	fi
+    done
+}
+
+# vim: syntax=sh sw=8 sts=8 sr noet

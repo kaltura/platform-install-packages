@@ -4,6 +4,6 @@ set -e
 
 #DEBHELPER#
 
-dpkg-maintscript-helper mv_conffile /etc/php5/fpm/main.conf /etc/php5/fpm/php-fpm.conf 5.3.5-1 -- "$@"
+dpkg-maintscript-helper mv_conffile /opt/kaltura/app/configurations/php/fpm/main.conf /opt/kaltura/app/configurations/php/fpm/php-fpm.conf 5.3.5-1 -- "$@"
 
 exit 0

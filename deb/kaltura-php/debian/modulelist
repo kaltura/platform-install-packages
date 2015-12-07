@@ -8,9 +8,9 @@ interbase Interbase
 intl Internationalisation
 ldap LDAP
 mcrypt MCrypt
-mysql MySQL
 mysqlnd MySQL mysqlnd 10
 odbc ODBC
+opcache Opcache
 pgsql PostgreSQL
 pspell pspell
 recode recode

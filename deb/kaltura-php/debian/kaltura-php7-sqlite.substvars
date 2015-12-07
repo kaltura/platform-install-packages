@@ -1,0 +1,3 @@
+shlibs:Depends=libc6 (>= 2.14), libsqlite3-0 (>= 3.7.4)
+php:Depends=phpapi-20151012
+misc:Depends=

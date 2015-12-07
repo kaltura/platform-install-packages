@@ -1,0 +1,3 @@
+shlibs:Depends=libc6 (>= 2.14), libxml2 (>= 2.7.4), libxslt1.1 (>= 1.1.25)
+php:Depends=phpapi-20151012
+misc:Depends=

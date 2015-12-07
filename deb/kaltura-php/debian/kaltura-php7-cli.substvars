@@ -1,0 +1,4 @@
+shlibs:Depends=libbz2-1.0, libc6 (>= 2.15), libonig2 (>= 5.2.0), libpcre3, libssl1.0.0 (>= 1.0.1), libxml2 (>= 2.9.0), zlib1g (>= 1:1.1.4)
+php:Provides=phpapi-20151012
+php:Extensions=The following extensions are built in: bcmath bz2 calendar Core ctype date${Newline}dom exif fileinfo filter ftp gettext hash iconv json libxml mbstring${Newline}openssl pcntl pcre Phar posix Reflection session shmop SimpleXML soap${Newline}sockets SPL standard sysvmsg sysvsem sysvshm tokenizer wddx xml xmlreader${Newline}xmlwriter zip zlib.
+misc:Depends=

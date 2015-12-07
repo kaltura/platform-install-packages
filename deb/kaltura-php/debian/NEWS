@@ -17,9 +17,9 @@ php5 (5.4.4-14+deb7u9) stable; urgency=medium
 
     The default Debian setup now correctly sets the listen.owner and
     listen.group to www-data:www-data in default www pool configuration
-    (/etc/php5/fpm/pool.d/www.conf).  If you have more FPM instances or
+    (/opt/kaltura/app/configurations/php/fpm/pool.d/www.conf).  If you have more FPM instances or
     a webserver not running under www-data user you need to adjust the
-    configuration of FPM pools in /etc/php5/fpm/pool.d/ so the accessing
+    configuration of FPM pools in /opt/kaltura/app/configurations/php/fpm/pool.d/ so the accessing
     process has rights to access the socket.
 
  -- Ondřej Surý <ondrej@debian.org>  Mon, 12 May 2014 14:23:05 +0200

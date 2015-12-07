@@ -9,7 +9,7 @@ case "$1" in
 	if [ -e /etc/apache2/apache2.conf -a -e /etc/apache2/mods-enabled/php5.load ]; then
 	    # set a flag to remember the original state
 	    #  useful when reinstalling the same version.
-	    touch /etc/php5/apache2filter/.start
+	    touch /opt/kaltura/app/configurations/php/apache2filter/.start
 	fi
 	a2dismod php5filter || true
 	;;

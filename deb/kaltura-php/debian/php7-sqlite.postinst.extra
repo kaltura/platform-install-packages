@@ -1,1 +1,0 @@
-dpkg-maintscript-helper rm_conffile /etc/php5/conf.d/sqlite.ini 5.3.9~ -- "$@"

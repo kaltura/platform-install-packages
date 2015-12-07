@@ -8,13 +8,12 @@ if [ "$1" != "configure" ]; then
     exit 0
 fi
 
-phpini="/etc/php5/cli/php.ini"
+phpini="/opt/kaltura/app/configurations/php/cli/php.ini"
 
-ucf /usr/share/php5/php.ini-production.cli $phpini
-ucfr php5-cli $phpini
+ucf /opt/kaltura/share/php7/php.ini-production.cli $phpini
 
 update-alternatives \
-	--install /usr/bin/php php /usr/bin/php5 50 \
-	--slave /usr/share/man/man1/php.1.gz php.1.gz /usr/share/man/man1/php5.1.gz
+	--install /usr/bin/php php /opt/kaltura/bin/php7 50 \
+	--slave /opt/kaltura/share/man/man1/php.1.gz php.1.gz /opt/kaltura/share/man/man1/php7.1.gz
 
 exit 0

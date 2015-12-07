@@ -1,1 +1,0 @@
-dpkg-maintscript-helper mv_conffile /etc/php5/conf.d/10-mysqlnd.ini /etc/php5/mods-available/mysqlnd.ini 5.4.0~rc6-1 -- "$@";

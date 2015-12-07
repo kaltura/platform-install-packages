@@ -1,0 +1,19 @@
+#!/bin/sh
+
+set -e
+
+
+
+if [ "$1" != "configure" ]; then
+    exit 0
+fi
+
+phpini="/opt/kaltura/app/configurations/php/cli/php.ini"
+
+ucf /opt/kaltura/share/php7/php.ini-production.cli $phpini
+
+update-alternatives \
+	--install /usr/bin/php php /opt/kaltura/bin/php7 50 \
+	--slave /opt/kaltura/share/man/man1/php.1.gz php.1.gz /opt/kaltura/share/man/man1/php7.1.gz
+
+exit 0

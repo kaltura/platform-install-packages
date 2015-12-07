@@ -1,0 +1,12 @@
+14cd73a5bc50fe64c0ece52925c947e0  opt/kaltura/bin/php5query
+1f2d8d8ea86f7738598b7a0ef3b33a32  opt/kaltura/bin/php7enmod
+8a135cda7135e376fdcdf2547e049434  opt/kaltura/lib/php/20151012/pdo.so
+7eab49fc34cdff6e4dfa27e7b8da56e8  opt/kaltura/lib/php7/maxlifetime
+6a769dfc0fb5f31bc022afabc6223e0a  opt/kaltura/lib/php7/sessionclean
+bfa961ed634b3f54a49c38b2c88537cc  opt/kaltura/share/php7/common/pdo.ini
+e7a2bebef32b26a16491f39e8462a9d0  opt/kaltura/share/php7/php.ini-development
+4ff5de06c37598d5cb4ae9a4010889dc  opt/kaltura/share/php7/php.ini-production
+922aabc83c1b272657be4f99770c50a5  opt/kaltura/share/php7/php.ini-production.cli
+34858eeeb54bedeef2ed686893d52cd3  opt/kaltura/share/php7/php7-helper
+4f2b81ca95f2fd31a6ab91842feb8e03  opt/kaltura/share/php7/php7-maintscript-helper
+c2493acdd68d7db7d3acbc132d0c7457  usr/share/doc/kaltura-php7-common/copyright

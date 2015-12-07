@@ -1,0 +1,18 @@
+Package: kaltura-php7-common
+Source: kaltura-php7
+Version: 7.0.0-6
+Architecture: amd64
+Maintainer: Jess Portnoy <jess.portnoy@kaltura.com>
+Installed-Size: 463
+Depends: libc6 (>= 2.14), sed (>= 4.1.1-1), psmisc (>= 22.15-1~), lsof, ucf
+Provides: php7-mhash
+Section: php
+Priority: optional
+Homepage: http://www.php.net/
+Description: Common files for packages built from the kaltura-php7 source
+ This package contains the documentation and example files relevant to all
+ the other packages built from the kaltura-php7 source.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.

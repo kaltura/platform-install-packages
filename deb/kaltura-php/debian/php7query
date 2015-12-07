@@ -1,0 +1,208 @@
+#!/bin/sh
+#
+#  php7query - a php7 module manager for Debian
+#
+#  Copyright 2013 Ondřej Surý <ondrej@sury.org>
+#
+# This program is licensed at your choice under the terms of the GNU General
+# Public License version 2+ or under the terms of the PHP License 3.01.
+#
+# For GPL-2+:
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,
+# USA.
+#
+# For PHP 3.01:
+# This source file is subject to version 3.01 of the PHP license,
+# that is bundled with this package in the file LICENSE, and is
+# available through the world-wide-web at the following url:
+# http://www.php.net/license/3_01.txt
+# If you did not receive a copy of the PHP license and are unable to
+# obtain it through the world-wide-web, please send a note to
+# license@php.net so we can mail you a copy immediately.
+#
+
+set -ue
+
+SCRIPT_NAME=${0##*/}
+QUIET=no
+
+. /opt/kaltura/share/php7/php7-helper
+
+usage() {
+    [ -n "$@" ] && warning $@
+    echo "usage: ${SCRIPT_NAME} [ -q ] -s sapi_name [ -m module_name ] [ -M ] [ -S ]"
+    exit 1
+}
+
+check_mod() {
+    local sapi=$1
+    local modname=$2
+
+    if ! module_exists $modname; then
+	output "No module matches $modname"
+	return 1
+    fi
+
+    local priority=$(get_priority $sapi $modname)
+    local live_link=$(get_live_link $sapi $modname $priority)
+    local live_link_content=$(get_live_link_content $sapi $modname $priority)
+
+    found=no
+    if [ -e "${live_link}" ] ; then
+	if [ -h "${live_link}" ] ; then
+	    local content="$(readlink "${live_link}")"
+	    if [ "${content}" = "${live_link_content}" ] ; then
+		found=yes
+	    fi
+	fi
+	if [ "$found" != "yes" ]; then
+	    output "Module $modname symlink was modified by local administrator."
+	    return 34
+	fi
+    fi
+
+    local state_dir="$(get_state_dir $sapi)"
+
+    if [ -e "${state_dir}/enabled_by_admin/$modname" ]; then
+	output "$modname (Enabled for $sapi by local administrator)"
+	return 0
+    elif [ -e "${state_dir}/enabled_by_maint/$modname" ]; then
+	output "$modname (Enabled for $sapi by maintainer script)"
+	return 0
+    elif [ -e "${state_dir}/disabled_by_admin/$modname" ]; then
+	output "No module matches $modname (Disabled for $sapi by local administrator)"
+	return 32
+    elif [ -e "${state_dir}/disabled_by_maint/$modname" ]; then
+	output "No module matches $modname (Disabled for $sapi by maintainer script)"
+	return 33
+    elif [ "$found" = "yes" ]; then
+	output "$modname (Enabled for $sapi by unknown)"
+	return 0
+    else
+	output "No module matches $modname"
+	return 1
+    fi
+}
+
+list_mod() {
+    local verbose=$1
+    local registry_dir="$(get_registry_dir)"
+
+    sapis=$(list_sapi)
+    if [ -d "$registry_dir" ]; then
+	for mod in $(list_parts "$registry_dir"); do
+	    if [ "$verbose" = "yes" ]; then
+		for sapi in $sapis; do
+		    check_mod $sapi $mod
+		done
+	    else
+		echo $mod
+	    fi
+	done
+	return 0
+    fi
+}
+
+list_sapi() {
+    local sapi_dir="$(get_sapi_dir)"
+
+    if [ -d "$sapi_dir" ]; then
+	for sapi in $(list_parts "$sapi_dir"); do
+	    echo $sapi;
+	done
+    fi
+}
+
+check_sapi() {
+    local sapi=$1
+    local sapi_dir="$(get_sapi_dir)"
+
+    if [ -e "$sapi_dir/$sapi" ]; then
+	return 0
+    fi
+    return 1
+}
+
+QUIET=no
+verbose=no
+action=
+sapi=
+
+while getopts s:m:SMqv opt; do
+    case $opt in
+	s)
+	    if [ -n "$action" ]; then
+		if [ "$action" != "check_mod" ]; then
+		    usage "Only one mode of operation can be used at the same time."
+		else
+		    action="check_sapi"
+		fi
+	    fi
+	    sapi="$OPTARG"
+	    ;;
+	S)
+	    if [ -n "$action" ]; then
+		usage "Only one mode of operation can be used at the same time."
+	    fi
+	    action="list_sapi"
+	    ;;
+	m)
+	    if [ -n "$action" -a "$action" != "check_sapi" ]; then
+		usage "Only one mode of operation can be used at the same time."
+	    fi
+	    action="check_mod"
+	    mod="$OPTARG"
+	    ;;
+	M)
+	    [ -n "$action" ] && usage "Only one mode of operation can be used at the same time."
+	    action="list_mod"
+	    ;;
+	q)
+	    QUIET=yes
+	    ;;
+	v)
+	    verbose=yes
+	    ;;
+	\?) usage "Unknown parameter specified";;
+    esac
+done
+shift $(expr $OPTIND - 1)
+
+if [ -z "$action" ]; then
+    usage "You need to specify at least one action."
+fi
+
+if [ -n "$sapi" ]; then
+    check_sapi $sapi || usage "Invalid SAPI specified"
+fi
+
+ret=0
+case "$action" in
+    check_mod)
+	[ -z "$sapi" ] && usage "You need to specify sapi"
+	check_mod $sapi $mod || ret=$?
+	;;
+    check_sapi)
+	check_sapi $sapi || ret=$?
+	if [ "$ret" -eq 0 ]; then
+	    output "$sapi"
+	fi
+	;;
+    list_mod) list_mod $verbose || ret=$?;;
+    list_sapi) list_sapi || ret=$?;;
+    *) usage "Unknown action $action"
+esac
+
+exit $ret

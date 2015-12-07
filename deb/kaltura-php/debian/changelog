@@ -1,3 +1,36 @@
+kaltura-php7 (7.0.0-6) kajam; urgency=medium
+
+  * explicitly call a2dismod mpm_event and a2enmod mpm_prefork due to a bug in the apache2 postinst script.
+
+ -- Jess Portnoy <jess.portnoy@kaltura.com>  Mon, 07 Dec 2015 13:09:32 +0000
+
+kaltura-php7 (7.0.0-5) kajam; urgency=medium
+
+  * kaltura-libapache2-mod-php7 depends on mpm-prefork
+
+ -- root <community@kaltura.com>  Mon, 07 Dec 2015 13:09:32 +0000
+
+kaltura-php7 (7.0.0-4) kajam; urgency=medium
+
+  * some minor fixes
+
+ -- root <community@kaltura.com>  Mon, 07 Dec 2015 11:36:17 +0000
+
+kaltura-php7 (7.0.0-3) kajam; urgency=medium
+
+  * This time really disable php5 module
+  * Call /opt/kaltura/bin/php7{dis,en}mod with full path
+
+ -- Jess Portnoy <jess.portnoy@kaltura.com>  Sun, 06 Dec 2015 20:27:55 +0000
+
+kaltura-php7 (7.0.0-2) kajam; urgency=medium
+
+  * updated kaltura-php7 meta package
+  * disable PHP5 Apache module when installing kaltura-libapache2-php7 as loading both causes a seg fault.
+  * update-alternatives php7enmod
+
+ -- Jess Portnoy <jess.portnoy@kaltura.com>  Sun, 06 Dec 2015 15:19:59 +0000
+
 kaltura-php7 (7.0.0-1) kajam; urgency=low
 
   * Non-maintainer upload.
@@ -915,7 +948,7 @@ php5 (5.4.0~rc6-2) experimental; urgency=low
 
  -- Ondřej Surý <ondrej@debian.org>  Wed, 01 Feb 2012 18:27:30 +0100
 
-php5 (5.4.0~rc6-1) experimental; urgency=low
+php5 (7.0.0-1) experimental; urgency=low
 
   * Imported Upstream version 5.4.0~rc6
 

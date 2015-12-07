@@ -1,0 +1,20 @@
+Package: kaltura-libphp7-embed
+Source: kaltura-php7
+Version: 7.0.0-1
+Architecture: amd64
+Maintainer: Jess Portnoy <jess.portnoy@kaltura.com>
+Installed-Size: 37
+Depends: mime-support, kaltura-php7-common (= 7.0.0-1), libmagic1, ucf, tzdata
+Suggests: php-pear
+Section: php
+Priority: optional
+Homepage: http://www.php.net/
+Description: HTML-embedded scripting language (Embedded SAPI library)
+ This package provides the library /usr/lib/libphp7.so which can
+ be used by application developers to embed PHP scripting functionality.
+ .
+ .
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
