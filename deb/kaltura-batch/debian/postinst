@@ -65,8 +65,8 @@ ln -sf $APP_DIR/configurations/logrotate/kaltura_apps /etc/logrotate.d/
 if [ -x "`which php5enmod 2>/dev/null`" ];then
 	php5enmod zz-kaltura
 fi
-if [ -x "`which php7enmod 2>/dev/null`" ];then
-	php7enmod zz-kaltura
+if [ -x /opt/kaltura/bin/php7enmod ];then
+	/opt/kaltura/bin/php7enmod zz-kaltura
 fi
 
 mkdir -p $LOG_DIR/batch 

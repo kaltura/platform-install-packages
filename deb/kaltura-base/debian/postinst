@@ -76,8 +76,8 @@ if [ "$1" = "configure" ]; then
 	if [ -x "`which php5enmod 2>/dev/null`" ];then
         	php5enmod mcrypt
 	fi
-	if [ -x "`which php7enmod 2>/dev/null`" ];then
-		php7enmod mcrypt
+	if [ -x /opt/kaltura/bin/php7enmod ];then
+		/opt/kaltura/bin/php7enmod mcrypt
 	fi
         . /usr/share/debconf/confmodule
         KALT_CONF_DIR=$APP_DIR/configurations/
