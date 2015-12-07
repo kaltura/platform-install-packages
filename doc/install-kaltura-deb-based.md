@@ -1,4 +1,4 @@
-# Installing Kaltura on a Single Server (deb)
+﻿# Installing Kaltura on a Single Server (deb)
 This guide describes deb installation of an all-in-one Kaltura server and applies to deb based Linux distros.
 
 The processes was tested on Debian 8 and Ubuntu 14.04 but is expected to work on other versions. If you tried a deb based distro and failed, please report it.
@@ -10,6 +10,8 @@ The processes was tested on Debian 8 and Ubuntu 14.04 but is expected to work on
 [Prerequites](https://github.com/kaltura/platform-install-packages/blob/master/doc/pre-requisites.md)
 
 [Step-by-step Installation](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-deb-based.md#step-by-step-installation)
+
+[Unattended Installation](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-deb-based.md#unattended-installation)
 
 [Upgrade Kaltura](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-deb-based.md#upgrade-kaltura)
 
@@ -56,8 +58,11 @@ This section is a step-by-step guide of a Kaltura installation.
 
 ```bash
 wget -O - http://installrepo.kaltura.org/repo/apt/debian/kaltura-deb.gpg.key|apt-key add -
-echo "deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/debian jupiter main" > /etc/apt/sources.list.d/kaltura.list
+echo "deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/debian kajam main" > /etc/apt/sources.list.d/kaltura.list
 ```
+
+*NOTE: for Debian, the non-free repo must also be enabled*
+
 *Ubuntu NOTE: You must also make sure the multiverse repo is enabled in /etc/apt/sources.list*
 
 *Debian Jessie [8] NOTE: You must also make sure the following Wheezy repos are enabled in /etc/apt/sources.list*
@@ -91,6 +96,18 @@ In such case, the postinst script for kaltrua-db will fail, if so, adjust it and
 Please note that for MySQL version 5.5 and above, you must first disable strict mode enforcement.
 See:
 https://support.realtyna.com/index.php?/Knowledgebase/Article/View/535/0/how-can-i-turn-off-mysql-strict-mode
+
+
+#### Install Kaltura Server with PHP 7
+By default, the installation is done against the PHP stack available from the official repo.
+Kaltura now offers beta deb packages of PHP 7 which can be installed from our repo.
+In order to install the server using these packages, simply run:
+```bash
+# wget -O - http://installrepo.kaltura.org/repo/apt/debian/kaltura-deb.gpg.key|apt-key add -
+# echo "deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/debian kajam main" > /etc/apt/sources.list.d/kaltura.list
+# aptitude install kaltura-php7
+```
+And the follow the instructions for installing the Kaltura server as normal.
 
 
 #### Install Kaltura Server
@@ -133,11 +150,25 @@ In order to perform a manual step by step install, simply copy the commands and 
 
 **Your Kaltura installation is now complete.**
 
+## Unattended Installation
+Edit the debconf [response file template](https://github.com/kaltura/platform-install-packages/blob/Jupiter-10.16.0/deb/kaltura_debconf_response.sh) by replacing all tokens with relevant values.
+and run it as root:
+```
+./kaltura_debconf_response.sh
+```
+the set the DEBIAN_FRONTEND ENV var:
+```
+export DEBIAN_FRONTEND=noninteractive
+```
+
+And install as described above. 
+
 ## Upgrade Kaltura
 *This will only work if the initial install was using this packages based install, it will not work for old Kaltura deployments using the PHP installers*
 ```bash
 # aptitude update
 # aptitude install ~Nkaltura
+# dpkg-reconfigure kaltura-base
 # dpkg-reconfigure kaltura-batch
 # dpkg-reconfigure kaltura-front
 ```

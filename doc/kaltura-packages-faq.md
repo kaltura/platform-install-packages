@@ -58,8 +58,84 @@ Run `# kaltlog`, which will continuously track (using `tail`) an error grep from
 You can also use: `# allkaltlog` (using root), which will dump all the error lines from the Kaltura logs once. Note that this can result in a lot of output, so the best way to use it will be to redirect to a file: `# allkaltlog > errors.txt`.
 This output can be used to analyze past failures but for active debugging use the kaltlog alias.   
 
+### Analytics issues
+check if a process lock is stuck:
+```
+mysql> select * from kalturadw_ds.locks ;
+```
+if lock_state says 1 for any of these, make sure you have no stuck dwh procs running, update it to read 0 and retry.
 
-#### Cannot login to Admin Console
+check if access files were processed:
+```
+mysql> select * from kalturadw_ds.files where insert_time >=%Y%m%d;
+```
+check if actual data about entries play and views was inserted:
+```
+mysql> select * from kalturadw.dwh_fact_events where event_date_id >=%Y%m%d ;
+```
+
+Try to run each step manually:
+```
+# rm /opt/kaltura/dwh/logs/*
+# logrotate -vvv -f /etc/logrotate.d/kaltura_apache
+# su kaltura -c "/opt/kaltura/dwh/etlsource/execute/etl_hourly.sh -p /opt/kaltura/dwh -k /opt/kaltura/pentaho/pdi/kitchen.sh"
+# su kaltura -c "/opt/kaltura/dwh/etlsource/execute/etl_update_dims.sh -p /opt/kaltura/dwh -k /opt/kaltura/pentaho/pdi/kitchen.sh"
+# su kaltura -c "/opt/kaltura/dwh/etlsource/execute/etl_daily.sh -p /opt/kaltura/dwh -k /opt/kaltura/pentaho/pdi/kitchen.sh"
+# su kaltura -c "/opt/kaltura/dwh/etlsource/execute/etl_perform_retention_policy.sh -p /opt/kaltura/dwh -k /opt/kaltura/pentaho/pdi/kitchen.sh"
+# su kaltura -c "/opt/kaltura/app/alpha/scripts/dwh/dwh_plays_views_sync.sh >> /opt/kaltura/log/cron.log"
+```
+
+Or use the wrapper script to run all steps:
+```
+/opt/kaltura/bin/kaltura-run-dwh.sh
+```
+
+In order to remove the Analytics DBs and repopulate them:
+
+0. Backup all Kaltura DBs using: https://github.com/kaltura/platform-install-packages/blob/Jupiter-10.2.0/doc/rpm-cluster-deployment-instructions.md#backup-and-restore-practices 
+1. Drop the current DWH DBs: 
+```
+PASSW=$MYSQL_SUPER_USER_PASSWD 
+for i in `mysql -N -p$PASSWD kalturadw -e "show tables"`;
+do mysql -p$PASSWD kalturadw -e "drop table $i";done 
+for i in `mysql -N -p$PASSWD kalturadw_ds -e "show tables"`;do mysql -p$PASSWD kalturadw_ds -e "drop table $i";done 
+for i in `mysql -N -p$PASSWD kalturalog -e "show tables"`;do mysql -p$PASSWD kalturalog -e "drop table $i";done 
+for i in `mysql -p$PASSWD -e "Show procedure status" |grep kalturadw|awk -F " " '{print $2}'`;do mysql kalturadw -p$PASSWD -e "drop procedure $i;";done 
+for i in `mysql -p$PASSWD -e "Show procedure status" |grep kalturadw_ds|awk -F " " '{print $2}'`;do mysql kalturadw_ds -p$PASSWD -e "drop procedure $i;";done 
+```
+
+2. Reinstall and config DWH
+
+on RPM based systems:
+```
+# yum reinstall kaltura-dwh 
+# kaltura-dwh-config.sh
+```
+
+on deb based systems:
+```
+# dpkg-reconfigure kaltura-dwh
+``` 
+
+#### Couldn't execute SQL: CALL move_innodb_to_archive()
+Running:
+```
+mysql> call kalturadw.add_partitions();
+```
+Should resolve the issue.
+
+#### Table has no partition for value
+
+- verify that your DB timezone settings are the same as PHP timezone settings (php.ini)
+- Re-sync dimension tables from the day you installed your server:
+    - Update kalturadw_ds.parameters where parameter_name = 'dim_sync_last_update'. You need to set date_value to the date you installed your server.
+    - Run /opt/kaltura/dwh/etlsource/execute/etl_update_dims.sh
+    -Verify that kalturadw.dwh_dim_entries was populated (If not check /opt/kaltura/dwh/logs/etl_update_dims-YYYTMMDD-HH.log for errors)
+- Update kalturadw.aggr_managment to run all aggregation again. Update kalturadw.aggr_managment set data_insert_time = NOW();
+- Run /opt/kaltura/dwh/etlsource/execute/etl_daily.sh
+
+
+### Cannot login to Admin Console
 To manually reset the passwd, following this procedure:
 mysql> select * from user_login_data where login_email='you@mail.com'\G
 
@@ -68,3 +144,17 @@ Then, update sha1_password and salt to read:
                salt: a6a3209b8827759fa4286d87a33f99df
 
 This should reset your passwd to 'admin123!'
+
+### kmc is routed to a SSL link
+If you try to access /kmc and get routed to https://vod.linnovate.net/index.php/kmc/kmc4 -
+(even if you prompted to work in non SSL mode...
+
+run the following commands...
+```
+  mysql kaltura
+  select id from permission WHERE permission.NAME='FEATURE_KMC_ENFORCE_HTTPS';
+```
+If you get a response use that in the next query
+```
+  delete from permission where id = NUM_YOU_GOT_ABOVE
+```

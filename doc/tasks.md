@@ -1,12 +1,8 @@
-# Simple Tasks That Make A Difference!
+# Tasks That Make A Difference!
 This document outlines general "smaller" or "easier" tasks that new Kaltura platform developers can take on as learning challenges, but at the same time also be proud of making a valueable contribution to the platform evolution!    
 If you decide to take on a challenge, please open a bug with the details of the task, and mark it as yours on the issue queue. We promise to do our best at mentoring you to greatness!
 
 Thanks!
-
-## Port Kaltura's Core to PHP 5_5
-
-## Fix Core's SQL init scripts to support MySQL 5.5
 
 ## Admin Console
 
@@ -31,10 +27,6 @@ Need to catch the exception and display.
 - Storage: force 'http' in http delivery URL
 - Disallow login to KMC if partner is -2
 - Change KMC login to be JS instead of FLASH
-
-## Packages
-- Add our packages to ClearOS' repo
-- (optionally) add package to EPEL
 
 ## Backend Plugins
 - Create a plugin for the Monit monitoring tab in admin console

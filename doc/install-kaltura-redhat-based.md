@@ -1,4 +1,4 @@
-# Installing Kaltura on a Single Server (RPM)
+﻿# Installing Kaltura on a Single Server (RPM)
 This guide describes RPM installation of an all-in-one Kaltura server and applies to all major RH based Linux distros including Fedora Core, RHEL, CentOS, etc.
 ([Note the supported distros and versions](http://kaltura.github.io/platform-install-packages/#supported-distros)).
 
@@ -10,6 +10,8 @@ This guide describes RPM installation of an all-in-one Kaltura server and applie
 [Non-SSL Step-by-step Installation](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-redhat-based.md#non-ssl-step-by-step-installation)
 
 [SSL Step-by-step Installation](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-redhat-based.md#ssl-step-by-step-installation)
+
+[Unattended Installation](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-redhat-based.md#unattended-installation)
 
 [Upgrade Kaltura](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-redhat-based.md#upgrade-kaltura)
 
@@ -59,7 +61,7 @@ rpm -ihv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
 ```
 
 ## Note on RHEL/CentOS 7 
-If you are using RHEL/CentOS 7, edit /etc/yum.repos.d/kaltura.repo and change:
+If you are using RHEL/CentOS 7, edit /etc/yum.repos.d/kaltura.repo and change the ```[Kaltura]``` section:
 ```
 baseurl = http://installrepo.kaltura.org/releases/latest/RPMS/$basearch/
 ```
@@ -68,14 +70,16 @@ to read:
 baseurl = http://installrepo.kaltura.org/releases/rhel7/RPMS/$basearch/
 ```
 
-Also note that version 7 no longer has MySQL server and instead includes MariaDB in its official repos.
+The ```[Kaltura-noarch]``` repo should remain as is. 
 
-RHEL/CentOS 7 is currently in beta stages, bug reports are most welcomed.
+*Note for RHEL7: depending on what repos you have enabled, you may also need to add the EPEL or CentOS repos to resolve all dependencies.*
+
+
 
 #### MySQL Install and Configuration
-Please note that currently, only MySQL 5.1 is supported, we recommend using the official package supplied by the RHEL/CentOS repos which is currently 5.1.73.
-
-For RHEL/CentOS 7 which is currently in the beta stage, MariaDB version 5.5.40 is supported. 
+For MySQL versions higher 5.5 and above, note that you must disable strict mode for the deployment to succeed.
+Please see the following document:
+https://support.realtyna.com/index.php?/Knowledgebase/Article/View/535/0/how-can-i-turn-off-mysql-strict-mode
 
 RHEL/CentOS 6 setup:
 ```bash
@@ -242,7 +246,7 @@ rpm -ihv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
 #### MySQL Install and Configuration
 Please note that currently, only MySQL 5.1 is supported, we recommend using the official package supplied by the RHEL/CentOS repos which is currently 5.1.73.
 
-For RHEL/CentOS 7 which is currently in the beta stage, MariaDB version 5.5.40 is supported. 
+For RHEL/CentOS 7, MariaDB version 5.5.40 is supported. 
 
 RHEL/CentOS 6 setup:
 ```bash
@@ -385,6 +389,10 @@ Finally, run: ```/etc/init.d/kaltura-monit restart```
 
 **Your Kaltura installation is now complete.**
 
+## Unattended Installation
+All Kaltura scripts accept an answer file as their first argument.
+In order to preform an unattended [silent] install, simply edit the [template](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura.template.ans) and pass it along to kaltura-config-all.sh.
+
 ## Upgrade Kaltura
 *This will only work if the initial install was using this packages based install, it will not work for old Kaltura deployments using the PHP installers*
 ```bash
@@ -411,7 +419,6 @@ To upgrade your DB schema.
 ## Remove Kaltura
 Use this in cases where you want to clear the database and start from fresh.
 ```bash
-/opt/kaltura/bin/kaltura-drop-db.sh
 /opt/kaltura/bin/kaltura-drop-db.sh
 yum remove "*kaltura*"
 rm -rf /opt/kaltura
