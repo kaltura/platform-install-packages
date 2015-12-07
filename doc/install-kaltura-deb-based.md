@@ -105,6 +105,7 @@ In order to install the server using these packages, simply run:
 ```bash
 # wget -O - http://installrepo.kaltura.org/repo/apt/debian/kaltura-deb.gpg.key|apt-key add -
 # echo "deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/debian kajam main" > /etc/apt/sources.list.d/kaltura.list
+# aptitude update
 # aptitude install kaltura-php7
 ```
 And the follow the instructions for installing the Kaltura server as normal.
