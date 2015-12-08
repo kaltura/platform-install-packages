@@ -1,0 +1,6 @@
+phppear:Debian-Depends=php5-common (>= 7.0.?not supported(0-dev)?), php-pear (>= 1.4.0~b1), phpapi-Usage: /usr/bin/php-config [OPTION]
+phppear:summary=APCu - APC User Cache
+phppear:description=APC User Caching
+phppear:channel=pecl.php.net
+shlibs:Depends=libc6 (>= 2.14)
+misc:Depends=
