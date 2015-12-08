@@ -264,6 +264,7 @@ CONF_FILES=`find $APP_DIR/configurations  -type f| grep -v template`
 find /etc/httpd/conf.d -type l -name "zzzkaltura*" -exec rm {} \;
 ln -fs $MAIN_APACHE_CONF /etc/httpd/conf.d/zzz`basename $MAIN_APACHE_CONF`
 
+
 if [ -z "$CONFIG_CHOICE" ];then
 cat << EOF 
 Please select one of the following options [0]:
@@ -274,6 +275,16 @@ EOF
 
 	CONFIG_MSG="Setup enabled the following Apache configuration for you:"
 	read CONFIG_CHOICE
+fi
+
+# Setting up nginx needed httpd settings(hybrid mode when ssl)
+HTTP_MAIN_APACHE_CONF=$KALTURA_APACHE_CONF/kaltura.conf
+if [ "$IS_VOD_PACKAGER_SSL" == 'y' ];then
+	if [ "$VOD_PACKAGER_HOST" == "$KALTURA_VIRTUAL_HOST_NAME" ] && [ "$KALTURA_VIRTUAL_HOST_NAME" == `hostname` ]; then
+		echo -e "${YELLOW}Configuring httpd to run in hybrid mode for nginx ssl support${NORMAL}"
+		sed -e "s#@APP_DIR@#$APP_DIR#g" -e "s#@LOG_DIR@#$LOG_DIR#g" -e "s#@KALTURA_VIRTUAL_HOST_PORT@#$KALTURA_VIRTUAL_HOST_PORT#g" -i $HTTP_MAIN_APACHE_CONF
+		ln -fs $HTTP_MAIN_APACHE_CONF /etc/httpd/conf.d/zzz`basename $HTTP_MAIN_APACHE_CONF`
+	fi
 fi
 
 find $KALTURA_APACHE_CONFD -type l -exec rm {} \;
