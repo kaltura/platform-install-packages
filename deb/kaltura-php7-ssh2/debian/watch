@@ -1,0 +1,4 @@
+version=3
+
+http://pecl.php.net/package/ssh2 /get/ssh2-(\d+.*).tgz
+

@@ -1,0 +1,171 @@
+<?xml version="1.0"?>
+<package xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" packagerversion="1.4.7" version="2.0" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
+  <name>ssh2</name>
+  <channel>pecl.php.net</channel>
+  <summary>Bindings for the libssh2 library</summary>
+  <description>
+    Provides bindings to the functions of libssh2 which implements the SSH2 protocol.
+    libssh2 is available from http:/libssh2.org/
+  </description>
+  <lead>
+    <name>Casper Langemeijer</name>
+    <user>langemeijer</user>
+    <email>langemeijer@php.net</email>
+    <active>yes</active>
+  </lead>  
+  <lead>
+    <name>Pierre Joye</name>
+    <user>pajoye</user>
+    <email>pierre@php.net</email>
+    <active>yes</active>
+  </lead>
+  <lead>
+    <name>Mike Sullivan</name>
+    <user>mikesul</user>
+    <email>mikesul@php.net</email>
+    <active>no</active>
+  </lead>
+  <lead>
+    <name>Sara Golemon</name>
+    <user>pollita</user>
+    <email>pollita@php.net</email>
+    <active>no</active>
+  </lead>
+  <date>2012-10-15</date>
+  <version>
+    <release>0.12</release>
+    <api>0.12</api>
+  </version>
+  <stability>
+    <release>beta</release>
+    <api>beta</api>
+  </stability>
+  <license uri="http://www.php.net/license">PHP License</license>
+  <notes>
+    - Bumped libssh2 version requirement to 1.2 (aug 2009)
+    - Added ssh2_auth_agent() - SSH agent authentication support (with libssh >= 1.2.3)
+    - Added ssh2_sftp_chmod() (fixed bug #59880)
+    - Added support for stream_set_timeout() to channel streams (fixed bug #56377) (with libssh >= 1.2.9)
+    - Added keyboard-interactive to ssh2_auth_password() (fixed bugs #61760 and #54916)
+    - Add license file as requested in bug #59980
+    - Allow for tilde (~) in public and private keyfile paths
+    - Be more verbose about any errors within ssh2_scp_send
+    - Fixed bug #56425 - Problem with ssh2_scp_send
+    - Fixed bug #59794 - ssh2.sftp protocol wrapper works incorrectly for paths which contain a '#'
+    - Fixed bug #63192 - Check if connection is authenticated.
+    - Fixed bug #58576 - Handle error values from reads and writes to a channel.
+  </notes>
+  <contents>
+    <dir name="/">
+      <file role="src" name="config.m4"/>
+      <file role="src" name="ssh2.c"/>
+      <file role="src" name="php_ssh2.h"/>
+      <file role="src" name="ssh2_fopen_wrappers.c"/>
+      <file role="src" name="ssh2_sftp.c"/>
+      <file role="src" name="LICENSE"/>
+    </dir>
+  </contents>
+  <dependencies>
+    <required>
+      <php>
+        <min>4.0.0</min>
+        <max>6.0.0</max>
+      </php>
+      <pearinstaller>
+        <min>1.4.0</min>
+      </pearinstaller>
+    </required>
+  </dependencies>
+  <providesextension>ssh2</providesextension>
+  <extsrcrelease>
+    <configureoption name="with-ssh2" default="autodetect" prompt="libssh2 prefix?"/>
+  </extsrcrelease>
+  <changelog>
+    <release>
+      <date>2011-09-22</date>
+      <version>
+        <release>0.11.3</release>
+        <api>0.11.0</api>
+      </version>
+      <notes>
+    - Fixed bug#24349 (ssh2_sftp_mkdir fails with trailing slash)
+    - Fixed bug#22729 (using ssh2.sftp stream on 64bit vs. 32bit)
+    - Fixed bug#22671 (trailing spaces trimmed from filenames)
+    - Fixed bug#17142 (Missing EOF detection in ssh2.sftp:// streams)
+    - Fixed bug#16944 (Segmentation fault SIGSEGV with protected variable with ssh2)
+  </notes>
+    </release>
+    <release>
+      <date>2009-11-28</date>
+      <version>
+        <release>0.11.1</release>
+        <api>0.11.0</api>
+      </version>
+      <stability>
+        <release>beta</release>
+        <api>beta</api>
+      </stability>
+      <license uri="http://www.php.net/license">PHP License</license>
+      <notes>
+        - Fixed the extension version info 
+        . no other changes since 0.11.1
+      </notes>
+    </release>
+    <release>
+      <date>2009-11-28</date>
+      <version>
+        <release>0.11.1</release>
+        <api>0.11.0</api>
+      </version>
+      <stability>
+        <release>beta</release>
+        <api>beta</api>
+      </stability>
+      <license uri="http://www.php.net/license">PHP License</license>
+      <notes>
+  - Fixed bug #9500, SSH2 sockets not being closed properly because of close vs closesocket difference
+  - Fixed Windows support 
+  - Support for latest libssh2 release
+  - Fix build with PHP 5.3
+  - Fixed incorrect return values for rename/unlink/mkdir/rmdir with sftp functions/streams
+  - Fixed various memory leaks and segfaults
+  </notes>
+    </release>
+    <release>
+      <date>2009-11-28</date>
+      <version>
+        <release>0.11.1-dev</release>
+        <api>0.11.0</api>
+      </version>
+      <stability>
+        <release>beta</release>
+        <api>beta</api>
+      </stability>
+      <license uri="http://www.php.net/license">PHP License</license>
+      <notes>
+  - Support for latest libssh2 release
+  - Fix build with PHP 5.3
+  - Fixed incorrect return values for rename/unlink/mkdir/rmdir with sftp functions/streams
+  - Fixed various memory leaks and segfaults
+  </notes>
+    </release>
+    <release>
+      <date>2008-12-08</date>
+      <version>
+        <release>0.11.0</release>
+        <api>0.11.0</api>
+      </version>
+      <stability>
+        <release>beta</release>
+        <api>beta</api>
+      </stability>
+      <license uri="http://www.php.net/license">PHP License</license>
+      <notes>
+  - Support for latest libssh2 release
+  - Fix build with PHP 5.3
+  - Fixed incorrect return values for rename/unlink/mkdir/rmdir with sftp functions/streams
+  - Fixed various memory leaks and segfaults
+  </notes>
+    </release>
+  </changelog>
+</package>

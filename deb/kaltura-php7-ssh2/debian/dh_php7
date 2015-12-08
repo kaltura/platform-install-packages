@@ -1,0 +1,430 @@
+#! /usr/bin/perl
+
+# dh_php7 - PHP 7 configuration helper for debhelper
+# Copyright (C) 2012 Arno Töll <debian@toell.net>
+#               2013 Ondřej Surý <ondrej@sury.org>
+#
+# This program is licensed at your choice under the terms of the GNU General
+# Public License vserion 2+ or under the terms of the Apache Software License
+# 2.0.
+#
+# For GPL-2+:
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+#
+# For ASF 2.0:
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+use strict;
+use File::Find;
+use Debian::Debhelper::Dh_Lib;
+
+
+=head1 NAME
+
+dh_php7 - register configuration snippets to the PHP 5
+
+=cut
+
+# auto-generated do not edit
+our $API=`grep '#define PHP_API_VERSION' /opt/kaltura/include/php/main/php.h|sed 's/#define PHP_API_VERSION //'`;
+our $MODULE_DIR = `/opt/kaltura/bin/php-config --extension-dir`;
+our $SERVER_VERSION = `/opt/kaltura/bin/php-config --version`;
+
+
+
+sub php7_api_version
+{
+	return "phpapi-$API";
+}
+
+
+sub php7_version
+{
+	return ">= $SERVER_VERSION~";
+}
+
+sub php7_api_installdir
+{
+	return $MODULE_DIR;
+}
+
+sub php7_conf_installdir
+{
+	my $type = shift;
+	return "opt/kaltura/app/configurations/php/${type}-available/"
+}
+
+=head1 SYNOPSIS
+
+B<dh_php7> [S<I<debhelper options>>] [S<B<--conditional>>=I<expression>] [B<--error-handler=>I<function>] [B<-n>|B<--noscripts>]
+
+=head1 DESCRIPTION
+
+B<dh_php7> is a debhelper program that is responsible for correctly installing
+Php5 configuration snippets and setting postinst, prerm and dependencies in
+Php5 web server modules and web applications.
+
+It supports the following configuration types
+
+=over 4
+
+=item *
+PHP 5 modules
+
+=item *
+PHP 5 configuration snippets
+
+=back
+
+B<dh_php7> supports two modes: A limited auto-configuration heuristic or
+alternatively a configuration file driven approach. If a file named
+debian/package.php7 exists, actual actions are determined by that file.
+
+=head1 OPERATION MODES
+
+B<dh_php7> can be used in two modes: A configuration file driven approach and
+a heuristic approach. The configuration driven mode is fully documented in the
+B<FILES> section below. This mode is activated by supplying a L<debhelper(7)>
+configuration file (e.g. debian/I<package>.php7).
+
+The alternative is a heuristic mode, in which no files are installed through
+B<dh_php7>. Instead the helper will scan the package installation directory
+for recognized files and guess their purpose depending on their installation
+path in the file system. Use with caution.
+
+=head1 INVOKATION
+
+B<dh_php7> is not part of debhelper and might require information available
+in the php7-dev package. Packages making use of B<dh_php7> should declare
+a build-dependency against the virtual B<dh-php7> package.
+
+B<dh_php7> supports both, called directly from a debian/rules file or as
+L<dh(1)> addon. In the former case the helper should run after L<dh_install(1)>
+or their respective counter parts in local implementations at earliest.
+Alternatively it can be used as L<dh> addon by invoking it with
+
+  %:
+     dh $@ --with php7
+
+=head1 FILES
+
+=over 4
+
+=item debian/I<package>.php7
+
+=item debian/php7
+
+=back
+
+Lists files to be registered with the PHP 5. The file is interpreted
+as line separated list of installation stanzas, where each entry
+consists of whitespace separated values conforming to the file
+semantics below.
+
+=head2 FILE SEMANTICS
+
+Each line consists of a triple
+
+I<type> I<file> [I<arguments>]
+
+where the values are interpreted as follows:
+
+
+=head3 I<type>
+
+Denotes the type of file to be installed. Recognized values are B<conf>
+for PHP 5 global configuration snippets and B<mod> for PHP 5 modules.
+
+=head3 I<file>
+
+Is interpreted as existing file name within the source package. No path
+expansion is effectuated. Just like L<dh_install(1)>, B<dh_php7> can not
+rename files.
+
+=head2 GLOBAL CONFIGURATION FILES
+
+Global configuration files (determined by the B<conf> type) must have a I<.conf>
+suffix and are installed to I</etc/php7/conf-available>. Moreover, the
+configuration is activated in the maintainer script at installation time.
+
+Such global configuration snippets are supposed to be used by web applications.
+Such stanzas accept an optional third I<arguments> which is interpreted as
+dependency line of alternative web servers the package supports. See I<EXAMPLES>
+below.
+
+B<dh_php7> will set dependencies in B<${misc:Recommends}> accordingly when
+this type of configuration is found. Alternatives from the optional I<argument>
+is incorporated into this dependency line.
+
+=head2 MODULES
+
+Modules are handled specially and are determined by the B<mod> type. Modules can
+either have a I<.conf> or I<.load> suffix.  In that case the file is interpreted
+as module load file or module configuration file respectively and is installed to
+I</opt/kaltura/app/configurations/php/mods-available>.  If the file is ending with a I<.so> suffix it is
+interpreted as actual module shared object and is installed to the PHP 5 module
+directory.  Moreover, if a I<.load> file is installed the configuration is
+activated in the maintainer script at installation time.
+
+A typical module configuration has two lines, one for the I<.load> file, and one
+for the I<.so> file, albeit the latter could be installed by upstream's
+makefile, too.
+
+B<dh_php7> will set dependencies in B<${misc:Depends}> accordingly when
+this type of configuration is found.
+
+=head1 OPTIONS
+
+=over 4
+
+=item B<--error-handler=>I<function>
+
+Call the named shell I<function> if running the maintainer script fails.  The
+function should be provided in the F<prerm> and F<postinst> scripts, before the
+B<#DEBHELPER#> token.
+
+=item B<-e>, B<--noenable>
+
+Install maintainer scripts accordingly, but do not enable the scripts or
+configuration by default.
+
+=item B<-n>, B<--noscripts>
+
+Do not modify F<postinst>/F<postrm>/F<prerm> maintainer scripts.
+
+
+=back
+
+=head1 NOTES
+
+Note that this command is not idempotent.  L<dh_prep(1)> should be called
+between invocations of this command.  Otherwise, it may cause multiple
+instances of the same text to be added to maintainer scripts.
+
+=head1 EXAMPLES
+
+The examples below lists valid entries for a debian/I<package>.php7 file.  For
+example, the two lines below install a fictional I<mod_foo> PHP 5 module along
+a Debian specific I<.ini> file:
+
+ mod src/foo/mod_foo.so
+ mod debian/foo.ini
+
+=head1 SEE ALSO
+
+L<php7ctl>(8), L<php7query>(8), L<debhelper>(7), L<dh>(1)
+
+=head1 AUTHOR
+
+This manual and L<dh_php7> was written by Arno Toell <debian@toell.net>
+for Apache 2 and modified for PHP 5 by Ondřej Surý <ondrej@sury.org>.
+
+=cut
+
+
+##
+## main code starts here
+##
+
+init(options => {
+	"e|noenable" => \$dh{NOENABLE},
+});
+
+foreach my $package ((@{$dh{DOPACKAGES}}))
+{
+	my %PACKAGE_TYPE = (
+		has_a_module => [],
+		has_a_conf_file => [],
+		dependency_line => "",
+		handler => $dh{ERROR_HANDLER},
+	);
+
+	my $file = pkgfile($package, "php7");
+	my $tmp  = tmpdir($package);
+
+	my @files_to_register = filedoublearray($file, ".") if $file;
+	foreach my $line (@files_to_register)
+	{
+		my $type = lc(shift @{$line}) if $line->[0];
+		my $source = shift @{$line} if $line->[0];
+		my @arguments = map {"$_ "} @{$line};
+
+		$type .= "s" unless $type eq "conf";
+		my $installdir = $tmp . "/" . php7_conf_installdir($type);
+
+		if ($type eq "mods" or $type eq "conf")
+		{
+			my $basesource = basename($source);
+
+			if ($type eq "mods")
+			{
+				if ($basesource =~ m/\.ini$/)
+				{
+					my $enablename = $basesource;
+					$enablename =~ s/\.ini$//;
+					push @{$PACKAGE_TYPE{'has_a_module'}}, $enablename;
+					verbose_print("Installing module configuration $enablename into $installdir\n");
+				}
+				elsif ($basesource =~ m/\.so$/)
+				{
+					my $modinstalldir = $tmp . "/" . php7_api_installdir();
+					verbose_print("Installing module binary $source into $modinstalldir\n");
+					if (! -d $modinstalldir)
+					{
+						complex_doit("mkdir","-p", $modinstalldir);
+						complex_doit("chmod","755","$modinstalldir");
+					}
+					complex_doit("cp", $source, $modinstalldir);
+					next;
+				}
+
+				error("module: \"$basesource\" needs .so or .ini suffix") if $basesource !~ m/\.(ini|so)/;
+			}
+
+			if (! -d $installdir)
+			{
+				complex_doit("mkdir","-p",$installdir);
+				complex_doit("chmod","755","$installdir");
+			}
+			complex_doit("cp",$source,$installdir);
+			complex_doit("chmod","644","$installdir/$basesource");
+
+		}
+		else
+		{
+			error("Unknown parameter: $type\n");
+		}
+
+	}
+
+
+	if (! $file)
+	{
+		# do black magic only if there is no .php7 configuration file
+		find({  no_chdir => 1,
+			wanted => sub
+			{
+				my ($dir, $file) = (dirname($File::Find::name), basename($File::Find::name));
+				# remove extension
+				my $conf_name = $file;
+				$conf_name =~ s/\.[^.]+$//;
+
+				if ($dir =~ m#opt/kaltura/app/configurations/php/mods-available# and $file =~ m#.(load|conf)$#)
+				{
+					verbose_print("package $package appears	to be a web server module\n");
+					push @{$PACKAGE_TYPE{'has_a_module'}}, $conf_name if $file =~ m/\.load/;
+				}
+				if ($dir =~ m#opt/kaltura/app/configurations/php/conf-available# and $file =~ m#.conf$#)
+				{
+					verbose_print("package $package appears	to contain a global configuration file \n");
+					push @{$PACKAGE_TYPE{'has_a_conf_file'}}, $conf_name;
+				}
+
+
+
+		}}, tmpdir($package));
+	}
+
+
+	my @postinst_autoscripts;
+
+	if ($#{$PACKAGE_TYPE{'has_a_module'}} >= 0)
+	{
+		if ($package !~ m/php7-\w+?/)
+		{
+			warning("Package $package appears to be an PHP 5 module. It should comply to the package naming scheme php7-<modulename>\n");
+		}
+		addsubstvar($package, "misc:Depends", php7_api_version());
+
+		my $modules = "";
+		foreach my $module (@{$PACKAGE_TYPE{'has_a_module'}})
+		{
+			$modules .= "$module ";
+		}
+
+		push @postinst_autoscripts, ["enmod", $modules];
+	}
+
+	if ($#{$PACKAGE_TYPE{'has_a_conf_file'}} >= 0)
+	{
+		$PACKAGE_TYPE{'dependency_line'} .= "| php7";
+		addsubstvar($package, "misc:Recommends", "php7 (" . php7_version() . ") " . $PACKAGE_TYPE{'dependency_line'} );
+
+		my $confs = "";
+
+		foreach my $conf (@{$PACKAGE_TYPE{'has_a_conf_file'}})
+		{
+			$confs .= "$conf ";
+		}
+
+		if ($confs)
+		{
+			push @postinst_autoscripts, ["enconf", $confs];
+		}
+	}
+
+	if (! $dh{NOSCRIPTS})
+	{
+		foreach my $ref (@postinst_autoscripts)
+		{
+			for my $script_type (qw/postinst prerm postrm/)
+			{
+				if ($script_type eq "postinst" &&  $dh{NOENABLE})
+				{
+					next
+				}
+
+				my %replacements = (
+					HELPER => $ref->[0],
+					NAMES  => $ref->[1],
+					ERROR_HANDLER => $PACKAGE_TYPE{handler}
+				);
+
+				if ($script_type eq "prerm" || $script_type eq "postrm")
+				{
+					$replacements{'HELPER'} =~ s/en/dis/;
+				}
+
+				my $sed_command = "";
+				foreach my $key (sort keys %replacements)
+				{
+					my $val = $replacements{$key};
+					# Use a control char as separator for sed, to
+					# reduce escaping issues. Everything else is
+					# passed verbatim, i.e. it must not contain any
+					# shell or sed special characters.
+					my $sep = "\x17";
+					$sed_command .= "s" . $sep . "#$key#" .
+							      $sep . $val .
+							      $sep . "g; ";
+				}
+
+				autoscript($package, "$script_type", "$script_type-php7", $sed_command);
+			}
+		}
+	}
+}
+
+# vim: syntax=perl sw=8 sts=8 sr noet
