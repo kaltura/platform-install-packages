@@ -6,7 +6,7 @@
 Summary: Kaltura Open Source Video Platform - frontend server 
 Name: kaltura-front
 Version: 11.4.0
-Release: 1
+Release: 2
 License: AGPLv3+
 Group: Server/Platform 
 Source3: zz-%{name}.ini 
@@ -101,6 +101,9 @@ rm -rf %{buildroot}
 %config %{_sysconfdir}/php.d/zz-%{name}.ini
 
 %changelog
+* Fri Dec 12 2015 jess.portnoy@kaltura.com <Jess Portnoy> - 11.4.0-2
+- added dep on php-pecl-zendopcache.
+
 * Mon Dec 7 2015 jess.portnoy@kaltura.com <Jess Portnoy> - 11.4.0-1
 - Ver Bounce to 11.4.0
 

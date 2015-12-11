@@ -7,7 +7,7 @@
 Summary: Kaltura Open Source Video Platform - batch server 
 Name: kaltura-batch
 Version: 11.4.0
-Release: 1
+Release: 2
 License: AGPLv3+
 Group: Server/Platform 
 Source0: zz-%{name}.ini
@@ -129,6 +129,9 @@ service httpd restart
 
 
 %changelog
+* Fri Dec 12 2015 jess.portnoy@kaltura.com <Jess Portnoy> - 11.4.0-2
+- added dep on php-pecl-zendopcache.
+
 * Mon Dec 7 2015 jess.portnoy@kaltura.com <Jess Portnoy> - 11.4.0-1
 - Ver Bounce to 11.4.0
 
