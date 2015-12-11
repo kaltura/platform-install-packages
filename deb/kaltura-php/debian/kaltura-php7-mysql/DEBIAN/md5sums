@@ -1,0 +1,5 @@
+380956da2e2a9d738a3ef7d4d54914bc  opt/kaltura/lib/php/20151012/mysqli.so
+8830fb65918fac22b2edcd74c8aa5ef4  opt/kaltura/lib/php/20151012/pdo_mysql.so
+f236e54661cdcf871dd7e4baf9abbea4  opt/kaltura/share/php7/mysql/mysqli.ini
+abfa801b4820233d1fcf18d3e15db635  opt/kaltura/share/php7/mysql/pdo_mysql.ini
+c2493acdd68d7db7d3acbc132d0c7457  usr/share/doc/kaltura-php7-mysql/copyright

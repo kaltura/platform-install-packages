@@ -1,0 +1,29 @@
+#! /bin/sh
+
+set -e
+
+phpini=/opt/kaltura/app/configurations/php/cgi/php.ini
+
+case "$1" in
+purge)
+	# remove the flag to remember the original state
+	if [ -e /opt/kaltura/app/configurations/php/cgi/.start ]; then
+	    rm -f /opt/kaltura/app/configurations/php/cgi/.start
+	fi
+	for ext in '~' '%' .bak .ucf-new .ucf-old .ucf-dist;  do
+	    rm -f $phpini$ext
+	done
+	rm -f $phpini
+	if which ucf >/dev/null; then
+	    ucf --purge $phpini
+	fi
+	if which ucfr >/dev/null; then
+	    ucfr --purge kaltura-php7-cgi $phpini
+	fi
+	;;
+esac
+
+
+#DEBHELPER#
+
+exit 0

@@ -1,0 +1,23 @@
+Package: kaltura-libapache2-mod-php7
+Source: kaltura-php7
+Version: 7.0.0-6
+Architecture: amd64
+Maintainer: Jess Portnoy <jess.portnoy@kaltura.com>
+Installed-Size: 10279
+Depends: libbz2-1.0, libc6 (>= 2.15), libonig2 (>= 5.2.0), libpcre3, libssl1.0.0 (>= 1.0.1), libxml2 (>= 2.9.0), zlib1g (>= 1:1.1.4), mime-support, kaltura-php7-common (= 7.0.0-6), libmagic1, ucf, tzdata, apache2-mpm-prefork (>= 2.4) | apache2-mpm-itk (>= 2.4)
+Recommends: kaltura-php7-cli
+Suggests: php-pear
+Provides: phpapi-20151012
+Section: httpd
+Priority: optional
+Homepage: http://www.php.net/
+Description: server-side, HTML-embedded scripting language (Apache 2 module)
+ This package provides the PHP7 module for the Apache 2 webserver (as
+ found in the apache2-mpm-prefork package).  Please note that this package
+ ONLY works with Apache's prefork MPM, as it is not compiled thread-safe.
+ .
+ .
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.

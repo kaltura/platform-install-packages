@@ -1,0 +1,5 @@
+9dd7bc143a7e2a642b3d64a2dc439f9d  opt/kaltura/lib/php/20151012/pdo_pgsql.so
+f4a70c17fc7cd76e440c7f6b0ab08d6c  opt/kaltura/lib/php/20151012/pgsql.so
+37e7019f79d6846fb8e92a5b864395d5  opt/kaltura/share/php7/pgsql/pdo_pgsql.ini
+1f6761664793d86cd33e38148393c3c2  opt/kaltura/share/php7/pgsql/pgsql.ini
+c2493acdd68d7db7d3acbc132d0c7457  usr/share/doc/kaltura-php7-pgsql/copyright

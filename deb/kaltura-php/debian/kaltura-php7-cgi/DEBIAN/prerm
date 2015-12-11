@@ -1,0 +1,17 @@
+#!/bin/sh
+
+set -e
+
+
+
+case "$1" in
+    remove)
+	if [ -x /usr/sbin/a2dismod ]; then
+	    a2dismod php5_cgi || true
+	fi
+	update-alternatives --remove php-cgi /usr/bin/php5-cgi
+	update-alternatives --remove php-cgi-bin /usr/lib/cgi-bin/php5
+	;;
+esac
+
+exit 0

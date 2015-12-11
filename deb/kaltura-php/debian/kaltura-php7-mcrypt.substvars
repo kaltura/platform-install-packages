@@ -1,0 +1,3 @@
+shlibs:Depends=libc6 (>= 2.14), libmcrypt4
+php:Depends=phpapi-20151012
+misc:Depends=

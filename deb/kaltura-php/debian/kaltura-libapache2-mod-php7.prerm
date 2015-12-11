@@ -6,12 +6,12 @@ set -e
 
 case "$1" in
     remove)
-	if [ -e /etc/apache2/apache2.conf -a -e /etc/apache2/mods-enabled/php5.load ]; then
+	if [ -e /etc/apache2/apache2.conf -a -e /etc/apache2/mods-enabled/php7.load ]; then
 	    # set a flag to remember the original state
 	    #  useful when reinstalling the same version.
-	    touch /etc/php5/apache2/.start
+	    touch /opt/kaltura/app/configurations/php/apache2/.start
 	fi
-	a2dismod php5 || true
+	a2dismod php7 || true
 	;;
 esac
 

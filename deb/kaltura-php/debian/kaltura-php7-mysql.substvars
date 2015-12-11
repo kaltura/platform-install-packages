@@ -1,0 +1,2 @@
+shlibs:Depends=libc6 (>= 2.14), libmysqlclient18 (>= 5.5.24+dfsg-1)
+misc:Depends=

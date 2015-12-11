@@ -1,3 +1,9 @@
+kaltura-base (11.4.0-1) kajam; urgency=low
+
+  * Switching to 11.4.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 07 Dec 2015 13:34:42 +0000
+
 kaltura-base (11.3.0-2) kajam; urgency=low
   * Support PHP 7
   * SUP-4598 - Infinite entry creation when using "Create new entry for every broadcast session"

@@ -1,3 +1,9 @@
+kaltura-front (11.4.0-1) kajam; urgency=low
+
+  * Switching to 11.4.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 07 Dec 2015 13:34:42 +0000
+
 kaltura-front (11.3.0-1) kajam; urgency=low
 
   * Switching to 11.3.0

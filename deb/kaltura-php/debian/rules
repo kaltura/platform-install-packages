@@ -5,7 +5,6 @@
 # This version is for a hypothetical package that builds an
 # architecture-dependant package, as well as an architecture-independent
 # package.
-
 # Uncomment this to turn on verbose mode. 
 #export DH_VERBOSE=1
 
@@ -76,8 +75,8 @@ else
 endif
 
 # some other helpful (for readability at least) shorthand variables
-PHPIZE_BUILDDIR = debian/php7-dev/usr/lib/php7/build
-
+PHP7_PREFIX = opt/kaltura
+PHPIZE_BUILDDIR = debian/kaltura-php7-dev/$(PHP7_PREFIX)/lib/php/build
 # support new (>= 2.2) and older versions of libtool for backporting ease
 LIBTOOL_DIRS = /usr/share/libtool/config /usr/share/libtool
 LTMAIN = $(firstword $(wildcard $(foreach d,$(LIBTOOL_DIRS),$d/ltmain.sh)))
@@ -104,9 +103,9 @@ export DEB_BUILD_HARDENING DEB_BUILD_HARDENING_PIE
 
 COMMON_CONFIG=--build=$(DEB_BUILD_GNU_TYPE) \
 		--host=$(DEB_HOST_GNU_TYPE) \
-		--sysconfdir=/opt/kaltura/app/configurations/php \
-		--localstatedir=/opt/kaltura/var \
-		--mandir=/opt/kaltura/share/man \
+		--sysconfdir=/$(PHP7_PREFIX)/app/configurations/php \
+		--localstatedir=/$(PHP7_PREFIX)/var \
+		--mandir=/$(PHP7_PREFIX)/share/man \
 		--disable-debug \
 		--disable-rpath \
 		--disable-static \
@@ -176,11 +175,8 @@ ifeq (yes,$(RUN_TESTS))
 	    test -d "$(CURDIR)/ext/$${ext%.so}/tests" || continue; \
 	    test "$$ext" != "imap.so" || continue; \
 	    test "$$ext" != "ldap.so" || continue; \
-	    test "$$ext" != "odbc.so" || continue; \
 	    test "$$ext" != "pgsql.so" || continue; \
 	    test "$$ext" != "pdo_dblib.so" || continue; \
-	    test "$$ext" != "pdo_firebird.so" || continue; \
-	    test "$$ext" != "pdo_odbc.so" || continue; \
 	    test "$$ext" != "pdo_pgsql.so" || continue; \
 	    test "$$ext" != "snmp.so" || continue; \
 	    extensions="$$extensions -d extension=$$ext"; \
@@ -201,7 +197,7 @@ else
 endif
 
 #build: build-apache2-stamp build-apache2filter-stamp build-cgi-stamp build-cli-stamp build-embed-stamp build-fpm-stamp build-pear-stamp test-results.txt
-build: build-apache2-stamp build-cli-stamp build-fpm-stamp build-pear-stamp
+build: build-apache2-stamp build-cli-stamp build-pear-stamp
 
 build-apache2-stamp: configure-apache2-stamp
 	dh_testdir
@@ -254,19 +250,20 @@ build-pear-stamp: build-cgi-stamp
 	dh_testdir
 	-mkdir pear-build
 	-mkdir pear-build-download
-	cd cgi-build && PHP_PEAR_DOWNLOAD_DIR=$(CURDIR)/pear-build-download $(MAKE) install-pear PHP_PEAR_PHP_BIN=/opt/kaltura/bin/php PHP_PEAR_INSTALL_DIR=/opt/kaltura/share/pear PHP_PEAR_SYSCONF_DIR=/etc/pear PHP_PEAR_SIG_BIN=/usr/bin/gpg INSTALL_ROOT=$(CURDIR)/pear-build
+	cd cgi-build && PHP_PEAR_DOWNLOAD_DIR=$(CURDIR)/pear-build-download $(MAKE) install-pear PHP_PEAR_PHP_BIN=/$(PHP7_PREFIX)/bin/php PHP_PEAR_INSTALL_DIR=/$(PHP7_PREFIX)/share/pear PHP_PEAR_SYSCONF_DIR=/etc/pear PHP_PEAR_SIG_BIN=/usr/bin/gpg INSTALL_ROOT=$(CURDIR)/pear-build
 	sed -i -e 's/-d output_buffering=1 -d open_basedir="" -d safe_mode=0/-d output_buffering=1 -d open_basedir="" -d safe_mode=0 -d memory_limit="-1"/' \
-	       $(CURDIR)/pear-build/opt/kaltura/bin/pear && \
+	       $(CURDIR)/debian/php-pear/$(PHP7_PREFIX)/bin/pear && \
 	sed -i -e 's/-d output_buffering=1 -d safe_mode=0/-d output_buffering=1 -d open_basedir="" -d safe_mode=0 -d memory_limit="-1"/' \
-	       $(CURDIR)/pear-build/opt/kaltura/bin/pecl && \
+	       $(CURDIR)/debian/php-pear/$(PHP7_PREFIX)/bin/pecl && \
 	sed -i -e 's/-d memory_limit="-1"//' \
 	       -e 's/-d output_buffering=1 -d open_basedir="" -d safe_mode=0/-d output_buffering=1 -d open_basedir="" -d safe_mode=0 -d memory_limit="-1"/' \
-	       $(CURDIR)/pear-build/opt/kaltura/bin/peardev
-	sed -i -re "s#('PEAR_CONFIG_SYSCONFDIR', PHP_SYSCONFDIR)#\1 . '/pear'#" $(CURDIR)/pear-build/opt/kaltura/share/pear/PEAR/Config.php
-	patch -s -d $(CURDIR)/pear-build/opt/kaltura/share/pear/ -p1 -i $(CURDIR)/debian/PEAR-Builder-print-info-about-php7-dev.patch
+	       $(CURDIR)/debian/php-pear/$(PHP7_PREFIX)/bin/peardev
+	sed -i -re "s#('PEAR_CONFIG_SYSCONFDIR', PHP_SYSCONFDIR)#\1 . '/pear'#" $(CURDIR)/debian/php-pear/$(PHP7_PREFIX)/share/pear/PEAR/Config.php
+	#patch -s -d $(CURDIR)/debian/php-pear/$(PHP7_PREFIX)/share/pear/ -p1 -i $(CURDIR)/debian/PEAR-Builder-print-info-about-php7-dev.patch
 	touch build-pear-stamp
 
-configure: configure-apache2-stamp configure-apache2filter-stamp configure-cli-stamp configure-embed-stamp configure-fpm-stamp configure-cgi-stamp
+#configure: configure-apache2-stamp configure-apache2filter-stamp configure-cli-stamp configure-embed-stamp configure-fpm-stamp configure-cgi-stamp
+configure: configure-apache2-stamp configure-cli-stamp
 
 configure-apache2-stamp: prepared-stamp
 	dh_testdir
@@ -277,13 +274,14 @@ configure-apache2-stamp: prepared-stamp
 	sed -i 's@ tsrm_virtual_cwd.c@@g' configure
 	cd apache2-build && \
         CFLAGS="$(CFLAGS)" PROG_SENDMAIL="$(PROG_SENDMAIL)" ../configure \
-		--prefix=/opt/kaltura --with-apxs2=/usr/bin/apxs2 \
-		--with-config-file-path=/opt/kaltura/app/configurations/php/apache2 \
-		--with-config-file-scan-dir=/opt/kaltura/app/configurations/php/apache2/conf.d \
+		--prefix=/$(PHP7_PREFIX) --with-apxs2=/usr/bin/apxs2 \
+		--with-config-file-path=/$(PHP7_PREFIX)/app/configurations/php/apache2 \
+		--with-config-file-scan-dir=/$(PHP7_PREFIX)/app/configurations/php/conf.d \
 		$(COMMON_CONFIG) \
 		--without-mm \
 		--with-curl=shared,/usr \
 		--with-zlib-dir=/usr \
+		--with-gd=shared,/usr --enable-gd-native-ttf \
 		--with-gmp=shared,/usr \
 		--with-jpeg-dir=shared,/usr \
 		--with-xpm-dir=shared,/usr/X11R6 \
@@ -296,19 +294,16 @@ configure-apache2-stamp: prepared-stamp
 		--with-mcrypt=shared,/usr \
 		--with-mysqli=shared,/usr/bin/mysql_config \
 		--with-pspell=shared,/usr \
-		--with-unixODBC=shared,/usr \
 		--with-recode=shared,/usr \
 		--with-xsl=shared,/usr \
 		--with-snmp=shared,/usr \
 		--with-sqlite3=shared,/usr \
-		--with-mssql=shared,/usr \
 		--with-tidy=shared,/usr \
 		--with-xmlrpc=shared \
 		--with-pgsql=shared,/usr PGSQL_INCLUDE=`pg_config --includedir` \
 		--enable-pdo=shared \
 		--without-pdo-dblib \
 		--with-pdo-mysql=shared,/usr \
-		--with-pdo-odbc=shared,unixODBC,/usr \
 		--with-pdo-pgsql=shared,/usr/bin/pg_config \
 		--with-pdo-sqlite=shared,/usr \
 		--with-pdo-dblib=shared,/usr \
@@ -326,9 +321,9 @@ configure-apache2filter-stamp: prepared-stamp
 	-mkdir apache2filter-build
 	cd apache2filter-build && \
         CFLAGS="$(CFLAGS)" PROG_SENDMAIL="$(PROG_SENDMAIL)" ../configure \
-		--prefix=/opt/kaltura --with-apxs2filter=/usr/bin/apxs2 \
-		--with-config-file-path=/opt/kaltura/app/configurations/php/apache2filter \
-		--with-config-file-scan-dir=/opt/kaltura/app/configurations/php/apache2filter/conf.d \
+		--prefix=/$(PHP7_PREFIX) --with-apxs2filter=/usr/bin/apxs2 \
+		--with-config-file-path=/$(PHP7_PREFIX)/app/configurations/php/apache2filter \
+		--with-config-file-scan-dir=/$(PHP7_PREFIX)/app/configurations/php/conf.d \
 		$(COMMON_CONFIG) \
 		--without-mm \
 		--disable-pdo \
@@ -347,9 +342,9 @@ configure-cgi-stamp: prepared-stamp
 	-mkdir cgi-build
 	cd cgi-build && \
         CFLAGS="$(CFLAGS)" PROG_SENDMAIL="$(PROG_SENDMAIL)" ../configure \
-		--prefix=/opt/kaltura \
-		--with-config-file-path=/opt/kaltura/app/configurations/php/cgi \
-		--with-config-file-scan-dir=/opt/kaltura/app/configurations/php/cgi/conf.d \
+		--prefix=/$(PHP7_PREFIX) \
+		--with-config-file-path=/$(PHP7_PREFIX)/app/configurations/php/cgi \
+		--with-config-file-scan-dir=/$(PHP7_PREFIX)/app/configurations/php/conf.d \
 		$(COMMON_CONFIG) \
 		--without-mm \
 		--enable-pdo=shared \
@@ -372,9 +367,9 @@ configure-cli-stamp: prepared-stamp
 	-mkdir cli-build
 	cd cli-build && \
         CFLAGS="$(CFLAGS)" PROG_SENDMAIL="$(PROG_SENDMAIL)" ../configure \
-		--prefix=/opt/kaltura --disable-cgi \
-		--with-config-file-path=/opt/kaltura/app/configurations/php/cli \
-		--with-config-file-scan-dir=/opt/kaltura/app/configurations/php/cli/conf.d \
+		--prefix=/$(PHP7_PREFIX) --disable-cgi \
+		--with-config-file-path=/$(PHP7_PREFIX)/app/configurations/php/cli \
+		--with-config-file-scan-dir=/$(PHP7_PREFIX)/app/configurations/php/conf.d \
 		$(COMMON_CONFIG) \
 		--without-mm \
 		--disable-pdo \
@@ -392,9 +387,9 @@ configure-embed-stamp: prepared-stamp
 	-mkdir embed-build
 	cd embed-build && \
         CFLAGS="$(CFLAGS)" PROG_SENDMAIL="$(PROG_SENDMAIL)" ../configure \
-		--prefix=/opt/kaltura --enable-embed --disable-cgi \
-		--with-config-file-path=/opt/kaltura/app/configurations/php/embed \
-		--with-config-file-scan-dir=/opt/kaltura/app/configurations/php/embed/conf.d \
+		--prefix=/$(PHP7_PREFIX) --enable-embed --disable-cgi \
+		--with-config-file-path=/$(PHP7_PREFIX)/app/configurations/php/embed \
+		--with-config-file-scan-dir=/$(PHP7_PREFIX)/app/configurations/php/conf.d \
 		$(COMMON_CONFIG) \
 		--without-mm \
 		--disable-pdo \
@@ -412,10 +407,10 @@ configure-fpm-stamp: prepared-stamp
 	-mkdir fpm-build
 	cd fpm-build && \
         CFLAGS="$(CFLAGS)" PROG_SENDMAIL="$(PROG_SENDMAIL)" ../configure \
-		--prefix=/opt/kaltura --enable-fpm --disable-cgi \
+		--prefix=/$(PHP7_PREFIX) --enable-fpm --disable-cgi \
 		--with-fpm-user=www-data --with-fpm-group=www-data \
-		--with-config-file-path=/opt/kaltura/app/configurations/php/fpm \
-		--with-config-file-scan-dir=/opt/kaltura/app/configurations/php/fpm/conf.d \
+		--with-config-file-path=/$(PHP7_PREFIX)/app/configurations/php/fpm \
+		--with-config-file-scan-dir=/$(PHP7_PREFIX)/app/configurations/php/conf.d \
 		$(COMMON_CONFIG) \
 		--with-libevent-dir=/usr \
 		--without-mm \
@@ -459,14 +454,14 @@ endif
 
 	# clean up autogenerated cruft
 	cat debian/modulelist | while read package extname dsoname priority; do \
-		rm -f debian/php7-$$package.postinst; \
-		rm -f debian/php7-$$package.preinst; \
-		rm -f debian/php7-$$package.prerm; \
-		rm -f debian/php7-$$package.postrm; \
+		rm -f debian/kaltura-php7-$$package.postinst; \
+		rm -f debian/kaltura-php7-$$package.preinst; \
+		rm -f debian/kaltura-php7-$$package.prerm; \
+		rm -f debian/kaltura-php7-$$package.postrm; \
 	done
-	for sapi in libapache2-mod-php7 libapache2-mod-php7filter php7-cgi php7-cli libphp7-embed php7-fpm; do \
+	for sapi in libapache2-mod-php7 php7-cli ; do \
 		for cruft in postrm links; do \
-			rm -f debian/$${sapi}.$${cruft}; \
+			rm -f debian/kaltura-$${sapi}.$${cruft}; \
 		done; \
 	done
 
@@ -479,164 +474,170 @@ install: build
 	dh_prep
 	dh_installdirs
 
-
-	cp debian/php7_cgi.conf \
-		debian/php7-cgi/etc/apache2/mods-available/php7_cgi.conf
-	cp debian/php7_cgi.load \
-	        debian/php7-cgi/etc/apache2/mods-available/php7_cgi.load
+	#mkdir -p debian/php7-cgi/etc/apache2/mods-available
+	#cp debian/php7_cgi.conf \
+	#	debian/php7-cgi/etc/apache2/mods-available/php7_cgi.conf
+	#cp debian/php7_cgi.load \
+	#        debian/php7-cgi/etc/apache2/mods-available/php7_cgi.load
 
 	# install apache2 DSO module
+	mkdir -p debian/kaltura-libapache2-mod-php7/`apxs2 -q LIBEXECDIR` debian/kaltura-libapache2-mod-php7/etc/apache2/mods-available 
 	cp apache2-build/.libs/libphp7.so \
-		debian/libapache2-mod-php7/`apxs2 -q LIBEXECDIR`/
+		debian/kaltura-libapache2-mod-php7/`apxs2 -q LIBEXECDIR`/
 	cp debian/libapache2-mod-php7.load \
-		debian/libapache2-mod-php7/etc/apache2/mods-available/php7.load
+		debian/kaltura-libapache2-mod-php7/etc/apache2/mods-available/php7.load
 	cp debian/libapache2-mod-php7.conf \
-		debian/libapache2-mod-php7/etc/apache2/mods-available/php7.conf
+		debian/kaltura-libapache2-mod-php7/etc/apache2/mods-available/php7.conf
 
 	# Add here commands to install the package into debian/php7.
 	# install apache2 DSO filter module
-	cp apache2filter-build/.libs/libphp7.so \
-		debian/libapache2-mod-php7filter/`apxs2 -q LIBEXECDIR`/libphp7filter.so
-	cp debian/libapache2-mod-php7filter.load \
-		debian/libapache2-mod-php7filter/etc/apache2/mods-available/php7filter.load
-	cp debian/libapache2-mod-php7filter.conf \
-		debian/libapache2-mod-php7filter/etc/apache2/mods-available/php7filter.conf
+	#mkdir -p debian/libapache2-mod-php7filter/`apxs2 -q LIBEXECDIR` debian/libapache2-mod-php7filter/etc/apache2/mods-available
+	#cp apache2filter-build/.libs/libphp7.so \
+	#	debian/libapache2-mod-php7filter/`apxs2 -q LIBEXECDIR`/libphp7filter.so
+	#cp debian/libapache2-mod-php7filter.load \
+	#	debian/libapache2-mod-php7filter/etc/apache2/mods-available/php7filter.load
+	#cp debian/libapache2-mod-php7filter.conf \
+	#	debian/libapache2-mod-php7filter/etc/apache2/mods-available/php7filter.conf
 
 	# sanitize php.ini file
-	cat php.ini-production | tr "\t" " " | sed -e'/short_open_tag =/ s/Off/On/g;/session.gc_probability =/ s/1/0/g;/disable_functions =/ s/$$/ $(PCNTL_FUNCTIONS)/g;' > debian/php7-common/opt/kaltura/share/php7/php.ini-production
-	cat php.ini-production | tr "\t" " " | sed -e'/memory_limit =/ s/128M/-1/g;/short_open_tag =/ s/Off/On/g;/session.gc_probability =/ s/1/0/g' > debian/php7-common/opt/kaltura/share/php7/php.ini-production.cli
-	cat php.ini-development | tr "\t" " " | sed -e'/short_open_tag =/ s/Off/On/g;/session.gc_probability =/ s/1/0/g;/disable_functions =/ s/$$/ $(PCNTL_FUNCTIONS)/g;' > debian/php7-common/opt/kaltura/share/php7/php.ini-development
-	cp test-results.txt debian/php7-common/opt/kaltura/share/doc/php7-common/
+	mkdir -p debian/kaltura-php7-common/$(PHP7_PREFIX)/share/php7/
+	cat php.ini-production | tr "\t" " " | sed -e'/short_open_tag =/ s/Off/On/g;/session.gc_probability =/ s/1/0/g;/disable_functions =/ s/$$/ $(PCNTL_FUNCTIONS)/g;' > debian/kaltura-php7-common/$(PHP7_PREFIX)/share/php7/php.ini-production
+	cat php.ini-production | tr "\t" " " | sed -e'/memory_limit =/ s/128M/-1/g;/short_open_tag =/ s/Off/On/g;/session.gc_probability =/ s/1/0/g' > debian/kaltura-php7-common/$(PHP7_PREFIX)/share/php7/php.ini-production.cli
+	cat php.ini-development | tr "\t" " " | sed -e'/short_open_tag =/ s/Off/On/g;/session.gc_probability =/ s/1/0/g;/disable_functions =/ s/$$/ $(PCNTL_FUNCTIONS)/g;' > debian/kaltura-php7-common/$(PHP7_PREFIX)/share/php7/php.ini-development
+	#cp test-results.txt debian/php7-common/$(PHP7_PREFIX)/share/doc/php7-common/
+	install -m644 debian/php7-helper $(CURDIR)/debian/kaltura-php7-common/$(PHP7_PREFIX)/share/php7/
+	install -m644 debian/debhelper/php7-maintscript-helper $(CURDIR)/debian/kaltura-php7-common/$(PHP7_PREFIX)/share/php7/
 
 	# install embed SAPI
-	cd embed-build && make install-headers install-build install-sapi install-programs INSTALL_ROOT=$(CURDIR)/debian/libphp7-embed
-	rm $(CURDIR)/debian/libphp7-embed/opt/kaltura/lib/php7/*.la
+	#cd embed-build && make install-headers install-build install-sapi install-programs INSTALL_ROOT=$(CURDIR)/debian/libphp7-embed
+	#rm $(CURDIR)/debian/libphp7-embed/$(PHP7_PREFIX)/lib/php7/*.la
 
 	# install the apache modules' files
-	cd apache2-build && $(MAKE) install-headers install-build install-modules install-programs INSTALL_ROOT=$(CURDIR)/debian/libapache2-mod-php7
-	# remove netware and win32 headers that we don't want
-	cd debian/libapache2-mod-php7/opt/kaltura/include/php7/ && \
-		  $(RM) TSRM/readdir.h \
-			TSRM/tsrm_config.nw.h TSRM/tsrm_config.w32.h\
-			TSRM/tsrm_nw.h TSRM/tsrm_win32.h\
-			Zend/zend_config.nw.h Zend/zend_config.w32.h\
-			main/config.nw.h main/config.w32.h\
-			main/win95nt.h
+	cd apache2-build && $(MAKE) install-headers install-build install-modules install-programs INSTALL_ROOT=$(CURDIR)/debian/kaltura-libapache2-mod-php7
 
 	# install PEAR
-	cp -a pear-build/* debian/php-pear/
+	#mkdir -p debian/php-pear
+	#cp -a pear-build/* debian/php-pear/
 
 	# everything under usr/share/php/data except 'PEAR' is b0rken
 	# and actually needs to be fixed
-	[ ! -f debian/php-pear/opt/kaltura/share/pear/data/Structures_Graph/LICENSE ] || \
-		$(RM) debian/php-pear/opt/kaltura/share/pear/data/Structures_Graph/LICENSE
-	[ ! -f debian/php-pear/opt/kaltura/share/pear/doc/PEAR/INSTALL ] || \
-		$(RM) debian/php-pear/opt/kaltura/share/pear/doc/PEAR/INSTALL
-	[ ! -f debian/php-pear/opt/kaltura/share/pear/doc/Structures_Graph/docs/generate.sh ] || \
-		$(RM) debian/php-pear/opt/kaltura/share/pear/doc/Structures_Graph/docs/generate.sh
-	for f in Structures_Graph/publish.sh Structures_Graph/package.sh \
-		Structures_Graph/genpackage.xml.pl; do \
-		$(RM) debian/php-pear/opt/kaltura/share/pear/data/$$f; \
-	done
+	#[ ! -f debian/php-pear/$(PHP7_PREFIX)/share/pear/data/Structures_Graph/LICENSE ] || \
+	#	$(RM) debian/php-pear/$(PHP7_PREFIX)/share/pear/data/Structures_Graph/LICENSE
+	#[ ! -f debian/php-pear/$(PHP7_PREFIX)/share/pear/doc/PEAR/INSTALL ] || \
+	#	$(RM) debian/php-pear/$(PHP7_PREFIX)/share/pear/doc/PEAR/INSTALL
+	#[ ! -f debian/php-pear/$(PHP7_PREFIX)/share/pear/doc/Structures_Graph/docs/generate.sh ] || \
+	#	$(RM) debian/php-pear/$(PHP7_PREFIX)/share/pear/doc/Structures_Graph/docs/generate.sh
+	#for f in Structures_Graph/publish.sh Structures_Graph/package.sh \
+	#	Structures_Graph/genpackage.xml.pl; do \
+	#	$(RM) debian/php-pear/$(PHP7_PREFIX)/share/pear/data/$$f; \
+	#done
 	# we don't want test suites
-	$(RM) -r debian/php-pear/opt/kaltura/share/pear/test/
-	[ -d debian/php-pear/opt/kaltura/share/pear/doc ] && { \
-		mkdir -p debian/php-pear/opt/kaltura/share/doc/php7-common/PEAR; \
-		mv debian/php-pear/opt/kaltura/share/pear/doc/* \
-			debian/php-pear/opt/kaltura/share/doc/php7-common/PEAR/; \
-		$(RM) -r debian/php-pear/opt/kaltura/share/pear/doc; \
-		ln -s ../doc/php-pear/PEAR debian/php-pear/opt/kaltura/share/pear/doc; \
-		echo "Dummy placeholder to prevent the directory's deletion" > \
-			debian/php-pear/opt/kaltura/share/doc/php7-common/PEAR/.placeholder; \
-	}
+	#$(RM) -rf debian/php-pear/$(PHP7_PREFIX)/share/pear/test/
+	#[ -d debian/php-pear/$(PHP7_PREFIX)/share/pear/doc ] && { \
+	#	mkdir -p debian/php-pear/$(PHP7_PREFIX)/share/doc/php7-common/PEAR; \
+	#	mv debian/php-pear/$(PHP7_PREFIX)/share/pear/doc/* \
+	#		debian/php-pear/$(PHP7_PREFIX)/share/doc/php7-common/PEAR/; \
+	#	#$(RM) -r debian/php-pear/$(PHP7_PREFIX)/share/pear/doc; \
+	#	ln -s ../doc/php-pear/PEAR debian/php-pear/$(PHP7_PREFIX)/share/pear/doc; \
+	#	echo "Dummy placeholder to prevent the directory's deletion" > \
+	#		debian/php-pear/$(PHP7_PREFIX)/share/doc/php7-common/PEAR/.placeholder; \
+	#}
 
 	# install extensions
-	ext=`./debian/libapache2-mod-php7/usr/bin/php-config --extension-dir`;\
-	for i in libapache2-mod-php7 libapache2-mod-php7filter php7-cgi php7-cli libphp7-embed php7-fpm; do \
+	ext=`./debian/kaltura-libapache2-mod-php7/$(PHP7_PREFIX)/bin/php-config --extension-dir`;\
+	for i in kaltura-libapache2-mod-php7 kaltura-php7-cli ; do \
 		mkdir -p debian/$$i/$${ext}; \
 	done; \
 	cat debian/modulelist debian/extramodulelist | while read package extname dsoname priority; do \
 		if [ "$$package" = "mysqlnd" ]; then \
 			modulepath=cgi-build/modules; \
 		else \
-			modulepath=debian/libapache2-mod-php7/$${ext}; \
+			modulepath=debian/kaltura-libapache2-mod-php7/$${ext}; \
 		fi; \
 		if [ -z "$$dsoname" ]; then dsoname=$$package; fi; \
-		mkdir -p debian/php7-$$package$${ext}; \
+		mkdir -p debian/kaltura-php7-$$package$${ext}; \
 		install -m 644 -o root -g root \
 			$${modulepath}/$$dsoname.so \
-			debian/php7-$$package$${ext}/$$dsoname.so; \
+			debian/kaltura-php7-$$package$${ext}/$$dsoname.so; \
 		rm $${modulepath}/$$dsoname.so; \
 	done
 
 	# install CGI
-	cp cgi-build/sapi/cgi/cgi-bin.php7 debian/php7-cgi/usr/lib/cgi-bin/php7
-	cp cgi-build/sapi/cgi/usr.bin.php7-cgi debian/php7-cgi/usr/bin/php7-cgi
-	cp cli-build/sapi/cli/php.1 debian/php7-cgi/usr/share/man/man1/php7-cgi.1
+	#cp cgi-build/sapi/cgi/cgi-bin.php7 debian/php7-cgi/usr/lib/cgi-bin/php7
+	#cp cgi-build/sapi/cgi/usr.bin.php7-cgi debian/php7-cgi/usr/bin/php7-cgi
+	#cp cli-build/sapi/cli/php.1 debian/php7-cgi/usr/share/man/man1/php7-cgi.1
 
 	# install CLI
-	cp cli-build/sapi/cli/php debian/php7-cli/usr/bin/php7
-	cp cli-build/sapi/cli/php.1 debian/php7-cli/usr/share/man/man1/php7.1
+	mkdir -p debian/kaltura-php7-cli/$(PHP7_PREFIX)/bin debian/kaltura-php7-cli/$(PHP7_PREFIX)/share/man/man1
+	cp cli-build/sapi/cli/php debian/kaltura-php7-cli/$(PHP7_PREFIX)/bin/php7
+	cp cli-build/sapi/cli/php.1 debian/kaltura-php7-cli/$(PHP7_PREFIX)/share/man/man1/php7.1
 
 	# install FPM
-	mkdir -p debian/php7-fpm/usr/sbin debian/php7-fpm/usr/share/man/man8/ debian/php7-fpm/opt/kaltura/app/configurations/php/fpm/pool.d
-	cp fpm-build/sapi/fpm/php-fpm debian/php7-fpm/usr/sbin/php7-fpm
-	cp fpm-build/sapi/fpm/php-fpm.8 debian/php7-fpm/usr/share/man/man8/php7-fpm.8
+	#mkdir -p debian/php7-fpm/usr/sbin debian/php7-fpm/usr/share/man/man8/ debian/php7-fpm/$(PHP7_PREFIX)/app/configurations/php/fpm/pool.d
+	#cp fpm-build/sapi/fpm/php-fpm debian/php7-fpm/usr/sbin/php7-fpm
+	#cp fpm-build/sapi/fpm/php-fpm.8 debian/php7-fpm/usr/share/man/man8/php7-fpm.8
 	# we don't want the pool definitions on the main file itself:
-	sed -r '/('"'"'|\[)www('"'"'|\])/Q' < fpm-build/sapi/fpm/php-fpm.conf > \
-	    debian/php7-fpm/opt/kaltura/app/configurations/php/fpm/php-fpm.conf
+	#sed -r '/('"'"'|\[)www('"'"'|\])/Q' < fpm-build/sapi/fpm/php-fpm.conf > \
+	#    debian/php7-fpm/$(PHP7_PREFIX)/app/configurations/php/fpm/php-fpm.conf
 	# extract the first pool, called "www," from the config file:
-	sed -nr '/('"'"'|\[)www('"'"'|\])/{h;p;d};x;/www/{x;p}' < fpm-build/sapi/fpm/php-fpm.conf | \
-	sed -e's{^;listen\.owner{listen.owner{;' \
-            -e's{^;listen\.group{listen.group{;' \
-	    > debian/php7-fpm/opt/kaltura/app/configurations/php/fpm/pool.d/www.conf
+	#sed -nr '/('"'"'|\[)www('"'"'|\])/{h;p;d};x;/www/{x;p}' < fpm-build/sapi/fpm/php-fpm.conf | \
+	#sed -e's{^;listen\.owner{listen.owner{;' \
+        #    -e's{^;listen\.group{listen.group{;' \
+	#    > debian/php7-fpm/$(PHP7_PREFIX)/app/configurations/php/fpm/pool.d/www.conf
 
 	# move and install -dev files
-	dh_movefiles --sourcedir=debian/libphp7-embed
+	#dh_movefiles --sourcedir=debian/libphp7-embed
 	dh_movefiles --sourcedir=debian/libapache2-mod-php7
-	rm -rf debian/libphp7-embed/usr/include/ \
-	       debian/libphp7-embed/usr/bin/
-	rm -rf debian/libapache2-mod-php7/usr/lib/php7/build/ \
-	       debian/libapache2-mod-php7/usr/include/ \
-	       debian/libapache2-mod-php7/usr/bin/
-	rm -rf debian/libapache2-mod-php7filter/usr/lib/php7/build/ \
-	       debian/libapache2-mod-php7filter/usr/include/ \
-	       debian/libapache2-mod-php7filter/usr/bin/
-	for i in Makefile.global acinclude.m4 mkdep.awk phpize.m4 scan_makefile_in.awk; do \
-		chmod 644 debian/php7-dev/usr/lib/php7/build/$$i; \
-	done
-	mkdir -p debian/php7-dev/opt/kaltura/share/php7
-	cp -a ext/skeleton ext/ext_skel debian/php7-dev/opt/kaltura/share/php7
+	#rm -rf debian/libphp7-embed/usr/include/ \
+	#       debian/libphp7-embed/usr/bin/
+	#rm -rf debian/kaltura-libapache2-mod-php7/usr/lib/php7/build/ \
+	#       debian/kaltura-libapache2-mod-php7/usr/include/ \
+	#       debian/kaltura-libapache2-mod-php7/usr/bin/
+	mkdir -p $(PHPIZE_BUILDDIR) debian/kaltura-php7-dev/$(PHP7_PREFIX)/share/php7
+	cp -a ext/skeleton ext/ext_skel debian/kaltura-php7-dev/$(PHP7_PREFIX)/share/php7
 	sed -i 's/skel_dir="skeleton"/skel_dir="\/usr\/share\/php7\/skeleton"/' \
-	    debian/php7-dev/opt/kaltura/share/php7/ext_skel
+	    debian/kaltura-php7-dev/$(PHP7_PREFIX)/share/php7/ext_skel
 	# shipping duplicate files from other packages is hell for security audits
 	ln -sf /usr/share/misc/config.guess $(PHPIZE_BUILDDIR)/config.guess
 	ln -sf /usr/share/misc/config.sub $(PHPIZE_BUILDDIR)/config.sub
-	ln -sf /usr/share/aclocal/libtool.m4 $(PHPIZE_BUILDDIR)/libtool.m4
+	#ln -sf /usr/share/aclocal/libtool.m4 $(PHPIZE_BUILDDIR)/libtool.m4
 	ln -sf $(LTMAIN_DIR)ltmain.sh $(PHPIZE_BUILDDIR)/ltmain.sh
 	ln -sf /usr/bin/shtool $(PHPIZE_BUILDDIR)/shtool
 	# make php-dev stuff versioned
+	mkdir -p debian/kaltura-php7-dev/$(PHP7_PREFIX)/bin/ debian/kaltura-php7-dev/$(PHP7_PREFIX)/share/man/man1/ debian/kaltura-php7-dev/$(PHP7_PREFIX)/bin/
 	for i in php-config phpize; do \
-		mv debian/php7-dev/usr/bin/$$i debian/php7-dev/usr/bin/"$$i"5; \
-		mv debian/php7-dev/usr/share/man/man1/"$$i".1 debian/php7-dev/usr/share/man/man1/"$$i"5.1; \
+		mv debian/kaltura-libapache2-mod-php7/$(PHP7_PREFIX)/bin/$$i debian/kaltura-php7-dev/$(PHP7_PREFIX)/bin/"$$i"; \
+		mv debian/kaltura-libapache2-mod-php7/$(PHP7_PREFIX)/share/man/man1/"$$i".1 debian/kaltura-php7-dev/$(PHP7_PREFIX)/share/man/man1/"$$i".1; \
 	done
-	# remove windows devel file
-	rm $(CURDIR)/debian/php7-dev/opt/kaltura/share/php7/skeleton/skeleton.dsp
+	mkdir -p debian/kaltura-php7-common/$(PHP7_PREFIX)/lib/php7 debian/kaltura-php7-common/$(PHP7_PREFIX)/bin debian/kaltura-php7-dev/$(PHP7_PREFIX) /kaltura-php7-dev/$(PHP7_PREFIX)/lib/php/build
+	mv debian/kaltura-libapache2-mod-php7/$(PHP7_PREFIX)/include debian/kaltura-php7-dev/$(PHP7_PREFIX)/
+	mv debian/kaltura-libapache2-mod-php7/$(PHP7_PREFIX)/lib/php/build/* debian/kaltura-php7-dev/$(PHP7_PREFIX)/lib/php/build/
+	for i in Makefile.global acinclude.m4 mkdep.awk phpize.m4 scan_makefile_in.awk; do \
+		chmod 644 debian/kaltura-php7-dev/opt/kaltura/lib/php/build/$$i; \
+	done
+	cat /usr/share/aclocal/lt~obsolete.m4 /usr/share/aclocal/ltoptions.m4 /usr/share/aclocal/ltsugar.m4 /usr/share/aclocal/ltversion.m4 >> /opt/kaltura/lib/php/build/libtool.m4
 
+	install -m755 debian/debhelper/dh_* $(CURDIR)/debian/kaltura-php7-dev/opt/bin
+	install -d -m755 $(CURDIR)/debian/kaltura-php7-dev/usr/share/debhelper/autoscripts/
+	install -m644 debian/debhelper/*-php7 $(CURDIR)/debian/kaltura-php7-dev/usr/share/debhelper/autoscripts/
+	install -d -m755 $(CURDIR)/debian/kaltura-php7-dev/usr/share/perl5/Debian/Debhelper/Sequence
+	install -m644 debian/debhelper/php7.pm $(CURDIR)/debian/kaltura-php7-dev/usr/share/perl5/Debian/Debhelper/Sequence
 	# install common files
-	install -m755 debian/sessionclean debian/php7-common/usr/lib/php7
-	install -m755 debian/maxlifetime debian/php7-common/usr/lib/php7
-	install -m755 debian/php7enmod debian/php7-common/usr/sbin/php7enmod
-	ln -s php7enmod debian/php7-common/usr/sbin/php7dismod
+	install -m755 debian/sessionclean debian/kaltura-php7-common/$(PHP7_PREFIX)/lib/php7
+	install -m755 debian/maxlifetime debian/kaltura-php7-common/$(PHP7_PREFIX)/lib/php7
+	install -m755 debian/php7enmod debian/kaltura-php7-common/$(PHP7_PREFIX)/bin/php7enmod
+	ln -s php7enmod debian/kaltura-php7-common/$(PHP7_PREFIX)/bin/php7dismod
+	install -m755 debian/php7query $(CURDIR)/debian/kaltura-php7-common/$(PHP7_PREFIX)/bin/php5query
 
+	#mkdir -p $(CURDIR)/debian/kaltura-php7-common/$(PHP7_PREFIX)/share/lintian/overrides $(CURDIR)/debian/php-pear/$(PHP7_PREFIX)/share/lintian/overrides/php-pear 
 	# install lintian overrides
-	cp debian/php7.lintian-overrides $(CURDIR)/debian/php7-common/usr/share/lintian/overrides/php7-common
-	cp debian/php7-dev.lintian-overrides $(CURDIR)/debian/php7-dev/usr/share/lintian/overrides/php7-dev
-	cp debian/php-pear.lintian-overrides $(CURDIR)/debian/php-pear/usr/share/lintian/overrides/php-pear
+	#cp debian/php7.lintian-overrides $(CURDIR)/debian/kaltura-php7-common/$(PHP7_PREFIX)/share/lintian/overrides/php7-common
+	#cp debian/php7-dev.lintian-overrides $(CURDIR)/debian/kaltura-php7-dev/$(PHP7_PREFIX)/share/lintian/overrides/php7-dev
+	#cp debian/php-pear.lintian-overrides $(CURDIR)/debian/php-pear/$(PHP7_PREFIX)/share/lintian/overrides/php-pear
 
 	# install some generic lintian overrides
-	ext=`debian/php7-dev/usr/bin/php-config5 --extension-dir | cut -b2- `; \
-	for sapi in php7-cli php7-fpm php7-cgi libapache2-mod-php7 libapache2-mod-php7filter libphp7-embed; do \
+	ext=`debian/kaltura-libapache2-mod-php7/$(PHP7_PREFIX)/bin/php-config --extension-dir | cut -b2- `; \
+	for sapi in php7-cli libapache2-mod-php7; do \
 		mkdir -p $(CURDIR)/debian/"$$sapi"/usr/share/lintian/overrides/; \
 		sed "s/@sapi@/$$sapi/g;s,@extdir@,$$ext,g" \
 		    < $(CURDIR)/debian/php7-sapi.lintian-overrides | \
@@ -645,7 +646,7 @@ install: build
 	done
 
 	# directories cleanup:
-	-rmdir -p debian/libapache2-mod-php7/usr/share/man/man1
+	-rmdir -p debian/kaltura-libapache2-mod-php7/usr/share/man/man1
 	-find debian/php-pear -type d -exec rmdir --ignore-fail-on-non-empty -p '{}' \; >/dev/null 2>&1
 
 	touch install-stamp
@@ -661,10 +662,10 @@ binary-indep: build install
 
 	dh_installdocs
 
-	for package in php7 php-pear; do \
-		rm -rf debian/$$package/opt/kaltura/share/doc/$$package; \
-		ln -s php7-common debian/$$package/opt/kaltura/share/doc/$$package; \
-	done
+	#for package in php7 php-pear; do \
+	#	rm -rf debian/$$package/$(PHP7_PREFIX)/share/doc/$$package; \
+	#	ln -s php7-common debian/$$package/$(PHP7_PREFIX)/share/doc/$$package; \
+	#done
 
 	dh_link
 	dh_compress -Xphp.ini
@@ -686,110 +687,93 @@ binary-arch: build install
 	cat debian/modulelist debian/extramodulelist | while read package extname dsoname priority; do \
 		if [ -z "$${dsoname}" ]; then dsoname=$$package; fi; \
 		if [ -z "$${priority}" ]; then priority=20; fi; \
-		mkdir -p debian/php7-$$package/opt/kaltura/share/php7/$$package; \
+		mkdir -p debian/kaltura-php7-$$package/$(PHP7_PREFIX)/share/php7/$$package; \
 		sed -e"s|@extname@|$${extname}|g; \
 		       s/@dsoname@/$${dsoname}/g; \
 		       s/@priority@/$${priority}/g" \
-		  < debian/php7-module.ini \
-		  > debian/php7-$$package/opt/kaltura/share/php7/$$package/$${dsoname}.ini; \
-		echo -n "$$dsoname " >> debian/php7-$$package.modules; \
+		  < debian/kaltura-php7-module.ini \
+		  > debian/kaltura-php7-$$package/$(PHP7_PREFIX)/share/php7/$$package/$${dsoname}.ini; \
+		echo -n "$$dsoname " >> debian/kaltura-php7-$$package.modules; \
 	done
 
 	# generate the maintscripts for various php
 	# modules from the templates.
 	cat debian/modulelist | while read package extname dsoname priority; do \
-	    modules=$$(cat debian/php7-$$package.modules); \
+	    modules=$$(cat debian/kaltura-php7-$$package.modules); \
 	    for script in postinst preinst postrm prerm; do \
 	        sed -e"s/@package@/$${package}/g; \
 	               s/@modules@/$${modules}/g; \
-	                /#EXTRA#/ r debian/php7-$${package}.$${script}.extra" \
-	          < debian/php7-module.$${script} \
+	                /#EXTRA#/ r debian/kaltura-php7-$${package}.$${script}.extra" \
+	          < debian/kaltura-php7-module.$${script} \
 	        | sed -e'/#EXTRA#/ d' \
-	          > debian/php7-$${package}.$${script}; \
+	          > debian/kaltura-php7-$${package}.$${script}; \
 	    done; \
-	    cp debian/php7-module.triggers debian/php7-$${package}.triggers; \
-	    rm debian/php7-$$package.modules; \
+	    cp debian/kaltura-php7-module.triggers debian/kaltura-php7-$${package}.triggers; \
+	    rm debian/kaltura-php7-$$package.modules; \
 	done
 
 	# likewise, for the different sapi implementations
 	for tmpl in postrm links; do \
-		for sapi in cgi cli fpm; do \
+		for sapi in cli; do \
 			sed -e "s/@sapi@/$${sapi}/g; \
-	                        s/@package@/php7-$${sapi}/g; \
-	                         /#EXTRA#/ r debian/php7-$${sapi}.$${tmpl}.extra" \
-		  	< debian/php7-sapi.$${tmpl} \
+	                        s/@package@/kaltura-php7-$${sapi}/g; \
+	                         /#EXTRA#/ r debian/kaltura-php7-$${sapi}.$${tmpl}.extra" \
+		  	< debian/kaltura-php7-sapi.$${tmpl} \
 	                | sed -e'/#EXTRA#/ d' \
-		  	> debian/php7-$${sapi}.$${tmpl}; \
+		  	> debian/kaltura-php7-$${sapi}.$${tmpl}; \
 		done; \
-		for sapi in embed; do \
-			sed -e "s/@sapi@/$${sapi}/g; \
-	                        s/@package@/libphp7-$${sapi}/g; \
-	                         /#EXTRA#/ r debian/libphp7-$${sapi}.$${tmpl}.extra" \
-		  	< debian/php7-sapi.$${tmpl} \
-	                | sed -e'/#EXTRA#/ d' \
-		  	> debian/libphp7-$${sapi}.$${tmpl}; \
-		done; \
-	        for sapi in "" "filter"; do \
-		        sed -e "s/@sapi@/apache2$${sapi}/g; \
-	                        s/@package@/libapache2-mod-php7$${sapi}/g; \
-	                         /#EXTRA#/ r debian/libapache2-mod-php7$${sapi}.$${tmpl}.extra" \
-		        < debian/php7-sapi.$${tmpl} \
-	                | sed -e'/#EXTRA#/ d' \
-		        > debian/libapache2-mod-php7$${sapi}.$${tmpl}; \
-	        done; \
 	done
 
 	cat debian/copyright.header LICENSE Zend/LICENSE > debian/copyright
 	dh_installdocs -s
 
-	cat debian/modulelist | grep -v common | while read package extname dsoname priority; do \
-		rm -rf debian/php7-$$package/opt/kaltura/share/doc/php7-$$package; \
-		ln -s php7-common debian/php7-$$package/opt/kaltura/share/doc/php7-$$package; \
-	done
+	#cat debian/modulelist | grep -v common | while read package extname dsoname priority; do \
+	#	rm -rf debian/php7-$$package/$(PHP7_PREFIX)/share/doc/php7-$$package; \
+	#	ln -s php7-common debian/php7-$$package/$(PHP7_PREFIX)/share/doc/php7-$$package; \
+	#done
 
-	for package in php7-dbg php7-dev php7-cgi php7-cli php7-fpm libapache2-mod-php7 libapache2-mod-php7filter libphp7-embed; do \
-		rm -rf debian/$$package/opt/kaltura/share/doc/$$package; \
-		ln -s php7-common debian/$$package/opt/kaltura/share/doc/$$package; \
-	done
+	#for package in php7-dbg php7-dev php7-cli libapache2-mod-php7 ; do \
+	#	rm -rf debian/$$package/$(PHP7_PREFIX)/share/doc/$$package; \
+	#	ln -s php7-common debian/$$package/$(PHP7_PREFIX)/share/doc/$$package; \
+	#done
 	dh_installlogrotate -pphp7-fpm
 	dh_installcron -pphp7-common --name=php7
 	dh_installchangelogs -pphp7-common NEWS
 	dh_installinit
-	dh_strip -s --dbg-package=php7-dbg
+	dh_strip -s --dbg-package=kaltura-php7-dbg
 	dh_link -s
+	dh_link debian/kaltura-php7-cli/$(PHP7_PREFIX)/bin/php7 debian/kaltura-php7-cli/$(PHP7_PREFIX)/bin/php
 	dh_compress -s -Xphp.ini
 	dh_installdeb -s
 	dh_shlibdeps -s
 
-	phpapi=`./debian/php7-dev/opt/kaltura/bin/php-config5 --phpapi`; \
+	phpapi=`grep '#define PHP_API_VERSION' main/php.h|sed 's/#define PHP_API_VERSION //'` \
 	stored=`cat debian/phpapi`; \
 	[ "$${phpapi%+lfs}" = "$${stored}" ] || echo "PHPAPI has changed, please modify debian/phpapi"; \
-	for i in libapache2-mod-php7 libapache2-mod-php7filter php7-cgi php7-cli libphp7-embed php7-fpm; do \
-		echo "php:Provides=phpapi-$${phpapi}" >> debian/$$i.substvars; \
+	for i in libapache2-mod-php7 php7-cli ; do \
+		echo "php:Provides=phpapi-$${phpapi}" >> debian/kaltura-$$i.substvars; \
 	done; \
 	cat debian/modulelist | while read package extname dsoname priority; do \
-		echo "php:Depends=phpapi-$${phpapi}" >> debian/php7-$$package.substvars; \
+		echo "php:Depends=phpapi-$${phpapi}" >> debian/kaltura-php7-$$package.substvars; \
 	done
 
-	for i in cgi cli fpm; do \
+	for i in cli ; do \
 		"$$i"-build/sapi/cli/php -n -r '$(BUILTIN_EXTENSION_CHECK)' \
-			>> debian/php7-"$$i".substvars; \
+			>> debian/kaltura-php7-"$$i".substvars; \
 	done
-	for i in embed; do \
-		"$$i"-build/sapi/cli/php -n -r '$(BUILTIN_EXTENSION_CHECK)' \
-			>> debian/libphp7-"$$i".substvars; \
-	done
+	#for i in embed; do \
+	#	"$$i"-build/sapi/cli/php -n -r '$(BUILTIN_EXTENSION_CHECK)' \
+	#		>> debian/libphp7-"$$i".substvars; \
+	#done
 	for i in apache2; do \
 		"$$i"-build/sapi/cli/php -n -r '$(BUILTIN_EXTENSION_CHECK)' \
 			>> debian/lib"$$i"-mod-php7.substvars; \
-		"$$i"filter-build/sapi/cli/php -n -r '$(BUILTIN_EXTENSION_CHECK)' \
-			>> debian/lib"$$i"-mod-php7filter.substvars; \
 	done
 
 	echo "apache2:Depends=apache2-mpm-prefork (>> 2.0.52) | apache2-mpm-itk, apache2.2-common" >>debian/libapache2-mod-php7.substvars
 	echo "apache2:Depends=apache2-mpm-prefork (>> 2.0.52) | apache2-mpm-itk, apache2.2-common" >>debian/libapache2-mod-php7filter.substvars
 
-	echo "libtool:Conflicts=$(LIBTOOL_CONFLICTS)" >>debian/php7-dev.substvars
+	echo "libtool:Conflicts=$(LIBTOOL_CONFLICTS)" >>debian/kaltura-php7-dev.substvars
 	dh_gencontrol -s
 	dh_md5sums -s
 	dh_builddeb -s

@@ -1,0 +1,35 @@
+#!/bin/sh
+
+set -e
+
+#DEBHELPER#
+
+inidir=/opt/kaltura/app/configurations/php/mods-available
+for dsoname in ldap ; do
+    inifile=${dsoname}.ini
+
+    dpkg-maintscript-helper mv_conffile /opt/kaltura/app/configurations/php/conf.d/${inifile} ${inidir}/${inifile} 7.0.0-1 -- "$@";
+
+    # Query which package has this conffile registered
+    if which ucfq >/dev/null; then
+	ucfp=$(ucfq -w ${inidir}/${inifile} | cut -f 2 -d:)
+    fi
+
+    # Only work with the config file if it still belongs to us
+    if test "$ucfp" = php5-ldap; then
+	if [ "$1" = "purge" ]; then
+	    for ext in '~' '%' .bak .ucf-new .ucf-old .ucf-dist;  do
+		rm -f ${inidir}/${inifile}${ext}
+	    done
+	    rm -f ${inidir}/${inifile}
+	    if which ucf >/dev/null; then
+		ucf --purge ${inidir}/${inifile}
+	    fi
+	    #if which ucfr >/dev/null; then
+	    #	ucfr --purge kaltura-php7-ldap ${inidir}/${inifile}
+	    #fi
+	fi
+    fi
+done
+
+exit 0

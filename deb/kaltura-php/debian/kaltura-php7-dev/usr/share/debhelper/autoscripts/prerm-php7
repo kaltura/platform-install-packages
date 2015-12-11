@@ -1,0 +1,9 @@
+if [ "$1" = "remove" ] || [ "$1" = "deconfigure" ] ; then
+	if [ -r /opt/kaltura/share/php7/php7-maintscript-helper ] ; then
+    		. /opt/kaltura/share/php7/php7-maintscript-helper
+	
+	for conf in #NAMES# ; do
+	    php5_invoke #HELPER# ALL $conf || #ERROR_HANDLER#
+	done
+    fi
+fi

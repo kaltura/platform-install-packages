@@ -1,0 +1,3 @@
+shlibs:Depends=libc6 (>= 2.14), libpq5 (>= 9.3~)
+php:Depends=phpapi-20151012
+misc:Depends=

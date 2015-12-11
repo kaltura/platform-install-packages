@@ -1,0 +1,5 @@
+a404b4920d25683b3e17f18f536e3c86  opt/kaltura/lib/php/20151012/pdo_sqlite.so
+8136a9ffec13d7a6010fb6ef9e713a39  opt/kaltura/lib/php/20151012/sqlite3.so
+296243da028c011bf7a40fe565b08d56  opt/kaltura/share/php7/sqlite/pdo_sqlite.ini
+1d73904e1491105dbdfe04163ccfd04a  opt/kaltura/share/php7/sqlite/sqlite3.ini
+c2493acdd68d7db7d3acbc132d0c7457  usr/share/doc/kaltura-php7-sqlite/copyright

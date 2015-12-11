@@ -14,21 +14,21 @@ reload_apache()
 }
 
 # we've registered a trigger to handle extension updates.
-if [ "$1" = "triggered" ] && [ "$2" = "/etc/php5/conf.d" ]; then
+if [ "$1" = "triggered" ] && [ "$2" = "/opt/kaltura/app/configurations/php/conf.d" ]; then
   reload_apache force-reload
   exit 0
 elif [ "$1" != "configure" ]; then
   exit 0
 fi
 
-phpini="/etc/php5/apache2filter/php.ini"
+phpini="/opt/kaltura/app/configurations/php/apache2filter/php.ini"
 
-ucf /usr/share/php5/php.ini-production $phpini
+ucf /opt/kaltura/share/php7/php.ini-production $phpini
 ucfr libapache2-mod-php5filter $phpini
 
 if [ -n "$2" ]; then
 	# recover the previous state
-	if [ -e /etc/php5/apache2filter/.start ]; then
+	if [ -e /opt/kaltura/app/configurations/php/apache2filter/.start ]; then
 	    a2enmod php5filter >/dev/null || true
 	fi
 # we're upgrading. test if we're enabled, and if so, restart to reload the module.
