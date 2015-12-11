@@ -6,8 +6,6 @@
 #
 # Please, preserve the changelog entries
 #
-%{!?php_inidir: %{expand: %%global php_inidir %{_sysconfdir}/php.d}}
-%{!?__php:      %{expand: %%global __php      %{_bindir}/php}}
 %{!?__pecl:     %{expand: %%global __pecl     %{_bindir}/pecl}}
 %global proj_name  ZendOpcache
 %global pecl_name  zendopcache
@@ -15,7 +13,7 @@
 
 Name:          php-pecl-%{pecl_name}
 Version:       7.0.5
-Release:       1
+Release:       2
 Summary:       The Zend OPcache
 
 Group:         Development/Libraries
@@ -27,7 +25,7 @@ Source0:       http://pecl.php.net/get/%{pecl_name}-%{version}.tgz
 Source1:       %{plug_name}.ini
 Source2:       %{plug_name}-default.blacklist
 
-BuildRequires: php-devel >= 5.3.0
+BuildRequires: php-devel >= 5.2.0
 BuildRequires: php-pear
 
 Requires(post): %{__pecl}
@@ -35,11 +33,6 @@ Requires(postun): %{__pecl}
 Requires:      php(zend-abi) = %{php_zend_api}
 Requires:      php(api) = %{php_core_api}
 
-# Only one opcode cache could be enabled
-Conflicts:     php-eaccelerator
-Conflicts:     php-xcache
-# APC 3.1.15 offer an option to disable opcache
-Conflicts:     php-pecl-apc < 3.1.15
 Provides:      php-pecl(%{plug_name}) = %{version}%{?prever}
 Provides:      php-pecl(%{plug_name})%{?_isa} = %{version}%{?prever}
 Provides:      php-%{plug_name} = %{version}-%{release}
@@ -85,11 +78,13 @@ make %{?_smp_mflags}
 
 
 %install
+make -C NTS install INSTALL_ROOT=%{buildroot}
+
+# Configuration file
 install -D -p -m 644 %{SOURCE1} %{buildroot}%{php_inidir}/%{plug_name}.ini
 sed -e 's:@EXTPATH@:%{php_extdir}:' \
+    -e 's:@INIPATH@:%{php_inidir}:' \
     -i %{buildroot}%{php_inidir}/%{plug_name}.ini
-
-make -C NTS install INSTALL_ROOT=%{buildroot}
 
 # The default Zend OPcache blacklist file
 install -D -p -m 644 %{SOURCE2} %{buildroot}%{php_inidir}/%{plug_name}-default.blacklist
@@ -98,20 +93,20 @@ install -D -p -m 644 %{SOURCE2} %{buildroot}%{php_inidir}/%{plug_name}-default.b
 install -D -m 644 package.xml %{buildroot}%{pecl_xmldir}/%{name}.xml
 
 
-#%check
+%check
 # ignore this one, works manually, run-tests.php issue
-#rm ?TS/tests/is_script_cached.phpt
+rm ?TS/tests/is_script_cached.phpt
 
-#cd NTS
-#%{__php} \
-#    -n -d zend_extension=%{buildroot}%{php_extdir}/%{plug_name}.so \
-#    -m | grep "Zend OPcache"
+cd NTS
+%{__php} \
+    -n -d zend_extension=%{buildroot}%{php_extdir}/%{plug_name}.so \
+    -m | grep "Zend OPcache"
 
-#TEST_PHP_EXECUTABLE=%{__php} \
-#TEST_PHP_ARGS="-n -d zend_extension=%{buildroot}%{php_extdir}/%{plug_name}.so" \
-#NO_INTERACTION=1 \
-#REPORT_EXIT_STATUS=1 \
-#%{__php} -n run-tests.php
+TEST_PHP_EXECUTABLE=%{__php} \
+TEST_PHP_ARGS="-n -d zend_extension=%{buildroot}%{php_extdir}/%{plug_name}.so" \
+NO_INTERACTION=1 \
+REPORT_EXIT_STATUS=1 \
+%{__php} -n run-tests.php
 
 
 %post
@@ -145,7 +140,14 @@ fi
 * Mon Jan 20 2014 Remi Collet <rcollet@redhat.com> - 7.0.3-1
 - Update to 7.0.3
 - open https://github.com/zendtech/ZendOptimizerPlus/issues/162
-- cleanup the zts stuff
+- cleanup the zts and scl stuff
+
+* Tue Jan 14 2014 Remi Collet <rcollet@redhat.com> - 7.0.2-3
+- drop conflicts with other opcode cache
+
+* Mon Jul 15 2013 Remi Collet <rcollet@redhat.com> - 7.0.2-2
+- fix ZTS configuration
+- Adapt for SCL
 
 * Wed Jun  5 2013 Remi Collet <rcollet@redhat.com> - 7.0.2-1
 - update to 7.0.2
