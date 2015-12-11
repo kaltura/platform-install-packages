@@ -54,6 +54,13 @@ if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
 	echo $OUT
 	exit 3
 fi
+PHP_MINOR_VER=`php -r 'echo PHP_MINOR_VERSION;'`
+if [ "$PHP_MINOR_VER" -gt 3 ];then
+        if ! rpm -q php-pecl-zendopcache >/dev/null;then
+                yum -y install php-pecl-zendopcache
+        fi
+fi
+
 . $KALTURA_FUNCTIONS_RC
 NEWANSFILE="/tmp/kaltura_`date +%d_%m_%H_%M.ans`"
 if [ -n "$1" -a -r "$1" ];then

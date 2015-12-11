@@ -26,6 +26,13 @@ if ! rpm -q kaltura-batch;then
 	echo -e "${BRIGHT_BLUE}Skipping as kaltura-batch is not installed.${NORMAL}"
 	exit 0 
 fi
+PHP_MINOR_VER=`php -r 'echo PHP_MINOR_VERSION;'`
+if [ "$PHP_MINOR_VER" -gt 3 ];then
+        if ! rpm -q php-pecl-zendopcache >/dev/null;then
+                yum -y install php-pecl-zendopcache
+        fi
+fi
+
 if [ -r $CONSENT_FILE ];then
 	. $CONSENT_FILE
 fi
