@@ -96,15 +96,17 @@ else
 		echo -e "${BRIGHT_RED}The option can only be 'y' or 'n'. Please re-run${NORMAL}"
 		exit 4
 	fi
-	echo -e "${CYAN}Please input path to your SSL certificate[${YELLOW}/etc/ssl/certs/localhost.crt${CYAN}]:${NORMAL}"
-	read -e CRT_FILE
-	echo "crt file: $CRT_FILE"
-	if [ -z "$CRT_FILE" ];then
-		CRT_FILE="/etc/ssl/certs/localhost.crt"
+	if [ $IS_VOD_PACKAGER_SSL == 'y' ];then
+		echo -e "${CYAN}Please input path to your SSL certificate[${YELLOW}/etc/ssl/certs/localhost.crt${CYAN}]:${NORMAL}"
+		read -e CRT_FILE
+		echo "crt file: $CRT_FILE"
+		if [ -z "$CRT_FILE" ];then
+			CRT_FILE="/etc/ssl/certs/localhost.crt"
+		fi
+		echo -e "${CYAN}Please input path to your SSL CA file or leave empty in case you have none${CYAN}:${NORMAL}"
+		read -e CHAIN_FILE
+		echo "chain file: $CHAIN_FILE"
 	fi
-	echo -e "${CYAN}Please input path to your SSL CA file or leave empty in case you have none${CYAN}:${NORMAL}"
-	read -e CHAIN_FILE
-	echo "chain file: $CHAIN_FILE"
 fi
 
 
