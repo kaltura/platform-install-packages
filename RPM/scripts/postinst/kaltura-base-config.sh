@@ -131,7 +131,7 @@ ${NORMAL} "
         read -e IS_SSL
 	temp_var=`echo $IS_NGINX_SSL | tr '[:upper:]' '[:lower:]'`
 	IS_SSL=$temp_var
-        while [ "$IS_SSL" != 'Y' -a "$IS_SSL" != 'N' ];do
+        while [ "$IS_SSL" != 'y' -a "$IS_SSL" != 'n' ];do
             echo -en "${CYAN}Please provide either 'Y' or 'N'.\nAre you using https? (Y/N) ${NORMAL}"
             read -e IS_SSL
         done
@@ -376,7 +376,7 @@ create_answer_file $POST_INST_MAIL_TMPL
 APP_REMOTE_ADDR_HEADER_SALT=`echo $SERVICE_URL|base64 -w0`
 
 
-if [ "$IS_SSL" == 'Y' ];then
+if [ "$IS_SSL" == 'y' ];then
         PROTOCOL="https"
 else
         PROTOCOL="http"
