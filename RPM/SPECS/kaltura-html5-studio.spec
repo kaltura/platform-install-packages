@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5-studio
-Version: v2.0.1
+Version: v2.0.2
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -51,6 +51,11 @@ rm -rf %{buildroot}
 %{prefix}/apps/studio/%{version}
 
 %changelog
+* Sun Dec 12 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v2.0.2-1
+- FEC-4158 Strings plugin should support per localization key overrides
+- PLAT-3566 - The studio should list also players of type PLAYER_V3 (8).
+- Aligned with HTML5 lib v2.37.1
+
 * Thu Sep 16 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v2.0.1-1
 - SUP-5016 - KMC doesn't save player strings override.
 - Aligned with HTML5 lib v2.35
