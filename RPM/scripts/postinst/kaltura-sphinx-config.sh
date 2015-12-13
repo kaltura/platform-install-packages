@@ -59,7 +59,17 @@ trap 'my_trap_handler "${LINENO}" ${$?}' ERR
 send_install_becon `basename $0` $ZONE install_start 0 
 mkdir -p $LOG_DIR/sphinx/data $APP_DIR/cache//sphinx
 chown $OS_KALTURA_USER.$OS_KALTURA_USER $APP_DIR/cache/sphinx $LOG_DIR/sphinx/data $BASE_DIR/sphinx
-echo "sphinxServer = $SPHINX_HOST" > /opt/kaltura/app/configurations/sphinx/populate/`hostname`.ini
+
+# Setting the Sphinx server for population
+if [ "$SPHINX_SERVER1" == `hostname` ]; then
+	echo "sphinxServer = $SPHINX_SERVER1" > /opt/kaltura/app/configurations/sphinx/populate/`hostname`.ini
+elif [ "$SPHINX_SERVER2" == `hostname` ]; then
+	echo "sphinxServer = $SPHINX_SERVER2" > /opt/kaltura/app/configurations/sphinx/populate/`hostname`.ini
+else 
+	echo "The hostname did not correspond with any of the given Sphinx server configurations. Aborting"
+	exit 10
+fi
+
 /etc/init.d/kaltura-sphinx restart >/dev/null 2>&1
 /etc/init.d/kaltura-populate restart >/dev/null 2>&1
 ln -sf $BASE_DIR/app/configurations/monit/monit.avail/sphinx.rc $BASE_DIR/app/configurations/monit/monit.d/enabled.sphinx.rc

@@ -405,6 +405,12 @@ SUPER_USER=$SUPER_USER
 SUPER_USER_PASSWD=\"$SUPER_USER_PASSWD\"
 KALTURA_VIRTUAL_HOST_NAME=$KALTURA_VIRTUAL_HOST_NAME
 RED5_HOST=$RED5_HOST">> $BASE_DIR/app/configurations/system.ini
+
+# In case 2nd sphinx is defined
+if [ ! -z "$SPHINX_SERVER2" -a "$SPHINX_SERVER2" != " " -a "$SPHINX_SERVER2" != "$SPHINX_SERVER1" ]; then
+    echo "SPHINX_SERVER2=$SPHINX_SERVER2" >> $BASE_DIR/app/configurations/system.ini
+fi
+
 # these two have passwds in them.
 chown kaltura.apache $BASE_DIR/app/configurations/system.ini $BASE_DIR/app/configurations/db.ini
 chmod 640 $BASE_DIR/app/configurations/system.ini $BASE_DIR/app/configurations/db.ini
