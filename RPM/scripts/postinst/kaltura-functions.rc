@@ -490,6 +490,13 @@ check_studio_index_page()
 	GOOD_STRING='Universal Studio'
 	HTML5_STUDIO_DIR=`ls -ld $BASE_DIR/apps/studio/v* 2>/dev/null|awk -F " " '{print $NF}' |tail -1`
 	STUDIO_VER=`basename $HTML5_STUDIO_DIR`
+	if ! grep -q "^studio_version\s*=\s*$STUDIO_VER" $APP_DIR/configurations/local.ini;then
+        	if ! grep -q "^studio_version\s*=\s*$STUDIO_VER" $APP_DIR/configurations/base.ini;then
+                	echo "Wrong value for studio_version in $APP_DIR/configurations/base.ini" 
+                	return 1
+        	fi
+        fi
+
 	STUDIO_URL="$SERVICE_URL/apps/studio/$STUDIO_VER/index.html"
 
 	curl -ks $STUDIO_URL  | grep -q "$GOOD_STRING"

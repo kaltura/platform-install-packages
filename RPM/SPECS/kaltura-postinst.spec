@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.30
-Release: 7
+Release: 8
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -82,7 +82,10 @@ find %{_sysconfdir}/logrotate.d -type l -name "kaltura_*" -exec rm {} \;
 %config %{prefix}/app/configurations/*
 
 %changelog
-* Fri Dec 12 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.30-6
+* Sun Dec 13 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.30-8
+- Verify that studio_version in {base,local}.ini matches the latest studio version on disk.
+
+* Fri Dec 11 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.30-6
 - If we're running on PHP >= 5.4, install Zend Opcache.
 
 * Fri Dec 4 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.30-5
