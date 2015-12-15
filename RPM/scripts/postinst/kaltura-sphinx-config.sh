@@ -66,13 +66,10 @@ if [ "$SPHINX_SERVER1" == "$SPHINX_SERVER2" ] && [ "$SPHINX_SERVER1" != "$LOCALH
     exit 9
 fi
 
-if [ "$SPHINX_SERVER1" == `hostname` ] || [ "$SPHINX_SERVER1" == "127.0.0.1" ] ; then
-    echo "sphinxServer = $SPHINX_SERVER1" > /opt/kaltura/app/configurations/sphinx/populate/`hostname`.ini
-elif [ "$SPHINX_SERVER2" == `hostname` ] || [ "$SPHINX_SERVER2" == "127.0.0.1" ]; then
+if [ "$SPHINX_SERVER2" == `hostname` ]; then
     echo "sphinxServer = $SPHINX_SERVER2" > /opt/kaltura/app/configurations/sphinx/populate/`hostname`.ini
-else 
-    echo  -e "${BRIGHT_RED}The hostname did not correspond with any of the given Sphinx server configurations. Aborting${NORMAL}"
-    exit 10
+else
+    echo "sphinxServer = $SPHINX_SERVER1" > /opt/kaltura/app/configurations/sphinx/populate/`hostname`.ini
 fi
 
 /etc/init.d/kaltura-sphinx restart >/dev/null 2>&1
