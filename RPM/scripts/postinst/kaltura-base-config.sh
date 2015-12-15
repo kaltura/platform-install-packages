@@ -127,12 +127,10 @@ ${NORMAL} "
         fi
 
     if [ "$KALTURA_VIRTUAL_HOST_PORT" -ne 80 ];then
-        echo -en "${CYAN}Vhost port will be set on [${YELLOW}$KALTURA_VIRTUAL_HOST_PORT${CYAN}]. Are you using https? (Y/N)${NORMAL}"
+        echo -en "${CYAN}Vhost port will be set on [${YELLOW}$KALTURA_VIRTUAL_HOST_PORT${CYAN}]. Are you using https? (y/n)${NORMAL}"
         read -e IS_SSL
-	temp_var=`echo $IS_NGINX_SSL | tr '[:upper:]' '[:lower:]'`
-	IS_SSL=$temp_var
         while [ "$IS_SSL" != 'y' -a "$IS_SSL" != 'n' ];do
-            echo -en "${CYAN}Please provide either 'Y' or 'N'.\nAre you using https? (Y/N) ${NORMAL}"
+            echo -en "${CYAN}Please provide either 'y' or 'n'.\nAre you using https? (y/n) ${NORMAL}"
             read -e IS_SSL
         done
     fi

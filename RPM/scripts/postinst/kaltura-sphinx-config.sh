@@ -61,7 +61,7 @@ mkdir -p $LOG_DIR/sphinx/data $APP_DIR/cache//sphinx
 chown $OS_KALTURA_USER.$OS_KALTURA_USER $APP_DIR/cache/sphinx $LOG_DIR/sphinx/data $BASE_DIR/sphinx
 
 # Setting the Sphinx server for population
-if [ "$SPHINX_SERVER1" == "$SPHINX_SERVER2" ];then
+if [ "$SPHINX_SERVER1" == "$SPHINX_SERVER2" ] && [ "$SPHINX_SERVER1" != "$LOCALHOST" ];then
     echo -e "${BRIGHT_RED}Both Sphinx servers are the same. Please revise and re-run${NORMAL}"
     exit 9
 fi
