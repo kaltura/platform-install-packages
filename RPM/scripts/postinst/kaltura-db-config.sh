@@ -185,7 +185,7 @@ EOF
 	exit 8
 fi
 
-if [ -n "$IS_SSL" ];then
+if [ "$IS_SSL" = 'Y' -a "$IS_SSL" = 1 -a "$IS_SSL" = 'y' -a "$IS_SSL" = 'true' ];then
 # force KMC login via HTTPs.
 	php $APP_DIR/deployment/base/scripts/insertPermissions.php -d $APP_DIR/deployment/permissions/ssl/ > /dev/null 2>&1
 fi
