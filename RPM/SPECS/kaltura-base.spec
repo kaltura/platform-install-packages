@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 11.4.0
-Release: 5
+Release: 11
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -298,6 +298,14 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Sat Dec 19 2015 jess.portnoy@kaltura.com <Jess Portnoy> - 11.4.0-11
+- SUP-6332 - Live entry has not been fully uploaded / transcoded
+- SUP-6763 - Cross Kaltura connector does not export thumbnails
+- PLAT-4712 - reduce duplicates in entryRequired
+- PLAT-4445 - Failed to change privacy to category by user from group with permission manager
+- PLAT-4663 - Support for HTTP Authentication in MRSS Feed ingestion
+- PLAT-4788 - TMZ SFTP YouTube connector issues
+
 * Mon Dec 7 2015 jess.portnoy@kaltura.com <Jess Portnoy> - 11.4.0-1
 - Ver Bounce to 11.4.0
 
