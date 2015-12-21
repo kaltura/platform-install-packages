@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.38
+Version: v2.38.1
 Release: 1
 Epoch:0 
 License: AGPLv3+
@@ -112,6 +112,13 @@ find /opt/kaltura/web/html5/html5lib -type d -name cache -exec chown -R 48 {} \;
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Mon Dec 21 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v2.38.1-1
+- TR-552 - CaaS widgets with playlist - On iOS thumbnail is out of alignment
+- FEC-4565 - Send Notification in native bridge crashes
+- FEC-4528 - drm playback : replay doesn't work , player stuck on spinning wheel
+- FEC-4562 - Channel Playlist - chapters thumbnail doesn't change
+- Fix mobile inlineScript loading
+
 * Sat Dec 19 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v2.38-1
 - id3 tags support for Live HLS (native and flash)
 - id3 tags support improved: time update interval has been reduced to 1 second

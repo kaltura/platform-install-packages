@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 11.4.0
-Release: 11
+Release: 12
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -298,6 +298,10 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Dec 21 2015 jess.portnoy@kaltura.com <Jess Portnoy> - 11.4.0-12
+- Added support for custom parameters on akamai hds urls. 
+  Needed in order to add hdcore=x.x.x when playing without the player Akamai HD plugin.
+
 * Sat Dec 19 2015 jess.portnoy@kaltura.com <Jess Portnoy> - 11.4.0-11
 - SUP-6332 - Live entry has not been fully uploaded / transcoded
 - SUP-6763 - Cross Kaltura connector does not export thumbnails
