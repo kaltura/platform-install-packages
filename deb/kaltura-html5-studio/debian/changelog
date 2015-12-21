@@ -1,3 +1,11 @@
+kaltura-html5-studio (2.0.2-1) kajam; urgency=low
+
+  * FEC-4158 Strings plugin should support per localization key overrides
+  * PLAT-3566 - The studio should list also players of type PLAYER_V3 (8).
+  * Aligned with HTML5 lib v2.37.1
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Sun, 13 Dec 2015 19:15:30 +0000
+
 kaltura-html5-studio (2.0.1-1) jupiter; urgency=low
 
   * SUP-5016 - KMC doesn't save player strings override.
