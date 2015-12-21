@@ -5,8 +5,8 @@
 %define apache_group	apache
 Summary: Kaltura Open Source Video Platform - frontend server 
 Name: kaltura-front
-Version: 11.4.0
-Release: 3
+Version: 11.5.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source3: zz-%{name}.ini 
@@ -102,6 +102,9 @@ rm -rf %{buildroot}
 %config %{_sysconfdir}/php.d/zz-%{name}.ini
 
 %changelog
+* Mon Dec 21 2015 jess.portnoy@kaltura.com <Jess Portnoy> - 11.5.0-1
+- Ver Bounce to 11.5.0
+
 * Fri Dec 12 2015 jess.portnoy@kaltura.com <Jess Portnoy> - 11.4.0-2
 - added dep on php-pecl-zendopcache.
 
