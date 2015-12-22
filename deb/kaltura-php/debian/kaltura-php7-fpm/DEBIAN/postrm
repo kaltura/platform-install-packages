@@ -1,0 +1,30 @@
+#! /bin/sh
+
+set -e
+
+phpini=/opt/kaltura/app/configurations/php/fpm/php.ini
+
+case "$1" in
+purge)
+	# remove the flag to remember the original state
+	if [ -e /opt/kaltura/app/configurations/php/fpm/.start ]; then
+	    rm -f /opt/kaltura/app/configurations/php/fpm/.start
+	fi
+	for ext in '~' '%' .bak .ucf-new .ucf-old .ucf-dist;  do
+	    rm -f $phpini$ext
+	done
+	rm -f $phpini
+	if which ucf >/dev/null; then
+	    ucf --purge $phpini
+	fi
+	if which ucfr >/dev/null; then
+	    ucfr --purge php7-fpm $phpini
+	fi
+	;;
+esac
+
+dpkg-maintscript-helper mv_conffile /opt/kaltura/app/configurations/php/fpm/main.conf /opt/kaltura/app/configurations/php/fpm/php-fpm.conf 5.3.5-1 -- "$@"
+
+
+
+exit 0

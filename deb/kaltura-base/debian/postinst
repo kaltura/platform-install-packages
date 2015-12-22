@@ -72,7 +72,13 @@ if [ -r $KALTURA_PREFIX/bin/kaltura-base-upgrading ];then
 fi
 set -e
 if [ "$1" = "configure" ]; then
-        php5enmod mcrypt
+
+	if [ -x "`which php5enmod 2>/dev/null`" ];then
+        	php5enmod mcrypt
+	fi
+	if [ -x /opt/kaltura/bin/php7enmod ];then
+		/opt/kaltura/bin/php7enmod mcrypt
+	fi
         . /usr/share/debconf/confmodule
         KALT_CONF_DIR=$APP_DIR/configurations/
         BEGINNERS_TUTORIAL_URL=http://bit.ly/KalturaUploadMenu
@@ -334,7 +340,7 @@ if [ "$1" = "configure" ]; then
         DB1_USER=kaltura
 
 	db_stop
-        for INI in /etc/php5/cli/php.ini /etc/php5/apache2/php.ini;do
+        for INI in /etc/php5/cli/php.ini /etc/php5/apache2/php.ini /opt/kaltura/app/configurations/php/apache2/php.ini /opt/kaltura/app/configurations/php/cli/php.ini;do
                 if [ -r "$INI_FILE" ];then
                         sed -i "s#\(date.timezone\)\s*=.*#\1='$TIME_ZONE'#g" $INI_FILE
                 fi
@@ -482,7 +488,12 @@ if [ "$1" = "configure" ]; then
 
         ln -sf $BASE_DIR/app/configurations/logrotate/kaltura_base /etc/logrotate.d/
         ln -sf $BASE_DIR/app/configurations/logrotate/kaltura_api /etc/logrotate.d/
-        ln -sf $APP_DIR/configurations/php/kaltura.ini /etc/php5/mods-available/zz-kaltura.ini
+	if [ -d "/etc/php5/mods-available" ];then
+        	ln -sf $APP_DIR/configurations/php/kaltura.ini /etc/php5/mods-available/zz-kaltura.ini
+	fi
+	if [ -d "/opt/kaltura/app/configurations/php/mods-available" ];then
+        	ln -sf $APP_DIR/configurations/php/kaltura.ini /opt/kaltura/app/configurations/php/mods-available/zz-kaltura.ini
+	fi
         touch  "$BASE_DIR/app/base-config.lock"
 
         find $BASE_DIR/app/cache/ $BASE_DIR/log -type d -exec chmod 775 {} \; 

@@ -60,19 +60,18 @@ send_install_becon `basename $0` $ZONE install_start 0
 mkdir -p $LOG_DIR/sphinx/data $APP_DIR/cache//sphinx
 chown $OS_KALTURA_USER.$OS_KALTURA_USER $APP_DIR/cache/sphinx $LOG_DIR/sphinx/data $BASE_DIR/sphinx
 
+LOCALHOST="127.0.0.1"
 # Setting the Sphinx server for population
-if [ "$SPHINX_SERVER1" == "$SPHINX_SERVER2" ];then
+if [ "$SPHINX_SERVER1" == "$SPHINX_SERVER2" ] && [ "$SPHINX_SERVER1" != "$LOCALHOST" ];then
     echo -e "${BRIGHT_RED}Both Sphinx servers are the same. Please revise and re-run${NORMAL}"
     exit 9
 fi
 
-if [ "$SPHINX_SERVER1" == `hostname` ] || [ "$SPHINX_SERVER1" == "127.0.0.1" ] ; then
-    echo "sphinxServer = $SPHINX_SERVER1" > /opt/kaltura/app/configurations/sphinx/populate/`hostname`.ini
-elif [ "$SPHINX_SERVER2" == `hostname` ] || [ "$SPHINX_SERVER2" == "127.0.0.1" ]; then
+# Configuring populate files with hostname
+if [ "$SPHINX_SERVER2" == `hostname` ]; then
     echo "sphinxServer = $SPHINX_SERVER2" > /opt/kaltura/app/configurations/sphinx/populate/`hostname`.ini
-else 
-    echo  -e "${BRIGHT_RED}The hostname did not correspond with any of the given Sphinx server configurations. Aborting${NORMAL}"
-    exit 10
+else
+    echo "sphinxServer = $SPHINX_SERVER1" > /opt/kaltura/app/configurations/sphinx/populate/`hostname`.ini
 fi
 
 /etc/init.d/kaltura-sphinx restart >/dev/null 2>&1

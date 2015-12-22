@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+#DEBHELPER#
+
+if [ "$1" = "remove" ]; then
+    for dsoname in tidy ; do
+	/opt/kaltura/bin/php7dismod ${dsoname}
+    done
+fi
+
+exit 0

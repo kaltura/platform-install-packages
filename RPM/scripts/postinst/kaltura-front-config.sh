@@ -54,6 +54,13 @@ if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
 	echo $OUT
 	exit 3
 fi
+PHP_MINOR_VER=`php -r 'echo PHP_MINOR_VERSION;'`
+if [ "$PHP_MINOR_VER" -gt 3 ];then
+        if ! rpm -q php-pecl-zendopcache >/dev/null;then
+                yum -y install php-pecl-zendopcache
+        fi
+fi
+
 . $KALTURA_FUNCTIONS_RC
 NEWANSFILE="/tmp/kaltura_`date +%d_%m_%H_%M.ans`"
 if [ -n "$1" -a -r "$1" ];then
@@ -89,10 +96,6 @@ if ! rpm -q kaltura-front;then
 fi
 trap 'my_trap_handler "${LINENO}" ${$?}' ERR
 send_install_becon `basename $0` $ZONE install_start 0 
-
-# Removal of older ssl line settings from the file. They are appended in the following lines again
-sed --follow-symlinks -e '/IS_SSL/d' -e '/CA_FILE/d' -e '/CRT_FILE/d' -e '/CHAIN_FILE/d' -e '/KEY_FILE/d' -i $RC_FILE
-
 KALTURA_APACHE_CONF=$APP_DIR/configurations/apache
 KALTURA_APACHE_CONFD=$KALTURA_APACHE_CONF/conf.d
 #unset IS_SSL
@@ -238,13 +241,6 @@ if [ -z "$KALTURA_VIRTUAL_HOST_PORT" ];then
 	fi
 fi
 
-# Dropping the port when it's a standard one (this code segment may be relevant only on a config re-run)
-if [ "$KALTURA_VIRTUAL_HOST_PORT" -eq 443 -o "$KALTURA_VIRTUAL_HOST_PORT" -eq 80 ];then
-        KALTURA_FULL_VIRTUAL_HOST_NAME="$KALTURA_VIRTUAL_HOST_NAME"
-else
-        KALTURA_FULL_VIRTUAL_HOST_NAME="$KALTURA_VIRTUAL_HOST_NAME:$KALTURA_VIRTUAL_HOST_PORT"
-fi
-
 if [ -z "$SERVICE_URL" ];then
 	echo -e "${CYAN}Service URL [${YELLOW}$PROTOCOL://$KALTURA_FULL_VIRTUAL_HOST_NAME${CYAN}]:${NORMAL} "
 	read -e SERVICE_URL
@@ -264,7 +260,6 @@ CONF_FILES=`find $APP_DIR/configurations  -type f| grep -v template`
 find /etc/httpd/conf.d -type l -name "zzzkaltura*" -exec rm {} \;
 ln -fs $MAIN_APACHE_CONF /etc/httpd/conf.d/zzz`basename $MAIN_APACHE_CONF`
 
-
 if [ -z "$CONFIG_CHOICE" ];then
 cat << EOF 
 Please select one of the following options [0]:
@@ -275,16 +270,6 @@ EOF
 
 	CONFIG_MSG="Setup enabled the following Apache configuration for you:"
 	read CONFIG_CHOICE
-fi
-
-# Setting up nginx needed httpd settings(hybrid mode when ssl)
-HTTP_MAIN_APACHE_CONF=$KALTURA_APACHE_CONF/kaltura.conf
-if [ "$IS_VOD_PACKAGER_SSL" == 'y' ];then
-	if [ "$VOD_PACKAGER_HOST" == "$KALTURA_VIRTUAL_HOST_NAME" ] && [ "$KALTURA_VIRTUAL_HOST_NAME" == `hostname` ]; then
-		echo -e "${YELLOW}Configuring httpd to run in hybrid mode for nginx ssl support${NORMAL}"
-		sed -e "s#@APP_DIR@#$APP_DIR#g" -e "s#@LOG_DIR@#$LOG_DIR#g" -e "s#@KALTURA_VIRTUAL_HOST_PORT@#$KALTURA_VIRTUAL_HOST_PORT#g" -i $HTTP_MAIN_APACHE_CONF
-		ln -fs $HTTP_MAIN_APACHE_CONF /etc/httpd/conf.d/zzz`basename $HTTP_MAIN_APACHE_CONF`
-	fi
 fi
 
 find $KALTURA_APACHE_CONFD -type l -exec rm {} \;

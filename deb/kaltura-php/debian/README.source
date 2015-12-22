@@ -1,0 +1,53 @@
+ == Generation of the php5-dbg package Depends ==
+
+The following command can be used to generate a heuristic list of
+packages the php5-dbg package probably needs to Depend on:
+
+dh_testdir && egrep '^Package' debian/control | cut '-d ' -f2 | \
+	egrep -v '(^php5|dbg|dev|common|pear)$' | tr "\n" "|" | sed 's/|$//' |\
+	sed -r 's/([^|]+)(\||$)/ \1 (= ${binary:Version}) \2/g'; echo
+
+ == Used patch system ==
+
+This package uses quilt to manage all modifications to the upstream
+source.  Changes are stored in the source package as diffs in
+debian/patches and applied during the build.
+ 
+See /usr/share/doc/quilt/README.source for a detailed explanation.
+
+ == Making some sense out of the configure options  ==
+
+The COMMON_CONFIG variable contains the configure options that are to
+be used on all the SAPIs. Built-in extensions and other general options
+should be set here.
+The shared extensions are built when building the apache2 SAPI and as
+such they need to be specified there.
+The calls to configure for the other SAPIs usually only need
+--without-foo when the extension or feature is otherwise enabled by
+default.
+
+ == The *modulelist files ==
+
+When building a new module (or extension) on an individual binary
+package, it must be added to the debian/modulelist file. However, if
+the extension is to be included in an existing binary package, it
+must be added to the debian/extramodulelist file.
+
+The format of these files is:
+"<package name> <fancy name, one word> <extension name>"
+
+E.g. for, if we want the mysql extension to be shipped in the
+php5-mysql package we use:
+"mysql MySQL mysql"
+But we also want mysqli and the PDO in the same package, so we add the
+following lines to extramoduleslist:
+"mysql MySQLi mysqli
+mysql MySQL_PDO pdo_mysql"
+
+ == More debian/rules foo ==
+
+* The shared extensions are built under the apache2 target (see above).
+* The CLI SAPI is built on the build-cli-stamp AND build-cgi-stamp, with
+  different configure options.
+
+ -- Ondřej Surý <ondrej@debian.org>, Wed, 16 Feb 2011 15:24:44 +0100

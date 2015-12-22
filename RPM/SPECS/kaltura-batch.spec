@@ -6,8 +6,8 @@
 %define apache_group	apache
 Summary: Kaltura Open Source Video Platform - batch server 
 Name: kaltura-batch
-Version: 11.2.0
-Release: 1
+Version: 11.4.0
+Release: 3
 License: AGPLv3+
 Group: Server/Platform 
 Source0: zz-%{name}.ini
@@ -15,7 +15,9 @@ Source1: kaltura-batch
 Source3: batch.ini.template 
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires: kaltura-base, kaltura-ffmpeg, kaltura-ffmpeg-aux, php, curl, httpd, sox, ImageMagick, kaltura-sshpass, php-pecl-memcached,  php-pecl-ssh2,php-mcrypt,memcached,mediainfo, kaltura-segmenter, mod_ssl,kaltura-mencoder
+Requires: kaltura-base, kaltura-ffmpeg, kaltura-ffmpeg-aux, php, curl, httpd, sox, ImageMagick, kaltura-sshpass, php-pecl-memcache,  php-pecl-ssh2,php-mcrypt,memcached,mediainfo, kaltura-segmenter, mod_ssl,kaltura-mencoder
+#php-pecl-zendopcache
+%{?el7:Requires: php-pecl-zendopcache}
 #PreReq: httpd
 Requires(post): chkconfig
 Requires(preun): chkconfig
@@ -129,6 +131,15 @@ service httpd restart
 
 
 %changelog
+* Fri Dec 12 2015 jess.portnoy@kaltura.com <Jess Portnoy> - 11.4.0-2
+- added dep on php-pecl-zendopcache.
+
+* Mon Dec 7 2015 jess.portnoy@kaltura.com <Jess Portnoy> - 11.4.0-1
+- Ver Bounce to 11.4.0
+
+* Mon Nov 23 2015 jess.portnoy@kaltura.com <Jess Portnoy> - 11.3.0-1
+- Ver Bounce to 11.3.0
+
 * Mon Nov 9 2015 jess.portnoy@kaltura.com <Jess Portnoy> - 11.2.0-1
 - Ver Bounce to 11.2.0
 

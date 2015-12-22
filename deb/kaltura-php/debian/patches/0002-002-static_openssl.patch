@@ -1,0 +1,23 @@
+From: Debian PHP Maintainers <pkg-php-maint@lists.alioth.debian.org>
+Date: Fri, 20 Mar 2015 12:08:43 +0100
+Subject: 002-static_openssl
+
+---
+ acinclude.m4 | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
+
+diff --git a/acinclude.m4 b/acinclude.m4
+index 4fd452e..fce024c 100644
+--- a/acinclude.m4
++++ b/acinclude.m4
+@@ -2392,9 +2392,7 @@ AC_DEFUN([PHP_SETUP_OPENSSL],[
+ 
+     PHP_ADD_INCLUDE($OPENSSL_INCDIR)
+   
+-    PHP_CHECK_LIBRARY(crypto, CRYPTO_free, [
+-      PHP_ADD_LIBRARY(crypto,,$1)
+-    ],[
++    PHP_CHECK_LIBRARY(crypto, CRYPTO_free, [:],[
+       AC_MSG_ERROR([libcrypto not found!])
+     ],[
+       -L$OPENSSL_LIBDIR

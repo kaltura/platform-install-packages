@@ -123,13 +123,17 @@ trap 'my_trap_handler "${LINENO}" ${$?}' ERR
 	set -e
 
 	# create users:
-	# TODO: Temp use of grant. Will be replaced with proper permissions
-	echo "CREATE USER kaltura;"
-	echo "GRANT ALL PRIVILEGES ON *.* TO 'kaltura'@'%' IDENTIFIED BY '$DB1_PASS';"  | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT
-	echo "CREATE USER etl;"
-	echo "GRANT ALL PRIVILEGES ON *.* TO 'etl'@'%' IDENTIFIED BY  '$DWH_PASS' ;"  | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT
-
- 	# create the DBs:
+	USER_EXISTS=`echo "SELECT EXISTS(SELECT 1 FROM mysql.user WHERE user = 'kaltura');" | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT`
+	if [ "$USER_EXISTS" != "1" ];then
+		echo "CREATE USER kaltura;"
+		echo "CREATE USER kaltura@'%' IDENTIFIED BY '$DB1_PASS' ;"  | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT
+	fi
+	USER_EXISTS=`echo "SELECT EXISTS(SELECT 1 FROM mysql.user WHERE user = 'etl');" | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT`
+	if [ "$USER_EXISTS" != "1" ];then
+		echo "CREATE USER etl;"
+		echo "CREATE USER etl@'%' IDENTIFIED BY '$DWH_PASS' ;"  | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT
+	fi
+	# create the DBs:
 	for DB in $DBS;do 
 		echo "CREATE DATABASE $DB;"
 		echo "CREATE DATABASE $DB;" | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT
@@ -185,7 +189,7 @@ EOF
 	exit 8
 fi
 
-if [ -n "$IS_SSL" ];then
+if [ "$IS_SSL" = 'Y' -a "$IS_SSL" = 1 -a "$IS_SSL" = 'y' -a "$IS_SSL" = 'true' ];then
 # force KMC login via HTTPs.
 	php $APP_DIR/deployment/base/scripts/insertPermissions.php -d $APP_DIR/deployment/permissions/ssl/ > /dev/null 2>&1
 fi

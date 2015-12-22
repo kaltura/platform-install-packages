@@ -1,0 +1,18 @@
+Package: kaltura-php7
+Version: 7.0.0-6
+Architecture: all
+Maintainer: Jess Portnoy <jess.portnoy@kaltura.com>
+Installed-Size: 52
+Depends: kaltura-libapache2-mod-php7 (>= 7.0.0-6), kaltura-php7-common (>= 7.0.0-6), kaltura-php7-cli (>= 7.0.0-6), kaltura-php7-mysql, kaltura-php7-xsl, kaltura-php7-curl, kaltura-php7-gmp, kaltura-php7-mcrypt, kaltura-php7-apcu, kaltura-php7-memcache, kaltura-php7-ssh2
+Section: php
+Priority: optional
+Homepage: http://www.php.net/
+Description: server-side, HTML-embedded scripting language (metapackage)
+ This package is a metapackage that, when installed, guarantees that you
+ have at least one of the four server-side versions of the PHP7 interpreter
+ installed. Removing this package won't remove PHP7 from your system, however
+ it may remove other packages that depend on this one.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.

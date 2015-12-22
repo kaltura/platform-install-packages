@@ -1,8 +1,43 @@
-kaltura-base (11.2.0-2) kajam; urgency=low
+kaltura-base (11.4.0-3) kajam; urgency=low
 
-  * SUP-6218 - Live entry, VOD entry stuck on "Pending" status
+  * Added support for custom parameters on akamai hds urls. 
+  * Needed in order to add hdcore=x.x.x when playing without the player Akamai HD plugin.
 
- -- Jess Portnoy <jess.portnoy@kaltura.org>  Sun, 22 Nov 2015 13:04:34 +0000
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 21 Dec 2015 10:49:13 +0000
+
+kaltura-base (11.4.0-2) kajam; urgency=low
+
+  * SUP-6332 - Live entry has not been fully uploaded / transcoded
+  * SUP-6763 - Cross Kaltura connector does not export thumbnails
+  * PLAT-4712 - reduce duplicates in entryRequired
+  * PLAT-4445 - Failed to change privacy to category by user from group with permission manager
+  * PLAT-4663 - Support for HTTP Authentication in MRSS Feed ingestion
+  * PLAT-4788 - TMZ SFTP YouTube connector issues
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Sat, 19 Dec 2015 13:03:26 +0000
+
+kaltura-base (11.4.0-1) kajam; urgency=low
+
+  * Switching to 11.4.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 07 Dec 2015 13:34:42 +0000
+
+kaltura-base (11.3.0-2) kajam; urgency=low
+  * Support PHP 7
+  * SUP-4598 - Infinite entry creation when using "Create new entry for every broadcast session"
+  * SUP-5438 - Converting Live Stream to VOD Not Working at all
+  * SUP-6536 - Entries Not in "Ready" Status - Fail to Clone
+  * SUP-6614 - ARF transcoding failure
+  * PLAT-3386 - Stream is rewinded on HLS when stopping and starting the stream with FMLE
+  * PLAT-4068 - When streaming with FMLE, first chunk has invalid duration (mostly after stop-start)
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Sun, 06 Dec 2015 16:37:44 +0000
+
+kaltura-base (11.3.0-1) kajam; urgency=low
+
+  * Switching to 11.3.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 23 Nov 2015 12:22:48 +0000
 
 kaltura-base (11.2.0-1) kajam; urgency=low
 

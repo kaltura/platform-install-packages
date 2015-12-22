@@ -1,0 +1,3 @@
+shlibs:Depends=libc6 (>= 2.14), libsnmp30 (>= 5.7.2~dfsg)
+php:Depends=phpapi-20151012
+misc:Depends=

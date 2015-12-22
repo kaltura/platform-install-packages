@@ -40,8 +40,8 @@ else
 	SERVICES="rpcidmapd rpcbind"
 fi
 # create user/group, and update permissions
-groupadd -r kaltura -g613 2>/dev/null || true
-useradd -M -r -u613 -d $PREFIX -s /bin/bash -c "Kaltura server" -g kaltura kaltura 2>/dev/null || true
+groupadd -r kaltura -g7373 2>/dev/null || true
+useradd -M -r -u7373 -d $PREFIX -s /bin/bash -c "Kaltura server" -g kaltura kaltura 2>/dev/null || true
 usermod -g kaltura kaltura 2>/dev/null || true
 
 if grep -q "^Domain" $IDMAPD_CONFFILE;then

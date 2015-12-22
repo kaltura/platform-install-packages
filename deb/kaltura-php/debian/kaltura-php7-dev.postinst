@@ -1,0 +1,16 @@
+#!/bin/sh
+
+set -e
+
+#DEBHELPER#
+
+if [ "$1" != "configure" ]; then
+    exit 0
+fi
+
+for i in php-config phpize; do
+        update-alternatives \
+          --install /usr/bin/"$i" $i /opt/kaltura/bin/"$i" 50 \
+          --slave /opt/kaltura/share/man/man1/"$i".1.gz "$i".1.gz /opt/kaltura/share/man/man1/"$i"7.1.gz
+done
+exit 0

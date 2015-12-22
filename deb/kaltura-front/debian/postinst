@@ -195,7 +195,12 @@ if [ "$1" = "configure" ]; then
 	a2dissite "zzzkaltura*" || true
 	ln -fs $MAIN_APACHE_CONF /etc/apache2/sites-available/zzz`basename $MAIN_APACHE_CONF`
 	a2ensite zzz`basename $MAIN_APACHE_CONF`
-	php5enmod zz-kaltura
+	if [ -x "`which php5enmod 2>/dev/null`" ];then
+		php5enmod zz-kaltura
+	fi
+	if [ -x /opt/kaltura/bin/php7enmod ];then
+		/opt/kaltura/bin/php7enmod zz-kaltura
+	fi
 
 	CONFIG_CHOICES="
 Please select one of the following options [0]:

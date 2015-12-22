@@ -123,11 +123,16 @@ EOF
 		set -e
 
 		# create users:
-		#for DB_USER in $DB_USERS;do
+		USER_EXISTS=`echo "SELECT EXISTS(SELECT 1 FROM mysql.user WHERE user = 'kaltura');" |  mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT`
+		if [ "$USER_EXISTS" != "1" ];then	
 			echo "CREATE USER kaltura;"
 			echo "CREATE USER kaltura@'%' IDENTIFIED BY '$DB1_PASS' ;"  | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT
+		fi
+		USER_EXISTS=`echo "SELECT EXISTS(SELECT 1 FROM mysql.user WHERE user = 'etl');" |  mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT`
+		if [ "$USER_EXISTS" != "1" ];then	
 			echo "CREATE USER etl@'%';"
 			echo "CREATE USER etl IDENTIFIED BY '$DWH_PASS' ;"  | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT
+		fi
 		#done
 		# create the DBs:
 		for DB in $DBS;do 
@@ -181,8 +186,10 @@ EOF
 		echo -e "${BRIGHT_RED}Please check your setup and then run $0 again.${NORMAL}"
 		exit 8
 	fi
+	db_get 'kaltura-front/is_apache_ssl'
+        IS_SSL="$RET"
 
-	if [ -n "$IS_SSL" ];then
+	if [ "$IS_SSL" = true ];then
 	# force KMC login via HTTPs.
 		php $APP_DIR/deployment/base/scripts/insertPermissions.php -d $APP_DIR/deployment/permissions/ssl/ > /dev/null 2>&1
 	fi

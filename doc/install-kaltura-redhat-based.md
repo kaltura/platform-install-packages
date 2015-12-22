@@ -246,7 +246,7 @@ rpm -ihv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
 #### MySQL Install and Configuration
 Please note that currently, only MySQL 5.1 is supported, we recommend using the official package supplied by the RHEL/CentOS repos which is currently 5.1.73.
 
-For RHEL/CentOS 7 which is currently in the beta stage, MariaDB version 5.5.40 is supported. 
+For RHEL/CentOS 7, MariaDB version 5.5.40 is supported. 
 
 RHEL/CentOS 6 setup:
 ```bash

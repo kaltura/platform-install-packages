@@ -1,0 +1,17 @@
+Package: kaltura-php7-snmp
+Source: kaltura-php7
+Version: 7.0.0-6
+Architecture: amd64
+Maintainer: Jess Portnoy <jess.portnoy@kaltura.com>
+Installed-Size: 117
+Pre-Depends: dpkg (>= 1.16.1~)
+Depends: libc6 (>= 2.14), libsnmp30 (>= 5.7.2~dfsg), phpapi-20151012, kaltura-php7-common (= 7.0.0-6), ucf
+Section: php
+Priority: optional
+Homepage: http://www.php.net/
+Description: SNMP module for kaltura-php7
+ This package provides a module for SNMP functions in PHP scripts.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.

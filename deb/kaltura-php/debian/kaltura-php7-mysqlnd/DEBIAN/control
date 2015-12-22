@@ -1,0 +1,25 @@
+Package: kaltura-php7-mysqlnd
+Source: kaltura-php7
+Version: 7.0.0-6
+Architecture: amd64
+Maintainer: Jess Portnoy <jess.portnoy@kaltura.com>
+Installed-Size: 485
+Pre-Depends: dpkg (>= 1.16.1~)
+Depends: libc6 (>= 2.15), phpapi-20151012, kaltura-php7-common (= 7.0.0-6), ucf
+Conflicts: kaltura-php7-mysql, kaltura-php7-mysqli
+Replaces: kaltura-php7-mysql, kaltura-php7-mysqli
+Section: php
+Priority: extra
+Homepage: http://www.php.net/
+Description: MySQL module for kaltura-php7 (Native Driver)
+ This package provides modules for MySQL database connections directly from
+ PHP scripts.  It includes the generic "mysql" module which can be used
+ to connect to all versions of MySQL, an improved "mysqli" module for
+ MySQL version 4.1 or later, and the pdo_mysql module for use with
+ the PHP Data Object extension.
+ .
+ This package use the MySQL Native Driver.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.

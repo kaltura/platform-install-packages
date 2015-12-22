@@ -13,13 +13,14 @@
 #       CREATED: 01/06/14 11:27:00 EST
 #      REVISION:  ---
 #===============================================================================
+
 #set -o nounset                              # Treat unset variables as an error
 verify_user_input()
 {
         ANSFILE=$1
         . $ANSFILE
         RC=0
-        for VAL in TIME_ZONE KALTURA_FULL_VIRTUAL_HOST_NAME KALTURA_VIRTUAL_HOST_NAME DB1_HOST DB1_PORT DB1_NAME DB1_USER SERVICE_URL SPHINX_SERVER1 SPHINX_SERVER2 DWH_HOST DWH_PORT SPHINX_DB_HOST SPHINX_DB_PORT ADMIN_CONSOLE_ADMIN_MAIL ADMIN_CONSOLE_PASSWORD SUPER_USER SUPER_USER_PASSWD CDN_HOST KALTURA_VIRTUAL_HOST_PORT DB1_PASS DWH_PASS PROTOCOL RED5_HOST USER_CONSENT VOD_PACKAGER_HOST VOD_PACKAGER_PORT IP_RANGE; do
+        for VAL in TIME_ZONE KALTURA_FULL_VIRTUAL_HOST_NAME KALTURA_VIRTUAL_HOST_NAME DB1_HOST DB1_PORT DB1_NAME DB1_USER SERVICE_URL SPHINX_SERVER1 SPHINX_SERVER2 DWH_HOST DWH_PORT ADMIN_CONSOLE_ADMIN_MAIL ADMIN_CONSOLE_PASSWORD SUPER_USER SUPER_USER_PASSWD CDN_HOST KALTURA_VIRTUAL_HOST_PORT DB1_PASS DWH_PASS PROTOCOL RED5_HOST USER_CONSENT VOD_PACKAGER_HOST VOD_PACKAGER_PORT IP_RANGE; do
                 if [ -z "${!VAL}" ];then
                         VALS="$VALS\n$VAL"
                         RC=1
@@ -39,7 +40,7 @@ create_answer_file()
 {
         POST_INST_MAIL_TMPL=$1
         ANSFILE=/tmp/kaltura_`date +%d_%m_%H_%M`.ans
-        for VAL in TIME_ZONE KALTURA_FULL_VIRTUAL_HOST_NAME KALTURA_VIRTUAL_HOST_NAME DB1_HOST DB1_PORT DB1_PASS DB1_NAME DB1_USER SERVICE_URL SPHINX_SERVER1 SPHINX_SERVER2 DWH_HOST DWH_PORT SPHINX_DB_HOST SPHINX_DB_PORT ADMIN_CONSOLE_ADMIN_MAIL ADMIN_CONSOLE_PASSWORD CDN_HOST KALTURA_VIRTUAL_HOST_PORT SUPER_USER SUPER_USER_PASSWD ENVIRONMENT_NAME DWH_PASS PROTOCOL RED5_HOST USER_CONSENT SEND_NEWSLETTER CONTACT_MAIL VOD_PACKAGER_HOST VOD_PACKAGER_PORT IP_RANGE WWW_HOST; do
+        for VAL in TIME_ZONE KALTURA_FULL_VIRTUAL_HOST_NAME KALTURA_VIRTUAL_HOST_NAME DB1_HOST DB1_PORT DB1_PASS DB1_NAME DB1_USER SERVICE_URL SPHINX_SERVER1 SPHINX_SERVER2 DWH_HOST DWH_PORT ADMIN_CONSOLE_ADMIN_MAIL ADMIN_CONSOLE_PASSWORD CDN_HOST KALTURA_VIRTUAL_HOST_PORT SUPER_USER SUPER_USER_PASSWD ENVIRONMENT_NAME DWH_PASS PROTOCOL RED5_HOST USER_CONSENT SEND_NEWSLETTER CONTACT_MAIL VOD_PACKAGER_HOST VOD_PACKAGER_PORT IP_RANGE WWW_HOST; do
                 if [ -n "${!VAL}" ];then
                         echo "$VAL=\"${!VAL}\"" >> $ANSFILE 
                 fi
@@ -98,7 +99,7 @@ else
                 get_tracking_consent
         fi
         . $CONSENT_FILE
-#	get_newsletter_consent
+	get_newsletter_consent
        # echo "Welcome to Kaltura Server $DISPLAY_NAME post install setup.
 echo -e "\n${CYAN}In order to finalize the system configuration, please input the following:
 
@@ -125,19 +126,6 @@ ${NORMAL} "
         if [ -z "$KALTURA_VIRTUAL_HOST_PORT" ];then
                 KALTURA_VIRTUAL_HOST_PORT=80
         fi
-
-    if [ "$KALTURA_VIRTUAL_HOST_PORT" -ne 80 ];then
-        echo -en "${CYAN}Vhost port will be set on [${YELLOW}$KALTURA_VIRTUAL_HOST_PORT${CYAN}]. Are you using https? (Y/N)${NORMAL}"
-        read -e IS_SSL
-	temp_var=`echo $IS_NGINX_SSL | tr '[:upper:]' '[:lower:]'`
-	IS_SSL=$temp_var
-        while [ "$IS_SSL" != 'y' -a "$IS_SSL" != 'n' ];do
-            echo -en "${CYAN}Please provide either 'Y' or 'N'.\nAre you using https? (Y/N) ${NORMAL}"
-            read -e IS_SSL
-        done
-    fi
-
-
 	if [ "$KALTURA_VIRTUAL_HOST_PORT" -eq 80 -o "$KALTURA_VIRTUAL_HOST_PORT" -eq 443 ];then
 		KALTURA_FULL_VIRTUAL_HOST_NAME=$KALTURA_VIRTUAL_HOST_NAME
 	else
@@ -240,18 +228,11 @@ ${NORMAL} "
                 echo -en "${CYAN}Kaltura Admin user (email address):${NORMAL} "
                 read -e ADMIN_CONSOLE_ADMIN_MAIL
         done
-
-    # This check will be relevant only if there's an answer file
-        if echo $ADMIN_CONSOLE_PASSWORD | grep -q -E "&|>|<|\/" ;then
-                echo "EMPTY"
-                echo -en "${BRIGHT_RED}ERROR: password can't have one of the following chars in it: '/' , '&' '>' '<'. Please re-input.${NORMAL}"
-                unset ADMIN_CONSOLE_PASSWORD
-        fi
         while [ -z "$ADMIN_CONSOLE_PASSWORD" ];do
                 echo -en "${CYAN}Admin user login password (must be minimum 8 chars and include at least one of each: upper-case, lower-case, number and a special character):${NORMAL}"
                 read -s ADMIN_CONSOLE_PASSWORD
-                if echo $ADMIN_CONSOLE_PASSWORD | grep -q -E "&|>|<|\/" ;then
-                        echo -en "\n${BRIGHT_RED}ERROR: password can't have one of the following chars in it: '/' , '&' '>' '<'. Please re-input.${NORMAL}"
+                if echo $ADMIN_CONSOLE_PASSWORD | grep -q "/\|&\|>\|<" ;then
+                        echo -en "${BRIGHT_RED}ERROR: Passwd can't have the '/' or '&' chars in it. Please re-input.${NORMAL}"
                         unset ADMIN_CONSOLE_PASSWORD
                 fi
         done
@@ -374,16 +355,6 @@ fi
 HTML5_VER="`rpm -qa kaltura-html5lib --queryformat %{version}`"
 create_answer_file $POST_INST_MAIL_TMPL
 APP_REMOTE_ADDR_HEADER_SALT=`echo $SERVICE_URL|base64 -w0`
-
-
-if [ "$IS_SSL" == 'y' ];then
-        PROTOCOL="https"
-else
-        PROTOCOL="http"
-fi
-SERVICE_URL="$PROTOCOL://$KALTURA_FULL_VIRTUAL_HOST_NAME"
-echo "service URL is: $SERVICE_URL"
-
 # Now we will sed.
 for TMPL_CONF_FILE in $CONF_FILES;do
         CONF_FILE=`echo $TMPL_CONF_FILE | sed 's@\(.*\)\.template\(.*\)@\1\2@'`
@@ -393,13 +364,14 @@ for TMPL_CONF_FILE in $CONF_FILES;do
         if `echo $TMPL_CONF_FILE|grep -q template`;then
                 cp  $TMPL_CONF_FILE $CONF_FILE
         fi
-        sed  -e "s#@ENVIRONMENT_PROTOCOL@#$PROTOCOL#g" -e "s#@CDN_HOST@#$CDN_HOST#g" -e "s#@DB[1-9]_HOST@#$DB1_HOST#g" -e "s#@DB[1-9]_NAME@#$DB1_NAME#g" -e "s#@DB[1-9]_USER@#$DB1_USER#g" -e "s#@DB[1-9]_PASS@#$DB1_PASS#g" -e "s#@DB[1-9]_PORT@#$DB1_PORT#g" -e "s#@TIME_ZONE@#$TIME_ZONE#g" -e "s#@KALTURA_FULL_VIRTUAL_HOST_NAME@#$KALTURA_FULL_VIRTUAL_HOST_NAME#g" -e "s#@KALTURA_VIRTUAL_HOST_NAME@#$KALTURA_VIRTUAL_HOST_NAME#g" -e "s#@SERVICE_URL@#$SERVICE_URL#g" -e "s#@WWW_HOST@#$KALTURA_FULL_VIRTUAL_HOST_NAME#g" -e "s#@SPHINX_DB_NAME@#kaltura_sphinx_log#g" -e "s#@SPHINX_DB_HOST@#$SPHINX_DB_HOST#g" -e "s#@SPHINX_DB_PORT@#$DB1_PORT#g" -e "s#@DWH_HOST@#$DWH_HOST#g" -e "s#@DWH_PORT@#$DWH_PORT#g" -e "s#@SPHINX_SERVER1@#$SPHINX_SERVER1#g" -e "s#@SPHINX_PORT@#9312#g" -e "s#@SPHINX_SERVER@#$SPHINX_SERVER1#g" -e "s#@SPHINX_SERVER2@#$SPHINX_SERVER2#g" -e "s#@DWH_DATABASE_NAME@#kalturadw#g" -e "s#@DWH_USER@#etl#g" -e "s#@DWH_PASS@#$DWH_PASS#g" -e "s#@ADMIN_CONSOLE_ADMIN_MAIL@#$ADMIN_CONSOLE_ADMIN_MAIL#g" -e "s#@WEB_DIR@#$BASE_DIR/web#g" -e "s#@LOG_DIR@#$BASE_DIR/log#g" -e "s#$BASE_DIR/app#$BASE_DIR/app#g" -e "s#@PHP_BIN@#/usr/bin/php#g" -e "s#@OS_KALTURA_USER@#kaltura#g" -e "s#@BASE_DIR@#$BASE_DIR#" -e "s#@APP_DIR@#$BASE_DIR/app#g" -e "s#@DWH_DIR@#$BASE_DIR/dwh#g" -e "s#@KETTLE_SH@#/opt/kaltura/pentaho/pdi/kitchen.sh#g" -e "s#@EVENTS_LOGS_DIR@#$BASE_DIR/web/logs#g" -e "s#@TMP_DIR@#$BASE_DIR/tmp#g" -e "s#@APACHE_SERVICE@#httpd#g" -e "s#@KALTURA_VIRTUAL_HOST_PORT@#$KALTURA_VIRTUAL_HOST_PORT#g" -e "s#@BIN_DIR@#$BASE_DIR/bin#g" -e "s#@KALTURA_VERSION@#$DISPLAY_NAME#g" -e "s#@SPHINX_SERVER@#$SPHINX_SERVER1#g" -e "s#@INSTALLED_HOSTNAME@#`hostname`#g" -e "s#@IMAGE_MAGICK_BIN_DIR@#/usr/bin#g" -e "s#@CURL_BIN_DIR@#/usr/bin#g" -e "s@^\(bin_path_mediainfo\).*@\1=/usr/bin/mediainfo@g" -e "s#@CONTACT_URL@#$CONTACT_URL#g" -e "s#@ENVIRONMENT_NAME@#$ENVIRONMENT_NAME#g" -e "s#@BEGINNERS_TUTORIAL_URL@#$BEGINNERS_TUTORIAL_URL#g" -e "s#@BEGINNERS_TUTORIAL_URL@#$BEGINNERS_TUTORIAL_URL#g" -e "s#@QUICK_START_GUIDE_URL@#$QUICK_START_GUIDE_URL#g" -e "s#@FORUMS_URLS@#$FORUMS_URLS#g" -e "s#@CONTACT_PHONE_NUMBER@#\"$CONTACT_PHONE_NUMBER\"#g" -e "s#@UNSUBSCRIBE_EMAIL_URL@#$SERVICE_URL/index.php/extwidget/blockMail?e=#g" -e "s#@UICONF_TAB_ACCESS@#SYSTEM_ADMIN_BATCH_CONTROL#g"  -e "s#@EVENTS_FETCH_METHOD@#local#g" -e "s#@HTML5_VER@#$HTML5_VER#g" -e "s#@MONIT_PASSWD@#$DB1_PASS#g" -e "s#@VOD_PACKAGER_HOST@#$VOD_PACKAGER_HOST#g" -e "s#@VOD_PACKAGER_PORT@#$VOD_PACKAGER_PORT#g" -e "s#@IP_RANGE@#$IP_RANGE#g" -e "s#@DB2_PORT@#$DWH_PORT#g" -e "s#@DB2_HOST@#$DWH_HOST#g" -e "s#@APP_REMOTE_ADDR_HEADER_SALT@#\"$APP_REMOTE_ADDR_HEADER_SALT\"#g" -i $CONF_FILE
+        sed  -e "s#@ENVIRONMENT_PROTOCOL@#$PROTOCOL#g" -e "s#@CDN_HOST@#$CDN_HOST#g" -e "s#@DB[1-9]_HOST@#$DB1_HOST#g" -e "s#@DB[1-9]_NAME@#$DB1_NAME#g" -e "s#@DB[1-9]_USER@#$DB1_USER#g" -e "s#@DB[1-9]_PASS@#$DB1_PASS#g" -e "s#@DB[1-9]_PORT@#$DB1_PORT#g" -e "s#@TIME_ZONE@#$TIME_ZONE#g" -e "s#@KALTURA_FULL_VIRTUAL_HOST_NAME@#$KALTURA_FULL_VIRTUAL_HOST_NAME#g" -e "s#@KALTURA_VIRTUAL_HOST_NAME@#$KALTURA_VIRTUAL_HOST_NAME#g" -e "s#@SERVICE_URL@#$SERVICE_URL#g" -e "s#@WWW_HOST@#$KALTURA_FULL_VIRTUAL_HOST_NAME#g" -e "s#@SPHINX_DB_NAME@#kaltura_sphinx_log#g" -e "s#@SPHINX_DB_HOST@#$DB1_HOST#g" -e "s#@SPHINX_DB_PORT@#$DB1_PORT#g" -e "s#@DWH_HOST@#$DWH_HOST#g" -e "s#@DWH_PORT@#$DWH_PORT#g" -e "s#@SPHINX_SERVER1@#$SPHINX_SERVER1#g" -e "s#@SPHINX_PORT@#9312#g" -e "s#@SPHINX_SERVER@#$SPHINX_SERVER1#g" -e "s#@SPHINX_SERVER2@#$SPHINX_SERVER2#g" -e "s#@DWH_DATABASE_NAME@#kalturadw#g" -e "s#@DWH_USER@#etl#g" -e "s#@DWH_PASS@#$DWH_PASS#g" -e "s#@ADMIN_CONSOLE_ADMIN_MAIL@#$ADMIN_CONSOLE_ADMIN_MAIL#g" -e "s#@WEB_DIR@#$BASE_DIR/web#g" -e "s#@LOG_DIR@#$BASE_DIR/log#g" -e "s#$BASE_DIR/app#$BASE_DIR/app#g" -e "s#@PHP_BIN@#/usr/bin/php#g" -e "s#@OS_KALTURA_USER@#kaltura#g" -e "s#@BASE_DIR@#$BASE_DIR#" -e "s#@APP_DIR@#$BASE_DIR/app#g" -e "s#@DWH_DIR@#$BASE_DIR/dwh#g" -e "s#@KETTLE_SH@#/opt/kaltura/pentaho/pdi/kitchen.sh#g" -e "s#@EVENTS_LOGS_DIR@#$BASE_DIR/web/logs#g" -e "s#@TMP_DIR@#$BASE_DIR/tmp#g" -e "s#@APACHE_SERVICE@#httpd#g" -e "s#@KALTURA_VIRTUAL_HOST_PORT@#$KALTURA_VIRTUAL_HOST_PORT#g" -e "s#@BIN_DIR@#$BASE_DIR/bin#g" -e "s#@KALTURA_VERSION@#$DISPLAY_NAME#g" -e "s#@SPHINX_SERVER@#$SPHINX_SERVER1#g" -e "s#@INSTALLED_HOSTNAME@#`hostname`#g" -e "s#@IMAGE_MAGICK_BIN_DIR@#/usr/bin#g" -e "s#@CURL_BIN_DIR@#/usr/bin#g" -e "s@^\(bin_path_mediainfo\).*@\1=/usr/bin/mediainfo@g" -e "s#@CONTACT_URL@#$CONTACT_URL#g" -e "s#@ENVIRONMENT_NAME@#$ENVIRONMENT_NAME#g" -e "s#@BEGINNERS_TUTORIAL_URL@#$BEGINNERS_TUTORIAL_URL#g" -e "s#@BEGINNERS_TUTORIAL_URL@#$BEGINNERS_TUTORIAL_URL#g" -e "s#@QUICK_START_GUIDE_URL@#$QUICK_START_GUIDE_URL#g" -e "s#@FORUMS_URLS@#$FORUMS_URLS#g" -e "s#@CONTACT_PHONE_NUMBER@#\"$CONTACT_PHONE_NUMBER\"#g" -e "s#@UNSUBSCRIBE_EMAIL_URL@#$SERVICE_URL/index.php/extwidget/blockMail?e=#g" -e "s#@UICONF_TAB_ACCESS@#SYSTEM_ADMIN_BATCH_CONTROL#g"  -e "s#@EVENTS_FETCH_METHOD@#local#g" -e "s#@HTML5_VER@#$HTML5_VER#g" -e "s#@MONIT_PASSWD@#$DB1_PASS#g" -e "s#@VOD_PACKAGER_HOST@#$VOD_PACKAGER_HOST#g" -e "s#@VOD_PACKAGER_PORT@#$VOD_PACKAGER_PORT#g" -e "s#@IP_RANGE@#$IP_RANGE#g" -e "s#@DB2_PORT@#$DWH_PORT#g" -e "s#@DB2_HOST@#$DWH_HOST#g" -e "s#@APP_REMOTE_ADDR_HEADER_SALT@#\"$APP_REMOTE_ADDR_HEADER_SALT\"#g" -i $CONF_FILE
 done
 
 sed -i "s#@MONIT_PASSWD@#$DB1_PASS#" -i $BASE_DIR/app/admin_console/views/scripts/index/monit.phtml
 echo "
 SERVICE_URL=$SERVICE_URL
 SPHINX_HOST=$SPHINX_SERVER1
+SPHINX_SERVER1=$SPHINX_SERVER1
 DB1_PORT=$DB1_PORT
 SUPER_USER=$SUPER_USER
 SUPER_USER_PASSWD=\"$SUPER_USER_PASSWD\"
@@ -514,17 +486,6 @@ ${NORMAL}
 fi
 
 set +e
-
-# in case we use Percona, change the monit rc file
-if rpm -qa "Percona-Server-server*" 2>/dev/null;then
-    cp $BASE_DIR/app/configurations/monit/monit.avail/percona.rc $BASE_DIR/app/configurations/monit/monit.avail/percona.rc.backup
-    sed -i s/@HOSTNAME@/`hostname`/ $BASE_DIR/app/configurations/monit/monit.avail/percona.rc
-    if [ `ps -ef | grep monit | grep -v grep | wc -l` -ne 0 ]; then
-        echo "Reloading monit"
-        /opt/kaltura/bin/monit reload
-    fi
-fi
-
 
 
 ln -sf $BASE_DIR/app/configurations/logrotate/kaltura_base /etc/logrotate.d/

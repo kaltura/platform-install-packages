@@ -1,0 +1,30 @@
+Source: kaltura-php7-apcu
+Section: php
+Priority: optional
+Maintainer: Jess Portnoy <jess.portnoy@kaltura.com>
+Build-Depends: debhelper (>= 9), kaltura-php7-dev (>= 7.0.0), kaltura-php7-cli (>= 7.0.0), pkg-php-tools (>= 1.6)
+Standards-Version: 3.9.5
+Homepage: http://pecl.php.net/package/APCu
+
+Package: kaltura-php7-apcu
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Replaces: php5-user-cache, php-apc (<< 4.0.0)
+Provides: php7-user-cache, php-apc
+Description: APC User Cache for PHP 7
+ The APCu is userland caching: APC (Alternative PHP Cache) stripped of
+ opcode caching after the deployment of Zend OpCache in PHP 5.5 as the
+ primary solution to opcode caching in future versions of PHP.
+ .
+ The APCu is a fast solution for userland caching (and dumping) of PHP
+ variables locally, it is not distributed like MemcacheD, but they can
+ be used together for optimal caching.
+
+Package: kaltura-php7-apc
+Architecture: all
+Section: oldlibs
+Priority: extra
+Depends: kaltura-php7-apcu, ${misc:Depends}
+Description: APC User Cache for PHP 7 (transitional package)
+ This is a dummy transition package that can be safely removed once no
+ package depend on it.

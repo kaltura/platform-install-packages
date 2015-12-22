@@ -1,0 +1,14 @@
+Source: kaltura-php7-ssh2
+Section: devel
+Priority: extra
+Maintainer: Jess Portnoy <jess.portnoy@kaltura.com>
+Build-Depends: debhelper (>= 7), kaltura-php7-dev, libssh2-1-dev, libtool
+Standards-Version: 3.9.5
+Homepage: http://pecl.php.net/package/ssh2
+
+Package: kaltura-php7-ssh2
+Architecture: any
+Depends: ucf, ${shlibs:Depends}, ${misc:Depends}, ${php:Depends}
+Description: PHP Bindings for libssh2
+ Provides bindings to the functions of libssh2 which implements the SSH2
+ protocol.

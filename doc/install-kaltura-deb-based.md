@@ -97,6 +97,17 @@ Please note that for MySQL version 5.5 and above, you must first disable strict 
 See:
 https://support.realtyna.com/index.php?/Knowledgebase/Article/View/535/0/how-can-i-turn-off-mysql-strict-mode
 
+#### Install Kaltura Server with PHP 7
+By default, the installation is done against the PHP stack available from the official repo.
+Kaltura now offers beta deb packages of PHP 7 which can be installed from our repo.
+In order to install the server using these packages, simply run:
+```bash
+# wget -O - http://installrepo.kaltura.org/repo/apt/debian/kaltura-deb.gpg.key|apt-key add -
+# echo "deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/debian kajam main" > /etc/apt/sources.list.d/kaltura.list
+# aptitude update
+# aptitude install kaltura-php7
+```
+And the follow the instructions for installing the Kaltura server as normal.
 
 #### Install Kaltura Server
 You can use this process to auto install an all in 1 server.

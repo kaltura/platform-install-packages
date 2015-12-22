@@ -1,0 +1,74 @@
+#!/usr/bin/make -f
+
+CFLAGS = -Wall -g
+
+CFLAGS += -O0
+BASE_PREFIX=opt/kaltura/
+EXT_NAME=ssh2
+configure: configure-stamp
+configure-stamp:
+	dh_testdir
+
+	cp -a $(EXT_NAME)-* build-php7
+	cd build-php7 && phpize
+	cd build-php7 && ./configure --build=$(DEB_BUILD_GNU_TYPE) --host=$(DEB_HOST_GNU_TYPE)
+	
+	touch configure-stamp
+
+build: build-arch build-indep
+
+build-arch: build-stamp
+
+build-indep: build-stamp
+
+build-stamp: configure-stamp 
+	dh_testdir
+
+	cd build-php7 && $(MAKE) CFLAGS="$(CFLAGS)"
+
+	touch $@
+
+clean:
+	dh_testdir
+	dh_testroot
+	rm -f build-stamp configure-stamp
+
+	rm -rf build-php7 opt
+	
+	dh_clean
+
+install: build
+	dh_testdir
+	dh_testroot
+	dh_prep
+	dh_installdirs
+
+	cd build-php7 && \
+	$(MAKE) INSTALL_ROOT=$(CURDIR)/debian/php-$(EXT_NAME) install
+	DH_AUTOSCRIPTDIR=debian/ debian/dh_php7 -pphp-$(EXT_NAME)
+	mkdir -p $(CURDIR)/debian/php-$(EXT_NAME)/opt/kaltura/app/configurations/php/mods-available/
+	echo "extension=$(EXT_NAME).so" > $(CURDIR)/debian/php-$(EXT_NAME)/opt/kaltura/app/configurations/php/mods-available/$(EXT_NAME).ini
+	
+binary-indep: build install
+
+binary-arch: build install
+	dh_testdir
+	dh_testroot
+	dh_installdebconf
+	dh_installchangelogs
+	dh_installdocs
+	dh_installexamples
+	mv $(CURDIR)/debian/php-$(EXT_NAME)/opt .
+	dh_install opt
+	dh_link
+	dh_strip
+	dh_compress
+	dh_fixperms
+	dh_installdeb
+	dh_shlibdeps
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb
+
+binary: binary-indep binary-arch
+.PHONY: build clean binary-indep binary-arch binary install configure

@@ -1,0 +1,25 @@
+Package: kaltura-php7-cli
+Source: kaltura-php7
+Version: 7.0.0-6
+Architecture: amd64
+Maintainer: Jess Portnoy <jess.portnoy@kaltura.com>
+Installed-Size: 9332
+Depends: libbz2-1.0, libc6 (>= 2.15), libonig2 (>= 5.2.0), libpcre3, libssl1.0.0 (>= 1.0.1), libxml2 (>= 2.9.0), zlib1g (>= 1:1.1.4), mime-support, kaltura-php7-common (= 7.0.0-6), libmagic1, ucf, tzdata
+Suggests: php-pear
+Provides: phpapi-20151012
+Section: php
+Priority: optional
+Homepage: http://www.php.net/
+Description: command-line interpreter for the kaltura-php7 scripting language
+ This package provides the /usr/bin/php7 command interpreter, useful for
+ testing PHP scripts from a shell or performing general shell scripting tasks.
+ .
+ The following extensions are built in: bcmath bz2 calendar Core ctype date
+ dom exif fileinfo filter ftp gettext hash iconv json libxml mbstring
+ openssl pcntl pcre Phar posix Reflection session shmop SimpleXML soap
+ sockets SPL standard sysvmsg sysvsem sysvshm tokenizer wddx xml xmlreader
+ xmlwriter zip zlib.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.

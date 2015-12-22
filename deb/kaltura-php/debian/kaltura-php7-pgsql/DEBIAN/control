@@ -1,0 +1,19 @@
+Package: kaltura-php7-pgsql
+Source: kaltura-php7
+Version: 7.0.0-6
+Architecture: amd64
+Maintainer: Jess Portnoy <jess.portnoy@kaltura.com>
+Installed-Size: 239
+Pre-Depends: dpkg (>= 1.16.1~)
+Depends: libc6 (>= 2.14), libpq5 (>= 9.3~), phpapi-20151012, kaltura-php7-common (= 7.0.0-6), ucf
+Section: php
+Priority: optional
+Homepage: http://www.php.net/
+Description: PostgreSQL module for kaltura-php7
+ This package provides a module for PostgreSQL database connections
+ directly from PHP scripts.  It also includes the pdo_pgsql module for
+ use with the PHP Data Object extension.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.

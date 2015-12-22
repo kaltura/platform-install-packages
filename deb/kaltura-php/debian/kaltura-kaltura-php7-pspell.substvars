@@ -1,0 +1,2 @@
+shlibs:Depends=libaspell15 (>= 0.60.7~20110707), libc6 (>= 2.4)
+misc:Depends=

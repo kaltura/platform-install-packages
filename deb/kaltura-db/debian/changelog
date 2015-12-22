@@ -1,4 +1,10 @@
-kaltura-db (11.1.0-1) UNRELEASED; urgency=low
+kaltura-db (11.4.0-1) kajam; urgency=low
+
+  * Properly check whether we're using SSL for service URL and if so, set FEATURE_KMC_ENFORCE_HTTPS permission on partner 0.
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Fri, 11 Dec 2015 16:28:08 +0000
+
+kaltura-db (11.1.0-1) kajam; urgency=low
 
   * Replace hardcoded /opt/kaltura/app with $APP_DIR.
 

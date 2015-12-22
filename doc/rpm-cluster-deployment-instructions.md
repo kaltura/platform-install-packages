@@ -249,7 +249,7 @@ When query cache is enabled, the server intelligently chooses between master / s
 ### The Sphinx Indexing Server
 ```
 # rpm -Uhv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
-# yum install kaltura-sphinx
+# yum install kaltura-sphinx kaltura-postinst
 # /opt/kaltura/bin/kaltura-sphinx-config.sh
 ```
 

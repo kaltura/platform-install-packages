@@ -10,11 +10,11 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 11.2.0
-Release: 16
+Version: 11.4.0
+Release: 12
 License: AGPLv3+
 Group: Server/Platform 
-Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}-TM.zip 
+Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
 Source4: emails_en.template.ini
 Source10: entry_and_uiconf_templates.tar.gz
 # fixes https://github.com/kaltura/platform-install-packages/issues/37
@@ -31,7 +31,7 @@ Source25: kaltura_populate.template
 Source26: kaltura_batch.template
 Source28: embedIframeJsAction.class.php
 Source32: KDLOperatorFfmpeg1_1_1.php
-URL: https://github.com/kaltura/server/tree/%{codename}-%{version}-TM
+URL: https://github.com/kaltura/server/tree/%{codename}-%{version}
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
 Requires: rsync,mysql,kaltura-monit,kaltura-postinst,cronie, php-cli, php-xml, php-curl, php-mysql, php-gd, php-gmp, php-ldap, php-mbstring, ntp, mailx
@@ -51,7 +51,7 @@ For more information visit: http://corp.kaltura.com, http://www.kaltura.org and 
 This is the base package, needed for any Kaltura server role.
 
 %prep
-%setup -qn server-%{codename}-%{version}-TM
+%setup -qn server-%{codename}-%{version}
 
 
 %install
@@ -95,7 +95,7 @@ project" "*.png" "*.properties" "*.sample" "*.swf" "*.sf" "*.swz" "*.uad" "*.pre
 done
 
 for i in admin_console alpha api_v3 batch configurations deployment generator infra plugins start tests ui_infra var_console vendor VERSION.txt  license.txt release-notes.md;do 
-	mv  %{_builddir}/server-%{codename}-%{version}-TM/$i $RPM_BUILD_ROOT%{prefix}/app
+	mv  %{_builddir}/server-%{codename}-%{version}/$i $RPM_BUILD_ROOT%{prefix}/app
 done
 find  $RPM_BUILD_ROOT%{prefix}/app -name "*.sh" -type f -exec chmod +x {} \;
 
@@ -185,8 +185,8 @@ and then edit /etc/selinux/config to make the change permanent."
 	fi
 fi
 # create user/group, and update permissions
-getent group %{kaltura_group} >/dev/null || groupadd -r %{kaltura_group} -g613 2>/dev/null
-getent passwd %{kaltura_user} >/dev/null || useradd -M -r -u613 -d %{prefix} -s /bin/bash -c "Kaltura server" -g %{kaltura_group} %{kaltura_user} 2>/dev/null
+getent group %{kaltura_group} >/dev/null || groupadd -r %{kaltura_group} -g7373 2>/dev/null
+getent passwd %{kaltura_user} >/dev/null || useradd -M -r -u7373 -d %{prefix} -s /bin/bash -c "Kaltura server" -g %{kaltura_group} %{kaltura_user} 2>/dev/null
 
 getent group %{apache_user} >/dev/null || groupadd -g 48 -r %{apache_group}
 getent passwd %{apache_user} >/dev/null || \
@@ -298,6 +298,32 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Dec 21 2015 jess.portnoy@kaltura.com <Jess Portnoy> - 11.4.0-12
+- Added support for custom parameters on akamai hds urls. 
+  Needed in order to add hdcore=x.x.x when playing without the player Akamai HD plugin.
+
+* Sat Dec 19 2015 jess.portnoy@kaltura.com <Jess Portnoy> - 11.4.0-11
+- SUP-6332 - Live entry has not been fully uploaded / transcoded
+- SUP-6763 - Cross Kaltura connector does not export thumbnails
+- PLAT-4712 - reduce duplicates in entryRequired
+- PLAT-4445 - Failed to change privacy to category by user from group with permission manager
+- PLAT-4663 - Support for HTTP Authentication in MRSS Feed ingestion
+- PLAT-4788 - TMZ SFTP YouTube connector issues
+
+* Mon Dec 7 2015 jess.portnoy@kaltura.com <Jess Portnoy> - 11.4.0-1
+- Ver Bounce to 11.4.0
+
+* Sun Dec 6 2015 jess.portnoy@kaltura.com <Jess Portnoy> - 11.3.0-12
+- SUP-4598 - Infinite entry creation when using "Create new entry for every broadcast session"
+- SUP-5438 - Converting Live Stream to VOD Not Working at all
+- SUP-6536 - Entries Not in "Ready" Status - Fail to Clone
+- SUP-6614 - ARF transcoding failure
+- PLAT-3386 - Stream is rewinded on HLS when stopping and starting the stream with FMLE
+- PLAT-4068 - When streaming with FMLE, first chunk has invalid duration (mostly after stop-start)
+ 
+* Mon Nov 23 2015 jess.portnoy@kaltura.com <Jess Portnoy> - 11.3.0-1
+- Ver Bounce to 11.3.0
+
 * Sun Nov 22 2015 jess.portnoy@kaltura.com <Jess Portnoy> - 11.2.0-12
 - 11.2.0 final
 

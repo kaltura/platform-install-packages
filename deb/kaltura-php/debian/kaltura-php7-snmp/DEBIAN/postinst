@@ -1,0 +1,36 @@
+#!/bin/sh
+
+set -e
+
+
+
+inidir=/opt/kaltura/app/configurations/php/mods-available
+if [ "$1" = "configure" ]; then
+     #update-alternatives --install /usr/bin/php7dismod php7dismod /opt/kaltura/bin/php7dismod 50
+     #update-alternatives --install /usr/bin/php7enmod php7enmod /opt/kaltura/bin/php7enmod 50
+    for dsoname in snmp ; do
+	inifile=${dsoname}.ini
+	priority=$(sed -ne "s/^; priority=\([0-9]\+\)$/\\1/p" /opt/kaltura/share/php7/snmp/${inifile})
+
+	# Register new conffile with UCF
+	cp /opt/kaltura/share/php7/snmp/${inifile} ${inidir}/${inifile}
+	ucf /opt/kaltura/share/php7/snmp/${inifile} ${inidir}/${inifile}
+	#ucfr --force kaltura-php7-snmp ${inidir}/${inifile}
+
+	# Move pre-extension manager conffile
+	dpkg-maintscript-helper mv_conffile /opt/kaltura/app/configurations/php/conf.d/${inifile} ${inidir}/${inifile} 7.0.0-1 -- "$@";
+
+	if [ -f "${inidir}/${inifile}.dpkg-new" ]; then
+	    md5sum="$(md5sum ${inidir}/${inifile}.dpkg-new | sed -e 's/ .*//')"
+	    old_md5sum="$(md5sum ${inidir}/${inifile} | sed -e 's/ .*//')"
+	    if [ "$md5sum" = "$old_md5sum" ]; then
+		mv "${inidir}/${inifile}.dpkg-new" "${inidir}/${inifile}"
+	    fi
+	fi
+
+	# Enable the module
+	/opt/kaltura/bin/php7enmod ${dsoname}/${priority:-20}
+    done
+fi
+
+exit 0

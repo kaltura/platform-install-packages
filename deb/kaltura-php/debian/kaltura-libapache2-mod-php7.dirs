@@ -1,0 +1,3 @@
+/etc/apache2/mods-available
+/opt/kaltura/app/configurations/php/apache2
+/usr/lib/apache2/modules
