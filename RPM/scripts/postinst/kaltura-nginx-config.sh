@@ -20,19 +20,24 @@ verify_user_input()
         ANSFILE=$1
         . $ANSFILE
         RC=0
-        for VAL in WWW_HOST VOD_PACKAGER_HOST VOD_PACKAGER_PORT ; do
-                if [ -z "${!VAL}" ];then
-                        VALS="$VALS\n$VAL"
-                        RC=1
-                fi
+        for VAL in WWW_HOST VOD_PACKAGER_HOST ; do
+            if [ -z "${!VAL}" ];then
+                    VALS="$VALS\n$VAL"
+                    RC=1
+            fi
         done
+        # Checking if at least one of the ports is defined
+        if [ -z VOD_PACKAGER_PORT -a VOD_PACKAGER_SSL_PORT ]; then
+        	RC=1
+        fi
+
         if [ $RC -eq 1 ];then
-                OUT="ERROR: Missing the following params in $ANSFILE
-                $VALS
-                "
-                echo -en "${BRIGHT_RED}$OUT${NORMAL}\n"
-                send_install_becon kaltura-nginx $ZONE "install_fail"  "$OUT"
-                exit $RC 
+            OUT="ERROR: Missing the following params in $ANSFILE
+            $VALS
+            "
+            echo -en "${BRIGHT_RED}$OUT${NORMAL}\n"
+            send_install_becon kaltura-nginx $ZONE "install_fail"  "$OUT"
+            exit $RC 
         fi
 }
 
@@ -50,11 +55,17 @@ if ! rpm -q kaltura-nginx;then
 fi
 
 if [ -n "$1" -a -r "$1" ];then
-        ANSFILE=$1
-        verify_user_input $ANSFILE
-        . $ANSFILE
-        export ANSFILE
+    ANSFILE=$1
+    verify_user_input $ANSFILE
+    . $ANSFILE
+    export ANSFILE
+
+    if [ "$VOD_PACKAGER_PORT" == "$VOD_PACKAGER_SSL_PORT" ]; then
+    	echo -e "${RED}The same port is used for nginx in both ssl and non-ssl mode. Please change one of them and run $0 again${NORMAL}"
+    	exit 4
+    fi
 else
+	echo -e "${CYAN}Note that nginx can be configured to work in both ssl and non-ssl mode${NORMAL} "
 	echo -e "${CYAN}Kaltura API host [${YELLOW}`hostname`${CYAN}]:${NORMAL} "
 	read -e WWW_HOST
 	if [ -z "$WWW_HOST" ];then
@@ -67,16 +78,64 @@ else
 		VOD_PACKAGER_HOST=`hostname`
 	fi
 
+ 	echo -e "${CYAN}Should nginx be configured in http mode? [${YELLOW}y/n${CYAN}]:${NORMAL} "
+ 	read -e IS_VOD_PACKAGER_HTTP
+ 	temp_var=`echo $IS_VOD_PACKAGER_HTTP | tr '[:upper:]' '[:lower:]'`
+ 	IS_VOD_PACKAGER_HTTP=$temp_var
+ 	if [ !"$IS_VOD_PACKAGER_HTTP" == 'y' -o !"$IS_VOD_PACKAGER_HTTP" == 'n' ]; then
+ 		echo -e "${BRIGHT_RED}The option can only be 'y' or 'n'. Please re-run${NORMAL}"
+ 		exit 5
+ 	fi
 	echo -en "${CYAN}Nginx port to listen on [${YELLOW}88${CYAN}]:${NORMAL} "
 	read -e VOD_PACKAGER_PORT
 	if [ -z "$VOD_PACKAGER_PORT" ];then
 		VOD_PACKAGER_PORT=88
 	fi
+
+ 	echo -e "${CYAN}Should nginx be configured in https mode? [${YELLOW}y/n${CYAN}]:${NORMAL} "
+ 	read -e IS_VOD_PACKAGER_SSL
+ 	temp_var=`echo $IS_VOD_PACKAGER_SSL | tr '[:upper:]' '[:lower:]'`
+ 	IS_VOD_PACKAGER_SSL=$temp_var
+ 	if [ !"$IS_VOD_PACKAGER_SSL" == 'y' -o !"$IS_VOD_PACKAGER_SSL" == 'n' ]; then
+ 		echo -e "${BRIGHT_RED}The option can only be 'y' or 'n'. Please re-run${NORMAL}"
+ 		exit 5
+ 	fi
+
+    if [ "$IS_VOD_PACKAGER_SSL" == 'y' ];then
+        echo -e "${CYAN}Please input path to your SSL certificate[${YELLOW}/etc/ssl/certs/localhost.crt${CYAN}]:${NORMAL}"
+        read -e CRT_FILE
+        echo "crt file: $CRT_FILE"
+        if [ -z "$CRT_FILE" ];then
+                CRT_FILE="/etc/ssl/certs/localhost.crt"
+        fi
+        echo -e "${CYAN}Please input path to your SSL CA file or leave empty in case you have none${CYAN}:${NORMAL}"
+        read -e KEY_FILE
+        echo -e "${CYAN}Please input the nginx https port${CYAN}:${NORMAL}"
+        read -e VOD_PACKAGER_SSL_PORT
+        if [ -z "$VOD_PACKAGER_SSL_PORT" ]; then
+        	VOD_PACKAGER_SSL_PORT=8008
+        	echo "No input was provided. Nginx https port will be $VOD_PACKAGER_SSL_PORT"
+        fi
+    fi
+
 fi
 if [ -f /etc/nginx/nginx.conf ];then
 	mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.old
 fi
-sed -e 's#@STATIC_FILES_PATH@#/etc/nginx/static#g' -e "s#@VOD_PACKAGER_HOST@#$VOD_PACKAGER_HOST#g" -e "s#@VOD_PACKAGER_PORT@#$VOD_PACKAGER_PORT#g" -e "s#@LOG_DIR@#/var/log/nginx#" -e "s#@WWW_HOST@#$WWW_HOST#g" /etc/nginx/conf.d/kaltura.conf.template > /etc/nginx/nginx.conf
+
+cp /etc/nginx/conf.d/kaltura.conf.template /tmp/nginx.conf.tmp
+# Removal according to the set vars
+if [ -z "$VOD_PACKAGER_PORT" ]; then
+	sed -i -e '/listen @VOD_PACKAGER_PORT@;/d' /tmp/nginx.conf.tmp
+fi	
+
+if [ -z "$VOD_PACKAGER_SSL_PORT" ]; then
+  	sed -i -e '/listen @VOD_PACKAGER_SSL_PORT@ ssl;/d' -e '/ssl_certificate_key @SSL_CERTIFICATE_CHAIN_FILE@;/d' -e '/ssl_certificate  @SSL_CERTIFICATE_FILE@;/d' /tmp/nginx.conf.tmp
+fi
+
+# The actual replacement
+sed -i -e 's#@STATIC_FILES_PATH@#/etc/nginx/static#g' -e "s#@VOD_PACKAGER_HOST@#$VOD_PACKAGER_HOST#g" -e "s#@VOD_PACKAGER_SSL_PORT@#$VOD_PACKAGER_SSL_PORT#g" -e "s#@VOD_PACKAGER_PORT@#$VOD_PACKAGER_PORT#g" -e "s#@LOG_DIR@#/var/log/nginx#" -e "s#@WWW_HOST@#$WWW_HOST#g"  -e "s#@SSL_CERTIFICATE_FILE@#$CRT_FILE#g" -e "s#@SSL_CERTIFICATE_CHAIN_FILE@#$KEY_FILE#g" /tmp/nginx.conf.tmp
+mv /tmp/nginx.conf.tmp /etc/nginx/nginx.conf
 
 chkconfig kaltura-nginx on
 if service kaltura-nginx status >/dev/null 2>&1;then
@@ -84,4 +143,5 @@ if service kaltura-nginx status >/dev/null 2>&1;then
 else
 	service kaltura-nginx start
 fi
+
 
