@@ -142,6 +142,10 @@ if [ $? -ne 0 ];then
        echo -e "${BRIGHT_RED}ERROR: $BASE_DIR/bin/kaltura-dwh-config.sh failed:( You can re-run it when the issue is fixed.${NORMAL}"
  #      send_install_becon kaltura-dwh $ZONE "install_fail: $OUT"
 fi
+
+# Running on prem-patches
+$BASE_DIR/bin/kaltura-on_prem_temp_patches.sh
+
 #send_install_becon kaltura-dwh $ZONE install_success
 find $APP_DIR/cache/ -type f -exec rm {} \;
 rm -f $APP_DIR/log/kaltura-*.log
