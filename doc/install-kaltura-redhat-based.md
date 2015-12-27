@@ -74,6 +74,14 @@ The ```[Kaltura-noarch]``` repo should remain as is.
 
 *Note for RHEL7: depending on what repos you have enabled, you may also need to add the EPEL or CentOS repos to resolve all dependencies.*
 
+#### Enabling the EPEL repo
+To add the EPEL repo:
+```
+# rpm -ihv https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+```
+For CentOS/RHEL6, this should not be necessary, for RHEL/CentOS 7, you will need EPEL for the mediainfo package.
+
+
 #### MySQL Install and Configuration
 For MySQL versions higher 5.5 and above, note that you must disable strict mode for the deployment to succeed.
 Please see the following document:
