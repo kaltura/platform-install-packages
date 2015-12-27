@@ -19,10 +19,18 @@ Sometimes, you may want to change deployment settings post installation, for exa
 You can run `/opt/kaltura/bin/kaltura-front-config.sh` as many times as you'd like with different values. The script will re-configure the system accordingly.   
 For instance, you may want to change the service URL, port or protocol.
 
+#### For RPM packages:
 Edit the answers file you've used to install Kaltura, then run:   
 `# /opt/kaltura/bin/kaltura-front-config.sh /path/to/updated/ans/file`
 
 If you've lost your installation answers file, you can recreate one using the [Kaltura Install Answers File Example](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura.template.ans).
+
+#### For deb packages:
+```
+# dpkg-reconfigure kaltura-base
+# dpkg-reconfigure kaltura-front
+# dpkg-reconfigure kaltura-batch
+```
 
 ### Deploy Local Repository for Offline Install
 
