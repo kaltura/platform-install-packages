@@ -77,6 +77,7 @@ Requires: %{name} = %{version}-%{release}
 Summary: SNMP storage engine for %{name}
 Group:   Web/Applications
 Requires: %{name} = %{version}-%{release}
+BuildRequires: net-snmp-devel
 
 %description snmp
 %{name} backend implementation which sends events as SNMP traps.
