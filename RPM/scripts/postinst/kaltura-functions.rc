@@ -251,9 +251,9 @@ send_install_becon()
 	#set -x
 
 	if  echo $SERVICE_URL | grep -q 'https://' ;then
-		IS_SSL=true
+		IS_SSL='y'
 	else
-		IS_SSL=false
+		IS_SSL='n'
 	fi
 	if [ -n "$GET_UPDATES_NEWSLETTER" ];then
 		SUBSCRIBE4UPDATES=1
