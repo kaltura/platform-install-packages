@@ -298,6 +298,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Dec 21 2015 jess.portnoy@kaltura.com <Jess Portnoy> - 11.5.0-1
+- Ver Bounce to 11.5.0
+
 * Mon Dec 21 2015 jess.portnoy@kaltura.com <Jess Portnoy> - 11.4.0-12
 - Added support for custom parameters on akamai hds urls. 
   Needed in order to add hdcore=x.x.x when playing without the player Akamai HD plugin.
