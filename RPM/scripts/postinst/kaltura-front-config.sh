@@ -109,8 +109,10 @@ cat << EOF
 Is your Apache working with SSL?[Y/n]
 EOF
 	read IS_SSL
+	temp_var=`echo $IS_SSL | tr '[:upper:]' '[:lower:]'`
+	IS_SSL=$temp_var
 	if [ -z "$IS_SSL" ];then
-        	IS_SSL='Y'
+        	IS_SSL='y'
         fi  
 fi
 if [ "$IS_SSL" != 'Y' -a "$IS_SSL" != 1 -a "$IS_SSL" != 'y' -a "$IS_SSL" != 'true' ];then

@@ -126,18 +126,30 @@ ${NORMAL} "
         if [ -z "$KALTURA_VIRTUAL_HOST_PORT" ];then
                 KALTURA_VIRTUAL_HOST_PORT=80
         fi
+
+    if [ "$KALTURA_VIRTUAL_HOST_PORT" -ne 80 -a "$IS_SSL" != 'y' ];then
+        echo -en "${CYAN}Vhost port will be set on [${YELLOW}$KALTURA_VIRTUAL_HOST_PORT${CYAN}]. Are you using https? (y/n)${NORMAL}"
+        read -e IS_SSL
+        while [ "$IS_SSL" != 'y' -a "$IS_SSL" != 'n' ];do
+            echo -en "${CYAN}Please provide either 'y' or 'N'.\nAre you using https? (y/n) ${NORMAL}"
+            read -e IS_SSL
+        done
+    fi
+
+
 	if [ "$KALTURA_VIRTUAL_HOST_PORT" -eq 80 -o "$KALTURA_VIRTUAL_HOST_PORT" -eq 443 ];then
 		KALTURA_FULL_VIRTUAL_HOST_NAME=$KALTURA_VIRTUAL_HOST_NAME
 	else
         	KALTURA_FULL_VIRTUAL_HOST_NAME="$KALTURA_VIRTUAL_HOST_NAME:$KALTURA_VIRTUAL_HOST_PORT"
 	fi
-        if [ -z "$DB1_HOST" ];then
-                echo -en "${CYAN}DB hostname [${YELLOW}$LOCALHOST${CYAN}]:${NORMAL} "
-                read -e DB1_HOST
-                if [ -z "$DB1_HOST" ];then
-                        DB1_HOST=$LOCALHOST
-                fi
-        fi
+
+    if [ -z "$DB1_HOST" ];then
+            echo -en "${CYAN}DB hostname [${YELLOW}$LOCALHOST${CYAN}]:${NORMAL} "
+            read -e DB1_HOST
+            if [ -z "$DB1_HOST" ];then
+                    DB1_HOST=$LOCALHOST
+            fi
+    fi
 
 
         echo -en "${CYAN}range of ip addresses belonging to internal kaltura servers [${YELLOW}0.0.0.0-255.255.255.255${CYAN}]:${NORMAL} 
@@ -200,7 +212,7 @@ The default is only good for testing, on a production ENV you should adjust acco
         fi
 
         while [ -z "$SERVICE_URL" ];do
-                if [ "$KALTURA_VIRTUAL_HOST_PORT" -eq 443 ];then
+                if [ "$IS_SSL" == 'y' ];then
                         PROTOCOL="https"
                 else
                         PROTOCOL="http"
@@ -374,6 +386,7 @@ SPHINX_HOST=$SPHINX_SERVER1
 SPHINX_SERVER1=$SPHINX_SERVER1
 DB1_PORT=$DB1_PORT
 SUPER_USER=$SUPER_USER
+PROTOCOL=$PROTOCOL
 SUPER_USER_PASSWD=\"$SUPER_USER_PASSWD\"
 KALTURA_VIRTUAL_HOST_NAME=$KALTURA_VIRTUAL_HOST_NAME
 RED5_HOST=$RED5_HOST">> $BASE_DIR/app/configurations/system.ini
