@@ -51,7 +51,7 @@ Requires(pre): pwdutils
 Summary: High performance web server customized for Kaltura VOD
 Name: kaltura-nginx
 Version: 1.8.0
-Release: 9
+Release: 10
 Vendor: Kaltura inc.
 URL: http://nginx.org/
 
