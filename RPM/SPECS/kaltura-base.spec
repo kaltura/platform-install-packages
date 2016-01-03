@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 11.5.0
-Release: 8
+Release: 9
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -298,6 +298,22 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Sun Jan 3 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 11.5.0-9
+- PLAT-4780 - Support generating packeger url format for external remote storage as well 
+- PLAT-4776 - eCDN: SaaS KES Failover support
+- PLAT-4433 - Facebook authentication for Distribution Connector
+- PLAT-4434 - Facebook Distribution Configuration
+- PLAT-4435 - Distribute content metadata to Facebook
+- PLAT-4436 - Video distribution to Facebook
+- PLAT-4438 - Distribution of thumbnails to Facebook
+- PLAT-4862 - Optionally preserve original source when custom intermediate-source is used
+- PLAT-2502 - Ad Stitching: log all ad calls & ad beacons; create sample live event ad event audit
+- SUP-5785 - playManifest request, allows access from 'unallowed' domain
+- SUP-6009 - Getting the sent notifications data - users, mails etc.
+- SUP-6187 - Unable to get the category ids from API
+- PLAT-4097 - quiz.update fails when using format=9 (jsonp)
+- PLAT-4782 - EmailReport:cue-point.VAST/Creatives gets wrong value
+
 * Mon Dec 21 2015 jess.portnoy@kaltura.com <Jess Portnoy> - 11.5.0-1
 - Ver Bounce to 11.5.0
 
