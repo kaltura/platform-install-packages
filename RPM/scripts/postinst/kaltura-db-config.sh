@@ -203,7 +203,6 @@ php $APP_DIR/deployment/uiconf/deploy_v2.php --ini=$WEB_DIR/flash/kmc/$KMC_VERSI
 find  $WEB_DIR/content/generatedUiConf -type d -exec chmod 775 {} \;
 
 set +e
-rm -rf $BASE_DIR/cache/*
 find $APP_DIR/cache/ -type f -exec rm {} \;
 rm -f $APP_DIR/log/kaltura-*.log
 
