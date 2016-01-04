@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.30
-Release: 9 
+Release: 10
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -82,6 +82,9 @@ find %{_sysconfdir}/logrotate.d -type l -name "kaltura_*" -exec rm {} \;
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Mon Jan 4 2016 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.30-10
+- Fix logdir path.
+
 * Thu Dec 31 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.30-9
 - Fix SSL config
 
