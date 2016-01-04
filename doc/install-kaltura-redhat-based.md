@@ -189,20 +189,45 @@ Please select one of the following options [0]: "<0>"
 
 Your install will now automatically perform all install tasks.
 
-#### Configure Red5 server
-1. install the kaltura-red5 package:
-```
-# yum install kaltura-red5
-```
-1. Request http://hostname:5080
-1. Click 'Install a ready-made application'
-1. Mark 'OFLA Demo' and click 'Install'
-1. Edit /usr/lib/red5/webapps/oflaDemo/index.html and replace 'localhost' with your actual Red5 hostname or IP
-1. Test OflaDemo by making a request to http://hostname:5080/oflaDemo/ and playing the sample videos
-1. Run:
+#### Configure kaltura-nginx
 
-```bash
-/opt/kaltura/bin/kaltura-red5-config.sh
+Kaltura-nginx can run in both ssl and non-ssl mode at the same time (on different ports of course)
+
+In case an answer file is used, run:
+```
+run /opt/kaltura/bin/kaltura-nginx-config.sh <answer file>.
+```
+The installation is set according to 2 set answer file parameters: 
+
+VOD_PACKAGER_PORT
+VOD_PACKAGER_SSL_PORT
+
+In case one of these ports is set in the answer file, the setting for that feature will be configured. 
+In case VOD_PACKAGER_SSL_PORT is used, CRT_FILE, KEY_FILE & CHAIN_FILE need to be defined as well. 
+
+Manual installtion:
+```
+Note that nginx can be configured to work in both ssl and non-ssl mode
+Kaltura API host [clone1]:
+
+Nginx server name [clone1]:
+
+Should nginx be configured in http mode? [y/n]:
+y
+Nginx port to listen on [88]:
+Should nginx be configured in https mode? [y/n]:
+y
+Please input path to your SSL certificate[/etc/ssl/certs/localhost.crt]:
+<certificate crt file>
+crt file:
+Please input path to your SSL CA file or leave empty in case you have none:
+<key file>
+Please input the nginx https port[default port is 8008]::
+```
+Upon a successful install, kaltura-nginx will be restarted successfully:
+```
+Stopping nginx:                                            [  OK  ]
+Starting nginx:                                            [  OK  ]
 ```
 
 
