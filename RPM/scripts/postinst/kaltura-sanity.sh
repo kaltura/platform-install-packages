@@ -37,7 +37,7 @@ fi
 DIRNAME=`dirname $0`
 CAPTIONS_FILE=$DIRNAME/example.srt
 rm  /tmp/`hostname`-reportme.`date +%d_%m_%Y`.sql 2> /dev/null
-rm $LOG_DIR/log/*log  $LOG_DIR/log/batch/*log 2> /dev/null
+rm $LOG_DIR/*log  $LOG_DIR/batch/*log 2> /dev/null
 for PARTITION in '/' $WEB_DIR;do
 	START=`date +%s.%N`
 	OUT=`check_space $PARTITION`
