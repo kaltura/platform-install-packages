@@ -20,7 +20,7 @@ verify_user_input()
         ANSFILE=$1
         . $ANSFILE
         RC=0
-        for VAL in WWW_HOST VOD_PACKAGER_HOST VOD_PACKAGER_PORT ; do
+        for VAL in WWW_HOST VOD_PACKAGER_HOST VOD_PACKAGER_PORT IS_NGINX_SSL ; do
                 if [ -z "${!VAL}" ];then
                         VALS="$VALS\n$VAL"
                         RC=1
@@ -72,12 +72,35 @@ else
 	if [ -z "$VOD_PACKAGER_PORT" ];then
 		VOD_PACKAGER_PORT=88
 	fi
+	echo -en "Would you like to configure Nginx with SSL?[Y/n]"
+	read IS_NGINX_SSL
+	if [ -z "$IS_NGINX_SSL" ];then
+        	IS_NGINX_SSL='Y'
+        fi  
+	if [ "$IS_NGINX_SSL" = 'Y' -o "$IS_NGINX_SSL" = 'y' ];then
+		echo -en "${CYAN}Nginx SSL port to listen on [${YELLOW}8443${CYAN}]:${NORMAL} "
+		read -e VOD_PACKAGER_SSL_PORT
+		if [ -z "$VOD_PACKAGER_SSL_PORT" ];then
+			VOD_PACKAGER_SSL_PORT=8443
+		fi
+		echo -en "${CYAN}Nginx SSL cert: ${NORMAL} "
+		read -e SSL_CERT 
+		echo -en "${CYAN}Nginx SSL key: ${NORMAL} "
+		read -e SSL_KEY
+	fi
 fi
 if [ -f /etc/nginx/nginx.conf ];then
 	mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.old
 fi
-sed -e 's#@STATIC_FILES_PATH@#/etc/nginx/static#g' -e "s#@VOD_PACKAGER_HOST@#$VOD_PACKAGER_HOST#g" -e "s#@VOD_PACKAGER_PORT@#$VOD_PACKAGER_PORT#g" -e "s#@LOG_DIR@#/var/log/nginx#" -e "s#@WWW_HOST@#$WWW_HOST#g" /etc/nginx/conf.d/kaltura.conf.template > /etc/nginx/nginx.conf
+mkdir -p $LOG_DIR/nginx 
+sed -e 's#@STATIC_FILES_PATH@#/etc/nginx/static#g' -e "s#@VOD_PACKAGER_HOST@#$VOD_PACKAGER_HOST#g" -e "s#@VOD_PACKAGER_PORT@#$VOD_PACKAGER_PORT#g" -e "s#@LOG_DIR@#$LOG_DIR/nginx#" -e "s#@WWW_HOST@#$WWW_HOST#g" /etc/nginx/conf.d/nginx.conf.template > /etc/nginx/nginx.conf
+sed -e 's#@STATIC_FILES_PATH@#/etc/nginx/static#g' /etc/nginx/conf.d/kaltura.conf.template > /etc/nginx/conf.d/kaltura.conf
 
+if [ "$IS_NGINX_SSL" = 'Y' -o "$IS_NGINX_SSL" = 'y' ];then
+	sed -e "s#@VOD_PACKAGER_HOST@#$VOD_PACKAGER_HOST#g" -e "s#@VOD_PACKAGER_SSL_PORT@#$VOD_PACKAGER_SSL_PORT#g" -e "s#@SSL_CERT@#$SSL_CERT#g" -e "s#@SSL_KEY@#$SSL_KEY#g" /etc/nginx/conf.d/ssl.conf.template > /etc/nginx/conf.d/ssl.conf
+else
+	touch /etc/nginx/conf.d/ssl.conf
+fi
 chkconfig kaltura-nginx on
 if service kaltura-nginx status >/dev/null 2>&1;then
 	service kaltura-nginx reload

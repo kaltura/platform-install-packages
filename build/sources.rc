@@ -146,7 +146,7 @@ KALTURA_CORE_URI="https://github.com/kaltura/server/archive/$KALTURA_SERVER_VERS
 KALTURA_TEMPLATES_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalsource/on-premise/trunk/packaging/templates"
 
 # Kaltura nginx-vod-module:
-KALTURA_NGINX_VOD_VERSION=1.4
+KALTURA_NGINX_VOD_VERSION=1.5.1
 KALTURA_NGINX_VOD_URI="https://github.com/kaltura/nginx-vod-module/archive/$KALTURA_NGINX_VOD_VERSION.zip"
 
 KALTURA_NGINX_AKAMAI_TOKEN_VALIDATE_VERSION=1.0.1
@@ -270,7 +270,7 @@ HTML5LIB_BASE_URI="https://github.com/kaltura/mwEmbed/tarball/"
 HTML5LIB_RPM_NAME="kaltura-html5lib"
 
 # Kaltura DWH
-DWH_VERSION="IX-9.5.0"
+DWH_VERSION="Kajam-11.3.0"
 DWH_URI="https://github.com/kaltura/dwh/archive/$DWH_VERSION.zip"
 DWH_RPM_NAME="kaltura-dwh"
 

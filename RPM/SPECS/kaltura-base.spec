@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 11.6.0
-Release: 3
+Release: 6
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -34,7 +34,7 @@ Source32: KDLOperatorFfmpeg1_1_1.php
 URL: https://github.com/kaltura/server/tree/%{codename}-%{version}
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
-Requires: rsync,mysql,kaltura-monit,kaltura-postinst,cronie, php-cli, php-xml, php-curl, php-mysql, php-gd, php-gmp, php-ldap, php-mbstring, ntp, mailx
+Requires: rsync,mysql,kaltura-monit,kaltura-postinst,cronie, php-cli, php-xml, php-curl, php-mysql, php-gd, php-gmp, php-ldap, php-mbstring, php-process, ntp, mailx
 
 %description
 Kaltura is the world's first Open Source Online Video Platform, transforming the way people work, 
@@ -298,6 +298,10 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Fri Jan 8 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 11.6.0-5
+- Ridiculously enough, the php RPM is compiled with posix as shared and you need to install php-process[!] to get it.
+  We want it so we can do posix_getuid() and get the proc's UID. Too much to ask?
+
 * Mon Jan 4 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 11.6.0-1
 - Ver Bounce to 11.6.0
 

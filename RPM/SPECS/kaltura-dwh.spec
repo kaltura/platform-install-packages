@@ -2,11 +2,11 @@
 %define kaltura_user kaltura
 Summary: Kaltura Open Source Video Platform - Analytics 
 Name: kaltura-dwh
-Version: 9.5.0
-Release: 2
+Version: 11.3.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
-Source0: https://github.com/kaltura/dwh/archive/%{name}-IX-%{version}.zip
+Source0: https://github.com/kaltura/dwh/archive/%{name}-Kajam-%{version}.zip
 URL: https://github.com/kaltura/dwh/tree/master 
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires: kaltura-base,kaltura-pentaho,jre, kaltura-postinst 
@@ -32,15 +32,14 @@ and developing a variety of online workflows for video.
 This package configures the Data Warehouse [DWH] analytics component. 
 
 %prep
-%setup -qn dwh-IX-%{version} 
+%setup -qn dwh-Kajam-%{version} 
 
 %build
 
 %install
 # for Apache access logs.
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/logs
-cp -r %{_builddir}/dwh-IX-%{version} $RPM_BUILD_ROOT%{prefix}/dwh
-#cp -r %{_builddir}/dwh-IX-%{version}/.kettle $RPM_BUILD_ROOT%{prefix}/dwh/
+cp -r %{_builddir}/dwh-Kajam-%{version} $RPM_BUILD_ROOT%{prefix}/dwh
 find  $RPM_BUILD_ROOT%{prefix}/dwh/ -name "*.sh" -type f -exec chmod +x {} \;
 
 %clean
@@ -74,6 +73,12 @@ fi
 
 
 %changelog
+* Thu Jan 7 2016 Jess Portnoy <jess.portnoy@kaltura.com> - 11.3.0-1
+- Add Hercules to Iris/Jupiter migration
+- Add Nginx log parsing
+- Add Totals Aggregration
+- Add Live Analytics
+
 * Thu Oct 15 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 9.5.0-2
 - Live entry aggregation ddl changes 
 
