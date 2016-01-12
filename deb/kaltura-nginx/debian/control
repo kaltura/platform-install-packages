@@ -7,7 +7,6 @@ Build-Depends:
  autotools-dev,
  dpkg-dev (>= 1.15.7),
  libexpat-dev,
- libgd2-noxpm-dev,
  libgeoip-dev,
  liblua5.1-dev,
  libmhash-dev,
