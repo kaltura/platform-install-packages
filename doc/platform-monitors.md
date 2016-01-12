@@ -6,6 +6,11 @@
 * Please review the [frequently answered questions](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura-packages-faq.md) document for general help before posting to the forums or issue queue.
 * [Kaltura Inc.](http://corp.kaltura.com) also provides commercial solutions and services including pro-active platform monitoring, applications, SLA, 24/7 support and professional services. If you're looking for a commercially supported video platform  with integrations to commercial encoders, streaming servers, eCDN, DRM and more - Start a [Free Trial of the Kaltura.com Hosted Platform](http://corp.kaltura.com/free-trial) or learn more about [Kaltura' Commercial OnPrem Edition™](http://corp.kaltura.com/Deployment-Options/Kaltura-On-Prem-Edition). For existing RPM based users, Kaltura offers commercial upgrade options.
 
+### Using JaM - a PHP monitoring system that supports storing PHP errors (events) into different storage backends
+JaM packages are available in the Kaltura CE repository, for instructions see:
+https://github.com/kaltura/jam#basic-setup
+
+### Kaltura specific monitors
 The Kaltura server includes extensive monitoring scripts, making use of our PHP5 API.   
 Apart from the scripts themselves, template configuration files for the Nagios monitoring system [http://www.nagios.com] are also supplied.   
 The monitors operate on partner -4, created as part of the installation and dedicated to this purpose.   
