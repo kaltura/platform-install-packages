@@ -189,6 +189,9 @@ EOF
 	exit 8
 fi
 
+find $BASE_DIR/app/cache/ $BASE_DIR/log -type d -exec chmod 775 {} \;
+find $BASE_DIR/app/cache/ $BASE_DIR/log -type f -exec chmod 664 {} \;
+
 if [ "$IS_SSL" = 'Y' -o "$IS_SSL" = 1 -o "$IS_SSL" = 'y' -o "$IS_SSL" = 'true' ];then
 # force KMC login via HTTPs.
 	php $APP_DIR/deployment/base/scripts/insertPermissions.php -d $APP_DIR/deployment/permissions/ssl/ > /dev/null 2>&1
