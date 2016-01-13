@@ -120,7 +120,7 @@ binary-arch: build install
 	#dh_installchangelogs $(BASE_PREFIX)/CHANGES
 	mv debian/$(tree)/$(BASE_PREFIX)/* $(BASE_PREFIX)
 	cp debian/logrotate $(BASE_PREFIX)/conf/
-	cp debian/kaltura.conf.template $(BASE_PREFIX)/conf/
+	cp debian/*.template $(BASE_PREFIX)/conf/
 	dh_install $(BASE_PREFIX) 
 	dh_install opt/kaltura/log/nginx
 	dh_installdebconf	
