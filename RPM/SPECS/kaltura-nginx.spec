@@ -51,7 +51,7 @@ Requires(pre): pwdutils
 Summary: High performance web server customized for Kaltura VOD
 Name: kaltura-nginx
 Version: 1.8.0
-Release: 10
+Release: 11
 Vendor: Kaltura inc.
 URL: http://nginx.org/
 
@@ -208,12 +208,14 @@ make %{?_smp_mflags}
 
 %{__mkdir} -p $RPM_BUILD_ROOT%{_sysconfdir}/nginx/conf.d
 %{__rm} $RPM_BUILD_ROOT%{_sysconfdir}/nginx/nginx.conf
-%{__install} -m 644 -p %{SOURCE4} \
-   $RPM_BUILD_ROOT%{_sysconfdir}/nginx/nginx.conf
+#%{__install} -m 644 -p %{SOURCE4} \
+#   $RPM_BUILD_ROOT%{_sysconfdir}/nginx/nginx.conf
 %{__install} -m 644 -p %{_builddir}/nginx-%{version}/nginx-vod-module-%{nginx_vod_module_ver}/conf/kaltura.conf.template \
    $RPM_BUILD_ROOT%{_sysconfdir}/nginx/conf.d/kaltura.conf.template
-%{__install} -m 644 -p %{SOURCE6} \
-   $RPM_BUILD_ROOT%{_sysconfdir}/nginx/conf.d/example_ssl.conf
+%{__install} -m 644 -p %{_builddir}/nginx-%{version}/nginx-vod-module-%{nginx_vod_module_ver}/conf/nginx.conf.template \
+   $RPM_BUILD_ROOT%{_sysconfdir}/nginx/conf.d/nginx.conf.template
+%{__install} -m 644 -p %{_builddir}/nginx-%{version}/nginx-vod-module-%{nginx_vod_module_ver}/conf/ssl.conf.template \
+   $RPM_BUILD_ROOT%{_sysconfdir}/nginx/conf.d/ssl.conf.template
 
 %{__mkdir} -p $RPM_BUILD_ROOT%{_sysconfdir}/sysconfig
 %{__install} -m 644 -p %{SOURCE3} \
@@ -257,9 +259,10 @@ make %{?_smp_mflags}
 %dir %{_sysconfdir}/nginx
 %dir %{_sysconfdir}/nginx/conf.d
 
-%config(noreplace) %{_sysconfdir}/nginx/nginx.conf
+#%config(noreplace,missingok) %{_sysconfdir}/nginx/nginx.conf
 %config %{_sysconfdir}/nginx/conf.d/kaltura.conf.template
-%config(noreplace) %{_sysconfdir}/nginx/conf.d/example_ssl.conf
+%config(noreplace) %{_sysconfdir}/nginx/conf.d/ssl.conf.template
+%config(noreplace) %{_sysconfdir}/nginx/conf.d/nginx.conf.template
 %config(noreplace) %{_sysconfdir}/nginx/mime.types
 %config(noreplace) %{_sysconfdir}/nginx/fastcgi_params
 %config(noreplace) %{_sysconfdir}/nginx/scgi_params
