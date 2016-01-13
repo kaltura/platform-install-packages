@@ -1,0 +1,68 @@
+kaltura-nginx (1.8.0-8) kajam; urgency=low
+
+  * optional SSL config during postint 
+  * decryption
+  * vod to live
+  * use standard nginx upstreams
+  * OpenSSL detection during configure
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Tue, 12 Jan 2016 21:11:39 +0000
+
+kaltura-nginx (1.8.0-7) kajam; urgency=low
+
+  * With nginx-vod-module 1.4 
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Sun, 22 Nov 2015 13:07:35 +0000
+
+kaltura-nginx (1.8.0-6) jupiter; urgency=low
+
+  * Compiled against ffmpeg 2.7.2 
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Thu, 08 Oct 2015 14:01:20 +0000
+
+kaltura-nginx (1.8.0-5) jupiter; urgency=low
+
+  * With nginx-vod-module 1.3.1 
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Tue, 29 Sep 2015 12:27:45 +0000
+
+kaltura-nginx (1.8.0-4) jupiter; urgency=low
+
+  * With nginx-vod 1.3  
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Tue, 29 Sep 2015 10:49:09 +0000
+
+kaltura-nginx (1.8.0-3) jupiter; urgency=low
+
+  * With nginx-vod 1.2  
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Wed, 23 Sep 2015 16:33:29 +0000
+
+kaltura-nginx (1.8.0-2) jupiter; urgency=low
+
+  * Cannot require system.ini since kaltura-nginx can be installed indep of kaltura-server.
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Sun, 14 Jun 2015 07:25:40 +0000
+
+kaltura-nginx (1.8.0-1) jupiter; urgency=low
+
+  * upgrade to 1.8.0 and enalbe threads.
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Thu, 30 Apr 2015 15:14:50 +0000
+
+kaltura-nginx (1.6.3-1) jupiter; urgency=low
+  
+  - Feature: now the "tcp_nodelay" directive works with SPDY connections.
+  - Bugfix: in error handling. Thanks to Yichun Zhang and Daniil Bondarev.
+  - Bugfix: alerts "header already sent" appeared in logs if the "post_action" directive was used; the bug had appeared in 1.5.4.
+  - Bugfix: alerts "sem_post() failed" might appear in logs.
+  - Bugfix: in hash table handling. Thanks to Chris West.
+  - Bugfix: in integer overflow handling. Thanks to Régis Leroy.
+
+ -- Jess Portnoy <jess.portnoy@kaltura.com>  Thu, 16 Apr 2014 16:41:33 +0200
+
+kaltura-nginx (1.6.2-1) jupiter; urgency=low
+  
+  First build.
+
+ -- Jess Portnoy <jess.portnoy@kaltura.com>  Thu, 16 Apr 2014 16:41:33 +0200
