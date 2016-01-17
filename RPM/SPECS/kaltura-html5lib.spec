@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.38.1
+Version: v2.39
 Release: 1
 Epoch:0 
 License: AGPLv3+
@@ -35,7 +35,9 @@ Source24: kaltura-html5lib-v2.34.tar.gz
 Source25: kaltura-html5lib-v2.35.5.tar.gz
 Source26: kaltura-html5lib-v2.36.tar.gz
 Source27: kaltura-html5lib-v2.37.1.tar.gz
+Source31: kaltura-html5lib-v2.37.3.tar.gz
 Source29: kaltura-html5lib-v2.38.tar.gz
+Source30: kaltura-html5lib-v2.38.1.tar.gz
 Source28: simplePhpXMLProxy.php
 
 URL: https://github.com/kaltura/mwEmbed 
@@ -87,10 +89,12 @@ tar zxf %{SOURCE25} -C %{_builddir}/
 tar zxf %{SOURCE26} -C %{_builddir}/
 tar zxf %{SOURCE27} -C %{_builddir}/
 tar zxf %{SOURCE29} -C %{_builddir}/
+tar zxf %{SOURCE30} -C %{_builddir}/
+tar zxf %{SOURCE31} -C %{_builddir}/
 
 %install
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib
-for i in v2.1.1 v2.3 v2.4 v2.6 v2.9 v2.14 v2.15 v2.18.5 v2.20 v2.21 v2.22 v2.23 v2.24 v2.25 v2.26 v2.27 v2.28 v2.29 v2.30 v2.31 v2.32.1 v2.33 v2.34 v2.35.5 v2.36 v2.37.1 v2.37.3 %{version};do
+for i in v2.1.1 v2.3 v2.4 v2.6 v2.9 v2.14 v2.15 v2.18.5 v2.20 v2.21 v2.22 v2.23 v2.24 v2.25 v2.26 v2.27 v2.28 v2.29 v2.30 v2.31 v2.32.1 v2.33 v2.34 v2.35.5 v2.36 v2.37.1 v2.37.3 v2.38 v2.38.1 %{version};do
 	rm -rf %{_builddir}/%{name}-$i/modules/Widevine
 	cp -r %{_builddir}/%{name}-$i $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i
 	cp %{SOURCE28} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i/
@@ -112,6 +116,85 @@ find /opt/kaltura/web/html5/html5lib -type d -name cache -exec chown -R 48 {} \;
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Sun Jan 17 2016 Jess Portnoy <jess.portnoy@kaltura.com> - v2.39-1
+- FEC-4308 - Player mobile skin
+- FEC-4512 - Mobile Skin - Long Title is cut on portrait mode
+- FEC-4511 - Mobile skin - Related videos shows settings icon on video while one entry has AC free preview
+- FEC-4488 - Mobile Skin - Player is disoriented on iPhone while using native menu of iphone
+- FEC-4524 - Webcast NO DVR- player freeze for 10 sec when
+- FEC-3608 - Related Videos - Videos are cut after closing and reing Related plugin
+- FEC-4525 - webcast (NO DVR) slide sync - slides arrived 15-20 second earlier
+- FEC-4454 - webcast with no DVR - slides don't change on IE browser
+- FEC-4453 - webcast - future slides appear in the slide menu
+- TR-552 - CaaS widgets with playlist - On iOS thumbnail is out of alignment
+- FEC-4550 - Mobile skin: moderation text outstanding from the box area
+- FEC-4547 - Customized info: no close button appears for Info screen
+- FEC-4510 - Mobile Skin - custom style brakes player on mobile
+- SUP-6115 - Apple Voice over not working with thumbnail emebd
+- SUP-6782 - inquiry as to mobile thumbnail embed - number of clicks to start a video
+- FEC-4555 - Mobile Skin - Related video: replay button disabled after an entry finished
+- FEC-4552 - Mobile Skin - Related videos - Play Button and spinner is shown at same time
+- FEC-4549 - Mobile Skin - Overly is shown on control bar
+- FEC-4544 - Mobile Skin - OTT skin in fullscreen mode shows control bar cut
+- FEC-4538 - Mobile Skin - Playhead is not shown on the beginning of a progress bar
+- FEC-4540 - Mobile Skin - HLS server side rate selector has wrong default value
+- FEC-4535 - Mobile skin - control bar is cut after using native mobiles select box ( captions/Moderation)
+- FEC-4543 - Mobile Skin - disables large play button while player has an auto loop
+- FEC-4539 - Mobile Skin - When player has custom style smart containers are shown even if you don't have plugins in a player
+- FEC-4542 - Info plugin: The info data doesn't re-sized in full screen mode
+- FEC-3608 - Related Videos - Videos are cut after closing and reing Related plugin
+- PLAT-4866 - webcast -last 10 sec of video is missing from the live event .
+- FEC-4455 - ID3 tag sync - changing slides less than three seconds cause that the second slide don't appear
+- FEC-4573 - DRM playback: after refreshing test page ,the replay doesn't works properly on FF
+- FEC-4575 - Mobile Skin: Clicking on play button disables share (share was ed before)
+- FEC-4465 - High cpu usage when there are many slides (>30)
+- FEC-4456 - HLS OSMF - the spinner appears during DVR playing if to stop and re-run Kaltura stream
+- FEC-4459 - HLS OSMF - take around 10-12 seconds to switch from DVR to Kaltura Live
+- FEC-4462 - HLS OSMF - Seek in Kaltura DVR take more time than in previous player version
+- FEC-4458 - HLS OSMF - Kaltura Live with DVR loaded with 40-50 seconds of delay
+- FEC-4567 - Regression: Kaltura Live without DVR stuck at beginning for 10-15 second
+- WEBC-632 - Use the creation time for answer-on-air instead of relative time
+- FEC-4460 - HLS OSMF - the Kaltura live's time isn't synchronized with the timer - 1 minute difference
+- FEC-4457 - HLS OSMF - After Kaltura Live stopped, the DVR started from 1 minute
+- FEC-4452 - HLS OSMF - the DVR timer of the Kaltura live stopped to update after several seconds
+- FEC-4451 - HLS OSMF - the timer for Kaltura live isn't updated
+- FEC-4582 - Playlist with moderation: if select other entry during moderation screen ed ,the video blurred
+- FEC-4536 - Mobile Skin - Multi streams box is located in center of a player
+- FEC-4596 - Regression: empty playlist in full screen mode displayed on the half of the screen
+- WEBC-644 - webcast embed - cancel button isn't in the right place (and fonts are wrong)
+- FEC-4471 - HLS OSMF - external stream (WhetherNation) stuck during manual throttling
+- FEC-4581 - It takes too long to start playing live (HLS)
+- FEC-4594 - HLS OSMF - Kaltura Live without DVR and VOD periodically stuck for 2-3 seconds during throttling
+- FEC-4612 - mac/iPad - after preforming stop/start in the encoder the video doesn't return until refresh the page
+- FEC-4611 - embed webcast - the message on the player when on off air mode is cut due to QnA
+- KMS-9595 - In Video Quizzes: Seek to the end of video via end button is not working in HDS (playhead continue to play and cue-points are not pop-upped)
+- SUP-6931 - Support for inlineScripting RESOLVED
+- KMS-9632 - In Video Quizzes: General: Skip for now is hidden in case of showing question when plugin option list is ed
+- FEC-4615 - session Android and iOS
+- SUP-6773 - Kaltura player v2.36.2 - live stream with pre-roll ads mixed audio
+- KMS-9871 - In Video Quizzes: Player puts different questions on the same cue-point after seek from pause (causes to add few questions in one cuepoint)(youtube entry)
+- FEC-4645 - Hidden Playlist - Next/Previous buttons not display during video playing on iPad
+- FEC-4638 - Vertical responsive playlist distorted after the browser resized
+- FEC-4636 - Lecture capture: Duration time works for first chapter only
+- FEC-4630 - Share&Embed and LC - Share screen is unexpectedly when player stared to play on Android
+- FEC-4352 - CaptureSpace - scrubber does not move and spinner stuck on the player (MAC only)
+- FEC-4669 - double play on native component READY FOR MERGE
+- FEC-4612 - mac/iPad - after preforming stop/start in the encoder the video doesn't return until refresh the page
+- SUP-6647 - alert-container text overflows
+- FEC-4664 - webcast iPad/ mac - slides doesn't appear in the menu slides
+- FEC-4580 - Enhanced Advertising > Content playback flow for web READY FOR DEV
+- SUP-6765 - Player does not end playback properly
+- SUP-6906 - Cursor remains hidden after exiting fullscreen
+- FEC-4660 - webcast on mac / ipad - after stop start the slides doesn't change
+- SUP-6442 - Playlist player overflow in IPHONE 6+
+- SUP-6927 - Audio thumbnail display issues.
+- SUP-6143 - Player v2.35 - Icons Display
+- FEC-4657 - Player seeks when changing audio stream
+- FEC-4666 - autoplay doesn't work after switching media
+- FEC-4432 - [Android] Add support for offline playback in mobile
+- FEC-4682 - Regression - dfp overly is shown on wrong place on Android 6.0
+- OSMF-HLS plugin Buffers Refactor
+
 * Mon Dec 21 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v2.38.1-1
 - TR-552 - CaaS widgets with playlist - On iOS thumbnail is out of alignment
 - FEC-4565 - Send Notification in native bridge crashes

@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 11.6.0
-Release: 10
+Release: 13
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -301,6 +301,18 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Sun Jan 17 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 11.6.0-13
+- PLAT-2443 - eCDN: cache Webcast's thumbAssets with KES
+- PLAT-4828 - eCDN: AccessControlProfile rules are limited (50)
+- PLAT-4433 - Facebook authentication for Distribution Connector
+- PLAT-4434 - Facebook Distribution Configuration
+- PLAT-4435 - Distribute content metadata to Facebook
+- PLAT-4436 - Video distribution to Facebook
+- PLAT-4438 - Distribution of thumbnails to Facebook
+- PLAT-4613 - Sometimes, ADV is not played, due to delay between live flavors(also occurs on WN entry).
+- PLAT-4940 - ADV is not played after restart FMLE/Wowza over time.
+- PLAT-4960 - Multiple stream watchers are started for the same rendition
+
 * Fri Jan 8 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 11.6.0-5
 - Ridiculously enough, the php RPM is compiled with posix as shared and you need to install php-process[!] to get it.
   We want it so we can do posix_getuid() and get the proc's UID. Too much to ask?
