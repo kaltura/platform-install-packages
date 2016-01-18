@@ -1,3 +1,18 @@
+kaltura-base (11.6.0-2) kajam; urgency=low
+
+  * PLAT-2443 - eCDN: cache Webcast's thumbAssets with KES
+  * PLAT-4828 - eCDN: AccessControlProfile rules are limited (50)
+  * PLAT-4433 - Facebook authentication for Distribution Connector
+  * PLAT-4434 - Facebook Distribution Configuration
+  * PLAT-4435 - Distribute content metadata to Facebook
+  * PLAT-4436 - Video distribution to Facebook
+  * PLAT-4438 - Distribution of thumbnails to Facebook
+  * PLAT-4613 - Sometimes, ADV is not played, due to delay between live flavors(also occurs on WN entry).
+  * PLAT-4940 - ADV is not played after restart FMLE/Wowza over time.
+  * PLAT-4960 - Multiple stream watchers are started for the same rendition
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Sun, 17 Jan 2016 16:11:47 +0000
+
 kaltura-base (11.6.0-1) kajam; urgency=low
 
   * Switching to 11.6.0
