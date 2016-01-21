@@ -199,7 +199,7 @@ The default is only good for testing, on a production ENV you should adjust acco
                 SPHINX_SERVER2="$LOCALHOST"
         fi
 
-        while [ -z "$SERVICE_URL" ];do
+	while [ -z "$SERVICE_URL" -o -z "$PROTOCOL" ];do
                 if [ "$KALTURA_VIRTUAL_HOST_PORT" -eq 443 ];then
                         PROTOCOL="https"
                 else
