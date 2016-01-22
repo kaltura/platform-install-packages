@@ -27,7 +27,7 @@ Description: DB port:
 Template: kaltura-base/mysql_super_user
 Type: string
 Default: root 
-Description: MySQL super use [only needed for install]:
+Description: MySQL super use [needed for install || upgrade]:
 
 Template: kaltura-base/mysql_super_passwd
 Type: password
