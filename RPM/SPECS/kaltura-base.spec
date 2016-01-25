@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 11.7.0
-Release: 6
+Release: 7
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -31,7 +31,7 @@ Source25: kaltura_populate.template
 Source26: kaltura_batch.template
 Source28: embedIframeJsAction.class.php
 Source32: KDLOperatorFfmpeg1_1_1.php
-Source33: kuserPeer.php
+#Source33: kuserPeer.php
 URL: https://github.com/kaltura/server/tree/%{codename}-%{version}
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
@@ -144,7 +144,7 @@ cp %{SOURCE28} $RPM_BUILD_ROOT%{prefix}/app/alpha/apps/kaltura/modules/extwidget
 # we bring a1nother in kaltura-batch
 rm $RPM_BUILD_ROOT%{prefix}/app/configurations/batch/batch.ini.template
 cp %{SOURCE32} $RPM_BUILD_ROOT%{prefix}/app/infra/cdl/kdl/KDLOperatorFfmpeg1_1_1.php
-cp %{SOURCE33} $RPM_BUILD_ROOT%{prefix}/app/alpha/lib/model/kuserPeer.php
+#cp %{SOURCE33} $RPM_BUILD_ROOT%{prefix}/app/alpha/lib/model/kuserPeer.php
 
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content
 tar zxf %{SOURCE10} -C $RPM_BUILD_ROOT%{prefix}/web/content
