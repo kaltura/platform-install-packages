@@ -27,12 +27,12 @@ Description: DB port:
 Template: kaltura-base/mysql_super_user
 Type: string
 Default: root 
-Description: MySQL super use [only needed for install]:
+Description: MySQL super use [needed for install || upgrade]:
 
 Template: kaltura-base/mysql_super_passwd
 Type: password
 Default:  
-Description: MySQL super user passwd [only for install]:
+Description: MySQL super user passwd [needed for install || upgrade]:
 
 Template: kaltura-base/dwh_db_hostname
 Type: string
