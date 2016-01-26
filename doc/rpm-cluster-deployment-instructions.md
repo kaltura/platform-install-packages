@@ -374,12 +374,6 @@ yum clean all
 yum update "*kaltura*"
 ```
 
-On the first batch or front node only:
-```
-## This operates on the DB and hence only needs to be done one. It requires the kaltura-base package and so must be run on a node that has it installed.
-# /opt/kaltura/bin/kaltura-db-update.sh
-```
-
 
 On front machines:
 ```

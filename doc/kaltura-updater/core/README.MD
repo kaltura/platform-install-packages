@@ -156,8 +156,6 @@ Inspect the run-update log for your upgrade, and inspect errors if they occurred
 ###4.7 Run current Kaltura updates
 After all legacy upgrades have been completed run the RMP upgrades. 
 
-> /opt/kaltura/bin/kaltura-db-update.sh
-And 
 > /opt/kaltura/bin/kaltura-config-all.sh
 
 ---
