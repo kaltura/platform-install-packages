@@ -171,6 +171,8 @@ fi
 
 echo "Cleaning cache.."
 find $APP_DIR/cache/ -type f -exec rm {} \;
+rm -f $LOG_DIR/installPlugins.log $LOG_DIR/insertDefaults.log $LOG_DIR/insertPermissions.log $LOG_DIR/insertContent.log
+
 echo -e "${CYAN}Populating DB with data.. please wait..${NORMAL}"
 echo -e "${CYAN}Output for $APP_DIR/deployment/base/scripts/installPlugins.php being logged into $LOG_DIR/installPlugins.log ${NORMAL}"
 php $APP_DIR/deployment/base/scripts/installPlugins.php >> $LOG_DIR/installPlugins.log  2>&1
@@ -203,9 +205,6 @@ php $APP_DIR/deployment/uiconf/deploy_v2.php --ini=$WEB_DIR/flash/kmc/$KMC_VERSI
 find  $WEB_DIR/content/generatedUiConf -type d -exec chmod 775 {} \;
 
 set +e
-find $APP_DIR/cache/ -type f -exec rm {} \;
-rm -f $APP_DIR/log/kaltura-*.log
-
 
 
 if [ "$DB1_HOST" = `hostname` -o "$DB1_HOST" = '127.0.0.1' -o "$DB1_HOST" = 'localhost' ];then

@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.30
-Release: 12
+Release: 13
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -82,6 +82,9 @@ find %{_sysconfdir}/logrotate.d -type l -name "kaltura_*" -exec rm {} \;
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Wed Jan 27 2016 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.30-13
+- Fix cache and log deletion.
+
 * Thu Jan 21 2016 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.30-12
 - Properly set PROTOCOL
 
