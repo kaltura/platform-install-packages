@@ -223,6 +223,12 @@ KRECORD_VERSION="v1.7"
 KRECORD_URI="https://github.com/kaltura/krecord/releases/download/$KRECORD_VERSION/$KRECORD_VERSION.zip"
 KRECORD_RPM_NAME="kaltura-krecord"
 
+# Kaltura legacy kRecord
+LEGACY_KRECORD_RPM_NAME="kaltura-legacy-krecord"
+SVN_LEGACY_VERSIONS="v1.6.5"
+GIT_LEGACY_VERSIONS="v1.7"
+
+
 # Kaltura KCW
 # we bundle a few vers at each release:
 KCW_VERSION="v2.2.4"
