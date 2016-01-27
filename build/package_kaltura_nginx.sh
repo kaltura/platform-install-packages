@@ -37,5 +37,5 @@ wget $NGINX_URI -O$RPM_SOURCES_DIR/kaltura-nginx-$NGINX_VERSION.tar.gz
 echo "Packaged into $RPM_SOURCES_DIR/kaltura-nginx-$NGINX_VERSION.tar.gz"
 
 if [ -x "`which rpmbuild 2>/dev/null`" ];then
-	rpmbuild -ba --define "nginx_vod_module_ver $KALTURA_NGINX_VOD_VERSION" $RPM_SPECS_DIR/kaltura-nginx.spec
+	rpmbuild -ba --define "_nginx_vod_module_ver $KALTURA_NGINX_VOD_VERSION" $RPM_SPECS_DIR/kaltura-nginx.spec
 fi
