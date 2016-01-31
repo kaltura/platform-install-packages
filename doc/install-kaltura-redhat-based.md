@@ -17,7 +17,7 @@ This guide describes RPM installation of an all-in-one Kaltura server and applie
 
 [Remove Kaltura](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-redhat-based.md#remove-kaltura)
 
-[Client generation](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-redhat-based.md#client-generation)
+[Client generation](https://github.com/kaltura/platform-install-packages/blob/Kajam-11.7.0-PS-1718/doc/install-kaltura-redhat-based.md#client-generation)
 
 [Troubleshooting](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-redhat-based.md#troubleshooting)
 
