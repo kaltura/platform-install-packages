@@ -429,6 +429,11 @@ yum remove "*kaltura*"
 rm -rf /opt/kaltura
 ```
 
+## Client generation
+You can create all the Kaltura API client by running the following command on your api server:
+```/opt/kaltura/app/generator/generate.php all```
+
+
 ## Troubleshooting
 Once the configuration phase is done, you may wish to run the sanity tests, for that, run:
 ```base
