@@ -1,6 +1,6 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmc
-Version: v5.40
+Version: v5.40.1
 Release: 1
 Summary: Kaltura Management Console
 
@@ -78,6 +78,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sun Jan 31 2016 Jess Portnoy <jess.portnoy@kaltura.com> - v5.40.1-1
+- New release.
+
 * Sun Jan 17 2016 Jess Portnoy <jess.portnoy@kaltura.com> - v5.40-1
 - SUP-5740 - Co-editor/Co-publisher in the KMC
 - PLAT-3962 - Core QA for VPaaS Usage Dashboard

@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 11.7.0
-Release: 7
+Release: 9
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -303,6 +303,17 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Sun Jan 31 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 11.7.0-9
+- PLAT-3593 - DVR refactoring
+- PLAT-3270 - Facebook distribution connector
+- SUP-7095 - Lakana - Sudden appearance of 'Save Original Source' flavors
+- SUP-6618 - Duplicate users created in the backend
+- PLAT-4878 - eCDN|KES|Failover|Need ability to handle situation when parent KES is down
+- PLAT-4937 - eCDN|There is no verification of EdgeServerType (KES or KSS) on registering
+- PLAT-4943 - facebook distribution - update title failed
+- PLAT-4189 - In Video Quizzes: copy cue points of chapter-based quiz
+- PLAT-4870 - Playlists (Rule Based) - Support Relative Dates
+
 * Mon Jan 18 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 11.7.0-1
 - Ver Bounce to 11.7.0
 
