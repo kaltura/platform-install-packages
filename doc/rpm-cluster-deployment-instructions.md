@@ -422,5 +422,6 @@ Then, if needed, to restore the Kaltura server, follow these steps:
 
 ### Client generation
 
-You can create all the Kaltura API client by running the following command on your api server:
-`/opt/kaltura/app/generator/generate.php all`
+* You can create all the Kaltura API client by running the following command on your api server:
+
+#`/opt/kaltura/app/generator/generate.php all`
