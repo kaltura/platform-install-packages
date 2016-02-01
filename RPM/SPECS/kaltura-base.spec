@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 11.7.0
-Release: 9
+Release: 10
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -23,6 +23,7 @@ Source11: clear_cache.sh
 Source13: sphinx.template.rc 
 Source14: httpd.template.rc 
 Source15: batch.template.rc 
+Source16: memcached.template.rc 
 Source17: navigation.xml 
 Source18: monit.phtml 
 Source19: IndexController.php
@@ -125,7 +126,8 @@ cp %{SOURCE13} $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/
 cp %{SOURCE20} $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/
 cp %{SOURCE14} $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/
 cp %{SOURCE15} $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/
-cp $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.d/*.template.rc $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/
+cp %{SOURCE16} $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/
+#cp $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.d/*.template.rc $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/
 #cp $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.d/memcached.template.rc $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/memcached.rc
 #cp $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.d/mysqld.template.rc $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/mysqld.rc
 #cp $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.d/mariadb.template.rc $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/mariadb.rc

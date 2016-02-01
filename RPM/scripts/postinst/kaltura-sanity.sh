@@ -64,6 +64,7 @@ for D in $ALL_DAEMONS; do
 			TOTAL_T=`bc <<< $TIME`
 			report "Check $D daemon status" 1 "Daemon $D is NOT running" "`bc <<< $END-$START`"
 		fi
+		monit monitor all
 		START=`date +%s.%N`
 		if [ $D != $MONIT_DAEMON ];then
 		if check_monit  $D;then
