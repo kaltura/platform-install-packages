@@ -1,3 +1,17 @@
+kaltura-base (11.7.0-2) kajam; urgency=low
+
+  * PLAT-3593 - DVR refactoring
+  * PLAT-3270 - Facebook distribution connector
+  * SUP-7095 - Lakana - Sudden appearance of 'Save Original Source' flavors
+  * SUP-6618 - Duplicate users created in the backend
+  * PLAT-4878 - eCDN|KES|Failover|Need ability to handle situation when parent KES is down
+  * PLAT-4937 - eCDN|There is no verification of EdgeServerType (KES or KSS) on registering
+  * PLAT-4943 - facebook distribution - update title failed
+  * PLAT-4189 - In Video Quizzes: copy cue points of chapter-based quiz
+  * PLAT-4870 - Playlists (Rule Based) - Support Relative Dates
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Sun, 31 Jan 2016 10:34:12 +0000
+
 kaltura-base (11.7.0-1) kajam; urgency=low
 
   * Switching to 11.7.0
