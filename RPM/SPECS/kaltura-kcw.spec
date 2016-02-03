@@ -1,7 +1,7 @@
 %define prefix /opt/kaltura
 %define widget_name kcw
 Name:	kaltura-%{widget_name}
-Version: 2.2.4 
+Version: 2.2.6
 Release: 1 
 Summary: Kalture Contribution Wizard 
 License: AGPLv3+	
@@ -49,6 +49,9 @@ rm -rf %{buildroot}
 %{prefix}/web/content/uiconf/kaltura/generic/kcw_%{kcw_uiconf_ver}
 
 %changelog
+* Wed Feb 3 2016 Jess Portnoy <jess.portnoy@kaltura.com> - 2.2.6
+- SUP-1834 allow configuring record stream buffertime via uiconf
+
 * Mon Apr 20 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 2.2.4
 - We don't need more than one KCW version. Bundle only latest.
 

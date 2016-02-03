@@ -219,15 +219,15 @@ CLIPAPP_RPM_NAME="kaltura-clipapp"
 
 # Kaltura kRecord
 # we bundle a few vers at each release:
-KRECORD_VERSION="v1.7"
+KRECORD_VERSION="v1.7.1"
 KRECORD_URI="https://github.com/kaltura/krecord/releases/download/$KRECORD_VERSION/$KRECORD_VERSION.zip"
 KRECORD_RPM_NAME="kaltura-krecord"
 
 # Kaltura KCW
 # we bundle a few vers at each release:
-KCW_VERSION="v2.2.4"
+KCW_VERSION="v2.2.6"
 KCW_UICONF_VERSIONS="v2.1.4 v2.1.5"
-KCW_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/flash/kcw"
+KCW_URI="https://github.com/kaltura/kcw/releases/download/$KCW_VERSION/$KCW_VERSION.zip"
 KCW_UICONF_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalsource/uiconf/kaltura/kmc/kcw"
 KCW_UICONF_GENERIC_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalsource/uiconf/kaltura/generic/kcw_2.1.5"
 KCW_UICONF_EDITOR_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalsource/uiconf/kcweditor/locales/en_US"

@@ -59,6 +59,11 @@ mkdir $RPM_BUILD_ROOT%{prefix}/web/flash/kmc/%{version}
 cp -r %{_builddir}/%{name}-%{version}/%{version}/* $RPM_BUILD_ROOT/%{prefix}/web/flash/kmc/%{version}/
 mv %{_builddir}/%{name}-%{version}/uiconf $RPM_BUILD_ROOT%{prefix}/web/flash/kmc/%{version}/
 cp %{SOURCE1} $RPM_BUILD_ROOT/%{prefix}/web/flash/kmc/%{version}/config.ini
+cd $RPM_BUILD_ROOT/%{prefix}/web/flash/kmc/%{version} 
+for i in "*.xml" "*.template" "*.ttf" "*.xsl" "*.xsd" "*.yml" "*.smil" "*.srt" "*.sql" "*.orig" "*.patch" "*.po" "*.pdf" "*.otf" "*.txt" "*.php" "*.phtml" "*.
+project" "*.png" "*.properties" "*.sample" "*.swf" "*.sf" "*.swz" "*.uad" "*.prefs" "*.psd" "*.rvmrc" "*.sln" "*.ini" "*.log" ;do
+	find . -iname "$i" -exec chmod 644 {} \;
+done
 
 %preun
 #if [ "$1" = 0 ] ; then
@@ -78,6 +83,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Tue Feb 2 2016 Jess Portnoy <jess.portnoy@kaltura.com> - v5.40.1-2
+- Drop exec bit where unneeded.
+
 * Sun Jan 31 2016 Jess Portnoy <jess.portnoy@kaltura.com> - v5.40.1-1
 - New release.
 

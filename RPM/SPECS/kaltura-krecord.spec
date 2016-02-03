@@ -1,9 +1,9 @@
 %define prefix /opt/kaltura
 %define widget_name krecord
 Name:	kaltura-%{widget_name}
-Version: v1.7 
+Version: v1.7.1 
 Epoch: 1
-Release: 2
+Release: 1
 Summary: Kaltura kRecord - used for recording from web cam
 License: AGPLv3+	
 URL: http://kaltura.org
@@ -48,6 +48,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Wed Feb 3 2016 Jess Portnoy <jess.portnoy@kaltura.com> - v1.7.1-1
+- https://github.com/kaltura/krecord/releases/tag/v1.7.1
+
 * Mon Feb 3 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v1.7.0-2
 - Since these widgets typically reside on NFS and served from another machine there is not need for the Apache dep.
 
