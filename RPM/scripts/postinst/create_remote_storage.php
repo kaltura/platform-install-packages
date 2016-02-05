@@ -54,10 +54,10 @@ try{
 	$config = new KalturaConfiguration($partnerId);
 	$config->serviceUrl = $service_url;  
 	$client = new KalturaClient($config);
-	$config->partnerId=$partnerId;
-	$client->setPartnerId($partnerId);
 	$ks = $client->session->start($secret, null, KalturaSessionType::ADMIN, -2, null,null);
 	$client->setKs($ks);
+	$config->partnerId=$partnerId;
+	$client->setPartnerId($partnerId);
 	$delivery = new KalturaDeliveryProfile();
 	$delivery->name = $profile_name;
 	$delivery->status = KalturaDeliveryStatus::ACTIVE;
