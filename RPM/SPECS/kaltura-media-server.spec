@@ -13,7 +13,7 @@ Source0: https://github.com/kaltura/media-server/releases/download/rel-%{version
 
 URL: https://github.com/kaltura/media-server 
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires:  jre >= 1.7.0, kaltura-postinst, ant >= 1.8.2 , php >= 5.3.0
+Requires:  jre >= 1.7.0, kaltura-postinst, ant >= 1.8.2 , php >= 5.3.0 kaltura-base 
 BuildArch: noarch
 
 %description
@@ -42,8 +42,6 @@ This package configures the Media Server component.
 %install
 mkdir -p $RPM_BUILD_ROOT/%{prefix}/media-server
 unzip -d $RPM_BUILD_ROOT/%{prefix}/media-server %{SOURCE0}
-mkdir -p $RPM_BUILD_ROOT/%{prefix}/bin
-%{__install} %{postinst_dir}/%{name}-config.sh  $RPM_BUILD_ROOT/%{prefix}/bin/
 
 
 %clean
@@ -58,6 +56,12 @@ Installation of %{name} %{version} completed
 Please run 
 # /opt/kaltura/bin/%{name}-config.sh [/path/to/answer/file]
 To finalize the setup.
+
+make sure
+
+# /opt/kaltura/bin/%{name}-api-config.sh [/path/to/answer/file]
+
+is run on the api server
 #####################################################################################################################################
 "
 
@@ -66,10 +70,11 @@ To finalize the setup.
 %files
 %dir %{prefix}/media-server
 %{prefix}/media-server/*
-%dir %{prefix}/bin/
-%{prefix}/bin/*
 
 %changelog
+* Sun Feb 07 2016 Kobi Michaeli <kobi.michaeli@kaltura.com> 
+- Removed all postinst deployment
+
 * Sun Apr 12 2015 Igor Shevach <igor.shevach@kaltura.com> - v3.2.0
 - Added support for eCDN (kaltura.ini is replaced with ecdn.ini)
 

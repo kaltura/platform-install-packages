@@ -25,11 +25,6 @@ if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
 fi
 . $KALTURA_FUNCTIONS_RC
 
-if ! rpm -q kaltura-media-server;then
-    echo -e "${BRIGHT_RED}ERROR: First install kaltura-media-server.${NORMAL}"
-    exit 0
-fi
-
 if [ -r $CONSENT_FILE ];then
     . $CONSENT_FILE
 elif [ -z "$USER_CONSENT" ];then
@@ -54,7 +49,7 @@ MANDATORY_VARS_LIST="MEDIA_SERVER_DOMAIN_NAME PRIMARY_MEDIA_SERVER_HOST KALTURA_
 
 function read_user_var_input() {
     TEMP_VAR=""  # Note that this is the var which will be used as a returned val
-    echo -e "${CYAN}PLease enter $1. Enter 'QUIT' in order to quit.${NORMAL}"
+    echo -e "${CYAN}Please enter $1. Enter 'QUIT' in order to quit.${NORMAL}"
     read -e TEMP_VAR
     while [ -z "$TEMP_VAR" ];do
         echo -en "${CYAN}$1 var cannot be empty${NORMAL}\n"
