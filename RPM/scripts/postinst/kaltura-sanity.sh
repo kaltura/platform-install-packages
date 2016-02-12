@@ -204,7 +204,6 @@ if $QUERY_COMMAND kaltura-batch >/dev/null 2>&1 || $QUERY_COMMAND kaltura-front 
 			if [ "$RC" -eq 0 ];then
 				START=`date +%s.%N`
 				OUT=`php  $DIRNAME/delete_flavor_params.php $ZERO_PARTNER_ADMIN_SECRET $SERVICE_URL $FLAVOR_PARAM_ID 2>&1`
-				#echo  "$DIRNAME/delete_flavor_params.php $ZERO_PARTNER_ADMIN_SECRET $SERVICE_URL $FLAVOR_PARAM_ID 2>&1"
 				RC=$?
 				END=`date +%s.%N`
 				TOTAL_T=`bc <<< $TIME`

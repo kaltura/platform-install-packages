@@ -3,7 +3,6 @@ check process mysql
     start program = "/sbin/service mysqld start" with timeout 60 seconds
     stop program = "/sbin/service mysqld stop"
 
-    if failed host localhost port 3306 protocol mysql then restart
     
     depends on mysqldbin, my.cnf
 

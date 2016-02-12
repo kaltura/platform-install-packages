@@ -2,7 +2,6 @@ check process apache
    with pidfile "/var/run/httpd/httpd.pid"
    start program = "/sbin/service httpd start" with timeout 60 seconds
    stop program = "/sbin/service httpd stop"
-if failed host localhost port @KALTURA_VIRTUAL_HOST_PORT@ protocol @PROTOCOL@ then restart
     group kaltura
     depends on httpd.conf, httpd
    

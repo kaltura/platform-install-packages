@@ -3,7 +3,6 @@ check process memcache
     start program = "/sbin/service memcached start" with timeout 60 seconds
     stop program = "/sbin/service memcached stop"
 
-    if failed host localhost port 11211 protocol MEMCACHE then restart
 
     depends on memcachedbin, memcachedconf
 

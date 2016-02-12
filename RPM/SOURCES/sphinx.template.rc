@@ -3,7 +3,6 @@ check process sphinx
     start program = "/etc/init.d/kaltura-sphinx start" with timeout 60 seconds
     stop program = "/etc/init.d/kaltura-sphinx stop"
     
-    if failed host localhost port 9312 protocol mysql then restart
         
     group kaltura
     depends on sphinx.conf, searchdbin
