@@ -150,10 +150,6 @@ else
 		echo -e "${CYAN}Please input path to your SSL CA file or leave empty in case you have none${CYAN}:${NORMAL}"
 		read -e CHAIN_FILE
 	fi
-	#if [ -z "$CA_FILE" ];then
-	#	echo -e "${CYAN}Please input path to your SSL CA file or leave empty in case you have none${CYAN}:${NORMAL}"
-	#	read -e CA_FILE
-	#fi
 	# check key and crt match
 	CRT_SUM=`openssl x509 -in $CRT_FILE -modulus -noout | openssl md5`
 	KEY_SUM=`openssl rsa -in $KEY_FILE -modulus -noout | openssl md5`
@@ -189,18 +185,8 @@ WARNING: self signed cerificate detected. Will set settings.clientConfig.verifyS
 		echo -e "settings.clientConfig.verifySSL=0" >> $APP_DIR/configurations/admin.ini
 		sed -i  's@\(\[production\]\)@\1\nsettings.clientConfig.verifySSL=0@' $APP_DIR/configurations/admin.ini
 	fi
-	#if [ -f /etc/httpd/conf.d/ssl.conf ];then
-	#	echo "Moving /etc/httpd/conf.d/ssl.conf to /etc/httpd/conf.d/ssl.conf.ks.bak."
-	#	mv /etc/httpd/conf.d/ssl.conf /etc/httpd/conf.d/ssl.conf.ks.bak
-	#fi
 	sed "s#@SSL_CERTIFICATE_FILE@#$CRT_FILE#g" -i $MAIN_APACHE_CONF
 	sed -i "s#@SSL_CERTIFICATE_KEY_FILE@#$KEY_FILE#g" $MAIN_APACHE_CONF
-	#if [ -r "$CHAIN_FILE" ];then
-	#	sed -i "s^SSLCertificateChainFile @SSL_CERTIFICATE_CHAIN_FILE@^SSLCertificateChainFile $CHAIN_FILE^" $MAIN_APACHE_CONF
-	#else
-	#	CHAIN_FILE="NO_CHAIN"
-	#	sed -i "s^SSLCertificateChainFile @SSL_CERTIFICATE_CHAIN_FILE@^#SSLCertificateChainFile @SSL_CERTIFICATE_CHAIN_FILE@^" $MAIN_APACHE_CONF
-	#fi
 	if [ -r "$CHAIN_FILE" ];then
 		sed -i "s^SSLCACertificateFile @SSL_CERTIFICATE_CHAIN_FILE@^SSLCACertificateFile $CHAIN_FILE^" $MAIN_APACHE_CONF
 	else
@@ -232,7 +218,6 @@ if [ -z "$KALTURA_VIRTUAL_HOST_PORT" ];then
 	read -e KALTURA_VIRTUAL_HOST_PORT
 	if [ -z "$KALTURA_VIRTUAL_HOST_PORT" ];then
 		KALTURA_VIRTUAL_HOST_PORT=$DEFAULT_PORT
-		#echo $KALTURA_VIRTUAL_HOST_PORT
 	fi
 	if [ "$KALTURA_VIRTUAL_HOST_PORT" -eq 443 ];then
 		PROTOCOL="https"
@@ -312,20 +297,16 @@ ln -sf $BASE_DIR/app/configurations/monit/monit.avail/memcached.rc $BASE_DIR/app
 	trap - ERR
 	echo "use kaltura" | mysql -h$DB1_HOST -u$DB1_USER -p$DB1_PASS -P$DB1_PORT $DB1_NAME 2> /dev/null
 	if [ $? -eq 0 ];then
-		if [ -r $BASE_DIR/apps/studio/`rpm -qa kaltura-html5-studio --queryformat %{version}`/studio.ini ];then
-			php $BASE_DIR/app/deployment/uiconf/deploy_v2.php --ini=$BASE_DIR/apps/studio/`rpm -qa kaltura-html5-studio --queryformat %{version}`/studio.ini >> /dev/null
-			sed -i "s@^\(studio_version\s*=\)\(.*\)@\1 `rpm -qa kaltura-html5-studio --queryformat %{version}`@g" -i $BASE_DIR/app/configurations/local.ini
+		HTML5_STUDIO_VERSION=`rpm -q kaltura-html5-studio --queryformat %{version}`
+		if [ -r $BASE_DIR/apps/studio/$HTML5_STUDIO_VERSION/studio.ini ];then
+			php $BASE_DIR/app/deployment/uiconf/deploy_v2.php --ini=$BASE_DIR/apps/studio/$HTML5_STUDIO_VERSION/studio.ini >> /dev/null
+			sed -i "s@^\(studio_version\s*=\)\(.*\)@\1 $HTML5_STUDIO_VERSION@g" -i $BASE_DIR/app/configurations/local.ini
 		fi
 	# we can't use rpm -q kaltura-kmc because this node may not be the one where we installed the KMC RPM on, as it resides in the web dir and does not need to be installed on all front nodes.
 		KMC_PATH=`ls -ld $BASE_DIR/web/flash/kmc/v* 2>/dev/null|awk -F " " '{print $NF}' |tail -1`
-#sed -i "s#\(@KMC_VERSION@\)\s*=.*#\1=%{_kmc_version}#g" $RPM_BUILD_ROOT%{prefix}/bin/sanity_config.template.ini
-#sed -i "s#\(@KMC_LOGIN_VERSION@\)\s*=.*#\1=%{kmc_login_version}#g" $RPM_BUILD_ROOT%{prefix}/bin/sanity_config.template.ini
-		#ln -sf $KMC_PATH/uiconf/kaltura/kmc  $BASE_DIR/web/content/uiconf/kaltura
 		php $BASE_DIR/app/deployment/uiconf/deploy_v2.php --ini=$KMC_PATH/config.ini >> /dev/null
-		HTML5_PATH=`ls -ld $BASE_DIR/web/html5/html5lib/v* 2>/dev/null|awk -F " " '{print $NF}' |tail -1`
-		sed -i "s@^\(html5_version\s*=\)\(.*\)@\1 `rpm -qa kaltura-html5lib --queryformat %{version}`@g" -i $BASE_DIR/app/configurations/local.ini
-		# https://github.com/kaltura/mwEmbed/issues/574
-		# find $BASE_DIR/web/html5/html5lib/ -type f -exec sed -i "s@http://cdnapi.kaltura.com@$SERVICE_URL@g" {} \;
+		HTML5LIB_VERSION=`yum info kaltura-html5lib|grep Version|awk -F ":" '{print $NF}'`
+		sed -i "s@^\(html5_version\s*=\)\(.*\)@\1 $HTML5LIB_VERSION@g" -i $BASE_DIR/app/configurations/local.ini
 	fi
 	trap 'my_trap_handler "${LINENO}" ${$?}' ERR
 send_install_becon `basename $0` $ZONE install_success 0 

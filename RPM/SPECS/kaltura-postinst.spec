@@ -1,8 +1,8 @@
 %define prefix /opt/kaltura 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
-Version: 1.0.30
-Release: 15
+Version: 1.0.31
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -82,6 +82,9 @@ find %{_sysconfdir}/logrotate.d -type l -name "kaltura_*" -exec rm {} \;
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Fri Feb 12 2016 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.31-1
+- Fix kaltura-drop-db.sh output.
+
 * Fri Feb 5 2016 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.30-15
 - https://github.com/kaltura/platform-install-packages/commit/72020d49ce30dffa4683a4d7853f983b3f8b852f
 
