@@ -51,6 +51,9 @@ echo kaltura-front   kaltura-front/web_interfaces    multiselect | debconf-set-s
 echo kaltura-nginx   kaltura-nginx/kaltura_service_url       string  @SERVICE_URL@ | debconf-set-selections
 echo kaltura-nginx   kaltura-nginx/nginx_hostname    string  @VOD_PACKAGER_HOST@ | debconf-set-selections
 echo kaltura-nginx   kaltura-nginx/nginx_port        string  @VOD_PACKAGER_PORT@ | debconf-set-selections
+echo kaltura-nginx   kaltura-nginx/ssl_cert	     string  @SSL_CERT@  | debconf-set-selections
+echo kaltura-nginx   kaltura-nginx/ssl_key	     string  @SSL_KEY@  | debconf-set-selections
+echo kaltura-nginx   kaltura-nginx/is_ssl	     boolean false | debconf-set-selections
 
 echo mysql-server-5.5        mysql-server/root_password_again        password @MYSQL_ROOT_PASSWD@ | debconf-set-selections
 echo mysql-server-5.5        mysql-server/root_password      password @MYSQL_ROOT_PASSWD@ | debconf-set-selections
