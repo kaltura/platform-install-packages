@@ -27,11 +27,13 @@ if [ ! -r "$RC_FILE" ];then
 	exit 1 
 fi
 . $RC_FILE
-echo -en "This will drop the following DBs: 
+echo -en "${CYAN}This will drop the following DBs: 
 $DBS 
 and remove users:
 $DB_USERS
-on $DB1_HOST"
+on $DB1_HOST
+${NORMAL}
+"
 if [ -n "$1" ];then
 	DBPASSWD=$1
 else
@@ -54,7 +56,7 @@ ${NORMAL}
 fi
 for i in $DB_USERS;do echo "drop user $i" | mysql -u$SUPER_USER -h$DB1_HOST -p$DBPASSWD -P$DB1_PORT;done
 for i in $DBS;do
-	echo "Removing $i" 
+	echo -en "${CYAN}Removing $i..${NORMAL}" 
 	echo "drop database $i" | mysql -u$SUPER_USER -h$DB1_HOST -p$DBPASSWD -P$DB1_PORT ;
 done
 
