@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.31
-Release: 1
+Release: 2
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -82,6 +82,11 @@ find %{_sysconfdir}/logrotate.d -type l -name "kaltura_*" -exec rm {} \;
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Fri Feb 12 2016 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.31-2
+- https://github.com/kaltura/platform-install-packages/issues/516 
+- Removed useless old commented code blocks 
+- Call rpm -q kaltura-html5-studio --queryformat %{version} once and use a var
+
 * Fri Feb 12 2016 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.31-1
 - Fix kaltura-drop-db.sh output.
 

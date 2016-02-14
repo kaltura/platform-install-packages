@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.39
+Version: v2.40
 Release: 1
 Epoch:0 
 License: AGPLv3+
@@ -38,6 +38,7 @@ Source27: kaltura-html5lib-v2.37.1.tar.gz
 Source31: kaltura-html5lib-v2.37.3.tar.gz
 Source29: kaltura-html5lib-v2.38.tar.gz
 Source30: kaltura-html5lib-v2.38.1.tar.gz
+Source32: kaltura-html5lib-v2.39.tar.gz
 Source28: simplePhpXMLProxy.php
 
 URL: https://github.com/kaltura/mwEmbed 
@@ -91,10 +92,11 @@ tar zxf %{SOURCE27} -C %{_builddir}/
 tar zxf %{SOURCE29} -C %{_builddir}/
 tar zxf %{SOURCE30} -C %{_builddir}/
 tar zxf %{SOURCE31} -C %{_builddir}/
+tar zxf %{SOURCE32} -C %{_builddir}/
 
 %install
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib
-for i in v2.1.1 v2.3 v2.4 v2.6 v2.9 v2.14 v2.15 v2.18.5 v2.20 v2.21 v2.22 v2.23 v2.24 v2.25 v2.26 v2.27 v2.28 v2.29 v2.30 v2.31 v2.32.1 v2.33 v2.34 v2.35.5 v2.36 v2.37.1 v2.37.3 v2.38 v2.38.1 %{version};do
+for i in v2.1.1 v2.3 v2.4 v2.6 v2.9 v2.14 v2.15 v2.18.5 v2.20 v2.21 v2.22 v2.23 v2.24 v2.25 v2.26 v2.27 v2.28 v2.29 v2.30 v2.31 v2.32.1 v2.33 v2.34 v2.35.5 v2.36 v2.37.1 v2.37.3 v2.38 v2.38.1 v2.39 %{version};do
 	rm -rf %{_builddir}/%{name}-$i/modules/Widevine
 	cp -r %{_builddir}/%{name}-$i $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i
 	cp %{SOURCE28} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i/
@@ -116,6 +118,39 @@ find /opt/kaltura/web/html5/html5lib -type d -name cache -exec chown -R 48 {} \;
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Sun Feb 14 2016 Jess Portnoy <jess.portnoy@kaltura.com> - v2.40-1
+- FEC-4659 - webcast live - clicking pause/play, the player jumps back a few seconds
+- FEC-4471 - HLS OSMF - external stream stuck during manual throttling
+- FEC-4629 - Supporting Multi Track Audio on Safari via leveraging Safari API for audio
+- FEC-4673 - Support load for Silverlight player DONE
+- PLAT-4681 - Events Collection | Player Plugin Creation
+- FEC-4690 - Develop Youbora Player Plugin
+- Update DASH lib with LIVE playback fixes
+- SUP-7026 - Related videos big thumbnail stretch
+- SUP-6945 - Media plays before the ad
+- FEC-4728 - Douleclick ads don't play on Android playlist
+- FEC-4711 - Channel Playlist with Quiz: Playlist doesnt support quiz
+- FEC-4580 - Enhanced Advertising > Content playback flow for web
+- SUP-6930 - Audio only flavors are labeled as 240P
+- SUP-6673 - Pause / play button doesn't work in playlist - switchOnResize
+- SUP-6708 - Switch on Resize, full-screen & live entries on mobile no playback
+- FEC-4735 - Playlist with Vast pre-roll: the ad doesn't started to play, stuck at beginning on Android
+- FEC-4734 - regression: auto continue in playlist doesn't work. playback stops after transition from first to second entry
+- FEC-4659 - webcast live - clicking pause/play, the player jumps back a few seconds
+- Fix event flow after change media
+- Doubleclick - Fallback to Flash on Microsoft Edge
+- KMS-10787 - In-Video Quizzes: Channel playlist - 'almost done' screen is not shown
+- FEC-4580 - Enhanced Advertising > Content playback flow for web
+- FEC-4541 - update API documentation in player.kaltura.com documentation
+- FEC-4475 - player iOS SDK throws error when loading an image entry
+- FEC-4723 - Allow player to select dash+widevine on Android
+- SUP-7123 - Layout of the play-button has been changed in the new version
+- FEC-4674 - Support load for DRM player DONE
+- FEC-4741 - Add support for offline OTT content
+- FEC-4786 - In-Video Quizzes: Channel playlist - last question pops up - in case of seek via scrubber (YouTube)
+- TR-196 - It is possible for a user to remove share link permanently (for the session at least)
+- SUP-7156 - Playback issues with Embed Code
+
 * Sun Jan 17 2016 Jess Portnoy <jess.portnoy@kaltura.com> - v2.39-1
 - FEC-4308 - Player mobile skin
 - FEC-4512 - Mobile Skin - Long Title is cut on portrait mode

@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 11.8.0
-Release: 10
+Release: 12
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -305,6 +305,24 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Sun Feb 14 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 11.8.0-11
+- SUP-7174 - iOS | Widevine Classic | OVP | uDRM | Licence duration error - app playback fails after approximately 10 min. 
+- SUP-6997 - Server returning all stream information when loading the player
+- SUP-7144 - Image downloaded in jpg format when was uploaded by bulk upload
+- PLAT-5042 - Remove user_videos permission from Facebook connector
+- PLAT-5045 - Recording fails when user stops few seconds after 15 minutes alignment (15:04,30:02 for example )
+- PLAT-4839 - Kaltura's webex account "kalturawebexhost" records meetings in *.MP4 instead of *.arf
+- PLAT-4924 - Facebook distribution - missing functionality - Tags
+- PLAT-4925 - Facebook distribution - missing functionality - Place
+- PLAT-4945 - Facebook distribution - update action missing on Custom Metadata Action
+- PLAT-4992 - Facebook distribution - real user cannot connect to Facebook
+- PLAT-5004 - In-Video Quizzes: Download PDF is limited to 13 questions
+- PLAT-5024 - QuizUserEntry - score should not be int
+- PLAT-5025 - Facebook distribution - TargetingCities\Regions failed
+- PLAT-4778 - UDRM - OTT BackEnd Entitlement response parsing error
+- PLAT-4020 - Media Server package is broken
+- PLAT-4714 - Sometimes there is more than one scheduler running on a batch machine
+
 * Mon Feb 1 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 11.8.0-1
 - Ver Bounce to 11.8.0
 
