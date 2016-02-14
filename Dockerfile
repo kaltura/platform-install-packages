@@ -4,10 +4,6 @@ FROM centos:6
 RUN echo "NETWORKING=yes" > /etc/sysconfig/network
 
 
-# JDK7
-RUN yum -y install java-1.7.0-openjdk
-
-
 # apache
 RUN yum -y install httpd
 RUN /sbin/chkconfig httpd on
@@ -28,10 +24,6 @@ RUN chkconfig ntpd on
 RUN service postfix start
 RUN service memcached start
 RUN service ntpd start
-
-
-# php
-RUN yum install -y php php-mysql php-gd php-pecl-memcache php-pspell php-snmp php-xmlrpc php-xml
 
 
 # kaltura
