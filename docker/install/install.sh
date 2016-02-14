@@ -1,5 +1,13 @@
 #!/bin/bash
 
+if [ -e /root/install/config.ans ]; then
+	. /root/install/config.ans
+fi
+
+if [ $# -gt 0 ]; then
+    SUPER_USER_PASSWD=$1
+fi
+
 # set SElinux enforcement to permissive
 setenforce permissive
 
@@ -7,7 +15,7 @@ setenforce permissive
 service mysqld start
 
 # make sure that NOBODY can access the server without a password
-mysql -e "UPDATE mysql.user SET Password = PASSWORD('root') WHERE User = 'root'"
+mysql -e "UPDATE mysql.user SET Password = PASSWORD('$SUPER_USER_PASSWD') WHERE User = 'root'"
 
 # delete anonymous users
 mysql -e "DELETE FROM mysql.user WHERE User = ''"
