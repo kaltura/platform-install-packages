@@ -1,3 +1,16 @@
+kaltura-kmc (5.40.1-2) kajam; urgency=low
+
+  * Version bounce to align with kaltura-html5lib v2.40. 
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Sun, 14 Feb 2016 17:34:50 +0000
+
+kaltura-kmc (5.40-1) kajam; urgency=low
+
+  * SUP-5740 - Co-editor/Co-publisher in the KMC
+  * PLAT-3962 - Core QA for VPaaS Usage Dashboard
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Sun, 17 Jan 2016 16:14:55 +0000
+
 kaltura-kmc (5.39.11-2) kajam; urgency=low
 
   * Version bounce to align with kaltura-html5lib v2.37.3. 
