@@ -50,40 +50,21 @@ if [ -n "$1" -a -r "$1" ];then
     . $ANSFILE
 fi
 
-MANDATORY_VARS_LIST="MEDIA_SERVER_DOMAIN_NAME PRIMARY_MEDIA_SERVER_HOST KALTURA_FULL_VIRTUAL_HOST_NAME"
-
-function read_user_var_input() {
-    TEMP_VAR=""  # Note that this is the var which will be used as a returned val
-    echo -e "${CYAN}PLease enter $1. Enter 'QUIT' in order to quit.${NORMAL}"
-    read -e TEMP_VAR
-    while [ -z "$TEMP_VAR" ];do
-        echo -en "${CYAN}$1 var cannot be empty${NORMAL}\n"
-        read TEMP_VAR
-    done
-    [[ "$TEMP_VAR" == "QUIT" ]] && echo -e "${BRIGHT_RED}Exiting due to user request${NORMAL}" && exit 1 # We quit if the user requests it
-}
-
-
-function check_mandatory_vars () {
-    for item in $MANDATORY_VARS_LIST; do
-        if [ -z "${!item}" ]; then
-            read_user_var_input $item
-            eval $item=$TEMP_VAR
-        fi
-    done
-}
-
 
 MEDIA_SERVER_DIR="$BASE_DIR/media-server"
 
-pushd $MEDIA_SERVER_DIR
-echo -e "${CYAN}Running ant configuration${NORMAL}"
+cd $MEDIA_SERVER_DIR
+echo -e "${BRIGHT_BLUE}Running ant configuration${NORMAL}"
 ant
 /etc/init.d/WowzaStreamingEngine stop >> /dev/null 2>&1
 /etc/init.d/WowzaStreamingEngine start
-php register_media_server.php
-popd
+php $MEDIA_SERVER_DIR/register_media_server.php
+RC=$?
+echo "[$RC]"
 
-send_install_becon `basename $0` $ZONE install_start 0
-send_install_becon `basename $0` $ZONE install_success 0
+if [ "$RC" -eq "0" ] || [ "$RC" -eq "255" ]; then
+    send_install_becon `basename $0` $ZONE install_success 0
+else
+    send_install_becon `basename $0` $ZONE install_fail "$RC"
+fi
 
