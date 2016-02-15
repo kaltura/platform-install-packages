@@ -4,10 +4,6 @@ FROM centos:6
 RUN echo "NETWORKING=yes" > /etc/sysconfig/network
 
 
-# apache
-RUN yum -y install httpd
-RUN /sbin/chkconfig httpd on
-
 
 # mysql
 RUN yum install -y mysql mysql-server
