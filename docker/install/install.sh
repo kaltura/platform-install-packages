@@ -1,5 +1,8 @@
 #!/bin/bash
 
+
+SUPER_USER_PASSWD=root
+
 if [ -e /root/install/config.ans ]; then
 	. /root/install/config.ans
 fi
