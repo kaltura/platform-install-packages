@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 11.8.0
-Release: 12
+Version: 11.9.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -305,6 +305,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Feb 15 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 11.9.0-1
+- Ver Bounce to 11.9.0
+
 * Sun Feb 14 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 11.8.0-11
 - SUP-7174 - iOS | Widevine Classic | OVP | uDRM | Licence duration error - app playback fails after approximately 10 min. 
 - SUP-6997 - Server returning all stream information when loading the player
