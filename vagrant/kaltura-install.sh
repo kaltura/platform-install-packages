@@ -6,7 +6,9 @@ source kaltura-install-config.sh
 iptables -F
 service iptables stop
 chkconfig iptables off
-setenforce permissive
+if [ `getenforce` = 'Enforcing' ] ;then
+        setenforce permissive
+fi
 yum -y clean all
 rpm -ihv --force http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
 yum -y install mysql-server kaltura-server kaltura-red5 postfix
@@ -50,7 +52,7 @@ ADMIN_CONSOLE_PASSWORD=\"$KALTURA_ADMIN_PASSWORD\"
 CDN_HOST=\"$KALTURA_DOMAIN\"
 KALTURA_VIRTUAL_HOST_PORT=\"80\"
 SUPER_USER=\"root\"
-SUPER_USER_PASSWD=\"vagrant\"
+SUPER_USER_PASSWD=\"$MYSQL_ROOT_PASSWORD\"
 ENVIRONMENT_NAME=\"$KALTURA_ENVIRONMENT_NAME\"
 DWH_PASS=\"$MYSQL_ROOT_PASSWORD\"
 PROTOCOL=\"http\"
@@ -70,6 +72,7 @@ CONTACT_MAIL=\"$KALTURA_ADMIN_EMAIL\"
 #CHAIN_FILE=NONE
 
 IS_SSL=\"N\"
+IS_NGINX_SSL=\"N\"
 VOD_PACKAGER_HOST=\"$KALTURA_DOMAIN\"
 VOD_PACKAGER_PORT=\"88\"
 WWW_HOST=\"$KALTURA_DOMAIN\"
