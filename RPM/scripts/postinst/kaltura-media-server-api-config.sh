@@ -49,9 +49,7 @@ function send_fail_beacon_and_exit() {
 
 KALTURA_FUNCTIONS_RC=`dirname $0`/kaltura-functions.rc
 if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
-    OUT="Could not find $KALTURA_FUNCTIONS_RC so, exiting.."
-    echo $OUT
-    RC=3
+    send_fail_beacon_and_exit "Could not find $KALTURA_FUNCTIONS_RC so, exiting.." 3
 fi
 . $KALTURA_FUNCTIONS_RC
 
@@ -73,7 +71,7 @@ fi
 
 TIME_ZONE_FILE="/etc/sysconfig/clock"
 if [ ! -r "$TIME_ZONE_FILE" ];then
-    send_fail_beacon_and_exit "ERROR: could not find $TIME_ZONE_FILE so, exiting.." 6
+    echo -r "${BRIGHT_RED}ERROR: could not find $TIME_ZONE_FILE so, exiting..${NORMAL}"
 fi
 . $TIME_ZONE_FILE
 
@@ -82,6 +80,26 @@ if [ -n "$1" -a -r "$1" ];then
     ANSFILE=$1
     . $ANSFILE
 fi
+
+while [ -z "$TIME_ZONE" ];do
+        if [ -n "$ZONE" ];then
+                echo -en "${CYAN}Your time zone [see http://php.net/date.timezone], or press enter for [${YELLOW}$ZONE${CYAN}]: ${NORMAL}"
+        else
+                echo -en "${CYAN}Your time zone [see http://php.net/date.timezone]: ${NORMAL}"
+        fi
+        read -e TIME_ZONE
+        if [ -z "$TIME_ZONE" -a -n "$ZONE" ];then
+                TIME_ZONE="$ZONE"
+        fi
+        # trap - ERR
+        php -r "if (timezone_open('$TIME_ZONE') === false){exit(1);}" 2>/dev/null
+        RC=$?
+        # trap 'my_trap_handler "${LINENO}" ${$?}' ERR
+        if [ $RC -ne 0 ];then
+                echo -e "${BRIGHT_RED}Bad Timezone value, please check valid options at http://php.net/date.timezone${NORMAL}"
+                unset TIME_ZONE
+        fi
+done
 
 
 # # VARS
