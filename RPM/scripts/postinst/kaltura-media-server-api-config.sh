@@ -55,6 +55,8 @@ if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
 fi
 . $KALTURA_FUNCTIONS_RC
 
+send_install_becon `basename $0` $ZONE install_start 0
+
 if [ -r $CONSENT_FILE ];then
     . $CONSENT_FILE
 elif [ -z "$USER_CONSENT" ];then
@@ -65,15 +67,22 @@ fi
 
 RC_FILE="/etc/kaltura.d/system.ini"
 if [ ! -r "$RC_FILE" ];then
-    echo -e "${BRIGHT_RED}ERROR: could not find $RC_FILE so, exiting..${NORMAL}"
-    RC=2
+    send_fail_beacon_and_exit "ERROR: could not find $RC_FILE so, exiting.." 4
 fi
 . $RC_FILE
+
+TIME_ZONE_FILE="/etc/sysconfig/clock"
+if [ ! -r "$TIME_ZONE_FILE" ];then
+    send_fail_beacon_and_exit "ERROR: could not find $TIME_ZONE_FILE so, exiting.." 6
+fi
+. $TIME_ZONE_FILE
+
 
 if [ -n "$1" -a -r "$1" ];then
     ANSFILE=$1
     . $ANSFILE
 fi
+
 
 # # VARS
 MANDATORY_VARS_LIST="MEDIA_SERVER_DOMAIN_NAME PRIMARY_MEDIA_SERVER_HOST KALTURA_FULL_VIRTUAL_HOST_NAME"
@@ -84,15 +93,15 @@ HTTP_DEFAULT_PORT="80"
 HTTPS_DEFAULT_PORT="443"
 MEDIA_SERVERS_INI_TEMPLATE="$APP_DIR/configurations/media_servers.template.ini"
 MEDIA_SERVERS_INI="$APP_DIR/configurations/media_servers.ini"
+SECOND_MEDIA_SECTION_TAG="@2nd_block@"
 
 
-if [ ! -r "$BROADCAST_TEMPLATE_FILE" ];then
-    send_fail_beacon_and_exit "ERROR: could not find $BROADCAST_TEMPLATE_FILE so, exiting.." 5
-fi
+for NEEDED_FILE in $BROADCAST_TEMPLATE_FILE MEDIA_SERVERS_INI_TEMPLATE; do
+    if [ ! -r "$BROADCAST_TEMPLATE_FILE" ];then
+        send_fail_beacon_and_exit "ERROR: could not find $NEEDED_FILE so, exiting.." 5
+    fi
+done  
 
-if [ ! -r "$APP_DIR/configurations/media_servers.template.ini" ]; then
-    send_fail_beacon_and_exit "$APP_DIR/configurations/media_servers.template.ini was not found. Exiting." 1
-fi
 
 # Checking if any mandatory vars are missing.
 check_mandatory_vars
@@ -131,19 +140,13 @@ then
         SECONDARY_MEDIA_SERVER_HOST=$TEMP_VAR
     else  # temp file for line removal
         echo -e "${YELLOW}Warning: SECONDARY_MEDIA_SERVER_HOST was not defined. In case this is not correct, please run '$0' again${NORMAL}"
-        # 4 line removal of the secondary media server  in case it's empty / the same as the primary (thus turned empty by the script)
-        START_LINE=`grep -n @SECONDARY_MEDIA_SERVER_HOST@ $TEMP_BROADCAST | cut -d':' -f1`
-        START_LINE=`expr $START_LINE - 1`
-        BLOCK_OFFSET=4
-        awk -v start_line=$START_LINE -v end_line=`expr $START_LINE + $BLOCK_OFFSET` '{
-            if (NR < start_line || NR > end_line)
-                print $0 
-        }' $TEMP_BROADCAST > $BROADCAST_FILE_TEMP
-        [ -f $BROADCAST_FILE_TEMP ] && mv $BROADCAST_FILE_TEMP $TEMP_BROADCAST
+        sed -i /^$SECOND_MEDIA_SECTION_TAG/d $TEMP_BROADCAST # Live removal for the 2nd server
     fi
+else
+    sed -i s/^$SECOND_MEDIA_SECTION_TAG//g $TEMP_BROADCAST # deleting the tag only since the values will be replaced in the next sed
 fi
 
-# sed for broadcast.ini
+# value replacement sed for broadcast.ini
 sed -i -e "s/@KALTURA_FULL_VIRTUAL_HOST_NAME@/$KALTURA_FULL_VIRTUAL_HOST_NAME/g" \
     -e "s/@PRIMARY_MEDIA_SERVER_HOST@/$PRIMARY_MEDIA_SERVER_HOST/g" \
     -e "s/@SECONDARY_MEDIA_SERVER_HOST@/$SECONDARY_MEDIA_SERVER_HOST/g" $TEMP_BROADCAST
@@ -165,5 +168,5 @@ fi
 mv $temp_media_server_ini $MEDIA_SERVERS_INI
 
 echo -e "${BRIGHT_BLUE}The setup was finished successfully.${NORMAL}"
-send_install_becon `basename $0` $ZONE install_start 0
+
 send_install_becon `basename $0` $ZONE install_success 0
