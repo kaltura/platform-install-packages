@@ -28,7 +28,7 @@ OPERATION=$4
 DATE=`date`
 if [ $OPERATION = 'master' ];then
 	# master:
-	sed -i "s@^\[mysqld\]@[mysqld]\n#Master configured by Kaltura on: $DATE\nlog-bin=mysql-bin\nserver-id = 1\nauto_increment_increment = 10\nauto_increment_offset = 1\n@" /etc/my.cnf
+	sed -i "s@^\[mysqld\]@[mysqld]\n#Master configured by Kaltura on: $DATE\nlog-bin=mysql-bin\nserver-id = 1\n@" /etc/my.cnf
 	SQL=`cat <<EOF
 	create user $KALT_REP_USER@'%' identified by '$KALT_REP_PASSWD';
 	GRANT SELECT, PROCESS, FILE, SUPER, REPLICATION CLIENT, REPLICATION SLAVE, RELOAD ON *.* TO $KALT_REP_USER@'%';
