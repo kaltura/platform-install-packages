@@ -39,6 +39,7 @@ Contact the authors or email community@kaltura.org if you have other ideas.
 * [Deploying a Kaltura Cluster (RPM)](https://github.com/kaltura/platform-install-packages/blob/master/doc/rpm-cluster-deployment-instructions.md)
 * [Deploying a Kaltura Cluster (deb)](https://github.com/kaltura/platform-install-packages/blob/master/doc/deb-cluster-deployment-instructions.md)
 * [Deploying Kaltura using Opscode Chef (RPM)](https://github.com/kaltura/platform-install-packages/blob/master/doc/rpm-chef-cluster-deployment.md)
+* [Deploying Kaltura using Vagrant (RPM)](https://github.com/kaltura/platform-install-packages/tree/master/vagrant)
 * [Upgrade from pre-RPM versions](https://github.com/kaltura/platform-install-packages/tree/master/doc/kaltura-updater)
 * [Setting up Kaltura platform monitoring](https://github.com/kaltura/platform-install-packages/blob/master/doc/platform-monitors.md)
 * [Required Open Ports to run Kaltura](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura-required-ports.md)
