@@ -61,7 +61,7 @@ ant
 php $MEDIA_SERVER_DIR/register_media_server.php
 RC=$?
 
-if [ "$RC" -eq "0" ] || [ "$RC" -eq "255" ]; then
+if [ "$RC" -eq "0" ]; then
     send_install_becon `basename $0` $ZONE install_success 0
 else
     send_install_becon `basename $0` $ZONE install_fail "$RC"
