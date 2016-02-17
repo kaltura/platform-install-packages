@@ -1,16 +1,20 @@
 %define prefix /opt/kaltura
-Name:	kaltura-media-server	
-Version: 2.2.2 
-Epoch: 1
-Release: 1 
-Summary: Kaltura Media Server 
-License: AGPLv3+	
-URL: https://github.com/kaltura/media-server/tree/%{version}
-Source0: %{name}-%{version}.zip
-BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
-BuildArch: noarch
+%define kaltura_user kaltura
+%define postinst_dir %{_topdir}/scripts/postinst
+Summary: Kaltura Open Source Video Platform - Media Server 
+Name: kaltura-media-server
+Version: 3.2.0
+Release: 1
+License: AGPLv3+
+Group: Server/Platform 
+Source0: https://github.com/kaltura/media-server/releases/download/rel-%{version}/KalturaWowzaServer-install-%{version}.zip 
+#Source1: %{postinst_dir}/%{name}-config.sh
+#Source2: %{postinst_dir}/kaltura-functions.rc
 
-Requires: kaltura-base
+URL: https://github.com/kaltura/media-server 
+Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Requires:  jre >= 1.7.0, kaltura-postinst, ant >= 1.8.2 , php >= 5.3.0
+BuildArch: noarch
 
 %description
 Kaltura is the world's first Open Source Online Video Platform, transforming the way people work, 
@@ -24,26 +28,54 @@ teachers by providing educational institutions disruptive online video solutions
 learning, and increased engagement across campuses and beyond. 
 For more information visit: http://corp.kaltura.com, http://www.kaltura.org and http://www.html5video.org.
 
-This package installs the Kaltura Media Server which can integrate with either Red5 [see kaltura-red5 RPM] and Wowza.
+
+The Kaltura platform enables video management, publishing, syndication and monetization, 
+as well as providing a robust framework for managing rich-media applications, 
+and developing a variety of online workflows for video. 
+
+This package configures the Media Server component. 
 
 %prep
-%setup -qn media-server-%{version} 
 
 %build
 
 %install
-mkdir -p $RPM_BUILD_ROOT%{prefix}/web/flash/media-server
-mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content
-cp -r %{_builddir}/media-server-%{version} $RPM_BUILD_ROOT/%{prefix}/web/flash/media-server/%{version}
+mkdir -p $RPM_BUILD_ROOT/%{prefix}/media-server
+unzip -d $RPM_BUILD_ROOT/%{prefix}/media-server %{SOURCE0}
+mkdir -p $RPM_BUILD_ROOT/%{prefix}/bin
+%{__install} %{postinst_dir}/%{name}-config.sh  $RPM_BUILD_ROOT/%{prefix}/bin/
+
 
 %clean
 rm -rf %{buildroot}
 
-%files
-%defattr(-,root,root,-)
-%{prefix}/web/flash/media-server
+%pre
 
+%post
+echo "
+#####################################################################################################################################
+Installation of %{name} %{version} completed
+Please run 
+# /opt/kaltura/bin/%{name}-config.sh [/path/to/answer/file]
+To finalize the setup.
+#####################################################################################################################################
+"
+
+%preun
+
+%files
+%dir %{prefix}/media-server
+%{prefix}/media-server/*
+%dir %{prefix}/bin/
+%{prefix}/bin/*
 
 %changelog
-* Sat Feb 1 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 2.2.2-1
-- initial package.
+* Sun Apr 12 2015 Igor Shevach <igor.shevach@kaltura.com> - v3.2.0
+- Added support for eCDN (kaltura.ini is replaced with ecdn.ini)
+
+* Fri Dec 12 2014 Tan-Tan <jonathan.kanarek@kaltura.com> - v3.1.5
+- Package jar instead of zip
+
+* Thu May 8 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 3.0.8.5-1
+- Initial release.
+

@@ -1,0 +1,24 @@
+Package: kaltura-php-pear
+Source: kaltura-php7
+Version: 7.0.0-6
+Architecture: all
+Maintainer: Jess Portnoy <jess.portnoy@kaltura.com>
+Installed-Size: 48
+Depends: kaltura-php7-common (>= 7.0.0-6), kaltura-php7-cli
+Recommends: gnupg
+Suggests: kaltura-php7-dev
+Conflicts: php-xml-util
+Provides: php-xml-util
+Section: php
+Priority: optional
+Homepage: http://www.php.net/
+Description: PEAR - PHP Extension and Application Repository
+ This package contains the base PEAR classes for PHP, as well as the PEAR
+ installer.  Many PEAR classes are already packaged for Debian, and can be
+ easily identified by names beginning with "php-", such as php-db and
+ php-auth.  Note: to build and install precompiled PECL extensions, you
+ will need one of the php development packages installed.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.

@@ -1,0 +1,18 @@
+Package: kaltura-php7-dev
+Source: kaltura-php7
+Version: 7.0.0-6
+Architecture: amd64
+Maintainer: Jess Portnoy <jess.portnoy@kaltura.com>
+Installed-Size: 4406
+Depends: autoconf (>= 2.63), automake (>= 1.11), libssl-dev, libtool (>= 2.2), shtool, kaltura-php7-common (>= 7.0.0-6)
+Conflicts: libtool (<< 2.2)
+Section: php
+Priority: optional
+Homepage: http://www.php.net/
+Description: Files for PHP7 module development
+ This package provides the files from the PHP7 source needed for compiling
+ additional modules.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.

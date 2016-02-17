@@ -1,0 +1,37 @@
+Template: kaltura-nginx/nginx_hostname
+Type: string
+Default: 
+Description: Server name
+
+Template: kaltura-nginx/nginx_port
+Type: string
+Default: 88
+Description: Vhost port to listen on:
+
+Template: kaltura-nginx/nginx_ssl_port
+Type: string
+Default: 8443
+Description: Vhost SSL port to listen on:
+
+Template: kaltura-nginx/kaltura_service_url
+Type: string
+Default:
+Description: Your Kaltura Service URL:
+	Base URL where the Kaltura API will be accessed from - this would be your Load Balancer URL on a cluster or same as your virtual host in an all-in-one Kaltura server.
+	Note that currently, only HTTP is supported and make sure to insert the host without the http:// prefix.
+
+Template: kaltura-nginx/ssl_cert
+Type: string
+Default: 
+Description: Please input path to your SSL certificate:
+
+Template: kaltura-nginx/ssl_key
+Type: string
+Default: 
+Description: Please input path to your SSL key:
+
+Template: kaltura-nginx/is_ssl
+Type: boolean
+Default: 
+Description: Config Nginx with SSL?
+

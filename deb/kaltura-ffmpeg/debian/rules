@@ -1,254 +1,132 @@
 #!/usr/bin/make -f
 
-EPOCH=1:
-DEB_SOURCE := $(shell dpkg-parsechangelog | sed -n 's/^Source: //p')
-DEB_VERSION := $(shell dpkg-parsechangelog | sed -n 's/^Version: //p')
-UPSTREAM_VERSION := $(shell echo $(DEB_VERSION) | sed -r 's/[^:]+://; s/-[^-]+$$//')
-SHLIBS_VERSION := $(EPOCH)1.1.1
 
-ifeq ($(shell dpkg-vendor --derives-from Ubuntu && echo yes),yes)
-# In Ubuntu, all -extra- packages are built from a special source
-# package called 'ffmpeg-extra', which is found in the universe section
-# of the archive because it requires extra build dependencies that are
-# not found in 'main'
-#
-# In order to ease the transition period when ffmpeg is uploaded to the
-# archive and ffmpeg-extra is not built yet, all libraries in ffmpeg
-# produce -extra variants. However, only ffmpegcodec-extra comes with
-# additional functionality.
-VENDOR := Ubuntu
+DEB_VERSION := $(shell dpkg-parsechangelog | egrep '^Version:' | cut -f 2 -d ' ')
+RC_FILE :=../../build/sources.rc
+FFMPEG_VERSION ?= $(shell egrep '^FFMPEG_VERSION=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
+SOURCE_PACKAGING_DIR ?= $(shell egrep '^SOURCE_PACKAGING_DIR=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
+include ../includes/build-revision.mk
+archive := $(SOURCE_PACKAGING_DIR)/ffmpeg-$(FFMPEG_VERSION).tar.bz2 
+tree := ffmpeg-$(FFMPEG_VERSION)
+BASE_PREFIX=opt/kaltura/$(tree)
+# These are used for cross-compiling and for saving the configure script
+# from having to guess our platform (since we know it already)
+DEB_HOST_GNU_TYPE   ?= $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
+DEB_BUILD_GNU_TYPE  ?= $(shell dpkg-architecture -qDEB_BUILD_GNU_TYPE)
 
-# these package do not build -extra variants
-LIB_PKGS := 
-# these packages do build -extra variants
-LIB_PKGS2 := $(shell sed -nr 's/^Package:[[:space:]]*(lib(avutil|avcodec|avdevice|avformat|avresample|avfilter|swscale)[0-9]+)[[:space:]]*$$/\1/p' debian/control)
-# these packages are the -extra- variants
-LIB_EXTRA_PKGS := $(shell sed -nr 's/^Package:[[:space:]]*(lib(avutil|avcodec|avdevice|avformat|avresample|avfilter|swscale)(-extra-)[0-9]+)[[:space:]]*$$/\1/p' debian/control)
+CFLAGS = `dpkg-buildflags --get CFLAGS`
+CFLAGS += -Wall
+LDFLAGS = `dpkg-buildflags --get LDFLAGS`
+CPPFLAGS = `dpkg-buildflags --get CPPFLAGS`
 
-else
-# In Debian, there is no need (anymore) for a separate ffmpeg-extra
-# source package. Instead, the ffmpegcodec-extra package is built
-# directly from the 'main' source package.
-#
-# the ffmpegcodec-extra package is necessary because it links against
-# libraries that are GPLv3 licensed. Make sure that you do not link
-# GPLv2 only applications against the ffmpegcodec-extra flavor!
-#
-# Because of the lack of archive skew problems, only ffmpegcodec produces
-# an -extra variant.
-
-VENDOR := Kaltura, Inc.
-# these package do not build -extra variants
-LIB_PKGS := $(shell sed -nr 's/^Package:[[:space:]]*(lib(avutil|avdevice|avformat|avfilter|avresample|swscale)[0-9]+)[[:space:]]*$$/\1/p' debian/control)
-# these packages do build -extra variants
-LIB_PKGS2 := $(shell sed -nr 's/^Package:[[:space:]]*(ffmpegcodec[0-9]+)[[:space:]]*$$/\1/p' debian/control)
-# these packages are the -extra- variants
-LIB_EXTRA_PKGS := $(shell sed -nr 's/^Package:[[:space:]]*(ffmpegcodec-extra-[0-9]+)[[:space:]]*$$/\1/p' debian/control)
+ifeq (,$(findstring nostrip,$(DEB_BUILD_OPTIONS)))
+	INSTALL_PROGRAM += -s
 endif
+$(archive):
+	~/sources/platform-install-packages/build/package_ffmpeg_source.sh
 
+$(tree): $(archive)
+	tar jxf $(archive) 
 
-# these are the -dev packages
-DEV_PKGS := $(shell echo $(LIB_PKGS) $(LIB_PKGS2) | sed 's/[0-9]\+\>/-dev/g')
-
-# Support multiple makes at once
-ifneq (,$(filter parallel=%,$(DEB_BUILD_OPTIONS)))
-NUMJOBS = -j$(patsubst parallel=%,%,$(filter parallel=%,$(DEB_BUILD_OPTIONS)))
-else
-# on i386 and amd64, we query the system unless overriden by DEB_BUILD_OPTIONS
-ifeq      ($(DEB_HOST_ARCH),i386)
-NUMJOBS := -j$(shell getconf _NPROCESSORS_ONLN 2>/dev/null || echo 1)
-else ifeq ($(DEB_HOST_ARCH),amd64)
-NUMJOBS := -j$(shell getconf _NPROCESSORS_ONLN 2>/dev/null || echo 1)
-endif
-endif
-
-include debian/confflags
-OPT_FLAVORS := $(filter-out static shared, $(FLAVORS))
-
-$(info FLAVORS = $(FLAVORS))
-$(info DEB_BUILD_OPTIONS = $(DEB_BUILD_OPTIONS))
-$(info CFLAGS = $(CFLAGS))
-$(info CPPFLAGS = $(CPPFLAGS))
-$(info LDFLAGS = $(LDFLAGS))
-
-define dh_install_file_opt_flavor
-	  grep @DEB_HOST_MULTIARCH_OPT@ < $(1).in | \
-	  sed 's:@DEB_HOST_MULTIARCH_OPT@:$(DEB_HOST_MULTIARCH)/$($(2)_shlibdir):g' >> $(1)
-
-endef
-
-DH_INSTALL_FILES := $(foreach pkg, $(LIB_PKGS) $(LIB_PKGS2) $(LIB_EXTRA_PKGS) $(DEV_PKGS), debian/$(pkg).install)
-$(DH_INSTALL_FILES):
-	sed 's/@DEB_HOST_MULTIARCH\(_OPT\)\?@/$(DEB_HOST_MULTIARCH)/g' $@.in > $@
-	$(foreach opt_flavor,$(OPT_FLAVORS),$(call dh_install_file_opt_flavor,$@,$(opt_flavor)))
-
-ifeq ($(DEB_SOURCE),ffmpeg-extra)
-CONFIGURE := ffmpeg/configure
-ffmpeg/configure:
-	tar jxvf ~/sources/ffmpeg-1.1.1.tar.bz2
-else
-CONFIGURE := configure
-endif
-
-configure-%: configure-stamp-%
-configure-stamp-%: $(CONFIGURE)
+config.status: $(tree) 
 	dh_testdir
-	mkdir -p debian-$*
-	cd debian-$* && CFLAGS="$(CFLAGS)" CPPFLAGS="$(CPPFLAGS)" LDFLAGS="$(LDFLAGS)" $(CURDIR)/$(CONFIGURE) \
-		$($*_build_confflags) $(extra_$*_build_confflags)
-	touch $@
-configure-extra-stamp-%:
-	dh_testdir
-	mkdir -p debian-extra-$*
-	cd debian-extra-$* && CFLAGS="$(CFLAGS)" CPPFLAGS="$(CPPFLAGS)" LDFLAGS="$(LDFLAGS)" $(CURDIR)/$(CONFIGURE) \
-		$($*_build_confflags) $(v3_confflags) $(extra_$*_build_confflags)
-	touch $@
+	CFLAGS="$(CFLAGS)" CPPFLAGS="$(CPPFLAGS)" LDFLAGS="$(LDFLAGS)" cd $(tree) && ./configure \
+		    --prefix="$(BASE_PREFIX)" \
+		    --libdir="$(BASE_PREFIX)/lib" \
+		    --shlibdir="$(BASE_PREFIX)/lib" \
+		    --extra-cflags=" -fPIC -I/opt/kaltura/include" \
+		    --extra-ldflags="-L/opt/kaltura/lib" \
+		    --disable-devices \
+		    --enable-bzlib \
+		    --enable-libgsm \
+		    --enable-libmp3lame \
+		    --enable-libschroedinger \
+		    --enable-libtheora \
+		    --enable-libvorbis \
+		    --enable-libx264 \
+		    --enable-libxvid \
+		    --enable-filter=movie \
+		    --enable-avfilter \
+		    --enable-libopencore-amrnb \
+		    --enable-libopencore-amrwb \
+		    --enable-libopenjpeg \
+		    --enable-libvpx \
+		    --enable-libspeex \
+		    --enable-libass \
+		    --enable-postproc \
+		    --enable-pthreads \
+		    --enable-static \
+		    --enable-shared \
+		    --enable-gpl \
+		     --disable-debug \
+		    --disable-optimizations \
+		--enable-gpl \
+		--enable-pthreads \
+		--enable-swscale \
+		--enable-vdpau \
+		--enable-bzlib \
+		--disable-devices \
+		--enable-filter=movie \
+		--enable-version3 \
+		--enable-x11grab
 
-build-%: build-stamp-%
-build-stamp-%: configure-stamp-%
-	dh_testdir
-	$(MAKE) -C debian-$* $(NUMJOBS) V=1
-	touch $@
-build-extra-stamp-%: configure-extra-stamp-%
-	dh_testdir
-	$(MAKE) -C debian-extra-$* $(NUMJOBS) V=1
-	touch $@
+build: build-stamp
 
-debian-shared/tools/qt-faststart: build-stamp-shared
-	$(MAKE) -C debian-shared tools/qt-faststart V=1
-
-build: build-stamp build-extra
-build-stamp: $(addprefix build-stamp-, $(FLAVORS)) debian-shared/tools/qt-faststart
-	touch $@
-build-extra: $(addprefix build-extra-stamp-, $(filter-out static,$(FLAVORS)))
-	touch $@
+build-stamp:  config.status
+	#dh_quilt_patch
+	dh_testdir
+	cd $(tree) && $(MAKE)
+	touch build-stamp
 
 clean:
 	dh_testdir
-	rm -f build-stamp build-extra $(addprefix build-stamp-, $(FLAVORS)) \
-	    $(addprefix build-extra-stamp-, $(FLAVORS)) \
-	    $(addprefix configure-stamp-, $(FLAVORS)) \
-	    $(addprefix configure-extra-stamp-, $(FLAVORS)) \
-	    build-doxy-stamp
-	rm -rf ffmpeg/ # created by the ffmpeg-extra variant
-	rm -rf $(addprefix debian-, $(FLAVORS)) \
-		$(addprefix debian-extra-, $(FLAVORS)) doxy
-	dh_clean $(DH_INSTALL_FILES) $(wildcard formats*.txt) $(wildcard codecs*.txt)
+	dh_testroot
+	rm -f build-stamp config.log
+	rm -rf opt/ ffmpeg-$(FFMPEG_VERSION)/
+	dh_quilt_unpatch
+	dh_clean 
 
-# The trailing newline is important!
-define install_flavor
-	$(MAKE) -C debian-$(1) install DESTDIR=$(CURDIR)/debian/tmp \
-	    mandir=$(CURDIR)/debian/tmp/usr/share/man
-
-endef
-
-# The trailing newline is important!
-define install_flavor_extra
-	$(MAKE) -C debian-extra-$(1) install DESTDIR=$(CURDIR)/debian/tmp/extra \
-	    mandir=$(CURDIR)/debian/tmp/usr/share/man
-
-endef
-
-# installs arch-dependent files only
-install: install-common install-extra
-install-common: build $(DH_INSTALL_FILES)
+install: build
 	dh_testdir
 	dh_testroot
-	dh_prep -a
-	$(foreach flavor,$(FLAVORS),$(call install_flavor,$(flavor)))
-	mkdir -p debian/tmp/etc
-	install -m 644 -D doc/avserver.conf debian/tmp/etc/
-	install -m 644 -D debian-shared/tools/qt-faststart debian/tmp/usr/bin/qt-faststart
-	dh_install $(addprefix -N,$(LIB_EXTRA_PKGS)) \
-		 --fail-missing --sourcedir=debian/tmp
-	env LD_LIBRARY_PATH="$(LD_LIBRARY_PATH):$(CURDIR)/debian/tmp/usr/lib/$(DEB_HOST_MULTIARCH)" \
-	debian/tmp/usr/bin/avconv -formats | tee formats-$(DEB_HOST_ARCH).txt
-	env LD_LIBRARY_PATH="$(LD_LIBRARY_PATH):$(CURDIR)/debian/tmp/usr/lib/$(DEB_HOST_MULTIARCH)" \
-	debian/tmp/usr/bin/avconv -codecs | tee codecs.txt
-	dh_installdocs -pffmpegformat54 formats-$(DEB_HOST_ARCH).txt
-	dh_installdocs -pffmpegcodec54 codecs.txt
-install-extra: build $(DH_INSTALL_FILES)
-	dh_testdir
-	dh_testroot
-	$(foreach flavor,$(filter-out static,$(FLAVORS)),$(call install_flavor_extra,$(flavor)))
-	dh_install $(addprefix -p,$(LIB_EXTRA_PKGS)) --fail-missing \
-		--sourcedir=debian/tmp/extra
-	env LD_LIBRARY_PATH="$(LD_LIBRARY_PATH):$(CURDIR)/debian/tmp/extra/usr/lib/$(DEB_HOST_MULTIARCH)" \
-	debian/tmp/usr/bin/avconv -codecs | tee codecs.txt
-	dh_installdocs -pffmpegcodec-extra-54 codecs.txt
-ifeq ($(DEB_SOURCE), ffmpeg)
-	dh_installdocs -a doc/APIchanges
-	install -m 644 -D debian-shared/doc/*.html debian/ffmpeg-tools/usr/share/doc/ffmpeg-tools
-	dh_installexamples -p ffmpegcodec-dev ffmpegcodec/api-example.c
-	dh_installchangelogs -a Changelog
-else
-	dh_installchangelogs -a ffmpeg/Changelog
-endif
+	dh_clean -k 
+	dh_installdirs
+	#cd $(tree)/tools && gcc qt-faststart.c -o $(CURDIR)/debian/$(tree)/qt-faststart && cd -
+	cd $(tree) && $(MAKE) -C . install DESTDIR=$(CURDIR)/debian/$(tree)/
+	cd $(tree) && $(MAKE) tools/qt-faststart 
+#&& mv $(tree)/qt-faststart $(CURDIR)/debian/$(tree)/
 
-binary-indep:
-ifeq ($(DEB_SOURCE), ffmpeg)
-	dh_testdir
-	dh_testroot
-	dh_prep -i
-	# the ffmpeg-source package does exist in some derivatives such as ubuntu, etc.
-	if grep -q 'Package: ffmpeg-source' debian/control; then \
-	  dh_installdirs -ptmp usr/src;  \
-	  tar czvf debian/tmp/usr/src/ffmpeg-source.tar.gz . \
-	  	 --exclude 'debian*' --exclude .git  --exclude .pc --exclude '*-stamp' \
-	  	 --transform 's,^./,ffmpeg/,' ; \
-	fi
-endif
-	doxygen doc/Doxyfile
-	mkdir -p debian/ffmpeg-doc/usr/share/doc/ffmpeg-doc
-	mv -v doc/doxy/html debian/ffmpeg-doc/usr/share/doc/ffmpeg-doc
-	dh_installdocs -i
-	dh_installchangelogs -i
-	dh_compress -i
-	dh_fixperms -i
-	dh_installdeb -i
-	dh_gencontrol -i
-	dh_md5sums -i
-	dh_builddeb -i -- -Zxz
 
+# Build architecture-independent files here.
+binary-indep:;
+# We have nothing to do by default.
+
+# Build architecture-dependent files here.
 binary-arch: build install
+	mkdir -p $(BASE_PREFIX) debian/kaltura-ffmpeg/opt/kaltura/bin/ 
 	dh_testdir
 	dh_testroot
-	dh_installman -pffmpeg-tools debian/qt-faststart.1
-ifeq ($(DEB_SOURCE), ffmpeg)
-	dh_strip -a --dbg-package=ffmpeg-dbg
-else
-	dh_strip -a --dbg-package=ffmpeg-extra-dbg
-endif
-	dh_lintian -a
-	dh_link -a
-	dh_compress -a
-	dh_fixperms -a
-
-	# operate on non -extra package producing packages
-	for pkg in $(LIB_PKGS); do \
-	    dh_makeshlibs -p"$$pkg" -V"$$pkg (>= $(SHLIBS_VERSION))"; \
-	done
-	# operate e.g. the -extra- packages, produce shlibs that have alternative dependencies
-	for pkg in $(LIB_EXTRA_PKGS); do \
-	    npkg=$$(echo "$$pkg" | sed -r 's/-extra-//'); \
-	    dh_makeshlibs -p"$$pkg" -V"$$npkg (>= $(SHLIBS_VERSION)) | $$pkg (>= $(EPOCH)$(UPSTREAM_VERSION))"; \
-	done
-	# operate on packages with -extra- variants such as ffmpegcodec54 - produce shlibs that have alternative dependencies
-	for pkg in $(LIB_PKGS2); do \
-	    upkg=$$(echo "$$pkg" | sed -r 's/([0-9]+)$$/-extra-\1/'); \
-	    dh_makeshlibs -p"$$pkg" -V"$$pkg (>= $(SHLIBS_VERSION)) | $$upkg (>= $(EPOCH)$(UPSTREAM_VERSION))"; \
-	done
-	dh_shlibdeps
-	dh_installdeb -a
-	dh_gencontrol -a
-	dh_md5sums -a
-	dh_builddeb -a -- -Zxz
+	#dh_installchangelogs ChangeLog
+	#dh_installdocs
+	dh_installexamples
+	#pwd
+	#ls -ald debian/$(tree)/$(BASE_PREFIX)/*
+	mv debian/$(tree)/$(BASE_PREFIX)/* $(BASE_PREFIX)
+	mv $(tree)/tools/qt-faststart $(BASE_PREFIX)/bin/
+	dh_gencontrol -u-v$(DEB_VERSION) 
+	dh_install $(BASE_PREFIX)
+	dh_installdebconf	
+	dh_installinit
+	dh_installman
+	dh_link $(BASE_PREFIX)/bin/ffmpeg opt/kaltura/bin/ffmpeg
+	dh_link $(BASE_PREFIX)/bin/qt-faststart opt/kaltura/bin/qt-faststart
+	dh_strip
+	dh_compress
+	dh_fixperms
+	dh_installdeb
+	LD_LIBRARY_PATH=$(BASE_PREFIX)/lib dh_shlibdeps
+	dh_md5sums
+	dh_builddeb
 
 binary: binary-indep binary-arch
-
-.PHONY: build $(addprefix build-, $(FLAVORS)) \
-	clean \
-	configure $(addprefix configure-, $(FLAVORS)) \
-	binary binary-indep binary-arch \
-	install install-common install-extra \
-	get-orig-source
+.PHONY: build clean binary-indep binary-arch binary install 

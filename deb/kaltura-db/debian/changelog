@@ -1,0 +1,17 @@
+kaltura-db (11.1.0-1) UNRELEASED; urgency=low
+
+  * Replace hardcoded /opt/kaltura/app with $APP_DIR.
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Fri, 06 Nov 2015 12:52:51 +0000
+
+kaltura-db (10.10.0) jupiter; urgency=low
+
+  * fix call to send_install_becon to correctly provide TZ.
+
+ -- Jess Portnoy <jess.portnoy@kaltura.com>  Thu, 07 Apr 2015 17:07:13 +0000
+
+kaltura-db (10.9.0) jupiter; urgency=low
+
+  * Switching to 10.9.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.com>  Thu, 07 Apr 2015 17:07:13 +0000

@@ -1,0 +1,18 @@
+Package: kaltura-php7-intl
+Source: kaltura-php7
+Version: 7.0.0-6
+Architecture: amd64
+Maintainer: Jess Portnoy <jess.portnoy@kaltura.com>
+Installed-Size: 526
+Pre-Depends: dpkg (>= 1.16.1~)
+Depends: libc6 (>= 2.14), libgcc1 (>= 1:4.1.1), libicu52 (>= 52~m1-1~), phpapi-20151012, kaltura-php7-common (= 7.0.0-6), ucf
+Provides: kaltura-php7-idn
+Section: php
+Priority: optional
+Homepage: http://www.php.net/
+Description: internationalisation module for kaltura-php7
+ This package provides a module to ease internationalisation of PHP scripts.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.

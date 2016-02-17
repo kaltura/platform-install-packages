@@ -1,0 +1,25 @@
+Package: kaltura-libapache2-mod-php7filter
+Source: kaltura-php7
+Version: 7.0.0-1
+Architecture: amd64
+Maintainer: Jess Portnoy <jess.portnoy@kaltura.com>
+Installed-Size: 82
+Depends: mime-support, kaltura-php7-common (= 7.0.0-1), libmagic1, ucf, tzdata
+Suggests: kaltura-php-pear
+Conflicts: kaltura-libapache2-mod-php7
+Section: httpd
+Priority: extra
+Homepage: http://www.php.net/
+Description: server-side, HTML-embedded scripting language (apache 2 filter module)
+ This package provides the PHP7 Filter module for the Apache 2 webserver (as
+ found in the apache2-mpm-prefork package).  Please note that this package
+ ONLY works with Apache's prefork MPM, as it is not compiled thread-safe.
+ .
+ Unless you specifically need filter-module support, you most likely
+ should instead install kaltura-libapache2-mod-php7.
+ .
+ .
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.

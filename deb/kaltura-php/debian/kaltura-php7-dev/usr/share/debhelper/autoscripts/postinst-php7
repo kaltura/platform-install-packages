@@ -1,0 +1,6 @@
+if [ -r /opt/kaltura/share/php7/php7-maintscript-helper ] ; then
+    . /opt/kaltura/share/php7/php7-maintscript-helper
+    for conf in #NAMES# ; do
+        php7_invoke #HELPER# ALL $conf || #ERROR_HANDLER#
+    done
+fi

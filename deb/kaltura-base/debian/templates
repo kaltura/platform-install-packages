@@ -1,0 +1,179 @@
+Template: kaltura-base/cdn_hostname
+Type: string
+Default: 
+Description: CDN hostname:
+
+Template: kaltura-base/apache_hostname
+Type: string
+Default: 
+Description: Apache virtual hostname:
+	Must be accessible from both inside the machine and from any clients / browsers that will use Kaltura
+
+Template: kaltura-base/vhost_port
+Type: string
+Default: 80 
+Description: Vhost port to listen on:
+
+Template: kaltura-base/db_hostname
+Type: string
+Default: localhost
+Description: DB hostname:
+
+Template: kaltura-base/db_port
+Type: string
+Default: 3306 
+Description: DB port:
+
+Template: kaltura-base/mysql_super_user
+Type: string
+Default: root 
+Description: MySQL super use [needed for install || upgrade]:
+
+Template: kaltura-base/mysql_super_passwd
+Type: password
+Default:  
+Description: MySQL super user passwd [needed for install || upgrade]:
+
+Template: kaltura-base/dwh_db_hostname
+Type: string
+Default: localhost
+Description: Analytics DB hostname:
+
+Template: kaltura-base/dwh_db_port
+Type: string
+Default: 3306
+Description: Analytics DB port:
+
+Template: kaltura-base/sphinx_hostname
+Type: string
+Default: 127.0.0.1
+Description: Sphinx hostname:
+
+Template: kaltura-base/media_server_hostname
+Type: string
+Default:
+Description: Media Streaming Server hostname:
+
+Template: kaltura-base/second_sphinx_hostname
+Type: string
+Default: 127.0.0.1
+Description: Secondary Sphinx hostname:
+
+Template: kaltura-base/second_sphinx_hostname
+Type: string
+Default:
+Description: Secondary Sphinx hostname:
+
+Template: kaltura-base/service_url
+Type: string
+Default:
+Description: Your Kaltura Service URL:
+	Base URL where the Kaltura API and Apps will be accessed from - this would be your Load Balancer URL on a cluster or same as your virtual host in an all-in-one Kaltura server - Must be accessible from both inside the machine and from any clients / browsers that will use Kaltura:\n
+
+Template: kaltura-base/ip_range
+Type: string
+Default: 0.0.0.0-255.255.255.255
+Description: Range of ip addresses belonging to internal kaltura servers 
+	The range is used when checking service actions permissions and allowing to access certain services without KS from the internal servers.
+
+Template: kaltura-base/vod_packager_hostname
+Type: string
+Default: 127.0.0.1
+Description: VOD packager hostname
+
+Template: kaltura-base/vod_packager_port
+Type: string
+Default: 88
+Description: VOD packager port
+
+Template: kaltura-base/admin_console_email
+Type: string
+Default:
+Description: Kaltura Admin user (email address):
+
+Template: kaltura-base/admin_console_passwd
+Type: password
+Default:
+Description: Admin user login password (must be minimum 8 chars and include at least one of each: upper-case, lower-case, number and a special character):
+
+Template: kaltura-base/admin_console_passwd_again
+Type: password
+Default:
+Description: Confirm passwd:
+
+Template: kaltura-base/passwd_invalid_char
+Type: note
+Default:
+Description: Passwd can't have the '/' char in it. Please re-input.
+
+Template: kaltura-base/passwd_dont_match
+Type: note
+Default:
+Description: Passwds do not match, again please.
+
+Template: kaltura-base/time_zone
+Type: string
+Default:
+Description: Your time zone [see http://php.net/date.timezone]:
+
+Template: kaltura-base/bad_time_zone
+Type: note
+Default:
+Description: Bad Timezone value, please check valid options at http://php.net/date.timezone
+
+Template: kaltura-base/env_name
+Type: string
+Default: Kaltura Video Platform
+Description: Your Kaltura install name (this name will show as the From field in emails sent by the system):
+
+Template: kaltura-base/contact_url
+Type: string
+Default: http://corp.kaltura.com/company/contact-us
+Description: Your website Contact Us URL:
+
+Template: kaltura-base/contact_phone
+Type: string
+Default: +1 800 871 5224 
+Description: Your 'Contact us' phone number:
+
+Template: kaltura-base/contact_phone
+Type: string
+Default: +1 800 871 5224 
+Description: Your 'Contact us' phone number:
+
+Template: kaltura-base/install_analytics_consent
+Type: Boolean
+Default:  
+Description: Should we collect stats?
+	To improve your Kaltura experience and provide you with the best service, Kaltura would like your consent to collect necessary data and information regarding your installation and use of Kaltura and analyze it to provide an upgraded and more stable platform and services.\n
+
+Template: kaltura-base/auto_generate_kaltura_mysql_passwd
+Type: Boolean
+Default:  
+Description: Auto generate MySQL kaltura password?
+	The Kaltura platform uses a dedicated MySQL user 'kaltura' for its operations.\n
+	If you are installing a standalone machine, it is recommended that you select YES.\n
+	If this node is part of a cluster, select NO and then input the password you set previously.\n
+	The current password can be found in /opt/kaltura/app/configurations/db.ini on the first node you installed.\n
+
+Template: kaltura-base/kaltura_mysql_passwd
+Type: password
+Default:
+Description: Kaltura user MySQL password (must be minimum 8 chars and include at least one of each: upper-case, lower-case, number and a special character):
+
+Template: kaltura-base/kaltura_mysql_passwd_again
+Type: password
+Default:
+Description: Confirm passwd:
+
+Template: kaltura-base/install_analytics_email
+Type: string
+Default: 
+Description: Please enter your email
+
+Template: kaltura-base/generating_client_libs
+Type: text
+Default:  
+Description: Generating client libs...
+	This can take a few minutes to complete, see log at $BASE_DIR/log/generate.php.log.
+

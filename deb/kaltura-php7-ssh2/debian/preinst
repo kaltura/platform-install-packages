@@ -1,0 +1,29 @@
+#! /bin/sh
+
+set -e
+
+case "$1" in
+  install|upgrade)
+    if [ -n "$2" ] && dpkg --compare-versions "$2" lt 0.12-1
+    then
+      ucf --purge /opt/kaltura/app/configurations/php/conf.d/ssh2.ini
+    fi
+    if test -e /opt/kaltura/app/configurations/php/conf.d/ssh2.ini
+    then
+      sed s/^\;extension/extension/ -i /opt/kaltura/app/configurations/php/conf.d/ssh2.ini
+      dpkg-maintscript-helper mv_conffile /opt/kaltura/app/configurations/php/conf.d/ssh2.ini \
+          /opt/kaltura/app/configurations/php/mods-available/ssh2.ini 0.12-1 -- "$@"
+      rm -f /opt/kaltura/app/configurations/php/conf.d/ssh2.ini
+    fi
+    ;;
+  abort-upgrade)
+    ;;
+  *)
+    echo "preinst called with unknown argument \`$1'" >&2
+    exit 1
+    ;;
+esac
+
+#DEBHELPER#
+
+exit 0

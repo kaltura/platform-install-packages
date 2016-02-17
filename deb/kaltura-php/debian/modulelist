@@ -1,0 +1,22 @@
+curl CURL
+common PDO pdo 10
+enchant Enchant
+gd GD
+gmp GMP
+imap IMAP
+interbase Interbase
+intl Internationalisation
+ldap LDAP
+mcrypt MCrypt
+mysqlnd MySQL mysqlnd 10
+odbc ODBC
+opcache Opcache
+pgsql PostgreSQL
+pspell pspell
+recode recode
+snmp SNMP
+sqlite SQLite sqlite3
+sybase Sybase mssql
+tidy tidy
+xmlrpc XML-RPC
+xsl XSL

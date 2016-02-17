@@ -1,5 +1,279 @@
-kaltura-base (9.7.0-1) experimental; urgency=low
+kaltura-base (11.9.0-1) kajam; urgency=low
 
-  - First package
+  * Switching to 11.9.0
 
- -- Jess Portnoy <jess.portnoy@kaltura.com>  Thu, 26 Dec 2013 18:02:43 +0200
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 15 Feb 2016 15:26:17 +0000
+kaltura-base (11.8.0-2) kajam; urgency=low
+
+  * SUP-7174 - iOS | Widevine Classic | OVP | uDRM | Licence duration error - app playback fails after approximately 10 min. 
+  * SUP-6997 - Server returning all stream information when loading the player
+  * SUP-7144 - Image downloaded in jpg format when was uploaded by bulk upload
+  * PLAT-5042 - Remove user_videos permission from Facebook connector
+  * PLAT-5045 - Recording fails when user stops few seconds after 15 minutes alignment (15:04,30:02 for example )
+  * PLAT-4839 - Kaltura's webex account "kalturawebexhost" records meetings in *.MP4 instead of *.arf
+  * PLAT-4924 - Facebook distribution - missing functionality - Tags
+  * PLAT-4925 - Facebook distribution - missing functionality - Place
+  * PLAT-4945 - Facebook distribution - update action missing on Custom Metadata Action
+  * PLAT-4992 - Facebook distribution - real user cannot connect to Facebook
+  * PLAT-5004 - In-Video Quizzes: Download PDF is limited to 13 questions
+  * PLAT-5024 - QuizUserEntry - score should not be int
+  * PLAT-5025 - Facebook distribution - TargetingCities\Regions failed
+  * PLAT-4778 - UDRM - OTT BackEnd Entitlement response parsing error
+  * PLAT-4020 - Media Server package is broken
+  * PLAT-4714 - Sometimes there is more than one scheduler running on a batch machine
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Sun, 14 Feb 2016 15:50:24 +0000
+
+kaltura-base (11.8.0-1) kajam; urgency=low
+
+  * Switching to 11.8.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 01 Feb 2016 19:16:45 +0000
+
+kaltura-base (11.7.0-1) kajam; urgency=low
+
+  * Switching to 11.7.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 18 Jan 2016 13:20:43 +0000
+
+kaltura-base (11.6.0-1) kajam; urgency=low
+
+  * Switching to 11.6.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Tue, 05 Jan 2016 13:10:15 +0000
+
+kaltura-base (11.5.0-1) kajam; urgency=low
+
+  * Switching to 11.5.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 21 Dec 2015 14:04:12 +0000
+
+kaltura-base (11.4.0-1) kajam; urgency=low
+
+  * Switching to 11.4.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 07 Dec 2015 13:34:42 +0000
+
+kaltura-base (11.3.0-2) kajam; urgency=low
+  * Support PHP 7
+  * SUP-4598 - Infinite entry creation when using "Create new entry for every broadcast session"
+  * SUP-5438 - Converting Live Stream to VOD Not Working at all
+  * SUP-6536 - Entries Not in "Ready" Status - Fail to Clone
+  * SUP-6614 - ARF transcoding failure
+  * PLAT-3386 - Stream is rewinded on HLS when stopping and starting the stream with FMLE
+  * PLAT-4068 - When streaming with FMLE, first chunk has invalid duration (mostly after stop-start)
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Sun, 06 Dec 2015 16:37:44 +0000
+
+kaltura-base (11.3.0-1) kajam; urgency=low
+
+  * Switching to 11.3.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 23 Nov 2015 12:22:48 +0000
+
+kaltura-base (11.2.0-1) kajam; urgency=low
+
+  * Switching to 11.2.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 09 Nov 2015 13:50:23 +0000
+
+kaltura-base (11.1.0-1) kajam; urgency=low
+
+  * Switching to 11.1.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 26 Oct 2015 11:59:20 +0000
+
+kaltura-base (11.0.0-1) kajam; urgency=low
+
+  * Switching to 11.0.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 12 Oct 2015 12:54:56 +0000
+
+kaltura-base (10.21.0-1) jupiter; urgency=low
+
+  * Switching to 10.21.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 21 Sep 2015 12:39:16 +0000
+
+kaltura-base (10.20.0-1) jupiter; urgency=low
+
+  * Switching to 10.20.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 07 Sep 2015 14:32:58 +0000
+
+kaltura-base (10.19.0-1) jupiter; urgency=low
+
+  * Switching to 10.19.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 24 Aug 2015 10:30:35 +0000
+
+kaltura-base (10.18.0-2) jupiter; urgency=low
+
+  * PLAT-3659 - baseEntry->addfromUploadedFile fails for data entry 
+  * SUP-2038 - Multiple Playlists - API inquiry
+  * SUP-5243 - KMC strips KalturaEndUserReportInputFilter when generating CSV
+  * SUP-4380 - Comments in e-mail notification
+  * PLAT-3522 - TR Reverse Proxy - pass "od" parameter when redirecting to mwEmbedLoader.php
+  * PLAT-3558 - Add Support for AIFF File Format in base.ini
+  * PLAT-3575 - Main file should be ism not a4m
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Thu, 20 Aug 2015 16:10:25 +0000
+
+kaltura-base (10.18.0-1) jupiter; urgency=low
+
+  * Switching to 10.18.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 10 Aug 2015 10:41:04 +0000
+
+kaltura-base (10.17.0-3) UNRELEASED; urgency=low
+
+  * SUP-5223 - KMS uploads do not inherit entry's 'Default Metadata Settings'
+  * PS-2298 - Custom Metadata HTTP notification - JSON with special chars
+  * SUP-4363 - API - captionAsset - serveByEntryId issue
+  * PLAT-3182 - eCDN: silverlight multicast plugin doesn't produce 30fps
+  * PLAT-3293 - provider name is too long
+  * PLAT-3523 - Extract Input validation to its own thread
+  * PLAT-3576 - Remove TTL From Register_File
+  * PLAT-3546 - TR Reverse Proxy support - validate domain from "x-forwarded-host" header against white-list
+ 
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Thu, 06 Aug 2015 13:13:10 +0000
+
+kaltura-base (10.17.0-2) jupiter; urgency=low
+
+  * Do not compile against FDK and faac as distributing the binary with such support violates license.   
+    See:   https://github.com/kaltura/platform-install-packages/issues/392, https://trac.ffmpeg.org/ticket/4735 
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Wed, 05 Aug 2015 14:17:56 +0000
+
+kaltura-base (10.17.0-1) jupiter; urgency=low
+
+  * Initial build for 10.17.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 27 Jul 2015 14:21:47 +0000
+
+kaltura-base (10.16.0-2) jupiter; urgency=low
+
+  * SUPPS-299 - Notifications issue - replacement video event
+  * SUP-5363 - WebEx Connector Errors - during and after Cisco BACKUP 
+  * PLAT-3504 - Zombie cleaner check
+  * PLAT-3458 - WV flavor does not created
+ 
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Fri, 24 Jul 2015 21:46:54 +0000
+
+kaltura-base (10.16.0-1) jupiter; urgency=low
+
+  * Initial build for 10.16.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Fri, 17 Jul 2015 11:37:27 +0000
+
+kaltura-base (10.15.0-1) jupiter; urgency=low
+
+  * Local patch for https://github.com/kaltura/server/pull/2838 
+  * Disable MySQL strict mode when deploying DB
+  * Added HTTP notification templates to deployment
+  * PLAT-3178 - eCDN: KES multicast
+  * PLAT-3180 - eCDN: KES non-flat multicast support from backend
+  * PLAT-3214 - eCDN: KES multicast - player changes
+  * PLAT-2924 - OTT DIstribution Module enhancements for MediaPrep Phase 1
+  * PLAT-3326 - Developer Account
+  * SUP-4344 - Presentation not uploaded to CaptureSpace
+  * SUP-3031 - Uploading issue
+  * SUP-3117 - getting an error on bulk category upload
+  * SUP-3867 - TechSmith relay issue
+  * SUP-4641 - Wrong content type returned for JS documententry in Chrome 42
+  * SUP-4776 - Dynamically retrieve the updated default thumbnail asset
+  * SUP-5236 - WeatherNation - Media server becoming unavailable
+  * SUP-4191 - Live stream stopped
+  * SUP-5228 - Cannot live stream with specific entry
+  * SUP-5257 - Live Stream presents still image of a previously streamed content
+  * PS-2287 - New HTTP notification fired when change is made to entry custom data
+  * PLAT-3387 - Spark stopped processing events when failed to parse a log line
+  * PLAT-3304 - Devices stopped to play Live(Ad stitching) after 90 min
+  * PLAT-3066 - Anonymous analytics
+  * PLAT-3014 - Converison profile default entry should not copy type and media type
+  * PLAT-3016 - entitlement prevent from load Conversion Profile Default entry
+  * PLAT-3287 - removeGroupSmils concurrent modification
+  * PLAT-3292 - Playlist API - Cannot save CategoryEntryAdvancedFilter as an advanced search filter
+  * PLAT-3294 - OR between KalturaCategoryEntryAdvancedFilter and KalturaMetadataSearchItem produces AND
+  * PLAT-3295 - Playlist API - Advanced filter items are duplicated
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Sun, 12 Jul 2015 05:39:34 +0000
+
+kaltura-base (10.14.0-1) jupiter; urgency=low
+
+  * SUP-4393 - Downloading screen recording from KMS saved as tmp file
+  * SUP-4339 - Email notifications send all addresses in the "To" field
+  * PLAT-3215 - ES3 - UnMuxed Solution Project
+  * PLAT-2908 - syndication feeds using playManifest not working with Access Control
+  * PLAT-3072 - many kuser_kgroup queries
+  * PLAT-3059 - KalturaNullableBoolean in format=json
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Sun, 28 Jun 2015 08:39:13 +0000
+
+kaltura-base (10.13.0-1) jupiter; urgency=low
+
+  * SUP-4515 - Widevine Media Transcoding Errors
+  * SUP-4362 - Adding Tags with less than 2 letters when uploading
+  * SUP-4491 - Entry ID containing # sign causing entries not to load
+  * SUP-4264 - Thumbnail rotation not working with ARF files
+  * SUP-4001 - Category listing options is not filtering on KMC
+  * PLAT-2983 - externalSourceType isn't being cloned
+  * PLAT-2872 - Refactor media server to suit SyncPoints requirements
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 15 Jun 2015 08:54:22 +0000
+
+kaltura-base (10.12.0-1) jupiter; urgency=low
+
+  * SUP-4016 - Cannot find category in analytics "Select Categories" drop down menu
+  * SUP-4408 - Specific WMV file not transcoding
+  * SUP-4695 - Entry does not display as expected
+  * SUP-4739 - Player's download button does not work in KMS
+  * PLAT-2204 - Can't add thumb cuepoint of sub type chapter without a slide
+  * PLAT-2987 - Auto-Intermediate-source flow for sources that processable only by Mencoder
+  * https://github.com/kaltura/server/blob/Jupiter-10.12.0-typeReflectorError/api_v3/lib/KalturaTypeReflector.php
+
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Sun, 31 May 2015 12:13:26 +0000
+
+kaltura-base (10.11.0-1) jupiter; urgency=low
+
+  * PLAT-2871 - Caption search using KalutraBaseEntryFilter::advancedSearch and cross metadata search
+  * PLAT-1998 - Avoid the need to update many metadata objects
+  * PLAT-2850 - API Changes for Q&A
+  * PLAT-2946 - Hide default template uiconfs from partner preview&&embed
+  * SUP-3451 - KMC error - The language 'sv_SE' has to be added before it can be used.
+  * SUP-3965 - Telepictures - high storage usage, flavors are not deleted after export?
+  * PLAT-2914 - Too many logs are written to file
+  * PLAT-2906 - Json serializer causing Studio crash
+  * PLAT-2387 - manual dispatch error
+  * PLAT-2934 - clip_test script fails
+  * PLAT-2940 - groupUser->list return fatal error
+  * https://github.com/kaltura/server/pull/2561
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Sun, 17 May 2015 12:31:51 +0000
+
+kaltura-base (10.10.0-2) jupiter; urgency=low
+
+  * PLAT-2042 - Kaltura MRSS Ingest for PostMedia (TR next)
+  * PLAT-2829 - New feature: Add a pager to playlist->execute
+  * SUP-4358 - [Pearson] Java API SDK throws a NumberFormatException
+  * PLAT-2865 - Live - isLive remains on true after stop streaming (regression)
+  * PLAT-1600 - Duplicate VOD entry is created when stopping streaming before live entry starts to play.
+  * PLAT-2497 - randomly the HLS flavors in the cloud transcode are not in sync
+  * PLAT-2885 - Kaltura Live with DVR: Player stuck for a few minutes after loading page
+  * WEBC-467 - Application error received when attempting to edit a webcast
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 04 May 2015 19:32:25 +0000
+
+kaltura-base (10.10.0-1) jupiter; urgency=low
+
+  * Switching to 10.10.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.com>  Mon, 27 Apr 2015 13:38:43 +0200
+
+kaltura-base (10.9.0-1) jupiter; urgency=low
+
+  * Switching to 10.9.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.com>  Mon, 06 Apr 2015 20:18:43 +0200

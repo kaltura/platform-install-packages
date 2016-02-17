@@ -4,6 +4,7 @@
 #         USAGE: ./kaltura-sphinx-config.sh 
 #   DESCRIPTION: configure server as a Sphinx node.
 #       OPTIONS: ---
+# 	LICENSE: AGPLv3+
 #  REQUIREMENTS: ---
 #          BUGS: ---
 #         NOTES: ---
@@ -23,8 +24,11 @@ if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
 fi
 . $KALTURA_FUNCTIONS_RC
 if ! rpm -q kaltura-sphinx;then
-	echo -e "${BRIGHT_RED}ERROR: first install kaltura-sphinx.${NORMAL}"
-	exit 11
+	echo -e "${BRIGHT_RED}ERROR: First install kaltura-sphinx.${NORMAL}"
+	exit 0
+fi
+if [ -r $CONSENT_FILE ];then
+	. $CONSENT_FILE
 fi
 if [ -n "$1" -a -r "$1" ];then
 	ANSFILE=$1
@@ -45,14 +49,21 @@ if [ ! -r "$RC_FILE" ];then
 	exit 2
 fi
 . $RC_FILE
-trap 'my_trap_handler ${LINENO} ${$?}' ERR
-send_install_becon `basename $0` $ZONE install_start 
+if [ -r "$APP_DIR/configurations/sphinx_schema_update" ];then
+	`dirname $0`/kaltura-sphinx-schema-update.sh
+	exit $?
+fi
+ln -sf $BASE_DIR/app/configurations/logrotate/kaltura_populate /etc/logrotate.d/
+ln -sf $BASE_DIR/app/configurations/logrotate/kaltura_sphinx /etc/logrotate.d/
+trap 'my_trap_handler "${LINENO}" ${$?}' ERR
+send_install_becon `basename $0` $ZONE install_start 0 
 mkdir -p $LOG_DIR/sphinx/data $APP_DIR/cache//sphinx
-chown $OS_KALTURA_USER.$OS_KALTURA_USER $APP_DIR/cache/sphinx $LOG_DIR/sphinx/data
+chown $OS_KALTURA_USER.$OS_KALTURA_USER $APP_DIR/cache/sphinx $LOG_DIR/sphinx/data $BASE_DIR/sphinx
 echo "sphinxServer = $SPHINX_HOST" > /opt/kaltura/app/configurations/sphinx/populate/`hostname`.ini
 /etc/init.d/kaltura-sphinx restart >/dev/null 2>&1
 /etc/init.d/kaltura-populate restart >/dev/null 2>&1
 ln -sf $BASE_DIR/app/configurations/monit/monit.avail/sphinx.rc $BASE_DIR/app/configurations/monit/monit.d/enabled.sphinx.rc
+ln -sf $BASE_DIR/app/configurations/monit/monit.avail/sphinx.populate.rc $BASE_DIR/app/configurations/monit/monit.d/enabled.sphinx.populate.rc
 /etc/init.d/kaltura-monit stop >> /dev/null 2>&1
 /etc/init.d/kaltura-monit start
-send_install_becon `basename $0` $ZONE install_success
+send_install_becon `basename $0` $ZONE install_success 0

@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+dpkg-maintscript-helper mv_conffile /opt/kaltura/app/configurations/php/conf.d/ssh2.ini \
+    /opt/kaltura/app/configurations/php/mods-available/ssh2.ini 0.12-1 -- "$@"
+rm -f /opt/kaltura/app/configurations/php/conf.d/ssh2.ini
+
+[ "$1" = "remove" ] && /opt/kaltura/bin/php7dismod ssh2
+
+#DEBHELPER#
+
+exit 0

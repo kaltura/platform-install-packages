@@ -1,4 +1,4 @@
-%define prefix /opt/kaltura
+%define prefix /usr
 %define snap_date 20140104
 
 Summary: Library for encoding and decoding H264/AVC video streams

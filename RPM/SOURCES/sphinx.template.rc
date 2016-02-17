@@ -1,17 +1,17 @@
-        check process sphinx 
-           with pidfile "@BASE_DIR@/sphinx/searchd.pid"
-           start program = "/etc/init.d/kaltura-sphinx start" with timeout 60 seconds
-           stop program = "/etc/init.d/kaltura-sphinx stop"
-           #if 10 restarts within 10 cycles then timeout
-           #if failed port 9312 protocol telnet then restart
-           group kaltura
-           depends on kaltura.conf, searchd
+check process sphinx 
+    with pidfile "@BASE_DIR@/sphinx/searchd.pid"
+    start program = "/etc/init.d/kaltura-sphinx start" with timeout 60 seconds
+    stop program = "/etc/init.d/kaltura-sphinx stop"
+    
+        
+    group kaltura
+    depends on sphinx.conf, searchdbin
 
-        check file kaltura.conf
-            with path "@APP_DIR@/configurations/sphinx/kaltura.conf"
-            # Reload Sphinx if the kaltura.conf file was changed
-            if changed checksum
-               then exec "/etc/init.d/kaltura-sphinx restart"
+check file sphinx.conf
+    with path "@APP_DIR@/configurations/sphinx/kaltura.conf"
+    # Reload Sphinx if the kaltura.conf file was changed
+    if changed checksum
+       then exec "/etc/init.d/kaltura-sphinx restart"
 
-        check file searchd
-            with path "@BASE_DIR@/sphinx/bin/searchd"
+check file searchdbin
+    with path "@BASE_DIR@/sphinx/bin/searchd"

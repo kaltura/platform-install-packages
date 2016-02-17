@@ -1,0 +1,3 @@
+shlibs:Depends=libc6 (>= 2.2.5), libgmp10
+php:Depends=phpapi-20151012
+misc:Depends=

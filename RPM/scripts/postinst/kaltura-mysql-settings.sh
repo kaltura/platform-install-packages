@@ -4,6 +4,7 @@
 #         USAGE: ./kaltura-mysql-settings.sh 
 #   DESCRIPTION: 
 #       OPTIONS: ---
+# 	LICENSE: AGPLv3+
 #  REQUIREMENTS: ---
 #          BUGS: ---
 #         NOTES: ---
@@ -14,14 +15,40 @@
 #===============================================================================
 
 #set -o nounset                              # Treat unset variables as an error
-MY_CNF=/etc/my.cnf
+
+if [ -r /etc/my.cnf ];then
+	MY_CNF=/etc/my.cnf
+elif [ -r /etc/mysql/my.cnf ];then
+	MY_CNF=/etc/mysql/my.cnf
+elif [ -r /usr/share/mysql/my-medium.cnf ];then
+ 	cp /usr/share/mysql/my-medium.cnf /etc/my.cnf
+ 	MY_CNF=/etc/my.cnf	
+else
+	echo "I could not find your my.cnf file. Exiting."
+	exit 1
+fi
+cp $MY_CNF $MY_CNF.orig
 sed -i '/^lower_case_table_names = 1$/d' $MY_CNF
 sed -i '/^open_files_limit.*$/d' $MY_CNF
 sed -i '/^max_allowed_packet.*$/d' $MY_CNF
 sed -i 's@^\[mysqld\]$@[mysqld]\nlower_case_table_names = 1\n@' $MY_CNF
 sed -i 's@^\[mysqld\]$@[mysqld]\ninnodb_file_per_table\n@' $MY_CNF
-sed -i 's@^\[mysqld\]$@[mysqld]\ninnodb_log_file_size=32MB\n@' $MY_CNF
+sed -i 's@^\[mysqld\]$@[mysqld]\ninnodb_log_file_size=32M\n@' $MY_CNF
 sed -i 's@^\[mysqld\]$@[mysqld]\nopen_files_limit = 20000\n@' $MY_CNF
 sed -i 's@^\[mysqld\]$@[mysqld]\nmax_allowed_packet = 16M\n@' $MY_CNF
-/etc/init.d/mysqld restart
+if [ -r /var/lib/mysql/ib_logfile0 ];then
+	mv /var/lib/mysql/ib_logfile0 /var/lib/mysql/ib_logfile0.old
+fi
+if [ -r /var/lib/mysql/ib_logfile1 ];then
+	mv /var/lib/mysql/ib_logfile1 /var/lib/mysql/ib_logfile1.old
+fi
 
+if rpm -q mysql-server 2>/dev/null;then
+        service mysqld restart
+elif rpm -q mariadb-server 2>/dev/null;then
+        service mariadb restart
+elif dpkg -l mysql-server >>/dev/null 2>&1 ;then
+        service mysql restart
+elif rpm -qa "Percona-Server-server*" 2>/dev/null;then
+        service mysql restart
+fi

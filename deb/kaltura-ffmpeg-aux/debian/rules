@@ -1,0 +1,134 @@
+#!/usr/bin/make -f
+
+DEB_VERSION := $(shell dpkg-parsechangelog | egrep '^Version:' | cut -f 2 -d ' ')
+RC_FILE :=../../build/sources.rc
+FFMPEG_VERSION ?= $(shell egrep '^FFMPEG_AUX_VERSION=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
+SOURCE_PACKAGING_DIR ?= $(shell egrep '^SOURCE_PACKAGING_DIR=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
+include ../includes/build-revision.mk
+archive := $(SOURCE_PACKAGING_DIR)/ffmpeg-$(FFMPEG_VERSION).tar.bz2 
+tree := ffmpeg-$(FFMPEG_VERSION)
+BASE_PREFIX=opt/kaltura/$(tree)
+# These are used for cross-compiling and for saving the configure script
+# from having to guess our platform (since we know it already)
+DEB_HOST_GNU_TYPE   ?= $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
+DEB_BUILD_GNU_TYPE  ?= $(shell dpkg-architecture -qDEB_BUILD_GNU_TYPE)
+
+CFLAGS = `dpkg-buildflags --get CFLAGS`
+CFLAGS += -Wall
+LDFLAGS = `dpkg-buildflags --get LDFLAGS`
+CPPFLAGS = `dpkg-buildflags --get CPPFLAGS`
+
+ifeq (,$(findstring nostrip,$(DEB_BUILD_OPTIONS)))
+	INSTALL_PROGRAM += -s
+endif
+$(archive):
+	~/sources/platform-install-packages/build/package_ffmpeg_source.sh
+
+$(tree): $(archive)
+	tar jxf $(archive) 
+
+config.status: $(tree) 
+	dh_testdir
+	CFLAGS="$(CFLAGS)" CPPFLAGS="$(CPPFLAGS)" LDFLAGS="$(LDFLAGS)" cd $(tree) && ./configure \
+	    --prefix="$(BASE_PREFIX)" \
+	    --libdir="$(BASE_PREFIX)/lib" \
+	    --shlibdir="$(BASE_PREFIX)/lib" \
+	    --extra-cflags=" -fPIC -I/opt/kaltura/include" \
+	    --extra-ldflags="-L/opt/kaltura/lib" \
+	    --disable-devices \
+	    --enable-bzlib \
+	    --enable-libgsm \
+	    --enable-libmp3lame \
+	    --enable-libschroedinger \
+	    --enable-libtheora \
+	    --enable-libvorbis \
+	    --enable-libx264 \
+	    --enable-libxvid \
+	    --enable-filter=movie \
+	    --enable-avfilter \
+	    --enable-libopencore-amrnb \
+	    --enable-libopencore-amrwb \
+	    --enable-libopenjpeg \
+	    --enable-libvpx \
+	    --enable-libspeex \
+	    --enable-libass \
+	    --enable-postproc \
+	    --enable-pthreads \
+	    --enable-static \
+	    --enable-shared \
+	    --enable-gpl \
+	     --disable-debug \
+	    --disable-optimizations \
+	--enable-gpl \
+	--enable-pthreads \
+	--enable-swscale \
+	--enable-vdpau \
+	--enable-bzlib \
+	--disable-devices \
+	--enable-filter=movie \
+	--enable-version3 \
+	--enable-x11grab
+
+
+
+
+build: build-stamp
+
+build-stamp:  config.status
+	#dh_quilt_patch
+	dh_testdir
+
+	cd $(tree) && $(MAKE)
+
+	touch build-stamp
+
+clean:
+	dh_testdir
+	dh_testroot
+	rm -f build-stamp config.log
+	rm -rf opt/ ffmpeg-$(FFMPEG_VERSION)/
+
+	dh_quilt_unpatch
+	dh_clean 
+
+install: build
+	dh_testdir
+	dh_testroot
+	dh_clean -k 
+	dh_installdirs
+	cd $(tree) && $(MAKE) -C . install DESTDIR=$(CURDIR)/debian/$(tree)/
+
+
+# Build architecture-independent files here.
+binary-indep:;
+# We have nothing to do by default.
+
+# Build architecture-dependent files here.
+binary-arch: build install
+	mkdir -p $(BASE_PREFIX) debian/kaltura-ffmpeg-aux/opt/kaltura/bin/ 
+	dh_link $(BASE_PREFIX)/bin/ffmpeg opt/kaltura/bin/ffmpeg-aux
+	dh_testdir
+	dh_testroot
+	#dh_installchangelogs ChangeLog
+	#dh_installdocs
+	dh_installexamples
+	#pwd
+	#ls -ald debian/$(tree)/$(BASE_PREFIX)/*
+	mv debian/$(tree)/$(BASE_PREFIX)/* $(BASE_PREFIX)
+	dh_gencontrol -u-v$(DEB_VERSION) 
+	dh_install $(BASE_PREFIX)
+	dh_installdebconf	
+	dh_installinit
+	dh_installman
+	dh_link
+	dh_strip
+	dh_compress
+	dh_fixperms
+	dh_installdeb
+	LD_LIBRARY_PATH=$(BASE_PREFIX)/lib dh_shlibdeps
+	dh_md5sums
+	dh_builddeb
+
+binary: binary-indep binary-arch
+.PHONY: build clean binary-indep binary-arch binary install 
+

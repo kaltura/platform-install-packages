@@ -1,6 +1,15 @@
 maintainer       "Jess Portnoy, Kaltura, Inc."
 maintainer_email "jess.portnoy@kaltura.com"
 license          "AGPLv3+"
-description      "Installs/Configures kaltura"
+description      "Installs and configures Kaltura"
+long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 
-version          "0.2"
+version          "24.0"
+
+
+
+supports 'centos'
+supports 'redhat'
+supports 'fedora'
+suggests 'nfs'
+suggests 'mysql'

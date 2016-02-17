@@ -1,0 +1,46 @@
+Source: kaltura-nginx
+Section: misc
+Priority: extra
+Maintainer: Jess Portnoy <jess.portnoy@kaltura.com>
+Build-Depends: 
+ debhelper (>= 7.0.50),
+ autotools-dev,
+ dpkg-dev (>= 1.15.7),
+ libexpat-dev,
+ libgeoip-dev,
+ liblua5.1-dev,
+ libmhash-dev,
+ libpam0g-dev,
+ libpcre3-dev,
+ libperl-dev,
+ libssl-dev,
+ libxslt1-dev,
+ po-debconf,
+ zlib1g-dev,
+ kaltura-ffmpeg,
+ unzip
+
+Package: kaltura-nginx
+Section: misc
+Architecture: any
+Pre-Depends:
+ dpkg (>= 1.15.7.2~),
+ kaltura-ffmpeg
+Provides: httpd,
+          nginx
+Conflicts: nginx
+Depends: 
+ kaltura-postinst,
+ ${misc:Depends},
+ ${shlibs:Depends}
+Description: Nginx web/proxy server - for Kaltura
+ Nginx ("engine X") is a high-performance web and reverse proxy server
+ created by Igor Sysoev. It can be used both as a standalone web server
+ and as a proxy to reduce the load on back-end HTTP or mail servers.
+ .
+ This package provides the autolearning daemon and web user interface for
+ nginx's naxsi module.
+ .
+ It includes an interceptor (listening on TCP port 8080), which monitors
+ HTTP requests from naxsi, and an extractor (running on TCP port 8081),
+ which reads the database and prints reports about blocked requests.

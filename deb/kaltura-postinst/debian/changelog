@@ -1,0 +1,53 @@
+kaltura-postinst (1.0.31-1) kajam; urgency=low
+
+  *  https://github.com/kaltura/platform-install-packages/pull/521
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Tue, 16 Feb 2016 14:35:33 +0000
+
+kaltura-postinst (1.0.30-1) kajam; urgency=low
+
+  * Output failure message in trap handler.
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Wed, 18 Nov 2015 17:02:13 +0000
+
+kaltura-postinst (1.0.29-1) kajam; urgency=low
+
+  * use -f when calling curl to verify connectivity to $SERVICE_URL/api_v3 
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Wed, 28 Oct 2015 11:46:41 +0000
+
+kaltura-postinst (1.0.28-1) jupiter; urgency=low
+
+  * dropfolder test: delete() afterwards.
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Thu, 16 Jul 2015 14:38:54 +0000
+
+kaltura-postinst (1.0.27-1) jupiter; urgency=low
+
+  * Changed script name to match script naming convention.
+  * Added script that clears old dwh logs, runs the logrotate and then all the jobs from /etc/cron.d/kaltura-dwh.. Useful for when debugging analytics.
+  * Added upload captions test
+  * Added search entry test
+  * Added notification tests
+
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Sun, 12 Jul 2015 06:37:23 +0000
+
+kaltura-postinst (1.0.27) jupiter; urgency=low
+
+  * Support deb based systems too. 
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Thu, 04 Jun 2015 15:12:55 +0000
+
+kaltura-postinst (1.0.26) jupiter; urgency=low
+
+  * Fix studio sanity on deb
+  * Redirect errors Can't DROP| already exists| Duplicate column name to /dev/null for db-update.sh since they stem from the fact these update SQLs were already prev. processed and are therefore not actual errors.
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Thu, 21 May 2015 14:37:45 +0000
+
+kaltura-postinst (1.0.25-1) experimental; urgency=low
+
+  - First package
+
+ -- Jess Portnoy <jess.portnoy@kaltura.com>  Mon, 6 Apr 2015 20:46:43 +0200

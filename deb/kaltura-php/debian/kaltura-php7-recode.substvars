@@ -1,0 +1,3 @@
+shlibs:Depends=libc6 (>= 2.14), librecode0 (>= 3.6)
+php:Depends=phpapi-20151012
+misc:Depends=

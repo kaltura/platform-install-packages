@@ -1,26 +1,16 @@
-        check process apache
-           with pidfile "/var/run/httpd/httpd.pid"
-           start program = "/sbin/service httpd start" with timeout 60 seconds
-           stop program = "/sbin/service httpd stop"
-           #if 10 restarts within 10 cycles then timeout
-           #if totalmem > 100 Mb then alert
-           #if children > 255 for 5 cycles then stop
-           #if cpu usage > 95% for 3 cycles then restart
-           #if failed port 80 protocol http then restart
-           group kaltura
-           depends on httpd.conf, httpd
+check process apache
+   with pidfile "/var/run/httpd/httpd.pid"
+   start program = "/sbin/service httpd start" with timeout 60 seconds
+   stop program = "/sbin/service httpd stop"
+    group kaltura
+    depends on httpd.conf, httpd
+   
+check file httpd.conf
+    with path "@APP_DIR@/configurations/apache/kaltura.conf"
+    # Reload apache if the httpd.conf file was changed
+    if changed checksum
+        then exec "/usr/sbin/apachectl graceful"
 
-        check file httpd.conf
-            with path "@APP_DIR@/configurations/apache/kaltura.conf"
-            # Reload apache if the httpd.conf file was changed
-            if changed checksum
-               then exec "/usr/sbin/apachectl graceful"
-
-        check file httpd
-            with path "/usr/sbin/httpd"
-            # Run /watch/dog in the case that the binary was changed
-            # and alert in the case that the checksum value recovered
-            # later
-            #if failed checksum then exec "/watch/dog"
-            #   else if recovered then alert
+check file httpd
+    with path "/usr/sbin/httpd"
 

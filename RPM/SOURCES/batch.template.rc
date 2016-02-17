@@ -1,11 +1,16 @@
-        check process batch 
-           with pidfile "@LOG_DIR@/batch/batch.pid"
-           start program = "/etc/init.d/kaltura-batch start" with timeout 60 seconds
-           stop program = "/etc/init.d/kaltura-batch stop"
-           #if 10 restarts within 10 cycles then timeout
-           group kaltura
-           depends on batch_script
+check process batch 
+    with pidfile "@LOG_DIR@/batch/batch.pid"
+    start program = "/etc/init.d/kaltura-batch restart" with timeout 60 seconds
+    stop program = "/etc/init.d/kaltura-batch stop"
 
-        check file batch_script
-            with path "@APP_DIR@/batch/KGenericBatchMgr.class.php"
-            
+    group kaltura
+    depends on batchbin, batch.ini
+
+check file batch.ini
+    with path "@APP_DIR@/configurations/batch/batch.ini"
+    # Reload Batch if the kaltura.conf file was changed
+    if changed checksum
+        then exec "/etc/init.d/kaltura-batch restart"
+
+check file batchbin
+    with path "@APP_DIR@/batch/KGenericBatchMgr.class.php"

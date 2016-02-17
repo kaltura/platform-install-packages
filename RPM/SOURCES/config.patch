@@ -1,0 +1,18 @@
+--- a/sphinx-min.conf.in	2012-10-22 11:50:56.000000000 +0200
++++ b/sphinx-min.conf.in	2012-10-22 11:45:02.000000000 +0200
+@@ -48,7 +48,7 @@
+ 
+ indexer
+ {
+-	mem_limit		= 32M
++	mem_limit		= 128M
+ }
+ 
+ 
+@@ -66,5 +66,5 @@
+ 	preopen_indexes		= 1
+ 	unlink_old		= 1
+ 	workers			= threads # for RT to work
+-	binlog_path		= @CONFDIR@/data
++	binlog_path		= @CONFDIR@/data/
+ }

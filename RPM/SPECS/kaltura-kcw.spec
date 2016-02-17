@@ -1,14 +1,12 @@
 %define prefix /opt/kaltura
 %define widget_name kcw
-%define kcw_uiconf_ver 2.1.5
-%define kcw_vers "v2.1.6.7 v2.1.5 v2.2.1 v2.2.3 v2.2.4 v2.1.4 v1.5.4 v2.1.2 v2.1.6.3"
 Name:	kaltura-%{widget_name}
-Version: 1.0.0 
-Release: 6 
-Summary: Kaltura KCW - used for recording from web cam
+Version: 2.2.6
+Release: 1 
+Summary: Kalture Contribution Wizard 
 License: AGPLv3+	
 URL: http://kaltura.org
-Source0: %{name}.tar.bz2
+Source0: %{name}-v%{version}.tar.bz2
 BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 BuildArch: noarch
 
@@ -26,7 +24,7 @@ teachers by providing educational institutions disruptive online video solutions
 learning, and increased engagement across campuses and beyond. 
 For more information visit: http://corp.kaltura.com, http://www.kaltura.org and http://www.html5video.org.
 
-This package installs the Kaltura KCW - used for recording from web cam.
+This package installs the Kaltura Contribution Wizard.
 
 %prep
 %setup -qn %{name} 
@@ -38,12 +36,9 @@ mkdir -p $RPM_BUILD_ROOT%{prefix}/web/flash/%{widget_name}
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content
 mkdir -p $RPM_BUILD_ROOT/%{prefix}/web/content/uiconf/kaltura/generic
 mv %{_builddir}/%{name}/uiconf/kaltura/generic/kcw_%{kcw_uiconf_ver} $RPM_BUILD_ROOT/%{prefix}/web/content/uiconf/kaltura/generic/kcw_%{kcw_uiconf_ver}
-for i in %{kcw_vers};do 
-	cp -r %{_builddir}/%{name}/$i $RPM_BUILD_ROOT/%{prefix}/web/flash/%{widget_name}
-	find $RPM_BUILD_ROOT/%{prefix}/web/flash/%{widget_name} -name ".project" -exec rm {} \;
-done
+cp -r %{_builddir}/%{name}/v%{version} $RPM_BUILD_ROOT/%{prefix}/web/flash/%{widget_name}
+find $RPM_BUILD_ROOT/%{prefix}/web/flash/%{widget_name} -name ".project" -exec rm {} \;
 
-#content/uiconf/kaltura/generic/kcw_%{kcw_uiconf_ver}
 
 %clean
 rm -rf %{buildroot}
@@ -54,6 +49,12 @@ rm -rf %{buildroot}
 %{prefix}/web/content/uiconf/kaltura/generic/kcw_%{kcw_uiconf_ver}
 
 %changelog
+* Wed Feb 3 2016 Jess Portnoy <jess.portnoy@kaltura.com> - 2.2.6
+- SUP-1834 allow configuring record stream buffertime via uiconf
+
+* Mon Apr 20 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 2.2.4
+- We don't need more than one KCW version. Bundle only latest.
+
 * Thu Feb 13 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.0-6
 - Placing uiconfs in the right location.
 

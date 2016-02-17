@@ -1,13 +1,13 @@
 %define prefix /opt/kaltura
 %define widget_name kupload
-%define kupload_vers "v1.2.8 v1.1.7 v1.0.23"
 Name:	kaltura-%{widget_name}
-Version: 1.0.0 
+Version: v1.2.16 
 Release: 1 
+Epoch:0
 Summary: Kaltura kupload widget
 License: AGPLv3+	
 URL: http://kaltura.org
-Source0: %{name}.tar.bz2
+Source0: %{name}-%{version}.zip
 BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 BuildArch: noarch
 
@@ -28,17 +28,15 @@ For more information visit: http://corp.kaltura.com, http://www.kaltura.org and 
 This package installs the Kaltura kupload.
 
 %prep
-%setup -qn %{name} 
+%setup -qn %{version}
 
 %build
 
 %install
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/flash/%{widget_name}
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content
-for i in %{kupload_vers};do
-	cp -r %{_builddir}/%{name}/$i $RPM_BUILD_ROOT/%{prefix}/web/flash/%{widget_name}
-	find $RPM_BUILD_ROOT/%{prefix}/web/flash/%{widget_name} -name ".project" -exec rm {} \;
-done
+cp -r %{_builddir}/%{version} $RPM_BUILD_ROOT/%{prefix}/web/flash/%{widget_name}
+find $RPM_BUILD_ROOT/%{prefix}/web/flash/%{widget_name} -name ".project" -exec rm {} \;
 
 %clean
 rm -rf %{buildroot}
@@ -48,6 +46,8 @@ rm -rf %{buildroot}
 %{prefix}/web/flash/%{widget_name}
 
 %changelog
+* Mon Nov 17 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v1.2.16
+- Bounce ver and also moved to GitHub.
 
 * Tue Feb 11 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.0-1
 - initial package.

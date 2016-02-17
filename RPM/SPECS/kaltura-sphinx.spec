@@ -6,7 +6,7 @@
 
 Name:           kaltura-sphinx
 Version:        2.2.1
-Release:        16
+Release:        17
 Summary:        Sphinx full-text search server - for Kaltura
 
 Group:          Applications/Text
@@ -17,10 +17,7 @@ Packager:       Kaltura Inc.
 
 Source0:       	%{name}-%{version}.tar.gz 
 Source1: 	%{name}
-Source2:	http://snowball.tartarus.org/dist/libstemmer_c.tgz
-Source3:	re2.tar.gz
-Source4:	kaltura.conf.template
-Source5: 	kaltura-populate
+Source2: 	kaltura-populate
 Patch0:		config-main.patch
 Patch1:		config.patch
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-build
@@ -32,7 +29,7 @@ Requires(post): chkconfig
 Requires(preun): chkconfig
 # This is for /sbin/service
 Requires(preun): initscripts
-Requires(preinst): mysql-libs zlib openssl expat libgcc krb5-libs, kaltura-base
+#Requires(preinst): mysql-libs zlib openssl expat libgcc krb5-libs
 
 
 %description
@@ -48,8 +45,8 @@ client programs and libraries via SQL-like SphinxQL interface.
 %setup -n %{name}-%{version}
 %patch0 -p1
 %patch1 -p1
-%setup -D -T -a 2 -n %{name}-%{version}
-%setup -D -T -a 3 -n %{name}-%{version}
+#%setup -D -T -a 2 -n %{name}-%{version}
+#%setup -D -T -a 3 -n %{name}-%{version}
 
 # Fix wrong-file-end-of-line-encoding
 sed -i 's/\r//' api/ruby/spec/sphinx/sphinx_test.sql
@@ -60,7 +57,7 @@ sed -i 's/\r//' api/ruby/lib/sphinx/response.rb
 
 %build
 
-%configure --sysconfdir=/opt/kaltura/app/configurations/sphinx  --with-mysql --with-libstemmer --with-unixodbc --with-iconv --enable-id64 --with-syslog --prefix=/opt/kaltura/sphinx --mandir=/opt/kaltura/sphinx/share/man --bindir=/opt/kaltura/sphinx/bin
+%configure --sysconfdir=/opt/kaltura/app/configurations/sphinx  --with-mysql --with-unixodbc --with-iconv --enable-id64 --with-syslog --prefix=%{prefix} --mandir=%{prefix}/share/man --bindir=%{prefix}/bin
 make %{?_smp_mflags}
 
 
@@ -72,7 +69,7 @@ mkdir $RPM_BUILD_ROOT/opt/kaltura/sphinx/lib
 mkdir -p  $RPM_BUILD_ROOT%{_initrddir}
 # Install sphinx initscript
 install -p -D -m 0755 %{SOURCE1} $RPM_BUILD_ROOT%{_initrddir}/
-install -p -D -m 0755 %{SOURCE5} $RPM_BUILD_ROOT%{_initrddir}/
+install -p -D -m 0755 %{SOURCE2} $RPM_BUILD_ROOT%{_initrddir}/
 chmod +x $RPM_BUILD_ROOT%{_initrddir}/*
 mkdir -p $RPM_BUILD_ROOT/opt/kaltura/log/sphinx/data
 
@@ -108,8 +105,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 ldconfig
-groupadd -r %{kaltura_group} 2>/dev/null || true
-useradd -M -r -d /opt/kaltura -s /bin/bash -c "Kaltura server" -g %{kaltura_group} %{kaltura_user} 2>/dev/null || true
+getent group %{sphinx_group} >/dev/null || groupadd -r %{sphinx_group} -g7373 2>/dev/null
+getent passwd %{sphinx_user} >/dev/null || useradd -M -r -u7373 -d %{prefix} -s /bin/bash -c "Kaltura server" -g %{sphinx_group} %{sphinx_user} 2>/dev/null
 sed 's#@LOG_DIR@#/opt/kaltura/log#g' /opt/kaltura/app/configurations/sphinx/kaltura.conf.template > /opt/kaltura/app/configurations/sphinx/kaltura.conf
 sed 's#@BASE_DIR@#/opt/kaltura#g' -i $RPM_BUILD_ROOT/opt/kaltura/app/configurations/sphinx/kaltura.conf
 sed 's#^pid_file.*#pid_file=%{prefix}/var/run/searchd.pid#' -i $RPM_BUILD_ROOT/opt/kaltura/app/configurations/sphinx/kaltura.conf
@@ -169,6 +166,9 @@ fi
 
 
 %changelog
+* Wed Oct 7 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 2.2.1.r4097-17
+- https://github.com/kaltura/platform-install-packages/issues/454
+
 * Mon Feb 3 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 2.2.1.r4097-15 
 - Start Sphinx and pop at init.
 

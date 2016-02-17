@@ -1,7 +1,14 @@
 # Deploying Kaltura using Opscode Chef
 
 This guide is intended for users of Chef that would like to deploy Kaltura clusters using [Chef recipes](http://docs.opscode.com/essentials_cookbook_recipes.html).   
-If you don't know what Chef is, start by reading [An Overview of Chef](http://docs.opscode.com/chef_overview.html).
+
+### Before You Get Started Notes
+
+* Please review the [frequently answered questions](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura-packages-faq.md) document for general help before posting to the forums or issue queue.
+* If you don't know what Chef is, start by reading [An Overview of Chef](http://docs.opscode.com/chef_overview.html).
+* If you're looking to install Kaltura on a signle machine, see: [Installing Kaltura on a Single All-In-One Server (RPM)](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-redhat-based.md)
+* If you're looking to deploy a cluster manually or using other automation tools, see [Deploying Kaltura Clusters](https://github.com/kaltura/platform-install-packages/blob/master/doc/rpm-cluster-deployment-instructions.md).
+* [Kaltura Inc.](http://corp.kaltura.com) also provides commercial solutions and services including pro-active platform monitoring, applications, SLA, 24/7 support and professional services. If you're looking for a commercially supported video platform  with integrations to commercial encoders, streaming servers, eCDN, DRM and more - Start a [Free Trial of the Kaltura.com Hosted Platform](http://corp.kaltura.com/free-trial) or learn more about [Kaltura' Commercial OnPrem Edition™](http://corp.kaltura.com/Deployment-Options/Kaltura-On-Prem-Edition). For existing RPM based users, Kaltura offers commercial upgrade options.
 
 ## Installing the Chef server
 
@@ -12,9 +19,12 @@ If you don't know what Chef is, start by reading [An Overview of Chef](http://do
     1. The post install will provide instructions as to what else needs to be done to set the instance up.   
 1. Obtain chef-repo from https://github.com/kaltura/platform-install-packages.git  
 1. Upload the Kaltura recipes to your Chef server using: `# knife cookbook upload kaltura`
-1. We also recommend you use the ready made recipes for MySQL and NFS which can be taken from here:
+1. We also recommend you use the ready made recipes for MySQL, NFS and NTP which can be taken from here:
     1. http://community.opscode.com/cookbooks/mysql
     1. http://community.opscode.com/cookbooks/nfs
+    1. http://community.opscode.com/cookbooks/ntp
+
+**Note: you may also want to use this recipe for a simple Apache load balancer: http://community.opscode.com/cookbooks/apache_load_balancer **
 
 ## Bootstrapping clients
 Run the following:
@@ -55,13 +65,60 @@ nfs
 Alternatively, log in to Chef's web with https://chef-server/   
 You should see your added nodes under the "Nodes" tab as well as the "Clients" tab.
 
-## Loading the NTP and MySQL recipes to your Chef server
-Download NTP and MySQL recipes:
+## Loading the NFS and MySQL recipes to your Chef server
+Download NFS and MySQL recipes:
 
-1. http://community.opscode.com/cookbooks/ntp
+1. https://github.com/jessp01/cookbook-nfs
 1. http://community.opscode.com/cookbooks/mysql
 
 **These recipes have dependencies you will need as well. Please follow documentation on the above URLs.**
+
+**Configuring NFS and MySQL Recipes**
+Before you upload the MySQL and NFS recipes to your chef server you need to configure them.
+
+**NFS Recipe**
+
+Add your mount point to the NFS recipe so each client that need access to it will be able to access.
+
+Edit:`path/to/your-chef-repo/cookbooks/nfs/recipes/_common.rb`
+
+At the end of the file add:
+```
+mount "/opt/kaltura/web" do
+  device "nfs.yourdomain.com:/opt/kaltura/web"
+  fstype "nfs"
+  options "rw"
+  action [:mount, :enable]
+end
+```
+This will mount the shared folder automatically even if you restart the server.
+
+**MySQL Recipe**
+
+The MySQL recipe configures MySQL to listen on localhost only, you need to change this as the various nodes in your cluster will need access to it, also, set the master password for root here:
+
+Edit:`path/to/your-chef-repo/cookbooks/mysql/attributes/default.rb`
+
+```
+default['mysql']['server_root_password'] = 'yourpassword'
+default['mysql']['allow_remote_root'] = true
+```
+Now edit:`path/to/your-chef-repo/cookbooks/mysql/templates/default/5.1/my.cnf.erb`
+
+Note: navigate into the "default" folder to configure as your mysql version if not 5.1.
+
+Inside the [mysqld] tag at the last line add:
+
+```
+open_files_limit = 20000
+lower_case_table_names=1
+max_allowed_packet = 16M
+```
+Finally navigate to `path/to/your-chef-repo/cookbooks/` and upload your configured cookbooks
+```
+knife cookbook upload nfs
+knife cookbook upload mysql
+```
 
 ## Loading the Kaltura recipes to your Chef server
 ```
@@ -97,17 +154,26 @@ The syntax for it is:
 ```
 An example cluster deployment will be:
 ```
+# knife node run_list add mynfs kaltura::nfs-server
 # knife node run_list add mynfs nfs::server
 # knife node run_list add my-mysql-machine mysql::server 
-# knife node run_list add my-mysql-machine mysql::_server_rhel 
 # knife node run_list add my-batch-machine nfs 
 # knife node run_list add my-batch-machine kaltura::batch 
 # knife node run_list add my-sphinx-machine kaltura::sphinx
 # knife node run_list add my-sphinx-machine kaltura::db_config
-# knife node run_list add my-front-machine  nfs 
-# knife node run_list add my-front-machine  kaltura::batch 
-# knife node run_list add my-dwh-machine  kaltura::dwh 
-# knife node run_list add my-dwh-machine  kaltura::nfs
+# knife node run_list add my-front-machine nfs 
+# knife node run_list add my-front-machine kaltura::front 
+# knife node run_list add my-dwh-machine nfs
+# knife node run_list add my-dwh-machine kaltura::dwh 
+# knife node run_list add my-vod-machine kaltura::vod-packager 
+```
+
+
+
+
+If at any point you would like to remove a role assignment, use:
+```
+# knife node run_list remove node 'recipe[COOKBOOK::RECIPE_NAME]'
 ```
 
 Alternatively, log in to Chef's web I/F with https://chef-server    
@@ -116,7 +182,8 @@ And deploy the cluster from the "Nodes"->"Edit" menu.
 ### Notes 
 
 1. The db_config runs from sphinx because it requires Kaltura's code which there is no reason to deploy on the DB machine.
-1. The above run lists are a recommedation, you can of course run more than one role per node.
+2. The above run lists are a recommedation, you can of course run more than one role per node.
+3. The order of the run_list is crucial. NFS needs to happen first. Note that your recipe should include creation of /opt/kaltura/web BEFORE the NFS recipe runs.
 
 
 ## Running the Chef client
@@ -126,17 +193,27 @@ Note that the order in which you install the nodes matters!
 It should be as following:
 ```
 $ ssh my-mysql-machine
-root@my-mysql-machine:~# chef-client
+root@my-mysql-machine:~# chef-client -ldebug
 
 $ ssh my-front-machine
-root@my-front-machine:~# chef-client
+root@my-front-machine:~# chef-client -ldebug
 
 $ ssh my-sphinx-machine
-root@my-sphinx-machine:~# chef-client
+root@my-sphinx-machine:~# chef-client -ldebug
 
 $ ssh my-batch-machine
-root@my-batch-machine:~# chef-client
+root@my-batch-machine:~# chef-client -ldebug
 
 $ ssh my-dwh-machine
-root@my-dwh-machine:~# chef-client
+root@my-dwh-machine:~# chef-client -ldebug
+
+$ ssh my-vod-machine
+root@my-vod-machine:~# chef-client -ldebug
 ```
+
+### EC2 automation
+Please this howto about auto provisioning EC2 images:
+https://learnchef.opscode.com/starter-use-cases/multi-node-ec2/
+
+### Automatic Scaling with Chef and Kaltura API:
+http://blog.kaltura.org/automatic-scaling-with-chef-kaltura-api/

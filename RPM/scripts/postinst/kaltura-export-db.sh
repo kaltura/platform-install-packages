@@ -4,6 +4,7 @@
 #         USAGE: ./export_db.sh <schema> <user> <passwd> <port> <host> <output/path> [verbose]
 #   DESCRIPTION: 
 #       OPTIONS: ---
+# 	LICENSE: AGPLv3+
 #  REQUIREMENTS: ---
 #          BUGS: ---
 #         NOTES: ---

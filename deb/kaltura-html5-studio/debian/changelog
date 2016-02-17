@@ -1,0 +1,46 @@
+kaltura-html5-studio (2.0.1-1) jupiter; urgency=low
+
+  * SUP-5016 - KMC doesn't save player strings override.
+  * Aligned with HTML5 lib v2.35
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Thu, 17 Sep 2015 14:39:33 +0000
+
+kaltura-html5-studio (2.0.0-1) jupiter; urgency=low
+
+  * Aligned with player v2.33.
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Fri, 24 Jul 2015 22:28:02 +0000
+
+kaltura-html5-studio (1.9.9-1) jupiter; urgency=low
+
+  * Add Studio support for Embed.ly embeds and Multi DRM plugins
+  * FEC-3611 Studio v2: after adding new boolean plugin, grey square displayed over 'delete' icon
+  * FEC-3612 Studio v2: need to add validation for Rate Selector selectable speeds
+  * FEC-3615 Give more width to player in studio better support on page plugins
+  * FEC-3628 Studio v2: need to click twice "Play" button after change player size, if 'auto preview' selected
+  * FEC-3613 Studio v2: Strings plugin - possible to add new strings, even if the plugin unchecked
+  * FEC-3609 Studio v2: incorrect aspect ratio selected ,if "Auto Preview" was checked
+  * SUP-4846 Cannot set mediaProxy.preferedFlavorBR without turning the SourceSelector on
+  * FEC-3628 Studio v2: need to click twice "Play" button after change player size, if 'auto preview' selected
+
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Sun, 28 Jun 2015 08:52:43 +0000
+
+kaltura-html5-studio (1.9.8-1) jupiter; urgency=low
+
+  * Version bounce 
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Sun, 31 May 2015 12:16:57 +0000
+
+kaltura-html5-studio (1.9.7-1) jupiter; urgency=low
+
+  * Version bounce 
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 04 May 2015 19:40:14 +0000
+
+kaltura-html5-studio (1.9.6) jupiter; urgency=low
+
+  * Initial package.
+
+ -- Jess Portnoy <jess.portnoy@kaltura.com>  Sun, 10 Apr 2015 15:27:12 +0000
+

@@ -1,0 +1,16 @@
+#### Creating Distribution profile
+Please follow the below steps to create a distribution profile and to distribute a video.
+We will get the error "The usage of feature [contentDistribution] is forbidden" while creating the distributing profile, unless the feature is enabled in Publicher's configuration settings. Please follow the below steps to enable it and to create a distribution profile.
+
+1. Login to Kaltura Admin Console.
+2. In Publishers tab, click on 'Actions' dropdown for a perticular publisher anf select 'Configure' option.
+3. Publisher Specific Configuration window will be opened and in 'Enable/Disable Features' section, check the box for 'Content Distribution Module'.
+4. Click on 'Save'.
+5. Click on 'Profiles' dropdown in Publishers tab, for a perticular publisher and select 'Distribution Profiles'.
+6. Select 'Provider' as YoutubeApi or Tvinci or Generic as per the provider and click on 'Create New'.
+7. Fill the required information in 'Profile Setup Configuration' window. Eg. for YoutubeApi, provide Youtube user name, password and click on save. Now Distribution Profile is created.
+8. Login to KMC and go to the 'Content' tab.
+9. Select the 'View Details' option for the desired Vidoe and click on the 'Distribution' option in left side menu.
+10. Select the required Distributor.
+11. Click on 'Save and Close'
+12. We can track the initiated Distribution jobs, in the 'Batch Process Control' tab in Admin Console.

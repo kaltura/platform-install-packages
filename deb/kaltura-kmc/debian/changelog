@@ -1,0 +1,72 @@
+kaltura-kmc (5.39.11-2) kajam; urgency=low
+
+  * Version bounce to align with kaltura-html5lib v2.37.3. 
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Sun, 06 Dec 2015 16:47:35 +0000
+
+kaltura-kmc (5.39.11-1) kajam; urgency=low
+
+  * SUP-4977 - Administration tab in KMC does not load on Mac in chrome, safari, or firefox 
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Fri, 20 Nov 2015 12:00:17 +0000
+
+kaltura-kmc (5.39.10-1) kajam; urgency=low
+
+  * SUP-5939 - Missing players when listing players for syndication
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Thu, 05 Nov 2015 12:56:01 +0000
+
+kaltura-kmc (5.39.9-4) jupiter; urgency=low
+
+  * Version bounce to align with kaltura-html5lib v2.36. 
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Fri, 23 Oct 2015 13:07:45 +0000
+
+kaltura-kmc (5.39.9-2) jupiter; urgency=low
+
+  * Version bounce to align with kaltura-html5lib v2.35.5. 
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Fri, 09 Oct 2015 11:52:05 +0000
+
+kaltura-kmc (5.39.9-1) jupiter; urgency=low
+
+  * Update KMC listing of live streaming ingest points to use _1 instead of _%i
+  * Version bounce to align with kaltura-html5lib v2.35. 
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Thu, 17 Sep 2015 14:52:21 +0000
+
+kaltura-kmc (5.39.8-1) jupiter; urgency=low
+
+  * Version bounce to align with server 10.17.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Thu, 06 Aug 2015 13:08:10 +0000
+
+kaltura-kmc (5.39.6-1) jupiter; urgency=low
+
+  * PLAT-3409 - CustomData.System name with underscore is not supported by KMC->Mapping fields fail. 
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Fri, 24 Jul 2015 22:21:32 +0000
+
+kaltura-kmc (5.39.3-1) jupiter; urgency=low
+
+  * SUP-4926 - Wrong KMC owner accounts - change to right account not saved 
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 15 Jun 2015 08:58:17 +0000
+
+kaltura-kmc (5.39.1-2) jupiter; urgency=low
+
+  * HTML5lib ver bounce to v2.31.
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Sun, 31 May 2015 12:40:25 +0000
+
+kaltura-kmc (5.39.1-1) experimental; urgency=low
+
+  - ver 5.39.1
+
+ -- Jess Portnoy <jess.portnoy@kaltura.com>  Fri, 10 Apr 2015 17:52:43 +0200
+
+kaltura-kmc (5.38.11-1) experimental; urgency=low
+
+  - First package
+
+ -- Jess Portnoy <jess.portnoy@kaltura.com>  Fri, 10 Apr 2015 17:52:43 +0200

@@ -1,0 +1,19 @@
+
+                             NOTES FOR DEBIAN USERS
+                             ======================
+
+
+ 1. Viewing statistics and tunning your userland cache
+
+ The script apc.php that comes with APCu provides detailed information
+ about your cache statistics.  In Debian you will need to copy or
+ symlink script from /usr/share/doc/php5-apcu to your desired location
+ (like a docroot) and access it from the browser.
+
+ The script will provide additional graphics if you install the
+ php5-gd package.
+
+ In order to understand the information and use it to tune you cache
+ refer to the APCu documentation at: http://pecl.php.net/package/APCu
+
+ -- Ondřej Surý <ondrej@debian.org>, Wed, 15 May 2013 09:33:39 +0200

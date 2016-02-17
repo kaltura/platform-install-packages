@@ -1,0 +1,4 @@
+#!/bin/bash
+echo "/opt/kaltura/ffmpeg-2.1.3/lib" >> /etc/ld.so.conf.d/kaltura-ffmpeg-aux.conf
+/sbin/ldconfig
+chcon -t textrel_shlib_t /usr/lib64/libav{codec,device,format,util}.so.*.*.* &>/dev/null || :

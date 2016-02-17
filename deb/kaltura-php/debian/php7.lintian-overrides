@@ -1,0 +1,3 @@
+kaltura-php7-common: non-standard-dir-perm var/lib/php5/ 1733 != 0755
+kaltura-php7-common: package-contains-empty-directory usr/lib/php5/libexec/
+kaltura-php7-common: missing-dependency-on-phpapi

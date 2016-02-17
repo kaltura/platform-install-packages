@@ -1,10 +1,16 @@
-        check process memcache
-           with pidfile "/var/run/memcached/memcached.pid"
-           start program = "/etc/init.d/memcached start" with timeout 60 seconds
-           stop program = "/etc/init.d/memcached stop"
-           #if 10 restarts within 10 cycles then timeout
-           group kaltura
-           depends on memcached
-        check file memcached
-            with path "/usr/bin/memcached"
+check process memcache
+    with pidfile "/var/run/memcached/memcached.pid"
+    start program = "/sbin/service memcached start" with timeout 60 seconds
+    stop program = "/sbin/service memcached stop"
 
+
+    depends on memcachedbin, memcachedconf
+
+check file memcachedconf
+    with path "/etc/sysconfig/memcached"
+    # Reload memcached if the configuration file was changed
+    if changed checksum
+        then exec "/sbin/service memcached restart"
+    
+check file memcachedbin
+    with path "/usr/bin/memcached"

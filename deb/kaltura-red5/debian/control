@@ -17,3 +17,4 @@ Description: Kaltura Open Source Video Platform
  increased engagement across campuses and beyond. 
  For more information visit: http://corp.kaltura.com, http://www.kaltura.org and http://www.html5video.org.
  .
+ This is a wrapper for red5-server. Will do some configurations needed specifically for Kaltura.

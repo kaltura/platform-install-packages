@@ -1,13 +1,14 @@
 %define prefix /opt/kaltura
-%define kdp3_vers "v3.5.21 v3.8.9 v3.9.1 v3.9.2 v3.9.7 v3.9.8"
 Name:	kaltura-kdp3	
-Version: v3.9.8
+Version: v3.9.9
 Epoch: 1 
-Release: 1 
+Release: 2
 Summary: Kaltura Dynamic Player
 License: AGPLv3+	
 URL: https://github.com/kaltura/kdp/releases/tag/%{version}
-Source0: %{name}-%{version}.zip
+Source0: %{name}-%{version}.tar.gz
+Source2: %{name}-v3.9.7.tar.gz
+Source3: %{name}-v3.9.8.tar.gz
 BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 BuildArch: noarch
 
@@ -29,14 +30,19 @@ This package installs the KDP Flash player.
 
 %prep
 %setup -qn %{version} 
-
+cd %{_builddir}
+tar zxf %{SOURCE2} 
+tar zxf %{SOURCE3} 
+cd -
 %build
 
 %install
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/flash/kdp3
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content
-cp -r %{_builddir}/%{version} $RPM_BUILD_ROOT/%{prefix}/web/flash/kdp3/%{version}
-
+for i in %{kdp3_vers};do
+	cp -r %{_builddir}/$i $RPM_BUILD_ROOT/%{prefix}/web/flash/kdp3/
+done
+	cp -r %{_builddir}/%{version} $RPM_BUILD_ROOT/%{prefix}/web/flash/kdp3/
 %clean
 rm -rf %{buildroot}
 
@@ -46,6 +52,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Thu Jul 10 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v3.9.9-1
+- New rel.
+
 * Sun Mar 9 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v3.9.8-1
 - SUP-1430 - Closed Captions won't show in livestream + prerolls 
 - SUP-1498 - Video is not Auto played After Ad served. 

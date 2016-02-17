@@ -25,8 +25,8 @@
 
 Summary: Utilities and libraries to record, convert and stream audio and video
 Name: kaltura-ffmpeg
-Version: 1.1.1
-Release: 9 
+Version: 2.7.2 
+Release: 2
 License: GPL
 Group: Applications/Multimedia
 URL: http://ffmpeg.org/
@@ -41,20 +41,23 @@ BuildRequires: SDL-devel
 BuildRequires: freetype-devel
 BuildRequires: imlib2-devel
 BuildRequires: zlib-devel
-%{!?_without_a52dec:BuildRequires: a52dec-devel}
+BuildRequires: schroedinger-devel
+BuildRequires: libtheora-devel
+BuildRequires: libvorbis-devel
+BuildRequires: xvidcore-devel
+%{!?_without_a52dec:BuildRequires: kaltura-a52dec-devel}
 %{!?_without_dc1394:BuildRequires: libdc1394-devel}
-%{!?_without_faac:BuildRequires: faac-devel}
 %{!?_without_gsm:BuildRequires: gsm-devel}
-%{!?_without_lame:BuildRequires: lame-devel}
+%{!?_without_lame:BuildRequires: kaltura-lame-devel}
 %{!?_without_nut:BuildRequires: libnut-devel}
-%{!?_without_opencore_amr:BuildRequires: opencore-amr-devel}
+%{!?_without_opencore_amr:BuildRequires: kaltura-libopencore-amr-devel}
 %{!?_without_openjpeg:BuildRequires: openjpeg-devel}
 %{!?_without_rtmp:BuildRequires: librtmp-devel}
 %{!?_without_schroedinger:BuildRequires: schroedinger-devel}
 %{!?_without_texi2html:BuildRequires: texi2html}
 %{!?_without_theora:BuildRequires: libogg-devel, libtheora-devel}
 %{!?_without_vorbis:BuildRequires: libogg-devel, libvorbis-devel}
-%{!?_without_vpx:BuildRequires: libvpx-devel}
+%{!?_without_vpx:BuildRequires: libvpx-devel >= 1.3.0}
 %{!?_without_x264:BuildRequires: kaltura-x264-devel}
 %{!?_without_xvid:BuildRequires: xvidcore-devel}
 %{!?_without_a52dec:Requires: a52dec}
@@ -63,8 +66,12 @@ BuildRequires: libass-devel
 BuildRequires: kaltura-x264-devel 
 BuildRequires: gsm-devel
 BuildRequires: speex-devel
-BuildRequires: libvpx-devel
-Requires:kaltura-a52dec,kaltura-libfaac,kaltura-libass,kaltura-x264
+BuildRequires: libvpx-devel >= 1.3.0
+BuildRequires: schroedinger-devel 
+BuildRequires: libtheora-devel
+BuildRequires: xvidcore-devel >= 1.3.2
+Requires:kaltura-a52dec,libass,kaltura-x264
+Requires: libvpx >= 1.3.0
 
 %description
 FFmpeg is a very fast video and audio converter. It can also grab from a
@@ -80,12 +87,11 @@ Summary: Header files and static library for the ffmpeg codec library
 Group: Development/Libraries
 Requires: %{name} = %{version}
 Requires: imlib2-devel, SDL-devel, freetype-devel, zlib-devel, pkgconfig,kaltura-x264
-%{!?_without_a52dec:Requires: a52dec-devel}
+%{!?_without_a52dec:Requires: kaltura-a52dec-devel}
 %{!?_without_dc1394:Requires: libdc1394-devel}
-%{!?_without_faac:Requires: faac-devel}
 %{!?_without_faad:Requires: faad2-devel}
 %{!?_without_gsm:Requires: gsm-devel}
-%{!?_without_lame:Requires: lame-devel}
+%{!?_without_lame:Requires: kaltura-lame-devel}
 %{!?_without_openjpeg:Requires: openjpeg-devel}
 %{!?_without_rtmp:Requires: librtmp-devel}
 %{!?_without_schroedinger:Requires: schroedinger-devel}
@@ -113,7 +119,6 @@ Install this package if you want to compile apps with ffmpeg support.
 export CFLAGS="%{optflags}"
 
 
-# ./configure --extra-cflags=-O2 --enable-bzlib --disable-devices --enable-libfaac --enable-libaacplus --enable-libgsm --enable-libmp3lame --enable-libschroedinger --enable-libtheora --enable-libvorbis --enable-libx264 --enable-libxvid --enable-filter=movie --enable-avfilter --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-libvpx --enable-libspeex --enable-libass --enable-postproc --enable-pthreads --disable-static --enable-shared --enable-gpl --disable-debug --disable-optimizations --disable-stripping --extra-cflags=-fPIC --extra-ldflags=-fPIC --enable-nonfree --enable-version3 --libdir=/usr/local/lib64
 ./configure \
     --prefix="%{base_prefix}-%{version}" \
     --libdir="%{base_prefix}-%{version}/lib" \
@@ -125,9 +130,10 @@ export CFLAGS="%{optflags}"
 %ifarch x86_64
     --extra-cflags="%{optflags} -fPIC" \
 %endif
-    --enable-bzlib \
+    --extra-cflags="%{optflags} -fPIC -I/opt/kaltura/include" \
+    --extra-ldflags="-L/opt/kaltura/lib" \
     --disable-devices \
-    --enable-libfaac \
+    --enable-bzlib \
     --enable-libgsm \
     --enable-libmp3lame \
     --enable-libschroedinger \
@@ -150,11 +156,7 @@ export CFLAGS="%{optflags}"
     --enable-gpl \
      --disable-debug \
     --disable-optimizations \
- --enable-libfdk-aac \
---enable-nonfree \
 --enable-gpl \
---enable-nonfree \
---enable-libfdk-aac \
 --enable-pthreads \
 --enable-swscale \
 --enable-vdpau \
@@ -162,6 +164,7 @@ export CFLAGS="%{optflags}"
 --disable-devices \
 --enable-filter=movie \
     --enable-version3 \
+--enable-indev=lavfi \
 --enable-x11grab
 
 %{__make} %{?_smp_mflags}
@@ -196,6 +199,7 @@ EOF
 /sbin/ldconfig
 chcon -t textrel_shlib_t %{base_prefix}-%{version}/lib/libav{codec,device,format,util}.so.*.*.* &>/dev/null || :
 ln -fs %{base_prefix}-%{version}/bin/ffmpeg /opt/kaltura/bin 
+ln -fs %{base_prefix}-%{version}/bin/ffprobe /opt/kaltura/bin 
 ln -fs %{base_prefix}-%{version}/bin/qt-faststart /opt/kaltura/bin 
 
 %postun 
@@ -208,7 +212,8 @@ fi
 
 %files
 %defattr(-, root, root, 0755)
-%doc Changelog COPYING* CREDITS INSTALL MAINTAINERS README
+%doc Changelog COPYING* CREDITS INSTALL.md MAINTAINERS RELEASE RELEASE_NOTES README.md 
+#%doc Changelog COPYING* CREDITS INSTALL MAINTAINERS RELEASE README
 %doc %{base_prefix}-%{version}/share/man/man1
 %config %{_sysconfdir}/profile.d/kaltura_ffmpeg.sh
 %config %{_sysconfdir}/ld.so.conf.d/kaltura_ffmpeg.conf
@@ -231,27 +236,47 @@ fi
 %{base_prefix}-%{version}/include/libavformat/
 %{base_prefix}-%{version}/include/libavutil/
 %{base_prefix}-%{version}/include/libswscale/
-%{base_prefix}-%{version}/lib/libavcodec.a
-%{base_prefix}-%{version}/lib/libavdevice.a
-%{base_prefix}-%{version}/lib/libavfilter.a
-%{base_prefix}-%{version}/lib/libavformat.a
-%{base_prefix}-%{version}/lib/libavutil.a
-%{base_prefix}-%{version}/lib/libswscale.a
-%{base_prefix}-%{version}/lib/libavcodec.so
-%{base_prefix}-%{version}/lib/libavdevice.so
-%{base_prefix}-%{version}/lib/libavfilter.so
-%{base_prefix}-%{version}/lib/libavformat.so
-%{base_prefix}-%{version}/lib/libavutil.so
-%{base_prefix}-%{version}/lib/libswscale.so
+#%{base_prefix}-%{version}/lib/libavcodec.a
+#%{base_prefix}-%{version}/lib/libavdevice.a
+#%{base_prefix}-%{version}/lib/libavfilter.a
+#%{base_prefix}-%{version}/lib/libavformat.a
+#%{base_prefix}-%{version}/lib/libavutil.a
+#%{base_prefix}-%{version}/lib/libswscale.a
+#%{base_prefix}-%{version}/lib/libavcodec.so
+#%{base_prefix}-%{version}/lib/libavdevice.so
+#%{base_prefix}-%{version}/lib/libavfilter.so
+#%{base_prefix}-%{version}/lib/libavformat.so
+#%{base_prefix}-%{version}/lib/libavutil.so
+#%{base_prefix}-%{version}/lib/libswscale.so
+%{base_prefix}-%{version}/lib/*so*
 %{base_prefix}-%{version}/lib/pkgconfig/libavcodec.pc
 %{base_prefix}-%{version}/lib/pkgconfig/libavdevice.pc
 %{base_prefix}-%{version}/lib/pkgconfig/libavfilter.pc
 %{base_prefix}-%{version}/lib/pkgconfig/libavformat.pc
 %{base_prefix}-%{version}/lib/pkgconfig/libavutil.pc
 %{base_prefix}-%{version}/lib/pkgconfig/libswscale.pc
+%{base_prefix}-%{version}/share
 
 %changelog
-* Sun Jan 14 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.1.1-4
+* Thu Oct 8 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 2.7.2-2
+- symlink ffprobe to /opt/kaltura/bin
+
+* Wed Oct 7 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 2.7.2-1
+- 2.7.2
+
+* Thu Aug 6 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 2.1.3-8
+- Require libvpx >=1.3.0 since CentOS 6 also had 1.2.0 at some stage and they are not binary compatible.
+
+* Wed Aug 5 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 2.1.3-7
+- Do not compile against FDK and faac as distributing the binary with such support violates license.
+  See:
+  https://github.com/kaltura/platform-install-packages/issues/392
+  https://trac.ffmpeg.org/ticket/4735
+
+* Mon Jul 7 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 2.1.3-1
+- 2.1.3.
+
+* Sun Jan 12 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.1.1-4
 - Added qt-faststart.
 
 * Sun Jan 12 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.1.1-3

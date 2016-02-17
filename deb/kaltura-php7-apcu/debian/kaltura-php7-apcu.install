@@ -1,0 +1,2 @@
+debian/apcu.ini opt/kaltura/app/configurations/php/mods-available
+debian/php7-apcu/opt/kaltura/lib/php/20151012/apcu.so opt/kaltura/lib/php/20151012

@@ -4,6 +4,7 @@
 #         USAGE: ./kaltura-front-config.sh 
 #   DESCRIPTION: configure server as a front node.
 #       OPTIONS: ---
+# 	LICENSE: AGPLv3+
 #  REQUIREMENTS: ---
 #          BUGS: ---
 #         NOTES: ---
@@ -32,7 +33,7 @@ enable_admin_conf()
 create_answer_file()
 {
 	ANSFILE="$1"
-        for VAL in CONFIG_CHOICE IS_SSL CRT_FILE KEY_FILE; do
+        for VAL in CONFIG_CHOICE IS_SSL CRT_FILE KEY_FILE CHAIN_FILE CA_FILE; do
                 if [ -n "${!VAL}" ];then
 			sed "/^$VAL=.*/d" -i $ANSFILE
 			echo "$VAL=\"${!VAL}\"" >> $ANSFILE 
@@ -53,17 +54,22 @@ if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
 	echo $OUT
 	exit 3
 fi
-. $KALTURA_FUNCTIONS_RC
-if ! rpm -q kaltura-front;then
-	echo -e "${BRIGHT_RED}ERROR: first install kaltura-front.${NORMAL}"
-	exit 11
+PHP_MINOR_VER=`php -r 'echo PHP_MINOR_VERSION;'`
+if [ "$PHP_MINOR_VER" -gt 3 ];then
+        if ! rpm -q php-pecl-zendopcache >/dev/null;then
+                yum -y install php-pecl-zendopcache
+        fi
 fi
+
+. $KALTURA_FUNCTIONS_RC
+NEWANSFILE="/tmp/kaltura_`date +%d_%m_%H_%M.ans`"
 if [ -n "$1" -a -r "$1" ];then
 	ANSFILE=$1
 	. $ANSFILE
 	AUTO_YES=1
-	NEWANSFILE="/tmp/kaltura_`date +%d_%m_%H_%M.ans`"
 	cp $ANSFILE $NEWANSFILE
+else
+	touch $NEWANSFILE
 fi
 if [ ! -r /opt/kaltura/app/base-config.lock ];then
 	`dirname $0`/kaltura-base-config.sh "$ANSFILE"
@@ -84,10 +90,15 @@ if [ ! -r "$RC_FILE" ];then
 	exit 1 
 fi
 . $RC_FILE
-trap 'my_trap_handler ${LINENO} ${$?}' ERR
-send_install_becon `basename $0` $ZONE install_start 
+if ! rpm -q kaltura-front;then
+	echo -e "${BRIGHT_BLUE}Skipping as kaltura-front is not installed.${NORMAL}"
+	exit 0 
+fi
+trap 'my_trap_handler "${LINENO}" ${$?}' ERR
+send_install_becon `basename $0` $ZONE install_start 0 
 KALTURA_APACHE_CONF=$APP_DIR/configurations/apache
 KALTURA_APACHE_CONFD=$KALTURA_APACHE_CONF/conf.d
+#unset IS_SSL
 if [ -z "$IS_SSL" ];then
 #unset IS_SSL
 cat << EOF 
@@ -104,7 +115,7 @@ echo "use kaltura" | mysql -h$DB1_HOST -u$DB1_USER -p$DB1_PASS -P$DB1_PORT $DB1_
 if [ $? -eq 0 ];then
 	echo "update permission set STATUS=3 WHERE permission.NAME='FEATURE_KMC_ENFORCE_HTTPS' ;" | mysql $DB1_NAME -h$DB1_HOST -u$DB1_USER -P$DB1_PORT -p$DB1_PASS 2> /dev/null 
 fi
-trap 'my_trap_handler ${LINENO} ${$?}' ERR
+trap 'my_trap_handler "${LINENO}" ${$?}' ERR
 
 	if [ -z "$AUTO_YES" ];then
 		echo -e "${YELLOW}It is recommended that you do work using HTTPs. Would you like to continue anyway?[N/y]${NORMAL}"
@@ -136,7 +147,7 @@ else
 
 	fi
 	if [ -z "$CHAIN_FILE" ];then
-		echo -e "${CYAN}Please input path to your SSL chain file or leave empty in case you have none${CYAN}:${NORMAL}"
+		echo -e "${CYAN}Please input path to your SSL CA file or leave empty in case you have none${CYAN}:${NORMAL}"
 		read -e CHAIN_FILE
 	fi
 	# check key and crt match
@@ -158,7 +169,14 @@ else
 	php $APP_DIR/deployment/base/scripts/insertPermissions.php -d $APP_DIR/deployment/permissions/ssl/ >/dev/null 2>&1 ||true
 
 	# if cert is self signed:
-	if openssl verify  $CRT_FILE | grep 'self signed certificate' -q ;then
+	if [ -r "$CHAIN_FILE" ];then
+		VERIFY_COMMAND="openssl verify -CAfile $CHAIN_FILE $CRT_FILE"
+	elif [ -r "$CA_FILE" ];then
+		VERIFY_COMMAND="openssl verify -CAfile $CA_FILE $CRT_FILE"
+	else
+		VERIFY_COMMAND="openssl verify $CRT_FILE"
+	fi  
+	if $VERIFY_COMMAND | grep 'self signed certificate' -q ;then
 		echo -e "${YELLOW}
 
 WARNING: self signed cerificate detected. Will set settings.clientConfig.verifySSL=0 in $APP_DIR/configurations/admin.ini.
@@ -167,20 +185,18 @@ WARNING: self signed cerificate detected. Will set settings.clientConfig.verifyS
 		echo -e "settings.clientConfig.verifySSL=0" >> $APP_DIR/configurations/admin.ini
 		sed -i  's@\(\[production\]\)@\1\nsettings.clientConfig.verifySSL=0@' $APP_DIR/configurations/admin.ini
 	fi
-	if [ -f /etc/httpd/conf.d/ssl.conf ];then
-		echo "Moving /etc/httpd/conf.d/ssl.conf to /etc/httpd/conf.d/ssl.conf.ks.bak."
-		mv /etc/httpd/conf.d/ssl.conf /etc/httpd/conf.d/ssl.conf.ks.bak
-	fi
-	sed "s#@SSL_CERTIFICATE_FILE@#$CRT_FILE#g" $MAIN_APACHE_CONF.template > $MAIN_APACHE_CONF
+	sed "s#@SSL_CERTIFICATE_FILE@#$CRT_FILE#g" -i $MAIN_APACHE_CONF
 	sed -i "s#@SSL_CERTIFICATE_KEY_FILE@#$KEY_FILE#g" $MAIN_APACHE_CONF
 	if [ -r "$CHAIN_FILE" ];then
-		sed -i "s^#SSLCertificateChainFile @SSL_CERTIFICATE_CHAIN_FILE@^SSLCertificateChainFile $CHAIN_FILE^" $MAIN_APACHE_CONF
+		sed -i "s^SSLCACertificateFile @SSL_CERTIFICATE_CHAIN_FILE@^SSLCACertificateFile $CHAIN_FILE^" $MAIN_APACHE_CONF
 	else
-		CHAIN_FILE="NO_CHAIN"
+		CA_FILE="NO_CA"
+		sed -i "s^SSLCACertificateFile @SSL_CERTIFICATE_CA_FILE@^#SSLCACertificateFile @SSL_CERTIFICATE_CA_FILE@^" $MAIN_APACHE_CONF
 	fi
 	echo "IS_SSL=y" >> $RC_FILE 
 	echo "CRT_FILE=$CRT_FILE" >> $RC_FILE
         echo "KEY_FILE=$KEY_FILE" >> $RC_FILE
+        echo "CA_FILE=$CA_FILE" >> $RC_FILE
         echo "CHAIN_FILE=$CHAIN_FILE" >> $RC_FILE
 
 fi
@@ -190,9 +206,9 @@ if [ "$IS_SSL" = 'Y' -o "$IS_SSL" = 1 -o "$IS_SSL" = 'y' -o "$IS_SSL" = 'true' ]
 	trap - ERR
 	echo "use kaltura" | mysql -h$DB1_HOST -u$DB1_USER -p$DB1_PASS -P$DB1_PORT $DB1_NAME 2> /dev/null
 	if [ $? -eq 0 ];then
-		echo "update permission set STATUS=2 WHERE permission.PARTNER_ID IN ('0') AND permission.NAME='FEATURE_KMC_ENFORCE_HTTPS' ORDER BY permission.STATUS ASC LIMIT 1;" | mysql $DB1_NAME -h$DB1_HOST -u$DB1_USER -P$DB1_PORT -p$DB1_PASS 
+		echo "update permission set STATUS=1 WHERE permission.PARTNER_ID IN ('0') AND permission.NAME='FEATURE_KMC_ENFORCE_HTTPS' ORDER BY permission.STATUS ASC LIMIT 1;" | mysql $DB1_NAME -h$DB1_HOST -u$DB1_USER -P$DB1_PORT -p$DB1_PASS 
 	fi
-	trap 'my_trap_handler ${LINENO} ${$?}' ERR
+	trap 'my_trap_handler "${LINENO}" ${$?}' ERR
 else
 	DEFAULT_PORT=80
 fi
@@ -202,7 +218,6 @@ if [ -z "$KALTURA_VIRTUAL_HOST_PORT" ];then
 	read -e KALTURA_VIRTUAL_HOST_PORT
 	if [ -z "$KALTURA_VIRTUAL_HOST_PORT" ];then
 		KALTURA_VIRTUAL_HOST_PORT=$DEFAULT_PORT
-		#echo $KALTURA_VIRTUAL_HOST_PORT
 	fi
 	if [ "$KALTURA_VIRTUAL_HOST_PORT" -eq 443 ];then
 		PROTOCOL="https"
@@ -212,7 +227,7 @@ if [ -z "$KALTURA_VIRTUAL_HOST_PORT" ];then
 fi
 
 if [ -z "$SERVICE_URL" ];then
-	echo -e "${CYAN}Service URL [${YELLOW}$PROTOCOL://$KALTURA_VIRTUAL_HOST_NAME:$KALTURA_VIRTUAL_HOST_PORT${CYAN}]:${NORMAL} "
+	echo -e "${CYAN}Service URL [${YELLOW}$PROTOCOL://$KALTURA_FULL_VIRTUAL_HOST_NAME${CYAN}]:${NORMAL} "
 	read -e SERVICE_URL
 	if [ -z "$SERVICE_URL" ];then
 		SERVICE_URL=$PROTOCOL://$KALTURA_FULL_VIRTUAL_HOST_NAME
@@ -226,7 +241,6 @@ cp $KALTURA_APACHE_CONF/kaltura.conf.template $KALTURA_APACHE_CONF/kaltura.conf
 sed -e "s#@APP_DIR@#$APP_DIR#g" -e "s#@LOG_DIR@#$LOG_DIR#g" -e "s#@WEB_DIR@#$WEB_DIR#g" -e "s#@KALTURA_VIRTUAL_HOST_NAME@#$KALTURA_VIRTUAL_HOST_NAME#g" -e "s#@KALTURA_VIRTUAL_HOST_PORT@#$KALTURA_VIRTUAL_HOST_PORT#g" -e "s#@SERVICE_URL@#$SERVICE_URL#g" -i $MAIN_APACHE_CONF $KALTURA_APACHE_CONFD/enabled.kaltura.conf
 
 CONF_FILES=`find $APP_DIR/configurations  -type f| grep -v template`
-for i in settings.serviceUrl \$wgKalturaServiceUrl \$wgKalturaCDNUrl \$wgKalturaStatsServiceUrl apphome_url admin_console_url admin_console SERVICE_URL settings.serviceUrl; do sed -i "s#\($i\)\s*=.*#\1=$SERVICE_URL#g" $CONF_FILES;done
 
 find /etc/httpd/conf.d -type l -name "zzzkaltura*" -exec rm {} \;
 ln -fs $MAIN_APACHE_CONF /etc/httpd/conf.d/zzz`basename $MAIN_APACHE_CONF`
@@ -259,7 +273,8 @@ fi
 
 # cronjobs:
 ln -sf $APP_DIR/configurations/cron/api /etc/cron.d/kaltura-api
-ln -sf $APP_DIR/configurations/cron/cleanup /etc/cron.d/kaltura-cleanup
+# currently causing issues, commenting
+#ln -sf $APP_DIR/configurations/cron/cleanup /etc/cron.d/kaltura-cleanup
 
 # logrotate:
 ln -sf $APP_DIR/configurations/logrotate/kaltura_apache /etc/logrotate.d/ 
@@ -271,21 +286,27 @@ fi
 find $BASE_DIR/app/cache/ $BASE_DIR/log -type d -exec chmod 775 {} \; 
 find $BASE_DIR/app/cache/ $BASE_DIR/log -type f -exec chmod 664 {} \; 
 chown -R kaltura.apache $BASE_DIR/app/cache/ $BASE_DIR/log
+find $BASE_DIR/web/html5/html5lib -type d -name cache -exec chown apache {} \;
 service httpd restart
+chkconfig httpd on
+chkconfig memcached on
+service memcached restart
 ln -sf $BASE_DIR/app/configurations/monit/monit.avail/httpd.rc $BASE_DIR/app/configurations/monit/monit.d/enabled.httpd.rc
 ln -sf $BASE_DIR/app/configurations/monit/monit.avail/memcached.rc $BASE_DIR/app/configurations/monit/monit.d/enabled.memcached.rc
 /etc/init.d/kaltura-monit restart
 	trap - ERR
 	echo "use kaltura" | mysql -h$DB1_HOST -u$DB1_USER -p$DB1_PASS -P$DB1_PORT $DB1_NAME 2> /dev/null
 	if [ $? -eq 0 ];then
-		if [ -r $BASE_DIR/apps/studio/`rpm -qa kaltura-html5-studio --queryformat %{version}`/studio.ini ];then
-			php $BASE_DIR/app/deployment/uiconf/deploy_v2.php --ini=$BASE_DIR/apps/studio/`rpm -qa kaltura-html5-studio --queryformat %{version}`/studio.ini >> /dev/null
-			sed -i "s@^\(studio_version\s*=\)\(.*\)@\1 `rpm -qa kaltura-html5-studio --queryformat %{version}`@g" -i $BASE_DIR/app/configurations/base.ini
+		HTML5_STUDIO_VERSION=`rpm -q kaltura-html5-studio --queryformat %{version}`
+		if [ -r $BASE_DIR/apps/studio/$HTML5_STUDIO_VERSION/studio.ini ];then
+			php $BASE_DIR/app/deployment/uiconf/deploy_v2.php --ini=$BASE_DIR/apps/studio/$HTML5_STUDIO_VERSION/studio.ini >> /dev/null
+			sed -i "s@^\(studio_version\s*=\)\(.*\)@\1 $HTML5_STUDIO_VERSION@g" -i $BASE_DIR/app/configurations/local.ini
 		fi
 	# we can't use rpm -q kaltura-kmc because this node may not be the one where we installed the KMC RPM on, as it resides in the web dir and does not need to be installed on all front nodes.
-	KMC_PATH=`ls -ld $BASE_DIR/web/flash/kmc/v*|awk -F " " '{print $NF}' |tail -1`
-	php $BASE_DIR/app/deployment/uiconf/deploy_v2.php --ini=$KMC_PATH/config.ini >> /dev/null
-
+		KMC_PATH=`ls -ld $BASE_DIR/web/flash/kmc/v* 2>/dev/null|awk -F " " '{print $NF}' |tail -1`
+		php $BASE_DIR/app/deployment/uiconf/deploy_v2.php --ini=$KMC_PATH/config.ini >> /dev/null
+		HTML5LIB_VERSION=`yum info kaltura-html5lib|grep Version|awk -F ":" '{print $NF}'`
+		sed -i "s@^\(html5_version\s*=\)\(.*\)@\1 $HTML5LIB_VERSION@g" -i $BASE_DIR/app/configurations/local.ini
 	fi
-	trap 'my_trap_handler ${LINENO} ${$?}' ERR
-send_install_becon `basename $0` $ZONE install_success 
+	trap 'my_trap_handler "${LINENO}" ${$?}' ERR
+send_install_becon `basename $0` $ZONE install_success 0 

@@ -1,0 +1,21 @@
+#!/bin/sh
+
+set -e
+
+#DEBHELPER#
+
+dpkg-maintscript-helper mv_conffile /opt/kaltura/app/configurations/php/fpm/main.conf /opt/kaltura/app/configurations/php/fpm/php-fpm.conf 5.3.5-1 -- "$@"
+
+if [ "$1" = "triggered" ] && [ "$2" = "/opt/kaltura/app/configurations/php/conf.d" ]; then
+    invoke-rc.d php5-fpm restart
+    exit 0
+elif [ "$1" != "configure" ]; then
+    exit 0
+fi
+
+phpini="/opt/kaltura/app/configurations/php/fpm/php.ini"
+
+ucf /opt/kaltura/share/php7/php.ini-production $phpini
+ucfr php5-fpm $phpini
+
+exit 0

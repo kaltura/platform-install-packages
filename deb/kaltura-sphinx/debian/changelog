@@ -1,5 +1,11 @@
-kaltura-sphinx (2.2.1-2) experimental; urgency=low
+kaltura-sphinx (2.2.1-3) jupiter; urgency=low
+
+  * fix call to send_install_becon()
+
+ -- Jess Portnoy <jess.portnoy@kaltura.com>  Mon, 27 Apr 2015 18:02:43 +0200
+
+kaltura-sphinx (2.2.1-2) jupiter; urgency=low
   
   First build.
 
- -- Jess Portnoy <jess.portnoy@kaltura.com>  Thu, 26 Dec 2013 18:00:33 +0200
+ -- Jess Portnoy <jess.portnoy@kaltura.com>  Thu, 26 Dec 2014 18:00:33 +0200

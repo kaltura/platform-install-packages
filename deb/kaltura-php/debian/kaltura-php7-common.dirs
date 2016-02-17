@@ -1,0 +1,9 @@
+/opt/kaltura/lib/php7/libexec
+/opt/kaltura/share/lintian/overrides
+/opt/kaltura/share/doc/php7-common
+/opt/kaltura/share/php7
+/var/lib/php7
+/opt/kaltura/lib/php7
+/opt/kaltura/app/configurations/php/conf.d
+/opt/kaltura/app/configurations/php/mods-available
+/usr/sbin

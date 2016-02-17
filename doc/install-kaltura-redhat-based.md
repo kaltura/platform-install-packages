@@ -1,179 +1,470 @@
-# Installing Kaltura on RedHat Linux
-This guide describes installation of an all-in-one Kaltura server and applies to all major RH based Linux distros including Fedora Core, RHEL, CentOS, etc. ([Note the supported distros and versions](http://kaltura.github.io/platform-install-packages/#supported-distros)).       
+﻿# Installing Kaltura on a Single Server (RPM)
+This guide describes RPM installation of an all-in-one Kaltura server and applies to all major RH based Linux distros including Fedora Core, RHEL, CentOS, etc.
+([Note the supported distros and versions](http://kaltura.github.io/platform-install-packages/#supported-distros)).
 
-##### Notes
+[Kaltura Inc.](http://corp.kaltura.com) also provides commercial solutions and services including pro-active platform monitoring, applications, SLA, 24/7 support and professional services. If you're looking for a commercially supported video platform  with integrations to commercial encoders, streaming servers, eCDN, DRM and more - Start a [Free Trial of the Kaltura.com Hosted Platform](http://corp.kaltura.com/free-trial) or learn more about [Kaltura' Commercial OnPrem Edition™](http://corp.kaltura.com/Deployment-Options/Kaltura-On-Prem-Edition). For existing RPM based users, Kaltura offers commercial upgrade options.
 
-1. This guide describes the installation and upgrade of an all-in-one machine where all the Kaltura components are installed on the same server. For cluster deployments, please refer to [cluster deployment document](http://bit.ly/kipp-cluster-yum), or [Deploying Kaltura using Opscode Chef](https://github.com/kaltura/platform-install-packages/blob/master/doc/rpm-chef-cluster-deployment.md).
-1. To learn about monitoring, please refer to [configuring platform monitors](http://bit.ly/kipp-monitoring).
-1. Testers using virtualization: [@DBezemer](https://github.com/DBezemer) created a basic CentOS template virtual server vailable here in OVF format: https://www.dropbox.com/s/luai7sk8nmihrkx/20140306_CentOS-base.zip
-1. Alternatively you can find VMWare images at - http://www.thoughtpolice.co.uk/vmware/ --> Make sure to only use compatible OS images; either RedHat or CentOS 5.n, 6.n or FedoraCore 18+.
+#### Table of Contents
+[Prerequites](https://github.com/kaltura/platform-install-packages/blob/master/doc/pre-requisites.md)
 
-## Installing on a new machine
+[Non-SSL Step-by-step Installation](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-redhat-based.md#non-ssl-step-by-step-installation)
 
-##### Pre-Install notes
+[SSL Step-by-step Installation](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-redhat-based.md#ssl-step-by-step-installation)
 
-* **Resolveable host names** - When installing, you will be promopted for each server's resolvable hostname. Note that it is crucial that all host names will be resolveable by other servers in the cluster (and outside the cluster for front machines). Before installing, verify the /etc/hosts file is properly configured and that all Kaltura server hostnames are resolveable in your network.
-* **ROOT is REQUIRED** - Before you begin, make sure you're logged in as the system root. root access is required to install Kaltura. ```sudo su - ```
+[Unattended Installation](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-redhat-based.md#unattended-installation)
 
-##### iptables and ports
-Kaltura requires certain ports to be open for proper operation. [See the list of required open ports](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura-required-ports.md).   
+[Upgrade Kaltura](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-redhat-based.md#upgrade-kaltura)
+
+[Remove Kaltura](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-redhat-based.md#remove-kaltura)
+
+[Troubleshooting](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-redhat-based.md#troubleshooting)
+
+[Additional Information](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-redhat-based.md#additional-information)
+
+[How to contribute](https://github.com/kaltura/platform-install-packages/blob/master/doc/CONTRIBUTERS.md)
+
+## Non-SSL Step-by-step Installation
+
+### Pre-Install notes
+* This install guides assumes that you did a clean, basic install of one of the RHEL based OS's in 64bit architecture.
+* When installing, you will be prompted for each server's resolvable hostname. Note that it is crucial that all host names will be resolvable by other servers in the cluster (and outside the cluster for front machines). Before installing, verify that your /etc/hosts file is properly configured and that all Kaltura server hostnames are resolvable in your network.
+* Before you begin, make sure you're logged in as the system root. Root access is required to install Kaltura, and you should execute ```sudo -i``` or ```su -```to make sure that you are indeed root.
+
+#### Firewall requirements
+Kaltura requires certain ports to be open for proper operation. [See the list of required open ports](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura-required-ports.md).
 If you're just testing and don't mind an open system, you can use the below to disbale iptables altogether:
 ```bash
 iptables -F
+service iptables stop
 chkconfig iptables off
 ```
-##### Disable SELinux - REQUIRED (currently Kaltura can't run properly with SELinux)
-```bash 
+#### Disable SELinux - REQUIRED
+**Currently Kaltura doesn't properly support running with SELinux, things will break if you don't set it to permissive**.
+
+```bash
 setenforce permissive
-# To verify SELinux will not revert to enabled next restart:
-# Edit /etc/selinux/config
-# Set SELINUX=permissive
-# Save /etc/selinux/config
 ```
-##### Auto Set the Kaltura install repository URLs 
+
+To verify SELinux will not revert to enabled next restart:
+
+1. Edit the file `/etc/selinux/config`
+1. Verify or change the value of SELINUX to permissive: `SELINUX=permissive`
+1. Save the file `/etc/selinux/config`
+
+### Start of Kaltura installation
+This section is a step-by-step guide of a Kaltura installation without SSL.
+
+#### Setup the Kaltura RPM repository
 
 ```bash
 rpm -ihv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
 ```
 
-This will enable the stable repo, to enable the nightly one in addition to it, please run:
-```bash   
-yum-config-manager --enable Kaltura-testing-noarch
-yum-config-manager --enable Kaltura-testing
+## Note on RHEL/CentOS 7 
+If you are using RHEL/CentOS 7, edit /etc/yum.repos.d/kaltura.repo and change the ```[Kaltura]``` section:
+```
+baseurl = http://installrepo.kaltura.org/releases/latest/RPMS/$basearch/
+```
+to read:
+```
+baseurl = http://installrepo.kaltura.org/releases/rhel7/RPMS/$basearch/
 ```
 
-##### Note about SSL certificates
+The ```[Kaltura-noarch]``` repo should remain as is. 
 
-You can run Kaltura with or without SSL (state the correct protocol and certificates during the installation).  
-It is recommended that you use a properly signed certificate and avoid self-signed certificates due to limitations of various browsers in properly loading websites using self-signed certificates.    
-You can generate a free valid cert using [http://cert.startcom.org/](http://cert.startcom.org/).    
-To verify the validity of your certificate, you can then use [SSLShoper's SSL Check Utility](http://www.sslshopper.com/ssl-checker.html).  
+*Note for RHEL7: depending on what repos you have enabled, you may also need to add the EPEL or CentOS repos to resolve all dependencies.*
 
-Depending on your certificate, you may also need to set the following directives in `/etc/httpd/conf.d/zzzkaltura.ssl.conf`: 
+#### Enabling the EPEL repo
+To add the EPEL repo:
 ```
-SSLCertificateChainFile
-SSLCACertificateFile
+# rpm -ihv https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 ```
+For CentOS/RHEL6, this should not be necessary, for RHEL/CentOS 7, you will need EPEL for the mediainfo package.
 
-To use the [monit](http://mmonit.com/monit/) Monitoring tab in admin console, you will need to also configure the SSL certificate for monit. Run the following using root:
+
+#### MySQL Install and Configuration
+For MySQL versions higher 5.5 and above, note that you must disable strict mode for the deployment to succeed.
+Please see the following document:
+https://support.realtyna.com/index.php?/Knowledgebase/Article/View/535/0/how-can-i-turn-off-mysql-strict-mode
+
+RHEL/CentOS 6 setup:
 ```bash
-/usr/bin/openssl req -new -x509 -days 365 -nodes -out /opt/kaltura/app/configurations/monit.pem -keyout /opt/kaltura/app/configurations/monit.pem
-chmod 600 /opt/kaltura/app/configurations/monit.pem
-/usr/bin/openssl gendh 512 >> /opt/kaltura/app/configurations/monit.pem
+yum install mysql mysql-server
+service mysqld start
+mysql_secure_installation
+chkconfig mysqld on
 ```
-Then edit: `/opt/kaltura/app/configurations/monit/monit.conf`    
-And add:
-```
-SSL ENABLE
-PEMFILE /opt/kaltura/app/configurations/monit.pem
-ALLOWSELFCERTIFICATION
-```
-Finally, run: `/etc/init.d/kaltura-monit restart`
 
-##### Install the Kaltura Packages
+RHEL/CentOS 7 setup:
+```bash
+yum install mariadb-server
+service mariadb start
+mysql_secure_installation
+chkconfig mariadb on
+```
+
+**Make sure to answer YES for all steps in the `mysql_secure_install` install, and follow through all the mysql install questions before continuing further.
+Failing to properly run `mysql_secure_install` will cause the kaltura mysql user to run without proper permissions to access your mysql DB, and require you to start over again.
+
+#### Mail Server (MTA) Install and Configuration
+If your machine doesn't have postfix email configured before the Kaltura install, you will not receive emails from the install system nor publisher account activation mails.
+If postfix runs without further configuration starting it is sufficient to make Kaltura work.
+```bash
+service postfix restart
+```
+
+If you are using Amazon Web Services (AWS) please note that by default EC2 machines are blocked from sending email via port 25. For more information see [this thread on AWS forums](https://forums.aws.amazon.com/message.jspa?messageID=317525#317525).
+
+##### Note regarding desktop installations
+
+When installing on a "desktop" environment there may be package conflicts with media encoding/decoding plugins.
+
+In Redhat 6.5 you should run the following to remove the conflicting packages:
+`rpm -e gstreamer-plugins-bad-free totem totem-nautilus`
+
+#### Install Kaltura Server
+
+Install the basic Kaltura Packages:
 ```bash
 yum clean all
 yum install kaltura-server
-# enable daemons at init:
-# The memcache and ntp RPMs used by Kaltura server are taken from the official disto's repo. 
-# Unfortuantely, the postinst scripts for these packages do not set it to start at init time.
-# To set this up:
+```
+
+Configure MySQL with the required Kaltura Settings
+```bash
+/opt/kaltura/bin/kaltura-mysql-settings.sh
+```
+
+Start required service and configure them to run at boot:
+```bash
+service memcached restart
+service ntpd restart
 chkconfig memcached on
 chkconfig ntpd on
 ```
 
-##### Install and configure MySQL (if you’re going to use DB on the same server)
+### Start of Kaltura Configuration
 ```bash
-yum install mysql-server
-/etc/init.d/mysqld start
-mysql_secure_installation
-```
-**Make sure to say Y** for the `mysql_secure_install` install, and follow through all the mysql install questions before continuing further.    
-Failing to properly run `mysql_secure_install` will cause the kaltura mysql user to run without proper permissions to access your mysql DB.    
-
-```bash
-# Run the my.cnf configuration script ON THE MYSQL server
-/opt/kaltura/bin/kaltura-mysql-settings.sh
-# Enable MySQL at init time:
-chkconfig mysqld on
+/opt/kaltura/bin/kaltura-config-all.sh
 ```
 
-##### Configure your email server and MTA - REQUIRED
-If your machine doesn't have postfix email configured before the Kaltura install, you will not receive emails from the install system nor publisher account activation mails. 
+The below is a sample question answer format, replace the input marked by <> with your own details:
 
-By default Amazon Web Services (AWS) EC2 machines are blocked from sending email via port 25. For more information see [this thread on AWS forums](https://forums.aws.amazon.com/message.jspa?messageID=317525#317525).  
-Two working solutions to the AWS EC2 email limitations are:
-
-* Using SendGrid as your mail service ([setting up ec2 with Sendgrid and postfix](http://www.zoharbabin.com/configure-ssmtp-or-postfix-to-send-email-via-sendgrid-on-centos-6-3-ec2)).
-* Using [Amazon's Simple Email Service](http://aws.amazon.com/ses/). 
-
-##### Configure the Kaltura installation
 ```bash
-/opt/kaltura/bin/kaltura-config-all.sh [answers-file-path]
+[Email\NO]: "<your email address>"
+CDN hostname [kalrpm.lcl]: "<your hostname>"
+Apache virtual hostname [kalrpm.lcl]: "<your hostname>"
+Which port will this Vhost listen on [80]?:
+
+DB hostname [127.0.0.1]: "<127.0.0.1>"
+DB port [3306]: "<3306>"
+MySQL super user [this is only for setting the kaltura user passwd and WILL NOT be used with the application]: "<root>"
+MySQL super user passwd [this is only for setting the kaltura user passwd and WILL NOT be used with the application]: "<your root password>"
+Analytics DB hostname [127.0.0.1]: "<127.0.0.1>"
+Analytics DB port [3306]: "<3306>"
+Sphinx hostname [127.0.0.1]: "<127.0.0.1>"
+
+Secondary Sphinx hostname: [leave empty if none] "<empty>"
+
+VOD packager hostname [kalrpm.lcl]: "<http://kaltura-nginx-hostname>"
+
+VOD packager port to listen on [88]: 
+
+Service URL [http://kalrpm.lcl:80]: "<http://apache-hostname:80>"
+
+Kaltura Admin user (email address): "<your email address>"
+Admin user login password (must be minimum 8 chars and include at least one of each: upper-case, lower-case, number and a special character): "<your kaltura admin password>"
+Confirm passwd: "<your kaltura admin password>"
+
+Your time zone [see http://php.net/date.timezone], or press enter for [Europe/Amsterdam]: "<your timezone>"
+How would you like to name your system (this name will show as the From field in emails sent by the system) [Kaltura Video Platform]? "<your preferred system name>"
+Your website Contact Us URL [http://corp.kaltura.com/company/contact-us]: "<your contact URL>"
+'Contact us' phone number [+1 800 871 5224]? "<your phone numer>"
+
+Is your Apache working with SSL?[Y/n] "<n>"
+It is recommended that you do work using HTTPs. Would you like to continue anyway?[N/y] "<y>"
+Which port will this Vhost listen on? [80] "<80>"
+Please select one of the following options [0]: "<0>"
 ```
-`[answers-file-path]` is an optional flag, in case you have an answers file ready, you can use it to perform a silent install (See [kaltura.template.ans](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura.template.ans) for documention of needed variables.).    
-If you don't have an answers file, simply omit it (`/opt/kaltura/bin/kaltura-config-all.sh`). The answers file is automatically generated post the installation and is placed in `/tmp/kaltura*.ans`.     
 
-When asked, answer all the post-install script questions (or provide an answers file to perform a silent install) -
-* For CDN host: and Apache virtual host: use the resolvable domain name of your server (not always the default value, which will be the hostname).
-* For Service URL: enter protocol + domain (e.g. https://mykalturasite.com).
+Your install will now automatically perform all install tasks.
 
-##### Configure Red5 server
+#### Configure Red5 server
+1. install the kaltura-red5 package:
+```
+# yum install kaltura-red5
+```
 1. Request http://hostname:5080
 1. Click 'Install a ready-made application'
 1. Mark 'OFLA Demo' and click 'Install'
 1. Edit /usr/lib/red5/webapps/oflaDemo/index.html and replace 'localhost' with your actual Red5 hostname or IP
 1. Test OflaDemo by making a request to http://hostname:5080/oflaDemo/ and playing the sample videos
-1. Run: 
+1. Run:
 
 ```bash
 /opt/kaltura/bin/kaltura-red5-config.sh
 ```
 
-You can now record a video using KMC->Upload->Record from Webcam.
 
-## Upgrade an existing Kaltura installation 
+
+**Your Kaltura installation is now complete.**
+
+## SSL Step-by-step Installation
+### Pre-Install notes
+* This install guides assumes that you did a clean, basic install of one of the support RHEL based OS's in 64bit architecture.
+* Currently, the Nginx VOD module does not support integration with Kaltura over HTTPs, only HTTP is supported. 
+* When installing, you will be prompted for each server's resolvable hostname. Note that it is crucial that all host names will be resolvable by other servers in the cluster (and outside the cluster for front machines). Before installing, verify that your /etc/hosts file is properly configured and that all Kaltura server hostnames are resolvable in your network.
+* Before you begin, make sure you're logged in as the system root. Root access is required to install Kaltura, and you should execute ```sudo -i``` or ```su -``` to make sure that you are indeed root.
+* It is recommended that you use a properly signed certificate and avoid self-signed certificates due to limitations of various browsers in properly loading websites using self-signed certificates.
+  * You can generate a free valid cert using [http://cert.startcom.org/](http://cert.startcom.org/).
+  * To verify the validity of your certificate, you can then use [SSLShoper's SSL Check Utility](http://www.sslshopper.com/ssl-checker.html).
+
+#### Firewall requirements
+Kaltura requires certain ports to be open for proper operation. [See the list of required open ports](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura-required-ports.md).
+If you're just testing and don't mind an open system, you can use the below to disbale iptables altogether:
+```bash
+iptables -F
+service iptables stop
+chkconfig iptables off
+```
+#### Disable SELinux - REQUIRED
+**Currently Kaltura doesn't properly support running with SELinux, things will break if you don't set it to permissive**.
+
+```bash
+setenforce permissive
+```
+
+To verify SELinux will not revert to enabled next restart:
+
+1. Edit the file `/etc/selinux/config`
+1. Verify or change the value of SELINUX to permissive: `SELINUX=permissive`
+1. Save the file `/etc/selinux/config`
+
+### Start of Kaltura installation
+This section is a step-by-step guide of a Kaltura installation with SSL.
+
+#### Setup the Kaltura RPM repository
+
+```bash
+rpm -ihv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
+```
+
+#### MySQL Install and Configuration
+Please note that currently, only MySQL 5.1 is supported, we recommend using the official package supplied by the RHEL/CentOS repos which is currently 5.1.73.
+
+For RHEL/CentOS 7, MariaDB version 5.5.40 is supported. 
+
+RHEL/CentOS 6 setup:
+```bash
+yum install mysql mysql-server
+service mysqld start
+mysql_secure_installation
+chkconfig mysqld on
+```
+
+RHEL/CentOS 7 setup:
+```bash
+yum install mariadb-server
+service mariadb start
+mysql_secure_installation
+chkconfig mariadb on
+```
+
+**Make sure to answer YES for all steps in the `mysql_secure_install` install, and follow through all the mysql install questions before continuing further.
+Failing to properly run `mysql_secure_install` will cause the kaltura mysql user to run without proper permissions to access your mysql DB, and require you to start over again.
+
+#### Mail Server (MTA) Install and Configuration
+If your machine doesn't have postfix email configured before the Kaltura install, you will not receive emails from the install system nor publisher account activation mails.
+If postfix runs without further configuration starting it is sufficient to make Kaltura work.
+```bash
+service postfix restart
+```
+
+If you are using Amazon Web Services (AWS) please note that by default EC2 machines are blocked from sending email via port 25. For more information see [this thread on AWS forums](https://forums.aws.amazon.com/message.jspa?messageID=317525#317525).
+
+#### Install Kaltura Server
+
+Note: prior to installing Kaltura, while not a must, we recommend you update the installed packages to latest by running:
+```bash
+yum update
+```
+
+Install the basic Kaltura Packages:
+```bash
+yum clean all
+yum update "*kaltura*" 
+yum install kaltura-server
+```
+
+Configure MySQL with the required Kaltura Settings
+```bash
+/opt/kaltura/bin/kaltura-mysql-settings.sh
+```
+
+Start required service and configure them to run at boot:
+```bash
+service memcached restart
+service ntpd restart
+chkconfig memcached on
+chkconfig ntpd on
+```
+
+### Start of Kaltura Configuration
+```bash
+/opt/kaltura/bin/kaltura-config-all.sh
+```
+
+The below is a sample question answer format, replace the input marked by <> with your own details:
+
+```bash
+[Email\NO]: "<your email address>"
+CDN hostname [kalrpm.lcl]: "<your hostname>"
+Apache virtual hostname [kalrpm.lcl]: "<your hostname>"
+Which port will this Vhost listen on [80]?: "<443>"
+
+DB hostname [127.0.0.1]: "<127.0.0.1>"
+DB port [3306]: "<3306>"
+MySQL super user [this is only for setting the kaltura user passwd and WILL NOT be used with the application]: "<root>"
+MySQL super user passwd [this is only for setting the kaltura user passwd and WILL NOT be used with the application]: "<your root password>"
+Analytics DB hostname [127.0.0.1]: "<127.0.0.1>"
+Analytics DB port [3306]: "<3306>"
+Sphinx hostname [127.0.0.1]: "<127.0.0.1>"
+
+Secondary Sphinx hostname: [leave empty if none] "<empty>"
+
+VOD packager hostname [kalrpm.lcl]: "<http://kaltura-nginx-hostname>"
+
+VOD packager port to listen on [88]: 
+
+Service URL [http://kalrpm.lcl:443]: "<http://your-hostname:443>"
+
+Kaltura Admin user (email address): "<your email address>"
+Admin user login password (must be minimum 8 chars and include at least one of each: upper-case, lower-case, number and a special character): "<your kaltura admin password>"
+Confirm passwd: "<your kaltura admin password>"
+
+Your time zone [see http://php.net/date.timezone], or press enter for [Europe/Amsterdam]: "<your timezone>"
+How would you like to name your system (this name will show as the From field in emails sent by the system) [Kaltura Video Platform]? "<your preferred system name>"
+Your website Contact Us URL [http://corp.kaltura.com/company/contact-us]: "<your contact URL>"
+'Contact us' phone number [+1 800 871 5224]? "<your phone numer>"
+
+Is your Apache working with SSL?[Y/n]: "<Y>"
+Please input path to your SSL certificate: "</path/to/my/ssl/certificate>"
+Please input path to your SSL key: "</path/to/my/ssl/key>"
+Please input path to your SSL chain file or leave empty in case you have none: "</path/to/my/ssl/chainfile>"
+Which port will this Vhost listen on? [443] "<443>"
+Please select one of the following options [0]: "<0>"
+```
+
+Your install will now automatically perform all install tasks.
+
+#### Configure Red5 server
+1. Request http://hostname:5080
+1. Click 'Install a ready-made application'
+1. Mark 'OFLA Demo' and click 'Install'
+1. Edit /usr/lib/red5/webapps/oflaDemo/index.html and replace 'localhost' with your actual Red5 hostname or IP
+1. Test OflaDemo by making a request to http://hostname:5080/oflaDemo/ and playing the sample videos
+1. Run:
+
+```bash
+/opt/kaltura/bin/kaltura-red5-config.sh
+```
+
+## Note about using Wowza as media server
+you can use Wowza as media server instead of Red5. For webcam recording using Wowza, please follow:
+https://github.com/kaltura/media-server/blob/3.0.9/Installation.md#for-webcam-recording-servers
+And then run /opt/kaltura/bin/kaltura-red5-config.sh providing the Wowza IP/hostname.
+
+### SSL Certificate Configuration
+
+Set the following directives in `/etc/httpd/conf.d/zzzkaltura.ssl.conf`:
+```
+SSLCertificateChainFile
+SSLCACertificateFile
+```
+
+To use the [monit](http://mmonit.com/monit/) Monitoring tab in admin console, you will need to also configure the SSL certificate for monit.
+To use the same certificate as you used for Kaltura they will need to be in PEM format. If it is not see [Generate PEM Instructions](http://www.digicert.com/ssl-support/pem-ssl-creation.htm)
+
+Edit: `/opt/kaltura/app/configurations/monit/monit.conf` and add:
+```
+SSL ENABLE
+PEMFILE /path/to/your/certificate.pem
+```
+
+Finally, run: ```/etc/init.d/kaltura-monit restart```
+
+**Your Kaltura installation is now complete.**
+
+## Unattended Installation
+All Kaltura scripts accept an answer file as their first argument.
+In order to preform an unattended [silent] install, simply edit the [template](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura.template.ans) and pass it along to kaltura-config-all.sh.
+
+## Upgrade Kaltura
 *This will only work if the initial install was using this packages based install, it will not work for old Kaltura deployments using the PHP installers*
 ```bash
 yum clean all
+yum update kaltura-release
+yum clean all
 yum update "*kaltura*"
 ```
-Then follow the on-screen instructions (in case any further actions required).   
+Then follow the on-screen instructions (in case any further actions required).
 Once the upgrade completes, please run:
 ```bash
-/opt/kaltura/bin/kaltura-db-update.sh
+/opt/kaltura/bin/kaltura-config-all.sh
 ```
+
+In the event you would like to see what changes the package includes before deciding whether or not you wish to upgrade, run:
+```bash
+yum install yum-plugin-changelog
+yum changelog all kaltura-package-name-here
+```
+
 To upgrade your DB schema.
 
-## Fresh Database Installation
+## Remove Kaltura
 Use this in cases where you want to clear the database and start from fresh.
-```bash
-/opt/kaltura/bin/kaltura-drop-db.sh
-/opt/kaltura/bin/kaltura-config-all.sh [answers-file-path]
-```
-
-## Complete REinstall 
-This will completely remove Kaltura, then download and install from scratch.
 ```bash
 /opt/kaltura/bin/kaltura-drop-db.sh
 yum remove "*kaltura*"
 rm -rf /opt/kaltura
-rpm -ihv http://installrepo.kaltura.org/releases/stable/RPMS/noarch/kaltura-release.noarch.rpm
-yum clean all
-yum install kaltura-server
-/opt/kaltura/bin/kaltura-config-all.sh [answers-file-path]
 ```
-*Note that the repository URL will change soon, this is just the test repository*
 
 ## Troubleshooting
-If you ever come across issues, increase log verbosity to 7 using the following method.        
-Run the following command using root:    
+Once the configuration phase is done, you may wish to run the sanity tests, for that, run:
+```base
+/opt/kaltura/bin/kaltura-sanity.sh
+```
+
+If you experience unknown, unwanted or erroneous behaviour, the logs are a greta place to start, to get a quick view into errors and warning run:
+```bash
+kaltlog
+```
+
+If this does not give enough information, increase logging verbosity:
 ```bash
 sed -i 's@^writers.\(.*\).filters.priority.priority\s*=\s*7@writers.\1.filters.priority.priority=4@g' /opt/kaltura/app/configurations/logger.ini
 ```
-Then restart your Apache.    
 
-Run `kaltlog` (using root), which will continuously track (using `tail`) an error grep from all Kaltura log files.
+To revert this logging verbosity run:
+```bash
+sed -i 's@^writers.\(.*\).filters.priority.priority\s*=\s*4@writers.\1.filters.priority.priority=7@g' /opt/kaltura/app/configurations/logger.ini
+```
 
-You can also use: `allkaltlog` (using root), which will dump all the error lines from the Kaltura logs once. Note that this can result in a lot of output, so the best way to use it will be to redirect to a file: `allkaltlog > errors.txt`.
-This output can be used to analyze past failures but for active debugging use the kaltlog alias.   
+Or output all logged information to a file for analysis:
+```bash
+allkaltlog > /path/to/mylogfile.log
+```
+
+For posting questions, please go to:
+(http://forum.kaltura.org)
+
+## Additional Information
+* Please review the [frequently answered questions](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura-packages-faq.md) document for general help before posting to the forums or issue queue.
+* This guide describes the installation and upgrade of an all-in-one machine where all the Kaltura components are installed on the same server. For cluster deployments, please refer to [cluster deployment document](http://bit.ly/kipp-cluster-yum), or [Deploying Kaltura using Opscode Chef](https://github.com/kaltura/platform-install-packages/blob/master/doc/rpm-chef-cluster-deployment.md).
+* To learn about monitoring, please refer to [configuring platform monitors](http://bit.ly/kipp-monitoring).
+* Testers using virtualization: [@DBezemer](https://github.com/kaltura) created a basic CentOS 6.4 template virtual server vailable here in OVF format: https://www.dropbox.com/s/luai7sk8nmihrkx/20140306_CentOS-base.zip
+* Alternatively you can find VMWare images at - http://www.thoughtpolice.co.uk/vmware/ --> Make sure to only use compatible OS images; either RedHat or CentOS 5.n, 6.n or FedoraCore 18+.
+* Two working solutions to the AWS EC2 email limitations are:
+  * Using SendGrid as your mail service ([setting up ec2 with Sendgrid and postfix](http://www.zoharbabin.com/configure-ssmtp-or-postfix-to-send-email-via-sendgrid-on-centos-6-3-ec2)).
+  * Using [Amazon's Simple Email Service](http://aws.amazon.com/ses/).
+* [Kaltura Inc.](http://corp.kaltura.com) also provides commercial solutions and services including pro-active platform monitoring, applications, SLA, 24/7 support and professional services. If you're looking for a commercially supported video platform  with integrations to commercial encoders, streaming servers, eCDN, DRM and more - Start a [Free Trial of the Kaltura.com Hosted Platform](http://corp.kaltura.com/free-trial) or learn more about [Kaltura' Commercial OnPrem Edition™](http://corp.kaltura.com/Deployment-Options/Kaltura-On-Prem-Edition). For existing RPM based users, Kaltura offers commercial upgrade options.

@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+dpkg-maintscript-helper mv_conffile /opt/kaltura/app/configurations/php/conf.d/apcu.ini \
+    /opt/kaltura/app/configurations/php/mods-available/apcu.ini 5.1.0-1 -- "$@"
+rm -f /opt/kaltura/app/configurations/php/conf.d/apcu.ini
+
+[ "$1" = "remove" ] && /opt/kaltura/bin/php7dismod apcu
+
+#DEBHELPER#
+
+exit 0

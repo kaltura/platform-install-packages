@@ -47,12 +47,30 @@ DB1_HOST="@MYSQL_HOST@"
 DB1_PORT="@MYSQL_PORT@"
 # desired passwd, make it good.
 DB1_PASS="@KALT_DB_PASS@"
-# analytics NySQL DB
+# analytics MySQL DB
 DWH_HOST="@MYSQL_HOST@"
-# analytics NySQL port 
+# analytics MySQL port 
 DWH_PORT="@MYSQL_PORT@"
-# analytics NySQL port 
+# analytics MySQL port 
 DWH_PASS="@KALT_DB_PASS@"
 # MySQL super user, this is only used for bootstrap, the app itself will not connect with it.
 SUPER_USER="@MYSQL_SUPER_USER@"
 SUPER_USER_PASSWD="@MYSQL_SUPER_USER_PASSWD@"
+# For nginx packager module
+VOD_PACKAGER_HOST="@NGINX_HOST@"
+VOD_PACKAGER_PORT="@NGINX_PORT@"
+# whether or not to configure Nginx over SSL
+IS_NGINX_SSL="N"
+# path to SSL cert 
+# SSL_CERT
+# path to SSL key
+# SSL_KEY
+# NGINX SSL PORT - note, if you have Apache running over SSL as well and on port 443, do not select 443 here too
+# VOD_PACKAGER_SSL_PORT=8443
+WWW_HOST="@API_HOST_TO_USE_FOR_NGINX@"
+# Range of ip addresses belonging to internal kaltura servers
+# The range is used when checking service actions permissions and allowing to access certain services without KS from the internal servers.
+# The default is only good for testing, on a production ENV you should adjust according to your network.
+IP_RANGE="0.0.0.0-255.255.255.255"
+
+

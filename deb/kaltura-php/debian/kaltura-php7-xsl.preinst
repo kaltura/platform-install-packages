@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+#DEBHELPER#
+
+for dsoname in xsl ; do
+    inifile=${dsoname}.ini
+
+    dpkg-maintscript-helper mv_conffile /opt/kaltura/app/configurations/php/conf.d/${inifile} /opt/kaltura/app/configurations/php/mods-available/${inifile} 7.0.0-1 -- "$@";
+done
+
+exit 0

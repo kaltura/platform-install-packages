@@ -1,0 +1,5 @@
+/etc/apache2/mods-available
+/opt/kaltura/app/configurations/php/cgi
+/usr/lib/cgi-bin
+/usr/bin
+/usr/share/man/man1

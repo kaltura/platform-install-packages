@@ -1,5 +1,120 @@
-kaltura-batch (9.7.0-1) experimental; urgency=low
+kaltura-batch (11.9.0-1) kajam; urgency=low
 
-  - First package
+  * Switching to 11.9.0
 
- -- Jess Portnoy <jess.portnoy@kaltura.com>  Thu, 26 Dec 2013 18:02:43 +0200
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 15 Feb 2016 15:26:18 +0000
+
+kaltura-batch (11.8.0-1) kajam; urgency=low
+
+  * Switching to 11.8.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 01 Feb 2016 19:16:45 +0000
+
+kaltura-batch (11.7.0-1) kajam; urgency=low
+
+  * Switching to 11.7.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 18 Jan 2016 13:20:44 +0000
+
+kaltura-batch (11.6.0-1) kajam; urgency=low
+
+  * Switching to 11.6.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Tue, 05 Jan 2016 13:10:16 +0000
+
+kaltura-batch (11.5.0-1) kajam; urgency=low
+
+  * Switching to 11.5.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 21 Dec 2015 14:04:13 +0000
+
+kaltura-batch (11.4.0-1) kajam; urgency=low
+
+  * Switching to 11.4.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 07 Dec 2015 13:34:43 +0000
+
+kaltura-batch (11.3.0-1) kajam; urgency=low
+
+  * Switching to 11.3.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 23 Nov 2015 12:22:48 +0000
+
+kaltura-batch (11.2.0-1) kajam; urgency=low
+
+  * Switching to 11.2.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 09 Nov 2015 13:50:24 +0000
+
+kaltura-batch (11.1.0-1) kajam; urgency=low
+
+  * Switching to 11.1.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 26 Oct 2015 11:59:21 +0000
+
+kaltura-batch (11.0.0-1) kajam; urgency=low
+
+  * Switching to 11.0.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 12 Oct 2015 12:55:04 +0000
+
+kaltura-batch (10.21.0-1) jupiter; urgency=low
+
+  * Switching to 10.21.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 21 Sep 2015 12:39:17 +0000
+
+kaltura-batch (10.20.0-1) jupiter; urgency=low
+
+  * Switching to 10.20.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 07 Sep 2015 14:32:58 +0000
+
+kaltura-batch (10.19.0-1) jupiter; urgency=low
+
+  * Switching to 10.19.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 24 Aug 2015 10:30:36 +0000
+
+kaltura-batch (10.19.0-1) jupiter; urgency=low
+
+  * Switching to 10.19.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 24 Aug 2015 10:29:39 +0000
+
+kaltura-batch (10.18.0-1) jupiter; urgency=low
+
+  * Switching to 10.18.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 10 Aug 2015 10:41:05 +0000
+
+kaltura-batch (10.17.0) jupiter; urgency=low
+
+  * Switching to 10.17.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Sun, 02 Aug 2015 13:35:32 +0000
+
+kaltura-batch (10.15.0-1) jupiter; urgency=low
+
+  * Added dep on memcached 
+  * sym link httpd.rc and memcached.rc to monit scandir
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Thu, 16 Jul 2015 12:10:19 +0000
+
+kaltura-batch (10.12.0-1) jupiter; urgency=low
+
+  * Ver bounce.
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Sun, 31 May 2015 13:01:05 +0000
+
+kaltura-batch (10.10.0-1) jupiter; urgency=low
+
+  * fix call to send_install_becon()
+
+ -- Jess Portnoy <jess.portnoy@kaltura.com>  Mon, 27 Apr 2015 18:02:43 +0200
+
+kaltura-batch (10.9.0-1) jupiter; urgency=low
+
+  * Switching to 10.9.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.com>  Thu, 07 Apr 2015 17:07:13 +0000

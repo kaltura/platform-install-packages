@@ -4,6 +4,7 @@
 #         USAGE: ./kaltura-config-all.sh 
 #   DESCRIPTION: 
 #       OPTIONS: ---
+# 	LICENSE: AGPLv3+
 #  REQUIREMENTS: ---
 #          BUGS: ---
 #         NOTES: ---
@@ -37,7 +38,7 @@ else
        ZONE="unknown"
 fi  
 OUT="1"
-#send_install_becon `basename $0` $ZONE install_start 
+send_install_becon `basename $0` $ZONE install_start 
 $BASE_DIR/bin/kaltura-base-config.sh "$ANSFILE"
 if [ $? -ne 0 ];then
        echo -e "${BRIGHT_RED}ERROR: $BASE_DIR/bin/kaltura-base-config.sh failed:( You can re-run it when the issue is fixed.${NORMAL}"
@@ -75,6 +76,7 @@ if [ $? -ne 0 ];then
        exit 3 
 fi
 #send_install_becon kaltura-sphinx $ZONE install_success 
+trap - ERR
 echo "use kaltura" | mysql -h$DB1_HOST -P$DB1_PORT -u$SUPER_USER -p$SUPER_USER_PASSWD mysql 2> /dev/null
 if [ $? -ne 0 ];then
        echo "
@@ -117,7 +119,13 @@ echo "Running Batch config...
 $BASE_DIR/bin/kaltura-batch-config.sh "$ANSFILE"
 if [ $? -ne 0 ];then
        echo -e "${BRIGHT_RED}ERROR: $BASE_DIR/bin/kaltura-batch-config.sh failed:( You can re-run it when the issue is fixed.${NORMAL}"
- #      send_install_becon kaltura-batch $ZONE "install_fail: $OUT"
+	exit 113 
+fi
+
+$BASE_DIR/bin/kaltura-nginx-config.sh "$ANSFILE"
+if [ $? -ne 0 ];then
+       echo -e "${BRIGHT_RED}ERROR: $BASE_DIR/bin/kaltura-nginx-config.sh failed:( You can re-run it when the issue is fixed.${NORMAL}"
+	exit 114 
 fi
 
 #echo "Running Red5 config...
@@ -135,7 +143,7 @@ if [ $? -ne 0 ];then
  #      send_install_becon kaltura-dwh $ZONE "install_fail: $OUT"
 fi
 #send_install_becon kaltura-dwh $ZONE install_success
-rm -rf $APP_DIR/cache/*
+find $APP_DIR/cache/ -type f -exec rm {} \;
 rm -f $APP_DIR/log/kaltura-*.log
 
 echo -e "${CYAN}
@@ -146,11 +154,23 @@ Setup completed successfully!
 To access your Kaltura tools visit:
 ${BRIGHT_BLUE}$SERVICE_URL${CYAN}
 
+To verify the integrity of your deployment and that all components are fully configured and installed,
+you can run the sanity tests using the following command:
+$BASE_DIR/bin/kaltura-sanity.sh 
+
 To begin, access the Admin Console using the Admin email and password you've entered while installing.
 When logged in to the KAC, create a new publisher account to being using Kaltura.
 Visit ${BRIGHT_BLUE}http://www.kaltura.org${CYAN} to join the community and get help!
-Visit ${BRIGHT_BLUE}http://knowledge.kaltura.com${CYAN} to read documentation and learn more.
-=====================================================================================================================${NORMAL}
+Visit ${BRIGHT_BLUE}https://forum.kaltura.org${CYAN} to post issues and help others with theirs.
+Visit ${BRIGHT_BLUE}https://surveys.kaltura.org/index.php/877436${CYAN} to submit our community survey.
+Visit ${BRIGHT_BLUE}https://knowledge.kaltura.com${CYAN} to read documentation and learn more.
+=====================================================================================================================
+
+
+Thank you for running Kaltura! To keep Kaltura viable, stable and tested, please join the community and help by contributing sanity tests that verify overall platform stability: http://bit.ly/kaltura-ci , and by contributing to the project roadmap by solving simple tasks and challenges: http://bit.ly/kaltura-tasks.
+
+
+${NORMAL}
 "
 
 find $BASE_DIR/app/cache/ $BASE_DIR/log -type d -exec chmod 775 {} \; 
@@ -159,4 +179,5 @@ chown -R kaltura.apache $BASE_DIR/app/cache/ $BASE_DIR/log
 chmod 775 $BASE_DIR/web/content
 send_post_inst_msg $ADMIN_CONSOLE_ADMIN_MAIL 
 
+send_install_becon `basename $0` $ZONE install_success 
 

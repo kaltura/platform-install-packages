@@ -1,0 +1,44 @@
+#!/usr/bin/make -f
+COMP_NAME ?= kaltura-dwh
+
+DEB_VERSION := $(shell dpkg-parsechangelog | egrep '^Version:' | cut -f 2 -d ' ')
+RC_FILE :=../../build/sources.rc
+KALTURA_SERVER_VERSION ?= $(shell egrep '^KALTURA_SERVER_VERSION=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
+RPM_SOURCES_DIR ?= $(shell egrep '^RPM_SOURCES_DIR=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
+KALTURA_PREFIX ?= $(shell egrep '^KALTURA_PREFIX=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
+DWH_VERSION ?= $(shell egrep '^DWH_VERSION=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
+include ../includes/build-revision.mk
+archive := $(RPM_SOURCES_DIR)/$(COMP_NAME)-$(DWH_VERSION).zip 
+tree := dwh-$(DWH_VERSION)
+
+clean:
+	dh_clean
+	rm -rf $(tree) 
+	rm -rf debian/tmp
+
+$(archive):
+	~/sources/platform-install-packages/build/package_kaltura_dwh.sh	
+
+$(tree): $(archive)
+	unzip -qq -o $(archive)
+
+build: $(tree)
+
+install: build
+
+binary-indep: install
+	dh_installdirs
+	rm -rf $(KALTURA_PREFIX)
+	mkdir -p $(KALTURA_PREFIX)/dwh 
+	mkdir -p $(KALTURA_PREFIX)/web/logs
+	mv $(tree)/.kettle $(KALTURA_PREFIX)/dwh/
+	mv $(tree)/* $(KALTURA_PREFIX)/dwh/
+	chmod +x $(KALTURA_PREFIX)/dwh/etlsource/execute/*sh
+	dh_install $(KALTURA_PREFIX)
+	dh_gencontrol -u-v$(DEB_VERSION) 
+	dh_installdebconf
+	dh_installdeb
+	dh_builddeb 
+
+binary: binary-indep
+.PHONY: clean build binary-indep binary-arch binary

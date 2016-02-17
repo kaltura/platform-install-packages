@@ -1,0 +1,39 @@
+#!/bin/sh
+
+set -e
+getopts d: FLAG || true
+if [ $FLAG = "d" ]; then
+	DIST=$OPTARG
+	shift 2
+else
+	DIST=ce
+fi 
+
+cd `dirname $0`
+cd $DIST
+
+if [ $1 ]; then
+	SUBSET=$@
+else
+	SUBSET="*"
+fi
+
+for deb in $SUBSET
+do
+    deb=${deb%%/}
+    if [ -e $deb/nobuild -o ! -d $deb/debian ]; then
+            continue
+    fi
+	if grep -q ") $DIST" $deb/debian/changelog;then
+    	cd $deb
+		dpkg-buildpackage -b -uc
+    	cd ../
+	fi
+done
+if [ $# -eq 0  ];then
+    share/repos/debian-test/add_changes $DIST /usr/zlocal/packaging/share/build-packages/deb/$DIST/*.changes 	
+fi
+if [ "$1" = "--live" ];then
+    share/repos/debian/add_debs $DIST /usr/zlocal/packaging/share/build-packages/deb/$DIST/*.deb
+fi
+    

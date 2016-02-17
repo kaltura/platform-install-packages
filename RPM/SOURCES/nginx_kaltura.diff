@@ -1,0 +1,13 @@
+--- nginx-1.6.2/src/http/ngx_http_upstream.c	2014-09-16 08:23:20.000000000 -0400
++++ nginx-1.6.2/src/http/ngx_http_upstream_kalt_vod_patch.c	2014-11-10 16:42:34.566279255 -0500
+@@ -2137,7 +2137,9 @@
+ 
+     b = &u->buffer;
+ 
+-    for ( ;; ) {
++    //for ( ;; ) {
++    // see https://github.com/kaltura/nginx-vod-module/#nginx-patch
++    while (u->length) {
+ 
+         size = b->end - b->last;
+ 

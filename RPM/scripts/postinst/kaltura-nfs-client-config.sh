@@ -4,6 +4,7 @@
 #         USAGE: ./kaltura-nfs-client-config.sh 
 #   DESCRIPTION: NFS client side preps. 
 #       OPTIONS: ---
+# 	LICENSE: AGPLv3+
 #  REQUIREMENTS: ---
 #          BUGS: ---
 #         NOTES: ---
@@ -26,14 +27,21 @@ IDMAPD_CONFFILE=/etc/idmapd.conf
 PREFIX=/opt/kaltura
 MOUNT_DIR=$PREFIX/web
 mkdir -p $MOUNT_DIR
-yum install nfs-utils-lib -y
+DISTRO=`lsb_release -i -s`
+if [ "$DISTRO" = "Ubuntu" -o "$DISTRO" = "Debian" ];then
+	apt-get install nfs-common -y
+	SERVICES="rpcidmapd"
+else
+	yum install nfs-utils-lib nfs-utils -y
+	getent group apache >/dev/null || groupadd -g 48 -r apache
+	getent passwd apache >/dev/null || \
+	  useradd -r -u 48 -g apache -s /sbin/nologin \
+	    -d /var/www -c "Apache" apache
+	SERVICES="rpcidmapd rpcbind"
+fi
 # create user/group, and update permissions
 groupadd -r kaltura -g7373 2>/dev/null || true
 useradd -M -r -u7373 -d $PREFIX -s /bin/bash -c "Kaltura server" -g kaltura kaltura 2>/dev/null || true
-getent group apache >/dev/null || groupadd -g 48 -r apache
-getent passwd apache >/dev/null || \
-  useradd -r -u 48 -g apache -s /sbin/nologin \
-    -d /var/www -c "Apache" apache
 usermod -g kaltura kaltura 2>/dev/null || true
 
 if grep -q "^Domain" $IDMAPD_CONFFILE;then
@@ -49,8 +57,17 @@ else
         echo "Nobody-User = $NOBODY_GROUP" >>$IDMAPD_CONFFILE
 fi
 echo "$NFS_HOST:$MOUNT_DIR $MOUNT_DIR nfs4 _netdev,auto 0 0" >> /etc/fstab
-for DAEMON in rpcbind rpcidmapd ;do
+for DAEMON in $SERVICES ;do
 	service $DAEMON restart
 done
 nfsidmap -c
-mount $MOUNT_DIR
+cat /proc/mounts |grep -q "$NFS_HOST:$MOUNT_DIR.*$MOUNT_DIR"
+if [ $? -ne 0 ];then
+	mount $MOUNT_DIR || echo "Failed to mount" && exit 2
+fi
+su kaltura -c "touch $MOUNT_DIR/"
+if [ $? -eq 0 ];then
+	echo "Mount is OK, writable to 'kaltura' user"
+else
+	echo "Could not touch $MOUNT_DIR as 'kaltura' user , you should fix it."
+fi
