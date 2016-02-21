@@ -1,20 +1,4 @@
-#!/bin/bash - 
-#===============================================================================
-#          FILE: kaltura-media-server-config.sh
-#         USAGE: ./kaltura-media-server-config.sh 
-#   DESCRIPTION: configure server as a media-server node.
-#       OPTIONS: ---
-#   LICENSE: AGPLv3+
-#  REQUIREMENTS: ---
-#          BUGS: ---
-#         NOTES: ---
-#        AUTHOR: Tan-Tan <kobi.michaeli@kaltura.com>
-#  ORGANIZATION: Kaltura, inc.
-#       CREATED: 14/12/14
-#      REVISION:  ---
-#===============================================================================
-
-#set -o nounset                              # Treat unset variables as an error
+et -o nounset                              # Treat unset variables as an error
 
 
 KALTURA_FUNCTIONS_RC=`dirname $0`/kaltura-functions.rc
@@ -60,11 +44,9 @@ ant
 /etc/init.d/WowzaStreamingEngine start
 php $MEDIA_SERVER_DIR/register_media_server.php
 RC=$?
-echo "[$RC]"
 
-if [ "$RC" -eq "0" ] || [ "$RC" -eq "255" ]; then
+if [ "$RC" -eq "0" ]; then
     send_install_becon `basename $0` $ZONE install_success 0
 else
     send_install_becon `basename $0` $ZONE install_fail "$RC"
 fi
-
