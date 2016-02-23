@@ -146,7 +146,7 @@ KALTURA_CORE_URI="https://github.com/kaltura/server/archive/$KALTURA_SERVER_VERS
 KALTURA_TEMPLATES_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalsource/on-premise/trunk/packaging/templates"
 
 # Kaltura nginx-vod-module:
-KALTURA_NGINX_VOD_VERSION=1.5.2
+KALTURA_NGINX_VOD_VERSION=1.6
 KALTURA_NGINX_VOD_URI="https://github.com/kaltura/nginx-vod-module/archive/$KALTURA_NGINX_VOD_VERSION.zip"
 
 KALTURA_NGINX_AKAMAI_TOKEN_VALIDATE_VERSION=1.0.1
@@ -157,7 +157,7 @@ NGINX_VTS_URI="https://github.com/vozlt/nginx-module-vts/archive/$NGINX_VTS_VERS
 
 KALTURA_NGINX_SECURE_TOKEN_VERSION=1.0.1
 KALTURA_NGINX_SECURE_TOKEN_URI="https://github.com/kaltura/nginx-secure-token-module/archive/$KALTURA_NGINX_SECURE_TOKEN_VERSION.zip"
-NGINX_VERSION=1.8.0
+NGINX_VERSION=1.8.1
 NGINX_URI="http://nginx.org/download/nginx-$NGINX_VERSION.tar.gz"
 
 # Kaltura Streaming lib build vars:
