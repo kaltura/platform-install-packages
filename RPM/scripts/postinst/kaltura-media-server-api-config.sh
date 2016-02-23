@@ -116,7 +116,7 @@ SECOND_MEDIA_SECTION_TAG="@2nd_block@"
 
 for NEEDED_FILE in $BROADCAST_TEMPLATE_FILE MEDIA_SERVERS_INI_TEMPLATE; do
     if [ ! -r "$BROADCAST_TEMPLATE_FILE" ];then
-        send_fail_beacon_and_exit "ERROR: could not find $NEEDED_FILE so, exiting.." 5
+        send_fail_beacon_and_exit "ERROR: could not find $NEEDED_FILE so, exiting." 5
     fi
 done  
 
@@ -158,9 +158,11 @@ then
         SECONDARY_MEDIA_SERVER_HOST=$TEMP_VAR
     else  # temp file for line removal
         echo -e "${YELLOW}Warning: SECONDARY_MEDIA_SERVER_HOST was not defined. In case this is not correct, please run '$0' again${NORMAL}"
-        sed -i /^$SECOND_MEDIA_SECTION_TAG/d $TEMP_BROADCAST # Live removal for the 2nd server
+        sed -i /^$SECOND_MEDIA_SECTION_TAG/d $TEMP_BROADCAST # Line removal for the 2nd server
     fi
-else
+fi
+
+if [ ! -z "$SECONDARY_MEDIA_SERVER_HOST" ]; then
     sed -i s/^$SECOND_MEDIA_SECTION_TAG//g $TEMP_BROADCAST # deleting the tag only since the values will be replaced in the next sed
 fi
 
