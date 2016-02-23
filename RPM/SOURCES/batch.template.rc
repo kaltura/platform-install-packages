@@ -1,5 +1,5 @@
 check process batch 
-    with pidfile "@LOG_DIR@/batch/batch.pid"
+    with pidfile "@BASE_DIR@/var/run/batch.pid"
     start program = "/etc/init.d/kaltura-batch restart" with timeout 60 seconds
     stop program = "/etc/init.d/kaltura-batch stop"
 

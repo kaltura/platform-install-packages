@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 11.9.0
-Release: 5
+Release: 8
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -59,6 +59,7 @@ This is the base package, needed for any Kaltura server role.
 %install
 mkdir -p $RPM_BUILD_ROOT%{prefix}/app
 mkdir -p $RPM_BUILD_ROOT%{prefix}/log
+mkdir -p $RPM_BUILD_ROOT%{prefix}/var/run
 mkdir -p $RPM_BUILD_ROOT%{prefix}/tmp
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web
 for i in alpha api_v3 batch generator infra scripts sphinx testme thumb deploy testmeDoc html5;do
@@ -225,9 +226,9 @@ if [ "$1" = 2 ];then
 		php %{prefix}/app/generator/generate.php
 		php %{prefix}/app/deployment/base/scripts/installPlugins.php
 		php %{prefix}/app/deployment/base/scripts/populateSphinxMetadata.php
-		find %{prefix}/app/cache/ %{prefix}/log -type d -exec chmod 775 {} \;
+		find %{prefix}/app/cache/ %{prefix}/log %{prefix}/var/run -type d -exec chmod 775 {} \;
 		find %{prefix}/log -type f -exec chmod 664 {} \;
-		chown -R %{kaltura_user}.%{apache_user} %{prefix}/app/cache/ %{prefix}/log
+		chown -R %{kaltura_user}.%{apache_user} %{prefix}/app/cache/ %{prefix}/log %{prefix}/var/run
 		chmod 775 %{prefix}/web/content
 
 		service kaltura-monit start
@@ -287,6 +288,7 @@ fi
 %dir /etc/kaltura.d
 %defattr(-, %{kaltura_user}, %{apache_group} , 0775)
 %dir %{prefix}/log
+%dir %{prefix}/var/run
 %dir %{prefix}/tmp
 %dir %{prefix}/app/cache
 %{prefix}/web/*
