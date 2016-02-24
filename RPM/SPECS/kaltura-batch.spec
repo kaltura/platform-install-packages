@@ -7,7 +7,7 @@
 Summary: Kaltura Open Source Video Platform - batch server 
 Name: kaltura-batch
 Version: 11.9.0
-Release: 1
+Release: 2
 License: AGPLv3+
 Group: Server/Platform 
 Source0: zz-%{name}.ini
@@ -89,10 +89,10 @@ To finalize the setup.
 "
 fi
 usermod -a -G %{apache_group} %{kaltura_user}
-chown -R %{kaltura_user}:%{kaltura_group} %{prefix}/log/batch
-chown -R %{kaltura_user}:%{apache_group} %{prefix}/tmp 
-chown -R %{kaltura_user}:%{apache_group} %{prefix}/app/cache 
-chmod -R 775 %{prefix}/log %{prefix}/tmp %{prefix}/app/cache %{prefix}/web
+chown %{kaltura_user}:%{kaltura_group} %{prefix}/log/batch
+chown %{kaltura_user}:%{apache_group} %{prefix}/tmp 
+chown %{kaltura_user}:%{apache_group} %{prefix}/app/cache 
+chmod 775 %{prefix}/log %{prefix}/tmp %{prefix}/app/cache %{prefix}/web
 
 chown %{kaltura_user}:%{kaltura_group} %{prefix}/app/batch
 echo "PATH=$PATH:/opt/kaltura/bin;export PATH" >> /etc/sysconfig/httpd
