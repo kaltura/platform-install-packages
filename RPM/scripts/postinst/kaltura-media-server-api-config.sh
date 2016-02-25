@@ -46,6 +46,30 @@ function send_fail_beacon_and_exit() {
     exit $RC
 }
 
+create_answer_file()
+{
+    POST_INST_MAIL_TMPL=$1
+    ANSFILE=/tmp/kaltura_`date +%d_%m_%H_%M`.ans
+    for VAL in TIME_ZONE KALTURA_FULL_VIRTUAL_HOST_NAME KALTURA_VIRTUAL_HOST_NAME DB1_HOST DB1_PORT DB1_PASS DB1_NAME DB1_USER SERVICE_URL SPHINX_SERVER1 SPHINX_SERVER2 DWH_HOST DWH_PORT ADMIN_CONSOLE_ADMIN_MAIL ADMIN_CONSOLE_PASSWORD CDN_HOST KALTURA_VIRTUAL_HOST_PORT SUPER_USER SUPER_USER_PASSWD ENVIRONMENT_NAME DWH_PASS PROTOCOL RED5_HOST USER_CONSENT SEND_NEWSLETTER CONTACT_MAIL VOD_PACKAGER_HOST VOD_PACKAGER_PORT IP_RANGE WWW_HOST IS_SSL MEDIA_SERVER_DOMAIN_NAME PRIMARY_MEDIA_SERVER_HOST; 
+    do
+        if [ -n "${!VAL}" ];then
+            echo "$VAL=\"${!VAL}\"" >> $ANSFILE 
+        fi
+    done
+    if [ -r "$POST_INST_MAIL_TMPL" ];then
+        sed -i "s#@ANSFILE@#$ANSFILE#g" $POST_INST_MAIL_TMPL 
+    fi
+    chmod 600 $ANSFILE
+    echo -en "${CYAN}
+========================================================================================================================
+Kaltura install answer file written to $ANSFILE  -  Please save it!
+This answers file can be used to silently-install re-install this machine or deploy other hosts in your cluster.
+========================================================================================================================
+${NORMAL}
+"
+
+}
+
 
 KALTURA_FUNCTIONS_RC=`dirname $0`/kaltura-functions.rc
 if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
@@ -103,7 +127,7 @@ done
 
 
 # # VARS
-MANDATORY_VARS_LIST="MEDIA_SERVER_DOMAIN_NAME PRIMARY_MEDIA_SERVER_HOST KALTURA_VIRTUAL_HOST_PORT"
+MANDATORY_VARS_LIST="MEDIA_SERVER_DOMAIN_NAME PRIMARY_MEDIA_SERVER_HOST KALTURA_FULL_VIRTUAL_HOST_NAME KALTURA_VIRTUAL_HOST_PORT"
 BROADCAST_TEMPLATE_FILE=$APP_DIR/configurations/broadcast.template.ini
 BROADCAST_FILE=$APP_DIR/configurations/broadcast.ini
 TEMP_BROADCAST="/tmp/"`basename $BROADCAST_FILE`
@@ -187,6 +211,10 @@ else
 fi
 mv $temp_media_server_ini $MEDIA_SERVERS_INI
 
+create_answer_file $POST_INST_MAIL_TMPL
+
 echo -e "${BRIGHT_BLUE}The setup was finished successfully.${NORMAL}"
 
 send_install_becon `basename $0` $ZONE install_success 0
+
+
