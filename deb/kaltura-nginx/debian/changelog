@@ -1,3 +1,16 @@
+kaltura-nginx (1.8.1-1) kajam; urgency=low
+
+  * support loading json mapping from file (in addition to http)
+  * support hds drm encryption
+  * support hls fairplay drm
+  * support additional codecs
+  * video: vp8, vp9
+  * audio: mp3, vorbis, opus
+  * add concat filter
+  * add vod_expires / vod_expires_live settings
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Tue, 23 Feb 2016 10:43:40 +0000
+
 kaltura-nginx (1.8.0-8) kajam; urgency=low
 
   * optional SSL config during postint 

@@ -46,9 +46,9 @@ if [ -r $KALTURA_PREFIX/bin/kaltura-base-upgrading ];then
                 touch $KALTURA_PREFIX/app/configurations/sphinx_schema_update
                 rm -rf $KALTURA_PREFIX/app/cache/*
                 php $KALTURA_PREFIX/app/generator/generate.php
-                find $KALTURA_PREFIX/app/cache/ $KALTURA_PREFIX/log -type d -exec chmod 775 {} \;
+                find $KALTURA_PREFIX/app/cache/ $KALTURA_PREFIX/log $KALTURA_PREFIX/var/run -type d -exec chmod 775 {} \;
                 find $KALTURA_PREFIX/app/cache/ $KALTURA_PREFIX/log -type f -exec chmod 664 {} \;
-                chown -R $KALTURA_USER.$APACHE_USER $KALTURA_PREFIX/app/cache/ $KALTURA_PREFIX/log
+                chown -R $KALTURA_USER.$APACHE_USER $KALTURA_PREFIX/app/cache/ $KALTURA_PREFIX/log $KALTURA_PREFIX/var/run
                 chmod 775 $KALTURA_PREFIX/web/content
 
                 if [ -n "$RESTART_APACHE" ];then

@@ -33,6 +33,7 @@ install: build
 binary-indep: install
 	rm -rf $(KALTURA_PREFIX)
 	mkdir -p $(KALTURA_PREFIX)/log
+	mkdir -p $(KALTURA_PREFIX)/var/run
 	mkdir -p $(KALTURA_PREFIX)/tmp
 	mkdir -p $(KALTURA_PREFIX)/web
 	mkdir -p $(KALTURA_PREFIX)/app/cache
