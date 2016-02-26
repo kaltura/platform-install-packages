@@ -7,6 +7,7 @@
 
 [template]
 logDir												= @LOG_DIR@/batch/
+pidFileDir 											= @BASE_DIR@/var/run/
 statusInterval										= 300
 serviceUrl											= @SERVICE_URL@
 remoteServerUrl										= @BATCH_URL@
