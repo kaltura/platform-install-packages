@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 11.9.0
-Release: 11
+Release: 12
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -307,6 +307,19 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Feb 29 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 11.9.0-12
+- SUP-6997 - Server returning all stream information when loading the player
+- SUP-7185 - Live stream Passthrough ingest is missing
+- SUP-7236 - Slow transcoding
+- SUP-7267 - Disney - Bulk ingestion intermittently fails to create certain flavors
+- PLAT-4714 - Sometimes there is more than one scheduler running on a batch machine
+- PLAT-5007 - MAC - Safari:File is not download when pressing on "Export to CSV"
+- PLAT-5097 - "Flavor Asset Status Changed" - http event notification template
+- PLAT-5103 - can not create drm profile from api
+- PLAT-5122 - bad sync between DCs on specific conditions
+- PLAT-5126 - KalturaCaptionAssetItemFilter returns KalturaCaptionAsset
+- FEC-4958 - Multi Audio tracks: Playmanifest is empty instead of showing the audio sources
+
 * Mon Feb 15 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 11.9.0-1
 - Ver Bounce to 11.9.0
 
