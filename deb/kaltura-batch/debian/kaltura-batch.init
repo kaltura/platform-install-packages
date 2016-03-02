@@ -25,7 +25,7 @@
 BATCHDIR=$APP_DIR/batch
 BATCHEXE=KGenericBatchMgr.class.php
 CONFIG_FILE=$APP_DIR/configurations/batch
-LOCKFILE="$LOG_DIR/batch/batch.pid"
+LOCKFILE="$BASE_DIR/var/run/batch.pid"
 GREEN='\e[1;32m'
 RED='\e[1;31m'
 NORMAL='\e[0m'
