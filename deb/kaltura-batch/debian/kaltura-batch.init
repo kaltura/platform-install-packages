@@ -121,7 +121,7 @@ stop() {
             echo_status "Killing Batch Manager with PID $KP_PARENT and related workers" 0
             kill -s $SIGNAL $KP > /dev/null
         fi
-        rm $LOCKFILE
+        rm -f $LOCKFILE
         RC=$?
     else
         echo_status "Service Batch Manager not running" 1
