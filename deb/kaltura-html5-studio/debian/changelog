@@ -1,3 +1,11 @@
+kaltura-html5-studio (2.0.3-1) kajam; urgency=low
+
+  * FEC-4776 - Studio hangs when trying to edit UIConf with invalid JSON config
+  * Switch between the words "Update" and "Upgrade" in the list view
+  * Aligned with HTML5 lib v2.41
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Fri, 11 Mar 2016 16:17:49 +0000
+
 kaltura-html5-studio (2.0.1-1) jupiter; urgency=low
 
   * SUP-5016 - KMC doesn't save player strings override.
