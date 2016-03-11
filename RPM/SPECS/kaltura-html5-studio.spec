@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5-studio
-Version: v2.0.2
+Version: v2.0.3
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -51,6 +51,11 @@ rm -rf %{buildroot}
 %{prefix}/apps/studio/%{version}
 
 %changelog
+* Fri Mar 11 2016 Jess Portnoy <jess.portnoy@kaltura.com> - v2.0.3-1
+- FEC-4776 - Studio hangs when trying to edit UIConf with invalid JSON config
+- Switch between the words "Update" and "Upgrade" in the list view
+- Aligned with HTML5 lib v2.41
+
 * Sun Dec 12 2015 Jess Portnoy <jess.portnoy@kaltura.com> - v2.0.2-1
 - FEC-4158 Strings plugin should support per localization key overrides
 - PLAT-3566 - The studio should list also players of type PLAYER_V3 (8).

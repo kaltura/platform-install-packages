@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.40
+Version: v2.41
 Release: 1
 Epoch:0 
 License: AGPLv3+
@@ -39,6 +39,7 @@ Source31: kaltura-html5lib-v2.37.3.tar.gz
 Source29: kaltura-html5lib-v2.38.tar.gz
 Source30: kaltura-html5lib-v2.38.1.tar.gz
 Source32: kaltura-html5lib-v2.39.tar.gz
+Source33: kaltura-html5lib-v2.40.tar.gz
 Source28: simplePhpXMLProxy.php
 
 URL: https://github.com/kaltura/mwEmbed 
@@ -93,10 +94,11 @@ tar zxf %{SOURCE29} -C %{_builddir}/
 tar zxf %{SOURCE30} -C %{_builddir}/
 tar zxf %{SOURCE31} -C %{_builddir}/
 tar zxf %{SOURCE32} -C %{_builddir}/
+tar zxf %{SOURCE33} -C %{_builddir}/
 
 %install
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib
-for i in v2.1.1 v2.3 v2.4 v2.6 v2.9 v2.14 v2.15 v2.18.5 v2.20 v2.21 v2.22 v2.23 v2.24 v2.25 v2.26 v2.27 v2.28 v2.29 v2.30 v2.31 v2.32.1 v2.33 v2.34 v2.35.5 v2.36 v2.37.1 v2.37.3 v2.38 v2.38.1 v2.39 %{version};do
+for i in v2.1.1 v2.3 v2.4 v2.6 v2.9 v2.14 v2.15 v2.18.5 v2.20 v2.21 v2.22 v2.23 v2.24 v2.25 v2.26 v2.27 v2.28 v2.29 v2.30 v2.31 v2.32.1 v2.33 v2.34 v2.35.5 v2.36 v2.37.1 v2.37.3 v2.38 v2.38.1 v2.39 v2.40 %{version};do
 	rm -rf %{_builddir}/%{name}-$i/modules/Widevine
 	cp -r %{_builddir}/%{name}-$i $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i
 	cp %{SOURCE28} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i/
@@ -118,6 +120,91 @@ find /opt/kaltura/web/html5/html5lib -type d -name cache -exec chown -R 48 {} \;
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Fri Mar 11 2016 Jess Portnoy <jess.portnoy@kaltura.com> - v2.41-1
+- FEC-4777 - Updated DVR Layout for Player
+- SUP-7065 - Content Drop-off - Play-through Ratio 121%
+- OPF-2109 - HD and Bitrate bar not working on IE11 and EDGE
+- OPF-2146 - player - the bar does not disappear when choosing audio langauge
+- FEC-4801 - DoubleClick: onAdPlay event doesn't return the same parameters when using leadWithFlash is true and false
+- FEC-4791 - Set DFP plugin to default to lead with html5 from player version 2.41
+- FEC-4768 - DFP pre-roll: Playlist is not disabled when pre-roll ad paused
+- FEC-4816 - MediaReady in dash-player
+- OPF-2364 - Self-Care-Web/Player/Progress bar/Sometimes the progress bar doesn't work properly
+- OPF-3047 - Self-Care-Web/Linear/The default audio language is English
+- OPF-3033 - Self-Care-Web/Linear/ Playback is stopped before 15 minutes
+- FEC-4400 - app crashes when starting to play media with postroll with fatal exception
+- FEC-4838 - Ads started to play with audio only for several seconds on iPad
+- FEC-4841 - DFP overlay: the player doesn't started to play, spinner appears all time
+- FEC-4846 - Yubora: the code in the ping request is incorrect when playing a playlist
+- FEC-4848 - attach buffering support on mwembed - web layer
+- FEC-4852 - Playlist with DFP overlay: Play button appears during a video playing (flash player)
+- FEC-4584 - Omniture do not dispatch segments-views after pause
+- FEC-4859 - yubora: ping requests are not reported after replay
+- FEC-4873 - regression: error messages appear for 2 seconds and then disappear
+- FEC-4858 - yubora: bitrate of live streams is set incorrectly to -1 instead of the real bitrate
+- FEC-4862 - yubora: the bitrate in ping events doens't update for hds/hls/akamai , but only to progressive download
+- FEC-4860 - yubora: play and pause events are not reported for live stream
+- PLAT-3728 - Anonymous user support WAITING FOR QA REVIEW
+- SUP-6930 - O'Reilly Media - Audio only flavors are labeled as 240P
+- FEC-4848 - attach buffering support on mwembed - web layer
+- FEC-4860 - yubora: play and pause events are not reported for live stream
+- FEC-4875 - yubora: bitrate equals to -1 in the first entry of the playlist
+- FEC-4814 - Calling doPause right after doPlay is not pausing the video
+- FEC-4882 - regression: playlist playback get stuck after playback of an ad that fails.
+- FEC-4884 - HLS-OSMF: flash errors appear in IE browser
+- FEC-4883 - HLS-OSMF: Black screen displayed during seek
+- FEC-4358 - live multi-track audio, audio is played before video
+- FEC-4609 - HLS-OSMF: stream stuck after limit bandwidth and no released after the limit disabled
+- FEC-4482 - HLS OSMF - external stream stuck in limit the bandwidth to 0.5M
+- FEC-4886 - MediaMark KPlayerEvenet returns "MediaMark" as the param
+- FEC-4888 - regression: playback start with audio only on pc when adErrorEvent occurs
+- FEC-4890 - yubora: two "data" requests sent when launching player with native app.
+- FEC-4895 - yubora - there are errors that don't trigger the "error" event
+- FEC-4658 - webcast live - Switching views in player is not smooth
+- WEBC-686 - As an attendee I'd like to see view switches in a smooth and uninterrupted manner
+- FEC-4901 - regression: comScoreStreamingTag- setCLip event not called
+- FEC-4900 - regression: comscore doesn't fire events on a page with a playlist
+- FEC-4852 - Playlist with DFP overlay: Play button appears during a video playing (flash player)
+- FEC-4908 - double call to "notifyJsReady" - breaks "addKPlayerEventListener" on UIWebView
+- FEC-4926 - Overlay Ad does not appear
+- FEC-4813 - Social Sharing Links Do Not Pass Time Offset to Facebook/Twitter/LinkedIn/etc.
+- FEC-3934 - Skip button doesn't work When using javascript (flash disabled) after switching media
+- FEC-4947 - DFP Trafficking - Ads are not displayed
+- FEC-4942 - DFP post-roll - Video is not getting played after tapping on Play button in iPad
+- FEC-4945 - regression google analytics: midSequenceStart is fired without midSequenceComplete
+- FEC-4903 - Vertical playlist with DFP becomes disabled after clicking on ad twice
+- FEC-4915 - DFP Post roll: Ad is not Paused at first click
+- FEC-4802 - Pass ad title in Doubleclick onAdPlay event
+- SUP-7422 - DFP issue - "learn more' button isn't clickable.
+- FEC-4957 - Live entry with adstiching plays with blackscreen on devices
+- FEC-4941 - Not regression: DFP - preroll is not shown if you choose the video from playlist
+- FEC-4939 - Regression: DFP pre-mid-post : you should press twice for replaying the entry in playlist
+- FEC-4928 - DFP pre-mid-post : video stack and preroll is not shown on second video from related videos
+- FEC-4928 - DFP pre-mid-post : video stack and preroll is not shown on second video from related videos
+- FEC-4941 - Not regression: DFP - preroll is not shown if you choose the video from playlist
+- FEC-4983 - Adding skip event
+- FEC-5008 - Regression: comScore: Extra playback event fired for playback of dfp pre-roll
+- FEC-5007 - Regression: Player api: "ad start: preroll" is fired for overlay
+- FEC-4945 - regression google analytics: midSequenceStart is fired without midSequenceComplete
+- FEC-5003 - V18 - Change media does not work
+- FEC-5004 - V18 - Taping on screen, makes the screen blue for a fraction of second
+- FEC-5010 - V18 - Taping on screen several times cause the player controls to disappear
+- FEC-5003 - V18 - Change media does not work
+- FEC-4970 - regression: omniture - milestones events are not reported in the right timing
+- FEC-5028 - playback]Catchup: time point in tooltip is not align to the center
+- FEC-5065 - Regression - Playlist is not getting disabled while midroll is playing
+- FEC-5064 - DFP pre-mid-post: post-roll doesn't playing on iPad
+- FEC-5061 - iOS trailer: 'Play' button is displayed on the screen only when pressing on it
+- FEC-5057 - DFP - Scroll bar is flickering If you seek on after midroll place
+- FEC-5051 - DFP pre-mid_post with playlist: nothing occurred after tap on big Play button in middle - iPad
+- FEC-5049 - regression: heartbeat: trackVideoLoad and trackSessionStart events come before the ad play event on the second entry
+- FEC-5046 - regression: playerPlayed and doPause events are fired between ad events
+- FEC-5008 - Regression: comScore: Extra playback event fired for playback of dfp pre-roll
+- FEC-4986 - Trailer not showing play button on iPhone
+- FEC-5070 - uDRM:Regression: PlayReady with ForceDash: Scrubber stuck and video is playing with loading spinner after clicking on play button
+- New HLS-OSMF plugin
+- Fix decimal point issues in different culture settings of systems in silverlight*
+
 * Sun Feb 14 2016 Jess Portnoy <jess.portnoy@kaltura.com> - v2.40-1
 - FEC-4659 - webcast live - clicking pause/play, the player jumps back a few seconds
 - FEC-4471 - HLS OSMF - external stream stuck during manual throttling
