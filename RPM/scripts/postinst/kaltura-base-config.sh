@@ -58,7 +58,12 @@ ${NORMAL}
 "
 
 }
-
+escape_hashes()
+{
+        for VAL in TIME_ZONE KALTURA_FULL_VIRTUAL_HOST_NAME KALTURA_VIRTUAL_HOST_NAME DB1_HOST DB1_PORT DB1_NAME DB1_USER SERVICE_URL SPHINX_SERVER1 SPHINX_SERVER2 DWH_HOST DWH_PORT ADMIN_CONSOLE_ADMIN_MAIL ADMIN_CONSOLE_PASSWORD SUPER_USER SUPER_USER_PASSWD CDN_HOST KALTURA_VIRTUAL_HOST_PORT DB1_PASS DWH_PASS PROTOCOL RED5_HOST USER_CONSENT VOD_PACKAGER_HOST VOD_PACKAGER_PORT IP_RANGE; do
+		export ${VAL}=`echo ${!VAL}|sed 's/#/\\\\#/g'`
+	done
+}
 KALTURA_FUNCTIONS_RC=`dirname $0`/kaltura-functions.rc
 if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
         OUT="${BRIGHT_RED}ERROR:could not find $KALTURA_FUNCTIONS_RC so, exiting..${NORMAL}"
@@ -355,6 +360,7 @@ fi
 HTML5_VER="`rpm -qa kaltura-html5lib --queryformat %{version}`"
 create_answer_file $POST_INST_MAIL_TMPL
 APP_REMOTE_ADDR_HEADER_SALT=`echo $SERVICE_URL|base64 -w0`
+escape_hashes
 # Now we will sed.
 for TMPL_CONF_FILE in $CONF_FILES;do
         CONF_FILE=`echo $TMPL_CONF_FILE | sed 's@\(.*\)\.template\(.*\)@\1\2@'`
