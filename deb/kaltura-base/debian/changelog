@@ -1,3 +1,12 @@
+kaltura-base (11.10.0-2) kajam; urgency=low
+
+  * PLAT-5056 - Enable content Pre-positioning on KES - only download
+  * PLAT-5091 - Expose Exception throwing in KalturaClient so it can be overridden by implementors
+  * SUP-6103 - Chapters module embed code not working properly
+  * PLAT-4082 - Distribution profile fail (YouTube)
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Fri, 11 Mar 2016 15:22:15 +0000
+
 kaltura-base (11.10.0-1) kajam; urgency=low
 
   * Switching to 11.10.0
