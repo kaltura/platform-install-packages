@@ -233,11 +233,25 @@ KCW_UICONF_GENERIC_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalsourc
 KCW_UICONF_EDITOR_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalsource/uiconf/kcweditor/locales/en_US"
 KCW_RPM_NAME="kaltura-kcw"
 
+# Kaltura aux kcw
+KCW_GIT_AUX_VERSIONS=""
+KCW_SVN_AUX_VERSIONS="v2.1.5"
+AUX_KCW_RPM_NAME="kaltura-aux-kcw"
+
+# Kaltura aux kRecord
+KRECORD_GIT_AUX_VERSIONS="v1.7"
+KRECORD_SVN_AUX_VERSIONS="v1.6.2 v1.6.5"
+AUX_KRECORD_RPM_NAME="kaltura-aux-krecord"
 
 # Kaltura kUpload
 KUPLOAD_VERSION="v1.2.16"
 KUPLOAD_URI="https://github.com/kaltura/kupload/releases/download/$KUPLOAD_VERSION/$KUPLOAD_VERSION.zip"
 KUPLOAD_RPM_NAME="kaltura-kupload"
+
+# Kaltura aux kupload
+KAUPLOAD_GIT_AUX_VERSIONS=""
+KAUPLOAD_SVN_AUX_VERSIONS="v2.1.5"
+AUX_KAUPLOAD_RPM_NAME="kaltura-aux-kupload"
 
 # Kaltura KVPM
 # we bundle a few vers at each release:
