@@ -146,6 +146,9 @@ fi
 find $APP_DIR/cache/ -type f -exec rm {} \;
 rm -f $APP_DIR/log/kaltura-*.log
 
+# Running on prem-patches
+$BASE_DIR/bin/kaltura-on_prem_temp_patches.sh
+
 echo -e "${CYAN}
 ====================================================================================================================
 
