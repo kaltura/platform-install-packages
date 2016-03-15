@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 11.10.0
-Release: 9
+Version: 11.11.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -307,6 +307,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Tue Mar 15 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 11.11.0-1
+- Ver Bounce to 11.11.0
+
 * Fri Mar 11 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 11.10.0-8
 - PLAT-5056 - Enable content Pre-positioning on KES - only download
 - PLAT-5091 - Expose Exception throwing in KalturaClient so it can be overridden by implementors
