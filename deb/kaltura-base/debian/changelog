@@ -1,3 +1,9 @@
+kaltura-base (11.11.0-1) kajam; urgency=low
+
+  * Switching to 11.11.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Tue, 15 Mar 2016 11:36:38 +0000
+
 kaltura-base (11.10.0-2) kajam; urgency=low
 
   * PLAT-5056 - Enable content Pre-positioning on KES - only download
