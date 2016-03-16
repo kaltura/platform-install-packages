@@ -126,8 +126,8 @@ To finalize the setup.
 "
 fi
 
-mkdir -p %{prefix}/app/configurations/sphinx/populate
-touch %{prefix}/app/configurations/sphinx/populate/`hostname`.ini
+mkdir -p /opt/kaltura/app/configurations/sphinx/populate
+touch /opt/kaltura/app/configurations/sphinx/populate/`hostname`.ini
 # create user/group, and update permissions
 chown -R %{sphinx_user}:%{sphinx_group} %{prefix} /opt/kaltura/log/sphinx 
 # don't start unless it went through configuration and the INI was created.
@@ -143,7 +143,7 @@ if [ "$1" = 0 ] ; then
     /sbin/service kaltura-populate stop >/dev/null 2>&1
     /sbin/chkconfig --del %{name}
     /sbin/chkconfig --del kaltura-populate 
-    rm -f %{prefix}/app/configurations/sphinx/populate/`hostname`.ini
+    rm -f /opt/kaltura/app/configurations/sphinx/populate/`hostname`.ini
 fi
 
 
