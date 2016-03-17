@@ -35,7 +35,6 @@ config.status: $(tree)
 	CFLAGS="$(CFLAGS)" CPPFLAGS="$(CPPFLAGS)" LDFLAGS="$(LDFLAGS)" cd $(tree) && ./configure \
 	--sysconfdir=/opt/kaltura/app/configurations/sphinx \
 	--with-mysql \
-	--with-unixodbc \
 	--with-iconv \
 	--enable-id64 \
 	--with-syslog \
