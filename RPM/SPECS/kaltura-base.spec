@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 11.11.0
-Release: 5
+Release: 8
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -307,6 +307,13 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Sun Mar 27 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 11.11.0-8
+- SUP-5851 - Categories/Media gallery locked 
+- SUP-7437 - API Errors When Pulling Custom Reports
+- PLAT-3842 - Two userEntry objects can be created for the same user and entry
+- PLAT-5222 - Can't list by AUTOMATIC type 
+- PLAT-5197 - The Duration of the DVR windows Don't match the parameters of Entry
+
 * Tue Mar 15 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 11.11.0-1
 - Ver Bounce to 11.11.0
 
