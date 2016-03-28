@@ -1,3 +1,13 @@
+kaltura-base (11.11.0-2) kajam; urgency=low
+
+  * SUP-5851 - Categories/Media gallery locked 
+  * SUP-7437 - API Errors When Pulling Custom Reports
+  * PLAT-3842 - Two userEntry objects can be created for the same user and entry
+  * PLAT-5222 - Can't list by AUTOMATIC type 
+  * PLAT-5197 - The Duration of the DVR windows Don't match the parameters of Entry
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Sun, 27 Mar 2016 16:25:21 +0000
+
 kaltura-base (11.11.0-1) kajam; urgency=low
 
   * Switching to 11.11.0
