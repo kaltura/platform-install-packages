@@ -6,7 +6,7 @@
 
 Name:           kaltura-sphinx
 Version:        2.2.1
-Release:        17
+Release:        18
 Summary:        Sphinx full-text search server - for Kaltura
 
 Group:          Applications/Text
@@ -108,8 +108,8 @@ ldconfig
 getent group %{sphinx_group} >/dev/null || groupadd -r %{sphinx_group} -g7373 2>/dev/null
 getent passwd %{sphinx_user} >/dev/null || useradd -M -r -u7373 -d %{prefix} -s /bin/bash -c "Kaltura server" -g %{sphinx_group} %{sphinx_user} 2>/dev/null
 sed 's#@LOG_DIR@#/opt/kaltura/log#g' /opt/kaltura/app/configurations/sphinx/kaltura.conf.template > /opt/kaltura/app/configurations/sphinx/kaltura.conf
-sed 's#@BASE_DIR@#/opt/kaltura#g' -i $RPM_BUILD_ROOT/opt/kaltura/app/configurations/sphinx/kaltura.conf
-sed 's#^pid_file.*#pid_file=%{prefix}/var/run/searchd.pid#' -i $RPM_BUILD_ROOT/opt/kaltura/app/configurations/sphinx/kaltura.conf
+sed 's#@BASE_DIR@#/opt/kaltura#g' -i /opt/kaltura/app/configurations/sphinx/kaltura.conf
+sed 's#^pid_file.*#pid_file=%{prefix}/var/run/searchd.pid#' -i /opt/kaltura/app/configurations/sphinx/kaltura.conf
 # register service
 if [ "$1" = 1 ];then
     /sbin/chkconfig --add %{name}
@@ -126,8 +126,8 @@ To finalize the setup.
 "
 fi
 
-mkdir -p %{prefix}/app/configurations/sphinx/populate
-touch %{prefix}/app/configurations/sphinx/populate/`hostname`.ini
+mkdir -p /opt/kaltura/app/configurations/sphinx/populate
+touch /opt/kaltura/app/configurations/sphinx/populate/`hostname`.ini
 # create user/group, and update permissions
 chown -R %{sphinx_user}:%{sphinx_group} %{prefix} /opt/kaltura/log/sphinx 
 # don't start unless it went through configuration and the INI was created.
@@ -143,7 +143,7 @@ if [ "$1" = 0 ] ; then
     /sbin/service kaltura-populate stop >/dev/null 2>&1
     /sbin/chkconfig --del %{name}
     /sbin/chkconfig --del kaltura-populate 
-    rm -f %{prefix}/app/configurations/sphinx/populate/`hostname`.ini
+    rm -f /opt/kaltura/app/configurations/sphinx/populate/`hostname`.ini
 fi
 
 
@@ -166,6 +166,10 @@ fi
 
 
 %changelog
+* Wed Mar 16 2016 Jess Portnoy <jess.portnoy@kaltura.com> - 2.2.1.r4097-18
+- https://github.com/kaltura/platform-install-packages/pull/532
+- https://github.com/kaltura/platform-install-packages/pull/533
+
 * Wed Oct 7 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 2.2.1.r4097-17
 - https://github.com/kaltura/platform-install-packages/issues/454
 
