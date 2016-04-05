@@ -337,11 +337,37 @@ This is used to achieve on-the-fly repackaging of MP4 files to DASH, HDS, HLS, M
 For more info about its features see:
 https://github.com/kaltura/nginx-vod-module/
 
-Installation:
+#### Installation:
 ```
 yum install kaltura-nginx
 /opt/kaltura/bin/kaltura-nginx-config.sh
 ```
+
+#### Setup:
+The default delivery profiles for DASH, HDS and HLS are defined here:
+```
+mysql> select * from delivery_profile where partner_id=0 and streamer_type in ('applehttp','mpegdash','hdnetworkmanifest');
+```
+
+These can be overridden for any given partner by going to Admin Console->Publishers->Profiles->Delivery profiles.
+
+The decision as to which delivery profile is default is done according to values in /opt/kaltura/app/configurations/base.ini
+```
+; max duration in seconds
+short_entries_max_duration = 300
+short_entries_default_delivery_type = http
+secured_default_delivery_type = http
+default_delivery_type = http
+```
+
+By default, all are set to 'http' which means progressive download. You can change them to reflect you preferences. For example:
+```
+short_entries_default_delivery_type = http
+secured_default_delivery_type = hds
+default_delivery_type = hds
+```
+Would make entries shorter than 5 minutes to be delivered as progressive download, all others will be served as HDS, unless we're on iOS where HLS will be attempted.
+
 
 Note: Currently, the Nginx VOD module does not support integration with Kaltura over HTTPs, only HTTP is supported. 
 

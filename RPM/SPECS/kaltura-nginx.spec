@@ -45,13 +45,13 @@ Requires(pre): pwdutils
 %define nginx_vod_module_ver 1.6
 %define nginx_secure_token_ver 1.0.1
 %define nginx_token_validate_ver 1.0.1
-%define nginx_vts_ver 0.1.2
+%define nginx_vts_ver 0.1.8
 # end of distribution specific definitions
 
 Summary: High performance web server customized for Kaltura VOD
 Name: kaltura-nginx
 Version: 1.8.1
-Release: 1
+Release: 3
 Vendor: Kaltura inc.
 URL: http://nginx.org/
 
@@ -293,15 +293,10 @@ make %{?_smp_mflags}
 
 %pre
 # Add the "nginx" user
-#getent group %{nginx_group} >/dev/null || groupadd -r %{nginx_group}
-#getent passwd %{nginx_user} >/dev/null || \
-#    useradd -r -g %{nginx_group} -s /sbin/nologin \
-#    -d %{nginx_home} -c "nginx user"  %{nginx_user}
-#exit 0
-if ! id -u %{nginx_user} >>/dev/null 2>&1 ;then
-	groupadd -r %{nginx_group} -g7373 2>/dev/null || true
-	useradd -M -r -u7373 -d %{prefix} -s /bin/bash -c "Kaltura server" -g %{nginx_group} %{nginx_user} 2>/dev/null || true
-fi
+# create user/group, and update permissions
+getent group %{nginx_group} >/dev/null || groupadd -r %{nginx_group} -g7373 2>/dev/null
+getent passwd %{nginx_user} >/dev/null || useradd -M -r -u7373  -s /bin/bash -c "Kaltura server" -g %{nginx_group} %{nginx_user} 2>/dev/null
+
 
 %post
 # Register the nginx service
@@ -364,6 +359,9 @@ if [ $1 -ge 1 ]; then
         "Binary upgrade failed, please check nginx's error.log"
 fi
 %changelog
+* Tue Mar 29 2016 Jess Portnoy <jess.portnoy@kaltura.com> - 1.8.1-2
+- Correctly check whether the nginx_user [kaltura] exists and if not - create.
+
 * Tue Feb 23 2016 Jess Portnoy <jess.portnoy@kaltura.com> - 1.8.1-1
 - support loading json mapping from file (in addition to http)
 - support hds drm encryption
