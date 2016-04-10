@@ -1,3 +1,68 @@
+kaltura-html5lib (2.42-1) kajam; urgency=low
+
+  * FEC-4777 - Updated DVR Layout for Player
+  * SUP-7499 - duplicated countdown on ads
+  * FEC-4123 - can't select related video to play during an entry playback
+  * FEC-3806 - Playhead - Endless loading icon after press 'End' key on keyboard on Microsoft Edge
+  * FEC-4879 - Elapsed PTS doesn't work
+  * FEC-5056 - AdClicked dispatched only once
+  * FEC-4308 - Player mobile skin OPEN
+  * FEC-4938 - Multidrm playback engine - Media replays when it should end and stop
+  * TR-768 - Captions parameter displayCaptions is not respected with 2nd entry v2.41
+  * FEC-4811 - Integrate HLS-JS Plugin
+  * FEC-5098 - Integrate FPS service in player
+  * WEBC-712 - multicast - slide sync doesn't always work
+  * FEC-4893 - hls is not chosen on iPhone - Forgeahead Solutions Customer
+  * FEC-4576 - Playback- Movie cannot be played again if user clicks on back button
+  * FEC-5159 - Share - Items are left side aligned
+  * FEC-5160 - bitrate selector is enabled while is rotating , instead to stay disabled
+  * WEBC-712 - multicast - slide sync doesn't always work
+  * FEC-4833 - Load player once for all media
+  * FEC-4917 - Update DFP plugin so that the IMA SDK is not loaded on each new request with a new timestamp
+  * FEC-5189 - HLSjs: Kaltura Live: Off air appears when live is playing
+  * FEC-5187 - HLSjs: Kaltura Live: Play after pause is not working
+  * FEC-5186 - HLSjs: Kaltura Live with DVR is not playing smothly
+  * FEC-5183 - FairPlay for iOS fixes
+  * WEBC-679 - As a producer I'd like to select for all viewers the view setup at any point during the broadcast
+  * FEC-5190 - kaltura stats: play event is not fired for the second and third entry in a playlist with flash dfp
+  * FEC-5188 - yubora: 2 stop events are fired at the end of entry playback in a playlist
+  * SUP-7442 - Player - infoscreen doesn't
+  * WEBC-713 - webcast in Multicast - after disconnection of the video the player play the last 3 minutes in endless loop
+  * SUP-6501 - Capturespace presentation ratio
+  * SUP-7247 - Player - 2.39 - click twice to start live stream (thumbnail)
+  * SUP-6927 - Audio thumbnail display issues.
+  * FEC-5240 - Using tvpapiContinueToTime event when autoPlay is turning on.
+  * FEC-4894 - setting mediaPlayFrom to be greater than zero
+  * FEC-5250 - Add cache to multiDrm player assets
+  * FEC-5248 - not receiving concurrent notification
+  * FEC-5211 - HLSjs: Flavor selector doesn't not appear on player in case of playing live entries
+  * FEC-5253 - playlist auto-continue doesn't work (flash)
+  * FEC-3806 - Playhead - Endless loading icon after press 'End' key on keyboard on Microsoft Edge
+  * FEC-5279 - uDRM: Regression:Video with PlayReady with Dash Plugin is not playing
+  * FEC-5161 - CLONE - For each action shown two MediaMark
+  * FEC-5180 - DRM - player plays only audio with black video when performing doSeek after playerReady event
+  * FEC-5228 - Eternal loader is displayed after seeking from replay state
+  * FEC-5212 - Eternal spinner while Seek without pressing on Play
+  * FEC-5216 - Player doesn't play from last seek position
+  * FEC-5261 - Muted video plays with sound
+  * FEC-5227 - Bug reported from test: Switch media - Sometimes an error occurred while attempting to play video
+  * FEC-5229 - Bug reported from test: Volume control - Volume indicator is missing
+  * FEC-5262 - Seek bar is not hidden
+  * SUP-7442 - Player - infoscreen doesn't
+  * SUP-6501 - Capturespace presentation ratio
+  * FEC-5281 - Regression:uDRM:PlayReady:Video always starts to play automatically when big player button appears in the middle of player area
+  * FEC-5303 - Webcast VOD - slides doesn't appear in the player
+  * KMS-11206 - In-Video Quizzes: Embed: question skipped and wasn't jumped up on the defined time (after submission)
+  * FEC-5361 - Regression - DFP preroll is playing only at first entry in horizontal playlist
+  * KMS-11329 - Channel Playlist - When switching back to Capture space - Slide menu Stuck on regular videos
+  * KMS-11324 - Capturespace entries palyback does not work as expected in channel playlist
+  * FEC-4508 - Playlist with Live entry: if select any entry during Live playing, it failed to be play
+  * FEC-5249 - VOD and live entries in a playlist: Playlist is not loading
+  * support trafficking parameters in DoubleClick onAdPlay event
+  * new HLS-OSMF plugin
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Sun, 10 Apr 2016 18:41:20 +0000
+
 kaltura-html5lib (2.41-1) kajam; urgency=low
 
   * FEC-4777 - Updated DVR Layout for Player
