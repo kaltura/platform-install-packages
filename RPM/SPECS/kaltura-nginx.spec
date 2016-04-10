@@ -42,16 +42,16 @@ BuildRequires: libopenssl-devel
 Requires(pre): pwdutils
 %endif
 
-%define nginx_vod_module_ver 1.6
-%define nginx_secure_token_ver 1.0.1
+%define nginx_vod_module_ver 1.7
+%define nginx_secure_token_ver 1.1
 %define nginx_token_validate_ver 1.0.1
-%define nginx_vts_ver 0.1.8
+%define nginx_vts_ver 0.1.9
 # end of distribution specific definitions
 
 Summary: High performance web server customized for Kaltura VOD
 Name: kaltura-nginx
 Version: 1.8.1
-Release: 3
+Release: 4
 Vendor: Kaltura inc.
 URL: http://nginx.org/
 
@@ -359,6 +359,10 @@ if [ $1 -ge 1 ]; then
         "Binary upgrade failed, please check nginx's error.log"
 fi
 %changelog
+* Sun Apr 10 2016 Jess Portnoy <jess.portnoy@kaltura.com> - 1.8.1-4
+- New Nginx vod module - 1.7
+- New Nginx secure token module - 1.1
+
 * Tue Mar 29 2016 Jess Portnoy <jess.portnoy@kaltura.com> - 1.8.1-2
 - Correctly check whether the nginx_user [kaltura] exists and if not - create.
 
