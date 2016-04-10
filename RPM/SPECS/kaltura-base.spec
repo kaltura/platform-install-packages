@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 11.12.0
-Release: 5
+Release: 6
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -307,6 +307,11 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Sun Apr 28 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 11.12.0-6
+- SUP-7496 - Syndicated Feed Player Problem 
+- PLAT-3872 - Internal Database Error returns when trying to create a userEntry given a non-existing entry ID
+- PLAT-5186 - Multi Audio tracks: Playmanifest is empty instead of showing the audio sources
+
 * Mon Mar 28 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 11.12.0-1
 - Ver Bounce to 11.12.0
 
