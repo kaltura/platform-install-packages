@@ -34,10 +34,10 @@ cp -rp /tmp/server/.git $APP_DIR/
 KALTURA_VERSION=`rpm -q kaltura-base --queryformat %{version}`
 GITHUB_PLATFORM_INSTALL_PACKAGES_REPO_URL="https://github.com/kaltura/platform-install-packages/raw/Kajam-$KALTURA_VERSION"
 
-curl $GITHUB_PLATFORM_INSTALL_PACKAGES_REPO_URL/RPM/SOURCES/KDLOperatorFfmpeg1_1_1.php > $APP_DIR/infra/cdl/kdl/KDLOperatorFfmpeg1_1_1.php
-curl $GITHUB_PLATFORM_INSTALL_PACKAGES_REPO_URL/RPM/SOURCES/navigation.xml > $APP_DIR/admin_console/configs/navigation.xml
-curl $GITHUB_PLATFORM_INSTALL_PACKAGES_REPO_URL/RPM/SOURCES/IndexController.php > $APP_DIR/admin_console/controllers/IndexController.php
-curl $GITHUB_PLATFORM_INSTALL_PACKAGES_REPO_URL/RPM/SOURCES/monit.phtml > $APP_DIR/admin_console/views/scripts/index/monit.phtml
+curl -L $GITHUB_PLATFORM_INSTALL_PACKAGES_REPO_URL/RPM/SOURCES/KDLOperatorFfmpeg1_1_1.php > $APP_DIR/infra/cdl/kdl/KDLOperatorFfmpeg1_1_1.php
+curl -L $GITHUB_PLATFORM_INSTALL_PACKAGES_REPO_URL/RPM/SOURCES/navigation.xml > $APP_DIR/admin_console/configs/navigation.xml
+curl -L $GITHUB_PLATFORM_INSTALL_PACKAGES_REPO_URL/RPM/SOURCES/IndexController.php > $APP_DIR/admin_console/controllers/IndexController.php
+curl -L $GITHUB_PLATFORM_INSTALL_PACKAGES_REPO_URL/RPM/SOURCES/monit.phtml > $APP_DIR/admin_console/views/scripts/index/monit.phtml
 
 if [ -n $1 ];then
         /opt/kaltura/bin/kaltura-config-all.sh $1

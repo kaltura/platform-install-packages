@@ -310,7 +310,7 @@ fi
 * Tue Apr 12 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 11.13.0-1
 - Ver Bounce to 11.13.0
 
-* Sun Apr 28 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 11.12.0-6
+* Sun Apr 10 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 11.12.0-6
 - SUP-7496 - Syndicated Feed Player Problem 
 - PLAT-3872 - Internal Database Error returns when trying to create a userEntry given a non-existing entry ID
 - PLAT-5186 - Multi Audio tracks: Playmanifest is empty instead of showing the audio sources
