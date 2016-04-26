@@ -1,3 +1,12 @@
+kaltura-base (11.13.0-2) kajam; urgency=low
+
+  * PLAT-4961 - Support passthrough as part of Slating Epic
+  * PLAT-4962 - Support return to defined entry as part of Slating development
+  * PLAT-5040 - LiveProxy call new API
+  * WEBC-682 - As a producer I'd like to configure my player with a default view
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 25 Apr 2016 14:44:15 +0000
+
 kaltura-base (11.13.0-1) kajam; urgency=low
 
   * Switching to 11.13.0
