@@ -10,7 +10,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 11.12.0
+Version: 11.14.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -307,6 +307,23 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Apr 25 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 11.14.0-1
+- Ver Bounce to 11.14.0
+
+* Mon Apr 25 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 11.13.0-6
+- PLAT-4961 - Support passthrough as part of Slating Epic
+- PLAT-4962 - Support return to defined entry as part of Slating development
+- PLAT-5040 - LiveProxy call new API
+- WEBC-682 - As a producer I'd like to configure my player with a default view
+
+* Tue Apr 12 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 11.13.0-1
+- Ver Bounce to 11.13.0
+
+* Sun Apr 10 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 11.12.0-6
+- SUP-7496 - Syndicated Feed Player Problem 
+- PLAT-3872 - Internal Database Error returns when trying to create a userEntry given a non-existing entry ID
+- PLAT-5186 - Multi Audio tracks: Playmanifest is empty instead of showing the audio sources
+
 * Mon Mar 28 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 11.12.0-1
 - Ver Bounce to 11.12.0
 

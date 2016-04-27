@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.31
-Release: 5
+Release: 7
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -82,6 +82,12 @@ find %{_sysconfdir}/logrotate.d -type l -name "kaltura_*" -exec rm {} \;
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Sun Apr 17 2016 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.31-7
+- Quote ENV_NAME
+
+* Thu Mar 31 2016 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.31-6
+- https://github.com/kaltura/platform-install-packages/issues/516
+
 * Tue Mar 15 2016 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.31-5
 - When writing to /opt/kaltura/app/configurations/sphinx/populate/`hostname`.ini use `hostname` as 'sphinxServer'
   Reported by Waldemar Żurowski.

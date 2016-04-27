@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5-studio
-Version: v2.0.3
+Version: v2.0.4
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -51,6 +51,9 @@ rm -rf %{buildroot}
 %{prefix}/apps/studio/%{version}
 
 %changelog
+* Sun Apr 10 2016 Jess Portnoy <jess.portnoy@kaltura.com> - v2.0.4-1
+- Synced with HTML5 lib version v2.42
+
 * Fri Mar 11 2016 Jess Portnoy <jess.portnoy@kaltura.com> - v2.0.3-1
 - FEC-4776 - Studio hangs when trying to edit UIConf with invalid JSON config
 - Switch between the words "Update" and "Upgrade" in the list view

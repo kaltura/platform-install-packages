@@ -5,7 +5,7 @@
 %define apache_group	apache
 Summary: Kaltura Open Source Video Platform - frontend server 
 Name: kaltura-front
-Version: 11.12.0
+Version: 11.14.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -13,7 +13,7 @@ Source3: zz-%{name}.ini
 
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires: mediainfo, httpd, php, curl, kaltura-base, kaltura-ffmpeg, ImageMagick, memcached, php-pecl-memcache, php-mysql, php-pecl-apc, php-mcrypt, kaltura-segmenter, mod_ssl,kaltura-sshpass, openssl,memcached
+Requires: mediainfo, httpd, php, curl, kaltura-base, kaltura-ffmpeg, ImageMagick, memcached, php-pecl-memcache, php-mysql, php-pecl-apc, php-mcrypt, kaltura-segmenter, mod_ssl,kaltura-sshpass, openssl,memcached, kaltura-html5-studio
 #php-pecl-zendopcache
 Requires(post): chkconfig
 Requires(preun): chkconfig
@@ -67,7 +67,7 @@ sed 's#@WEB_DIR@#%{prefix}/web#' -i $RPM_BUILD_ROOT/%{_sysconfdir}/php.d/zz-%{na
 chown -R %{kaltura_user}:%{apache_group} %{prefix}/log 
 chown -R %{kaltura_user}:%{apache_group} %{prefix}/tmp 
 chown -R %{kaltura_user}:%{apache_group} %{prefix}/app/cache 
-chmod -R 775 %{prefix}/log %{prefix}/tmp %{prefix}/app/cache %{prefix}/web
+chmod 775 %{prefix}/log %{prefix}/tmp %{prefix}/app/cache %{prefix}/web
 if [ "$1" = 1 ];then
 	/sbin/chkconfig --add httpd
 	/sbin/chkconfig httpd on
@@ -102,6 +102,17 @@ rm -rf %{buildroot}
 %config %{_sysconfdir}/php.d/zz-%{name}.ini
 
 %changelog
+* Mon Apr 25 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 11.14.0-1
+- Ver Bounce to 11.14.0
+
+* Tue Apr 12 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 11.13.0-1
+- Ver Bounce to 11.13.0
+
+* Thu Mar 31 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 11.12.0-2
+- https://github.com/kaltura/platform-install-packages/issues/516
+* Thu Mar 31 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 11.12.0-2
+- https://github.com/kaltura/platform-install-packages/issues/536
+
 * Mon Mar 28 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 11.12.0-1
 - Ver Bounce to 11.12.0
 

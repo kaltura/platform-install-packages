@@ -35,12 +35,10 @@ Kaltura requires certain ports to be open for proper operation. [See the list of
 If you're just testing and don't mind an open system, you can use the below to disbale iptables altogether:
 ```bash
 iptables -F
-service iptables stop
-chkconfig iptables off
 ```
 #### Disable SELinux - REQUIRED
 **Currently Kaltura doesn't properly support running with SELinux, things will break if you don't set it to permissive**.
-
+If your instances has it enabled [by default Debian and Ubuntu does not enable SELinux], run:
 ```bash
 setenforce permissive
 ```
@@ -73,7 +71,7 @@ deb http://security.debian.org/ wheezy/updates main
 
 IMPORTANT NOTE: 
 
-depending on your current Apache configuration, you may need to disable your default site configuration.
+If you had a pre-install Apache on the machine, depending on your current Apache configuration, you may need to disable your default site configuration.
 
 Use:
 ```
