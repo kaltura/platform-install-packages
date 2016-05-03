@@ -43,8 +43,8 @@ if [ -n "$1" -a -r "$1" ];then
 fi
 
 
-BROADCAST_TEMPLATE_FILE=$APP_DIR/app/configurations/broadcast.template.ini
-BROADCAST_FILE=$APP_DIR/app/configurations/broadcast.ini
+BROADCAST_TEMPLATE_FILE=$APP_DIR/configurations/broadcast.template.ini
+BROADCAST_FILE=$APP_DIR/configurations/broadcast.ini
 TEMP_BROADCAST=/tmp/temp_broadcast.ini
 # In case no primary server is configured, there is no point running.
 
