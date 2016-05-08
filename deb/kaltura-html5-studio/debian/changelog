@@ -1,3 +1,10 @@
+kaltura-html5-studio (2.0.5-1) kajam; urgency=low
+
+  * FEC-5495 - Update and Upgrade messages contain wrong text
+  * Synced with HTML5 lib version v2.43
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Sun, 08 May 2016 18:58:04 +0000
+
 kaltura-html5-studio (2.0.3-1) kajam; urgency=low
 
   * FEC-4776 - Studio hangs when trying to edit UIConf with invalid JSON config

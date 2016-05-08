@@ -1,3 +1,21 @@
+kaltura-base (11.14.0-2) kajam; urgency=low
+
+  * PLAT-5348 - Add support for prepositioning when running access control even when using admin KS
+  * PLAT-5350 - Failed to play smooth stream on the fly flavor due to transcoding issue
+  * PLAT-5354 - bug when changing user roles via admin console (and api)
+  * PLAT-5387 - Append to recorded entry does not work properly
+  * PLAT-5400 - Add support for playlist paging over 200 entries limit
+  * PLAT-5404 - FSM change status from suspend to play, although entry is not live
+  * PLAT-3023 - captions does not update Youtube API distribution
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Sun, 08 May 2016 18:53:30 +0000
+
+kaltura-base (11.14.0-1) kajam; urgency=low
+
+  * Switching to 11.14.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Tue, 26 Apr 2016 16:38:53 +0000
+
 kaltura-base (11.13.0-1) kajam; urgency=low
 
   * Switching to 11.13.0

@@ -1,3 +1,9 @@
+kaltura-batch (11.14.0-1) kajam; urgency=low
+
+  * Switching to 11.14.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Tue, 26 Apr 2016 16:38:54 +0000
+
 kaltura-batch (11.13.0-1) kajam; urgency=low
 
   * Switching to 11.13.0

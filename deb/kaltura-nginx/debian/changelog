@@ -1,3 +1,15 @@
+kaltura-nginx (1.8.1-3) kajam; urgency=low
+
+  * new release 
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Sun, 08 May 2016 20:12:12 +0000
+
+kaltura-nginx (1.8.1-2) kajam; urgency=low
+
+  * nginx-vod-mod 1.8
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Sun, 08 May 2016 19:00:07 +0000
+
 kaltura-nginx (1.8.1-1) kajam; urgency=low
 
   * support loading json mapping from file (in addition to http)
