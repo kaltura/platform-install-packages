@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.42
+Version: v2.43
 Release: 1
 Epoch:0 
 License: AGPLv3+
@@ -41,6 +41,7 @@ Source30: kaltura-html5lib-v2.38.1.tar.gz
 Source32: kaltura-html5lib-v2.39.tar.gz
 Source33: kaltura-html5lib-v2.40.tar.gz
 Source34: kaltura-html5lib-v2.41.tar.gz
+Source35: kaltura-html5lib-v2.42.tar.gz
 Source28: simplePhpXMLProxy.php
 
 URL: https://github.com/kaltura/mwEmbed 
@@ -97,10 +98,11 @@ tar zxf %{SOURCE31} -C %{_builddir}/
 tar zxf %{SOURCE32} -C %{_builddir}/
 tar zxf %{SOURCE33} -C %{_builddir}/
 tar zxf %{SOURCE34} -C %{_builddir}/
+tar zxf %{SOURCE35} -C %{_builddir}/
 
 %install
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib
-for i in v2.1.1 v2.3 v2.4 v2.6 v2.9 v2.14 v2.15 v2.18.5 v2.20 v2.21 v2.22 v2.23 v2.24 v2.25 v2.26 v2.27 v2.28 v2.29 v2.30 v2.31 v2.32.1 v2.33 v2.34 v2.35.5 v2.36 v2.37.1 v2.37.3 v2.38 v2.38.1 v2.39 v2.40 v2.41 %{version};do
+for i in v2.1.1 v2.3 v2.4 v2.6 v2.9 v2.14 v2.15 v2.18.5 v2.20 v2.21 v2.22 v2.23 v2.24 v2.25 v2.26 v2.27 v2.28 v2.29 v2.30 v2.31 v2.32.1 v2.33 v2.34 v2.35.5 v2.36 v2.37.1 v2.37.3 v2.38 v2.38.1 v2.39 v2.40 v2.41 v2.42 %{version};do
 	rm -rf %{_builddir}/%{name}-$i/modules/Widevine
 	cp -r %{_builddir}/%{name}-$i $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i
 	cp %{SOURCE28} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i/
@@ -122,6 +124,76 @@ find /opt/kaltura/web/html5/html5lib -type d -name cache -exec chown -R 48 {} \;
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Sun May 8 2016 Jess Portnoy <jess.portnoy@kaltura.com> - v2.43-1
+- FEC-5259 - Set Doubleclick request ads timeout check only when play start
+- FEC-4430 - Related videos with auto continue - each entry plays twice
+- FEC-4992 - Related video: First entry is looped after all videos has been played
+- SUP-7211 - Progress Bar color on iOS SDK
+- FEC-5376 - Update Youbora Plugin to cover passing bitrate in all playback contexts
+- OPF-4120 - Report CDN to youbora
+- SUP-7693 - Typo in KMC studio Enable embed.ly embeds
+- FEC-5129 - LC Dual screen: the dual screen menu appears over moderation screen
+- FEC-5353 - kanalony: change service name and action name
+- FEC-5292 - kanalony: remove "event:" from events names
+- FEC-5271 - LC Dual screen: playlist with LC entry - spinner appears during first entry playing on Edge
+- SUP-7573 - 3gp behvior
+- FEM-432 - seek after EOF, player stuck
+- FEC-5390 - When doubleclick leads with flash the timeout of adtag loading is not respected
+- SUP-7662 - Player not displaying "Currently not broadcasting" message on mobile
+- SUP-6103 - Chapters module embed code not working properly
+- FEC-5404 - Javascript VPAID ad do not load using doubleClick plugin and player is stuck
+- FEC-5267 - kanalony: Event type 3 (play) is fired only for the first entry in the playlist
+- FEC-5293 - kanalony: flavourId should be added to all events as it is a required param
+- FEC-5305 - kanalony: after watching vast or dfp postroll : player doesn't stop reporting Event 99 (viewing) every 10 seconds
+- FEC-5269 - kanalony: Event 99 : playing content appears after event 14 – 100% content
+- FEC-5307 - kanalony: quarterly events are not reported after replay. all other events are reported
+- OPF-3749 - When the moveing playhead backward the subtitles not shown
+- SUP-7493 - Issues with pixelation during playback
+- FEC-4805 - failover doesn't work
+- FEC-4907 - HLS-OSMF: external stream plays not smooth in first 15-20 seconds (only at the beginning)
+- FEC-5115 - Add support for ID3 tags in HLS JS
+- FEC-5308 - kanalonly: 50% and 75% quarterly events are not fired when user does seek
+- SUP-6927 - Audio thumbnail display issues.
+- FEC-5436 - universal stream doesn't play with hlsJS
+- OPF-3862 - HD button is disable after clicking on continue button - Chrome only
+- FEC-5335 - kanalony: position resets on ios during ads playback, unlike pc
+- FEC-5278 - Two events from type 1 fired for smoothStreaming playback
+- SUP-7673 - Adobe Heartbeat Integration
+- SUP-7824 - Player does not save 'Button Size' settings
+- FEC-5355 - IE edge: error appears in console - id3Tag :: ERROR :: TypeError: Unable to get property 'data' of undefined or null reference
+- FEC-5438 - mediaLoaded event not fired after changing media
+- SUP-7960 - onAdError: AdError 1009: The VAST response with cuePoints
+- FEC-5245 - HLS JS: The First/Next entry in the playlist with Ads doesn't play on click
+- FEC-5474 - MultiDRM + DoubleClick preroll - Source Selector doesn't show flavours
+- FEC-5459 - HLS JS : Regression: VOD with Flavor selector is not working
+- FEC-5458 - Rate selector - is not possible to change the playback speed on Microsoft Edge
+- FEC-5485 - Seek from position 0 fails on Microsoft EDGE
+- FEC-5484 - Force HLS Native playback for Microsoft EDGE
+- TR-976 - Omniture calls aren't sent after hitting 'Replay' button on player timeline
+- FEC-5444 - Silverlight: Flavor Selector: Flavors are not displayed in SPlayer (only auto)
+- SUP-8040 - Media plays with ad and seek bar issue on FF
+- FEC-4714 - ChromeCast - Live is not playing. Black screen is shown (Without Chrome cast the stream plays)
+- FEC-5486 - ChromeCast - Chromecast thumbnail is not centralized in Fullscreen mode
+- FEC-5476 - Playlist with Vast pre-roll: the playlist switched to enabled after click on Ad and return to the player
+- FEC-5471 - Multiple Playlist: Pre-roll Ad is not played before the video start on iPhone
+- FEC-5468 - Share&Embed: a video is not blurred on clicking 'Share'
+- FEC-4725 - ChromeCast: player stack when you Stop casting from the middle of a video
+- FEC-5494 - HLS JS : Only auto displayed after opening flavor selector when playing VOD/Live entry with multiple bitrates (IE11 Only)
+- SUP-7729 - Frames of Kaltura Secret protected videos are visible to unauthenticated user
+- FEC-5482 - MultiAudioTracks: Active language should be highlighted after opening "Select audio" button
+- SUP-7780 - IVQ - Quitting before editing a new quiz creates a non functioning quiz in My Media
+- FEC-5381 - webcast-sometimes after stop/start when changing the player view the video doesn't display
+- FEC-5514 - Chromecast - Analytics - Only Seek event is shown
+- FEC-5512 - Chrome cast - when you unpause Live entry, it doesn't back to Live
+- FEC-5439 - player doesn't play according to mediaPlayFrom/mediaPlayTo - stuck with buffering wheel
+- FEC-5524 - PlayReady is not working on IE11 (black screen with loading spinner )
+- FEC-5191 - DVR Layout - Drag the scrabbler to the most right place doesn't return to live
+- Fix HLS AES source selection for DRM allowed sources
+- new HLS-OSMF plugin
+- Chromecast support in android SDK
+- add support for custom receiver logo url in Chromecast
+- Update HLS.JS to v0.6.1 Add version print out when in debug mode*
+
 * Sun Apr 10 2016 Jess Portnoy <jess.portnoy@kaltura.com> - v2.42-1
 - FEC-4777 - Updated DVR Layout for Player
 - SUP-7499 - duplicated countdown on ads

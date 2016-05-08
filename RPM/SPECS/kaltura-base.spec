@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 11.14.0
-Release: 1
+Release: 8
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -307,6 +307,15 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Sun May 8 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 11.13.0-8
+- PLAT-5348 - Add support for prepositioning when running access control even when using admin KS
+- PLAT-5350 - Failed to play smooth stream on the fly flavor due to transcoding issue
+- PLAT-5354 - bug when changing user roles via admin console (and api)
+- PLAT-5387 - Append to recorded entry does not work properly
+- PLAT-5400 - Add support for playlist paging over 200 entries limit
+- PLAT-5404 - FSM change status from suspend to play, although entry is not live
+- PLAT-3023 - captions does not update Youtube API distribution
+
 * Mon Apr 25 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 11.14.0-1
 - Ver Bounce to 11.14.0
 
