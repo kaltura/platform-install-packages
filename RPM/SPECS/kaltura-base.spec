@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 11.14.0
-Release: 8
+Version: 11.15.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -307,6 +307,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon May 9 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 11.15.0-1
+- Ver Bounce to 11.15.0
+
 * Sun May 8 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 11.13.0-8
 - PLAT-5348 - Add support for prepositioning when running access control even when using admin KS
 - PLAT-5350 - Failed to play smooth stream on the fly flavor due to transcoding issue
