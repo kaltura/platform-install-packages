@@ -10,7 +10,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 11.14.0
+Version: 11.15.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -210,7 +210,7 @@ usermod -g %{kaltura_group} %{kaltura_user} 2>/dev/null || true
 ln -sf %{prefix}/app/configurations/system.ini /etc/kaltura.d/system.ini
 ln -sf %{prefix}/app/api_v3/web %{prefix}/app/alpha/web/api_v3
 chown apache.kaltura %{prefix}/web/content/entry %{prefix}/web/content/uploads/  %{prefix}/web/tmp/
-find %{prefix}/web/content/entry %{prefix}/web/content/uploads/  %{prefix}/web/tmp/ -type d -exec chmod 775 {} \;
+chmod 775 %{prefix}/web/content/entry %{prefix}/web/content/uploads  %{prefix}/web/tmp
 service ntpd start
 if [ "$1" = 2 ];then
 	if [ -r "%{prefix}/app/configurations/local.ini" -a -r "%{prefix}/app/configurations/base.ini" ];then
@@ -241,7 +241,7 @@ if [ "$1" = 2 ];then
 		# we now need CREATE and DROP priv for 'kaltura' on kaltura.*
 		if [ -r /etc/kaltura.d/system.ini ];then
 			. /etc/kaltura.d/system.ini
-			echo "GRANT INSERT,UPDATE,DELETE,SELECT,ALTER,DROP,CREATE ON kaltura.* TO 'kaltura'@'%';FLUSH PRIVILEGES;"|mysql -h$DB1_HOST -u $SUPER_USER -p$SUPER_USER_PASSWD -P$DB1_PORT
+			echo "GRANT INSERT,UPDATE,DELETE,SELECT,ALTER,DROP,CREATE ON kaltura.* TO '$DB_USER'@'%';FLUSH PRIVILEGES;"|mysql -h$DB1_HOST -u $SUPER_USER -p$SUPER_USER_PASSWD -P$DB1_PORT
 		fi
 		php %{prefix}/app/deployment/updates/update.php -i -d >> /opt/kaltura/log/kalt_up.log 2>&1
 		php %{prefix}/app/deployment/updates/update.php -i -s >> /opt/kaltura/log/kalt_up.log 2>&1
@@ -307,6 +307,18 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon May 9 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 11.15.0-1
+- Ver Bounce to 11.15.0
+
+* Sun May 8 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 11.13.0-8
+- PLAT-5348 - Add support for prepositioning when running access control even when using admin KS
+- PLAT-5350 - Failed to play smooth stream on the fly flavor due to transcoding issue
+- PLAT-5354 - bug when changing user roles via admin console (and api)
+- PLAT-5387 - Append to recorded entry does not work properly
+- PLAT-5400 - Add support for playlist paging over 200 entries limit
+- PLAT-5404 - FSM change status from suspend to play, although entry is not live
+- PLAT-3023 - captions does not update Youtube API distribution
+
 * Mon Apr 25 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 11.14.0-1
 - Ver Bounce to 11.14.0
 

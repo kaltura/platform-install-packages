@@ -42,6 +42,34 @@ if [ -n "$1" -a -r "$1" ];then
     . $ANSFILE
 fi
 
+
+BROADCAST_TEMPLATE_FILE=$APP_DIR/configurations/broadcast.template.ini
+BROADCAST_FILE=$APP_DIR/configurations/broadcast.ini
+TEMP_BROADCAST=/tmp/temp_broadcast.ini
+# In case no primary server is configured, there is no point running.
+
+if [ -z "$KALTURA_FULL_VIRTUAL_HOST_NAME" ];
+then
+	echo -e "${BRIGHT_RED} KALTURA_FULL_VIRTUAL_HOST_NAME value was not found in $1 answer file. \nPlease fix the used answer file.${NORMAL}"
+	exit 2
+else
+	echo -e "${CYAN}Copying broadcast.template.ini${NORMAL}"
+	cp $BROADCAST_TEMPLATE_FILE $TEMP_BROADCAST
+	# Resetting the KALTURA_FULL_VIRTUAL_HOST_NAME after template copy
+	sed -i s/@KALTURA_FULL_VIRTUAL_HOST_NAME@/$KALTURA_FULL_VIRTUAL_HOST_NAME/ $TEMP_BROADCAST
+fi
+
+# Setting the primary server setting. No point of continuing the setup in case there is no server.
+if [ -z "$PRIMARY_MEDIA_SERVER_HOST" ]; then
+	echo -e "${BRIGHT_RED}PRIMARY_MEDIA_SERVER_HOST value was not found in $1 answer file. \nPlease fix the $BROADCAST_FILE if needed.${NORMAL}"
+	echo -e "You can fix this later by running kaltura-media-server-config.sh <answer file>\n"
+	exit 2
+else
+	echo -e "${CYAN}Setting PRIMARY_MEDIA_SERVER_HOST${NORMAL}"
+	sed -i s/@PRIMARY_MEDIA_SERVER_HOST@/$PRIMARY_MEDIA_SERVER_HOST/ $TEMP_BROADCAST
+fi
+
+
 if [ ! -r /opt/kaltura/app/base-config.lock ];then
     `dirname $0`/kaltura-base-config.sh "$ANSFILE"
     if [ $? -ne 0 ];then
