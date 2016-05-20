@@ -46,12 +46,13 @@ Requires(pre): pwdutils
 %define nginx_secure_token_ver 1.1
 %define nginx_token_validate_ver 1.0.1
 %define nginx_vts_ver 0.1.9
+%define ngx_aws_auth_ver 2.0.0
 # end of distribution specific definitions
 
 Summary: High performance web server customized for Kaltura VOD
 Name: kaltura-nginx
 Version: 1.8.1
-Release: 5
+Release: 6
 Vendor: Kaltura inc.
 URL: http://nginx.org/
 
@@ -69,6 +70,7 @@ Source10: nginx-vod-module-%{nginx_vod_module_ver}.zip
 Source11: nginx-secure-token-module-%{nginx_secure_token_ver}.zip
 Source12: nginx-akamai-token-validate-module-%{nginx_token_validate_ver}.zip
 Source13: nginx-module-vts-v%{nginx_vts_ver}.zip
+Source14: ngx_aws_auth-%{ngx_aws_auth_ver}.zip
 #Patch1: nginx_kaltura.diff 
 
 License: 2-clause BSD-like license
@@ -104,6 +106,7 @@ unzip -o %{SOURCE12}
 
 unzip -o %{SOURCE13}
 
+unzip -o %{SOURCE14}
 
 %build
 ./configure \
@@ -146,6 +149,7 @@ unzip -o %{SOURCE13}
 	--add-module=./nginx-secure-token-module-%{nginx_secure_token_ver} \
 	--add-module=./nginx-akamai-token-validate-module-%{nginx_token_validate_ver} \
 	--add-module=./nginx-module-vts-%{nginx_vts_ver} \
+	--add-module=./ngx_aws_auth-%{ngx_aws_auth_ver} \
         $*
 make %{?_smp_mflags}
 %{__mv} %{_builddir}/nginx-%{version}/objs/nginx \
@@ -189,6 +193,7 @@ make %{?_smp_mflags}
 	--add-module=./nginx-secure-token-module-%{nginx_secure_token_ver} \
 	--add-module=./nginx-akamai-token-validate-module-%{nginx_token_validate_ver} \
 	--add-module=./nginx-module-vts-%{nginx_vts_ver} \
+	--add-module=./ngx_aws_auth-%{ngx_aws_auth_ver} \
         $*
 make %{?_smp_mflags}
 
@@ -359,6 +364,9 @@ if [ $1 -ge 1 ]; then
         "Binary upgrade failed, please check nginx's error.log"
 fi
 %changelog
+* Fri May 20 2016 Anthony Drimones <anthony.drimones@kaltura.com> - 1.8.1-6
+- Add Nginx AWS Authentication module - 2.0.0
+
 * Sun May 8 2016 Jess Portnoy <jess.portnoy@kaltura.com> - 1.8.1-5
 - New Nginx vod module - 1.8
 
