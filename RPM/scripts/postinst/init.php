@@ -87,7 +87,7 @@ function cUrl($url, $localFilePath, &$headers, $followLocation = true)
         return $errCode;
 }
 
-require_once ('/opt/kaltura/web/content/clientlibs/php5/KalturaClient.php');
+require_once ('/opt/kaltura/web/content/clientlibs/php5full/KalturaClient.php');
 
 class SanityTestLogger implements IKalturaLogger
 {

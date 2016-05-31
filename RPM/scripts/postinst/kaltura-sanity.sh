@@ -170,7 +170,7 @@ if $QUERY_COMMAND kaltura-clipapp >/dev/null 2>&1 ;then
 	END=`date +%s.%N`
 	report "check_clipapp_index_page" $RC "$MSG" "`bc <<< $END-$START`"
 fi
-
+php /opt/kaltura/app/generator/generate.php php5full
 ADMIN_PARTNER_SECRET=`echo "select admin_secret from partner where id=-2" | mysql -N -h $DB1_HOST -p$DB1_PASS $DB1_NAME -u$DB1_USER  -P$DB1_PORT`
 NOW=`date +%d-%H-%m-%S`
 START=`date +%s.%N`

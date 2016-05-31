@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.31
-Release: 7
+Release: 8
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -82,6 +82,9 @@ find %{_sysconfdir}/logrotate.d -type l -name "kaltura_*" -exec rm {} \;
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Tue May 31 2016 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.31-8
+- Generate php5full and use them for partner_delete.php since the php5 client not longer contains systemPartner
+
 * Sun Apr 17 2016 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.31-7
 - Quote ENV_NAME
 
