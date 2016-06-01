@@ -5,7 +5,7 @@ Maintainer: Jess Portnoy <jess.portnoy@kaltura.com>
 
 Package: kaltura-batch
 Architecture: all
-Depends: ${shlibs:Depends},apache2-mpm-prefork,php5-cli|kaltura-php7-cli,php5-mysql|kaltura-php7-mysql,php5-xsl|kaltura-php7-xsl,php5-curl|kaltura-php7-curl,php5-gmp|kaltura-php7-gmp, php5-mcrypt|kaltura-php7-mcrypt, php-apc|kaltura-php7-apcu, php5-memcache|kaltura-php7-memcache, imagemagick, libapache2-mod-php5|kaltura-libapache2-mod-php7,libssh2-php|kaltura-php7-ssh2,libapache2-mod-xsendfile,libjpeg62,sshpass,kaltura-ffmpeg,kaltura-ffmpeg-aux,mencoder,mediainfo,memcached,kaltura-base
+Depends: ${shlibs:Depends},apache2-api-20120211, apache2-bin,php5-cli|kaltura-php7-cli,php5-mysql|kaltura-php7-mysql,php5-xsl|kaltura-php7-xsl,php5-curl|kaltura-php7-curl,php5-gmp|kaltura-php7-gmp, php5-mcrypt|kaltura-php7-mcrypt, php-apc|kaltura-php7-apcu, php5-memcache|kaltura-php7-memcache, imagemagick, libapache2-mod-php5|kaltura-libapache2-mod-php7,libssh2-php|kaltura-php7-ssh2,libapache2-mod-xsendfile,libjpeg62,sshpass,kaltura-ffmpeg,kaltura-ffmpeg-aux,mencoder,mediainfo,memcached,kaltura-base
 Description: Kaltura Open Source Video Platform - batch server 
  Kaltura is the world's first Open Source Online Video Platform, transforming the way people work, learn, 
  and entertain using online video. The Kaltura platform empowers media applications with advanced video 

@@ -2,12 +2,12 @@ Source: kaltura-kmc
 Section: net
 Priority: extra
 Maintainer: Jess Portnoy <jess.portnoy@kaltura.com>
+Build-Depends: 
+ dos2unix
 
 Package: kaltura-kmc
 Architecture: all
-Build-Depends-Indep:
- dos2unix
-Depends: ${shlibs:Depends},kaltura-base,apache2-mpm-prefork,kaltura-html5-studio
+Depends: ${shlibs:Depends},kaltura-base,apache2-api-20120211, apache2-bin,kaltura-html5-studio
 Description: Kaltura Management Console 
  Kaltura is the world's first Open Source Online Video Platform, transforming the way people work, learn, 
  and entertain using online video. The Kaltura platform empowers media applications with advanced video 

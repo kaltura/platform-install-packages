@@ -28,7 +28,6 @@ build: $(tree)
 install: build
 
 binary-indep: install
-	dh_installdirs
 	rm -rf $(KMC_PREFIX)
 	mkdir -p $(KMC_PREFIX) $(KALTURA_PREFIX)/web/content/docs
 	mv $(tree)/* $(KMC_PREFIX)/
