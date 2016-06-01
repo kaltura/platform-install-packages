@@ -15,7 +15,7 @@ Architecture: any
 Pre-Depends:
  dpkg (>= 1.15.7.2~)
 Depends: 
- libmysqlclient18,
+ libmysqlclient,
  kaltura-base, libodbc1
  ${misc:Depends},
  ${shlibs:Depends}
