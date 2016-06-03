@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.43
+Version: v2.44
 Release: 1
 Epoch:0 
 License: AGPLv3+
@@ -42,6 +42,7 @@ Source32: kaltura-html5lib-v2.39.tar.gz
 Source33: kaltura-html5lib-v2.40.tar.gz
 Source34: kaltura-html5lib-v2.41.tar.gz
 Source35: kaltura-html5lib-v2.42.tar.gz
+Source36: kaltura-html5lib-v2.43.tar.gz
 Source28: simplePhpXMLProxy.php
 
 URL: https://github.com/kaltura/mwEmbed 
@@ -99,10 +100,11 @@ tar zxf %{SOURCE32} -C %{_builddir}/
 tar zxf %{SOURCE33} -C %{_builddir}/
 tar zxf %{SOURCE34} -C %{_builddir}/
 tar zxf %{SOURCE35} -C %{_builddir}/
+tar zxf %{SOURCE36} -C %{_builddir}/
 
 %install
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib
-for i in v2.1.1 v2.3 v2.4 v2.6 v2.9 v2.14 v2.15 v2.18.5 v2.20 v2.21 v2.22 v2.23 v2.24 v2.25 v2.26 v2.27 v2.28 v2.29 v2.30 v2.31 v2.32.1 v2.33 v2.34 v2.35.5 v2.36 v2.37.1 v2.37.3 v2.38 v2.38.1 v2.39 v2.40 v2.41 v2.42 %{version};do
+for i in v2.1.1 v2.3 v2.4 v2.6 v2.9 v2.14 v2.15 v2.18.5 v2.20 v2.21 v2.22 v2.23 v2.24 v2.25 v2.26 v2.27 v2.28 v2.29 v2.30 v2.31 v2.32.1 v2.33 v2.34 v2.35.5 v2.36 v2.37.1 v2.37.3 v2.38 v2.38.1 v2.39 v2.40 v2.41 v2.42 v2.43 %{version};do
 	rm -rf %{_builddir}/%{name}-$i/modules/Widevine
 	cp -r %{_builddir}/%{name}-$i $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i
 	cp %{SOURCE28} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i/
@@ -124,6 +126,52 @@ find /opt/kaltura/web/html5/html5lib -type d -name cache -exec chown -R 48 {} \;
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Fri Jun 3 2016 Jess Portnoy <jess.portnoy@kaltura.com> - v2.44-1
+- FEC-5518 - Expose PTS in HLS JS player
+- SUP-8167
+- FEC-5503 - Add support for Related Plugin
+- SUP-7515
+- SUP-6103
+- FEC-5419 - Buffer, interruption,
+- FEC-5549 - MultiAudioTracks: Select audio button disabled on Edge browser
+- FEC-5548 - Add ability to pass captions array via external captions event
+- FEM-460 - Handle Kaltura.OverrideLicneseURL in MobileSDK/EmbedPlayerNativeComponent
+- FEC-484 - Version Tag
+- FEC-5457 - expose new event for external full screen
+- FEC-5395 - hlsjs- heartbeat: trackSessionStart event not reported when playing kaltura live with dvr
+- FEC-5567 - uDRM:WVCENC:Video is stuck with wrong current time instead of playing after performing seek from the end of video to beginning
+- SUP-7410
+- FEC-5569 - uDRM: Rate selector is not working
+- FEC-5573 - Add ‘ setKDPAttribute’ support for ‘visible’ property in controlBarContainer and topBarContainer
+- FEC-5575 - Setting DASH source multiple times while in init state crashes playback
+- FEM-385 - Android | Native sdk | Multi audio/Captions support
+- FEC-3682 - live HLS: Each time player buffers, the latency increases
+- FEM-514 - Fix Undefined index in mweApiGetLicenseData.php
+- SUP-7804
+- FEC-5282 - Mobile Skin Portrait Mode
+- FEC-5595 - Monetization: Vast (ID:12): Video does not resume from the 15th second after ad is finished playing
+- FEC-5583 - Lecture capture (ID:42) -Audio/Video doesn't start playing on clicking Slide/Chapter'
+- FEC-5580 - Webvtt: "Loading text" is shown at left upper side of a player, when switching between languages
+- FEC-5576 - webvtt: gap is shown instead to show the cue at most right side of a player
+- FEC-5574 - webvtt: cue text tag is not working
+- FEC-5556 - closedCaptions - redundant div is created in the DOM per each language
+- FEC-5599 - HTML player not switching DRM videos
+- WEBC-691 - As a producer I'd like to upload a slide deck via the webcasting application
+- FEC-1246 - Create per-user agent top level css classes
+- FEC-5601 - HLS JS: Lecture Capture: Video starts from the beginning after changing stream
+- FEC-5604 - changing the volume manually from x to 0, and click unmute, doesn't do anything
+- FEC-5611 - Multiple Playlist: Monetization (ID:10) - Overlay Ad duration is not 5 seconds
+- FEC-5602 - hlsjs: playlist with dfp - playback get stuck when playback switches from first to second entry
+- SUP-8326
+- SUP-8313
+- updated resources page linking to VPASS
+- fix xss
+- Fix IOS resume playback after midroll ad
+- Fix support for HLS AES as DRM source
+- Update DASH everywhere package to v4.1.1
+- updated Chromecast application ID in all test pages
+- Add captions force webVTT flag for kaltura API on-the-fly generated webvtt captions
+
 * Sun May 8 2016 Jess Portnoy <jess.portnoy@kaltura.com> - v2.43-1
 - FEC-5259 - Set Doubleclick request ads timeout check only when play start
 - FEC-4430 - Related videos with auto continue - each entry plays twice

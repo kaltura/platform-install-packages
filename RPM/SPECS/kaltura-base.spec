@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 11.16.0
-Release: 7
+Release: 8
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -307,6 +307,20 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Fri Jun 3 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 11.16.0-8
+- PLAT-4620 - Support delete on MediaPrep
+- PLAT-5408 - VNPT tokenizer
+- PLAT-5369 - Change default pre fetch time to be a configurable value
+- PLAT-4961 - Support passthrough as part of Slating Epic
+- PLAT-4962 - Support return to defined entry as part of Slating development
+- PLAT-5295 - Live/DVR & Play manifest use register to caluclate playmanifest response
+- PLAT-5357 - Change RTMP url to contain all information on DNS
+- SUP-8280 - YouTube API - Distribution error due to duplicate distribute 
+- SUP-7828 - Can't distribute when description use HTML tags 
+- PLAT-5543 - Searching codeCue points with metadatSearch condition is not working
+- PLAT-5264 - ADVs are not played(SyntaxError: Unexpected token @).
+
+
 * Tue May 24 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 11.16.0-1
 - Ver Bounce to 11.16.0
 

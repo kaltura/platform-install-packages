@@ -1,7 +1,7 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmc
 Version: v5.40.2
-Release: 1
+Release: 2
 Summary: Kaltura Management Console
 
 Group: System Management	
@@ -83,6 +83,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Fri Jun 3 2016 Jess Portnoy <jess.portnoy@kaltura.com> - v5.40.2-2
+- Ver bounce of HTML5 to v2.44
+
 * Sun May 8 2016 Jess Portnoy <jess.portnoy@kaltura.com> - v5.40.2-1
 - PLAT-5420 - Export FMLE XML in KMC/KMS: key frame interval should be 2 seconds instead of 3 seconds
 
