@@ -22,7 +22,7 @@ ifeq (,$(findstring nostrip,$(DEB_BUILD_OPTIONS)))
 	INSTALL_PROGRAM += -s
 endif
 $(archive):
-	~/sources/platform-install-packages/build/package_ffmpeg_source.sh
+	~/sources/platform-install-packages/build/package_ffmpeg_aux_source.sh
 
 $(tree): $(archive)
 	tar jxf $(archive) 
