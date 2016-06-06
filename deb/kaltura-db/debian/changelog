@@ -1,4 +1,4 @@
-kaltura-db (11.1.0-1) UNRELEASED; urgency=low
+kaltura-db (11.1.0-1) kajam; urgency=low
 
   * Replace hardcoded /opt/kaltura/app with $APP_DIR.
 
