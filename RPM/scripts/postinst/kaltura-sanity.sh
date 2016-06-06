@@ -52,6 +52,15 @@ for PARTITION in '/' $WEB_DIR;do
 	fi
 done
 php /opt/kaltura/app/generator/generate.php php5full
+DISTRO=`lsb_release -i -s`
+if [ "$DISTRO" = "Ubuntu" -o "$DISTRO" = "Debian" ];then
+        APACHE_USER=www-data
+else
+        APACHE_USER=apache
+fi
+chown -R $APACHE_USER.$OS_KALTURA_USER $APP_DIR/cache
+find $APP_DIR/cache -type d -exec chmod 775 {} \;
+find $APP_DIR/cache -type f -exec chmod 644 {} \;
 for D in $ALL_DAEMONS; do
 # if this package is installed check daemon status
         if $QUERY_COMMAND $D >/dev/null;then
