@@ -1,3 +1,25 @@
+kaltura-base (11.16.0-2) kajam; urgency=low
+
+  * PLAT-4620 - Support delete on MediaPrep
+  * PLAT-5408 - VNPT tokenizer
+  * PLAT-5369 - Change default pre fetch time to be a configurable value
+  * PLAT-4961 - Support passthrough as part of Slating Epic
+  * PLAT-4962 - Support return to defined entry as part of Slating development
+  * PLAT-5295 - Live/DVR & Play manifest use register to caluclate playmanifest response
+  * PLAT-5357 - Change RTMP url to contain all information on DNS
+  * SUP-8280 - YouTube API - Distribution error due to duplicate distribute 
+  * SUP-7828 - Can't distribute when description use HTML tags 
+  * PLAT-5543 - Searching codeCue points with metadatSearch condition is not working
+  * PLAT-5264 - ADVs are not played(SyntaxError: Unexpected token @).
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Fri, 03 Jun 2016 15:30:28 +0000
+
+kaltura-base (11.16.0-1) kajam; urgency=low
+
+  * Switching to 11.16.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Tue, 24 May 2016 16:07:46 +0000
+
 kaltura-base (11.13.0-1) kajam; urgency=low
 
   * Switching to 11.13.0
