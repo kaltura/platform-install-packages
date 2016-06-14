@@ -11,3 +11,17 @@
                 [ -f /var/run/nginx.pid ] && kill -USR1 `cat /var/run/nginx.pid`
         endscript
 }
+
+@LOG_DIR@/kaltura_nginx_access.log {
+ rotate 7
+ daily
+ missingok
+ compress
+ dateext
+ notifempty
+ lastaction
+     mv @LOG_DIR@/kaltura_nginx_access.log-`/bin/date +%Y%m%d`.gz @EVENTS_LOGS_DIR@/`hostname`-kaltura_nginx_access.log-`/bin/date +%Y%m%d-%H`.gz
+     service kaltura-nginx reload
+ endscript
+ su root kaltura
+}
