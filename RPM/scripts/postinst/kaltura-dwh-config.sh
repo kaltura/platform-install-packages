@@ -55,6 +55,7 @@ Output is logged to $BASE_DIR/dwh/logs/dwh_setup.log.${NORMAL}
 	grep -rl p_20130831 $BASE_DIR/dwh/ddl/ | xargs sed -i "s/p_20130831/p_$(date '+%Y%m%d' -d "-$(date +%d) days")/g"
 	grep -rl p_201308 $BASE_DIR/dwh/ddl/ | xargs sed -i "s/p_201308/p_$(date '+%Y%m' -d "-$(date +%d) days")/g"
 	grep -rl 20130901 $BASE_DIR/dwh/ddl/ | xargs sed -i "s/20130901/$(date '+%Y%m%d' -d "-$(($(date +%d)-1)) days")/g"
+	grep -rl 20130902 $BASE_DIR/dwh/ddl/ | xargs sed -i "s/20130901/$(date '+%Y%m%d' -d "-$(($(date +%d)-2)) days")/g"
 	$BASE_DIR/dwh/setup/dwh_setup.sh -u$SUPER_USER -k $BASE_DIR/pentaho/pdi/ -d$BASE_DIR/dwh -h$DWH_HOST -P$DWH_PORT -p$SUPER_USER_PASSWD | tee $BASE_DIR/dwh/logs/dwh_setup.log
 else
 cat << EOF
