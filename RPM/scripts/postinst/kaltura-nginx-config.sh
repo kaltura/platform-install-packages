@@ -94,6 +94,7 @@ if [ -f /etc/nginx/nginx.conf ];then
 fi
 sed -e 's#@STATIC_FILES_PATH@#/etc/nginx/static#g' -e "s#@VOD_PACKAGER_HOST@#$VOD_PACKAGER_HOST#g" -e "s#@VOD_PACKAGER_PORT@#$VOD_PACKAGER_PORT#g" -e "s#@LOG_DIR@#$LOG_DIR#" -e "s#@WWW_HOST@#$WWW_HOST#g" /etc/nginx/conf.d/nginx.conf.template > /etc/nginx/nginx.conf
 sed -e 's#@STATIC_FILES_PATH@#/etc/nginx/static#g' /etc/nginx/conf.d/kaltura.conf.template > /etc/nginx/conf.d/kaltura.conf
+sed -i 's#@LOG_DIR@#$LOG_DIR#' /etc/logrotate.d/nginx
 
 if [ "$IS_NGINX_SSL" = 'Y' -o "$IS_NGINX_SSL" = 'y' ];then
 	sed -e "s#@VOD_PACKAGER_HOST@#$VOD_PACKAGER_HOST#g" -e "s#@VOD_PACKAGER_SSL_PORT@#$VOD_PACKAGER_SSL_PORT#g" -e "s#@SSL_CERT@#$SSL_CERT#g" -e "s#@SSL_KEY@#$SSL_KEY#g" /etc/nginx/conf.d/ssl.conf.template > /etc/nginx/conf.d/ssl.conf
