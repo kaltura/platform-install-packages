@@ -29,11 +29,11 @@ if ! rpm -q kaltura-dwh;then
 	echo -e "${BRIGHT_BLUE}Skipping as kaltura-dwh is not installed.${NORMAL}"
 	exit 0 
 fi
-if [ ! -r /opt/kaltura/app/base-config.lock ];then
+if [ ! -r $BASE_DIR/app/base-config.lock ];then
 	`dirname $0`/kaltura-base-config.sh "$1"
 else
 	echo -e "${BRIGHT_BLUE}base-config completed successfully, if you ever want to re-configure your system (e.g. change DB hostname) run the following script:
-# rm /opt/kaltura/app/base-config.lock
+# rm $BASE_DIR/app/base-config.lock
 # $BASE_DIR/bin/kaltura-base-config.sh
 ${NORMAL}
 "
@@ -52,6 +52,8 @@ if [ -z "$TABLES" ];then
 Output is logged to $BASE_DIR/dwh/logs/dwh_setup.log.${NORMAL}
 "
 	trap 'my_trap_handler "${LINENO}" ${$?}' ERR
+	sed -i "s/20130831/$(date '+%Y%m%d' -d "-$(date +%d) days")/g" $BASE_DIR/dwh/ddl/dw/facts/dwh_fact_api_calls.sql $BASE_DIR/dwh/ddl/dw/facts/dwh_fact_events.sql $BASE_DIR/dwh/ddl/dw/facts/dwh_fact_bandwidth_usage.sql $BASE_DIR/dwh/ddl/dw/facts/dwh_fact_fms_sessions.sql $BASE_DIR/dwh/ddl/dw/facts/dwh_fact_fms_session_events.sql $BASE_DIR/dwh/ddl/dw/facts/dwh_fact_errors.sql
+	sed -i "s/20130901/$(date '+%Y%m%d' -d "-$(($(date +%d)-1)) days")/g" $BASE_DIR/dwh/ddl/dw/facts/dwh_fact_api_calls.sql $BASE_DIR/dwh/ddl/dw/facts/dwh_fact_events.sql $BASE_DIR/dwh/ddl/dw/facts/dwh_fact_bandwidth_usage.sql $BASE_DIR/dwh/ddl/dw/facts/dwh_fact_fms_sessions.sql $BASE_DIR/dwh/ddl/dw/facts/dwh_fact_fms_session_events.sql $BASE_DIR/dwh/ddl/dw/facts/dwh_fact_errors.sql
 	$BASE_DIR/dwh/setup/dwh_setup.sh -u$SUPER_USER -k $BASE_DIR/pentaho/pdi/ -d$BASE_DIR/dwh -h$DWH_HOST -P$DWH_PORT -p$SUPER_USER_PASSWD | tee $BASE_DIR/dwh/logs/dwh_setup.log
 else
 cat << EOF
