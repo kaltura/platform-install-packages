@@ -298,7 +298,7 @@ ln -sf $BASE_DIR/app/configurations/monit/monit.avail/memcached.rc $BASE_DIR/app
 	echo "use kaltura" | mysql -h$DB1_HOST -u$DB1_USER -p$DB1_PASS -P$DB1_PORT $DB1_NAME 2> /dev/null
 	if [ $? -eq 0 ];then
 		HTML5_STUDIO_VERSION=`rpm -q kaltura-html5-studio --queryformat %{version}`
-		HTML5LIB_VERSION=`yum info kaltura-html5lib|grep Version|awk -F ":" '{print $NF}'`
+		HTML5LIB_VERSION=`rpm -q kaltura-html5lib --queryformat %{version}`
 		sed -i "s@^\(html5_version\s*=\)\(.*\)@\1 $HTML5LIB_VERSION@g" -i $BASE_DIR/app/configurations/local.ini
 		sed -i "s/@HTML5_VER@/$HTML5LIB_VERSION/g" -i $BASE_DIR/apps/studio/$HTML5_STUDIO_VERSION/studio.ini
 		if [ -r $BASE_DIR/apps/studio/$HTML5_STUDIO_VERSION/studio.ini ];then
