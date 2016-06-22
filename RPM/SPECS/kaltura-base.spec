@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 11.17.0
-Release: 7
+Release: 8
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -307,6 +307,24 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Tue Jun 21 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 11.17.0-8
+- PLAT-5484 - As a Kaltura platform developer, I'd like to filter events by linked resource system name
+- PLAT-5488 - As a scheduling admin, I'd like to filter events based on the entry template categories tied to the event
+- PLAT-5544 - recorded is not exported to remote storage when remote storage has rules
+- PLAT-5295 - Live/DVR & Play manifest use register to caluclate playmanifest response
+- PLAT-5441 - Add ability to set language on flavor asset object 
+- PLAT-5521 - Multi audio support - create infra language manager
+- PLAT-5545 - retrieve event-resource objects using responseProfile when listing events
+- PLAT-5604 - active Html purifier
+- SUP-6788 - Api Error/Access denied in Blackboard
+- SUP-8220 - Live stream report
+- SUP-8208 - Email notifications sends temporary entry ID when replacing media
+- PLAT-5443 - MultiAudioTracks: Video with multiple audio tracks is not working with subtitles
+- PLAT-5580 - Live Refactoring -Merging PlayManifest with partner that configure "force Proxy" enable
+- PLAT-5519 - Bulk upload and drop folder ingestion doesn't work
+- PLAT-4661 - When changing a user's ID - category_kuser records (and maybe others) go out of sync
+- PLAT-5120 - When stream is inactive chunklist is still returned instead of 404
+
 * Tue Jun 7 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 11.17.0-1
 - Ver Bounce to 11.17.0
 
