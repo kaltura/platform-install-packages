@@ -112,7 +112,6 @@ fi
 - New Upstream Release 5.13
 - Adding MMonit support
 
-%changelog
 * Thu Mar 13 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 5.6-13
 - Generate random monit passwd.
 
