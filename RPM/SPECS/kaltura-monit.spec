@@ -5,7 +5,7 @@
 
 Summary: Process monitor and restart utility
 Name: kaltura-monit
-Version: 5.13
+Version: 5.18
 Release: 1
 License: GPLv3
 Group: High Availability Management 
@@ -105,11 +105,13 @@ fi
 #%attr(0600, root, root) %config(noreplace) %{confdir}/monit.conf
 
 %changelog
+* Wed June 22 2016 David Bezemer <david.bezemer@kaltura.com> - 5.18
+- New Upstream Release 5.18
+
 * Thu May 8 2015 David Bezemer <david.bezemer@kaltura.com> - 5.13
 - New Upstream Release 5.13
 - Adding MMonit support
 
-%changelog
 * Thu Mar 13 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 5.6-13
 - Generate random monit passwd.
 
