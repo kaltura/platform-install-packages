@@ -6,7 +6,7 @@
 
 Name:           kaltura-sphinx
 Version:        2.2.1
-Release:        18
+Release:        19
 Summary:        Sphinx full-text search server - for Kaltura
 
 Group:          Applications/Text
@@ -143,6 +143,10 @@ if [ "$1" = 0 ] ; then
     /sbin/service kaltura-populate stop >/dev/null 2>&1
     /sbin/chkconfig --del %{name}
     /sbin/chkconfig --del kaltura-populate 
+    if [ -L /opt/kaltura/app/configurations/monit/monit.d/enabled.sphinx.rc ];then     
+	rm /opt/kaltura/app/configurations/monit/monit.d/enabled.sphinx.rc
+	/sbin/service kaltura-monit reload
+    fi
     rm -f /opt/kaltura/app/configurations/sphinx/populate/`hostname`.ini
 fi
 
