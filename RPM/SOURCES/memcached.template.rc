@@ -1,5 +1,5 @@
 check process memcache
-    with pidfile "/var/run/memcached/memcached.pid"
+    with match "memcached"
     start program = "/sbin/service memcached start" with timeout 60 seconds
     stop program = "/sbin/service memcached stop"
 
