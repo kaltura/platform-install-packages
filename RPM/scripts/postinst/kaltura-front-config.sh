@@ -1,4 +1,4 @@
-#!/bin/bash 
+#!/bin/bash  
 #===============================================================================
 #          FILE: kaltura-front-config.sh
 #         USAGE: ./kaltura-front-config.sh 
@@ -294,13 +294,14 @@ service memcached restart
 ln -sf $BASE_DIR/app/configurations/monit/monit.avail/httpd.rc $BASE_DIR/app/configurations/monit/monit.d/enabled.httpd.rc
 ln -sf $BASE_DIR/app/configurations/monit/monit.avail/memcached.rc $BASE_DIR/app/configurations/monit/monit.d/enabled.memcached.rc
 /etc/init.d/kaltura-monit restart
-	trap - ERR
+trap - ERR
+
+HTML5_STUDIO_VERSION=`rpm -q kaltura-html5-studio --queryformat %{version}`
+HTML5LIB_VERSION=`yum info kaltura-html5lib|grep Version|awk -F ":" '{print $NF}'|sed 's/\s*//g'`
+sed -i "s@^\(html5_version\s*=\)\(.*\)@\1 $HTML5LIB_VERSION@g" -i $BASE_DIR/app/configurations/local.ini
+sed -i "s/@HTML5_VER@/$HTML5LIB_VERSION/g" -i $BASE_DIR/apps/studio/$HTML5_STUDIO_VERSION/studio.ini
 	echo "use kaltura" | mysql -h$DB1_HOST -u$DB1_USER -p$DB1_PASS -P$DB1_PORT $DB1_NAME 2> /dev/null
 	if [ $? -eq 0 ];then
-		HTML5_STUDIO_VERSION=`rpm -q kaltura-html5-studio --queryformat %{version}`
-		HTML5LIB_VERSION=`yum info kaltura-html5lib|grep Version|awk -F ":" '{print $NF}'|sed 's/\s*//g'`
-		sed -i "s@^\(html5_version\s*=\)\(.*\)@\1 $HTML5LIB_VERSION@g" -i $BASE_DIR/app/configurations/local.ini
-		sed -i "s/@HTML5_VER@/$HTML5LIB_VERSION/g" -i $BASE_DIR/apps/studio/$HTML5_STUDIO_VERSION/studio.ini
 		if [ -r $BASE_DIR/apps/studio/$HTML5_STUDIO_VERSION/studio.ini ];then
 			php $BASE_DIR/app/deployment/uiconf/deploy_v2.php --ini=$BASE_DIR/apps/studio/$HTML5_STUDIO_VERSION/studio.ini >> /dev/null
 			sed -i "s@^\(studio_version\s*=\)\(.*\)@\1 $HTML5_STUDIO_VERSION@g" -i $BASE_DIR/app/configurations/local.ini
