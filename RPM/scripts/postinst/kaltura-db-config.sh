@@ -202,6 +202,11 @@ php $APP_DIR/deployment/uiconf/deploy_v2.php --ini=$WEB_DIR/flash/kmc/$KMC_VERSI
 #for i in $APP_DIR/deployment/updates/scripts/patches/*.sh;do
 #	$i
 #done
+HTML5_STUDIO_VERSION=`rpm -q kaltura-html5-studio --queryformat %{version}`
+if [ -r $BASE_DIR/apps/studio/$HTML5_STUDIO_VERSION/studio.ini ];then
+	php $BASE_DIR/app/deployment/uiconf/deploy_v2.php --ini=$BASE_DIR/apps/studio/$HTML5_STUDIO_VERSION/studio.ini >> /dev/null
+	sed -i "s@^\(studio_version\s*=\)\(.*\)@\1 $HTML5_STUDIO_VERSION@g" -i $BASE_DIR/app/configurations/local.ini
+fi
 find  $WEB_DIR/content/generatedUiConf -type d -exec chmod 775 {} \;
 
 set +e
