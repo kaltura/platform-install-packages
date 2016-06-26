@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 11.18.0
-Release: 1
+Release: 2
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -33,6 +33,7 @@ Source26: kaltura_batch.template
 Source28: embedIframeJsAction.class.php
 Source32: KDLOperatorFfmpeg1_1_1.php
 #Source33: kuserPeer.php
+Source34: clients-generator-%{codename}-%{version}.zip
 URL: https://github.com/kaltura/server/tree/%{codename}-%{version}
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
@@ -54,6 +55,7 @@ This is the base package, needed for any Kaltura server role.
 
 %prep
 %setup -qn server-%{codename}-%{version}
+unzip -q -o %{SOURCE34}
 
 
 %install
@@ -62,6 +64,7 @@ mkdir -p $RPM_BUILD_ROOT%{prefix}/log
 mkdir -p $RPM_BUILD_ROOT%{prefix}/var/run
 mkdir -p $RPM_BUILD_ROOT%{prefix}/tmp
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web
+mv clients-generator-%{codename}-%{version} $RPM_BUILD_ROOT%{prefix}/clients-generator 
 for i in alpha api_v3 batch generator infra scripts sphinx testme thumb deploy testmeDoc html5;do
 	mkdir -p $RPM_BUILD_ROOT%{prefix}/app/cache/$i
 done
@@ -114,6 +117,7 @@ sed -i 's@^writers.\(.*\).filters.priority.priority\s*=\s*7@writers.\1.filters.p
 # our Pentaho is correctly installed under its own dir and not %prefix/bin which is the known default so, adding -k path to kitchen.sh
 sed -i 's#\(@DWH_DIR@\)$#\1 -k %{prefix}/pentaho/pdi/kitchen.sh#g' $RPM_BUILD_ROOT%{prefix}/app/configurations/cron/dwh.template
 rm $RPM_BUILD_ROOT%{prefix}/app/generator/sources/android/DemoApplication/libs/libWVphoneAPI.so
+rm $RPM_BUILD_ROOT%{prefix}/clients-generator/sources/android/DemoApplication/libs/libWVphoneAPI.so
 rm $RPM_BUILD_ROOT%{prefix}/app/configurations/.project
 # we have our own that is provided with the kaltura-monit package
 rm $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.template.conf
@@ -279,8 +283,10 @@ fi
 %{prefix}/app/vendor
 %{prefix}/app/tests
 %{prefix}/app/cache
+%{prefix}/clients-generator
 
 %config %{prefix}/app/configurations/*
+%config %{prefix}/clients-generator/config/*
 %config %{_sysconfdir}/profile.d/kaltura_base.sh
 %config %{_sysconfdir}/ld.so.conf.d/kaltura_base.conf
 

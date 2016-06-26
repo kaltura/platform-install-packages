@@ -145,6 +145,9 @@ MONIT_URI="http://mmonit.com/monit/dist/monit-$MONIT_VERSION.tar.gz"
 KALTURA_CORE_URI="https://github.com/kaltura/server/archive/$KALTURA_SERVER_VERSION.zip"
 KALTURA_TEMPLATES_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalsource/on-premise/trunk/packaging/templates"
 
+# Kaltura clients generator
+KALTURA_CLIENTS_GENERATOR_URI="https://github.com/kaltura/clients-generator/archive/$KALTURA_SERVER_VERSION.zip"
+
 # Kaltura nginx-vod-module:
 KALTURA_NGINX_VOD_VERSION=1.8
 KALTURA_NGINX_VOD_URI="https://github.com/kaltura/nginx-vod-module/archive/$KALTURA_NGINX_VOD_VERSION.zip"
