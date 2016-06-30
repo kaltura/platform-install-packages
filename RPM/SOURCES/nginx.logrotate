@@ -10,6 +10,7 @@
         postrotate
                 [ -f /var/run/nginx.pid ] && kill -USR1 `cat /var/run/nginx.pid`
         endscript
+ 	su root kaltura
 }
 
 @LOG_DIR@/kaltura_nginx_access.log {
