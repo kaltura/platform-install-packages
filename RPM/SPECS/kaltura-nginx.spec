@@ -51,7 +51,7 @@ Requires(pre): pwdutils
 Summary: High performance web server customized for Kaltura VOD
 Name: kaltura-nginx
 Version: 1.8.1
-Release: 5
+Release: 6
 Vendor: Kaltura inc.
 URL: http://nginx.org/
 
@@ -359,6 +359,9 @@ if [ $1 -ge 1 ]; then
         "Binary upgrade failed, please check nginx's error.log"
 fi
 %changelog
+* Wed Jun 30 2016 Jess Portnoy <jess.portnoy@kaltura.com> - 1.8.1-6
+- Fixed logrotate config
+
 * Sun May 8 2016 Jess Portnoy <jess.portnoy@kaltura.com> - 1.8.1-5
 - New Nginx vod module - 1.8
 
