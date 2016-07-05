@@ -2,7 +2,7 @@
 %define nginx_home %{_localstatedir}/cache/nginx
 %define nginx_user kaltura
 %define nginx_group kaltura
-
+%define optflags -O3
 # distribution specific definitions
 %define use_systemd (0%{?fedora} && 0%{?fedora} >= 18) || (0%{?rhel} && 0%{?rhel} >= 7)
 
@@ -141,7 +141,7 @@ unzip -o %{SOURCE13}
         --with-debug \
         %{?with_spdy:--with-http_spdy_module} \
 	--with-threads \
-        --with-cc-opt="%{optflags} $(pcre-config --cflags)" \
+        --with-cc-opt="%{optflags}" \
 	--add-module=./nginx-vod-module-%{nginx_vod_module_ver} \
 	--add-module=./nginx-secure-token-module-%{nginx_secure_token_ver} \
 	--add-module=./nginx-akamai-token-validate-module-%{nginx_token_validate_ver} \
@@ -184,7 +184,7 @@ make %{?_smp_mflags}
         --with-ipv6 \
         %{?with_spdy:--with-http_spdy_module} \
 	--with-threads \
-        --with-cc-opt="%{optflags} $(pcre-config --cflags)" \
+        --with-cc-opt="%{optflags}" \
 	--add-module=./nginx-vod-module-%{nginx_vod_module_ver} \
 	--add-module=./nginx-secure-token-module-%{nginx_secure_token_ver} \
 	--add-module=./nginx-akamai-token-validate-module-%{nginx_token_validate_ver} \
