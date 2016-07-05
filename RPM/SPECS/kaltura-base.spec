@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 11.18.0
-Release: 5
+Release: 7
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -313,6 +313,12 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Tue Jul 5 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 11.18.0-7
+- PLAT-5390 - syndication xml format
+- TOG-369 - Source COPY flavor fails for MPEG-TS files 
+- PLAT-5519 - Bulk upload and drop folder ingestion doesn't work
+- PLAT-5529 - Can not do bulk actions on resource object
+
 * Sat Jun 25 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 11.18.0-1
 - Ver Bounce to 11.18.0
 
