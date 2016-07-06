@@ -1,3 +1,86 @@
+kaltura-html5lib (2.45-1) kajam; urgency=low
+
+  * FEC-5525 - Chrome cast - Seek event (17) is thrown when you click on replay
+  * FEC-5527 - Chromecast - no events rare sent after replay
+  * FEC-5526 - Chromecast - Play_reached_50 and 75 is not thrown when you seek almost to the end of a video
+  * FEC-5615 - Youtube player on Android - current time not updating
+  * FEC-5582 - Channel playlist: ID 18-pre-roll ad is not playing before most video
+  * FEC-5282 - Mobile Skin Portrait Mode
+  * FEC-5310 - Mobile Skin Landscape Mode
+  * FEC-5503 - Add support for Related Plugin
+  * FEC-5505 - Add support for Playlists
+  * FEC-5506 - Add support for watermark plugin
+  * FEC-5508 - Add support for Watermarked HLS (Stream with KS)
+  * FEC-5509 - Support toggling cast from the browser Chromecast icon
+  * FEC-5510 - Add support for custom receiver logo
+  * FEC-5511 - Support sending proxyData to the receiver and custom proxyData
+  * SUP-8237
+  * FEC-5609 - Lecture capture (ID:40) - Unexpected black frame displays when in fullscreen
+  * FEC-5500 - Add Support for DFP Plugin
+  * FEC-5541 - youbora : error event is triggered twice
+  * FEC-5513 - ChromeCast : DVR is not working on Chromecast
+  * FEC-5616 - Chromecast - auto deployment
+  * FEC-5626 - Mobile skin - Share is not shown on iPhone while player has smart container
+  * FEC-5628 - Mobile skin - Captions can't be changed on Mobiles
+  * FEC-5631 - Mobile skin - When video finishes to play the duration of video is shown 0:01 instead of 3:33
+  * FEC-5632 - Mobile Skin - Back is not shown on Nexus 6
+  * FEC-5633 - Mobile Skin - playlist with dfp preroll - Duration of video is shown on left upper player's side on android
+  * FEC-5634 - Mobile Skin - Playlist - Fullscreen icon is shown on Duration, when you click on video from playlist
+  * FEC-5635 - Mobile Skin - info - description is cut
+  * FEC-5637 - Mobile Skin - Quality settings - are not saved
+  * FEC-5638 - Mobile skin - Captions - Settings screen is not automatically after updating it
+  * FEC-5641 - Mobile skin - Playlist - Settings screen is not blurred when you click on it on the end of video
+  * FEC-5642 - Mobile skin - Playlist - Player should be disabled when DFP is playing
+  * FEC-5645 - Mobile skin - Report plugin should be disabled when confirmation screen is open
+  * FEC-5648 - Mobile skin - Playlist should be disabled when you back from iPhone's native player and DFP is shown
+  * FEC-5646 - Add ability to specify legacy document modes in player embeds
+  * FEC-5565 - MultiAudioTracks: Video stuck and scrubber continues the progress in case of changing audio track after replay (Edge browser only)
+  * FEC-5564 - MultiAudioTracks:Video is playing without sound in case of changing language after continuing the video from pause (Edge Only)
+  * FEC-5647 - Fix vtt.js IE8 crash
+  * FEC-5651 - Mobile Skin - Play button is shown when share and info is open on iPhone
+  * FEC-5654 - Mobile skin - 'x' doesn't react on iPhone after filling out report
+  * FEC-5657 - Mobile skin - Live indicator icon shown as 'x' instead to be shown as red circle
+  * FEC-5656 - Mobile skin - DFP contrary to old skin DFP shows video's duration instead of DFP's duration
+  * FEC-5652 - MultiAudioTracks: Language is displayed twice (each language) after mid-roll
+  * FEC-5636 - Mobile skin - playlist - Next button is shown before Play button in hovering control player
+  * FEC-5653 - Mobile skin - Playbutton is shown with loading spinner
+  * FEC-5659 - Mobile Skin - captions and Quality settings are duplicated each time you choose new entry from playlist
+  * FEC-5662 - mobile skin: Basics (ID:75) - Overlapping issue with Report dropdown icon
+  * SUP-8053
+  * SUP-8323
+  * FEC-5663 - Lecture capture (ID:19) - Cannot focus on Search bar if played video before
+  * FEC-5667 - Lecture capture (ID:39) - Cannot switch view mode after playing from slide menu
+  * FEC-5674 - Mobile skin - Unable to drag till the end of a video
+  * FEC-5666 - Channel Playlist (ID:1) - Play/Pause button does not display for youtube entry
+  * FEC-5501 - Add support for Youbora Plugin
+  * FEC-5710 - Native iOS - info - Uploaded time and Views are blue and underlined, like if they were links
+  * FEC-5326 - spinner appear on PlayReady on the fly (emss) and clear ISM playback on full screen
+  * FEC-5707 - Mobile Skin - Landscape only - Cannot interact with control bar in fullscreen mode
+  * FEC-5716 - FairPlayOnSafari: Video is not playing
+  * FEC-5717 - Add support for OTT HLS FPS
+  * FEC-5702 - UI fixes
+  * FEC-5687 - Mobile skin - Long title is not cut on mobiles
+  * FEC-5658 - Mobile skin - player's icons are flickering when you you click on Next video in playlist
+  * FEC-5689 - Playlist with watermark - Tapping on the watermark does not open Kaltura site in a new tab
+  * FEC-5721 - Mobile skin - Learn more on DFP is not clickable on Android
+  * FEC-5728 - Native iOS - Play button is not shown when you close plugin (for example Report)
+  * FEC-5732 - Native iOS - Aditional second is added to the video if you drag till the end of video
+  * FEC-5735 - DoubleClick: audio is playing after pressing on skip (Edge+Safari)
+  * FEC-5591 - Monetization: Doubleclick (ID:45) - Skip message overlaps with the control bar
+  * FEC-5718 - after change media wrong params sent in media hit
+  * FEC-5502 - Add support for kAnalony Plugin
+  * FEC-5745 - Chrome cast - Video doesn't start automatically after DFP preroll
+  * FEC-5752 - Chrome cast - Black screen while changing videos via next button in playlist
+  * fix polyfill dependency name
+  * Fix naming convention issue with polyfills
+  * Mobile skin UI fixes
+  * HlsJs Peer5 support
+  * Fix scope issue
+  * support native SDK messaging from mobile web to work samelessly with the receiver
+  * Turn off mobile skin for this version
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Tue, 05 Jul 2016 19:33:39 +0000
+
 kaltura-html5lib (2.44-1) kajam; urgency=low
 
   * FEC-5518 - Expose PTS in HLS JS player

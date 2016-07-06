@@ -1,3 +1,18 @@
+kaltura-base (11.18.0-2) kajam; urgency=low
+
+  * PLAT-5390 - syndication xml format
+  * TOG-369 - Source COPY flavor fails for MPEG-TS files 
+  * PLAT-5519 - Bulk upload and drop folder ingestion doesn't work
+  * PLAT-5529 - Can not do bulk actions on resource object
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Tue, 05 Jul 2016 19:29:33 +0000
+
+kaltura-base (11.18.0-1) kajam; urgency=low
+
+  * Switching to 11.18.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Sun, 26 Jun 2016 14:35:03 +0000
+
 kaltura-base (11.16.0-2) kajam; urgency=low
 
   * PLAT-4620 - Support delete on MediaPrep

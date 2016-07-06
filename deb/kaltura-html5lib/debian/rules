@@ -21,6 +21,7 @@ $(archive):
 
 $(tree): $(archive)
 	tar zxf $(RPM_SOURCES_DIR)/kaltura-html5lib-$(HTML5LIB_LATEST_VERSION).tar.gz
+	tar zxf $(RPM_SOURCES_DIR)/kaltura-html5lib-v2.44.tar.gz
 	tar zxf $(RPM_SOURCES_DIR)/kaltura-html5lib-v2.43.tar.gz
 	tar zxf $(RPM_SOURCES_DIR)/kaltura-html5lib-v2.42.tar.gz
 	tar zxf $(RPM_SOURCES_DIR)/kaltura-html5lib-v2.41.tar.gz
@@ -68,6 +69,7 @@ binary-indep: install
 	mv kaltura-html5lib-v2.41 $(HTML5LIB_PREFIX)/v2.41
 	mv kaltura-html5lib-v2.42 $(HTML5LIB_PREFIX)/v2.42
 	mv kaltura-html5lib-v2.43 $(HTML5LIB_PREFIX)/v2.43
+	mv kaltura-html5lib-v2.44 $(HTML5LIB_PREFIX)/v2.44
 	cp debian/LocalSettings.php $(HTML5LIB_PREFIX)/$(HTML5LIB_LATEST_VERSION)/
 	cp debian/LocalSettings.php $(HTML5LIB_PREFIX)/v2.29/
 	cp debian/LocalSettings.php $(HTML5LIB_PREFIX)/v2.30/
@@ -86,7 +88,8 @@ binary-indep: install
 	cp debian/LocalSettings.php $(HTML5LIB_PREFIX)/v2.41/
 	cp debian/LocalSettings.php $(HTML5LIB_PREFIX)/v2.42/
 	cp debian/LocalSettings.php $(HTML5LIB_PREFIX)/v2.43/
-	mkdir $(HTML5LIB_PREFIX)/$(HTML5LIB_LATEST_VERSION)/cache $(HTML5LIB_PREFIX)/v2.35.5/cache $(HTML5LIB_PREFIX)/v2.36/cache $(HTML5LIB_PREFIX)/v2.37.1/cache $(HTML5LIB_PREFIX)/v2.37.3/cache $(HTML5LIB_PREFIX)/v2.38/cache $(HTML5LIB_PREFIX)/v2.38.1/cache $(HTML5LIB_PREFIX)/v2.39/cache $(HTML5LIB_PREFIX)/v2.40/cache $(HTML5LIB_PREFIX)/v2.41/cache $(HTML5LIB_PREFIX)/v2.42/cache $(HTML5LIB_PREFIX)/v2.43/cache $(HTML5LIB_PREFIX)/v2.34/cache $(HTML5LIB_PREFIX)/v2.33/cache $(HTML5LIB_PREFIX)/v2.32.1/cache $(HTML5LIB_PREFIX)/v2.31/cache $(HTML5LIB_PREFIX)/v2.30/cache $(HTML5LIB_PREFIX)/v2.29/cache
+	cp debian/LocalSettings.php $(HTML5LIB_PREFIX)/v2.44/
+	mkdir $(HTML5LIB_PREFIX)/$(HTML5LIB_LATEST_VERSION)/cache $(HTML5LIB_PREFIX)/v2.35.5/cache $(HTML5LIB_PREFIX)/v2.36/cache $(HTML5LIB_PREFIX)/v2.37.1/cache $(HTML5LIB_PREFIX)/v2.37.3/cache $(HTML5LIB_PREFIX)/v2.38/cache $(HTML5LIB_PREFIX)/v2.38.1/cache $(HTML5LIB_PREFIX)/v2.39/cache $(HTML5LIB_PREFIX)/v2.40/cache $(HTML5LIB_PREFIX)/v2.41/cache $(HTML5LIB_PREFIX)/v2.42/cache $(HTML5LIB_PREFIX)/v2.43/cache $(HTML5LIB_PREFIX)/v2.44/cache $(HTML5LIB_PREFIX)/v2.34/cache $(HTML5LIB_PREFIX)/v2.33/cache $(HTML5LIB_PREFIX)/v2.32.1/cache $(HTML5LIB_PREFIX)/v2.31/cache $(HTML5LIB_PREFIX)/v2.30/cache $(HTML5LIB_PREFIX)/v2.29/cache
 	dh_install $(KALTURA_PREFIX)
 	dh_gencontrol -u-v$(DEB_VERSION) 
 	dh_installdebconf
