@@ -1,3 +1,9 @@
+kaltura-kmc (5.40.2-3) kajam; urgency=low
+
+  * Version bounce to align with kaltura-html5lib v2.45.
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Tue, 05 Jul 2016 19:38:24 +0000
+
 kaltura-kmc (5.40.2-2) kajam; urgency=low
 
   * Version bounce to align with kaltura-html5lib v2.44.

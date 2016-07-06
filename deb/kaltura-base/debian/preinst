@@ -1,0 +1,23 @@
+#!/bin/bash
+KALTURA_GROUP=kaltura
+KALTURA_USER=kaltura
+APACHE_USER=www-data
+KALTURA_PREFIX=/opt/kaltura
+
+if ! getent group $KALTURA_GROUP >/dev/null; then
+        addgroup --system --force-badname --quiet $KALTURA_GROUP --gid 7373 
+fi
+
+if ! getent passwd $KALTURA_USER >/dev/null; then
+        adduser --system --force-badname --quiet \
+            --home $KALTURA_PREFIX --no-create-home \
+            --shell /bin/bash \
+    --uid 7373 \
+            --group $KALTURA_GROUP
+        usermod -c "Kaltura server" $KALTURA_USER
+	usermod -a -G www-data kaltura
+fi
+
+if [ "$1" = "upgrade" ];then
+	touch $KALTURA_PREFIX/bin/kaltura-base-upgrading
+fi
