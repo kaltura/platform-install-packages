@@ -45,6 +45,17 @@ if [ -z "$TABLES" ];then
 Output is logged to $BASE_DIR/dwh/logs/dwh_setup.log.${NORMAL}
 "
 	trap 'my_trap_handler "${LINENO}" ${$?}' ERR
+	grep -rl p_20130831 $BASE_DIR/dwh/ddl/ | xargs sed -i "s/p_20130831/p_$(date '+%Y%m%d' -d "-$(date +%d) days")/g"
+	grep -rl p_201308 $BASE_DIR/dwh/ddl/ | xargs sed -i "s/p_201308/p_$(date '+%Y%m' -d "-$(date +%d) days")/g"
+	grep -rl 20130901 $BASE_DIR/dwh/ddl/ | xargs sed -i "s/20130901/$(date '+%Y%m%d' -d "-$(($(date +%d)-1)) days")/g"
+	grep -rl 20130902 $BASE_DIR/dwh/ddl/ | xargs sed -i "s/20130902/$(date '+%Y%m%d' -d "-$(($(date +%d)-2)) days")/g"
+	grep -rl p_20131231 $BASE_DIR/dwh/ddl/ | xargs sed -i "s/p_20131231/p_$(date '+%Y%m%d' -d "-$(date +%d) days")/g"
+	grep -rl p_201312 $BASE_DIR/dwh/ddl/ | xargs sed -i "s/p_201312/p_$(date '+%Y%m' -d "-$(date +%d) days")/g"
+	grep -rl 20140101 $BASE_DIR/dwh/ddl/ | xargs sed -i "s/20140101/$(date '+%Y%m%d' -d "-$(($(date +%d)-1)) days")/g"
+	grep -rl p_201406 $BASE_DIR/dwh/ddl/ | xargs sed -i "s/p_201406/p_$(date '+%Y%m' -d "-$(date +%d) days")/g"
+	grep -rl 20140701 $BASE_DIR/dwh/ddl/ | xargs sed -i "s/20140701/$(date '+%Y%m%d' -d "-$(($(date +%d)-1)) days")/g"
+	grep -rl p_201510 $BASE_DIR/dwh/ddl/ | xargs sed -i "s/p_201510/p_$(date '+%Y%m' -d "-$(date +%d) days")/g"
+	grep -rl 20151101 $BASE_DIR/dwh/ddl/ | xargs sed -i "s/20151101/$(date '+%Y%m%d' -d "-$(($(date +%d)-1)) days")/g"
 	$BASE_DIR/dwh/setup/dwh_setup.sh -u$SUPER_USER -k $BASE_DIR/pentaho/pdi/ -d$BASE_DIR/dwh -h$DWH_HOST -P$DWH_PORT -p$SUPER_USER_PASSWD | tee $BASE_DIR/dwh/logs/dwh_setup.log
 else
 cat << EOF

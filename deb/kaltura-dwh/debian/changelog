@@ -1,3 +1,10 @@
+kaltura-dwh (11.3.0-1) kajam; urgency=low
+
+  * Add last month dates to the DWH setup to avoid partition count issues.
+
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 11 Jul 2016 16:28:26 +0000
+
 kaltura-dwh (10.10.0-2) jupiter; urgency=low
 
   * live entry aggregation ddl changes

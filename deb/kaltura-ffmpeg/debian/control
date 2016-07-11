@@ -60,7 +60,7 @@ Depends:
  ${misc:Depends},
  ${shlibs:Depends},
  libopencore-amrwb0,
- libx264-123,
+ libx264-148,
  libopencore-amrnb0,
  libass4,
  libgsm1,
