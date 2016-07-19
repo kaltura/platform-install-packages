@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 11.19.0
-Release: 1
+Release: 4
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -313,6 +313,12 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Tue Jul 19 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 11.19.0-4
+- SUP-8470 - Thumbnail Preview Displayed Direction
+- SUP-7683 - API calls failing (Limited to metadata->update)
+- PLAT-5725 - Add user-role CAPTURE_DEVICE_ROLE to partner 0
+- PLAT-5326 - As a Kaltura platform developer, I'd like to set an entry template on an event
+
 * Tue Jul 12 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 11.19.0-1
 - Ver Bounce to 11.19.0
 

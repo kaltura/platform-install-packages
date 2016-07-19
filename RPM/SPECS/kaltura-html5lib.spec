@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.45
+Version: v2.45.1
 Release: 1
 Epoch:0 
 License: AGPLv3+
@@ -44,6 +44,7 @@ Source34: kaltura-html5lib-v2.41.tar.gz
 Source35: kaltura-html5lib-v2.42.tar.gz
 Source36: kaltura-html5lib-v2.43.tar.gz
 Source37: kaltura-html5lib-v2.44.tar.gz
+Source38: kaltura-html5lib-v2.45.tar.gz
 Source28: simplePhpXMLProxy.php
 
 URL: https://github.com/kaltura/mwEmbed 
@@ -103,10 +104,11 @@ tar zxf %{SOURCE34} -C %{_builddir}/
 tar zxf %{SOURCE35} -C %{_builddir}/
 tar zxf %{SOURCE36} -C %{_builddir}/
 tar zxf %{SOURCE37} -C %{_builddir}/
+tar zxf %{SOURCE38} -C %{_builddir}/
 
 %install
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib
-for i in v2.1.1 v2.3 v2.4 v2.6 v2.9 v2.14 v2.15 v2.18.5 v2.20 v2.21 v2.22 v2.23 v2.24 v2.25 v2.26 v2.27 v2.28 v2.29 v2.30 v2.31 v2.32.1 v2.33 v2.34 v2.35.5 v2.36 v2.37.1 v2.37.3 v2.38 v2.38.1 v2.39 v2.40 v2.41 v2.42 v2.43 v2.44 %{version};do
+for i in v2.1.1 v2.3 v2.4 v2.6 v2.9 v2.14 v2.15 v2.18.5 v2.20 v2.21 v2.22 v2.23 v2.24 v2.25 v2.26 v2.27 v2.28 v2.29 v2.30 v2.31 v2.32.1 v2.33 v2.34 v2.35.5 v2.36 v2.37.1 v2.37.3 v2.38 v2.38.1 v2.39 v2.40 v2.41 v2.42 v2.43 v2.44 v2.45 %{version};do
 	rm -rf %{_builddir}/%{name}-$i/modules/Widevine
 	cp -r %{_builddir}/%{name}-$i $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i
 	cp %{SOURCE28} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i/
@@ -128,6 +130,26 @@ find /opt/kaltura/web/html5/html5lib -type d -name cache -exec chown -R 48 {} \;
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Tue Jul 19 2016 Jess Portnoy <jess.portnoy@kaltura.com> - v2.45.1-1
+- FEC-5792 - Mobile skin - Regression - captions is shown in both smart containers
+- FEC-5792 - Mobile skin - Regression - captions is shown in both smart containers
+- FEC-5791 - Mobile skin - custom style - plugin's name in smart container
+- FEC-5790 - Mobile skin - Custom spinner is not shown on mobiles
+- FEC-5768 - Native Android - Player with OTT skin is shown with big icons and not in their location
+- FEM-592 - screen flashes when control bar appears and disappears or when clicking play button to replay playback
+- FEM-595 - flavour selector icon is displayed on the playing video
+- FEC-4618 - DFP pre-roll : Ad new page is not opened upon clicking on Ad in Android
+- FEC-5777 - Mobile skin :Switch caption button is not presented
+- FEC-5787 - Mobile skin - Playhead is too big when player has custom style
+- FEC-5775 - Player flag button - flag menu is cut on horizontal display
+- FEC-5723 - Native iOS - Incorrect end time of video while dragging till the end
+- FEC-5737 - Watermark overlaps on the control bar on Lenovo Yoga tab
+- FEC-5740 - Mobile skin - Unable to continue the AD, after you back from DFP's site
+- FEC-5727 - Native iOS - Duration is shown at left top side when you click on any plugin
+- FEC-5734 - Native iOS - Plugins in smart container are shown cut
+- FEC-5730 - Native iOS -- Unable to Copy player URL from Share plugin on iPhone
+- FEC-5767 - Mobile skin :Back button in the incorrect place
+
 * Tue Jul 5 2016 Jess Portnoy <jess.portnoy@kaltura.com> - v2.45-1
 - FEC-5525 - Chrome cast - Seek event (17) is thrown when you click on replay
 - FEC-5527 - Chromecast - no events rare sent after replay
