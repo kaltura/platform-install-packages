@@ -1,3 +1,18 @@
+kaltura-base (11.19.0-2) kajam; urgency=low
+
+  * SUP-8470 - Thumbnail Preview Displayed Direction
+  * SUP-7683 - API calls failing (Limited to metadata->update)
+  * PLAT-5725 - Add user-role CAPTURE_DEVICE_ROLE to partner 0
+  * PLAT-5326 - As a Kaltura platform developer, I'd like to set an entry template on an event
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Tue, 19 Jul 2016 16:10:58 +0000
+
+kaltura-base (11.19.0-1) kajam; urgency=low
+
+  * Switching to 11.19.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Thu, 14 Jul 2016 20:11:14 +0000
+
 kaltura-base (11.18.0-2) kajam; urgency=low
 
   * PLAT-5390 - syndication xml format

@@ -1,3 +1,26 @@
+kaltura-html5lib (2.45.1-1) kajam; urgency=low
+
+  * FEC-5792 - Mobile skin - Regression - captions is shown in both smart containers
+  * FEC-5792 - Mobile skin - Regression - captions is shown in both smart containers
+  * FEC-5791 - Mobile skin - custom style - plugin's name in smart container
+  * FEC-5790 - Mobile skin - Custom spinner is not shown on mobiles
+  * FEC-5768 - Native Android - Player with OTT skin is shown with big icons and not in their location
+  * FEM-592 - screen flashes when control bar appears and disappears or when clicking play button to replay playback
+  * FEM-595 - flavour selector icon is displayed on the playing video
+  * FEC-4618 - DFP pre-roll : Ad new page is not opened upon clicking on Ad in Android
+  * FEC-5777 - Mobile skin :Switch caption button is not presented
+  * FEC-5787 - Mobile skin - Playhead is too big when player has custom style
+  * FEC-5775 - Player flag button - flag menu is cut on horizontal display
+  * FEC-5723 - Native iOS - Incorrect end time of video while dragging till the end
+  * FEC-5737 - Watermark overlaps on the control bar on Lenovo Yoga tab
+  * FEC-5740 - Mobile skin - Unable to continue the AD, after you back from DFP's site
+  * FEC-5727 - Native iOS - Duration is shown at left top side when you click on any plugin
+  * FEC-5734 - Native iOS - Plugins in smart container are shown cut
+  * FEC-5730 - Native iOS -- Unable to Copy player URL from Share plugin on iPhone
+  * FEC-5767 - Mobile skin :Back button in the incorrect place
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Tue, 19 Jul 2016 16:20:53 +0000
+
 kaltura-html5lib (2.45-1) kajam; urgency=low
 
   * FEC-5525 - Chrome cast - Seek event (17) is thrown when you click on replay
