@@ -55,7 +55,7 @@ if [ -r "$APP_DIR/configurations/sphinx_schema_update" ];then
 fi
 ln -sf $BASE_DIR/app/configurations/logrotate/kaltura_populate /etc/logrotate.d/
 ln -sf $BASE_DIR/app/configurations/logrotate/kaltura_sphinx /etc/logrotate.d/
-trap 'my_trap_handler "${LINENO}" ${$?}' ERR
+trap 'my_trap_handler "${LINENO}" $?' ERR
 send_install_becon `basename $0` $ZONE install_start 0 
 mkdir -p $LOG_DIR/sphinx/data $APP_DIR/cache//sphinx
 chown $OS_KALTURA_USER.$OS_KALTURA_USER $APP_DIR/cache/sphinx $LOG_DIR/sphinx/data $BASE_DIR/sphinx

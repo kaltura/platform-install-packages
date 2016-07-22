@@ -49,7 +49,7 @@ else
 ${NORMAL}
 "
 fi
-trap 'my_trap_handler "${LINENO}" ${$?}' ERR
+trap 'my_trap_handler "${LINENO}" $?' ERR
 send_install_becon `basename $0` $ZONE install_start 0 
 CONFIG_DIR=/opt/kaltura/app/configurations
 if [ -r $CONFIG_DIR/system.ini ];then

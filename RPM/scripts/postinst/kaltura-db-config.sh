@@ -44,7 +44,7 @@ if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
 	exit 3
 fi
 . $KALTURA_FUNCTIONS_RC
-trap 'my_trap_handler "${LINENO}" ${$?}' ERR
+trap 'my_trap_handler "${LINENO}" $?' ERR
 send_install_becon `basename $0` $ZONE install_start 0 
 
 MYSQL_HOST=$1
@@ -117,7 +117,7 @@ EOF
 			exit 5
 		fi
 	fi 
-trap 'my_trap_handler "${LINENO}" ${$?}' ERR
+trap 'my_trap_handler "${LINENO}" $?' ERR
 
 	# this is the DB creation part, we want to exit if something fails here:
 	set -e

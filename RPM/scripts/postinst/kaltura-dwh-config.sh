@@ -51,7 +51,7 @@ if [ -z "$TABLES" ];then
 	echo -e "${CYAN}Deploying analytics warehouse DB, please be patient as this may take a while...
 Output is logged to $BASE_DIR/dwh/logs/dwh_setup.log.${NORMAL}
 "
-	trap 'my_trap_handler "${LINENO}" ${$?}' ERR
+	trap 'my_trap_handler "${LINENO}" $?' ERR
 	grep -rl p_20130831 $BASE_DIR/dwh/ddl/ | xargs sed -i "s/p_20130831/p_$(date '+%Y%m%d' -d "-$(date +%d) days")/g"
 	grep -rl p_201308 $BASE_DIR/dwh/ddl/ | xargs sed -i "s/p_201308/p_$(date '+%Y%m' -d "-$(date +%d) days")/g"
 	grep -rl 20130901 $BASE_DIR/dwh/ddl/ | xargs sed -i "s/20130901/$(date '+%Y%m%d' -d "-$(($(date +%d)-1)) days")/g"

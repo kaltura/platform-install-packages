@@ -94,7 +94,7 @@ if ! rpm -q kaltura-front;then
 	echo -e "${BRIGHT_BLUE}Skipping as kaltura-front is not installed.${NORMAL}"
 	exit 0 
 fi
-trap 'my_trap_handler "${LINENO}" ${$?}' ERR
+trap 'my_trap_handler "${LINENO}" $?' ERR
 send_install_becon `basename $0` $ZONE install_start 0 
 KALTURA_APACHE_CONF=$APP_DIR/configurations/apache
 KALTURA_APACHE_CONFD=$KALTURA_APACHE_CONF/conf.d
@@ -115,7 +115,7 @@ echo "use kaltura" | mysql -h$DB1_HOST -u$DB1_USER -p$DB1_PASS -P$DB1_PORT $DB1_
 if [ $? -eq 0 ];then
 	echo "update permission set STATUS=3 WHERE permission.NAME='FEATURE_KMC_ENFORCE_HTTPS' ;" | mysql $DB1_NAME -h$DB1_HOST -u$DB1_USER -P$DB1_PORT -p$DB1_PASS 2> /dev/null 
 fi
-trap 'my_trap_handler "${LINENO}" ${$?}' ERR
+trap 'my_trap_handler "${LINENO}" $?' ERR
 
 	if [ -z "$AUTO_YES" ];then
 		echo -e "${YELLOW}It is recommended that you do work using HTTPs. Would you like to continue anyway?[N/y]${NORMAL}"
@@ -208,7 +208,7 @@ if [ "$IS_SSL" = 'Y' -o "$IS_SSL" = 1 -o "$IS_SSL" = 'y' -o "$IS_SSL" = 'true' ]
 	if [ $? -eq 0 ];then
 		echo "update permission set STATUS=1 WHERE permission.PARTNER_ID IN ('0') AND permission.NAME='FEATURE_KMC_ENFORCE_HTTPS' ORDER BY permission.STATUS ASC LIMIT 1;" | mysql $DB1_NAME -h$DB1_HOST -u$DB1_USER -P$DB1_PORT -p$DB1_PASS 
 	fi
-	trap 'my_trap_handler "${LINENO}" ${$?}' ERR
+	trap 'my_trap_handler "${LINENO}" $?' ERR
 else
 	DEFAULT_PORT=80
 fi
@@ -310,5 +310,5 @@ sed -i "s/@HTML5_VER@/$HTML5LIB_VERSION/g" -i $BASE_DIR/apps/studio/$HTML5_STUDI
 		KMC_PATH=`ls -ld $BASE_DIR/web/flash/kmc/v* 2>/dev/null|awk -F " " '{print $NF}' |tail -1`
 		php $BASE_DIR/app/deployment/uiconf/deploy_v2.php --ini=$KMC_PATH/config.ini >> /dev/null
 	fi
-	trap 'my_trap_handler "${LINENO}" ${$?}' ERR
+	trap 'my_trap_handler "${LINENO}" $?' ERR
 send_install_becon `basename $0` $ZONE install_success 0 

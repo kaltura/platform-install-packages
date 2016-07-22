@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.31
-Release: 18
+Release: 19
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -82,6 +82,9 @@ find %{_sysconfdir}/logrotate.d -type l -name "kaltura_*" -exec rm {} \;
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Thu Jul 21 2016 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.31-19
+- Fix trapping of RC
+
 * Thu Jun 30 2016 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.31-18
 - Fixed sed in kaltura-nginx-config.sh
 

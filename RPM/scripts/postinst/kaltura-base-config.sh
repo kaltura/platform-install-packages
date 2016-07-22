@@ -81,7 +81,7 @@ And re-run:
 ${NORMAL}"
         exit 2 
 fi
-trap 'my_trap_handler "${LINENO}" ${$?}' ERR
+trap 'my_trap_handler "${LINENO}" $?' ERR
 send_install_becon `basename $0` $ZONE install_start 0
 BASE_DIR=/opt/kaltura
 LOCALHOST=127.0.0.1
@@ -268,7 +268,7 @@ ${NORMAL} "
 		trap - ERR
 		php -r "if (timezone_open('$TIME_ZONE') === false){exit(1);}" 2>/dev/null
 		RC=$?
-		trap 'my_trap_handler "${LINENO}" ${$?}' ERR
+		trap 'my_trap_handler "${LINENO}" $?' ERR
 		if [ $RC -ne 0 ];then
 			echo -e "${BRIGHT_RED}Bad Timezone value, please check valid options at http://php.net/date.timezone${NORMAL}"
 			unset TIME_ZONE
