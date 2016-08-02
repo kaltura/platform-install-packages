@@ -363,7 +363,7 @@ https://github.com/kaltura/nginx-vod-module/
 # wget -O - http://installrepo.kaltura.org/repo/apt/debian/kaltura-deb.gpg.key|apt-key add -
 # echo "deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/debian jupiter main" > /etc/apt/sources.list.d/kaltura.list 
 # apt-get update
-# apt-get install kaltura-nginx
+# apt-get install kaltura-base kaltura-nginx
 ```
 
 #### Setup:
