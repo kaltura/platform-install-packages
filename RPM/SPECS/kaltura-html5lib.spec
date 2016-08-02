@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.45.1
+Version: v2.46
 Release: 1
 Epoch:0 
 License: AGPLv3+
@@ -45,6 +45,7 @@ Source35: kaltura-html5lib-v2.42.tar.gz
 Source36: kaltura-html5lib-v2.43.tar.gz
 Source37: kaltura-html5lib-v2.44.tar.gz
 Source38: kaltura-html5lib-v2.45.tar.gz
+Source39: kaltura-html5lib-v2.45.1.tar.gz
 Source28: simplePhpXMLProxy.php
 
 URL: https://github.com/kaltura/mwEmbed 
@@ -105,10 +106,11 @@ tar zxf %{SOURCE35} -C %{_builddir}/
 tar zxf %{SOURCE36} -C %{_builddir}/
 tar zxf %{SOURCE37} -C %{_builddir}/
 tar zxf %{SOURCE38} -C %{_builddir}/
+tar zxf %{SOURCE39} -C %{_builddir}/
 
 %install
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib
-for i in v2.1.1 v2.3 v2.4 v2.6 v2.9 v2.14 v2.15 v2.18.5 v2.20 v2.21 v2.22 v2.23 v2.24 v2.25 v2.26 v2.27 v2.28 v2.29 v2.30 v2.31 v2.32.1 v2.33 v2.34 v2.35.5 v2.36 v2.37.1 v2.37.3 v2.38 v2.38.1 v2.39 v2.40 v2.41 v2.42 v2.43 v2.44 v2.45 %{version};do
+for i in v2.1.1 v2.3 v2.4 v2.6 v2.9 v2.14 v2.15 v2.18.5 v2.20 v2.21 v2.22 v2.23 v2.24 v2.25 v2.26 v2.27 v2.28 v2.29 v2.30 v2.31 v2.32.1 v2.33 v2.34 v2.35.5 v2.36 v2.37.1 v2.37.3 v2.38 v2.38.1 v2.39 v2.40 v2.41 v2.42 v2.43 v2.44 v2.45 v2.45.1 %{version};do
 	rm -rf %{_builddir}/%{name}-$i/modules/Widevine
 	cp -r %{_builddir}/%{name}-$i $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i
 	cp %{SOURCE28} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i/
@@ -130,6 +132,54 @@ find /opt/kaltura/web/html5/html5lib -type d -name cache -exec chown -R 48 {} \;
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Tue Aug 2 2016 Jess Portnoy <jess.portnoy@kaltura.com> - v2.46-1
+- FEC-5691 - Chrome cast - Different events are sent when you activate casting via Google Cast or via Chromecast plugin
+- FEC-5762 - Chrome cast - Kanalony - Event 99 is sent duplicated
+- FEC-5773 - Chrome cast - Replay is not working in playlist with auto-continiue
+- FEC-5586 - Support captions on chromecast
+- FEC-5796 - Bug with 'monitorEvent' event
+- SUP-8163 - iPad video issue when switvhing tabs
+- FEC-5795 - Playlist: Scrubber jumps when choosing flavor selector after performing change media
+- FEC-5794 - incorrect uDRM play manifest requested on Edge
+- FEC-5792 - Mobile skin - Regression - captions is shown in both smart containers
+- FEC-5792 - Mobile skin - Regression - captions is shown in both smart containers
+- FEC-5791 - Mobile skin - custom style - plugin's name in smart container
+- FEC-5790 - Mobile skin - Custom spinner is not shown on mobiles
+- FEC-5768 - Native Android - Player with OTT skin is shown with big icons and not in their loacation
+- FEM-592 - screen flashes when control bar appears and disappears or when clicking play button to replay playback
+- FEM-595 - flavor selector icon is displayed on the playing video
+- FEC-4618 - DFP pre-roll : Ad new page is not ed upon clicking on Ad in Android
+- FEC-5777 - Mobile skin :Switch caption button is not presented
+- FEC-5787 - Mobile skin - Playhead is too big when player has custom style
+- FEC-5775 - Player flag button - flag menu is cut on horizontal display
+- FEC-5723 - Native iOS - Incorrect end time of video while dragging till the end
+- FEC-5737 - Watermark overlaps on the control bar on Lenovo Yoga tab
+- FEC-5740 - Mobile skin - Unable to continue the AD, after you back from DFP's site
+- FEC-5727 - Native iOS - Duration is shown at left top side when you click on any plugin
+- FEC-5734 - Native iOS - Plugins in smart container are shown cut
+- FEC-5730 - Native iOS -- Unable to Copy player URL from Share plugin on iPhone
+- FEC-5767 - Mobile skin :Back button in the incorrect place
+- FEC-5822 - Mobile skin - Audio entry destroys the player
+- FEC-5809 - DFP: Lean more is not clickable on iPad
+- FEC-5808 - Lecture capture: Time, Fullscreen btn & Stream selector are misaligned when video not played on android
+- FEC-5807 - Vast with bumper: "Play" button appears after pre-roll during bumper on Android
+- FEC-5768 - Native Android - Player with OTT skin is shown with big icons and not in their loacation
+- FEC-5801 - DFP pre-roll with enabled controls - pause doesn't works during Ad
+- FEC-5823 - Chromecast - Playhead is not moving when you seek in Pause state
+- FEC-5820 - Chromecast - when video finishes to play, the Playhead has a gap of 3-4px
+- FEC-5801 - DFP pre-roll with enabled controls - pause doesn't works during Ad
+- FEC-5829 - Chromecast - playlist - back/foreword buttons appears on TV
+- FEC-5809 - DFP: Lean more is not clickable on iPad
+- FEC-5835 - Chromecast -DFP preroll - AD is not playing before the video (is playing after a video, as post roll)
+- FEC-5847 - Add audio selector plugin to studio
+- FEC-5835 - Chromecast -DFP preroll - AD is not playing before the video (is playing after a video, as post roll)
+- FEC-5849 - Chromecast: receiver logo displayed over player area during playing from MAC
+- FEC-5852 - Regression:Kaltura Live with DVR: DVR scrubber is shown at left side of a player on MS edge instead of right
+- Chromecast ui/x
+- Support studio mobile simulation mode
+- Mobile skin disabled by default
+- block video tag poster for user agent cordova SDK (mobile devices)
+
 * Tue Jul 19 2016 Jess Portnoy <jess.portnoy@kaltura.com> - v2.45.1-1
 - FEC-5792 - Mobile skin - Regression - captions is shown in both smart containers
 - FEC-5792 - Mobile skin - Regression - captions is shown in both smart containers
