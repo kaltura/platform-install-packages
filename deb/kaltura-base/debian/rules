@@ -13,6 +13,7 @@ KMC_LOGIN_VERSION ?= v$(shell egrep '^KMC_LOGIN_MINUS_V_VERSION=' $(RC_FILE) | c
 KDP3WRAPPER_VERSION ?=$(shell egrep '^KDP3WRAPPER_VERSION=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
 include ../includes/build-revision.mk
 archive := $(SOURCE_PACKAGING_DIR)/$(KALTURA_SERVER_VERSION).zip 
+clientlibs_archive := $(SOURCE_PACKAGING_DIR)/clients-generator-$(KALTURA_SERVER_VERSION).zip 
 tree := server-$(KALTURA_SERVER_VERSION)
 
 clean:
@@ -22,9 +23,12 @@ clean:
 
 $(archive):
 	~/sources/platform-install-packages/build/package_kaltura_core.sh	
+	~/sources/platform-install-packages/build/package_kaltura_clients-generator.sh	
 
 $(tree): $(archive)
 	unzip -qq -o $(archive)
+	unzip -qq -o $(clientlibs_archive)
+	mv clients-generator-$(KALTURA_SERVER_VERSION) $(tree)/clients-generator
 
 build: $(tree)
 
@@ -81,6 +85,7 @@ binary-indep: install
 	sed -i "s@^\(params.mediaInfoCmd\)\s*=.*@\1=mediainfo@" $(tree)/configurations/batch/batch.ini.template
 	sed -i "s@^\(params.mencderCmd\)\s*=.*@\1=mencoder@" $(tree)/configurations/batch/batch.ini.template
 	tar zxf debian/entry_and_uiconf_templates.tar.gz -C $(KALTURA_PREFIX)/web/content 
+	mv $(tree)/clients-generator $(KALTURA_PREFIX)/
 	mv $(tree)/* $(KALTURA_PREFIX)/app/
 	dh_install $(KALTURA_PREFIX)
 	dh_install etc/profile.d

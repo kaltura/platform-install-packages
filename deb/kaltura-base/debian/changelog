@@ -1,3 +1,10 @@
+kaltura-base (11.20.0-2) kajam; urgency=low
+
+  * SUP-7827 - Access control is not being set by default
+  * SUP-8669 - Possible Sphynx issue- When using guest KS, restricted entry is not returned when doing baseEntry->get (expected) but DOES return when baseEntry->List (not expected)
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Tue, 02 Aug 2016 18:45:43 +0000
+
 kaltura-base (11.20.0-1) kajam; urgency=low
 
   * Switching to 11.20.0
