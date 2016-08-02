@@ -250,7 +250,7 @@ When query cache is enabled, the server intelligently chooses between master / s
 ```
 # rpm -Uhv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
 # yum install kaltura-sphinx kaltura-postinst
-# /opt/kaltura/bin/kaltura-sphinx-config.sh
+# /opt/kaltura/bin/kaltura-sphinx-confing.sh
 ```
 
 It is strongly recommended that you install at least 2 Sphinx nodes for redundancy.
@@ -340,7 +340,8 @@ https://github.com/kaltura/nginx-vod-module/
 
 Installation:
 ```
-yum install kaltura-nginx kaltura-postinst
+yum install kaltura-nginx kaltura-base kaltura-postinst
+/opt/kaltura/bin/kaltura-base-config.sh
 /opt/kaltura/bin/kaltura-nginx-config.sh
 ```
 
