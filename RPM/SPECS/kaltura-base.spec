@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 11.20.0
-Release: 8
+Version: 11.21.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -313,6 +313,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Thu Aug 4 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 11.21.0-1
+- Ver Bounce to 11.21.0
+
 * Tue Aug 2 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 11.20.0-8
 - SUP-7827 - Access control is not being set by default
 - SUP-8669 - Possible Sphynx issue- When using guest KS, restricted entry is not returned when doing baseEntry->get (expected) but DOES return when baseEntry->List (not expected)
