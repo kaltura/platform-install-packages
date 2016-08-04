@@ -35,6 +35,8 @@ wget $NGINX_VTS_URI -O$RPM_SOURCES_DIR/nginx-module-vts-$NGINX_VTS_VERSION.zip
 echo "Packaged into $RPM_SOURCES_DIR/nginx-module-vts-$NGINX_VTS_VERSION.zip"
 wget $NGINX_URI -O$RPM_SOURCES_DIR/kaltura-nginx-$NGINX_VERSION.tar.gz
 echo "Packaged into $RPM_SOURCES_DIR/kaltura-nginx-$NGINX_VERSION.tar.gz"
+wget $NGX_AWS_AUTH_URI -O$RPM_SOURCES_DIR/ngx_aws_auth-$NGX_AWS_AUTH_VERSION.zip
+echo "Packaged into $RPM_SOURCES_DIR/ngx_aws_auth-$NGX_AWS_AUTH_VERSION.zip"
 
 if [ -x "`which rpmbuild 2>/dev/null`" ];then
 	rpmbuild -ba $RPM_SPECS_DIR/kaltura-nginx.spec

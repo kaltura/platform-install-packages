@@ -163,6 +163,10 @@ KALTURA_NGINX_SECURE_TOKEN_URI="https://github.com/kaltura/nginx-secure-token-mo
 NGINX_VERSION=1.8.1
 NGINX_URI="http://nginx.org/download/nginx-$NGINX_VERSION.tar.gz"
 
+# Nginx AWS authentication module. Not pulling from source's repo due to 2.0.0 release not created yet, and don't want to use master.
+NGX_AWS_AUTH_VERSION="2.0.0"
+NGX_AWS_AUTH_URI="https://github.com/doubleshot/ngx_aws_auth/archive/$NGX_AWS_AUTH_VERSION.zip"
+
 # Kaltura Streaming lib build vars:
 KALTURA_MEDIASERVER_VERSION="3.2.0"
 KALTURA_MEDIASERVER_URI="https://github.com/kaltura/media-server/releases/download/rel-$KALTURA_MEDIASERVER_VERSION/KalturaWowzaServer-install-$KALTURA_MEDIASERVER_VERSION.zip"
