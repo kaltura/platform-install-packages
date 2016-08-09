@@ -1,3 +1,9 @@
+kaltura-base (11.21.0-1) kajam; urgency=low
+
+  * Switching to 11.21.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Tue, 09 Aug 2016 13:40:14 +0000
+
 kaltura-base (11.20.0-2) kajam; urgency=low
 
   * SUP-7827 - Access control is not being set by default
