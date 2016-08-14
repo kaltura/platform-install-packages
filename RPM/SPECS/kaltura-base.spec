@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 11.21.0
-Release: 5
+Release: 6
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -313,6 +313,14 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Fri Aug 12 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 11.21.0-6
+- SUP-8019 - caption URL with 404 error gets set as the caption URL for the entry using bulk
+- SUP-8470 - Thumbnail Preview Displayed Direction 
+- SUP-4381 - Akamai live stream - deletion process inquiry
+- PLAT-5797 - Distribution is happening before entry is ready
+- PLAT-5742 - Player warm load gets all cue points with no filter so big polls will "kill" the player 
+- PLAT-5878 - scheduleEventResource set on recurring event isn't copied to child recurrences
+
 * Thu Aug 4 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 11.21.0-1
 - Ver Bounce to 11.21.0
 
