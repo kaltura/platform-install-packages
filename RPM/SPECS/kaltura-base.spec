@@ -6,12 +6,12 @@
 %define confdir %{prefix}/app/configurations
 %define logdir %{prefix}/log
 %define webdir %{prefix}/web
-%define codename Kajam 
+%define codename Lynx 
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 11.21.0
-Release: 6
+Version: 12.0.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -313,6 +313,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Aug 15 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 12.0.0-1
+- Ver Bounce to 12.0.0
+
 * Fri Aug 12 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 11.21.0-6
 - SUP-8019 - caption URL with 404 error gets set as the caption URL for the entry using bulk
 - SUP-8470 - Thumbnail Preview Displayed Direction 
