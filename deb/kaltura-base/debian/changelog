@@ -1,3 +1,14 @@
+kaltura-base (11.21.0-2) kajam; urgency=low
+
+  * SUP-8019 - caption URL with 404 error gets set as the caption URL for the entry using bulk
+  * SUP-8470 - Thumbnail Preview Displayed Direction 
+  * SUP-4381 - Akamai live stream - deletion process inquiry
+  * PLAT-5797 - Distribution is happening before entry is ready
+  * PLAT-5742 - Player warm load gets all cue points with no filter so big polls will "kill" the player 
+  * PLAT-5878 - scheduleEventResource set on recurring event isn't copied to child recurrences
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Sun, 14 Aug 2016 16:16:11 +0000
+
 kaltura-base (11.21.0-1) kajam; urgency=low
 
   * Switching to 11.21.0

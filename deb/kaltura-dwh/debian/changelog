@@ -1,3 +1,9 @@
+kaltura-dwh (11.3.0-2) kajam; urgency=low
+
+  * Cleaner fix for https://github.com/kaltura/platform-install-packages/pull/545 
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Tue, 09 Aug 2016 13:57:50 +0000
+
 kaltura-dwh (11.3.0-1) kajam; urgency=low
 
   * Add last month dates to the DWH setup to avoid partition count issues.
