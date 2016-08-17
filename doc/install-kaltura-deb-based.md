@@ -7,7 +7,7 @@ The processes was tested on Debian 8 and Ubuntu 14.04 but is expected to work on
 [Kaltura Inc.](http://corp.kaltura.com) also provides commercial solutions and services including pro-active platform monitoring, applications, SLA, 24/7 support and professional services. If you're looking for a commercially supported video platform  with integrations to commercial encoders, streaming servers, eCDN, DRM and more - Start a [Free Trial of the Kaltura.com Hosted Platform](http://corp.kaltura.com/free-trial) or learn more about [Kaltura' Commercial OnPrem Edition™](http://corp.kaltura.com/Deployment-Options/Kaltura-On-Prem-Edition). Please note that this service in only offered for RHEL based distros. 
 
 #### Table of Contents
-[Prerequites](https://github.com/kaltura/platform-install-packages/blob/master/doc/pre-requisites.md)
+[Prerequisites](https://github.com/kaltura/platform-install-packages/blob/master/doc/pre-requisites.md)
 
 [Step-by-step Installation](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-deb-based.md#step-by-step-installation)
 
