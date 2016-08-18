@@ -268,7 +268,7 @@ Please select one of the following options [0]:
 		if [ -f "$BASE_DIR/apps/studio/$HTML5_STUDIO_VER/studio.template.ini" ];then
 			sed -e "s#@HTML5_STUDIO_VER@#$HTML5_STUDIO_VER#g" -e "s#@HTML5_VER@#$HTML5_VER#g" -e "s#@CDN_HOST@#$KALTURA_VIRTUAL_HOST_NAME#g" $BASE_DIR/apps/studio/$HTML5_STUDIO_VER/studio.template.ini > $BASE_DIR/apps/studio/$HTML5_STUDIO_VER/studio.ini		      
 		fi
-		if [ -r "$BASE_DIR/apps/studio/$STUDIO_VER/studio.ini" ];then
+		if [ -r "$BASE_DIR/apps/studio/$HTML5_STUDIO_VER/studio.ini" ];then
 			php $BASE_DIR/app/deployment/uiconf/deploy_v2.php --user=www-data --ini=$BASE_DIR/apps/studio/$HTML5_STUDIO_VER/studio.ini >> /dev/null
 			chown -R $APACHE_USER.$KALTURA_GROUP $WEB_DIR/content/generatedUiConf/
 			sed -i "s@^\(studio_version\s*=\)\(.*\)@\1 $HTML5_STUDIO_VER@g" -i $BASE_DIR/app/configurations/local.ini
