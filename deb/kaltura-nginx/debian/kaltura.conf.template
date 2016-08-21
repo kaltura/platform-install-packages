@@ -4,11 +4,12 @@
 		vod_upstream_location /kalapi_proxy;
 		vod_upstream_extra_args "pathOnly=1";
 
-		# shared memory zones
-		vod_metadata_cache moov_cache 512m;
-		vod_path_mapping_cache mapping_cache 64m;
-		vod_response_cache response_cache 64m;
-		vod_performance_counters perf_counters;
+	        # shared memory zones
+        	vod_metadata_cache metadata_cache 512m;
+	        vod_mapping_cache mapping_cache 64m;
+        	vod_response_cache response_cache 64m;
+	        vod_performance_counters perf_counters;
+
 
 		# common file caching / aio
 		open_file_cache max=1000 inactive=5m;
