@@ -1,3 +1,9 @@
+kaltura-base (12.0.0-1) lynx; urgency=low
+
+  * Switching to 12.0.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 15 Aug 2016 13:55:01 +0000
+
 kaltura-base (11.21.0-2) kajam; urgency=low
 
   * SUP-8019 - caption URL with 404 error gets set as the caption URL for the entry using bulk
