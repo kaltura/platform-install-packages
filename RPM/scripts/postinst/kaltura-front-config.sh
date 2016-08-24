@@ -191,7 +191,7 @@ WARNING: self signed cerificate detected. Will set settings.clientConfig.verifyS
 		sed -i "s^SSLCACertificateFile @SSL_CERTIFICATE_CHAIN_FILE@^SSLCACertificateFile $CHAIN_FILE^" $MAIN_APACHE_CONF
 	else
 		CA_FILE="NO_CA"
-		sed -i "s^SSLCACertificateFile @SSL_CERTIFICATE_CA_FILE@^#SSLCACertificateFile @SSL_CERTIFICATE_CA_FILE@^" $MAIN_APACHE_CONF
+		sed -i "s^SSLCACertificateFile @SSL_CERTIFICATE_CHAIN_FILE@^#SSLCACertificateFile @SSL_CERTIFICATE_CHAIN_FILE@^" $MAIN_APACHE_CONF
 	fi
 	echo "IS_SSL=y" >> $RC_FILE 
 	echo "CRT_FILE=$CRT_FILE" >> $RC_FILE
