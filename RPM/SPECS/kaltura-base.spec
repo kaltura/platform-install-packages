@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 12.0.0
-Release: 8
+Release: 9
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -313,6 +313,10 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Sun Aug 28 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 12.0.0-9
+- PLAT-5747 - Recurrences aren't created from recurring event 
+- SUP-8866 - YouTube Distributor 
+
 * Mon Aug 15 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 12.0.0-1
 - Ver Bounce to 12.0.0
 
