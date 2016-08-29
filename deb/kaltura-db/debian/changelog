@@ -1,3 +1,9 @@
+kaltura-db (12.0.0-1) lynx; urgency=low
+
+  * Correctly set studio.ini and run uiconf deployment for it.
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Fri, 06 Nov 2015 12:52:51 +0000
+
 kaltura-db (11.1.0-1) UNRELEASED; urgency=low
 
   * Replace hardcoded /opt/kaltura/app with $APP_DIR.

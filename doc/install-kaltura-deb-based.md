@@ -162,6 +162,12 @@ And install as described above.
 
 ## Upgrade Kaltura
 *This will only work if the initial install was using this packages based install, it will not work for old Kaltura deployments using the PHP installers*
+
+Edit /etc/apt/sources.list.d/kaltura.list so that it reads:
+```
+deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/debian lynx main
+```
+
 ```bash
 # aptitude update
 # aptitude install ~Nkaltura
@@ -176,6 +182,7 @@ Use this in cases where you want to clear the database and start from fresh.
 # /opt/kaltura/bin/kaltura-drop-db.sh
 # aptitude purge ~Nkaltura
 # rm -rf /opt/kaltura
+# rm -rf /etc/kaltura.d
 ```
 
 ## Troubleshooting

@@ -416,6 +416,11 @@ Kaltura supports commercial encoders and streaming servers too. For more informa
 
 ### Upgrade Kaltura
 
+Edit /etc/apt/sources.list.d/kaltura.list so that it reads:
+```
+deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/debian lynx main
+```
+
 On front machines:
 ```
 # dpkg-reconfigure kaltura-base

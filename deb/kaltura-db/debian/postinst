@@ -1,4 +1,4 @@
-#!/bin/bash - 
+#!/bin/bash -
 #===============================================================================
 #          FILE: kaltura-db-config.sh
 #         USAGE: ./kaltura-db-config.sh 
@@ -15,20 +15,63 @@
 #===============================================================================
 #set -o nounset                              # Treat unset variables as an error
 
+deploy_kmc_and_studio()
+{
+	HTML5_DIR=`ls -ld $BASE_DIR/web/html5/html5lib/v* 2>/dev/null|awk -F " " '{print $NF}' |tail -1`
+	HTML5_VER=`basename $HTML5_DIR`
+	HTML5_STUDIO_DIR=`ls -ld $BASE_DIR/apps/studio/v* 2>/dev/null|awk -F " " '{print $NF}' |tail -1`
+	HTML5_STUDIO_VER=`basename $HTML5_STUDIO_DIR`
+	if [ -f "$BASE_DIR/apps/studio/$HTML5_STUDIO_VER/studio.template.ini" ];then
+		sed -e "s#@HTML5_STUDIO_VER@#$HTML5_STUDIO_VER#g" -e "s#@HTML5_VER@#$HTML5_VER#g" -e "s#@CDN_HOST@#$KALTURA_VIRTUAL_HOST_NAME#g" $BASE_DIR/apps/studio/$HTML5_STUDIO_VER/studio.template.ini > $BASE_DIR/apps/studio/$HTML5_STUDIO_VER/studio.ini		      
+	fi
+	if [ -r "$BASE_DIR/apps/studio/$HTML5_STUDIO_VER/studio.ini" ];then
+		php $BASE_DIR/app/deployment/uiconf/deploy_v2.php --user=www-data --ini=$BASE_DIR/apps/studio/$HTML5_STUDIO_VER/studio.ini >> /dev/null
+		chown -R $APACHE_USER.$KALTURA_GROUP $WEB_DIR/content/generatedUiConf/
+		sed -i "s@^\(studio_version\s*=\)\(.*\)@\1 $HTML5_STUDIO_VER@g" -i $BASE_DIR/app/configurations/local.ini
+	fi
+
+	KMC_VERSION=`grep "^kmc_version" $APP_DIR/configurations/local.ini|awk -F "=" '{print $2}'|sed 's@\s*@@g'`
+	echo -e "${BRIGHT_BLUE}Generating UI confs..${NORMAL}"
+	php $APP_DIR/deployment/uiconf/deploy_v2.php --ini=$WEB_DIR/flash/kmc/$KMC_VERSION/config.ini --user=www-data >> $LOG_DIR/deploy_v2.log  2>&1
+	STUDIO_VERSION=`grep "^studio_version" $APP_DIR/configurations/local.ini|awk -F "=" '{print $2}'|sed 's@\s*@@g'`
+	if [ -r "$BASE_DIR/apps/studio/$STUDIO_VERSION/studio.ini" ];then
+		echo -e "${BRIGHT_BLUE}Generating Studio UI confs..${NORMAL}"
+		php $APP_DIR/deployment/uiconf/deploy_v2.php --ini=$BASE_DIR/apps/studio/$STUDIO_VERSION/studio.ini --user=www-data >> $LOG_DIR/deploy_v2.log  2>&1
+	fi
+	chown -R www-data.kaltura $WEB_DIR/content
+	if [ -d $APP_DIR/deployment/updates/scripts/patches ];then
+		for i in $APP_DIR/deployment/updates/scripts/patches/*.sh;do
+			$i
+		done
+	fi
+	find  $WEB_DIR/content/generatedUiConf -type d -exec chmod 775 {} \;
+
+	set +e
+	rm -rf $BASE_DIR/cache/*
+
+
+}
+
+RC_FILE=/etc/kaltura.d/system.ini
+if [ ! -r "$RC_FILE" ];then
+	echo -e "${BRIGHT_RED}ERROR: could not find $RC_FILE so, exiting..${NORMAL}"
+	exit 2
+fi
+. $RC_FILE
+KALTURA_FUNCTIONS_RC=$BASE_DIR/bin/kaltura-functions.rc
+if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
+	echo "Could not find $KALTURA_FUNCTIONS_RC so, exiting.."
+	exit 3
+fi
+. $KALTURA_FUNCTIONS_RC
+
+if [ -n "$2" ];then
+	deploy_kmc_and_studio
+	exit $?
+fi
+
 if [ "$1" = "configure" ]; then
 	. /usr/share/debconf/confmodule
-	RC_FILE=/etc/kaltura.d/system.ini
-	if [ ! -r "$RC_FILE" ];then
-		echo -e "${BRIGHT_RED}ERROR: could not find $RC_FILE so, exiting..${NORMAL}"
-		exit 2
-	fi
-	. $RC_FILE
-	KALTURA_FUNCTIONS_RC=$BASE_DIR/bin/kaltura-functions.rc
-	if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
-		echo "Could not find $KALTURA_FUNCTIONS_RC so, exiting.."
-		exit 3
-	fi
-	. $KALTURA_FUNCTIONS_RC
 	DB_ACTIONS_RC=$BASE_DIR/bin/db_actions.rc
 	if [ ! -r "$DB_ACTIONS_RC" ];then
 		echo -e "${BRIGHT_RED}ERROR: could not find $DB_ACTIONS_RC so, exiting..${NORMAL}"
@@ -193,25 +236,7 @@ EOF
 	# force KMC login via HTTPs.
 		php $APP_DIR/deployment/base/scripts/insertPermissions.php -d $APP_DIR/deployment/permissions/ssl/ > /dev/null 2>&1
 	fi
-
-	KMC_VERSION=`grep "^kmc_version" $APP_DIR/configurations/local.ini|awk -F "=" '{print $2}'|sed 's@\s*@@g'`
-	echo -e "${BRIGHT_BLUE}Generating UI confs..${NORMAL}"
-	php $APP_DIR/deployment/uiconf/deploy_v2.php --ini=$WEB_DIR/flash/kmc/$KMC_VERSION/config.ini --user=www-data >> $LOG_DIR/deploy_v2.log  2>&1
-	STUDIO_VERSION=`grep "^studio_version" $APP_DIR/configurations/local.ini|awk -F "=" '{print $2}'|sed 's@\s*@@g'`
-	if [ -r "$BASE_DIR/apps/studio/$STUDIO_VERSION/studio.ini" ];then
-		echo -e "${BRIGHT_BLUE}Generating Studio UI confs..${NORMAL}"
-		php $APP_DIR/deployment/uiconf/deploy_v2.php --ini=$BASE_DIR/apps/studio/$STUDIO_VERSION/studio.ini --user=www-data >> $LOG_DIR/deploy_v2.log  2>&1
-	fi
-	chown -R www-data.kaltura $WEB_DIR/content
-	if [ -d $APP_DIR/deployment/updates/scripts/patches ];then
-		for i in $APP_DIR/deployment/updates/scripts/patches/*.sh;do
-			$i
-		done
-	fi
-	find  $WEB_DIR/content/generatedUiConf -type d -exec chmod 775 {} \;
-
-	set +e
-	rm -rf $BASE_DIR/cache/*
+	deploy_kmc_and_studio
 	rm -f $APP_DIR/log/kaltura-*.log
 
 
