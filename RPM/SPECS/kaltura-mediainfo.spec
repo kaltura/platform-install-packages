@@ -17,7 +17,6 @@ BuildRequires:  pkgconfig(zlib)
 BuildRequires:  libtool
 BuildRequires:  automake
 BuildRequires:  autoconf
-BuildRequires:  ImageMagick
 Requires:  kaltura-libmediainfo = %{version}
 Requires: libzen = %{libzen_version}
 
