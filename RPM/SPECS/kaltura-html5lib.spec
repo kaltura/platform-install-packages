@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.46
+Version: v2.47
 Release: 1
 Epoch:0 
 License: AGPLv3+
@@ -46,6 +46,7 @@ Source36: kaltura-html5lib-v2.43.tar.gz
 Source37: kaltura-html5lib-v2.44.tar.gz
 Source38: kaltura-html5lib-v2.45.tar.gz
 Source39: kaltura-html5lib-v2.45.1.tar.gz
+Source40: kaltura-html5lib-v2.46.tar.gz
 Source28: simplePhpXMLProxy.php
 
 URL: https://github.com/kaltura/mwEmbed 
@@ -107,10 +108,11 @@ tar zxf %{SOURCE36} -C %{_builddir}/
 tar zxf %{SOURCE37} -C %{_builddir}/
 tar zxf %{SOURCE38} -C %{_builddir}/
 tar zxf %{SOURCE39} -C %{_builddir}/
+tar zxf %{SOURCE40} -C %{_builddir}/
 
 %install
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib
-for i in v2.1.1 v2.3 v2.4 v2.6 v2.9 v2.14 v2.15 v2.18.5 v2.20 v2.21 v2.22 v2.23 v2.24 v2.25 v2.26 v2.27 v2.28 v2.29 v2.30 v2.31 v2.32.1 v2.33 v2.34 v2.35.5 v2.36 v2.37.1 v2.37.3 v2.38 v2.38.1 v2.39 v2.40 v2.41 v2.42 v2.43 v2.44 v2.45 v2.45.1 %{version};do
+for i in v2.1.1 v2.3 v2.4 v2.6 v2.9 v2.14 v2.15 v2.18.5 v2.20 v2.21 v2.22 v2.23 v2.24 v2.25 v2.26 v2.27 v2.28 v2.29 v2.30 v2.31 v2.32.1 v2.33 v2.34 v2.35.5 v2.36 v2.37.1 v2.37.3 v2.38 v2.38.1 v2.39 v2.40 v2.41 v2.42 v2.43 v2.44 v2.45 v2.45.1 v2.46 %{version};do
 	rm -rf %{_builddir}/%{name}-$i/modules/Widevine
 	cp -r %{_builddir}/%{name}-$i $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i
 	cp %{SOURCE28} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i/
@@ -132,6 +134,14 @@ find /opt/kaltura/web/html5/html5lib -type d -name cache -exec chown -R 48 {} \;
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Mon Sep 5 2016 Jess Portnoy <jess.portnoy@kaltura.com> - v2.47-1
+- FEC-5898 - Set hls.js to be on by default
+- SUP-8648 - Live stream doesn't play after the first click with thumbnail embed
+- SUP-8683 - Player doesn't display caption files alphabetically
+- SUP-8704 - Switching Flavors on HLSJS Playback Beahviour
+- SUP-8724 - Hovering menu blocking info tab
+- SUP-7848 - Enable DVR in Manual live streams
+
 * Tue Aug 2 2016 Jess Portnoy <jess.portnoy@kaltura.com> - v2.46-1
 - FEC-5691 - Chrome cast - Different events are sent when you activate casting via Google Cast or via Chromecast plugin
 - FEC-5762 - Chrome cast - Kanalony - Event 99 is sent duplicated

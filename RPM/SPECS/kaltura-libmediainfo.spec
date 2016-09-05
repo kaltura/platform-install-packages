@@ -4,7 +4,7 @@
 
 Name:           kaltura-libmediainfo
 Version:        0.7.61
-Release:        2
+Release:        3
 Summary:        Library for supplies technical and tag information about a video or audio file
 
 Group:          System Environment/Libraries
@@ -18,6 +18,7 @@ BuildRequires:  pkgconfig(zlib)
 BuildRequires:  doxygen
 BuildRequires:  pkgconfig(libcurl)
 #BuildRequires:  pkgconfig(tinyxml2)
+Requires: libzen = %{libzen_version}
 
 Provides:       bundled(md5-plumb)
 

@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.31
-Release: 21
+Release: 23
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -82,6 +82,9 @@ find %{_sysconfdir}/logrotate.d -type l -name "kaltura_*" -exec rm {} \;
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Mon Sep 5 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.31-23
+- Use the kaltura-mediainfo package instead of mediainfo
+
 * Thu Aug 25 2016 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.31-21
 - https://github.com/kaltura/platform-install-packages/pull/562
 

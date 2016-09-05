@@ -1,7 +1,7 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmc
 Version: v5.40.3
-Release: 1
+Release: 2
 Summary: Kaltura Management Console
 
 Group: System Management	
@@ -83,6 +83,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Sep 5 2016 Jess Portnoy <jess.portnoy@kaltura.com> - v5.40.3-2
+- Ver bounce of HTML5 to v2.47
+
 * Tue Aug 2 2016 Jess Portnoy <jess.portnoy@kaltura.com> - v5.40.3-1
 - PLAT-5729 - Hide RTSP links from KMC as they are not supported
 - PLAT-5667 - Support Trimming & Clipping on Remote Storage

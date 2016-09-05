@@ -3,7 +3,7 @@
 
 Name:           kaltura-mediainfo
 Version:        0.7.61
-Release:        1
+Release:        3
 Summary:        Supplies technical and tag information about a video or audio file (CLI)
 
 License:        BSD
@@ -11,13 +11,15 @@ Group:          Applications/Multimedia
 URL:            http://mediaarea.net/MediaInfo
 Source0:        http://mediaarea.net/download/source/mediainfo/%{version}/mediainfo_%{version}.tar.bz2
 
-BuildRequires:  kaltura-libmediainfo >= %{version}
+BuildRequires:  kaltura-libmediainfo-devel >= %{version}
 BuildRequires:  pkgconfig(libzen) >= %{libzen_version}
 BuildRequires:  pkgconfig(zlib)
 BuildRequires:  libtool
 BuildRequires:  automake
 BuildRequires:  autoconf
 BuildRequires:  ImageMagick
+Requires:  kaltura-libmediainfo = %{version}
+Requires: libzen = %{libzen_version}
 
 %description
 MediaInfo CLI (Command Line Interface).

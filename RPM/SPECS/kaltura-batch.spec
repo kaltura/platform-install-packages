@@ -7,7 +7,7 @@
 Summary: Kaltura Open Source Video Platform - batch server 
 Name: kaltura-batch
 Version: 12.1.0
-Release: 1
+Release: 2
 License: AGPLv3+
 Group: Server/Platform 
 Source0: zz-%{name}.ini
@@ -15,7 +15,7 @@ Source1: kaltura-batch
 Source3: batch.ini.template 
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires: kaltura-base, kaltura-ffmpeg, kaltura-ffmpeg-aux, php, curl, httpd, sox, ImageMagick, kaltura-sshpass, php-pecl-memcache,  php-pecl-ssh2,php-pecl-apc,php-mcrypt,memcached,mediainfo, kaltura-segmenter, mod_ssl,kaltura-mencoder
+Requires: kaltura-base, kaltura-ffmpeg, kaltura-ffmpeg-aux, php, curl, httpd, sox, ImageMagick, kaltura-sshpass, php-pecl-memcache,  php-pecl-ssh2,php-pecl-apc,php-mcrypt,memcached,kaltura-mediainfo, kaltura-segmenter, mod_ssl,kaltura-mencoder
 #php-pecl-zendopcache
 %{?el7:Requires: php-pecl-zendopcache}
 #PreReq: httpd
@@ -72,7 +72,7 @@ fi
 %post
 # now replace tokens
 sed -i "s@^\(params.ImageMagickCmd\)\s*=.*@\1=%{_bindir}/convert@" $RPM_BUILD_ROOT%{batch_confdir}/batch.ini.template
-sed -i "s@^\(params.mediaInfoCmd\)\s*=.*@\1=%{_bindir}/mediainfo@" $RPM_BUILD_ROOT%{batch_confdir}/batch.ini.template
+sed -i "s@^\(params.mediaInfoCmd\)\s*=.*@\1=%{prefix}/bin/mediainfo@" $RPM_BUILD_ROOT%{batch_confdir}/batch.ini.template
 #sed 's#@APACHE_SERVICE@#httpd#g' -i %{prefix}/app/configurations/monit.avail/httpd.rc
 
 #ln -fs %{prefix}/app/configurations/monit.avail/httpd.rc %{prefix}/app/configurations/monit.d/httpd.rc
@@ -131,6 +131,9 @@ service httpd restart
 
 
 %changelog
+* Mon Sep 5 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 12.1.0-2
+- Use the kaltura-mediainfo package instead of mediainfo
+
 * Mon Aug 29 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 12.1.0-1
 - Ver Bounce to 12.1.0
 
