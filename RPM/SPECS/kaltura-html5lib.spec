@@ -3,51 +3,21 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
 Version: v2.47
-Release: 1
-Epoch:0 
+Release: 2
+Epoch: 0 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/mwEmbed/tarball/%{name}-%{version}.tar.gz 
-#Source1: LocalSettings.php
-Source2: kaltura-html5lib-v2.1.1.tar.gz
-Source3: kaltura-html5lib-v2.3.tar.gz
-Source4: kaltura-html5lib-v2.4.tar.gz
-Source5: kaltura-html5lib-v2.6.tar.gz
-Source6: kaltura-html5lib-v2.9.tar.gz
-Source7: kaltura-html5lib-v2.14.tar.gz
-Source8: kaltura-html5lib-v2.15.tar.gz
-Source9: kaltura-html5lib-v2.18.5.tar.gz
-Source10: kaltura-html5lib-v2.20.tar.gz
-Source11: kaltura-html5lib-v2.21.tar.gz
-Source12: kaltura-html5lib-v2.22.tar.gz
-Source13: kaltura-html5lib-v2.23.tar.gz
-Source14: kaltura-html5lib-v2.24.tar.gz
-Source15: kaltura-html5lib-v2.25.tar.gz
-Source16: kaltura-html5lib-v2.26.tar.gz
-Source17: kaltura-html5lib-v2.27.tar.gz
-Source18: kaltura-html5lib-v2.28.tar.gz
-Source19: kaltura-html5lib-v2.29.tar.gz
-Source20: kaltura-html5lib-v2.30.tar.gz
-Source21: kaltura-html5lib-v2.31.tar.gz
-Source22: kaltura-html5lib-v2.32.1.tar.gz
-Source23: kaltura-html5lib-v2.33.tar.gz
-Source24: kaltura-html5lib-v2.34.tar.gz
-Source25: kaltura-html5lib-v2.35.5.tar.gz
-Source26: kaltura-html5lib-v2.36.tar.gz
-Source27: kaltura-html5lib-v2.37.1.tar.gz
-Source31: kaltura-html5lib-v2.37.3.tar.gz
-Source29: kaltura-html5lib-v2.38.tar.gz
-Source30: kaltura-html5lib-v2.38.1.tar.gz
-Source32: kaltura-html5lib-v2.39.tar.gz
-Source33: kaltura-html5lib-v2.40.tar.gz
-Source34: kaltura-html5lib-v2.41.tar.gz
-Source35: kaltura-html5lib-v2.42.tar.gz
-Source36: kaltura-html5lib-v2.43.tar.gz
-Source37: kaltura-html5lib-v2.44.tar.gz
-Source38: kaltura-html5lib-v2.45.tar.gz
-Source39: kaltura-html5lib-v2.45.1.tar.gz
-Source40: kaltura-html5lib-v2.46.tar.gz
-Source28: simplePhpXMLProxy.php
+Source1: simplePhpXMLProxy.php
+Source2: kaltura-html5lib-v2.14.tar.gz
+Source3: kaltura-html5lib-v2.37.tar.gz
+Source4: kaltura-html5lib-v2.37.1.tar.gz
+Source5: kaltura-html5lib-v2.38.3.tar.gz
+Source6: kaltura-html5lib-v2.42.tar.gz
+Source7: kaltura-html5lib-v2.44.tar.gz
+Source8: kaltura-html5lib-v2.45.tar.gz
+Source9: kaltura-html5lib-v2.45.1.tar.gz
+Source10: kaltura-html5lib-v2.46.tar.gz
 
 URL: https://github.com/kaltura/mwEmbed 
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -79,43 +49,13 @@ tar zxf %{SOURCE7} -C %{_builddir}/
 tar zxf %{SOURCE8} -C %{_builddir}/
 tar zxf %{SOURCE9} -C %{_builddir}/
 tar zxf %{SOURCE10} -C %{_builddir}/
-tar zxf %{SOURCE11} -C %{_builddir}/
-tar zxf %{SOURCE12} -C %{_builddir}/
-tar zxf %{SOURCE13} -C %{_builddir}/
-tar zxf %{SOURCE14} -C %{_builddir}/
-tar zxf %{SOURCE15} -C %{_builddir}/
-tar zxf %{SOURCE16} -C %{_builddir}/
-
-tar zxf %{SOURCE17} -C %{_builddir}/
-tar zxf %{SOURCE18} -C %{_builddir}/
-tar zxf %{SOURCE19} -C %{_builddir}/
-tar zxf %{SOURCE20} -C %{_builddir}/
-tar zxf %{SOURCE21} -C %{_builddir}/
-tar zxf %{SOURCE22} -C %{_builddir}/
-tar zxf %{SOURCE23} -C %{_builddir}/
-tar zxf %{SOURCE24} -C %{_builddir}/
-tar zxf %{SOURCE25} -C %{_builddir}/
-tar zxf %{SOURCE26} -C %{_builddir}/
-tar zxf %{SOURCE27} -C %{_builddir}/
-tar zxf %{SOURCE29} -C %{_builddir}/
-tar zxf %{SOURCE30} -C %{_builddir}/
-tar zxf %{SOURCE31} -C %{_builddir}/
-tar zxf %{SOURCE32} -C %{_builddir}/
-tar zxf %{SOURCE33} -C %{_builddir}/
-tar zxf %{SOURCE34} -C %{_builddir}/
-tar zxf %{SOURCE35} -C %{_builddir}/
-tar zxf %{SOURCE36} -C %{_builddir}/
-tar zxf %{SOURCE37} -C %{_builddir}/
-tar zxf %{SOURCE38} -C %{_builddir}/
-tar zxf %{SOURCE39} -C %{_builddir}/
-tar zxf %{SOURCE40} -C %{_builddir}/
 
 %install
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib
-for i in v2.1.1 v2.3 v2.4 v2.6 v2.9 v2.14 v2.15 v2.18.5 v2.20 v2.21 v2.22 v2.23 v2.24 v2.25 v2.26 v2.27 v2.28 v2.29 v2.30 v2.31 v2.32.1 v2.33 v2.34 v2.35.5 v2.36 v2.37.1 v2.37.3 v2.38 v2.38.1 v2.39 v2.40 v2.41 v2.42 v2.43 v2.44 v2.45 v2.45.1 v2.46 %{version};do
+for i in v2.14  v2.37  v2.37.1  v2.38.3  v2.42  v2.44  v2.45  v2.45.1 v2.46 %{version};do
 	rm -rf %{_builddir}/%{name}-$i/modules/Widevine
 	cp -r %{_builddir}/%{name}-$i $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i
-	cp %{SOURCE28} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i/
+	cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i/
 	ln -sf %{prefix}/app/configurations/html5.php $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i/LocalSettings.php 
 	mkdir $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i/cache
 done
@@ -134,6 +74,10 @@ find /opt/kaltura/web/html5/html5lib -type d -name cache -exec chown -R 48 {} \;
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Tue Sep 6 2016 David Bezemer <david.bezemer@kaltura.com> - v2.47-2
+- remove obsolete old player versions
+- add missing player versions
+
 * Mon Sep 5 2016 Jess Portnoy <jess.portnoy@kaltura.com> - v2.47-1
 - FEC-5898 - Set hls.js to be on by default
 - SUP-8648 - Live stream doesn't play after the first click with thumbnail embed
