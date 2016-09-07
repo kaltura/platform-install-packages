@@ -1,3 +1,9 @@
+kaltura-kmc (5.40.3-2) lynx; urgency=low
+ 
+  * Version bounce to align with kaltura-html5lib v2.47.
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 05 Sep 2016 15:14:32 +0000
+
 kaltura-kmc (5.40.3-1) kajam; urgency=low
 
   * PLAT-5729 - Hide RTSP links from KMC as they are not supported

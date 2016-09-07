@@ -1,3 +1,9 @@
+kaltura-base (12.1.0-1) lynx; urgency=low
+
+  * Switching to 12.1.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 29 Aug 2016 15:07:45 +0000
+
 kaltura-base (12.0.0-2) lynx; urgency=low
 
   * PLAT-5747 - Recurrences aren't created from recurring event 

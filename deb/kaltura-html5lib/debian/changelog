@@ -1,3 +1,14 @@
+kaltura-html5lib (2.47-1) lynx; urgency=low
+
+  * FEC-5898 - Set hls.js to be on by default
+  * SUP-8648 - Live stream doesn't play after the first click with thumbnail embed
+  * SUP-8683 - Player doesn't display caption files alphabetically
+  * SUP-8704 - Switching Flavors on HLSJS Playback Beahviour
+  * SUP-8724 - Hovering menu blocking info tab
+  * SUP-7848 - Enable DVR in Manual live streams
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 05 Sep 2016 15:06:54 +0000
+
 kaltura-html5lib (2.46-1) kajam; urgency=low
 
   * FEC-5691 - Chrome cast - Different events are sent when you activate casting via Google Cast or via Chromecast plugin
