@@ -63,6 +63,12 @@ done
 rm -rf %{buildroot}
 
 %post
+if [ "$1" = 2 ];then
+	if [ -r /etc/kaltura.d/system.ini ];then
+		. /etc/kaltura.d/system.ini
+		echo 'update ui_conf set html5_url = "/html5/html5lib/%{version}/mwEmbedLoader.php" where html5_url like "%html5lib/v2.%" and tags like "%html5studio,player%"'|mysql -h$DB1_HOST -u $SUPER_USER -p$SUPER_USER_PASSWD -P$DB1_PORT $DB1_NAME
+	fi
+fi
 find /opt/kaltura/web/html5/html5lib -type d -name cache -exec chown -R 48 {} \; 
 
 %postun
@@ -74,6 +80,9 @@ find /opt/kaltura/web/html5/html5lib -type d -name cache -exec chown -R 48 {} \;
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Wed Sep 7 2016 Jess Portnoy <jess.portnoy@kaltura.com> - v2.47-2
+- Auto upgrade players ui conf to the latest version upon each upgrade
+
 * Tue Sep 6 2016 David Bezemer <david.bezemer@kaltura.com> - v2.47-2
 - remove obsolete old player versions
 - add missing player versions
