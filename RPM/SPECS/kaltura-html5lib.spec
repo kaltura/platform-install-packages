@@ -3,7 +3,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
 Version: v2.47
-Release: 2
+Release: 3
 Epoch: 0 
 License: AGPLv3+
 Group: Server/Platform 
@@ -66,7 +66,7 @@ rm -rf %{buildroot}
 if [ "$1" = 2 ];then
 	if [ -r /etc/kaltura.d/system.ini ];then
 		. /etc/kaltura.d/system.ini
-		echo 'update ui_conf set html5_url = "/html5/html5lib/%{version}/mwEmbedLoader.php" where html5_url like "%html5lib/v2.%" and tags like "%html5studio,player%"'|mysql -h$DB1_HOST -u $SUPER_USER -p$SUPER_USER_PASSWD -P$DB1_PORT $DB1_NAME
+		echo 'update ui_conf set html5_url = "/html5/html5lib/%{version}/mwEmbedLoader.php" where html5_url like "%html5lib/v2.%mwEmbedLoader.php"'|mysql -h$DB1_HOST -u $SUPER_USER -p$SUPER_USER_PASSWD -P$DB1_PORT $DB1_NAME
 	fi
 fi
 find /opt/kaltura/web/html5/html5lib -type d -name cache -exec chown -R 48 {} \; 

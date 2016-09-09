@@ -2,7 +2,7 @@
 Summary: Toolkit for RTMP streams
 Name: kaltura-rtmpdump
 Version: 2.3
-Release: 2 
+Release: 3
 License: GPLv2+
 Group: Applications/Internet
 URL: http://rtmpdump.mplayerhq.hu/

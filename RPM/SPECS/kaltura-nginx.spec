@@ -51,7 +51,7 @@ Requires(pre): pwdutils
 Summary: High performance web server customized for Kaltura VOD
 Name: kaltura-nginx
 Version: 1.8.1
-Release: 8
+Release: 9
 Vendor: Kaltura inc.
 URL: http://nginx.org/
 
@@ -76,6 +76,8 @@ License: 2-clause BSD-like license
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildRequires: zlib-devel
 BuildRequires: pcre-devel
+BuildRequires: kaltura-ffmpeg-devel
+Requires: kaltura-ffmpeg
 
 Provides: webserver
 Conflicts: nginx
@@ -106,6 +108,10 @@ unzip -o %{SOURCE13}
 
 
 %build
+LIBRARY_PATH=/opt/kaltura/ffmpeg-2.7.2/lib
+C_INCLUDE_PATH=/opt/kaltura/ffmpeg-2.7.2/include
+export LIBRARY_PATH C_INCLUDE_PATH
+
 ./configure \
         --prefix=%{_sysconfdir}/nginx \
         --sbin-path=%{_sbindir}/nginx \
@@ -150,6 +156,7 @@ unzip -o %{SOURCE13}
 make %{?_smp_mflags}
 %{__mv} %{_builddir}/nginx-%{version}/objs/nginx \
         %{_builddir}/nginx-%{version}/objs/nginx.debug
+
 ./configure \
         --prefix=%{_sysconfdir}/nginx \
         --sbin-path=%{_sbindir}/nginx \

@@ -26,7 +26,7 @@
 Summary: Utilities and libraries to record, convert and stream audio and video
 Name: kaltura-ffmpeg
 Version: 2.7.2 
-Release: 2
+Release: 4
 License: GPL
 Group: Applications/Multimedia
 URL: http://ffmpeg.org/
@@ -52,7 +52,7 @@ BuildRequires: xvidcore-devel
 %{!?_without_nut:BuildRequires: libnut-devel}
 %{!?_without_opencore_amr:BuildRequires: kaltura-libopencore-amr-devel}
 %{!?_without_openjpeg:BuildRequires: openjpeg-devel}
-%{!?_without_rtmp:BuildRequires: librtmp-devel}
+%{!?_without_rtmp:BuildRequires: kaltura-librtmp-devel}
 %{!?_without_schroedinger:BuildRequires: schroedinger-devel}
 %{!?_without_texi2html:BuildRequires: texi2html}
 %{!?_without_theora:BuildRequires: libogg-devel, libtheora-devel}
@@ -89,11 +89,11 @@ Requires: %{name} = %{version}
 Requires: imlib2-devel, SDL-devel, freetype-devel, zlib-devel, pkgconfig,kaltura-x264
 %{!?_without_a52dec:Requires: kaltura-a52dec-devel}
 %{!?_without_dc1394:Requires: libdc1394-devel}
-%{!?_without_faad:Requires: faad2-devel}
+#%{!?_without_faad:Requires: faad2-devel}
 %{!?_without_gsm:Requires: gsm-devel}
 %{!?_without_lame:Requires: kaltura-lame-devel}
 %{!?_without_openjpeg:Requires: openjpeg-devel}
-%{!?_without_rtmp:Requires: librtmp-devel}
+%{!?_without_rtmp:Requires: kaltura-librtmp-devel}
 %{!?_without_schroedinger:Requires: schroedinger-devel}
 %{!?_without_vorbis:Requires: libogg-devel, libvorbis-devel}
 %{!?_without_vpx:Requires: libvpx-devel}
