@@ -63,9 +63,9 @@ Output is logged to $BASE_DIR/dwh/logs/dwh_setup.log.${NORMAL}
 	newdates=($LDAYLM $LASTMO $FDAYCM $SDAYCM $LDAYLM $LASTMO $FDAYCM $LASTMO $FDAYCM $LASTMO $FDAYCM) 
 	
 	for ((i=0;i<${#olddates[@]};++i)); do
-		FILES=`grep -rl "${olddates[i]}" $BASE_DIR/dwh/ddl/`
+		FILES=`grep -rl "${olddates[i]}" $BASE_DIR/dwh/ddl/` || true
 		if [ -n "$FILES" ]; then
-            sed -i  "s/${olddates[i]}/${newdates[i]}/g" $FILES
+            		sed -i  "s/${olddates[i]}/${newdates[i]}/g" $FILES
 		fi
 	done
 
