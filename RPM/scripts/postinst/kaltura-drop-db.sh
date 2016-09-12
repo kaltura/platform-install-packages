@@ -59,5 +59,4 @@ for i in $DBS;do
 	echo -en "${CYAN}Removing $i..${NORMAL}" 
 	echo "drop database $i" | mysql -u$SUPER_USER -h$DB1_HOST -p$DBPASSWD -P$DB1_PORT ;
 done
-
-
+echo "${BRIGHT_GREEN} Successfully dropped kaltura databases and users"
