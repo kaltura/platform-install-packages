@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 12.1.0
-Release: 7
+Release: 8
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -313,6 +313,15 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Sep 12 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 12.1.0-8
+- PLAT-5105 - playManifest refactoring for live - delivery profile
+- PLAT-5778 - On playManifest, When Captions are available add them automatically in the packager request
+- PLAT-6024 - Live Delivery profile - enable overiding live delivery profiles per partner similar to how we work with VOD
+- PLAT-5907 - Add live delivery profile configuration in admin console partner configure page
+- SUP-8321 - Trimming VOD of a live entry results in two sources
+- SUP-8905 - Cross Kaltura distribution failing intermittently 
+- SUP-8016 - replacing media to a VOD entry results with adding instead of replacing
+
 * Mon Aug 29 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 12.1.0-1
 - Ver Bounce to 12.1.0
 
