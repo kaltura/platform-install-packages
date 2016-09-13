@@ -46,21 +46,21 @@ Output is logged to $BASE_DIR/dwh/logs/dwh_setup.log.${NORMAL}
 "
 	trap 'my_trap_handler "${LINENO}" ${$?}' ERR
 	# Define required dates
-	FDAYCURMONTH=$(date '+%Y%m%d' -d "-$((10#`date +%d`-1)) days")
-	SDAYCURMONTH=$(date '+%Y%m%d' -d "-$((10#$(date +%d)-2)) days")
-	LDAYLASTMONTH=$(date '+%Y%m%d' -d "-$(date +%d) days")
-	LASTMONTH=$(date '+%Y%m' -d "-$(date +%d) days")
-
+	FDAYCM=$(date '+%Y%m%d' -d "-$((10#`date +%d`-1)) days")
+	SDAYCM=$(date '+%Y%m%d' -d "-$((10#$(date +%d)-2)) days")
+	LDAYLM=$(date '+%Y%m%d' -d "-$(date +%d) days")
+	LASTMO=$(date '+%Y%m' -d "-$(date +%d) days")
+	
 	# Replace various old dates to avoid issues with partitions
-	olddates="p_20130831 p_201308 20130901 20130902 p_20131231 p_201312 20140101 p_201406 20140701 p_201510 20151101"
-	for olddate in $olddates; do
-	    FILES=`grep -rl $olddate`
-	    if [ -n "$FILES" ]; then
-	    	sed -i $FILES "s/$olddate/p_$LDAYLASTMONTH/g"
-	    fi
+	olddates=(20130831 201308 20130901 20130902 20131231 201312 20140101 201406 20140701 201510 20151101)
+	newdates=($LDAYLM $LASTMO $FDAYCM $SDAYCM $LDAYLM $LASTMO $FDAYCM $LASTMO $FDAYCM $LASTMO $FDAYCM) 
+	
+	for ((i=0;i<${#olddates[@]};++i)); do
+		FILES=`grep -rl "${olddates[i]}" $BASE_DIR/dwh/ddl/` || true
+		if [ -n "$FILES" ]; then
+            		sed -i  "s/${olddates[i]}/${newdates[i]}/g" $FILES
+		fi
 	done
-
-
 	$BASE_DIR/dwh/setup/dwh_setup.sh -u$SUPER_USER -k $BASE_DIR/pentaho/pdi/ -d$BASE_DIR/dwh -h$DWH_HOST -P$DWH_PORT -p$SUPER_USER_PASSWD | tee $BASE_DIR/dwh/logs/dwh_setup.log
 else
 cat << EOF
