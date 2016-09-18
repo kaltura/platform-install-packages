@@ -32,7 +32,7 @@ mv /tmp/server/configurations /tmp/server/configurations.git
 cp -rp /tmp/server/* $APP_DIR/
 cp -rp /tmp/server/.git $APP_DIR/
 KALTURA_VERSION=`rpm -q kaltura-base --queryformat %{version}`
-GITHUB_PLATFORM_INSTALL_PACKAGES_REPO_URL="https://github.com/kaltura/platform-install-packages/raw/Kajam-$KALTURA_VERSION"
+GITHUB_PLATFORM_INSTALL_PACKAGES_REPO_URL="https://github.com/kaltura/platform-install-packages/raw/Lynx-$KALTURA_VERSION"
 
 curl -L $GITHUB_PLATFORM_INSTALL_PACKAGES_REPO_URL/RPM/SOURCES/KDLOperatorFfmpeg1_1_1.php > $APP_DIR/infra/cdl/kdl/KDLOperatorFfmpeg1_1_1.php
 curl -L $GITHUB_PLATFORM_INSTALL_PACKAGES_REPO_URL/RPM/SOURCES/navigation.xml > $APP_DIR/admin_console/configs/navigation.xml
