@@ -25,8 +25,8 @@
 
 Summary: Utilities and libraries to record, convert and stream audio and video
 Name: kaltura-ffmpeg
-Version: 2.7.2 
-Release: 4
+Version: 3.1.3 
+Release: 1
 License: GPL
 Group: Applications/Multimedia
 URL: http://ffmpeg.org/
@@ -45,6 +45,7 @@ BuildRequires: schroedinger-devel
 BuildRequires: libtheora-devel
 BuildRequires: libvorbis-devel
 BuildRequires: xvidcore-devel
+BuildRequires: x265-devel
 %{!?_without_a52dec:BuildRequires: kaltura-a52dec-devel}
 %{!?_without_dc1394:BuildRequires: libdc1394-devel}
 %{!?_without_gsm:BuildRequires: gsm-devel}
@@ -72,6 +73,7 @@ BuildRequires: libtheora-devel
 BuildRequires: xvidcore-devel >= 1.3.2
 Requires:kaltura-a52dec,libass,kaltura-x264
 Requires: libvpx >= 1.3.0
+Requires: x265-libs
 
 %description
 FFmpeg is a very fast video and audio converter. It can also grab from a
@@ -140,6 +142,8 @@ export CFLAGS="%{optflags}"
     --enable-libtheora \
     --enable-libvorbis \
     --enable-libx264 \
+    --enable-libx265 \
+    --enable-avisynth \
     --enable-libxvid \
     --enable-filter=movie \
     --enable-avfilter \
@@ -258,6 +262,9 @@ fi
 %{base_prefix}-%{version}/share
 
 %changelog
+* Sun Sep 18 2016 Jess Portnoy <jess.portnoy@kaltura.com> - 3.1.3-1
+- 3.1.3 first build.
+
 * Thu Oct 8 2015 Jess Portnoy <jess.portnoy@kaltura.com> - 2.7.2-2
 - symlink ffprobe to /opt/kaltura/bin
 
