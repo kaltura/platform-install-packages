@@ -48,6 +48,7 @@ Build-Depends:
  libxvidcore-dev,
  libxvmc-dev,
  texi2html,
+ libx265-dev,
  yasm [any-amd64 any-i386],
  zlib1g-dev
 
@@ -75,6 +76,7 @@ Depends:
  libxvidcore4,
  libvorbis0a, 
  libvorbisenc2, 
+ libx265-87,
  libvorbisfile3
 Description: 
  FFmpeg is a very fast video and audio converter. It can also grab from a
