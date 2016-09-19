@@ -1,0 +1,10 @@
+--- ffmpeg-3.1.3/libavfilter/allfilters.c	2016-06-27 00:54:30.000000000 +0100
++++ ffmpeg313_patches/libavfilter/allfilters.c	2016-09-19 05:01:28.000000000 +0100
+@@ -307,6 +307,7 @@
+     REGISTER_FILTER(ZMQ,            zmq,            vf);
+     REGISTER_FILTER(ZOOMPAN,        zoompan,        vf);
+     REGISTER_FILTER(ZSCALE,         zscale,         vf);
++    REGISTER_FILTER(TRANSFORM, 	    transform,      vf);
+ 
+     REGISTER_FILTER(ALLRGB,         allrgb,         vsrc);
+     REGISTER_FILTER(ALLYUV,         allyuv,         vsrc);

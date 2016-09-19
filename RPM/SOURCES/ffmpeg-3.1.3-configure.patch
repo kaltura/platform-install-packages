@@ -1,0 +1,11 @@
+--- ffmpeg-3.1.3/configure	2016-08-26 11:05:59.000000000 +0100
++++ ffmpeg313_patches/configure	2016-09-19 04:57:27.000000000 +0100
+@@ -5671,7 +5671,7 @@
+                                  require opencv opencv2/core/core_c.h cvCreateImageHeader -lopencv_core -lopencv_imgproc; } ||
+                                require_pkg_config opencv opencv/cxcore.h cvCreateImageHeader; }
+ enabled libopenh264       && require_pkg_config openh264 wels/codec_api.h WelsGetCodecVersion
+-enabled libopenjpeg       && { check_lib openjpeg-2.1/openjpeg.h opj_version -lopenjp2 -DOPJ_STATIC ||
++enabled libopenjpeg       && { check_lib openjpeg-2.1/openjpeg.h opj_version -lopenjp2 ||
+                                check_lib openjpeg-2.0/openjpeg.h opj_version -lopenjp2 -DOPJ_STATIC ||
+                                check_lib openjpeg-1.5/openjpeg.h opj_version -lopenjpeg -DOPJ_STATIC ||
+                                check_lib openjpeg.h opj_version -lopenjpeg -DOPJ_STATIC ||

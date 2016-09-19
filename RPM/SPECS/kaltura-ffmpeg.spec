@@ -26,7 +26,7 @@
 Summary: Utilities and libraries to record, convert and stream audio and video
 Name: kaltura-ffmpeg
 Version: 3.1.3 
-Release: 1
+Release: 2
 License: GPL
 Group: Applications/Multimedia
 URL: http://ffmpeg.org/
@@ -35,6 +35,14 @@ Packager: Jess Portnoy <jess.portnoy@kaltura.com>
 Vendor: Kaltura, Inc.
 
 Source: http://www.ffmpeg.org/releases/ffmpeg-%{version}.tar.bz2
+Source1: vf_transform.c 
+Patch0: allfilters.c.patch 
+Patch1: crypto.c.patch 
+Patch2: libopenjpegdec.c.patch 
+Patch3: libopenjpegenc.c.patch
+Patch4: vf_transform.patch 
+Patch5: ffmpeg-3.1.3-configure.patch
+
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
 BuildRequires: SDL-devel
@@ -115,6 +123,13 @@ Install this package if you want to compile apps with ffmpeg support.
 
 %prep
 %setup -qn ffmpeg-%{version}
+%patch0 -p1
+%patch1 -p1
+%patch2 -p1
+%patch3 -p1
+%patch4 -p1
+%patch5 -p1
+cp %{SOURCE1} %{_builddir}/ffmpeg-%{version}/libavfilter/
 
 
 %build
@@ -262,6 +277,12 @@ fi
 %{base_prefix}-%{version}/share
 
 %changelog
+* Mon Sep 19 2016 Jess Portnoy <jess.portnoy@kaltura.com> - 3.1.3-2
+- Patches:
+	https://github.com/FFmpeg/FFmpeg/commit/a13a81a0dc98a35293f3f2603db9b01bf76b6a05
+	https://trac.ffmpeg.org/attachment/ticket/5694/ffmpeg_opj2.patch
+	https://github.com/facebook/transform
+
 * Sun Sep 18 2016 Jess Portnoy <jess.portnoy@kaltura.com> - 3.1.3-1
 - 3.1.3 first build.
 
