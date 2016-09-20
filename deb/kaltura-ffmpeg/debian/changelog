@@ -1,3 +1,15 @@
+kaltura-ffmpeg (3.1.3-2) lynx; urgency=low
+
+  * fix ld.conf.d file
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 19 Sep 2016 16:38:26 +0000
+
+kaltura-ffmpeg (3.1.3-1) lynx; urgency=low
+
+  * 3.1.3 with x265 support.
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 19 Sep 2016 16:03:31 +0000
+
 kaltura-ffmpeg (2.7.2-1) jupiter; urgency=low
 
   * 2.7.2 

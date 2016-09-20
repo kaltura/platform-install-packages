@@ -44,6 +44,8 @@ config.status: $(tree)
 		    --enable-libtheora \
 		    --enable-libvorbis \
 		    --enable-libx264 \
+		    --enable-libx265 \
+		    --enable-avisynth \
 		    --enable-libxvid \
 		    --enable-filter=movie \
 		    --enable-avfilter \
