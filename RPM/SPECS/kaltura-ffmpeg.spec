@@ -95,7 +95,7 @@ quality polyphase filter.
 %package devel
 Summary: Header files and static library for the ffmpeg codec library
 Group: Development/Libraries
-Requires: %{name} = %{version}
+Requires: %{name} = %{version}-%{release}
 Requires: imlib2-devel, SDL-devel, freetype-devel, zlib-devel, pkgconfig,kaltura-x264
 %{!?_without_a52dec:Requires: kaltura-a52dec-devel}
 %{!?_without_dc1394:Requires: libdc1394-devel}
