@@ -26,7 +26,7 @@
 Summary: Utilities and libraries to record, convert and stream audio and video
 Name: kaltura-ffmpeg
 Version: 2.7.2 
-Release: 4
+Release: 5
 License: GPL
 Group: Applications/Multimedia
 URL: http://ffmpeg.org/
@@ -85,7 +85,7 @@ quality polyphase filter.
 %package devel
 Summary: Header files and static library for the ffmpeg codec library
 Group: Development/Libraries
-Requires: %{name} = %{version}
+Requires: %{name} = %{version}-%{release}
 Requires: imlib2-devel, SDL-devel, freetype-devel, zlib-devel, pkgconfig,kaltura-x264
 %{!?_without_a52dec:Requires: kaltura-a52dec-devel}
 %{!?_without_dc1394:Requires: libdc1394-devel}
