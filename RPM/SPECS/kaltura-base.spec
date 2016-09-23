@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 12.2.0
-Release: 4
+Release: 5
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -313,6 +313,22 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Fri Sep 23 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 12.2.0-5
+- PLAT-5105 - playManifest refactoring for live - delivery profile
+- PLAT-5916 - Enhance Access Control Creation script for uDRM
+- PLAT-5962 - Support Dash packaging for Firefox standard
+- SUP-9003 - The property "accessControlId" is updatable with admin session only
+- PLAT-5983 - Sphinx improvement - add partnerId to privacy_by_contexts
+- PLAT-5963 - Add makeHidden property to Kaltura_Client_Type_LiveEntryRecordingOptions
+- PLAT-5964 - createRecordedEntry method should set display_in_search to -1 if makeHidden is true
+- PLAT-5965 - expose entry's display_in_search property in api v3 
+- PLAT-5966 - In baseEntry.list (or any derived service) - when listing with IdIn, entries with display_in_search = -1 should be returned
+- PLAT-6007 - When picture is not available mediaprep failed the entry
+- PLAT-6027 - Enable filtering based on resource ID or parent resource ID
+- PLAT-6061 - When picture is not available mediaprep failed to populate metadata
+- PLAT-5732 - copy annotation cue points from live to VOD
+- PLAT-6047 - yahoo syndication error
+
 * Tue Sep 13 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 12.2.0-1
 - Ver Bounce to 12.2.0
 
