@@ -6,7 +6,7 @@
 
 Name:           kaltura-sphinx
 Version:        2.2.1
-Release:        19
+Release:        20
 Summary:        Sphinx full-text search server - for Kaltura
 
 Group:          Applications/Text
@@ -77,22 +77,6 @@ mkdir -p $RPM_BUILD_ROOT/opt/kaltura/log/sphinx/data
 mkdir -p $RPM_BUILD_ROOT%{prefix}/var/run
 
 
-
-
-# Create /etc/logrotate.d/sphinx
-mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/logrotate.d
-cat > $RPM_BUILD_ROOT%{_sysconfdir}/logrotate.d/sphinx << EOF
-%{prefix}/log/sphinx/*.log {
-       weekly
-       rotate 10
-       copytruncate
-       delaycompress
-       compress
-       notifempty
-       missingok
-}
-EOF
-
 mkdir $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
 cat > $RPM_BUILD_ROOT%{_sysconfdir}/profile.d/kaltura_sphinx.sh << EOF
 PATH=\$PATH:%{prefix}/bin
@@ -161,7 +145,6 @@ fi
 %exclude %{confdir}/*.conf.dist
 %exclude %{confdir}/example.sql
 %{_initrddir}/kaltura-*
-%config(noreplace) %{_sysconfdir}/logrotate.d/sphinx
 %{prefix}/bin/*
 %dir /opt/kaltura/log/sphinx
 %dir /opt/kaltura/log/sphinx/data
@@ -170,6 +153,9 @@ fi
 
 
 %changelog
+* Fri Sep 23 2016 Jess Portnoy <jess.portnoy@kaltura.com> - 2.2.1.r4097-20
+- No need to generate logrotate file here as it's taken care of by kaltura-base with /opt/kaltura/app/configurations/logrotate/kaltura_sphinx
+
 * Wed Mar 16 2016 Jess Portnoy <jess.portnoy@kaltura.com> - 2.2.1.r4097-18
 - https://github.com/kaltura/platform-install-packages/pull/532
 - https://github.com/kaltura/platform-install-packages/pull/533
