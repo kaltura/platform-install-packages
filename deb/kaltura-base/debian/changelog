@@ -1,3 +1,22 @@
+kaltura-base (12.2.0-2) lynx; urgency=low
+
+  * PLAT-5105 - playManifest refactoring for live - delivery profile
+  * PLAT-5916 - Enhance Access Control Creation script for uDRM
+  * PLAT-5962 - Support Dash packaging for Firefox standard
+  * SUP-9003 - The property "accessControlId" is updatable with admin session only
+  * PLAT-5983 - Sphinx improvement - add partnerId to privacy_by_contexts
+  * PLAT-5963 - Add makeHidden property to Kaltura_Client_Type_LiveEntryRecordingOptions
+  * PLAT-5964 - createRecordedEntry method should set display_in_search to -1 if makeHidden is true
+  * PLAT-5965 - expose entry's display_in_search property in api v3 
+  * PLAT-5966 - In baseEntry.list (or any derived service) - when listing with IdIn, entries with display_in_search = -1 should be returned
+  * PLAT-6007 - When picture is not available mediaprep failed the entry
+  * PLAT-6027 - Enable filtering based on resource ID or parent resource ID
+  * PLAT-6061 - When picture is not available mediaprep failed to populate metadata
+  * PLAT-5732 - copy annotation cue points from live to VOD
+  * PLAT-6047 - yahoo syndication error
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Fri, 23 Sep 2016 15:40:28 +0000
+
 kaltura-base (12.2.0-1) lynx; urgency=low
 
   * Switching to 12.2.0

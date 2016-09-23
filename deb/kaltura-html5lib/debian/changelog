@@ -1,3 +1,62 @@
+kaltura-html5lib (2.48-1) lynx; urgency=low
+
+  * SUP-8883 - V2 player custom styles "Button's icon color" are not saved
+  * FEC-5966 - Regression:uDRM:WV cenc: black screen with loading spinner in case of performing consecutive seek when player in pause mode
+  * FEC-6004 - iOS 10: the player failed to play on iPhone Chrome/FireFox browser
+  * FEC-5871 - MPEG_Dash: Flavor selector: Video stuck for 1 sec in case of changing bitrate manually
+  * FEC-5969 - MPEG_Dash uDRM: IE9 fallback: Old IE uses castlab instead of silverlight for DRM
+  * SUP-8896 - Player not loaded on IE - only black box
+  * FEC-5858 - Mobile skin: Expand button presented on top of the entry duration time
+  * FEM-801 - iPhone 5c- Downloaded media (not only offline) - Play button stays on the screen after entry starts playing
+  * FEC-5878 - MPEG_Dash: pre-sequence bumper is not working on shaka player
+  * FEC-5960 - dash - player api events: switchingChangeStarted and switchingChangeComplete not fired when switching bitrate
+  * FEC-5884 - MPEG_Dash: No UI indication in case of switching between bitrates
+  * SUP-8984 - Multispeed Playback Issue on iPad devices
+  * SUP-8778 - Player's Controls Out of Alignment on IE
+  * FEC-6015 - dash flavor removed
+  * FEC-6016 - Shaka runs on mobile and there is a crash in player due to this and drm playback is stuck
+  * Prevent shaka from loading on chrome cast receiver
+  * Add chrome cast receiver disconnection handler
+  * Set preload to auto without any condition when play is clicked
+  * Fix "responsive" closed captions on fullscreen open/close
+  * FEC-5870 - MPEG_Dash: Flavor Selector: Only "auto" option should be represented when opening flavor selector before clicking on play
+  * FEC-5736 - Loading an entry that has more then 500 cue points will fetch only the first 500 (due to default pagination)
+  * FEC-5963 - dash - kanalony : actualBitrate and flavourID are not pupoluated
+  * FEC-5959 - dash - youbora : bitrate field not populated in bitrate requests
+  * FEC-6030 - dash on mac - player api events: switchingChangeStarted doesn't doesn't specify bitrate
+  * FEM-815 - Allow player prefetch
+  * FEC-5948 - MPEG_Dash uDRM: Black screen after performing seek (IE11 Only)
+  * FEC-5952 - MPEG_Dash uDRM: Black screen with playing audio appears after changing flavors 4-5 times (IE11 only)
+  * FEC-5956 - MPEG_Dash uDRM: Black screen and audio is playing in throttling (sometimes picture freeze with audio) (IE11 Only)
+  * FEC-6043 - Playlist with DFP overlay - Video does not start playing after tapping on first entry
+  * FEC-6044 - Playlist with Vast overlay - Loading spinner displayed endlessly after tapping on Play button
+  * FEC-6046 - Vast mod-rolls : Video does not play continuous loading symbol displayed
+  * FEC-6047 - Kaltura Live with Vast : Pre Roll ad and video is not getting played on Android
+  * SUP-6782 - inquiry as to mobile thumbnail embed - number of clicks to start a video
+  * FEC-6057 - Regression: Seek is not working on any entry on 2.45.rc5
+  * FEC-6058 - Regression:MPEG_Dash Clear\DRM :MultiAudioTracks: There is no ability to switch audio tracks (Only one audio track displayed on IE11)
+  * FEC-6027 - MPEG_Dash: Playlist: Second video stuck after whole playlist and first video (one more time) finished to play(IE11 only)
+  * FEC-5900 - MPEG_Dash: DFP: Video is not playing(black screen) after pre-roll finishes (Android devices only)
+  * FEC-5902 - MPEG_Dash: Bumper: Player stuck with disabled controls after trying to play video with bumper ad (Android devices only)
+  * FEC-5947 - Dash - uDRM: player stuck with spinner after return to high bandwidth on Android
+  * SUP-8883 - V2 player custom styles "Button's icon color" are not saved
+  * FEC-6052 - HLS JS - Auto flavor is shown twice before starting the playback on FF
+  * FEC-5875 - MPEG_Dash: Playlist with auto play and DFP: Scrubber is jumping and video isn't starting after clicking not on first entry right after playlist is loaded
+  * FEC-6092 - HLS JS - Progress time is not updated, stays on 0:00
+  * FEC-6090 - Vast midroll - No matter to witch point you seek video continue after first midrol (20th sec)
+  * FEC-5898 - Set hls.js to be on by default
+  * FEC-6102 - shaka throws an exception on change media
+  * FEC-6106 - MPEG_Dash: Playlist: Video stuck with loading spinner after performing seek before tapping on play (occurs only with debugKalturaPlayer)
+  * FEC-6027 - MPEG_Dash: Playlist: Second video stuck after whole playlist and first video (one more time) finished to play(IE11 only)
+  * SUP-8992 - Player version 2.46 not responsive for mobile devices
+  * FEC-6104 - HLSOSMF/HLSJS : DFP pre-mid-post roll: scrubber jumps on pre-roll after performing seek and tapping on play button
+  * FEC-6119 - Player doesn't recover from restarting fmle streaming - stuck with disabled control bar
+  * FEC-6120 - data format of eventbitrate changed on live stats
+  * FEC-6116 - DFP pre-mid-post : Skip is shown from the beginning of AD while choosing playlist list at first 5 sec
+  * FEC-6119 - Player doesn't recover from restarting fmle streaming - stuck with disabled control bar
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Fri, 23 Sep 2016 15:42:52 +0000
+
 kaltura-html5lib (2.47-1) lynx; urgency=low
 
   * FEC-5898 - Set hls.js to be on by default
