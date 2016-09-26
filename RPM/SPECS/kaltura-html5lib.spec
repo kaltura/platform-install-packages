@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.48
+Version: v2.48.1
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -80,6 +80,11 @@ find /opt/kaltura/web/html5/html5lib -type d -name cache -exec chown -R 48 {} \;
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Mon Sep 26 2016 Jess Portnoy <jess.portnoy@kaltura.com> - v2.48.1-1
+- SUP-9210 - Due to changes made on Chrome 52 removing the touchstart eventName from Android
+- FEC-6130 - Ignore the initial seeking to the live edge
+- FEC-6133 - Fix stream switching with HLSJS
+
 * Fri Sep 23 2016 Jess Portnoy <jess.portnoy@kaltura.com> - v2.48-1
 - SUP-8883 - V2 player custom styles "Button's icon color" are not saved
 - FEC-5966 - Regression:uDRM:WV cenc: black screen with loading spinner in case of performing consecutive seek when player in pause mode
