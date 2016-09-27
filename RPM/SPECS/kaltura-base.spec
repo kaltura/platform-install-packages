@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 12.2.0
-Release: 8
+Version: 12.3.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -313,6 +313,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Tue Sep 27 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 12.3.0-1
+- Ver Bounce to 12.3.0
+
 * Fri Sep 23 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 12.2.0-5
 - PLAT-5105 - playManifest refactoring for live - delivery profile
 - PLAT-5916 - Enhance Access Control Creation script for uDRM
