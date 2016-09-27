@@ -1,3 +1,9 @@
+kaltura-base (12.3.0-1) lynx; urgency=low
+
+  * Switching to 12.3.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Tue, 27 Sep 2016 13:17:40 +0000
+
 kaltura-base (12.2.0-2) lynx; urgency=low
 
   * PLAT-5105 - playManifest refactoring for live - delivery profile
