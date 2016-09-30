@@ -138,7 +138,7 @@ PENTAHO_RPM_PACKAGE_NAME=kaltura-pentaho
 PENTAHO_URI="http://sourceforge.net/projects/pentaho/files/Data%20Integration/$PENTAHO_VERSION-stable/pdi-ce-$PENTAHO_VERSION-stable.tar.gz"
 
 # monit:
-MONIT_VERSION=5.19
+MONIT_VERSION=5.19.0
 MONIT_URI="http://mmonit.com/monit/dist/monit-$MONIT_VERSION.tar.gz"
 
 # Kaltura Core build vars:
