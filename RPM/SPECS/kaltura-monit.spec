@@ -105,13 +105,13 @@ fi
 #%attr(0600, root, root) %config(noreplace) %{confdir}/monit.conf
 
 %changelog
-* Thu Sep 22 2016 David Bezemer <david.bezemer@kaltura.com> - 5.19
+* Thu Sep 22 2016 David Bezemer <david.bezemer@kaltura.com> - 5.19.0-1
 - New Upstream Release, see: https://mmonit.com/monit/changes
 
-* Wed Jun 22 2016 Jess Portnoy <jess.portnoy@kaltura.com> - 5.18
+* Wed Jun 22 2016 Jess Portnoy <jess.portnoy@kaltura.com> - 5.18-1
 - New Upstream Release, see: https://mmonit.com/monit/changes
 
-* Thu May 8 2015 David Bezemer <david.bezemer@kaltura.com> - 5.13
+* Thu May 8 2015 David Bezemer <david.bezemer@kaltura.com> - 5.13-1
 - New Upstream Release 5.13
 - Adding MMonit support
 
