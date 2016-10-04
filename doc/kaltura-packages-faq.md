@@ -34,7 +34,7 @@ If you've lost your installation answers file, you can recreate one using the [K
 
 In addition, when changing the CDN hostname, the kaltura.delivery_profile table must be updated.
 ```
-# mysql -h$DB1_HOST -u$DB1_USER -p$DB1_PASS
+# mysql -h$DB1_HOST -u$DB1_USER -p$DB1_PASS $DB1_NAME
 
 mysql> select id,name,url,host_name from delivery_profile;
 ```
