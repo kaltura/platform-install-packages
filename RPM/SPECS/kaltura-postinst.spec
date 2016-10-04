@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.31
-Release: 26
+Release: 27
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -82,6 +82,9 @@ find %{_sysconfdir}/logrotate.d -type l -name "kaltura_*" -exec rm {} \;
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Tue Oct 4 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.31-27
+- Don't escpae '#' char in the MySQL super passwd.
+
 * Fri Sep 9 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.31-24
 - https://github.com/kaltura/platform-install-packages/pull/566
 
