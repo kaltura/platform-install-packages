@@ -1,3 +1,11 @@
+kaltura-html5lib (2.48.1-1) lynx; urgency=low
+
+  * SUP-9210 - Due to changes made on Chrome 52 removing the touchstart eventName from Android
+  * FEC-6130 - Ignore the initial seeking to the live edge
+  * FEC-6133 - Fix stream switching with HLSJS
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 26 Sep 2016 14:43:04 +0000
+
 kaltura-html5lib (2.48-1) lynx; urgency=low
 
   * SUP-8883 - V2 player custom styles "Button's icon color" are not saved
