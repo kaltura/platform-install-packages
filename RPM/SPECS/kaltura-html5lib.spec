@@ -18,7 +18,6 @@ Source7: kaltura-html5lib-v2.44.tar.gz
 Source8: kaltura-html5lib-v2.45.tar.gz
 Source9: kaltura-html5lib-v2.45.1.tar.gz
 Source10: kaltura-html5lib-v2.46.tar.gz
-#Source11: UiConfResult.php
 
 URL: https://github.com/kaltura/mwEmbed 
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -60,7 +59,6 @@ for i in v2.14  v2.37  v2.37.1  v2.38.3  v2.42  v2.44  v2.45  v2.45.1 v2.46 %{ve
 	ln -sf %{prefix}/app/configurations/html5.php $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i/LocalSettings.php 
 	mkdir $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i/cache
 done
-#cp %{SOURCE11} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/%{version}/modules/KalturaSupport/UiConfResult.php
 
 %clean
 rm -rf %{buildroot}
