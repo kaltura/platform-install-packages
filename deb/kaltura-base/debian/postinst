@@ -59,6 +59,8 @@ if [ -r $KALTURA_PREFIX/bin/kaltura-base-upgrading ];then
                 # we now need CREATE and DROP priv for 'kaltura' on kaltura.*
                 if [ -r /etc/kaltura.d/system.ini ];then
                         . /etc/kaltura.d/system.ini
+			# disbale Default_Akamai_HLS_direct since we want the nginx vod-module profile to be used [ID 1001, system_name: Kaltura HLS segmentation]
+			echo "update delivery_profile set is_default=0 where id=1 and system_name='Default_Akamai_HLS_direct';"|mysql -h$DB1_HOST -u $DB1_USER -p$DB1_PASS -P$DB1_PORT $DB1_NAME
                         echo "GRANT INSERT,UPDATE,DELETE,SELECT,ALTER,DROP,CREATE ON kaltura.* TO 'kaltura'@'%';FLUSH PRIVILEGES;"|mysql -h$DB1_HOST -u $SUPER_USER -p$SUPER_USER_PASSWD -P$DB1_PORT
                 fi
                 php $KALTURA_PREFIX/app/deployment/updates/update.php -i -d >> /opt/kaltura/log/kalt_up.log 2>&1

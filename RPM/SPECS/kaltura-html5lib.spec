@@ -3,7 +3,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
 Version: v2.48.1
-Release: 2
+Release: 1
 Epoch: 0 
 License: AGPLv3+
 Group: Server/Platform 
@@ -18,7 +18,6 @@ Source7: kaltura-html5lib-v2.44.tar.gz
 Source8: kaltura-html5lib-v2.45.tar.gz
 Source9: kaltura-html5lib-v2.45.1.tar.gz
 Source10: kaltura-html5lib-v2.46.tar.gz
-#Source11: UiConfResult.php
 
 URL: https://github.com/kaltura/mwEmbed 
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -60,7 +59,6 @@ for i in v2.14  v2.37  v2.37.1  v2.38.3  v2.42  v2.44  v2.45  v2.45.1 v2.46 %{ve
 	ln -sf %{prefix}/app/configurations/html5.php $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i/LocalSettings.php 
 	mkdir $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i/cache
 done
-#cp %{SOURCE11} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/%{version}/modules/KalturaSupport/UiConfResult.php
 
 %clean
 rm -rf %{buildroot}
@@ -83,9 +81,6 @@ find /opt/kaltura/web/html5/html5lib -type d -name cache -exec chown -R 48 {} \;
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
-* Wed Oct 6 2016 Jess Portnoy <jess.portnoy@kaltura.com> - v2.48.1-2
-- Patch to disable hlsjs by default.
-
 * Mon Sep 26 2016 Jess Portnoy <jess.portnoy@kaltura.com> - v2.48.1-1
 - SUP-9210 - Due to changes made on Chrome 52 removing the touchstart eventName from Android
 - FEC-6130 - Ignore the initial seeking to the live edge
