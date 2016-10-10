@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 12.3.0
-Release: 5
+Release: 7
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -246,7 +246,7 @@ if [ "$1" = 2 ];then
 		if [ -r /etc/kaltura.d/system.ini ];then
 			. /etc/kaltura.d/system.ini
 			# disbale Default_Akamai_HLS_direct since we want the nginx vod-module profile to be used [ID 1001, system_name: Kaltura HLS segmentation]
-			echo "update delivery_profile set is_default=0 where id=1 and system_name='Default_Akamai_HLS_direct';"|mysql -h$DB1_HOST -u $SUPER_USER -p$SUPER_USER_PASSWD -P$DB1_PORT
+			echo "update delivery_profile set is_default=0 where id=1 and system_name='Default_Akamai_HLS_direct';"|mysql -h$DB1_HOST -u $DB1_USER -p$DB1_PASS -P$DB1_PORT $DB1_NAME
 			echo "GRANT INSERT,UPDATE,DELETE,SELECT,ALTER,DROP,CREATE ON kaltura.* TO '$DB_USER'@'%';FLUSH PRIVILEGES;"|mysql -h$DB1_HOST -u $SUPER_USER -p$SUPER_USER_PASSWD -P$DB1_PORT
 		fi
 		php %{prefix}/app/deployment/updates/update.php -i -d >> /opt/kaltura/log/kalt_up.log 2>&1
@@ -315,6 +315,22 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Oct 10 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 12.3.0-7
+- PLAT-6132 - Display cross day events
+- PLAT-6135 - Get end date of last event of a series
+- PLAT-6127 - Add "EXT-X-SESSION-KEY" tag to master manifest for offline FairPlay
+- PLAT-5983 - Sphinx improvement - add partnerId to privacy_by_contexts 
+- PLAT-5485 - The max duration of an event should be 24 hours
+- SUP-7180 - API call - emailRecipients field not working
+- SUP-9173 - Server side notifications not working since Sep 2nd - notification ID 7721
+- PLAT-5774 - iCal with recurring events ingestion issues
+- PLAT-6083 - Response profile returns wrong results
+- PLAT-6124 - can't update recurrence of past recurring event
+- PLAT-6123 - Can't update series recurrence from until to count or the either way around
+- PLAT-5613 - Possible to create duplicate scheduleEventResource
+- PLAT-5513 - Possible to set non-existing resource as parent
+- PLAT-6186 - Push notifications code is not compatible with Push server V2
+
 * Wed Oct 6 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 12.3.0-5
 - disbale Default_Akamai_HLS_direct since we want the nginx vod-module profile to be used [ID 1001, system_name: Kaltura HLS segmentation]
 
