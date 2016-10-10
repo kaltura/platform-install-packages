@@ -1,3 +1,10 @@
+kaltura-html5-studio (2.0.7-1) lynx; urgency=low
+
+  * SUP-8880: KMS/KAF deployment players are not editable in The Universal Studio.
+  * Aligned with HTML5 lib v2.48.1
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 10 Oct 2016 13:18:56 +0000
+
 kaltura-html5-studio (2.0.6-1) kajam; urgency=low
 
   * Add mobile device emulation mode

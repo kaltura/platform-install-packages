@@ -1,3 +1,22 @@
+kaltura-base (12.3.0-2) lynx; urgency=low
+
+  * PLAT-6132 - Display cross day events
+  * PLAT-6135 - Get end date of last event of a series
+  * PLAT-6127 - Add "EXT-X-SESSION-KEY" tag to master manifest for offline FairPlay
+  * PLAT-5983 - Sphinx improvement - add partnerId to privacy_by_contexts 
+  * PLAT-5485 - The max duration of an event should be 24 hours
+  * SUP-7180 - API call - emailRecipients field not working
+  * SUP-9173 - Server side notifications not working since Sep 2nd - notification ID 7721
+  * PLAT-5774 - iCal with recurring events ingestion issues
+  * PLAT-6083 - Response profile returns wrong results
+  * PLAT-6124 - can't update recurrence of past recurring event
+  * PLAT-6123 - Can't update series recurrence from until to count or the either way around
+  * PLAT-5613 - Possible to create duplicate scheduleEventResource
+  * PLAT-5513 - Possible to set non-existing resource as parent
+  * PLAT-6186 - Push notifications code is not compatible with Push server V2
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 10 Oct 2016 13:14:40 +0000
+
 kaltura-base (12.3.0-1) lynx; urgency=low
 
   * Switching to 12.3.0
