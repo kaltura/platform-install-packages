@@ -55,5 +55,5 @@ In order to preform an unattended [silent] install:
 # docker exec -i -t kaltura /root/install/install.sh
 ```
 
-**Note:** answers file contains already mysql root password. Therefore, do NOT pass a MySQL root passwd as an argument when performing an unattended installation.
+**Note:** answer files contain a mysql root password param called SUPER_USER_PASSWD. Therefore, do NOT pass a MySQL root passwd as an argument when performing an unattended installation.
 
