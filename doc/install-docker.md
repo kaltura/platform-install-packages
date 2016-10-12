@@ -31,14 +31,9 @@ docker run -d --name=kaltura -p 80:80 -p 443:443 -p 1935:1935 kaltura/server
 ```
 
 ### Start of Kaltura Configuration
-```bash
-docker exec -i -t kaltura /root/install/install.sh
-```
 
-Note that the install.sh script changes the mysql root password to root, that password is used only during the installation.
-To use a different password, pass it as first argument:
 ```bash
-docker exec -i -t kaltura /root/install/install.sh myBetterPassword
+# docker exec -i -t kaltura /root/install/install.sh MYSQL_ROOT_PASSWD_HERE
 ``` 
 
 Your install will now automatically perform all install tasks.
@@ -53,9 +48,12 @@ In order to preform an unattended [silent] install:
  - Create **config.ans** file according to [template](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura.template.ans).
  - Copy to file into the container: 
 ```bash
-docker cp config.ans kaltura:/root/install/
+# docker cp config.ans kaltura:/root/install/
 ``` 
  - Run the installer, it will automatically search for answers file in this path.
+```
+# docker exec -i -t kaltura /root/install/install.sh
+```
 
-**Note:** answers file contains already mysql root password and therefore, passing a different password as argument to install.sh script may cause conflicts.
+**Note:** answers file contains already mysql root password. Therefore, do NOT pass a MySQL root passwd as an argument when performing an unattended installation.
 
