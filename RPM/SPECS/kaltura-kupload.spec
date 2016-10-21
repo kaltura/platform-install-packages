@@ -2,8 +2,8 @@
 %define widget_name kupload
 Name:	kaltura-%{widget_name}
 Version: v1.2.16 
-Release: 1 
-Epoch:0
+Release: 2
+Epoch:1
 Summary: Kaltura kupload widget
 License: AGPLv3+	
 URL: http://kaltura.org
@@ -38,6 +38,14 @@ mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content
 cp -r %{_builddir}/%{version} $RPM_BUILD_ROOT/%{prefix}/web/flash/%{widget_name}
 find $RPM_BUILD_ROOT/%{prefix}/web/flash/%{widget_name} -name ".project" -exec rm {} \;
 
+%post
+if [ "$1" = 2 ];then
+	if [ -r /etc/kaltura.d/system.ini ];then
+		. /etc/kaltura.d/system.ini
+		echo 'update ui_conf set swf_url = "/flash/kupload/%{version}/KUpload.swf" where swf_url like "/flash/kupload/v%/KUpload.swf"'|mysql -h$DB1_HOST -u $SUPER_USER -p$SUPER_USER_PASSWD -P$DB1_PORT $DB1_NAME
+	fi
+fi
+
 %clean
 rm -rf %{buildroot}
 
@@ -46,7 +54,10 @@ rm -rf %{buildroot}
 %{prefix}/web/flash/%{widget_name}
 
 %changelog
-* Mon Nov 17 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v1.2.16
+* Thu Oct 20 2016 Jess Portnoy <jess.portnoy@kaltura.com> - v1.2.16-2
+- Auto upgrade ui_conf.swf_url during %post
+
+* Mon Nov 17 2014 Jess Portnoy <jess.portnoy@kaltura.com> - v1.2.16-1
 - Bounce ver and also moved to GitHub.
 
 * Tue Feb 11 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.0-1
