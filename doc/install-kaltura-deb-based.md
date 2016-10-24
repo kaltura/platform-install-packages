@@ -166,7 +166,7 @@ And install as described above.
 *This will only work if the initial install was using this packages based install, it will not work for old Kaltura deployments using the PHP installers*
 ```bash
 # aptitude update
-# aptitude install ~Nkaltura
+# aptitude install "~Nkaltura"
 # dpkg-reconfigure kaltura-base
 # dpkg-reconfigure kaltura-front
 # dpkg-reconfigure kaltura-batch
