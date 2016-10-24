@@ -158,6 +158,9 @@ KALTURA_NGINX_AKAMAI_TOKEN_VALIDATE_URI="https://github.com/kaltura/nginx-akamai
 NGINX_VTS_VERSION=v0.1.9
 NGINX_VTS_URI="https://github.com/vozlt/nginx-module-vts/archive/$NGINX_VTS_VERSION.zip"
 
+NGINX_RTMP_VERSION=v1.1.10
+NGINX_RTMP_URI="https://github.com/arut/nginx-rtmp-module/archive/$NGINX_RTMP_VERSION.zip"
+
 KALTURA_NGINX_SECURE_TOKEN_VERSION=1.1
 KALTURA_NGINX_SECURE_TOKEN_URI="https://github.com/kaltura/nginx-secure-token-module/archive/$KALTURA_NGINX_SECURE_TOKEN_VERSION.zip"
 NGINX_VERSION=1.8.1

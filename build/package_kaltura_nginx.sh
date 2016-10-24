@@ -33,6 +33,8 @@ wget $KALTURA_NGINX_VOD_URI -O$RPM_SOURCES_DIR/nginx-vod-module-$KALTURA_NGINX_V
 echo "Packaged into $RPM_SOURCES_DIR/nginx-vod-module-$KALTURA_NGINX_VOD_VERSION.zip"
 wget $NGINX_VTS_URI -O$RPM_SOURCES_DIR/nginx-module-vts-$NGINX_VTS_VERSION.zip
 echo "Packaged into $RPM_SOURCES_DIR/nginx-module-vts-$NGINX_VTS_VERSION.zip"
+wget $NGINX_RTMP_URI -O$RPM_SOURCES_DIR/nginx-module-rtmp-$NGINX_RTMP_VERSION.zip
+echo "Packaged into $RPM_SOURCES_DIR/nginx-module-rtmp-$NGINX_RTMP_VERSION.zip"
 wget $NGINX_URI -O$RPM_SOURCES_DIR/kaltura-nginx-$NGINX_VERSION.tar.gz
 echo "Packaged into $RPM_SOURCES_DIR/kaltura-nginx-$NGINX_VERSION.tar.gz"
 
