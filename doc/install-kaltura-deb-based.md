@@ -114,7 +114,7 @@ In order to perform a manual step by step install, simply copy the commands and 
 *NOTE: the script calls aptitude with -y which means you will not be prompted to confirm the packages about to be installed.*
 
 ```bash
-# wget http://installrepo.kaltura.org/repo/apt/debian/install_kaltura_all_in_1.sh 
+# wget http://installrepo.origin.kaltura.org/repo/apt/debian/install_kaltura_all_in_1.sh 
 # chmod +x install_kaltura_all_in_1.sh
 # ./install_kaltura_all_in_1.sh
 ```
