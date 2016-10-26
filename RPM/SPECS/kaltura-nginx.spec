@@ -22,7 +22,6 @@ Requires: initscripts >= 8.36
 Requires(post): chkconfig
 Requires: openssl >= 1.0.1
 BuildRequires: openssl-devel >= 1.0.1
-%define with_spdy 1
 %endif
 
 %if 0%{?rhel}  == 7
@@ -33,7 +32,6 @@ Requires: openssl >= 1.0.1
 BuildRequires: systemd
 BuildRequires: openssl-devel >= 1.0.1
 Epoch: 1
-%define with_spdy 1
 %endif
 
 %if 0%{?suse_version}
@@ -51,8 +49,8 @@ Requires(pre): pwdutils
 
 Summary: High performance web server customized for Kaltura VOD
 Name: kaltura-nginx
-Version: 1.8.1
-Release: 10
+Version: 1.10.2
+Release: 1
 Vendor: Kaltura inc.
 URL: http://nginx.org/
 
@@ -149,7 +147,6 @@ export LIBRARY_PATH C_INCLUDE_PATH
         --with-file-aio \
         --with-ipv6 \
         --with-debug \
-        %{?with_spdy:--with-http_spdy_module} \
 	--with-threads \
         --with-cc-opt="%{optflags}" \
 	--add-module=./nginx-vod-module-%{nginx_vod_module_ver} \
@@ -194,7 +191,6 @@ make %{?_smp_mflags}
         --with-mail_ssl_module \
         --with-file-aio \
         --with-ipv6 \
-        %{?with_spdy:--with-http_spdy_module} \
 	--with-threads \
         --with-cc-opt="%{optflags}" \
 	--add-module=./nginx-vod-module-%{nginx_vod_module_ver} \
@@ -373,6 +369,10 @@ if [ $1 -ge 1 ]; then
 fi
 
 %changelog
+* Wed Oct 26 2016 Jess Portnoy <jess.portnoy@kaltura.com> - 1.10.2-1
+- Upgrade to 1.10 [latest stable]
+- Nginx now compiled with the RTMP module to be used for Live streaming.
+
 * Sun Sep 18 2016 Jess Portnoy <jess.portnoy@kaltura.com> - 1.8.1-10
 - Compiled against FFMPEG 3.1.3
 
