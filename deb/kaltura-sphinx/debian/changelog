@@ -1,3 +1,9 @@
+kaltura-sphinx (2.2.1-4) lynx; urgency=low
+
+  * Fix Default-Start and Default-Stop init levels. 
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Tue, 11 Oct 2016 14:56:41 +0000
+
 kaltura-sphinx (2.2.1-3) jupiter; urgency=low
 
   * fix call to send_install_becon()

@@ -119,3 +119,21 @@
 		location = /50x.html {
 			root   html;
 		}
+
+                location /dashme {
+                        open_file_cache off;
+                        root /var/tmp;
+                        add_header Cache-Control no-cache;
+                        # To avoid issues with cross-domain HTTP requests (e.g. during development)
+                        add_header Access-Control-Allow-Origin *;
+                }
+                location /hlsme {
+                        open_file_cache off;
+                        types {
+                                application/vnd.apple.mpegurl m3u8;
+                        }
+                        root /var/tmp;
+                        add_header Cache-Control no-cache; # Prevent caching of HLS fragments
+                        add_header Access-Control-Allow-Origin *; # Allow web player to access our playlist
+                }
+
