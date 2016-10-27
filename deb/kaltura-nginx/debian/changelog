@@ -1,3 +1,10 @@
+kaltura-nginx (1.10.2-1) lynx; urgency=low
+
+  * New Nginx version - 1.10.2
+  * Compile with the rtmp module
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Thu, 27 Oct 2016 18:13:41 +0000
+
 kaltura-nginx (1.8.1-4) lynx; urgency=low
 
   * New Nginx vod module - 1.10. See https://github.com/kaltura/nginx-vod-module/releases/tag/1.10
