@@ -50,7 +50,7 @@ Requires(pre): pwdutils
 Summary: High performance web server customized for Kaltura VOD
 Name: kaltura-nginx
 Version: 1.10.2
-Release: 1
+Release: 2
 Vendor: Kaltura inc.
 URL: http://nginx.org/
 
@@ -69,6 +69,9 @@ Source11: nginx-secure-token-module-%{nginx_secure_token_ver}.zip
 Source12: nginx-akamai-token-validate-module-%{nginx_token_validate_ver}.zip
 Source13: nginx-module-vts-v%{nginx_vts_ver}.zip
 Source14: nginx-module-rtmp-v%{nginx_rtmp_ver}.zip
+Source15: nginx_kaltura.conf.template 
+Source16: nginx.conf.template 
+Source17: nginx_ssl.conf.template
 #Patch1: nginx_kaltura.diff 
 
 License: 2-clause BSD-like license
@@ -219,11 +222,18 @@ make %{?_smp_mflags}
 %{__rm} $RPM_BUILD_ROOT%{_sysconfdir}/nginx/nginx.conf
 #%{__install} -m 644 -p %{SOURCE4} \
 #   $RPM_BUILD_ROOT%{_sysconfdir}/nginx/nginx.conf
-%{__install} -m 644 -p %{_builddir}/nginx-%{version}/nginx-vod-module-%{nginx_vod_module_ver}/conf/kaltura.conf.template \
+#%{__install} -m 644 -p %{_builddir}/nginx-%{version}/nginx-vod-module-%{nginx_vod_module_ver}/conf/kaltura.conf.template \
+#   $RPM_BUILD_ROOT%{_sysconfdir}/nginx/conf.d/kaltura.conf.template
+#%{__install} -m 644 -p %{_builddir}/nginx-%{version}/nginx-vod-module-%{nginx_vod_module_ver}/conf/nginx.conf.template \
+#   $RPM_BUILD_ROOT%{_sysconfdir}/nginx/conf.d/nginx.conf.template
+#%{__install} -m 644 -p %{_builddir}/nginx-%{version}/nginx-vod-module-%{nginx_vod_module_ver}/conf/ssl.conf.template \
+#   $RPM_BUILD_ROOT%{_sysconfdir}/nginx/conf.d/ssl.conf.template
+
+%{__install} -m 644 -p %{SOURCE15} \
    $RPM_BUILD_ROOT%{_sysconfdir}/nginx/conf.d/kaltura.conf.template
-%{__install} -m 644 -p %{_builddir}/nginx-%{version}/nginx-vod-module-%{nginx_vod_module_ver}/conf/nginx.conf.template \
+%{__install} -m 644 -p %{SOURCE16} \
    $RPM_BUILD_ROOT%{_sysconfdir}/nginx/conf.d/nginx.conf.template
-%{__install} -m 644 -p %{_builddir}/nginx-%{version}/nginx-vod-module-%{nginx_vod_module_ver}/conf/ssl.conf.template \
+%{__install} -m 644 -p %{SOURCE17} \
    $RPM_BUILD_ROOT%{_sysconfdir}/nginx/conf.d/ssl.conf.template
 
 %{__mkdir} -p $RPM_BUILD_ROOT%{_sysconfdir}/sysconfig
@@ -270,8 +280,8 @@ make %{?_smp_mflags}
 
 #%config(noreplace,missingok) %{_sysconfdir}/nginx/nginx.conf
 %config %{_sysconfdir}/nginx/conf.d/kaltura.conf.template
-%config(noreplace) %{_sysconfdir}/nginx/conf.d/ssl.conf.template
-%config(noreplace) %{_sysconfdir}/nginx/conf.d/nginx.conf.template
+%config %{_sysconfdir}/nginx/conf.d/ssl.conf.template
+%config %{_sysconfdir}/nginx/conf.d/nginx.conf.template
 %config(noreplace) %{_sysconfdir}/nginx/mime.types
 %config(noreplace) %{_sysconfdir}/nginx/fastcgi_params
 %config(noreplace) %{_sysconfdir}/nginx/scgi_params
@@ -369,6 +379,10 @@ if [ $1 -ge 1 ]; then
 fi
 
 %changelog
+* Thu Oct 27 2016 Jess Portnoy <jess.portnoy@kaltura.com> - 1.10.2-2
+- Since our configuration now includes directives that are needed for RTMP but have nothing to do with the vod module, configuration for Nginx will come from the platform-install-packages repo and not the nginx-vod-module
+- Remove noreplace attrib from kaltura nginx config templates
+
 * Wed Oct 26 2016 Jess Portnoy <jess.portnoy@kaltura.com> - 1.10.2-1
 - Upgrade to 1.10 [latest stable]
 - Nginx now compiled with the RTMP module to be used for Live streaming.
