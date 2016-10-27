@@ -67,3 +67,27 @@ http {
 	}
 	include /etc/nginx/conf.d/ssl.conf;
 }
+# RTMP configuration
+rtmp {
+    server {
+        listen 1935; # Listen on standard RTMP port
+        chunk_size 4000;
+
+        # This application is to accept incoming stream
+        application kLive {
+                live on; # Allows live input from above
+                dash on;
+                dash_path /var/tmp/dashme;
+
+                hls on; # Enable HTTP Live Streaming
+                hls_cleanup on;
+                hls_sync 100ms;
+                hls_fragment 2s;
+
+                hls_path /var/tmp/hlsme/;
+
+
+        }
+    }
+}
+
