@@ -155,7 +155,7 @@ KALTURA_NGINX_VOD_URI="https://github.com/kaltura/nginx-vod-module/archive/$KALT
 KALTURA_NGINX_AKAMAI_TOKEN_VALIDATE_VERSION=1.0.1
 KALTURA_NGINX_AKAMAI_TOKEN_VALIDATE_URI="https://github.com/kaltura/nginx-akamai-token-validate-module/archive/$KALTURA_NGINX_AKAMAI_TOKEN_VALIDATE_VERSION.zip"
 
-NGINX_VTS_VERSION=v0.1.9
+NGINX_VTS_VERSION=v0.1.10
 NGINX_VTS_URI="https://github.com/vozlt/nginx-module-vts/archive/$NGINX_VTS_VERSION.zip"
 
 NGINX_RTMP_VERSION=v1.1.10

@@ -43,7 +43,7 @@ Requires(pre): pwdutils
 %define nginx_vod_module_ver 1.10
 %define nginx_secure_token_ver 1.1
 %define nginx_token_validate_ver 1.0.1
-%define nginx_vts_ver 0.1.9
+%define nginx_vts_ver 0.1.10
 %define nginx_rtmp_ver 1.1.10
 # end of distribution specific definitions
 
@@ -379,6 +379,9 @@ if [ $1 -ge 1 ]; then
 fi
 
 %changelog
+* Mon Nov 7 2016 Jess Portnoy <jess.portnoy@kaltura.com> - 1.10.2-3
+- VTS module version v0.1.10
+
 * Thu Oct 27 2016 Jess Portnoy <jess.portnoy@kaltura.com> - 1.10.2-2
 - Since our configuration now includes directives that are needed for RTMP but have nothing to do with the vod module, configuration for Nginx will come from the platform-install-packages repo and not the nginx-vod-module
 - Remove noreplace attrib from kaltura nginx config templates

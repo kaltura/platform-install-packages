@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 12.4.0
-Release: 11
+Release: 12
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -315,6 +315,22 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Nov 7 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 12.4.0-12
+- PLAT-6135 - Get end date of last event of a series
+- PLAT-6164 - events orderby name is missing
+- PLAT-6215 - 2 factor authentication feature
+- SUP-9163 - first status of a user
+- SUP-9229 - API Error metadata.list
+- SUP-9337 - Captions on iPhone not displaying since KS is missing the 'disableentitlementforentry' priviliedge
+- PLAT-6197 - List response filter does not return new resources added after creation
+- PLAT-6198 - Recscheduling- Recurrence event - time of day is taken from current system time
+- PLAT-6218 - Change single event to recurring returns wrong event time.
+- PLAT-6255 - edit the resource of an occurrence
+- PLAT-6279 - Bulk Upload XML replacement deleted entry's original thumbnails
+- PLAT-6268 - Weekly recurrence calculation
+- PLAT-6287 - Recurrence date is 31
+- PLAT-6305 - exporting schdule events in ICAL format results in incorrect dates
+
 * Mon Oct 10 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 12.4.0-1
 - Ver Bounce to 12.4.0
 
