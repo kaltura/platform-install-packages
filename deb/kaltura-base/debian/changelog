@@ -1,3 +1,22 @@
+kaltura-base (12.4.0-2) lynx; urgency=low
+
+  * PLAT-6135 - Get end date of last event of a series
+  * PLAT-6164 - events orderby name is missing
+  * PLAT-6215 - 2 factor authentication feature
+  * SUP-9163 - first status of a user
+  * SUP-9229 - API Error metadata.list
+  * SUP-9337 - Captions on iPhone not displaying since KS is missing the 'disableentitlementforentry' priviliedge
+  * PLAT-6197 - List response filter does not return new resources added after creation
+  * PLAT-6198 - Recscheduling- Recurrence event - time of day is taken from current system time
+  * PLAT-6218 - Change single event to recurring returns wrong event time.
+  * PLAT-6255 - edit the resource of an occurrence
+  * PLAT-6279 - Bulk Upload XML replacement deleted entry's original thumbnails
+  * PLAT-6268 - Weekly recurrence calculation
+  * PLAT-6287 - Recurrence date is 31
+  * PLAT-6305 - exporting schdule events in ICAL format results in incorrect dates
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 07 Nov 2016 11:19:22 +0000
+
 kaltura-base (12.4.0-1) lynx; urgency=low
 
   * Switching to 12.4.0

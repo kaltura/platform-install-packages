@@ -64,10 +64,9 @@ if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
 	exit 3
 fi
 . $KALTURA_FUNCTIONS_RC
-
 if [ -n "$2" ];then
-	deploy_kmc_and_studio
-	exit $?
+        deploy_kmc_and_studio
+        exit $?
 fi
 
 if [ "$1" = "configure" ]; then
@@ -247,4 +246,8 @@ EOF
 		/etc/init.d/monit restart
 	fi
 	send_install_becon `basename $0` $TIMEZ install_success 0 
+elif [ -n "$2" ];then
+	deploy_kmc_and_studio
+	exit $?
 fi
+

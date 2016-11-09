@@ -1,3 +1,9 @@
+kaltura-db (12.4.0-1) lynx; urgency=low
+
+  * fix dpkg-reconfigure flow 
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Wed, 02 Nov 2016 12:53:58 +0000
+
 kaltura-db (12.0.0-1) lynx; urgency=low
 
   * Correctly set studio.ini and run uiconf deployment for it.

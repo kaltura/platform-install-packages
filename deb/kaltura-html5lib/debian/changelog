@@ -1,3 +1,64 @@
+kaltura-html5lib (2.49-1) lynx; urgency=low
+
+  * SUP-9210 - Iframe Embeds - Wheel of death on Android + Chrome
+  * FEC-6129 - Enable Shaka on Android
+  * FEC-6130 - Incorrect event type on livestats events
+  * FEC-6133 - LC - Endless spinner while changing streams (when hls-js is enabled)
+  * FEC-6138 - MPEG Dash:LC - Endless spinner while changing streams (dash)
+  * FEC-6140 - Lecture Capture multi streams: selected stream failed to be play, errors in console
+  * FEC-6091 - CLONE - Changing bitrate causes player to become unresponsive in Safari
+  * FEC-6112 - DFP Pre-Mid-Post:Big play button is missing after post-roll
+  * FEC-6107 - Replay Youtube Entry Displays Only Audio
+  * FEC-6118 - MPEG_Dash: Channel playlist: Player stuck after choosing dash clear entry after live entry
+  * FEC-6142 - Chromecast - (OTT content) can not replace media thumbnail in changemedia
+  * FEC-6143 - Chromecast - Not able to set chromecast proxy data in changemedia
+  * FEC-6128 - Upgrade hls.js to v0.5.48
+  * FEC-6127 - Upgrade Shaka to stable v2.0.0
+  * FEC-6166 - MPEG_Dash uDRM: Player stuck after switching entries in playlist
+  * FEC-6167 - MPEG_Dash uDRM: Any entry plays only first 4 seconds after switching in playlist
+  * SUP-8825 - iOS flavor transition in 2.45 jumps back to the video beginning for a split second
+  * SUP-9089 - Resgination Media - VAST trafficking doesn't respect skipBtn condition
+  * SUP-9251 - "Apply drop shadow to icons" is not responding
+  * FEC-6186 - Player not loaded on IE8 - only black box
+  * SUP-8163 - iPad video issue when switvhing tabs
+  * FEC-6164 - Change media of live linear not working
+  * FEC-6145 - DFP overlay: the video doesn't loaded , spinner appears all time
+  * FEC-6189 - DFP overlay - the video is not displayed after overlay Ad starts
+  * FEC-6196 - Vast overlay is not displayed
+  * FEC-6175 - Regression: Video stack loading with DFP overly (Regression)
+  * FEC-6200 - endless loop when change media while ad
+  * FEC-6215 - seek bar is not functioning after change media
+  * FEC-5874 - Playlist: "Play previous clip" button grey out (but clickable) even user plays not the first entry
+  * SUP-8939 - In IE11, In Full Screen, using 'iframe' embeds - Volume Drops to 0 %
+  * FEC-5981 - Call to action buttons are not working
+  * SUP-9452 - Companion Ad Issue
+  * FEC-6208 - HLS -JS - DFP - Playlist is disabled during the video
+  * SUP-7774 - Video Quality is degraded when casting to AirPlay from iOS app
+  * FEC-6170 - [Web 3 Player] Unable to load captions file although Captions enabled
+  * FEC-6177 - MPEG_Dash uDRM: seek doesn't work in case of performing seek before tapping on play button(Win8.1-IE11 Only).
+  * FEC-6239 - Regression: HLSJS: Live with DVR: Video is not playing smooth after throttling the bandwidth
+  * Set max retry for handling errors
+  * Retrieving cue points - adding safe check
+  * add external proxyData for ott use case
+  * Fix default CC thumbnail preview
+  * Do not load hlsjs on SDK
+  * Fix invalid $_SERVER user agent access
+  * Change to getLicenseData API. For OTT offline registration without flavorId
+  * Fix getLicenseData on php < 5.4.0
+  * Merge ccAds branch
+  * Merge DualVideo branch
+  * Add printouts to IMA loading
+  * Do not reload the IMA lib if already available
+  * Fixed a problem where a TypeError was fired after playback switches to the next playback item in a playlist
+  * disable shaka on Android
+  * Select base, main and high profiles when forcing using "Kaltura.ForceHighResFlavors"
+  * peer5 plugin update
+  * Re-add DRM mime type selection to native SDK
+  * Fix playlist with ads get stuck on changeMedia
+  * Remove HLS-IE8 condition from UIConfResult.php
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Thu, 03 Nov 2016 14:27:39 +0000
+
 kaltura-html5lib (2.48-1) lynx; urgency=low
 
   * SUP-8883 - V2 player custom styles "Button's icon color" are not saved
