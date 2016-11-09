@@ -3,7 +3,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
 Version: v2.49
-Release: 1
+Release: 2
 Epoch: 0 
 License: AGPLv3+
 Group: Server/Platform 

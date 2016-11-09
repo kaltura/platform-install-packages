@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 12.4.0
-Release: 12
+Release: 13
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -315,6 +315,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Tue Nov 8 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 12.4.0-13
+- Fix Sphinx config https://github.com/kaltura/server/pull/4869/files
+
 * Mon Nov 7 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 12.4.0-12
 - PLAT-6135 - Get end date of last event of a series
 - PLAT-6164 - events orderby name is missing
