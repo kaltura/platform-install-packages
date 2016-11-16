@@ -29,7 +29,7 @@ RUN yum install -y kaltura-server
 ADD docker/install/* /root/install/
 RUN chmod +x /root/install/install.sh
 
-EXPOSE 80 443 1935
+EXPOSE 80 443 1935 88
 
 
 # start services
