@@ -102,6 +102,7 @@ Configure memcached server
 =======
 ```
 echo "select memc_servers_set('<global memcache host>:<global memcache port>');" > /var/lib/mysql/mysql.init
+echo "select memc_servers_behavior_set('MEMCACHED_BEHAVIOR_NO_BLOCK', 1);" >> /var/lib/mysql/mysql.init
 chown mysql:mysql /var/lib/mysql/mysql.init
 ```
 
@@ -110,6 +111,12 @@ Configure init script
 Add to my.cnf in [mysqld] section:
 ```
 init-file=/var/lib/mysql/mysql.init
+```
+
+Restart MySQL
+=======
+```
+service mysqld restart
 ```
 
 Install Kaltura Triggers

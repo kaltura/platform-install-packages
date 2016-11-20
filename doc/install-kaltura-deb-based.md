@@ -7,7 +7,7 @@ The processes was tested on Debian 8 and Ubuntu 14.04 but is expected to work on
 [Kaltura Inc.](http://corp.kaltura.com) also provides commercial solutions and services including pro-active platform monitoring, applications, SLA, 24/7 support and professional services. If you're looking for a commercially supported video platform  with integrations to commercial encoders, streaming servers, eCDN, DRM and more - Start a [Free Trial of the Kaltura.com Hosted Platform](http://corp.kaltura.com/free-trial) or learn more about [Kaltura' Commercial OnPrem Edition™](http://corp.kaltura.com/Deployment-Options/Kaltura-On-Prem-Edition). Please note that this service in only offered for RHEL based distros. 
 
 #### Table of Contents
-[Prerequisites](https://github.com/kaltura/platform-install-packages/blob/master/doc/pre-requisites.md)
+[Prerequites](https://github.com/kaltura/platform-install-packages/blob/master/doc/pre-requisites.md)
 
 [Step-by-step Installation](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-deb-based.md#step-by-step-installation)
 
@@ -35,12 +35,10 @@ Kaltura requires certain ports to be open for proper operation. [See the list of
 If you're just testing and don't mind an open system, you can use the below to disbale iptables altogether:
 ```bash
 iptables -F
-service iptables stop
-chkconfig iptables off
 ```
 #### Disable SELinux - REQUIRED
 **Currently Kaltura doesn't properly support running with SELinux, things will break if you don't set it to permissive**.
-
+If your instances has it enabled [by default Debian and Ubuntu does not enable SELinux], run:
 ```bash
 setenforce permissive
 ```
@@ -73,7 +71,7 @@ deb http://security.debian.org/ wheezy/updates main
 
 IMPORTANT NOTE: 
 
-depending on your current Apache configuration, you may need to disable your default site configuration.
+If you had a pre-install Apache on the machine, depending on your current Apache configuration, you may need to disable your default site configuration.
 
 Use:
 ```
@@ -164,6 +162,12 @@ And install as described above.
 
 ## Upgrade Kaltura
 *This will only work if the initial install was using this packages based install, it will not work for old Kaltura deployments using the PHP installers*
+
+Edit /etc/apt/sources.list.d/kaltura.list so that it reads:
+```
+deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/debian lynx main
+```
+
 ```bash
 # aptitude update
 # aptitude install ~Nkaltura
@@ -176,8 +180,9 @@ And install as described above.
 Use this in cases where you want to clear the database and start from fresh.
 ```bash
 # /opt/kaltura/bin/kaltura-drop-db.sh
-# aptitude purge "~Nkaltura"
+# aptitude purge ~Nkaltura
 # rm -rf /opt/kaltura
+# rm -rf /etc/kaltura.d
 ```
 
 ## Troubleshooting

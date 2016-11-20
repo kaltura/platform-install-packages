@@ -1,5 +1,5 @@
 # Deploy Local Repository for Offline Install
-This quick guide describes the steps required for creating and deploying Kaltura Install Packages Repository locally for offline installations (for cases where the environment you’re deploying on is not connected to the internet).
+This quick guide describes the steps required for creating and deploying Kaltura Install Packages Repository locally for offline installations (for cases where the environment you're deploying on is not connected to the internet).
 
 ### Before You Get Started Notes
 
@@ -11,8 +11,13 @@ This quick guide describes the steps required for creating and deploying Kaltura
 
 ## Download the repository
 ```
-# wget -r http://installrepo.kaltura.org/releases
-# cp -r installrepo.kaltura.org/releases/$CORE_VER/RPMS  %LOCAL_PATH%
+# wget -r http://installrepo.origin.kaltura.org/releases
+# cp -r installrepo.origin.kaltura.org/releases/$VERSION/RPMS  /path/to/local/repo
+```
+
+If you want to only mirror one version, you can also do:
+```
+wget -r --level=0 -E --ignore-length --reject="index.html*" -x -k -p -erobots=off -np -N http://installrepo.origin.kaltura.org/releases/$VERSION/
 ```
 
 ## Create the local repository file

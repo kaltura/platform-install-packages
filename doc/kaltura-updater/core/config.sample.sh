@@ -18,11 +18,13 @@ RELEASES="$RELEASES gemini_2013_07_16_1"
 MYSQL_ROOT="root"
 MYSQL_ROOT_PW=""
 
-EXPORT_PATH="exports"
+# Change to full path where the exports should be stored
+EXPORT_PATH="/opt/kaltura-updater/exports"
+# Change to full path where the logs should be stored
+LOG_PATH="/opt/kaltura-updater/logs"
 
+# Change to full path where your new kaltura is installed, most likely /opt/kaltura
 KALTURA_INSTALL="/opt/kaltura"
-
-LOG_PATH="/root/kaltura-inst/logs"
-
-SERVICE_URL="http://[host]"
 WEB_DIR="/opt/kaltura/web"
+SERVICE_URL="http://[host]"
+

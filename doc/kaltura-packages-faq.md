@@ -32,6 +32,15 @@ If you've lost your installation answers file, you can recreate one using the [K
 # dpkg-reconfigure kaltura-batch
 ```
 
+In addition, when changing the CDN hostname, the kaltura.delivery_profile table must be updated.
+```
+# mysql -h$DB1_HOST -u$DB1_USER -p$DB1_PASS $DB1_NAME
+
+mysql> select id,name,url,host_name from delivery_profile;
+```
+Then use update statements to reset the url and hostname.
+
+
 ### Deploy Local Repository for Offline Install
 
 On rare ocaasions, you may encounter the need to deploy Kaltura on an offline environment where internet connection is not available, and thus you can't reach the Kaltura packages install repository (http://installrepo.kaltura.org/releases/).
