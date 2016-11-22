@@ -1,3 +1,40 @@
+kaltura-html5lib (2.50-1) lynx; urgency=low
+
+  * FEC-6260 - Regression: DFP Pre-mid-post: Video is playing 5 seconds with spinner during 10-15th seconds (right before the midrol)
+  * FEC-6260 - Regression: DFP Pre-mid-post: Video is playing 5 seconds with spinner during 10-15th seconds (right before the midrol)
+  * SUP-9527 - Player info plugin displaying number of impressions instead of number of plays
+  * SUP-9648 - Issue is in udrm in IE
+  * FEC-6242 - Silver light error msg on Edge browser - Player is not uploaded
+  * FEC-6245 - DFP pre-roll with skip: "Skip Ad" button displayed twice,if click on Ad
+  * SUP-9586 - Slow initialization of video playback
+  * Add support to nativeVersion in GetLicenedLinks.js reg exp
+  * CC Receiver - returning to dynamic loading of mwEmbedLoader
+  * Webc 734 polls only
+  * give force pause in changeMedia
+  * Fixing isInSequence var after AdError in CC
+  * Revert some CC module loading optimisations
+  * Reciever performance improvements
+  * Unload Chromecast media player immediately on changeMedia
+  * Show splash screen on IDLE or change media on Chromecast
+  * Send raw kaltura plugin data to chrome cast
+  * SUP-9527 - Player info plugin displaying number of impressions instead of number of plays
+  * SUP-9648 - Issue is in udrm in IE
+  * FEC-6242 - Silver light error msg on Edge browser - Player is not uploaded
+  * FEC-6245 - DFP pre-roll with skip: "Skip Ad" button displayed twice,if click on Ad
+  * SUP-9586 - Slow initialization of video playback
+  * Add support to nativeVersion in GetLicenedLinks.js reg exp
+  * CC Receiver - returning to dynamic loading of mwEmbedLoader
+  * Webc 734 polls only
+  * give force pause in changeMedia
+  * Fixing isInSequence var after AdError in CC
+  * Revert some CC module loading optimisations
+  * Reciever performance improvements
+  * Unload Chromecast media player immediately on changeMedia
+  * Show splash screen on IDLE or change media on Chromecast
+  * Send raw kaltura plugin data to chrome cast
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Tue, 22 Nov 2016 17:09:41 +0000
+
 kaltura-html5lib (2.48-1) lynx; urgency=low
 
   * SUP-8883 - V2 player custom styles "Button's icon color" are not saved

@@ -1,3 +1,21 @@
+kaltura-base (12.5.0-2) lynx; urgency=low
+
+  * PLAT-6348 - Add ReplacedEntryId Xsl variable
+  * SUP-8727 - Deleting CaptureSpace Quiz entry with presentation removes presentation from original entry
+  * SUP-9501 - Query - in the KMC - Entitlements Settings are empty
+  * SUP-9451 - Long Conversion Duration for Clipped/trimmed Content - 12H-18H
+  * PLAT-5983 - Sphinx improvement - add partnerId to privacy_by_contexts
+  * PLAT-6338 - Multi-Audio: audioLanguage - add label tag to manifest - HLS 
+  * PLAT-6412 - add KalturaBaseEntryBaseFilter userIdNotIn field
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Tue, 22 Nov 2016 17:35:16 +0000
+
+kaltura-base (12.5.0-1) lynx; urgency=low
+
+  * Switching to 12.5.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Wed, 09 Nov 2016 14:40:55 +0000
+
 kaltura-base (12.4.0-1) lynx; urgency=low
 
   * Switching to 12.4.0
