@@ -2,8 +2,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.49
-Release: 2
+Version: v2.50
+Release: 1
 Epoch: 0 
 License: AGPLv3+
 Group: Server/Platform 
@@ -81,6 +81,40 @@ find /opt/kaltura/web/html5/html5lib -type d -name cache -exec chown -R 48 {} \;
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Tue Nov 22 2016 Jess Portnoy <jess.portnoy@kaltura.com> - v2.50-1
+- FEC-6260 - Regression: DFP Pre-mid-post: Video is playing 5 seconds with spinner during 10-15th seconds (right before the midrol)
+- FEC-6260 - Regression: DFP Pre-mid-post: Video is playing 5 seconds with spinner during 10-15th seconds (right before the midrol)
+- SUP-9527 - Player info plugin displaying number of impressions instead of number of plays
+- SUP-9648 - Issue is in udrm in IE
+- FEC-6242 - Silver light error msg on Edge browser - Player is not uploaded
+- FEC-6245 - DFP pre-roll with skip: "Skip Ad" button displayed twice,if click on Ad
+- SUP-9586 - Slow initialization of video playback
+- Add support to nativeVersion in GetLicenedLinks.js reg exp
+- CC Receiver - returning to dynamic loading of mwEmbedLoader
+- Webc 734 polls only
+- give force pause in changeMedia
+- Fixing isInSequence var after AdError in CC
+- Revert some CC module loading optimisations
+- Reciever performance improvements
+- Unload Chromecast media player immediately on changeMedia
+- Show splash screen on IDLE or change media on Chromecast
+- Send raw kaltura plugin data to chrome cast
+- SUP-9527 - Player info plugin displaying number of impressions instead of number of plays
+- SUP-9648 - Issue is in udrm in IE
+- FEC-6242 - Silver light error msg on Edge browser - Player is not uploaded
+- FEC-6245 - DFP pre-roll with skip: "Skip Ad" button displayed twice,if click on Ad
+- SUP-9586 - Slow initialization of video playback
+- Add support to nativeVersion in GetLicenedLinks.js reg exp
+- CC Receiver - returning to dynamic loading of mwEmbedLoader
+- Webc 734 polls only
+- give force pause in changeMedia
+- Fixing isInSequence var after AdError in CC
+- Revert some CC module loading optimisations
+- Reciever performance improvements
+- Unload Chromecast media player immediately on changeMedia
+- Show splash screen on IDLE or change media on Chromecast
+- Send raw kaltura plugin data to chrome cast
+
 * Thu Nov 3 2016 Jess Portnoy <jess.portnoy@kaltura.com> - v2.49-1
 - SUP-9210 - Iframe Embeds - Wheel of death on Android + Chrome
 - FEC-6129 - Enable Shaka on Android

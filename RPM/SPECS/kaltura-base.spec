@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 12.5.0
-Release: 3
+Release: 4
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -315,6 +315,15 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Tue Nov 22 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 12.5.0-4
+- PLAT-6348 - Add ReplacedEntryId Xsl variable
+- SUP-8727 - Deleting CaptureSpace Quiz entry with presentation removes presentation from original entry
+- SUP-9501 - Query - in the KMC - Entitlements Settings are empty
+- SUP-9451 - Long Conversion Duration for Clipped/trimmed Content - 12H-18H
+- PLAT-5983 - Sphinx improvement - add partnerId to privacy_by_contexts
+- PLAT-6338 - Multi-Audio: audioLanguage - add label tag to manifest - HLS 
+- PLAT-6412 - add KalturaBaseEntryBaseFilter userIdNotIn field
+
 * Wed Nov 9 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 12.5.0-1
 - Ver Bounce to 12.5.0
 
