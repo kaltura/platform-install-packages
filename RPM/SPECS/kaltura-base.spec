@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 12.5.0
-Release: 4
+Version: 12.6.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -315,6 +315,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Thu Nov 24 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 12.6.0-1
+- Ver Bounce to 12.6.0
+
 * Tue Nov 22 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 12.5.0-4
 - PLAT-6348 - Add ReplacedEntryId Xsl variable
 - SUP-8727 - Deleting CaptureSpace Quiz entry with presentation removes presentation from original entry
