@@ -3,16 +3,18 @@
 %define media_server_version 4.3.1.5
 %define kaltura_prefix /opt/kaltura
 %define use_systemd (0%{?fedora} && 0%{?fedora} >= 18) || (0%{?rhel} && 0%{?rhel} >= 7)
+%define kaltura_user	kaltura
+%define kaltura_group	kaltura
 
 Summary: Kaltura Open Source Video Platform - Live Streaming Server  
 Name: kaltura-live
 Version: 12.6.0
-Release: 4
+Release: 5
 License: AGPLv3+
 Group: Server/Platform 
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires: java-1.8.0-openjdk,ant
+Requires: java-1.8.0-openjdk,ant, kaltura-monit, kaltura-base
 BuildRequires: unzip
 Source0: WowzaStreamingEngine-%{wowza_version}-linux-x64-installer.run
 Source1: https://github.com/kaltura/media-server/releases/download/rel-%{media_server_version}/KalturaWowzaServer-install-%{media_server_version}.zip
@@ -22,7 +24,7 @@ Source4: build.xml
 Source5: configure.xsl
 Source6: hdfvr.xml
 Source7: oflaDemo.xml
-Source8: wowza.template.rc
+Source8: wowza.rc
 
 
 %description
@@ -44,14 +46,13 @@ rm -rf %{buildroot}
 
 %install
 mkdir -p $RPM_BUILD_ROOT%{kaltura_prefix}/var/tmp $RPM_BUILD_ROOT%{kaltura_prefix}/var/live/dvr $RPM_BUILD_ROOT%{wowza_prefix}/conf/oflaDemo $RPM_BUILD_ROOT%{wowza_prefix}/applications/oflaDemo $RPM_BUILD_ROOT%{wowza_prefix}/transcoder/templates $RPM_BUILD_ROOT%{kaltura_prefix}/app/configurations/monit/monit.avail
-chmod +x %{SOURCE0}
-cp %{SOURCE0} $RPM_BUILD_ROOT%{kaltura_prefix}/var/tmp
+#chmod +x %{SOURCE0}
+#cp %{SOURCE0} $RPM_BUILD_ROOT%{kaltura_prefix}/var/tmp
 unzip -o %{SOURCE1} -d $RPM_BUILD_ROOT%{kaltura_prefix}/var/tmp
-mv $RPM_BUILD_ROOT%{kaltura_prefix}/var/tmp/lib/* $RPM_BUILD_ROOT%{wowza_prefix}/
+mv $RPM_BUILD_ROOT%{kaltura_prefix}/var/tmp/lib $RPM_BUILD_ROOT%{wowza_prefix}/
 mv  $RPM_BUILD_ROOT%{kaltura_prefix}/var/tmp/build.xml $RPM_BUILD_ROOT%{wowza_prefix}/
 mv  $RPM_BUILD_ROOT%{kaltura_prefix}/var/tmp/configure.xsl $RPM_BUILD_ROOT%{wowza_prefix}/
 mv  $RPM_BUILD_ROOT%{kaltura_prefix}/var/tmp/register_media_server.php $RPM_BUILD_ROOT%{wowza_prefix}/
-rm -rf $RPM_BUILD_ROOT%{kaltura_prefix}/var/tmp/lib/
 cp %{SOURCE4} %{SOURCE5} $RPM_BUILD_ROOT%{wowza_prefix}/
 cp %{SOURCE6} $RPM_BUILD_ROOT%{wowza_prefix}/transcoder/templates/
 cp %{SOURCE7} $RPM_BUILD_ROOT%{wowza_prefix}/conf/oflaDemo/Application.xml
@@ -76,6 +77,11 @@ and then edit /etc/selinux/config to make the change permanent."
 		exit 1;
 	fi
 fi
+# create user/group, and update permissions
+getent group %{kaltura_group} >/dev/null || groupadd -r %{kaltura_group} -g7373 2>/dev/null
+getent passwd %{kaltura_user} >/dev/null || useradd -m -r -u7373 -d %{prefix} -s /bin/bash -c "Kaltura server" -g %{kaltura_group} %{kaltura_user} 2>/dev/null
+
+usermod -g %{kaltura_group} %{kaltura_user} 2>/dev/null || true
 %post
 
 %preun
@@ -83,13 +89,15 @@ fi
 %postun
 
 %files
-%{kaltura_prefix}/var/tmp/WowzaStreamingEngine-%{wowza_version}-linux-x64-installer.run
+#%{kaltura_prefix}/var/tmp/WowzaStreamingEngine-%{wowza_version}-linux-x64-installer.run
 %{wowza_prefix}
 %config %{wowza_prefix}/conf/oflaDemo/Application.xml
 %config %{wowza_prefix}/transcoder/templates/hdfvr.xml
 %config %{wowza_prefix}/configure.xsl
 %config %{wowza_prefix}/build.xml
-%config %{kaltura_prefix}/app/configurations/monit/monit.avail/wowza.template.rc
+%config %{kaltura_prefix}/app/configurations/monit/monit.avail/wowza.rc
+%defattr(-, %{kaltura_user}, %{kaltura_group} , 0775)
+%dir %{kaltura_prefix}/var/live/dvr
 
 %if %{use_systemd}
 %{_unitdir}/WowzaStreamingEngine.service
