@@ -15,8 +15,9 @@ Group: Server/Platform
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires: java-1.8.0-openjdk,ant, kaltura-monit, kaltura-base
+BuildArch: noarch
 BuildRequires: unzip
-Source0: WowzaStreamingEngine-%{wowza_version}-linux-x64-installer.run
+#Source0: WowzaStreamingEngine-%{wowza_version}-linux-x64-installer.run
 Source1: https://github.com/kaltura/media-server/releases/download/rel-%{media_server_version}/KalturaWowzaServer-install-%{media_server_version}.zip
 Source2: WowzaStreamingEngine.service
 Source3: WowzaStreamingEngineManager.service
