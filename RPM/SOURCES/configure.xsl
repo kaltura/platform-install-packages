@@ -458,6 +458,10 @@
 										<Name>sanjoseCacheControlMediaChunk</Name>
 										<Value>max-age=86400</Value>
 									</Property>
+									<Property>
+										<Name>cupertinoUserHTTPHeaders</Name>
+										<Value>Access-Control-Allow-Origin: *</Value>
+									</Property>
 								</xsl:with-param>
 							</xsl:call-template>
 						</xsl:when>
