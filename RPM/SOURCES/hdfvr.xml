@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Root>
+	<Transcode>
+		<Encodes>
+			<!-- Example Encode block for source, not required unless Member of StreamNameGroup. -->
+			<Encode>
+				<Enable>true</Enable>
+				<Name>aac</Name>
+				<StreamName>mp4:${SourceStreamName}</StreamName>
+				<Video>
+					<!-- H.264, PassThru, Disable -->
+					<Codec>PassThru</Codec>
+					<Bitrate>${SourceVideoBitrate}</Bitrate>
+					<Parameters>
+					</Parameters>
+				</Video>
+				<Audio>
+					<!-- AAC, PassThru, Disable -->
+					<Codec>AAC</Codec>
+					<Bitrate>48000</Bitrate>
+				</Audio>
+				<Properties>
+				</Properties>
+			</Encode>
+		</Encodes>
+		<Decode>
+		</Decode>
+		<StreamNameGroups>
+		</StreamNameGroups>
+		<Properties>
+		</Properties>
+	</Transcode>
+</Root>

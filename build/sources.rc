@@ -293,3 +293,7 @@ PHP_VERSION="7.0.0RC7"
 PHP7_URI="https://downloads.php.net/~ab/php-$PHP_VERSION.tar.gz"
 PHP_MEMCACHE_EXT_VERSION="https://github.com/websupport-sk/pecl-memcache/archive/php7.zip"
 PHP_MEMCACHE_EXT_URI="https://github.com/Sean-Der/pecl-networking-ssh2/archive/php7.zip"
+
+# Wowza
+WOWZA_VERSION="4.3.0"
+WOWZA_URI="https://www.wowza.com/downloads/WowzaStreamingEngine-`echo $WOWZA_VERSION|sed 's@\.@-@g'`/WowzaStreamingEngine-$WOWZA_VERSION-linux-x64-installer.run"
