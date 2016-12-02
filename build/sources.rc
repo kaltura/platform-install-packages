@@ -297,3 +297,12 @@ PHP_MEMCACHE_EXT_URI="https://github.com/Sean-Der/pecl-networking-ssh2/archive/p
 # Wowza
 WOWZA_VERSION="4.3.0"
 WOWZA_URI="https://www.wowza.com/downloads/WowzaStreamingEngine-`echo $WOWZA_VERSION|sed 's@\.@-@g'`/WowzaStreamingEngine-$WOWZA_VERSION-linux-x64-installer.run"
+
+# live analytics 
+LIVE_ANALYTICS_VERSION=
+LIVE_ANALYTICS_URI=""
+
+# live analytics frontend
+LIVE_ANALYTICS_FRONT_END_VERSION=v2.6
+LIVE_ANALYTICS_FRONT_END_URI="https://github.com/kaltura/live-analytics-front-end/releases/download/$LIVE_ANALYTICS_FRONT_END_VERSION/$LIVE_ANALYTICS_FRONT_END_VERSION.zip"
+LIVE_ANALYTICS_FRONT_END_PACKAGE_NAME="kaltura-live-analytics-front"
