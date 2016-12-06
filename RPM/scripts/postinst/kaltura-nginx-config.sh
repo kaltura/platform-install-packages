@@ -53,6 +53,9 @@ if [ -n "$1" -a -r "$1" ];then
         ANSFILE=$1
         verify_user_input $ANSFILE
         . $ANSFILE
+	if [ -z "$RTMP_PORT" ];then
+                RTMP_PORT=1935
+        fi
         export ANSFILE
 else
 	echo -e "${CYAN}Kaltura API host [${YELLOW}`hostname`${CYAN}]:${NORMAL} "
