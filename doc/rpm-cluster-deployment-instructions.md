@@ -114,7 +114,7 @@ The NFS is the shared network storage between all machines in the cluster. To le
 ```
 # yum install nfs-utils-lib ntp
 # chkconfig nfs on
-# chkconfig ntp on
+# chkconfig ntpd on
 # service ntpd start
 # service rpcbind start
 # service nfs start

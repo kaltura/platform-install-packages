@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.32
-Release: 1
+Release: 3
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -82,6 +82,9 @@ find %{_sysconfdir}/logrotate.d -type l -name "kaltura_*" -exec rm {} \;
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Tue Dec 6 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.32-3
+- Added RTMP port selection prompt to kaltura-nginx-config.sh, default is 1935.
+
 * Tue Nov 29 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.32-1
 - Added kaltura-live-config.sh
 

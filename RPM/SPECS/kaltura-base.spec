@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 12.6.0
-Release: 5
+Release: 6
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -317,6 +317,14 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Tue Dec 6 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 12.6.0-6
+- SUP-9130 - Cannot download media via KMS
+- SUP-9437 - WN - 414 Request-URI Too Large errors on player version 2.48.1
+- PLAT-6415 - Timeout when generating 'Business-Process Cases' table in admin console
+- PLAT-5783 - Template Entry Overrides Irrelevant Field if New Entry Type is External Media
+- PLAT-6419 - Recscheduling - Publish - VOD Entry is not published
+- PLAT-6428 - Recscheduling - Recurrence - Weekly series missing two last events (specific case)
+
 * Thu Nov 24 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 12.6.0-1
 - Ver Bounce to 12.6.0
 

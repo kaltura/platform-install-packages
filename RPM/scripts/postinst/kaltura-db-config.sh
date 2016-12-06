@@ -93,6 +93,15 @@ if ! check_mysql_settings $MYSQL_SUPER_USER $MYSQL_SUPER_USER_PASSWD $MYSQL_HOST
 			exit 8
 		fi
 	else
+		echo "Your MySQL settings are incorrect, please set the following in your MySQL conf file [my.cnf]:
+lower_case_table_names = 1
+innodb_file_per_table
+innodb_log_file_size=32M
+open_files_limit = 20000
+max_allowed_packet = 16M
+
+Restart the MySQL daemon and re-run the config script.
+"
 		exit 7
 	fi
 fi

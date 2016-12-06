@@ -14,7 +14,7 @@ License: AGPLv3+
 Group: Server/Platform 
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires: java-1.8.0-openjdk,ant, kaltura-monit, kaltura-base
+Requires: java-1.8.0-openjdk,ant,ant-trax kaltura-monit, kaltura-base
 BuildArch: noarch
 BuildRequires: unzip
 #Source0: WowzaStreamingEngine-%{wowza_version}-linux-x64-installer.run

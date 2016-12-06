@@ -1,7 +1,7 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmc
-Version: v5.40.3
-Release: 6
+Version: v5.41.1
+Release: 1
 Summary: Kaltura Management Console
 
 Group: System Management	
@@ -83,6 +83,10 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Tue Dec 6 2016 Jess Portnoy <jess.portnoy@kaltura.com> - v5.41.1-1
+- PLAT-6257 - Add Average Accumulative Storage to Publisher Bandwidth and Storage Report
+- PLAT-6211 - create "re-generate token" button in KMC
+
 * Tue Nov 22 2016 Jess Portnoy <jess.portnoy@kaltura.com> - v5.40.3-6
 - Ver bounce of HTML5 to v2.50
 

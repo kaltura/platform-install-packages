@@ -72,6 +72,11 @@ else
 	if [ -z "$VOD_PACKAGER_PORT" ];then
 		VOD_PACKAGER_PORT=88
 	fi
+	echo -en "${CYAN}RTMP port to listen on [${YELLOW}1935${CYAN}]:${NORMAL} "
+	read -e RTMP_PORT
+	if [ -z "$RTMP_PORT" ];then
+		RTMP_PORT=1935
+	fi
 	echo -en "Would you like to configure Nginx with SSL?[Y/n]"
 	read IS_NGINX_SSL
 	if [ -z "$IS_NGINX_SSL" ];then
@@ -92,7 +97,7 @@ fi
 if [ -f /etc/nginx/nginx.conf ];then
 	mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.old
 fi
-sed -e 's#@STATIC_FILES_PATH@#/etc/nginx/static#g' -e "s#@VOD_PACKAGER_HOST@#$VOD_PACKAGER_HOST#g" -e "s#@VOD_PACKAGER_PORT@#$VOD_PACKAGER_PORT#g" -e "s#@LOG_DIR@#$LOG_DIR#" -e "s#@WWW_HOST@#$WWW_HOST#g" /etc/nginx/conf.d/nginx.conf.template > /etc/nginx/nginx.conf
+sed -e 's#@STATIC_FILES_PATH@#/etc/nginx/static#g' -e "s#@VOD_PACKAGER_HOST@#$VOD_PACKAGER_HOST#g" -e "s#@VOD_PACKAGER_PORT@#$VOD_PACKAGER_PORT#g" -e "s#@RTMP_PORT@#$RTMP_PORT#g" -e "s#@LOG_DIR@#$LOG_DIR#" -e "s#@WWW_HOST@#$WWW_HOST#g" /etc/nginx/conf.d/nginx.conf.template > /etc/nginx/nginx.conf
 sed -e 's#@STATIC_FILES_PATH@#/etc/nginx/static#g' /etc/nginx/conf.d/kaltura.conf.template > /etc/nginx/conf.d/kaltura.conf
 sed -i "s#@LOG_DIR@#$LOG_DIR#" /etc/logrotate.d/nginx
 

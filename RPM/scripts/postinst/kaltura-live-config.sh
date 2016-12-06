@@ -77,7 +77,7 @@ fi
 
 echo -e "${BRIGHT_BLUE}Fetching the Wowza archive...${NORMAL}"
 wget --quiet https://www.wowza.com/downloads/WowzaStreamingEngine-4-3-0/WowzaStreamingEngine-4.3.0-linux-x64-installer.run -O /tmp/WowzaStreamingEngine-4.3.0-linux-x64-installer.run
-
+chmod +x /tmp/WowzaStreamingEngine-4.3.0-linux-x64-installer.run
 echo -e "${BRIGHT_BLUE}Deploying Wowza, this may take a while...${NORMAL}"
 # this is incredibly moronic --prefix is a mandatory arg but no matter what you'll pass the prefix is always /usr/local
 /tmp/WowzaStreamingEngine-4.3.0-linux-x64-installer.run  --mode unattended --licensekey $WOWZA_LIC_KEY --silentInstallKey $WOWZA_SILENT_KEY --username kadmin --password $WOWZA_PASSWD --prefix /usr/local/

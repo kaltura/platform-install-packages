@@ -70,7 +70,7 @@ http {
 # RTMP configuration
 rtmp {
     server {
-        listen 1935; # Listen on standard RTMP port
+        listen @RTMP_PORT@; # Listen on standard RTMP port
         chunk_size 4000;
 
         # This application is to accept incoming stream
