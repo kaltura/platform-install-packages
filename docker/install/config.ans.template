@@ -31,3 +31,6 @@ WWW_HOST=
 CONFIG_CHOICE="0"
 IS_SSL="n"
 IS_NGINX_SSL="n"
+# Port to use with Nginx's RTMP module
+RTMP_PORT=1935
+

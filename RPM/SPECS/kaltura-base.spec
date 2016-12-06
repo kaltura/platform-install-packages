@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 12.6.0
-Release: 7
+Version: 12.7.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -317,6 +317,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Tue Dec 6 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 12.7.0-1
+- Ver Bounce to 12.7.0
+
 * Tue Dec 6 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 12.6.0-6
 - SUP-9130 - Cannot download media via KMS
 - SUP-9437 - WN - 414 Request-URI Too Large errors on player version 2.48.1
