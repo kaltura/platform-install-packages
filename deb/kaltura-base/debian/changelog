@@ -1,3 +1,20 @@
+kaltura-base (12.6.0-2) lynx; urgency=low
+
+  * SUP-9130 - Cannot download media via KMS
+  * SUP-9437 - WN - 414 Request-URI Too Large errors on player version 2.48.1
+  * PLAT-6415 - Timeout when generating 'Business-Process Cases' table in admin console
+  * PLAT-5783 - Template Entry Overrides Irrelevant Field if New Entry Type is External Media
+  * PLAT-6419 - Recscheduling - Publish - VOD Entry is not published
+  * PLAT-6428 - Recscheduling - Recurrence - Weekly series missing two last events (specific case)
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Tue, 06 Dec 2016 13:04:52 +0000
+
+kaltura-base (12.6.0-1) lynx; urgency=low
+
+  * Switching to 12.6.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Thu, 24 Nov 2016 21:42:20 +0000
+
 kaltura-base (12.5.0-2) lynx; urgency=low
 
   * PLAT-6348 - Add ReplacedEntryId Xsl variable

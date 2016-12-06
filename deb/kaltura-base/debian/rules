@@ -64,6 +64,8 @@ binary-indep: install
 	find  $(tree) -name "*.sh" -type f -exec chmod +x {} \;
 	sed -i 's@^IsmIndex@;IsmIndex@g' $(tree)/configurations/plugins.template.ini
 	sed -i "s#^;kmc_version = @KMC_VERSION@#kmc_version = $(KMC_VERSION)#g" $(tree)/configurations/local.template.ini
+	sed -i 's@^otp_required_partners\[\]@;otp_required_partners\[\]@g' $(tree)/configurations/local.template.ini
+	sed -i "s@^partner_otp_internal_ips@;partner_otp_internal_ips@g" $(tree)/configurations/local.template.ini
 	sed -i "s#^;html5_version = @HTML5LIB_VERSION@#html5_version = $(HTML5LIB_VERSION)#g" $(tree)/configurations/local.template.ini
 	sed -i "s#^;studio_version = @STUDIO_VERSION@#studio_version = $(HTML5_STUDIO_VERSION)#g" $(tree)/configurations/local.template.ini
 	sed -i "s#^;kdp3_wrapper_version = @KDP3_WRAPPER_VERSION@#kdp3_wrapper_version = $(KDP3WRAPPER_VERSION)#g" $(tree)/configurations/local.template.ini

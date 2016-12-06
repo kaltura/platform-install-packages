@@ -16,6 +16,12 @@ if [ "$1" = "configure" ]; then
         db_get 'kaltura-nginx/nginx_port'
         VOD_PACKAGER_PORT=$RET
 
+        db_input critical 'kaltura-nginx/rtmp_port' || true
+        db_go || true
+        db_get 'kaltura-nginx/rtmp_port'
+        RTMP_PORT=$RET
+
+
         db_get 'kaltura-nginx/kaltura_service_url'
         db_input critical 'kaltura-nginx/kaltura_service_url' || true
         db_go || true
@@ -44,7 +50,7 @@ if [ "$1" = "configure" ]; then
 	else
 		touch /opt/kaltura/nginx/conf/ssl.conf
 	fi
-        sed -e "s#@VOD_PACKAGER_HOST@#$VOD_PACKAGER_HOST#g" -e "s#@VOD_PACKAGER_PORT@#$VOD_PACKAGER_PORT#g" -e "s#@LOG_DIR@#/opt/kaltura/log/nginx#" -e "s#@WWW_HOST@#$WWW_HOST#g" /opt/kaltura/nginx/conf/nginx.conf.template > /opt/kaltura/nginx/conf/nginx.conf
+        sed -e "s#@VOD_PACKAGER_HOST@#$VOD_PACKAGER_HOST#g" -e "s#@VOD_PACKAGER_PORT@#$VOD_PACKAGER_PORT#g" -e "s#@RTMP_PORT@#$RTMP_PORT#g" -e "s#@LOG_DIR@#/opt/kaltura/log/nginx#" -e "s#@WWW_HOST@#$WWW_HOST#g" /opt/kaltura/nginx/conf/nginx.conf.template > /opt/kaltura/nginx/conf/nginx.conf
 	sed -e 's#@STATIC_FILES_PATH@#/opt/kaltura/nginx/static#g' /opt/kaltura/nginx/conf/kaltura.conf.template > /opt/kaltura/nginx/conf/kaltura.conf
         update-rc.d kaltura-nginx defaults || true
 

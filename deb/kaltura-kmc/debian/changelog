@@ -1,3 +1,10 @@
+kaltura-kmc (5.41.1-1) lynx; urgency=low
+
+  * PLAT-6257 - Add Average Accumulative Storage to Publisher Bandwidth and Storage Report
+  * PLAT-6211 - create "re-generate token" button in KMC
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Tue, 06 Dec 2016 13:08:51 +0000
+
 kaltura-kmc (5.40.3-5) lynx; urgency=low
 
   * Version bounce to align with kaltura-html5lib v2.50.

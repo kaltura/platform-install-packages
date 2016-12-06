@@ -8,6 +8,11 @@ Type: string
 Default: 88
 Description: Vhost port to listen on:
 
+Template: kaltura-nginx/rtmp_port
+Type: string
+Default: 1935
+Description: RTMP port to listen on:
+
 Template: kaltura-nginx/nginx_ssl_port
 Type: string
 Default: 8443
