@@ -15,7 +15,12 @@
 
 #set -o nounset                              # Treat unset variables as an error
 
-. /etc/kaltura.d/system.ini
+if [ -r /etc/kaltura.d/system.ini ];then
+    . /etc/kaltura.d/system.ini
+else
+    echo "ERROR: Missing $CONFIG_DIR/system.ini. Exiting.."
+    exit 3
+fi
 
 if [ $# -lt 1 ];then
 	echo "Usage: $0 <mysql_root_passwd>"
