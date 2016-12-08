@@ -16,34 +16,34 @@
     </target>
 
     <target  name="set-properties-from-system-ini"  if="system-ini-present">
-        <loadproperties srcfile="/etc/kaltura.d/system.ini" prefix="kaltura" />
-        <loadproperties srcfile="${kaltura.APP_DIR}/configurations/local.ini" prefix="kaltura" />
+        <loadproperties srcfile="/etc/kaltura.d/system.ini" />
+        <loadproperties srcfile="${APP_DIR}/configurations/local.ini" />
     </target>
 
     <target  name="extract-properties-from-ecdn-ini" if="ecdn-ini-present">
-        <loadproperties srcfile="/opt/kaltura/app/configurations/ecdn.ini" prefix="kaltura" />
+        <loadproperties srcfile="/opt/kaltura/app/configurations/ecdn.ini" />
     </target>
 
     <target name="retrieve-admin-secret-from-db" unless="kaltura.ADMIN_SECRET" depends="extract-properties-from-ecdn-ini, set-properties-from-system-ini">
 		<sql	driver="com.mysql.jdbc.Driver"
-				url="jdbc:mysql://${kaltura.DB1_HOST}:3306/${kaltura.DB1_NAME}"
-				userid="${kaltura.DB1_USER}"
-				password="${kaltura.DB1_PASS}"
+				url="jdbc:mysql://${DB1_HOST}:3306/${DB1_NAME}"
+				userid="${DB1_USER}"
+				password="${DB1_PASS}"
 				output="${basedir}/tmp/adminSecret.ini" print="true" showheaders="false" showtrailers="false">
 				<classpath>
 					<pathelement location="${basedir}/lib/mysql-connector-java-5.1.34.jar"/>
 				</classpath>
 				SELECT CONCAT('ADMIN_SECRET=', admin_secret) FROM partner WHERE id = -5;
 		</sql>
-		<loadproperties srcfile="${basedir}/tmp/adminSecret.ini" prefix="kaltura" />
+		<loadproperties srcfile="${basedir}/tmp/adminSecret.ini" />
 	</target>
 
     <target name="configure" depends="set-properties, retrieve-admin-secret-from-db, set-properties-from-system-ini, extract-properties-from-ecdn-ini">
 		<mkdir dir="${basedir}/tmp" />
 		<xslt reloadstylesheet="true" destdir="${basedir}/tmp" extension=".xml" style="${basedir}/configure.xsl" basedir="${wowza.install.dir}/conf" includes="Server.xml, Application.xml">
-			<param name="BASE_DIR" expression="${kaltura.BASE_DIR}" />
-			<param name="APP_URL" expression="${kaltura.apphome_url}" />
-			<param name="ADMIN_SECRET" expression="${kaltura.ADMIN_SECRET}" />
+			<param name="BASE_DIR" expression="${BASE_DIR}" />
+			<param name="APP_URL" expression="${apphome_url}" />
+			<param name="ADMIN_SECRET" expression="${ADMIN_SECRET}" />
 			<param name="HOSTNAME" expression="${HOSTNAME}" />
 		</xslt>
 		
@@ -72,7 +72,7 @@
 			<entry key="log4j.appender.kalturaAccess" value="org.apache.log4j.DailyRollingFileAppender" />
 			<entry key="log4j.appender.kalturaAccess.encoding" value="UTF-8" />
 			<entry key="log4j.appender.kalturaAccess.DatePattern" value="'.'yyyy-MM-dd" />
-			<entry key="log4j.appender.kalturaAccess.File" value="${kaltura.LOG_DIR}/kaltura_mediaserver.log" />
+			<entry key="log4j.appender.kalturaAccess.File" value="${LOG_DIR}/kaltura_mediaserver.log" />
 			<entry key="log4j.appender.kalturaAccess.layout" value="org.apache.log4j.PatternLayout" />
 			<entry key="log4j.appender.kalturaAccess.layout.ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss}][%t][%C:%M] %p - %m - (%F:%L) %n" />
 			
@@ -80,7 +80,7 @@
 			<entry key="log4j.appender.serverAccess" value="org.apache.log4j.DailyRollingFileAppender" />
 			<entry key="log4j.appender.serverAccess.encoding" value="UTF-8" />
 			<entry key="log4j.appender.serverAccess.DatePattern" value="'.'yyyy-MM-dd" />
-			<entry key="log4j.appender.serverAccess.File" value="${kaltura.LOG_DIR}/kaltura_mediaserver_access.log" />
+			<entry key="log4j.appender.serverAccess.File" value="${LOG_DIR}/kaltura_mediaserver_access.log" />
 			<entry key="log4j.appender.serverAccess.layout" value="com.wowza.wms.logging.ECLFPatternLayout" />
 			<entry key="log4j.appender.serverAccess.layout.Fields" value="x-severity,x-category,x-event;date,time,c-client-id,c-ip,c-port,cs-bytes,sc-bytes,x-duration,x-sname,x-stream-id,x-spos,sc-stream-bytes,cs-stream-bytes,x-file-size,x-file-length,x-ctx,x-comment" />
 			<entry key="log4j.appender.serverAccess.layout.Fields" value="date,time,tz,x-event,x-category,x-severity,x-status,x-ctx,x-comment,x-vhost,x-app,x-appinst,x-duration,s-ip,s-port,s-uri,c-ip,c-proto,c-referrer,c-user-agent,c-client-id,cs-bytes,sc-bytes,x-stream-id,x-spos,cs-stream-bytes,sc-stream-bytes,x-sname,x-sname-query,x-file-name,x-file-ext,x-file-size,x-file-length,x-suri,x-suri-stem,x-suri-query,cs-uri-stem,cs-uri-query" />
@@ -92,7 +92,7 @@
 			<entry key="log4j.appender.serverError" value="org.apache.log4j.DailyRollingFileAppender" />
 			<entry key="log4j.appender.serverError.encoding" value="UTF-8" />
 			<entry key="log4j.appender.serverError.DatePattern" value="'.'yyyy-MM-dd" />
-			<entry key="log4j.appender.serverError.File" value="${kaltura.LOG_DIR}/kaltura_mediaserver_error.log" />
+			<entry key="log4j.appender.serverError.File" value="${LOG_DIR}/kaltura_mediaserver_error.log" />
 			<entry key="log4j.appender.serverError.layout" value="com.wowza.wms.logging.ECLFPatternLayout" />
 			<entry key="log4j.appender.serverError.layout.Fields" value="x-severity,x-category,x-event;date,time,c-client-id,c-ip,c-port,cs-bytes,sc-bytes,x-duration,x-sname,x-stream-id,x-spos,sc-stream-bytes,cs-stream-bytes,x-file-size,x-file-length,x-ctx,x-comment" />
 			<entry key="log4j.appender.serverError.layout.OutputHeader" value="true" />
@@ -104,7 +104,7 @@
 			<entry key="log4j.appender.serverStats" value="org.apache.log4j.DailyRollingFileAppender" />
 			<entry key="log4j.appender.serverStats.encoding" value="UTF-8" />
 			<entry key="log4j.appender.serverStats.DatePattern" value="'.'yyyy-MM-dd" />
-			<entry key="log4j.appender.serverStats.File" value="${kaltura.LOG_DIR}/logs/wowzastreamingengine_stats.log" />
+			<entry key="log4j.appender.serverStats.File" value="${LOG_DIR}/logs/wowzastreamingengine_stats.log" />
 			<entry key="log4j.appender.serverStats.layout" value="com.wowza.wms.logging.ECLFPatternLayout" />
 			<entry key="log4j.appender.serverStats.layout.Fields" value="x-severity,x-category,x-event;date,time,c-client-id,c-ip,c-port,cs-bytes,sc-bytes,x-duration,x-sname,x-stream-id,x-spos,sc-stream-bytes,cs-stream-bytes,x-file-size,x-file-length,x-ctx,x-comment" />
 			<entry key="log4j.appender.serverStats.layout.OutputHeader" value="true" />

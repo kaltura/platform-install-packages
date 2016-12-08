@@ -9,7 +9,7 @@
 Summary: Kaltura Open Source Video Platform - Live Streaming Server  
 Name: kaltura-live
 Version: 12.6.0
-Release: 6
+Release: 7
 License: AGPLv3+
 Group: Server/Platform 
 URL: http://kaltura.org
