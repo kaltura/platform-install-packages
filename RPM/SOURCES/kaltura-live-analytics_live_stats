@@ -1,0 +1,1 @@
+* * * * * root /usr/sbin/logrotate -f /etc/logrotate.d/kaltura_live_stats >> /opt/kaltura/log/kaltura_live_stats_cron.log 2>&1

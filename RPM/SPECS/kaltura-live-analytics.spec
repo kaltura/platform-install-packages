@@ -2,7 +2,7 @@
 Summary: Kaltura Server release file and package configuration
 Name: kaltura-live-analytics
 Version: v0.5.26
-Release: 2
+Release: 3
 License: AGPLv3+
 Group: Server/Platform 
 URL: http://kaltura.org
@@ -15,9 +15,13 @@ Source5: https://github.com/kaltura/live_analytics/releases/download/%{version}/
 Source6: http://repo.maven.apache.org/maven2/com/sun/xml/ws/jaxws-ri/2.2.10/jaxws-ri-2.2.10.zip
 Source7: %{name}_nginx.conf
 Source8: https://raw.githubusercontent.com/kaltura/live_analytics/v0.5/setup/create_cassandra_tables.cql
+Source9: %{name}_register_log.sh
+Source10: %{name}_live_stats
+Source11: %{name}_rotate_live_stats.template
+Source12: %{name}_live-analytics-driver.sh
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildArch: noarch
-Requires: dsc22 cassandra22 tomcat java-1.8.0-openjdk kaltura-nginx
+Requires: dsc22 cassandra22 tomcat java-1.8.0-openjdk kaltura-nginx kaltura-spark
 
 %description
 Kaltura Server release file. This package contains yum 
@@ -30,7 +34,8 @@ GPG keys used to sign them.
 %build
 
 %install
-mkdir -p $RPM_BUILD_ROOT%{prefix}/data/geoip $RPM_BUILD_ROOT%{prefix}/lib $RPM_BUILD_ROOT/usr/share/tomcat/lib $RPM_BUILD_ROOT/var/lib/tomcat/webapps/ $RPM_BUILD_ROOT%{prefix}/app/configurations/cassandra
+mkdir -p $RPM_BUILD_ROOT%{prefix}/data/geoip $RPM_BUILD_ROOT%{prefix}/bin $RPM_BUILD_ROOT%{prefix}/lib $RPM_BUILD_ROOT/usr/share/tomcat/lib $RPM_BUILD_ROOT/var/lib/tomcat/webapps/ $RPM_BUILD_ROOT%{prefix}/app/configurations/live_analytics/cassandra $RPM_BUILD_ROOT%{prefix}/app/configurations/live_analytics/cron $RPM_BUILD_ROOT%{prefix}/app/configurations/live_analytics/logrotate
+
 tar zxf %{SOURCE0} -C $RPM_BUILD_ROOT%{prefix}/lib
 unzip -o -q %{SOURCE6} -d $RPM_BUILD_ROOT
 cp $RPM_BUILD_ROOT/jaxws-ri/lib/*jar $RPM_BUILD_ROOT/usr/share/tomcat/lib
@@ -39,7 +44,12 @@ cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/lib/config.template.properties
 cp %{SOURCE2} $RPM_BUILD_ROOT%{prefix}/lib/log4j.properties
 cp %{SOURCE3} $RPM_BUILD_ROOT/var/lib/tomcat/webapps/
 cp %{SOURCE4} %{SOURCE5} $RPM_BUILD_ROOT%{prefix}/lib
-cp %{SOURCE8} $RPM_BUILD_ROOT%{prefix}/app/configurations/cassandra
+cp %{SOURCE8} $RPM_BUILD_ROOT%{prefix}/app/configurations/live_analytics/cassandra
+chmod +x %{SOURCE9}
+cp %{SOURCE9} $RPM_BUILD_ROOT%{prefix}/bin/kaltura_register_log.sh
+cp %{SOURCE12} $RPM_BUILD_ROOT%{prefix}/bin/live-analytics-driver.sh
+cp %{SOURCE10} $RPM_BUILD_ROOT%{prefix}/app/configurations/live_analytics/cron/live_stats
+cp %{SOURCE11} $RPM_BUILD_ROOT%{prefix}/app/configurations/live_analytics/logrotate/live_stats.template
 
 %clean
 %{__rm} -rf %{buildroot}
@@ -52,9 +62,12 @@ done
 %files
 %dir %{prefix}/data/geoip
 %{prefix}/lib/*jar
+%{prefix}/bin/*
 %config %{prefix}/lib/config.template.properties
 %config %{prefix}/lib/log4j.properties
-%config %{prefix}/app/configurations/cassandra/*
+%config %{prefix}/app/configurations/live_analytics/cassandra/*
+%config %{prefix}/app/configurations/live_analytics/logrotate/*
+%config %{prefix}/app/configurations/live_analytics/cron/*
 /var/lib/tomcat/webapps/KalturaLiveAnalytics.war
 /usr/share/tomcat/lib/*jar
 

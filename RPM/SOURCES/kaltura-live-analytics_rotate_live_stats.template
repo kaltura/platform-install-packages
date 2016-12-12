@@ -1,0 +1,12 @@
+/opt/kaltura/log/nginx/live_access_log.gz{
+    nodateext
+    rotate 60
+    missingok
+    sharedscripts
+    postrotate
+        [ ! -f /var/run/nginx.pid ] || kill -USR1 `cat /var/run/nginx.pid`
+    endscript
+   lastaction
+    /opt/kaltura/bin/kaltura_register_log.sh @CASSANDRA_HOST@
+   endscript
+}
