@@ -94,7 +94,7 @@ rm -rf $WOWZA_PREFIX/applications/vod/
 
 sed 's@${com.wowza.wms.TuningHeapSizeDevelopment}@${com.wowza.wms.TuningHeapSizeProduction}@g' -i $WOWZA_PREFIX/conf/Tune.xml
 ant -Dbasedir=$WOWZA_PREFIX -f $WOWZA_PREFIX/build.xml
-php $WOWZA_PREFIX/register_media_server.php
+php $BASE_DIR/bin/register_media_server.php
 service WowzaStreamingEngine restart
 service kaltura-monit stop >> /dev/null 2>&1
 service kaltura-monit start
