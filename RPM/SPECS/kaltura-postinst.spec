@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.32
-Release: 4
+Release: 5
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -82,6 +82,10 @@ find %{_sysconfdir}/logrotate.d -type l -name "kaltura_*" -exec rm {} \;
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Thu Dec 8 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.32-4
+- Support installing Wowza in interactive mode
+- https://github.com/kaltura/platform-install-packages/pull/573
+
 * Tue Dec 6 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.32-3
 - Added RTMP port selection prompt to kaltura-nginx-config.sh, default is 1935.
 
