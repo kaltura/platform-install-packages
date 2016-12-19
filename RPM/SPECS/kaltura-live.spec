@@ -8,13 +8,14 @@
 
 Summary: Kaltura Open Source Video Platform - Live Streaming Server  
 Name: kaltura-live
-Version: 12.6.0
-Release: 6
+Version: 12.7.0
+Release: 2
 License: AGPLv3+
 Group: Server/Platform 
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires: java-1.8.0-openjdk,ant,ant-trax kaltura-monit, kaltura-base
+Requires: java-1.8.0-openjdk,ant, kaltura-monit, kaltura-base, redhat-lsb-core
+# ant-trax
 BuildArch: noarch
 BuildRequires: unzip
 #Source0: WowzaStreamingEngine-%{wowza_version}-linux-x64-installer.run
@@ -53,6 +54,7 @@ unzip -o %{SOURCE1} -d $RPM_BUILD_ROOT%{kaltura_prefix}/var/tmp
 mv $RPM_BUILD_ROOT%{kaltura_prefix}/var/tmp/lib $RPM_BUILD_ROOT%{wowza_prefix}/
 mv  $RPM_BUILD_ROOT%{kaltura_prefix}/var/tmp/build.xml $RPM_BUILD_ROOT%{wowza_prefix}/
 mv  $RPM_BUILD_ROOT%{kaltura_prefix}/var/tmp/configure.xsl $RPM_BUILD_ROOT%{wowza_prefix}/
+rm -rf $RPM_BUILD_ROOT%{kaltura_prefix}/var/tmp
 cp %{SOURCE4} %{SOURCE5} $RPM_BUILD_ROOT%{wowza_prefix}/
 cp %{SOURCE6} $RPM_BUILD_ROOT%{wowza_prefix}/transcoder/templates/
 cp %{SOURCE7} $RPM_BUILD_ROOT%{wowza_prefix}/conf/oflaDemo/Application.xml

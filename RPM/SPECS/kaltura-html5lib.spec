@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.50
+Version: v2.51
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -81,6 +81,31 @@ find /opt/kaltura/web/html5/html5lib -type d -name cache -exec chown -R 48 {} \;
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Mon Dec 19 2016 Jess Portnoy <jess.portnoy@kaltura.com> - v2.51-1
+- FEC-5890 - DFP pre-mid-post with skip: Video sound is playing during mid roll when performing seek over mid roll cue point
+- SUP-9337 - Captions on iPhone not displaying since KS is missing the 'disableentitlementforentry' priviliedge
+- FEC-5936 - configuration for player - use latest or update manually
+- FEC-5543 - During webcast, the player time goes out of sync
+- SUP-7353 - The number of playlist's videos is incorrect (rule-based)
+- SUP-9063 - Chapter\slide locator only responding to slides
+- FEC-6231 - Player 2.46| users cannot close report content due to slides plugin
+- SUP-8926 - Playlist with slides - unexpected behavior when the player contains bumper
+- FEC-5623 - Closed captions menu open/closes very quickly on second click
+- SUP-9515 - Some entries won't play in full screen when source selector is enabled
+- SUP-7353 - The number of playlist's videos is incorrect (rule-based)
+- SUP-9829 - Resignation Media - WebKitPlaysInline incorrect flag
+- FEC-5132 - Enable ID3 tags plugin in DVR & related
+- SUP-9823 - 2.49 player issue on Note 3&4
+- FEC-6284 - MPEG dash uDRM (ID:14)-The video is not shown but audio playing and counter working after pausing Ad
+- tvpapiGetlicensedUrl plugin
+- Fix hls.js debug info and test page
+- Error handling improvements
+- Reset closedCaptions UI state on media change
+- Support pipe-lining protocol across embed requests
+- dfp-does-not-work-escaping-issue
+- fix that instead of interval we set a timeout after we get result
+- Change default IMA3 companion ResourceType to ALL
+
 * Tue Nov 22 2016 Jess Portnoy <jess.portnoy@kaltura.com> - v2.50-1
 - FEC-6260 - Regression: DFP Pre-mid-post: Video is playing 5 seconds with spinner during 10-15th seconds (right before the midrol)
 - FEC-6260 - Regression: DFP Pre-mid-post: Video is playing 5 seconds with spinner during 10-15th seconds (right before the midrol)

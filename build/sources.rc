@@ -270,7 +270,7 @@ FLEX_WRAPPER_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/flash/
 FLEX_WRAPPER_RPM_NAME="kaltura-flexwrapper"
 
 # HTML5 lib
-HTML5LIB_LATEST_VERSION="v2.50"
+HTML5LIB_LATEST_VERSION="v2.51"
 HTML5LIB_VERSIONS="v2.14 v2.37 v2.37.1 v2.38.3 v2.42 v2.44 v2.45 v2.45.1 v2.46 v2.47 $HTML5LIB_LATEST_VERSION"
 HTML5LIB_BASE_URI="https://github.com/kaltura/mwEmbed/tarball/"
 HTML5LIB_RPM_NAME="kaltura-html5lib"
@@ -282,7 +282,7 @@ DWH_RPM_NAME="kaltura-dwh"
 
 
 # App Studio HTML5:
-HTML5_APP_STUDIO_VERSION="v2.0.7"
+HTML5_APP_STUDIO_VERSION="v2.0.8"
 HTML5_APP_STUDIO_ARCHIVE_NAME=studio_$HTML5_APP_STUDIO_VERSION.zip
 HTML5_APP_STUDIO_URI="https://github.com/kaltura/player-studio/releases/download/$HTML5_APP_STUDIO_VERSION/$HTML5_APP_STUDIO_ARCHIVE_NAME"
 HTML5_APP_STUDIO_RPM_NAME=kaltura-html5-studio

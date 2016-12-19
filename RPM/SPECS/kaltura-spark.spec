@@ -1,10 +1,10 @@
 %define use_systemd (0%{?fedora} && 0%{?fedora} >= 18) || (0%{?rhel} && 0%{?rhel} >= 7)
-%define prefix /opt/spark
+%define prefix /opt/spark-1.2.2-bin-hadoop2.4
 
 Summary: Kaltura Open Source Video Platform - Spark Server  
 Name: kaltura-spark
 Version: 1.2.2
-Release: 1
+Release: 2
 License: AGPLv3+
 Group: Server/Platform 
 URL: http://kaltura.org
@@ -64,8 +64,9 @@ and then edit /etc/selinux/config to make the change permanent."
 	fi
 fi
 %post
-
+ln -s %{prefix} /opt/spark
 %preun
+rm /opt/spark
 
 %postun
 

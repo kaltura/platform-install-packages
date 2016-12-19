@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5-studio
-Version: v2.0.7
+Version: v2.0.8
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -51,6 +51,11 @@ rm -rf %{buildroot}
 %{prefix}/apps/studio/%{version}
 
 %changelog
+* Mon Dec 19 2016 Jess Portnoy <jess.portnoy@kaltura.com> - v2.0.8-1
+- FEC-5936: configuration for player - use latest or update manually
+- Aligned with HTML5 lib v2.51
+
+
 * Mon Oct 10 2016 Jess Portnoy <jess.portnoy@kaltura.com> - v2.0.7-1
 - SUP-8880: KMS/KAF deployment players are not editable in The Universal Studio.
 - Aligned with HTML5 lib v2.48.1

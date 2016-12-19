@@ -50,6 +50,11 @@ fi
 echo -e "${CYAN}Welcome to Kaltura Live post install setup.${NORMAL}"
 trap 'my_trap_handler "${LINENO}" $?' ERR
 send_install_becon `basename $0` $ZONE install_start 0 
+RELEASE=`lsb_release -r -s|awk -F . '{print $1}'`
+if [ $RELEASE = 6 ];then
+        yum install -y ant-trax
+fi
+
 if [ -r $CONSENT_FILE ];then
         . $CONSENT_FILE
 fi

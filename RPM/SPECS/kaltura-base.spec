@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 12.7.0
-Release: 2
+Release: 6
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -317,6 +317,20 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Dec 19 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 12.7.0-6
+- SUP-9163 - first status of a user
+- SUP-9535 - iTunes Syndication feed not updating explicit tag in channel
+- SUP-9785 - Youtube Distribution fails for several entries
+- SUP-9799 - Duplicated Users Per Same PID
+- PLAT-6516 - Delivery Profile selection order not working properly
+- PLAT-6150 - Typo in HTTP notification name related to Attachments
+- PLAT-5707 - optimize the thumbnail grabbing
+- PLAT-5801 - Design batch optimiztion
+- PLAT-6478 - Deployment of new FFMPEG 3.2
+- PLAT-6429 - Suggestion: "re-register authentication" button in Youtube API distribution profile settings
+- PLAT-6448 - hbbtv - support set-top boxes
+- PLAT-6461 - new player initialization - create play manifest URL
+
 * Tue Dec 6 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 12.7.0-1
 - Ver Bounce to 12.7.0
 
