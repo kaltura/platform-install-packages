@@ -55,20 +55,5 @@ if [ "$1" = "configure" ]; then
         update-rc.d kaltura-nginx defaults || true
 
 fi
-KALTURA_FUNCTIONS_RC=/opt/kaltura/bin/kaltura-functions.rc
-if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
-        OUT="${BRIGHT_RED}ERROR:could not find $KALTURA_FUNCTIONS_RC so, exiting..${NORMAL}"
-        echo -en $OUT
-        exit 3
-fi
-
-
-. $KALTURA_FUNCTIONS_RC
-if [ -r $CONSENT_FILE ];then
-        . $CONSENT_FILE
-fi
-
-#ln -sf $BASE_DIR/app/configurations/logrotate/kaltura_populate /etc/logrotate.d/
-trap 'my_trap_handler "${LINENO}" ${$?}' ERR
 chown -R kaltura /opt/kaltura/log/nginx
 service kaltura-nginx reload 
