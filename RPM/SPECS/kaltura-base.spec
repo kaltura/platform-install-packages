@@ -30,7 +30,7 @@ Source19: IndexController.php
 Source20: sphinx.populate.template.rc
 Source25: kaltura_populate.template
 Source26: kaltura_batch.template
-Source28: embedIframeJsAction.class.php
+#Source28: embedIframeJsAction.class.php
 Source32: KDLOperatorFfmpeg1_1_1.php
 #Source33: kuserPeer.php
 Source34: clients-generator-%{codename}-%{version}.zip
@@ -149,7 +149,7 @@ cp %{SOURCE17} $RPM_BUILD_ROOT%{prefix}/app/admin_console/configs/navigation.xml
 cp %{SOURCE18} $RPM_BUILD_ROOT%{prefix}/app/admin_console/views/scripts/index/monit.phtml
 cp %{SOURCE19} $RPM_BUILD_ROOT%{prefix}/app/admin_console/controllers/IndexController.php
 # patch for auto embed to work, should be dropped when core merge.
-cp %{SOURCE28} $RPM_BUILD_ROOT%{prefix}/app/alpha/apps/kaltura/modules/extwidget/actions/embedIframeJsAction.class.php
+#cp %{SOURCE28} $RPM_BUILD_ROOT%{prefix}/app/alpha/apps/kaltura/modules/extwidget/actions/embedIframeJsAction.class.php
 # we bring a1nother in kaltura-batch
 rm $RPM_BUILD_ROOT%{prefix}/app/configurations/batch/batch.ini.template
 cp %{SOURCE32} $RPM_BUILD_ROOT%{prefix}/app/infra/cdl/kdl/KDLOperatorFfmpeg1_1_1.php
