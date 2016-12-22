@@ -1,3 +1,26 @@
+kaltura-base (12.7.0-2) lynx; urgency=low
+
+  * SUP-9163 - first status of a user
+  * SUP-9535 - iTunes Syndication feed not updating explicit tag in channel
+  * SUP-9785 - Youtube Distribution fails for several entries
+  * SUP-9799 - Duplicated Users Per Same PID
+  * PLAT-6516 - Delivery Profile selection order not working properly
+  * PLAT-6150 - Typo in HTTP notification name related to Attachments
+  * PLAT-5707 - optimize the thumbnail grabbing
+  * PLAT-5801 - Design batch optimiztion
+  * PLAT-6478 - Deployment of new FFMPEG 3.2
+  * PLAT-6429 - Suggestion: "re-register authentication" button in Youtube API distribution profile settings
+  * PLAT-6448 - hbbtv - support set-top boxes
+  * PLAT-6461 - new player initialization - create play manifest URL
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 19 Dec 2016 16:57:47 +0000
+
+kaltura-base (12.7.0-1) lynx; urgency=low
+
+  * Switching to 12.7.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Tue, 13 Dec 2016 16:04:38 +0000
+
 kaltura-base (12.6.0-2) lynx; urgency=low
 
   * SUP-9130 - Cannot download media via KMS

@@ -1,3 +1,10 @@
+kaltura-html5-studio (2.0.8-1) lynx; urgency=low
+
+  * FEC-5936: configuration for player - use latest or update manually
+  * Aligned with HTML5 lib v2.51
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 19 Dec 2016 17:21:50 +0000
+
 kaltura-html5-studio (2.0.7-1) lynx; urgency=low
 
   * SUP-8880: KMS/KAF deployment players are not editable in The Universal Studio.

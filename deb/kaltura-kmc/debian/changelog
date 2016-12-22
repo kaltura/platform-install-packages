@@ -1,3 +1,9 @@
+kaltura-kmc (5.41.1-2) lynx; urgency=low
+
+  * Version bounce to align with kaltura-html5lib v2.51.
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 19 Dec 2016 17:13:44 +0000
+
 kaltura-kmc (5.41.1-1) lynx; urgency=low
 
   * PLAT-6257 - Add Average Accumulative Storage to Publisher Bandwidth and Storage Report
