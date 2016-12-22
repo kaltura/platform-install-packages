@@ -52,7 +52,6 @@ binary-indep: install
 	rm -rf $(HTML5LIB_PREFIX)
 	mkdir -p $(HTML5LIB_PREFIX)
 	find kaltura-html5lib-* -name Widevine -exec rm -rf {} \; || true
-	find kaltura-html5lib-* -name UiConfResult.php  -exec cp debian/UiConfResult.php {} \; || true
 	find kaltura-html5lib-* -name simplePhpXMLProxy.php  -exec cp debian/simplePhpXMLProxy.php {} \; || true
 	mv kaltura-html5lib-$(HTML5LIB_LATEST_VERSION) $(HTML5LIB_PREFIX)/$(HTML5LIB_LATEST_VERSION)
 	mv kaltura-html5lib-v2.29 $(HTML5LIB_PREFIX)/v2.29
