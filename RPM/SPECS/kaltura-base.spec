@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 12.7.0
-Release: 7
+Version: 12.8.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -317,6 +317,12 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Thu Dec 22 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 12.8.0-1
+- Ver Bounce to 12.8.0
+
+* Thu Dec 22 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 12.8.0-1
+- Ver Bounce to 12.8.0
+
 * Mon Dec 19 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 12.7.0-6
 - SUP-9163 - first status of a user
 - SUP-9535 - iTunes Syndication feed not updating explicit tag in channel
