@@ -196,6 +196,11 @@ If you experience unknown, unwanted or erroneous behaviour, the logs are a greta
 kaltlog
 ```
 
+If kaltolog is not available, run: 
+```
+. /etc/profile.d/kaltura-base.sh
+```
+
 If this does not give enough information, increase logging verbosity:
 ```bash
 sed -i 's@^writers.\(.*\).filters.priority.priority\s*=\s*7@writers.\1.filters.priority.priority=4@g' /opt/kaltura/app/configurations/logger.ini
