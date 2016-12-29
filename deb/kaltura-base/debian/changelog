@@ -1,3 +1,9 @@
+kaltura-base (12.8.0-1) lynx; urgency=low
+
+  * Switching to 12.8.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Thu, 22 Dec 2016 13:55:53 +0000
+
 kaltura-base (12.7.0-2) lynx; urgency=low
 
   * SUP-9163 - first status of a user

@@ -1,3 +1,9 @@
+kaltura-nginx (1.10.2-3) lynx; urgency=low
+
+  * New Nginx vod module - 1.12, built against FFmpeg 3.2.
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Wed, 28 Dec 2016 17:30:54 +0000
+
 kaltura-nginx (1.10.2-2) lynx; urgency=low
 
   * New Nginx vod module - 1.11. See https://github.com/kaltura/nginx-vod-module/releases/tag/1.11
