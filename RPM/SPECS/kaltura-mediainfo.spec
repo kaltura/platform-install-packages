@@ -1,9 +1,9 @@
-%global libzen_version  0.4.33
+%global libzen_version  0.4.34
 %define prefix /opt/kaltura
 
 Name:           kaltura-mediainfo
 Version:        0.7.61
-Release:        3
+Release:        4
 Summary:        Supplies technical and tag information about a video or audio file (CLI)
 
 License:        BSD
