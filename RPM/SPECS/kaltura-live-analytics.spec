@@ -2,7 +2,7 @@
 Summary: Kaltura Server release file and package configuration
 Name: kaltura-live-analytics
 Version: v0.5.26
-Release: 6
+Release: 8
 License: AGPLv3+
 Group: Server/Platform 
 URL: http://kaltura.org
@@ -19,6 +19,7 @@ Source9: %{name}_register_log.sh
 Source10: %{name}_live_stats
 Source11: %{name}_rotate_live_stats.template
 Source12: %{name}_live-analytics-driver.sh
+Source13: %{name}_live-analytics-driver.service
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildArch: noarch
@@ -35,7 +36,7 @@ GPG keys used to sign them.
 %build
 
 %install
-mkdir -p $RPM_BUILD_ROOT%{prefix}/data/geoip $RPM_BUILD_ROOT%{prefix}/bin $RPM_BUILD_ROOT%{prefix}/lib $RPM_BUILD_ROOT/usr/share/tomcat/lib $RPM_BUILD_ROOT/var/lib/tomcat/webapps/ $RPM_BUILD_ROOT%{prefix}/app/configurations/live_analytics/cassandra $RPM_BUILD_ROOT%{prefix}/app/configurations/live_analytics/cron $RPM_BUILD_ROOT%{prefix}/app/configurations/live_analytics/logrotate $RPM_BUILD_ROOT%{prefix}/app/configurations/live_analytics/nginx
+mkdir -p $RPM_BUILD_ROOT%{prefix}/data/geoip $RPM_BUILD_ROOT%{prefix}/bin $RPM_BUILD_ROOT%{prefix}/lib $RPM_BUILD_ROOT/usr/share/tomcat/lib $RPM_BUILD_ROOT/var/lib/tomcat/webapps/ $RPM_BUILD_ROOT%{prefix}/app/configurations/live_analytics/cassandra $RPM_BUILD_ROOT%{prefix}/app/configurations/live_analytics/cron $RPM_BUILD_ROOT%{prefix}/app/configurations/live_analytics/logrotate $RPM_BUILD_ROOT%{prefix}/app/configurations/live_analytics/nginx $RPM_BUILD_ROOT%{prefix}/app/configurations/live_analytics/driver $RPM_BUILD_ROOT%{prefix}/log/nginx $RPM_BUILD_ROOT%{prefix}/var/run/live-analytics-driver
 
 tar zxf %{SOURCE0} -C $RPM_BUILD_ROOT%{prefix}/lib
 unzip -o -q %{SOURCE6} -d $RPM_BUILD_ROOT
@@ -52,6 +53,7 @@ cp %{SOURCE12} $RPM_BUILD_ROOT%{prefix}/bin/live-analytics-driver.sh
 cp %{SOURCE10} $RPM_BUILD_ROOT%{prefix}/app/configurations/live_analytics/cron/live_stats
 cp %{SOURCE11} $RPM_BUILD_ROOT%{prefix}/app/configurations/live_analytics/logrotate/live_stats.template
 cp %{SOURCE7} $RPM_BUILD_ROOT%{prefix}/app/configurations/live_analytics/nginx/live.template.conf
+cp %{SOURCE13} $RPM_BUILD_ROOT%{prefix}/app/configurations/live_analytics/driver/live-analytics-driver.service
 
 %clean
 %{__rm} -rf %{buildroot}
@@ -60,9 +62,31 @@ cp %{SOURCE7} $RPM_BUILD_ROOT%{prefix}/app/configurations/live_analytics/nginx/l
 for DAEMON in cassandra tomcat ;do
 	service $DAEMON restart
 done
+if [ -d /usr/lib/systemd/system ];then
+	ln -sf %{prefix}/app/configurations/live_analytics/driver/live-analytics-driver.service /usr/lib/systemd/system
+    	/usr/bin/systemctl preset live-analytics-driver.service >/dev/null 2>&1 ||:
+else
+	ln -sf %{prefix}/bin/live-analytics-driver.sh /etc/init.d/live-analytics-driver
+	chkconfig  --add live-analytics-driver 
+	chkconfig live-analytics-driver on
+fi
+
+%preun
+if [ "$1" = 0 ] ; then
+	service live-analytics-driver stop
+	for FILE in /usr/lib/systemd/system/live-analytics-driver.service /etc/init.d/live-analytics-driver /etc/cron.d/kaltura_live_stats /etc/logrotate.d/kaltura_live_stats /etc/nginx/conf.d/live.conf ;do
+		if [ -r $FILE ];then
+			rm $FILE
+		fi
+	done
+	service nginx reload
+fi
+
 
 %files
 %dir %{prefix}/data/geoip
+%dir %{prefix}/log/nginx
+%dir %{prefix}/var/run/live-analytics-driver
 %{prefix}/lib/*jar
 %{prefix}/bin/*
 %config %{prefix}/lib/log4j.properties
@@ -71,6 +95,7 @@ done
 %config %{prefix}/app/configurations/live_analytics/logrotate/*
 %config %{prefix}/app/configurations/live_analytics/cron/*
 %config %{prefix}/app/configurations/live_analytics/nginx/*
+%config %{prefix}/app/configurations/live_analytics/driver/*
 /var/lib/tomcat/webapps/KalturaLiveAnalytics.war
 /usr/share/tomcat/lib/*jar
 

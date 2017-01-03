@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.32
-Release: 7
+Release: 8
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -82,6 +82,9 @@ find %{_sysconfdir}/logrotate.d -type l -name "kaltura_*" -exec rm {} \;
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Tue Jan 3 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.32-8
+- Additions to kaltura-live-analytics-config.sh
+
 * Mon Dec 12 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.32-6
 - Move register_media_server.php to this package
  
