@@ -4,7 +4,7 @@
 Summary: Kaltura Open Source Video Platform - Spark Server  
 Name: kaltura-spark
 Version: 1.2.2
-Release: 2
+Release: 3
 License: AGPLv3+
 Group: Server/Platform 
 URL: http://kaltura.org
@@ -53,16 +53,7 @@ EOF
 
 
 %pre
-# maybe one day we will support SELinux in which case this can be ommitted.
-if which getenforce >> /dev/null 2>&1; then
-	
-	if [ `getenforce` = 'Enforcing' ];then
-		echo "You have SELinux enabled, please change to permissive mode with:
-# setenforce permissive
-and then edit /etc/selinux/config to make the change permanent."
-		exit 1;
-	fi
-fi
+
 %post
 ln -s %{prefix} /opt/spark
 %preun

@@ -5,7 +5,7 @@ Description=Kaltura Live Analytics Driver
 Type=forking
 PIDFile=/opt/kaltura/var/run/live-analytics-driver/live-analytics-driver.pid
 ExecStartPre=/usr/bin/rm -f /opt/kaltura/var/run/live-analytics-driver/live-analytics-driver.pid
-ExecStart=/opt/kaltura/bin/live-analytics-driver.sh
+ExecStart=/opt/kaltura/bin/live-analytics-driver.sh start
 ExecReload=/bin/kill -s HUP $MAINPID
 ExecStop=/bin/kill -s SIGTERM $MAINPID
 

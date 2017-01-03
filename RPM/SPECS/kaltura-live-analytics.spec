@@ -2,7 +2,7 @@
 Summary: Kaltura Server release file and package configuration
 Name: kaltura-live-analytics
 Version: v0.5.26
-Release: 8
+Release: 9
 License: AGPLv3+
 Group: Server/Platform 
 URL: http://kaltura.org
@@ -70,6 +70,7 @@ else
 	chkconfig  --add live-analytics-driver 
 	chkconfig live-analytics-driver on
 fi
+service live-analytics-driver restart
 
 %preun
 if [ "$1" = 0 ] ; then
