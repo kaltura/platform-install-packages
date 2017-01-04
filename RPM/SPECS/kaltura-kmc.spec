@@ -1,7 +1,7 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmc
-Version: v5.41.1
-Release: 3
+Version: v5.41.2
+Release: 1
 Summary: Kaltura Management Console
 
 Group: System Management	
@@ -83,6 +83,11 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Wed Jan 4 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v5.41.2-1
+- PLAT-6669 - Change the default value of the recording status from "append Recording" to "New Per Session"
+- PLAT-6634 - Changes to "Publishers Bandwidth and Storage Report" - front end
+- PLAT-6656 - Changes to "Publishers Bandwidth and Storage Report" - front end
+
 * Mon Dec 19 2016 Jess Portnoy <jess.portnoy@kaltura.com> - v5.41.1-3
 - Ver bounce of HTML5 to v2.51
 

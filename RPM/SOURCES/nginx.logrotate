@@ -13,6 +13,21 @@
  	su root kaltura
 }
 
+@LOG_DIR@/kaltura_nginx_errors.log {
+        daily
+        missingok
+        rotate 52
+        compress
+        delaycompress
+        notifempty
+        create 640 kaltura kaltura
+        sharedscripts
+        postrotate
+                [ -f /var/run/nginx.pid ] && kill -USR1 `cat /var/run/nginx.pid`
+        endscript
+ 	su root kaltura
+}
+
 @LOG_DIR@/kaltura_nginx_access.log {
  rotate 7
  daily
