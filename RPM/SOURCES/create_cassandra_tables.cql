@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS kaltura_live.log_files (
 )
 WITH CLUSTERING ORDER BY (insert_time DESC);
 
-CREATE INDEX log_files_batch_id
+CREATE INDEX IF NOT EXISTS log_files_batch_id
  ON log_files (batch_id);
 
 CREATE TABLE IF NOT EXISTS kaltura_live.log_data (

@@ -2,7 +2,7 @@
 Summary: Kaltura Server release file and package configuration
 Name: kaltura-live-analytics
 Version: v0.5.26
-Release: 9
+Release: 11
 License: AGPLv3+
 Group: Server/Platform 
 URL: http://kaltura.org
