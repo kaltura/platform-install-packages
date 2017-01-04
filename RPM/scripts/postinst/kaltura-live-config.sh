@@ -64,7 +64,7 @@ if [ -n "$1" -a -r "$1" ];then
 else
         echo -e "${CYAN}Wowza license key:${NORMAL} "
         read -e WOWZA_LIC_KEY
-        echo -e "${CYAN}Wowza slient key:${NORMAL} "
+        echo -e "${CYAN}Wowza silent key:${NORMAL} "
         read -e WOWZA_SILENT_KEY
         echo -e "${CYAN}Wowza admin password:${NORMAL} "
         read -s WOWZA_PASSWD
