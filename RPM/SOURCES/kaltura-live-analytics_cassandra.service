@@ -1,11 +1,18 @@
 [Unit]
 Description=Cassandra
+After=network.target
 
 [Service]
 Type=forking
-PIDFile=/var/run/cassandra/cassandra.pid
-Before=live-analytics-driver
-ExecStart=/etc/init.d/cassandra start
-ExecReload=/etc/init.d/cassandra reload
-ExecStop=/etc/init.d/cassandra restart
+PIDFile=/run/cassandra/cassandra.pid
+User=cassandra
+Group=cassandra
+PermissionsStartOnly=true
+ExecStartPre=/usr/bin/install -d -o cassandra /run/cassandra
+ExecStart=/usr/sbin/cassandra -p /run/cassandra/cassandra.pid
+StandardOutput=journal
+StandardError=journal
+LimitNOFILE=infinity
 
+[Install]
+WantedBy=multi-user.target

@@ -1,12 +1,14 @@
 [Unit]
 Description=Kaltura Live Analytics Driver
+After=cassandra.service
 
 [Service]
 Type=forking
 PIDFile=/opt/kaltura/var/run/live-analytics-driver/live-analytics-driver.pid
-After=cassandra
 ExecStartPre=/usr/bin/rm -f /opt/kaltura/var/run/live-analytics-driver/live-analytics-driver.pid
 ExecStart=/opt/kaltura/bin/live-analytics-driver.sh start
 ExecReload=/bin/kill -s HUP $MAINPID
 ExecStop=/bin/kill -s SIGTERM $MAINPID
 
+[Install]
+WantedBy=multi-user.target

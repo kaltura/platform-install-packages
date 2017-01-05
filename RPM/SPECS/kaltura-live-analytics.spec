@@ -65,10 +65,14 @@ for DAEMON in cassandra tomcat ;do
 	service $DAEMON restart
 done
 if [ -d /usr/lib/systemd/system ];then
-	ln -sf %{prefix}/app/configurations/live_analytics/driver/live-analytics-driver.service /usr/lib/systemd/system
-	ln -sf %{prefix}/app/configurations/live_analytics/driver/cassandra.service /usr/lib/systemd/system
-    	/usr/bin/systemctl preset live-analytics-driver.service >/dev/null 2>&1 ||:
+	# symlink does not work, see https://github.com/systemd/systemd/issues/2298
+	cp %{prefix}/app/configurations/live_analytics/driver/live-analytics-driver.service /usr/lib/systemd/system
+	cp %{prefix}/app/configurations/live_analytics/driver/cassandra.service /usr/lib/systemd/system
     	/usr/bin/systemctl preset cassandra.service >/dev/null 2>&1 ||:
+	/usr/bin/systemctl enable cassandra.service
+	service cassandra start
+    	/usr/bin/systemctl preset live-analytics-driver.service >/dev/null 2>&1 ||:
+	/usr/bin/systemctl enable live-analytics-driver.service
 else
 	ln -sf %{prefix}/bin/live-analytics-driver.sh /etc/init.d/live-analytics-driver
 	chkconfig  --add live-analytics-driver 

@@ -14,7 +14,7 @@ SPARK_MASTER_PORT=@SPARK_MASTER_PORT@
 SPARK_DEFAULT_PARALLELISM=2
 SPARK_CORES_MAX=1
 SPARK_MEMORY=2g
-PID_FILE="/opt/kaltura/var/run/live-analytics-driver/$NAME.pid"
+PID_FILE="/opt/kaltura/var/run/$NAME/$NAME.pid"
 nodetool enablethrift
 
 . /etc/rc.d/init.d/functions
@@ -28,7 +28,7 @@ case "$1" in
                 exit 0
         fi
         echo -n "Starting $NAME: "
-        nohup /opt/spark-1.2.2-bin-hadoop2.4/bin/spark-submit --class com.kaltura.Live.MainDriver --master local[2] --driver-class-path "/opt/kaltura/lib/*" --conf spark.driver.memory=$SPARK_MEMORY --conf spark.default.parallelism=$SPARK_DEFAULT_PARALLELISM /opt/kaltura/lib/live-analytics-driver.jar >> /opt/kaltura/log/$NAME.log 2>&1 &
+        nohup /opt/spark-1.2.2-bin-hadoop2.4/bin/spark-submit --class com.kaltura.Live.MainDriver --master local[2] --driver-class-path "/opt/kaltura/lib/*" --conf spark.driver.memory=$SPARK_MEMORY --conf spark.default.parallelism=$SPARK_DEFAULT_PARALLELISM /opt/kaltura/lib/$NAME.jar >> /opt/kaltura/log/$NAME.log 2>&1 &
         PID="$!"
         retval=$?
         if [ $retval -eq 0 ] ;then echo "$PID" > $PID_FILE;fi
