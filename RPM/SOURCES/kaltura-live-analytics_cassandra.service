@@ -1,0 +1,11 @@
+[Unit]
+Description=Cassandra
+
+[Service]
+Type=forking
+PIDFile=/var/run/cassandra/cassandra.pid
+Before=live-analytics-driver
+ExecStart=/etc/init.d/cassandra start
+ExecReload=/etc/init.d/cassandra reload
+ExecStop=/etc/init.d/cassandra restart
+

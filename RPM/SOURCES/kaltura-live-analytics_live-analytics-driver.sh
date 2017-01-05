@@ -1,4 +1,12 @@
 #!/bin/sh
+#
+# /etc/init.d/live-analytics-driver
+#
+# Startup script for live driver
+#
+# chkconfig: 2345 21 81
+# description: Starts and stops live driver
+
 
 NAME="live-analytics-driver"
 SPARK_MASTER_HOST=@SPARK_MASTER_HOST@

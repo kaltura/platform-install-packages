@@ -2,7 +2,7 @@
 Summary: Kaltura Server release file and package configuration
 Name: kaltura-live-analytics
 Version: v0.5.26
-Release: 11
+Release: 12
 License: AGPLv3+
 Group: Server/Platform 
 URL: http://kaltura.org
@@ -20,6 +20,7 @@ Source10: %{name}_live_stats
 Source11: %{name}_rotate_live_stats.template
 Source12: %{name}_live-analytics-driver.sh
 Source13: %{name}_live-analytics-driver.service
+Source14: %{name}_cassandra.service
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildArch: noarch
@@ -54,6 +55,7 @@ cp %{SOURCE10} $RPM_BUILD_ROOT%{prefix}/app/configurations/live_analytics/cron/l
 cp %{SOURCE11} $RPM_BUILD_ROOT%{prefix}/app/configurations/live_analytics/logrotate/live_stats.template
 cp %{SOURCE7} $RPM_BUILD_ROOT%{prefix}/app/configurations/live_analytics/nginx/live.template.conf
 cp %{SOURCE13} $RPM_BUILD_ROOT%{prefix}/app/configurations/live_analytics/driver/live-analytics-driver.service
+cp %{SOURCE14} $RPM_BUILD_ROOT%{prefix}/app/configurations/live_analytics/driver/cassandra.service
 
 %clean
 %{__rm} -rf %{buildroot}
@@ -64,13 +66,19 @@ for DAEMON in cassandra tomcat ;do
 done
 if [ -d /usr/lib/systemd/system ];then
 	ln -sf %{prefix}/app/configurations/live_analytics/driver/live-analytics-driver.service /usr/lib/systemd/system
+	ln -sf %{prefix}/app/configurations/live_analytics/driver/cassandra.service /usr/lib/systemd/system
     	/usr/bin/systemctl preset live-analytics-driver.service >/dev/null 2>&1 ||:
+    	/usr/bin/systemctl preset cassandra.service >/dev/null 2>&1 ||:
 else
 	ln -sf %{prefix}/bin/live-analytics-driver.sh /etc/init.d/live-analytics-driver
 	chkconfig  --add live-analytics-driver 
 	chkconfig live-analytics-driver on
+	chkconfig  --add cassandra 
+	chkconfig cassandra on
 fi
-service live-analytics-driver restart
+if [ "$1" = 2 ];then
+	service live-analytics-driver restart
+fi
 
 %preun
 if [ "$1" = 0 ] ; then
