@@ -2,7 +2,7 @@
 Summary: Kaltura Server release file and package configuration
 Name: kaltura-live-analytics
 Version: v0.5.26
-Release: 12
+Release: 14
 License: AGPLv3+
 Group: Server/Platform 
 URL: http://kaltura.org
@@ -70,9 +70,10 @@ if [ -d /usr/lib/systemd/system ];then
 	cp %{prefix}/app/configurations/live_analytics/driver/cassandra.service /usr/lib/systemd/system
     	/usr/bin/systemctl preset cassandra.service >/dev/null 2>&1 ||:
 	/usr/bin/systemctl enable cassandra.service
-	service cassandra start
     	/usr/bin/systemctl preset live-analytics-driver.service >/dev/null 2>&1 ||:
 	/usr/bin/systemctl enable live-analytics-driver.service
+	systemctl daemon-reload
+	service cassandra start
 else
 	ln -sf %{prefix}/bin/live-analytics-driver.sh /etc/init.d/live-analytics-driver
 	chkconfig  --add live-analytics-driver 
