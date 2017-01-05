@@ -4,7 +4,7 @@
 #
 # Startup script for live driver
 #
-# chkconfig: 2345 21 81
+# chkconfig: 2345 30 70
 # description: Starts and stops live driver
 
 
