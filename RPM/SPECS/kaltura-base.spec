@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 12.8.0
-Release: 8
+Release: 10
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -134,11 +134,6 @@ cp %{SOURCE20} $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/
 cp %{SOURCE14} $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/
 cp %{SOURCE15} $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/
 cp %{SOURCE16} $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/
-#cp $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.d/*.template.rc $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/
-#cp $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.d/memcached.template.rc $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/memcached.rc
-#cp $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.d/mysqld.template.rc $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/mysqld.rc
-#cp $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.d/mariadb.template.rc $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/mariadb.rc
-#cp $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.d/percona.template.rc $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/percona.rc
 rm $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.d/*template*
 cp %{SOURCE25} $RPM_BUILD_ROOT%{prefix}/app/configurations/logrotate/
 cp %{SOURCE26} $RPM_BUILD_ROOT%{prefix}/app/configurations/logrotate/
@@ -148,12 +143,9 @@ cp %{SOURCE26} $RPM_BUILD_ROOT%{prefix}/app/configurations/logrotate/
 cp %{SOURCE17} $RPM_BUILD_ROOT%{prefix}/app/admin_console/configs/navigation.xml
 cp %{SOURCE18} $RPM_BUILD_ROOT%{prefix}/app/admin_console/views/scripts/index/monit.phtml
 cp %{SOURCE19} $RPM_BUILD_ROOT%{prefix}/app/admin_console/controllers/IndexController.php
-# patch for auto embed to work, should be dropped when core merge.
-#cp %{SOURCE28} $RPM_BUILD_ROOT%{prefix}/app/alpha/apps/kaltura/modules/extwidget/actions/embedIframeJsAction.class.php
 # we bring a1nother in kaltura-batch
 rm $RPM_BUILD_ROOT%{prefix}/app/configurations/batch/batch.ini.template
 cp %{SOURCE32} $RPM_BUILD_ROOT%{prefix}/app/infra/cdl/kdl/KDLOperatorFfmpeg1_1_1.php
-#cp %{SOURCE33} $RPM_BUILD_ROOT%{prefix}/app/alpha/lib/model/kuserPeer.php
 
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content
 tar zxf %{SOURCE10} -C $RPM_BUILD_ROOT%{prefix}/web/content
@@ -317,8 +309,13 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Thu Dec 22 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 12.8.0-1
-- Ver Bounce to 12.8.0
+* Fri Jan 6 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.8.0-10
+- PLAT-6650 - New X265/HEVC support
+- PLAT-5801 - Design batch optimiztion
+- PLAT-6543 - Scheduling - validate resourceEvent is not already allocated at a specific time
+- PLAT-6666 - When changing entry UserId change the owner also on the childs.
+- PLAT-6668 - When changing entry.entitledUsersEdit/Publish, make the same changes on the child entries
+- PLAT-6708 - At rest encryption fails with transcoding operators
 
 * Thu Dec 22 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 12.8.0-1
 - Ver Bounce to 12.8.0
