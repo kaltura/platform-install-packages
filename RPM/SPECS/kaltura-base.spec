@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 12.8.0
-Release: 12
+Version: 12.9.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -309,6 +309,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Jan 9 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.9.0-1
+- Ver Bounce to 12.9.0
+
 * Fri Jan 6 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.8.0-10
 - PLAT-6650 - New X265/HEVC support
 - PLAT-5801 - Design batch optimiztion
