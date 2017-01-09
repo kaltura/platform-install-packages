@@ -1,3 +1,11 @@
+kaltura-kmc (5.41.2-1) lynx; urgency=low
+
+  * PLAT-6669 - Change the default value of the recording status from "append Recording" to "New Per Session"
+  * PLAT-6634 - Changes to "Publishers Bandwidth and Storage Report" - front end
+  * PLAT-6656 - Changes to "Publishers Bandwidth and Storage Report" - front end
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Wed, 04 Jan 2017 15:28:57 +0000
+
 kaltura-kmc (5.41.1-2) lynx; urgency=low
 
   * Version bounce to align with kaltura-html5lib v2.51.

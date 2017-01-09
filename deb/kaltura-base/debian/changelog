@@ -1,3 +1,14 @@
+kaltura-base (12.8.0-2) lynx; urgency=low
+
+  * PLAT-6650 - New X265/HEVC support
+  * PLAT-5801 - Design batch optimiztion
+  * PLAT-6543 - Scheduling - validate resourceEvent is not already allocated at a specific time
+  * PLAT-6666 - When changing entry UserId change the owner also on the childs.
+  * PLAT-6668 - When changing entry.entitledUsersEdit/Publish, make the same changes on the child entries
+  * PLAT-6708 - At rest encryption fails with transcoding operators
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Fri, 06 Jan 2017 13:35:57 +0000
+
 kaltura-base (12.8.0-1) lynx; urgency=low
 
   * Switching to 12.8.0
