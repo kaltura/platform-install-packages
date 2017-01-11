@@ -1,7 +1,7 @@
 %define base_prefix /opt/kaltura
 %define app_prefix %{base_prefix}/apps/liveanalytics/
 
-Summary: Kaltura Open Source Video Platform 
+Summary: Kaltura Live Analytics Front End
 Name: kaltura-live-analytics-front
 Version: v2.6
 Release: 1
