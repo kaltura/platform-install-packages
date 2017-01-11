@@ -1,8 +1,8 @@
 %define prefix /opt/kaltura 
 Summary: Kaltura Server release file and package configuration
 Name: kaltura-live-analytics
-Version: v0.5.26
-Release: 14
+Version: v0.5.34
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 URL: http://kaltura.org
@@ -14,7 +14,7 @@ Source4: https://github.com/kaltura/live_analytics/releases/download/%{version}/
 Source5: https://github.com/kaltura/live_analytics/releases/download/%{version}/register-file.jar
 Source6: http://repo.maven.apache.org/maven2/com/sun/xml/ws/jaxws-ri/2.2.10/jaxws-ri-2.2.10.zip
 Source7: %{name}_nginx_live.template.conf
-Source8: https://raw.githubusercontent.com/kaltura/live_analytics/v0.5/setup/create_cassandra_tables.cql
+Source8: https://github.com/kaltura/live_analytics/raw/%{version}/setup/create_cassandra_tables.cql
 Source9: %{name}_register_log.sh
 Source10: %{name}_live_stats
 Source11: %{name}_rotate_live_stats.template
@@ -114,5 +114,8 @@ fi
 /usr/share/tomcat/lib/*jar
 
 %changelog
-* Sat Dec 3 2016 jess.portnoy@kaltura.com <Jess Portnoy> - 12.6.0-1
+* Wed Jan 11 2017 jess.portnoy@kaltura.com <Jess Portnoy> - v0.5.34-1
+- https://github.com/kaltura/live_analytics/pull/25
+
+* Sat Dec 3 2016 jess.portnoy@kaltura.com <Jess Portnoy> - v0.5.26-1
 - First release

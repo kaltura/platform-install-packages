@@ -1,7 +1,7 @@
 #!/bin/bash -e 
 #===============================================================================
-#          FILE: package_kaltura_html5lib.sh
-#         USAGE: ./package_kaltura_html5lib.sh 
+#          FILE: package_kaltura-live-analytics-front.sh 
+#         USAGE: ./package_kaltura-live-analytics-front.sh
 #   DESCRIPTION: 
 #       OPTIONS: ---
 # 	LICENSE: AGPLv3+
