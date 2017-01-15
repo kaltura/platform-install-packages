@@ -1,7 +1,7 @@
 %define prefix /opt/kaltura 
 Summary: Kaltura Live Analytics
 Name: kaltura-live-analytics
-Version: v0.5.34
+Version: v0.5.35
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -54,7 +54,7 @@ cp %{SOURCE2} $RPM_BUILD_ROOT%{prefix}/lib/log4j.properties
 cp %{SOURCE3} $RPM_BUILD_ROOT/var/lib/tomcat/webapps/
 cp %{SOURCE4} %{SOURCE5} $RPM_BUILD_ROOT%{prefix}/lib
 cp %{SOURCE8} $RPM_BUILD_ROOT%{prefix}/app/configurations/live_analytics/cassandra
-chmod +x %{SOURCE9}
+chmod +x %{SOURCE12} %{SOURCE9}
 cp %{SOURCE9} $RPM_BUILD_ROOT%{prefix}/bin/kaltura_register_log.sh
 cp %{SOURCE12} $RPM_BUILD_ROOT%{prefix}/bin/live-analytics-driver.sh
 cp %{SOURCE10} $RPM_BUILD_ROOT%{prefix}/app/configurations/live_analytics/cron/live_stats
@@ -120,6 +120,9 @@ fi
 /usr/share/tomcat/lib/*jar
 
 %changelog
+* Sun Jan 15 2017 jess.portnoy@kaltura.com <Jess Portnoy> - v0.5.35-1
+- https://github.com/kaltura/live_analytics/pull/26
+
 * Wed Jan 11 2017 jess.portnoy@kaltura.com <Jess Portnoy> - v0.5.34-1
 - https://github.com/kaltura/live_analytics/pull/25
 

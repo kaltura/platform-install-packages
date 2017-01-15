@@ -299,7 +299,7 @@ WOWZA_VERSION="4.3.0"
 WOWZA_URI="https://www.wowza.com/downloads/WowzaStreamingEngine-`echo $WOWZA_VERSION|sed 's@\.@-@g'`/WowzaStreamingEngine-$WOWZA_VERSION-linux-x64-installer.run"
 
 # live analytics 
-LIVE_ANALYTICS_VERSION=v0.5.34
+LIVE_ANALYTICS_VERSION=v0.5.35
 LIVE_ANALYTICS_WAR_URI="https://github.com/kaltura/live_analytics/releases/download/$LIVE_ANALYTICS_VERSION/KalturaLiveAnalytics.war"
 LIVE_ANALYTICS_DRIVER_URI="https://github.com/kaltura/live_analytics/releases/download/$LIVE_ANALYTICS_VERSION/live-analytics-driver.jar"
 LIVE_ANALYTICS_REGISTER_FILE_URI="https://github.com/kaltura/live_analytics/releases/download/$LIVE_ANALYTICS_VERSION/register-file.jar"

@@ -48,8 +48,6 @@ rm -rf %{buildroot}
 
 %install
 mkdir -p $RPM_BUILD_ROOT%{kaltura_prefix}/var/tmp $RPM_BUILD_ROOT%{kaltura_prefix}/var/live/dvr $RPM_BUILD_ROOT%{wowza_prefix}/conf/oflaDemo $RPM_BUILD_ROOT%{wowza_prefix}/applications/oflaDemo $RPM_BUILD_ROOT%{wowza_prefix}/transcoder/templates $RPM_BUILD_ROOT%{kaltura_prefix}/app/configurations/monit/monit.avail
-#chmod +x %{SOURCE0}
-#cp %{SOURCE0} $RPM_BUILD_ROOT%{kaltura_prefix}/var/tmp
 unzip -o %{SOURCE1} -d $RPM_BUILD_ROOT%{kaltura_prefix}/var/tmp
 mv $RPM_BUILD_ROOT%{kaltura_prefix}/var/tmp/lib $RPM_BUILD_ROOT%{wowza_prefix}/
 mv  $RPM_BUILD_ROOT%{kaltura_prefix}/var/tmp/build.xml $RPM_BUILD_ROOT%{wowza_prefix}/
@@ -91,7 +89,6 @@ usermod -g %{kaltura_group} %{kaltura_user} 2>/dev/null || true
 %postun
 
 %files
-#%{kaltura_prefix}/var/tmp/WowzaStreamingEngine-%{wowza_version}-linux-x64-installer.run
 %{wowza_prefix}
 %config %{wowza_prefix}/conf/oflaDemo/Application.xml
 %config %{wowza_prefix}/transcoder/templates/hdfvr.xml
