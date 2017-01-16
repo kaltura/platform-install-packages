@@ -2,7 +2,7 @@
 Summary: Kaltura Live Analytics
 Name: kaltura-live-analytics
 Version: v0.5.35
-Release: 1
+Release: 2
 License: AGPLv3+
 Group: Server/Platform 
 URL: http://kaltura.org
