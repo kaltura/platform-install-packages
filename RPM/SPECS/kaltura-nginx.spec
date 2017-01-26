@@ -50,7 +50,7 @@ Requires(pre): pwdutils
 Summary: High performance web server customized for Kaltura VOD
 Name: kaltura-nginx
 Version: 1.10.2
-Release: 6
+Release: 7
 Vendor: Kaltura inc.
 URL: http://nginx.org/
 
@@ -120,6 +120,7 @@ export LIBRARY_PATH C_INCLUDE_PATH
 ./configure \
         --prefix=%{_sysconfdir}/nginx \
         --sbin-path=%{_sbindir}/nginx \
+		--modules-path=%{_libdir}/nginx/modules \
         --conf-path=%{_sysconfdir}/nginx/nginx.conf \
         --error-log-path=%{_localstatedir}/log/nginx/error.log \
         --http-log-path=%{_localstatedir}/log/nginx/access.log \
@@ -165,6 +166,7 @@ make %{?_smp_mflags}
 ./configure \
         --prefix=%{_sysconfdir}/nginx \
         --sbin-path=%{_sbindir}/nginx \
+		--modules-path=%{_libdir}/nginx/modules \
         --conf-path=%{_sysconfdir}/nginx/nginx.conf \
         --error-log-path=%{_localstatedir}/log/nginx/error.log \
         --http-log-path=%{_localstatedir}/log/nginx/access.log \
@@ -217,6 +219,10 @@ make %{?_smp_mflags}
 %{__mkdir} -p $RPM_BUILD_ROOT%{_localstatedir}/log/nginx
 %{__mkdir} -p $RPM_BUILD_ROOT%{_localstatedir}/run/nginx
 %{__mkdir} -p $RPM_BUILD_ROOT%{_localstatedir}/cache/nginx
+
+%{__mkdir} -p $RPM_BUILD_ROOT%{_libdir}/nginx/modules
+cd $RPM_BUILD_ROOT%{_sysconfdir}/nginx && \
+    %{__ln_s} ../..%{_libdir}/nginx/modules modules && cd -
 
 %{__mkdir} -p $RPM_BUILD_ROOT%{_sysconfdir}/nginx/conf.d
 %{__rm} $RPM_BUILD_ROOT%{_sysconfdir}/nginx/nginx.conf
@@ -277,6 +283,7 @@ make %{?_smp_mflags}
 
 %dir %{_sysconfdir}/nginx
 %dir %{_sysconfdir}/nginx/conf.d
+%{_sysconfdir}/nginx/modules
 
 #%config(noreplace,missingok) %{_sysconfdir}/nginx/nginx.conf
 %config %{_sysconfdir}/nginx/conf.d/kaltura.conf.template
@@ -300,6 +307,9 @@ make %{?_smp_mflags}
 %{_initrddir}/kaltura-nginx
 %endif
 
+%attr(0755,root,root) %dir %{_libdir}/nginx
+%attr(0755,root,root) %dir %{_libdir}/nginx/modules
+%attr(0755,root,root) %{_libdir}/nginx/modules/*.so
 %dir %{_datadir}/nginx
 %dir %{_datadir}/nginx/html
 %{_datadir}/nginx/html/*
@@ -379,6 +389,9 @@ if [ $1 -ge 1 ]; then
 fi
 
 %changelog
+* Mon Jan 16 2017 Anthony Drimones <anthony.drimones@kaltura.com> - 1.10.2-7
+- Add path support for dynamic modules
+
 * Tue Dec 28 2016 Jess Portnoy <jess.portnoy@kaltura.com> - 1.10.2-5
 - Upgrade to vod module 1.12 [latest stable]
 
