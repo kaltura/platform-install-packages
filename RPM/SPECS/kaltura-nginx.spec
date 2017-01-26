@@ -45,6 +45,8 @@ Requires(pre): pwdutils
 %define nginx_token_validate_ver 1.0.1
 %define nginx_vts_ver 0.1.10
 %define nginx_rtmp_ver 1.1.10
+%define ngx_aws_auth_ver 2.0.1
+%define headers_more_nginx_ver 0.32
 # end of distribution specific definitions
 
 Summary: High performance web server customized for Kaltura VOD
@@ -72,6 +74,8 @@ Source14: nginx-module-rtmp-v%{nginx_rtmp_ver}.zip
 Source15: nginx_kaltura.conf.template 
 Source16: nginx.conf.template 
 Source17: nginx_ssl.conf.template
+Source18: ngx_aws_auth-%{ngx_aws_auth_ver}.zip
+Source19: headers-more-nginx-module-v%{headers_more_nginx_ver}.zip
 #Patch1: nginx_kaltura.diff 
 
 License: 2-clause BSD-like license
@@ -110,6 +114,10 @@ unzip -o %{SOURCE12}
 unzip -o %{SOURCE13}
 
 unzip -o %{SOURCE14}
+
+unzip -o %{SOURCE18}
+
+unzip -o %{SOURCE19}
 
 
 %build
@@ -158,6 +166,8 @@ export LIBRARY_PATH C_INCLUDE_PATH
 	--add-module=./nginx-akamai-token-validate-module-%{nginx_token_validate_ver} \
 	--add-module=./nginx-module-vts-%{nginx_vts_ver} \
 	--add-module=./nginx-rtmp-module-%{nginx_rtmp_ver} \
+	--add-dynamic-module=./ngx_aws_auth-%{ngx_aws_auth_ver} \
+    --add-dynamic-module=./headers-more-nginx-module-%{headers_more_nginx_ver} \
         $*
 make %{?_smp_mflags}
 %{__mv} %{_builddir}/nginx-%{version}/objs/nginx \
@@ -203,6 +213,8 @@ make %{?_smp_mflags}
 	--add-module=./nginx-akamai-token-validate-module-%{nginx_token_validate_ver} \
 	--add-module=./nginx-module-vts-%{nginx_vts_ver} \
 	--add-module=./nginx-rtmp-module-%{nginx_rtmp_ver} \
+	--add-dynamic-module=./ngx_aws_auth-%{ngx_aws_auth_ver} \
+    --add-dynamic-module=./headers-more-nginx-module-%{headers_more_nginx_ver} \
         $*
 make %{?_smp_mflags}
 
@@ -390,7 +402,9 @@ fi
 
 %changelog
 * Mon Jan 16 2017 Anthony Drimones <anthony.drimones@kaltura.com> - 1.10.2-7
-- Add path support for dynamic modules
+- Add support for dynamic modules
+- Add Nginx AWS Authentication module as dynamic module - 2.0.1
+- Add Nginx Headers More module as dynamic module - 0.32
 
 * Tue Dec 28 2016 Jess Portnoy <jess.portnoy@kaltura.com> - 1.10.2-5
 - Upgrade to vod module 1.12 [latest stable]
