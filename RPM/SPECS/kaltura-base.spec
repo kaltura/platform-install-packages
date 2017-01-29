@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 12.9.0
-Release: 8
+Release: 18
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -54,7 +54,6 @@ This is the base package, needed for any Kaltura server role.
 %prep
 %setup -qn server-%{codename}-%{version}
 unzip -q -o %{SOURCE34}
-
 
 %install
 mkdir -p $RPM_BUILD_ROOT%{prefix}/app
@@ -306,6 +305,14 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Sun Jan 29 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.9.0-18
+- SUP-9380 - Live Manifest delivered over http
+- SUP-8904 - flavorAsset -> getDownloadURL provides broken links when there are special characters in the entry name such as %
+- SUP-9879 - Generate thumbnail error when uploading short video - 3 seconds
+- PLAT-6662 - Entry Deep clone - clone childs
+- PLAT-5707 - optimize the thumbnail grabbing
+- PLAT-6503 - Add ability to sanitize/block/notify/ignore on a closed list of object attributes
+
 * Mon Jan 9 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.9.0-1
 - Ver Bounce to 12.9.0
 
