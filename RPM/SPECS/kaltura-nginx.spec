@@ -45,12 +45,14 @@ Requires(pre): pwdutils
 %define nginx_token_validate_ver 1.0.1
 %define nginx_vts_ver 0.1.10
 %define nginx_rtmp_ver 1.1.10
+%define ngx_aws_auth_ver 2.0.1
+%define headers_more_nginx_ver 0.32
 # end of distribution specific definitions
 
 Summary: High performance web server customized for Kaltura VOD
 Name: kaltura-nginx
 Version: 1.10.2
-Release: 6
+Release: 7
 Vendor: Kaltura inc.
 URL: http://nginx.org/
 
@@ -72,6 +74,8 @@ Source14: nginx-module-rtmp-v%{nginx_rtmp_ver}.zip
 Source15: nginx_kaltura.conf.template 
 Source16: nginx.conf.template 
 Source17: nginx_ssl.conf.template
+Source18: ngx_aws_auth-%{ngx_aws_auth_ver}.zip
+Source19: headers-more-nginx-module-v%{headers_more_nginx_ver}.zip
 #Patch1: nginx_kaltura.diff 
 
 License: 2-clause BSD-like license
@@ -111,6 +115,10 @@ unzip -o %{SOURCE13}
 
 unzip -o %{SOURCE14}
 
+unzip -o %{SOURCE18}
+
+unzip -o %{SOURCE19}
+
 
 %build
 LIBRARY_PATH=/opt/kaltura/ffmpeg-3.2/lib
@@ -120,6 +128,7 @@ export LIBRARY_PATH C_INCLUDE_PATH
 ./configure \
         --prefix=%{_sysconfdir}/nginx \
         --sbin-path=%{_sbindir}/nginx \
+		--modules-path=%{_libdir}/nginx/modules \
         --conf-path=%{_sysconfdir}/nginx/nginx.conf \
         --error-log-path=%{_localstatedir}/log/nginx/error.log \
         --http-log-path=%{_localstatedir}/log/nginx/access.log \
@@ -157,6 +166,8 @@ export LIBRARY_PATH C_INCLUDE_PATH
 	--add-module=./nginx-akamai-token-validate-module-%{nginx_token_validate_ver} \
 	--add-module=./nginx-module-vts-%{nginx_vts_ver} \
 	--add-module=./nginx-rtmp-module-%{nginx_rtmp_ver} \
+	--add-dynamic-module=./ngx_aws_auth-%{ngx_aws_auth_ver} \
+    --add-dynamic-module=./headers-more-nginx-module-%{headers_more_nginx_ver} \
         $*
 make %{?_smp_mflags}
 %{__mv} %{_builddir}/nginx-%{version}/objs/nginx \
@@ -165,6 +176,7 @@ make %{?_smp_mflags}
 ./configure \
         --prefix=%{_sysconfdir}/nginx \
         --sbin-path=%{_sbindir}/nginx \
+		--modules-path=%{_libdir}/nginx/modules \
         --conf-path=%{_sysconfdir}/nginx/nginx.conf \
         --error-log-path=%{_localstatedir}/log/nginx/error.log \
         --http-log-path=%{_localstatedir}/log/nginx/access.log \
@@ -201,6 +213,8 @@ make %{?_smp_mflags}
 	--add-module=./nginx-akamai-token-validate-module-%{nginx_token_validate_ver} \
 	--add-module=./nginx-module-vts-%{nginx_vts_ver} \
 	--add-module=./nginx-rtmp-module-%{nginx_rtmp_ver} \
+	--add-dynamic-module=./ngx_aws_auth-%{ngx_aws_auth_ver} \
+    --add-dynamic-module=./headers-more-nginx-module-%{headers_more_nginx_ver} \
         $*
 make %{?_smp_mflags}
 
@@ -217,6 +231,10 @@ make %{?_smp_mflags}
 %{__mkdir} -p $RPM_BUILD_ROOT%{_localstatedir}/log/nginx
 %{__mkdir} -p $RPM_BUILD_ROOT%{_localstatedir}/run/nginx
 %{__mkdir} -p $RPM_BUILD_ROOT%{_localstatedir}/cache/nginx
+
+%{__mkdir} -p $RPM_BUILD_ROOT%{_libdir}/nginx/modules
+cd $RPM_BUILD_ROOT%{_sysconfdir}/nginx && \
+    %{__ln_s} ../..%{_libdir}/nginx/modules modules && cd -
 
 %{__mkdir} -p $RPM_BUILD_ROOT%{_sysconfdir}/nginx/conf.d
 %{__rm} $RPM_BUILD_ROOT%{_sysconfdir}/nginx/nginx.conf
@@ -277,6 +295,7 @@ make %{?_smp_mflags}
 
 %dir %{_sysconfdir}/nginx
 %dir %{_sysconfdir}/nginx/conf.d
+%{_sysconfdir}/nginx/modules
 
 #%config(noreplace,missingok) %{_sysconfdir}/nginx/nginx.conf
 %config %{_sysconfdir}/nginx/conf.d/kaltura.conf.template
@@ -300,6 +319,9 @@ make %{?_smp_mflags}
 %{_initrddir}/kaltura-nginx
 %endif
 
+%attr(0755,root,root) %dir %{_libdir}/nginx
+%attr(0755,root,root) %dir %{_libdir}/nginx/modules
+%attr(0755,root,root) %{_libdir}/nginx/modules/*.so
 %dir %{_datadir}/nginx
 %dir %{_datadir}/nginx/html
 %{_datadir}/nginx/html/*
@@ -379,6 +401,11 @@ if [ $1 -ge 1 ]; then
 fi
 
 %changelog
+* Mon Jan 16 2017 Anthony Drimones <anthony.drimones@kaltura.com> - 1.10.2-7
+- Add support for dynamic modules
+- Add Nginx AWS Authentication module as dynamic module - 2.0.1
+- Add Nginx Headers More module as dynamic module - 0.32
+
 * Tue Dec 28 2016 Jess Portnoy <jess.portnoy@kaltura.com> - 1.10.2-5
 - Upgrade to vod module 1.12 [latest stable]
 
