@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.51
+Version: v2.52
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -81,6 +81,28 @@ find /opt/kaltura/web/html5/html5lib -type d -name cache -exec chown -R 48 {} \;
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Mon Jan 30 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v2.52-1
+- SUP-9989 - Duplicate 350x90 companion ads
+- SUP-9982 - Companion CreativeType is incorrect
+- SUP-9980 - YLE - HLS.JS duplicating external stream segments
+- SUP-9824 - Fullscreen issue with dual screen
+- SUP-8514 - Chapter and slides have wrong thumbnails
+- FEC-6311 - Add support to memcache
+- FEC-6309 - inappropriate use of ARIA roles, states, and properties
+- FEC-6308 - The video player object contains inappropriate aria roles
+- FEC-6216 - Player spinner is displayed during failover
+- FEC-6184 - playback of live stream freezes after fallback to primary
+- FEC-6128 - Upgrade hls.js to v0.6.x
+- FEC-5598 - HLS JS: Green screen appears when Trinity Church stream is playing
+- FEC-6332 - Regression: HLSJS: In most of cases scrubber stays at the same place and live indicator shows DVR after trying to back on live from DVR during throttling
+- FEC-6321 - HLS JS - Loading spinner is shown on playing video after back to LIVE on external stream
+- FEC-6330 - Continuous loading symbol displayed on changing the rate
+- FEC-6341 - Live indicator doesn't return to Live when you pause the stream twice
+- FEC-6343 - Kaltura Live: Bitrate switch: Player doesn't switch bitrate after starting to play live and trying to choose lowest bitrate
+- Enable setting only required settings for HLSJS
+- Disable memCache by default
+- Revert "Change playbackrate api in playManifest request"
+
 * Mon Dec 19 2016 Jess Portnoy <jess.portnoy@kaltura.com> - v2.51-1
 - FEC-5890 - DFP pre-mid-post with skip: Video sound is playing during mid roll when performing seek over mid roll cue point
 - SUP-9337 - Captions on iPhone not displaying since KS is missing the 'disableentitlementforentry' priviliedge
