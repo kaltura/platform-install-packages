@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 12.9.0
-Release: 18
+Version: 12.10.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -305,6 +305,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Tue Jan 31 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.10.0-1
+- Ver Bounce to 12.10.0
+
 * Sun Jan 29 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.9.0-18
 - SUP-9380 - Live Manifest delivered over http
 - SUP-8904 - flavorAsset -> getDownloadURL provides broken links when there are special characters in the entry name such as %
