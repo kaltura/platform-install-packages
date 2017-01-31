@@ -1,3 +1,20 @@
+kaltura-base (12.9.0-2) lynx; urgency=low
+
+  * SUP-9380 - Live Manifest delivered over http
+  * SUP-8904 - flavorAsset -> getDownloadURL provides broken links when there are special characters in the entry name such as %
+  * SUP-9879 - Generate thumbnail error when uploading short video - 3 seconds
+  * PLAT-6662 - Entry Deep clone - clone childs
+  * PLAT-5707 - optimize the thumbnail grabbing
+  * PLAT-6503 - Add ability to sanitize/block/notify/ignore on a closed list of object attributes
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Sun, 29 Jan 2017 18:58:53 +0000
+
+kaltura-base (12.9.0-1) lynx; urgency=low
+
+  * Switching to 12.9.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 09 Jan 2017 15:26:16 +0000
+
 kaltura-base (12.8.0-1) lynx; urgency=low
 
   * Switching to 12.8.0
