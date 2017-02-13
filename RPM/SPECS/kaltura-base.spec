@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 12.10.0
-Release: 6
+Version: 12.11.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -305,6 +305,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Feb 13 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.11.0-1
+- Ver Bounce to 12.11.0
+
 * Mon Feb 13 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.10.0-5
 - SUP-9415 - Comment Limit
 - SUP-9904 - Specific size of thumbnails calls for the original one and not the replacement that was uploaded
