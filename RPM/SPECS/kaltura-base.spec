@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 12.10.0
-Release: 1
+Release: 6
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -305,6 +305,16 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Feb 13 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.10.0-5
+- SUP-9415 - Comment Limit
+- SUP-9904 - Specific size of thumbnails calls for the original one and not the replacement that was uploaded
+- SUP-10147 - V18- Custom metadata fields are not distributed when null via KMC
+- SUP-9826 - Google Drive Integration
+- SUP-10043 - KMS user list does not match the one in the KMC or the API list
+- PLAT-6663 - Trimming or clipping on parent entry should also happen to child entries
+- PLAT-6783 - Batch service keeps respawning
+- PLAT-6679 - partner->register allows for new accounts to be created even if email already exists, without validating password or KS
+
 * Tue Jan 31 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.10.0-1
 - Ver Bounce to 12.10.0
 
