@@ -1,3 +1,22 @@
+kaltura-base (12.10.0-2) lynx; urgency=low
+
+  * SUP-9415 - Comment Limit
+  * SUP-9904 - Specific size of thumbnails calls for the original one and not the replacement that was uploaded
+  * SUP-10147 - V18- Custom metadata fields are not distributed when null via KMC
+  * SUP-9826 - Google Drive Integration
+  * SUP-10043 - KMS user list does not match the one in the KMC or the API list
+  * PLAT-6663 - Trimming or clipping on parent entry should also happen to child entries
+  * PLAT-6783 - Batch service keeps respawning
+  * PLAT-6679 - partner->register allows for new accounts to be created even if email already exists, without validating password or KS
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 13 Feb 2017 14:11:34 +0000
+
+kaltura-base (12.10.0-1) lynx; urgency=low
+
+  * Switching to 12.10.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Tue, 31 Jan 2017 15:22:17 +0000
+
 kaltura-base (12.9.0-2) lynx; urgency=low
 
   * SUP-9380 - Live Manifest delivered over http

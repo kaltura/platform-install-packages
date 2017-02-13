@@ -1,3 +1,9 @@
+kaltura-kmc (5.41.2-3) lynx; urgency=low
+
+  * Version bounce to align with kaltura-html5lib v2.53.
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 13 Feb 2017 14:22:29 +0000
+
 kaltura-kmc (5.41.2-2) lynx; urgency=low
 
   * Version bounce to align with kaltura-html5lib v2.52.

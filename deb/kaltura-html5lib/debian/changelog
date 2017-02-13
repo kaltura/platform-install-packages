@@ -1,3 +1,60 @@
+kaltura-html5lib (2.53-1) lynx; urgency=low
+
+  * FEC-6339 - Audio selection for Shaka is incorrect
+  * FEC-6338 - Quality remains low on DASH playback
+  * FEC-6344 - Add support for HLSJS audio track selection
+  * FEC-6283 - Support Live on Dash
+  * FEC-6159 - VAST Trafficking - image entry doesn't played
+  * FEC-6346 - Auto-detect HLSJS seamless failover settings
+  * FEC-6322 - HLS-JS - Loading spinner while performing seek before pressing on Play on EDGE
+  * FEC-6363 - MPEG-DASH: the video stuck if click more than one time on playlist entry on MAC FF
+  * SUP-9827 - Chapter View For Audio Entries
+  * FEC-6354 - 360 indicator image is shown empty
+  * SUP-10007 - Mixed Hebrew-English captions display incorrectly in player
+  * FEC-6372 - Regression: MPEG Dash: Playlist: Video stuck with loading spinner after performing seek (almost till the end) (PC-IE11 Only)
+  * FEC-6375 - hls-js multiple audio tracks: playback will sporadically pause. Play pause buttons will not respond after switching audio tracks
+  * FEC-6374 - hls-js multiple audio tracks - playback stuck or no sound will be heard after switching tracks in full screen
+  * FEC-6384 - ie edge : audio track not switched after playing dfp mid roll
+  * FEC-6389 - MultiAudio Selector not working on Safari on Mac
+  * FEC-6351 - CVAA triggering and backward compatibility
+  * FEC-6313 - Support for kaltura Live DRM
+  * FEC-6391 - Default Audio Track selection
+  * FEC-6345 - Integrate Dual Video branch
+  * FEC-6130 - Incorrect event type on livestats events
+  * FEC-6423 - HLSJS and Shaka don't respect default audio track setting
+  * SUP-9661 - playlist player with Iframe embed not playing
+  * SUP-9286 - Player Button size not saved on Android & Ipad
+  * FEC-6410 - changeMedia from empty source doesn't play automatically
+  * FEC-6397 - cvcaa : keyboard shortcuts: clicking on tab key will will cause the X and back icons to disapear . user won't be able to close the cvaa dialog
+  * FEC-6398 - cvcaa : text in pull down menus is invisible
+  * FEC-6399 - cvaa: none of the settings affect the captions display
+  * FEC-6401 - cvaa: the label "custom" is not displayed correctly. the m character is displayed outside of the frame
+  * FEC-6416 - Monetization: DoubleClick (ID: 4) - After skipping , ad progress bar is not repalced with player vod progress bar ad , user can't seek . also play button doesn't change to pause
+  * FEC-6425 - cvaa: keyboard shortcuts - custom captions options can't be selected by space key unlike other options in the dialog box
+  * FEC-6444 - Monetization: DoubleClick (ID: 4) - After skipping , skip button stays on add
+  * WEBC-937 - Cannot view webcast live stream from KMS when localStorage is full
+  * FEC-6378 - Draging "UP/DOWN" when video reached video's most UP/DOWN point, reloads the page
+  * FEC-6362 - Entire page is moving when you try to 360 the video on mobile (using finger touch)
+  * FEC-6353 - 360 - Unable to switch between videos in playlist
+  * FEC-6364 - Video is stretched in Full screen (Desktop and mobile)
+  * FEC-6365 - After open/close plugin screen (info/Share etc) dragging video pauses the video
+  * FEC-6451 - Dual video doesn't works on MAC safari - browser error appears
+  * FEC-6441 - Quiz plugin damaged when switching between dual video options
+  * FEC-6356 - No Thumbnail if you seek before clicking on Play
+  * Change default HTTPS stats URL
+  * Seek with Dash - fix the this context
+  * Checking if errorEvent is exists
+  * Remove unicode from CSS file
+  * Fix forced 0 index selection
+  * update memcache config
+  * Add default Widevine CDM Robustness level
+  * Added the RaptMedia plugin
+  * Dual screen fixes
+  * Set DRM robustness level only on Chrome
+  * add 360 to KMC plugins enablement
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 13 Feb 2017 14:17:42 +0000
+
 kaltura-html5lib (2.52-1) lynx; urgency=low
 
   * SUP-9989 - Duplicate 350x90 companion ads
