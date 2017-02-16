@@ -52,7 +52,7 @@ Requires(pre): pwdutils
 Summary: High performance web server customized for Kaltura VOD
 Name: kaltura-nginx
 Version: 1.10.3
-Release: 8
+Release: 1
 Vendor: Kaltura inc.
 URL: http://nginx.org/
 
@@ -401,6 +401,12 @@ if [ $1 -ge 1 ]; then
 fi
 
 %changelog
+* Thu Feb 16 2017 Jess Portnoy <jess.portnoy@kaltura.com> - 1.10.3-1
+- Following pull from David Bezemer: https://github.com/kaltura/platform-install-packages/pull/583/files
+- Sync with nginx upstream
+- VTS module v0.1.12: Fix VTS worker process exited on signal 11
+- aws_auth 2.1.0: Switch back to the official repo
+
 * Mon Jan 16 2017 Anthony Drimones <anthony.drimones@kaltura.com> - 1.10.2-7
 - Add support for dynamic modules
 - Add Nginx AWS Authentication module as dynamic module - 2.0.1
