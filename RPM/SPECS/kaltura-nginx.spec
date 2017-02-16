@@ -43,7 +43,7 @@ Requires(pre): pwdutils
 %define nginx_vod_module_ver 1.12
 %define nginx_secure_token_ver 1.1
 %define nginx_token_validate_ver 1.0.1
-%define nginx_vts_ver 0.1.10
+%define nginx_vts_ver 0.1.11
 %define nginx_rtmp_ver 1.1.10
 %define ngx_aws_auth_ver 2.0.1
 %define headers_more_nginx_ver 0.32
