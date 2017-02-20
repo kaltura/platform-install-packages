@@ -138,11 +138,6 @@ if [ "$1" = "configure" ]; then
 				CA_FILE="NO_CA"
 				sed -i "s^SSLCACertificateFile @SSL_CERTIFICATE_CA_FILE@^#SSLCACertificateFile @SSL_CERTIFICATE_CA_FILE@^" $MAIN_APACHE_CONF
 			fi
-			echo "CRT_FILE=$CRT_FILE" >> $RC_FILE
-			echo "KEY_FILE=$KEY_FILE" >> $RC_FILE
-			echo "CA_FILE=$CA_FILE" >> $RC_FILE
-			echo "CHAIN_FILE=$CHAIN_FILE" >> $RC_FILE
-
 		fi
 
 	if [ "$IS_SSL" = 'true' ];then
