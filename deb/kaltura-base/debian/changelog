@@ -1,3 +1,9 @@
+kaltura-base (12.11.0-1) lynx; urgency=low
+
+  * Switching to 12.11.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 13 Feb 2017 17:29:13 +0000
+
 kaltura-base (12.10.0-2) lynx; urgency=low
 
   * SUP-9415 - Comment Limit

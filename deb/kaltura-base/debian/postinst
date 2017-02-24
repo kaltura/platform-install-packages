@@ -17,7 +17,7 @@ APACHE_USER=www-data
 KALTURA_VERSION="`dpkg-query -W -f'${Version}' kaltura-base|awk -F "+" '{print $1}'`"
 
 ln -sf $KALTURA_PREFIX/app/api_v3/web $KALTURA_PREFIX/app/alpha/web/api_v3
-chown $APACHE_USER.kaltura -R $KALTURA_PREFIX/web/content/entry $KALTURA_PREFIX/web/content/uploads/  $KALTURA_PREFIX/web/tmp/
+chown $APACHE_USER.kaltura -R $KALTURA_PREFIX/web/content/entry $KALTURA_PREFIX/web/content/uploads/  $KALTURA_PREFIX/web/tmp/ $KALTURA_PREFIX/tmp
 find $KALTURA_PREFIX/web/content/entry $KALTURA_PREFIX/web/content/uploads/  $KALTURA_PREFIX/web/tmp/ -type d -exec chmod 775 {} \;
 if [ -r $KALTURA_PREFIX/bin/kaltura-base-upgrading ];then
         if [ -r "$KALTURA_PREFIX/app/configurations/local.ini" -a -r "$KALTURA_PREFIX/app/configurations/base.ini" ];then
