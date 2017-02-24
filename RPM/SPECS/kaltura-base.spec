@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 12.11.0
-Release: 4
+Release: 9
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -305,6 +305,14 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Fri Feb 23 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.11.0-9
+- PLAT-6888 - Push notification redesig + caching optiization
+- PLAT-6944 - Drop folder Optimization
+- PLAT-6786 - Conditional conversion porfiles
+- PLAT-6786 - Preserve Source Key Frames
+- PLAT-6663 - Trimming or clipping on parent entry should also happen to child entries
+- PLAT-6855 - kMatchMetadataCondition should return false for irrelevant metadata objects
+
 * Mon Feb 13 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.11.0-1
 - Ver Bounce to 12.11.0
 
