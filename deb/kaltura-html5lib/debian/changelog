@@ -1,3 +1,13 @@
+kaltura-html5lib (2.53.2-1) lynx; urgency=low
+
+  * New hlsjs version 0.6.21 [https://kaltura.atlassian.net/browse/SUP-10327]
+  * FEC-6469 - 360 first finger touch doesn't work when controlBarContainer is hover
+  * FEC-6494 - 360: if play more than one entry, the entry's thumbnail appears over DFP pre-roll
+  * FEC-6498 - 360 BE tagging support
+  * FEC-6501 - Regression: 360: Seek works only one time after changing media from 360 video to 360/simple video
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 27 Feb 2017 13:01:09 +0000
+
 kaltura-html5lib (2.53-1) lynx; urgency=low
 
   * FEC-6339 - Audio selection for Shaka is incorrect

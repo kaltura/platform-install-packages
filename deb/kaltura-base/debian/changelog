@@ -1,3 +1,14 @@
+kaltura-base (12.11.0-2) lynx; urgency=low
+
+  * PLAT-6888 - Push notification redesig + caching optiization
+  * PLAT-6944 - Drop folder Optimization
+  * PLAT-6786 - Conditional conversion porfiles
+  * PLAT-6786 - Preserve Source Key Frames
+  * PLAT-6663 - Trimming or clipping on parent entry should also happen to child entries
+  * PLAT-6855 - kMatchMetadataCondition should return false for irrelevant metadata objects
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 27 Feb 2017 12:58:12 +0000
+
 kaltura-base (12.11.0-1) lynx; urgency=low
 
   * Switching to 12.11.0
