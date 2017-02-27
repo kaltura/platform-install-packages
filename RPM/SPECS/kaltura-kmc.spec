@@ -1,7 +1,7 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmc
 Version: v5.41.2
-Release: 3
+Release: 4
 Summary: Kaltura Management Console
 
 Group: System Management	
@@ -83,6 +83,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Feb 26 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v5.41.2-4
+- Ver bounce of HTML5 to v2.53.2
+
 * Mon Feb 13 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v5.41.2-3
 - Ver bounce of HTML5 to v2.53
 

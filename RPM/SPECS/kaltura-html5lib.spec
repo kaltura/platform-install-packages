@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.53
+Version: v2.53.2
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -81,6 +81,13 @@ find /opt/kaltura/web/html5/html5lib -type d -name cache -exec chown -R 48 {} \;
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Mon Feb 26 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v2.53.2-1
+- New hlsjs version 0.6.21 [https://kaltura.atlassian.net/browse/SUP-10327]
+- FEC-6469 - 360 first finger touch doesn't work when controlBarContainer is hover
+- FEC-6494 - 360: if play more than one entry, the entry's thumbnail appears over DFP pre-roll
+- FEC-6498 - 360 BE tagging support
+- FEC-6501 - Regression: 360: Seek works only one time after changing media from 360 video to 360/simple video
+
 * Mon Feb 13 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v2.53-1
 - FEC-6339 - Audio selection for Shaka is incorrect
 - FEC-6338 - Quality remains low on DASH playback
