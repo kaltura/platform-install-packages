@@ -72,5 +72,7 @@ WWW_HOST="@API_HOST_TO_USE_FOR_NGINX@"
 # The range is used when checking service actions permissions and allowing to access certain services without KS from the internal servers.
 # The default is only good for testing, on a production ENV you should adjust according to your network.
 IP_RANGE="0.0.0.0-255.255.255.255"
+# Port to use with Nginx's RTMP module
+RTMP_PORT=1935
 
 
