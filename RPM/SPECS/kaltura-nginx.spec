@@ -40,7 +40,7 @@ BuildRequires: libopenssl-devel
 Requires(pre): pwdutils
 %endif
 
-%define nginx_vod_module_ver 1.12
+%define nginx_vod_module_ver 1.13
 %define nginx_secure_token_ver 1.1
 %define nginx_token_validate_ver 1.0.1
 %define nginx_vts_ver 0.1.12
@@ -52,7 +52,7 @@ Requires(pre): pwdutils
 Summary: High performance web server customized for Kaltura VOD
 Name: kaltura-nginx
 Version: 1.10.3
-Release: 1
+Release: 2
 Vendor: Kaltura inc.
 URL: http://nginx.org/
 
@@ -401,6 +401,9 @@ if [ $1 -ge 1 ]; then
 fi
 
 %changelog
+* Tue Feb 28 2017 Jess Portnoy <jess.portnoy@kaltura.com> - 1.10.3-2
+- Upgrade to vod module 1.13 [latest stable]
+
 * Thu Feb 16 2017 Jess Portnoy <jess.portnoy@kaltura.com> - 1.10.3-1
 - Following pull from David Bezemer: https://github.com/kaltura/platform-install-packages/pull/583/files
 - Sync with nginx upstream

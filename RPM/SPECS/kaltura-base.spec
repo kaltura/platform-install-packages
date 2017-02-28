@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 12.11.0
-Release: 10
+Version: 12.12.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -305,6 +305,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Tue Feb 28 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.12.0-1
+- Ver Bounce to 12.12.0
+
 * Fri Feb 23 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.11.0-9
 - PLAT-6888 - Push notification redesig + caching optiization
 - PLAT-6944 - Drop folder Optimization
