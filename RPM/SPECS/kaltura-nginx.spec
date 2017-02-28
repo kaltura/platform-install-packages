@@ -44,7 +44,7 @@ Requires(pre): pwdutils
 %define nginx_secure_token_ver 1.1
 %define nginx_token_validate_ver 1.0.1
 %define nginx_vts_ver 0.1.12
-%define nginx_rtmp_ver 1.1.10
+%define nginx_rtmp_ver 1.1.11
 %define ngx_aws_auth_ver 2.1.0
 %define headers_more_nginx_ver 0.32
 # end of distribution specific definitions
@@ -52,7 +52,7 @@ Requires(pre): pwdutils
 Summary: High performance web server customized for Kaltura VOD
 Name: kaltura-nginx
 Version: 1.10.3
-Release: 2
+Release: 3
 Vendor: Kaltura inc.
 URL: http://nginx.org/
 
@@ -401,6 +401,9 @@ if [ $1 -ge 1 ]; then
 fi
 
 %changelog
+* Tue Feb 28 2017 Jess Portnoy <jess.portnoy@kaltura.com> - 1.10.3-2
+- New RTMP module - 1.1.11 [Added OpenSSL support: https://github.com/arut/nginx-rtmp-module/commit/04f0ab97ac61d181dbfdaa5299412fc3064e95a3]
+
 * Tue Feb 28 2017 Jess Portnoy <jess.portnoy@kaltura.com> - 1.10.3-2
 - Upgrade to vod module 1.13 [latest stable]
 
