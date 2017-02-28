@@ -1,3 +1,11 @@
+kaltura-nginx (1.10.3-1) lynx; urgency=low
+
+  * Nginx latest stable
+  * New Nginx vod module - 1.13 [https://github.com/kaltura/nginx-vod-module/releases/tag/1.13]
+  * New RTMP module - 1.1.11 [Added OpenSSL support: https://github.com/arut/nginx-rtmp-module/commit/04f0ab97ac61d181dbfdaa5299412fc3064e95a3]
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Tue, 28 Feb 2017 15:34:06 +0000
+
 kaltura-nginx (1.10.2-3) lynx; urgency=low
 
   * New Nginx vod module - 1.12, built against FFmpeg 3.2.
