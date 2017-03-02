@@ -7,7 +7,7 @@
 Summary: Kaltura Open Source Video Platform - batch server 
 Name: kaltura-batch
 Version: 12.12.0
-Release: 1
+Release: 2
 License: AGPLv3+
 Group: Server/Platform 
 Source0: zz-%{name}.ini
@@ -131,6 +131,9 @@ service httpd restart
 
 
 %changelog
+* Thu Mar 2 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.12.0-2
+- Updated batch.ini.template
+
 * Tue Feb 28 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.12.0-1
 - Ver Bounce to 12.12.0
 

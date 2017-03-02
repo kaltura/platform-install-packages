@@ -46,6 +46,8 @@ enabledWorkers.KAsyncDistributeSubmit				= 1
 enabledWorkers.KAsyncDistributeUpdate				= 1
 enabledWorkers.KAsyncDistributeDelete				= 1
 enabledWorkers.KAsyncDistributeFetchReport			= 1
+enabledWorkers.KAsyncDistributeEnable				= 1
+enabledWorkers.KAsyncDistributeDisable				= 1 
 enabledWorkers.KAsyncSynchronizeDistribution		= 1
 enabledWorkers.KAsyncDropFolderWatcher				= 1
 enabledWorkers.KAsyncDropFolderContentProcessor		= 1
@@ -57,13 +59,18 @@ enabledWorkers.KAsyncDeleteFile						= 1
 enabledWorkers.KAsyncMoveCategoryEntries			= 4
 enabledWorkers.KAsyncCopy							= 4
 enabledWorkers.KAsyncParseCaptionAsset				= 1
-enabledWorkers.KScheduledTaskRunner					= 0
-enabledWorkers.KScheduledTaskDryRunner				= 0
+enabledWorkers.KScheduledTaskRunner					= 1
+enabledWorkers.KScheduledTaskDryRunner				= 1
 enabledWorkers.KAsyncConvertLiveSegment				= 1
 enabledWorkers.KAsyncConcat							= 1
 enabledWorkers.KAsyncValidateLiveMediaServers		= 1
 enabledWorkers.KAsyncSyncCategoryPrivacyContext		= 1
 enabledWorkers.KAsyncTagIndex						= 1
+enabledWorkers.KAsyncIntegrate						= 1
+enabledWorkers.KAsyncIntegrateCloser				= 1
+enabledWorkers.KAsyncClearCuePoints					= 1
+enabledWorkers.KAsyncConvertThumbAssetsGenerator	= 1
+enabledWorkers.KAsyncLiveToVod      				= 1
 
 [mainTemplate : template]
 enabledWorkers.DirectoryCleanupShared				= 1
@@ -202,6 +209,9 @@ friendlyName										= Extract Media
 type												= KAsyncExtractMedia
 scriptPath											= batches/ExtractMedia/KAsyncExtractMediaExe.php
 params.mediaInfoCmd									= @BIN_DIR@/mediainfo
+params.ffprobeCmd									= @BIN_DIR@/ffprobe
+;The path for local temporary generated product
+params.localTempPath 									= @TMP_DIR@/convert
 
 [KAsyncConvertWorker : JobHandlerWorker]
 type												= KAsyncConvert
@@ -483,6 +493,7 @@ id													= 260
 friendlyName										= Distribute Submit
 type												= KAsyncDistributeSubmit
 scriptPath											= ../plugins/content_distribution/batch/Distribute/KAsyncDistributeSubmitExe.php
+maximumExecutionTime								= 5400
 
 
 [KAsyncDistributeUpdate : KAsyncDistribute]
@@ -551,6 +562,10 @@ type												= KAsyncDropFolderWatcher
 maximumExecutionTime								= 3000
 scriptPath											= ../plugins/drop_folder/batch/DropFolderWatcher/KAsyncDropFolderWatcherExe.php
 params.tags											= *
+params.maxTimeForFolder                             = 3000
+numberOfFoldersEachRun                              = 20
+params.mrss.xmlPath									= @WEB_DIR@/tmp/dropFolderFiles
+params.mrss.limitProcessEachRun						= 20
 
 
 [KAsyncDropFolderContentProcessor : JobHandlerWorker]
@@ -641,6 +656,8 @@ scriptPath             								= ../plugins/drm/providers/widevine/batch/widevin
 id													= 490
 type												= KAsyncConvertLiveSegment
 scriptPath											= batches/ConvertLiveSegment/KAsyncConvertLiveSegmentExe.php
+params.ffprobeCmd									= @BIN_DIR@/ffprobe
+params.mediaInfoCmd									= @BIN_DIR@/mediainfo
 
 
 
@@ -648,6 +665,8 @@ scriptPath											= batches/ConvertLiveSegment/KAsyncConvertLiveSegmentExe.ph
 id													= 500
 type												= KAsyncConcat
 scriptPath											= batches/Concat/KAsyncConcatExe.php
+params.ffprobeCmd									= @BIN_DIR@/ffprobe
+params.mediaInfoCmd									= @BIN_DIR@/mediainfo
 
 
 
@@ -657,6 +676,7 @@ friendlyName										= Validate Live Media Servers
 type												= KAsyncValidateLiveMediaServers
 scriptPath											= batches/ValidateLiveMediaServers/KAsyncValidateLiveMediaServersExe.php
 sleepBetweenStopStart								= 30
+params.minCreationTime								= 120
 
 
 
@@ -683,10 +703,12 @@ scriptPath											= ../plugins/scheduled_task/batch/ScheduledTaskDryRunner/KS
 params.sharedTempPath 								= @TMP_DIR@/scheduledtasks
 
 [KScheduledTaskRunner : PeriodicWorker]
+id													= 610
 type												= KScheduledTaskRunner
 maximumExecutionTime								= 600
 scriptPath											= ../plugins/scheduled_task/batch/ScheduledTaskRunner/KScheduledTaskRunnerExe.php
 sleepBetweenStopStart								= 21600
+maxTotalCountAllowed								= 50
 
 [KAsyncSyncCategoryPrivacyContext : JobHandlerWorker]
 id													= 550
@@ -701,3 +723,67 @@ friendlyName										= Re-index tags
 type												= KAsyncTagIndex
 maximumExecutionTime								= 12000
 scriptPath											= ../plugins/tag_search/lib/batch/tag_index/KAsyncTagIndexExe.php
+[KAsyncLiveReportExport : JobHandlerWorker]
+id													= 600
+friendlyName										= Live reports export
+type												= KAsyncLiveReportExport
+maximumExecutionTime								= 12000
+scriptPath											= batches/LiveReportExport/KAsyncLiveReportExportExe.php
+params.localTempPath								= @TMP_DIR@/reports
+params.sharedPath									= @WEB_DIR@/tmp/reports
+
+[KAsyncIntegrate : JobHandlerWorker]
+id													= 570
+friendlyName										= Integrate
+type												= KAsyncIntegrate
+maximumExecutionTime								= 12000
+scriptPath											= ../plugins/integration/batch/Integrate/KAsyncIntegrateExe.php
+
+[KAsyncIntegrateCloser : JobHandlerWorker]
+id													= 580
+friendlyName										= Integrate Closer
+type												= KAsyncIntegrateCloser
+maximumExecutionTime								= 12000
+scriptPath											= ../plugins/integration/batch/Integrate/KAsyncIntegrateCloserExe.php
+params.maxTimeBeforeFail							= 1000000
+
+[KAsyncDistributeEnable : KAsyncDistribute]
+id													= 590
+friendlyName										= Distribute Enable
+type												= KAsyncDistributeEnable
+scriptPath											= ../plugins/content_distribution/batch/Distribute/KAsyncDistributeEnableExe.php
+
+[KAsyncDistributeDisable : KAsyncDistribute]
+id													= 600
+friendlyName										= Distribute Disable
+type												= KAsyncDistributeDisable
+scriptPath											= ../plugins/content_distribution/batch/Distribute/KAsyncDistributeDisableExe.php
+
+[KAsyncRecalculateCache : JobHandlerWorker]
+id													= 610
+friendlyName										= Recalculate Cache
+type												= KAsyncRecalculateCache
+scriptPath											= batches/Cache/KAsyncRecalculateCacheExe.php
+
+[KAsyncClearCuePoints : PeriodicWorker]
+id																	= 620
+friendlyName                                        				= Clear old cue points from live entry
+type                                                				= KAsyncClearCuePoints
+scriptPath                                          				= ../plugins/cue_points/base/batch/clearCuePonts/KAsyncClearCuePointsExe.php
+advancedFilter.KalturaCuePointFilter.cuePointTypeIn							= "thumbCuePoint.Thumb,adCuePoint.Ad,codeCuePoint.Code"
+advancedFilter.KalturaCuePointFilter.orderBy								= "+createdAt"
+advancedFilter.KalturaCuePointFilter.createdAtLessThanOrEqual				= "-86400"
+advancedFilter.KalturaCuePointFilter.statusEqual							= 1
+
+[KAsyncConvertThumbAssetsGenerator : KAsyncConvertWorker]
+id                                      = 630
+friendlyName                            = Convert Thumb Assets
+maximumExecutionTime                    = 36000
+maxJobsEachRun                          = 1
+filter.jobSubTypeIn                     = document.thumbAssets
+params.skipSourceValidation             = 1
+
+[KAsyncLiveToVod : KAsyncConvertWorker]
+id													= 640
+type												= KAsyncLiveToVod
+scriptPath											= batches/LiveToVod/KAsyncLiveToVodExe.php
