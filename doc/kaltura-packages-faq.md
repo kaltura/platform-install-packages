@@ -76,6 +76,45 @@ You can also use: `# allkaltlog` (using root), which will dump all the error lin
 This output can be used to analyze past failures but for active debugging use the kaltlog alias.   
 
 ### Analytics issues
+
+#### General Flow
+- When a user hits play, an API request similar to the below [service=stats&action=collect], is made by the player:
+```
+ api_v3/index.php?service=stats&apiVersion=3.1&expiry=86400&clientTag=kwidget%3Av2.53.2&format=1&ignoreNull=1&action=collect&event:eventType=3&event:clientVer=2.53.2&event:currentPoint=0&event:duration=29&event:eventTimestamp=1488213859683&event:isFirstInSession=false&event:objectType=KalturaStatsEvent&event:partnerId=102&event:sessionId=1b92c640-b6de-3e22-4736-0755706220d7&event:uiconfId=23448199&event:seek=false&event:entryId=0_wl3vd05h&event:historyEvents=111000000000000000000000-3-3&event:widgetId=_102&event
+```
+- This in turn is recorded in the Apache access log for the Kaltura VHost [/opt/kaltura/log/kaltura_apache_access.log]
+- The access logs from each front node are then rotated to /opt/kaltura/web/logs using /etc/logrotate.d/kaltura_apache, in particular:
+```
+/opt/kaltura/log/kaltura_apache_access.log {
+ rotate 5
+ daily
+ missingok
+ compress
+ dateext
+ notifempty
+ lastaction
+ mv /opt/kaltura/log/kaltura_apache_access.log-`/bin/date +%Y%m%d`.gz /opt/kaltura/web/logs/`hostname`-kaltura_apache_access.log-`/bin/date +%Y%m%d-%H`.gz
+ service httpd reload
+ endscript
+ su root kaltura
+}
+```
+- On the DWH machine, the relevant scripts are run by crond, because of this file: /etc/cron.d/kaltura-dwh
+- As a first step, the following config file is looked at /opt/kaltura/dwh/.kettle/kettle.properties, in it, the path to the log dir and the pattern to look for are defined like so:
+```
+EventsLogsDir = /opt/kaltura/web/logs
+EventsWildcard = .*kaltura.*_access.*.log-.*
+``` 
+
+In summary, when troubleshooting Analytics issues:
+- Make sure /opt/kaltura/web/logs exist on the NFS
+- Make sure the volume is mounted on all front and batch machines and that at least /opt/kaltura/web/logs is mounted on the DWH machine [it does not need the other dirs though you can mount the entire volume]
+- Make sure /etc/logrotate.d/kaltura_apache exists on all front machines and the access log files are rotated
+
+*Note that analytics are not updated in real time but rather processed by running the cron jobs defined here /etc/cron.d/kaltura-dwh*
+
+#### Troubleshooting Analytics Issues
+
 check if a process lock is stuck:
 ```
 mysql> select * from kalturadw_ds.locks ;
