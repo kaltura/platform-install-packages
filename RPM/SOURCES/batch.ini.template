@@ -209,7 +209,7 @@ id                                                  = 60
 friendlyName                                        = Extract Media
 type                                                = KAsyncExtractMedia
 scriptPath                                          = batches/ExtractMedia/KAsyncExtractMediaExe.php
-params.mediaInfoCmd                                 = @BIN_DIR@mediainfo
+params.mediaInfoCmd                                 = @BIN_DIR@/mediainfo
 params.ffprobeCmd                                   = @BIN_DIR@/ffprobe
 params.localTempPath                                = @TMP_DIR@/convert
 
@@ -228,7 +228,7 @@ params.segmenterCmd                                 = @BIN_DIR@/segmenter
 params.pdf2SwfCmd                                   = @BIN_DIR@/pdf2swf
 params.ImageMagickCmd                               = /usr/bin/convert
 params.ffprobeCmd                                   = @BIN_DIR@/ffprobe
-params.mediaInfoCmd                                 = @BIN_DIR@mediainfo
+params.mediaInfoCmd                                 = @BIN_DIR@/mediainfo
 
 params.EncodingComUserId                            = should-fail
 params.EncodingComUserKey                           = should-fail
