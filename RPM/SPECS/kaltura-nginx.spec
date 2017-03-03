@@ -41,7 +41,7 @@ Requires(pre): pwdutils
 %endif
 
 %define nginx_vod_module_ver 1.13
-%define nginx_secure_token_ver 1.1
+%define nginx_secure_token_ver 1.2
 %define nginx_token_validate_ver 1.0.1
 %define nginx_vts_ver 0.1.12
 %define nginx_rtmp_ver 1.1.11
@@ -401,6 +401,12 @@ if [ $1 -ge 1 ]; then
 fi
 
 %changelog
+* Fri Mar 3 2017 Jess Portnoy <jess.portnoy@kaltura.com> - 1.10.3-3
+- Upgrade to nginx-secure-token module 1.13 [latest stable]:
+	- https://github.com/kaltura/nginx-secure-token-module/blob/master/CHANGELOG.md#20161208---refactor-conf-structure
+	- added support for cht tokens
+	- xml escape tokens in mpd/f4m
+
 * Tue Feb 28 2017 Jess Portnoy <jess.portnoy@kaltura.com> - 1.10.3-2
 - New RTMP module - 1.1.11 [Added OpenSSL support: https://github.com/arut/nginx-rtmp-module/commit/04f0ab97ac61d181dbfdaa5299412fc3064e95a3]
 
