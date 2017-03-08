@@ -21,7 +21,7 @@ Refer to the [Deploying Kaltura Clusters Using Chef](https://github.com/kaltura/
 * [Batch servers](#the-batch-node)
 * [DWH server](#the-datawarehouse)
 * [Nginx VOD server](#nginx-vod-server)
-* [Streaming Server](#the-streaming-server)
+* [Live Streaming with Nginx and the RTMP module](#live-streaming-with-nginx-and-the-rtmp-module)
 * [Upgrade Kaltura](#upgrade-kaltura)
 * [Platform Monitoring](#platform-monitoring)
 * [Backup and Restore](#backup-and-restore-practices)
@@ -114,7 +114,7 @@ The NFS is the shared network storage between all machines in the cluster. To le
 ```
 # yum install nfs-utils-lib ntp
 # chkconfig nfs on
-# chkconfig ntp on
+# chkconfig ntpd on
 # service ntpd start
 # service rpcbind start
 # service nfs start
@@ -370,26 +370,13 @@ default_delivery_type = hds
 Would make entries shorter than 5 minutes to be delivered as progressive download, all others will be served as HDS, unless we're on iOS where HLS will be attempted.
 
 
-Note: Currently, the Nginx VOD module does not support integration with Kaltura over HTTPs, only HTTP is supported. 
+### Live Streaming with Nginx and the RTMP module
+Kaltura CE includes the kaltura-nginx package, which is compiled with the [Nginx RTMP module](https://github.com/arut/nginx-rtmp-module).
 
-### The Streaming Server
-To achieve RTMP/t/e playback, Live streaming, webcam recording, and etc. Kaltura requires a streaming server.   
-You can use the open source Red5 server which is available as a Kaltura package too, and follow the steps below.   
+Please see documentation here [nginx-rtmp-live-streaming.md](nginx-rtmp-live-streaming.md)
 
-To install Red5:
-```
-# rpm -Uhv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
-# yum install kaltura-red5 kaltura-postinst
-```
+A longer post about it can be found at https://blog.kaltura.com/free-and-open-live-video-streaming
 
-* Visit on your browser: `http://your_red5_server_hostname:5080` (This will load Red5's Web Admin)
-* Click 'Install a ready-made application'
-* Check 'OFLA Demo' and click 'Install'
-* Edit `/usr/lib/red5/webapps/oflaDemo/index.html` and replace `localhost` with your actual Red5 hostname or IP
-* Test OflaDemo by visiting `http://your_red5_server_hostname:5080/oflaDemo/` and playing the sample videos
-* Run: `# /opt/kaltura/bin/kaltura-red5-config.sh`
-
-Kaltura supports commercial encoders and streaming servers too. For more information about commercial alternatives see [Kaltura Commercial OnPrem Edition™](http://corp.kaltura.com/Deployment-Options/Kaltura-On-Prem-Edition).
 
 ### Upgrade Kaltura
 On all nodes:

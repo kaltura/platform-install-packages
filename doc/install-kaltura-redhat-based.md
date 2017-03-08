@@ -13,6 +13,8 @@ This guide describes RPM installation of an all-in-one Kaltura server and applie
 
 [Unattended Installation](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-redhat-based.md#unattended-installation)
 
+[Live Streaming with Nginx and the RTMP module](install-kaltura-redhat-based.md#live-streaming-with-nginx-and-the-rtmp-module)
+
 [Upgrade Kaltura](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-redhat-based.md#upgrade-kaltura)
 
 [Remove Kaltura](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-redhat-based.md#remove-kaltura)
@@ -74,12 +76,33 @@ The ```[Kaltura-noarch]``` repo should remain as is.
 
 *Note for RHEL7: depending on what repos you have enabled, you may also need to add the EPEL or CentOS repos to resolve all dependencies.*
 
+#### Installing on AWS EC2 instances
+Depending on your setup, you may need to enable two additional repos: rhui-REGION-rhel-server-extras and rhui-REGION-rhel-server-optional.
+This can be done by editing /etc/yum.repos.d/redhat-rhui.repo and changing:
+```
+enabled=0
+```
+to:
+```
+enabled=1
+```
+under the following sections:
+```
+rhui-REGION-rhel-server-optional
+rhui-REGION-rhel-server-extras
+```
+
+Or by running the following commands:
+```
+# yum -y install yum-utils
+# yum-config-manager --enable rhui-REGION-rhel-server-extras rhui-REGION-rhel-server-optional
+```
+
 #### Enabling the EPEL repo
 To add the EPEL repo:
 ```
 # rpm -ihv https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 ```
-For CentOS/RHEL6, this should not be necessary, for RHEL/CentOS 7, you will need EPEL for the mediainfo package.
 
 
 #### MySQL Install and Configuration
@@ -189,22 +212,6 @@ Please select one of the following options [0]: "<0>"
 
 Your install will now automatically perform all install tasks.
 
-#### Configure Red5 server
-1. install the kaltura-red5 package:
-```
-# yum install kaltura-red5
-```
-1. Request http://hostname:5080
-1. Click 'Install a ready-made application'
-1. Mark 'OFLA Demo' and click 'Install'
-1. Edit /usr/lib/red5/webapps/oflaDemo/index.html and replace 'localhost' with your actual Red5 hostname or IP
-1. Test OflaDemo by making a request to http://hostname:5080/oflaDemo/ and playing the sample videos
-1. Run:
-
-```bash
-/opt/kaltura/bin/kaltura-red5-config.sh
-```
-
 
 
 **Your Kaltura installation is now complete.**
@@ -248,6 +255,8 @@ This section is a step-by-step guide of a Kaltura installation with SSL.
 ```bash
 rpm -ihv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
 ```
+
+
 
 #### MySQL Install and Configuration
 Please note that currently, only MySQL 5.1 is supported, we recommend using the official package supplied by the RHEL/CentOS repos which is currently 5.1.73.
@@ -357,22 +366,13 @@ Please select one of the following options [0]: "<0>"
 
 Your install will now automatically perform all install tasks.
 
-#### Configure Red5 server
-1. Request http://hostname:5080
-1. Click 'Install a ready-made application'
-1. Mark 'OFLA Demo' and click 'Install'
-1. Edit /usr/lib/red5/webapps/oflaDemo/index.html and replace 'localhost' with your actual Red5 hostname or IP
-1. Test OflaDemo by making a request to http://hostname:5080/oflaDemo/ and playing the sample videos
-1. Run:
+### Live Streaming with Nginx and the RTMP module
+Kaltura CE includes the kaltura-nginx package, which is compiled with the [Nginx RTMP module](https://github.com/arut/nginx-rtmp-module).
 
-```bash
-/opt/kaltura/bin/kaltura-red5-config.sh
-```
+Please see documentation here [nginx-rtmp-live-streaming.md](nginx-rtmp-live-streaming.md)
 
-## Note about using Wowza as media server
-you can use Wowza as media server instead of Red5. For webcam recording using Wowza, please follow:
-https://github.com/kaltura/media-server/blob/3.0.9/Installation.md#for-webcam-recording-servers
-And then run /opt/kaltura/bin/kaltura-red5-config.sh providing the Wowza IP/hostname.
+A longer post about it can be found at https://blog.kaltura.com/free-and-open-live-video-streaming
+
 
 ### SSL Certificate Configuration
 
@@ -463,7 +463,7 @@ For posting questions, please go to:
 * This guide describes the installation and upgrade of an all-in-one machine where all the Kaltura components are installed on the same server. For cluster deployments, please refer to [cluster deployment document](http://bit.ly/kipp-cluster-yum), or [Deploying Kaltura using Opscode Chef](https://github.com/kaltura/platform-install-packages/blob/master/doc/rpm-chef-cluster-deployment.md).
 * To learn about monitoring, please refer to [configuring platform monitors](http://bit.ly/kipp-monitoring).
 * Testers using virtualization: [@DBezemer](https://github.com/kaltura) created a basic CentOS 6.4 template virtual server vailable here in OVF format: https://www.dropbox.com/s/luai7sk8nmihrkx/20140306_CentOS-base.zip
-* Alternatively you can find VMWare images at - http://www.thoughtpolice.co.uk/vmware/ --> Make sure to only use compatible OS images; either RedHat or CentOS 5.n, 6.n or FedoraCore 18+.
+* Alternatively you can find VMWare images at - https://www.osboxes.org/vmware-images --> Make sure to only use compatible OS images; either RedHat or CentOS 5.n, 6.n or FedoraCore 18+.
 * Two working solutions to the AWS EC2 email limitations are:
   * Using SendGrid as your mail service ([setting up ec2 with Sendgrid and postfix](http://www.zoharbabin.com/configure-ssmtp-or-postfix-to-send-email-via-sendgrid-on-centos-6-3-ec2)).
   * Using [Amazon's Simple Email Service](http://aws.amazon.com/ses/).

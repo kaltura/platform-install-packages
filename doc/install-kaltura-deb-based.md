@@ -13,6 +13,8 @@ The processes was tested on Debian 8 and Ubuntu 14.04 but is expected to work on
 
 [Unattended Installation](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-deb-based.md#unattended-installation)
 
+[Live Streaming with Nginx and the RTMP module](install-kaltura-redhat-based.md#live-streaming-with-nginx-and-the-rtmp-module)
+
 [Upgrade Kaltura](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-deb-based.md#upgrade-kaltura)
 
 [Remove Kaltura](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-deb-based.md#remove-kaltura)
@@ -119,21 +121,12 @@ In order to perform a manual step by step install, simply copy the commands and 
 # ./install_kaltura_all_in_1.sh
 ```
 
-#### Configure Red5 server
-1. install the kaltura-red5 package:
-```
-# aptitude install kaltura-red5
-```
-1. Request http://hostname:5080
-1. Click 'Install a ready-made application'
-1. Mark 'OFLA Demo' and click 'Install'
-1. Edit /usr/lib/red5/webapps/oflaDemo/index.html and replace 'localhost' with your actual Red5 hostname or IP
-1. Test OflaDemo by making a request to http://hostname:5080/oflaDemo/ and playing the sample videos
-1. Run:
+### Live Streaming with Nginx and the RTMP module
+Kaltura CE includes the kaltura-nginx package, which is compiled with the [Nginx RTMP module](https://github.com/arut/nginx-rtmp-module).
 
-```bash
-/opt/kaltura/bin/kaltura-red5-config.sh
-```
+Please see documentation here [nginx-rtmp-live-streaming.md](nginx-rtmp-live-streaming.md)
+
+A longer post about it can be found at https://blog.kaltura.com/free-and-open-live-video-streaming
 
 
 
@@ -146,6 +139,14 @@ In order to perform a manual step by step install, simply copy the commands and 
 
 
 **Your Kaltura installation is now complete.**
+
+## Live Streaming with Nginx and the RTMP module
+Kaltura CE includes the kaltura-nginx package, which is compiled with the [Nginx RTMP module](https://github.com/arut/nginx-rtmp-module).
+
+Please see documentation here [nginx-rtmp-live-streaming.md](nginx-rtmp-live-streaming.md)
+
+A longer post about it can be found at https://blog.kaltura.com/free-and-open-live-video-streaming
+
 
 ## Unattended Installation
 Edit the debconf [response file template](https://github.com/kaltura/platform-install-packages/blob/Jupiter-10.16.0/deb/kaltura_debconf_response.sh) by replacing all tokens with relevant values.
@@ -219,7 +220,7 @@ For posting questions, please go to:
 * This guide describes the installation and upgrade of an all-in-one machine where all the Kaltura components are installed on the same server. For cluster deployments, please refer to [cluster deployment document](http://bit.ly/kipp-cluster-yum), or [Deploying Kaltura using Opscode Chef](https://github.com/kaltura/platform-install-packages/blob/master/doc/rpm-chef-cluster-deployment.md).
 * To learn about monitoring, please refer to [configuring platform monitors](http://bit.ly/kipp-monitoring).
 * Testers using virtualization: [@DBezemer](https://github.com/kaltura) created a basic CentOS 6.4 template virtual server vailable here in OVF format: https://www.dropbox.com/s/luai7sk8nmihrkx/20140306_CentOS-base.zip
-* Alternatively you can find VMWare images at - http://www.thoughtpolice.co.uk/vmware/ --> Make sure to only use compatible OS images; either RedHat or CentOS 5.n, 6.n or FedoraCore 18+.
+* Alternatively you can find VMWare images at - https://www.osboxes.org/vmware-images/ --> Make sure to only use compatible OS images; either RedHat or CentOS 5.n, 6.n or FedoraCore 18+.
 * Two working solutions to the AWS EC2 email limitations are:
   * Using SendGrid as your mail service ([setting up ec2 with Sendgrid and postfix](http://www.zoharbabin.com/configure-ssmtp-or-postfix-to-send-email-via-sendgrid-on-centos-6-3-ec2)).
   * Using [Amazon's Simple Email Service](http://aws.amazon.com/ses/).
