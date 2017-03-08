@@ -74,12 +74,33 @@ The ```[Kaltura-noarch]``` repo should remain as is.
 
 *Note for RHEL7: depending on what repos you have enabled, you may also need to add the EPEL or CentOS repos to resolve all dependencies.*
 
+#### Installing on AWS EC2 instances
+Depending on your setup, you may need to enable two additional repos: rhui-REGION-rhel-server-extras and rhui-REGION-rhel-server-optional.
+This can be done by editing /etc/yum.repos.d/redhat-rhui.repo and changing:
+```
+enabled=0
+```
+to:
+```
+enabled=1
+```
+under the following sections:
+```
+rhui-REGION-rhel-server-optional
+rhui-REGION-rhel-server-extras
+```
+
+Or by running the following commands:
+```
+# yum -y install yum-utils
+# yum-config-manager --enable rhui-REGION-rhel-server-extras rhui-REGION-rhel-server-optional
+```
+
 #### Enabling the EPEL repo
 To add the EPEL repo:
 ```
 # rpm -ihv https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 ```
-For CentOS/RHEL6, this should not be necessary, for RHEL/CentOS 7, you will need EPEL for the mediainfo package.
 
 
 #### MySQL Install and Configuration
@@ -232,6 +253,8 @@ This section is a step-by-step guide of a Kaltura installation with SSL.
 ```bash
 rpm -ihv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
 ```
+
+
 
 #### MySQL Install and Configuration
 Please note that currently, only MySQL 5.1 is supported, we recommend using the official package supplied by the RHEL/CentOS repos which is currently 5.1.73.
