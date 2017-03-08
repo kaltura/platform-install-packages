@@ -4,9 +4,11 @@ Kaltura CE includes the kaltura-nginx package, which is compiled with the [Nginx
 ## Nginx RTMP Configuration
 The paths to the configuration files for kaltura-nginx vary depending on rather you use the Deb or the RPM package.
 For deb, the main file is here:
-```/opt/kaltura/nginx/conf/nginx.conf```
+/opt/kaltura/nginx/conf/nginx.conf
 For RHEL:
-```/etc/nginx/nginx.conf```
+/etc/nginx/nginx.conf
+
+
 ```
 rtmp {
     server {
