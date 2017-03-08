@@ -13,6 +13,8 @@ This guide describes RPM installation of an all-in-one Kaltura server and applie
 
 [Unattended Installation](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-redhat-based.md#unattended-installation)
 
+[Live Streaming with Nginx and the RTMP module](install-kaltura-redhat-based.md#live-streaming-with-nginx-and-the-rtmp-module)
+
 [Upgrade Kaltura](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-redhat-based.md#upgrade-kaltura)
 
 [Remove Kaltura](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-redhat-based.md#remove-kaltura)
