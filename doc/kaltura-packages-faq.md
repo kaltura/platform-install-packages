@@ -10,7 +10,7 @@ The Open Source Kaltura Platform is provided under the [AGPLv3 license](http://w
 [Kaltura Inc.](http://corp.kaltura.com) also provides commercial solutions and services including pro-active platform monitoring, applications, SLA, 24/7 support and professional services. If you're looking for a commercially supported video platform  with integrations to commercial encoders, streaming servers, eCDN, DRM and more - Start a [Free Trial of the Kaltura.com Hosted Platform](http://corp.kaltura.com/free-trial) or learn more about [Kaltura' Commercial OnPrem Edition™](http://corp.kaltura.com/Deployment-Options/Kaltura-On-Prem-Edition). For existing RPM based users, Kaltura offers commercial upgrade options.
 
 ### How to contribute
-We value contributions from our CE user base very much. To make a contribution, follow the [See our CONTRIBUTERS doc](https://github.com/kaltura/platform-install-packages/blob/master/doc/Contributing-to-the-Kaltura-Platform.md).
+We value contributions from our CE user base very much. To make a contribution, follow the [See our CONTRIBUTERS doc](https://github.com/kaltura/platform-install-packages/blob/IX-9.19.0/doc/CONTRIBUTERS.md).
 
 
 ### Changing Apache configurations post install.
@@ -19,10 +19,27 @@ Sometimes, you may want to change deployment settings post installation, for exa
 You can run `/opt/kaltura/bin/kaltura-front-config.sh` as many times as you'd like with different values. The script will re-configure the system accordingly.   
 For instance, you may want to change the service URL, port or protocol.
 
+#### For RPM packages:
 Edit the answers file you've used to install Kaltura, then run:   
 `# /opt/kaltura/bin/kaltura-front-config.sh /path/to/updated/ans/file`
 
 If you've lost your installation answers file, you can recreate one using the [Kaltura Install Answers File Example](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura.template.ans).
+
+#### For deb packages:
+```
+# dpkg-reconfigure kaltura-base
+# dpkg-reconfigure kaltura-front
+# dpkg-reconfigure kaltura-batch
+```
+
+In addition, when changing the CDN hostname, the kaltura.delivery_profile table must be updated.
+```
+# mysql -h$DB1_HOST -u$DB1_USER -p$DB1_PASS $DB1_NAME
+
+mysql> select id,name,url,host_name from delivery_profile;
+```
+Then use update statements to reset the url and hostname.
+
 
 ### Deploy Local Repository for Offline Install
 
@@ -144,3 +161,17 @@ Then, update sha1_password and salt to read:
                salt: a6a3209b8827759fa4286d87a33f99df
 
 This should reset your passwd to 'admin123!'
+
+### kmc is routed to a SSL link
+If you try to access /kmc and get routed to https://vod.linnovate.net/index.php/kmc/kmc4 -
+(even if you prompted to work in non SSL mode...
+
+run the following commands...
+```
+  mysql kaltura
+  select id from permission WHERE permission.NAME='FEATURE_KMC_ENFORCE_HTTPS';
+```
+If you get a response use that in the next query
+```
+  delete from permission where id = NUM_YOU_GOT_ABOVE
+```
