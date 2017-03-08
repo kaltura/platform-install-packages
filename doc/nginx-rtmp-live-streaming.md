@@ -35,6 +35,9 @@ rtmp {
    }
 }
 ```
+
+*IMPORTANT NOTE: when balancing between nodes, the hls_path and dash_path directives must point to directories that are shared between the Nginx nodes*
+
 ## Creating a Live Stream Entry
 To create the Kaltura Live Entry that will make use of the HLS stream, go to to ```KMC->Upload->Live Stream Entry```.
 
