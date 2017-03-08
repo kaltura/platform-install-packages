@@ -366,7 +366,9 @@ Your install will now automatically perform all install tasks.
 
 ### Live Streaming with Nginx and the RTMP module
 Kaltura CE includes the kaltura-nginx package, which is compiled with the [Nginx RTMP module](https://github.com/arut/nginx-rtmp-module).
+
 Please see documentation here [nginx-rtmp-live-streaming.md](nginx-rtmp-live-streaming.md)
+
 A longer post about it can be found at https://blog.kaltura.com/free-and-open-live-video-streaming
 
 
