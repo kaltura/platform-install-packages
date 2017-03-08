@@ -189,22 +189,6 @@ Please select one of the following options [0]: "<0>"
 
 Your install will now automatically perform all install tasks.
 
-#### Configure Red5 server
-1. install the kaltura-red5 package:
-```
-# yum install kaltura-red5
-```
-1. Request http://hostname:5080
-1. Click 'Install a ready-made application'
-1. Mark 'OFLA Demo' and click 'Install'
-1. Edit /usr/lib/red5/webapps/oflaDemo/index.html and replace 'localhost' with your actual Red5 hostname or IP
-1. Test OflaDemo by making a request to http://hostname:5080/oflaDemo/ and playing the sample videos
-1. Run:
-
-```bash
-/opt/kaltura/bin/kaltura-red5-config.sh
-```
-
 
 
 **Your Kaltura installation is now complete.**
@@ -357,22 +341,9 @@ Please select one of the following options [0]: "<0>"
 
 Your install will now automatically perform all install tasks.
 
-#### Configure Red5 server
-1. Request http://hostname:5080
-1. Click 'Install a ready-made application'
-1. Mark 'OFLA Demo' and click 'Install'
-1. Edit /usr/lib/red5/webapps/oflaDemo/index.html and replace 'localhost' with your actual Red5 hostname or IP
-1. Test OflaDemo by making a request to http://hostname:5080/oflaDemo/ and playing the sample videos
-1. Run:
-
-```bash
-/opt/kaltura/bin/kaltura-red5-config.sh
-```
-
-## Note about using Wowza as media server
-you can use Wowza as media server instead of Red5. For webcam recording using Wowza, please follow:
-https://github.com/kaltura/media-server/blob/3.0.9/Installation.md#for-webcam-recording-servers
-And then run /opt/kaltura/bin/kaltura-red5-config.sh providing the Wowza IP/hostname.
+### Live Streaming with Nginx and the RTMP module
+Kaltura CE includes the kaltura-nginx package, which is compiled with the [Nginx RTMP module](https://github.com/arut/nginx-rtmp-module).
+Please see documentation here [nginx-rtmp-live-streaming.md](nginx-rtmp-live-streaming.md)
 
 ### SSL Certificate Configuration
 
