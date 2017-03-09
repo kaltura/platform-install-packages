@@ -8,6 +8,7 @@ KALTURA_NGINX_VOD_VERSION ?= $(shell egrep '^KALTURA_NGINX_VOD_VERSION=' $(RC_FI
 KALTURA_NGINX_AKAMAI_TOKEN_VALIDATE_VERSION ?= $(shell egrep '^KALTURA_NGINX_AKAMAI_TOKEN_VALIDATE_VERSION=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
 KALTURA_NGINX_SECURE_TOKEN_VERSION ?= $(shell egrep '^KALTURA_NGINX_SECURE_TOKEN_VERSION=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
 NGINX_RTMP_VERSION ?= $(shell egrep '^NGINX_RTMP_VERSION=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
+NGINX_RTMP_VERSION_NO_V ?= $(shell echo $(NGINX_RTMP_VERSION)|sed 's/^v//g')
 SOURCE_PACKAGING_DIR ?= $(shell egrep '^RPM_SOURCES_DIR=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
 FFMPEG_VERSION ?= $(shell egrep '^FFMPEG_VERSION=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
 include ../includes/build-revision.mk
@@ -84,7 +85,7 @@ config.status: $(tree)
 	--add-module=./nginx-vod-module-$(KALTURA_NGINX_VOD_VERSION) \
 	--add-module=./nginx-secure-token-module-$(KALTURA_NGINX_SECURE_TOKEN_VERSION) \
 	--add-module=./nginx-akamai-token-validate-module-$(KALTURA_NGINX_AKAMAI_TOKEN_VALIDATE_VERSION) \
-	--add-module=./nginx-rtmp-module-1.1.10 \
+	--add-module=./nginx-rtmp-module-$(NGINX_RTMP_VERSION_NO_V) \
         $*
 
 build: build-stamp

@@ -1,3 +1,25 @@
+kaltura-nginx (1.10.3-4) lynx; urgency=low
+
+  *  New Nginx VOD module [1.14]:
+     * add an optional bitrate param to sequence
+     * refactor hls filters
+     * sample aes support ac3
+     * support using playlistType=live for live recording
+  * New Nginx AWS module [2.1.1]:
+    * URI-encoding canonical requests
+    * Return immediately if module is not enabled
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Thu, 09 Mar 2017 12:16:00 +0000
+
+kaltura-nginx (1.10.3-2) lynx; urgency=low
+
+  * Upgrade to nginx-secure-token module 1.13 [latest stable]:
+    - https://github.com/kaltura/nginx-secure-token-module/blob/master/CHANGELOG.md#20161208---refactor-conf-structure
+    - added support for cht tokens
+    - xml escape tokens in mpd/f4m
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Fri, 03 Mar 2017 17:59:35 +0000
+
 kaltura-nginx (1.10.3-1) lynx; urgency=low
 
   * Nginx latest stable
