@@ -40,19 +40,19 @@ BuildRequires: libopenssl-devel
 Requires(pre): pwdutils
 %endif
 
-%define nginx_vod_module_ver 1.13
+%define nginx_vod_module_ver 1.14
 %define nginx_secure_token_ver 1.2
 %define nginx_token_validate_ver 1.0.1
 %define nginx_vts_ver 0.1.12
 %define nginx_rtmp_ver 1.1.11
-%define ngx_aws_auth_ver 2.1.0
+%define ngx_aws_auth_ver 2.1.1
 %define headers_more_nginx_ver 0.32
 # end of distribution specific definitions
 
 Summary: High performance web server customized for Kaltura VOD
 Name: kaltura-nginx
 Version: 1.10.3
-Release: 3
+Release: 4
 Vendor: Kaltura inc.
 URL: http://nginx.org/
 
@@ -401,6 +401,16 @@ if [ $1 -ge 1 ]; then
 fi
 
 %changelog
+* Thu Mar 9 2017 Jess Portnoy <jess.portnoy@kaltura.com> - 1.10.3-4
+- New Nginx VOD module [1.14]:
+	- add an optional bitrate param to sequence
+	- refactor hls filters
+	- sample aes support ac3
+	- support using playlistType=live for live recording
+- New Nginx AWS module [2.1.1]:
+	- URI-encoding canonical requests
+    	- Return immediately if module is not enabled
+
 * Fri Mar 3 2017 Jess Portnoy <jess.portnoy@kaltura.com> - 1.10.3-3
 - Upgrade to nginx-secure-token module 1.13 [latest stable]:
 	- https://github.com/kaltura/nginx-secure-token-module/blob/master/CHANGELOG.md#20161208---refactor-conf-structure
