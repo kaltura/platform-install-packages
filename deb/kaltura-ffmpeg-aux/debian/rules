@@ -26,6 +26,7 @@ $(archive):
 
 $(tree): $(archive)
 	tar jxf $(archive) 
+	cd $(tree) && patch -p1 < ../debian/6540fe04a3f9a11ba7084a49b3ee5fa2fc5b32ab.patch 
 
 config.status: $(tree) 
 	dh_testdir
@@ -125,7 +126,7 @@ binary-arch: build install
 	dh_compress
 	dh_fixperms
 	dh_installdeb
-	LD_LIBRARY_PATH=$(BASE_PREFIX)/lib dh_shlibdeps
+	LD_LIBRARY_PATH=$(BASE_PREFIX)/lib dh_shlibdeps --dpkg-shlibdeps-params=--ignore-missing-info
 	dh_md5sums
 	dh_builddeb
 
