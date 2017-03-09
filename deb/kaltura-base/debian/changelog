@@ -1,3 +1,18 @@
+kaltura-base (12.12.0-2) lynx; urgency=low
+
+  * PLAT-6916 - Add batch thumbasset delete permission
+  * PLAT-6663 - User KS allow specific permission to approveReplace
+  * PLAT-6933 - stored XSS in preview action (KMC)
+  * PLAT-6934 - reflected XSS in clientTest.php
+  * PLAT-6935 - reflected XSS in modules/kmc/templates/reportsSuccess.php
+  * PLAT-6936 - reflected XSS in modules/system/templates/loginSuccess.php
+  * PLAT-6937 - reflected XSS in kmcEmbed action
+  * PLAT-6938 - PHP File Inclusion vulnerability in defPartnerservices2baseAction.class.php
+  * PLAT-6952 - BaseEntry.clone gets error 500 Internal server error occurred
+  * PLAT-6663 - Trimming or clipping on parent entry should also happen to child entries
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Thu, 09 Mar 2017 17:41:19 +0000
+
 kaltura-base (12.12.0-1) lynx; urgency=low
 
   * Switching to 12.12.0
