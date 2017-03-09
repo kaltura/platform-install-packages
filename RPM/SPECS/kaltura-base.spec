@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 12.12.0
-Release: 6
+Release: 8
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -305,6 +305,18 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Thu Mar 9 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.12.0-8
+- PLAT-6916 - Add batch thumbasset delete permission
+- PLAT-6663 - User KS allow specific permission to approveReplace
+- PLAT-6933 - stored XSS in preview action (KMC)
+- PLAT-6934 - reflected XSS in clientTest.php
+- PLAT-6935 - reflected XSS in modules/kmc/templates/reportsSuccess.php
+- PLAT-6936 - reflected XSS in modules/system/templates/loginSuccess.php
+- PLAT-6937 - reflected XSS in kmcEmbed action
+- PLAT-6938 - PHP File Inclusion vulnerability in defPartnerservices2baseAction.class.php
+- PLAT-6952 - BaseEntry.clone gets error 500 Internal server error occurred
+- PLAT-6663 - Trimming or clipping on parent entry should also happen to child entries
+
 * Tue Feb 28 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.12.0-1
 - Ver Bounce to 12.12.0
 

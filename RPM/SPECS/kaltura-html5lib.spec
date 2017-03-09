@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.53.2
+Version: v2.54
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -81,6 +81,30 @@ find /opt/kaltura/web/html5/html5lib -type d -name cache -exec chown -R 48 {} \;
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Thu Mar 9 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v2.54-1
+- FEC-6469 - locate the canvas on the top (z-index:2) to catch the touchstart event (https://github.com/kaltura/mwEmbed/pull/3269)
+- KMS-13614, KMS-13612, KMS-13618, KMS-13609, KMS-13611, KMS-13610 - accessibility enhancements
+- FEC-6467 - Do not seek to 0 on stop in live stream (https://github.com/kaltura/mwEmbed/pull/3269)
+- SUP-9028 - player icons flickering (https://github.com/kaltura/mwEmbed/pull/3278)
+- SUP-10006 - Hebrew captions in IE are displayed incorrectly (https://github.com/kaltura/mwEmbed/pull/3280)
+- SUP-10117 - CVAA styling does not override XML styling (https://github.com/kaltura/mwEmbed/pull/3279)
+- Update hlsjs 0.6.21 (https://github.com/kaltura/mwEmbed/pull/3281)
+- FEC-6494 - Pop the canvas' z-index only on firstPlay (https://github.com/kaltura/mwEmbed/pull/3284)
+- FEC-6498 - support 360 tagging (https://github.com/kaltura/mwEmbed/pull/3286) * support 360 tagging * Init camera target on clean
+- FEC-6501 - detach only 360 handler on clean (https://github.com/kaltura/mwEmbed/pull/3287)
+- FEC 6497 - add close chapters menu upon chapter selection (https://github.com/kaltura/mwEmbed/pull/3289)
+- FEC-6520 - remove typo from class name to hide close button again (https://github.com/kaltura/mwEmbed/pull/3294)
+- FEC-6462 - DualScreen - on Safari dragging an item has an offset (https://github.com/kaltura/mwEmbed/pull/3268)
+- FEC-6448,FEC-6449,FEC-6368 - new chromecast receiver
+- Remove hlsjs dependency from dualScreen (https://github.com/kaltura/mwEmbed/pull/3295) 	
+- Fec 6521 - remove focus indicator (https://github.com/kaltura/mwEmbed/pull/3296) 	
+- FEC-642 - Fix video element rendering on IE11/Win8.1 with preroll (https://github.com/kaltura/mwEmbed/pull/3299)
+- fix cvaa selected option
+- Fixing jQuery non-conflict for several use-cases 	
+- Ivq accessibility (https://github.com/kaltura/mwEmbed/pull/3291) 	
+- Asset playback not measured correctly Android with Chrome versions lower than 50 (https://github.com/kaltura/mwEmbed/pull/3292)
+- Small players controls size & layout fixes KMCNG-196
+
 * Mon Feb 26 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v2.53.2-1
 - New hlsjs version 0.6.21 [https://kaltura.atlassian.net/browse/SUP-10327]
 - FEC-6469 - 360 first finger touch doesn't work when controlBarContainer is hover
