@@ -26,6 +26,83 @@ if [ "$#" -lt 4 ];then
 	exit 1
 fi
 
+
+MYSQL_HOST=$1
+MYSQL_SUPER_USER=$2
+MYSQL_SUPER_USER_PASSWD=$3
+MYSQL_PORT=$4
+IS_UPGRADE=$5
+
+#Notice for a non installation
+NO_REMOVAL_NOTICE="This installation has been stopped. In order to try again please tend to stop reason and run '${CYAN}kaltura-config-all.sh${NORMAL}' or '${CYAN}kaltura-db-config.sh${NORMAL}' depending on the initial command which has been used.";
+
+#USed for both connection check, and record check
+EMPTY_HOSTS_RECORDS=`mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT -N -e "use mysql; select host,user from mysql.user where user=''"`
+if [ $? -ne 0 ]; then
+    echo -e "${BRIGH_RED}Problem connecting to DB. Please verify that the super user password is correct.${NORMAL}";
+    exit 1;
+else
+    echo "Initial DB access check passed.";
+fi
+
+# DB emnpty user fix
+EMPTY_HOSTS_COUNT=`echo $EMPTY_HOSTS_RECORDS | wc -w;` # counting how many words were returned.
+if [ $EMPTY_HOSTS_COUNT -ne 0 ]; then 
+    echo -e "
+    \rRecords found in ${CYAN}mysql.user${NORMAL} table contain 'host' values with no 'user' value. These records may interfere with the planned installation process.
+    \rWe would like to remove these records in order to allow proper user authentication.\e[31m\e[1m"; 
+    
+    #Run for showing well formatted results for the user
+    mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT -e "use mysql; select host,user from mysql.user where user=''"
+    echo -e "${NORMAL}
+    \r* 'YES' - If you are certain that you wish to proeed with the record removal and installation
+    \r* 'NO' - Stop the installation, with no DB changes made. If you wish to tend to the matter manually this installation can be performed again later.
+    \r* 'TRY' - Attempt to proceed with the installation without user removal\n";
+    read -p ">" USER_CHOICE;
+
+    # Input verification
+    while [ $USER_CHOICE != 'YES' ] && [ $USER_CHOICE != 'NO' ] && [ $USER_CHOICE != 'TRY' ]
+    do
+        echo -e "Please choose either: \n'YES' - remove users and proeed with the installation, \n'NO' - Stop the installation or \n'GO' in order to try without user removal:\n";
+        read -p ">" USER_CHOICE;
+    done
+    
+    #1st menu choice
+    case "$USER_CHOICE" in 
+        YES)
+            echo -e "Are you sure you want to delete the mentioned records?. This action cannot be undone.";
+            read -p "Please choose either 'YES' or 'NO':" USER_CHOICE;
+            
+            # Input verification
+            while [ $USER_CHOICE != 'YES' ] && [ $USER_CHOICE != 'NO' ]
+            do
+                echo -e "Please choose either 'YES' or 'NO':"
+                read -p ">" USER_CHOICE;
+            done
+
+            #2nd level menu choice
+            case "$USER_CHOICE" in
+                YES)
+                    echo -n "Deleting records from the DB...";
+                    echo "delete from mysql.user where user=''" | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT;
+                    echo "Done"
+                    ;;
+                NO)
+                    echo -e "Exiting with no changes made.\n$NO_REMOVAL_NOTICE";
+                    exit 0;
+                    ;;              
+            esac
+            ;;
+        NO)
+            echo -e "Exiting with no changes made.\n$NO_REMOVAL_NOTICE";
+            ;;
+        TRY)
+            echo "proceeding without user removal.";
+            ;;  
+    esac    
+fi
+#DB fix change end 
+
 RC_FILE=/etc/kaltura.d/system.ini
 if [ ! -r "$RC_FILE" ];then
 	echo -e "${BRIGHT_RED}ERROR: could not find $RC_FILE so, exiting..${NORMAL}"
@@ -47,11 +124,7 @@ fi
 trap 'my_trap_handler "${LINENO}" ${$?}' ERR
 send_install_becon `basename $0` $ZONE install_start 0 
 
-MYSQL_HOST=$1
-MYSQL_SUPER_USER=$2
-MYSQL_SUPER_USER_PASSWD=$3
-MYSQL_PORT=$4
-IS_UPGRADE=$5
+
 
 if [ "$IS_UPGRADE" = 'upgrade' ];then
 	echo "calling upgrade script instead."
