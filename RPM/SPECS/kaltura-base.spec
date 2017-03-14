@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 12.12.0
-Release: 9
+Version: 12.13.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -305,6 +305,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Tue Mar 14 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.13.0-1
+- Ver Bounce to 12.13.0
+
 * Thu Mar 9 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.12.0-8
 - PLAT-6916 - Add batch thumbasset delete permission
 - PLAT-6663 - User KS allow specific permission to approveReplace
