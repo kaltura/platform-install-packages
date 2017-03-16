@@ -15,6 +15,7 @@ SPARK_DEFAULT_PARALLELISM=2
 SPARK_CORES_MAX=1
 SPARK_MEMORY=2g
 PID_FILE="/opt/kaltura/var/run/$NAME/$NAME.pid"
+DRIVER_USER=cassandra
 nodetool enablethrift
 
 . /etc/rc.d/init.d/functions
@@ -28,11 +29,18 @@ case "$1" in
                 exit 0
         fi
         echo -n "Starting $NAME: "
-        nohup /opt/spark-1.2.2-bin-hadoop2.4/bin/spark-submit --class com.kaltura.Live.MainDriver --master local[2] --driver-class-path "/opt/kaltura/lib/*" --conf spark.driver.memory=$SPARK_MEMORY --conf spark.default.parallelism=$SPARK_DEFAULT_PARALLELISM /opt/kaltura/lib/$NAME.jar >> /opt/kaltura/log/$NAME.log 2>&1 &
-        PID="$!"
-        retval=$?
-        if [ $retval -eq 0 ] ;then echo "$PID" > $PID_FILE;fi
-        echo "OK ($PID)"
+	chown -R $DRIVER_USER `dirname $PID_FILE` /opt/kaltura/log/$NAME.log
+	su $DRIVER_USER -c "nohup /opt/spark-1.2.2-bin-hadoop2.4/bin/spark-submit \
+                --class com.kaltura.Live.MainDriver --master local[2] \
+                --driver-class-path \"/opt/kaltura/lib/*\" \
+                --conf spark.driver.memory=$SPARK_MEMORY \
+                --conf spark.default.parallelism=$SPARK_DEFAULT_PARALLELISM \
+                --conf \"spark.executor.extraJavaOptions=Dlog4j.configuration=/opt/kaltura/lib/log4j.properties\" \
+                /opt/kaltura/lib/${NAME}.jar >> /opt/kaltura/log/$NAME.log &  echo \$!>$PID_FILE"
+
+	status -p $PID_FILE "$NAME"
+	exit $?
+
         ;;
     stop)
         echo -n "Shutdown $NAME: "

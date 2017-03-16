@@ -1,10 +1,21 @@
-/opt/kaltura/log/live-analytics-driver.log{
- rotate 5
- daily
- missingok
- compress
- dateext
- notifempty
- sharedscripts
+/opt/kaltura/log/kaltura_live_stats_cron.log
+/opt/kaltura/log/live-analytics-driver.log {
+    dateext
+    compress
+    rotate 14
+    missingok
+    notifempty
+    copytruncate
+    #su cassandra cassandra
+}
+
+/opt/kaltura/log/live-analytics-driver-debug.log {
+dateext
+    compress
+    rotate 7
+    missingok
+    notifempty
+    copytruncate
+    #su cassandra cassandra
 }
 
