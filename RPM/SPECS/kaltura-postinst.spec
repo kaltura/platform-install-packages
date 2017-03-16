@@ -1,8 +1,8 @@
 %define prefix /opt/kaltura 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
-Version: 1.0.32
-Release: 12
+Version: 1.0.33
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -82,6 +82,9 @@ find %{_sysconfdir}/logrotate.d -type l -name "kaltura_*" -exec rm {} \;
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Thu Mar 16 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.33-1
+- Added logrotate config for live-analytics-driver.log
+
 * Wed Jan 4 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.32-9
 - Fetch DB3LITE as part of live-analytics-config.sh
 

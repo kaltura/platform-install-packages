@@ -60,6 +60,7 @@ cqlsh < $LIVE_ANALYTICS_CONFIG_BASE_DIR/cassandra/create_cassandra_tables.cql
 sed "s#@CASSANDRA_HOST@#$CASSANDRA_HOST#g"  $LIVE_ANALYTICS_CONFIG_BASE_DIR/logrotate/live_stats.template > $LIVE_ANALYTICS_CONFIG_BASE_DIR/logrotate/live_stats
 sed "s#@CASSANDRA_HOST@#$CASSANDRA_HOST#g" $LIVE_ANALYTICS_CONFIG_BASE_DIR/config.template.properties > /opt/kaltura/lib/config.properties
 ln -sf $LIVE_ANALYTICS_CONFIG_BASE_DIR/logrotate/live_stats /etc/logrotate.d/kaltura_live_stats
+ln -sf $LIVE_ANALYTICS_CONFIG_BASE_DIR/logrotate/live-analytics-driver /etc/logrotate.d/live-analytics-driver
 ln -sf $LIVE_ANALYTICS_CONFIG_BASE_DIR/cron/live_stats /etc/cron.d/kaltura_live_stats
 sed "s#@LIVE_ANALYTICS_STATS_PORT@#$LIVE_ANALYTICS_STATS_PORT#g" $LIVE_ANALYTICS_CONFIG_BASE_DIR/nginx/live.template.conf > $LIVE_ANALYTICS_CONFIG_BASE_DIR/nginx/live.conf
 ln -sf $LIVE_ANALYTICS_CONFIG_BASE_DIR/nginx/live.conf /etc/nginx/conf.d/

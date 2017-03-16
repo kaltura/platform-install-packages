@@ -1,0 +1,10 @@
+/opt/kaltura/log/live-analytics-driver.log{
+ rotate 5
+ daily
+ missingok
+ compress
+ dateext
+ notifempty
+ sharedscripts
+}
+

@@ -2,7 +2,7 @@
 Summary: Kaltura Live Analytics
 Name: kaltura-live-analytics
 Version: v0.5.35
-Release: 2
+Release: 3
 License: AGPLv3+
 Group: Server/Platform 
 URL: http://kaltura.org
@@ -21,6 +21,7 @@ Source11: %{name}_rotate_live_stats.template
 Source12: %{name}_live-analytics-driver.sh
 Source13: %{name}_live-analytics-driver.service
 Source14: %{name}_cassandra.service
+Source15: %{name}_rotate_live-analytics-driver
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildArch: noarch
@@ -59,6 +60,7 @@ cp %{SOURCE9} $RPM_BUILD_ROOT%{prefix}/bin/kaltura_register_log.sh
 cp %{SOURCE12} $RPM_BUILD_ROOT%{prefix}/bin/live-analytics-driver.sh
 cp %{SOURCE10} $RPM_BUILD_ROOT%{prefix}/app/configurations/live_analytics/cron/live_stats
 cp %{SOURCE11} $RPM_BUILD_ROOT%{prefix}/app/configurations/live_analytics/logrotate/live_stats.template
+cp %{SOURCE15} $RPM_BUILD_ROOT%{prefix}/app/configurations/live_analytics/logrotate/live-analytics-driver
 cp %{SOURCE7} $RPM_BUILD_ROOT%{prefix}/app/configurations/live_analytics/nginx/live.template.conf
 cp %{SOURCE13} $RPM_BUILD_ROOT%{prefix}/app/configurations/live_analytics/driver/live-analytics-driver.service
 cp %{SOURCE14} $RPM_BUILD_ROOT%{prefix}/app/configurations/live_analytics/driver/cassandra.service
@@ -94,7 +96,7 @@ fi
 %preun
 if [ "$1" = 0 ] ; then
 	service live-analytics-driver stop
-	for FILE in /usr/lib/systemd/system/live-analytics-driver.service /etc/init.d/live-analytics-driver /etc/cron.d/kaltura_live_stats /etc/logrotate.d/kaltura_live_stats /etc/nginx/conf.d/live.conf ;do
+	for FILE in /usr/lib/systemd/system/live-analytics-driver.service /etc/init.d/live-analytics-driver /etc/cron.d/kaltura_live_stats /etc/logrotate.d/kaltura_live_stats /etc/logrotate.d/live-analytics-driver /etc/nginx/conf.d/live.conf ;do
 		if [ -r $FILE ];then
 			rm $FILE
 		fi
@@ -120,6 +122,9 @@ fi
 /usr/share/tomcat/lib/*jar
 
 %changelog
+* Thu Mar 16 2017 jess.portnoy@kaltura.com <Jess Portnoy> - v0.5.35-3
+- Added logrotate config for live-analytics-driver.log
+
 * Sun Jan 15 2017 jess.portnoy@kaltura.com <Jess Portnoy> - v0.5.35-1
 - https://github.com/kaltura/live_analytics/pull/26
 
