@@ -168,7 +168,7 @@ NGINX_URI="http://nginx.org/download/nginx-$NGINX_VERSION.tar.gz"
 
 # Nginx AWS authentication module.
 NGX_AWS_AUTH_VERSION="2.1.1"
-NGX_AWS_AUTH_URI="https://github.com/kaltura/ngx_aws_auth/archive/$NGX_AWS_AUTH_VERSION.zip"
+NGX_AWS_AUTH_URI="https://github.com/anomalizer/ngx_aws_auth/archive/$NGX_AWS_AUTH_VERSION.zip"
 
 # Nginx headers more module
 HEADERS_MORE_NGINX_VERSION="v0.32"
