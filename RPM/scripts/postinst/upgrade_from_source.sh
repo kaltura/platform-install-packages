@@ -1,4 +1,4 @@
-#!/bin/bash  
+#!/bin/bash -e 
 #===============================================================================
 #          FILE: upgrade_from_source.sh
 #         USAGE: ./upgrade_from_source.sh [/path/to/answer/file]
