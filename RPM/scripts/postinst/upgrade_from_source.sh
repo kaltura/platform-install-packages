@@ -38,7 +38,7 @@ curl -L $GITHUB_PLATFORM_INSTALL_PACKAGES_REPO_URL/RPM/SOURCES/KDLOperatorFfmpeg
 curl -L $GITHUB_PLATFORM_INSTALL_PACKAGES_REPO_URL/RPM/SOURCES/navigation.xml > $APP_DIR/admin_console/configs/navigation.xml
 curl -L $GITHUB_PLATFORM_INSTALL_PACKAGES_REPO_URL/RPM/SOURCES/IndexController.php > $APP_DIR/admin_console/controllers/IndexController.php
 curl -L $GITHUB_PLATFORM_INSTALL_PACKAGES_REPO_URL/RPM/SOURCES/monit.phtml > $APP_DIR/admin_console/views/scripts/index/monit.phtml
-
+ln -sf $APP_DIR/api_v3/web $APP_DIR/alpha/web/api_v3
 if [ -n $1 ];then
         /opt/kaltura/bin/kaltura-config-all.sh $1
 else
