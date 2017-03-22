@@ -199,7 +199,7 @@ The default is only good for testing, on a production ENV you should adjust acco
                 fi
         fi
         if [ -z "$SECONDARY_MEDIA_SERVER_HOST" ];then
-                echo -en "${CYAN}Media Streaming Server host [${YELLOW}`hostname`${CYAN}]:${NORMAL} "
+                echo -en "${CYAN}Media Streaming Server secondary host [${YELLOW}`hostname`${CYAN}]:${NORMAL} "
                 read -e SECONDARY_MEDIA_SERVER_HOST
                 if [ -z $SECONDARY_MEDIA_SERVER_HOST ];then
                         SECONDARY_MEDIA_SERVER_HOST=`hostname`

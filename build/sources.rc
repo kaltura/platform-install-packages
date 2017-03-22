@@ -175,9 +175,12 @@ HEADERS_MORE_NGINX_VERSION="v0.32"
 HEADERS_MORE_NGINX_URI="https://github.com/openresty/headers-more-nginx-module/archive/$HEADERS_MORE_NGINX_VERSION.zip"
 
 # Kaltura Streaming lib build vars:
-KALTURA_MEDIASERVER_VERSION="3.2.0"
+KALTURA_MEDIASERVER_VERSION="4.5.9.68"
 KALTURA_MEDIASERVER_URI="https://github.com/kaltura/media-server/releases/download/rel-$KALTURA_MEDIASERVER_VERSION/KalturaWowzaServer-install-$KALTURA_MEDIASERVER_VERSION.zip"
 KALTURA_MEDIASERVER_RPM_NAME=kaltura-media-server
+
+MEDIASERVER_DEPS_JARS="junit/junit-dep-4.7 json-/json-20090211 hamcrest/hamcrest-core-1.1 commons-logging/commons-logging-1.0.4 commons-httpclient/commons-httpclient-3.1 commons-codec/commons-codec-1.4"
+
 
 KALTURA_PLAYSERVER_VERSION="v1.1"
 KALTURA_PLAYSERVER_URI="https://github.com/kaltura/play-server/archive/$KALTURA_PLAYSERVER_VERSION.zip"
