@@ -89,7 +89,7 @@ if ! check_mysql_settings $MYSQL_SUPER_USER $MYSQL_SUPER_USER_PASSWD $MYSQL_HOST
 		if [ "$ANS" = "Y" ];then
 			$BASE_DIR/bin/kaltura-mysql-settings.sh
 		else
-			echo "Please adjust your settings manually and re-run." 
+			echo -e "${BRIGHT_RED}Please adjust your MySQL configuration manually and re-run.${NORMAL}" 
 			exit 8
 		fi
 	else
