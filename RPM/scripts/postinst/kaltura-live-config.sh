@@ -66,7 +66,7 @@ else
         read -e WOWZA_LIC_KEY
         echo -e "${CYAN}Wowza silent key:${NORMAL} "
         read -e WOWZA_SILENT_KEY
-        echo -e "${CYAN}Wowza admin password:${NORMAL} "
+        echo -e "${CYAN}Wowza admin password [only letters, numbers and '@', '.', '_' and '-' are acceptible]:${NORMAL} "
         read -s WOWZA_PASSWD
 fi
 if [ ! -r /opt/kaltura/app/base-config.lock ];then

@@ -25,5 +25,5 @@ cd $BASE_CHECKOUT_DIR/RPM/scripts
 tar zcf $RPM_SOURCES_DIR/kaltura-postinst-$KALTURA_POSTINST_VERSION.tar.gz postinst/
 echo "Packaged into $RPM_SOURCES_DIR/kaltura-postinst-$KALTURA_POSTINST_VERSION.tar.gz"
 if [ -x "`which rpmbuild 2>/dev/null`" ];then
-	rpmbuild -ba $RPM_SPECS_DIR/kaltura-postinst.spec
+	rpmbuild -bb $RPM_SPECS_DIR/kaltura-postinst.spec
 fi
