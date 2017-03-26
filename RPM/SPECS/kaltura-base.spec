@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 12.13.0
-Release: 7
+Release: 9
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -305,6 +305,12 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Sun Mar 26 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.13.0-9
+- PLAT-6942 - Clipped entry offset and duration are not retuned by Kaltura API 
+- PLAT-7135 - Drop folder watcher not getting folders 
+- PLAT-7163 - Race between old and new recording causes wrong call to cancelReplace
+- PLAT-7163 - Add media-server permission get permission
+
 * Tue Mar 14 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.13.0-1
 - Ver Bounce to 12.13.0
 
