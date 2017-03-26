@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 12.13.0
-Release: 9
+Release: 10
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -84,6 +84,7 @@ mkdir -p $RPM_BUILD_ROOT%{prefix}/web/control
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content/cacheswf
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content/uploads
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content/entry
+mkdir -p $RPM_BUILD_ROOT%{prefix}/web/tmp/dropFolderFiles
 mkdir -p $RPM_BUILD_ROOT%{prefix}web/content//metadata
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content/batchfiles
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content/templates
