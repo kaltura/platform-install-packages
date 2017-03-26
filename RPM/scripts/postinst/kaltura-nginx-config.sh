@@ -58,10 +58,10 @@ if [ -n "$1" -a -r "$1" ];then
         fi
         export ANSFILE
 else
-	echo -e "${CYAN}Kaltura API host [${YELLOW}`hostname`${CYAN}]:${NORMAL} "
+	echo -e "${CYAN}Kaltura API host and port (without the protocol) [${YELLOW}`hostname`:80${CYAN}]:${NORMAL} "
 	read -e WWW_HOST
 	if [ -z "$WWW_HOST" ];then
-		WWW_HOST=`hostname`
+		WWW_HOST="`hostname`:80"
 	fi
 
 	echo -e "${CYAN}Nginx server name [${YELLOW}`hostname`${CYAN}]:${NORMAL} "
