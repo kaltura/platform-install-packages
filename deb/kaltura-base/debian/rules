@@ -50,6 +50,7 @@ binary-indep: install
 	mkdir -p $(KALTURA_PREFIX)/web/tmp/imports
 	mkdir -p $(KALTURA_PREFIX)/web/tmp/convert
 	mkdir -p $(KALTURA_PREFIX)/web/tmp/thumb
+	mkdir -p $(KALTURA_PREFIX)/web/tmp/dropFolderFiles
 	mkdir -p $(KALTURA_PREFIX)/web/tmp/xml
 	mkdir -p $(KALTURA_PREFIX)/web/dropfolders/monitor
 	mkdir -p $(KALTURA_PREFIX)/web/content/cacheswf
