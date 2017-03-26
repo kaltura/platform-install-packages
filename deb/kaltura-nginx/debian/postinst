@@ -47,11 +47,13 @@ if [ "$1" = "configure" ]; then
 		db_get 'kaltura-nginx/ssl_key'
 		SSL_KEY=$RET
 		sed -e "s#@VOD_PACKAGER_HOST@#$VOD_PACKAGER_HOST#g" -e "s#@VOD_PACKAGER_SSL_PORT@#$VOD_PACKAGER_SSL_PORT#g" -e "s#@SSL_CERT@#$SSL_CERT#g" -e "s#@SSL_KEY@#$SSL_KEY#g" /opt/kaltura/nginx/conf/ssl.conf.template > /opt/kaltura/nginx/conf/ssl.conf
+		PROTOCOL=https
 	else
 		touch /opt/kaltura/nginx/conf/ssl.conf
+		PROTOCOL=http
 	fi
         sed -e "s#@VOD_PACKAGER_HOST@#$VOD_PACKAGER_HOST#g" -e "s#@VOD_PACKAGER_PORT@#$VOD_PACKAGER_PORT#g" -e "s#@RTMP_PORT@#$RTMP_PORT#g" -e "s#@LOG_DIR@#/opt/kaltura/log/nginx#" -e "s#@WWW_HOST@#$WWW_HOST#g" /opt/kaltura/nginx/conf/nginx.conf.template > /opt/kaltura/nginx/conf/nginx.conf
-	sed -e 's#@STATIC_FILES_PATH@#/opt/kaltura/nginx/static#g' /opt/kaltura/nginx/conf/kaltura.conf.template > /opt/kaltura/nginx/conf/kaltura.conf
+	sed -e 's#@STATIC_FILES_PATH@#/opt/kaltura/nginx/static#g' -e "s#@PROTOCOL@#$PROTOCOL#g" /opt/kaltura/nginx/conf/kaltura.conf.template > /opt/kaltura/nginx/conf/kaltura.conf
         update-rc.d kaltura-nginx defaults || true
 
 fi

@@ -1,3 +1,18 @@
+kaltura-base (12.13.0-2) lynx; urgency=low
+
+  * PLAT-6942 - Clipped entry offset and duration are not retuned by Kaltura API 
+  * PLAT-7135 - Drop folder watcher not getting folders 
+  * PLAT-7163 - Race between old and new recording causes wrong call to cancelReplace
+  * PLAT-7163 - Add media-server permission get permission
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Sun, 26 Mar 2017 14:16:42 +0000
+
+kaltura-base (12.13.0-1) lynx; urgency=low
+
+  * Switching to 12.13.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Tue, 14 Mar 2017 22:27:06 +0000
+
 kaltura-base (12.12.0-2) lynx; urgency=low
 
   * PLAT-6916 - Add batch thumbasset delete permission

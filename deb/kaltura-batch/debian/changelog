@@ -1,3 +1,9 @@
+kaltura-batch (12.13.0-1) lynx; urgency=low
+
+  * Switching to 12.13.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Tue, 14 Mar 2017 22:27:07 +0000
+
 kaltura-batch (12.12.0-1) lynx; urgency=low
 
   * Switching to 12.12.0
