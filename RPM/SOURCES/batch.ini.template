@@ -50,6 +50,7 @@ enabledWorkers.KAsyncDistributeEnable               = 1
 enabledWorkers.KAsyncDistributeDisable              = 1
 enabledWorkers.KAsyncSynchronizeDistribution        = 1
 enabledWorkers.KAsyncDropFolderWatcher              = 1
+enabledWorkers.KAsyncDropFolderWatcherLocalBase	    = 1
 enabledWorkers.KAsyncDropFolderContentProcessor     = 1
 enabledWorkers.KAsyncTransformMetadata              = 1
 enabledWorkers.KAsyncDispatchEventNotification      = 1
@@ -554,11 +555,22 @@ id                                                  = 350
 friendlyName                                        = Drop Folder Watcher
 type                                                = KAsyncDropFolderWatcher
 maximumExecutionTime                                = 3000
+numberOfFoldersEachRun				    = 10
 scriptPath                                          = ../plugins/drop_folder/batch/DropFolderWatcher/KAsyncDropFolderWatcherExe.php
+params.maxTimeForFolder         = 30000
 params.tags                                         = *
 params.mrss.xmlPath                                 = @WEB_DIR@/tmp/dropFolderFiles
 params.mrss.limitProcessEachRun                     = 20
 
+[KAsyncDropFolderWatcherLocal : KAsyncDropFolderWatcher]
+sleepBetweenStopStart		= 900
+params.maxTimeForFolder         = 30000
+numberOfFoldersEachRun          = 50
+
+[KAsyncDropFolderWatcherLocalBase : KAsyncDropFolderWatcherLocal]
+id                              = 20009
+friendlyName                    = Local Base Drop Folder Watcher
+params.tags                     = localBase
 
 [KAsyncDropFolderContentProcessor : JobHandlerWorker]
 id                                                  = 355
