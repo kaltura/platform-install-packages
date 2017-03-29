@@ -175,12 +175,15 @@ HEADERS_MORE_NGINX_VERSION="v0.32"
 HEADERS_MORE_NGINX_URI="https://github.com/openresty/headers-more-nginx-module/archive/$HEADERS_MORE_NGINX_VERSION.zip"
 
 # Kaltura Streaming lib build vars:
-KALTURA_MEDIASERVER_VERSION="4.5.9.68"
+KALTURA_MEDIASERVER_VERSION="4.5.10.72"
 KALTURA_MEDIASERVER_URI="https://github.com/kaltura/media-server/releases/download/rel-$KALTURA_MEDIASERVER_VERSION/KalturaWowzaServer-install-$KALTURA_MEDIASERVER_VERSION.zip"
 KALTURA_MEDIASERVER_RPM_NAME=kaltura-media-server
 
 MEDIASERVER_DEPS_JARS="junit/junit-dep-4.7 json-/json-20090211 hamcrest/hamcrest-core-1.1 commons-logging/commons-logging-1.0.4 commons-httpclient/commons-httpclient-3.1 commons-codec/commons-codec-1.4"
 
+KALTURA_LIVE_DVR_VERSION="1.9.2"
+KALTURA_LIVE_DVR_URI="https://github.com/kaltura/liveDVR/archive/v$KALTURA_LIVE_DVR_VERSION.tar.gz"
+KALTURA_LIVE_DVR_RPM_NAME=kaltura-livedvr
 
 KALTURA_PLAYSERVER_VERSION="v1.1"
 KALTURA_PLAYSERVER_URI="https://github.com/kaltura/play-server/archive/$KALTURA_PLAYSERVER_VERSION.zip"
@@ -281,7 +284,7 @@ FLEX_WRAPPER_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/flash/
 FLEX_WRAPPER_RPM_NAME="kaltura-flexwrapper"
 
 # HTML5 lib
-HTML5LIB_LATEST_VERSION="v2.54"
+HTML5LIB_LATEST_VERSION="v2.54.1"
 HTML5LIB_VERSIONS="v2.14 v2.37 v2.37.1 v2.38.3 v2.42 v2.44 v2.45 v2.45.1 v2.46 v2.47 $HTML5LIB_LATEST_VERSION"
 HTML5LIB_BASE_URI="https://github.com/kaltura/mwEmbed/tarball/"
 HTML5LIB_RPM_NAME="kaltura-html5lib"

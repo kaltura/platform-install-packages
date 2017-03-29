@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.54
+Version: v2.54.1
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -81,6 +81,15 @@ find /opt/kaltura/web/html5/html5lib -type d -name cache -exec chown -R 48 {} \;
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Tue Mar 29 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v2.54.1-1
+- FEC-6441 - Quiz plugin damaged when switching between dual video options
+- FEC-6537 - Auto replay from start after post roll Ad
+- FEC-6522 - Unable to play Dash in player
+- reverting HLS dependency
+- fix dependancy bug
+- qnaPushNotification
+- Update to Shaka v2.0.6
+
 * Thu Mar 9 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v2.54-1
 - FEC-6469 - locate the canvas on the top (z-index:2) to catch the touchstart event (https://github.com/kaltura/mwEmbed/pull/3269)
 - KMS-13614, KMS-13612, KMS-13618, KMS-13609, KMS-13611, KMS-13610 - accessibility enhancements
