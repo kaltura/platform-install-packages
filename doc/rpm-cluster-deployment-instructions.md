@@ -126,7 +126,7 @@ Edit `/etc/exports` to have the desired settings, for example:
 Edit `/etc/idmapd.conf` and add your domain, for example:
 `Domain = kaltura.dev`
 ```
-# /etc/init.d/rpcidmapd restart
+# service rpcidmapd restart
 ```
 
 Note that you may choose different NFS settings which is fine so long as:
