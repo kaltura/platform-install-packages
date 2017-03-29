@@ -85,6 +85,7 @@ else
 	if [ -z "$IS_NGINX_SSL" ];then
         	IS_NGINX_SSL='Y'
         fi  
+	PROTOCOL=http
 	if [ "$IS_NGINX_SSL" = 'Y' -o "$IS_NGINX_SSL" = 'y' ];then
 		PROTOCOL=https
 		echo -en "${CYAN}Nginx SSL port to listen on [${YELLOW}8443${CYAN}]:${NORMAL} "
