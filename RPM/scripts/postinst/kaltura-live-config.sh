@@ -46,6 +46,14 @@ if ! rpm -q kaltura-live;then
         echo -e "${BRIGHT_BLUE}Skipping as kaltura-live is not installed.${NORMAL}"
         exit 0 
 fi
+CONFIG_DIR=/opt/kaltura/app/configurations
+if [ -r $CONFIG_DIR/system.ini ];then
+	. $CONFIG_DIR/system.ini
+else
+	echo -e "${BRIGHT_RED}ERROR: Missing $CONFIG_DIR/system.ini. Exiting..${NORMAL}"
+	exit 1
+fi
+
 
 echo -e "${CYAN}Welcome to Kaltura Live post install setup.${NORMAL}"
 trap 'my_trap_handler "${LINENO}" $?' ERR
@@ -90,6 +98,14 @@ echo -e "${BRIGHT_BLUE}Deploying Wowza, this may take a while...${NORMAL}"
 BASE_DIR=/opt/kaltura
 WOWZA_PREFIX=/usr/local/WowzaStreamingEngine
 ln -sf $BASE_DIR/app/configurations/monit/monit.avail/wowza.rc $BASE_DIR/app/configurations/monit/monit.d/enabled.wowza.rc
+
+MINUS_FIVE_ADMIN_SECRET=`echo "select admin_secret from partner where id=-5"|mysql -N -h$DB1_HOST -u$DB1_USER -p$DB1_PASS $DB1_NAME -P$DB1_PORT`
+
+CONF_FILE_TEMPLATES=`find /usr/local/WowzaStreamingEngine/conf -type f -name "*template*"`
+for CONF_FILE_TEMPLATE in $CONF_FILE_TEMPLATES;do
+    CONF_FILE=`echo $CONF_FILE_TEMPLATE | sed 's@\(.*\)\.template\(.*\)@\1\2@'`
+    sed -e "s#@KALTURA_SERVICE_URL@#$SERVICE_URL#g" -e "s#@KALTURA_PARTNER_ID@#-5#g" -e "s#@KALTURA_PARTNER_ADMIN_SECRET@#$MINUS_FIVE_ADMIN_SECRET#g" $CONF_FILE_TEMPLATE > $CONF_FILE
+done
 
 # remove default unneeded Wowza apps:
 rm -rf $WOWZA_PREFIX/conf/live/
