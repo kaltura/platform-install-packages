@@ -175,7 +175,7 @@ HEADERS_MORE_NGINX_VERSION="v0.32"
 HEADERS_MORE_NGINX_URI="https://github.com/openresty/headers-more-nginx-module/archive/$HEADERS_MORE_NGINX_VERSION.zip"
 
 # Kaltura Streaming lib build vars:
-KALTURA_MEDIASERVER_VERSION="4.5.10.72"
+KALTURA_MEDIASERVER_VERSION="4.5.10.73"
 KALTURA_MEDIASERVER_URI="https://github.com/kaltura/media-server/releases/download/rel-$KALTURA_MEDIASERVER_VERSION/KalturaWowzaServer-install-$KALTURA_MEDIASERVER_VERSION.zip"
 KALTURA_MEDIASERVER_RPM_NAME=kaltura-media-server
 
