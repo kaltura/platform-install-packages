@@ -28,7 +28,7 @@ if [ -n "$NEWREL" ];then
 else
 	REV=1
 fi
-if [ -n $4 ];then
+if [ -n "$4" ];then
 	CHANGELOG_MSG=$4
 else
 	CHANGELOG_MSG="Ver Bounce to $NEWVER"

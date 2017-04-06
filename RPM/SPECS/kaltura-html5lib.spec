@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.54.1
+Version: v2.54.3
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -81,6 +81,9 @@ find /opt/kaltura/web/html5/html5lib -type d -name cache -exec chown -R 48 {} \;
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Thu Apr 6 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v2.54.3-1
+- Fix 360 on iOS
+
 * Tue Mar 29 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v2.54.1-1
 - FEC-6441 - Quiz plugin damaged when switching between dual video options
 - FEC-6537 - Auto replay from start after post roll Ad
