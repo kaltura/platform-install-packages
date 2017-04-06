@@ -27,7 +27,7 @@ The container already documented to expose 80, 443 and 1935 ports, make sue to r
 
 ### Start Kaltura container
 ```bash
-docker run -d --name=kaltura -p 80:80 -p 443:443 -p 1935:1935 kaltura/server
+docker run -d --name=kaltura -p 80:80 -p 443:443 -p 1935:1935 -p 88:88 -p 8443:8443 kaltura/server
 ```
 
 ### Start of Kaltura Configuration
