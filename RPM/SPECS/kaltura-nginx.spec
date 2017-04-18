@@ -51,8 +51,8 @@ Requires(pre): pwdutils
 
 Summary: High performance web server customized for Kaltura VOD
 Name: kaltura-nginx
-Version: 1.10.3
-Release: 5
+Version: 1.12.0
+Release: 1
 Vendor: Kaltura inc.
 URL: http://nginx.org/
 
@@ -401,6 +401,13 @@ if [ $1 -ge 1 ]; then
 fi
 
 %changelog
+* Tue Apr 18 2017 Jess Portnoy <jess.portnoy@kaltura.com> - 1.12.0-1
+- New stable Nginx version - 1.12.0
+- New VOD module [1.15]:
+	- add support for cap format (cheetah)
+- New VTS module [0.1.14]:
+	- fixed issues/76 worker process exited on signal 11
+
 * Thu Mar 23 2017 Jess Portnoy <jess.portnoy@kaltura.com> - 1.10.3-5
 - add token for @PROTOCOL@ when using proxy_pass with the kaltura API endpoint
 
