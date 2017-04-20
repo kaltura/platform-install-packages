@@ -447,17 +447,18 @@ check_space()
 
 check_start_page()
 {
-	# requesting the service URL should get a HTTP 301 to start page
-	START_PAGE=`curl -ks "$SERVICE_URL"  | grep 'The document has moved '|sed 's@.*a href="\(.*\)".*@\1@g'`
-	curl -ks $START_PAGE | grep 'Kaltura Video Platfrom - Home Page' -q
-	if [ $? -eq 0 ];then
-		echo "Successfully found 'Kaltura Video Platfrom - Home Page' on page $START_PAGE"
-		return 0
-	else
-		echo "Did not find 'Kaltura Video Platfrom - Home Page' on page $START_PAGE :("
-		return 1
-	fi	
-} 
+        # requesting the service URL should get a HTTP 301 to start page
+        GOOD_STRING="Kaltura Platform Start Page - Getting Started"
+        START_PAGE=`curl -ks "$SERVICE_URL"  | grep 'The document has moved '|sed 's@.*a href="\(.*\)".*@\1@g'`
+        curl -ks $START_PAGE | grep "$GOOD_STRING" -q
+        if [ $? -eq 0 ];then
+                echo "Successfully found \"$GOOD_STRING\" on page $START_PAGE"
+                return 0
+        else
+                echo "Did not find \"$GOOD_STRING\" on page $START_PAGE :("
+                return 1
+        fi      
+}
 
 check_testme_page()
 {
