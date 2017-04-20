@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 12.14.0
-Release: 25
+Release: 26
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -306,60 +306,6 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Wed Apr 19 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.14.0-25
-- Nightly build.
-
-* Tue Apr 18 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.14.0-24
-- Nightly build.
-
-* Mon Apr 17 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.14.0-23
-- Nightly build.
-
-* Sun Apr 16 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.14.0-22
-- Nightly build.
-
-* Sat Apr 15 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.14.0-21
-- Nightly build.
-
-* Fri Apr 14 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.14.0-20
-- Nightly build.
-
-* Thu Apr 13 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.14.0-19
-- Nightly build.
-
-* Wed Apr 12 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.14.0-18
-- Nightly build.
-
-* Tue Apr 11 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.14.0-17
-- Nightly build.
-
-* Mon Apr 10 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.14.0-16
-- Nightly build.
-
-* Sun Apr 9 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.14.0-15
-- Nightly build.
-
-* Sat Apr 8 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.14.0-14
-- Nightly build.
-
-* Fri Apr 7 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.14.0-13
-- Nightly build.
-
-* Thu Apr 6 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.14.0-12
-- Nightly build.
-
-* Wed Apr 5 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.14.0-11
-- Nightly build.
-
-* Tue Apr 4 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.14.0-10
-- Nightly build.
-
-* Mon Apr 3 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.14.0-9
-- Nightly build.
-
-* Mon Apr 3 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.14.0-8
-- Nightly build.
-
 * Mon Mar 27 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.14.0-1
 - Ver Bounce to 12.14.0
 

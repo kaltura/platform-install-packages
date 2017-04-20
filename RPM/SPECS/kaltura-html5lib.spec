@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.54.3
+Version: v2.55
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -81,6 +81,54 @@ find /opt/kaltura/web/html5/html5lib -type d -name cache -exec chown -R 48 {} \;
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Thu Apr 20 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v2.55-1
+- FEC-6522 - Unable to play Dash in player
+- FEC-6163 - secured akamai live doesn't work with flash hls
+- FEC-6522 - Unable to play Dash in player
+- FEC-6532 - Enable seeking in DVR enabled external live stream
+- FEC-6537 - Auto replay from start after post roll Ad
+- FEC-6493 - [Les Mills International - LMI] default audio track selection
+- FEC-6491 - CVAA: no "options" appears in the captions menu on iPhone with iOS 10
+- FEC-6535 - HLSJS: Kaltura Live with DVR: Seek functionality is broken (DVR window is bigger than live streaming length)
+- FEC-6547 - Dual player doesn't work with 2.54 (2.53 ok)
+- KMS-13549 - Accessibility - Main - Provide alternative text for images
+- SUP-9932 - playbackRateSelector key code not working on Firefox
+- FEC-6441 - Quiz plugin damaged when switching between dual video options
+- FEC-6508 - Duration of last chapter is not calculated
+- SUP-9113 - Resizing dimensions in dualScreen
+- SUP-9622 - Source selector shows only 'Auto' while using delivery type 'HTTP Progressive Download'
+- qnaPushNotification - refactor QnA to use socket.io (#3326)
+- Chromecast - remove workaround for web sender v3 after issue has been fixed
+- reverting HLS dependency
+- fix dependancy bug (#3318)
+- SUP-10559 - Closed Captions - Options Menu Default Desgin Invisible on white Background
+- Receiver v3 - fix iOS play-pause issue
+- FEC-6537 - Auto replay from start after post roll Ad
+- FEC-6558 - Playback start error on Android Chrome
+- Chromecast queues - migrate 'up next' notification to in between medias (#3312)
+- Chromecast web sender v3 ads fixes (#3314)
+- FEC-6550 - Dual video - Unable to switch between Slides and Cameras
+- FEC-6520 - Quiz Player Accessibility: 'X' button is presented on 'welcome' screen
+- SUP-9095 - Player 2.46 + IE11 + document mode set to IE8 + 'Custom Styles' On = Scrubber is Square (instead of round)
+- FEC-6470 - Add length validation to moderation description
+- SUP-10592 - Quiz automatically replays after submitting
+- Remove dependency from KalturaSupport.json. For DualScreen the plugin will import this as dependency injection via plugin code.
+- Remove widevine classic from repo
+- FEC-6536 - Multi Audio Tracks - Default selection
+- SUP-10656 - DualScreen + Player's Height < 400 px = player plugins are opened stretched up
+- force hls from window if exist (#3343)
+- SUP-10832 - Hunters- No playback on IE
+- Added new logic in the plugin to better support DVR streams. (#3348)
+- Fix shaka polyfill install logic
+- SUP-10832 - Hunters- No playback on IE
+- change swf of HLS plugin to support relative urls (#3349)
+- Disable 360 video on desktop safari
+- SUP-10592 - Quiz automatically replays after submitting OPEN
+- FEC-6588 - Regression: HLS-OSMF: Kaltura Live with DVR: Back to DVR is not working (scrubber always jumps to live)
+- SUP-9742 - Player icons sometimes not loaded
+- CC receiver - Remove call of unexisting function
+- 
+
 * Thu Apr 6 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v2.54.3-1
 - Fix 360 on iOS
 
