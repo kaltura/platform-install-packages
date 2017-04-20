@@ -148,6 +148,12 @@ if [ $? -eq 0 ];then
 fi
 
 START=`date +%s.%N`
+MSG=`check_start_page`
+RC=$?
+END=`date +%s.%N`
+report "check_start_page" $RC "$MSG" "`bc <<< $END-$START`"
+
+START=`date +%s.%N`
 MSG=`check_testme_page`
 RC=$?
 END=`date +%s.%N`
