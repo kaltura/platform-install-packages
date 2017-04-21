@@ -43,7 +43,7 @@ Requires(pre): pwdutils
 %define nginx_vod_module_ver 1.14
 %define nginx_secure_token_ver 1.2
 %define nginx_token_validate_ver 1.0.1
-%define nginx_vts_ver 0.1.12
+%define nginx_vts_ver 0.1.14
 %define nginx_rtmp_ver 1.1.11
 %define ngx_aws_auth_ver 2.1.1
 %define headers_more_nginx_ver 0.32
@@ -52,7 +52,7 @@ Requires(pre): pwdutils
 Summary: High performance web server customized for Kaltura VOD
 Name: kaltura-nginx
 Version: 1.12.0
-Release: 1
+Release: 2
 Vendor: Kaltura inc.
 URL: http://nginx.org/
 
