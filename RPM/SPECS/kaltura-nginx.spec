@@ -40,9 +40,9 @@ BuildRequires: libopenssl-devel
 Requires(pre): pwdutils
 %endif
 
-%define nginx_vod_module_ver 1.14
-%define nginx_secure_token_ver 1.2
-%define nginx_token_validate_ver 1.0.1
+%define nginx_vod_module_ver 1.16
+%define nginx_secure_token_ver 1.3
+%define nginx_token_validate_ver 1.1
 %define nginx_vts_ver 0.1.14
 %define nginx_rtmp_ver 1.1.11
 %define ngx_aws_auth_ver 2.1.1
@@ -52,7 +52,7 @@ Requires(pre): pwdutils
 Summary: High performance web server customized for Kaltura VOD
 Name: kaltura-nginx
 Version: 1.12.0
-Release: 2
+Release: 3
 Vendor: Kaltura inc.
 URL: http://nginx.org/
 
@@ -401,6 +401,25 @@ if [ $1 -ge 1 ]; then
 fi
 
 %changelog
+* Mon Apr 24 2017 Jess Portnoy <jess.portnoy@kaltura.com> - 1.12.0-3
+- New VOD module [1.16]:
+	* support openssl 1.1
+	* dash validator fixes  
+	* add support for dfxp captions  
+	* add vod_manifest_duration_policy  
+	* output EXT-X-I-FRAME-STREAM-INF in master m3u8  
+	* support eac3 codec in hls (clear and sample-aes)  
+	* add new stat variables  
+	* support opus in mp4
+
+- New Nginx Akamai token validate module [1.1]
+	* use nginx variables to define the token 
+	* fix hmac leak
+
+- New Nginx secure token module [1.3]
+	* support openssl 1.1
+	* support china cache tokens
+	
 * Tue Apr 18 2017 Jess Portnoy <jess.portnoy@kaltura.com> - 1.12.0-1
 - New stable Nginx version - 1.12.0
 - New VOD module [1.15]:
