@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 12.14.0
-Release: 30
+Release: 31
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -306,17 +306,46 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Sun Apr 23 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.14.0-30
-- Nightly build.
-
-* Sat Apr 22 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.14.0-29
-- Nightly build.
-
-* Fri Apr 21 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.14.0-28
-- Nightly build.
-
-* Thu Apr 20 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.14.0-27
-- Nightly build.
+* Mon Apr 24 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.14.0-31
+- add missing conn took variable (https://github.com/kaltura/server/pull/5459)
+- use 'apphome_url_no_protocol' instead of 'cdn_api_host_https' (https://github.com/kaltura/server/pull/5458)
+- PLAT-7022: fix NOTICE of undefined XSTL (https://github.com/kaltura/server/pull/5456)
+- PLAT-7238: add ability for hash algorithm in updateclients to be requested dynamically and cache the results of the hash (https://github.com/kaltura/server/pull/5455)
+- PLAT-7253:should be uploadToken instead of appToken (https://github.com/kaltura/server/pull/5451)
+- PLAT-7253:add script file (https://github.com/kaltura/server/pull/5448)
+- PLAT-7253: add permission for appToken->get to capture devices (https://github.com/kaltura/server/pull/5447)
+- Add sessionRequired attribute the generated XML (https://github.com/kaltura/server/pull/5440)
+- TR-1860 (https://github.com/kaltura/server/pull/5438)
+- SUP-10845: fix delivery profile ids will be set to none if during storage profile update they are not given (https://github.com/kaltura/server/pull/5437)
+- Lynx 12.14.0 plat 7178 support eac3 audio generation  (https://github.com/kaltura/server/pull/5435)
+- PLAT-7245: downloadUrl should return playmanifest urls instead of the ps2 raw action (https://github.com/kaltura/server/pull/5433)
+- PLAT-7234: enable opera and roku syndication feeds xslt to escape XML chars (https://github.com/kaltura/server/pull/5432)
+- syndication federated search - remove entry status earlier (https://github.com/kaltura/server/pull/5431)
+- disable IRelatedObject on DropFolder and DropFolderFile derived objects (https://github.com/kaltura/server/pull/5430)
+- remove redundant logging (https://github.com/kaltura/server/pull/5427)
+- add more params to log (https://github.com/kaltura/server/pull/5426)
+- add logging to resposne profile couchbase caching (https://github.com/kaltura/server/pull/5425)
+- PLAT-7150:construct shouldn't change things in custom_data since it could be before hidration (https://github.com/kaltura/server/pull/5424)
+- track repetitive udpates of the same object (https://github.com/kaltura/server/pull/5423)
+- PLAT-7240: Prevent deleting live entry while recording flow still running (https://github.com/kaltura/server/pull/5422)
+- PLAT-7169:add update event notification script and enable event notifications (https://github.com/kaltura/server/pull/5421)
+- PLAT-7194: attachments - enable download using playmanifest (https://github.com/kaltura/server/pull/5420)
+- PLAT-7216: allow capture device permission to add/update/list scheduleEvent and scheduleResource (https://github.com/kaltura/server/pull/5419)
+- PLAT-7217: add plugin interface && missing fields (https://github.com/kaltura/server/pull/5416)
+- PLAT-7150: Adding Roku and Opera syndication feeds to KMC (https://github.com/kaltura/server/pull/5413)
+- PLAT-7150: fix for getfeed and new XSLT (https://github.com/kaltura/server/pull/5411)
+- PLAT-7194: playmanifest attachement download/url - check asset existance (https://github.com/kaltura/server/pull/5410)
+- PLAT-5816: remove eventid from schedule event resource when the schedule event (https://github.com/kaltura/server/pull/5409)
+- PLAT-7220: Dont allow adding liveEntries with recording enabled unless recording feature is enabled on the account (https://github.com/kaltura/server/pull/5402)
+- PLAT-7218: Support filtering by idIn & idEqual in KalturaAssetParams.. (https://github.com/kaltura/server/pull/5398)
+- SUP-10721: In case of text/html file import , ignore size checking  (https://github.com/kaltura/server/pull/5396)
+- PLAT-7167: allow only admin_console to insert and update parent-partner-id and artner-package (https://github.com/kaltura/server/pull/5392)
+- PLAT-6809: set duration of live recording while recording is still being done (https://github.com/kaltura/server/pull/5391)
+- PLAT-7128: Prevent the ability to delete live stream entry while its still streaming (https://github.com/kaltura/server/pull/5389)
+- PLAT-7142: ad stitching player awareness patches (https://github.com/kaltura/server/pull/5385)
+- PLAT-7194: playmanifest action - enable all asset types download (https://github.com/kaltura/server/pull/5384)
+- SUP-10236: merge users with multiple kusers for the same puser by giving a partner (https://github.com/kaltura/server/pull/5383)
+- PLAT-7192: allow setting keepOriginalFile when using KalturaServerFile (https://github.com/kaltura/server/pull/5381)
 
 * Mon Mar 27 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.14.0-1
 - Ver Bounce to 12.14.0

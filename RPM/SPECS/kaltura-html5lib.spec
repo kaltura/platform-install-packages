@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.55
+Version: v2.55.2
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -81,6 +81,9 @@ find /opt/kaltura/web/html5/html5lib -type d -name cache -exec chown -R 48 {} \;
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Mon Apr 24 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v2.55.2-1
+- SUP-9932 - playbackRateSelector key code not working on Firefox
+
 * Thu Apr 20 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v2.55-1
 - FEC-6522 - Unable to play Dash in player
 - FEC-6163 - secured akamai live doesn't work with flash hls

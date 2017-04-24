@@ -7,7 +7,7 @@
 Summary: Kaltura Open Source Video Platform - batch server 
 Name: kaltura-batch
 Version: 12.14.0
-Release: 1
+Release: 2
 License: AGPLv3+
 Group: Server/Platform 
 Source0: zz-%{name}.ini
@@ -15,7 +15,7 @@ Source1: kaltura-batch
 Source3: batch.ini.template 
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires: kaltura-base, kaltura-ffmpeg, kaltura-ffmpeg-aux, php, curl, httpd, sox, ImageMagick, kaltura-sshpass, php-pecl-memcache,  php-pecl-ssh2,php-pecl-apc,php-mcrypt,memcached,kaltura-mediainfo, kaltura-segmenter, mod_ssl,kaltura-mencoder
+Requires: kaltura-base, kaltura-ffmpeg, kaltura-ffmpeg-aux, php, curl, httpd, sox, ImageMagick, kaltura-sshpass, php-pecl-memcache,  php-pecl-ssh2,php-pecl-apc,php-mcrypt,memcached,kaltura-mediainfo, kaltura-segmenter, mod_ssl
 #php-pecl-zendopcache
 %{?el7:Requires: php-pecl-zendopcache}
 #PreReq: httpd
