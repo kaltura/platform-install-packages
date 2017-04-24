@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 12.14.0
-Release: 31
+Version: 12.15.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -306,6 +306,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Apr 24 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.15.0-1
+- Ver Bounce to 12.15.0
+
 * Mon Apr 24 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.14.0-31
 - add missing conn took variable (https://github.com/kaltura/server/pull/5459)
 - use 'apphome_url_no_protocol' instead of 'cdn_api_host_https' (https://github.com/kaltura/server/pull/5458)
