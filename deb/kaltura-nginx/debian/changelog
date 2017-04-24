@@ -1,3 +1,13 @@
+kaltura-nginx (1.12-1) lynx; urgency=low
+
+  * New stable Nginx version - 1.12.0
+  * New VOD module [1.15]:
+    - add support for cap format (cheetah)
+  * New VTS module [0.1.14]:
+    - fixed issues/76 worker process exited on signal 11
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Tue, 18 Apr 2017 15:06:17 +0000
+
 kaltura-nginx (1.10.3-4) lynx; urgency=low
 
   *  New Nginx VOD module [1.14]:
