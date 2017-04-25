@@ -1,7 +1,7 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmc
 Version: v5.41.2
-Release: 8 
+Release: 9
 Summary: Kaltura Management Console
 
 Group: System Management	
@@ -9,6 +9,7 @@ License: AGPLv3+
 URL: https://github.com/kaltura/kmc 
 Source0: %{name}-%{version}.tar.bz2
 Source1: kmc_config.ini
+Source2: kmc_preview_dark.json
 BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 BuildArch: noarch
 
@@ -64,6 +65,7 @@ for i in "*.xml" "*.template" "*.ttf" "*.xsl" "*.xsd" "*.yml" "*.smil" "*.srt" "
 project" "*.png" "*.properties" "*.sample" "*.swf" "*.sf" "*.swz" "*.uad" "*.prefs" "*.psd" "*.rvmrc" "*.sln" "*.ini" "*.log" ;do
 	find . -iname "$i" -exec chmod 644 {} \;
 done
+cp %{SOURCE2} $RPM_BUILD_ROOT/%{prefix}/web/flash/kmc/%{version}/xml/content/
 
 %preun
 #if [ "$1" = 0 ] ; then
@@ -83,6 +85,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Wed Apr 25 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v5.41.2-9
+- Added kmc_preview_dark.json to KMC's config.ini so that, in preview and embed, an HTML5 player will be loaded when selecting "KDP3 Dark"
+
 * Tue Apr 24 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v5.41.2-8
 - Ver bounce of HTML5 to v2.55.2
 
