@@ -15,6 +15,9 @@
 #===============================================================================
 #set -o nounset                              # Treat unset variables as an error
 
+KALTURA_GROUP=kaltura
+KALTURA_USER=kaltura
+APACHE_USER=www-data
 deploy_kmc_and_studio()
 {
 	HTML5_DIR=`ls -ld $BASE_DIR/web/html5/html5lib/v* 2>/dev/null|awk -F " " '{print $NF}' |tail -1`
@@ -38,7 +41,7 @@ deploy_kmc_and_studio()
 		echo -e "${BRIGHT_BLUE}Generating Studio UI confs..${NORMAL}"
 		php $APP_DIR/deployment/uiconf/deploy_v2.php --ini=$BASE_DIR/apps/studio/$STUDIO_VERSION/studio.ini --user=www-data >> $LOG_DIR/deploy_v2.log  2>&1
 	fi
-	chown -R www-data.kaltura $WEB_DIR/content
+	chown -R $APACHE_USER.$KALTURA_GROUP $WEB_DIR/content
 	if [ -d $APP_DIR/deployment/updates/scripts/patches ];then
 		for i in $APP_DIR/deployment/updates/scripts/patches/*.sh;do
 			$i
@@ -209,7 +212,6 @@ EOF
 		fi
 		exit 6
 	fi
-
 	echo "Cleaning cache.."
 	rm -rf $APP_DIR/cache/*
 	echo -e "${CYAN}Populating DB with data.. please wait..${NORMAL}"
@@ -220,6 +222,11 @@ EOF
 	echo -e "${CYAN}Output for $APP_DIR/deployment/base/scripts/insertPermissions.php being logged into $LOG_DIR/insertPermissions.log ${NORMAL}"
 	php $APP_DIR/deployment/base/scripts/insertPermissions.php  >> $LOG_DIR/insertPermissions.log 2>&1
 	echo -e "${CYAN}Output for $APP_DIR/deployment/base/scripts/insertContent.php being logged into $LOG_DIR/insertContent.log ${NORMAL}"
+	mkdir -p $WEB_DIR/content/generatedUiConf $WEB_DIR/content/entry/data $WEB_DIR/content/batchfiles $WEB_DIR/content/uploads 
+	find  $WEB_DIR/content/generatedUiConf -type d -exec chmod 775 {} \; -exec chown $APACHE_USER.$KALTURA_GROUP {} \;
+	find  $WEB_DIR/content/entry -type d -exec chmod 775 {} \; -exec chown $APACHE_USER.$KALTURA_GROUP {} \;
+	chown $APACHE_USER.$KALTURA_GROUP $WEB_DIR/content/batchfiles $WEB_DIR/content/uploads $APP_DIR/cache
+	chmod 775 $WEB_DIR/content/batchfiles $WEB_DIR/content/uploads $APP_DIR/cache
 	php $APP_DIR/deployment/base/scripts/insertContent.php >> $LOG_DIR/insertContent.log  2>&1
 	if [ $? -ne 0 ];then
 cat << EOF
