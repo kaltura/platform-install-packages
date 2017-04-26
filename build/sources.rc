@@ -294,6 +294,11 @@ DWH_VERSION="Lynx-12.14.0"
 DWH_URI="https://github.com/kaltura/dwh/archive/$DWH_VERSION.zip"
 DWH_RPM_NAME="kaltura-dwh"
 
+#ASYNC_API_PROXY_VERSION=
+#ASYNC_API_PROXY_URI=
+#ASYNC_API_PROXY_RPM_NAME=
+
+
 
 # App Studio HTML5:
 HTML5_APP_STUDIO_VERSION="v2.0.9"
