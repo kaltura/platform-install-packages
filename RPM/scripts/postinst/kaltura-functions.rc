@@ -45,7 +45,7 @@ fi
 POST_INST_MAIL_SUBJECT='Your new Kaltura server is up! and 6 Quick Tips For Smooth Kaltura Maintenance'
 POST_INST_MAIL_TMPL=$BASE_DIR/app/configurations/post_inst_mail
 
-ANALYTICS_SERVER_URI="http://installytics.kaltura.org/report"
+ANALYTICS_SERVER_URI="https://installytics.kaltura.org/report/add_rec.php"
 NEWSLETTER_URL="https://agentcontribs.kaltura.org/newsletter_subscribe.php"
 NEWSLETTER_MSG="
 To keep up with the bi-weekly Kaltura releases, and stay up to date with 
@@ -273,9 +273,7 @@ send_install_becon()
 	REVISION=`lsb_release -r|awk '{print $NF}'`
         CODENAME=`lsb_release -i|awk '{print $NF}'`
         RELEASE="$CODENAME-$REVISION"
-
-	curl -i -X POST -H 'Content-Type: application/json' -d '{"event_type": "'$ACTION'", "server_role": "'$ROLE'", "user_email": "'$CONTACT_MAIL'", "machine_id": "'$MACHINE_ID'", "installation_id": "'$INSTALL_ID'", "timestamp": "'$EPOCH'", "kernel_version": "'`uname -r`'", "machine_arch": "'`uname -m`'","linux_flavor":"'$RELEASE'","is_ssl": "'$IS_SSL'", "service_url": "'$SERVICE_URL'","install_err_line": "'$ERR_LINE'","timezone": "'$TIMEZONE'","package_type":"'$PACKAGE_TYPE'","kaltura_version": "'$KALTURA_VERSION'","package_revision": "'$KALTURA_REVISION'"}' $ANALYTICS_SERVER_URI &>/dev/null
-	 curl --data "event_type=$ACTION&server_role=$ROLE&user_email=$CONTACT_MAIL&machine_id=$MACHINE_ID&installation_id=$INSTALL_ID&timestamp=`date +%s`&kernel_version=`uname -r`&machine_arch=`uname -m`&linux_flavor=$RELEASE&service_url=$SERVICE_URL&install_err_line=$ERR_LINE&timezone=$TIMEZONE&package_type=$PACKAGE_TYPE&kaltura_version=$KALTURA_VERSION&package_revision=$KALTURA_REVISION&subscribed_for_ce_updates=$SUBSCRIBE4UPDATES" https://installytics.kaltura.org/report/add_rec.php 
+	curl --data "event_type=$ACTION&server_role=$ROLE&user_email=$CONTACT_MAIL&machine_id=$MACHINE_ID&installation_id=$INSTALL_ID&timestamp=`date +%s`&kernel_version=`uname -r`&machine_arch=`uname -m`&linux_flavor=$RELEASE&service_url=$SERVICE_URL&install_err_line=$ERR_LINE&timezone=$TIMEZONE&package_type=$PACKAGE_TYPE&kaltura_version=$KALTURA_VERSION&package_revision=$KALTURA_REVISION&subscribed_for_ce_updates=$SUBSCRIBE4UPDATES" $ANALYTICS_SERVER_URI 
 
 #	set +x
 	trap 'my_trap_handler ${LINENO} ${$?}' ERR
