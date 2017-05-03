@@ -1,3 +1,9 @@
+kaltura-postinst (1.0.33-1) lynx; urgency=low
+
+  * Remove old analytics URL
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Tue, 02 May 2017 21:49:55 +0000
+
 kaltura-postinst (1.0.31-1) kajam; urgency=low
 
   *  https://github.com/kaltura/platform-install-packages/pull/521

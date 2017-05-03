@@ -37,7 +37,9 @@ fi
 #. $CONSENT_FILE
 trap - ERR
 TIMEZ=`get_tz`
+set +e
 send_install_becon `basename $0` $TIMEZ install_start 0 
+set -e
 
 TABLES=`echo "show tables" | mysql -h$DWH_HOST -u$SUPER_USER -p$SUPER_USER_PASSWD -P$DWH_PORT kalturadw 2> /dev/null`
 if [ -z "$TABLES" ];then 
@@ -76,4 +78,6 @@ chown -R $OS_KALTURA_USER $BASE_DIR/dwh/cycles/
 ln -sf $APP_DIR/configurations/cron/dwh /etc/cron.d/kaltura-dwh
 echo -e "${CYAN}DWH configured.${NORMAL}"
 chown -R $OS_KALTURA_USER $BASE_DIR/dwh/logs $BASE_DIR/pentaho/pdi/
+set +e
 send_install_becon `basename $0` $TIMEZ install_success 0 
+set -e

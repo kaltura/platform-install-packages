@@ -78,7 +78,7 @@ Description: Range of ip addresses belonging to internal kaltura servers
 
 Template: kaltura-base/vod_packager_hostname
 Type: string
-Default: 127.0.0.1
+Default: 
 Description: VOD packager hostname
 
 Template: kaltura-base/vod_packager_port

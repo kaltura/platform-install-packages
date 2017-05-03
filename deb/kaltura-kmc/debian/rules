@@ -32,8 +32,10 @@ binary-indep: install
 	rm -rf $(KMC_PREFIX)
 	mkdir -p $(KMC_PREFIX) $(KALTURA_PREFIX)/web/content/docs
 	mv $(tree)/* $(KMC_PREFIX)/
+	cp debian/kmc_preview_dark.json $(KMC_PREFIX)/$(KMC_VERSION)/xml/content/
 	sed -i "s#html5_version =.*#html5_version = $(HTML5LIB_VERSION)#g" $(KMC_PREFIX)/$(KMC_VERSION)/config.ini 
 	sed -i "s#\(widgets.kClip.*version\) =.*#\1 = $(KCLIP_VERSION)#g" $(KMC_PREFIX)/$(KMC_VERSION)/config.ini 
+	sed -i "s@^\(widgets.kdp1.conf_file\s*=.*\)@\1\nwidgets.kdp1.config_file = xml/content/kmc_preview_dark.json@g" $(KMC_PREFIX)/$(KMC_VERSION)/config.ini
 	dos2unix $(KMC_PREFIX)/$(KMC_VERSION)/config.ini
 	cp -r $(KMC_PREFIX)/doc/* $(KALTURA_PREFIX)/web/content/docs
 	dh_install $(KALTURA_PREFIX)

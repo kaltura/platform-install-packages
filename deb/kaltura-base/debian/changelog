@@ -1,3 +1,9 @@
+kaltura-base (12.15.0-1) lynx; urgency=low
+
+  * Switching to 12.15.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 24 Apr 2017 16:14:23 +0000
+
 kaltura-base (12.14.0-2) lynx; urgency=low
 
   * add missing conn took variable (https://github.com/kaltura/server/pull/5459)

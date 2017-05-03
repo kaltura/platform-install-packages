@@ -1,3 +1,9 @@
+kaltura-db (12.15.0-1) lynx; urgency=low
+
+  * fix permissions on $WEB_DIR/content/generatedUiConf and $WEB_DIR/content/entry
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Tue, 25 Apr 2017 13:43:27 +0000
+
 kaltura-db (12.0.0-1) lynx; urgency=low
 
   * Correctly set studio.ini and run uiconf deployment for it.

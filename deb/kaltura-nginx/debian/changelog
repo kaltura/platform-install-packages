@@ -1,3 +1,25 @@
+kaltura-nginx (1.12-2) lynx; urgency=low
+
+  * New VOD module [1.16]:
+    - support openssl 1.1
+    - dash validator fixes  
+    - add support for dfxp captions  
+    - add vod_manifest_duration_policy  
+    - output EXT-X-I-FRAME-STREAM-INF in master m3u8  
+    - support eac3 codec in hls (clear and sample-aes)  
+    - add new stat variables  
+    - support opus in mp4
+
+  * New Nginx Akamai token validate module [1.1]
+    - use nginx variables to define the token 
+    - fix hmac leak
+
+  * New Nginx secure token module [1.3]
+   - support openssl 1.1
+   - support china cache tokens
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 24 Apr 2017 17:13:29 +0000
+
 kaltura-nginx (1.12-1) lynx; urgency=low
 
   * New stable Nginx version - 1.12.0
