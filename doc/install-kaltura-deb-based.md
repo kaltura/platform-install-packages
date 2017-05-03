@@ -181,7 +181,7 @@ deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/debian lynx main
 Use this in cases where you want to clear the database and start from fresh.
 ```bash
 # /opt/kaltura/bin/kaltura-drop-db.sh
-# aptitude purge ~Nkaltura
+# aptitude purge "~Nkaltura"
 # rm -rf /opt/kaltura
 # rm -rf /etc/kaltura.d
 ```

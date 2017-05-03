@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 12.15.0
-Release: 1
+Release: 11
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -109,6 +109,7 @@ sed -i "s#^;kmc_version = @KMC_VERSION@#kmc_version = %{_kmc_version}#g" $RPM_BU
 sed -i 's@^otp_required_partners\[\]@;otp_required_partners\[\]@g' $RPM_BUILD_ROOT%{prefix}/app/configurations/local.template.ini
 sed -i "s@^partner_otp_internal_ips@;partner_otp_internal_ips@g" $RPM_BUILD_ROOT%{prefix}/app/configurations/local.template.ini
 sed -i "s#^;html5_version = @HTML5LIB_VERSION@#html5_version = %{html5_version}#g" $RPM_BUILD_ROOT%{prefix}/app/configurations/local.template.ini
+sed -i 's#<html5Url>/html5/html5lib/v.*/mwEmbedLoader.php</html5Url>#<html5Url>/html5/html5lib/%{html5_version}/mwEmbedLoader.php</html5Url>#g' $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_content/01.uiConf.99.template.xml
 sed -i "s#^;kmc_login_version = @KMC_LOGIN_VERSION@#kmc_login_version = %{kmc_login_version}#g" $RPM_BUILD_ROOT%{prefix}/app/configurations/local.template.ini
 sed -i "s@clipapp_version = @CLIPPAPP_VERSION@#clipapp_version = %{clipapp_version}#g" $RPM_BUILD_ROOT%{prefix}/app/configurations/local.template.ini
 sed -i "s#^clipapp_version =.*#clipapp_version = %{clipapp_version}#g" $RPM_BUILD_ROOT%{prefix}/app/configurations/base.ini
@@ -306,6 +307,33 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Tue May 2 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.15.0-11
+- Nightly build.
+
+* Mon May 1 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.15.0-10
+- Nightly build.
+
+* Sun Apr 30 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.15.0-9
+- Nightly build.
+
+* Sat Apr 29 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.15.0-8
+- Nightly build.
+
+* Fri Apr 28 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.15.0-7
+- Nightly build.
+
+* Thu Apr 27 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.15.0-6
+- Nightly build.
+
+* Wed Apr 26 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.15.0-5
+- Nightly build.
+
+* Tue Apr 25 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.15.0-4
+- Nightly build.
+
+* Mon Apr 24 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.15.0-2
+- Nightly build.
+
 * Mon Apr 24 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.15.0-1
 - Ver Bounce to 12.15.0
 
