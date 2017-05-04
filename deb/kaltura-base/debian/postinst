@@ -207,6 +207,10 @@ if [ "$1" = "configure" ]; then
         db_get 'kaltura-base/ip_range'
         IP_RANGE=$RET
 
+        db_get 'kaltura-base/vod_packager_hostname'
+        if [ -z "$RET" ];then
+                db_set 'kaltura-base/vod_packager_hostname' "`hostname`"
+        fi
         db_input critical 'kaltura-base/vod_packager_hostname' || true
         db_go || true
         db_get 'kaltura-base/vod_packager_hostname'

@@ -123,6 +123,7 @@ binary-arch: build install
 	dh_installinit
 	dh_installman
 	dh_link $(BASE_PREFIX)/bin/ffmpeg opt/kaltura/bin/ffmpeg
+	dh_link $(BASE_PREFIX)/bin/ffprobe opt/kaltura/bin/ffprobe
 	dh_link $(BASE_PREFIX)/bin/qt-faststart opt/kaltura/bin/qt-faststart
 	dh_strip
 	dh_compress

@@ -58,4 +58,5 @@ if [ "$1" = "configure" ]; then
 
 fi
 chown -R kaltura /opt/kaltura/log/nginx
-service kaltura-nginx reload 
+db_stop
+invoke-rc.d kaltura-nginx restart
