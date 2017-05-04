@@ -310,6 +310,9 @@ fi
 * Thu May 4 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.15.0-13
 - Nightly build.
 
+* Thu May 4 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.15.0-13
+- Nightly build.
+
 * Wed May 3 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.15.0-12
 - Nightly build.
 
