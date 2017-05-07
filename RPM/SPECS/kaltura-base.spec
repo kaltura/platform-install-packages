@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 12.15.0
-Release: 15
+Release: 16
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -307,47 +307,39 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Sat May 6 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.15.0-15
-- Nightly build.
-
-* Fri May 5 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.15.0-14
-- Nightly build.
-
-* Thu May 4 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.15.0-13
-- Nightly build.
-
-* Thu May 4 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.15.0-13
-- Nightly build.
-
-* Wed May 3 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.15.0-12
-- Nightly build.
-
-* Tue May 2 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.15.0-11
-- Nightly build.
-
-* Mon May 1 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.15.0-10
-- Nightly build.
-
-* Sun Apr 30 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.15.0-9
-- Nightly build.
-
-* Sat Apr 29 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.15.0-8
-- Nightly build.
-
-* Fri Apr 28 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.15.0-7
-- Nightly build.
-
-* Thu Apr 27 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.15.0-6
-- Nightly build.
-
-* Wed Apr 26 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.15.0-5
-- Nightly build.
-
-* Tue Apr 25 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.15.0-4
-- Nightly build.
-
-* Mon Apr 24 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.15.0-2
-- Nightly build.
+* Sun May 7 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.15.0-16
+- PLAT-7251: handle script exception (https://github.com/kaltura/server/pull/5507)
+- Update KAsyncDropFolderWatcher.class.php (https://github.com/kaltura/server/pull/5506)
+- PLAT-7251: fix script and typo (https://github.com/kaltura/server/pull/5504)
+- service names are always kaltura-$DAEMON_NAME, not kaltura_$DAEMON_NAME (https://github.com/kaltura/server/pull/5503)
+- PLAT-7251: add comment (https://github.com/kaltura/server/pull/5502)
+- PLAT-7332: allow specific partnerPackages to be inserted without KS (https://github.com/kaltura/server/pull/5501)
+- PLAT-7277: verify "/v" in path before splitting to get version (https://github.com/kaltura/server/pull/5499)
+- Add missing sharedTempPath to batch template file (https://github.com/kaltura/server/pull/5498)
+- add error to metadata when can not process task on entry (https://github.com/kaltura/server/pull/5497)
+- add try catch when try to updata metadata for delete entry (https://github.com/kaltura/server/pull/5496)
+- prevent creation of duplicate kuser when the puser is long (https://github.com/kaltura/server/pull/5495)
+- Lynx 12.15.0 plat 7300 (https://github.com/kaltura/server/pull/5494)
+- PLAT-7318: if no profile configured for partner we should take default (https://github.com/kaltura/server/pull/5493)
+- PLAT-7317-FIX channels_layout in ffmpeg cmdLine (https://github.com/kaltura/server/pull/5491)
+- PLAT-7317-FIX channels_layout in ffmpeg cmdLine (https://github.com/kaltura/server/pull/5490)
+- PLAT-7003-FIX-WM-for-true-portrait-sources (https://github.com/kaltura/server/pull/5489)
+- PS-3018: syndicationFeed - get entry type as dynamic enum (https://github.com/kaltura/server/pull/5488)
+- PS-3015+6: syndicationFeed - if no more entries don't add link (https://github.com/kaltura/server/pull/5487)
+- PLAT-7313: syndicationFeed - check entryFilter existance (https://github.com/kaltura/server/pull/5486)
+- PS-3017: syndicationFeed - no ampersand escaping (https://github.com/kaltura/server/pull/5485)
+- add check for MR metadata profile request (https://github.com/kaltura/server/pull/5483)
+- PLAT-7238: small fix (https://github.com/kaltura/server/pull/5482)
+- add metadataProfileId for MR (https://github.com/kaltura/server/pull/5481)
+- PLAT-7251: remove broadcast urls from custom data (https://github.com/kaltura/server/pull/5478)
+- in case a filename filter was passed enforce a statusIn filter in order to limit slow db queries (https://github.com/kaltura/server/pull/5475)
+- PS-2993: syndication-feed - enable relative-time filter (https://github.com/kaltura/server/pull/5474)
+- fix permission and impersonate for admin partner (https://github.com/kaltura/server/pull/5472)
+- First version of Media Repurposing (https://github.com/kaltura/server/pull/5471)
+- PLAT-7254 fix missing flavor params id for live entries (https://github.com/kaltura/server/pull/5470)
+- Don't deploy KDP players to partner 99 (https://github.com/kaltura/server/pull/5469)
+- Remove flix and mencoder trans engines in flavour creation. (https://github.com/kaltura/server/pull/5468)
+- PLAT-7299: change core object of KalturaGenericSyndication feed to be genericSyndicationFeed (https://github.com/kaltura/server/pull/5467)
 
 * Mon Apr 24 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.15.0-1
 - Ver Bounce to 12.15.0
