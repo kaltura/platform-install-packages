@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 12.15.0
-Release: 16
+Release: 17
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -307,6 +307,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Sun May 7 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.15.0-17
+- Nightly build.
+
 * Sun May 7 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.15.0-16
 - PLAT-7251: handle script exception (https://github.com/kaltura/server/pull/5507)
 - Update KAsyncDropFolderWatcher.class.php (https://github.com/kaltura/server/pull/5506)
