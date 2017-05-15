@@ -6,15 +6,16 @@
 
 Summary: Kaltura Async Api Proxy 
 Name: kaltura-async-api-proxy 
-Version: 1.0.0
-Release: 2
+Version: 1.0.3
+Release: 3
 License: AGPLv3+
 Group: Server/Platform 
 Source0: async-api-proxy-v%{version}.tar.gz
 URL: https://github.com/kaltura/AsyncApiProxy
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
-Requires: nodejs >= 6.0.0 nodejs-forever nodejs-bundle-config nodejs-os nodejs-simple-rate-limiter nodejs-bundle-continuation-local-storage nodejs-bundle-express nodejs-uuid nodejs-bundle-request nodejs-crypto nodejs-is-subset nodejs-bluebird nodejs-memory-cache nodejs-ipaddr.js 
+Requires: nodejs >= 6.0.0 nodejs-forever nodejs-config nodejs-os nodejs-simple-rate-limiter nodejs-continuation-local-storage nodejs-express nodejs-uuid nodejs-request nodejs-crypto nodejs-is-subset nodejs-bluebird nodejs-memory-cache nodejs-ipaddr.js 
+Requires(post): chkconfig
 BuildRequires: nodejs-packaging
 AutoReq: no 
 
@@ -40,13 +41,10 @@ mkdir -p $RPM_BUILD_ROOT%{confdir}
 mkdir -p $RPM_BUILD_ROOT%{logdir}
 mkdir -p $RPM_BUILD_ROOT%{_initrddir}
 
-sed -e "s#@LOG_DIR@#%{logdir}#g" -e "s#@ASYNC_API_PROXY_PREFIX@#%{prefix}#g"  %{_builddir}/AsyncApiProxy-%{version}/bin/async-proxy-server.template.sh > $RPM_BUILD_ROOT%{_initrddir}/async-proxy-server
-chmod +x $RPM_BUILD_ROOT%{_initrddir}/async-proxy-server
+sed -e "s#@LOG_DIR@#%{logdir}#g" -e "s#@ASYNC_API_PROXY_PREFIX@#%{prefix}#g"  %{_builddir}/AsyncApiProxy-%{version}/bin/async-proxy-server.template.sh > $RPM_BUILD_ROOT%{_initrddir}/kaltura-async-proxy-server
+chmod +x $RPM_BUILD_ROOT%{_initrddir}/kaltura-async-proxy-server
 rm -rf %{_builddir}/AsyncApiProxy-%{version}/bin 
 cp -r %{_builddir}/AsyncApiProxy-%{version}/* $RPM_BUILD_ROOT%{prefix}/
-#cd $RPM_BUILD_ROOT%{prefix} 
-#npm install
-#find $RPM_BUILD_ROOT%{prefix}/node_modules -name package.json -exec rm {} \;
 
 
 
@@ -67,15 +65,17 @@ fi
 
 
 %post
-
+/sbin/chkconfig --add kaltura-async-proxy-server
 
 %preun
+/sbin/service kaltura-async-proxy-server stop > /dev/null 2>&1
+/sbin/chkconfig --del kaltura-async-proxy-server
 
 %postun
 
 %files
 %{prefix}/*
-%{_initrddir}/async-proxy-server
+%{_initrddir}/kaltura-async-proxy-server
 %config %{confdir}/*
 
 
@@ -84,5 +84,10 @@ fi
 %doc %{prefix}/README.md
 
 %changelog
+* Mon May 15 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.3-1
+- Update default.template.json
+- Merge pull request #34 from kaltura/master-fixInitScript
+- Add missing Provides field to init info
+
 * Wed Apr 26 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0-1
 - First release
