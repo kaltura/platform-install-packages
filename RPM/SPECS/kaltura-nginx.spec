@@ -40,7 +40,7 @@ BuildRequires: libopenssl-devel
 Requires(pre): pwdutils
 %endif
 
-%define nginx_vod_module_ver 1.16
+%define nginx_vod_module_ver 1.17
 %define nginx_secure_token_ver 1.3
 %define nginx_token_validate_ver 1.1
 %define nginx_vts_ver 0.1.14
@@ -52,7 +52,7 @@ Requires(pre): pwdutils
 Summary: High performance web server customized for Kaltura VOD
 Name: kaltura-nginx
 Version: 1.12.0
-Release: 3
+Release: 4
 Vendor: Kaltura inc.
 URL: http://nginx.org/
 
@@ -401,6 +401,12 @@ if [ $1 -ge 1 ]; then
 fi
 
 %changelog
+* Tue May 16 2017 Jess Portnoy <jess.portnoy@kaltura.com> - 1.12.0-4
+- New VOD module [1.17]:
+	* Support multiple -s params
+	* Add a sample dash/clear key implementation
+	* Add support for utf16le srt
+
 * Mon Apr 24 2017 Jess Portnoy <jess.portnoy@kaltura.com> - 1.12.0-3
 - New VOD module [1.16]:
 	* support openssl 1.1
