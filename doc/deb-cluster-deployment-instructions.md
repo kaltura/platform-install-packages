@@ -364,6 +364,7 @@ https://github.com/kaltura/nginx-vod-module/
 # echo "deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/debian jupiter main" > /etc/apt/sources.list.d/kaltura.list 
 # apt-get update
 # apt-get install kaltura-base kaltura-nginx
+# /opt/kaltura/bin/kaltura-nfs-client-config.sh <NFS host> <domain> <nobody-user> <nobody-group>
 ```
 
 #### Setup:

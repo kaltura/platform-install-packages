@@ -339,9 +339,10 @@ https://github.com/kaltura/nginx-vod-module/
 
 #### Installation:
 ```
-yum install kaltura-base kaltura-nginx kaltura-postinst
-/opt/kaltura/bin/kaltura-base-config.sh
-/opt/kaltura/bin/kaltura-nginx-config.sh
+# yum install kaltura-base kaltura-nginx kaltura-postinst
+# /opt/kaltura/bin/kaltura-nfs-client-config.sh <NFS host> <domain> <nobody-user> <nobody-group>
+# /opt/kaltura/bin/kaltura-base-config.sh
+# /opt/kaltura/bin/kaltura-nginx-config.sh
 ```
 
 #### Setup:
