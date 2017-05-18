@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.55.2
+Version: v2.56
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -81,6 +81,32 @@ find /opt/kaltura/web/html5/html5lib -type d -name cache -exec chown -R 48 {} \;
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Thu May 18 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v2.56-1
+- SUP-10592 - Quiz automatically replays after submitting
+- FEC-6581 - Prevent circular dependency on OTT change media
+- SUP-10774 - Live-indicator doesn't get back when changeMedia is used
+- SUP-10856 - Player defaults to progressive download on android
+- SUP-10892 - Double flavor source listed on player quality settings icon
+- SUP-10835 - Player 360° - Canvas Overlay on IE11
+- SUP-10896 - Double Captions with dash.js
+- SUP-9742 - Player icons sometimes not loaded
+- FEC-6600 - 360 - midroll is covered
+- FEC-6552 - youbora - the "code" property should be unique and consistent for each event for each playlist entry
+- FEC-6563 - youbora - when playing playlist , the specified bitrate in first ping event contains the bitrate from previous played entry
+- FEC-6599 - Live with multiple audio|DVR|Safari|After pause/resume or jump to live, switches to primary language
+- FEC-6598 - Live with multiple audio|DVR|Safari|After pause/resume, playback jumps to "live" automatically
+- SUP-10991 - Subtitles not behaving as expected
+- SUP-10985 - Disney - cc menu doesn't appear on Safari (Desktop) for CAP files
+- FEC-6619 - Default embedded subtitle not selected automatically
+- FEC-6597 - CVAA styling doesn't get applied to embedded captions
+- TAG-3069
+- TAG-3071
+- Add an option to not auto-continue the quiz after submission.
+- Pass async boolean value correctly to tvpapiRequest service
+- Rapt Media V1
+- Youbora reporting fixes
+- roll back comscore to 2.54
+
 * Mon Apr 24 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v2.55.2-1
 - SUP-9932 - playbackRateSelector key code not working on Firefox
 

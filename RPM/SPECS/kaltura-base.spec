@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 12.16.0
-Release: 9
+Release: 10
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -307,29 +307,46 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Wed May 17 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.16.0-9
-- Nightly build.
-
-* Tue May 16 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.16.0-8
-- Nightly build.
-
-* Mon May 15 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.16.0-7
-- Nightly build.
-
-* Sun May 14 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.16.0-6
-- Nightly build.
-
-* Sat May 13 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.16.0-5
-- Nightly build.
-
-* Fri May 12 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.16.0-4
-- Nightly build.
-
-* Thu May 11 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.16.0-3
-- Nightly build.
-
-* Wed May 10 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.16.0-2
-- Nightly build.
+* Thu May 18 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.16.0-10
+- Update ScheduledTaskPlugin.php (https://github.com/kaltura/server/pull/5565)
+- insert creating date into the loop (https://github.com/kaltura/server/pull/5564)
+- Add permission script (https://github.com/kaltura/server/pull/5562)
+- Lynx 12.16.0 plat 6960 increase time out (https://github.com/kaltura/server/pull/5561)
+- Add missing function to delivery profile (https://github.com/kaltura/server/pull/5560)
+- PLAT-6960: add validation on numbers (https://github.com/kaltura/server/pull/5557)
+- PLAT-7022 PLAT-7344 - Roku and Opera syndication feed xslt modification (https://github.com/kaltura/server/pull/5556)
+- PLAT 6960: modify GUI - 1 (https://github.com/kaltura/server/pull/5555)
+- SUP-10928: add a check for null puser_id (https://github.com/kaltura/server/pull/5554)
+- Add scheduleEvent->list optimization (https://github.com/kaltura/server/pull/5552)
+- Apply URANDOM to PlayReady form as it slow down the add/configure (https://github.com/kaltura/server/pull/5551)
+- increase Drop folder ttl in cache for 15 minutes (https://github.com/kaltura/server/pull/5550)
+- PLAT-7381 : sanitize html tags from title and tags as well in youtube (https://github.com/kaltura/server/pull/5549)
+- Add sending mail to admin when profile suspended (https://github.com/kaltura/server/pull/5548)
+- PLAT-7378: fix get conflicts to retrive events with recurrence type of a single  (https://github.com/kaltura/server/pull/5546)
+- PLAT-7373: If flavor params id not found on live entry throw exception (https://github.com/kaltura/server/pull/5545)
+- SUP-10970: getId => getFlavorParamsId (https://github.com/kaltura/server/pull/5543)
+- Add support for insert absolute dates (https://github.com/kaltura/server/pull/5542)
+- Fix issue when getting conflicts to get only the active events (https://github.com/kaltura/server/pull/5536)
+- SUP-10970: filter temprorary entries from event notifications (https://github.com/kaltura/server/pull/5535)
+- PLAT-7365: set maxConcurrency (https://github.com/kaltura/server/pull/5533)
+- PLAT-7365: fix required bootstrap cmd (https://github.com/kaltura/server/pull/5532)
+- PLAT-7365: fix min concurrency default (https://github.com/kaltura/server/pull/5531)
+- Check if folder exists before calling freeExclusiveDropFolder() (https://github.com/kaltura/server/pull/5530)
+- Syndication feed - add external media duration value (https://github.com/kaltura/server/pull/5529)
+- PLAT-7244: Support live stream recording of each individual flavor (https://github.com/kaltura/server/pull/5527)
+- PLAT-7365: chunked encoding (https://github.com/kaltura/server/pull/5526)
+- PLAT-7256: fix youtube distribution on update (https://github.com/kaltura/server/pull/5525)
+- Fix cloning filter array before insert extra data (https://github.com/kaltura/server/pull/5524)
+- SUPPS-1126 (https://github.com/kaltura/server/pull/5523)
+- TR-1205: add whitelisted parameters (https://github.com/kaltura/server/pull/5522)
+- PLAT-7281: ViewHistory feature (https://github.com/kaltura/server/pull/5521)
+- Moderation status - make 'deleted' external (https://github.com/kaltura/server/pull/5518)
+- PLAT-7357: Return kMultiCast location based on the request format (https://github.com/kaltura/server/pull/5517)
+- Anonymous IP ACL (https://github.com/kaltura/server/pull/5515)
+- Ignore entitlement fields in ranker (https://github.com/kaltura/server/pull/5514)
+- Add bin_path_ffprobe to local.template.ini (https://github.com/kaltura/server/pull/5508)
+- PLAT-7301 support response profile in schedule events getConflicts (https://github.com/kaltura/server/pull/5480)
+- PLAT-7294 playback context handling recorded-live entries (https://github.com/kaltura/server/pull/5473)
 
 * Tue May 9 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.16.0-1
 - Ver Bounce to 12.16.0
