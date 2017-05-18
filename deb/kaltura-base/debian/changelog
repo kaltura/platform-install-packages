@@ -1,3 +1,9 @@
+kaltura-base (12.16.0-1) lynx; urgency=low
+
+  * Switching to 12.16.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Tue, 09 May 2017 22:32:23 +0000
+
 kaltura-base (12.15.0-2) lynx; urgency=low
 
   * PLAT-7251: handle script exception (https://github.com/kaltura/server/pull/5507)
