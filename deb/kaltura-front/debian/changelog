@@ -1,3 +1,9 @@
+kaltura-front (12.16.0-1) lynx; urgency=low
+
+  * Switching to 12.16.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Tue, 09 May 2017 22:32:24 +0000
+
 kaltura-front (12.15.0-1) lynx; urgency=low
 
   * Switching to 12.15.0
