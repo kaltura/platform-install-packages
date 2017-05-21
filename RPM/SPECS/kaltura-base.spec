@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 12.16.0
-Release: 14
+Release: 16
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -312,14 +312,11 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Sat May 20 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.16.0-14
+* Sun May 21 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.16.0-16
 - Nightly build.
 
-* Fri May 19 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.16.0-13
-- Nightly build.
-
-* Thu May 18 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.16.0-12
-- Nightly build.
+* Sun May 21 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.16.0-15
+- Final 12.16.0 build
 
 * Thu May 18 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.16.0-10
 - Update ScheduledTaskPlugin.php (https://github.com/kaltura/server/pull/5565)
