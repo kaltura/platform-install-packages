@@ -71,7 +71,7 @@ make install DESTDIR=$RPM_BUILD_ROOT INSTALL="%{__install} -p -c"
 %{__install} -m644 %SOURCE3 \
         $RPM_BUILD_ROOT%{_unitdir}/%{name}.service
 %else
-cp %{SOURCE1} %{buildroot}%{_initrddir}/kaltura-monit
+cp %{SOURCE1} %{buildroot}%{_initrddir}/%{name}
 %endif
 
 %pre
@@ -85,8 +85,8 @@ if [ "$1" -eq 1 ];then
 %if %{use_systemd}
 	/usr/bin/systemctl preset %{name}.service >/dev/null 2>&1 ||:
 %else
-	/sbin/chkconfig --add kaltura-monit
-	/sbin/chkconfig kaltura-monit on
+	/sbin/chkconfig --add %{name}
+	/sbin/chkconfig %{name} on
 %endif
 fi
 /sbin/service monit restart &>/dev/null || :
@@ -123,7 +123,7 @@ fi
 %if %{use_systemd}
 %{_unitdir}/%{name}.service
 %else
-%{_initrddir}/kaltura-monit
+%{_initrddir}/%{name}
 %endif
 %config %{confdir}/monit.d/
 %defattr(-, root, root, 0600)
