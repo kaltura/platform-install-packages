@@ -8,7 +8,7 @@
 Summary: Process monitor and restart utility
 Name: kaltura-monit
 Version: 5.21.0
-Release: 2
+Release: 4
 License: GPLv3
 Group: High Availability Management 
 URL: http://mmonit.com/monit/
@@ -70,9 +70,10 @@ make install DESTDIR=$RPM_BUILD_ROOT INSTALL="%{__install} -p -c"
 %{__mkdir} -p $RPM_BUILD_ROOT%{_unitdir}
 %{__install} -m644 %SOURCE3 \
         $RPM_BUILD_ROOT%{_unitdir}/%{name}.service
-%else
-cp %{SOURCE1} %{buildroot}%{_initrddir}/%{name}
 %endif
+%{__mkdir} -p $RPM_BUILD_ROOT%{_initrddir}
+%{__install} -m755 %{SOURCE1} \
+   $RPM_BUILD_ROOT%{_initrddir}/%{name}
 
 %pre
 if ! /usr/bin/id monit &>/dev/null; then
@@ -87,6 +88,10 @@ if [ "$1" -eq 1 ];then
 %else
 	/sbin/chkconfig --add %{name}
 	/sbin/chkconfig %{name} on
+%endif
+else
+%if %{use_systemd}
+	/usr/bin/systemctl daemon-reload >/dev/null 2>&1 ||:
 %endif
 fi
 /sbin/service monit restart &>/dev/null || :
@@ -122,9 +127,8 @@ fi
 %defattr(-, root, root, 0755)
 %if %{use_systemd}
 %{_unitdir}/%{name}.service
-%else
-%{_initrddir}/%{name}
 %endif
+%{_initrddir}/%{name}
 %config %{confdir}/monit.d/
 %defattr(-, root, root, 0600)
 %config %{confdir}/monit.template.conf
