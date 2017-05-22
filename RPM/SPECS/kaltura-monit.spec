@@ -58,7 +58,7 @@ sed -i 's@^#\(\s+\)set \(id|state\)file /var/\.monit\.\(id|state\)$@set $2file /
 %{__rm} -rf %{buildroot}
 make install DESTDIR=$RPM_BUILD_ROOT INSTALL="%{__install} -p -c"
 
-%{__install} -Dp -m0755 system/startup/rc.monit %{buildroot}%{_initrddir}/%{name}
+#%{__install} -Dp -m0755 system/startup/rc.monit %{buildroot}%{_initrddir}/%{name}
 %{__install} -Dp -m0600 %{SOURCE2} %{buildroot}%{confdir}/monit.template.conf
 
 %{__install} -d -m0755 %{buildroot}%{confdir}/monit.d/
@@ -121,7 +121,7 @@ fi
 %doc %{prefix}/share/man/man?/*
 %defattr(-, root, root, 0755)
 %if %{use_systemd}
-%{_unitdir}/%SOURCE3
+%{_unitdir}/%{name}.service
 %else
 %{_initrddir}/kaltura-monit
 %endif
