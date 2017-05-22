@@ -1,0 +1,32 @@
+# This file is systemd template for kaltura-monit.service. To
+# register monit with systemd, place the kaltura-monit.service file
+# to the /lib/systemd/system/ directory and then start it
+# using systemctl (see bellow).
+#
+# Enable monit to start on boot:
+#         systemctl enable kaltura-monit.service
+#
+# Start monit immediately:
+#         systemctl start kaltura-monit.service
+#
+# Stop monit:
+#         systemctl stop kaltura-monit.service
+#
+# Status:
+#         systemctl status kaltura-monit.service
+
+[Unit]
+Description=Pro-active monitoring utility for unix systems
+After=network.target
+
+[Service]
+Type=simple
+KillMode=process
+ExecStart=/opt/kaltura/bin/monit -I -c /opt/kaltura/app/configurations/monit/monit.conf
+ExecStop=/opt/kaltura/bin/monit -c /opt/kaltura/app/configurations/monit/monit.conf quit
+ExecReload=/opt/kaltura/bin/monit -c /opt/kaltura/app/configurations/monit/monit.conf reload
+Restart=on-abnormal
+StandardOutput=null
+
+[Install]
+WantedBy=multi-user.target

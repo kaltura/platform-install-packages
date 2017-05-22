@@ -2,21 +2,25 @@
 # this isn't really a stand location for placing conf files but we wish to remain compatible with the current config dir tree used by Kaltura
 %define confdir /opt/kaltura/app/configurations/monit
 %define logmsg logger -t %{name}/rpm
+# distribution specific definitions
+%define use_systemd (0%{?fedora} && 0%{?fedora} >= 18) || (0%{?rhel} && 0%{?rhel} >= 7)
 
 Summary: Process monitor and restart utility
 Name: kaltura-monit
 Version: 5.21.0
-Release: 1
+Release: 2
 License: GPLv3
 Group: High Availability Management 
 URL: http://mmonit.com/monit/
 
 Packager: Jess Portnoy <jess.portnoy@kaltura.com>
-Vendor: Tildeslash Ltd. 
 
 Source0: http://mmonit.com/monit/dist/monit-%{version}.tar.gz
 Source1: kaltura-monit
 Source2: monit.template.conf
+%if %{use_systemd}
+Source3: kaltura-monit.service
+%endif
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
 BuildRequires: binutils
@@ -27,6 +31,9 @@ BuildRequires: /usr/bin/logger
 BuildRequires: pam-devel 
 BuildRequires: chkconfig 
 BuildRequires: initscripts 
+%if %{use_systemd}
+BuildRequires: systemd
+%endif
 
 %description
 Monit is an utility for monitoring daemons or similar programs running on
@@ -59,7 +66,12 @@ make install DESTDIR=$RPM_BUILD_ROOT INSTALL="%{__install} -p -c"
 
 # create folder where state and id are stored
 %{__install} -d -m0755 %{buildroot}%{prefix}/var/monit/
+%if %{use_systemd}
+%{__mkdir} -p $RPM_BUILD_ROOT%{_unitdir}
+sed 's///' %SOURCE3 > $RPM_BUILD_ROOT%{_unitdir}/%SOURCE3
+%else
 cp %{SOURCE1} %{buildroot}%{_initrddir}/kaltura-monit
+%endif
 
 %pre
 if ! /usr/bin/id monit &>/dev/null; then
@@ -95,7 +107,11 @@ fi
 %doc COPYING README* CONTRIBUTORS
 %doc %{prefix}/share/man/man?/*
 %defattr(-, root, root, 0755)
+%if %{use_systemd}
+%{_unitdir}/%SOURCE3
+%else
 %{_initrddir}/kaltura-monit
+%endif
 %config %{confdir}/monit.d/
 %defattr(-, root, root, 0600)
 %config %{confdir}/monit.template.conf
@@ -105,6 +121,9 @@ fi
 #%attr(0600, root, root) %config(noreplace) %{confdir}/monit.conf
 
 %changelog
+* Mon May 22 2017 Jess Portnoy <jess.portnoy@kaltura.com> - 5.21.0-2
+- Added systemd config
+
 * Tue Apr 18 2017 Jess Portnoy <jess.portnoy@kaltura.com> - 5.21.0-1
 - https://bitbucket.org/tildeslash/monit/commits/tag/release-5-21-0
 
