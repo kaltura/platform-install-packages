@@ -19,7 +19,7 @@ Source0: http://mmonit.com/monit/dist/monit-%{version}.tar.gz
 Source1: kaltura-monit
 Source2: monit.template.conf
 %if %{use_systemd}
-Source3: kaltura-monit.service
+Source3: %{name}.service
 %endif
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
@@ -68,7 +68,8 @@ make install DESTDIR=$RPM_BUILD_ROOT INSTALL="%{__install} -p -c"
 %{__install} -d -m0755 %{buildroot}%{prefix}/var/monit/
 %if %{use_systemd}
 %{__mkdir} -p $RPM_BUILD_ROOT%{_unitdir}
-sed 's///' %SOURCE3 > $RPM_BUILD_ROOT%{_unitdir}/%SOURCE3
+%{__install} -m644 %SOURCE3 \
+        $RPM_BUILD_ROOT%{_unitdir}/%{name}.service
 %else
 cp %{SOURCE1} %{buildroot}%{_initrddir}/kaltura-monit
 %endif
@@ -80,20 +81,32 @@ if ! /usr/bin/id monit &>/dev/null; then
 fi
 
 %post
-if [ "$1" = 1 ];then
+if [ "$1" -eq 1 ];then
+%if %{use_systemd}
+	/usr/bin/systemctl preset %{name}.service >/dev/null 2>&1 ||:
+%else
 	/sbin/chkconfig --add kaltura-monit
 	/sbin/chkconfig kaltura-monit on
+%endif
 fi
 /sbin/service monit restart &>/dev/null || :
 
 
 %preun
 if [ $1 -eq 0 ]; then
-	service kaltura-monit stop &>/dev/null || :
-	/sbin/chkconfig --del kaltura-monit
+%if %use_systemd
+	/usr/bin/systemctl --no-reload disable %{name}.service >/dev/null 2>&1 ||:
+	/usr/bin/systemctl stop %{name}.service >/dev/null 2>&1 ||:
+%else
+	service %{name} stop &>/dev/null || :
+	/sbin/chkconfig --del %{name}
+%endif
 fi
 
 %postun
+%if %use_systemd
+	/usr/bin/systemctl daemon-reload >/dev/null 2>&1 ||:
+%endif
 /sbin/service monit condrestart &>/dev/null || :
 if [ $1 -eq 0 ]; then
 	/usr/sbin/userdel monit || %logmsg "User \"monit\" could not be deleted."
