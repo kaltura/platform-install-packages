@@ -227,7 +227,7 @@ if [ "$DB1_HOST" = `hostname` -o "$DB1_HOST" = '127.0.0.1' -o "$DB1_HOST" = 'loc
 	else
 		ln -sf $BASE_DIR/app/configurations/monit/monit.avail/mysqld.rc $BASE_DIR/app/configurations/monit/monit.d/enabled.mysqld.rc
 	fi
-	/etc/init.d/kaltura-monit stop >> /dev/null 2>&1
-	/etc/init.d/kaltura-monit restart
+	service kaltura-monit stop >> /dev/null 2>&1
+	service kaltura-monit restart
 fi
 send_install_becon `basename $0` $ZONE install_success 0 

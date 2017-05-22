@@ -106,6 +106,6 @@ service memcached restart
 ln -sf $BASE_DIR/app/configurations/monit/monit.avail/batch.rc $BASE_DIR/app/configurations/monit/monit.d/enabled.batch.rc
 ln -sf $BASE_DIR/app/configurations/monit/monit.avail/httpd.rc $BASE_DIR/app/configurations/monit/monit.d/enabled.httpd.rc
 ln -sf $BASE_DIR/app/configurations/monit/monit.avail/memcached.rc $BASE_DIR/app/configurations/monit/monit.d/enabled.memcached.rc
-/etc/init.d/kaltura-monit stop >> /dev/null 2>&1
-/etc/init.d/kaltura-monit start
+service kaltura-monit stop >> /dev/null 2>&1
+service kaltura-monit start
 send_install_becon `basename $0` $ZONE install_success 0 

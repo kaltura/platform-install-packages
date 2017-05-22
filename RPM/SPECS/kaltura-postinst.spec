@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.33
-Release: 10
+Release: 11
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -82,6 +82,9 @@ find %{_sysconfdir}/logrotate.d -type l -name "kaltura_*" -exec rm {} \;
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Mon May 22 2017 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.33-11
+- Control kaltura-monit with /sbin/service rather than with /etc/init.d/kaltura-monit 
+
 * Thu Mar 23 2017 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.33-4
 - add token for @PROTOCOL@ when using proxy_pass with the kaltura API endpoint
 

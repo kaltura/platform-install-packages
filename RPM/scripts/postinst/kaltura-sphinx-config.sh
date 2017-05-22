@@ -64,6 +64,6 @@ echo "sphinxServer = `hostname`" > /opt/kaltura/app/configurations/sphinx/popula
 /etc/init.d/kaltura-populate restart >/dev/null 2>&1
 ln -sf $BASE_DIR/app/configurations/monit/monit.avail/sphinx.rc $BASE_DIR/app/configurations/monit/monit.d/enabled.sphinx.rc
 ln -sf $BASE_DIR/app/configurations/monit/monit.avail/sphinx.populate.rc $BASE_DIR/app/configurations/monit/monit.d/enabled.sphinx.populate.rc
-/etc/init.d/kaltura-monit stop >> /dev/null 2>&1
-/etc/init.d/kaltura-monit start
+service kaltura-monit stop >> /dev/null 2>&1
+service kaltura-monit start
 send_install_becon `basename $0` $ZONE install_success 0
