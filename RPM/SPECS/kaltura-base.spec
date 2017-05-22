@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 12.16.0
-Release: 10
+Release: 16
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -32,6 +32,9 @@ Source25: kaltura_populate.template
 Source26: kaltura_batch.template
 Source32: KDLOperatorFfmpeg1_1_1.php
 Source34: clients-generator-%{codename}-%{version}.zip
+# should be removed once https://github.com/kaltura/server/pull/5569/files is merged
+Source35: KChunkedEncodeSessionManager.php   
+Source36: KConversionEngineFfmpeg.class.php
 URL: https://github.com/kaltura/server/tree/%{codename}-%{version}
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
@@ -135,6 +138,8 @@ cp %{SOURCE16} $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/
 rm $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.d/*template*
 cp %{SOURCE25} $RPM_BUILD_ROOT%{prefix}/app/configurations/logrotate/
 cp %{SOURCE26} $RPM_BUILD_ROOT%{prefix}/app/configurations/logrotate/
+cp %{SOURCE35} $RPM_BUILD_ROOT%{prefix}/app/infra/chunkedEncode/KChunkedEncodeSessionManager.php
+cp %{SOURCE36} $RPM_BUILD_ROOT%{prefix}/app/batch/batches/Convert/Engines/KConversionEngineFfmpeg.class.php
 
 
 # David Bezemer's Admin console and monit patches:
@@ -307,6 +312,12 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Sun May 21 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.16.0-16
+- Nightly build.
+
+* Sun May 21 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.16.0-15
+- Final 12.16.0 build
+
 * Thu May 18 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.16.0-10
 - Update ScheduledTaskPlugin.php (https://github.com/kaltura/server/pull/5565)
 - insert creating date into the loop (https://github.com/kaltura/server/pull/5564)
