@@ -31,7 +31,7 @@ teachers by providing educational institutions disruptive online video solutions
 learning, and increased engagement across campuses and beyond. 
 For more information visit: http://corp.kaltura.com, http://www.kaltura.org and http://www.html5video.org.
 
-This package provides to Async Api Proxy Server.
+This package provides the Async Api Proxy Server.
 
 %prep
 %setup -qn AsyncApiProxy-%{version}

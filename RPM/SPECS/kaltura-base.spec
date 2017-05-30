@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 12.17.0
-Release: 10
+Release: 11
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -224,8 +224,9 @@ if [ "$1" = 2 ];then
 		php %{prefix}/app/deployment/base/scripts/populateSphinxMetadata.php
 		find %{prefix}/app/cache/ %{prefix}/log %{prefix}/var/run -type d -exec chmod 775 {} \;
 		find %{prefix}/log -type f -exec chmod 664 {} \;
-		chown -R %{kaltura_user}.%{apache_user} %{prefix}/app/cache/ %{prefix}/log %{prefix}/var/run
-		chmod 775 %{prefix}/web/content
+		# || true because it may fail if root_squash is used
+		chown -R %{kaltura_user}.%{apache_user} %{prefix}/app/cache/ %{prefix}/log %{prefix}/var/run || true
+		chmod 775 %{prefix}/web/content || true
 
 		service kaltura-monit start
 		if rpm -q httpd >> /dev/null;then
