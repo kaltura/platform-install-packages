@@ -10,7 +10,7 @@ Version: 1.0.3
 Release: 3
 License: AGPLv3+
 Group: Server/Platform 
-Source0: async-api-proxy-v%{version}.tar.gz
+Source0: %{name}-v%{version}.tar.gz
 URL: https://github.com/kaltura/AsyncApiProxy
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch

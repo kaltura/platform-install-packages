@@ -2,8 +2,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.56
-Release: 2
+Version: v2.57
+Release: 1
 Epoch: 0 
 License: AGPLv3+
 Group: Server/Platform 
@@ -82,6 +82,21 @@ fi
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Thu Jun 1 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v2.57-1
+- FEC-6675 - Autoplay and Live entry do not show the video
+- FEC-6663 - reported events entry playing with dfp overlay are incorrect
+- FEC-6667 - resume event reported after adJoin
+- FEC-6669 - skip ad is not reported
+- FEC-6670 - Kaltura bumper is reported as midrol
+- FEC-6665 - no adPause or adResume when pausing and resuming ad playback
+- SUP-10705 - Chromecast on Android device - auto play option
+- SUP-11057 - Kaltura.forceLayoutRedraw=true causes player not to load when toggling
+- SUP-11090 - Infinite load wheel when CMW widget is reloaded with live content that is not broadcasting
+- FEC-6646 - Full screen button doesn't appear in mobile web skin
+- TAG-3090
+- Refactored youbora plugin (using Youbora's SDK)
+- Youbora fix - add seeked report (#3408)
+
 * Thu May 18 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v2.56-1
 - SUP-10592 - Quiz automatically replays after submitting
 - FEC-6581 - Prevent circular dependency on OTT change media
