@@ -1,6 +1,6 @@
 <?php
 if (count($argv)<4){
-    echo __FILE__ . ' <admin_secret> <partner email> <partner passwd> <service_url> '."\n";
+    echo __FILE__ . ' <-2 partner admin secret> <partner email> <partner passwd> <service_url> '."\n";
     exit (1);
 }
 require_once('create_session.php');
