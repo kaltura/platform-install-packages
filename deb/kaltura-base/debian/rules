@@ -85,8 +85,6 @@ binary-indep: install
 	cp debian/batch.ini.template $(tree)/configurations/batch/batch.ini.template
 	cp debian/kaltura-base.sh etc/profile.d/
 	cp debian/KDLOperatorFfmpeg1_1_1.php $(tree)/infra/cdl/kdl/KDLOperatorFfmpeg1_1_1.php
-	cp debian/KChunkedEncodeSessionManager.php $(tree)/infra/chunkedEncode/KChunkedEncodeSessionManager.php
-	cp debian/KConversionEngineFfmpeg.class.php $(tree)/batch/batches/Convert/Engines/KConversionEngineFfmpeg.class.php
 	sed -i "s@^\(params.ImageMagickCmd\)\s*=.*@\1=convert@" $(tree)/configurations/batch/batch.ini.template
 	sed -i "s@^\(params.mediaInfoCmd\)\s*=.*@\1=mediainfo@" $(tree)/configurations/batch/batch.ini.template
 	sed -i "s@^\(params.mencderCmd\)\s*=.*@\1=mencoder@" $(tree)/configurations/batch/batch.ini.template

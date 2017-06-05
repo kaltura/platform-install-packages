@@ -1,3 +1,54 @@
+kaltura-base (12.17.0-2) lynx; urgency=low
+
+  * PLAT-7487: keepOriginalFile flag should be passed when ingesting per flavor asset as well (https://github.com/kaltura/server/pull/5631)
+  * handle use case where header value contains the ":" character (https://github.com/kaltura/server/pull/5630)
+  * remove notification from  template name (delete) (https://github.com/kaltura/server/pull/5625)
+  * PLAT-7333 disable cache for service (https://github.com/kaltura/server/pull/5622)
+  * qnd: When creating poll ids need to disable cache (https://github.com/kaltura/server/pull/5621)
+  * PLAT-7288 support keep https (https://github.com/kaltura/server/pull/5620)
+  * PS-3058: syndication feed - add capabilities (https://github.com/kaltura/server/pull/5619)
+  * do not update metadata when deleting entry (https://github.com/kaltura/server/pull/5618)
+  * PLAT-7436: check directory existance (https://github.com/kaltura/server/pull/5617)
+  * PS-3067+8 (https://github.com/kaltura/server/pull/5616)
+  * Lynx 12.15.0 plat 7333 (https://github.com/kaltura/server/pull/5614)
+  * SUP-11188: Validate permission only if property is being changed (https://github.com/kaltura/server/pull/5613)
+  * add check for not null, change button placement (https://github.com/kaltura/server/pull/5612)
+  * PLAT-7343 - update opera xslt (https://github.com/kaltura/server/pull/5611)
+  * In case of conflict validation , add SchedulerEventId to ignore (https://github.com/kaltura/server/pull/5608)
+  * Avoid php notice if the remove address does not exist (https://github.com/kaltura/server/pull/5607)
+  * conversion prof xslt - use congigured shared folder path (https://github.com/kaltura/server/pull/5606)
+  * get intval of partner_id and from/to dates params to prevent sql injection (https://github.com/kaltura/server/pull/5604)
+  * view history - check profile existance (https://github.com/kaltura/server/pull/5603)
+  * update release notes (https://github.com/kaltura/server/pull/5599)
+  * PLAT-7460 - reindex schedule event when deleting schedule_event_resource (https://github.com/kaltura/server/pull/5598)
+  * Improved evaluateConcurrency func (https://github.com/kaltura/server/pull/5595)
+  * Update PollService.php (https://github.com/kaltura/server/pull/5594)
+  * Update PollService.php (https://github.com/kaltura/server/pull/5592)
+  * Update PollService.php (https://github.com/kaltura/server/pull/5591)
+  * Added helper PendingChunksCount function (https://github.com/kaltura/server/pull/5590)
+  * Update PollService.php (https://github.com/kaltura/server/pull/5589)
+  * PLAT-7343 - fixed syndication feed roku and opera xslt to hold CDATA (https://github.com/kaltura/server/pull/5588)
+  * allow player do userEntry->update (https://github.com/kaltura/server/pull/5586)
+  * PLAT-3761: Support deploying system profile used by Kaltura webcast application (https://github.com/kaltura/server/pull/5584)
+  * Lynx 12.16.0 ps 3045 (https://github.com/kaltura/server/pull/5583)
+  * PLAT-7384: Enforce ACL limitFlavors action on live streams as well (https://github.com/kaltura/server/pull/5582)
+  * As of PHP 5.4.0, removed call-time pass-by-refer (https://github.com/kaltura/server/pull/5581)
+  * move the copy template MD to MD object (https://github.com/kaltura/server/pull/5579)
+  * Lynx 12.16.0 plat 7429 mr validate filter (https://github.com/kaltura/server/pull/5578)
+  * Updated version (https://github.com/kaltura/server/pull/5577)
+  * PLAT-7445: minor fix (https://github.com/kaltura/server/pull/5575)
+  * Lynx 12.15.0 plat 7333 (https://github.com/kaltura/server/pull/5574)
+  * Sort by user entry order (https://github.com/kaltura/server/pull/5573)
+  * PLAT-7407: cross kaltura connector doesn't distribute ThumbCuePoints correctly (https://github.com/kaltura/server/pull/5566)
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 05 Jun 2017 10:46:47 +0000
+
+kaltura-base (12.17.0-1) lynx; urgency=low
+
+  * Switching to 12.17.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 22 May 2017 11:19:53 +0000
+
 kaltura-base (12.16.0-2) lynx; urgency=low
 
   * Update ScheduledTaskPlugin.php (https://github.com/kaltura/server/pull/5565)

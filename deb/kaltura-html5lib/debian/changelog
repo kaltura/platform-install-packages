@@ -1,3 +1,21 @@
+kaltura-html5lib (2.57-1) lynx; urgency=low
+
+  * FEC-6675 - Autoplay and Live entry do not show the video
+  * FEC-6663 - reported events entry playing with dfp overlay are incorrect
+  * FEC-6667 - resume event reported after adJoin
+  * FEC-6669 - skip ad is not reported
+  * FEC-6670 - Kaltura bumper is reported as midrol
+  * FEC-6665 - no adPause or adResume when pausing and resuming ad playback
+  * SUP-10705 - Chromecast on Android device - auto play option
+  * SUP-11057 - Kaltura.forceLayoutRedraw=true causes player not to load when toggling
+  * SUP-11090 - Infinite load wheel when CMW widget is reloaded with live content that is not broadcasting
+  * FEC-6646 - Full screen button doesn't appear in mobile web skin
+  * TAG-3090
+  * Refactored youbora plugin (using Youbora's SDK)
+  * Youbora fix - add seeked report (#3408)
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Thu, 01 Jun 2017 16:13:32 +0000
+
 kaltura-html5lib (2.56-1) lynx; urgency=low
 
   * SUP-10592 - Quiz automatically replays after submitting
