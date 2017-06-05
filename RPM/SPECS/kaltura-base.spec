@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 12.17.0
-Release: 19
+Release: 20
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -308,47 +308,47 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Sun Jun 4 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.17.0-19
-- Nightly build.
-
-* Sat Jun 3 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.17.0-18
-- Nightly build.
-
-* Fri Jun 2 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.17.0-17
-- Nightly build.
-
-* Thu Jun 1 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.17.0-16
-- Nightly build.
-
-* Wed May 31 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.17.0-13
-- Nightly build.
-
-* Tue May 30 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.17.0-12
-- Nightly build.
-
-* Mon May 29 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.17.0-10
-- Nightly build.
-
-* Sun May 28 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.17.0-8
-- Nightly build.
-
-* Sat May 27 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.17.0-7
-- Nightly build.
-
-* Fri May 26 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.17.0-6
-- Nightly build.
-
-* Thu May 25 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.17.0-5
-- Nightly build.
-
-* Wed May 24 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.17.0-4
-- Nightly build.
-
-* Tue May 23 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.17.0-3
-- Nightly build.
-
-* Mon May 22 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.17.0-2
-- Nightly build.
+* Mon Jun 5 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.17.0-20
+- PLAT-7487: keepOriginalFile flag should be passed when ingesting per flavor asset as well (https://github.com/kaltura/server/pull/5631)
+- handle use case where header value contains the ":" character (https://github.com/kaltura/server/pull/5630)
+- remove notification from  template name (delete) (https://github.com/kaltura/server/pull/5625)
+- PLAT-7333 disable cache for service (https://github.com/kaltura/server/pull/5622)
+- qnd: When creating poll ids need to disable cache (https://github.com/kaltura/server/pull/5621)
+- PLAT-7288 support keep https (https://github.com/kaltura/server/pull/5620)
+- PS-3058: syndication feed - add capabilities (https://github.com/kaltura/server/pull/5619)
+- do not update metadata when deleting entry (https://github.com/kaltura/server/pull/5618)
+- PLAT-7436: check directory existance (https://github.com/kaltura/server/pull/5617)
+- PS-3067+8 (https://github.com/kaltura/server/pull/5616)
+- Lynx 12.15.0 plat 7333 (https://github.com/kaltura/server/pull/5614)
+- SUP-11188: Validate permission only if property is being changed (https://github.com/kaltura/server/pull/5613)
+- add check for not null, change button placement (https://github.com/kaltura/server/pull/5612)
+- PLAT-7343 - update opera xslt (https://github.com/kaltura/server/pull/5611)
+- In case of conflict validation , add SchedulerEventId to ignore (https://github.com/kaltura/server/pull/5608)
+- Avoid php notice if the remove address does not exist (https://github.com/kaltura/server/pull/5607)
+- conversion prof xslt - use congigured shared folder path (https://github.com/kaltura/server/pull/5606)
+- get intval of partner_id and from/to dates params to prevent sql injection (https://github.com/kaltura/server/pull/5604)
+- view history - check profile existance (https://github.com/kaltura/server/pull/5603)
+- update release notes (https://github.com/kaltura/server/pull/5599)
+- PLAT-7460 - reindex schedule event when deleting schedule_event_resource (https://github.com/kaltura/server/pull/5598)
+- Improved evaluateConcurrency func (https://github.com/kaltura/server/pull/5595)
+- Update PollService.php (https://github.com/kaltura/server/pull/5594)
+- Update PollService.php (https://github.com/kaltura/server/pull/5592)
+- Update PollService.php (https://github.com/kaltura/server/pull/5591)
+- Added helper PendingChunksCount function (https://github.com/kaltura/server/pull/5590)
+- Update PollService.php (https://github.com/kaltura/server/pull/5589)
+- PLAT-7343 - fixed syndication feed roku and opera xslt to hold CDATA (https://github.com/kaltura/server/pull/5588)
+- allow player do userEntry->update (https://github.com/kaltura/server/pull/5586)
+- PLAT-3761: Support deploying system profile used by Kaltura webcast application (https://github.com/kaltura/server/pull/5584)
+- Lynx 12.16.0 ps 3045 (https://github.com/kaltura/server/pull/5583)
+- PLAT-7384: Enforce ACL limitFlavors action on live streams as well (https://github.com/kaltura/server/pull/5582)
+- As of PHP 5.4.0, removed call-time pass-by-refer (https://github.com/kaltura/server/pull/5581)
+- move the copy template MD to MD object (https://github.com/kaltura/server/pull/5579)
+- Lynx 12.16.0 plat 7429 mr validate filter (https://github.com/kaltura/server/pull/5578)
+- Updated version (https://github.com/kaltura/server/pull/5577)
+- PLAT-7445: minor fix (https://github.com/kaltura/server/pull/5575)
+- Lynx 12.15.0 plat 7333 (https://github.com/kaltura/server/pull/5574)
+- Sort by user entry order (https://github.com/kaltura/server/pull/5573)
+- PLAT-7407: cross kaltura connector doesn't distribute ThumbCuePoints correctly (https://github.com/kaltura/server/pull/5566)
 
 * Mon May 22 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.17.0-1
 - Ver Bounce to 12.17.0
