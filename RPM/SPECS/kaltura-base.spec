@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 12.17.0
-Release: 20
+Version: 12.18.0
+Release: 2
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -308,6 +308,18 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Jun 5 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.18.0-2
+- Nightly build.
+
+* Mon Jun 5 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.18.0-1
+- Ver Bounce to 12.18.0
+
+* Mon Jun 5 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.18.0-1
+- Ver Bounce to 12.18.0
+
+* Mon Jun 5 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.18.00-1
+- Ver Bounce to 12.18.00
+
 * Mon Jun 5 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.17.0-20
 - PLAT-7487: keepOriginalFile flag should be passed when ingesting per flavor asset as well (https://github.com/kaltura/server/pull/5631)
 - handle use case where header value contains the ":" character (https://github.com/kaltura/server/pull/5630)
