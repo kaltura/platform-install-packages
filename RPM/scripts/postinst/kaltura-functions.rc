@@ -434,7 +434,7 @@ check_monit()
 
 check_space()
 {
-	SPACE=`df -k $1 |sed '1,1d' |awk -F " " '{print $3}'`;if [ $SPACE -lt 700000 ];then 
+	SPACE=`df -k --direct $1 |sed '1,1d' |awk -F " " '{print $4}'`;if [ $SPACE -lt 700000 ];then
 		echo "$SPACE"
 		return 1
 	else

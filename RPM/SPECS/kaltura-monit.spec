@@ -84,7 +84,8 @@ fi
 %post
 if [ "$1" -eq 1 ];then
 %if %{use_systemd}
-	/usr/bin/systemctl preset %{name}.service >/dev/null 2>&1 ||:
+	#/usr/bin/systemctl preset %{name}.service >/dev/null 2>&1 ||:
+	/usr/bin/systemctl enable %{name}.service >/dev/null 2>&1 ||:
 %else
 	/sbin/chkconfig --add %{name}
 	/sbin/chkconfig %{name} on
