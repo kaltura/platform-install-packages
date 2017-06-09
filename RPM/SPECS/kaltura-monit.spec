@@ -8,7 +8,7 @@
 Summary: Process monitor and restart utility
 Name: kaltura-monit
 Version: 5.21.0
-Release: 4
+Release: 6
 License: GPLv3
 Group: High Availability Management 
 URL: http://mmonit.com/monit/
@@ -89,10 +89,6 @@ if [ "$1" -eq 1 ];then
 %else
 	/sbin/chkconfig --add %{name}
 	/sbin/chkconfig %{name} on
-%endif
-else
-%if %{use_systemd}
-	/usr/bin/systemctl daemon-reload >/dev/null 2>&1 ||:
 %endif
 fi
 /sbin/service monit restart &>/dev/null || :
