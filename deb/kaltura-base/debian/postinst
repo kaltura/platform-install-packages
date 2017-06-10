@@ -502,6 +502,9 @@ if [ "$1" = "configure" ]; then
 	if [ -d "/etc/php5/mods-available" ];then
         	ln -sf $APP_DIR/configurations/php/kaltura.ini /etc/php5/mods-available/zz-kaltura.ini
 	fi
+	if [ -d "/etc/php/7.0/mods-available" ];then
+        	ln -sf $APP_DIR/configurations/php/kaltura.ini /etc/php/7.0/mods-available/zz-kaltura.ini
+	fi
 	if [ -d "/opt/kaltura/app/configurations/php/mods-available" ];then
         	ln -sf $APP_DIR/configurations/php/kaltura.ini /opt/kaltura/app/configurations/php/mods-available/zz-kaltura.ini
 	fi
