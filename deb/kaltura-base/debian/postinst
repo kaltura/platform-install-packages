@@ -63,6 +63,18 @@ if [ -r $KALTURA_PREFIX/bin/kaltura-base-upgrading ];then
 			echo "update delivery_profile set is_default=0 where id=1 and system_name='Default_Akamai_HLS_direct';"|mysql -h$DB1_HOST -u $DB1_USER -p$DB1_PASS -P$DB1_PORT $DB1_NAME
                         echo "GRANT INSERT,UPDATE,DELETE,SELECT,ALTER,DROP,CREATE ON kaltura.* TO 'kaltura'@'%';FLUSH PRIVILEGES;"|mysql -h$DB1_HOST -u $SUPER_USER -p$SUPER_USER_PASSWD -P$DB1_PORT
                 fi
+		MINUS_2_PARTNER_ADMIN_SECRET=`echo "select admin_secret from partner where id=-2"|mysql -N -h$DB1_HOST -u$DB1_USER -p$DB1_PASS $DB1_NAME -P$DB1_PORT`
+		CONF_FILES=`find $APP_DIR/deployment/updates/ -type f -name "*template.xml"`
+		for TMPL_CONF_FILE in $CONF_FILES;do
+			CONF_FILE=`echo $TMPL_CONF_FILE | sed 's@\(.*\)\.template\(.*\)@\1\2@'`
+			if [ -r $CONF_FILE ];then
+				cp $CONF_FILE $CONF_FILE.backup
+			fi
+			if `echo $TMPL_CONF_FILE|grep -q template`;then
+				cp  $TMPL_CONF_FILE $CONF_FILE
+			fi
+			sed -e "s#@ADMIN_CONSOLE_PARTNER_ADMIN_SECRET@#$MINUS_2_PARTNER_ADMIN_SECRET#g" -e "s#@SERVICE_URL@#$SERVICE_URL#g" -i $CONF_FILE		
+		done
                 php $KALTURA_PREFIX/app/deployment/updates/update.php -i -d >> /opt/kaltura/log/kalt_up.log 2>&1
                 php $KALTURA_PREFIX/app/deployment/updates/update.php -i -s >> /opt/kaltura/log/kalt_up.log 2>&1
                 php $KALTURA_PREFIX/app/deployment/base/scripts/installPlugins.php >> /opt/kaltura/log/kalt_up.log 2>&1
