@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 12.18.0
-Release: 5
+Release: 18
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -242,6 +242,19 @@ if [ "$1" = 2 ];then
 			echo "update delivery_profile set is_default=0 where id=1 and system_name='Default_Akamai_HLS_direct';"|mysql -h$DB1_HOST -u $DB1_USER -p$DB1_PASS -P$DB1_PORT $DB1_NAME
 			echo "GRANT INSERT,UPDATE,DELETE,SELECT,ALTER,DROP,CREATE ON kaltura.* TO '$DB_USER'@'%';FLUSH PRIVILEGES;"|mysql -h$DB1_HOST -u $SUPER_USER -p$SUPER_USER_PASSWD -P$DB1_PORT
 		fi
+			MINUS_2_PARTNER_ADMIN_SECRET=`echo "select admin_secret from partner where id=-2"|mysql -N -h$DB1_HOST -u$DB1_USER -p$DB1_PASS $DB1_NAME -P$DB1_PORT`
+			CONF_FILES=`find $APP_DIR/deployment/updates/ -type f -name "*template.xml"`
+			for TMPL_CONF_FILE in $CONF_FILES;do
+				CONF_FILE=`echo $TMPL_CONF_FILE | sed 's@\(.*\)\.template\(.*\)@\1\2@'`
+				if [ -r $CONF_FILE ];then
+					cp $CONF_FILE $CONF_FILE.backup
+				fi
+				if `echo $TMPL_CONF_FILE|grep -q template`;then
+					cp  $TMPL_CONF_FILE $CONF_FILE
+				fi
+				sed -e "s#@ADMIN_CONSOLE_PARTNER_ADMIN_SECRET@#$MINUS_2_PARTNER_ADMIN_SECRET#g" -e "s#@SERVICE_URL@#$SERVICE_URL#g" -i $CONF_FILE		
+			done
+#	@ADMIN_CONSOLE_PARTNER_ADMIN_SECRET@ @SERVICE_URL@	
 		php %{prefix}/app/deployment/updates/update.php -i -d >> /opt/kaltura/log/kalt_up.log 2>&1
 		php %{prefix}/app/deployment/updates/update.php -i -s >> /opt/kaltura/log/kalt_up.log 2>&1
 		php %{prefix}/app/deployment/base/scripts/installPlugins.php >> /opt/kaltura/log/kalt_up.log 2>&1
@@ -308,17 +321,44 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Thu Jun 8 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.18.0-5
-- Nightly build.
-
-* Wed Jun 7 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.18.0-4
-- Nightly build.
-
-* Tue Jun 6 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.18.0-3
-- Nightly build.
-
-* Mon Jun 5 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.18.0-2
-- Nightly build.
+* Mon Jun 19 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.18.0-18
+- Minor fix - if found 0 user entries, should return empty result (https://github.com/kaltura/server/pull/5696)
+- Default parameter assignment is not supported in IE (https://github.com/kaltura/server/pull/5690)
+- Revert "Return Global parter only when specifically requested" (https://github.com/kaltura/server/pull/5688)
+- Return Global parter only when specifically requested (https://github.com/kaltura/server/pull/5687)
+- Allow partner zero impersonate (https://github.com/kaltura/server/pull/5686)
+- Adding script for change drop folders tag (https://github.com/kaltura/server/pull/5685)
+- Don't allow deletion while entry live (https://github.com/kaltura/server/pull/5680)
+- 1. Remove privacy context from userEntry calculations (https://github.com/kaltura/server/pull/5678)
+- PLAT-7471: add Access-Control-Expose-Headers (https://github.com/kaltura/server/pull/5675)
+- fix drop folder file copy and add log to webex engine (https://github.com/kaltura/server/pull/5674)
+- Lynx 12.18.0 plat 7531 (https://github.com/kaltura/server/pull/5673)
+- PLAT-7518: Prevent deleting recorded entry while recorded content is not set (https://github.com/kaltura/server/pull/5672)
+- missing enum from quiz plugin (https://github.com/kaltura/server/pull/5671)
+- PLAT-7535: CE|On Prem - support new live packages + LC flow + webcast (https://github.com/kaltura/server/pull/5670)
+- PLAT-7472: fix handling stripping html tags in youtube distribution (https://github.com/kaltura/server/pull/5668)
+- PLAT-7386: modify entry (https://github.com/kaltura/server/pull/5667)
+- save bundles in subdirectories and allow explicitly bundle regeneration (https://github.com/kaltura/server/pull/5666)
+- If no user ID was passed, use current KS user ID (https://github.com/kaltura/server/pull/5665)
+- PLAT-7485: Handle security issues in in-video-quiz (https://github.com/kaltura/server/pull/5664)
+- preg_replace(): The /e modifier is no longer supported (https://github.com/kaltura/server/pull/5663)
+- The /kmc alias is not only unnecessary but also triggers errors (https://github.com/kaltura/server/pull/5661)
+- PLAT-7371: Support defining multiple parents pre server node (https://github.com/kaltura/server/pull/5659)
+- hls compatibility features (https://github.com/kaltura/server/pull/5657)
+- return the dry run batch job Id from the server (https://github.com/kaltura/server/pull/5656)
+- SUP-10933:: when generating flavor asset URL disable parentEntry entity (https://github.com/kaltura/server/pull/5650)
+- remove setting kuser when updating cue point (https://github.com/kaltura/server/pull/5649)
+- PS-3112: don't delete existing cue points during update (https://github.com/kaltura/server/pull/5648)
+- PLAT-7502: get vote implementation (https://github.com/kaltura/server/pull/5647)
+- Update QuizUserEntry.php (https://github.com/kaltura/server/pull/5646)
+- PLAT-7343 handle opera xslt with special characters in media:category(https://github.com/kaltura/server/pull/5645)
+- PLAT-7482: Automaticity fail request that we failed to replaceMultiRequestResults (https://github.com/kaltura/server/pull/5644)
+- PLAT-7499: When calculating push notifications hash use original ks object (https://github.com/kaltura/server/pull/5643)
+- PLAT-7385: (https://github.com/kaltura/server/pull/5640)
+- add move to category option in modify category engine (https://github.com/kaltura/server/pull/5639)
+- change script delete process (https://github.com/kaltura/server/pull/5638)
+- Updated version (https://github.com/kaltura/server/pull/5637)
+- PlayKit player embed (https://github.com/kaltura/server/pull/5587)
 
 * Mon Jun 5 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.18.0-1
 - Ver Bounce to 12.18.0
