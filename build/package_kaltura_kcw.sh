@@ -1,4 +1,4 @@
-#!/bin/bash -e 
+#!/bin/bash -e
 #===============================================================================
 #          FILE: package_kaltura_kcw.sh
 #         USAGE: ./package_kaltura_kcw.sh 
@@ -31,7 +31,7 @@ rm -rf $SOURCE_PACKAGING_DIR/$KCW_RPM_NAME/*
 
 #kaltura_svn export --force --quiet $KCW_URI/$KCW_VERSION $SOURCE_PACKAGING_DIR/$KCW_RPM_NAME/$KCW_VERSION 
 wget $KCW_URI -O $SOURCE_PACKAGING_DIR/kcw-$KCW_VERSION 
-mkdir $SOURCE_PACKAGING_DIR/$KCW_RPM_NAME/
+mkdir -p $SOURCE_PACKAGING_DIR/$KCW_RPM_NAME/
 cd $SOURCE_PACKAGING_DIR/$KCW_RPM_NAME
 unzip $SOURCE_PACKAGING_DIR/kcw-$KCW_VERSION
 
