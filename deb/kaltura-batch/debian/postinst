@@ -65,6 +65,9 @@ ln -sf $APP_DIR/configurations/logrotate/kaltura_apps /etc/logrotate.d/
 if [ -x "`which php5enmod 2>/dev/null`" ];then
 	php5enmod zz-kaltura
 fi
+if [ -x "`which phpenmod 2>/dev/null`" ];then
+	phpenmod zz-kaltura
+fi
 if [ -x /opt/kaltura/bin/php7enmod ];then
 	/opt/kaltura/bin/php7enmod zz-kaltura
 fi
@@ -74,19 +77,20 @@ find $BASE_DIR/app/cache/ $BASE_DIR/log -type d -exec chmod 775 {} \;
 find $BASE_DIR/app/cache/ $BASE_DIR/log -type f -exec chmod 664 {} \; 
 chown $KALTURA_USER.$APACHE_GROUP $BASE_DIR/app/cache/ $BASE_DIR/log/* $WEB_DIR/content/entry $BASE_DIR/var/run
 
-if service apache2 status >/dev/null 2>&1;then
-	service apache2 reload
+# stupidly and only for apache2, service apache2 status outputs to PAGER, thus no good for auto upgrades
+if /etc/init.d/apache2 status >/dev/null 2>&1;then
+	invoke-rc.d apache2 reload
 else
-	service apache2 start
+	invoke-rc.d apache2 start
 fi
 
-/etc/init.d/kaltura-batch stop >/dev/null 2>&1 || true
-/etc/init.d/kaltura-batch start
+invoke-rc.d kaltura-batch stop >/dev/null 2>&1 || true
+invoke-rc.d kaltura-batch start
 ln -sf $BASE_DIR/app/configurations/monit/monit.d/batch.rc /etc/monit/conf.d/
 ln -sf $BASE_DIR/app/configurations/monit/monit.d/httpd.rc /etc/monit/conf.d/apache2.rc
 ln -sf $BASE_DIR/app/configurations/monit/monit.d/memcached.rc /etc/monit/conf.d/
-service monit stop >> /dev/null 2>&1 || true
-service monit start
+invoke-rc.d monit stop >> /dev/null 2>&1 || true
+invoke-rc.d monit start
 
 send_install_becon `basename $0` $TIMEZ install_success 0 
 

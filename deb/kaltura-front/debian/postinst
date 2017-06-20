@@ -193,6 +193,9 @@ if [ "$1" = "configure" ]; then
 	if [ -x "`which php5enmod 2>/dev/null`" ];then
 		php5enmod zz-kaltura
 	fi
+	if [ -x "`which phpenmod 2>/dev/null`" ];then
+		phpenmod zz-kaltura
+	fi
 	if [ -x /opt/kaltura/bin/php7enmod ];then
 		/opt/kaltura/bin/php7enmod zz-kaltura
 	fi

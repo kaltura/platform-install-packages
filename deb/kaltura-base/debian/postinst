@@ -37,9 +37,10 @@ if [ -r $KALTURA_PREFIX/bin/kaltura-base-upgrading ];then
                 fi
                 sed -i "s@^\(kaltura_version\).*@\1 = $KALTURA_VERSION@g" $KALTURA_PREFIX/app/configurations/local.ini
                 echo "Regenarating client libs.. this will take up to 2 minutes to complete."
-                if service apache2 status;then
-                        service apache2 stop
-                        service monit stop
+		# stupidly and only for apache2, service apache2 status outputs to PAGER, thus no good for auto upgrades
+                if /etc/init.d/apache2 status ;then
+                        invoke-rc.d apache2 stop
+                        invoke-rc.d monit stop
 			RESTART_APACHE=true
                 fi
                 # this is read by kaltura-sphinx-schema-update.sh to determine rather or not to run
@@ -52,9 +53,9 @@ if [ -r $KALTURA_PREFIX/bin/kaltura-base-upgrading ];then
                 chmod 775 $KALTURA_PREFIX/web/content
 
                 if [ -n "$RESTART_APACHE" ];then
-                        service apache2 start
+                        invoke-rc.d apache2 start
                 fi
-                service monit start
+                invoke-rc.d monit start
 		sleep 70
                 # we now need CREATE and DROP priv for 'kaltura' on kaltura.*
                 if [ -r /etc/kaltura.d/system.ini ];then
@@ -495,31 +496,28 @@ if [ "$1" = "configure" ]; then
         fi
 
         #db_input critical 'kaltura-base/generating_client_libs' || true
-	if service apache2 status;then
-		service apache2 stop
+	# stupidly and only for apache2, service apache2 status outputs to PAGER, thus no good for auto upgrades
+	if /etc/init.d/apache2 status ;then
+		invoke-rc.d apache2 stop
 		RESTART_APACHE=true
-		service monit stop
+		invoke-rc.d monit stop
 	fi
         rm -rf $KALTURA_PREFIX/app/cache/*
         php $BASE_DIR/app/generator/generate.php >> $BASE_DIR/log/generate.php.log 2>&1
 
 	if [ -n "$RESTART_APACHE" ];then
-		service apache2 start
+		invoke-rc.d apache2 start
 	fi
         set +e
 
 
         ln -sf $BASE_DIR/app/configurations/logrotate/kaltura_base /etc/logrotate.d/
         ln -sf $BASE_DIR/app/configurations/logrotate/kaltura_api /etc/logrotate.d/
-	if [ -d "/etc/php5/mods-available" ];then
-        	ln -sf $APP_DIR/configurations/php/kaltura.ini /etc/php5/mods-available/zz-kaltura.ini
-	fi
-	if [ -d "/etc/php/7.0/mods-available" ];then
-        	ln -sf $APP_DIR/configurations/php/kaltura.ini /etc/php/7.0/mods-available/zz-kaltura.ini
-	fi
-	if [ -d "/opt/kaltura/app/configurations/php/mods-available" ];then
-        	ln -sf $APP_DIR/configurations/php/kaltura.ini /opt/kaltura/app/configurations/php/mods-available/zz-kaltura.ini
-	fi
+	for MOD_DIR in /etc/php5/mods-available /etc/php/7.0/mods-available /opt/kaltura/app/configurations/php/mods-available;do
+		if [ -d "$MOD_DIR" ];then
+        		ln -sf $APP_DIR/configurations/php/kaltura.ini $MOD_DIR/zz-kaltura.ini
+		fi
+	done
         touch  "$BASE_DIR/app/base-config.lock"
 
         find $BASE_DIR/app/cache/ $BASE_DIR/log -type d -exec chmod 775 {} \; 

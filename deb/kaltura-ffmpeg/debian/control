@@ -72,11 +72,13 @@ Depends:
  libspeex1,
  libtheora0,
  libva1,
+ libva-drm1, 
+ libva-x11-1,
  libvpx1|libvpx3,
  libxvidcore4,
  libvorbis0a, 
  libvorbisenc2, 
- libx265-87|libx265-79,
+ x265|libx265-87|libx265-79,
  libvorbisfile3
 Description: 
  FFmpeg is a very fast video and audio converter. It can also grab from a
