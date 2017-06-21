@@ -6,15 +6,15 @@
 
 Summary: Kaltura Async Api Proxy 
 Name: kaltura-async-api-proxy 
-Version: 1.0.3
-Release: 3
+Version: 1.0.9
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-v%{version}.tar.gz
 URL: https://github.com/kaltura/AsyncApiProxy
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
-Requires: nodejs >= 6.0.0 nodejs-forever nodejs-config nodejs-os nodejs-simple-rate-limiter nodejs-continuation-local-storage nodejs-express nodejs-uuid nodejs-request nodejs-crypto nodejs-is-subset nodejs-bluebird nodejs-memory-cache nodejs-ipaddr.js 
+Requires: nodejs >= 6.0.0 nodejs-forever nodejs-config nodejs-os nodejs-simple-rate-limiter nodejs-continuation-local-storage nodejs-express nodejs-uuid nodejs-request nodejs-crypto nodejs-is-subset nodejs-bluebird nodejs-memory-cache nodejs-ipaddr.js nodejs-compression nodejs-cluster
 Requires(post): chkconfig
 BuildRequires: nodejs-packaging
 AutoReq: no 
