@@ -13,7 +13,7 @@ Depends:
  php5-mysql|php-mysql|kaltura-php7-mysql,
  php5-xsl|php-xsl|kaltura-php7-xsl,
  php5-curl|php-curl|kaltura-php7-curl,
- php5-gmp|php-gimp|kaltura-php7-gmp,
+ php5-gmp|php-gmp|kaltura-php7-gmp,
  php5-mcrypt|php-mcrypt|kaltura-php7-mcrypt, 
  php-apc|php-apcu|kaltura-php7-apcu, 
  php5-memcache|php-memcache|kaltura-php7-memcache, 
