@@ -2,7 +2,8 @@
 This guide describes deb installation of an all-in-one Kaltura server and applies to deb based Linux distros.
 
 The processes was tested on Debian 8 and Ubuntu 14.04 but is expected to work on other versions. 
-*When installing on Ubuntu Xenial [16.04], please refer to [this howto](install-kaltura-xenial.md) instead*
+
+*When installing on Ubuntu Xenial [16.04], please refer to [this howto](install-kaltura-xenial.md) instead.*
 
 If you tried a different deb based distro and failed, please report it.
 
