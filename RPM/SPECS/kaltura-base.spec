@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 12.19.0
-Release: 14
+Release: 15
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -321,44 +321,26 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Sun Jul 2 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.19.0-14
-- Nightly build.
-
-* Sat Jul 1 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.19.0-13
-- Nightly build.
-
-* Fri Jun 30 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.19.0-12
-- Nightly build.
-
-* Thu Jun 29 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.19.0-11
-- Nightly build.
-
-* Wed Jun 28 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.19.0-10
-- Nightly build.
-
-* Tue Jun 27 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.19.0-9
-- Nightly build.
-
-* Mon Jun 26 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.19.0-8
-- Nightly build.
-
-* Sun Jun 25 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.19.0-7
-- Nightly build.
-
-* Sat Jun 24 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.19.0-6
-- Nightly build.
-
-* Fri Jun 23 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.19.0-5
-- Nightly build.
-
-* Thu Jun 22 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.19.0-4
-- Nightly build.
-
-* Wed Jun 21 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.19.0-3
-- Nightly build.
-
-* Tue Jun 20 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.19.0-2
-- Nightly build.
+* Mon Jul 3 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.19.0-15
+- Update kViewHistoryUserEntryAdvancedFilter.php (https://github.com/kaltura/server/pull/5762)
+- PLAT-7483: put language and label in correct place (https://github.com/kaltura/server/pull/5760)
+- Override filter limit from advanced filter (https://github.com/kaltura/server/pull/5756)
+- syndication feed - cue-points ordering by created_at (https://github.com/kaltura/server/pull/5745)
+- DropFolder: add order by to list (https://github.com/kaltura/server/pull/5735)
+- Source flavour can only be ingested, not generated (https://github.com/kaltura/server/pull/5734)
+- PLAT-7639: Avoid sync issue now that first sync point could be a few seconds into the video (https://github.com/kaltura/server/pull/5733)
+- PLAT-7639: Recorded video is always missing last few seconds so when copying cue points make sure to include cue points added during that time (https://github.com/kaltura/server/pull/5732)
+- PS-3159 - fix improper frame-rate assignment (https://github.com/kaltura/server/pull/5730)
+- KALTURA_RECORDED_LIVE deleting validation should only be done when root entry id is of type live (https://github.com/kaltura/server/pull/5729)
+- Fix PS2 XSSes (https://github.com/kaltura/server/pull/5728)
+- PLAT-7565: allow the update of flavorAsset::label (https://github.com/kaltura/server/pull/5724)
+- PLAT-7575 (https://github.com/kaltura/server/pull/5718)
+- SUP-11306: handle ampersand chars in XML document" (https://github.com/kaltura/server/pull/5716)
+- add stats->reportDeviceCapabilties action (https://github.com/kaltura/server/pull/5714)
+- add reset of MR entry status when retention time changes (https://github.com/kaltura/server/pull/5713)
+- PLAT-7504: refactore drop folder watcher for file transfer engine (https://github.com/kaltura/server/pull/5679)
+- PLAT-7483: On-the-fly stitching of the bumper video (https://github.com/kaltura/server/pull/5669)
+- PLAT-6734: getPlaybackContext fixes (https://github.com/kaltura/server/pull/5653)
 
 * Tue Jun 20 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.19.0-1
 - Ver Bounce to 12.19.0

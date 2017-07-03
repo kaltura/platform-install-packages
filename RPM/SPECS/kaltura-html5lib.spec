@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.57
+Version: v2.58.1
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -82,6 +82,42 @@ fi
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Mon Jul 3 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v2.58.1-1
+- FEC-6668 - Upgrade Comscore plugin to 1.2.3
+- FEC-6679 - Support passing tags filed from TVPAPI to player
+- SUP-10279 - Related module in player functionality
+- FEC-6616 - CLONE - Autoplay Support in web player - Muted start
+- FEC-6564 - Upgrade Shaka to latest
+- FEC-6642 - Support custom text tracks labels in Dash
+- FEC-6522 - Unable to play Dash in player
+- Force LeadWithHLSOnFlash to true for rapt compatibility w/ IE11 Win7 (#3393)
+- Fix multicast (#3413)
+- FEC-6689 - LiveDRM: Seek to DVR is not working - Scrubber always jumps to live
+- FEC-6695 - [Autoplay_Automute] - Clicking on 'Skip Ad' does not make the ad or video to play with audio
+- FEC-6696 - [Autoplay_Automute] - When seeking a video it is still playing muted
+- FEC-6699 - [Autoplay_Automute] - Clicking on full screen does not make the video play with audio
+- Dvr to 2.58 (#3419)
+- FEC-6694 - [Autoplay_Automute] - A bumper which is paused and played again keeps playing muted
+- FEC-6700 - [Autoplay_Automute] - Autoplay does not work on iPad
+- FEC-6769 - Safari autoplay is broken
+- FEC-6699 - [Autoplay_Automute] - Clicking on full screen does not make the video play with audio
+- FEC-6798 - [AutoPlay_AutoMute][Android] - When clicking on full screen, the video keeps playing muted
+- FEC-6797 - [AutoPlay_AutoMute][Android] - Pausing and then playing a video does not make it play with audio
+- SUP-10856 - Player defaults to progressive download on android
+- SUP-11369 - Closed Captions Does not Work on iOS When 360 is Enabled
+- SUP-11362 - Kaltura.ForceLayoutRedraw=true causes the player to lose responsiveness
+- SUP-11300 - Infinite load wheel when CMW widget is reloaded with live content that is not broadcasting
+- FEC-6802 - Support Youbora Plugin Backward Compatibility
+- Merge pull request #3430 from kaltura/webcast_2.58_post_dvr
+- revert upgrade shaka to latest
+- KMCNG-386
+- FEC-6564 - Upgrade Shaka to latest
+- FEC-6642 - Support custom text tracks labels in Dash
+- FEC-6522 - Unable to play Dash in player
+- Fix dash on IE11
+- Android audio on mobile autoplay (#3439)
+- FEC-6821 - Fix regression with dual video VOD slides display
+
 * Thu Jun 1 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v2.57-1
 - FEC-6675 - Autoplay and Live entry do not show the video
 - FEC-6663 - reported events entry playing with dfp overlay are incorrect
