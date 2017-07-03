@@ -33,20 +33,20 @@
 Kaltura requires certain ports to be open for proper operation. [See the list of required open ports](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura-required-ports.md).
 If you're just testing and don't mind an open system, you can use the below to disbale iptables altogether:
 ```bash
-iptables -F
+# iptables -F
 ```
 #### Disable SELinux - REQUIRED
 **Currently Kaltura doesn't properly support running with SELinux, things will break if you don't set it to permissive**.
 If your instances has it enabled [by default Debian and Ubuntu does not enable SELinux], run:
 ```bash
-setenforce permissive
+# setenforce permissive
 ```
 
 To verify SELinux will not revert to enabled next restart:
 
-1. Edit the file `/etc/selinux/config`
-1. Verify or change the value of SELINUX to permissive: `SELINUX=permissive`
-1. Save the file `/etc/selinux/config`
+- Edit the file `/etc/selinux/config`
+- Verify or change the value of SELINUX to permissive: `SELINUX=permissive`
+- Save the file `/etc/selinux/config`
 
 ### Start of Kaltura installation
 This section is a step-by-step guide of a Kaltura installation.
@@ -54,8 +54,8 @@ This section is a step-by-step guide of a Kaltura installation.
 #### Setup the Kaltura deb repository
 
 ```bash
-wget -O - http://installrepo.kaltura.org/repo/apt/debian/kaltura-deb.gpg.key|apt-key add -
-echo "deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/xenial lynx main" > /etc/apt/sources.list.d/kaltura.list
+# wget -O - http://installrepo.kaltura.org/repo/apt/debian/kaltura-deb.gpg.key|apt-key add -
+# echo "deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/xenial lynx main" > /etc/apt/sources.list.d/kaltura.list
 ```
 
 ##### IMPORTANT NOTE: 
