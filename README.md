@@ -34,7 +34,8 @@ Contact the authors or email community@kaltura.org if you have other ideas.
 
 * [**Frequently Asked Questions**](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura-packages-faq.md)
 * [Single-server All-In-One RedHat based Linux distros Installation (including FC, RHEL and CentOS)](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-redhat-based.md).
-* [Single-server All-In-One deb based Linux distros Installation (Debian/Ubuntu)](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-deb-based.md).
+* [Single-server All-In-One deb based distros Installation (Debian: Jessie [8]; Ubuntu: Trusty [14.04])](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-deb-based.md).
+* [Single-server All-In-One Ubuntu Xenial (16.04) Installation](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-xenial.md).
 * [Single-server All-In-One Docker container Installation](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-docker.md).
 * [Deploying a Kaltura Cluster (RPM)](https://github.com/kaltura/platform-install-packages/blob/master/doc/rpm-cluster-deployment-instructions.md)
 * [Deploying a Kaltura Cluster (deb)](https://github.com/kaltura/platform-install-packages/blob/master/doc/deb-cluster-deployment-instructions.md)
