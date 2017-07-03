@@ -1,3 +1,15 @@
+kaltura-postinst (1.0.33-3) lynx; urgency=low
+
+  * Newer versions of df no longer support the --direct opt and instead have --output=avail 
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 03 Jul 2017 16:35:58 +0000
+
+kaltura-postinst (1.0.33-2) lynx; urgency=low
+
+  * Check for percona MySQL deb in kaltura-mysql-settings.sh
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 03 Jul 2017 16:09:14 +0000
+
 kaltura-postinst (1.0.33-1) lynx; urgency=low
 
   * Remove old analytics URL

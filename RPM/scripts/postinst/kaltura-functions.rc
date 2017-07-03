@@ -434,14 +434,21 @@ check_monit()
 
 check_space()
 {
-	SPACE=`df -k --direct $1 |sed '1,1d' |awk -F " " '{print $4}'`;if [ $SPACE -lt 700000 ];then
-		echo "$SPACE"
-		return 1
-	else
-		echo "$SPACE"
-		return 0
-	fi
+	# newer versions of df no longer support the --direct opt and instead have --output=avail
+	# so try the first and if SPACE is not populated, try the other. God help us all..
+        SPACE=`df -k --direct $1 2>/dev/null |sed '1,1d' |awk -F " " '{print $4}'`
+        if [ -z "$SPACE" ];then
+                SPACE=`df --output=avail $1 | awk 'NR == 2 { print $1  }'`
+        fi
+        if [ $SPACE -lt 700000 ];then
+                echo "$SPACE"
+                return 1
+        else
+                echo "$SPACE"
+                return 0
+        fi
 }
+
 
 check_start_page()
 {
