@@ -68,7 +68,7 @@ Use:
 ```
 to check your current configuration and:
 ```
-a2dissite $SITENAME
+# a2dissite $SITENAME
 ```
 to disable any site that might be set in a way by which $YOUR_SERVICE_URL/api_v3 will reach it instead of the Kaltura vhost config.
 
@@ -121,11 +121,11 @@ A longer post about it can be found at https://blog.kaltura.com/free-and-open-li
 Edit the debconf [response file template](https://github.com/kaltura/platform-install-packages/blob/Jupiter-10.16.0/deb/kaltura_debconf_response.sh) by replacing all tokens with relevant values.
 and run it as root:
 ```
-./kaltura_debconf_response.sh
+# ./kaltura_debconf_response.sh
 ```
 the set the DEBIAN_FRONTEND ENV var:
 ```
-export DEBIAN_FRONTEND=noninteractive
+# export DEBIAN_FRONTEND=noninteractive
 ```
 
 And install as described above. 
@@ -154,27 +154,28 @@ Use this in cases where you want to clear the database and start from fresh.
 ## Troubleshooting
 Once the configuration phase is done, you may wish to run the sanity tests, for that, run:
 ```base
-/opt/kaltura/bin/kaltura-sanity.sh
+# /opt/kaltura/bin/kaltura-sanity.sh
 ```
 
 If you experience unknown, unwanted or erroneous behaviour, the logs are a greta place to start, to get a quick view into errors and warning run:
 ```bash
-kaltlog
+# . /etc/profile.d/kaltura-base.sh 
+# kaltlog
 ```
 
 If this does not give enough information, increase logging verbosity:
 ```bash
-sed -i 's@^writers.\(.*\).filters.priority.priority\s*=\s*7@writers.\1.filters.priority.priority=4@g' /opt/kaltura/app/configurations/logger.ini
+# sed -i 's@^writers.\(.*\).filters.priority.priority\s*=\s*7@writers.\1.filters.priority.priority=4@g' /opt/kaltura/app/configurations/logger.ini
 ```
 
 To revert this logging verbosity run:
 ```bash
-sed -i 's@^writers.\(.*\).filters.priority.priority\s*=\s*4@writers.\1.filters.priority.priority=7@g' /opt/kaltura/app/configurations/logger.ini
+# sed -i 's@^writers.\(.*\).filters.priority.priority\s*=\s*4@writers.\1.filters.priority.priority=7@g' /opt/kaltura/app/configurations/logger.ini
 ```
 
 Or output all logged information to a file for analysis:
 ```bash
-allkaltlog > /path/to/mylogfile.log
+# allkaltlog > /path/to/mylogfile.log
 ```
 
 For posting questions, please go to:

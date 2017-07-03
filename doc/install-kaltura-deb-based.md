@@ -40,20 +40,20 @@ If you tried a different deb based distro and failed, please report it.
 Kaltura requires certain ports to be open for proper operation. [See the list of required open ports](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura-required-ports.md).
 If you're just testing and don't mind an open system, you can use the below to disbale iptables altogether:
 ```bash
-iptables -F
+# iptables -F
 ```
 #### Disable SELinux - REQUIRED
 **Currently Kaltura doesn't properly support running with SELinux, things will break if you don't set it to permissive**.
 If your instances has it enabled [by default Debian and Ubuntu does not enable SELinux], run:
 ```bash
-setenforce permissive
+# setenforce permissive
 ```
 
 To verify SELinux will not revert to enabled next restart:
 
-1. Edit the file `/etc/selinux/config`
-1. Verify or change the value of SELINUX to permissive: `SELINUX=permissive`
-1. Save the file `/etc/selinux/config`
+- Edit the file `/etc/selinux/config`
+- Verify or change the value of SELINUX to permissive: `SELINUX=permissive`
+- Save the file `/etc/selinux/config`
 
 ### Start of Kaltura installation
 This section is a step-by-step guide of a Kaltura installation.
@@ -61,8 +61,8 @@ This section is a step-by-step guide of a Kaltura installation.
 #### Setup the Kaltura deb repository
 
 ```bash
-wget -O - http://installrepo.kaltura.org/repo/apt/debian/kaltura-deb.gpg.key|apt-key add -
-echo "deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/debian lynx main" > /etc/apt/sources.list.d/kaltura.list
+# wget -O - http://installrepo.kaltura.org/repo/apt/debian/kaltura-deb.gpg.key|apt-key add -
+# echo "deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/debian lynx main" > /etc/apt/sources.list.d/kaltura.list
 ```
 
 *NOTE: for Debian, the non-free repo must also be enabled*
@@ -85,7 +85,7 @@ Use:
 ```
 to check your current configuration and:
 ```
-a2dissite $SITENAME
+# a2dissite $SITENAME
 ```
 to disable any site that might be set in a way by which $YOUR_SERVICE_URL/api_v3 will reach it instead of the Kaltura vhost config.
 
@@ -137,11 +137,11 @@ A longer post about it can be found at https://blog.kaltura.com/free-and-open-li
 Edit the debconf [response file template](https://github.com/kaltura/platform-install-packages/blob/Jupiter-10.16.0/deb/kaltura_debconf_response.sh) by replacing all tokens with relevant values.
 and run it as root:
 ```
-./kaltura_debconf_response.sh
+# ./kaltura_debconf_response.sh
 ```
 the set the DEBIAN_FRONTEND ENV var:
 ```
-export DEBIAN_FRONTEND=noninteractive
+# export DEBIAN_FRONTEND=noninteractive
 ```
 
 And install as described above. 
@@ -174,27 +174,28 @@ Use this in cases where you want to clear the database and start from fresh.
 ## Troubleshooting
 Once the configuration phase is done, you may wish to run the sanity tests, for that, run:
 ```base
-/opt/kaltura/bin/kaltura-sanity.sh
+# /opt/kaltura/bin/kaltura-sanity.sh
 ```
 
 If you experience unknown, unwanted or erroneous behaviour, the logs are a greta place to start, to get a quick view into errors and warning run:
 ```bash
-kaltlog
+# . /etc/profile.d/kaltura-base.sh 
+# kaltlog
 ```
 
 If this does not give enough information, increase logging verbosity:
 ```bash
-sed -i 's@^writers.\(.*\).filters.priority.priority\s*=\s*7@writers.\1.filters.priority.priority=4@g' /opt/kaltura/app/configurations/logger.ini
+# sed -i 's@^writers.\(.*\).filters.priority.priority\s*=\s*7@writers.\1.filters.priority.priority=4@g' /opt/kaltura/app/configurations/logger.ini
 ```
 
 To revert this logging verbosity run:
 ```bash
-sed -i 's@^writers.\(.*\).filters.priority.priority\s*=\s*4@writers.\1.filters.priority.priority=7@g' /opt/kaltura/app/configurations/logger.ini
+# sed -i 's@^writers.\(.*\).filters.priority.priority\s*=\s*4@writers.\1.filters.priority.priority=7@g' /opt/kaltura/app/configurations/logger.ini
 ```
 
 Or output all logged information to a file for analysis:
 ```bash
-allkaltlog > /path/to/mylogfile.log
+# allkaltlog > /path/to/mylogfile.log
 ```
 
 For posting questions, please go to:

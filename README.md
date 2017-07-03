@@ -33,18 +33,18 @@ Contact the authors or email community@kaltura.org if you have other ideas.
 ## Documentation and Guides
 
 * [**Frequently Asked Questions**](kaltura-packages-faq.md)
-* [Single-server All-In-One RedHat based Linux distros Installation (including FC, RHEL and CentOS)](install-kaltura-redhat-based.md).
-* [Single-server All-In-One deb based distros Installation (Debian: Jessie [8]; Ubuntu: Trusty [14.04])](install-kaltura-deb-based.md).
-* [Single-server All-In-One Ubuntu Xenial (16.04) Installation](install-kaltura-xenial.md).
-* [Single-server All-In-One Docker container Installation](install-docker.md).
-* [Deploying a Kaltura Cluster (RPM)](rpm-cluster-deployment-instructions.md)
-* [Deploying a Kaltura Cluster (deb)](deb-cluster-deployment-instructions.md)
-* [Deploying Kaltura using Opscode Chef (RPM)](rpm-chef-cluster-deployment.md)
-* [Deploying Kaltura using Vagrant (RPM)](https://github.com/kaltura/platform-install-packages/tree/master/vagrant)
-* [Upgrade from pre-RPM versions](https://github.com/kaltura/platform-install-packages/tree/master/doc/kaltura-updater)
-* [Setting up Kaltura platform monitoring](platform-monitors.md)
-* [Required Open Ports to run Kaltura](kaltura-required-ports.md)
-* [Deploy Local Repository for Offline Install](deploy-local-rpm-repo-offline-install.md)
+* [Single-server All-In-One RedHat based Linux distros Installation (including FC, RHEL and CentOS)](doc/install-kaltura-redhat-based.md).
+* [Single-server All-In-One deb based distros Installation (Debian: Jessie [8]; Ubuntu: Trusty [14.04])](doc/install-kaltura-deb-based.md).
+* [Single-server All-In-One Ubuntu Xenial (16.04) Installation](doc/install-kaltura-xenial.md).
+* [Single-server All-In-One Docker container Installation](doc/install-docker.md).
+* [Deploying a Kaltura Cluster (RPM)](doc/rpm-cluster-deployment-instructions.md)
+* [Deploying a Kaltura Cluster (deb)](doc/deb-cluster-deployment-instructions.md)
+* [Deploying Kaltura using Opscode Chef (RPM)](doc/rpm-chef-cluster-deployment.md)
+* [Deploying Kaltura using Vagrant (RPM)](vagrant)
+* [Upgrade from pre-RPM versions](doc/kaltura-updater)
+* [Setting up Kaltura platform monitoring](doc/platform-monitors.md)
+* [Required Open Ports to run Kaltura](doc/kaltura-required-ports.md)
+* [Deploy Local Repository for Offline Install](doc/deploy-local-rpm-repo-offline-install.md)
 
 
 
