@@ -1,5 +1,5 @@
-﻿# Installing Kaltura on a Single Server (deb)
-This guide describes deb installation of an all-in-one Kaltura server on Ubuntu Xenial [16.04].
+﻿# Installing Kaltura on a Single Ser
+This guide describes the installation process of an all-in-one Kaltura server on Ubuntu Xenial [16.04].
 
 
 [Kaltura Inc.](http://corp.kaltura.com) also provides commercial solutions and services including pro-active platform monitoring, applications, SLA, 24/7 support and professional services. If you're looking for a commercially supported video platform  with integrations to commercial encoders, streaming servers, eCDN, DRM and more - Start a [Free Trial of the Kaltura.com Hosted Platform](http://corp.kaltura.com/free-trial) or learn more about [Kaltura' Commercial OnPrem Edition™](http://corp.kaltura.com/Deployment-Options/Kaltura-On-Prem-Edition). Please note that this service in only offered for RHEL based distros. 

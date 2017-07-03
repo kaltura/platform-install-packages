@@ -132,25 +132,6 @@ Please see documentation here [nginx-rtmp-live-streaming.md](nginx-rtmp-live-str
 A longer post about it can be found at https://blog.kaltura.com/free-and-open-live-video-streaming
 
 
-
-**Your Kaltura installation is now complete.**
-
-## SSL Step-by-step Installation
-### Pre-Install notes
-* Currently, the Nginx VOD module does not support integration with Kaltura over HTTPs, only HTTP is supported. 
-### SSL Certificate Configuration
-
-
-**Your Kaltura installation is now complete.**
-
-## Live Streaming with Nginx and the RTMP module
-Kaltura CE includes the kaltura-nginx package, which is compiled with the [Nginx RTMP module](https://github.com/arut/nginx-rtmp-module).
-
-Please see documentation here [nginx-rtmp-live-streaming.md](nginx-rtmp-live-streaming.md)
-
-A longer post about it can be found at https://blog.kaltura.com/free-and-open-live-video-streaming
-
-
 ## Unattended Installation
 Edit the debconf [response file template](https://github.com/kaltura/platform-install-packages/blob/Jupiter-10.16.0/deb/kaltura_debconf_response.sh) by replacing all tokens with relevant values.
 and run it as root:

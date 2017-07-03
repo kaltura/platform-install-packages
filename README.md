@@ -32,19 +32,19 @@ Contact the authors or email community@kaltura.org if you have other ideas.
 
 ## Documentation and Guides
 
-* [**Frequently Asked Questions**](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura-packages-faq.md)
-* [Single-server All-In-One RedHat based Linux distros Installation (including FC, RHEL and CentOS)](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-redhat-based.md).
-* [Single-server All-In-One deb based distros Installation (Debian: Jessie [8]; Ubuntu: Trusty [14.04])](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-deb-based.md).
-* [Single-server All-In-One Ubuntu Xenial (16.04) Installation](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-xenial.md).
-* [Single-server All-In-One Docker container Installation](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-docker.md).
-* [Deploying a Kaltura Cluster (RPM)](https://github.com/kaltura/platform-install-packages/blob/master/doc/rpm-cluster-deployment-instructions.md)
-* [Deploying a Kaltura Cluster (deb)](https://github.com/kaltura/platform-install-packages/blob/master/doc/deb-cluster-deployment-instructions.md)
-* [Deploying Kaltura using Opscode Chef (RPM)](https://github.com/kaltura/platform-install-packages/blob/master/doc/rpm-chef-cluster-deployment.md)
+* [**Frequently Asked Questions**](kaltura-packages-faq.md)
+* [Single-server All-In-One RedHat based Linux distros Installation (including FC, RHEL and CentOS)](install-kaltura-redhat-based.md).
+* [Single-server All-In-One deb based distros Installation (Debian: Jessie [8]; Ubuntu: Trusty [14.04])](install-kaltura-deb-based.md).
+* [Single-server All-In-One Ubuntu Xenial (16.04) Installation](install-kaltura-xenial.md).
+* [Single-server All-In-One Docker container Installation](install-docker.md).
+* [Deploying a Kaltura Cluster (RPM)](rpm-cluster-deployment-instructions.md)
+* [Deploying a Kaltura Cluster (deb)](deb-cluster-deployment-instructions.md)
+* [Deploying Kaltura using Opscode Chef (RPM)](rpm-chef-cluster-deployment.md)
 * [Deploying Kaltura using Vagrant (RPM)](https://github.com/kaltura/platform-install-packages/tree/master/vagrant)
 * [Upgrade from pre-RPM versions](https://github.com/kaltura/platform-install-packages/tree/master/doc/kaltura-updater)
-* [Setting up Kaltura platform monitoring](https://github.com/kaltura/platform-install-packages/blob/master/doc/platform-monitors.md)
-* [Required Open Ports to run Kaltura](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura-required-ports.md)
-* [Deploy Local Repository for Offline Install](https://github.com/kaltura/platform-install-packages/blob/master/doc/deploy-local-rpm-repo-offline-install.md)
+* [Setting up Kaltura platform monitoring](platform-monitors.md)
+* [Required Open Ports to run Kaltura](kaltura-required-ports.md)
+* [Deploy Local Repository for Offline Install](deploy-local-rpm-repo-offline-install.md)
 
 
 
