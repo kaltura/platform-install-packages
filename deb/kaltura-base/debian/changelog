@@ -1,3 +1,27 @@
+kaltura-base (12.19.0-2) lynx; urgency=low
+
+  * Update kViewHistoryUserEntryAdvancedFilter.php (https://github.com/kaltura/server/pull/5762)
+  * PLAT-7483: put language and label in correct place (https://github.com/kaltura/server/pull/5760)
+  * Override filter limit from advanced filter (https://github.com/kaltura/server/pull/5756)
+  * syndication feed - cue-points ordering by created_at (https://github.com/kaltura/server/pull/5745)
+  * DropFolder: add order by to list (https://github.com/kaltura/server/pull/5735)
+  * Source flavour can only be ingested, not generated (https://github.com/kaltura/server/pull/5734)
+  * PLAT-7639: Avoid sync issue now that first sync point could be a few seconds into the video (https://github.com/kaltura/server/pull/5733)
+  * PLAT-7639: Recorded video is always missing last few seconds so when copying cue points make sure to include cue points added during that time (https://github.com/kaltura/server/pull/5732)
+  * PS-3159 - fix improper frame-rate assignment (https://github.com/kaltura/server/pull/5730)
+  * KALTURA_RECORDED_LIVE deleting validation should only be done when root entry id is of type live (https://github.com/kaltura/server/pull/5729)
+  * Fix PS2 XSSes (https://github.com/kaltura/server/pull/5728)
+  * PLAT-7565: allow the update of flavorAsset::label (https://github.com/kaltura/server/pull/5724)
+  * PLAT-7575 (https://github.com/kaltura/server/pull/5718)
+  * SUP-11306: handle ampersand chars in XML document" (https://github.com/kaltura/server/pull/5716)
+  * add stats->reportDeviceCapabilties action (https://github.com/kaltura/server/pull/5714)
+  * add reset of MR entry status when retention time changes (https://github.com/kaltura/server/pull/5713)
+  * PLAT-7504: refactore drop folder watcher for file transfer engine (https://github.com/kaltura/server/pull/5679)
+  * PLAT-7483: On-the-fly stitching of the bumper video (https://github.com/kaltura/server/pull/5669)
+  * PLAT-6734: getPlaybackContext fixes (https://github.com/kaltura/server/pull/5653)
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 03 Jul 2017 11:18:53 +0000
+
 kaltura-base (12.19.0-1) lynx; urgency=low
 
   * Switching to 12.19.0

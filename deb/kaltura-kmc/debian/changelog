@@ -1,3 +1,9 @@
+kaltura-kmc (5.42.0-3) lynx; urgency=low
+
+  * Ver bounce of HTML5 to v2.58.1
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 03 Jul 2017 11:25:10 +0000
+
 kaltura-kmc (5.42.0-2) lynx; urgency=low
 
   * Ver bounce of HTML5 to v2.57
