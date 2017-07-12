@@ -5,7 +5,7 @@
 
 Name: nodejs-%{npm_name}
 Version: 0.13.0
-Release: 1
+Release: 3
 Summary: Highly efficient WebSocket & HTTP library
 License: Zlib
 URL: https://github.com/uWebSockets/uWebSockets
@@ -13,6 +13,8 @@ Source0: http://registry.npmjs.org/%{npm_name}/-/%{npm_name}-%{version}.tgz
 BuildRequires: nodejs-packaging
 BuildArch:  noarch
 ExclusiveArch: %{nodejs_arches} noarch
+AutoReq: no
+AutoProv: no
 
 %{?nodejs_find_provides_and_requires}
 
