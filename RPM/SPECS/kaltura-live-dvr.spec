@@ -40,15 +40,20 @@ rm -rf %{buildroot}
 %prep
 %setup -qn liveDVR-%{version}
 
-%install
-mkdir -p $RPM_BUILD_ROOT/tmp/build $RPM_BUILD_ROOT%{livedvr_prefix}/bin $RPM_BUILD_ROOT%{livedvr_prefix}/liveRecorder/bin /usr/lib/node_modules
-./build_scripts/build_ffmpeg.sh $RPM_BUILD_ROOT/tmp/build %{ffmpeg_version}
-./build_scripts/build_ts2mp4_convertor.sh $RPM_BUILD_ROOT/tmp/build/ffmpeg-%{ffmpeg_version} ./liveRecorder
-cp ./liveRecorder/bin/ts_to_mp4_convertor $RPM_BUILD_ROOT%{livedvr_prefix}/liveRecorder/bin/ts_to_mp4_convertor
+%build
+mkdir -p %{buildroot}/%{name}-%{version}/tmp/build 
+./build_scripts/build_ffmpeg.sh %{buildroot}/%{name}-%{version}/tmp/build %{ffmpeg_version}
+./build_scripts/build_ts2mp4_convertor.sh %{buildroot}/%{name}-%{version}/tmp/build/ffmpeg-%{ffmpeg_version} ./liveRecorder
 npm install nan
-./build_scripts/build_addon.sh `pwd` $RPM_BUILD_ROOT/tmp/build/ffmpeg-%{ffmpeg_version}
-cp ./node_addons/FormatConverter/build/Release/FormatConverter.so $RPM_BUILD_ROOT%{livedvr_prefix}/bin/FormatConverter.node
+./build_scripts/build_addon.sh `pwd` %{buildroot}/%{name}-%{version}/tmp/build/ffmpeg-%{ffmpeg_version} Release
 
+
+%install
+mkdir -p $RPM_BUILD_ROOT%{livedvr_prefix}/bin $RPM_BUILD_ROOT%{livedvr_prefix}/liveRecorder/bin 
+cp %{_builddir}/liveDVR-%{version}/liveRecorder/bin/ts_to_mp4_convertor $RPM_BUILD_ROOT%{livedvr_prefix}/liveRecorder/bin/ts_to_mp4_convertor
+cp %{_builddir}/liveDVR-%{version}/node_addons/FormatConverter/build/Release/FormatConverter.so $RPM_BUILD_ROOT%{livedvr_prefix}/bin/FormatConverter.node
+strip $RPM_BUILD_ROOT%{livedvr_prefix}/liveRecorder/bin/ts_to_mp4_convertor
+strip $RPM_BUILD_ROOT%{livedvr_prefix}/bin/FormatConverter.node
 
 %pre
 # maybe one day we will support SELinux in which case this can be ommitted.
@@ -74,12 +79,9 @@ usermod -g %{kaltura_group} %{kaltura_user} 2>/dev/null || true
 
 %files
 %defattr(-, %{kaltura_user}, %{kaltura_group} , 0775)
-%dir %{kaltura_prefix}/var/live/dvr
+%dir %{livedvr_prefix}
+%{livedvr_prefix}
 
-%if %{use_systemd}
-%{_unitdir}/WowzaStreamingEngine.service
-%{_unitdir}/WowzaStreamingEngineManager.service
-%endif
 
 
 %changelog
