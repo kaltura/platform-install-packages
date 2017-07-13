@@ -27,5 +27,5 @@ if [ $? -ne 0 ];then
 fi
 set -e
 rabbitmqadmin declare exchange name=kaltura_exchange type=fanout durable=true
-rabbitmqadmin declare queue name=`hostname` durable=false 'arguments={"x-message-ttl":86400000}'
+rabbitmqadmin declare queue name=`hostname` durable=true 'arguments={"x-message-ttl":86400000}'
 
