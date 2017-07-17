@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 12.20.0
-Release: 21
+Release: 22
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -322,44 +322,31 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Sun Jul 16 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.20.0-21
-- Nightly build.
-
-* Sat Jul 15 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.20.0-20
-- Nightly build.
-
-* Fri Jul 14 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.20.0-19
-- Nightly build.
-
-* Thu Jul 13 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.20.0-18
-- Nightly build.
-
-* Wed Jul 12 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.20.0-17
-- Nightly build.
-
-* Tue Jul 11 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.20.0-16
-- Nightly build.
-
-* Mon Jul 10 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.20.0-12
-- Nightly build.
-
-* Sun Jul 9 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.20.0-9
-- Nightly build.
-
-* Sat Jul 8 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.20.0-8
-- Nightly build.
-
-* Fri Jul 7 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.20.0-7
-- Nightly build.
-
-* Thu Jul 6 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.20.0-6
-- Nightly build.
-
-* Wed Jul 5 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.20.0-4
-- Nightly build.
-
-* Tue Jul 4 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.20.0-2
-- Nightly build.
+* Mon Jul 17 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.20.0-22
+- PLAT-7741: additional filters shouldn't be used with filter (https://github.com/kaltura/server/pull/5816)
+- PLAT-7725: Deploy live packager delivery profiles to support new live playback (https://github.com/kaltura/server/pull/5809)
+- PLAT-7737: when generating target client send partnerId to login to solve error when same user id exists multiple partner ids (https://github.com/kaltura/server/pull/5807)
+- Fix monitoring (https://github.com/kaltura/server/pull/5804)
+- Coherent exception message if the kalturadw DB cannot be reached (https://github.com/kaltura/server/pull/5803)
+- SUP-10803-arf-to-wmv inter-source files (https://github.com/kaltura/server/pull/5802)
+- PLAT-7483: make sure flavour exists  (https://github.com/kaltura/server/pull/5799)
+- add privilege to spesific entryIds (https://github.com/kaltura/server/pull/5798)
+- PLAT-7682: need to add insert permission for kalturathumbcuepoint (https://github.com/kaltura/server/pull/5797)
+- PLAT-7483: should use origEntry instead of reference for serverUrl (https://github.com/kaltura/server/pull/5796)
+- PLAT-7635: Update not triggered when replacing timed thumb asset associated with cue point (https://github.com/kaltura/server/pull/5795)
+- add referenceId to the entry updateable fields list (https://github.com/kaltura/server/pull/5792)
+- SUP-11032: fail process for unsupported file types (https://github.com/kaltura/server/pull/5791)
+- PLAT-7682: allow capture space to add cue points and thumb assets (https://github.com/kaltura/server/pull/5788)
+- add DigitalElement geocoder (https://github.com/kaltura/server/pull/5787)
+- add bypass to user filter in the cue point service (https://github.com/kaltura/server/pull/5784)
+- Increment recorded entry index only in case new recorded entry id is defined and is different from current one (https://github.com/kaltura/server/pull/5783)
+- Add lastFileTimestamp to DF configuration (https://github.com/kaltura/server/pull/5781)
+- PLAT-7714: when setting recorded content fetch assets in deleted status as well in case someone changed conversion profile id (https://github.com/kaltura/server/pull/5780)
+- PLAT-7708: Refactor drop folder watcher to avoid multi scanning of same file (https://github.com/kaltura/server/pull/5778)
+- Change file name to template and add check of exist (https://github.com/kaltura/server/pull/5777)
+- PLAT-7316: kObjectDeleteHandler::objectDeleted is called twice any time an object is deleted (https://github.com/kaltura/server/pull/5775)
+- PLAT-7676 (https://github.com/kaltura/server/pull/5773)
+- PLAT-7675 (https://github.com/kaltura/server/pull/5771)
 
 * Tue Jul 4 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.20.0-1
 - Ver Bounce to 12.20.0

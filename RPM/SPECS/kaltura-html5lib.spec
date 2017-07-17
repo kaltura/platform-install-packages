@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.58.1
+Version: v2.58.2
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -82,6 +82,9 @@ fi
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Mon Jul 17 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v2.58.2-1
+- Fix webcast VOD entries do not load
+
 * Mon Jul 3 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v2.58.1-1
 - FEC-6668 - Upgrade Comscore plugin to 1.2.3
 - FEC-6679 - Support passing tags filed from TVPAPI to player
