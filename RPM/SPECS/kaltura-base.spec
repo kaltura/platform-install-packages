@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 12.20.0
-Release: 22
+Version: 13.0.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -322,6 +322,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Tue Jul 18 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.0.0-1
+- Ver Bounce to 13.0.0
+
 * Mon Jul 17 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 12.20.0-22
 - PLAT-7741: additional filters shouldn't be used with filter (https://github.com/kaltura/server/pull/5816)
 - PLAT-7725: Deploy live packager delivery profiles to support new live playback (https://github.com/kaltura/server/pull/5809)
