@@ -1,3 +1,38 @@
+kaltura-base (12.20.0-2) lynx; urgency=low
+
+  * PLAT-7741: additional filters shouldn't be used with filter (https://github.com/kaltura/server/pull/5816)
+  * PLAT-7725: Deploy live packager delivery profiles to support new live playback (https://github.com/kaltura/server/pull/5809)
+  * PLAT-7737: when generating target client send partnerId to login to solve error when same user id exists multiple partner ids (https://github.com/kaltura/server/pull/5807)
+  * Fix monitoring (https://github.com/kaltura/server/pull/5804)
+  * Coherent exception message if the kalturadw DB cannot be reached (https://github.com/kaltura/server/pull/5803)
+  * SUP-10803-arf-to-wmv inter-source files (https://github.com/kaltura/server/pull/5802)
+  * PLAT-7483: make sure flavour exists  (https://github.com/kaltura/server/pull/5799)
+  * add privilege to spesific entryIds (https://github.com/kaltura/server/pull/5798)
+  * PLAT-7682: need to add insert permission for kalturathumbcuepoint (https://github.com/kaltura/server/pull/5797)
+  * PLAT-7483: should use origEntry instead of reference for serverUrl (https://github.com/kaltura/server/pull/5796)
+  * PLAT-7635: Update not triggered when replacing timed thumb asset associated with cue point (https://github.com/kaltura/server/pull/5795)
+  * add referenceId to the entry updateable fields list (https://github.com/kaltura/server/pull/5792)
+  * SUP-11032: fail process for unsupported file types (https://github.com/kaltura/server/pull/5791)
+  * PLAT-7682: allow capture space to add cue points and thumb assets (https://github.com/kaltura/server/pull/5788)
+  * add DigitalElement geocoder (https://github.com/kaltura/server/pull/5787)
+  * add bypass to user filter in the cue point service (https://github.com/kaltura/server/pull/5784)
+  * Increment recorded entry index only in case new recorded entry id is defined and is different from current one (https://github.com/kaltura/server/pull/5783)
+  * Add lastFileTimestamp to DF configuration (https://github.com/kaltura/server/pull/5781)
+  * PLAT-7714: when setting recorded content fetch assets in deleted status as well in case someone changed conversion profile id (https://github.com/kaltura/server/pull/5780)
+  * PLAT-7708: Refactor drop folder watcher to avoid multi scanning of same file (https://github.com/kaltura/server/pull/5778)
+  * Change file name to template and add check of exist (https://github.com/kaltura/server/pull/5777)
+  * PLAT-7316: kObjectDeleteHandler::objectDeleted is called twice any time an object is deleted (https://github.com/kaltura/server/pull/5775)
+  * PLAT-7676 (https://github.com/kaltura/server/pull/5773)
+  * PLAT-7675 (https://github.com/kaltura/server/pull/5771)
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 17 Jul 2017 10:04:05 +0000
+
+kaltura-base (12.20.0-1) lynx; urgency=low
+
+  * Switching to 12.20.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Tue, 04 Jul 2017 14:28:02 +0000
+
 kaltura-base (12.19.0-2) lynx; urgency=low
 
   * Update kViewHistoryUserEntryAdvancedFilter.php (https://github.com/kaltura/server/pull/5762)

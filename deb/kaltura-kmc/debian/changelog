@@ -1,3 +1,10 @@
+kaltura-kmc (5.42.1-1) lynx; urgency=low
+
+  * Ver bounce of HTML5 to v2.58.2
+  * PLAT-7659 - Change Opera Syndication Feed Name
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 17 Jul 2017 10:23:28 +0000
+
 kaltura-kmc (5.42.0-3) lynx; urgency=low
 
   * Ver bounce of HTML5 to v2.58.1
