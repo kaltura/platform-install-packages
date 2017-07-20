@@ -40,7 +40,7 @@ BuildRequires: libopenssl-devel
 Requires(pre): pwdutils
 %endif
 
-%define nginx_vod_module_ver 1.17
+%define nginx_vod_module_ver 1.18
 %define nginx_secure_token_ver 1.3
 %define nginx_token_validate_ver 1.1
 %define nginx_vts_ver 0.1.14
@@ -52,7 +52,7 @@ Requires(pre): pwdutils
 Summary: High performance web server customized for Kaltura VOD
 Name: kaltura-nginx
 Version: 1.12.0
-Release: 4
+Release: 5
 Vendor: Kaltura inc.
 URL: http://nginx.org/
 
@@ -253,6 +253,7 @@ cd $RPM_BUILD_ROOT%{_sysconfdir}/nginx && \
    $RPM_BUILD_ROOT%{_sysconfdir}/nginx/conf.d/nginx.conf.template
 %{__install} -m 644 -p %{SOURCE17} \
    $RPM_BUILD_ROOT%{_sysconfdir}/nginx/conf.d/ssl.conf.template
+touch $RPM_BUILD_ROOT%{_sysconfdir}/nginx/conf.d/live.conf
 
 %{__mkdir} -p $RPM_BUILD_ROOT%{_sysconfdir}/sysconfig
 %{__install} -m 644 -p %{SOURCE3} \
@@ -301,6 +302,8 @@ cd $RPM_BUILD_ROOT%{_sysconfdir}/nginx && \
 %config %{_sysconfdir}/nginx/conf.d/kaltura.conf.template
 %config %{_sysconfdir}/nginx/conf.d/ssl.conf.template
 %config %{_sysconfdir}/nginx/conf.d/nginx.conf.template
+# this is essentially an empty stub. In the event liveDVR is needed on the machine, it will be populated with the needed configuration.
+%config %{_sysconfdir}/nginx/conf.d/live.conf
 %config(noreplace) %{_sysconfdir}/nginx/mime.types
 %config(noreplace) %{_sysconfdir}/nginx/fastcgi_params
 %config(noreplace) %{_sysconfdir}/nginx/scgi_params
