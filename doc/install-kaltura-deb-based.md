@@ -95,7 +95,7 @@ In such case, the postinst script for kaltrua-db will fail, if so, adjust it and
 #### MySQL Install and Configuration
 Please note that for MySQL version 5.5 and above, you must first disable strict mode enforcement.
 See:
-https://support.realtyna.com/index.php?/Knowledgebase/Article/View/535/0/how-can-i-turn-off-mysql-strict-mode
+https://dev.mysql.com/doc/refman/5.5/en/sql-mode.html#sql-mode-setting
 
 #### Install Kaltura Server with PHP 7
 By default, the installation is done against the PHP stack available from the official repo.

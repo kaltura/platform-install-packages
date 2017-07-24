@@ -108,7 +108,7 @@ To add the EPEL repo:
 #### MySQL Install and Configuration
 For MySQL versions higher 5.5 and above, note that you must disable strict mode for the deployment to succeed.
 Please see the following document:
-https://support.realtyna.com/index.php?/Knowledgebase/Article/View/535/0/how-can-i-turn-off-mysql-strict-mode
+https://dev.mysql.com/doc/refman/5.5/en/sql-mode.html#sql-mode-setting
 
 RHEL/CentOS 6 setup:
 ```bash
