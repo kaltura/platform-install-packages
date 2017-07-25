@@ -1,3 +1,13 @@
+kaltura-nginx (1.12-4) mercury; urgency=low
+
+  *  New VOD module [1.18]:
+     - support track selection with sequence id
+     - support additional SRT timestamp formats (no millis / 1-2 digits)
+  *  New RTMP module [1.2.0]:
+     - DASH improvements
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Tue, 25 Jul 2017 15:28:08 +0000
+
 kaltura-nginx (1.12-3) lynx; urgency=low
 
   * New VOD module [1.17]:
