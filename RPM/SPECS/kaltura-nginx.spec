@@ -43,8 +43,8 @@ Requires(pre): pwdutils
 %define nginx_vod_module_ver 1.18
 %define nginx_secure_token_ver 1.3
 %define nginx_token_validate_ver 1.1
-%define nginx_vts_ver 0.1.14
-%define nginx_rtmp_ver 1.1.11
+%define nginx_vts_ver 0.1.15
+%define nginx_rtmp_ver 1.2.0
 %define ngx_aws_auth_ver 2.1.1
 %define headers_more_nginx_ver 0.32
 # end of distribution specific definitions
@@ -52,7 +52,7 @@ Requires(pre): pwdutils
 Summary: High performance web server customized for Kaltura VOD
 Name: kaltura-nginx
 Version: 1.12.0
-Release: 5
+Release: 6
 Vendor: Kaltura inc.
 URL: http://nginx.org/
 
@@ -404,6 +404,13 @@ if [ $1 -ge 1 ]; then
 fi
 
 %changelog
+* Tue Jul 25 2017 Jess Portnoy <jess.portnoy@kaltura.com> - 1.12.0-6
+- New VOD module [1.18]:
+	* support track selection with sequence id
+	* support additional SRT timestamp formats (no millis / 1-2 digits)
+- New RTMP module [1.2.0]:
+	* DASH improvements
+
 * Tue May 16 2017 Jess Portnoy <jess.portnoy@kaltura.com> - 1.12.0-4
 - New VOD module [1.17]:
 	* Support multiple -s params
