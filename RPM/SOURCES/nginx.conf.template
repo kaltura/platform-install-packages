@@ -62,6 +62,7 @@ http {
 	server {
 		listen @VOD_PACKAGER_PORT@;
 		server_name @VOD_PACKAGER_HOST@;
+		include /etc/nginx/conf.d/live.conf;
 		include /etc/nginx/conf.d/kaltura.conf;
 
 	}

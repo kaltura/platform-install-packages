@@ -9,7 +9,7 @@
 
 Summary: Kaltura Open Source Video Platform - Live DVR
 Name: kaltura-livedvr
-Version: 1.15.2
+Version: 1.16.3
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -43,17 +43,19 @@ rm -rf %{buildroot}
 %build
 mkdir -p %{buildroot}/%{name}-%{version}/tmp/build 
 ./build_scripts/build_ffmpeg.sh %{buildroot}/%{name}-%{version}/tmp/build %{ffmpeg_version}
-./build_scripts/build_ts2mp4_convertor.sh %{buildroot}/%{name}-%{version}/tmp/build/ffmpeg-%{ffmpeg_version} ./liveRecorder
+./build_scripts/build_ts2mp4_convertor.sh ./liveRecorder %{buildroot}/%{name}-%{version}/tmp/build/ffmpeg-%{ffmpeg_version} 
 npm install nan
 ./build_scripts/build_addon.sh `pwd` %{buildroot}/%{name}-%{version}/tmp/build/ffmpeg-%{ffmpeg_version} Release
 
 
 %install
-mkdir -p $RPM_BUILD_ROOT%{livedvr_prefix}/bin $RPM_BUILD_ROOT%{livedvr_prefix}/liveRecorder/bin 
+mkdir -p $RPM_BUILD_ROOT%{livedvr_prefix}/bin $RPM_BUILD_ROOT%{livedvr_prefix}/liveRecorder/bin $RPM_BUILD_ROOT%{livedvr_prefix}/common/config/ $RPM_BUILD_ROOT%{livedvr_prefix}/liveRecorder/Config
 cp %{_builddir}/liveDVR-%{version}/liveRecorder/bin/ts_to_mp4_convertor $RPM_BUILD_ROOT%{livedvr_prefix}/liveRecorder/bin/ts_to_mp4_convertor
 cp %{_builddir}/liveDVR-%{version}/node_addons/FormatConverter/build/Release/FormatConverter.so $RPM_BUILD_ROOT%{livedvr_prefix}/bin/FormatConverter.node
 strip $RPM_BUILD_ROOT%{livedvr_prefix}/liveRecorder/bin/ts_to_mp4_convertor
 strip $RPM_BUILD_ROOT%{livedvr_prefix}/bin/FormatConverter.node
+cp %{_builddir}/liveDVR-%{version}/common/config/configMapping.json.template $RPM_BUILD_ROOT%{livedvr_prefix}/common/config
+cp %{_builddir}/liveDVR-%{version}/liveRecorder/Config/configMapping.ini.template $RPM_BUILD_ROOT%{livedvr_prefix}/liveRecorder/Config
 
 %pre
 # maybe one day we will support SELinux in which case this can be ommitted.
@@ -81,7 +83,8 @@ usermod -g %{kaltura_group} %{kaltura_user} 2>/dev/null || true
 %defattr(-, %{kaltura_user}, %{kaltura_group} , 0775)
 %dir %{livedvr_prefix}
 %{livedvr_prefix}
-
+%config %{livedvr_prefix}/*
+%config %{livedvr_prefix}/liveRecorder/Config/*
 
 
 %changelog
