@@ -1,3 +1,10 @@
+kaltura-html5-studio (2.1.0-1) mercury; urgency=low
+
+  * FEC-6809 - support "Disable_Studio_Update" tag
+  * Aligned with HTML5 lib v2.59
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Fri, 28 Jul 2017 15:22:40 +0000
+
 kaltura-html5-studio (2.0.9-1) lynx; urgency=low
 
   * FEC-6500 - When resizing Firefox window, the scroll bar for the menu doesn't scroll down till the end
