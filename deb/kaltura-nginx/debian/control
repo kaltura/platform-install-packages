@@ -30,7 +30,6 @@ Provides: httpd,
           nginx
 Conflicts: nginx
 Depends: 
- kaltura-postinst,
  ${misc:Depends},
  ${shlibs:Depends}
 Description: Nginx web/proxy server - for Kaltura
