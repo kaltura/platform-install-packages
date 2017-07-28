@@ -37,6 +37,9 @@ binary-indep: install
 	sed -i "s#\(widgets.kClip.*version\) =.*#\1 = $(KCLIP_VERSION)#g" $(KMC_PREFIX)/$(KMC_VERSION)/config.ini 
 	sed -i "s@^\(widgets.kdp1.conf_file\s*=.*\)@\1\nwidgets.kdp1.config_file = xml/content/kmc_preview_dark.json@g" $(KMC_PREFIX)/$(KMC_VERSION)/config.ini
 	dos2unix $(KMC_PREFIX)/$(KMC_VERSION)/config.ini
+	for i in "*.xml" "*.template" "*.ttf" "*.xsl" "*.xsd" "*.yml" "*.smil" "*.srt" "*.sql" "*.orig" "*.patch" "*.po" "*.pdf" "*.otf" "*.txt" "*.php" "*.phtml" "*.project" "*.png" "*.properties" "*.sample" "*.swf" "*.sf" "*.swz" "*.uad" "*.prefs" "*.psd" "*.rvmrc" "*.sln" "*.ini" "*.log" ;do \
+		find $(KMC_PREFIX)  -iname "$i" -exec chmod 644 {} \; ; \
+	done
 	cp -r $(KMC_PREFIX)/doc/* $(KALTURA_PREFIX)/web/content/docs
 	dh_install $(KALTURA_PREFIX)
 	dh_gencontrol -u-v$(DEB_VERSION) 
