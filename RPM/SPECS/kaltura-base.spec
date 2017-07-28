@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 13.0.0
-Release: 12
+Release: 13
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -322,6 +322,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Fri Jul 28 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.0.0-13
+- Nightly build.
+
 * Fri Jul 28 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.0.0-12
 - PLAT-7823 - add params validation and partner filters to userEntry filter (https://github.com/kaltura/server/pull/5870)
 - SUP-11599 - new AR mode (https://github.com/kaltura/server/pull/5868)
