@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.58.2
+Version: v2.59
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -82,6 +82,38 @@ fi
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Fri Jul 28 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v2.59-1
+- FEC-6818 - Upgrade Yoboura plugin to latest 
+- FEC-6685 - youbora plugin doesn't send entry information and player config info when player embedded in iframe embed
+- FEC-6814 - Youbora params from flashvar not present in output 
+- SUP-11452 - Youbora Metrics Dropped To Zero  
+- SUP-10972 - Sticky Playhead/Mouse  
+- SUP-11066 - Constant Spinner on iOS  
+- Revert jquery update (#3463)  
+- FEC-6337 - 360 support for web - Phase 2   
+- SUP-11066 - Constant Spinner on iOS
+- SUP-10972 - Sticky Playhead/Mouse  
+- FEC-6615 - LIVE - IPhone safari audio selector doesn't response after pause/resume.  
+- FEV-66 - CTA screen isn't presented when enabled related with empty entries list.  
+- Change media with FPS DRM fails (#3470)  
+- FEC-6820 - Live+DVR|After streaming stop/start, playback misbehaves till page refresh.   
+- SUP-11066 - Constant Spinner on iOS 
+- FEV-76 - The new player version (2.59.rc5) is not working with analytics configuration   
+- SUP-10955 - Video plays for a short moment before the ad  
+- FEC-6911 - Enable disabling video ended watch dog   
+- SUP-11290 - Large amount of cue-points -> very long player loading time  
+- update icomoon (#3475)
+- PLAT-7193 - Webcast| player version 2.54.1| Empty green notification appear in the Q&A plugin 
+- Accessibility (#3455)  
+- Multicast webcast (#3435)  
+- FEC-6928 - Combined playlist - VOD - Ad is not starting and pause and next entry is always disabled  
+- FEC-6907 - 360 and VR not working in a playlist (that has another entry which is not 360) 
+- FEC-6522 - Unable to play Dash in player 
+- FEC-6860 - [Android][Player] - When playing a video with 2 segments, the second segment is not playing with audio
+- FEC-6839 - [iPad][Player] - Midroll is played muted when it is supposed to be played with audio
+- Duration not updated correctly when playing dash
+- SUPPS-11290 - JIRA project doesn't exist or you don't have permission to view it.  
+
 * Mon Jul 17 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v2.58.2-1
 - Fix webcast VOD entries do not load
 

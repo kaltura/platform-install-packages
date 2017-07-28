@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5-studio
-Version: v2.0.9
+Version: v2.1.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -51,6 +51,10 @@ rm -rf %{buildroot}
 %{prefix}/apps/studio/%{version}
 
 %changelog
+* Fri Jul 28 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v2.1.0-1
+- FEC-6809 - support "Disable_Studio_Update" tag
+- Aligned with HTML5 lib v2.59
+
 * Thu Mar 9 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v2.0.9-1
 - FEC-6500 - When resizing Firefox window, the scroll bar for the menu doesn't scroll down till the end
 - Aligned with HTML5 player lib 2.54

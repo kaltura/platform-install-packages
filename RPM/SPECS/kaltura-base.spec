@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 13.0.0
-Release: 11
+Release: 12
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -322,35 +322,33 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Thu Jul 27 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.0.0-11
-- Nightly build.
-
-* Wed Jul 26 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.0.0-10
-- Nightly build.
-
-* Tue Jul 25 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.0.0-9
-- Nightly build.
-
-* Mon Jul 24 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.0.0-8
-- Nightly build.
-
-* Sun Jul 23 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.0.0-7
-- Nightly build.
-
-* Sat Jul 22 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.0.0-6
-- Nightly build.
-
-* Fri Jul 21 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.0.0-5
-- Nightly build.
-
-* Thu Jul 20 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.0.0-4
-- Nightly build.
-
-* Wed Jul 19 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.0.0-3
-- Nightly build.
-
-* Tue Jul 18 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.0.0-2
-- Nightly build.
+* Fri Jul 28 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.0.0-12
+- PLAT-7823 - add params validation and partner filters to userEntry filter (https://github.com/kaltura/server/pull/5870)
+- SUP-11599 - new AR mode (https://github.com/kaltura/server/pull/5868)
+- SUPPS-1191 - Serve Flavor DC Redirect Fix (https://github.com/kaltura/server/pull/5865)
+- SUPPS-1191 - Serve Flavor DC Redirect Fix (https://github.com/kaltura/server/pull/5863)
+- caption fixes (https://github.com/kaltura/server/pull/5861)
+- PLAT-7810 - Entry appears multiple times in history page (https://github.com/kaltura/server/pull/5859)
+- KMS-14633 - modify metaData delete action. (https://github.com/kaltura/server/pull/5858)
+- SUP-9349 - unescape parameters that were escaped in Flex KMC and passed via ExternalInterface (https://github.com/kaltura/server/pull/5857)
+- PLAT-7804 - verify that the resource file type is text (https://github.com/kaltura/server/pull/5856)
+- PS-3201 - When making a playmanifest request with a minBitrate that is higher than the available bitrates, all flavours should be returned (https://github.com/kaltura/server/pull/5852)
+- PLAT-7801 - New 'virtual' Chunked-FFmpeg transcoder type (https://github.com/kaltura/server/pull/5851)
+- SUP-11614 - embedIframeJsAction should pass referrer when dumping request to avoid ACL not passing validation (https://github.com/kaltura/server/pull/5850)
+- Set MRSS timeout (https://github.com/kaltura/server/pull/5849)
+- PLAT-7796 - Resolve PHP Fatal error: Call to undefined method LiveStreamEntry::getPushPublishConfigurations when pushPublish flag enabled on entry (https://github.com/kaltura/server/pull/5845)
+- PLAT-7571 -  Add support for Thumbnail Stripes (https://github.com/kaltura/server/pull/5841)
+- Add play_manifest_cache_age kconf param (https://github.com/kaltura/server/pull/5838)
+- PLAT-7663: shouldn't use recorderLengthInMsecs if entry is no longer served from live (https://github.com/kaltura/server/pull/5837)
+- Add sender header to MR mail (https://github.com/kaltura/server/pull/5836)
+- Add serve thumbnail with thumbnail api with flavor_params_id parameter (https://github.com/kaltura/server/pull/5833)
+- SUP-11336: Correctly sync entitlement info between parent and child entries (https://github.com/kaltura/server/pull/5832)
+- PLAT-7754: Add support for distributing all entry thumbnails + Resolve bugs in K2K distribution flow (https://github.com/kaltura/server/pull/5830)
+- Check response code from curl request (https://github.com/kaltura/server/pull/5829)
+- Sequence in dash and hls only (https://github.com/kaltura/server/pull/5827)
+- PS-3180 - playmanifest - adding minimum bit-rate limit parameter (https://github.com/kaltura/server/pull/5826)
+- Check for type in media->get() (https://github.com/kaltura/server/pull/5824)
+- PLAT-7669: add addContent action to the Data service (https://github.com/kaltura/server/pull/5814)
 
 * Tue Jul 18 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.0.0-1
 - Ver Bounce to 13.0.0

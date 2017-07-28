@@ -1,6 +1,6 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmc
-Version: v5.42.1
+Version: v5.42.3
 Release: 1
 Summary: Kaltura Management Console
 
@@ -85,6 +85,10 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Fri Jul 28 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v5.42.3-1
+- PLAT-7173 - KMC ADV tab: When changing duration at cuepoint2 ->Duration at cuepoint1 is updated.
+- Ver bounce of HTML5 to v2.59
+
 * Mon Jul 17 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v5.42.1-1
 - Ver bounce of HTML5 to v2.58.2
 - PLAT-7659 - Change Opera Syndication Feed Name
