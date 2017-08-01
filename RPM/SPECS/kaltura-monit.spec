@@ -7,8 +7,8 @@
 
 Summary: Process monitor and restart utility
 Name: kaltura-monit
-Version: 5.21.0
-Release: 6
+Version: 5.23.0
+Release: 1 
 License: GPLv3
 Group: High Availability Management 
 URL: http://mmonit.com/monit/
@@ -135,6 +135,9 @@ fi
 #%attr(0600, root, root) %config(noreplace) %{confdir}/monit.conf
 
 %changelog
+* Tue Aug 1 2017 Jess Portnoy <jess.portnoy@kaltura.com> - 5.23.0-1
+- New Upstream Release, see: https://mmonit.com/monit/changes
+
 * Mon May 22 2017 Jess Portnoy <jess.portnoy@kaltura.com> - 5.21.0-2
 - Added systemd config
 
