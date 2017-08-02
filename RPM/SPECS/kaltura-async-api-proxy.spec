@@ -14,7 +14,7 @@ Source0: %{name}-v%{version}.tar.gz
 URL: https://github.com/kaltura/AsyncApiProxy
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
-Requires: nodejs >= 6.0.0 nodejs-forever nodejs-config nodejs-os nodejs-simple-rate-limiter nodejs-continuation-local-storage nodejs-express nodejs-uuid nodejs-request nodejs-crypto nodejs-is-subset nodejs-bluebird nodejs-memory-cache nodejs-ipaddr.js nodejs-compression nodejs-cluster
+Requires: nodejs >= 6.0.0 nodejs-forever nodejs-config nodejs-os nodejs-simple-rate-limiter nodejs-continuation-local-storage nodejs-express nodejs-uuid nodejs-request nodejs-crypto nodejs-is-subset nodejs-bluebird nodejs-memory-cache nodejs-ipaddr.js nodejs-compression nodejs-cluster nodejs-body-parser
 Requires(post): chkconfig
 BuildRequires: nodejs-packaging
 AutoReq: no 
@@ -41,7 +41,7 @@ mkdir -p $RPM_BUILD_ROOT%{confdir}
 mkdir -p $RPM_BUILD_ROOT%{logdir}
 mkdir -p $RPM_BUILD_ROOT%{_initrddir}
 
-sed -e "s#@LOG_DIR@#%{logdir}#g" -e "s#@ASYNC_API_PROXY_PREFIX@#%{prefix}#g"  %{_builddir}/AsyncApiProxy-%{version}/bin/async-proxy-server.template.sh > $RPM_BUILD_ROOT%{_initrddir}/kaltura-async-proxy-server
+sed -e "s#@LOG_DIR@#%{logdir}#g" -e "s#@ASYNC_API_PROXY_PREFIX@#%{prefix}#g"  -e 's#@NODE_MODULES_PATH@#/usr/lib/node_modules#g'  %{_builddir}/AsyncApiProxy-%{version}/bin/async-proxy-server.template.sh > $RPM_BUILD_ROOT%{_initrddir}/kaltura-async-proxy-server
 chmod +x $RPM_BUILD_ROOT%{_initrddir}/kaltura-async-proxy-server
 rm -rf %{_builddir}/AsyncApiProxy-%{version}/bin 
 cp -r %{_builddir}/AsyncApiProxy-%{version}/* $RPM_BUILD_ROOT%{prefix}/
