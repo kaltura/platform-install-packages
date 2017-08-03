@@ -6,7 +6,7 @@
 
 Summary: Kaltura Async Api Proxy 
 Name: kaltura-async-api-proxy 
-Version: 1.0.9
+Version: 1.0.10
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
