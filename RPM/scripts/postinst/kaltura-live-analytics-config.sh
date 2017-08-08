@@ -49,9 +49,9 @@ fi
 IP2LOC_TMPDIR=/tmp/ip2loc/
 mkdir -p $IP2LOC_TMPDIR
 cd $IP2LOC_TMPDIR
-wget "http://www.ip2location.com/download?productcode=DB3LITEBIN&login=$IP2LOC_USER&password=$IP2LOC_PASS" -O $IP2LOC_TMPDIR/DB3LITE.zip
-unzip $IP2LOC_TMPDIR/DB3LITE.zip
-mv IP2LOCATION-LITE-DB3.BIN /opt/kaltura/data/geoip/
+wget "http://www.ip2location.com/download?productcode=DB5LITEBIN&login=$IP2LOC_USER&password=$IP2LOC_PASS" -O $IP2LOC_TMPDIR/DB5LITE.zip
+unzip $IP2LOC_TMPDIR/DB5LITE.zip
+mv IP2LOCATION-LITE-DB5.BIN /opt/kaltura/data/geoip/
 cd -
 rm -rf $IP2LOC_TMPDIR
 
