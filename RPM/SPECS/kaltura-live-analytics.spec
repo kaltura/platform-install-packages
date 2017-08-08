@@ -2,7 +2,7 @@
 Summary: Kaltura Live Analytics
 Name: kaltura-live-analytics
 Version: v0.5.35
-Release: 5
+Release: 6
 License: AGPLv3+
 Group: Server/Platform 
 URL: http://kaltura.org
@@ -123,6 +123,9 @@ fi
 /usr/share/tomcat/lib/*jar
 
 %changelog
+* Tue Aug 8 2017 jess.portnoy@kaltura.com <Jess Portnoy> - v0.5.35-6
+https://github.com/kaltura/platform-install-packages/pull/600/files
+
 * Thu Mar 16 2017 jess.portnoy@kaltura.com <Jess Portnoy> - v0.5.35-4
 - Adjusted logrotation for live-analytics-driver.log
 - Added log4j directives for live-analytics-driver.log
