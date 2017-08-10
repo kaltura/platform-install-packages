@@ -413,13 +413,14 @@ Once the upgrade completes, please run:
 /opt/kaltura/bin/kaltura-config-all.sh
 ```
 
+/opt/kaltura/bin/kaltura-config-all.sh can accept an answer file as its first argument, allowing for an unattended deployment/upgrade.
+For more on that, see: https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura.template.ans 
+
 In the event you would like to see what changes the package includes before deciding whether or not you wish to upgrade, run:
 ```bash
 yum install yum-plugin-changelog
 yum changelog all kaltura-package-name-here
 ```
-
-To upgrade your DB schema.
 
 ## Remove Kaltura
 Use this in cases where you want to clear the database and start from fresh.
