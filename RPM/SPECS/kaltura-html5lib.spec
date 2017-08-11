@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.59
+Version: v2.60
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -82,6 +82,25 @@ fi
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Fri Aug 11 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v2.60-1
+- FEC-6609 - CLONE - [iPad] Chromecast: Multi Subtitles - enable subtitles and then connect to receiver - the subtitles are none
+- SUP-11548 - Kaltura.ForceLayoutRedraw=true causes vertical black bar in playlist players
+- FEC-6981 - live - autoPlay + disableLiveCheck doesn't play
+- FEC-6812 - [AutoPlay_AutoMute][Android] - After an ad is played with audio, the video after it is played muted
+- FEC-6813 - [AutoPlay_AutoMute][Android] - When pausing a video or clicking full screen, the video is playing muted
+- FEC-6861 - [Android][Player] - After clicking 'Skip Ad' on an ad, the video is playing muted
+- FEC-6958 - After stop/start of live stream, player sends numerous requests to stats.kaltura.com, causing player to stuck
+- SUP-11246 - Secure thumbnail request is redirected to insecure response
+- FEC-6795 - Error messages on small players (280x158px, used for the new KMC preview player) do not match the player size
+- Receiver default captions fix (#3504)
+- Chromecast - Enable default captions from web sender (#3503)
+- Update chromecast studio description
+- add chromecast to studio
+- FEC-6957 - Webcast - Player doesn't fallback on IE11/Safari when multicast is not configured in the access control for this user but it the player is configured to ask for multicast
+- Reset adsLoader flag on destory (#3501)
+- Register to IMA events only once during playback (#3499)
+- Revert "Accessibility (#3455)" (#3498)
+
 * Fri Jul 28 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v2.59-1
 - FEC-6818 - Upgrade Yoboura plugin to latest 
 - FEC-6685 - youbora plugin doesn't send entry information and player config info when player embedded in iframe embed

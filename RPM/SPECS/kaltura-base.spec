@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 13.1.0
-Release: 12
+Release: 13
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -322,38 +322,32 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Thu Aug 10 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.1.0-12
-- Nightly build.
-
-* Wed Aug 9 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.1.0-11
-- Nightly build.
-
-* Tue Aug 8 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.1.0-10
-- Nightly build.
-
-* Mon Aug 7 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.1.0-9
-- Nightly build.
-
-* Sun Aug 6 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.1.0-8
-- Nightly build.
-
-* Sat Aug 5 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.1.0-7
-- Nightly build.
-
-* Fri Aug 4 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.1.0-6
-- Nightly build.
-
-* Thu Aug 3 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.1.0-5
-- Nightly build.
-
-* Wed Aug 2 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.1.0-4
-- Nightly build.
-
-* Tue Aug 1 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.1.0-3
-- Nightly build.
-
-* Mon Jul 31 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.1.0-2
-- Nightly build.
+* Fri Aug 11 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.1.0-13
+- serveFlavor replace path only when pathOnly is set (https://github.com/kaltura/server/pull/5917)
+- PLAT-7863: If new file download attempt failed unlink local file created (https://github.com/kaltura/server/pull/5914)
+- ElasticSearch modifcations (https://github.com/kaltura/server/pull/5912)
+- add default value to type in retrieveByLastId (https://github.com/kaltura/server/pull/5911)
+- support path prefix replacement in serveFlavor (https://github.com/kaltura/server/pull/5909)
+- Update kMetadataManager.php (https://github.com/kaltura/server/pull/5907)
+- Avoid PHP Fatal error in case getSingleLayerCache did return cache object (https://github.com/kaltura/server/pull/5906)
+- add delete from elastic index (https://github.com/kaltura/server/pull/5905)
+- PLAT-7863: Move validation of invalid import URL after the file download attempt to avoid failing request to domains that block head request (https://github.com/kaltura/server/pull/5902)
+- Fix category full name indexing (https://github.com/kaltura/server/pull/5901)
+- Specify on alias actions what plugins they come from (https://github.com/kaltura/server/pull/5899)
+- add the unlockJobsByScheduler script (https://github.com/kaltura/server/pull/5897)
+- apiGrep - add support for --match-any (https://github.com/kaltura/server/pull/5895)
+- add flag for disabling events (https://github.com/kaltura/server/pull/5894)
+- optimize grepping of gzip files (https://github.com/kaltura/server/pull/5892)
+- PLAT-7836: Add copy from template entry for live stream entries (https://github.com/kaltura/server/pull/5891)
+- add script for grepping api logs (https://github.com/kaltura/server/pull/5889)
+- SUP-11537: Allow uploading of MO files in restriction mode. (https://github.com/kaltura/server/pull/5888)
+- PLAT-7837: prevent user-entry duplicate only on history context (https://github.com/kaltura/server/pull/5887)
+- ElasticSearch (https://github.com/kaltura/server/pull/5885)
+- SUP-11599 - Fix non-integer width case (https://github.com/kaltura/server/pull/5883)
+- Use standart error when filter is not provided correctly + minor code changes (https://github.com/kaltura/server/pull/5871)
+- PLAT-7822: indexIdGreaterThan should refer to the entry int_id in case of entry (https://github.com/kaltura/server/pull/5869)
+- PLAT-7821: When fetching multiple entrries need to reset deliveryAttributes between entry iterations (https://github.com/kaltura/server/pull/5867)
+- PLAT7813: use playlist version when creating thumbnail (https://github.com/kaltura/server/pull/5864)
 
 * Mon Jul 31 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.1.0-1
 - Ver Bounce to 13.1.0

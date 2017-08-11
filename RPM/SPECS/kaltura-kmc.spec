@@ -1,7 +1,7 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmc
 Version: v5.42.3
-Release: 1
+Release: 2
 Summary: Kaltura Management Console
 
 Group: System Management	
@@ -85,6 +85,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Fri Aug 11 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v5.42.3-2
+- Ver bounce of HTML5 to v2.60
+
 * Fri Jul 28 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v5.42.3-1
 - PLAT-7173 - KMC ADV tab: When changing duration at cuepoint2 ->Duration at cuepoint1 is updated.
 - Ver bounce of HTML5 to v2.59
