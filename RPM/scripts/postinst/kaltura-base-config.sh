@@ -504,8 +504,9 @@ ln -sf $BASE_DIR/app/configurations/logrotate/kaltura_base /etc/logrotate.d/
 ln -sf $BASE_DIR/app/configurations/logrotate/kaltura_api /etc/logrotate.d/
 touch  "$BASE_DIR/app/base-config.lock"
 
+find $BASE_DIR/app/cache/ -type f -exec rm {} \;
+find $BASE_DIR/log -type f -exec chmod 664 {} \; 
 find $BASE_DIR/app/cache/ $BASE_DIR/log -type d -exec chmod 775 {} \; 
-find $BASE_DIR/app/cache/ $BASE_DIR/log -type f -exec chmod 664 {} \; 
 chown -R kaltura.apache $BASE_DIR/app/cache/ $BASE_DIR/log
 chmod 775 $BASE_DIR/web/content
 if [ -d /usr/lib/red5/webapps/oflaDemo ];then
