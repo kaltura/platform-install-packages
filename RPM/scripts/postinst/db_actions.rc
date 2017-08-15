@@ -6,7 +6,7 @@ kaltura_PRIVILEGES="INSERT,UPDATE,DELETE,SELECT,ALTER,CREATE,DROP"
 kaltura_USER="kaltura"
 kaltura_SQL_FILES="/opt/kaltura/app/deployment/base/sql/01.kaltura_ce_tables.sql /opt/kaltura/app/deployment/base/sql/04.stored_procedures.sql"
 
-kaltura_sphinx_log_PRIVILEGES="SELECT,INSERT,UPDATE"
+kaltura_sphinx_log_PRIVILEGES="INSERT,UPDATE,DELETE,SELECT,ALTER,CREATE,DROP"
 kaltura_sphinx_log_USER="kaltura"
 kaltura_sphinx_log_SQL_FILES="/opt/kaltura/app/deployment/base/sql/01.kaltura_sphinx_ce_tables.sql"
 

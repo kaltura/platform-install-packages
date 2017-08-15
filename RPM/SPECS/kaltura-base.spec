@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 13.1.0
-Release: 16
+Release: 17
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -242,6 +242,8 @@ if [ "$1" = 2 ];then
 			# disbale Default_Akamai_HLS_direct since we want the nginx vod-module profile to be used [ID 1001, system_name: Kaltura HLS segmentation]
 			echo "update delivery_profile set is_default=0 where id=1 and system_name='Default_Akamai_HLS_direct';"|mysql -h$DB1_HOST -u $DB1_USER -p$DB1_PASS -P$DB1_PORT $DB1_NAME
 			echo "GRANT INSERT,UPDATE,DELETE,SELECT,ALTER,DROP,CREATE ON kaltura.* TO '$DB_USER'@'%';FLUSH PRIVILEGES;"|mysql -h$DB1_HOST -u $SUPER_USER -p$SUPER_USER_PASSWD -P$DB1_PORT
+			echo "GRANT INSERT,UPDATE,DELETE,SELECT,ALTER,DROP,CREATE ON kaltura_sphinx_log.* TO '$DB_USER'@'%';FLUSH PRIVILEGES;"|mysql -h$DB1_HOST -u $SUPER_USER -p$SUPER_USER_PASSWD -P$DB1_PORT
+			echo "ALTER TABLE kaltura_sphinx_log.sphinx_log ADD type INT AFTER created_at;"|mysql -h$DB1_HOST -u $SUPER_USER -p$SUPER_USER_PASSWD -P$DB1_PORT 2>/dev/null|| true
 		fi
 			MINUS_2_PARTNER_ADMIN_SECRET=`echo "select admin_secret from partner where id=-2"|mysql -N -h$DB1_HOST -u$DB1_USER -p$DB1_PASS $DB1_NAME -P$DB1_PORT`
 			CONF_FILES=`find $APP_DIR/deployment/updates/ -type f -name "*template.xml"`
@@ -322,14 +324,8 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Sun Aug 13 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.1.0-16
-- Nightly build.
-
-* Sat Aug 12 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.1.0-15
-- Nightly build.
-
-* Fri Aug 11 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.1.0-14
-- Nightly build.
+* Tue Aug 15 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.1.0-17
+- In older versions, the 'kaltura' user did not have ALTER priviliges on the kaltura_sphinx_log DB. Added %post action to correct this.
 
 * Fri Aug 11 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.1.0-13
 - serveFlavor replace path only when pathOnly is set (https://github.com/kaltura/server/pull/5917)

@@ -1,8 +1,9 @@
 %define wowza_version 4.6.0
 %define wowza_prefix /usr/local/WowzaStreamingEngine-%{wowza_version}
 %define media_server_version 4.5.9.68 
-%define livedvr_prefix /opt/kaltura/livedvr
 %define use_systemd (0%{?fedora} && 0%{?fedora} >= 18) || (0%{?rhel} && 0%{?rhel} >= 7)
+%define kaltura_root_prefix	/opt/kaltura
+%define livedvr_prefix %{kaltura_root_prefix}/livedvr
 %define kaltura_user	kaltura
 %define kaltura_group	kaltura
 %define ffmpeg_version 3.0
@@ -15,7 +16,10 @@ License: AGPLv3+
 Group: Server/Platform 
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires: kaltura-monit, kaltura-base, redhat-lsb-core, nodejs >= 6.0.0 
+Requires: kaltura-monit, kaltura-base, redhat-lsb-core, nodejs >= 6.0.0, kaltura-ngnix 
+Requires(post): chkconfig
+Requires(preun): chkconfig
+Requires(preun): initscripts
 BuildRequires: unzip
 Source0: %{name}-%{version}.tar.gz
 
@@ -49,13 +53,16 @@ npm install nan
 
 
 %install
-mkdir -p $RPM_BUILD_ROOT%{livedvr_prefix}/bin $RPM_BUILD_ROOT%{livedvr_prefix}/liveRecorder/bin $RPM_BUILD_ROOT%{livedvr_prefix}/common/config/ $RPM_BUILD_ROOT%{livedvr_prefix}/liveRecorder/Config
+mkdir -p $RPM_BUILD_ROOT/%{_sysconfdir}/init.d
+mkdir -p $RPM_BUILD_ROOT%{livedvr_prefix}/bin $RPM_BUILD_ROOT%{livedvr_prefix}/liveRecorder/bin $RPM_BUILD_ROOT%{livedvr_prefix}/common/config/ $RPM_BUILD_ROOT%{livedvr_prefix}/liveRecorder/Config $RPM_BUILD_ROOT%{livedvr_prefix}/log $RPM_BUILD_ROOT/%{kaltura_root_prefix}/web/content/kLive/liveRecorder/recordings/newSession $RPM_BUILD_ROOT/%{kaltura_root_prefix}/web/content/kLive/liveRecorder/recordings/append $RPM_BUILD_ROOT/%{kaltura_root_prefix}/web/content/kLive/liveRecorder/error $RPM_BUILD_ROOT/%{kaltura_root_prefix}/web/content/kLive/liveRecorder/incoming $RPM_BUILD_ROOT/%{kaltura_root_prefix}/web/content/kLive/liveRecorder/recordings
 cp %{_builddir}/liveDVR-%{version}/liveRecorder/bin/ts_to_mp4_convertor $RPM_BUILD_ROOT%{livedvr_prefix}/liveRecorder/bin/ts_to_mp4_convertor
 cp %{_builddir}/liveDVR-%{version}/node_addons/FormatConverter/build/Release/FormatConverter.so $RPM_BUILD_ROOT%{livedvr_prefix}/bin/FormatConverter.node
 strip $RPM_BUILD_ROOT%{livedvr_prefix}/liveRecorder/bin/ts_to_mp4_convertor
 strip $RPM_BUILD_ROOT%{livedvr_prefix}/bin/FormatConverter.node
 cp %{_builddir}/liveDVR-%{version}/common/config/configMapping.json.template $RPM_BUILD_ROOT%{livedvr_prefix}/common/config
 cp %{_builddir}/liveDVR-%{version}/liveRecorder/Config/configMapping.ini.template $RPM_BUILD_ROOT%{livedvr_prefix}/liveRecorder/Config
+cp %{_builddir}/liveDVR-%{version}/serviceWrappers/linux/kLiveController $RPM_BUILD_ROOT/%{_sysconfdir}/init.d/%{name} 
+cp %{_builddir}/liveDVR-%{version}/liveRecorder/serviceWrappers/linux/liveRecorder $RPM_BUILD_ROOT/%{_sysconfdir}/init.d/kaltura-live-recorder 
 
 %pre
 # maybe one day we will support SELinux in which case this can be ommitted.
@@ -74,17 +81,30 @@ getent passwd %{kaltura_user} >/dev/null || useradd -m -r -u7373 -d %{prefix} -s
 
 usermod -g %{kaltura_group} %{kaltura_user} 2>/dev/null || true
 %post
-
+if [ "$1" = 1 ];then
+	/sbin/chkconfig --add %{name}
+	/sbin/chkconfig %{name} on
+	/sbin/chkconfig --add kaltura-live-recorder
+	/sbin/chkconfig kaltura-live-recorder on
+fi
 %preun
-
+if [ "$1" = 0 ] ; then
+	/sbin/chkconfig --del %{name}
+	service %{name} stop
+	/sbin/chkconfig --del kaltura-live-recorder
+	service kaltura-live-recorder stop
+fi
 %postun
 
 %files
 %defattr(-, %{kaltura_user}, %{kaltura_group} , 0775)
 %dir %{livedvr_prefix}
 %{livedvr_prefix}
-%config %{livedvr_prefix}/*
+%{kaltura_root_prefix}/web/content/kLive/liveRecorder/*
+%config %{livedvr_prefix}/common/config/*
 %config %{livedvr_prefix}/liveRecorder/Config/*
+%{_sysconfdir}/init.d/%{name}
+%{_sysconfdir}/init.d/kaltura-live-recorder
 
 
 %changelog
