@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.60
+Version: v2.60.2
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -82,6 +82,9 @@ fi
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Thu Aug 17 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v2.60.2-1
+- FEC-7039 - Regression: uDRM: MultiAudio/ Source selector: Audio Language / Source selector switching is not working (IE11)
+
 * Fri Aug 11 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v2.60-1
 - FEC-6609 - CLONE - [iPad] Chromecast: Multi Subtitles - enable subtitles and then connect to receiver - the subtitles are none
 - SUP-11548 - Kaltura.ForceLayoutRedraw=true causes vertical black bar in playlist players

@@ -85,6 +85,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Thu Aug 17 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v5.42.3-3
+- Ver bounce of HTML5 to v2.60.2
+
 * Fri Aug 11 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v5.42.3-2
 - Ver bounce of HTML5 to v2.60
 
