@@ -1,3 +1,9 @@
+kaltura-kmc (5.42.3-2) mercury; urgency=low
+
+  * Ver bounce of HTML5 to v2.60.2
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Fri, 18 Aug 2017 12:52:14 +0000
+
 kaltura-kmc (5.42.3-1) mercury; urgency=low
 
   * Ver bounce of HTML5 to v2.60
