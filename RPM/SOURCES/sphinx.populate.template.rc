@@ -3,6 +3,7 @@ check process sphinx-populate
     start program = "/etc/init.d/kaltura-populate start" with timeout 60 seconds
     stop program = "/etc/init.d/kaltura-populate stop"
     
+
     group kaltura
     depends on populate.conf, populate_script
 
@@ -13,5 +14,5 @@ check file populate.conf
        then exec "/etc/init.d/kaltura-populate restart"
 
 check file populate_script
-    with path "@APP_DIR@/plugins/sphinx_search/scripts/populateFromLog.php"
+    with path "@APP_DIR@/plugins/search/providers/sphinx_search/scripts/populateFromLog.php"
     
