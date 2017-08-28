@@ -26,6 +26,7 @@ RUN service ntpd start
 # kaltura
 RUN rpm -ihv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
 RUN sed -i 's@installrepo.kaltura.org@installrepo.origin.kaltura.org@g' /etc/yum.repos.d/kaltura.repo
+RUN sed -i 's@^tsflags=nodocs@#tsflags=nodocs@g' /etc/yum.conf
 RUN yum install -y kaltura-server
 
 ADD docker/install/* /root/install/
