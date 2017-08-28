@@ -17,6 +17,7 @@ RUN yum install -y postfix memcached ntp
 RUN chkconfig postfix on
 RUN chkconfig memcached on
 RUN chkconfig ntpd on
+RUN sed -i 's@^inet_protocols = all@inet_protocol = ipv4@g' /etc/postfix/main.cf
 RUN service postfix start
 RUN service memcached start
 RUN service ntpd start
@@ -24,6 +25,7 @@ RUN service ntpd start
 
 # kaltura
 RUN rpm -ihv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
+RUN sed -i 's@installrepo.kaltura.org@installrepo.origin.kaltura.org@g' /etc/yum.repos.d/kaltura.repo
 RUN yum install -y kaltura-server
 
 ADD docker/install/* /root/install/
