@@ -6,7 +6,7 @@
 
 Name:           kaltura-sphinx
 Version:        2.2.1
-Release:        20
+Release:        21
 Summary:        Sphinx full-text search server - for Kaltura
 
 Group:          Applications/Text
@@ -153,6 +153,9 @@ fi
 
 
 %changelog
+* Tue Aug 29 2017 Jess Portnoy <jess.portnoy@kaltura.com> - 2.2.1.r4097-21
+- Fix init script since populateFromLog.php was moved
+
 * Fri Sep 23 2016 Jess Portnoy <jess.portnoy@kaltura.com> - 2.2.1.r4097-20
 - No need to generate logrotate file here as it's taken care of by kaltura-base with /opt/kaltura/app/configurations/logrotate/kaltura_sphinx
 

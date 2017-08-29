@@ -23,7 +23,7 @@ echo `date`
 #. /etc/rc.d/init.d/functions
 
 # Directory containing the populate php files 
-SCRIPTDIR=$APP_DIR/plugins/sphinx_search/scripts
+SCRIPTDIR=$APP_DIR/plugins/search/providers/sphinx_search/scripts
 
 SCRIPTEXE=populateFromLog.php
 
