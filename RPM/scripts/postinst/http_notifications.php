@@ -21,32 +21,27 @@ $filter->systemNameEqual = 'HTTP_ENTRY_STATUS_CHANGED';
 $pager = null;
 $eventNotificationTemplate = new KalturaHttpNotificationTemplate();
 $eventnotificationPlugin = KalturaEventnotificationClientPlugin::get($client);
-$notification_templates = $eventnotificationPlugin->eventNotificationTemplate->listTemplates($filter, $pager);
-// id for entry change:
-if (isset($notification_templates->objects[0]->id)){
-	$template_id=$notification_templates->objects[0]->id;
+$my_notification_templates = $eventnotificationPlugin->eventNotificationTemplate->listAction($filter, $pager);
+if (!isset($my_notification_templates->objects[0]->id)){
+        $notification_templates = $eventnotificationPlugin->eventNotificationTemplate->listTemplates($filter, $pager);
+        // id for entry change:
+        if (isset($notification_templates->objects[0]->id)){
+                $template_id=$notification_templates->objects[0]->id;
+                // clone the template to partner:
+                $result = $eventnotificationPlugin->eventNotificationTemplate->cloneAction($template_id, $eventNotificationTemplate);
+                $notification_id = $result->id;
+                // activate template
+                //$status = KalturaEventNotificationTemplateStatus::ACTIVE;
+                //$result = $eventnotificationPlugin->eventNotificationTemplate->updateStatus($notification_id, $status);
+        }else{
+                die("\nNo HTTP templates exist.\n Try running:\nphp /opt/kaltura/app/tests/standAloneClient/exec.php /opt/kaltura/app/tests/standAloneClient/httpNotificationsTemplate.xml /tmp/out.xml\nPassing -2 as partner ID");
+        }
 }else{
-	die("\nNo HTTP templates exist.\n Try running:\nphp /opt/kaltura/app/tests/standAloneClient/exec.php /opt/kaltura/app/tests/standAloneClient/httpNotificationsTemplate.xml /tmp/out.xml\nPassing -2 as partner ID");
+        $notification_id=$my_notification_templates->objects[0]->id;
 }
 
-// clone the template to partner:
-$result = $eventnotificationPlugin->eventNotificationTemplate->cloneAction($template_id, $eventNotificationTemplate);
-$notification_id = $result->id;
-
-// activate template
-$status = KalturaEventNotificationTemplateStatus::ACTIVE;
-$eventnotificationPlugin = KalturaEventnotificationClientPlugin::get($client);
-$result = $eventnotificationPlugin->eventNotificationTemplate->updateStatus($notification_id, $status);
 
 // update url:
-$eventNotificationTemplate->type = KalturaEventNotificationTemplateType::HTTP;
-$eventNotificationTemplate->eventType = KalturaEventNotificationEventType::BATCH_JOB_STATUS;
-$eventNotificationTemplate->eventObjectType = KalturaEventNotificationEventObjectType::ENTRY;
-$eventNotificationTemplate->contentParameters = array();
-$eventNotificationTemplate->contentParameters[0] = new KalturaEventNotificationParameter();
-$eventNotificationTemplate->contentParameters[1] = new KalturaEventNotificationParameter();
-$eventNotificationTemplate->contentParameters[2] = null;
-$eventNotificationTemplate->contentParameters[3] = null;
 $eventNotificationTemplate->url = 'http://localhost/1.php';
 $KalturaHttpNotificationDataFields=new KalturaHttpNotificationDataFields();
 $eventNotificationTemplate->data = $KalturaHttpNotificationDataFields;

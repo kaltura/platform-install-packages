@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.33
-Release: 17
+Release: 18
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -82,6 +82,9 @@ find %{_sysconfdir}/logrotate.d -type l -name "kaltura_*" -exec rm {} \;
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Wed Aug 30 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.33-17
+- Fix event notification tests
+
 * Tue Aug 15 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.33-16
 - kaltura user should have full privileges on kaltura_sphinx_log
 

@@ -21,28 +21,25 @@ $filter->systemNameEqual = 'Entry_Ready';
 $pager = null;
 $eventNotificationTemplate = new KalturaEmailNotificationTemplate();
 $eventnotificationPlugin = KalturaEventnotificationClientPlugin::get($client);
-$notification_templates = $eventnotificationPlugin->eventNotificationTemplate->listTemplates($filter, $pager);
-// will return all available
-$template_id=$notification_templates->objects[0]->id;
-// clone the template to partner:
-$result = $eventnotificationPlugin->eventNotificationTemplate->cloneAction($template_id, $eventNotificationTemplate);
-$notification_id = $result->id;
-
-// activate template
-$status = KalturaEventNotificationTemplateStatus::ACTIVE;
-$eventnotificationPlugin = KalturaEventnotificationClientPlugin::get($client);
-$result = $eventnotificationPlugin->eventNotificationTemplate->updateStatus($notification_id, $status);
+$my_notification_templates = $eventnotificationPlugin->eventNotificationTemplate->listAction($filter, $pager);
+if (!isset($my_notification_templates->objects[0]->id)){
+        $notification_templates = $eventnotificationPlugin->eventNotificationTemplate->listTemplates($filter, $pager);
+        if (isset($notification_templates->objects[0]->id)){
+                // will return all available
+                $template_id=$notification_templates->objects[0]->id;
+                // clone the template to partner:
+                $result = $eventnotificationPlugin->eventNotificationTemplate->cloneAction($template_id, $eventNotificationTemplate);
+                $notification_id = $result->id;
+                // activate template
+                $status = KalturaEventNotificationTemplateStatus::ACTIVE;
+                $result = $eventnotificationPlugin->eventNotificationTemplate->updateStatus($notification_id, $status);
+        }
+}else{
+        $notification_id=$my_notification_templates->objects[0]->id;
+}
 
 // update mail subject and body:
 
-$eventNotificationTemplate->type = KalturaEventNotificationTemplateType::EMAIL;
-$eventNotificationTemplate->eventType = KalturaEventNotificationEventType::BATCH_JOB_STATUS;
-$eventNotificationTemplate->eventObjectType = KalturaEventNotificationEventObjectType::ENTRY;
-$eventNotificationTemplate->contentParameters = array();
-$eventNotificationTemplate->contentParameters[0] = new KalturaEventNotificationParameter();
-$eventNotificationTemplate->contentParameters[1] = new KalturaEventNotificationParameter();
-$eventNotificationTemplate->contentParameters[2] = new KalturaEventNotificationParameter();
-$eventNotificationTemplate->contentParameters[3] = new KalturaEventNotificationParameter();
 $eventNotificationTemplate->subject = 'Your video is ready to be played!';
 $eventNotificationTemplate->body = 'Hello world:)';
 $eventnotificationPlugin = KalturaEventnotificationClientPlugin::get($client);
@@ -50,3 +47,4 @@ $result = $eventnotificationPlugin->eventNotificationTemplate->update($notificat
 $eventnotificationPlugin->eventNotificationTemplate->delete($notification_id);
 echo('ID: '. $result->id. ', Subject: '.$result->subject.', Mail body: '.$result->body);
 ?>
+
