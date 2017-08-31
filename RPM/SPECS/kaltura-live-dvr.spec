@@ -16,7 +16,7 @@ License: AGPLv3+
 Group: Server/Platform 
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires: kaltura-monit, kaltura-base, redhat-lsb-core, nodejs >= 6.0.0, kaltura-ngnix 
+Requires: kaltura-monit, kaltura-base, redhat-lsb-core, nodejs >= 6.0.0, kaltura-nginx 
 Requires(post): chkconfig
 Requires(preun): chkconfig
 Requires(preun): initscripts
