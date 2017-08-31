@@ -40,7 +40,7 @@ BuildRequires: libopenssl-devel
 Requires(pre): pwdutils
 %endif
 
-%define nginx_vod_module_ver 1.18
+%define nginx_vod_module_ver 1.19
 %define nginx_secure_token_ver 1.3
 %define nginx_token_validate_ver 1.1
 %define nginx_vts_ver 0.1.15
@@ -52,7 +52,7 @@ Requires(pre): pwdutils
 Summary: High performance web server customized for Kaltura VOD
 Name: kaltura-nginx
 Version: 1.12.0
-Release: 6
+Release: 7
 Vendor: Kaltura inc.
 URL: http://nginx.org/
 
@@ -404,6 +404,16 @@ if [ $1 -ge 1 ]; then
 fi
 
 %changelog
+* Thu Aug 31 2017 Jess Portnoy <jess.portnoy@kaltura.com> - 1.12.0-7
+- New VOD module [1.19]:
+	* support subtitles in playlist
+	* add label attribute to dash mpd
+	* srt and cap parsing fixes
+	* add more iso639-3 languages
+	* add vod_hls_force_master_separate_audio_video option
+	* read cache optimizations
+	* fix compilation as dynamic module
+
 * Tue Jul 25 2017 Jess Portnoy <jess.portnoy@kaltura.com> - 1.12.0-6
 - New VOD module [1.18]:
 	* support track selection with sequence id
