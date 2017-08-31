@@ -1,3 +1,16 @@
+kaltura-nginx (1.12-5) mercury; urgency=low
+
+  * New VOD module [1.19]:
+    - support subtitles in playlist
+    - add label attribute to dash mpd
+    - srt and cap parsing fixes
+    - add more iso639-3 languages
+    - add vod_hls_force_master_separate_audio_video option
+    - read cache optimizations
+    - fix compilation as dynamic module
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Thu, 31 Aug 2017 13:54:56 +0000
+
 kaltura-nginx (1.12-4) mercury; urgency=low
 
   *  New VOD module [1.18]:
