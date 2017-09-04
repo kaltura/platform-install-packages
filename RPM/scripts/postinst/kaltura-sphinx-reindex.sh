@@ -33,7 +33,7 @@ fi
                 # disable Sphinx's monit monitoring
                 rm $APP_DIR/configurations/monit/monit.d/enabled.sphinx.rc
                 /etc/init.d/kaltura-sphinx stop
-                service kaltura-monit restart
+                service kaltura-monit restart 2>/dev/null || service monit restart 2>/dev/null
         fi
         STMP=`date +%s`
         mkdir -p $BASE_DIR/sphinx.bck.$STMP
@@ -41,7 +41,7 @@ fi
         mv $BASE_DIR/sphinx/kaltura_*  $LOG_DIR/sphinx/data/binlog.* $BASE_DIR/sphinx.bck.$STMP
         /etc/init.d/kaltura-sphinx start
         ln -sf $APP_DIR/configurations/monit/monit.avail/sphinx.rc $APP_DIR/configurations/monit/monit.d/enabled.sphinx.rc
-        service kaltura-monit restart
+        service kaltura-monit restart 2>/dev/null || service monit restart 2>/dev/null
         for SCRIPT in $APP_DIR/deployment/base/scripts/populateSphinx*.php;do php $SCRIPT
         RC=$?
         if [ $RC -ne 0 ];then
