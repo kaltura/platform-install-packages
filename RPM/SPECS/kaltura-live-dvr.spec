@@ -9,7 +9,7 @@
 Summary: Kaltura Open Source Video Platform - Live DVR
 Name: kaltura-livedvr
 Version: 1.17.2
-Release: 2
+Release: 3
 License: AGPLv3+
 Group: Server/Platform 
 URL: http://kaltura.org
@@ -62,6 +62,7 @@ cp %{_builddir}/liveDVR-%{version}/common/config/configMapping.json.template $RP
 cp %{_builddir}/liveDVR-%{version}/liveRecorder/Config/configMapping.ini.template $RPM_BUILD_ROOT%{livedvr_prefix}/liveRecorder/Config
 cp %{_builddir}/liveDVR-%{version}/serviceWrappers/linux/kLiveController $RPM_BUILD_ROOT/%{_sysconfdir}/init.d/%{name} 
 cp %{_builddir}/liveDVR-%{version}/liveRecorder/serviceWrappers/linux/liveRecorder $RPM_BUILD_ROOT/%{_sysconfdir}/init.d/kaltura-live-recorder 
+rm %{_builddir}/liveDVR-%{version}/packager/config/nginx.conf.template
 cp %{_builddir}/liveDVR-%{version}/packager/config/* $RPM_BUILD_ROOT%{nginx_conf_dir}
 
 %pre
