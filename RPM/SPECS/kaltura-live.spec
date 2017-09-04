@@ -1,6 +1,6 @@
-%define wowza_version 4.6.0
+%define wowza_version 4.7.1
 %define wowza_prefix /usr/local/WowzaStreamingEngine-%{wowza_version}
-%define media_server_version 4.5.10.73
+%define media_server_version 4.5.14.81
 %define kaltura_prefix /opt/kaltura
 %define use_systemd (0%{?fedora} && 0%{?fedora} >= 18) || (0%{?rhel} && 0%{?rhel} >= 7)
 %define kaltura_user	kaltura
@@ -8,7 +8,7 @@
 
 Summary: Kaltura Open Source Video Platform - Live Streaming Server  
 Name: kaltura-live
-Version: 12.14.0
+Version: 13.2.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -27,12 +27,12 @@ Source3: WowzaStreamingEngineManager.service
 #Source6: hdfvr.xml
 Source7: oflaDemo.xml
 Source8: wowza.rc
-Source9: junit-dep-4.7.jar 
-Source10: json-20090211.jar
-Source11: hamcrest-core-1.1.jar
-Source12: commons-logging-1.0.4.jar
-Source13: commons-httpclient-3.1.jar
-Source14: commons-codec-1.4.jar
+#Source9: junit-dep-4.7.jar 
+#Source10: json-20090211.jar
+#Source11: hamcrest-core-1.1.jar
+#Source12: commons-logging-1.0.4.jar
+#Source13: commons-httpclient-3.1.jar
+#Source14: commons-codec-1.4.jar
 
 
 %description
@@ -56,13 +56,15 @@ rm -rf %{buildroot}
 mkdir -p $RPM_BUILD_ROOT%{kaltura_prefix}/var/tmp $RPM_BUILD_ROOT%{kaltura_prefix}/var/live/dvr $RPM_BUILD_ROOT%{wowza_prefix}/conf/oflaDemo $RPM_BUILD_ROOT%{wowza_prefix}/applications/oflaDemo $RPM_BUILD_ROOT%{wowza_prefix}/transcoder/templates $RPM_BUILD_ROOT%{kaltura_prefix}/app/configurations/monit/monit.avail
 unzip -o %{SOURCE1} -d $RPM_BUILD_ROOT%{kaltura_prefix}/var/tmp
 mv $RPM_BUILD_ROOT%{kaltura_prefix}/var/tmp/lib $RPM_BUILD_ROOT%{wowza_prefix}/
-%{__install} -m644  %{SOURCE9} %{SOURCE10} %{SOURCE11} %{SOURCE12} %{SOURCE13} %{SOURCE14} $RPM_BUILD_ROOT%{wowza_prefix}/lib
+%{__install} -m644  $RPM_BUILD_ROOT%{kaltura_prefix}/var/tmp/installation/configTemplates/Server.xml.template $RPM_BUILD_ROOT%{wowza_prefix}/conf
+cp -r $RPM_BUILD_ROOT%{kaltura_prefix}/var/tmp/installation/configTemplates/kLive $RPM_BUILD_ROOT%{wowza_prefix}/conf/
+#%{__install} -m644  %{SOURCE9} %{SOURCE10} %{SOURCE11} %{SOURCE12} %{SOURCE13} %{SOURCE14} $RPM_BUILD_ROOT%{wowza_prefix}/lib
 #mv  $RPM_BUILD_ROOT%{kaltura_prefix}/var/tmp/build.xml $RPM_BUILD_ROOT%{wowza_prefix}/
 #mv  $RPM_BUILD_ROOT%{kaltura_prefix}/var/tmp/configure.xsl $RPM_BUILD_ROOT%{wowza_prefix}/
 rm -rf $RPM_BUILD_ROOT%{kaltura_prefix}/var/tmp
 #cp %{SOURCE4} %{SOURCE5} $RPM_BUILD_ROOT%{wowza_prefix}/
 #cp %{SOURCE6} $RPM_BUILD_ROOT%{wowza_prefix}/transcoder/templates/
-cp %{SOURCE7} $RPM_BUILD_ROOT%{wowza_prefix}/conf/oflaDemo/Application.xml
+#cp %{SOURCE7} $RPM_BUILD_ROOT%{wowza_prefix}/conf/oflaDemo/Application.xml
 cp %{SOURCE8} $RPM_BUILD_ROOT%{kaltura_prefix}/app/configurations/monit/monit.avail
 
 %if %{use_systemd}
@@ -97,7 +99,7 @@ usermod -g %{kaltura_group} %{kaltura_user} 2>/dev/null || true
 
 %files
 %{wowza_prefix}
-%config %{wowza_prefix}/conf/oflaDemo/Application.xml
+%config %{wowza_prefix}/conf/
 #%config %{wowza_prefix}/transcoder/templates/hdfvr.xml
 #%config %{wowza_prefix}/configure.xsl
 #%config %{wowza_prefix}/build.xml

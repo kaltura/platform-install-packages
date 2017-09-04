@@ -1,6 +1,3 @@
-%define wowza_version 4.6.0
-%define wowza_prefix /usr/local/WowzaStreamingEngine-%{wowza_version}
-%define media_server_version 4.5.9.68 
 %define use_systemd (0%{?fedora} && 0%{?fedora} >= 18) || (0%{?rhel} && 0%{?rhel} >= 7)
 %define kaltura_root_prefix	/opt/kaltura
 %define livedvr_prefix %{kaltura_root_prefix}/livedvr
@@ -10,7 +7,7 @@
 
 Summary: Kaltura Open Source Video Platform - Live DVR
 Name: kaltura-livedvr
-Version: 1.17.0
+Version: 1.17.2
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 

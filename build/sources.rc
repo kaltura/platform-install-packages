@@ -175,13 +175,13 @@ HEADERS_MORE_NGINX_VERSION="v0.32"
 HEADERS_MORE_NGINX_URI="https://github.com/openresty/headers-more-nginx-module/archive/$HEADERS_MORE_NGINX_VERSION.zip"
 
 # Kaltura Streaming lib build vars:
-KALTURA_MEDIASERVER_VERSION="4.5.13.77"
+KALTURA_MEDIASERVER_VERSION="4.5.14.81"
 KALTURA_MEDIASERVER_URI="https://github.com/kaltura/media-server/releases/download/rel-$KALTURA_MEDIASERVER_VERSION/KalturaWowzaServer-install-$KALTURA_MEDIASERVER_VERSION.zip"
 KALTURA_MEDIASERVER_RPM_NAME=kaltura-media-server
 
 MEDIASERVER_DEPS_JARS="junit/junit-dep-4.7 json-/json-20090211 hamcrest/hamcrest-core-1.1 commons-logging/commons-logging-1.0.4 commons-httpclient/commons-httpclient-3.1 commons-codec/commons-codec-1.4"
 
-KALTURA_LIVE_DVR_VERSION="1.17.0"
+KALTURA_LIVE_DVR_VERSION="1.17.2"
 KALTURA_LIVE_DVR_URI="https://github.com/kaltura/liveDVR/archive/v$KALTURA_LIVE_DVR_VERSION.tar.gz"
 KALTURA_LIVE_DVR_RPM_NAME=kaltura-livedvr
 
