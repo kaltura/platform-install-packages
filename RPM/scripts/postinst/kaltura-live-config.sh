@@ -48,13 +48,13 @@ if ! rpm -q kaltura-live;then
 fi
 CONFIG_DIR=/opt/kaltura/app/configurations
 if [ -r $CONFIG_DIR/system.ini ];then
-	. $CONFIG_DIR/system.ini
+ . $CONFIG_DIR/system.ini
 else
-	echo -e "${BRIGHT_RED}ERROR: Missing $CONFIG_DIR/system.ini. Exiting..${NORMAL}"
-	exit 1
+ echo -e "${BRIGHT_RED}ERROR: Missing $CONFIG_DIR/system.ini. Exiting..${NORMAL}"
+ exit 1
 fi
 
-WOWZA_VER=4.6.0
+WOWZA_VER=4.7.1
 WOWZA_VER_DASHES=`echo $WOWZA_VER|sed 's/\./-/g'`
 
 echo -e "${CYAN}Welcome to Kaltura Live post install setup.${NORMAL}"
@@ -94,8 +94,13 @@ echo -e "${BRIGHT_BLUE}Fetching the Wowza archive...${NORMAL}"
 wget --quiet https://www.wowza.com/downloads/WowzaStreamingEngine-$WOWZA_VER_DASHES/WowzaStreamingEngine-$WOWZA_VER-linux-x64-installer.run -O /tmp/WowzaStreamingEngine-$WOWZA_VER-linux-x64-installer.run
 chmod +x /tmp/WowzaStreamingEngine-$WOWZA_VER-linux-x64-installer.run
 echo -e "${BRIGHT_BLUE}Deploying Wowza, this may take a while...${NORMAL}"
-# this is incredibly moronic --prefix is a mandatory arg but no matter what you'll pass the prefix is always /usr/local
-/tmp/WowzaStreamingEngine-$WOWZA_VER-linux-x64-installer.run  --mode unattended --licensekey $WOWZA_LIC_KEY --silentInstallKey $WOWZA_SILENT_KEY --username kadmin --password $WOWZA_PASSWD --prefix /usr/local/
+if [ -n "$WOWZA_SILENT_KEY" ];then
+       # this is incredibly moronic --prefix is a mandatory arg but no matter what you'll pass the prefix is always /usr/local
+ /tmp/WowzaStreamingEngine-$WOWZA_VER-linux-x64-installer.run  --mode unattended --licensekey $WOWZA_LIC_KEY --silentInstallKey $WOWZA_SILENT_KEY --username kadmin --password $WOWZA_PASSWD --prefix /usr/local/
+else
+       # install interactively
+ /tmp/WowzaStreamingEngine-$WOWZA_VER-linux-x64-installer.run  
+fi
 
 BASE_DIR=/opt/kaltura
 WOWZA_PREFIX=/usr/local/WowzaStreamingEngine
@@ -109,6 +114,7 @@ for CONF_FILE_TEMPLATE in $CONF_FILE_TEMPLATES;do
     sed -e "s#@KALTURA_SERVICE_URL@#$SERVICE_URL#g" -e "s#@KALTURA_PARTNER_ID@#-5#g" -e "s#@KALTURA_PARTNER_ADMIN_SECRET@#$MINUS_FIVE_ADMIN_SECRET#g" $CONF_FILE_TEMPLATE > $CONF_FILE
 done
 
+
 # remove default unneeded Wowza apps:
 rm -rf $WOWZA_PREFIX/conf/live/
 rm -rf $WOWZA_PREFIX/conf/vod/
@@ -116,7 +122,7 @@ rm -rf $WOWZA_PREFIX/applications/live/
 rm -rf $WOWZA_PREFIX/applications/vod/
 
 sed 's@${com.wowza.wms.TuningHeapSizeDevelopment}@${com.wowza.wms.TuningHeapSizeProduction}@g' -i $WOWZA_PREFIX/conf/Tune.xml
-ant -Dbasedir=$WOWZA_PREFIX -f $WOWZA_PREFIX/build.xml
+#ant -Dbasedir=$WOWZA_PREFIX -f $WOWZA_PREFIX/build.xml
 php $BASE_DIR/bin/register_media_server.php
 service WowzaStreamingEngine restart
 service kaltura-monit stop >> /dev/null 2>&1
