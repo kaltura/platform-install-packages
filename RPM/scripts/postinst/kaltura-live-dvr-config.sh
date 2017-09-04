@@ -28,4 +28,6 @@ yum install -y gcc
 for MOD in poster psutil m3u8 schedule pycrypto;do
         pip install $MOD
 done
-yum install -y kaltura-livedvr
+yum install -y kaltura-live kaltura-livedvr 
+/opt/kaltura/bin/kaltura-live-config.sh
+
