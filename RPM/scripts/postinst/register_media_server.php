@@ -11,11 +11,11 @@ $xml_file_path="/usr/local/WowzaStreamingEngine/conf/Server.xml";
  * @param $admin_secret
  * @return KalturaClient
  */
-function initClient ($xml_file_path, $admin_secret) {
+function initClient ($xml_file_path, $partner_id, $admin_secret) {
     $config = new KalturaConfiguration();
     $config->serviceUrl = getValueFromXml($xml_file_path,"Server/Properties/Property[1]/Value").'/';
     $client = new KalturaClient($config);
-    $result = $client->session->start($admin_secret, null, KalturaSessionType::ADMIN, -5, null, null);
+    $result = $client->session->start($admin_secret, null, KalturaSessionType::ADMIN, $partner_id, null, null);
     $client->setKs($result);
     return $client;
 }
@@ -69,8 +69,9 @@ function getValueFromXml ($xml_file, $xml_path) {
 }
 
 // main
-$xml_admin_secret = getValueFromXml($xml_file_path, "Server/Properties/Property[2]/Value");
-$new_client = initClient($xml_file_path, $xml_admin_secret);
+$partner_id = getValueFromXml($xml_file_path, "Server/Properties/Property[2]/Value");
+$xml_admin_secret = getValueFromXml($xml_file_path, "Server/Properties/Property[3]/Value");
+$new_client = initClient($xml_file_path, $partner_id,$xml_admin_secret);
 if(isset($argv[1])){
         $node_hostname=$argv[1];
 }else{
