@@ -1,3 +1,11 @@
+kaltura-nginx (1.12.1-1) mercury; urgency=low
+
+  * Security: a specially crafted request might result in an integer
+  overflow and incorrect processing of ranges in the range filter,
+  potentially resulting in sensitive information leak (CVE-2017-7529).
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Wed, 06 Sep 2017 15:22:51 +0000
+
 kaltura-nginx (1.12-5) mercury; urgency=low
 
   * New VOD module [1.19]:
