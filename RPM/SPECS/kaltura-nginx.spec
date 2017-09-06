@@ -51,8 +51,8 @@ Requires(pre): pwdutils
 
 Summary: High performance web server customized for Kaltura VOD
 Name: kaltura-nginx
-Version: 1.12.0
-Release: 7
+Version: 1.12.1
+Release: 1
 Vendor: Kaltura inc.
 URL: http://nginx.org/
 
@@ -404,6 +404,11 @@ if [ $1 -ge 1 ]; then
 fi
 
 %changelog
+* Wed Sep 6 2017 Jess Portnoy <jess.portnoy@kaltura.com> - 1.12.1-1
+- Security: a specially crafted request might result in an integer
+  overflow and incorrect processing of ranges in the range filter,
+  potentially resulting in sensitive information leak (CVE-2017-7529).
+
 * Thu Aug 31 2017 Jess Portnoy <jess.portnoy@kaltura.com> - 1.12.0-7
 - New VOD module [1.19]:
 	* support subtitles in playlist

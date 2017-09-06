@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.60.2
+Version: v2.61
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -82,6 +82,32 @@ fi
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Wed Sep 6 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v2.61-1
+- FEC-7019 - (iOS 11) - DoubleClick Pre-Mid-Post roll - Video not playing (audio only) after mid-roll
+- FEC-6930 - (iOS11) - Playlist dropdown collapse after a second of showing it
+- FEC-7018 - (iOS 11) - Player doesn't fit the screen when entering full screen mode at the 1st attempt
+- FEC-6929 -(iOS11) Horizontal multiple playlist below - Video adjusts itself and playlist gets hidden
+- FEC-7014 - Seek playback - audio only playing after seek on iOS 11 device
+- fix ott largePlayBtn margin (#3506)
+- Fix IE8 XML parsing for metadata from Kaltura API (TR-1927) (#3491)
+- SUP-11400 - Keyboard shortcut does not work in 360 player
+- FEC-6896 - Midroll fails to play on Android Chrome
+- FEC-7049 - YouTube player error when ad load fails and autoplay is set
+- FEC-6985 - VR support follow up
+- FEC-6905 - If Autoplay plugin = true , then CathUp and Startover not working
+- SUP-11661 - Player controls interfere with the iPad native controls
+- PLAT-7855 - eCDN multicast is using UDP instead of RTP (packet reorder support)
+- FEC-7048 - Playlist on page doesn't work with multiple embeds on same page
+- FEC-7011 - SartOver Failed to play in the 4 ts and stream jumpback to live
+- FEC-7011: fix startOver from start of live playback
+- FEC-7063: remove error message on player when rolling multicast to unicast
+- SUP-11360: Thumbnail Disappears When Dual Screen is Enabled
+- feat: add has kanalony as query string param
+- feat: add hasKanalony param to stats event to signal kava
+- FEC-7082 - DFP - Vast trafficking with DFP overlay - No overlays ad appears at 12th sec
+- FEC-7104 - wrong icon shown in cvaa screen
+- FEC-7102 - Player V2: Inbound captions are displayed in different languages at the same time (HLS Only)
+
 * Thu Aug 17 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v2.60.2-1
 - FEC-7039 - Regression: uDRM: MultiAudio/ Source selector: Audio Language / Source selector switching is not working (IE11)
 
