@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 13.2.0
-Release: 30
+Release: 31
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -324,86 +324,25 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Sun Sep 10 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.2.0-30
-- Nightly build.
+* Mon Sep 11 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.2.0-31
+- Preview and Embed: do not encode entry names (https://github.com/kaltura/server/pull/6031)
+- PLAT-7969: fix ical bulk ingestion to handle [duration] field input (https://github.com/kaltura/server/pull/6019)
+- PLAT-7971: Clip of entry not in ready state fails (https://github.com/kaltura/server/pull/6018)
+- Admin Console UI: fix input type for password (https://github.com/kaltura/server/pull/6016)
+- SUP-11944: add retry when download part of the file (https://github.com/kaltura/server/pull/6009)
+- PLAT-7953: Audio upload fix to add the stream language correctly (https://github.com/kaltura/server/pull/6006)
+- add ascii folding to kaltura_keyword (https://github.com/kaltura/server/pull/6002)
+- PLAT-7945: Allow deleting live + recorded entries for which the recording flow is stuck for more the 7 days (https://github.com/kaltura/server/pull/5997)
+- PLAT-7827: add entry server node recording status (https://github.com/kaltura/server/pull/5994)
+- PLAT-7818: handling language and label copy when replacing entry (https://github.com/kaltura/server/pull/5991)
+- PLAT-7894: Add new delivery profile type for serving vod HLS manifest directly from packager (https://github.com/kaltura/server/pull/5988)
+- PLAT-7889: When clipping and trimming, add caption files from the original entry onto the new one (https://github.com/kaltura/server/pull/5983)
+- plat-7942: Add a playManifest param to disable the returning of captions (https://github.com/kaltura/server/pull/5979)
+- PLAT-7928: Added retrieveVolumeLevels() (https://github.com/kaltura/server/pull/5976)
+- PLAT-7939: Prevent adding user entry without user id + prevent changing entryId on existing user entry object (https://github.com/kaltura/server/pull/5975)
+- PLAT-7933: Extend language support in ISO 639 (https://github.com/kaltura/server/pull/5973)
+- PLAT-7854: Align bigint db fields to API objects and services (https://github.com/kaltura/server/pull/5971)
 
-* Sat Sep 9 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.2.0-29
-- Nightly build.
-
-* Fri Sep 8 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.2.0-28
-- Nightly build.
-
-* Thu Sep 7 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.2.0-27
-- Nightly build.
-
-* Wed Sep 6 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.2.0-26
-- Nightly build.
-
-* Tue Sep 5 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.2.0-25
-- Nightly build.
-
-* Mon Sep 4 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.2.0-24
-- Nightly build.
-
-* Sun Sep 3 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.2.0-22
-- Nightly build.
-
-* Sat Sep 2 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.2.0-21
-- Nightly build.
-
-* Fri Sep 1 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.2.0-20
-- Nightly build.
-
-* Thu Aug 31 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.2.0-19
-- Nightly build.
-
-* Wed Aug 30 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.2.0-18
-- Nightly build.
-
-* Tue Aug 29 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.2.0-17
-- Nightly build.
-
-* Mon Aug 28 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.2.0-16
-- Nightly build.
-
-* Sun Aug 27 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.2.0-14
-- Nightly build.
-
-* Sat Aug 26 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.2.0-13
-- Nightly build.
-
-* Fri Aug 25 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.2.0-12
-- Nightly build.
-
-* Thu Aug 24 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.2.0-11
-- Nightly build.
-
-* Wed Aug 23 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.2.0-10
-- Nightly build.
-
-* Tue Aug 22 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.2.0-9
-- Nightly build.
-
-* Mon Aug 21 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.2.0-8
-- Nightly build.
-
-* Sun Aug 20 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.2.0-7
-- Nightly build.
-
-* Sat Aug 19 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.2.0-6
-- Nightly build.
-
-* Fri Aug 18 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.2.0-5
-- Nightly build.
-
-* Thu Aug 17 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.2.0-4
-- Nightly build.
-
-* Wed Aug 16 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.2.0-3
-- Nightly build.
-
-* Tue Aug 15 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.2.0-2
-- Nightly build.
 
 * Tue Aug 15 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.2.0-1
 - Ver Bounce to 13.2.0
