@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 13.2.0
-Release: 31
+Version: 13.3.0
+Release: 2
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -324,6 +324,12 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Sep 11 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.3.0-2
+- Nightly build.
+
+* Mon Sep 11 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.3.0-1
+- Ver Bounce to 13.3.0
+
 * Mon Sep 11 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.2.0-31
 - Preview and Embed: do not encode entry names (https://github.com/kaltura/server/pull/6031)
 - PLAT-7969: fix ical bulk ingestion to handle [duration] field input (https://github.com/kaltura/server/pull/6019)
