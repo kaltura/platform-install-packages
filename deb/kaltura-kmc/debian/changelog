@@ -1,3 +1,10 @@
+kaltura-kmc (5.43.1-1) mercury; urgency=low
+
+  * hide live dashboard link (not yet ready)
+  * Ver bounce of HTML5 player to v2.61
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Wed, 06 Sep 2017 14:53:51 +0000
+
 kaltura-kmc (5.42.3-2) mercury; urgency=low
 
   * Ver bounce of HTML5 to v2.60.2
