@@ -1,3 +1,25 @@
+kaltura-base (13.2.0-2) mercury; urgency=low
+
+  * Preview and Embed: do not encode entry names (https://github.com/kaltura/server/pull/6031)
+  * PLAT-7969: fix ical bulk ingestion to handle [duration] field input (https://github.com/kaltura/server/pull/6019)
+  * PLAT-7971: Clip of entry not in ready state fails (https://github.com/kaltura/server/pull/6018)
+  * Admin Console UI: fix input type for password (https://github.com/kaltura/server/pull/6016)
+  * SUP-11944: add retry when download part of the file (https://github.com/kaltura/server/pull/6009)
+  * PLAT-7953: Audio upload fix to add the stream language correctly (https://github.com/kaltura/server/pull/6006)
+  * add ascii folding to kaltura_keyword (https://github.com/kaltura/server/pull/6002)
+  * PLAT-7945: Allow deleting live + recorded entries for which the recording flow is stuck for more the 7 days (https://github.com/kaltura/server/pull/5997)
+  * PLAT-7827: add entry server node recording status (https://github.com/kaltura/server/pull/5994)
+  * PLAT-7818: handling language and label copy when replacing entry (https://github.com/kaltura/server/pull/5991)
+  * PLAT-7894: Add new delivery profile type for serving vod HLS manifest directly from packager (https://github.com/kaltura/server/pull/5988)
+  * PLAT-7889: When clipping and trimming, add caption files from the original entry onto the new one (https://github.com/kaltura/server/pull/5983)
+  * plat-7942: Add a playManifest param to disable the returning of captions (https://github.com/kaltura/server/pull/5979)
+  * PLAT-7928: Added retrieveVolumeLevels() (https://github.com/kaltura/server/pull/5976)
+  * PLAT-7939: Prevent adding user entry without user id + prevent changing entryId on existing user entry object (https://github.com/kaltura/server/pull/5975)
+  * PLAT-7933: Extend language support in ISO 639 (https://github.com/kaltura/server/pull/5973)
+  * PLAT-7854: Align bigint db fields to API objects and services (https://github.com/kaltura/server/pull/5971)
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 11 Sep 2017 12:17:43 +0000
+
 kaltura-base (13.2.0-1) mercury; urgency=low
 
   * Switching to 13.2.0
