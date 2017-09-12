@@ -54,7 +54,7 @@ This section is a step-by-step guide of a Kaltura installation.
 #### Setup the Kaltura deb repository
 
 ```bash
-# wget -O - http://installrepo.kaltura.org/repo/apt/debian/kaltura-deb.gpg.key|apt-key add -
+# wget -O - http://installrepo.kaltura.org/repo/apt/xenial/kaltura-deb-256.gpg.key|apt-key add -
 # echo "deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/xenial lynx main" > /etc/apt/sources.list.d/kaltura.list
 ```
 
@@ -135,6 +135,7 @@ And install as described above.
 
 
 ```bash
+# wget -O - http://installrepo.kaltura.org/repo/apt/xenial/kaltura-deb-256.gpg.key|apt-key add -
 # aptitude update
 # aptitude install ~Nkaltura
 # dpkg-reconfigure kaltura-base
