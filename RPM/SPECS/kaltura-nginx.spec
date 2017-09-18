@@ -40,7 +40,7 @@ BuildRequires: libopenssl-devel
 Requires(pre): pwdutils
 %endif
 
-%define nginx_vod_module_ver 1.19
+%define nginx_vod_module_ver 1.20
 %define nginx_secure_token_ver 1.3
 %define nginx_token_validate_ver 1.1
 %define nginx_vts_ver 0.1.15
@@ -404,6 +404,15 @@ if [ $1 -ge 1 ]; then
 fi
 
 %changelog
+* Mon Sep 18 2017 Jess Portnoy <jess.portnoy@kaltura.com> - 1.12.1-2
+- New VOD module [1.20]:
+	* support sample-aes in hls/fmp4
+	* add volume map packager
+	* support time shift url param
+	* add the ability to set the segment duration in the mapping json
+	* add detection for zlib in configure
+	* support using hdlr atom name as label
+
 * Wed Sep 6 2017 Jess Portnoy <jess.portnoy@kaltura.com> - 1.12.1-1
 - Security: a specially crafted request might result in an integer
   overflow and incorrect processing of ranges in the range filter,
