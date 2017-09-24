@@ -1,3 +1,15 @@
+kaltura-nginx (1.12.1-2) mercury; urgency=low
+
+  *  New VOD module [1.20]:
+   - support sample-aes in hls/fmp4
+   - add volume map packager
+   - support time shift url param
+   - add the ability to set the segment duration in the mapping json
+   - add detection for zlib in configure
+   - support using hdlr atom name as label
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 18 Sep 2017 11:29:21 +0000
+
 kaltura-nginx (1.12.1-1) mercury; urgency=low
 
   * Security: a specially crafted request might result in an integer
