@@ -1,3 +1,10 @@
+kaltura-html5lib (2.61.1-1) mercury; urgency=low
+
+  * FEC-7133 - hls.js crash on error
+  * feat: Rapt Media revisions and API features
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Sun, 24 Sep 2017 20:46:18 +0000
+
 kaltura-html5lib (2.61-1) mercury; urgency=low
 
   * FEC-7019 - (iOS 11) - DoubleClick Pre-Mid-Post roll - Video not playing (audio only) after mid-roll
