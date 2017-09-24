@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.61
+Version: v2.61.1
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -82,6 +82,10 @@ fi
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Sun Sep 24 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v2.61.1-1
+- FEC-7133 - hls.js crash on error
+- feat: Rapt Media revisions and API features
+
 * Wed Sep 6 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v2.61-1
 - FEC-7019 - (iOS 11) - DoubleClick Pre-Mid-Post roll - Video not playing (audio only) after mid-roll
 - FEC-6930 - (iOS11) - Playlist dropdown collapse after a second of showing it

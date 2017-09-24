@@ -1,6 +1,6 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmc
-Version: v5.43.1
+Version: v5.43.3
 Release: 1
 Summary: Kaltura Management Console
 
@@ -85,6 +85,11 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sun Sep 24 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v5.43.3-1
+- SUP-10756 - Cannot download XML file from the Bulk menu - re-fix
+- Ver bounce of HTML5 player to v2.61.1
+- Change the built in EmailValidator to support new TLDs
+
 * Wed Sep 6 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v5.43.1-1
 - hide live dashboard link (not yet ready)
 - Ver bounce of HTML5 player to v2.61
