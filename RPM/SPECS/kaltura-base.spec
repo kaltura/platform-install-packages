@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 13.3.0
-Release: 16
+Release: 17
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -350,48 +350,6 @@ fi
 - PLAT-7943: Support setting flavor language and label via xml bulk upload (https://github.com/kaltura/server/pull/6026)
 - PLAT-7952: Add user login by ks action allow change account operation (https://github.com/kaltura/server/pull/6020)
 - should match Infra_AuthAdapter::getUserIdentity()'s signature (https://github.com/kaltura/server/pull/6017)
-
-* Sun Sep 24 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.3.0-15
-- Nightly build.
-
-* Sat Sep 23 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.3.0-14
-- Nightly build.
-
-* Fri Sep 22 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.3.0-13
-- Nightly build.
-
-* Thu Sep 21 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.3.0-12
-- Nightly build.
-
-* Wed Sep 20 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.3.0-11
-- Nightly build.
-
-* Tue Sep 19 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.3.0-10
-- Nightly build.
-
-* Mon Sep 18 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.3.0-9
-- Nightly build.
-
-* Sun Sep 17 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.3.0-8
-- Nightly build.
-
-* Sat Sep 16 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.3.0-7
-- Nightly build.
-
-* Fri Sep 15 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.3.0-6
-- Nightly build.
-
-* Thu Sep 14 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.3.0-5
-- Nightly build.
-
-* Wed Sep 13 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.3.0-4
-- Nightly build.
-
-* Tue Sep 12 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.3.0-3
-- Nightly build.
-
-* Mon Sep 11 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.3.0-2
-- Nightly build.
 
 * Mon Sep 11 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.3.0-1
 - Ver Bounce to 13.3.0
