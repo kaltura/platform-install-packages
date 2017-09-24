@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 13.3.0
-Release: 14
+Release: 16
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -324,6 +324,36 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Sun Sep 24 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.3.0-16
+- PLAT-8067: Use impersonated partnerId if one exists (https://github.com/kaltura/server/pull/6091)
+- googleoauth action fix save timezone (https://github.com/kaltura/server/pull/6080)
+- PLAT-7978: Set the original entry as the root of the cloned entry (https://github.com/kaltura/server/pull/6075)
+- Don't send empty strings + cache.ini fix (https://github.com/kaltura/server/pull/6074)
+- Avoid fatal error when returning header that contains multiple ':' chars (https://github.com/kaltura/server/pull/6073)
+- PLAT-7987: Support beacon add via api layer (https://github.com/kaltura/server/pull/6070)
+- playManifest beacon - improve clientTag parsing (https://github.com/kaltura/server/pull/6068)
+- Change type of KalturaOptionalAnswersArray (https://github.com/kaltura/server/pull/6066)
+- PLAT-8023: Fix mismatch on enc-at-rest replacement (https://github.com/kaltura/server/pull/6064)
+- SUP-11906: Invalidate query cache before fetching entryServerNode list (https://github.com/kaltura/server/pull/6061)
+- Recorded entry should always get the live conversion profile id from the live entry (https://github.com/kaltura/server/pull/6058)
+- Enhance search support sorting (https://github.com/kaltura/server/pull/6055)
+- PLAT-7985: Avoid adding user entry for empty userId (https://github.com/kaltura/server/pull/6049)
+- PLAT-7999: Fix the media type validation in the mediaService get action (https://github.com/kaltura/server/pull/6048)
+- playManifest - allow overriding of playbackType (https://github.com/kaltura/server/pull/6047)
+- PLAT-7978: Add copyRootEntryId option to baseEntry clone action (https://github.com/kaltura/server/pull/6045)
+- PHP Strict Standards (https://github.com/kaltura/server/pull/6044)
+- PLAT-7975: Add valid check for partner when getting drop folder to watch (https://github.com/kaltura/server/pull/6041)
+- KMS-15029: Support trimming of quiz entries (https://github.com/kaltura/server/pull/6040)
+- PLAT-7917- new CHUNKED_ENCODE_JOB_SCHEDULER job (https://github.com/kaltura/server/pull/6039)
+- SUP-12047: Cross Kaltura connector retries endlessly due to deleted cuepoint (https://github.com/kaltura/server/pull/6036)
+- Remove code for aborting file sync import jobs (https://github.com/kaltura/server/pull/6035)
+- PLAT-7943: Support setting flavor language and label via xml bulk upload (https://github.com/kaltura/server/pull/6026)
+- PLAT-7952: Add user login by ks action allow change account operation (https://github.com/kaltura/server/pull/6020)
+- should match Infra_AuthAdapter::getUserIdentity()'s signature (https://github.com/kaltura/server/pull/6017)
+
+* Sun Sep 24 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.3.0-15
+- Nightly build.
+
 * Sat Sep 23 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.3.0-14
 - Nightly build.
 
