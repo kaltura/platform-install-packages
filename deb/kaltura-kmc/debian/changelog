@@ -1,3 +1,11 @@
+kaltura-kmc (5.43.3-1) mercury; urgency=low
+
+  * SUP-10756 - Cannot download XML file from the Bulk menu - re-fix
+  * Ver bounce of HTML5 player to v2.61.1
+  * Change the built in EmailValidator to support new TLDs
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Sun, 24 Sep 2017 20:34:01 +0000
+
 kaltura-kmc (5.43.1-1) mercury; urgency=low
 
   * hide live dashboard link (not yet ready)
