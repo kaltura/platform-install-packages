@@ -793,10 +793,10 @@ type                                                = KAsyncLiveToVod
 scriptPath                                          = batches/LiveToVod/KAsyncLiveToVodExe.php
 
 [KAsyncCopyCaptions : JobHandlerWorker]
-id													= 670
-friendlyName										= Copy Caption Assets
-type												= KAsyncCopyCaptions
-scriptPath											= ../plugins/content/caption/base/batch/CopyCaptions/KAsyncCopyCaptionsExe.php
+id						    = 670
+friendlyName					    = Copy Caption Assets
+type						    = KAsyncCopyCaptions
+scriptPath					    = ../plugins/content/caption/base/batch/CopyCaptions/KAsyncCopyCaptionsExe.php
 
 [KAsyncClearBeacons : JobHandlerWorker]
 id                                                  = 680
