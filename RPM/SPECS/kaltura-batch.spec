@@ -7,7 +7,7 @@
 Summary: Kaltura Open Source Video Platform - batch server 
 Name: kaltura-batch
 Version: 13.3.0
-Release: 1
+Release: 2
 License: AGPLv3+
 Group: Server/Platform 
 Source0: zz-%{name}.ini
@@ -131,6 +131,9 @@ service httpd restart
 
 
 %changelog
+* Mon Sep 25 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.3.0-2
+- Added KAsyncCopyCaptions and KAsyncClearBeacons workers
+
 * Mon Sep 11 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.3.0-1
 - Ver Bounce to 13.3.0
 
