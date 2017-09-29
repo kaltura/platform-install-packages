@@ -1,3 +1,9 @@
+kaltura-batch (13.4.0-1) mercury; urgency=low
+
+  * Switching to 13.4.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 25 Sep 2017 13:55:07 +0000
+
 kaltura-batch (13.3.0-1) mercury; urgency=low
 
   * Switching to 13.3.0
