@@ -1,10 +1,10 @@
-%global libzen_version  0.4.36
+%global libzen_version  0.4.37
 %define prefix /opt/kaltura
 %define libname libmediainfo
 
 Name:           kaltura-libmediainfo
 Version:        0.7.61
-Release:        7
+Release:        8
 Summary:        Library for supplies technical and tag information about a video or audio file
 
 Group:          System Environment/Libraries
@@ -118,6 +118,9 @@ rm -f %{buildroot}%{prefix}/lib/%{libname}.la
 %{prefix}/lib/%{libname}.a
 
 %changelog
+* Fri Sep 29 2017 Jess Portnoy <jess.portnoy@kaltura.com> 0.7.61-8
+- Build against new libzen [0.4.37]
+
 * Wed Sep 6 2017 Jess Portnoy <jess.portnoy@kaltura.com> 0.7.61-7
 - Build against new libzen [0.4.36]
 
