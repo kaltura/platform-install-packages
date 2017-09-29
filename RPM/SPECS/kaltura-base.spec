@@ -333,6 +333,9 @@ fi
 * Fri Sep 29 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.4.0-6
 - Nightly build.
 
+* Fri Sep 29 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.4.0-6
+- Nightly build.
+
 * Thu Sep 28 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.4.0-5
 - Nightly build.
 
