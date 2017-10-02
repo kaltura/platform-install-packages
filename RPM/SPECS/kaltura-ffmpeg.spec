@@ -26,7 +26,7 @@
 Summary: Utilities and libraries to record, convert and stream audio and video
 Name: kaltura-ffmpeg
 Version: 3.2 
-Release: 1
+Release: 2
 License: GPL
 Group: Applications/Multimedia
 URL: http://ffmpeg.org/
@@ -36,6 +36,7 @@ Vendor: Kaltura, Inc.
 
 Source: http://www.ffmpeg.org/releases/ffmpeg-%{version}.tar.bz2
 Source1: vf_transform.c 
+patch0: movenc.c.diff
 #Patch0: allfilters.c.patch 
 #Patch1: crypto.c.patch 
 #Patch2: libopenjpegdec.c.patch 
@@ -123,7 +124,7 @@ Install this package if you want to compile apps with ffmpeg support.
 
 %prep
 %setup -qn ffmpeg-%{version}
-#%patch0 -p1
+%patch0 -p1
 #%patch1 -p1
 #%patch2 -p1
 #%patch3 -p1
@@ -277,6 +278,16 @@ fi
 %{base_prefix}-%{version}/share
 
 %changelog
+* Mon Oct 2 2017 Jess Portnoy <jess.portnoy@kaltura.com> - 3.2-2
+- Apple TV requires 'HVC1' tag (vs default 'HEV1' tag) for HLS streaming.
+  This required applying of following ffmpeg patches -
+    movenc: use correct tag list for AVOutputFormat.codec_tag
+    movenc: simplify codec_tag lookup
+    movenc: move tags definitions to where they are used
+    movenc: write correct format hvcc when tag is hvc1
+    movenc: allow alternative hvc1 h.265 codec tag
+  Applied with patch0: movenc.c.diff
+
 * Tue Dec 6 2016 Jess Portnoy <jess.portnoy@kaltura.com> - 3.2-1
 - 3.2 first release
 
