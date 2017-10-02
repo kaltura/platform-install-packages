@@ -30,9 +30,8 @@ $(tree): $(archive)
 
 config.status: $(tree) 
 	dh_testdir
-	#CFLAGS="$(CFLAGS)" CPPFLAGS="$(CPPFLAGS)" LDFLAGS="$(LDFLAGS)" cd $(tree) && cp ~/sources/platform-install-packages/RPM/SOURCES/vf_transform.c libavfilter/ && cat $(SOURCE_PACKAGING_DIR)/platform-install-packages/RPM/SOURCES/vf_transform.patch |patch -p1||true && ./configure \
-	
-	CFLAGS="$(CFLAGS)" CPPFLAGS="$(CPPFLAGS)" LDFLAGS="$(LDFLAGS)" cd $(tree) && ./configure \
+	#CFLAGS="$(CFLAGS)" CPPFLAGS="$(CPPFLAGS)" LDFLAGS="$(LDFLAGS)" cd $(tree) && ./configure 
+	CFLAGS="$(CFLAGS)" CPPFLAGS="$(CPPFLAGS)" LDFLAGS="$(LDFLAGS)" cd $(tree) && cat $(SOURCE_PACKAGING_DIR)/platform-install-packages/RPM/SOURCES/movenc.c.diff |patch -p1||true && ./configure \
 		    --prefix="$(BASE_PREFIX)" \
 		    --libdir="$(BASE_PREFIX)/lib" \
 		    --shlibdir="$(BASE_PREFIX)/lib" \

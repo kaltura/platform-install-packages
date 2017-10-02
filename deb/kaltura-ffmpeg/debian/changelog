@@ -1,3 +1,16 @@
+kaltura-ffmpeg (3.2-2) mercury; urgency=low
+
+  * Apple TV requires 'HVC1' tag (vs default 'HEV1' tag) for HLS streaming.
+  This required applying of following ffmpeg patches -
+    movenc: use correct tag list for AVOutputFormat.codec_tag
+    movenc: simplify codec_tag lookup
+    movenc: move tags definitions to where they are used
+    movenc: write correct format hvcc when tag is hvc1
+    movenc: allow alternative hvc1 h.265 codec tag
+  Applied with patch0: movenc.c.diff
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 02 Oct 2017 17:25:45 +0000
+
 kaltura-ffmpeg (3.2-1) lynx; urgency=low
 
   * 3.2
