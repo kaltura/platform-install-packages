@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.61.1
+Version: v2.61.4
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -82,6 +82,9 @@ fi
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Mon Oct 9 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v2.61.4-1
+- Add play promise to handle play rejection
+
 * Sun Sep 24 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v2.61.1-1
 - FEC-7133 - hls.js crash on error
 - feat: Rapt Media revisions and API features

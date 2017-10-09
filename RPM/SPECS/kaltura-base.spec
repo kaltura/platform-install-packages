@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 13.4.0
-Release: 6
+Release: 7
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -324,53 +324,41 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Sat Oct 7 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.4.0-6
-- Nightly build.
-
-* Fri Oct 6 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.4.0-6
-- Nightly build.
-
-* Thu Oct 5 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.4.0-6
-- Nightly build.
-
-* Wed Oct 4 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.4.0-6
-- Nightly build.
-
-* Tue Oct 3 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.4.0-6
-- Nightly build.
-
-* Mon Oct 2 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.4.0-6
-- Nightly build.
-
-* Sun Oct 1 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.4.0-6
-- Nightly build.
-
-* Sat Sep 30 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.4.0-6
-- Nightly build.
-
-* Fri Sep 29 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.4.0-6
-- Nightly build.
-
-* Fri Sep 29 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.4.0-6
-- Nightly build.
-
-* Fri Sep 29 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.4.0-6
-- Nightly build.
-
-* Fri Sep 29 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.4.0-6
-- Nightly build.
-
-* Thu Sep 28 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.4.0-5
-- Nightly build.
-
-* Wed Sep 27 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.4.0-4
-- Nightly build.
-
-* Tue Sep 26 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.4.0-3
-- Nightly build.
-
-* Mon Sep 25 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.4.0-2
-- Nightly build.
+* Mon Oct 9 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.4.0-7
+- Don't call fullMkdir since it requires full file name (https://github.com/kaltura/server/pull/6139)
+- apigrep - support case insensitive (https://github.com/kaltura/server/pull/6137)
+- Update the add permission script date (https://github.com/kaltura/server/pull/6135)
+- PLAT-8083: allow inclusion/exclusion cloning metaData and flavors objects (https://github.com/kaltura/server/pull/6134)
+- Fix for 6sec default chunk duration (https://github.com/kaltura/server/pull/6131)
+- PLAT-7986: Add getVolumeMap action to media service (https://github.com/kaltura/server/pull/6130)
+- PLAT-8085: Fix elastic populate Exceptions (https://github.com/kaltura/server/pull/6129)
+- SUP-12195: Default value for update method (https://github.com/kaltura/server/pull/6127)
+- PLAT 6597: apply 6 sec default chunk duration (https://github.com/kaltura/server/pull/6125)
+- FileGetContant patch for maxlen (https://github.com/kaltura/server/pull/6124)
+- PLAT-8049: Upgrade FB SDK to 2.5 (https://github.com/kaltura/server/pull/6123)
+- Adding defaultExpiry as 30 day for filesystemPlayKitJsSourceMap (https://github.com/kaltura/server/pull/6122)
+- PLAT-7961: sftp engine use kFile function (https://github.com/kaltura/server/pull/6121)
+- PLAT-7951: Add _matchand_entitled_kusers_view entry filter (https://github.com/kaltura/server/pull/6120)
+- PLAT-7961: Adopt the myFlvStreamer to FileSyncKey (https://github.com/kaltura/server/pull/6118)
+- SUP-12069: Add url domain to uploadToken->add (https://github.com/kaltura/server/pull/6117)
+- PLAT-7988: Return only the time and not an array when parsing caption times (https://github.com/kaltura/server/pull/6116)
+- Increase chunk retries count and max exec time (https://github.com/kaltura/server/pull/6114)
+- PLAT-7961: Tunnel Set content through kFile in kActivitiBusinessProcessProvider.php (https://github.com/kaltura/server/pull/6113)
+- PLAT-7961: Remove redundant code in BusinessProcessCaseService.php (https://github.com/kaltura/server/pull/6112)
+- PLAT-8060: Add fullscreen attributes to iframe (https://github.com/kaltura/server/pull/6111)
+- Fix playkit embed (https://github.com/kaltura/server/pull/6109)
+- PLAT-7961: Get content in KalturaFileSync through kFileSyncUtils (https://github.com/kaltura/server/pull/6108)
+- PLAT-8037: Obtain kuser from ks when users:exclude clone option is given (https://github.com/kaltura/server/pull/6107)
+- PLAT-7961: Use kFile::createTempFile() instead of getTempFileWithContent() (https://github.com/kaltura/server/pull/6106)
+- PLAT-5577: Always return primary server stream first when serving playManifest (https://github.com/kaltura/server/pull/6105)
+- PLAT-8064: Add permission to restore entry action to Admin console partner (https://github.com/kaltura/server/pull/6104)
+- PLAT-8064: Add restore entry button to entry investigation (https://github.com/kaltura/server/pull/6103)
+- PLAT-7961: Use kFile::appendToFile() instead of addToLogFile() (https://github.com/kaltura/server/pull/6100)
+- PLAT-7961: Refactor sFTP distribution engine (https://github.com/kaltura/server/pull/6094)
+- PLAT-8038: Support flavor asset update without updating source content (https://github.com/kaltura/server/pull/6087)
+- PLAT-8030: Recording 24 By 7 feature flip (https://github.com/kaltura/server/pull/6085)
+- PLAT-7988: Add caption support for webvtt format on clip/trim (https://github.com/kaltura/server/pull/6037)
+- PLAT-7906: Add php7 support for accessing sftp urls (https://github.com/kaltura/server/pull/5937)
 
 * Mon Sep 25 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.4.0-1
 - Ver Bounce to 13.4.0

@@ -1,6 +1,6 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmc
-Version: v5.43.3
+Version: v5.43.4
 Release: 1
 Summary: Kaltura Management Console
 
@@ -85,6 +85,10 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Oct 9 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v5.43.4-1
+- PLAT-8070 - re-enable live dashboard shortcut in the old KMC
+- Ver bounce of HTML5 player to v2.61.4
+
 * Sun Sep 24 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v5.43.3-1
 - SUP-10756 - Cannot download XML file from the Bulk menu - re-fix
 - Ver bounce of HTML5 player to v2.61.1
