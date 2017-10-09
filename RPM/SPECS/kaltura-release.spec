@@ -4,7 +4,7 @@
 Summary: Kaltura Server release file and package configuration
 Name: kaltura-release
 Version: 13.4.0
-Release: 2
+Release: 4
 License: AGPLv3+
 Group: Server/Platform 
 URL: http://kaltura.org
@@ -12,7 +12,6 @@ URL: http://kaltura.org
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildArch: noarch
 
-%define path releases/latest/$releasever/RPMS
 
 %description
 Kaltura Server release file. This package contains yum 
@@ -27,14 +26,14 @@ GPG keys used to sign them.
 # URL: http://kaltura.org/
 [Kaltura]
 name = Kaltura Server
-baseurl = http://%{baseurl}/%{path}/\$basearch/
+baseurl = http://%{baseurl}/releases/latest/\$releasever/RPMS/\$basearch/
 gpgkey = http://%{baseurl}/releases/RPM-GPG-KEY-kaltura
 gpgcheck = 1 
 enabled = 1
 
 [Kaltura-noarch]
 name = Kaltura Server arch independent
-baseurl = http://%{baseurl}/%{path}/noarch
+baseurl = http://%{baseurl}/releases/latest/\$releasever/RPMS/noarch
 gpgkey = http://%{baseurl}/releases/RPM-GPG-KEY-kaltura
 gpgcheck = 1
 enabled = 1
