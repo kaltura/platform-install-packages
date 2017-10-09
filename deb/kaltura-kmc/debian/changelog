@@ -1,3 +1,10 @@
+kaltura-kmc (5.43.4-1) mercury; urgency=low
+
+  * PLAT-8070 - re-enable live dashboard shortcut in the old KMC
+  * Ver bounce of HTML5 player to v2.61.4
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 09 Oct 2017 12:07:27 +0000
+
 kaltura-kmc (5.43.3-1) mercury; urgency=low
 
   * SUP-10756 - Cannot download XML file from the Bulk menu - re-fix
