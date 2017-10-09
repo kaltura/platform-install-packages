@@ -1,3 +1,9 @@
+kaltura-html5lib (2.61.4-1) mercury; urgency=low
+
+  * Add play promise to handle play rejection
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 09 Oct 2017 12:04:21 +0000
+
 kaltura-html5lib (2.61.1-1) mercury; urgency=low
 
   * FEC-7133 - hls.js crash on error
