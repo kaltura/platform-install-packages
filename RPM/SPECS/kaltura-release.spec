@@ -4,7 +4,7 @@
 Summary: Kaltura Server release file and package configuration
 Name: kaltura-release
 Version: 13.4.0
-Release: 1
+Release: 2
 License: AGPLv3+
 Group: Server/Platform 
 URL: http://kaltura.org
@@ -12,7 +12,7 @@ URL: http://kaltura.org
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildArch: noarch
 
-%define path releases/latest/RPMS
+%define path releases/latest/$releasever/RPMS
 
 %description
 Kaltura Server release file. This package contains yum 
@@ -38,21 +38,6 @@ baseurl = http://%{baseurl}/%{path}/noarch
 gpgkey = http://%{baseurl}/releases/RPM-GPG-KEY-kaltura
 gpgcheck = 1
 enabled = 1
-
-# we currently do not have the nightly so commented. We do have plans to add that.
-#[Kaltura-testing]
-#name = Kaltura Server arch independent
-#baseurl = http://%{baseurl}/%{testpath}/\$basearch/
-#gpgkey = http://%{baseurl}/releases/RPM-GPG-KEY-kaltura
-#gpgcheck = 1 
-#enabled = 0
-
-#[Kaltura-testing-noarch]
-#name = Kaltura Server arch independent
-#baseurl = http://%{baseurl}/%{testpath}/noarch
-#gpgkey = http://%{baseurl}/releases/RPM-GPG-KEY-kaltura
-#gpgcheck = 1
-#enabled = 0
 EOF
 
 %install
@@ -81,6 +66,9 @@ exit 0
 %config %{_sysconfdir}/yum.repos.d/kaltura.repo
 
 %changelog
+* Mon Oct 8 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.4.0-2
+- New repo FS layout
+
 * Mon Sep 25 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.4.0-1
 - Ver Bounce to 13.4.0
 
