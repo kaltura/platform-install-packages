@@ -1,10 +1,10 @@
 %_signature gpg
 %_gpg_name Kaltura, Inc.
 # this sucks but base.ini needs to know the KMC version and it needs to be known cross cluster because, it is needed to generate the UI confs, which is done by the db-config postinst script which can run from every cluster node.
-%_kmc_version v5.43.1
+%_kmc_version v5.43.4
 %clipapp_version v1.3
-%html5_version v2.61
+%html5_version v2.61.4
 %kdp3_wrapper_version v37.0
-%kmc_login_version v1.2.8
+%kmc_login_version v1.2.9
 %kcw_uiconf_ver 2.1.5
 %kdp3_vers v3.9.7 v3.9.8
