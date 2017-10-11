@@ -97,6 +97,11 @@ After installing the percona-server-server-5.5 deb and all its dependencies, run
 ```
 **Be sure to input 'Y' whenever prompted by `mysql_secure_installation`, and set a root password before continuing further.**
 
+When installing an all in one instance, for security reasons, it is best to bind the MySQL daemon to 127.0.0.1 [loopback].
+When prompted for the MySQL host/IP, please use ```127.0.0.1``` rather than ```localhost``` since the server code uses the PHP PDO MySQL extension and setting the host to localhost will cause it to attempt to connect via a UNIX socket, as opposed to over TCP, which may fa
+il, depending on where the UNIX socket is placed and the value set for the pdo_mysql.default_socket directive.
+
+
 #### Install Kaltura Server
 You can use this process to auto install an all in 1 server.
 In order to perform a manual step by step install, simply copy the commands and run them one by one.
@@ -147,7 +152,7 @@ And install as described above.
 Use this in cases where you want to clear the database and start from fresh.
 ```bash
 # /opt/kaltura/bin/kaltura-drop-db.sh
-# aptitude purge "~Nkaltura"
+# aptitude purge "~nkaltura"
 # rm -rf /opt/kaltura
 # rm -rf /etc/kaltura.d
 ```
