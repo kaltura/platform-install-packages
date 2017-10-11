@@ -108,7 +108,7 @@ To add the EPEL repo:
 #### MySQL Install and Configuration
 For MySQL versions higher 5.5 and above, note that you must disable strict mode for the deployment to succeed.
 Please see the following document:
-https://dev.mysql.com/doc/refman/5.5/en/sql-mode.html#sql-mode-setting
+https://support.realtyna.com/index.php?/Knowledgebase/Article/View/535/0/how-can-i-turn-off-mysql-strict-mode
 
 RHEL/CentOS 6 setup:
 ```bash
@@ -413,14 +413,13 @@ Once the upgrade completes, please run:
 /opt/kaltura/bin/kaltura-config-all.sh
 ```
 
-/opt/kaltura/bin/kaltura-config-all.sh can accept an answer file as its first argument, allowing for an unattended deployment/upgrade.
-For more on that, see: https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura.template.ans 
-
 In the event you would like to see what changes the package includes before deciding whether or not you wish to upgrade, run:
 ```bash
 yum install yum-plugin-changelog
 yum changelog all kaltura-package-name-here
 ```
+
+To upgrade your DB schema.
 
 ## Remove Kaltura
 Use this in cases where you want to clear the database and start from fresh.

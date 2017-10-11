@@ -23,11 +23,11 @@ Installed [Docker Engine](https://docs.docker.com/engine/installation).
 
 ### Running the image
 Kaltura requires certain ports to be open for proper operation. [See the list of required open ports](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura-required-ports.md).
-The container already documented to expose 80, 443 and 1935 ports, make sure to run it using -p option to enable access to these ports.
+The container already documented to expose 80, 443 and 1935 ports, make sue to run it using -p option to enable access to these ports.
 
 ### Start Kaltura container
 ```bash
-docker run -d --name=kaltura -p 80:80 -p 443:443 -p 1935:1935 -p 88:88 -p 8443:8443 kaltura/server
+docker run -d --name=kaltura -p 80:80 -p 443:443 -p 1935:1935 kaltura/server
 ```
 
 ### Start of Kaltura Configuration

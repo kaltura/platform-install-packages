@@ -95,7 +95,7 @@ In such case, the postinst script for kaltrua-db will fail, if so, adjust it and
 #### MySQL Install and Configuration
 Please note that for MySQL version 5.5 and above, you must first disable strict mode enforcement.
 See:
-https://dev.mysql.com/doc/refman/5.5/en/sql-mode.html#sql-mode-setting
+https://support.realtyna.com/index.php?/Knowledgebase/Article/View/535/0/how-can-i-turn-off-mysql-strict-mode
 
 #### Install Kaltura Server with PHP 7
 By default, the installation is done against the PHP stack available from the official repo.
@@ -181,7 +181,7 @@ deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/debian lynx main
 Use this in cases where you want to clear the database and start from fresh.
 ```bash
 # /opt/kaltura/bin/kaltura-drop-db.sh
-# aptitude purge "~Nkaltura"
+# aptitude purge ~Nkaltura
 # rm -rf /opt/kaltura
 # rm -rf /etc/kaltura.d
 ```
