@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 13.4.0
-Release: 7
+Version: 13.5.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -324,6 +324,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Wed Oct 11 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.5.0-1
+- Ver Bounce to 13.5.0
+
 * Mon Oct 9 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.4.0-7
 - Don't call fullMkdir since it requires full file name (https://github.com/kaltura/server/pull/6139)
 - apigrep - support case insensitive (https://github.com/kaltura/server/pull/6137)
