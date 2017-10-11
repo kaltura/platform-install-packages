@@ -383,10 +383,9 @@ A longer post about it can be found at https://blog.kaltura.com/free-and-open-li
 On all nodes:
 
 ```
-yum clean all
-yum update kaltura-release
-yum clean all
-yum update "*kaltura*"
+# rpm -Uhv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
+# yum clean all
+# yum update "*kaltura*"
 ```
 
 

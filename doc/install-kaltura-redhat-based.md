@@ -391,10 +391,9 @@ In order to preform an unattended [silent] install, simply edit the [template](h
 ## Upgrade Kaltura
 *This will only work if the initial install was using this packages based install, it will not work for old Kaltura deployments using the PHP installers*
 ```bash
-yum clean all
-yum update kaltura-release
-yum clean all
-yum update "*kaltura*"
+# rpm -Uhv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
+# yum clean all
+# yum update "*kaltura*"
 ```
 Then follow the on-screen instructions (in case any further actions required).
 Once the upgrade completes, please run:
