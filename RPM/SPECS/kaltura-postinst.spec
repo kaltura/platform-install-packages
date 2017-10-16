@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.33
-Release: 18
+Release: 19
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -82,6 +82,9 @@ find %{_sysconfdir}/logrotate.d -type l -name "kaltura_*" -exec rm {} \;
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Mon Oct 16 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.33-19
+- If this batch host already has a configured_id ID, in the scheduler table, use that rather than generate a new one
+
 * Wed Aug 30 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.33-17
 - Fix event notification tests
 

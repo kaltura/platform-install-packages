@@ -6,7 +6,7 @@
 
 Name:           kaltura-sphinx
 Version:        2.2.1
-Release:        22
+Release:        23
 Summary:        Sphinx full-text search server - for Kaltura
 
 Group:          Applications/Text
@@ -133,7 +133,7 @@ fi
 
 
 %preun
-if [ "$1" = 0 ] ; then
+if [ $1 -eq 0 ] ; then
     /sbin/service kaltura-sphinx stop >/dev/null 2>&1
     /sbin/service kaltura-populate stop >/dev/null 2>&1
     /sbin/chkconfig --del %{name}
