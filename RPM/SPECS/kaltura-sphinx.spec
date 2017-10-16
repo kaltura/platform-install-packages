@@ -6,7 +6,7 @@
 
 Name:           kaltura-sphinx
 Version:        2.2.1
-Release:        21
+Release:        22
 Summary:        Sphinx full-text search server - for Kaltura
 
 Group:          Applications/Text
@@ -40,6 +40,12 @@ Oracle, and other databases are supported. Client programs can query
 Sphinx either using native SphinxAPI library, or using regular MySQL
 client programs and libraries via SQL-like SphinxQL interface.
 
+%package debug
+Summary: debug version of Sphinx
+Group: System Environment/Daemons
+Requires: kaltura-sphinx
+%description debug
+Not stripped version of Sphinx built with the debugging log support.
 
 %prep
 %setup -n %{name}-%{version}
@@ -56,10 +62,14 @@ sed -i 's/\r//' api/ruby/lib/sphinx/response.rb
 
 
 %build
+# debug build
+%configure --sysconfdir=/opt/kaltura/app/configurations/sphinx  --with-mysql --with-unixodbc --with-iconv --enable-id64 --with-syslog --prefix=%{prefix} --mandir=%{prefix}/share/man --bindir=%{prefix}/bin --with-debug
+make %{?_smp_mflags}
+mkdir -p $RPM_BUILD_ROOT/%{prefix}/bin/
 
+# regular build
 %configure --sysconfdir=/opt/kaltura/app/configurations/sphinx  --with-mysql --with-unixodbc --with-iconv --enable-id64 --with-syslog --prefix=%{prefix} --mandir=%{prefix}/share/man --bindir=%{prefix}/bin
 make %{?_smp_mflags}
-
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -76,6 +86,7 @@ mkdir -p $RPM_BUILD_ROOT/opt/kaltura/log/sphinx/data
 # Create /var/run/sphinx
 mkdir -p $RPM_BUILD_ROOT%{prefix}/var/run
 
+%{__mv} %{_builddir}/%{name}-%{version}/src/searchd $RPM_BUILD_ROOT/%{prefix}/bin/searchd.debug
 
 mkdir $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
 cat > $RPM_BUILD_ROOT%{_sysconfdir}/profile.d/kaltura_sphinx.sh << EOF
@@ -145,16 +156,23 @@ fi
 %exclude %{confdir}/*.conf.dist
 %exclude %{confdir}/example.sql
 %{_initrddir}/kaltura-*
-%{prefix}/bin/*
+%{prefix}/bin/indexer      
+%{prefix}/bin/indextool    
+%{prefix}/bin/search       
+%{prefix}/bin/searchd      
+%{prefix}/bin/spelldump    
+%{prefix}/bin/wordbreaker
 %dir /opt/kaltura/log/sphinx
 %dir /opt/kaltura/log/sphinx/data
 %dir %{prefix}/var/run
 
+%files debug
+%attr(0755,root,root) %{prefix}/bin/searchd.debug
 
 
 %changelog
-* Tue Aug 29 2017 Jess Portnoy <jess.portnoy@kaltura.com> - 2.2.1.r4097-21
-- Fix init script since populateFromLog.php was moved
+* Thu Oct 12 2017 Jess Portnoy <jess.portnoy@kaltura.com> - 2.2.1.r4097-22
+- Added debug package
 
 * Fri Sep 23 2016 Jess Portnoy <jess.portnoy@kaltura.com> - 2.2.1.r4097-20
 - No need to generate logrotate file here as it's taken care of by kaltura-base with /opt/kaltura/app/configurations/logrotate/kaltura_sphinx
