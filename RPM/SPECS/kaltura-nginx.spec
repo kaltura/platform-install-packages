@@ -51,8 +51,8 @@ Requires(pre): pwdutils
 
 Summary: High performance web server customized for Kaltura VOD
 Name: kaltura-nginx
-Version: 1.12.1
-Release: 2
+Version: 1.12.2
+Release: 1
 Vendor: Kaltura inc.
 URL: http://nginx.org/
 
@@ -404,6 +404,26 @@ if [ $1 -ge 1 ]; then
 fi
 
 %changelog
+* Wed Oct 18 2017 Jess Portnoy <jess.portnoy@kaltura.com> - 1.12.2-1
+- Bugfix: client SSL connections were immediately closed if deferred
+accept and the "proxy_protocol" parameter of the "listen" directive
+were used.
+
+- Bugfix: client connections might be dropped during configuration
+testing when using the "reuseport" parameter of the "listen"
+directive on Linux.
+
+- Bugfix: incorrect response length was returned on 32-bit platforms
+when requesting more than 4 gigabytes with multiple ranges.
+
+- Bugfix: switching to the next upstream server in the stream module
+did not work when using the "ssl_preread" directive.
+
+- Bugfix: when using HTTP/2 client request body might be corrupted.
+
+- Bugfix: in handling of client addresses when using unix domain
+sockets.
+
 * Mon Sep 18 2017 Jess Portnoy <jess.portnoy@kaltura.com> - 1.12.1-2
 - New VOD module [1.20]:
 	* support sample-aes in hls/fmp4
