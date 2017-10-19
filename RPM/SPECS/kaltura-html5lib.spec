@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.61.4
+Version: v2.62
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -82,6 +82,21 @@ fi
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Thu Oct 19 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v2.62-1
+- fix: improve autoplay and poster display (#3575) |  
+- FEC-7273 - #2134- Thumbnail embed- No video show after click Play button
+- FEC-7297 - V2 - playlists with autoPlay and autoContinue - each video started to play muted on MAC Safari 11
+- KMS-15360 - It is possible to add questions on 'Done' page of a quiz
+- FEV-120 - 2 second delay while loading multicast 
+- FEC-7288 - V2 - Bumper before and after video - Post bumper stuck at 0:00 on MAC Safari 11 (No AutoPlay)
+- FEC-7294 - V2 - Bumper before and after video - Replay doesn't works on MAC safari 11   
+- FEC-7295 - V2 - Pre-sequence bumper with/without autoPlay - Replay doesn't works after the video finished on MAC Safari 11  
+- FEC-7296 - V2 - need to click Play in order to start video after pre-sequence bumper on MAC Safari 11 
+- Enable muted autoplay on desktop safari 11 only (#3589) |  
+- Add i18n to unmute plugin (#3586) |  
+- Remove computed position of unmute button (#3584) |  
+- Add Unmute plugin as default (#3583)
+
 * Mon Oct 9 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v2.61.4-1
 - Add play promise to handle play rejection
 

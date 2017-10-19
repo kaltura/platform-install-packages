@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 13.5.0
-Release: 8
+Release: 9
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -324,29 +324,32 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Wed Oct 18 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.5.0-8
-- Nightly build.
-
-* Tue Oct 17 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.5.0-7
-- Nightly build.
-
-* Mon Oct 16 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.5.0-6
-- Nightly build.
-
-* Sun Oct 15 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.5.0-5
-- Nightly build.
-
-* Sat Oct 14 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.5.0-4
-- Nightly build.
-
-* Fri Oct 13 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.5.0-3
-- Nightly build.
-
-* Thu Oct 12 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.5.0-2
-- Nightly build.
-
-* Wed Oct 11 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.5.0-1
-- Ver Bounce to 13.5.0
+* Thu Oct 19 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.5.0-9
+- KMS-15676: Clone quiz data in baseEntry->clone (https://github.com/kaltura/server/pull/6190)
+- KMS-15632: Override source type in cloning (https://github.com/kaltura/server/pull/6188)
+- PLAT-8100: Support chunked uploading with autoFinalize flag (https://github.com/kaltura/server/pull/6184)
+- PLAT-8138: When serving multi audio entry, audio flavors should be first in the list (https://github.com/kaltura/server/pull/6183)
+- PLAT-8129: Don't set sourceType to the original type when clonning (https://github.com/kaltura/server/pull/6180)
+- PLAT-8040: Update google API client to 1.1.2 (https://github.com/kaltura/server/pull/6176)
+- SUP-12232: Due to Apple bug: add new lines at the end of WebVTT segment to make it at least 10 bytes long (https://github.com/kaltura/server/pull/6175)
+- Set plugins in player config object from uiConfig data (https://github.com/kaltura/server/pull/6171)
+- PLAT-8132: Fix facebook connector when tags are empty (https://github.com/kaltura/server/pull/6167)
+- PLAT-8130: Limit cue point indexing (https://github.com/kaltura/server/pull/6166)
+- ChunkedEncoding: Require minimal duration of 3 min (https://github.com/kaltura/server/pull/6164)
+- PLAT-8127: Add clone option for caption assets (https://github.com/kaltura/server/pull/6162)
+- ChunkedEncoding: Fix aud/vid filters processing (https://github.com/kaltura/server/pull/6160)
+- PLAT-8113: Add getVolumeMap action to flavorAsset service (https://github.com/kaltura/server/pull/6156)
+- changing enum to core value in drmPlugin (https://github.com/kaltura/server/pull/6155)
+- PLAT-8089: facebook 'place' metadata is deprecated and added updateTags() method (https://github.com/kaltura/server/pull/6153)
+- PLAT-8100: Support chunked uploading autoFinalize to support file upload without stating which chunk is the last one (https://github.com/kaltura/server/pull/6148)
+- PLAT-8084: Dolby audio improvements (https://github.com/kaltura/server/pull/6147)
+- Allow single KChunkedEncodeJobScheduler process (https://github.com/kaltura/server/pull/6146)
+- PLAT-7886: add optional param of flavorId to getVolumeMap action (https://github.com/kaltura/server/pull/6144)
+- x265 frame size should be mod 2 (https://github.com/kaltura/server/pull/6143)
+- PLAT-7979: Adding Multi Captions Support connector (https://github.com/kaltura/server/pull/6140)
+- PLAT-7961: Adopt YouTube distribution engine (https://github.com/kaltura/server/pull/6138)
+- PLAT-8048: Fix distributionProfile and distributionProvider fields on… (https://github.com/kaltura/server/pull/6136)
+- Avoid error Response header name 'KalturaBaseEntry-description error' contains invalid characters, aborting request (https://github.com/kaltura/server/pull/6126)
 
 * Mon Oct 9 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.4.0-7
 - Don't call fullMkdir since it requires full file name (https://github.com/kaltura/server/pull/6139)
