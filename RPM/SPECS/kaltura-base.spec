@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 13.5.0
-Release: 12
+Release: 13
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -324,14 +324,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Sat Oct 21 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.5.0-12
-- Nightly build.
-
-* Fri Oct 20 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.5.0-11
-- Nightly build.
-
-* Thu Oct 19 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.5.0-10
-- Nightly build.
+* Sun Oct 22 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.5.0-13
+- KMS-15658: Handle Complex Entry clipping of clip (https://github.com/kaltura/server/pull/6194)
+- apiGrep bug fix - case insensitive with match any (https://github.com/kaltura/server/pull/6193)
 
 * Thu Oct 19 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.5.0-9
 - KMS-15676: Clone quiz data in baseEntry->clone (https://github.com/kaltura/server/pull/6190)
