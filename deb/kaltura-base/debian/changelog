@@ -1,3 +1,9 @@
+kaltura-base (13.6.0-1) mercury; urgency=low
+
+  * Switching to 13.6.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 23 Oct 2017 13:14:28 +0000
+
 kaltura-base (13.5.0-3) mercury; urgency=low
 
   * KMS-15658: Handle Complex Entry clipping of clip (https://github.com/kaltura/server/pull/6194)
