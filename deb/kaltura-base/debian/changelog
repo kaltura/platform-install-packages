@@ -1,3 +1,10 @@
+kaltura-base (13.5.0-3) mercury; urgency=low
+
+  * KMS-15658: Handle Complex Entry clipping of clip (https://github.com/kaltura/server/pull/6194)
+  * apiGrep bug fix - case insensitive with match any (https://github.com/kaltura/server/pull/6193)
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Sun, 22 Oct 2017 18:41:00 +0000
+
 kaltura-base (13.5.0-2) mercury; urgency=low
 
   * KMS-15676: Clone quiz data in baseEntry->clone (https://github.com/kaltura/server/pull/6190)
