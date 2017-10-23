@@ -82,6 +82,11 @@ find %{_sysconfdir}/logrotate.d -type l -name "kaltura_*" -exec rm {} \;
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Mon Oct 23 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.33-20
+  - kaltura-sphinx-reindex.sh changes:
+    * restart monit BEFORE stopping Sphinx. Sometimes monit is fast enough so that it restarts Sphinx before it itself is restarted afte
+    * correctly report failing reindexing script
+
 * Mon Oct 16 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.33-19
 - If this batch host already has a configured_id ID, in the scheduler table, use that rather than generate a new one
 
