@@ -32,8 +32,8 @@ fi
         if /etc/init.d/kaltura-sphinx status;then
                 # disable Sphinx's monit monitoring
                 rm $APP_DIR/configurations/monit/monit.d/enabled.sphinx.rc
-                /etc/init.d/kaltura-sphinx stop
                 service kaltura-monit restart 2>/dev/null || service monit restart 2>/dev/null
+                /etc/init.d/kaltura-sphinx stop
         fi
         STMP=`date +%s`
         mkdir -p $BASE_DIR/sphinx.bck.$STMP
@@ -46,7 +46,7 @@ fi
         RC=$?
         if [ $RC -ne 0 ];then
 
-                echo "Failed to run $APP_DIR/deployment/base/scripts/populateSphinxEntries.php.
+                echo "Failed to run $SCRIPT.
         Please try to run it manually and look at the logs"
                 exit $RC
         fi
