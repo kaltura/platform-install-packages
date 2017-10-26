@@ -8,8 +8,8 @@
 
 Summary: Kaltura Open Source Video Platform - Live DVR
 Name: kaltura-livedvr
-Version: 1.17.2
-Release: 4
+Version: 1.20.2
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 URL: http://kaltura.org
@@ -112,6 +112,10 @@ fi
 
 
 %changelog
+* Thu Oct 26 2017 Jess Portnoy <jess.portnoy@kaltura.com> - 1.20.2-1
+- PLAT-8051: Recording, jobs in processing queue of UploadTask, are not handled (https://github.com/kaltura/liveDVR/pull/534)
+- Replace number with explicit kalturaLiveStatus
+
 * Fri Mar 31 2016 Jess Portnoy <jess.portnoy@kaltura.com> - 1.9.2-1
 - First package.
 
