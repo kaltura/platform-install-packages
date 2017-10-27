@@ -3,7 +3,7 @@
 
 Name:           kaltura-mediainfo
 Version:        0.7.61
-Release:        8
+Release:        9
 Summary:        Supplies technical and tag information about a video or audio file (CLI)
 
 License:        BSD
@@ -18,7 +18,7 @@ BuildRequires:  libtool
 BuildRequires:  automake
 BuildRequires:  autoconf
 Requires:  kaltura-libmediainfo = %{version}
-Requires: libzen = %{libzen_version}
+Requires: libzen >= %{libzen_version}
 
 %description
 MediaInfo CLI (Command Line Interface).
@@ -79,6 +79,9 @@ popd
 
 
 %changelog
+* Fri Oct 27 2017 Jess Portnoy <jess.portnoy@kaltura.com> 0.7.61-9
+- Be more lenient about the libzen version (>= rather than =).
+
 * Fri Sep 29 2017 Jess Portnoy <jess.portnoy@kaltura.com> 0.7.61-8
 - Build against new libzen [0.4.37]
 

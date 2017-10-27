@@ -4,7 +4,7 @@
 
 Name:           kaltura-libmediainfo
 Version:        0.7.61
-Release:        8
+Release:        9
 Summary:        Library for supplies technical and tag information about a video or audio file
 
 Group:          System Environment/Libraries
@@ -18,7 +18,7 @@ BuildRequires:  pkgconfig(zlib)
 BuildRequires:  doxygen
 BuildRequires:  pkgconfig(libcurl)
 #BuildRequires:  pkgconfig(tinyxml2)
-Requires: libzen = %{libzen_version}
+Requires: libzen >= %{libzen_version}
 
 Provides:       bundled(md5-plumb)
 
@@ -118,6 +118,9 @@ rm -f %{buildroot}%{prefix}/lib/%{libname}.la
 %{prefix}/lib/%{libname}.a
 
 %changelog
+* Fri Oct 27 2017 Jess Portnoy <jess.portnoy@kaltura.com> 0.7.61-9
+- Be more lenient about the libzen version (>= rather than =).
+
 * Fri Sep 29 2017 Jess Portnoy <jess.portnoy@kaltura.com> 0.7.61-8
 - Build against new libzen [0.4.37]
 
