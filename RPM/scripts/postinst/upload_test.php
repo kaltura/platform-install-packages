@@ -27,9 +27,12 @@ function upload($client,$fileData,$title,$conv_profile=null,$type=null)
 		$result = $client->baseEntry->addfromuploadedfile($entry, $tok, $type);
 		$id=$result->id;
 		return($id);
-	}catch(exception $e){
-		throw $e;
-	}
+	}catch(KalturaException $ex){
+	    $message=$ex->getMessage();
+    	    $error_code=$ex->getCode();
+	    echo("Failed with message: $message, error code: $error_code\n");
+	    exit(255);
+        }
 }
 $entry_queue='/tmp/upload_test_queue';
 $service_url = $argv[1];

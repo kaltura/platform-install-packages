@@ -60,7 +60,7 @@ else
 fi
 chown -R $APACHE_USER.$OS_KALTURA_USER $APP_DIR/cache
 find $APP_DIR/cache -type d -exec chmod 775 {} \;
-find $APP_DIR/cache -type f -exec chmod 644 {} \;
+find $APP_DIR/cache -type f -exec chmod 664 {} \;
 for D in $ALL_DAEMONS; do
 # if this package is installed check daemon status
         if $QUERY_COMMAND $D >/dev/null;then
@@ -408,6 +408,12 @@ ${NORMAL}"
 			TOTAL_T=`bc <<< $TIME`
 			report "Generate thumb" $RC "$OUTP" "`bc <<< $END-$START`"
 
+			START=`date +%s.%N`
+			OUT=`php $DIRNAME/delete_entry.php $SERVICE_URL $PARTNER_ID $PARTNER_ADMIN_SECRET $UPLOADED_ENT`	
+			RC=$?
+			END=`date +%s.%N`
+			TOTAL_T=`bc <<< $END-$START`
+			report "Deleting $UPLOADED_ENT" $RC "$OUT" "$TOTAL_T"
 
 			START=`date +%s.%N`
 			OUTP=`php $DIRNAME/delete_partner.php $DIRNAME/sanity_config.ini 2>&1`
