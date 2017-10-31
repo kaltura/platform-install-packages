@@ -75,6 +75,7 @@ binary-indep: install
 	sed -i "s#^;kmc_login_version = @KMC_LOGIN_VERSION@#kmc_login_version = $(KMC_LOGIN_VERSION)#g" $(tree)/configurations/local.template.ini
 	sed -i 's@^writers.\(.*\).filters.priority.priority\s*=\s*7@writers.\1.filters.priority.priority=4@g' $(tree)/configurations/logger.template.ini
 	sed -i 's@/sbin/service@/usr/sbin/service@g' $(tree)/configurations/monit/monit.d/*
+	sed -i 's@/etc/init.d@/usr/sbin/service @g' $(tree)/configurations/monit/monit.d/*
 	sed -i 's@kaltura_sphinx@kaltura-sphinx@g' $(tree)/configurations/monit/monit.d/sphinx.template.rc
 	sed -i 's@kaltura_batch@kaltura-batch@g' $(tree)/configurations/monit/monit.d/batch.template.rc
 	sed -i 's@kaltura_populate@kaltura-populate@g' $(tree)/configurations/monit/monit.d/sphinx.populate.template.rc
