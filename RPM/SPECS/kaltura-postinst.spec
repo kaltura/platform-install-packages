@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.33
-Release: 20
+Release: 21
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -82,6 +82,12 @@ find %{_sysconfdir}/logrotate.d -type l -name "kaltura_*" -exec rm {} \;
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Mon Oct 30 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.33-21
+- kaltura-sanity.sh:
+    * Use baseentry->list() instead of baseentry->get() to test the Sphinx side of things as well
+    * Delete the test entry after all the other tests ended
+    * Use service kaltura-batch $ACTION, rather than /etc/init.d/kaltura-batch $ACTION
+
 * Mon Oct 23 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.33-20
   - kaltura-sphinx-reindex.sh changes:
     * restart monit BEFORE stopping Sphinx. Sometimes monit is fast enough so that it restarts Sphinx before it itself is restarted afte

@@ -409,11 +409,11 @@ ${NORMAL}"
 			report "Generate thumb" $RC "$OUTP" "`bc <<< $END-$START`"
 
 			START=`date +%s.%N`
-			OUT=`php $DIRNAME/delete_entry.php $SERVICE_URL $PARTNER_ID $PARTNER_ADMIN_SECRET $UPLOADED_ENT`	
+			OUT=`php $DIRNAME/delete_entries.php $SERVICE_URL $PARTNER_ID $PARTNER_ADMIN_SECRET`	
 			RC=$?
 			END=`date +%s.%N`
 			TOTAL_T=`bc <<< $END-$START`
-			report "Deleting $UPLOADED_ENT" $RC "$OUT" "$TOTAL_T"
+			report "Delete all entries" $RC "$OUT" "$TOTAL_T"
 
 			START=`date +%s.%N`
 			OUTP=`php $DIRNAME/delete_partner.php $DIRNAME/sanity_config.ini 2>&1`
@@ -450,15 +450,4 @@ echo -e "${BRIGHT_BLUE}
 
 Thank you for running Kaltura! To keep Kaltura viable, stable and well tested, please join the community and help by contributing sanity tests that verify overall platform stability: http://bit.ly/kaltura-ci , and by contributing to the project roadmap by solving simple tasks and challenges: http://bit.ly/kaltura-tasks.
 ${NORMAL}"
-
-#START=`date +%s.%N`
-#OUTP=`check_missing_web_files`
-#RC=$?
-#END=`date +%s.%N`
-#if [ $RC -ne 0 ];then
-#	report "Check missing web/content files - $OUTP" $RC, $OUTP "`bc <<< $END-$START`"
-#else
-#	report "Check missing web/content files - none are missing" $RC, "All files found" "`bc <<< $END-$START`"
-#
-#fi
 
