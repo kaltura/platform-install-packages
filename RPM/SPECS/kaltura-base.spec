@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 13.6.0
-Release: 15
+Release: 16
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -324,47 +324,41 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Sun Nov 5 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.6.0-15
-- Nightly build.
-
-* Sat Nov 4 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.6.0-14
-- Nightly build.
-
-* Fri Nov 3 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.6.0-13
-- Nightly build.
-
-* Thu Nov 2 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.6.0-12
-- Nightly build.
-
-* Wed Nov 1 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.6.0-11
-- Nightly build.
-
-* Tue Oct 31 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.6.0-10
-- Nightly build.
-
-* Mon Oct 30 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.6.0-9
-- Nightly build.
-
-* Sun Oct 29 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.6.0-8
-- Nightly build.
-
-* Sat Oct 28 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.6.0-7
-- Nightly build.
-
-* Fri Oct 27 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.6.0-6
-- Nightly build.
-
-* Thu Oct 26 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.6.0-5
-- Nightly build.
-
-* Wed Oct 25 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.6.0-4
-- Nightly build.
-
-* Tue Oct 24 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.6.0-3
-- Nightly build.
-
-* Mon Oct 23 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.6.0-2
-- Nightly build.
+* Mon Nov 6 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.6.0-16
+- Update KalturaLiveEntryService.php (https://github.com/kaltura/server/pull/6274)
+- Avoid returning empty results when passing DYNAMIC_OBJECT metadata object type (https://github.com/kaltura/server/pull/6273)
+- Correctly validate objectId is filtered when calling metadata list (https://github.com/kaltura/server/pull/6269)
+- Add query cache rules (https://github.com/kaltura/server/pull/6264)
+- PLAT-8134: added KalturaESearchQuery obejct (https://github.com/kaltura/server/pull/6263)
+- PLAT-8134: added KalturaESearchObject (https://github.com/kaltura/server/pull/6262)
+- SUP-11691: Added ra extension into audio_file_ext[] (https://github.com/kaltura/server/pull/6260)
+- PSVAMB-459: New email notification template - current session user (https://github.com/kaltura/server/pull/6259)
+- Handle 'skip-chunk-job' cases (https://github.com/kaltura/server/pull/6255)
+- Increase allowed max retried chunk jobs to 5 (https://github.com/kaltura/server/pull/6250)
+- Call realpath() on secondary sources (WM's) (https://github.com/kaltura/server/pull/6245)
+- PlaykitJX: fix last modified date (https://github.com/kaltura/server/pull/6242)
+- KMS15714: retreive child entries without entitlements if user is entitled to the parent entry (https://github.com/kaltura/server/pull/6241)
+- Remove defKeditorservicesSuccess.php  (https://github.com/kaltura/server/pull/6238)
+- PLAT-8133: Changing pubdate date/time format to ISO (https://github.com/kaltura/server/pull/6237)
+- playkitjs action validations (https://github.com/kaltura/server/pull/6236)
+- embedPlaykitJsAction.class.php: Return correct lastModified value (https://github.com/kaltura/server/pull/6235)
+- PLAT-8174: add permission to v3 studio (https://github.com/kaltura/server/pull/6233)
+- PLAT-8174: add V3 studio permission and feature flip (https://github.com/kaltura/server/pull/6232)
+- ChunkedEncode support for x265 (https://github.com/kaltura/server/pull/6231)
+- Raise urgency/priority of copy jobs (https://github.com/kaltura/server/pull/6229)
+- PLAT-8150: fix searchCategory + searchUser allowed fields (https://github.com/kaltura/server/pull/6228)
+- PLAT-8195: chunked encoding (https://github.com/kaltura/server/pull/6223)
+- KMS-15806: allow anonymous user in KalturaQuizUserEntry (https://github.com/kaltura/server/pull/6221)
+- PLAT-8122: add partial search on cue point tags (https://github.com/kaltura/server/pull/6218)
+- PLAT-8121: add missing cue point question to cue point item result (https://github.com/kaltura/server/pull/6217)
+- PLAT-8190: fix partial metadata query (https://github.com/kaltura/server/pull/6216)
+- PLAT-8164: change access_control rules column to mediumtext to allow saving ACL's with large amount of rules (https://github.com/kaltura/server/pull/6215)
+- PLAT-8142: don't check entitlement when using an ADMIN KS (https://github.com/kaltura/server/pull/6214)
+- PLAT-7768: fix privacy context search (https://github.com/kaltura/server/pull/6212)
+- Fix conditional-conv-prof crashes (https://github.com/kaltura/server/pull/6211)
+- PLAT-8179: move kExtwidgetUtils to lib directory (https://github.com/kaltura/server/pull/6210)
+- PLAT-8169: Add support in new languages hkk teo hak hnn (https://github.com/kaltura/server/pull/6209)
+- SUP-11802: Properly handle multi deferred events raising a deferred event (https://github.com/kaltura/server/pull/6207)
 
 * Mon Oct 23 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.6.0-1
 - Ver Bounce to 13.6.0
