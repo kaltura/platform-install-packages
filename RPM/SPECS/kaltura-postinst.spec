@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.33
-Release: 21
+Release: 22
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -82,6 +82,9 @@ find %{_sysconfdir}/logrotate.d -type l -name "kaltura_*" -exec rm {} \;
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Mon Nov 6 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.33-22
+- kaltura-nginx-config.sh: Create an empty /etc/nginx/conf.d/live.conf. The actual file is only needed when using livedvr, in which case, the kaltura-live-dvr package will override the empty file.
+
 * Mon Oct 30 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.33-21
 - kaltura-sanity.sh:
     * Use baseentry->list() instead of baseentry->get() to test the Sphinx side of things as well

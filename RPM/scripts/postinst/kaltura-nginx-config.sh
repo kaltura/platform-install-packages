@@ -105,6 +105,8 @@ fi
 sed -e 's#@STATIC_FILES_PATH@#/etc/nginx/static#g' -e "s#@VOD_PACKAGER_HOST@#$VOD_PACKAGER_HOST#g" -e "s#@VOD_PACKAGER_PORT@#$VOD_PACKAGER_PORT#g" -e "s#@RTMP_PORT@#$RTMP_PORT#g" -e "s#@LOG_DIR@#$LOG_DIR#" -e "s#@WWW_HOST@#$WWW_HOST#g" /etc/nginx/conf.d/nginx.conf.template > /etc/nginx/nginx.conf
 sed -e 's#@STATIC_FILES_PATH@#/etc/nginx/static#g' -e "s#@PROTOCOL@#$PROTOCOL#g" /etc/nginx/conf.d/kaltura.conf.template > /etc/nginx/conf.d/kaltura.conf
 sed -i "s#@LOG_DIR@#$LOG_DIR#" /etc/logrotate.d/nginx
+# this is just a stub. The actual /etc/nginx/conf.d/live.conf is only needed when using livedvr, in which case, the kaltura-live-dvr package will override the empty file.
+touch /etc/nginx/conf.d/live.conf
 
 if [ "$IS_NGINX_SSL" = 'Y' -o "$IS_NGINX_SSL" = 'y' ];then
 	sed -e "s#@VOD_PACKAGER_HOST@#$VOD_PACKAGER_HOST#g" -e "s#@VOD_PACKAGER_SSL_PORT@#$VOD_PACKAGER_SSL_PORT#g" -e "s#@SSL_CERT@#$SSL_CERT#g" -e "s#@SSL_KEY@#$SSL_KEY#g" /etc/nginx/conf.d/ssl.conf.template > /etc/nginx/conf.d/ssl.conf
