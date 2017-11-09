@@ -1,0 +1,115 @@
+#!/bin/bash
+# Live:              This shell script takes care of starting and stopping the Kaltura kLive Controller service
+#
+# chkconfig:         345 80 20
+# description:       Kaltura Live Controller
+
+### BEGIN INIT INFO
+# Provides:          liveController
+# Required-Start:    $local_fs $remote_fs $network
+# Required-Stop:     $local_fs $remote_fs $network
+# Default-Start:     3 4 5
+# Default-Stop:      0 1 6
+# X-Interactive:     true
+# Short-Description: Start/stop Kaltura Live Controller
+### END INIT INFO
+
+###
+# extend callable functions from "functions" script
+###
+# Source function library.
+. /etc/init.d/functions
+
+# Source Kaltura function library.
+. /etc/kaltura.d/system.ini
+
+# Ensure Python 2.7 is loaded on CentOS 6
+if [ -r /opt/rh/python27/enable ]; then
+    . /opt/rh/python27/enable
+fi
+
+### Default Variables
+NAME="liveController"
+NODE_BIN_DIR="/usr/bin/"
+NODE_PATH="/usr/lib/node_modules/"
+PID_DIR="/var/run"
+PIDFILE="${PID_DIR}/${NAME}.pid"
+LOGFILE="${LOG_DIR}/livedvr/${NAME}-service.log"
+SCRIPT=${BASE_DIR}/livedvr/lib/App.js
+MIN_UPTIME="5000"
+SPIN_SLEEP_TIME="2000"
+RETVAL=0
+
+# Export NodeJS variables
+export NODE_PATH=$NODE_PATH
+
+if [ $# -ne 1 ]; then
+    echo "Usage: {start|stop|status|restart}"
+    RETVAL=1
+fi
+
+start() {
+	if my_status; then
+		echo -n "$NAME is already running."
+		echo_success
+		RETVAL=0
+	else
+		rm -f $PIDFILE
+		echo "Starting $NAME service: "
+		forever --pidFile ${PIDFILE} \
+			-a -l ${LOGFILE} \
+			--minUptime ${MIN_UPTIME} \
+			--spinSleepTime ${SPIN_SLEEP_TIME} \
+			start ${SCRIPT} 2>&1 > /dev/null &
+		RETVAL=$?
+		if my_status; then
+		    PID=$( cat ${PIDFILE} )
+		    success "started ${NAME} with ${PID}"
+		    echo_success
+		else
+		    failure "starting ${NAME} failed. Please see ${LOGFILE}"
+		    echo_failure
+		fi
+	fi
+}
+
+stop() {
+	echo -n "Stopping $NAME service: "
+	forever stop ${SCRIPT} >> ${LOGFILE}
+	RETVAL=$?
+	if ! my_status; then
+		rm -f ${PIDFILE}
+		echo_success
+	else
+		echo_failure
+	fi
+}
+
+my_status()
+{
+	status -p ${PIDFILE} ${NAME}
+	return $?
+}
+
+
+case "$1" in
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    status)
+        my_status
+        RETVAL=$?
+        ;;
+    restart)
+        stop
+        start
+        ;;
+    *)
+        echo $"Usage: $0 {start|stop|status|restart}"
+        RETVAL=1
+        ;;
+esac
+exit ${RETVAL}

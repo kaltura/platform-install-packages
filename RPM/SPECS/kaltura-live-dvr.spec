@@ -8,18 +8,21 @@
 
 Summary: Kaltura Open Source Video Platform - Live DVR
 Name: kaltura-livedvr
-Version: 1.20.2
-Release: 3
+Version: 1.22.1
+Release: 2
 License: AGPLv3+
 Group: Server/Platform 
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires: kaltura-monit kaltura-base redhat-lsb-core nodejs >= 6.0.0 kaltura-nginx nodejs-chunked-stream nodejs-commander  nodejs-log4js nodejs-glob nodejs-mkdirp nodejs-q nodejs-q-io nodejs-touch nodejs-underscore nodejs-v8-profiler nodejs-nconf nodejs-request nodejs-forever 
+Requires: kaltura-monit kaltura-base redhat-lsb-core nodejs >= 7.0.0 kaltura-nginx nodejs-chunked-stream nodejs-commander  nodejs-log4js nodejs-glob nodejs-mkdirp nodejs-q nodejs-q-io nodejs-touch nodejs-underscore nodejs-nconf nodejs-request nodejs-forever 
 Requires(post): chkconfig
 Requires(preun): chkconfig
 Requires(preun): initscripts
 BuildRequires: unzip
 Source0: %{name}-%{version}.tar.gz
+Source1: %{name}.logrotate
+Source2: %{name}.recorder.init
+Source3: %{name}.controller.init
 
 
 %description
@@ -52,8 +55,8 @@ npm install nan
 
 
 %install
-mkdir -p $RPM_BUILD_ROOT/%{_sysconfdir}/init.d
-mkdir -p $RPM_BUILD_ROOT%{livedvr_prefix}/bin $RPM_BUILD_ROOT%{livedvr_prefix}/liveRecorder/bin $RPM_BUILD_ROOT%{livedvr_prefix}/liveRecorder/Config $RPM_BUILD_ROOT%{livedvr_prefix}/log $RPM_BUILD_ROOT/%{kaltura_root_prefix}/web/content/kLive/liveRecorder/recordings/newSession $RPM_BUILD_ROOT/%{kaltura_root_prefix}/web/content/kLive/liveRecorder/recordings/append $RPM_BUILD_ROOT/%{kaltura_root_prefix}/web/content/kLive/liveRecorder/error $RPM_BUILD_ROOT/%{kaltura_root_prefix}/web/content/kLive/liveRecorder/incoming $RPM_BUILD_ROOT/%{kaltura_root_prefix}/web/content/kLive/liveRecorder/recordings $RPM_BUILD_ROOT%{nginx_conf_dir}
+mkdir -p $RPM_BUILD_ROOT/%{_sysconfdir}/init.d 
+mkdir -p $RPM_BUILD_ROOT%{livedvr_prefix}/bin $RPM_BUILD_ROOT%{livedvr_prefix}/liveRecorder/bin $RPM_BUILD_ROOT%{livedvr_prefix}/liveRecorder/Config $RPM_BUILD_ROOT%{livedvr_prefix}/log $RPM_BUILD_ROOT/%{kaltura_root_prefix}/web/content/kLive/liveRecorder/recordings/newSession $RPM_BUILD_ROOT/%{kaltura_root_prefix}/web/content/kLive/liveRecorder/recordings/append $RPM_BUILD_ROOT/%{kaltura_root_prefix}/web/content/kLive/liveRecorder/error $RPM_BUILD_ROOT/%{kaltura_root_prefix}/web/content/kLive/liveRecorder/incoming $RPM_BUILD_ROOT/%{kaltura_root_prefix}/web/content/kLive/liveRecorder/recordings $RPM_BUILD_ROOT%{nginx_conf_dir} $RPM_BUILD_ROOT%{kaltura_root_prefix}/log/livedvr
 cp %{_builddir}/liveDVR-%{version}/liveRecorder/bin/ts_to_mp4_convertor $RPM_BUILD_ROOT%{livedvr_prefix}/liveRecorder/bin/ts_to_mp4_convertor
 cp %{_builddir}/liveDVR-%{version}/node_addons/FormatConverter/build/Release/FormatConverter.so $RPM_BUILD_ROOT%{livedvr_prefix}/bin/FormatConverter.node
 strip $RPM_BUILD_ROOT%{livedvr_prefix}/liveRecorder/bin/ts_to_mp4_convertor
@@ -61,14 +64,15 @@ strip $RPM_BUILD_ROOT%{livedvr_prefix}/bin/FormatConverter.node
 cp -r %{_builddir}/liveDVR-%{version}/lib $RPM_BUILD_ROOT%{livedvr_prefix}
 cp -r %{_builddir}/liveDVR-%{version}/common $RPM_BUILD_ROOT%{livedvr_prefix}
 cp %{_builddir}/liveDVR-%{version}/liveRecorder/Config/configMapping.ini.template $RPM_BUILD_ROOT%{livedvr_prefix}/liveRecorder/Config
-cp %{_builddir}/liveDVR-%{version}/serviceWrappers/linux/kLiveController $RPM_BUILD_ROOT/%{_sysconfdir}/init.d/%{name} 
-cp %{_builddir}/liveDVR-%{version}/liveRecorder/serviceWrappers/linux/liveRecorder $RPM_BUILD_ROOT/%{_sysconfdir}/init.d/kaltura-live-recorder 
+cp %{SOURCE2} $RPM_BUILD_ROOT/%{_sysconfdir}/init.d/kaltura-live-recorder 
+cp %{SOURCE3} $RPM_BUILD_ROOT/%{_sysconfdir}/init.d/kaltura-live-controller
 sed 's#@CONTENT_DIR@#%{kaltura_root_prefix}/web#g' %{_builddir}/liveDVR-%{version}/packager/config/nginx.conf.live.bootstrap.template > $RPM_BUILD_ROOT%{nginx_conf_dir}/nginx.conf.live.bootstrap
 cp %{_builddir}/liveDVR-%{version}/packager/config/nginx.conf.live.conf.template $RPM_BUILD_ROOT%{nginx_conf_dir}/live.conf
-# tmp fix until https://github.com/kaltura/liveDVR/pull/546 is merged.
-sed -i 's@vod_hls_output_id3_timestamps@vod_hls_mpegts_output_id3_timestamps@g' $RPM_BUILD_ROOT%{nginx_conf_dir}/live.conf
 cp %{_builddir}/liveDVR-%{version}/packager/config/nginx.conf.live.protocols.template $RPM_BUILD_ROOT%{nginx_conf_dir}/
 
+%{__mkdir} -p $RPM_BUILD_ROOT%{_sysconfdir}/logrotate.d
+%{__install} -m 644 -p %{SOURCE1} \
+   $RPM_BUILD_ROOT%{_sysconfdir}/logrotate.d/%{name}
 
 %pre
 # maybe one day we will support SELinux in which case this can be ommitted.
@@ -88,15 +92,15 @@ getent passwd %{kaltura_user} >/dev/null || useradd -m -r -u7373 -d %{prefix} -s
 usermod -g %{kaltura_group} %{kaltura_user} 2>/dev/null || true
 %post
 if [ "$1" = 1 ];then
-	/sbin/chkconfig --add %{name}
-	/sbin/chkconfig %{name} on
+	/sbin/chkconfig --add kaltura-live-controller
+	/sbin/chkconfig kaltura-live-controller on
 	/sbin/chkconfig --add kaltura-live-recorder
 	/sbin/chkconfig kaltura-live-recorder on
 fi
 %preun
 if [ "$1" = 0 ] ; then
-	/sbin/chkconfig --del %{name}
-	service %{name} stop
+	/sbin/chkconfig --del kaltura-live-controller
+	service kaltura-live-controller stop
 	/sbin/chkconfig --del kaltura-live-recorder
 	service kaltura-live-recorder stop
 fi
@@ -107,14 +111,19 @@ fi
 %dir %{livedvr_prefix}
 %{livedvr_prefix}
 %{kaltura_root_prefix}/web/content/kLive/liveRecorder/*
+%{kaltura_root_prefix}/log/livedvr
 %config %{livedvr_prefix}/common/config/*
 %config %{livedvr_prefix}/liveRecorder/Config/*
 %config %{nginx_conf_dir}/*
-%{_sysconfdir}/init.d/%{name}
+%{_sysconfdir}/init.d/kaltura-live-controller
 %{_sysconfdir}/init.d/kaltura-live-recorder
-
+%config %{_sysconfdir}/logrotate.d/%{name}
 
 %changelog
+* Thu Nov 9 2017 Jess Portnoy <jess.portnoy@kaltura.com> - 1.22.1-1
+- Fixed init scripts
+- Added logrotate config
+
 * Thu Oct 26 2017 Jess Portnoy <jess.portnoy@kaltura.com> - 1.20.2-1
 - PLAT-8051: Recording, jobs in processing queue of UploadTask, are not handled (https://github.com/kaltura/liveDVR/pull/534)
 - Replace number with explicit kalturaLiveStatus
