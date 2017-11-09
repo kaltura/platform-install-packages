@@ -9,7 +9,7 @@
 Summary: Kaltura Open Source Video Platform - Live DVR
 Name: kaltura-livedvr
 Version: 1.22.1
-Release: 1
+Release: 2
 License: AGPLv3+
 Group: Server/Platform 
 URL: http://kaltura.org
@@ -66,7 +66,6 @@ cp -r %{_builddir}/liveDVR-%{version}/common $RPM_BUILD_ROOT%{livedvr_prefix}
 cp %{_builddir}/liveDVR-%{version}/liveRecorder/Config/configMapping.ini.template $RPM_BUILD_ROOT%{livedvr_prefix}/liveRecorder/Config
 cp %{SOURCE2} $RPM_BUILD_ROOT/%{_sysconfdir}/init.d/kaltura-live-recorder 
 cp %{SOURCE3} $RPM_BUILD_ROOT/%{_sysconfdir}/init.d/kaltura-live-controller
-cp %{_builddir}/liveDVR-%{version}/liveRecorder/serviceWrappers/linux/liveRecorder $RPM_BUILD_ROOT/%{_sysconfdir}/init.d/kaltura-live-recorder 
 sed 's#@CONTENT_DIR@#%{kaltura_root_prefix}/web#g' %{_builddir}/liveDVR-%{version}/packager/config/nginx.conf.live.bootstrap.template > $RPM_BUILD_ROOT%{nginx_conf_dir}/nginx.conf.live.bootstrap
 cp %{_builddir}/liveDVR-%{version}/packager/config/nginx.conf.live.conf.template $RPM_BUILD_ROOT%{nginx_conf_dir}/live.conf
 cp %{_builddir}/liveDVR-%{version}/packager/config/nginx.conf.live.protocols.template $RPM_BUILD_ROOT%{nginx_conf_dir}/
