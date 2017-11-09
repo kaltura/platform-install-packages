@@ -1,0 +1,14 @@
+/opt/kaltura/log/livedvr/liveController-service.log
+/opt/kaltura/log/livedvr/liveRecorder-service.log
+/opt/kaltura/log/livedvr/kaltura_mediaserver_access.log
+/opt/kaltura/log/livedvr/kaltura_mediaserver.log
+/opt/kaltura/log/livedvr/kaltura_mediaserver_error.log {
+     copytruncate
+     rotate 7
+     daily
+     missingok
+     compress
+     nodateext
+     notifempty
+    su root root
+}
