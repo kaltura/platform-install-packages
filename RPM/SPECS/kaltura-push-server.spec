@@ -6,7 +6,7 @@
 
 Summary: Kaltura Push Server 
 Name: kaltura-push-server 
-Version: 1.0.8
+Version: 1.0.9
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -48,7 +48,6 @@ rm $RPM_BUILD_ROOT%{prefix}/bin/push-server.template.sh $RPM_BUILD_ROOT%{prefix}
 chmod +x $RPM_BUILD_ROOT%{prefix}/bin/configure-rabbitmq.sh
 
 
-
 %clean
 rm -rf %{buildroot}
 
@@ -85,6 +84,10 @@ fi
 %doc %{prefix}/README.md
 
 %changelog
+* Fri Nov  10 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.9-1
+- PLAT-7977: add ability to keep socket connected but not listen on specific queue
+- correct name for configure-rabbitmq.sh
+
 * Tue Aug  23 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.8-1
 - Add binding command to bind between the kaltura exchange and the queue
 
