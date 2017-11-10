@@ -84,7 +84,7 @@ else
 fi
 
 export RABBIT_USER RABBIT_PASSWD 
-/opt/kaltura/push-server/bin/configure-rabbitmq.sh
+/opt/kaltura/push-server/bin/kaltura-rabbitmq-config.sh
 
 sed -e "s#@LOG_DIR@#$PUSH_SERVER_PREFIX/log#g" -e "s#@QUEUE_NAME@#`hostname`#g" -e "s#@EXCHANGE@#kaltura_exchange#g" -e "s#@RABBIT_MQ_SERVER@#$RABBIT_MQ_SERVER#g" -e "s#@RABBIT_MQ_USERNAME@#$RABBIT_USER#g" -e "s#@RABBIT_MQ_PASSWORD@#$RABBIT_PASSWD#g" -e "s#@RABBIT_MQ_SERVER_HOSTS@#$RABBIT_MQ_SERVER_HOSTS#g" -e "s#@SOCKET_IO_PORT@#$SOCKET_IO_PORT#g" -e "s#@TOKEN_KEY@#$TOKEN_KEY#g" -e "s#@TOKEN_IV@#$TOKEN_IV#g" $PUSH_SERVER_PREFIX/config/config.ini.template > $PUSH_SERVER_PREFIX/config/config.ini
 
