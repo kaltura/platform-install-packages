@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 13.6.0
-Release: 16
+Version: 13.7.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -324,6 +324,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Fri Nov 10 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.7.0-1
+- Ver Bounce to 13.7.0
+
 * Mon Nov 6 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.6.0-16
 - Update KalturaLiveEntryService.php (https://github.com/kaltura/server/pull/6274)
 - Avoid returning empty results when passing DYNAMIC_OBJECT metadata object type (https://github.com/kaltura/server/pull/6273)
