@@ -207,6 +207,7 @@ Your install will now automatically perform all install tasks.
 
 ## SSL Step-by-step Installation
 ### Pre-Install notes
+* This guide doesn't work because we never tested it. Use the http install guide and add a *:443 virtual host yourself
 * This install guides assumes that you did a clean, basic install of one of the support RHEL based OS's in 64bit architecture.
 * Currently, the Nginx VOD module does not support integration with Kaltura over HTTPs, only HTTP is supported. 
 * When installing, you will be prompted for each server's resolvable hostname. Note that it is crucial that all host names will be resolvable by other servers in the cluster (and outside the cluster for front machines). Before installing, verify that your /etc/hosts file is properly configured and that all Kaltura server hostnames are resolvable in your network.
