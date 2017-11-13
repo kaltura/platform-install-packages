@@ -331,3 +331,8 @@ LIVE_ANALYTICS_PACKAGE_NAME="kaltura-live-analytics"
 LIVE_ANALYTICS_FRONT_END_VERSION=v2.6
 LIVE_ANALYTICS_FRONT_END_URI="https://github.com/kaltura/live-analytics-front-end/releases/download/$LIVE_ANALYTICS_FRONT_END_VERSION/$LIVE_ANALYTICS_FRONT_END_VERSION.zip"
 LIVE_ANALYTICS_FRONT_END_PACKAGE_NAME="kaltura-live-analytics-front"
+
+# live dashboard
+LIVE_DAHSBOARD_FRONT_END_VERSION=v1.1.1
+LIVE_DAHSBOARD_FRONT_END_URI="https://github.com/kaltura/kmc-live-dashboard/archive/$LIVE_DAHSBOARD_FRONT_END_VERSION.tar.gz"
+LIVE_DAHSBOARD_FRONT_END_PACKAGE_NAME="kaltura-live-dashboard-front"
