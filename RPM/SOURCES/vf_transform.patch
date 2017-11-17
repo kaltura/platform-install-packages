@@ -1,5 +1,5 @@
---- ffmpeg-3.2/libavfilter/Makefile	2016-06-27 00:54:30.000000000 +0100
-+++ ffmpeg313_patches/libavfilter/Makefile	2016-09-19 05:01:40.000000000 +0100
+--- ffmpeg-3.2.orig/libavfilter/Makefile	2016-06-27 00:54:30.000000000 +0100
++++ ffmpeg-3.2/libavfilter/Makefile	2016-09-19 05:01:40.000000000 +0100
 @@ -292,6 +292,7 @@
  OBJS-$(CONFIG_ZMQ_FILTER)                    += f_zmq.o
  OBJS-$(CONFIG_ZOOMPAN_FILTER)                += vf_zoompan.o

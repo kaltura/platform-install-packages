@@ -1,5 +1,5 @@
---- ffmpeg-3.2/libavformat/movenc.c	2016-10-27 17:17:40.000000000 +0100
-+++ ffmpeg-3.2-p/downloads/movenc.c	2017-10-02 16:19:53.083094878 +0100
+--- ffmpeg-3.2.orig/libavformat/movenc.c	2016-10-27 17:17:40.000000000 +0100
++++ ffmpeg-3.2/libavformat/movenc.c	2017-10-02 16:19:53.083094878 +0100
 @@ -34,6 +34,8 @@
  #include "libavcodec/ac3_parser.h"
  #include "libavcodec/dnxhddata.h"

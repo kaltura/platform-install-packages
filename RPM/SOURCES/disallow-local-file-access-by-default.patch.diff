@@ -1,7 +1,7 @@
-diff --git a/libavformat/hls.c b/libavformat/hls.c
-index 4b8fb19a52..3a82855ab7 100644
---- a/libavformat/hls.c
-+++ b/libavformat/hls.c
+#diff --git a/libavformat/hls.c b/libavformat/hls.c
+#index 4b8fb19a52..3a82855ab7 100644
+--- ffmpeg-3.2.orig/libavformat/hls.c
++++ ffmpeg-3.2/libavformat/hls.c
 @@ -204,6 +204,7 @@ typedef struct HLSContext {
      char *http_proxy;                    ///< holds the address of the HTTP proxy server
      AVDictionary *avio_opts;
@@ -40,8 +40,8 @@ index 4b8fb19a52..3a82855ab7 100644
  
 diff --git a/tests/fate/filter-audio.mak b/tests/fate/filter-audio.mak
 index 5d15b31e0b..0c229ccc51 100644
---- a/tests/fate/filter-audio.mak
-+++ b/tests/fate/filter-audio.mak
+--- ffmpeg-3.2.orig/tests/fate/filter-audio.mak
++++ ffmpeg-3.2/tests/fate/filter-audio.mak
 @@ -150,7 +150,7 @@ tests/data/hls-list.m3u8: ffmpeg$(PROGSSUF)$(EXESUF) | tests/data
  
  FATE_AFILTER-$(call ALLYES, HLS_DEMUXER MPEGTS_MUXER MPEGTS_DEMUXER AEVALSRC_FILTER LAVFI_INDEV MP2FIXED_ENCODER) += fate-filter-hls
