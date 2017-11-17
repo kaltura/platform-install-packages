@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.62
+Version: v2.63.1
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -82,6 +82,28 @@ fi
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Fri Nov 17 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v2.63.1-1
+- FEC-7484 - #2697 - HLS JS - Multiple Audio Track - Captions - Captions displayed twice (different style)
+- SUP-9616 - defaultLanguageKey var not passed to apple native player on iphone
+- SUP-12496 - Ad notice text does not appear in postroll
+- FEC-7025 - Regression: MPEG Dash DRM is not working on IE 11
+- FEC-7419 - V2: Live DRM Dash doesn't works, trying to play HLS
+- KMS-15649 - [IVQ] quiz submit page change per i18n
+- FEC-6979 - CLONE - VOOTAPP-364 [Version2] - Android - ChromeCast-Casting a video in portrait player that does not contain next video it fails to show Replay and cancel buttons.
+- SUP-12010 - Double Closed Caption
+- SUP-11980 - Using the seekFrom / seekTo cause endless stuck buffering in player
+- SUP-12109 - Flagged video - Screen isn't displayed fully Can't add comment and can't submit item
+- SUP-12305 - Launch custom logo button link using keyboard doesn't work
+- KMS-15400 - Add questions button does not appear when hovering over the screen with mouse
+- KMS-15672 - Difficult to reach 'Add question' button when captions go over the button UI
+- KMS-15695 - Question button does not add questions to Youtube entry (actual for all three flows)
+- Update IMA SDK lib url (#3613)
+- FEV 103 (#3614)
+- handle ios caption on full screen (#3607)
+- feat: only throw critical Shaka errors (#3608)
+- feat: repackage comscore streaming plugin with an updated generic plugin version v2.6.0.170905 (#3593)
+- Force return boolean from isSafeEnviornment of unmute plugin (#3592)
+
 * Thu Oct 19 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v2.62-1
 - fix: improve autoplay and poster display (#3575) |  
 - FEC-7273 - #2134- Thumbnail embed- No video show after click Play button

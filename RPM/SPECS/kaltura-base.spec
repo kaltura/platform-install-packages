@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 13.7.0
-Release: 3
+Release: 4
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -324,20 +324,40 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Tue Nov 14 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.7.0-3
-- Nightly build.
-
-* Mon Nov 13 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.7.0-3
-- Nightly build.
-
-* Sun Nov 12 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.7.0-3
-- Nightly build.
-
-* Sat Nov 11 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.7.0-3
-- Nightly build.
-
-* Fri Nov 10 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.7.0-2
-- Nightly build.
+* Fri Nov 17 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.7.0-4
+- PLAT-7977: minor fix so that redirectEntryId will behave the same way as it used to (https://github.com/kaltura/server/pull/6358)
+- Fix getting file with dump renderer (https://github.com/kaltura/server/pull/6356)
+- PLAT-8242: When setting Label or Language on Flavor - increase cache version of entry (https://github.com/kaltura/server/pull/6350)
+- Run convert processes check before vidslice loop (https://github.com/kaltura/server/pull/6345)
+- Improve log of failed chunk job (https://github.com/kaltura/server/pull/6342)
+- KMS-14875: fix regex for finding alphanumeric in all languages (https://github.com/kaltura/server/pull/6340)
+- PLAT-8120: add exists query to reference id (https://github.com/kaltura/server/pull/6338)
+- Chunked Encoding - improved FetchNextJob (https://github.com/kaltura/server/pull/6337)
+- Chunked Encoding - Improved 'job-skip' detection (https://github.com/kaltura/server/pull/6336)
+- Chunked Encoding - fixes and updates (https://github.com/kaltura/server/pull/6335)
+- Chunked Encoding - concurrency reports (https://github.com/kaltura/server/pull/6334)
+- PLAT-8240: Duplicate entries in MR notification mail (https://github.com/kaltura/server/pull/6332)
+- When serving live order by primary DC first (https://github.com/kaltura/server/pull/6331)
+- PLAT-8236: set loginEnabled to @insertonly (https://github.com/kaltura/server/pull/6330)
+- PLAT-7961: added max_file_size_for_encryption directive (https://github.com/kaltura/server/pull/6328)
+- Fix category privacy + return only category id in entitlement query (https://github.com/kaltura/server/pull/6327)
+- PLAT-7961: add file size check before encrypting/decrypting (https://github.com/kaltura/server/pull/6323)
+- Update bpmNotificationsTemplates.xml (https://github.com/kaltura/server/pull/6322)
+- PLAT-8219: add projected audience parameter to live schedule event (https://github.com/kaltura/server/pull/6321)
+- SUP-12622: KWebexDropFolderEngine.php: validate startTime (https://github.com/kaltura/server/pull/6318)
+- SUP-12622: Obey new webex limitation LstRecording SQL default time range of 4 weeks (https://github.com/kaltura/server/pull/6315)
+- PLAT-8207: fix group_ids indexing on kuser (https://github.com/kaltura/server/pull/6311)
+- KMS-14857: add language support to name and description in partial search (https://github.com/kaltura/server/pull/6309)
+- PLAT-7961: when using encryption flow do not save the single vid slice after concating (https://github.com/kaltura/server/pull/6307)
+- PLAT-8230: user->add action should call toInsertable() for htmlPurify validation (https://github.com/kaltura/server/pull/6306)
+- PLAT-8097: Add new logic to matching flavors on playlist (https://github.com/kaltura/server/pull/6305)
+- plat 8204: MR - add footer to email notification (https://github.com/kaltura/server/pull/6303)
+- Support api rate limiting (https://github.com/kaltura/server/pull/6300)
+- SUP-12423: Support passing defaultAudioLang param on the playManifest request to determine which audio flavor will be marked with default & autoSelect = YES + support defining default audio flavor on flavorAsset object (https://github.com/kaltura/server/pull/6297)
+- Set the filter *before* getDisableEntitlementForEntry since otherwise the partner criteria will not be added to $c (https://github.com/kaltura/server/pull/6295)
+- Move object id filtering validation into filter to support responseProfile flow (https://github.com/kaltura/server/pull/6292)
+- PLAT-8205: Add media name in notification email (https://github.com/kaltura/server/pull/6290)
+- SUP-12546: Add retry when regisering WV asset (https://github.com/kaltura/server/pull/6289)
 
 * Fri Nov 10 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.7.0-1
 - Ver Bounce to 13.7.0
