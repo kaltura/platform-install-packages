@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 13.7.0
-Release: 4
+Release: 5
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -324,6 +324,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Fri Nov 17 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.7.0-5
+- Nightly build.
+
 * Fri Nov 17 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.7.0-4
 - PLAT-7977: minor fix so that redirectEntryId will behave the same way as it used to (https://github.com/kaltura/server/pull/6358)
 - Fix getting file with dump renderer (https://github.com/kaltura/server/pull/6356)
