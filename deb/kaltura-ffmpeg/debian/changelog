@@ -1,3 +1,9 @@
+kaltura-ffmpeg (3.2-3) mercury; urgency=low
+
+  * avformat/hls: Disallow local file access by default: https://patchwork.ffmpeg.org/patch/3768 
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Fri, 17 Nov 2017 15:56:06 +0000
+
 kaltura-ffmpeg (3.2-2) mercury; urgency=low
 
   * Apple TV requires 'HVC1' tag (vs default 'HEV1' tag) for HLS streaming.
