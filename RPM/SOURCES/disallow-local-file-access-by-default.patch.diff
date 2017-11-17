@@ -1,0 +1,62 @@
+diff --git a/libavformat/hls.c b/libavformat/hls.c
+index 4b8fb19a52..3a82855ab7 100644
+--- a/libavformat/hls.c
++++ b/libavformat/hls.c
+@@ -204,6 +204,7 @@ typedef struct HLSContext {
+     char *http_proxy;                    ///< holds the address of the HTTP proxy server
+     AVDictionary *avio_opts;
+     int strict_std_compliance;
++    int allow_file;
+ } HLSContext;
+ 
+ static int read_chomp_line(AVIOContext *s, char *buf, int maxlen)
+@@ -618,8 +619,16 @@ static int open_url(AVFormatContext *s, AVIOContext **pb, const char *url,
+         return AVERROR_INVALIDDATA;
+ 
+     // only http(s) & file are allowed
+-    if (!av_strstart(proto_name, "http", NULL) && !av_strstart(proto_name, "file", NULL))
++    if (av_strstart(proto_name, "http", NULL))
++        ;
++    else if (av_strstart(proto_name, "file", NULL)) {
++        if (!c->allow_file) {
++            av_log(s, AV_LOG_ERROR, "Local file access is disabled by default for security reasons. To override this set hls_allow_file to 1\n");
++            return AVERROR_INVALIDDATA;
++        }
++    } else
+         return AVERROR_INVALIDDATA;
++
+     if (!strncmp(proto_name, url, strlen(proto_name)) && url[strlen(proto_name)] == ':')
+         ;
+     else if (av_strstart(url, "crypto", NULL) && !strncmp(proto_name, url + 7, strlen(proto_name)) && url[7 + strlen(proto_name)] == ':')
+@@ -2134,6 +2143,8 @@ static int hls_probe(AVProbeData *p)
+ static const AVOption hls_options[] = {
+     {"live_start_index", "segment index to start live streams at (negative values are from the end)",
+         OFFSET(live_start_index), AV_OPT_TYPE_INT, {.i64 = -3}, INT_MIN, INT_MAX, FLAGS},
++    {"hls_allow_file", "Allow to refer to files instead of http only",
++        OFFSET(allow_file), AV_OPT_TYPE_BOOL, {.i64 = 0}, 0, 1, FLAGS},
+     {NULL}
+ };
+ 
+ 
+diff --git a/tests/fate/filter-audio.mak b/tests/fate/filter-audio.mak
+index 5d15b31e0b..0c229ccc51 100644
+--- a/tests/fate/filter-audio.mak
++++ b/tests/fate/filter-audio.mak
+@@ -150,7 +150,7 @@ tests/data/hls-list.m3u8: ffmpeg$(PROGSSUF)$(EXESUF) | tests/data
+ 
+ FATE_AFILTER-$(call ALLYES, HLS_DEMUXER MPEGTS_MUXER MPEGTS_DEMUXER AEVALSRC_FILTER LAVFI_INDEV MP2FIXED_ENCODER) += fate-filter-hls
+ fate-filter-hls: tests/data/hls-list.m3u8
+-fate-filter-hls: CMD = framecrc -flags +bitexact -i $(TARGET_PATH)/tests/data/hls-list.m3u8
++fate-filter-hls: CMD = framecrc -flags +bitexact -hls_allow_file 1 -i $(TARGET_PATH)/tests/data/hls-list.m3u8
+ 
+ tests/data/hls-list-append.m3u8: TAG = GEN
+ tests/data/hls-list-append.m3u8: ffmpeg$(PROGSSUF)$(EXESUF) | tests/data
+@@ -164,7 +164,7 @@ tests/data/hls-list-append.m3u8: ffmpeg$(PROGSSUF)$(EXESUF) | tests/data
+ 
+ FATE_AFILTER-$(call ALLYES, HLS_DEMUXER MPEGTS_MUXER MPEGTS_DEMUXER AEVALSRC_FILTER LAVFI_INDEV MP2FIXED_ENCODER) += fate-filter-hls-append
+ fate-filter-hls-append: tests/data/hls-list-append.m3u8
+-fate-filter-hls-append: CMD = framecrc -flags +bitexact -i $(TARGET_PATH)/tests/data/hls-list-append.m3u8 -af asetpts=RTCTIME
++fate-filter-hls-append: CMD = framecrc -flags +bitexact -hls_allow_file 1 -i $(TARGET_PATH)/tests/data/hls-list-append.m3u8 -af asetpts=RTCTIME
+ 
+ FATE_AMIX += fate-filter-amix-simple
+ fate-filter-amix-simple: CMD = ffmpeg -filter_complex amix -i $(SRC) -ss 3 -i $(SRC1) -f f32le -

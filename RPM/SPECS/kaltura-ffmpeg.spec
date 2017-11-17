@@ -26,7 +26,7 @@
 Summary: Utilities and libraries to record, convert and stream audio and video
 Name: kaltura-ffmpeg
 Version: 3.2 
-Release: 2
+Release: 3
 License: GPL
 Group: Applications/Multimedia
 URL: http://ffmpeg.org/
@@ -43,6 +43,8 @@ patch0: movenc.c.diff
 #Patch3: libopenjpegenc.c.patch
 Patch4: vf_transform.patch 
 #Patch5: ffmpeg-3.1.3-configure.patch
+# https://patchwork.ffmpeg.org/patch/3768/
+Patch6: disallow-local-file-access-by-default.patch.diff 
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
@@ -130,6 +132,7 @@ Install this package if you want to compile apps with ffmpeg support.
 #%patch3 -p1
 %patch4 -p1
 #%patch5 -p1
+%patch6 -p1
 cp %{SOURCE1} %{_builddir}/ffmpeg-%{version}/libavfilter/
 
 
@@ -278,6 +281,9 @@ fi
 %{base_prefix}-%{version}/share
 
 %changelog
+* Fri Nov 17 2017 Jess Portnoy <jess.portnoy@kaltura.com> - 3.2-3
+- avformat/hls: Disallow local file access by default: https://patchwork.ffmpeg.org/patch/3768
+
 * Mon Oct 2 2017 Jess Portnoy <jess.portnoy@kaltura.com> - 3.2-2
 - Apple TV requires 'HVC1' tag (vs default 'HEV1' tag) for HLS streaming.
   This required applying of following ffmpeg patches -
