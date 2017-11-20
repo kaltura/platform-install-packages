@@ -1,3 +1,10 @@
+kaltura-kmc (5.43.5-1) mercury; urgency=low
+
+  * SUP-11848 - Youtube entries display in KMC - unresponsive
+  * Ver bounce of HTML5 player to v2.63.1
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Fri, 17 Nov 2017 16:15:07 +0000
+
 kaltura-kmc (5.43.4-2) mercury; urgency=low
 
   * Ver bounce of HTML5 player to v2.62
