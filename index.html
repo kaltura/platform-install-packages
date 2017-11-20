@@ -18,7 +18,7 @@
     <header>
       <div class="container">
         <h1>Kaltura Installation Packages Project</h1>
-        <h2>To enable the of use standard binary packages and package managers to deploy the Kaltura platform.</h2>
+        <h2>To enable the of use standard binary packages and package managers to deploy the Kaltura Video Platform Community Edition.</h2>
 
         <section id="downloads">
             <a href="https://github.com/kaltura/platform-install-packages" target="_blank" class="btn btn-github"><span class="icon"></span>The code repository</a>
@@ -55,8 +55,8 @@
           <p>To enable the of use standard binary packages and package managers to deploy the Kaltura platform.</p>
           
           <ul>
-            <li class="starli">This project sole purpose is to create standard installation packages for the Kaltura platform. It will make the installation process far easier (compared to the existing PHP/bash installers) and allow users to use package managers (aptitude, yum, synaptic, kpackage, etc.) and install Kaltura as you would any other binary package in your operating system of choice.</li>
-            <li class="starli">A longer term goal of this project is to allow standard distribution of the Kaltura platform via the official distribution repositories.</li>
+            <li class="starli">This project's sole purpose is to create standard installation packages for Kaltura CE. It will make the installation process far easier (compared to the existing PHP/bash installers) and allow users to use package managers (aptitude, yum, synaptic, kpackage, etc.) and install Kaltura as you would any other binary package in your operating system of choice.</li>
+            <li class="starli">A longer term goal of this project is to allow standard distribution of the Kaltura Video Platform via the official distribution repositories.</li>
           </ul>
           
           <br />
@@ -77,7 +77,7 @@
           
           <p><a href="http://bit.ly/1cFFgGf" target="_blank">deb</a> and <a href="http://red.ht/1cFFhtI" target="_blank">RPM</a> are the de-facto standard for binary installations on Linux. Using this installation method will yield the following advantages to Kaltura admins:</p>
           <ul>
-            <li>Compatibility with the industry standards for installing linux packages, simplifying prerequisites and platform installation and wider and easier package distribution.</li>
+            <li>Compatibility with the industry standards for installing Linux packages, simplifying prerequisites and platform installation and wider and easier package distribution.</li>
             <li>Simplified upgrade flow using standard package manager commands.</li>
             <li>Simplified patch deployment using standard package manager commands.</li>
             <li>Clean and organized components versioning and changes-log using standard package manager commands.</li>
@@ -91,7 +91,7 @@
             Is this project only Linux focused?
           </h2>
           
-          <p>Since Kaltura is built mostly in PHP and platform independant technologies, it is theoretically possible to deploy Kaltura on any OS.<br />
+          <p>Since Kaltura is built mostly in PHP and its major components are available for multiple OSes, it is theoretically possible to deploy Kaltura on any OS.<br />
             In the longer term we would love for this project to expand beyond deb and RPM packages to other distributions and operating systems.<br />
             However, since the majority of Kaltura users and, majority of servers on the web, are Linux based, this project is started off focusing only on deb and RPM packages.<br />
             We will try as much as possible to keep a common folder and coding practices that will allow for easier porting later.<br />
@@ -113,14 +113,14 @@
             Which Linux distributions will be supported?
           </h2>
           
-          <p>Following results from a recent Kaltura community usage survey, we've set this project to target the most popular Linux distros among Kaltura users, which includes:</p>
+          <p>Following results from a recent Kaltura Community usage survey, we've set this project to target the most popular Linux distros among Kaltura users, which includes:</p>
           <ul>
             <li>RHEL/CentOS 6 and above <a href="http://bit.ly/kaltura-install-redhat-linux" target="_blank">Install Kaltura on RH based systems.</a></li>
             <li>Ubuntu 12.04 and above.</li> <a href="https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-deb-based.md" target="_blank">Install Kaltura on deb based systems.</a></li>
             <li>Debian Wheezy and above.</li> <a href="https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-deb-based.md" target="_blank">Install Kaltura on deb based systems.</a></li>
           </ul>
 
-          <span style="color: #666;font-style: italic;font-size:0.8em;">We would love to have every known linux distribution supported! However the reality is that there’s a lot of work in maintaining each package. We hope that the larger community could help port and extend the packages into more distros as the project progresses.</span>
+          <span style="color: #666;font-style: italic;font-size:0.8em;">We would love to have every known Linux distribution supported! However the reality is that there’s a lot of work in maintaining each package. We hope that the larger community could help port and extend the packages into more distros as the project progresses.</span>
             
           <p style="font-size:1em;">&nbsp;</p>
 
@@ -144,7 +144,7 @@
           <ul>
             <li>Kaltura Core (aka kaltura-base) - files and actions needed by all Kaltura server roles.</li>
             <li>Kaltura API node (aka kaltura-front) - files and actions needed for an API-Front server role.</li>
-            <li>Kaltura Batch Server (aka kaltura-batch) - files and actions needed for a asynchronous batch processing (transcoding, metadata extraction, emails, notifications, etc.) Kaltura server role.</li>
+            <li>Kaltura Batch Server (aka kaltura-batch) - files and actions needed for asynchronous batch processing (transcoding, metadata extraction, emails, notifications, etc.) Kaltura server role.</li>
             <li>Kaltura Sphinx node (aka kaltura-sphinx) - files and actions needed for a Sphinx Kaltura Indexing server role.</li>
             <li>Kaltura DB node - files and actions needed for a MySQL DB Kaltura server role.</li>
             <li>Kaltura Data Warehouse (aka kaltura-dwh) - files and actions needed for the Kaltura analytics data warehouse server role.</li>
@@ -168,7 +168,7 @@
             Phase C.1 - Writing A Post-Install Configuration Guides
           </h3>
           
-          <p>While the packages will provide a complete installation on the system, post-installation configuration is always required, especially in clustered/multi-server environments. At this phase we will perform initial testing, and focus on preparing all necessary instructions into a post-install system configuration guide for the sys-admin wanting to deploy Kaltura.</p>
+          <p>While the packages will enable a complete installation of the system, post-installation configuration is always required, especially in clustered/multi-server environments. At this phase we will perform initial testing, and focus on preparing all necessary instructions into a post-install system configuration guide for the sys-admin wanting to deploy Kaltura.</p>
           <p>For RPM, we have the following guides ready:</p>
           <ul>
             <li><a href="https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-redhat-based.md" target="_blank">Installing Kaltura on RedHat Linux</a>.</li>
@@ -196,7 +196,7 @@
           
           <p>Track the development and learn more, visit the <strong><a href="https://github.com/kaltura/platform-continuous-integration" target="_blank">Continuous Integration System Project</a></strong>.</p>
           <p>The creation and deployment of a CI (Continuous Integration) system for building, testing and distributing the platform packages.<br />
-          This is a crucial phase in the maturity of project, which will allow us to determine health status of the packages before releasing to user QA and public distribution.</p>
+          This is a crucial phase in the maturity of the project, which will allow us to determine health status of the packages before releasing to user QA and public distribution.</p>
           <p>During this phase beta testing of various cluster deployments will be continued, and tools to deploy and verify deployment health will be created.</p>
           
           <h3>
@@ -234,7 +234,7 @@
           <p>There will be a weekly <a href="http://bit.ly/kaltura-webchat" target="_blank">IRC (#kaltura on freenode.net)</a> meeting every Monday at 10am NY time, where we openly discuss project status and details.<br />
           Join us at #kaltura on freenode and share your feedback, insights and ideas for the project!</p>
 
-          <p>If you’ve already dipped your toes in the code, got experience building linux packages and want to join the team - 
+          <p>If you've already dipped your toes in the code, have experience building Linux packages and want to join the team - 
           <script language='javascript' type='text/javascript'><!--
             x = '&#64;';
             eml = '&#99;&#111;&#109;&#109;&#117;&#110;&#105;&#116;&#121;' + x + '&#107;&#97;&#108;&#116;&#117;&#114;&#97;&#46;&#99;&#111;&#109;';
@@ -269,10 +269,10 @@
                   Under Specifications &amp; Definitions, why did we decide to break the server roles the way we did and not in other ways?
                 </li>
                 <li class="answerli">
-                  We wish to support a full cluster setup and maintain a modular structure to allow for easier server roles and respected maintainance and updates.<br />
+                  We wish to support a full cluster setup and maintain a modular structure to allow for easier server roles and respected maintenance and updates.<br />
                   The Kaltura architecture allows designating each server (or group of servers for more computing power and redundancy purposes) with its own dedicated role (batch, front, Sphinx, etc.) but it is also possible to have a server that has multiple or all roles assigned to it.<br />
                   By creating a package for each server role, we allow for easy support of both setup types, and gain a modular structure that allows for simpler updating/patching each individual server role.<br />
-                  If you wish to assign only one role, install the package for that role (all packages will also automatically require the kaltura-common package to be installed by the linux package manager), if you wish to have an all-in-one server, simply install all packages.</li>
+                  If you wish to assign only one role, install the package for that role (all packages will also automatically require the kaltura-common package to be installed by the Linux package manager), if you wish to have an all-in-one server, simply install all packages.</li>
               </ul>
             </li>
             
@@ -283,7 +283,7 @@
                   Which official packages are being used and which are you bundling specifically?
                 </li>
                 <li class="answerli">
-                  This project aims to to support complete self-supported local installs of Kaltura on a lean environment, downloading the least possible number of packages and requiring the least possible number of additional repositories.<br />
+                  This project aims to support complete self-supported local installs of Kaltura on a lean environment, downloading the least possible number of packages and requiring the least possible number of additional repositories.<br />
                   In addition, the packages project aims to maintain the perfect version compatibility across the various platform components.<br />
                   To meet these requirements, the packaging project will only depend on official base distribution packages that are widely used and known to be stable and accepted.
                 </li>
@@ -299,7 +299,7 @@
                 <li class="answerli">
                   For MySQL and PHP, we use standard packages from the distributions official repository.<br />
                   For Sphinx and ffmpeg, this cannot be done because a robust and stable Kaltura deployment requires very particular versions, often because they are newer and include fixes for crucial bugs, and additional functionality.<br />
-                  Therefore, some libraries will be supplied as separate packages which the kaltura packages will depend on.<br />
+                  Therefore, some libraries will be supplied as separate packages which the Kaltura packages will depend on.<br />
                   Note that these packages will be installed under the Kaltura directory structure and thus will not conflict or override the parallel packages from the official distribution repository.<br />
                   Nevertheless, this is a good time to remind that video processing is a demanding task and should be on its own dedicated machine - it is not recommended to install Kaltura alongside other production software on the same machine.
                 </li>
@@ -354,7 +354,7 @@
               <a name="simple-upgrade-qa" class="anchor" href="#simple-upgrade-qa"><span class="octicon qa-anchor-icon"></span></a>
               <ul>
                 <li class="questionli">
-                  How will packages help simplify upgrading of Kaltura servers?
+                  How will packages help simplify the upgrade process of Kaltura servers?
                 </li>
                 <li class="answerli">
                   By leveraging standard package managers, we plan to achieve a faster, incremental release cycles, with clear change-log and native system package versions management.</br>
@@ -400,7 +400,7 @@
                   How will you make cluster / multi-server environment deployments easier?
                 </li>
                 <li class="answerli">
-                  Multi-server environment deployments are a central driving consideration for this project, there is a significant effort to define and separate packages based on <a href="#packages-list">server roles and components</a>. By having multiple packages that are self-contained and a clear chain of dependency management (which is handled by the system package manager), deploying across the network is made much simpler.<br />There are multitude of tools that can be leveraged to automate deploying Kaltura servers across the netwrok and even in rules-based automation of scaling or redundency scenarios. Depending on the environment restrictions and business constraints, these tools include the aforementioned planned Chef scripts, and other common tools such as <a href="http://www.redhat.com/products/enterprise-linux/satellite/" target="_blank">RedHat Satellite</a>, <a href="http://spacewalk.redhat.com/" target="_blank">Spacewalk</a> and others.<br />If you've got experience with automation, and would like to suggest best practices, ideas or concerns - <a href="#help-contribute">please join us at the weekly IRC (Mondays at 10am EST)</a> or post to the issue queue.
+                  Multi-server environment deployments are a central driving consideration for this project, there is a significant effort to define and separate packages based on <a href="#packages-list">server roles and components</a>. By having multiple packages that are self-contained and a clear chain of dependency management (which is handled by the system package manager), deploying across the network is made much simpler.<br />There are multitude of tools that can be leveraged to automate deploying Kaltura servers across the network and even in rules-based automation of scaling or redundancy scenarios. Depending on the environment restrictions and business constraints, these tools include the aforementioned planned Chef scripts, and other common tools such as <a href="http://www.redhat.com/products/enterprise-linux/satellite/" target="_blank">RedHat Satellite</a>, <a href="http://spacewalk.redhat.com/" target="_blank">Spacewalk</a> and others.<br />If you've got experience with automation, and would like to suggest best practices, ideas or concerns - <a href="#help-contribute">please join us at the weekly IRC (Mondays at 10am EST)</a> or post to the issue queue.
                 </li>
               </ul>
             </li>
@@ -409,10 +409,10 @@
               <a name="system-specific-qa" class="anchor" href="#system-specific-qa"><span class="octicon qa-anchor-icon"></span></a>
               <ul>
                 <li class="questionli">
-                  How are system specific tuning configurations are handled?
+                  How are system specific tuning configurations handled?
                 </li>
                 <li class="answerli">
-                  For example: in a Batch server role some configurations are dependant on how much RAM and CPU resources are available.<br />
+                  For example: in a Batch server role some configurations are dependent on how much RAM and CPU resources are available.<br />
                   CPU and RAM based tuning configurations will eventually be performed automatically by the post-install script, which will calculate the ideal values based on the system available resources.
                 </li>
               </ul>
@@ -455,7 +455,10 @@
                   What is Kaltura?
                 </li>
                 <li class="answerli">
-                  Kaltura is the world’s first Open Source Online Video Platform, transforming the way people work, learn, and entertain using online video. The Kaltura platform empowers media applications with advanced video management, publishing, and monetization tools that increase their reach and monetization and simplify their video operations. Kaltura improves productivity and interaction among millions of employees by providing enterprises powerful online video tools for boosting internal knowledge sharing, training, and collaboration, and for more effective marketing. Kaltura offers next generation learning for millions of students and teachers by providing educational institutions disruptive online video solutions for improved teaching, learning, and increased engagement across campuses and beyond. For more information visit: <a href="http://corp.kaltura.com" target="_blank">http://corp.kaltura.com</a>, <a href="http://www.kaltura.org" target="_blank">http://www.kaltura.org</a> and <a href="http://www.html5video.org" target="_blank">http://www.html5video.org</a>.
+                  Kaltura is the world's first Open Source Online Video Platform, transforming the way people work, learn, and entertain using online video. The Kaltura platform empowers media applications with advanced video management, publishing, and monetization tools that increase their reach and monetization and simplify their video operations. Kaltura improves productivity and interaction among millions of employees by providing enterprises powerful online video tools for boosting internal knowledge sharing, training, and collaboration, and for more effective marketing, sales and customer support. Kaltura offers next generation learning for millions of students and teachers by providing educational institutions disruptive online video solutions for improved teaching, learning, and increased engagement across campuses and beyond.
+Kaltura also provides operators and service providers with a Cloud TV platform that enables them to launch next generation TV services to their audience.
+
+ For more information visit: <a href="http://corp.kaltura.com" target="_blank">http://corp.kaltura.com</a>, <a href="http://www.kaltura.org" target="_blank">http://www.kaltura.org</a> and <a href="http://www.html5video.org" target="_blank">http://www.html5video.org</a>.
                 </li>
               </ul>
             </li>
