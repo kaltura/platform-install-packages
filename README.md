@@ -2,15 +2,15 @@
 
 [![License](https://img.shields.io/badge/license-AGPLv3-blue.svg)](http://www.gnu.org/licenses/agpl-3.0.html)
 # Kaltura Installation Packages Project
-To enable the use of standard binary packages and package managers when deploying the Kaltura platform.
+To enable the use of standard binary packages and package managers when deploying the Kaltura Video Platform Community Edition.
 
-This project features official deployment packages to install the Kaltura platform on a server or cluster environments using native OS package managers.
+This project features official deployment packages to install the Kaltura Video Platform on a server or cluster environments using native OS package managers.
 
 * **[Learn more & keep track on the project page](http://kaltura.github.io/platform-install-packages/)**.    
 * [Read Latest Project Status](https://github.com/kaltura/platform-install-packages/blob/master/doc/project-status-updates.md).
 * [See the Build and Test Reports on the Continuous Integration system](http://installrepo.kaltura.org/reports/ci/).    
-+ Visit the [Kaltura Platform Packages CI Project](https://github.com/kaltura/platform-continuous-integration) and help by contributing automatic sanity tests.
-* Track the development of the [Kaltura Platform Packages CI Project](https://github.com/kaltura/platform-continuous-integration).
++ Visit the [Kaltura Video Platform Packages CI Project](https://github.com/kaltura/platform-continuous-integration) and help by contributing automatic sanity tests.
+* Track the development of the [Kaltura Video Platform Packages CI Project](https://github.com/kaltura/platform-continuous-integration).
 * [Kaltura Inc.](http://corp.kaltura.com) also provides commercial solutions and services including pro-active platform monitoring, applications, SLA, 24/7 support and professional services. If you're looking for a commercially supported video platform  with integrations to commercial encoders, streaming servers, eCDN, DRM and more - Start a [Free Trial of the Kaltura.com Hosted Platform](http://corp.kaltura.com/free-trial) or learn more about [Kaltura' Commercial OnPrem Edition™](http://corp.kaltura.com/Deployment-Options/Kaltura-On-Prem-Edition). For existing RPM based users, Kaltura offers commercial upgrade options.
 * Please refer to the [Frequently Asked Questions document](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura-packages-faq.md) before opening new issues or forum threads.
 
@@ -21,8 +21,8 @@ Thank you for running Kaltura and pushing the limits of online video! By joining
 + By solving [simple tasks and challenges that advance the platform roadmap](http://bit.ly/kaltura-tasks).
 + By testing the platform components, including various deployment settings and environments, and network settings, [reporting issues and feature requests](https://github.com/kaltura/platform-install-packages/issues) and [pushing pull-requests](https://help.github.com/articles/creating-a-pull-request) that patch bugs.
 + By creating [documentation](https://github.com/kaltura/platform-install-packages/tree/master/doc), demos and examples.
-+ By translating Kaltura and the documentation.
-+ By filling out the [2015 Community Survey](http://surveys.kaltura.org/index.php/877436/lang-en)
++ By translating the Kaltura Platform documentation.
++ By filling out the [Community Survey](http://surveys.kaltura.org/index.php/877436/lang-en)
 
 Contact the authors or email community@kaltura.org if you have other ideas.
 
@@ -42,7 +42,7 @@ Contact the authors or email community@kaltura.org if you have other ideas.
 * [Deploying Kaltura using Opscode Chef (RPM)](doc/rpm-chef-cluster-deployment.md)
 * [Deploying Kaltura using Vagrant (RPM)](vagrant)
 * [Upgrade from pre-RPM versions](doc/kaltura-updater)
-* [Setting up Kaltura platform monitoring](doc/platform-monitors.md)
+* [Setting up Kaltura Video Platform monitoring](doc/platform-monitors.md)
 * [Required Open Ports to run Kaltura](doc/kaltura-required-ports.md)
 * [Deploy Local Repository for Offline Install](doc/deploy-local-rpm-repo-offline-install.md)
 
