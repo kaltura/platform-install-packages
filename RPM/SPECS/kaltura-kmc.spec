@@ -1,7 +1,7 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmc
 Version: v5.43.5
-Release: 1
+Release: 2
 Summary: Kaltura Management Console
 
 Group: System Management	
@@ -85,6 +85,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Nov 20 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v5.43.5-2
+- Ver bounce of HTML5 player to v2.63.2
+
 * Fri Nov 17 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v5.43.5-1
 - SUP-11848 - Youtube entries display in KMC - unresponsive
 - Ver bounce of HTML5 player to v2.63.1

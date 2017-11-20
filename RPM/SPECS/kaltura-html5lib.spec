@@ -82,6 +82,9 @@ fi
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Mon Nov 20 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v2.63.2-1
+- KMS-15990 - Webcast iPad- Slides and Polls Are Not Displayed 
+
 * Fri Nov 17 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v2.63.1-1
 - FEC-7484 - #2697 - HLS JS - Multiple Audio Track - Captions - Captions displayed twice (different style)
 - SUP-9616 - defaultLanguageKey var not passed to apple native player on iphone
