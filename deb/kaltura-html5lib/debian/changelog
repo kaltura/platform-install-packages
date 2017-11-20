@@ -1,3 +1,9 @@
+kaltura-html5lib (2.63.2-1) mercury; urgency=low
+
+  * KMS-15990 - Webcast iPad- Slides and Polls Are Not Displayed 
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 20 Nov 2017 14:07:13 +0000
+
 kaltura-html5lib (2.63.1-1) mercury; urgency=low
 
   * FEC-7484 - #2697 - HLS JS - Multiple Audio Track - Captions - Captions displayed twice (different style)
