@@ -32,7 +32,7 @@ Contact the authors or email community@kaltura.org if you have other ideas.
 
 ## Documentation and Guides
 
-* [**Frequently Asked Questions**](kaltura-packages-faq.md)
+* [**Frequently Asked Questions**](doc/kaltura-packages-faq.md)
 * [Single-server All-In-One RedHat based Linux distros Installation (including FC, RHEL and CentOS)](doc/install-kaltura-redhat-based.md).
 * [Single-server All-In-One deb based distros Installation (Debian: Jessie [8]; Ubuntu: Trusty [14.04])](doc/install-kaltura-deb-based.md).
 * [Single-server All-In-One Ubuntu Xenial (16.04) Installation](doc/install-kaltura-xenial.md).

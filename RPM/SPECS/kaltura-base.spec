@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 13.7.0
-Release: 7
+Release: 8
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -324,16 +324,7 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Sun Nov 19 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.7.0-7
-- Nightly build.
-
-* Sat Nov 18 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.7.0-6
-- Nightly build.
-
-* Fri Nov 17 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.7.0-5
-- Nightly build.
-
-* Fri Nov 17 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.7.0-4
+* Mon Nov 20 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.7.0-8
 - PLAT-7977: minor fix so that redirectEntryId will behave the same way as it used to (https://github.com/kaltura/server/pull/6358)
 - Fix getting file with dump renderer (https://github.com/kaltura/server/pull/6356)
 - PLAT-8242: When setting Label or Language on Flavor - increase cache version of entry (https://github.com/kaltura/server/pull/6350)
