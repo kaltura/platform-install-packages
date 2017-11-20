@@ -10,7 +10,7 @@ The Open Source Kaltura Platform is provided under the [AGPLv3 license](http://w
 [Kaltura Inc.](http://corp.kaltura.com) also provides commercial solutions and services including pro-active platform monitoring, applications, SLA, 24/7 support and professional services. If you're looking for a commercially supported video platform  with integrations to commercial encoders, streaming servers, eCDN, DRM and more - Start a [Free Trial of the Kaltura.com Hosted Platform](http://corp.kaltura.com/free-trial) or learn more about [Kaltura' Commercial OnPrem Edition™](http://corp.kaltura.com/Deployment-Options/Kaltura-On-Prem-Edition). For existing RPM based users, Kaltura offers commercial upgrade options.
 
 ### How to contribute
-We value contributions from our CE user base very much. To make a contribution, follow the [See our CONTRIBUTERS doc](https://github.com/kaltura/platform-install-packages/blob/IX-9.19.0/doc/CONTRIBUTERS.md).
+We value contributions from our Community Edition user base very much. To make a contribution, follow the [See our CONTRIBUTERS doc](https://github.com/kaltura/platform-install-packages/blob/IX-9.19.0/doc/CONTRIBUTERS.md).
 
 
 ### Changing Apache configurations post install.
@@ -43,16 +43,16 @@ Then use update statements to reset the url and hostname.
 
 ### Deploy Local Repository for Offline Install
 
-On rare ocaasions, you may encounter the need to deploy Kaltura on an offline environment where internet connection is not available, and thus you can't reach the Kaltura packages install repository (http://installrepo.kaltura.org/releases/).
+On rare occasions, you may encounter the need to deploy Kaltura on an offline environment where internet connection is not available, and thus you can't reach the Kaltura packages install repository (http://installrepo.kaltura.org/releases/).
 
-On such cases, the solution is to download the packages, deploy a local repository and install from it instead of the online repository.   
+In such cases, the solution is to download the packages, deploy a local repository and install from it instead of the online repository.   
 **Note** that when following this path, you will need to re-deploy your local repository for every new version upgrade.
 
 To perform an offline install, follow the [Deploy Local Repository for Offline Install guide](https://github.com/kaltura/platform-install-packages/blob/master/doc/deploy-local-rpm-repo-offline-install.md).
 
 ### Fresh Database Installation
 
-On occasions where you'd like to drop the database and content and re-install Kaltura. Follor the below commands:    
+On occasions where you'd like to drop the database and content and re-install Kaltura. Follow the below commands:    
 ```bash
 # /opt/kaltura/bin/kaltura-drop-db.sh
 # /opt/kaltura/bin/kaltura-config-all.sh [answers-file-path]
@@ -75,7 +75,7 @@ Run `# kaltlog`, which will continuously track (using `tail`) an error grep from
 You can also use: `# allkaltlog` (using root), which will dump all the error lines from the Kaltura logs once. Note that this can result in a lot of output, so the best way to use it will be to redirect to a file: `# allkaltlog > errors.txt`.
 This output can be used to analyze past failures but for active debugging use the kaltlog alias.   
 
-### Analytics issues
+### Analytics Issues
 
 #### General Flow
 - When a user hits play, an API request similar to the below [service=stats&action=collect], is made by the player:
