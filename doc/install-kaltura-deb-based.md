@@ -158,7 +158,7 @@ deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/debian lynx main
 
 ```bash
 # aptitude update
-# aptitude install ~Nkaltura
+# aptitude install `dpkg-query -f '${Package} ' -W "kaltura-*"`
 # dpkg-reconfigure kaltura-base
 # dpkg-reconfigure kaltura-front
 # dpkg-reconfigure kaltura-batch
