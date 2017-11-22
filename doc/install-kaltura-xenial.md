@@ -138,15 +138,25 @@ And install as described above.
 ## Upgrade Kaltura
 *This will only work if the initial install was using this packages based install, it will not work for old Kaltura deployments using the PHP installers*
 
+Make sure /etc/apt/sources.list.d/kaltura.list has:
+```
+deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/xenial mercury main
+```
+And import the GPG key with:
+```
+# wget -O - http://installrepo.kaltura.org/repo/apt/xenial/kaltura-deb-256.gpg.key|apt-key add -
+```
+
+Then run:
 
 ```bash
-# wget -O - http://installrepo.kaltura.org/repo/apt/xenial/kaltura-deb-256.gpg.key|apt-key add -
 # aptitude update
-# aptitude install ~Nkaltura
+# aptitude install `dpkg-query -f '${Package} ' -W "kaltura-*"`
 # dpkg-reconfigure kaltura-base
 # dpkg-reconfigure kaltura-front
 # dpkg-reconfigure kaltura-batch
 ```
+
 
 ## Remove Kaltura
 Use this in cases where you want to clear the database and start from fresh.

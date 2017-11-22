@@ -406,9 +406,18 @@ If using Debian: Jessie [8] or Ubuntu: Trusty [14.04], edit /etc/apt/sources.lis
 deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/debian mercury main
 ```
 
+And import the GPG key with:
+```
+# wget -O - http://installrepo.kaltura.org/repo/apt/debian/kaltura-deb.gpg.key|apt-key add -
+```
+
 Or, if using Ubuntu Xenial [16.04]:
 ```
 deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/xenial mercury main
+```
+And import the GPG key with:
+```
+# wget -O - http://installrepo.kaltura.org/repo/apt/xenial/kaltura-deb-256.gpg.key|apt-key add -
 ```
 
 Then run:
