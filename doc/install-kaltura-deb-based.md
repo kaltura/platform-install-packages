@@ -174,7 +174,7 @@ Then run the following commands to upgrade [this will work for all supported Deb
 
 ```bash
 # aptitude update
-# aptitude install `dpkg-query -f '${Package} ' -W "kaltura-*"`
+# aptitude dist-upgrade
 # dpkg-reconfigure kaltura-base
 # dpkg-reconfigure kaltura-front
 # dpkg-reconfigure kaltura-batch

@@ -151,7 +151,7 @@ Then run:
 
 ```bash
 # aptitude update
-# aptitude install `dpkg-query -f '${Package} ' -W "kaltura-*"`
+# aptitude dist-upgrade
 # dpkg-reconfigure kaltura-base
 # dpkg-reconfigure kaltura-front
 # dpkg-reconfigure kaltura-batch

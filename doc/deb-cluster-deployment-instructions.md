@@ -422,7 +422,7 @@ And import the GPG key with:
 
 Then run the following commands to upgrade [this will work for all supported Debian and Ubuntu versions]:
 ```
-# aptitude install `dpkg-query -f '${Package} ' -W "kaltura-*"`
+# aptitude dist-upgrade
 ```
 
 Then, on front machines:
