@@ -170,6 +170,8 @@ And import the GPG key with:
 # wget -O - http://installrepo.kaltura.org/repo/apt/xenial/kaltura-deb-256.gpg.key|apt-key add -
 ```
 
+Then run the following commands to upgrade [this will work for all supported Debian and Ubuntu versions]:
+
 ```bash
 # aptitude update
 # aptitude install `dpkg-query -f '${Package} ' -W "kaltura-*"`
