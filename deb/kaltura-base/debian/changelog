@@ -1,3 +1,9 @@
+kaltura-base (13.8.0-1) mercury; urgency=low
+
+  * Switching to 13.8.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Tue, 21 Nov 2017 14:26:53 +0000
+
 kaltura-base (13.7.0-2) mercury; urgency=low
 
   * PLAT-7977: minor fix so that redirectEntryId will behave the same way as it used to (https://github.com/kaltura/server/pull/6358)
