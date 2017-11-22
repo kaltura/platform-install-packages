@@ -1,7 +1,11 @@
 ﻿# Installing Kaltura on a Single Server (deb)
 This guide describes deb installation of an all-in-one Kaltura server and applies to deb based Linux distros.
 
-The processes was tested on Debian 8 and Ubuntu 14.04 but is expected to work on other versions. If you tried a deb based distro and failed, please report it.
+The processes was tested on Debian 8 and Ubuntu 14.04 but is expected to work on other versions. 
+
+*When installing on Ubuntu Xenial [16.04], please refer to [this howto](install-kaltura-xenial.md) instead.*
+
+If you tried a different deb based distro and failed, please report it.
 
 
 [Kaltura Inc.](http://corp.kaltura.com) also provides commercial solutions and services including pro-active platform monitoring, applications, SLA, 24/7 support and professional services. If you're looking for a commercially supported video platform  with integrations to commercial encoders, streaming servers, eCDN, DRM and more - Start a [Free Trial of the Kaltura.com Hosted Platform](http://corp.kaltura.com/free-trial) or learn more about [Kaltura' Commercial OnPrem Edition™](http://corp.kaltura.com/Deployment-Options/Kaltura-On-Prem-Edition). Please note that this service in only offered for RHEL based distros. 
@@ -36,20 +40,20 @@ The processes was tested on Debian 8 and Ubuntu 14.04 but is expected to work on
 Kaltura requires certain ports to be open for proper operation. [See the list of required open ports](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura-required-ports.md).
 If you're just testing and don't mind an open system, you can use the below to disbale iptables altogether:
 ```bash
-iptables -F
+# iptables -F
 ```
 #### Disable SELinux - REQUIRED
 **Currently Kaltura doesn't properly support running with SELinux, things will break if you don't set it to permissive**.
 If your instances has it enabled [by default Debian and Ubuntu does not enable SELinux], run:
 ```bash
-setenforce permissive
+# setenforce permissive
 ```
 
 To verify SELinux will not revert to enabled next restart:
 
-1. Edit the file `/etc/selinux/config`
-1. Verify or change the value of SELINUX to permissive: `SELINUX=permissive`
-1. Save the file `/etc/selinux/config`
+- Edit the file `/etc/selinux/config`
+- Verify or change the value of SELINUX to permissive: `SELINUX=permissive`
+- Save the file `/etc/selinux/config`
 
 ### Start of Kaltura installation
 This section is a step-by-step guide of a Kaltura installation.
@@ -57,8 +61,8 @@ This section is a step-by-step guide of a Kaltura installation.
 #### Setup the Kaltura deb repository
 
 ```bash
-wget -O - http://installrepo.kaltura.org/repo/apt/debian/kaltura-deb.gpg.key|apt-key add -
-echo "deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/debian lynx main" > /etc/apt/sources.list.d/kaltura.list
+# wget -O - http://installrepo.kaltura.org/repo/apt/debian/kaltura-deb.gpg.key|apt-key add -
+# echo "deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/debian lynx main" > /etc/apt/sources.list.d/kaltura.list
 ```
 
 *NOTE: for Debian, the non-free repo must also be enabled*
@@ -81,7 +85,7 @@ Use:
 ```
 to check your current configuration and:
 ```
-a2dissite $SITENAME
+# a2dissite $SITENAME
 ```
 to disable any site that might be set in a way by which $YOUR_SERVICE_URL/api_v3 will reach it instead of the Kaltura vhost config.
 
@@ -95,7 +99,9 @@ In such case, the postinst script for kaltrua-db will fail, if so, adjust it and
 #### MySQL Install and Configuration
 Please note that for MySQL version 5.5 and above, you must first disable strict mode enforcement.
 See:
-https://support.realtyna.com/index.php?/Knowledgebase/Article/View/535/0/how-can-i-turn-off-mysql-strict-mode
+https://dev.mysql.com/doc/refman/5.5/en/sql-mode.html#sql-mode-setting
+When installing an all in one instance, for security reasons, it is best to bind the MySQL daemon to 127.0.0.1 [loopback].
+When prompted for the MySQL host/IP, please use ```127.0.0.1``` rather than ```localhost``` since the server code uses the PHP PDO MySQL extension and setting the host to localhost will cause it to attempt to connect via a UNIX socket, as opposed to over TCP, which may fail, depending on where the UNIX socket is placed and the value set for the pdo_mysql.default_socket directive.
 
 #### Install Kaltura Server with PHP 7
 By default, the installation is done against the PHP stack available from the official repo.
@@ -129,34 +135,15 @@ Please see documentation here [nginx-rtmp-live-streaming.md](nginx-rtmp-live-str
 A longer post about it can be found at https://blog.kaltura.com/free-and-open-live-video-streaming
 
 
-
-**Your Kaltura installation is now complete.**
-
-## SSL Step-by-step Installation
-### Pre-Install notes
-* Currently, the Nginx VOD module does not support integration with Kaltura over HTTPs, only HTTP is supported. 
-### SSL Certificate Configuration
-
-
-**Your Kaltura installation is now complete.**
-
-## Live Streaming with Nginx and the RTMP module
-Kaltura CE includes the kaltura-nginx package, which is compiled with the [Nginx RTMP module](https://github.com/arut/nginx-rtmp-module).
-
-Please see documentation here [nginx-rtmp-live-streaming.md](nginx-rtmp-live-streaming.md)
-
-A longer post about it can be found at https://blog.kaltura.com/free-and-open-live-video-streaming
-
-
 ## Unattended Installation
 Edit the debconf [response file template](https://github.com/kaltura/platform-install-packages/blob/Jupiter-10.16.0/deb/kaltura_debconf_response.sh) by replacing all tokens with relevant values.
 and run it as root:
 ```
-./kaltura_debconf_response.sh
+# ./kaltura_debconf_response.sh
 ```
 the set the DEBIAN_FRONTEND ENV var:
 ```
-export DEBIAN_FRONTEND=noninteractive
+# export DEBIAN_FRONTEND=noninteractive
 ```
 
 And install as described above. 
@@ -164,14 +151,28 @@ And install as described above.
 ## Upgrade Kaltura
 *This will only work if the initial install was using this packages based install, it will not work for old Kaltura deployments using the PHP installers*
 
-Edit /etc/apt/sources.list.d/kaltura.list so that it reads:
+If using Debian: Jessie [8] or Ubuntu: Trusty [14.04], edit /etc/apt/sources.list.d/kaltura.list so that it reads:
 ```
-deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/debian lynx main
+deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/debian mercury main
+```
+
+And import the GPG key with:
+```
+# wget -O - http://installrepo.kaltura.org/repo/apt/debian/kaltura-deb.gpg.key|apt-key add -
+```
+
+Or, if using Ubuntu Xenial [16.04]:
+```
+deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/xenial mercury main
+```
+And import the GPG key with:
+```
+# wget -O - http://installrepo.kaltura.org/repo/apt/xenial/kaltura-deb-256.gpg.key|apt-key add -
 ```
 
 ```bash
 # aptitude update
-# aptitude install ~Nkaltura
+# aptitude install `dpkg-query -f '${Package} ' -W "kaltura-*"`
 # dpkg-reconfigure kaltura-base
 # dpkg-reconfigure kaltura-front
 # dpkg-reconfigure kaltura-batch
@@ -181,7 +182,7 @@ deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/debian lynx main
 Use this in cases where you want to clear the database and start from fresh.
 ```bash
 # /opt/kaltura/bin/kaltura-drop-db.sh
-# aptitude purge ~Nkaltura
+# aptitude purge "~Nkaltura"
 # rm -rf /opt/kaltura
 # rm -rf /etc/kaltura.d
 ```
@@ -189,27 +190,28 @@ Use this in cases where you want to clear the database and start from fresh.
 ## Troubleshooting
 Once the configuration phase is done, you may wish to run the sanity tests, for that, run:
 ```base
-/opt/kaltura/bin/kaltura-sanity.sh
+# /opt/kaltura/bin/kaltura-sanity.sh
 ```
 
 If you experience unknown, unwanted or erroneous behaviour, the logs are a greta place to start, to get a quick view into errors and warning run:
 ```bash
-kaltlog
+# . /etc/profile.d/kaltura-base.sh 
+# kaltlog
 ```
 
 If this does not give enough information, increase logging verbosity:
 ```bash
-sed -i 's@^writers.\(.*\).filters.priority.priority\s*=\s*7@writers.\1.filters.priority.priority=4@g' /opt/kaltura/app/configurations/logger.ini
+# sed -i 's@^writers.\(.*\).filters.priority.priority\s*=\s*7@writers.\1.filters.priority.priority=4@g' /opt/kaltura/app/configurations/logger.ini
 ```
 
 To revert this logging verbosity run:
 ```bash
-sed -i 's@^writers.\(.*\).filters.priority.priority\s*=\s*4@writers.\1.filters.priority.priority=7@g' /opt/kaltura/app/configurations/logger.ini
+# sed -i 's@^writers.\(.*\).filters.priority.priority\s*=\s*4@writers.\1.filters.priority.priority=7@g' /opt/kaltura/app/configurations/logger.ini
 ```
 
 Or output all logged information to a file for analysis:
 ```bash
-allkaltlog > /path/to/mylogfile.log
+# allkaltlog > /path/to/mylogfile.log
 ```
 
 For posting questions, please go to:
