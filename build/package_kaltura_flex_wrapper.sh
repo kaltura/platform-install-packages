@@ -1,7 +1,7 @@
 #!/bin/bash -e 
 #===============================================================================
-#          FILE: package_kaltura_kvpm.sh
-#         USAGE: ./package_kaltura_kvpm.sh 
+#          FILE: package_kaltura_flexwrapper.sh
+#         USAGE: ./package_kaltura_flexwrapper.sh 
 #   DESCRIPTION: 
 #       OPTIONS: ---
 # 	LICENSE: AGPLv3+
