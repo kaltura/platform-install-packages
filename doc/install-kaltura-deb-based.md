@@ -151,14 +151,30 @@ And install as described above.
 ## Upgrade Kaltura
 *This will only work if the initial install was using this packages based install, it will not work for old Kaltura deployments using the PHP installers*
 
-Edit /etc/apt/sources.list.d/kaltura.list so that it reads:
+If using Debian: Jessie [8] or Ubuntu: Trusty [14.04], edit /etc/apt/sources.list.d/kaltura.list so that it reads:
 ```
-deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/debian lynx main
+deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/debian mercury main
 ```
+
+And import the GPG key with:
+```
+# wget -O - http://installrepo.kaltura.org/repo/apt/debian/kaltura-deb.gpg.key|apt-key add -
+```
+
+Or, if using Ubuntu Xenial [16.04]:
+```
+deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/xenial mercury main
+```
+And import the GPG key with:
+```
+# wget -O - http://installrepo.kaltura.org/repo/apt/xenial/kaltura-deb-256.gpg.key|apt-key add -
+```
+
+Then run the following commands to upgrade [this will work for all supported Debian and Ubuntu versions]:
 
 ```bash
 # aptitude update
-# aptitude install ~Nkaltura
+# aptitude dist-upgrade
 # dpkg-reconfigure kaltura-base
 # dpkg-reconfigure kaltura-front
 # dpkg-reconfigure kaltura-batch
