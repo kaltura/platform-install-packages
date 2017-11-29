@@ -1,3 +1,11 @@
+kaltura-html5lib (2.63.3-1) mercury; urgency=low
+
+  * FEC-7512 - Safari 11 - play from thumbEmbed start muted
+  * FEC-7513 - Safari 11 - cant see the unmute button when ad is playing
+  * SUP-12735 - Thumbnail embed causes mixed mode
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Wed, 29 Nov 2017 16:02:17 +0000
+
 kaltura-html5lib (2.63.2-1) mercury; urgency=low
 
   * KMS-15990 - Webcast iPad- Slides and Polls Are Not Displayed 
