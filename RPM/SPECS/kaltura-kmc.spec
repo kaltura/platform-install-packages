@@ -1,7 +1,7 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmc
-Version: v5.43.5
-Release: 2
+Version: v5.43.6
+Release: 1
 Summary: Kaltura Management Console
 
 Group: System Management	
@@ -85,6 +85,10 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Wed Nov 29 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v5.43.6-1
+- Ver bounce of HTML5 player to v2.63.3
+- SUP-11685 - Bulk unpublish from multiple categories produce error #1010
+
 * Mon Nov 20 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v5.43.5-2
 - Ver bounce of HTML5 player to v2.63.2
 

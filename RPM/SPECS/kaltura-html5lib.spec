@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.63.2
+Version: v2.63.3
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -82,6 +82,11 @@ fi
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Wed Nov 29 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v2.63.3-1
+- FEC-7512 - Safari 11 - play from thumbEmbed start muted
+- FEC-7513 - Safari 11 - cant see the unmute button when ad is playing
+- SUP-12735 - Thumbnail embed causes mixed mode
+
 * Mon Nov 20 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v2.63.2-1
 - KMS-15990 - Webcast iPad- Slides and Polls Are Not Displayed 
 
