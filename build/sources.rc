@@ -149,7 +149,7 @@ KALTURA_TEMPLATES_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalsource
 KALTURA_CLIENTS_GENERATOR_URI="https://github.com/kaltura/clients-generator/archive/$KALTURA_SERVER_VERSION.zip"
 
 # Kaltura nginx-vod-module:
-KALTURA_NGINX_VOD_VERSION=1.20
+KALTURA_NGINX_VOD_VERSION=1.21
 KALTURA_NGINX_VOD_URI="https://github.com/kaltura/nginx-vod-module/archive/$KALTURA_NGINX_VOD_VERSION.zip"
 
 KALTURA_NGINX_AKAMAI_TOKEN_VALIDATE_VERSION=1.1

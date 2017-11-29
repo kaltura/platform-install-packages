@@ -40,7 +40,7 @@ BuildRequires: libopenssl-devel
 Requires(pre): pwdutils
 %endif
 
-%define nginx_vod_module_ver 1.20
+%define nginx_vod_module_ver 1.21
 %define nginx_secure_token_ver 1.3
 %define nginx_token_validate_ver 1.1
 %define nginx_vts_ver 0.1.15
@@ -52,7 +52,7 @@ Requires(pre): pwdutils
 Summary: High performance web server customized for Kaltura VOD
 Name: kaltura-nginx
 Version: 1.12.2
-Release: 2
+Release: 3
 Vendor: Kaltura inc.
 URL: http://nginx.org/
 
@@ -404,6 +404,10 @@ if [ $1 -ge 1 ]; then
 fi
 
 %changelog
+* Wed Nov 29 2017 Jess Portnoy <jess.portnoy@kaltura.com> - 1.12.2-3
+- support HLS/SAMPLE-AES encryption with HEVC
+- add silence generator
+
 * Wed Oct 18 2017 Jess Portnoy <jess.portnoy@kaltura.com> - 1.12.2-1
 - Bugfix: client SSL connections were immediately closed if deferred
 accept and the "proxy_protocol" parameter of the "listen" directive
