@@ -1,12 +1,12 @@
-Source: kaltura-widgets
+Source: kaltura-flexwrapper
 Section: net
 Priority: extra
 Maintainer: Jess Portnoy <jess.portnoy@kaltura.com>
 
-Package: kaltura-widgets
+Package: kaltura-flexwrapper
 Architecture: all
-Depends: kaltura-krecord, kaltura-kupload, kaltura-clipapp, kaltura-kmc, kaltura-kdp, kaltura-kcw, kaltura-kdp3, kaltura-kdp3wrapper, kaltura-kclip, kaltura-kdpwrapper, kaltura-flexwrapper
-Description: Kaltura Open Source Video Platform - widgets meta package
+Depends: ${shlibs:Depends}, kaltura-base
+Description: Kaltura Video Presentations Manager
  Kaltura is the world's first Open Source Online Video Platform, transforming the way people work, learn, 
  and entertain using online video. The Kaltura platform empowers media applications with advanced video 
  management, publishing, and monetization tools that increase their reach and monetization and simplify 
@@ -17,5 +17,5 @@ Description: Kaltura Open Source Video Platform - widgets meta package
  increased engagement across campuses and beyond. 
  For more information visit: http://corp.kaltura.com, http://www.kaltura.org and http://www.html5video.org.
  .
- This package installs the Kaltura widgets.
+ This package installs the Kaltura Flex Wrapper.
  .
