@@ -1,3 +1,10 @@
+kaltura-nginx (1.12.2-2) mercury; urgency=low
+
+  * support HLS/SAMPLE-AES encryption with HEVC
+  * add silence generator
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Wed, 29 Nov 2017 18:40:41 +0000
+
 kaltura-nginx (1.12.2-1) mercury; urgency=low
 
   * Bugfix: client SSL connections were immediately closed if deferred accept and the "proxy_protocol" parameter of the "listen" directive were used.
