@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 13.8.0
-Release: 10
+Release: 11
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -324,29 +324,26 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Wed Nov 29 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.8.0-10
-- Nightly build.
+* Thu Nov 30 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.8.0-11
+- PLAT-8349: app token list filter fix (https://github.com/kaltura/server/pull/6448)
+- PLAT-8273: fix Code review comments for croping in the packager (https://github.com/kaltura/server/pull/6441)
+- SUP-12533: Add http notification to be triggered when recorded entry was replaced (https://github.com/kaltura/server/pull/6432)
+- PLAT-8249: Adding deliveryProfileIds to playManifestAction (https://github.com/kaltura/server/pull/6431)
+- PLAT-8273: move deletion of temp encrypted file after combine pictures (https://github.com/kaltura/server/pull/6430)
+- Don't create copyCpations job if no captions found on source entry (https://github.com/kaltura/server/pull/6429)
+- Fix mediaInfo missing duration info with some MP3 cases (https://github.com/kaltura/server/pull/6423)
+- PLAT-8273: Use VOD packager for cropping rather than imageMagick (https://github.com/kaltura/server/pull/6417)
+- PLAT-8281: Support sorting flavors order when serving mpegdash (https://github.com/kaltura/server/pull/6413)
+- PLAT-7977: Added pushnotificationtemplate-register() permission (https://github.com/kaltura/server/pull/6409)
+- PLAT-7387: Media Repurposing UI fix (https://github.com/kaltura/server/pull/6408)
+- TR-1693: Email Notification - dispatch to multiple category subscribers (https://github.com/kaltura/server/pull/6407)
+- Chunked Encoding: several fixes and additions (https://github.com/kaltura/server/pull/6399)
+- Mercury 13.8.0 psvamb321 (https://github.com/kaltura/server/pull/6395)
+- PLAT-8282: enable the file encryption on CaptureThumb batch job (https://github.com/kaltura/server/pull/6389)
+- TR-2020: Allow partners to set VoiceBase speaker delimiter (https://github.com/kaltura/server/pull/6388)
+- PLAT-8285: Add partner id to categoryUser default criteria (https://github.com/kaltura/server/pull/6387)
 
-* Tue Nov 28 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.8.0-9
-- Nightly build.
 
-* Mon Nov 27 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.8.0-8
-- Nightly build.
-
-* Sun Nov 26 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.8.0-6
-- Nightly build.
-
-* Sat Nov 25 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.8.0-5
-- Nightly build.
-
-* Fri Nov 24 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.8.0-4
-- Nightly build.
-
-* Thu Nov 23 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.8.0-3
-- Nightly build.
-
-* Wed Nov 22 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.8.0-2
-- Nightly build.
 
 * Tue Nov 21 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.8.0-1
 - Ver Bounce to 13.8.0
