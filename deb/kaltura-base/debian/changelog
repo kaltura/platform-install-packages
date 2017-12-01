@@ -1,3 +1,25 @@
+kaltura-base (13.8.0-2) mercury; urgency=low
+
+  * PLAT-8349: app token list filter fix (https://github.com/kaltura/server/pull/6448)
+  * PLAT-8273: fix Code review comments for croping in the packager (https://github.com/kaltura/server/pull/6441)
+  * SUP-12533: Add http notification to be triggered when recorded entry was replaced (https://github.com/kaltura/server/pull/6432)
+  * PLAT-8249: Adding deliveryProfileIds to playManifestAction (https://github.com/kaltura/server/pull/6431)
+  * PLAT-8273: move deletion of temp encrypted file after combine pictures (https://github.com/kaltura/server/pull/6430)
+  * Don't create copyCpations job if no captions found on source entry (https://github.com/kaltura/server/pull/6429)
+  * Fix mediaInfo missing duration info with some MP3 cases (https://github.com/kaltura/server/pull/6423)
+  * PLAT-8273: Use VOD packager for cropping rather than imageMagick (https://github.com/kaltura/server/pull/6417)
+  * PLAT-8281: Support sorting flavors order when serving mpegdash (https://github.com/kaltura/server/pull/6413)
+  * PLAT-7977: Added pushnotificationtemplate-register() permission (https://github.com/kaltura/server/pull/6409)
+  * PLAT-7387: Media Repurposing UI fix (https://github.com/kaltura/server/pull/6408)
+  * TR-1693: Email Notification - dispatch to multiple category subscribers (https://github.com/kaltura/server/pull/6407)
+  * Chunked Encoding: several fixes and additions (https://github.com/kaltura/server/pull/6399)
+  * Mercury 13.8.0 psvamb321 (https://github.com/kaltura/server/pull/6395)
+  * PLAT-8282: enable the file encryption on CaptureThumb batch job (https://github.com/kaltura/server/pull/6389)
+  * TR-2020: Allow partners to set VoiceBase speaker delimiter (https://github.com/kaltura/server/pull/6388)
+  * PLAT-8285: Add partner id to categoryUser default criteria (https://github.com/kaltura/server/pull/6387)
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Fri, 01 Dec 2017 16:42:39 +0000
+
 kaltura-base (13.8.0-1) mercury; urgency=low
 
   * Switching to 13.8.0
