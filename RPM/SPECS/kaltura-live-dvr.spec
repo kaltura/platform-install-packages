@@ -8,8 +8,8 @@
 
 Summary: Kaltura Open Source Video Platform - Live DVR
 Name: kaltura-livedvr
-Version: 1.22.1
-Release: 2
+Version: 1.23.1
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 URL: http://kaltura.org
@@ -39,6 +39,12 @@ For more information visit: http://corp.kaltura.com, http://www.kaltura.org and 
 
 This package sets up a Kaltura LiveDvr.
 
+#%package debug
+#Summary: debug binaries for livedvr
+#Requires: kaltura-livedvr
+#%description debug
+#Not stripped version of ts_to_mp4_convertor
+
 %clean
 rm -rf %{buildroot}
 
@@ -57,12 +63,19 @@ npm install nan
 %install
 mkdir -p $RPM_BUILD_ROOT/%{_sysconfdir}/init.d 
 mkdir -p $RPM_BUILD_ROOT%{livedvr_prefix}/bin $RPM_BUILD_ROOT%{livedvr_prefix}/liveRecorder/bin $RPM_BUILD_ROOT%{livedvr_prefix}/liveRecorder/Config $RPM_BUILD_ROOT%{livedvr_prefix}/log $RPM_BUILD_ROOT/%{kaltura_root_prefix}/web/content/kLive/liveRecorder/recordings/newSession $RPM_BUILD_ROOT/%{kaltura_root_prefix}/web/content/kLive/liveRecorder/recordings/append $RPM_BUILD_ROOT/%{kaltura_root_prefix}/web/content/kLive/liveRecorder/error $RPM_BUILD_ROOT/%{kaltura_root_prefix}/web/content/kLive/liveRecorder/incoming $RPM_BUILD_ROOT/%{kaltura_root_prefix}/web/content/kLive/liveRecorder/recordings $RPM_BUILD_ROOT%{nginx_conf_dir} $RPM_BUILD_ROOT%{kaltura_root_prefix}/log/livedvr
+strip %{_builddir}/liveDVR-%{version}/liveRecorder/bin/ts_to_mp4_convertor
+strip %{_builddir}/liveDVR-%{version}/node_addons/FormatConverter/build/Release/FormatConverter.so
 cp %{_builddir}/liveDVR-%{version}/liveRecorder/bin/ts_to_mp4_convertor $RPM_BUILD_ROOT%{livedvr_prefix}/liveRecorder/bin/ts_to_mp4_convertor
 cp %{_builddir}/liveDVR-%{version}/node_addons/FormatConverter/build/Release/FormatConverter.so $RPM_BUILD_ROOT%{livedvr_prefix}/bin/FormatConverter.node
-strip $RPM_BUILD_ROOT%{livedvr_prefix}/liveRecorder/bin/ts_to_mp4_convertor
-strip $RPM_BUILD_ROOT%{livedvr_prefix}/bin/FormatConverter.node
 cp -r %{_builddir}/liveDVR-%{version}/lib $RPM_BUILD_ROOT%{livedvr_prefix}
 cp -r %{_builddir}/liveDVR-%{version}/common $RPM_BUILD_ROOT%{livedvr_prefix}
+cp -r %{_builddir}/liveDVR-%{version}/liveRecorder/* $RPM_BUILD_ROOT%{livedvr_prefix}/liveRecorder/
+
+# get rid of shit we do not want to package:
+for RUBBISH in  serviceWrappers ts_to_mp4_convertor install.sh installPython.sh ;do
+	rm -rf $RPM_BUILD_ROOT%{livedvr_prefix}/liveRecorder/$RUBBISH
+done
+
 cp %{_builddir}/liveDVR-%{version}/liveRecorder/Config/configMapping.ini.template $RPM_BUILD_ROOT%{livedvr_prefix}/liveRecorder/Config
 cp %{SOURCE2} $RPM_BUILD_ROOT/%{_sysconfdir}/init.d/kaltura-live-recorder 
 cp %{SOURCE3} $RPM_BUILD_ROOT/%{_sysconfdir}/init.d/kaltura-live-controller
@@ -118,6 +131,8 @@ fi
 %{_sysconfdir}/init.d/kaltura-live-controller
 %{_sysconfdir}/init.d/kaltura-live-recorder
 %config %{_sysconfdir}/logrotate.d/%{name}
+
+#%files debug
 
 %changelog
 * Thu Nov 9 2017 Jess Portnoy <jess.portnoy@kaltura.com> - 1.22.1-1
