@@ -160,6 +160,7 @@ export LIBRARY_PATH C_INCLUDE_PATH
         --with-ipv6 \
         --with-debug \
 	--with-threads \
+	--with-http_slice_module \
         --with-cc-opt="%{optflags}" \
 	--add-module=./nginx-vod-module-%{nginx_vod_module_ver} \
 	--add-module=./nginx-secure-token-module-%{nginx_secure_token_ver} \
