@@ -1,7 +1,13 @@
+kaltura-nginx (1.12.2-3) mercury; urgency=low
+
+  *  VOD module - 1.22: support complex playlist clipping
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 04 Dec 2017 13:25:31 +0000
+
 kaltura-nginx (1.12.2-2) mercury; urgency=low
 
-  * support HLS/SAMPLE-AES encryption with HEVC
-  * add silence generator
+  * VOD module - 1.21: support HLS/SAMPLE-AES encryption with HEVC
+  * VOD module - 1.21: add silence generator
 
  -- Jess Portnoy <jess.portnoy@kaltura.org>  Wed, 29 Nov 2017 18:40:41 +0000
 

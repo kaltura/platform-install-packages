@@ -1,3 +1,9 @@
+kaltura-base (13.9.0-1) mercury; urgency=low
+
+  * Switching to 13.9.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 04 Dec 2017 13:21:03 +0000
+
 kaltura-base (13.8.0-2) mercury; urgency=low
 
   * PLAT-8349: app token list filter fix (https://github.com/kaltura/server/pull/6448)
