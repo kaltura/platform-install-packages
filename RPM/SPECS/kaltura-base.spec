@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 13.8.0
-Release: 13
+Version: 13.9.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -324,6 +324,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Dec 4 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.9.0-1
+- Ver Bounce to 13.9.0
+
 * Thu Nov 30 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.8.0-13
 - PLAT-8349: app token list filter fix (https://github.com/kaltura/server/pull/6448)
 - PLAT-8273: fix Code review comments for croping in the packager (https://github.com/kaltura/server/pull/6441)
