@@ -30,8 +30,8 @@ Refer to the [Deploying Kaltura Clusters Using Chef](https://github.com/kaltura/
 Kaltura requires certain ports to be open for proper operation. [See the list of required open ports](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura-required-ports.md).   
 
 
-##### Disable SELinux
-This is REQUIRED on all machines, currently Kaltura can't run properly with SELinux.
+##### Set SELinux to permissive mode
+This is REQUIRED on all machines, currently Kaltura can't run properly with SELinux in ```enforcing``` mode.
 ``` 
 setenforce permissive
 # To verify SELinux will not revert to enabled next restart:

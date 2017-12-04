@@ -33,15 +33,15 @@ This guide describes RPM installation of an all-in-one Kaltura server and applie
 * Before you begin, make sure you're logged in as the system root. Root access is required to install Kaltura, and you should execute ```sudo -i``` or ```su -```to make sure that you are indeed root.
 
 #### Firewall requirements
-Kaltura requires certain ports to be open for proper operation. [See the list of required open ports](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura-required-ports.md).
-If you're just testing and don't mind an open system, you can use the below to disbale iptables altogether:
+Kaltura requires certain ports to be open for proper operation. [See the list of required open ports](kaltura-required-ports.md).
+If you're **just testing locally** and don't mind an open system, you can use the below to disbale iptables altogether:
 ```bash
 iptables -F
 service iptables stop
 chkconfig iptables off
 ```
-#### Disable SELinux - REQUIRED
-**Currently Kaltura doesn't properly support running with SELinux, things will break if you don't set it to permissive**.
+#### Set SELinux to permissive mode - REQUIRED
+**Currently Kaltura doesn't properly support running with SELinux in ```enforcing``` mode, things will break if you don't set it to permissive**.
 
 ```bash
 setenforce permissive
