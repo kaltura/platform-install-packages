@@ -101,7 +101,7 @@ https://dev.mysql.com/doc/refman/5.5/en/sql-mode.html#sql-mode-setting
 
 RHEL/CentOS 6 setup:
 ```bash
-yum install mysql mysql-server
+yum install mysql-server
 service mysqld start
 mysql_secure_installation
 chkconfig mysqld on
