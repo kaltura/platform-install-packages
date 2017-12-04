@@ -40,7 +40,7 @@ BuildRequires: libopenssl-devel
 Requires(pre): pwdutils
 %endif
 
-%define nginx_vod_module_ver 1.21
+%define nginx_vod_module_ver 1.22
 %define nginx_secure_token_ver 1.3
 %define nginx_token_validate_ver 1.1
 %define nginx_vts_ver 0.1.15
@@ -52,7 +52,7 @@ Requires(pre): pwdutils
 Summary: High performance web server customized for Kaltura VOD
 Name: kaltura-nginx
 Version: 1.12.2
-Release: 3
+Release: 4
 Vendor: Kaltura inc.
 URL: http://nginx.org/
 
@@ -208,6 +208,7 @@ make %{?_smp_mflags}
         --with-file-aio \
         --with-ipv6 \
 	--with-threads \
+	--with-http_slice_module \
         --with-cc-opt="%{optflags}" \
 	--add-module=./nginx-vod-module-%{nginx_vod_module_ver} \
 	--add-module=./nginx-secure-token-module-%{nginx_secure_token_ver} \
@@ -405,6 +406,10 @@ if [ $1 -ge 1 ]; then
 fi
 
 %changelog
+* Mon Dec 4 2017 Jess Portnoy <jess.portnoy@kaltura.com> - 1.12.2-4
+- VOD module - 1.22: support complex playlist clipping
+- Compile with slice module
+
 * Wed Nov 29 2017 Jess Portnoy <jess.portnoy@kaltura.com> - 1.12.2-3
 - support HLS/SAMPLE-AES encryption with HEVC
 - add silence generator
