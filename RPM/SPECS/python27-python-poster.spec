@@ -1,12 +1,14 @@
 %define python27_sitelib %(python -c "from distutils.sysconfig import get_python_lib; import sys; sys.stdout.write(get_python_lib())")
 %{!?py2ver: %global py2ver %(python -c "import sys ; print sys.version[:3]")}
+%filter_from_requires s|python(abi)|python27-python(abi)|g
+%filter_setup
 
 %global modname poster
 
 Name:           python27-python-%{modname}
 Summary:        Streaming HTTP uploads and multipart/form-data encoding
 Version:        0.8.1
-Release:        1
+Release:        2
 License:        MIT
 Group:          System Environment/Libraries
 URL:            http://atlee.ca/software/poster
