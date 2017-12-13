@@ -1,6 +1,6 @@
 %define python27_sitelib %(python -c "from distutils.sysconfig import get_python_lib; import sys; sys.stdout.write(get_python_lib())")
 %{!?py2ver: %global py2ver %(python -c "import sys ; print sys.version[:3]")}
-%filter_from_requires s|python(abi)|python27-python(abi)|g
+%filter_from_requires s|^python(abi)|python27-python(abi)|
 %filter_setup
 
 %global modname psutil
