@@ -127,6 +127,7 @@ binary-arch: build install
 	mv debian/$(tree)/$(BASE_PREFIX)/* $(BASE_PREFIX)
 	cp debian/logrotate $(BASE_PREFIX)/conf/
 	cp debian/*.template $(BASE_PREFIX)/conf/
+	cp debian/*.conf $(BASE_PREFIX)/conf/
 	dh_install $(BASE_PREFIX) 
 	dh_install opt/kaltura/log/nginx
 	dh_installdebconf	
