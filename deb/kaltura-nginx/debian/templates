@@ -27,8 +27,10 @@ Template: kaltura-nginx/vod_mod
 Type: select
 Choices: Local, Remote
 Default: Local
-Description: Please select an operation mode:
+Description: For info about the operation modes, please see: https://github.com/kaltura/nginx-vod-module#features
+	Please select an operation mode.
 
+	
 Template: kaltura-nginx/kaltura_service_url
 Type: string
 Default:
