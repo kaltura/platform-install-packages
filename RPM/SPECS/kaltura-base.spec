@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 13.9.0
-Release: 11
+Release: 12
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -32,6 +32,8 @@ Source25: kaltura_populate.template
 Source26: kaltura_batch.template
 Source32: KDLOperatorFfmpeg1_1_1.php
 Source34: clients-generator-%{codename}-%{version}.zip
+Source35: start_page.php 
+Source36: start_page_survey.png
 URL: https://github.com/kaltura/server/tree/%{codename}-%{version}
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
@@ -146,6 +148,9 @@ cp %{SOURCE19} $RPM_BUILD_ROOT%{prefix}/app/admin_console/controllers/IndexContr
 rm $RPM_BUILD_ROOT%{prefix}/app/configurations/batch/batch.ini.template
 cp %{SOURCE32} $RPM_BUILD_ROOT%{prefix}/app/infra/cdl/kdl/KDLOperatorFfmpeg1_1_1.php
 
+# tmp patch for the new start page, to be removed once merged into the server repo
+cp %{SOURCE35} $RPM_BUILD_ROOT%{prefix}/app/start/index.php
+cp %{SOURCE36} $RPM_BUILD_ROOT%{prefix}/app/start/img/survery.png
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content
 tar zxf %{SOURCE10} -C $RPM_BUILD_ROOT%{prefix}/web/content
 
