@@ -18,12 +18,35 @@ Type: string
 Default: 8443
 Description: Vhost SSL port to listen on:
 
+Template: kaltura-nginx/is_kaltura_server
+Type: boolean
+Default: true
+Description: Do you intend to use the Nginx VOD module against a Kaltura CE Server?
+
+Template: kaltura-nginx/vod_mod
+Type: select
+Choices: Local, Remote
+Default: Local
+Description: For info about the operation modes, please see: https://github.com/kaltura/nginx-vod-module#features
+	Please select an operation mode.
+
+	
 Template: kaltura-nginx/kaltura_service_url
 Type: string
 Default:
 Description: Your Kaltura Service URL:
 	Base URL where the Kaltura API will be accessed from - this would be your Load Balancer URL on a cluster or same as your virtual host in an all-in-one Kaltura server.
 	make sure to insert the host and port without the http:// prefix.
+
+Template: kaltura-nginx/path_to_media_files
+Type: string
+Default:
+Description: Please input the base dir for your media files:
+
+Template: kaltura-nginx/remote_media_host_port
+Type: string
+Default:
+Description: Please input the IP and port for your upstream host without the protocol, i.e my.remote.server:443:
 
 Template: kaltura-nginx/ssl_cert
 Type: string
@@ -39,4 +62,9 @@ Template: kaltura-nginx/is_ssl
 Type: boolean
 Default: 
 Description: Config Nginx with SSL?
+
+Template: kaltura-nginx/invalid_mod
+Type: note
+Default:
+Description: Only Kaltura, Local and Remote modes are supported, skipping configuration.
 

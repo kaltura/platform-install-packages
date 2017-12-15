@@ -1,5 +1,6 @@
 #!/bin/bash
 ldconfig
+NGINX_BASE_DIR=/opt/kaltura/nginx
 if [ "$1" = "configure" ]; then
         . /usr/share/debconf/confmodule
         db_get 'kaltura-nginx/nginx_hostname'
@@ -20,13 +21,15 @@ if [ "$1" = "configure" ]; then
         db_go || true
         db_get 'kaltura-nginx/rtmp_port'
         RTMP_PORT=$RET
-
-
-        db_get 'kaltura-nginx/kaltura_service_url'
-        db_input critical 'kaltura-nginx/kaltura_service_url' || true
-        db_go || true
-        db_get 'kaltura-nginx/kaltura_service_url'
-        WWW_HOST=$RET
+	invoke-rc.d kaltura-nginx stop
+	rm -f $NGINX_BASE_DIR/conf/nginx.conf $NGINX_BASE_DIR/conf/server.conf $NGINX_BASE_DIR/conf/ssl.conf
+	for TEMPLATE in $NGINX_BASE_DIR/conf/*.template;do
+	    # we configure that one later because SSL is not always desirable.
+	    if [ "$TEMPLATE" = "$NGINX_BASE_DIR/conf/ssl.conf.template" ];then continue;fi
+	    CONF_FILE=`echo $TEMPLATE|sed 's@.template$@@'`
+	    sed -e "s#@NGINX_CONF_PATH@#$NGINX_BASE_DIR/conf#g" -e "s#@LOG_DIR@#/opt/kaltura/log/nginx#" -e "s#@PID_FILE_PATH@#$NGINX_BASE_DIR/logs/nginx.pid#g" -e "s#@VOD_PACKAGER_PORT@#$VOD_PACKAGER_PORT#g" -e "s#@VOD_PACKAGER_HOST@#$VOD_PACKAGER_HOST#g" $TEMPLATE > $CONF_FILE 
+	done
+	
 	db_input critical kaltura-nginx/is_ssl || true
 	db_go || true
 	db_get kaltura-nginx/is_ssl
@@ -46,15 +49,57 @@ if [ "$1" = "configure" ]; then
 		db_go || true
 		db_get 'kaltura-nginx/ssl_key'
 		SSL_KEY=$RET
-		sed -e "s#@VOD_PACKAGER_HOST@#$VOD_PACKAGER_HOST#g" -e "s#@VOD_PACKAGER_SSL_PORT@#$VOD_PACKAGER_SSL_PORT#g" -e "s#@SSL_CERT@#$SSL_CERT#g" -e "s#@SSL_KEY@#$SSL_KEY#g" /opt/kaltura/nginx/conf/ssl.conf.template > /opt/kaltura/nginx/conf/ssl.conf
+		sed -e "s#@VOD_PACKAGER_HOST@#$VOD_PACKAGER_HOST#g" -e "s#@VOD_PACKAGER_SSL_PORT@#$VOD_PACKAGER_SSL_PORT#g" -e "s#@SSL_CERT@#$SSL_CERT#g" -e "s#@SSL_KEY@#$SSL_KEY#g" -e "s#@NGINX_CONF_PATH@#$NGINX_BASE_DIR/conf#g" $NGINX_BASE_DIR/conf/ssl.conf.template > $NGINX_BASE_DIR/conf/ssl.conf
 		PROTOCOL=https
 	else
-		touch /opt/kaltura/nginx/conf/ssl.conf
+		touch $NGINX_BASE_DIR/conf/ssl.conf
 		PROTOCOL=http
 	fi
-        sed -e "s#@VOD_PACKAGER_HOST@#$VOD_PACKAGER_HOST#g" -e "s#@VOD_PACKAGER_PORT@#$VOD_PACKAGER_PORT#g" -e "s#@RTMP_PORT@#$RTMP_PORT#g" -e "s#@LOG_DIR@#/opt/kaltura/log/nginx#" -e "s#@WWW_HOST@#$WWW_HOST#g" /opt/kaltura/nginx/conf/nginx.conf.template > /opt/kaltura/nginx/conf/nginx.conf
-	sed -e 's#@STATIC_FILES_PATH@#/opt/kaltura/nginx/static#g' -e "s#@PROTOCOL@#$PROTOCOL#g" /opt/kaltura/nginx/conf/kaltura.conf.template > /opt/kaltura/nginx/conf/kaltura.conf
+	db_input critical kaltura-nginx/is_kaltura_server || true
+	db_go || true
+	db_get kaltura-nginx/is_kaltura_server
+	IS_KALTURA_SERVER="$RET"
+	if [ "$IS_KALTURA_SERVER" = 'true' ];then
+		db_input critical 'kaltura-nginx/kaltura_service_url' || true
+		db_go || true
+		db_get 'kaltura-nginx/kaltura_service_url'
+		WWW_HOST=$RET
+		sed -e "s#@STATIC_FILES_PATH@#$NGINX_BASE_DIR/static#g" -e "s#@PROTOCOL@#$PROTOCOL#g" -e "s#@WWW_HOST@#$WWW_HOST#g"  -i $NGINX_BASE_DIR/conf/kaltura-nginx.conf $NGINX_BASE_DIR/conf/kaltura.conf
+		ln -sf $NGINX_BASE_DIR/conf/kaltura-nginx.conf $NGINX_BASE_DIR/conf/nginx.conf
+		ln -sf $NGINX_BASE_DIR/conf/kaltura.conf $NGINX_BASE_DIR/conf/server.conf
+	else
+		db_input critical kaltura-nginx/vod_mod || true
+		CONFIG_CHOICES="Remote, Local"
+		db_set kaltura-nginx/vod_mod "$CONFIG_CHOICES"
+		db_go || true
+		db_get kaltura-nginx/vod_mod && CONFIG_CHOICE=$RET
+		if [ "$CONFIG_CHOICE" = 'Local' ];then
+		    db_input critical 'kaltura-nginx/path_to_media_files' || true
+		    db_go || true
+		    db_get 'kaltura-nginx/path_to_media_files'
+		    MEDIA_FILES_PATH=$RET
+		    sed -e "s#@MEDIA_FILES_PATH@#$MEDIA_FILES_PATH#g" -e "s#@STATIC_FILES_PATH@#html#g" -i $NGINX_BASE_DIR/conf/vod-local-nginx.conf $NGINX_BASE_DIR/conf/vod-local.conf
+		    ln -sf $NGINX_BASE_DIR/conf/vod-local-nginx.conf $NGINX_BASE_DIR/conf/nginx.conf
+		    ln -sf $NGINX_BASE_DIR/conf/vod-local.conf $NGINX_BASE_DIR/conf/server.conf
+		    mkdir -p $MEDIA_FILES_PATH
+		elif [ "$CONFIG_CHOICE" = 'Remote' ];then
+		    db_input critical 'kaltura-nginx/remote_media_host_port' || true
+		    db_go || true
+		    db_get 'kaltura-nginx/remote_media_host_port'
+		    MEDIA_HOST=$RET
+
+		    sed -e "s#@MEDIA_HOST@#$MEDIA_HOST#g" -e "s#@STATIC_FILES_PATH@#html#g" -i $NGINX_BASE_DIR/conf/vod-remote-nginx.conf $NGINX_BASE_DIR/conf/vod-remote.conf
+		    ln -sf $NGINX_BASE_DIR/conf/vod-remote-nginx.conf $NGINX_BASE_DIR/conf/nginx.conf
+		    ln -sf $NGINX_BASE_DIR/conf/vod-remote.conf $NGINX_BASE_DIR/conf/server.conf
+		else 
+                        db_input critical kaltura-nginx/invalid_mod || true 
+                        db_go
+		fi
+
+	fi
+
         update-rc.d kaltura-nginx defaults || true
+
 
 fi
 chown -R kaltura /opt/kaltura/log/nginx

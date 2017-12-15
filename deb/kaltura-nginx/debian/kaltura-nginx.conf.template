@@ -1,0 +1,42 @@
+include @NGINX_CONF_PATH@/main.conf;
+
+http {
+	upstream kalapi {
+		server @WWW_HOST@;
+	}
+
+	include @NGINX_CONF_PATH@/http.conf;
+
+	server {
+		listen @VOD_PACKAGER_PORT@;
+		server_name @VOD_PACKAGER_HOST@;
+		include @NGINX_CONF_PATH@/server.conf;
+	}
+
+	include @NGINX_CONF_PATH@/ssl.conf;
+}
+
+# RTMP configuration
+rtmp {
+    server {
+        listen 1936; # Listen on standard RTMP port
+        chunk_size 4000;
+
+        # This application is to accept incoming stream
+        application kLive {
+                live on; # Allows live input from above
+                dash on;
+                dash_path /var/tmp/dashme;
+
+                hls on; # Enable HTTP Live Streaming
+                hls_cleanup on;
+                hls_sync 100ms;
+                hls_fragment 2s;
+
+                hls_path /var/tmp/hlsme/;
+
+
+        }
+    }
+}
+
