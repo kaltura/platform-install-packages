@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 13.9.0
-Release: 16
+Release: 18
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -352,7 +352,6 @@ fi
 - PLAT-8315: Check isFileText for encrypted files as well (https://github.com/kaltura/server/pull/6469)
 - SUP-11979: Deinterlace thumbs (https://github.com/kaltura/server/pull/6467)
 - SUP-11979: Deinterlace thumbs (https://github.com/kaltura/server/pull/6463)
-- PLAT-8307: Limit max time for stalled file import (https://github.com/kaltura/server/pull/6466)
 - SUP-11797: Add mediaInfoScanType to the captureThumb (https://github.com/kaltura/server/pull/6464)
 - PLAT-8323: Enable file encryption in the post convert batch job (https://github.com/kaltura/server/pull/6456)
 
