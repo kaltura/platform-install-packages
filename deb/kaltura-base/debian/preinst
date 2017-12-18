@@ -18,6 +18,9 @@ if ! getent passwd $KALTURA_USER >/dev/null; then
 	usermod -a -G www-data kaltura
 fi
 
-if [ "$1" = "upgrade" ];then
+if [ -n "$2" ];then
 	touch $KALTURA_PREFIX/bin/kaltura-base-upgrading
+else
+	# if this is a fresh deployment, we want to remove possible broken old symlinks
+	rm -f /etc/kaltura.d/system.ini
 fi
