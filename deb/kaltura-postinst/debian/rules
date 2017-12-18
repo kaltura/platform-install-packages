@@ -27,6 +27,8 @@ install: build
 
 binary-indep: install
 	dh_installdirs
+	# these scripts are only needed for RPM since it has no debconf parallel so we remove them from deb the package
+	rm $(tree)/kaltura-base-config.sh $(tree)/kaltura-batch-config.sh $(tree)/kaltura-db-config.sh $(tree)/kaltura-front-config.sh $(tree)/kaltura-dwh-config.sh $(tree)/kaltura-nginx-config.sh $(tree)/kaltura-live-dvr-config.sh $(tree)/kaltura-live-config.sh $(tree)/kaltura-red5-config.sh $(tree)/kaltura-sphinx-config.sh
 	dh_install $(tree)/* $(KALTURA_PREFIX)/bin
 	dh_gencontrol -u-v$(DEB_VERSION) 
 	dh_installdebconf

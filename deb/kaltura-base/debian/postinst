@@ -33,7 +33,7 @@ if [ -r $KALTURA_PREFIX/bin/kaltura-base-upgrading ];then
                                 TIME_ZONE=`find /usr/share/zoneinfo -type f | xargs md5sum | grep $LOCALTIME_MD5|awk -F " " '{print $2}'|sed 's@/usr/share/zoneinfo/@@g'`
                         fi
                         db_stop
-                        send_install_becon kaltura-base-`dpkg-query -W -f'${Version}' kaltura-base` $TIME_ZONE install_upgrade
+                        send_install_becon "`basename $0`" "install_upgrade" 0
                 fi
                 sed -i "s@^\(kaltura_version\).*@\1 = $KALTURA_VERSION@g" $KALTURA_PREFIX/app/configurations/local.ini
                 echo "Regenarating client libs.. this will take up to 2 minutes to complete."
@@ -538,7 +538,7 @@ if [ "$1" = "configure" ]; then
 
 
         #echo -e "${BRIGHT_BLUE}Configuration of $KALTURA_VERSION finished successfully!${NORMAL}"
-        send_install_becon `basename $0` $TIME_ZONE install_success 0
+        send_install_becon "`basename $0`" "install_success" 0
         echo "
 SERVICE_URL=$SERVICE_URL
 SPHINX_HOST=$SPHINX_SERVER1

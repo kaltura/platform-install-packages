@@ -33,7 +33,7 @@ fi
 #. $CONSENT_FILE
 trap 'my_trap_handler "${LINENO}" ${$?}' ERR
 TIMEZ=`get_tz`
-send_install_becon `basename $0` $TIMEZ install_start 0 
+send_install_becon `basename $0` "install_start" 0 
 CONFIG_DIR=/opt/kaltura/app/configurations
 if [ -r $CONFIG_DIR/system.ini ];then
 	. $CONFIG_DIR/system.ini
@@ -97,5 +97,5 @@ ln -sf $BASE_DIR/app/configurations/monit/monit.d/memcached.rc /etc/monit/conf.d
 invoke-rc.d monit stop >> /dev/null 2>&1 || true
 invoke-rc.d monit start
 
-send_install_becon `basename $0` $TIMEZ install_success 0 
+send_install_becon `basename $0` "install_success" 0 
 
