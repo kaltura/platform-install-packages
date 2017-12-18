@@ -12,8 +12,23 @@ fi
 if [ -r /etc/sysconfig/clock ];then
         . /etc/sysconfig/clock
 fi
+
+function get_tz()
+{
+	if [ -r /etc/sysconfig/clock ];then
+		. /etc/sysconfig/clock
+	fi
+	if [ -n "$ZONE" ];then
+		echo $ZONE
+	else
+	        LOCALTIME_MD5=`md5sum /etc/localtime|awk -F " " '{print $1}'`
+        	TZGUESS=`find /usr/share/zoneinfo -type f | xargs md5sum | grep $LOCALTIME_MD5|tail -1|awk -F " " '{print $2}'|sed 's@/usr/share/zoneinfo/@@g'`
+	        echo $TZGUESS
+	fi
+}
+
 if [ -z "$ZONE" ];then
-	ZONE=`get_tz`
+	ZONE="`get_tz`"
 fi
 export ZONE
 
@@ -73,19 +88,6 @@ call_base_config()
 
 }
 
-function get_tz()
-{
-	if [ -r /etc/sysconfig/clock ];then
-		. /etc/sysconfig/clock
-	fi
-	if [ -n "$ZONE" ];then
-		echo $ZONE
-	else
-	        LOCALTIME_MD5=`md5sum /etc/localtime|awk -F " " '{print $1}'`
-        	TZGUESS=`find /usr/share/zoneinfo -type f | xargs md5sum | grep $LOCALTIME_MD5|tail -1|awk -F " " '{print $2}'|sed 's@/usr/share/zoneinfo/@@g'`
-	        echo $TZGUESS
-	fi
-}
 
 check_mysql_settings()
 {
@@ -221,7 +223,11 @@ send_install_becon()
 		return 0 
 	fi
 	#echo sending becobeep
-	TIMEZONE=`get_tz`
+	TIMEZONE="`get_tz`"
+	# just to be on the very safe side:
+	if [ -z "$TIMEZONE" ];then
+		TIMEZONE="UNKNOWN"
+	fi
         ROLE=$1
         ACTION=$2
 

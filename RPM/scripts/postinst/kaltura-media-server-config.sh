@@ -139,9 +139,9 @@ if [ ! -r "$BROADCAST_FILE" ];then
 	exit 2
 fi
 
-send_install_becon `basename $0` $ZONE install_start 0
+send_install_becon "`basename $0`" "install_start" 0
 cd $BASE_DIR/media-server
 ant
 /etc/init.d/WowzaStreamingEngine stop >> /dev/null 2>&1
 /etc/init.d/WowzaStreamingEngine start
-send_install_becon `basename $0` $ZONE install_success 0
+send_install_becon "`basename $0`" "install_success" 0

@@ -97,6 +97,12 @@ if [ -n "$1" -a -r "$1" ];then
         verify_user_input $ANSFILE
         . $ANSFILE
         export ANSFILE
+        if [ "$USER_CONSENT" = 1 ];then
+                echo "USER_CONSENT=1" > $CONSENT_FILE
+                echo "CONTACT_MAIL=$ADMIN_CONSOLE_ADMIN_MAIL" >> $CONSENT_FILE
+        else
+                echo "USER_CONSENT=0" > $CONSENT_FILE
+        fi
 else
        # echo "Welcome to Kaltura Server $DISPLAY_NAME post install setup.
 echo -e "\n${CYAN}In order to finalize the system configuration, please input the following:

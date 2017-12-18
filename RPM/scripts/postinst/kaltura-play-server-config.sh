@@ -31,7 +31,7 @@ verify_user_input()
                 $VALS
                 "
                 echo -en "${BRIGHT_RED}$OUT${NORMAL}\n"
-                send_install_becon kaltura-play-server $ZONE "install_fail"  "$OUT"
+                send_install_becon kaltura-play-server "install_fail"  "$OUT"
                 exit $RC 
         fi
 }
