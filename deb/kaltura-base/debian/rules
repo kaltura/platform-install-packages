@@ -80,6 +80,7 @@ binary-indep: install
 	sed -i 's@kaltura_batch@kaltura-batch@g' $(tree)/configurations/monit/monit.d/batch.template.rc
 	sed -i 's@kaltura_populate@kaltura-populate@g' $(tree)/configurations/monit/monit.d/sphinx.populate.template.rc
 	sed -i 's@httpd@apache2@g' $(tree)/configurations/monit/monit.d/httpd.template.rc
+	sed -i 's#@PROTOCOL@#http#g' $(tree)/configurations/monit/monit.d/httpd.template.rc
 	sed -i 's@/var/run/memcached/memcached.pid@/var/run/memcached.pid@g' $(tree)/configurations/monit/monit.d/memcached.template.rc
 	sed -i 's@/etc/sysconfig/memcached@/etc/memcached.conf@g' $(tree)/configurations/monit/monit.d/memcached.template.rc
 	rm $(tree)/deployment/base/scripts/init_content/04.dropFolder.-4.template.xml
