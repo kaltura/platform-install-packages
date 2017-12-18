@@ -313,12 +313,8 @@ if [ "$1" = "configure" ]; then
 
 
 	if [ "$USER_CONSENT" = true ];then
-		db_input critical 'kaltura-base/install_analytics_email' || true
-		db_go || true
-		db_get 'kaltura-base/install_analytics_email'
-		CONTACT_MAIL=$RET
 		echo "USER_CONSENT=1" > $CONSENT_FILE
-		echo "CONTACT_MAIL=$CONTACT_MAIL" >> $CONSENT_FILE
+		echo "CONTACT_MAIL=$ADMIN_CONSOLE_ADMIN_MAIL" >> $CONSENT_FILE
 	else
 		echo "USER_CONSENT=0" > $CONSENT_FILE
 	fi

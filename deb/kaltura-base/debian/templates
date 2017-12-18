@@ -90,7 +90,7 @@ Template: kaltura-base/admin_console_email
 Type: string
 Default:
 Description: Kaltura Admin user (email address):
-	The system will be sending you notifications so it is very advisable that you input a real email address.
+	This email address will be used to send important, sensitive notifications. Please input a valid address.
 
 Template: kaltura-base/admin_console_passwd
 Type: password
