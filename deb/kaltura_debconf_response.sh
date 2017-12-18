@@ -48,6 +48,7 @@ echo kaltura-front   kaltura-front/service_url       string  @SERVICE_URL@ | deb
 echo kaltura-front   kaltura-front/vhost_port        string  @KALTURA_VIRTUAL_HOST_PORT@ | debconf-set-selections
 echo kaltura-front   kaltura-front/web_interfaces    multiselect | debconf-set-selections
 
+echo kaltura-nginx   kaltura-nginx/is_kaltura_server   boolean true | debconf-set-selections
 echo kaltura-nginx   kaltura-nginx/kaltura_service_url       string  @SERVICE_URL@ | debconf-set-selections
 echo kaltura-nginx   kaltura-nginx/nginx_hostname    string  @VOD_PACKAGER_HOST@ | debconf-set-selections
 echo kaltura-nginx   kaltura-nginx/nginx_port        string  @VOD_PACKAGER_PORT@ | debconf-set-selections
