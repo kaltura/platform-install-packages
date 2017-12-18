@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.63.3
+Version: v2.64
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -82,6 +82,30 @@ fi
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Mon Dec 18 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v2.64-1
+- SUP-12735 - Thumbnail embed causes mixed mode
+- FEC-7456 - #232 - Customized logo - No tooltip for Customized logo
+- SUP-12532 - Ads on Images will play on HTTP instead of HTTPS
+- FEC-7515 - Kava reporting first play as resume when there's preroll
+- FEC-7519 - V2 - AutoPlay fallback: no "unmute" icon displayed on iOS devices
+- FEC-7513 - Safari 11 - cant see the unmute button when ad is playing
+- FEC-7512 - Safari 11 - play from thumbEmbed start muted
+- FEC-7562 - v2.64.rc1 playback doesn't start
+- FEC-7491 - chrome cast with tokanzeztion is not working
+- SUP-12262 - YouTube Videos cannot be played
+- SUP-12276 - Scrubber end-point losing colour / formatting when moving back and forth
+- SUP-4615 - Audio - left/right panning control
+- FEV-109 - When trying to click on change views, users accidentally pause the video
+- SUP-12673 - Default language caption flashvar not working on iOS
+- SUP-12503 - Missing set of que points to the same entry
+- FEC-6644 - DFP PRE MID POST : after midroll first frame of the video is shown instead of continuing from the stopping point
+- SUP-12518 - VOD Entry Player Controls Greying Out After a Live Clip in Playlist
+- SUP-12203 - Tab Accessibility while Player Controls are Hidden
+- FEC-7109 - Make HLS lead by default on Android
+- FEC-7515 - Kava reporting first play as resume when there's preroll
+- FEC-7556 - handle restore player on ad error of LOG type
+- PLAT-8372 - Playlist players fail playback - Issue in API gateway KES src (#3652)
+
 * Wed Nov 29 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v2.63.3-1
 - FEC-7512 - Safari 11 - play from thumbEmbed start muted
 - FEC-7513 - Safari 11 - cant see the unmute button when ad is playing

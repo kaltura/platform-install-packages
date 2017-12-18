@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 13.9.0
-Release: 15
+Release: 16
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -329,47 +329,32 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Sun Dec 17 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.9.0-15
-- Nightly build.
-
-* Sat Dec 16 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.9.0-14
-- Nightly build.
-
-* Fri Dec 15 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.9.0-13
-- Nightly build.
-
-* Thu Dec 14 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.9.0-11
-- Nightly build.
-
-* Wed Dec 13 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.9.0-10
-- Nightly build.
-
-* Tue Dec 12 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.9.0-9
-- Nightly build.
-
-* Mon Dec 11 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.9.0-8
-- Nightly build.
-
-* Sun Dec 10 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.9.0-7
-- Nightly build.
-
-* Sat Dec 9 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.9.0-6
-- Nightly build.
-
-* Fri Dec 8 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.9.0-5
-- Nightly build.
-
-* Thu Dec 7 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.9.0-4
-- Nightly build.
-
-* Wed Dec 6 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.9.0-3
-- Nightly build.
-
-* Tue Dec 5 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.9.0-2
-- Nightly build.
-
-* Mon Dec 4 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.9.0-1
-- Ver Bounce to 13.9.0
+* Mon Dec 18 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.9.0-16
+- PLAT-8409: allow webcast producer to update cue point status (https://github.com/kaltura/server/pull/6533)
+- PLAT-8398: add partner -5 to allowed viewers of preview stream in explicit live (https://github.com/kaltura/server/pull/6524)
+- PLAT-8396: If no delivery format is supplied, sort all the list (https://github.com/kaltura/server/pull/6522)
+- check if bundleConfig exists (https://github.com/kaltura/server/pull/6515)
+- SUP-12843: increase entry cache version if isDefault is set on flavor (https://github.com/kaltura/server/pull/6512)
+- PLAT-8032: if no push publish is set return null (https://github.com/kaltura/server/pull/6509)
+- PLAT-7961: Enable file encryption for the ISMC engine (https://github.com/kaltura/server/pull/6505)
+- PLAT-8277: KS v2 multiple values support for disableentitlementforentry privilege (https://github.com/kaltura/server/pull/6500)
+- SUP-12993: Fix HTTP error condition (https://github.com/kaltura/server/pull/6496)
+- Fix conditional-conv-prof crashes (https://github.com/kaltura/server/pull/6495)
+- SUPPS-1311: Raise the limit of email notification recipients (https://github.com/kaltura/server/pull/6488)
+- Fix failure on video-only sources (https://github.com/kaltura/server/pull/6487)
+- PLAT-8370: Block ingest of m3u8 and MPD files (https://github.com/kaltura/server/pull/6486)
+- PLAT-8366: alert when asking for unsupported format in storage delivery profile (https://github.com/kaltura/server/pull/6485)
+- Fix fatal error in kFlowHelper when trying to get replacing entry for recorded live (https://github.com/kaltura/server/pull/6484)
+- SUP-12715: substring of tag with utf8 encoding (https://github.com/kaltura/server/pull/6480)
+- plat-8233: Add "name" to Media Entry Filter (https://github.com/kaltura/server/pull/6476)
+- PLAT-8354: grab the label and id from entry that has captions for a given lang (https://github.com/kaltura/server/pull/6473)
+- PLAT-8273: Thumbnail resize action should use the packager rather than image magic (https://github.com/kaltura/server/pull/6472)
+- PLAT-8315: Check isFileText for encrypted files as well (https://github.com/kaltura/server/pull/6469)
+- SUP-11979: Deinterlace thumbs (https://github.com/kaltura/server/pull/6467)
+- SUP-11979: Deinterlace thumbs (https://github.com/kaltura/server/pull/6463)
+- PLAT-8307: Limit max time for stalled file import (https://github.com/kaltura/server/pull/6466)
+- SUP-11797: Add mediaInfoScanType to the captureThumb (https://github.com/kaltura/server/pull/6464)
+- PLAT-8323: Enable file encryption in the post convert batch job (https://github.com/kaltura/server/pull/6456)
 
 * Thu Nov 30 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.8.0-13
 - PLAT-8349: app token list filter fix (https://github.com/kaltura/server/pull/6448)
