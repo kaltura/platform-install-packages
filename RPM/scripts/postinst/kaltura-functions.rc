@@ -12,6 +12,10 @@ fi
 if [ -r /etc/sysconfig/clock ];then
         . /etc/sysconfig/clock
 fi
+if [ -z "$ZONE" ];then
+	ZONE=`get_tz`
+fi
+export ZONE
 
 if [ -r $BASE_DIR/app/configurations/consent_msgs ];then
 	. $BASE_DIR/app/configurations/consent_msgs 
@@ -71,9 +75,16 @@ call_base_config()
 
 function get_tz()
 {
-        LOCALTIME_MD5=`md5sum /etc/localtime|awk -F " " '{print $1}'`
-        TZGUESS=`find /usr/share/zoneinfo -type f | xargs md5sum | grep $LOCALTIME_MD5|awk -F " " '{print $2}'|sed 's@/usr/share/zoneinfo/@@g'`
-        echo $TZGUESS
+	if [ -r /etc/sysconfig/clock ];then
+		. /etc/sysconfig/clock
+	fi
+	if [ -n "$ZONE" ];then
+		echo $ZONE
+	else
+	        LOCALTIME_MD5=`md5sum /etc/localtime|awk -F " " '{print $1}'`
+        	TZGUESS=`find /usr/share/zoneinfo -type f | xargs md5sum | grep $LOCALTIME_MD5|tail -1|awk -F " " '{print $2}'|sed 's@/usr/share/zoneinfo/@@g'`
+	        echo $TZGUESS
+	fi
 }
 
 check_mysql_settings()
@@ -210,15 +221,15 @@ send_install_becon()
 		return 0 
 	fi
 	#echo sending becobeep
+	TIMEZONE=`get_tz`
         ROLE=$1
-	TIMEZONE=$2
-        ACTION=$3
-	ERR_LINE=$ACTION
+        ACTION=$2
 
-	if [ -n $4 ];then
-		ERR_LINE=$4
+	if [ -n $3 ];then
+		ERR_LINE=$3
+	else
+		ERR_LINE="0"
 	fi
-	#echo $ERR_LINE 
         RC_FILE=/etc/kaltura.d/system.ini
         if [ -r "$RC_FILE" ];then
         	. $RC_FILE
@@ -307,7 +318,7 @@ Archving logs to $TAR_PATH...
 		. $CONSENT_FILE 
 	fi
 	
-       	send_install_becon ${MYSELF} $ZONE install_fail "${LASTLINE},${POSTINST_VER}"
+       	send_install_becon "${MYSELF}" "install_fail" "${LASTLINE},${POSTINST_VER}"
         exit 11
 }
 
@@ -325,25 +336,22 @@ validate_mail()
 get_tracking_consent()
 {
 
-	echo -en "${BRIGHT_BLUE}$PRE_CONSENT 
+	echo -en "\n${BRIGHT_BLUE}$PRE_CONSENT 
 	
+[Y\n]:${NORMAL}
+"
 
-[Email\NO]:${NORMAL}"
+	shopt -s nocasematch
 
-	CONTACT_MAIL="mailhere"
-	read -e CONTACT_MAIL
-	while [ "$CONTACT_MAIL" != "NO" ];do
-		if validate_mail "$CONTACT_MAIL";then
-			echo "USER_CONSENT=1" >> $CONSENT_FILE
-			echo "CONTACT_MAIL=$CONTACT_MAIL" >> $CONSENT_FILE
-			return 0
-		fi	
-		echo "Please input a valid mail address or 'NO'"
-		read -e CONTACT_MAIL
-	done
-	if [ "$CONTACT_MAIL" = "NO" ];then
+	CONTACT_MAIL="$1"
+	read -e ANS
+	if [ "$ANS" = "no" -o "$ANS" = "n" ];then 
 		echo "USER_CONSENT=0" > $CONSENT_FILE
+	else
+		echo "USER_CONSENT=1" >> $CONSENT_FILE
+		echo "CONTACT_MAIL=$CONTACT_MAIL" >> $CONSENT_FILE
 	fi
+	shopt -u nocasematch
 	. $CONSENT_FILE
 }
 

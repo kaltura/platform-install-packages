@@ -95,7 +95,7 @@ if ! rpm -q kaltura-front;then
 	exit 0 
 fi
 trap 'my_trap_handler "${LINENO}" $?' ERR
-send_install_becon `basename $0` $ZONE install_start 0 
+send_install_becon "`basename $0`" "install_start" 0 
 KALTURA_APACHE_CONF=$APP_DIR/configurations/apache
 KALTURA_APACHE_CONFD=$KALTURA_APACHE_CONF/conf.d
 #unset IS_SSL
@@ -117,15 +117,7 @@ if [ $? -eq 0 ];then
 fi
 trap 'my_trap_handler "${LINENO}" $?' ERR
 
-	if [ -z "$AUTO_YES" ];then
-		echo -e "${YELLOW}It is recommended that you do work using HTTPs. Would you like to continue anyway?[N/y]${NORMAL}"
-		read CONT
-		if [ "$CONT" != 'y' ];then
-			echo "Exiting."
-			exit 2
-		fi
-		IS_SSL='N'
-	fi
+	IS_SSL='N'
 	MAIN_APACHE_CONF=$KALTURA_APACHE_CONF/kaltura.conf
 else
 	# configure SSL:
@@ -311,4 +303,4 @@ sed -i "s/@HTML5_VER@/$HTML5LIB_VERSION/g" -i $BASE_DIR/apps/studio/$HTML5_STUDI
 		php $BASE_DIR/app/deployment/uiconf/deploy_v2.php --ini=$KMC_PATH/config.ini >> /dev/null
 	fi
 	trap 'my_trap_handler "${LINENO}" $?' ERR
-send_install_becon `basename $0` $ZONE install_success 0 
+send_install_becon `basename $0` install_success 0 

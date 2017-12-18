@@ -45,7 +45,7 @@ if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
 fi
 . $KALTURA_FUNCTIONS_RC
 trap 'my_trap_handler "${LINENO}" $?' ERR
-send_install_becon `basename $0` $ZONE install_start 0 
+send_install_becon "`basename $0`" "install_start" 0 
 
 MYSQL_HOST=$1
 MYSQL_SUPER_USER=$2
@@ -230,4 +230,4 @@ if [ "$DB1_HOST" = `hostname` -o "$DB1_HOST" = '127.0.0.1' -o "$DB1_HOST" = 'loc
 	service kaltura-monit stop >> /dev/null 2>&1
 	service kaltura-monit restart
 fi
-send_install_becon `basename $0` $ZONE install_success 0 
+send_install_becon "`basename $0`" "install_success" 0 

@@ -38,14 +38,13 @@ else
        ZONE="unknown"
 fi  
 OUT="1"
-send_install_becon `basename $0` $ZONE install_start 
+send_install_becon "`basename $0`" "install_start" 0
 $BASE_DIR/bin/kaltura-base-config.sh "$ANSFILE"
 if [ $? -ne 0 ];then
        echo -e "${BRIGHT_RED}ERROR: $BASE_DIR/bin/kaltura-base-config.sh failed:( You can re-run it when the issue is fixed.${NORMAL}"
 #       senddd_install_becon kaltura-base $ZONE "install_fail: $OUT"
        exit 1
 fi
-#send_install_becon kaltura-base $ZONE "install_success"
 
 RC_FILE=/etc/kaltura.d/system.ini
 if [ ! -r "$RC_FILE" ];then
@@ -57,25 +56,19 @@ echo "Running FrontEnd config...
 
 "
 
-#send_install_becon kaltura-front $ZONE install_start 
 $BASE_DIR/bin/kaltura-front-config.sh "$ANSFILE"
 if [ $? -ne 0 ];then
        echo -e "${BRIGHT_RED}ERROR: $BASE_DIR/bin/kaltura-front-config.sh failed:( You can re-run it when the issue is fixed.${NORMAL}"
-#       send_install_becon kaltura-front $ZONE "install_fail: $OUT"
        exit 2 
 fi
-#send_install_becon kaltura-front $ZONE install_success 
 echo "Running Sphinx config...
 
 "
-#send_install_becon kaltura-sphinx $ZONE install_start 
 $BASE_DIR/bin/kaltura-sphinx-config.sh "$ANSFILE"
 if [ $? -ne 0 ];then
        echo -e "${BRIGHT_RED}ERROR: $BASE_DIR/bin/kaltura-sphinx-config.sh failed:( You can re-run it when the issue is fixed.${NORMAL}"
- #      send_install_becon kaltura-sphinx $ZONE "install_fail: $OUT"
        exit 3 
 fi
-#send_install_becon kaltura-sphinx $ZONE install_success 
 trap - ERR
 echo "use kaltura" | mysql -h$DB1_HOST -P$DB1_PORT -u$SUPER_USER -p$SUPER_USER_PASSWD mysql 2> /dev/null
 if [ $? -ne 0 ];then
@@ -84,14 +77,11 @@ if [ $? -ne 0 ];then
 Configuring your Kaltura DB...
 
 "
-#send_install_becon kaltura-db $ZONE install_start 
 $BASE_DIR/bin/kaltura-db-config.sh $DB1_HOST $SUPER_USER $SUPER_USER_PASSWD $DB1_PORT $SPHINX_HOST
 
        RC=$?
        if [ $RC -ne 0 ];then
- #      send_install_becon kaltura-db $ZONE "install_fail: $OUT"
         if [ $RC = 111 ];then
-  #              send_install_becon kaltura-db $ZONE "install_fail: Tried reaching $SERVICE_URL/api_v3/index.php?service=system&action=ping and couldn't"
                 echo -e "${BRIGHT_RED}ERROR: $BASE_DIR/bin/kaltura-db-config.sh $DB1_HOST $SUPER_USER $SUPER_USER_PASSWD $DB1_PORT failed when trying to populate the DB.
 It tried reaching $SERVICE_URL/api_v3/index.php?service=system&action=ping and couldn't.
 This probably means you have either inputted and bad service URL or have yet to configure your Apache.
@@ -109,13 +99,11 @@ You may run $0 again once done.${NORMAL}"
        fi
 fi
 
-#send_install_becon kaltura-db $ZONE install_success 
 
 echo "Running Batch config...
 
 "
 
-#send_install_becon kaltura-batch $ZONE install_start
 $BASE_DIR/bin/kaltura-batch-config.sh "$ANSFILE"
 if [ $? -ne 0 ];then
        echo -e "${BRIGHT_RED}ERROR: $BASE_DIR/bin/kaltura-batch-config.sh failed:( You can re-run it when the issue is fixed.${NORMAL}"
@@ -136,13 +124,10 @@ fi
 echo "Running DWH config...
 
 "
-#send_install_becon kaltura-dwh $ZONE install_start
 $BASE_DIR/bin/kaltura-dwh-config.sh "$ANSFILE" 
 if [ $? -ne 0 ];then
        echo -e "${BRIGHT_RED}ERROR: $BASE_DIR/bin/kaltura-dwh-config.sh failed:( You can re-run it when the issue is fixed.${NORMAL}"
- #      send_install_becon kaltura-dwh $ZONE "install_fail: $OUT"
 fi
-#send_install_becon kaltura-dwh $ZONE install_success
 find $APP_DIR/cache/ -type f -exec rm {} \;
 rm -f $APP_DIR/log/kaltura-*.log
 
@@ -179,5 +164,5 @@ chown -R kaltura.apache $BASE_DIR/app/cache/ $BASE_DIR/log
 chmod 775 $BASE_DIR/web/content
 send_post_inst_msg $ADMIN_CONSOLE_ADMIN_MAIL 
 
-send_install_becon `basename $0` $ZONE install_success 
+send_install_becon "`basename $0`" "install_success" 0
 

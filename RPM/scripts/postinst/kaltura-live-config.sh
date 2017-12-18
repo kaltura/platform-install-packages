@@ -31,7 +31,7 @@ verify_user_input()
                 $VALS
                 "
                 echo -en "${BRIGHT_RED}$OUT${NORMAL}\n"
-                send_install_becon kaltura-nginx $ZONE "install_fail"  "$OUT"
+                send_install_becon "`basename $0`" "install_fail"  "$OUT"
                 exit $RC 
         fi
 }
@@ -59,7 +59,7 @@ WOWZA_VER_DASHES=`echo $WOWZA_VER|sed 's/\./-/g'`
 
 echo -e "${CYAN}Welcome to Kaltura Live post install setup.${NORMAL}"
 trap 'my_trap_handler "${LINENO}" $?' ERR
-send_install_becon `basename $0` $ZONE install_start 0 
+send_install_becon "`basename $0" "install_start" 0 
 RELEASE=`lsb_release -r -s|awk -F . '{print $1}'`
 if [ $RELEASE = 6 ];then
         yum install -y ant-trax
@@ -128,4 +128,4 @@ service WowzaStreamingEngine restart
 service kaltura-monit stop >> /dev/null 2>&1
 service kaltura-monit start
 
-send_install_becon `basename $0` $ZONE install_success 0
+send_install_becon `basename $0` install_success 0

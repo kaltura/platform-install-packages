@@ -31,7 +31,7 @@ verify_user_input()
                 $VALS
                 "
                 echo -en "${BRIGHT_RED}$OUT${NORMAL}\n"
-                send_install_becon kaltura-base $ZONE "install_fail"  "$OUT"
+                send_install_becon "`basename $0`" "install_fail"  "$OUT"
                 exit $RC 
         fi
 }
@@ -82,7 +82,7 @@ ${NORMAL}"
         exit 2 
 fi
 trap 'my_trap_handler "${LINENO}" $?' ERR
-send_install_becon `basename $0` $ZONE install_start 0
+send_install_becon "`basename $0`" "install_start" 0
 BASE_DIR=/opt/kaltura
 LOCALHOST=127.0.0.1
 DISPLAY_NAME=`rpm -q kaltura-base --queryformat %{version}`
@@ -98,13 +98,6 @@ if [ -n "$1" -a -r "$1" ];then
         . $ANSFILE
         export ANSFILE
 else
-        if [ -r $CONSENT_FILE ];then
-                . $CONSENT_FILE
-        elif [ -z "$USER_CONSENT" ];then
-                get_tracking_consent
-        fi
-        . $CONSENT_FILE
-	get_newsletter_consent
        # echo "Welcome to Kaltura Server $DISPLAY_NAME post install setup.
 echo -e "\n${CYAN}In order to finalize the system configuration, please input the following:
 
@@ -243,7 +236,7 @@ ${NORMAL} "
                 VOD_PACKAGER_PORT=88
         fi
         while [ -z "$ADMIN_CONSOLE_ADMIN_MAIL" ];do
-                echo -en "${CYAN}Kaltura Admin user (email address):${NORMAL} "
+                echo -en "${CYAN}This email address will be used to send important, sensitive notifications. Please input a valid address.\nKaltura Admin user (email address):${NORMAL} "
                 read -e ADMIN_CONSOLE_ADMIN_MAIL
         done
         while [ -z "$ADMIN_CONSOLE_PASSWORD" ];do
@@ -311,7 +304,11 @@ ${NORMAL} "
                         CONTACT_PHONE_NUMBER="+1 800 871 5224"
                 fi
         fi
-
+        if [ -r $CONSENT_FILE ];then
+                . $CONSENT_FILE
+        elif [ -z "$USER_CONSENT" ];then
+                get_tracking_consent "$ADMIN_CONSOLE_ADMIN_MAIL"
+        fi
 
 fi
 
@@ -524,7 +521,7 @@ fi
 
 
 echo -e "${BRIGHT_BLUE}Configuration of $DISPLAY_NAME finished successfully!${NORMAL}"
-send_install_becon `basename $0` $ZONE install_success 0
+send_install_becon `basename $0` "install_success" 0
 write_last_base_version
 #if [ -x /etc/init.d/httpd ];then
 #	service httpd reload

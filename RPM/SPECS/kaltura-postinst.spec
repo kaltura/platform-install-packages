@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.33
-Release: 24
+Release: 25
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -12,7 +12,7 @@ Source3: sql_updates
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
-Requires: bc,unzip,redhat-lsb-core,wget
+Requires: bc,unzip,redhat-lsb-core,wget,dmidecode
 
 %description
 Kaltura is the world's first Open Source Online Video Platform, transforming the way people work, 
@@ -82,6 +82,11 @@ find %{_sysconfdir}/logrotate.d -type l -name "kaltura_*" -exec rm {} \;
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Mon Dec 18 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.33-25
+- Some string changes
+- Make the default answer to the reporting question "YES"
+- Use Admin Console email for reporting rather than prompt for another addr
+
 * Fri Nov 10 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.33-23
 - Generate a value for the encryption_iv directive.
 

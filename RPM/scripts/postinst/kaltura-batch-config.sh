@@ -50,7 +50,7 @@ ${NORMAL}
 "
 fi
 trap 'my_trap_handler "${LINENO}" $?' ERR
-send_install_becon `basename $0` $ZONE install_start 0 
+send_install_becon `basename $0` "install_start" 0 
 CONFIG_DIR=/opt/kaltura/app/configurations
 if [ -r $CONFIG_DIR/system.ini ];then
 	. $CONFIG_DIR/system.ini
@@ -113,4 +113,4 @@ ln -sf $BASE_DIR/app/configurations/monit/monit.avail/httpd.rc $BASE_DIR/app/con
 ln -sf $BASE_DIR/app/configurations/monit/monit.avail/memcached.rc $BASE_DIR/app/configurations/monit/monit.d/enabled.memcached.rc
 service kaltura-monit stop >> /dev/null 2>&1
 service kaltura-monit start
-send_install_becon `basename $0` $ZONE install_success 0 
+send_install_becon "`basename $0`" "install_success" 0 

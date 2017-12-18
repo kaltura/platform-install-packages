@@ -77,7 +77,7 @@ include_once(__DIR__ . '/../alpha/config/kConf.php');
                 <div class="col-lg-5 col-sm-6">
                     <hr class="section-heading-spacer">
                     <div class="clearfix"></div>
-                    <h2 class="section-heading">The Admin Console<br /><a href="//<?php echo kConf::get('apphome_url_no_protocol')?>/admin_console" target="_blank">Admin Your Platform Backend</a></h2>
+                    <h2 class="section-heading">The Kaltura Admin Console<br /><a href="//<?php echo kConf::get('apphome_url_no_protocol')?>/admin_console" target="_blank">Admin Your Platform Backend</a></h2>
                     <p class="lead">The Admin Console makes it easy to manage your Kaltura backend and administer Kaltura accounts. View and access all accounts, manage permissions, register new accounts using templates, view usage reports for each account or the entire group, manage backend services and investigate jobs, and more. <a href="https://knowledge.kaltura.com/kaltura-admin-console-user-manual" target="_blank">Learn more about the Admin Console</a>.</p>
                     <p>As your first step, login to the Admin Console using the credentials provided during the installation, and create a new Kaltura account.</p>
                 </div>
@@ -101,7 +101,7 @@ include_once(__DIR__ . '/../alpha/config/kConf.php');
                 <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
                     <hr class="section-heading-spacer">
                     <div class="clearfix"></div>
-                    <h2 class="section-heading">KMC: Management Console<br /><a href="//<?php echo kConf::get('apphome_url_no_protocol')?>/kmc" target="_blank">Manage Specific Accounts</a></h2>
+                    <h2 class="section-heading">KMC: Kaltura Management Console<br /><a href="//<?php echo kConf::get('apphome_url_no_protocol')?>/kmc" target="_blank">Manage Specific Accounts</a></h2>
                     <p class="lead">The KMC is a comprehensive media management application. Perform bulk ingestion/upload, create transcoding profiles, manage metadata and categories, design and configure players, create playlists, view analytics, configure live streaming, distribute content across the web, configure ad campaigns, control access to media, manage your account, users, entitlements and permissions, and much more. <a href="https://knowledge.kaltura.com/node/1606/attachment/field_media" target="_blank">Learn more about the KMC application</a>.</p>
 		    <p>Once you have created a Kaltura account in the Admin Console, login to the KMC to get started!</p>
                 </div>
