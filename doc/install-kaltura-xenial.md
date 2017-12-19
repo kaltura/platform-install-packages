@@ -4,23 +4,23 @@
 [Kaltura Inc.](http://corp.kaltura.com) also provides commercial solutions and services including pro-active platform monitoring, applications, SLA, 24/7 support and professional services. If you're looking for a commercially supported video platform  with integrations to commercial encoders, streaming servers, eCDN, DRM and more - Start a [Free Trial of the Kaltura.com Hosted Platform](http://corp.kaltura.com/free-trial) or learn more about [Kaltura' Commercial OnPrem Edition™](http://corp.kaltura.com/Deployment-Options/Kaltura-On-Prem-Edition). Please note that this service in only offered for RHEL based distros. 
 
 #### Table of Contents
-[Prerequites](https://github.com/kaltura/platform-install-packages/blob/master/doc/pre-requisites.md)
+[Prerequites](pre-requisites.md)
 
-[Step-by-step Installation](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-deb-based.md#step-by-step-installation)
+[Step-by-step Installation](install-kaltura-deb-based.md#step-by-step-installation)
 
-[Unattended Installation](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-deb-based.md#unattended-installation)
+[Unattended Installation](install-kaltura-deb-based.md#unattended-installation)
 
 [Live Streaming with Nginx and the RTMP module](install-kaltura-redhat-based.md#live-streaming-with-nginx-and-the-rtmp-module)
 
-[Upgrade Kaltura](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-deb-based.md#upgrade-kaltura)
+[Upgrade Kaltura](install-kaltura-deb-based.md#upgrade-kaltura)
 
-[Remove Kaltura](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-deb-based.md#remove-kaltura)
+[Remove Kaltura](install-kaltura-deb-based.md#remove-kaltura)
 
-[Troubleshooting](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-deb-based.md#troubleshooting)
+[Troubleshooting](install-kaltura-deb-based.md#troubleshooting)
 
-[Additional Information](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-redhat-based.md#additional-information)
+[Additional Information](install-kaltura-redhat-based.md#additional-information)
 
-[How to contribute](https://github.com/kaltura/platform-install-packages/blob/master/doc/CONTRIBUTERS.md)
+[How to contribute](CONTRIBUTERS.md)
 
 ## Step-by-step Installation
 
@@ -30,7 +30,7 @@
 * Before you begin, make sure you're logged in as super user [root]. Root access is required to install Kaltura, and you should execute ```sudo -i``` or ```su -```to make sure that you are indeed root.
 
 #### Firewall requirements
-Kaltura requires certain ports to be open for proper operation. [See the list of required open ports](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura-required-ports.md).
+Kaltura requires certain ports to be open for proper operation. [See the list of required open ports](kaltura-required-ports.md).
 If you're just testing and don't mind an open system, you can use the below to disbale iptables altogether:
 ```bash
 # iptables -F
@@ -198,8 +198,8 @@ For posting questions, please go to:
 (http://forum.kaltura.org)
 
 ## Additional Information
-* Please review the [frequently answered questions](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura-packages-faq.md) document for general help before posting to the forums or issue queue.
-* This guide describes the installation and upgrade of an all-in-one machine where all the Kaltura components are installed on the same server. For cluster deployments, please refer to [cluster deployment document](http://bit.ly/kipp-cluster-yum), or [Deploying Kaltura using Opscode Chef](https://github.com/kaltura/platform-install-packages/blob/master/doc/rpm-chef-cluster-deployment.md).
+* Please review the [frequently answered questions](kaltura-packages-faq.md) document for general help before posting to the forums or issue queue.
+* This guide describes the installation and upgrade of an all-in-one machine where all the Kaltura components are installed on the same server. For cluster deployments, please refer to [cluster deployment document](http://bit.ly/kipp-cluster-yum), or [Deploying Kaltura using Opscode Chef](rpm-chef-cluster-deployment.md).
 * To learn about monitoring, please refer to [configuring platform monitors](http://bit.ly/kipp-monitoring).
 * Testers using virtualization: [@DBezemer](https://github.com/kaltura) created a basic CentOS 6.4 template virtual server vailable here in OVF format: https://www.dropbox.com/s/luai7sk8nmihrkx/20140306_CentOS-base.zip
 * Alternatively you can find VMWare images at - https://www.osboxes.org/vmware-images/ --> Make sure to only use compatible OS images; either RedHat or CentOS 5.n, 6.n or FedoraCore 18+.

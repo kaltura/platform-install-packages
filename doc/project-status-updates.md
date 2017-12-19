@@ -48,10 +48,10 @@ Celebrating over 100 bugs crushed mark! :) Thanks to all active contributors! (D
 + Many more tests were added to the CI system.
 + [Continuous Integration reports are now publicly accessible](http://installrepo.kaltura.org/reports/ci/). 
 + Many bug patches were merged to core in uiConfs, monitors, batches, and client generators. (ref: [pull1](https://github.com/jessp01/server/compare/kaltura:master...master), [pull2](https://github.com/kaltura/server/commit/3cfacf04d48640d63cc6080592ffcc1270da82a3))
-+ Amazon Web Services documentations contributed by [@blackyboy](https://github.com/blackyboy): 1) [CloudFront HTTP/s](https://github.com/kaltura/platform-install-packages/blob/master/doc/setting-up-amazon-cloudfront-cdn-http-https.md), 2) [CloudFront RTMP](https://github.com/kaltura/platform-install-packages/blob/master/doc/setting-up-amazon-cloudfront-cdn-rtmp.md), and 3) [AWS S3 Remote Storage](https://github.com/kaltura/platform-install-packages/blob/master/doc/setup-amazon-S3-remote-storage.md).
++ Amazon Web Services documentations contributed by [@blackyboy](https://github.com/blackyboy): 1) [CloudFront HTTP/s](setting-up-amazon-cloudfront-cdn-http-https.md), 2) [CloudFront RTMP](setting-up-amazon-cloudfront-cdn-rtmp.md), and 3) [AWS S3 Remote Storage](setup-amazon-S3-remote-storage.md).
 + Chef Kaltura cookbook are now available for download from the [official Chef community site](http://community.opscode.com/cookbooks/kaltura). 
 + Signed RPM packages: Signing RPMs adds an extra level of trustworthiness to the RPMs. A digital signature helps establish that the package indeed came from Kaltura, and not from someone masquerading as Kaltura or retrafficing via DNS spoofing, etc. (Read more about [RPM signing](http://docs.fedoraproject.org/en-US/Fedora_Draft_Documentation/0.1/html/RPM_Guide/ch11s04.html)). 
-+ Introducing: [Simple Tasks That Make A Difference!](https://github.com/kaltura/platform-install-packages/blob/master/doc/tasks.md) - small things you could patch to learn and at the same time contribute greatly to the platform!
++ Introducing: [Simple Tasks That Make A Difference!](tasks.md) - small things you could patch to learn and at the same time contribute greatly to the platform!
 
 
 #### 2014-04-14:
@@ -68,19 +68,19 @@ Celebrating over 100 bugs crushed mark! :) Thanks to all active contributors! (D
 + Migration path between 9.11.0, 9.12.0 was tested by several users and found stable. 
 + 9.13.0 passed all CI tests.
 + Added [script to configure NFS client side](https://github.com/kaltura/platform-install-packages/blob/master/RPM/scripts/postinst/kaltura-nfs-client-config.sh)
-+ Added new [FAQ section for commonly asked questions help](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura-packages-faq.md)
++ Added new [FAQ section for commonly asked questions help](kaltura-packages-faq.md)
 + All CI tests were wrapped as local post-install sanity tests kit for users to run after installation verifying their install. [See sanity-test kit screenshot](https://raw.githubusercontent.com/kaltura/platform-install-packages/master/doc/post-inst-sanity-tests-output.png).
 + Install scripts output is now presented in colors to make messages easier to read and understand [See install output screenshot](https://raw.githubusercontent.com/kaltura/platform-install-packages/master/doc/rpm_install_console_colors.png)
 + Missing KMC documentation and bulk upload samples were added.
 + Widgets upgrade and cleanup completed - updated to use new github links rather than old SVN. And added CI test to check for existence of all widget swfs that are referenced by uiConfs.
 + Discovered missing old uiConf files - list is being checked against core to verify cleanup.
 + [@blackyboy](https://github.com/blackyboy) contributed [Configuring Drop Folder, Amazon S3 Remote Storage, Amazon CloudFront CDN, and CloudFront RTMP](https://github.com/kaltura/platform-install-packages/issues/61#issuecomment-38462301), will be added document shortly, and inspired the idea for [Create Post-Inst Scripts for CDN Configurations](https://github.com/kaltura/platform-install-packages/issues/80).
-+ [@DBezemer](https://github.com/DBezemer) tested and updated [Deploying Kaltura Clusters guide](https://github.com/kaltura/platform-install-packages/blob/master/doc/rpm-cluster-deployment-instructions.md) to be even more "fool-proof".
-+ [Deploy Local Repository for Offline Install](https://github.com/kaltura/platform-install-packages/blob/master/doc/deploy-local-rpm-repo-offline-install.md) guide was added to support environments that are not connected to the internet. 
++ [@DBezemer](https://github.com/DBezemer) tested and updated [Deploying Kaltura Clusters guide](rpm-cluster-deployment-instructions.md) to be even more "fool-proof".
++ [Deploy Local Repository for Offline Install](deploy-local-rpm-repo-offline-install.md) guide was added to support environments that are not connected to the internet. 
 
 **Continuous Integration Updates**
 
-+ Nightly sanity occurs each night on EC2, logs entries to SQLite and sends a CSV report by email. See [example CSV Report](https://github.com/kaltura/platform-install-packages/blob/master/doc/ci_example_csv_report.csv)
++ Nightly sanity occurs each night on EC2, logs entries to SQLite and sends a CSV report by email. See [example CSV Report](ci_example_csv_report.csv)
 + Erected a cluster to test on ESXi for testing, integration in progress
 + Currently working on integration using [The Foremen](http://www.theforeman.org/) to support wider range of deployment options.
 

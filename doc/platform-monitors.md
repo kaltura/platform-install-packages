@@ -3,7 +3,7 @@
 ### Before You Get Started Notes
 
 * If you see a `#` at the beginning of a line, this line should be run as `root`.
-* Please review the [frequently answered questions](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura-packages-faq.md) document for general help before posting to the forums or issue queue.
+* Please review the [frequently answered questions](kaltura-packages-faq.md) document for general help before posting to the forums or issue queue.
 * [Kaltura Inc.](http://corp.kaltura.com) also provides commercial solutions and services including pro-active platform monitoring, applications, SLA, 24/7 support and professional services. If you're looking for a commercially supported video platform  with integrations to commercial encoders, streaming servers, eCDN, DRM and more - Start a [Free Trial of the Kaltura.com Hosted Platform](http://corp.kaltura.com/free-trial) or learn more about [Kaltura' Commercial OnPrem Edition™](http://corp.kaltura.com/Deployment-Options/Kaltura-On-Prem-Edition). For existing RPM based users, Kaltura offers commercial upgrade options.
 
 ### Using JaM - a PHP monitoring system that supports storing PHP errors (events) into different storage backends

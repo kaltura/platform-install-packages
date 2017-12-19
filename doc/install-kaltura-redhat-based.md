@@ -5,25 +5,25 @@ This guide describes RPM installation of an all-in-one Kaltura server and applie
 [Kaltura Inc.](http://corp.kaltura.com) also provides commercial solutions and services including pro-active platform monitoring, applications, SLA, 24/7 support and professional services. If you're looking for a commercially supported video platform  with integrations to commercial encoders, streaming servers, eCDN, DRM and more - Start a [Free Trial of the Kaltura.com Hosted Platform](http://corp.kaltura.com/free-trial) or learn more about [Kaltura' Commercial OnPrem Edition™](http://corp.kaltura.com/Deployment-Options/Kaltura-On-Prem-Edition). For existing RPM based users, Kaltura offers commercial upgrade options.
 
 #### Table of Contents
-[Prerequites](https://github.com/kaltura/platform-install-packages/blob/master/doc/pre-requisites.md)
+[Prerequites](pre-requisites.md)
 
-[Non-SSL Step-by-step Installation](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-redhat-based.md#non-ssl-step-by-step-installation)
+[Non-SSL Step-by-step Installation](install-kaltura-redhat-based.md#non-ssl-step-by-step-installation)
 
-[SSL Step-by-step Installation](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-redhat-based.md#ssl-step-by-step-installation)
+[SSL Step-by-step Installation](install-kaltura-redhat-based.md#ssl-step-by-step-installation)
 
-[Unattended Installation](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-redhat-based.md#unattended-installation)
+[Unattended Installation](install-kaltura-redhat-based.md#unattended-installation)
 
 [Live Streaming with Nginx and the RTMP module](install-kaltura-redhat-based.md#live-streaming-with-nginx-and-the-rtmp-module)
 
-[Upgrade Kaltura](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-redhat-based.md#upgrade-kaltura)
+[Upgrade Kaltura](install-kaltura-redhat-based.md#upgrade-kaltura)
 
-[Remove Kaltura](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-redhat-based.md#remove-kaltura)
+[Remove Kaltura](install-kaltura-redhat-based.md#remove-kaltura)
 
-[Troubleshooting](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-redhat-based.md#troubleshooting)
+[Troubleshooting](install-kaltura-redhat-based.md#troubleshooting)
 
-[Additional Information](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-redhat-based.md#additional-information)
+[Additional Information](install-kaltura-redhat-based.md#additional-information)
 
-[How to contribute](https://github.com/kaltura/platform-install-packages/blob/master/doc/CONTRIBUTERS.md)
+[How to contribute](CONTRIBUTERS.md)
 
 ## Non-SSL Step-by-step Installation
 
@@ -215,7 +215,7 @@ Your install will now automatically perform all install tasks.
   * To verify the validity of your certificate, you can then use [SSLShoper's SSL Check Utility](http://www.sslshopper.com/ssl-checker.html).
 
 #### Firewall requirements
-Kaltura requires certain ports to be open for proper operation. [See the list of required open ports](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura-required-ports.md).
+Kaltura requires certain ports to be open for proper operation. [See the list of required open ports](kaltura-required-ports.md).
 If you're just testing and don't mind an open system, you can use the below to disbale iptables altogether:
 ```bash
 iptables -F
@@ -385,7 +385,7 @@ Finally, run: ```/etc/init.d/kaltura-monit restart```
 
 ## Unattended Installation
 All Kaltura scripts accept an answer file as their first argument.
-In order to preform an unattended [silent] install, simply edit the [template](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura.template.ans) and pass it along to kaltura-config-all.sh.
+In order to preform an unattended [silent] install, simply edit the [template](kaltura.template.ans) and pass it along to kaltura-config-all.sh.
 
 ## Upgrade Kaltura
 *This will only work if the initial install was using this packages based install, it will not work for old Kaltura deployments using the PHP installers*
@@ -401,7 +401,7 @@ Once the upgrade completes, please run:
 ```
 
 /opt/kaltura/bin/kaltura-config-all.sh can accept an answer file as its first argument, allowing for an unattended deployment/upgrade.
-For more on that, see: https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura.template.ans 
+For more on that, see: kaltura.template.ans 
 
 In the event you would like to see what changes the package includes before deciding whether or not you wish to upgrade, run:
 ```bash
@@ -447,8 +447,8 @@ For posting questions, please go to:
 (http://forum.kaltura.org)
 
 ## Additional Information
-* Please review the [frequently answered questions](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura-packages-faq.md) document for general help before posting to the forums or issue queue.
-* This guide describes the installation and upgrade of an all-in-one machine where all the Kaltura components are installed on the same server. For cluster deployments, please refer to [cluster deployment document](http://bit.ly/kipp-cluster-yum), or [Deploying Kaltura using Opscode Chef](https://github.com/kaltura/platform-install-packages/blob/master/doc/rpm-chef-cluster-deployment.md).
+* Please review the [frequently answered questions](kaltura-packages-faq.md) document for general help before posting to the forums or issue queue.
+* This guide describes the installation and upgrade of an all-in-one machine where all the Kaltura components are installed on the same server. For cluster deployments, please refer to [cluster deployment document](http://bit.ly/kipp-cluster-yum), or [Deploying Kaltura using Opscode Chef](rpm-chef-cluster-deployment.md).
 * To learn about monitoring, please refer to [configuring platform monitors](http://bit.ly/kipp-monitoring).
 * Testers using virtualization: [@DBezemer](https://github.com/kaltura) created a basic CentOS 6.4 template virtual server vailable here in OVF format: https://www.dropbox.com/s/luai7sk8nmihrkx/20140306_CentOS-base.zip
 * Alternatively you can find VMWare images at - https://www.osboxes.org/vmware-images --> Make sure to only use compatible OS images; either RedHat or CentOS 5.n, 6.n or FedoraCore 18+.
