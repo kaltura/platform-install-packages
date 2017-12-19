@@ -52,9 +52,16 @@ echo kaltura-nginx   kaltura-nginx/is_kaltura_server   boolean true | debconf-se
 echo kaltura-nginx   kaltura-nginx/kaltura_service_url       string  @SERVICE_URL@ | debconf-set-selections
 echo kaltura-nginx   kaltura-nginx/nginx_hostname    string  @VOD_PACKAGER_HOST@ | debconf-set-selections
 echo kaltura-nginx   kaltura-nginx/nginx_port        string  @VOD_PACKAGER_PORT@ | debconf-set-selections
+echo kaltura-nginx   kaltura-nginx/nginx_ssl_port        string  @VOD_PACKAGER_SSL_PORT@ | debconf-set-selections
+echo kaltura-nginx   kaltura-nginx/rtmp_port        string  1935 | debconf-set-selections
 echo kaltura-nginx   kaltura-nginx/ssl_cert	     string  @SSL_CERT@  | debconf-set-selections
 echo kaltura-nginx   kaltura-nginx/ssl_key	     string  @SSL_KEY@  | debconf-set-selections
 echo kaltura-nginx   kaltura-nginx/is_ssl	     boolean false | debconf-set-selections
 
 echo mysql-server-5.5        mysql-server/root_password_again        password @MYSQL_ROOT_PASSWD@ | debconf-set-selections
 echo mysql-server-5.5        mysql-server/root_password      password @MYSQL_ROOT_PASSWD@ | debconf-set-selections
+
+echo kaltura-dwh    kaltura-dwh/db_hostname        string  @DB1_HOST@ | debconf-set-selections
+echo kaltura-dwh    kaltura-dwh/db_port        string  3306 | debconf-set-selections
+echo kaltura-dwh    kaltura-dwh/mysql_super_passwd        string  @MYSQL_ROOT_PASSWD@ | debconf-set-selections
+echo kaltura-dwh    kaltura-dwh/mysql_super_user     string  root | debconf-set-selections

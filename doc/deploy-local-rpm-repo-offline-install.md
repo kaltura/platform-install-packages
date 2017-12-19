@@ -50,4 +50,4 @@ enabled = 1
 ```
 
 ## Install Kaltura
-Follow the desired install guide ([cluster deployment](https://github.com/kaltura/platform-install-packages/blob/master/doc/rpm-cluster-deployment-instructions.md) or [all-in-one install](https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-redhat-based.md)), skipping the "Auto Set the Kaltura install repository URLs" step.
+Follow the desired install guide ([cluster deployment](rpm-cluster-deployment-instructions.md) or [all-in-one install](install-kaltura-redhat-based.md)), skipping the "Auto Set the Kaltura install repository URLs" step.
