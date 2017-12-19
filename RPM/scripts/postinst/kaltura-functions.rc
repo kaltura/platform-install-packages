@@ -342,10 +342,8 @@ validate_mail()
 get_tracking_consent()
 {
 
-	echo -en "\n${BRIGHT_BLUE}$PRE_CONSENT 
-	
-[Y\n]:${NORMAL}
-"
+        echo -en "\n${BRIGHT_BLUE}$PRE_CONSENT\n
+[Y|n]:${NORMAL}"
 
 	shopt -s nocasematch
 
