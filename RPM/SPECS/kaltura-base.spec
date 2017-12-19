@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 13.9.0
-Release: 19
+Version: 13.10.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -329,6 +329,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Tue Dec 19 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.10.0-1
+- Ver Bounce to 13.10.0
+
 * Mon Dec 18 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.9.0-16
 - PLAT-8409: allow webcast producer to update cue point status (https://github.com/kaltura/server/pull/6533)
 - PLAT-8398: add partner -5 to allowed viewers of preview stream in explicit live (https://github.com/kaltura/server/pull/6524)
