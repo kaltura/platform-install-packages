@@ -1,3 +1,9 @@
+kaltura-base (13.10.0-1) mercury; urgency=low
+
+  * Switching to 13.10.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Tue, 19 Dec 2017 16:43:10 +0000
+
 kaltura-base (13.9.0-2) mercury; urgency=low
 
   * PLAT-8409: allow webcast producer to update cue point status (https://github.com/kaltura/server/pull/6533)

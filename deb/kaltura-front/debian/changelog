@@ -1,3 +1,9 @@
+kaltura-front (13.10.0-1) mercury; urgency=low
+
+  * Switching to 13.10.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Tue, 19 Dec 2017 16:43:11 +0000
+
 kaltura-front (13.9.0-1) mercury; urgency=low
 
   * Switching to 13.9.0
