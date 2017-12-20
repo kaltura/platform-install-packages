@@ -16,11 +16,11 @@ Refer to the [Deploying Kaltura Clusters Using Chef](rpm-chef-cluster-deployment
 * [Load Balancer](#apache-load-balancer)
 * [NFS server](#the-nfs-server)
 * [MySQL Database](#the-mysql-database)
-* [Sphinx Indexing](#the-sphinx-indexing-server)
-* [Front servers](#the-first-front-node)
-* [Batch servers](#the-batch-node)
-* [DWH server](#the-datawarehouse)
-* [Nginx VOD server](#nginx-vod-server)
+* [Sphinx Indexing Nodes](#the-sphinx-indexing-server)
+* [Front Nodes](#the-first-front-node)
+* [Batch Nodes](#the-batch-node)
+* [Analytics Node](#the-datawarehouse)
+* [Nginx VOD Nodes](#nginx-vod-server)
 * [Live Streaming with Nginx and the RTMP module](#live-streaming-with-nginx-and-the-rtmp-module)
 * [Upgrade Kaltura](#upgrade-kaltura)
 * [Platform Monitoring](#platform-monitoring)
@@ -369,6 +369,9 @@ secured_default_delivery_type = hds
 default_delivery_type = hds
 ```
 Would make entries shorter than 5 minutes to be delivered as progressive download, all others will be served as HDS, unless we're on iOS where HLS will be attempted.
+
+##### Nginx SSL configuration
+Please see [nginx-ssl-config.md](nginx-ssl-config.md)
 
 
 ### Live Streaming with Nginx and the RTMP module

@@ -9,10 +9,10 @@ Refer to the [All-In-One Kaltura Server Installation Guide](install-kaltura-deb-
 * [NFS server](#the-nfs-server)
 * [MySQL Database](#the-mysql-database)
 * [Sphinx Indexing](#the-sphinx-indexing-server)
-* [Front servers](#the-front)
-* [Batch servers](#the-batch)
-* [DWH server](#the-datawarehouse)
-* [Nginx VOD server](#nginx-vod-server)
+* [Front Nodes](#the-front)
+* [Batch Nodes](#the-batch)
+* [Analytics](#the-datawarehouse)
+* [Nginx VOD Nodes](#nginx-vod-server)
 * [Live Streaming with Nginx and the RTMP module](#live-streaming-with-nginx-and-the-rtmp-module)
 * [Upgrade Kaltura](#upgrade-kaltura)
 * [Platform Monitoring](#platform-monitoring)
@@ -391,6 +391,9 @@ secured_default_delivery_type = hds
 default_delivery_type = hds
 ```
 Would make entries shorter than 5 minutes to be delivered as progressive download, all others will be served as HDS, unless we're on iOS where HLS will be attempted.
+
+##### Nginx SSL configuration
+Please see [nginx-ssl-config.md](nginx-ssl-config.md)
 
 ### Live Streaming with Nginx and the RTMP module
 Kaltura CE includes the kaltura-nginx package, which is compiled with the [Nginx RTMP module](https://github.com/arut/nginx-rtmp-module).
