@@ -1,3 +1,9 @@
+kaltura-html5-studio (2.2.0-1) mercury; urgency=low
+
+  * Aligned with HTML5 player lib 2.64
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Wed, 20 Dec 2017 11:13:41 +0000
+
 kaltura-html5-studio (2.0.9-1) lynx; urgency=low
 
   * FEC-6500 - When resizing Firefox window, the scroll bar for the menu doesn't scroll down till the end
