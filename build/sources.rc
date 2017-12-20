@@ -303,7 +303,7 @@ PUSH_SERVER_URI="https://github.com/kaltura/pub-sub-server/archive/v$PUSH_SERVER
 PUSH_SERVER_RPM_NAME=kaltura-push-server
 
 # App Studio HTML5:
-HTML5_APP_STUDIO_VERSION="v2.1.0"
+HTML5_APP_STUDIO_VERSION="v2.2.0"
 HTML5_APP_STUDIO_ARCHIVE_NAME=studio_$HTML5_APP_STUDIO_VERSION.zip
 HTML5_APP_STUDIO_URI="https://github.com/kaltura/player-studio/releases/download/$HTML5_APP_STUDIO_VERSION/$HTML5_APP_STUDIO_ARCHIVE_NAME"
 HTML5_APP_STUDIO_RPM_NAME=kaltura-html5-studio
