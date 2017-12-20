@@ -17,6 +17,8 @@ If you tried a different deb based distro and failed, please report it.
 
 [Unattended Installation](install-kaltura-deb-based.md#unattended-installation)
 
+[Nginx SSL Configuration](nginx-ssl-config.md)
+
 [Live Streaming with Nginx and the RTMP module](install-kaltura-redhat-based.md#live-streaming-with-nginx-and-the-rtmp-module)
 
 [Upgrade Kaltura](install-kaltura-deb-based.md#upgrade-kaltura)

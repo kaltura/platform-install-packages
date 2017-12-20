@@ -6,7 +6,9 @@ The kaltura-nginx package is used for two functions:
 
 **A general note about SSL: if you have a CE cluster, as opposed to an all in one instance, it is wise to use a load balancer configured to perform SSL offloading to the various Kaltura API and Nginx nodes.
 You can read more about that here:
+
 [RPM cluster howto](rpm-cluster-deployment-instructions.md#apache-load-balancer)
+
 [deb cluster howto](deb-cluster-deployment-instructions.md#apache-load-balancer)**
 
 During the post install configuration phase, you will be prompted about whether or not you'd like to configure Nginx over SSL.
