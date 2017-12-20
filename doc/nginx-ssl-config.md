@@ -5,6 +5,7 @@ The kaltura-nginx package is used for two functions:
 - RTMP Live Streaming using the [RTMP module](https://github.com/arut/nginx-rtmp-module)
 
 **A general note about SSL: if you have a CE cluster, as opposed to an all in one instance, it is wise to use a load balancer configured to perform SSL offloading to the various Kaltura API and Nginx nodes.**
+
 You can read more about load balancing here:
 
 [RPM cluster howto](rpm-cluster-deployment-instructions.md#apache-load-balancer)
