@@ -11,7 +11,7 @@ This guide describes RPM installation of an all-in-one Kaltura server and applie
 
 [Non-SSL Step-by-step Installation](install-kaltura-redhat-based.md#non-ssl-step-by-step-installation)
 
-[Apache SSL Step-by-step Installation](install-kaltura-redhat-based.md#ssl-step-by-step-installation)
+[Apache SSL Step-by-step Installation](install-kaltura-redhat-based.md#apache-ssl-step-by-step-installation)
 
 [Nginx SSL Configuration](nginx-ssl-config.md)
 
