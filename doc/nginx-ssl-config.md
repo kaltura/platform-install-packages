@@ -4,11 +4,10 @@ The kaltura-nginx package is used for two functions:
 - On-the-fly repackaging of MP4 files to DASH, HDS, HLS, MSS using [VOD module](https://github.com/kaltura/nginx-vod-module)
 - RTMP Live Streaming using the [RTMP module](https://github.com/arut/nginx-rtmp-module)
 
-*A general note about SSL: if you have a CE cluster, as opposed to an all in one instance, it is wise to use a load balancer configured to perform SSL offloading to the various Kaltura API and Nginx nodes.
+**A general note about SSL: if you have a CE cluster, as opposed to an all in one instance, it is wise to use a load balancer configured to perform SSL offloading to the various Kaltura API and Nginx nodes.
 You can read more about that here:
 [RPM cluster howto](rpm-cluster-deployment-instructions.md#apache-load-balancer)
-[deb cluster howto](deb-cluster-deployment-instructions.md#apache-load-balancer)
-*
+[deb cluster howto](deb-cluster-deployment-instructions.md#apache-load-balancer)**
 
 During the post install configuration phase, you will be prompted about whether or not you'd like to configure Nginx over SSL.
 In the event you choose to do so, you will be prompted for the SSL certificate and key files as well as the port you'd like to use [default SSL port is 8443 since 443 is used by Apache].
