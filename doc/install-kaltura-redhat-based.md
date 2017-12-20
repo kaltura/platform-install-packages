@@ -30,8 +30,8 @@ This guide describes RPM installation of an all-in-one Kaltura server and applie
 [How to contribute](CONTRIBUTERS.md)
 
 ## Pre-Install steps
-* This install guides assumes that you did a clean, basic install of one of the RHEL based OS's in 64bit architecture.
-* When installing, you will be prompted for each server's resolvable hostname. Note that it is crucial that all host names will be resolvable by other servers in the cluster (and outside the cluster for front machines). Before installing, verify that your /etc/hosts file is properly configured and that all Kaltura server hostnames are resolvable in your network.
+* This guide assumes that you have a clean, basic install of one of the RHEL based OS's in 64bit architecture.
+* During the installation process, you will be prompted about several hostnames. Note that it is crucial that all host names will be resolvable by other members of the cluster (and outside the cluster in the case of API/front machines). Before installing, verify that your DNS contains records for all the hostnames you intend to use or that the /etc/hosts file on all machines is properly configured to include them.
 * Before you begin, make sure you're logged in as the system root. Root access is required to install Kaltura, and you should execute ```sudo -i``` or ```su -```to make sure that you are indeed root.
 
 #### Firewall requirements
@@ -61,7 +61,7 @@ To verify SELinux will not revert to enabled next restart:
 rpm -ihv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
 ```
 
-## Note on RHEL/CentOS 7 
+#### Note for RHEL/CentOS 7 users
 Depending on what repos you have enabled, you may also need to add the EPEL or CentOS repos to resolve all dependencies.
 
 #### Installing on AWS EC2 instances
