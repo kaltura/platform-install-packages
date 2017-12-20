@@ -7,7 +7,7 @@ This guide describes RPM installation of an all-in-one Kaltura server and applie
 #### Table of Contents
 [Prerequites](pre-requisites.md)
 
-[pre-install steps](install-kaltura-redhat-based.md##Pre-Install-steps)
+[Pre-Install Steps](install-kaltura-redhat-based.md#pre-install-steps)
 
 [Non-SSL Step-by-step Installation](install-kaltura-redhat-based.md#non-ssl-step-by-step-installation)
 
@@ -135,7 +135,7 @@ In Redhat 6.5 you should run the following to remove the conflicting packages:
 
 
 ## Non-SSL Step-by-step Installation
-Before you can deploy your Kaltura CE Server, you need to perform some preliminary actions such as adding the Kaltura RPM repos, setting SELinux to persmissive mode and deploying MySQL. Please see [pre-install steps](install-kaltura-redhat-based.md##Pre-Install-steps). 
+Before you can deploy your Kaltura CE Server, you need to perform some preliminary actions such as adding the Kaltura RPM repos, setting SELinux to persmissive mode and deploying MySQL. Please see [pre-install steps](install-kaltura-redhat-based.md#pre-install-steps). 
 
 Install the basic Kaltura Packages:
 ```bash
@@ -207,7 +207,7 @@ Your install will now automatically perform all install tasks.
 **Your Kaltura installation is now complete.**
 
 ## Apache SSL Step-by-step Installation
-Before you can deploy your Kaltura CE Server, you need to perform some preliminary actions such as adding the Kaltura RPM repos, setting SELinux to persmissive mode and deploying MySQL. Please see [pre-install steps](install-kaltura-redhat-based.md##Pre-Install-steps)  
+Before you can deploy your Kaltura CE Server, you need to perform some preliminary actions such as adding the Kaltura RPM repos, setting SELinux to persmissive mode and deploying MySQL. Please see [pre-install steps](install-kaltura-redhat-based.md#pre-install-steps)  
 
 Note: prior to installing Kaltura, while not a must, we recommend you update the installed packages to latest by running:
 ```bash
