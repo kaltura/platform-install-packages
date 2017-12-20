@@ -368,6 +368,10 @@ https://github.com/kaltura/nginx-vod-module/
 ```
 
 #### Setup:
+
+##### Nginx SSL configuration
+For SSL specific configuration options, please see [nginx-ssl-config.md](nginx-ssl-config.md)
+
 The default delivery profiles for DASH, HDS and HLS are defined here:
 ```
 mysql> select * from delivery_profile where partner_id=0 and streamer_type in ('applehttp','mpegdash','hdnetworkmanifest');
@@ -391,9 +395,6 @@ secured_default_delivery_type = hds
 default_delivery_type = hds
 ```
 Would make entries shorter than 5 minutes to be delivered as progressive download, all others will be served as HDS, unless we're on iOS where HLS will be attempted.
-
-##### Nginx SSL configuration
-Please see [nginx-ssl-config.md](nginx-ssl-config.md)
 
 ### Live Streaming with Nginx and the RTMP module
 Kaltura CE includes the kaltura-nginx package, which is compiled with the [Nginx RTMP module](https://github.com/arut/nginx-rtmp-module).
