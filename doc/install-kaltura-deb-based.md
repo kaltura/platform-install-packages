@@ -17,6 +17,8 @@ If you tried a different deb based distro and failed, please report it.
 
 [Unattended Installation](install-kaltura-deb-based.md#unattended-installation)
 
+[Nginx SSL Configuration](nginx-ssl-config.md)
+
 [Live Streaming with Nginx and the RTMP module](install-kaltura-redhat-based.md#live-streaming-with-nginx-and-the-rtmp-module)
 
 [Upgrade Kaltura](install-kaltura-deb-based.md#upgrade-kaltura)
@@ -126,6 +128,10 @@ In order to perform a manual step by step install, simply copy the commands and 
 # chmod +x install_kaltura_all_in_1.sh
 # ./install_kaltura_all_in_1.sh
 ```
+
+### Nginx SSL configuration
+Please see [nginx-ssl-config.md](nginx-ssl-config.md)
+
 
 ### Live Streaming with Nginx and the RTMP module
 Kaltura CE includes the kaltura-nginx package, which is compiled with the [Nginx RTMP module](https://github.com/arut/nginx-rtmp-module).

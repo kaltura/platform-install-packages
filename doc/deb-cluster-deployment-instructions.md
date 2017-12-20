@@ -9,10 +9,10 @@ Refer to the [All-In-One Kaltura Server Installation Guide](install-kaltura-deb-
 * [NFS server](#the-nfs-server)
 * [MySQL Database](#the-mysql-database)
 * [Sphinx Indexing](#the-sphinx-indexing-server)
-* [Front servers](#the-front)
-* [Batch servers](#the-batch)
-* [DWH server](#the-datawarehouse)
-* [Nginx VOD server](#nginx-vod-server)
+* [Front Nodes](#the-front)
+* [Batch Nodes](#the-batch)
+* [Analytics](#the-datawarehouse)
+* [Nginx VOD Nodes](#nginx-vod-server)
 * [Live Streaming with Nginx and the RTMP module](#live-streaming-with-nginx-and-the-rtmp-module)
 * [Upgrade Kaltura](#upgrade-kaltura)
 * [Platform Monitoring](#platform-monitoring)
@@ -368,6 +368,10 @@ https://github.com/kaltura/nginx-vod-module/
 ```
 
 #### Setup:
+
+##### Nginx SSL configuration
+For SSL specific configuration options, please see [nginx-ssl-config.md](nginx-ssl-config.md)
+
 The default delivery profiles for DASH, HDS and HLS are defined here:
 ```
 mysql> select * from delivery_profile where partner_id=0 and streamer_type in ('applehttp','mpegdash','hdnetworkmanifest');

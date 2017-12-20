@@ -16,11 +16,11 @@ Refer to the [Deploying Kaltura Clusters Using Chef](rpm-chef-cluster-deployment
 * [Load Balancer](#apache-load-balancer)
 * [NFS server](#the-nfs-server)
 * [MySQL Database](#the-mysql-database)
-* [Sphinx Indexing](#the-sphinx-indexing-server)
-* [Front servers](#the-first-front-node)
-* [Batch servers](#the-batch-node)
-* [DWH server](#the-datawarehouse)
-* [Nginx VOD server](#nginx-vod-server)
+* [Sphinx Indexing Nodes](#the-sphinx-indexing-server)
+* [Front Nodes](#the-first-front-node)
+* [Batch Nodes](#the-batch-node)
+* [Analytics Node](#the-datawarehouse)
+* [Nginx VOD Nodes](#nginx-vod-server)
 * [Live Streaming with Nginx and the RTMP module](#live-streaming-with-nginx-and-the-rtmp-module)
 * [Upgrade Kaltura](#upgrade-kaltura)
 * [Platform Monitoring](#platform-monitoring)
@@ -346,6 +346,10 @@ https://github.com/kaltura/nginx-vod-module/
 ```
 
 #### Setup:
+
+##### Nginx SSL configuration
+For SSL specific configuration options, please see [nginx-ssl-config.md](nginx-ssl-config.md)
+
 The default delivery profiles for DASH, HDS and HLS are defined here:
 ```
 mysql> select * from delivery_profile where partner_id=0 and streamer_type in ('applehttp','mpegdash','hdnetworkmanifest');

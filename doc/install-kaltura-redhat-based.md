@@ -1,4 +1,4 @@
-﻿# Installing Kaltura on a Single Server (RPM)
+# Installing Kaltura on a Single Server (RPM)
 This guide describes RPM installation of an all-in-one Kaltura server and applies to all major RH based Linux distros including Fedora Core, RHEL, CentOS, etc.
 ([Note the supported distros and versions](http://kaltura.github.io/platform-install-packages/#supported-distros)).
 
@@ -7,9 +7,13 @@ This guide describes RPM installation of an all-in-one Kaltura server and applie
 #### Table of Contents
 [Prerequites](pre-requisites.md)
 
+[Pre-Install Steps](install-kaltura-redhat-based.md#pre-install-steps)
+
 [Non-SSL Step-by-step Installation](install-kaltura-redhat-based.md#non-ssl-step-by-step-installation)
 
-[SSL Step-by-step Installation](install-kaltura-redhat-based.md#ssl-step-by-step-installation)
+[Apache SSL Step-by-step Installation](install-kaltura-redhat-based.md#apache-ssl-step-by-step-installation)
+
+[Nginx SSL Configuration](nginx-ssl-config.md)
 
 [Unattended Installation](install-kaltura-redhat-based.md#unattended-installation)
 
@@ -25,11 +29,9 @@ This guide describes RPM installation of an all-in-one Kaltura server and applie
 
 [How to contribute](CONTRIBUTERS.md)
 
-## Non-SSL Step-by-step Installation
-
-### Pre-Install notes
-* This install guides assumes that you did a clean, basic install of one of the RHEL based OS's in 64bit architecture.
-* When installing, you will be prompted for each server's resolvable hostname. Note that it is crucial that all host names will be resolvable by other servers in the cluster (and outside the cluster for front machines). Before installing, verify that your /etc/hosts file is properly configured and that all Kaltura server hostnames are resolvable in your network.
+## Pre-Install steps
+* This guide assumes that you have a clean, basic install of one of the RHEL based OS's in 64bit architecture.
+* During the installation process, you will be prompted about several hostnames. Note that it is crucial that all host names will be resolvable by other members of the cluster (and outside the cluster in the case of API/front machines). Before installing, verify that your DNS contains records for all the hostnames you intend to use or that the /etc/hosts file on all machines is properly configured to include them.
 * Before you begin, make sure you're logged in as the system root. Root access is required to install Kaltura, and you should execute ```sudo -i``` or ```su -```to make sure that you are indeed root.
 
 #### Firewall requirements
@@ -53,16 +55,13 @@ To verify SELinux will not revert to enabled next restart:
 1. Verify or change the value of SELINUX to permissive: `SELINUX=permissive`
 1. Save the file `/etc/selinux/config`
 
-### Start of Kaltura installation
-This section is a step-by-step guide of a Kaltura installation without SSL.
-
 #### Setup the Kaltura RPM repository
 
 ```bash
 rpm -ihv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
 ```
 
-## Note on RHEL/CentOS 7 
+#### Note for RHEL/CentOS 7 users
 Depending on what repos you have enabled, you may also need to add the EPEL or CentOS repos to resolve all dependencies.
 
 #### Installing on AWS EC2 instances
@@ -134,7 +133,9 @@ When installing on a "desktop" environment there may be package conflicts with m
 In Redhat 6.5 you should run the following to remove the conflicting packages:
 `rpm -e gstreamer-plugins-bad-free totem totem-nautilus`
 
-#### Install Kaltura Server
+
+## Non-SSL Step-by-step Installation
+Before you can deploy your Kaltura CE Server, you need to perform some preliminary actions such as adding the Kaltura RPM repos, setting SELinux to persmissive mode and deploying MySQL. Please see [pre-install steps](install-kaltura-redhat-based.md#pre-install-steps). 
 
 Install the basic Kaltura Packages:
 ```bash
@@ -205,81 +206,8 @@ Your install will now automatically perform all install tasks.
 
 **Your Kaltura installation is now complete.**
 
-## SSL Step-by-step Installation
-### Pre-Install notes
-* This install guides assumes that you did a clean, basic install of one of the support RHEL based OS's in 64bit architecture.
-* When installing, you will be prompted for each server's resolvable hostname. Note that it is crucial that all host names will be resolvable by other servers in the cluster (and outside the cluster for front machines). Before installing, verify that your /etc/hosts file is properly configured and that all Kaltura server hostnames are resolvable in your network.
-* Before you begin, make sure you're logged in as the system root. Root access is required to install Kaltura, and you should execute ```sudo -i``` or ```su -``` to make sure that you are indeed root.
-* It is recommended that you use a properly signed certificate and avoid self-signed certificates due to limitations of various browsers in properly loading websites using self-signed certificates.
-  * You can generate a free valid cert using [http://cert.startcom.org/](http://cert.startcom.org/).
-  * To verify the validity of your certificate, you can then use [SSLShoper's SSL Check Utility](http://www.sslshopper.com/ssl-checker.html).
-
-#### Firewall requirements
-Kaltura requires certain ports to be open for proper operation. [See the list of required open ports](kaltura-required-ports.md).
-If you're just testing and don't mind an open system, you can use the below to disbale iptables altogether:
-```bash
-iptables -F
-service iptables stop
-chkconfig iptables off
-```
-#### Disable SELinux - REQUIRED
-**Currently Kaltura doesn't properly support running with SELinux, things will break if you don't set it to permissive**.
-
-```bash
-setenforce permissive
-```
-
-To verify SELinux will not revert to enabled next restart:
-
-1. Edit the file `/etc/selinux/config`
-1. Verify or change the value of SELINUX to permissive: `SELINUX=permissive`
-1. Save the file `/etc/selinux/config`
-
-### Start of Kaltura installation
-This section is a step-by-step guide of a Kaltura installation with SSL.
-
-#### Setup the Kaltura RPM repository
-
-```bash
-rpm -ihv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
-```
-
-
-
-#### MySQL Install and Configuration
-Please note that currently, only MySQL 5.1 is supported, we recommend using the official package supplied by the RHEL/CentOS repos which is currently 5.1.73.
-
-For RHEL/CentOS 7, MariaDB version 5.5.40 is supported. 
-
-RHEL/CentOS 6 setup:
-```bash
-yum install mysql mysql-server
-service mysqld start
-mysql_secure_installation
-chkconfig mysqld on
-```
-
-RHEL/CentOS 7 setup:
-```bash
-yum install mariadb-server
-service mariadb start
-mysql_secure_installation
-chkconfig mariadb on
-```
-
-**Make sure to answer YES for all steps in the `mysql_secure_install` install, and follow through all the mysql install questions before continuing further.
-Failing to properly run `mysql_secure_install` will cause the kaltura mysql user to run without proper permissions to access your mysql DB, and require you to start over again.
-
-#### Mail Server (MTA) Install and Configuration
-If your machine doesn't have postfix email configured before the Kaltura install, you will not receive emails from the install system nor publisher account activation mails.
-If postfix runs without further configuration starting it is sufficient to make Kaltura work.
-```bash
-service postfix restart
-```
-
-If you are using Amazon Web Services (AWS) please note that by default EC2 machines are blocked from sending email via port 25. For more information see [this thread on AWS forums](https://forums.aws.amazon.com/message.jspa?messageID=317525#317525).
-
-#### Install Kaltura Server
+## Apache SSL Step-by-step Installation
+Before you can deploy your Kaltura CE Server, you need to perform some preliminary actions such as adding the Kaltura RPM repos, setting SELinux to persmissive mode and deploying MySQL. Please see [pre-install steps](install-kaltura-redhat-based.md#pre-install-steps)  
 
 Note: prior to installing Kaltura, while not a must, we recommend you update the installed packages to latest by running:
 ```bash
@@ -352,7 +280,8 @@ Which port will this Vhost listen on? [443] "<443>"
 Please select one of the following options [0]: "<0>"
 ```
 
-Your install will now automatically perform all install tasks.
+### Nginx SSL configuration
+Please see [nginx-ssl-config.md](nginx-ssl-config.md)
 
 ### Live Streaming with Nginx and the RTMP module
 Kaltura CE includes the kaltura-nginx package, which is compiled with the [Nginx RTMP module](https://github.com/arut/nginx-rtmp-module).
