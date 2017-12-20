@@ -127,6 +127,10 @@ In order to perform a manual step by step install, simply copy the commands and 
 # ./install_kaltura_all_in_1.sh
 ```
 
+### Nginx SSL configuration
+Please see [nginx-ssl-config.md](nginx-ssl-config.md)
+
+
 ### Live Streaming with Nginx and the RTMP module
 Kaltura CE includes the kaltura-nginx package, which is compiled with the [Nginx RTMP module](https://github.com/arut/nginx-rtmp-module).
 
