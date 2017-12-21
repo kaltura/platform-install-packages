@@ -1,3 +1,9 @@
+kaltura-db (13.10.0-1) mercury; urgency=low
+
+  * String changes
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Thu, 21 Dec 2017 15:57:29 +0000
+
 kaltura-db (12.15.0-1) lynx; urgency=low
 
   * fix permissions on $WEB_DIR/content/generatedUiConf and $WEB_DIR/content/entry
