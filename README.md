@@ -22,7 +22,7 @@ Thank you for running Kaltura and pushing the limits of online video! By joining
 + By testing the platform components, including various deployment settings and environments, and network settings, [reporting issues and feature requests](https://github.com/kaltura/platform-install-packages/issues) and [pushing pull-requests](https://help.github.com/articles/creating-a-pull-request) that patch bugs.
 + By creating [documentation](https://github.com/kaltura/platform-install-packages/tree/master/doc), demos and examples.
 + By translating the Kaltura Platform documentation.
-+ By filling out the [Community Survey](http://surveys.kaltura.org/index.php/877436/lang-en)
++ By filling out the [Community Survey](https://www.kaltura.com/tiny/u08ud)
 
 Contact the authors or email community@kaltura.org if you have other ideas.
 
