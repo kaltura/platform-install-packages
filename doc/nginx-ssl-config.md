@@ -17,12 +17,12 @@ In the event you choose to do so, you will be prompted for the SSL certificate a
 Once the configuration is done, you should also adjust the delivery_profile.url column like so:
 ```
 # mysql -h$DB1_HOST -u $DB1_USER -p$DB1_PASS -P$DB1_PORT $DB1_NAME
-mysql> UPDATE delivery_profile SET url = REPLACE(url, 'http://$NGINX_HOST:$NGINX_NON_SLL_PORT', 'https://$NGINX_HOST:$NGINX_SLL_PORT') WHERE url LIKE 'http://$NGINX_HOST:$NGINX_NON_SLL_PORT%';
+mysql> UPDATE delivery_profile SET url = REPLACE(url, '$NGINX_HOST:$NGINX_NON_SLL_PORT', '$NGINX_HOST:$NGINX_SLL_PORT') WHERE url LIKE '$NGINX_HOST:$NGINX_NON_SLL_PORT%';
 ```
 
 So, for example, if your Nginx host is test.kaltura.org and your Nginx port is 88 [the default non-SSL port when configuring kaltura-nginx], then the update statement would be:
 ```
-mysql> UPDATE delivery_profile SET url = REPLACE(url, 'http://test.kaltura.org:88', 'https://test.kaltura.org:8443') WHERE url LIKE 'http://test.kaltura.org:88/%';
+mysql> UPDATE delivery_profile SET url = REPLACE(url, 'test.kaltura.org:88', 'test.kaltura.org:8443') WHERE url LIKE 'test.kaltura.org:88/%';
 ```
 
 If your Kaltura API endpoint is over SSL and you are using a port different than 443, you should also edit the nginx.conf file [/etc/nginx/nginx.conf in the RPM package, /opt/kaltura/nginx/conf/nginx.conf in deb]  so that the ```server``` directive includes a port, like so:

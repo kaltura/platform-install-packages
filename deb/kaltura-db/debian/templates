@@ -11,12 +11,14 @@ Description: DB port:
 Template: kaltura-db/mysql_super_user
 Type: string
 Default: root 
-Description: MySQL super use [only needed for install]:
+Description: MySQL super user:
+	MySQL's super user is needed for the initial deployment so that the 'kaltura' DB user and DBs can be created.
+	After that, a dedicated Kaltura DB user will be used for all operations.
 
 Template: kaltura-db/mysql_super_passwd
 Type: password
 Default:  
-Description: MySQL super user passwd [only for install]:
+Description: MySQL super user password:
 
 Template: kaltura-db/fix_mysql_settings
 Type: boolean

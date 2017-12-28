@@ -36,7 +36,7 @@ Type: string
 Default:
 Description: Your Kaltura Service URL:
 	Base URL where the Kaltura API will be accessed from - this would be your Load Balancer URL on a cluster or same as your virtual host in an all-in-one Kaltura server.
-	make sure to insert the host and port without the http:// prefix.
+	make sure to insert the host and port WITHOUT the http[s]:// prefix.
 
 Template: kaltura-nginx/path_to_media_files
 Type: string

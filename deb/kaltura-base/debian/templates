@@ -7,12 +7,12 @@ Template: kaltura-base/apache_hostname
 Type: string
 Default: 
 Description: Apache virtual hostname:
-	Must be accessible from both inside the machine and from any clients / browsers that will use Kaltura
+	The hostname be accessible from both inside the machine and from any clients / browsers that will use Kaltura.
 
 Template: kaltura-base/vhost_port
 Type: string
 Default: 80 
-Description: Vhost port to listen on:
+Description: Apache's Kaltura Vhost port:
 
 Template: kaltura-base/db_hostname
 Type: string
@@ -22,17 +22,19 @@ Description: DB hostname:
 Template: kaltura-base/db_port
 Type: string
 Default: 3306 
-Description: DB port:
+Description: MySQL DB port:
 
 Template: kaltura-base/mysql_super_user
 Type: string
 Default: root 
-Description: MySQL super user [needed for install || upgrade]:
+Description: MySQL super user:
+	MySQL's super user is needed for the initial deployment so that the 'kaltura' DB user and DBs can be created.
+	After that, a dedicated Kaltura DB user will be used for all operations.
 
 Template: kaltura-base/mysql_super_passwd
 Type: password
 Default:  
-Description: MySQL super user password [needed for install || upgrade]:
+Description: MySQL super user password:
 
 Template: kaltura-base/dwh_db_hostname
 Type: string
@@ -68,23 +70,28 @@ Template: kaltura-base/service_url
 Type: string
 Default:
 Description: Your Kaltura Service URL:
-	Base URL where the Kaltura API and Apps will be accessed from - this would be your Load Balancer URL on a cluster or the same as your virtual host in an All-in-One Kaltura server - Must be accessible from both inside the machine and from any clients / browsers that will use Kaltura:\n
+	Base URL where the Kaltura API and Apps will be accessed from - this would be your Load Balancer URL on a cluster or the same as your virtual host in an All-in-One Kaltura server - Must be accessible from both inside the machine and from any clients / browsers that will use Kaltura.
 
 Template: kaltura-base/ip_range
 Type: string
 Default: 0.0.0.0-255.255.255.255
-Description: Range of ip addresses belonging to internal Kaltura servers 
-	The range is used when checking service actions permissions and allowing to access certain services without KS from the internal servers.
+Description: IP range:
+	The IP range will be used when checking service actions permissions and allowing to access certain services without KS from the internal servers.
 
 Template: kaltura-base/vod_packager_hostname
 Type: string
 Default: 
-Description: VOD packager hostname
+Description: Nginx hostname:
+    The kaltura-nginx package includes the VOD module which is used to repackage MP4 files for HLS, DASH and HDS delivery.
 
 Template: kaltura-base/vod_packager_port
 Type: string
 Default: 88
-Description: VOD packager port
+Description: Nginx port:
+    The kaltura-nginx package includes the VOD module which is used to repackage MP4 files for HLS, DASH and HDS delivery.
+    When installing kaltura-nginx, the default non-SSL port is 88 and the SSL port is 8443.
+    If your Kaltura Server is configured to use SSL, Nginx should be configued over SSL as well.
+    Please input 88 for non-SSL, 8443 for SSL or the custom port you intend to use for Nginx.
 
 Template: kaltura-base/admin_console_email
 Type: string
@@ -145,12 +152,12 @@ Description: This data will be used for analysis and ongoing improvement of the 
 
 Template: kaltura-base/auto_generate_kaltura_mysql_passwd
 Type: Boolean
-Default:  
+Default:
 Description: Auto generate MySQL Kaltura password?
-	The Kaltura platform uses a dedicated MySQL user 'kaltura' for its operations.\n
-	If you are installing a standalone machine, it is recommended that you select YES.\n
-	If this node is part of a cluster, select NO and then input the password you set previously.\n
-	The current password can be found in /opt/kaltura/app/configurations/db.ini on the first node you installed.\n
+	The Kaltura platform uses a dedicated MySQL user 'kaltura' for its operations.
+	If you are installing a standalone machine, it is recommended that you select YES.
+	If this node is part of a cluster, select NO and then input the password you set previously.
+	The current password can be found in /opt/kaltura/app/configurations/db.ini on the first node you installed.
 
 Template: kaltura-base/kaltura_mysql_passwd
 Type: password
@@ -165,7 +172,7 @@ Description: Confirm password:
 Template: kaltura-base/install_analytics_email
 Type: string
 Default: 
-Description: Please enter your email
+Description: Please enter your email:
 
 Template: kaltura-base/generating_client_libs
 Type: text
