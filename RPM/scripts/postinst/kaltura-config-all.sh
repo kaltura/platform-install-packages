@@ -147,7 +147,7 @@ To begin, access the Admin Console using the Admin email and password you've ent
 When logged in to the KAC, create a new publisher account to being using Kaltura.
 Visit ${BRIGHT_BLUE}http://www.kaltura.org${CYAN} to join the community and get help!
 Visit ${BRIGHT_BLUE}https://forum.kaltura.org${CYAN} to post issues and help others with theirs.
-Visit ${BRIGHT_BLUE}https://surveys.kaltura.org/index.php/877436${CYAN} to submit our community survey.
+Visit ${BRIGHT_BLUE}https://www.kaltura.com/tiny/u08ud${CYAN} to submit our community survey.
 Visit ${BRIGHT_BLUE}https://knowledge.kaltura.com${CYAN} to read documentation and learn more.
 =====================================================================================================================
 
