@@ -1,4 +1,4 @@
-**[Help make Kaltura CE better! Participate in the 2015 Kaltura CE Survey](http://surveys.kaltura.org/index.php/877436/lang-en).**
+**[Help make Kaltura CE better! Participate in the 2015 Kaltura CE Survey](https://www.kaltura.com/tiny/u08ud).**
 
 [![License](https://img.shields.io/badge/license-AGPLv3-blue.svg)](http://www.gnu.org/licenses/agpl-3.0.html)
 # Kaltura Installation Packages Project
