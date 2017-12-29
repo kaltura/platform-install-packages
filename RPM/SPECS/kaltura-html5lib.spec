@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.64
+Version: v2.64.3
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -82,6 +82,11 @@ fi
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Fri Dec 29 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v2.64.3-1
+- Disable receiver ads manager on empty ad tag url (#3653)
+- FEC-7267(fix): avoid IMA and YT Iframe API collision (#3656)
+- FEC-7644 - change media to the same item skip the licenselink request
+
 * Mon Dec 18 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v2.64-1
 - SUP-12735 - Thumbnail embed causes mixed mode
 - FEC-7456 - #232 - Customized logo - No tooltip for Customized logo
