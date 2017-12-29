@@ -77,7 +77,7 @@ Note that the port in the example file is 80 (standard HTTP port), feel free to 
 
 ### HAProxy Load Balancer
 
-A simpler load balancer called HAProxy can also be configured **instead** of Apache load balancer, after installing it refer to the [configuration file example](haproxy.cfg).
+Please refer to the [configuration file example](haproxy.cfg).
 To configure the load balancer on your environment:
 
 1. Replace all occurances of `node0.domain.org` with the first front machine hostname and `node1.domain.org` with the second front machine hostname.
