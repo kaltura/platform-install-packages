@@ -13,7 +13,7 @@ Refer to the [Deploying Kaltura Clusters Using Chef](rpm-chef-cluster-deployment
 
 ### Instructions here are for a cluster with the following members:
 
-* [Load Balancer](#apache-load-balancer)
+* [Load Balancing](load_balancing.md)
 * [NFS server](#the-nfs-server)
 * [MySQL Database](#the-mysql-database)
 * [Sphinx Indexing Nodes](#the-sphinx-indexing-server)
@@ -62,62 +62,6 @@ Two working solutions to the AWS EC2 email limitations are:
 * Using SendGrid as your mail service ([setting up ec2 with Sendgrid and postfix](http://www.zoharbabin.com/configure-ssmtp-or-postfix-to-send-email-via-sendgrid-on-centos-6-3-ec2)).
 * Using [Amazon's Simple Email Service](http://aws.amazon.com/ses/). 
 
-### Apache Load Balancer
-
-Load balancing is recommended to scale your front and streaming server (e.g. Red5, Wowza) machines.   
-To deploy an Apache based load balancer, refer to the [Apache Load Balancer configuration file example](apache_balancer.conf).   
-This example config uses the `proxy_balancer_module` and `proxy_module` Apache modules to setup a simple Apache based load balancer (refer to official docs about [proxy_balancer_module](http://httpd.apache.org/docs/2.2/mod/mod_proxy_balancer.html) and [proxy_module](http://httpd.apache.org/docs/2.2/mod/mod_proxy.html) to learn more).    
-To configure the load balancer on your environment: 
-
-1. Replace all occurances of `balancer.domain.org` with the desired hostname for the load balanacer (the main end-point your end-users will reach).
-1. Replace all occurances of `node0.domain.org` with the first front machine hostname and `node1.domain.org` with the second front machine hostname.    
-1. In order to add more front machines to the load balancing poll, simply clone the nodeX.domain.org lines and change to the hostnames of the new front machines and the route.
-
-Note that the port in the example file is 80 (standard HTTP port), feel free to change it if you're using a non-standard port.
-
-### HAProxy Load Balancer
-Make sure you have HAProxy compiled with SSL support. It seems the official packages on several Linux distros are compiled without it [propbably due to licensing considerations]  and so, you may need to compile your own. 
-This can be done with these simple steps [replace $HA_PROXY_VERSION with whatever the latest stable happens to be at the time of reading this]:
-
-```
-# wget http://www.haproxy.org/download/1.5/src/haproxy-$HA_PROXY_VERSION.tar.gz
-# tar zxvf haproxy-$HA_PROXY_VERSION.tar.gz
-# cd haproxy-$HA_PROXY_VERSION
-# make USE_PCRE=1 USE_OPENSSL=1 USE_ZLIB=1 USE_CRYPT_H=1 USE_LIBCRYPT=1
-# make install
-```
-
-Please refer to the [configuration file example](haproxy.cfg).
-To configure the load balancer on your environment:
-
-1. Replace all occurances of `node0.domain.org` with the first front machine hostname and `node1.domain.org` with the second front machine hostname.
-2. In order to add more front machines to the load balancing poll, simply clone the nodeX.domain.org line and change to the hostnames of the new front machines and change the server cookie ID (after the cookie keyword).
-
-If you want to have logging for HAProxy with the sample configuration, add the following lines to the syslog/rsyslog configuration (for rsyslog you can put this in the file /etc/rsyslog.d/haproxy.conf):
-```
-$ModLoad imudp
-$UDPServerRun 514
-
-local0.* -/var/log/haproxy/haproxy.log
-```
-
-And restart syslog/rsyslog:
-```
-restart rsyslog
-```
-
-##### SSL Offloading on a Load Balancer
-Load Balancers have the ability to perform SSL offloading (aka [SSL Acceleration](http://en.wikipedia.org/wiki/SSL_Acceleration)). Using SSL offloading can dramatically reduce the load on the systems by only encrypting the communications between the Load Balancer and the public network while communicating on non-encrypted http with the internal network (in Kaltura's case, between the Load Balancer and the front machines).
-
-Kaltura recommends that you utilize offloading. I this case, you will only need to deploy the SSL certificates on your Load Balancer.    
-However, if network requirements dictates (noting that this will hurt performance) Kaltura will work just as well with double encryption - But be sure to deploy the SSL certificates on the front machines as well as the load balancer.
-
-##### Self-Balancing Components
-The following server roles should not be load-balanced:
-
-* Batch machines are very effective at scaling on themselves, by simply installing more batch servers in your cluster they will seamlessly register against the DB on their own and begin to take jobs independantly.
-* Sphinx machines are balanced in the Kaltura application level.
-* See below the notes regarding MySQL replication and scaling.
 
 ### The NFS server
 The NFS is the shared network storage between all machines in the cluster. To learn more about NFS read [this wikipedia article about NFS](http://en.wikipedia.org/wiki/Network_File_System).
