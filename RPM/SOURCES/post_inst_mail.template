@@ -38,7 +38,7 @@ Tip #2:
 
 In order to automate your Kaltura server deployment and upgrades - you can use the answers file that was generated for you during the installation, and pass it as a parameter to the post-install script. 
 
-Find your answers file at: @ANSFILE@
+Find your answers file at: /tmp/kaltura_$TIME_STAMP.ans
 
 
 Tip #3:
