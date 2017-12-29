@@ -1,3 +1,34 @@
+kaltura-base (13.10.0-2) mercury; urgency=low
+
+  * Increase memory limit for CSV report action to 512M (https://github.com/kaltura/server/pull/6597)
+  * SUP-12871: Adjust bitrate threshold for CODECS="mp4a.40.2" (https://github.com/kaltura/server/pull/6593)
+  * SUP-12853: Added reSetMembersCount() to categoryCount script (https://github.com/kaltura/server/pull/6590)
+  * PLAT-8307: Limit max time for stalled file import (https://github.com/kaltura/server/pull/6586)
+  * PLAT-8430: Update inner hits size for caption and cue points (https://github.com/kaltura/server/pull/6585)
+  * addBulkUploadResult(): set bulk job ID only when its null (https://github.com/kaltura/server/pull/6582)
+  * SUP-12715: substring of tag with utf8 encoding (https://github.com/kaltura/server/pull/6579)
+  * call dieError() in case bundleConfig does not exist (https://github.com/kaltura/server/pull/6578)
+  * Fix deletion of caption file syncs (https://github.com/kaltura/server/pull/6577)
+  * SUP-12871: change the bitrate HLS calculation (https://github.com/kaltura/server/pull/6576)
+  * Remove protocol from DeliveryProfile url (https://github.com/kaltura/server/pull/6573)
+  * KMS-16413: store questionCuePoint name in the cue_point_question element (https://github.com/kaltura/server/pull/6572)
+  * Fix JSON serializer (https://github.com/kaltura/server/pull/6571)
+  * PLAT-8274: Disable XsendFile for encrypted file (https://github.com/kaltura/server/pull/6570)
+  * Fix filter issues (https://github.com/kaltura/server/pull/6568)
+  * PLAT-8332: Check ingestFramerate before setting skipCount for Wowza (https://github.com/kaltura/server/pull/6565)
+  * PLAT-8294: Support Finnish and Swedish multi audio live flavor params (https://github.com/kaltura/server/pull/6561)
+  * PLAT-8408: Encrypted folders - set user and group permissions according to the source's (https://github.com/kaltura/server/pull/6560)
+  * PLAT-8354: Avoid warning when missing label from caption (https://github.com/kaltura/server/pull/6559)
+  * PLAT-8408: Decrypt the image list xml file (https://github.com/kaltura/server/pull/6556)
+  * SUP-13055: Add Entry replaced HTTP notification template that excludes kaltura VOD entries (https://github.com/kaltura/server/pull/6555)
+  * SUP-12938: New Media Repurposing email address selection logic (https://github.com/kaltura/server/pull/6554)
+  * SUP-13043: KalturaMetadataFilter::validateObjectIdFiltered() - call strtolower() on $objectIds (https://github.com/kaltura/server/pull/6552)
+  * PLAT-8420: fix php error (https://github.com/kaltura/server/pull/6551)
+  * PLAT-8408: Enable recursive directory encryption (https://github.com/kaltura/server/pull/6547)
+  * PLAT-8414: handleConvertFinished() - only iterate over jobs with these statuses: BatchJobType::CONVERT, BatchJobType::CONVERT_COLLECTION, BatchJobType::POSTCONVERT (https://github.com/kaltura/server/pull/6545)
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Fri, 29 Dec 2017 18:32:00 +0000
+
 kaltura-base (13.10.0-1) mercury; urgency=low
 
   * Switching to 13.10.0

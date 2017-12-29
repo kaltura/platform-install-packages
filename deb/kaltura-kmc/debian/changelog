@@ -1,3 +1,10 @@
+kaltura-kmc (5.43.10-1) mercury; urgency=low
+
+  * SUP-12502 - Fix Google structured data errors
+  * Ver bounce of HTML5 player to v2.64.3
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Fri, 29 Dec 2017 18:46:14 +0000
+
 kaltura-kmc (5.43.9-1) mercury; urgency=low
 
   * PLAT-8367 - Explicit KMC: if publisher presses Save in just created entry, its Auto-start is changed to enabled automatically
