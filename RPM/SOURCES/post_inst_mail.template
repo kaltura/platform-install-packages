@@ -2,7 +2,7 @@ Dear Kaltura administrator,
 
 
 
-Thank you for installing Kaltura, the open source media asset management platform.
+Thank you for installing Kaltura, the open source media management platform.
 
 
 This email confirms that you've successfully installed a Kaltura server on:
@@ -10,31 +10,33 @@ This email confirms that you've successfully installed a Kaltura server on:
 @SERVICE_URL@
 
 
-To begin using your new Kaltura server, access the Admin Console at:
+To manage your platform, access the Admin Console at:
 
 @SERVICE_URL@/admin_console/
 
 
-Use @ADMIN_CONSOLE_ADMIN_MAIL@ and the the password you've entered while installing.
+Login with @ADMIN_CONSOLE_ADMIN_MAIL@ and the the password you inputted during the installation.
 
-When logged in to the KAC, click on "Add New Publisher" to create a new account and being using Kaltura.
+Click on "Add New Publisher" to create a new account.
 
-
-Please tell us about your experience running Kaltura at: http://bit.ly/kcommnuitysurvey
-
+Once you've created your first account, you can login to the Kaltura Management Console [KMC] and start enjoying Kaltura's broad set of media management capabilities.
 
 
-6 Quick Tips For Smooth Kaltura Maintenance -
+Please tell us about your experience using Kaltura at: https://www.kaltura.com/tiny/u08ud
+
+And here's some additional information that can come in handy:
+
+6 Quick Tips for Smooth Kaltura Maintenance -
 
 
 Tip #1:
 
-Join the community discussion board at: http://forum.kaltura.org to get help, meet other Kaltura community members and share your Kaltura stories!
+Join the community discussion board at: https://forum.kaltura.org to get help, meet other Kaltura community members and share your Kaltura stories!
 
 
 Tip #2:
 
-In order to automate the installation of your Kaltura server (if you running in a cluster, or just to make the next install faster) - you can use the answers file that was generated for you during the installation, and pass it as a parameter to the post-install script. 
+In order to automate your Kaltura server deployment and upgrades - you can use the answers file that was generated for you during the installation, and pass it as a parameter to the post-install script. 
 
 Find your answers file at: @ANSFILE@
 
@@ -60,25 +62,19 @@ This output can be used to analyze past failures but for active debugging use th
 
 Tip #5:
 
-Follow http://bit.ly/kcore-release-notes for the latest Kaltura release notes.
+Follow https://forum.kaltura.org/c/new-release-updates for the latest Kaltura release notes.
 
 
 Tip #6:
 
 Visit http://knowledge.kaltura.com to read documentation and learn more.
 
-Visit http://www.kaltura.org to join the community and get help.
-
-
-
-We're excited to have you join the Kaltura community!
+Thank you for joining the community, we’re excited to have you!
 
 Please email community@kaltura.com for any questions, ideas or join us for a beer!
 
 
-
-
-The Kaltura team
+The Kaltura team,
 
 community@kaltura.com
 
