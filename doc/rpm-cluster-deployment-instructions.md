@@ -76,6 +76,16 @@ To configure the load balancer on your environment:
 Note that the port in the example file is 80 (standard HTTP port), feel free to change it if you're using a non-standard port.
 
 ### HAProxy Load Balancer
+Make sure you have HAProxy compiled with SSL support. It seems the official packages on several Linux distros are compiled without it [propbably due to licensing considerations]  and so, you may need to compile your own. 
+This can be done with these simple steps [replace $HA_PROXY_VERSION with whatever the latest stable happens to be at the time of reading this]:
+
+```
+# wget http://www.haproxy.org/download/1.5/src/haproxy-$HA_PROXY_VERSION.tar.gz
+# tar zxvf haproxy-$HA_PROXY_VERSION.tar.gz
+# cd haproxy-$HA_PROXY_VERSION
+# make USE_PCRE=1 USE_OPENSSL=1 USE_ZLIB=1 USE_CRYPT_H=1 USE_LIBCRYPT=1
+# make install
+```
 
 Please refer to the [configuration file example](haproxy.cfg).
 To configure the load balancer on your environment:
