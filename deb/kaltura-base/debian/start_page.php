@@ -124,7 +124,7 @@ include_once(__DIR__ . '/../alpha/config/kConf.php');
                     <hr class="section-heading-spacer">
                     <div class="clearfix"></div>
                     <h2 class="section-heading"><a href="https://www.kaltura.com/tiny/u08ud" target="_blank">Send Us Your Feedback</a></h2>
-                    <p class="lead">Help us to continue to improve by filling out the <a href="https://kaltura1.typeform.com/to/WcvKW6" target="_blank">Kaltura Community Edition survey</a>.</p>
+                    <p class="lead">Help us to continue to improve by filling out the <a href="https://www.kaltura.com/tiny/u08ud" target="_blank">Kaltura Community Edition survey</a>.</p>
 		    <p>We greatly appreciate your input!</p>
                 </div>
                 <div class="col-lg-5 col-lg-offset-2 col-sm-6">
