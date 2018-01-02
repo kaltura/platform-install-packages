@@ -1,3 +1,11 @@
+kaltura-html5lib (2.64.3-1) mercury; urgency=low
+
+  * Disable receiver ads manager on empty ad tag url (#3653)
+  * FEC-7267(fix): avoid IMA and YT Iframe API collision (#3656)
+  * FEC-7644 - change media to the same item skip the licenselink request
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Fri, 29 Dec 2017 18:37:57 +0000
+
 kaltura-html5lib (2.64-1) mercury; urgency=low
 
   * SUP-12735 - Thumbnail embed causes mixed mode
