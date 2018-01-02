@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5-studio
-Version: v2.2.0
+Version: v2.2.1
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -51,6 +51,10 @@ rm -rf %{buildroot}
 %{prefix}/apps/studio/%{version}
 
 %changelog
+* Tue Jan 2 2018 Jess Portnoy <jess.portnoy@kaltura.com> - v2.2.1-1
+- Fix studio link name(FEC-7651)
+- Aligned with HTML5 lib v2.64.4
+
 * Wed Dec 20 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v2.2.0-1
 - Aligned with HTML5 lib v2.64
 

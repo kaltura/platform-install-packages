@@ -321,17 +321,6 @@ fi
 # check DB connectivity:
 echo -e "${CYAN}Checking MySQL version..${NORMAL}"
 MYVER=`echo "select version();" | mysql -h$DB1_HOST -u$SUPER_USER -p$SUPER_USER_PASSWD -P$DB1_PORT -N`
-MYMAJVER=`echo $MYVER| awk -F "." '{print $1}'`
-MYMINORVER=`echo $MYVER| awk -F "." '{print $2}'`
-
-if [ "$MYMAJVER" -ne 5 ];then
-	echo -e "${BRIGHT_RED}Your version of MySQL is not compatible with Kaltura at the moment. 
-Please install and configure MySQL 5.1 according to the instructions on the Kaltura install manual before proceeding with the Kaltura installation.${NORMAL}"
-	exit 4 
-else
-	echo -e "${CYAN}Ver $MYVER found compatible${NORMAL}"
-fi
-
 if [ $? -ne 0 ];then
 cat << EOF
 Failed to run:
@@ -340,6 +329,18 @@ Check your settings."
 EOF
 	exit 5
 fi
+MYMAJVER=`echo $MYVER| awk -F "." '{print $1}'`
+MYMINORVER=`echo $MYVER| awk -F "." '{print $2}'`
+
+if [ "$MYMAJVER" -ne 5 ];then
+	echo -e "${BRIGHT_RED}Your version of MySQL is not compatible with Kaltura at the moment. 
+Kaltura supports MySQL 5.1.n - 5.6.n. MySQL 5.7.n is not supported.
+Please install and configure MySQL according to the instructions on the Kaltura install manual before proceeding with the Kaltura installation.${NORMAL}"
+	exit 4 
+else
+	echo -e "${CYAN}Ver $MYVER found compatible${NORMAL}"
+fi
+
 
 # need to check if we even have PHP as Sphinx and DWH can be installed without thank heavens.
 # reported by David Bezemer:

@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.64.3
+Version: v2.64.4
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -82,6 +82,9 @@ fi
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Tue Jan 2 2018 Jess Portnoy <jess.portnoy@kaltura.com> - v2.64.4-1
+- FEC-7689: autoplay not working on youtube entries fix incorrect _this ref
+
 * Fri Dec 29 2017 Jess Portnoy <jess.portnoy@kaltura.com> - v2.64.3-1
 - Disable receiver ads manager on empty ad tag url (#3653)
 - FEC-7267(fix): avoid IMA and YT Iframe API collision (#3656)
