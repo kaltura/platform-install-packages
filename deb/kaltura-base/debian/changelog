@@ -1,3 +1,9 @@
+kaltura-base (13.10.0-3) mercury; urgency=low
+
+  * MR email bug (https://github.com/kaltura/server/pull/6613)
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Wed, 03 Jan 2018 12:50:29 +0000
+
 kaltura-base (13.10.0-2) mercury; urgency=low
 
   * Increase memory limit for CSV report action to 512M (https://github.com/kaltura/server/pull/6597)
