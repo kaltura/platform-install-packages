@@ -1,3 +1,9 @@
+kaltura-base (13.11.0-1) mercury; urgency=low
+
+  * Switching to 13.11.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Wed, 03 Jan 2018 13:18:22 +0000
+
 kaltura-base (13.10.0-2) mercury; urgency=low
 
   * Increase memory limit for CSV report action to 512M (https://github.com/kaltura/server/pull/6597)
