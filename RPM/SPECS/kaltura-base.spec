@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 13.10.0
-Release: 16
+Version: 13.11.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -329,6 +329,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Wed Jan 3 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.11.0-1
+- Ver Bounce to 13.11.0
+
 * Wed Jan 3 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.10.0-16
 - MR email bug (https://github.com/kaltura/server/pull/6613)
 
