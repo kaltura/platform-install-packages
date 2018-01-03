@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 13.10.0
-Release: 15
+Release: 16
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -329,6 +329,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Wed Jan 3 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.10.0-16
+- MR email bug (https://github.com/kaltura/server/pull/6613)
+
 * Fri Dec 29 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 13.10.0-13
 - Increase memory limit for CSV report action to 512M (https://github.com/kaltura/server/pull/6597)
 - SUP-12871: Adjust bitrate threshold for CODECS="mp4a.40.2" (https://github.com/kaltura/server/pull/6593)
