@@ -1,3 +1,9 @@
+kaltura-html5lib (2.64.4-1) mercury; urgency=low
+
+  * FEC-7689: autoplay not working on youtube entries fix incorrect _this ref 
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Tue, 02 Jan 2018 20:41:01 +0000
+
 kaltura-html5lib (2.64.3-1) mercury; urgency=low
 
   * Disable receiver ads manager on empty ad tag url (#3653)
