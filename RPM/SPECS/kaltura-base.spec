@@ -329,6 +329,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Thu Jan 4 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.11.0-1
+- Nightly build.
+
 * Wed Jan 3 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.11.0-1
 - Ver Bounce to 13.11.0
 
