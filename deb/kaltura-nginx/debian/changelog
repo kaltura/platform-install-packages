@@ -1,3 +1,9 @@
+kaltura-nginx (1.12.2-4) mercury; urgency=low
+
+  * Compile with the VTS module
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Tue, 09 Jan 2018 17:00:50 +0000
+
 kaltura-nginx (1.12.2-3) mercury; urgency=low
 
   *  VOD module - 1.22: support complex playlist clipping

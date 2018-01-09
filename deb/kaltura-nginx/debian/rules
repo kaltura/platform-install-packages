@@ -9,6 +9,8 @@ KALTURA_NGINX_AKAMAI_TOKEN_VALIDATE_VERSION ?= $(shell egrep '^KALTURA_NGINX_AKA
 KALTURA_NGINX_SECURE_TOKEN_VERSION ?= $(shell egrep '^KALTURA_NGINX_SECURE_TOKEN_VERSION=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
 NGINX_RTMP_VERSION ?= $(shell egrep '^NGINX_RTMP_VERSION=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
 NGINX_RTMP_VERSION_NO_V ?= $(shell echo $(NGINX_RTMP_VERSION)|sed 's/^v//g')
+NGINX_VTS_VERSION ?= $(shell egrep '^NGINX_VTS_VERSION=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
+NGINX_VTS_VERSION_NO_V ?= $(shell echo $(NGINX_VTS_VERSION)|sed 's/^v//g')
 SOURCE_PACKAGING_DIR ?= $(shell egrep '^RPM_SOURCES_DIR=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
 FFMPEG_VERSION ?= $(shell egrep '^FFMPEG_VERSION=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
 include ../includes/build-revision.mk
@@ -18,6 +20,7 @@ vod_module_archive := $(SOURCE_PACKAGING_DIR)/nginx-vod-module-$(KALTURA_NGINX_V
 secure_token_module_archive := $(SOURCE_PACKAGING_DIR)/nginx-secure-token-module-$(KALTURA_NGINX_SECURE_TOKEN_VERSION).zip
 akamai_token_validate_module_archive := $(SOURCE_PACKAGING_DIR)/nginx-akamai-token-validate-module-$(KALTURA_NGINX_AKAMAI_TOKEN_VALIDATE_VERSION).zip
 rtmp_module_archive := $(SOURCE_PACKAGING_DIR)/nginx-module-rtmp-$(NGINX_RTMP_VERSION).zip
+vts_module_archive := $(SOURCE_PACKAGING_DIR)/nginx-module-vts-$(NGINX_VTS_VERSION).zip
 
 BASE_PREFIX=opt/kaltura/nginx
 NGINX_USER=kaltura
@@ -49,6 +52,7 @@ $(tree): $(archive)
 	unzip -o $(secure_token_module_archive) -d $(tree) 
 	unzip -o $(akamai_token_validate_module_archive) -d $(tree)
 	unzip -o $(rtmp_module_archive) -d $(tree)
+	unzip -o $(vts_module_archive) -d $(tree)
 
 config.status: $(tree) 
 	tar zxf $(archive) 
@@ -57,6 +61,7 @@ config.status: $(tree)
 	unzip -o $(secure_token_module_archive) -d $(tree) 
 	unzip -o $(akamai_token_validate_module_archive) -d $(tree)
 	unzip -o $(rtmp_module_archive) -d $(tree)
+	unzip -o $(vts_module_archive) -d $(tree)
 	dh_testdir
 	cd $(tree) && CFLAGS="$(CFLAGS)" CPPFLAGS="$(CPPFLAGS)" LDFLAGS="$(LDFLAGS)" LD_LIBRARY_PATH=/opt/kaltura/ffmpeg-$(FFMPEG_VERSION)/lib LIBRARY_PATH=/opt/kaltura/ffmpeg-$(FFMPEG_VERSION)/lib C_INCLUDE_PATH=/opt/kaltura/ffmpeg-$(FFMPEG_VERSION)/include ./configure \
         --prefix=/$(BASE_PREFIX) \
@@ -86,6 +91,7 @@ config.status: $(tree)
 	--add-module=./nginx-secure-token-module-$(KALTURA_NGINX_SECURE_TOKEN_VERSION) \
 	--add-module=./nginx-akamai-token-validate-module-$(KALTURA_NGINX_AKAMAI_TOKEN_VALIDATE_VERSION) \
 	--add-module=./nginx-rtmp-module-$(NGINX_RTMP_VERSION_NO_V) \
+	--add-module=./nginx-module-vts-$(NGINX_VTS_VERSION_NO_V) \
         $*
 
 build: build-stamp
