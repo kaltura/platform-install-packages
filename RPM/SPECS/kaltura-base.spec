@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 13.11.0
-Release: 12
+Version: 13.12.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -329,6 +329,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Jan 15 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.12.0-1
+- Ver Bounce to 13.12.0
+
 * Mon Jan 15 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.11.0-12
 - Increase the Encrypted file max size to 25 MB (https://github.com/kaltura/server/pull/6638)
 - Add delete verification script (https://github.com/kaltura/server/pull/6637)
