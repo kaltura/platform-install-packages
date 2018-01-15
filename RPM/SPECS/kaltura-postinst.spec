@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.33
-Release: 32
+Release: 33
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -82,6 +82,9 @@ find %{_sysconfdir}/logrotate.d -type l -name "kaltura_*" -exec rm {} \;
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Mon Jan 18 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.33-33
+- Live DVR related changes
+
 * Mon Dec 18 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.33-26
 - Absolutely no need to send TZ to send_install_becon() over and over again, simply get it by calling get_tz from within send_install_becon()
 * Mon Dec 18 2017 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.33-25
