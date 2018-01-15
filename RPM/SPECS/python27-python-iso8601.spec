@@ -3,27 +3,27 @@
 %filter_from_requires s|^python(abi)|python27-python(abi)|
 %filter_setup
 
-%global modname m3u8
+%global modname iso8601
 
 Name:           python27-python-%{modname}
-Summary:        Python m3u8 parser
-Version:        0.3.5
-Release:        3
+Summary:        Simple module to parse ISO 8601 dates
+Version:        0.1.12
+Release:        2
 License:        MIT
 Group:          System Environment/Libraries
 URL:            https://github.com/globocom/m3u8
-Source0:        http://pypi.python.org/packages/source/m/%{modname}/%{modname}-%{version}.tar.gz
+Source0:        %{modname}-%{version}.tar.gz
 
 
 BuildArch:      noarch
 BuildRequires:  python27-scldevel
 BuildRequires:  python27-python-setuptools
 #BuildRequires:  setuptools
-Requires: python27-python,python27-python-iso8601
+Requires: python27-python
 
 
 %description
-Python m3u8 parser
+Simple module to parse ISO 8601 dates
 
 %prep
 %setup -q -n %{modname}-%{version}
@@ -44,8 +44,7 @@ ls -al %{buildroot}%{python27_sitelib}/%{modname}/
 %{python27_sitelib}/%{modname}-%{version}-py2.7.egg-info
 
 
-
 %changelog
-* Wed Dec 13 2017 Jess Portnoy <jess.portnoy@kaltura.com> - 0.3.5-1
+* Wed Dec 13 2017 Jess Portnoy <jess.portnoy@kaltura.com> - 0.1.12-1
 - First release
 

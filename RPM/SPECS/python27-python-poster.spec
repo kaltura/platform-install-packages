@@ -8,7 +8,7 @@
 Name:           python27-python-%{modname}
 Summary:        Streaming HTTP uploads and multipart/form-data encoding
 Version:        0.8.1
-Release:        2
+Release:        3
 License:        MIT
 Group:          System Environment/Libraries
 URL:            http://atlee.ca/software/poster
@@ -31,24 +31,23 @@ encoding of string or file parameters.
 %prep
 %setup -q -n %{modname}-%{version}
 
-
-
 %build
-python setup.py build bdist_egg
+python setup.py build 
 
 
 %install
-
-%{__mkdir} -p %{buildroot}%{python27_sitelib}
-easy_install-%{py2ver} -m --prefix %{buildroot}/opt/rh/python27/root/usr/ dist/*.egg
-%{__chmod} 0644 %{buildroot}%{python27_sitelib}/%{modname}-%{version}-*.egg
-
-%check
-#python setup.py test
+%{__mkdir} -p %{buildroot}%{python27_sitelib}/%{modname}
+python setup.py install --skip-build --root %{buildroot}
+cp -p %{modname}/__init__.py %{buildroot}%{python27_sitelib}/%{modname}/
+ls -al %{buildroot}%{python27_sitelib}/%{modname}/
 
 
 %files
-%{python27_sitelib}/%{modname}-%{version}-*.egg
+%{python27_sitelib}/tests/*
+%{python27_sitelib}/%{modname}/*
+%{python27_sitelib}/%{modname}-%{version}-py2.7.egg-info
+
+
 
 
 %changelog
