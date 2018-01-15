@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.64.4
+Version: v2.65
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -82,6 +82,36 @@ fi
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Mon Jan 15 2018 Jess Portnoy <jess.portnoy@kaltura.com> - v2.65-1
+- FEC-7267 - YouTube player error when ad load fails
+- FEC-7613 - HLSJS upgrade to 0.8.9
+- FEC-7496 - [Post-prod][Inbound captions][IE11/Edge] Selected captions other than default are not displayed
+- SUP-12797 - Player Captions Below Video - Text Larger Than "Medium" Gets Cut Off
+- SUP-12806 - Video not loading automatically after bumper using Safari on iOS 11
+- FEC-7697 - preroll pauses after a sec on iPad
+- FEC-7493 - #2697 - HLS JS - Multiple Audio Track - Captions - iOS - Default captions displayed twice in option and captions are not displayed
+- FEC-7496 - [Post-prod][Inbound captions][IE11/Edge] Selected captions other than default are not displayed
+- FEC-7689 - [Player V2][Test 904][Autoplay] YouTube vertical playlist - autoplay is not working
+- FEC-7690 - [Player V2][#5499][Autoplay][Chrome64] Playlist is not running with auto-mute
+- FEC-7707 - Player V2: Regression: Vast pre-roll and bumper: Video stuck with endless spinner on loading test page (FF Only)
+- SUP-12992 - WeatherNation - Embedded captions are not showing.
+- FEV-135 - [IVQ-Access.] Q text not readable by SR
+- FEV-136 - [IVQ-Access.] continue button keyboard trap
+- FEV-144 - [IVQ-Access.] submit and review buttons keyboard trap
+- FEV-148 - [Player-Access.] chapter module text not readable/contrast
+- SUP-12799 - Select audio button (Multiple audio tracks) drops down when selected
+- FEC-7483 - Vertical left playlist with auto play, (#427).....-when first video finishes next not autocontinue
+- FEC-7714 - Vertical left playlist with auto play, (#427) - In Chrome Android browser the video is not starting automatically after ad
+- FEC-7719 - Reporting hasKanalony=true when kanalony isn't configured on a player
+- FEC-7725 - Live captions 608/708 aren't loaded
+- FEC-7483 - Vertical left playlist with auto play, (#427).....-when first video finishes next not autocontinue
+- FEC-7731 - [Player_V2][Multi_audio] - The multi audio icon is not responding in iOS
+- FEC-7734 - regression: ios - the video becomes black after ~15 sec.
+- FEC-7725 - Live captions 608/708 aren't loaded
+- FEC-7740 - [#5610]: Auto Play fallback - Unmute button is not working when video playing (after ad)
+- Disable receiver ads manager on empty ad tag url (#3653)
+- add feature to support banSeekManager (#3664)
+
 * Tue Jan 2 2018 Jess Portnoy <jess.portnoy@kaltura.com> - v2.64.4-1
 - FEC-7689: autoplay not working on youtube entries fix incorrect _this ref
 

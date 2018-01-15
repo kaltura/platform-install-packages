@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 13.11.0
-Release: 11
+Release: 12
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -329,38 +329,22 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Sun Jan 14 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.11.0-11
-- Nightly build.
-
-* Sat Jan 13 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.11.0-10
-- Nightly build.
-
-* Fri Jan 12 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.11.0-9
-- Nightly build.
-
-* Thu Jan 11 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.11.0-8
-- Nightly build.
-
-* Wed Jan 10 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.11.0-7
-- Nightly build.
-
-* Tue Jan 9 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.11.0-6
-- Nightly build.
-
-* Mon Jan 8 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.11.0-5
-- Nightly build.
-
-* Sun Jan 7 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.11.0-4
-- Nightly build.
-
-* Sat Jan 6 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.11.0-3
-- Nightly build.
-
-* Fri Jan 5 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.11.0-2
-- Nightly build.
-
-* Thu Jan 4 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.11.0-1
-- Nightly build.
+* Mon Jan 15 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.11.0-12
+- Increase the Encrypted file max size to 25 MB (https://github.com/kaltura/server/pull/6638)
+- Add delete verification script (https://github.com/kaltura/server/pull/6637)
+- TR-1682: Better Error Handling for VoiceBase (https://github.com/kaltura/server/pull/6632)
+- PLAT-8404: Enable captions when blocking high bitrate flavors (https://github.com/kaltura/server/pull/6629)
+- PLAT-8453: Storage: preserve original file permissions when copying (https://github.com/kaltura/server/pull/6626)
+- KMS-16337: fix cue point sub type query with OR operator (https://github.com/kaltura/server/pull/6625)
+- PLAT-8449: fix field name in decorator + change shouldEnforceEntitlement to use kEntitlementUtils (https://github.com/kaltura/server/pull/6624)
+- Improved memcache error handling (https://github.com/kaltura/server/pull/6622)
+- Improved memcache error handling (https://github.com/kaltura/server/pull/6621)
+- PLAT-8343: support hevc (h265) flavors in getPlaybackContext (https://github.com/kaltura/server/pull/6619)
+- PLAT-8442: Media Re-purposing email notification bug (https://github.com/kaltura/server/pull/6614)
+- SUP-12639: throw api error on replacement when source flavor not found (https://github.com/kaltura/server/pull/6610)
+- SUP-11664: get live default thumbnail in case the recorded entry is not ready yet (https://github.com/kaltura/server/pull/6606)
+- PLAT8405: use a 2 letter language code in HLS manifest (instead of a 3 letter code) (https://github.com/kaltura/server/pull/6594)
+- SUP-12956: avoid simultaneous updates to the same Live Entry object when running in multi DC mode (https://github.com/kaltura/server/pull/6540)
 
 * Wed Jan 3 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.11.0-1
 - Ver Bounce to 13.11.0
