@@ -20,7 +20,7 @@ clean:
 	dh_clean
 	rm -rf $(tree) 
 	rm -rf debian/tmp
-	rm $(archive)
+	rm -f $(archive)
 
 $(archive):
 	~/sources/platform-install-packages/build/package_kaltura_core.sh	
