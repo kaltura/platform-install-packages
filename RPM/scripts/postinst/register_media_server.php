@@ -32,7 +32,7 @@ function registerMediaServer ($xml_file_path, $client, $sys_hostname) {
 
     $serverNode = new KalturaWowzaMediaServerNode();
     $serverNode->name = $sys_hostname.$media_server_tag;
-    $serverNode->systemName = '';
+    $serverNode->systemName = $sys_hostname.$media_server_tag;
     $serverNode->description = 'Registered using '. __FILE__;
     $serverNode->hostName = $sys_hostname;
     $serverNode->liveServicePort = $media_server_default_port;

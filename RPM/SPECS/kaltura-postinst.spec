@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.33
-Release: 33
+Release: 34
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -82,6 +82,9 @@ find %{_sysconfdir}/logrotate.d -type l -name "kaltura_*" -exec rm {} \;
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Tue Jan 19 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.33-34
+- More Live DVR related changes [register_media_server.php]
+
 * Mon Jan 18 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.33-33
 - Live DVR related changes
 
