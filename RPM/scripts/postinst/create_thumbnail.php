@@ -17,7 +17,7 @@ $secret=$argv[3];
 $entry_id = $argv[4];
 $basedir=dirname(__FILE__);
 require_once($basedir.'/create_session.php');
-$client=generate_ks($service_url,$partnerId,$secret,$type=KalturaSessionType::ADMIN,$userId=null);
+$client=generate_ks($service_url,$partnerId,$secret,KalturaSessionType::ADMIN,null);
 $offset = $argv[5];
 $result = $client->baseEntry->updatethumbnailfromsourceentry($entry_id, $entry_id, $offset);
 echo ($result->thumbnailUrl);

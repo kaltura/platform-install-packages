@@ -14,7 +14,7 @@ $secret = $argv[1];
 $type = KalturaSessionType::ADMIN;
 $partnerId=0;
 $service_url= $argv[2];
-$client=generate_ks($service_url,$partnerId,$secret,$type=KalturaSessionType::ADMIN,$userId=null,$expiry = null,$privileges = null);
+$client=generate_ks($service_url,$partnerId,$secret,$type,null,null,null);
 $flavor_name='Flavor test II';
 $filter = new KalturaFlavorParamsFilter();
 $filter->systemNameEqual = $flavor_name;

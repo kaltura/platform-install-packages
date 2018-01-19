@@ -15,7 +15,7 @@ $type = KalturaSessionType::ADMIN;
 $partnerId=0;
 $service_url= $argv[2];
 $flavor_id=$argv[3];
-$client=generate_ks($service_url,$partnerId,$secret,$type=KalturaSessionType::ADMIN,$userId=null,$expiry = null,$privileges = null);
+$client=generate_ks($service_url,$partnerId,$secret,$type,null,null,null);
 $flavorParams = new KalturaFlavorParams();
 try{
 $results = $client->flavorParams->delete($flavor_id);

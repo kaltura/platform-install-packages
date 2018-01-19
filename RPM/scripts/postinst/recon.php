@@ -13,7 +13,7 @@ $partnerId=$argv[2];
 $config = new KalturaConfiguration($partnerId);
 $service_url= $argv[1];
 $config->serviceUrl = $service_url;
-$client=generate_ks($service_url,$partnerId,$secret,$type=KalturaSessionType::ADMIN,$userId=null);
+$client=generate_ks($service_url,$partnerId,$secret,KalturaSessionType::ADMIN,$userId);
 $entryId = $argv[4];
 $conversionProfileId =null ;
 $dynamicConversionAttributes=null;

@@ -41,7 +41,7 @@ $secret=$argv[3];
 $asset_file = $argv[4];
 $basedir=dirname(__FILE__);
 require_once($basedir.'/create_session.php');
-$client=generate_ks($service_url,$partnerId,$secret,$type=KalturaSessionType::USER,$userId=null);
+$client=generate_ks($service_url,$partnerId,$secret,KalturaSessionType::USER,null);
 $ext=explode(".",$asset_file);
 $id=upload($client,$asset_file,date ("U",time()).'.'.$ext[1],null,null);
 error_log($id."\n",3,$entry_queue);

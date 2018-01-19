@@ -14,7 +14,7 @@ $config->serviceUrl = $argv[3];
 $client = new KalturaClient($config);
 $config->partnerId=$partnerId;
 $client->setPartnerId($partnerId);
-$ks = $client->session->start($secret, $userId,KalturaSessionType::ADMIN , -2, $expiry, $privileges);
+$ks = $client->session->start($secret, $userId,$type , -2, $expiry, $privileges);
 $client->setKs($ks);
 $filter = null;
 $pager = null;

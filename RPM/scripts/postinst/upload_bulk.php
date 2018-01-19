@@ -20,7 +20,7 @@ $csvFileData = $argv[5];
 // type here is CSV but can also work with XML
 $bulkUploadType = $argv[6];
 //$bulkUploadType = $argv[6];
-$client=generate_ks($config->serviceUrl,$partnerId,$secret,$type=KalturaSessionType::ADMIN,$userId=null,$expiry = null,$privileges = null);
+$client=generate_ks($config->serviceUrl,$partnerId,$secret,KalturaSessionType::ADMIN,$userId,$expiry,$privileges);
 // conversion profile to be used
 //if you want a specific one:
 //$filter = new KalturaConversionProfileFilter();

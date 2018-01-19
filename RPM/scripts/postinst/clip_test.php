@@ -58,5 +58,5 @@ $entry_id = $argv[4];
 $overwrite = $argv[5];
 $basedir=dirname(__FILE__);
 require_once($basedir.'/create_session.php');
-$client=generate_ks($service_url,$partnerId,$secret,$type=KalturaSessionType::ADMIN,$userId=null);
+$client=generate_ks($service_url,$partnerId,$secret,KalturaSessionType::ADMIN,null);
 echo(clipi($client,$entry_id,$overwrite)). " was created.\n";
