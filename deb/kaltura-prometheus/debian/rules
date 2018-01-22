@@ -1,0 +1,40 @@
+#!/usr/bin/make -f
+COMP_NAME ?= kaltura-prometheus
+
+DEB_VERSION := $(shell dpkg-parsechangelog | egrep '^Version:' | cut -f 2 -d ' ')
+RC_FILE :=../../build/sources.rc
+PROMETHEUS_VERSION ?= $(shell egrep '^PROMETHEUS_VERSION=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
+PROMETHEUS_URI ?= https://github.com/prometheus/prometheus/releases/download/v$(PROMETHEUS_VERSION)/prometheus-$(PROMETHEUS_VERSION).linux-amd64.tar.gz 
+SOURCE_PACKAGING_DIR ?= $(shell egrep '^SOURCE_PACKAGING_DIR=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
+PROMETHEUS_PREFIX ?= $(shell egrep '^KALTURA_PREFIX=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')/prometheus
+include ../includes/build-revision.mk
+archive := $(SOURCE_PACKAGING_DIR)/prometheus-$(PROMETHEUS_VERSION).linux-amd64.tar.gz
+tree := prometheus-$(PROMETHEUS_VERSION).linux-amd64
+
+clean:
+	dh_clean
+	rm -rf $(tree) 
+	rm -rf debian/tmp
+
+$(archive):
+	wget $(PROMETHEUS_URI) -O $(SOURCE_PACKAGING_DIR)/prometheus-$(PROMETHEUS_VERSION).linux-amd64.tar.gz
+
+$(tree): $(archive)
+	tar zxf $(archive)
+
+build: $(tree)
+
+install: build
+
+binary-arch: install
+	dh_installdirs
+	mkdir -p $(tree)/etc
+	cp debian/prometheus.template.yml $(tree)/etc
+	dh_install $(tree)/* $(PROMETHEUS_PREFIX)
+	dh_gencontrol -u-v$(DEB_VERSION) 
+	dh_installdebconf
+	dh_installdeb
+	dh_builddeb 
+
+binary: binary-arch
+.PHONY: clean build binary-indep binary-arch binary

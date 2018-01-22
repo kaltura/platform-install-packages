@@ -1,0 +1,17 @@
+[Unit]
+Description=Prometheus
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=prometheus
+Group=prometheus
+Type=simple
+ExecStart=/opt/prometheus/prometheus \
+    --config.file /opt/prometheus/prometheus.yml \
+    --web.listen-address="127.0.0.1:9090" \
+    --storage.tsdb.path /opt/prometheus/data 
+ExecReload=/bin/kill -HUP $MAINPID
+
+[Install]
+WantedBy=multi-user.target
