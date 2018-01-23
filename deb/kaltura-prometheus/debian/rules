@@ -28,9 +28,12 @@ install: build
 
 binary-arch: install
 	dh_installdirs
-	mkdir -p $(tree)/etc
+	mkdir -p $(tree)/etc/rules $(tree)/data lib/systemd/system
 	cp debian/prometheus.template.yml $(tree)/etc
+	cp debian/rules.yml $(tree)/etc/rules
 	dh_install $(tree)/* $(PROMETHEUS_PREFIX)
+	dh_install debian/prometheus.service lib/systemd/system
+	dh_systemd_enable -pkaltura-prometheus --name prometheus prometheus.service
 	dh_gencontrol -u-v$(DEB_VERSION) 
 	dh_installdebconf
 	dh_installdeb
