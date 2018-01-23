@@ -1,0 +1,5 @@
+#!/bin/sh
+if [ "$1" = "configure" ];then
+	chown prometheus.prometheus /opt/kaltura/prometheus/data
+fi
+

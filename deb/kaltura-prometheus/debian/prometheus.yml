@@ -9,7 +9,7 @@ alerting:
   alertmanagers:
   - static_configs:
     - targets:
-      - @ALERTMANAGER_URL@
+      - localhost:9093
 
 # Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
 rule_files:
@@ -24,7 +24,7 @@ scrape_configs:
 
  - job_name: 'consul'
    consul_sd_configs:
-   - server:   '@CONSUL_URL@'
+   - server:   'localhost:8500'
      #services: ['memcached','apache','nginx']
 
    relabel_configs:

@@ -11,16 +11,21 @@ include ../includes/build-revision.mk
 archive := $(SOURCE_PACKAGING_DIR)/prometheus-$(PROMETHEUS_VERSION).linux-amd64.tar.gz
 tree := prometheus-$(PROMETHEUS_VERSION).linux-amd64
 
+%:
+	dh $@ --with systemd
+
+
 clean:
 	dh_clean
-	rm -rf $(tree) 
+	rm -rf $(tree)
+	rm -rf $(PROMETHEUS_PREFIX) 
 	rm -rf debian/tmp
 
 $(archive):
 	wget $(PROMETHEUS_URI) -O $(SOURCE_PACKAGING_DIR)/prometheus-$(PROMETHEUS_VERSION).linux-amd64.tar.gz
 
 $(tree): $(archive)
-	tar zxf $(archive)
+	tar zxf $(archive) 
 
 build: $(tree)
 
@@ -28,12 +33,13 @@ install: build
 
 binary-arch: install
 	dh_installdirs
-	mkdir -p $(tree)/etc/rules $(tree)/data lib/systemd/system
-	cp debian/prometheus.template.yml $(tree)/etc
-	cp debian/rules.yml $(tree)/etc/rules
-	dh_install $(tree)/* $(PROMETHEUS_PREFIX)
-	dh_install debian/prometheus.service lib/systemd/system
-	dh_systemd_enable -pkaltura-prometheus --name prometheus prometheus.service
+	mkdir -p $(PROMETHEUS_PREFIX)/etc/rules $(PROMETHEUS_PREFIX)/data $(PROMETHEUS_PREFIX)/bin 
+	cp debian/prometheus.template.yml $(PROMETHEUS_PREFIX)/etc
+	cp debian/prometheus.yml $(PROMETHEUS_PREFIX)/etc
+	cp debian/rules.yml $(PROMETHEUS_PREFIX)/etc/rules
+	mv $(tree)/* $(PROMETHEUS_PREFIX)
+	mv $(PROMETHEUS_PREFIX)/prometheus $(PROMETHEUS_PREFIX)/bin 
+	dh_install $(PROMETHEUS_PREFIX)
 	dh_gencontrol -u-v$(DEB_VERSION) 
 	dh_installdebconf
 	dh_installdeb
