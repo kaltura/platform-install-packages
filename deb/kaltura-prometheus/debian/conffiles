@@ -1,1 +1,3 @@
-/opt/kaltura/prometheus/etc/prometheus.template.yml
+/opt/kaltura/prometheus/etc/prometheus.yml
+/opt/kaltura/prometheus/etc/rules/0_general.yml
+/opt/kaltura/prometheus/etc/rules/1_memcached.yml

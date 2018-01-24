@@ -9,11 +9,11 @@ alerting:
   alertmanagers:
   - static_configs:
     - targets:
-      - localhost:9093
+      - @ALERTMANAGER_URL@
 
 # Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
 rule_files:
-   - "/opt/kaltura/prometheus/etc/rules/rules.yml"
+   - "/opt/kaltura/prometheus/etc/rules/*.yml"
 
 # A scrape configuration containing exactly one endpoint to scrape:
 # Here it's Prometheus itself.
@@ -24,12 +24,11 @@ scrape_configs:
 
  - job_name: 'consul'
    consul_sd_configs:
-   - server:   'localhost:8500'
-     #services: ['memcached','apache','nginx']
+   - server:   '@CONSUL_URL@'
 
    relabel_configs:
      - source_labels: [__meta_consul_tags]
-       regex: .*,prod,.*
+       regex: .*,kaltura-prod,.*
        action: keep
      - source_labels: [__meta_consul_service]
        target_label: job

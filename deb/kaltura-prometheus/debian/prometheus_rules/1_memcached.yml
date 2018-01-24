@@ -1,0 +1,14 @@
+groups:
+- name: memcached
+  rules:
+
+  # Alert for any instance that is unreachable for >1 minutes.
+  - alert: InstanceDown
+    expr: memcached_up == 0
+    for: 1m
+    labels:
+      severity: critical
+    annotations:
+      summary: "Instance {{ $labels.instance }} down"
+      description: "{{ $labels.instance }} of job {{ $labels.job }} has been down for more than 1 minute."
+

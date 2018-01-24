@@ -42,9 +42,8 @@ override_dh_installinit:
 binary-arch: install
 	dh_installdirs
 	mkdir -p $(PROMETHEUS_PREFIX)/etc/rules $(PROMETHEUS_PREFIX)/data $(PROMETHEUS_PREFIX)/bin $(KALTURA_PREFIX)/var/run/prometheus $(KALTURA_PREFIX)/log/prometheus
-	cp debian/prometheus.template.yml $(PROMETHEUS_PREFIX)/etc
 	cp debian/prometheus.yml $(PROMETHEUS_PREFIX)/etc
-	cp debian/rules.yml $(PROMETHEUS_PREFIX)/etc/rules
+	cp debian/prometheus_rules/*yml $(PROMETHEUS_PREFIX)/etc/rules
 	mv $(tree)/* $(PROMETHEUS_PREFIX)
 	mv $(PROMETHEUS_PREFIX)/prometheus $(PROMETHEUS_PREFIX)/bin 
 	dh_install $(PROMETHEUS_PREFIX)
