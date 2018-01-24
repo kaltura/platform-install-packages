@@ -1,0 +1,101 @@
+#!/bin/sh
+# kFreeBSD do not accept scripts as interpreters, using #!/bin/sh and sourcing.
+### BEGIN INIT INFO
+# Provides:          prometheus
+# Required-Start:    $local_fs $remote_fs $network $named
+# Required-Stop:     $local_fs $remote_fs $network $named
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Monitoring system and time series database
+# Description:       Prometheus is a systems and services monitoring system. It
+#                    collects metrics from configured targets at given
+#                    intervals, evaluates rule expressions, displays the
+#                    results, and can trigger alerts if some condition is
+#                    observed to be true.
+### END INIT INFO
+
+
+DESC="monitoring system and time series database"
+DAEMON=/opt/kaltura/prometheus/bin/prometheus
+NAME=kaltura-prometheus
+USER=prometheus
+PIDFILE=/opt/kaltura/var/run/prometheus/prometheus.pid
+LOGFILE=/opt/kaltura/log/prometheus/prometheus.log
+
+HELPER=/usr/bin/daemon
+HELPER_ARGS="--name=$NAME --output=$LOGFILE --pidfile=$PIDFILE --user=$USER"
+
+if [ -f /etc/default/$NAME ]; then
+        . /etc/default/$NAME
+fi
+
+test -x $DAEMON || exit 0
+
+set -e
+
+. /lib/lsb/init-functions
+
+status_message()
+{
+        if $HELPER $HELPER_ARGS --running ;then
+                echo "$NAME is running (`cat $PIDFILE`)."
+                return 0
+        else
+                echo "$NAME is not running."
+                return 1
+        fi
+}
+
+start_prometheus()
+{
+                $HELPER $HELPER_ARGS --running && echo "$NAME is already running (`cat $PIDFILE`)" && return 0
+                echo "Starting $NAME: ${DESC}.."
+                $HELPER $HELPER_ARGS -- $DAEMON $ARGS || return 2
+                status_message && return $?
+}
+
+stop_prometheus()
+{
+                if ! $HELPER $HELPER_ARGS --running ;then 
+                        echo "$NAME is not running" 
+                        return 0
+                fi
+                echo "Stopping $NAME: ${DESC}.. "
+                $HELPER $HELPER_ARGS --stop 
+                # wait for the process to really terminate
+                for n in `seq 1 5`; do
+                        sleep 1
+                        $HELPER $HELPER_ARGS --running || break
+                done
+                $HELPER $HELPER_ARGS --running && echo "Failed to stop $NAME" && return 2
+                echo "$NAME successfully stopped."
+
+}
+case "$1" in
+        start)
+                start_prometheus
+                ;;
+
+        stop)
+                stop_prometheus
+                ;;
+
+        restart|force-reload)
+                stop_prometheus && start_prometheus
+                ;;
+
+        reload)
+                $HELPER $HELPER_ARGS --running || (echo "$NAME is not running. Cannot reload." && exit 1)
+                echo "Reloading $DESC configuration "
+                /bin/kill -SIGHUP `cat $PIDFILE` || (echo "Failed to reload $NAME" && exit 2) 
+                ;;
+
+
+        status)
+                status_message
+                ;;
+        *)
+                echo "Usage: $NAME {start|stop|restart|reload|force-reload|status}" >&2
+                exit 1
+                ;;
+esac
