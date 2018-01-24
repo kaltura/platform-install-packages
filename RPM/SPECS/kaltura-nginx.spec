@@ -43,7 +43,6 @@ Requires(pre): pwdutils
 %define nginx_vod_module_ver 1.22
 %define nginx_secure_token_ver 1.3
 %define nginx_token_validate_ver 1.1
-%define nginx_vts_ver 0.1.15
 %define nginx_rtmp_ver 1.2.0
 %define ngx_aws_auth_ver 2.1.1
 %define headers_more_nginx_ver 0.32
@@ -52,7 +51,7 @@ Requires(pre): pwdutils
 Summary: High performance web server customized for Kaltura VOD
 Name: kaltura-nginx
 Version: 1.12.2
-Release: 4
+Release: 5
 Vendor: Kaltura inc.
 URL: http://nginx.org/
 
@@ -69,7 +68,6 @@ Source9: nginx.upgrade.sh
 Source10: nginx-vod-module-%{nginx_vod_module_ver}.zip  
 Source11: nginx-secure-token-module-%{nginx_secure_token_ver}.zip
 Source12: nginx-akamai-token-validate-module-%{nginx_token_validate_ver}.zip
-Source13: nginx-module-vts-v%{nginx_vts_ver}.zip
 Source14: nginx-module-rtmp-v%{nginx_rtmp_ver}.zip
 Source15: nginx_kaltura.conf.template 
 Source16: nginx.conf.template 
@@ -110,8 +108,6 @@ unzip -o %{SOURCE10}
 unzip -o %{SOURCE11}
 
 unzip -o %{SOURCE12}
-
-unzip -o %{SOURCE13}
 
 unzip -o %{SOURCE14}
 
@@ -165,7 +161,6 @@ export LIBRARY_PATH C_INCLUDE_PATH
 	--add-module=./nginx-vod-module-%{nginx_vod_module_ver} \
 	--add-module=./nginx-secure-token-module-%{nginx_secure_token_ver} \
 	--add-module=./nginx-akamai-token-validate-module-%{nginx_token_validate_ver} \
-	--add-module=./nginx-module-vts-%{nginx_vts_ver} \
 	--add-module=./nginx-rtmp-module-%{nginx_rtmp_ver} \
 	--add-dynamic-module=./ngx_aws_auth-%{ngx_aws_auth_ver} \
     --add-dynamic-module=./headers-more-nginx-module-%{headers_more_nginx_ver} \
@@ -213,7 +208,6 @@ make %{?_smp_mflags}
 	--add-module=./nginx-vod-module-%{nginx_vod_module_ver} \
 	--add-module=./nginx-secure-token-module-%{nginx_secure_token_ver} \
 	--add-module=./nginx-akamai-token-validate-module-%{nginx_token_validate_ver} \
-	--add-module=./nginx-module-vts-%{nginx_vts_ver} \
 	--add-module=./nginx-rtmp-module-%{nginx_rtmp_ver} \
 	--add-dynamic-module=./ngx_aws_auth-%{ngx_aws_auth_ver} \
     --add-dynamic-module=./headers-more-nginx-module-%{headers_more_nginx_ver} \
@@ -406,6 +400,9 @@ if [ $1 -ge 1 ]; then
 fi
 
 %changelog
+* Wed Jan 24 2018 Jess Portnoy <jess.portnoy@kaltura.com> - 1.12.2-5
+- Remove VTS module as it doesn't work with Nginx >= 1.12
+
 * Mon Dec 4 2017 Jess Portnoy <jess.portnoy@kaltura.com> - 1.12.2-4
 - VOD module - 1.22: support complex playlist clipping
 - Compile with slice module
@@ -533,7 +530,7 @@ sockets.
 - Add Nginx AWS Authentication module as dynamic module - 2.0.1
 - Add Nginx Headers More module as dynamic module - 0.32
 
-* Tue Dec 28 2016 Jess Portnoy <jess.portnoy@kaltura.com> - 1.10.2-5
+* Wed Dec 28 2016 Jess Portnoy <jess.portnoy@kaltura.com> - 1.10.2-5
 - Upgrade to vod module 1.12 [latest stable]
 
 * Tue Dec 6 2016 Jess Portnoy <jess.portnoy@kaltura.com> - 1.10.2-4
@@ -559,7 +556,7 @@ sockets.
 * Tue Jul 05 2016 David Bezemer <david.bezemer@kaltura.com> - 1.8.1-7
 - New Nginx vod module - 1.9 - fixes segfaults with XFF headers
 
-* Wed Jun 30 2016 Jess Portnoy <jess.portnoy@kaltura.com> - 1.8.1-6
+* Thu Jun 30 2016 Jess Portnoy <jess.portnoy@kaltura.com> - 1.8.1-6
 - Fixed logrotate config
 
 * Sun May 8 2016 Jess Portnoy <jess.portnoy@kaltura.com> - 1.8.1-5
