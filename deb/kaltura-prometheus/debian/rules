@@ -6,13 +6,14 @@ RC_FILE :=../../build/sources.rc
 PROMETHEUS_VERSION ?= $(shell egrep '^PROMETHEUS_VERSION=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
 PROMETHEUS_URI ?= https://github.com/prometheus/prometheus/releases/download/v$(PROMETHEUS_VERSION)/prometheus-$(PROMETHEUS_VERSION).linux-amd64.tar.gz 
 SOURCE_PACKAGING_DIR ?= $(shell egrep '^SOURCE_PACKAGING_DIR=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
-PROMETHEUS_PREFIX ?= $(shell egrep '^KALTURA_PREFIX=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')/prometheus
+KALTURA_PREFIX ?= $(shell egrep '^KALTURA_PREFIX=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
+PROMETHEUS_PREFIX ?= $(KALTURA_PREFIX)/prometheus
 include ../includes/build-revision.mk
 archive := $(SOURCE_PACKAGING_DIR)/prometheus-$(PROMETHEUS_VERSION).linux-amd64.tar.gz
 tree := prometheus-$(PROMETHEUS_VERSION).linux-amd64
 
 %:
-	dh $@ --with systemd
+	dh $@ --with=systemd
 
 
 clean:
@@ -31,15 +32,23 @@ build: $(tree)
 
 install: build
 
+override_dh_systemd_enable:
+	dh_systemd_enable -pkaltura-prometheus --name kaltura-prometheus kaltura-prometheus.service
+
+override_dh_installinit:
+	dh_installinit -R --name kaltura-prometheus
+
+
 binary-arch: install
 	dh_installdirs
-	mkdir -p $(PROMETHEUS_PREFIX)/etc/rules $(PROMETHEUS_PREFIX)/data $(PROMETHEUS_PREFIX)/bin 
+	mkdir -p $(PROMETHEUS_PREFIX)/etc/rules $(PROMETHEUS_PREFIX)/data $(PROMETHEUS_PREFIX)/bin $(KALTURA_PREFIX)/var/run/prometheus $(KALTURA_PREFIX)/log/prometheus
 	cp debian/prometheus.template.yml $(PROMETHEUS_PREFIX)/etc
 	cp debian/prometheus.yml $(PROMETHEUS_PREFIX)/etc
 	cp debian/rules.yml $(PROMETHEUS_PREFIX)/etc/rules
 	mv $(tree)/* $(PROMETHEUS_PREFIX)
 	mv $(PROMETHEUS_PREFIX)/prometheus $(PROMETHEUS_PREFIX)/bin 
 	dh_install $(PROMETHEUS_PREFIX)
+	dh_install $(KALTURA_PREFIX)
 	dh_gencontrol -u-v$(DEB_VERSION) 
 	dh_installdebconf
 	dh_installdeb

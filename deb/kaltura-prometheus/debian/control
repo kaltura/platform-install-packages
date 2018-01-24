@@ -6,16 +6,11 @@ Build-Depends: wget, dh-systemd (>= 1.5)
 
 Package: kaltura-prometheus
 Architecture: any
-Description: Kaltura Open Source Video Platform 
- Kaltura is the world's first Open Source Online Video Platform, transforming the way people work, learn, 
- and entertain using online video. The Kaltura platform empowers media applications with advanced video 
- management, publishing, and monetization tools that increase their reach and monetization and simplify 
- their video operations. Kaltura improves productivity and interaction among millions of employees by providing 
- enterprises powerful online video tools for boosting internal knowledge sharing, training, and collaboration, 
- and for more effective marketing. Kaltura offers next generation learning for millions of students and teachers 
- by providing educational institutions disruptive online video solutions for improved teaching, learning, and 
- increased engagement across campuses and beyond. 
- For more information visit: http://corp.kaltura.com, http://www.kaltura.org and http://www.html5video.org.
+Depends: ${shlibs:Depends}, init-system-helpers, daemon
+Description: Prometheus is a monitoring system and time series database.
+ It collects metrics from configured targets at given intervals, evaluates 
+ rule expressions, displays the results, and can trigger alerts if some 
+ condition is observed to be true.
  .
- This package provides the Prometheus daemon and configuration 
- .
+ This package provides the Prometheus daemon and configuration meant to be 
+ used with Kaltura Server.

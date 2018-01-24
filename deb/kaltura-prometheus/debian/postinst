@@ -1,6 +1,6 @@
 #!/bin/sh
 if [ "$1" = "configure" ];then
-	chown prometheus.prometheus /opt/kaltura/prometheus/data
+	chown prometheus.prometheus /opt/kaltura/prometheus/data /opt/kaltura/log/prometheus /opt/kaltura/var/run/prometheus
 fi
 
 #DEBHELPER#
