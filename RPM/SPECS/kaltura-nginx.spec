@@ -530,7 +530,7 @@ sockets.
 - Add Nginx AWS Authentication module as dynamic module - 2.0.1
 - Add Nginx Headers More module as dynamic module - 0.32
 
-* Tue Dec 28 2016 Jess Portnoy <jess.portnoy@kaltura.com> - 1.10.2-5
+* Wed Dec 28 2016 Jess Portnoy <jess.portnoy@kaltura.com> - 1.10.2-5
 - Upgrade to vod module 1.12 [latest stable]
 
 * Tue Dec 6 2016 Jess Portnoy <jess.portnoy@kaltura.com> - 1.10.2-4
@@ -556,7 +556,7 @@ sockets.
 * Tue Jul 05 2016 David Bezemer <david.bezemer@kaltura.com> - 1.8.1-7
 - New Nginx vod module - 1.9 - fixes segfaults with XFF headers
 
-* Wed Jun 30 2016 Jess Portnoy <jess.portnoy@kaltura.com> - 1.8.1-6
+* Thu Jun 30 2016 Jess Portnoy <jess.portnoy@kaltura.com> - 1.8.1-6
 - Fixed logrotate config
 
 * Sun May 8 2016 Jess Portnoy <jess.portnoy@kaltura.com> - 1.8.1-5
