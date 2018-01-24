@@ -1,3 +1,9 @@
+kaltura-base (13.12.0-1) mercury; urgency=low
+
+  * Switching to 13.12.0
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Mon, 15 Jan 2018 20:01:56 +0000
+
 kaltura-base (13.11.0-2) mercury; urgency=low
 
   * Increase the Encrypted file max size to 25 MB (https://github.com/kaltura/server/pull/6638)

@@ -1,0 +1,17 @@
+#!/bin/bash
+PROMETHEUS_GROUP=prometheus
+PROMETHEUS_USER=prometheus
+PROMETHEUS_PREFIX=/opt/prometheus
+
+if ! getent group $PROMETHEUS_GROUP >/dev/null; then
+        addgroup --system --force-badname --quiet $PROMETHEUS_GROUP 
+fi
+
+if ! getent passwd $PROMETHEUS_USER >/dev/null; then
+        adduser --system --force-badname --quiet \
+            --home $PROMETHEUS_PREFIX  \
+            --shell /usr/sbin/nologin \
+            --group $PROMETHEUS_GROUP
+        usermod -c "Prometheus daemon" $PROMETHEUS_USER
+fi
+

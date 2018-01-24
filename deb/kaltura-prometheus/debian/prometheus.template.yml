@@ -1,0 +1,57 @@
+# my global config
+global:
+  scrape_interval:     15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
+  evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
+  # scrape_timeout is set to the global default (10s).
+
+# Alertmanager configuration
+alerting:
+  alertmanagers:
+  - static_configs:
+    - targets:
+      - @ALERTMANAGER_URL@
+
+# Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
+rule_files:
+   - "/opt/kaltura/prometheus/etc/rules/rules.yml"
+
+# A scrape configuration containing exactly one endpoint to scrape:
+# Here it's Prometheus itself.
+scrape_configs:
+  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+    # metrics_path defaults to '/metrics'
+    # scheme defaults to 'http'.
+
+ - job_name: 'consul'
+   consul_sd_configs:
+   - server:   '@CONSUL_URL@'
+     #services: ['memcached','apache','nginx']
+
+   relabel_configs:
+     - source_labels: [__meta_consul_tags]
+       regex: .*,prod,.*
+       action: keep
+     - source_labels: [__meta_consul_service]
+       target_label: job
+
+ #   relabel_configs:
+ #   - source_labels: ['__meta_consul_service']
+ #     regex:         '(.*)'
+ #     target_label:  'job'
+ #     replacement:   '$1'
+ #   - source_labels: ['__meta_consul_node']
+ #     regex:         '(.*)'
+ #     target_label:  'instance'
+ #     replacement:   '$1'
+ #   - source_labels: ['__meta_consul_tags']
+ #     regex:         ',(production|canary),'
+ #     target_label:  'group'
+ #     replacement:   '$1'
+  
+
+ - job_name: 'prometheus'
+   static_configs:
+
+     - targets: ['localhost:9090']
+
+
