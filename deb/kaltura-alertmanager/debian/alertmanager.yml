@@ -2,8 +2,8 @@ global:
   # The smarthost and SMTP sender used for mail notifications.
   smtp_smarthost: '@SMTP_HOST@'
   smtp_from: '@FROM_EMAIL@'
-  smtp_auth_username: '@SMTP_USER@'
-  smtp_auth_password: '@SMTP_PASSWD@'
+  #smtp_auth_username: '@SMTP_USER@'
+  #smtp_auth_password: '@SMTP_PASSWD@'
   smtp_require_tls: false
 
 # The directory from which notification templates are read.

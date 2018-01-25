@@ -1,25 +1,47 @@
 #!/bin/sh
 if [ "$1" = "configure" ];then
-	PROMETHEUS_MAIN_CONF=/opt/kaltura/prometheus/etc/prometheus.yml
+        ALERTMANAGER_MAIN_CONF=/opt/kaltura/prometheus/alertmanager/etc/alertmanager.yml
         . /usr/share/debconf/confmodule
-        db_get 'kaltura-prometheus/alertmanager_url'
+        db_get 'kaltura-alertmanager/smtp_host'
         if [ -z "$RET" ];then
-                db_set 'kaltura-prometheus/alertmanager_url' "localhost:9093"
+                db_set 'kaltura-alertmanager/smtp_host' "localhost:25"
         fi
-        db_input critical 'kaltura-prometheus/alertmanager_url' || true
+        db_input critical 'kaltura-alertmanager/smtp_host' || true
         db_go || true
-        db_get 'kaltura-prometheus/alertmanager_url'
-        ALERTMANAGER_URL=$RET
-        db_get 'kaltura-prometheus/consul_url'
-        if [ -z "$RET" ];then
-                db_set 'kaltura-prometheus/consul_url' "localhost:8500"
+        db_get 'kaltura-alertmanager/smtp_host'
+        SMTP_HOST=$RET
+        db_input critical 'kaltura-alertmanager/smtp_user' || true
+        db_go || true
+        db_get 'kaltura-alertmanager/smtp_user'
+        SMTP_USER=$RET
+
+        if [ -n "$SMTP_USER" ];then
+                db_input critical 'kaltura-alertmanager/smtp_passwd' || true
+                db_go || true
+                db_get 'kaltura-alertmanager/smtp_passwd'
+                SMTP_PASSWD=$RET
         fi
-        db_input critical 'kaltura-prometheus/consul_url' || true
+        db_get 'kaltura-alertmanager/from_addr'
+        db_input critical 'kaltura-alertmanager/from_addr' || true
         db_go || true
-        db_get 'kaltura-prometheus/consul_url'
-        CONSUL_URL=$RET
-	sed -i -e "s^@CONSUL_URL@^$CONSUL_URL^g" -e "s^@ALERTMANAGER_URL@^$ALERTMANAGER_URL^g" $PROMETHEUS_MAIN_CONF
+        db_get 'kaltura-alertmanager/from_addr'
+        FROM_EMAIL=$RET
+
+        db_get 'kaltura-alertmanager/default_alerting_email_addr'
+        db_input critical 'kaltura-alertmanager/default_alerting_email_addr' || true
+        db_go || true
+        db_get 'kaltura-alertmanager/default_alerting_email_addr'
+        DEFAULT_ALERTING_EMAIL_ADDR=$RET
+
+        sed -i -e "s^@SMTP_HOST@^$SMTP_HOST^g" -e "s^@FROM_EMAIL@^$FROM_EMAIL^g" -e "s^@DEFAULT_ALERTING_EMAIL_ADDR@^$DEFAULT_ALERTING_EMAIL_ADDR^g" $ALERTMANAGER_MAIN_CONF
+        if [ -n "$SMTP_USER" ];then
+                sed -i "s/^\(\s*#smtp_auth_username:\)\s*'@SMTP_USER@'/\1 '$SMTP_USER'/" $ALERTMANAGER_MAIN_CONF
+        fi
+
+        if [ -n "$SMTP_PASSWD" ];then
+                sed -i "s/^\(\s*#smtp_auth_password:\)\s*'@SMTP_PASSWD@'/\1 '$SMTP_PASSWD'/" $ALERTMANAGER_MAIN_CONF
+        fi
 fi
-chown prometheus.prometheus /opt/kaltura/prometheus/data /opt/kaltura/log/prometheus /opt/kaltura/var/run/prometheus
+chown prometheus.prometheus /opt/kaltura/prometheus/alertmanager/data /opt/kaltura/log/alertmanager /opt/kaltura/var/run/alertmanager
 
 #DEBHELPER#

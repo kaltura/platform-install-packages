@@ -1,5 +1,5 @@
 # Set the command-line arguments to pass to the server.
-ARGS="-config.file=/opt/kaltura/prometheus/alertmanager/etc/alertmanager.yml -storage.path /opt/kaltura/prometheus/alertmanager/data"
+ARGS="--config.file=/opt/kaltura/prometheus/alertmanager/etc/alertmanager.yml --storage.path /opt/kaltura/prometheus/alertmanager/data"
  
 # # Prometheus Alertmanager supports the following options:
 #   -config.file string

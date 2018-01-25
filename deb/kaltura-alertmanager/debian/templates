@@ -6,3 +6,19 @@ Description: The SMTP server to send alerts through:
 Template: kaltura-alertmanager/from_addr
 Type: string
 Description: Alertmanager's from address
+
+Template: kaltura-alertmanager/smtp_user
+Type: string
+Default: 
+Description: The SMTP user [leave empty if no auth is required]:
+
+Template: kaltura-alertmanager/smtp_passwd
+Type: string
+Default: 
+Description: The SMTP user's password [leave empty if no auth is required]:
+
+Template: kaltura-alertmanager/default_alerting_email_addr
+Type: string
+Default: 
+Description: Email address:
+	The default email address to send alerts to. Additional addresses and sending conditions can be declared by editing /opt/kaltura/prometheus/alertmanager/etc/alertmanager.yml 

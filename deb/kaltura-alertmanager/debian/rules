@@ -43,6 +43,7 @@ binary-arch: install
 	dh_installdirs
 	mkdir -p $(PROMETHEUS_ALERTMANAGER_PREFIX)/etc/templates $(PROMETHEUS_ALERTMANAGER_PREFIX)/data $(PROMETHEUS_ALERTMANAGER_PREFIX)/bin $(KALTURA_PREFIX)/var/run/alertmanager $(KALTURA_PREFIX)/log/alertmanager 
 	cp debian/alertmanager.yml $(PROMETHEUS_ALERTMANAGER_PREFIX)/etc
+	cp debian/alertmanager_templates/*tmpl $(PROMETHEUS_ALERTMANAGER_PREFIX)/etc/templates/
 	mv $(tree)/* $(PROMETHEUS_ALERTMANAGER_PREFIX)
 	mv $(PROMETHEUS_ALERTMANAGER_PREFIX)/alertmanager $(PROMETHEUS_ALERTMANAGER_PREFIX)/bin 
 	mv $(PROMETHEUS_ALERTMANAGER_PREFIX)/amtool $(PROMETHEUS_ALERTMANAGER_PREFIX)/bin 
