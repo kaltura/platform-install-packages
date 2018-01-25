@@ -21,10 +21,12 @@ if [ ! -r $SOURCES_RC ];then
 	exit 1
 fi
 . $SOURCES_RC 
-if [ ! -x "`which svn 2>/dev/null`" ];then
-	echo "Need to install svn."
-	exit 2
-fi
+for UTIL in svn wget unzip ;do
+	if [ ! -x "`which $UTIL 2>/dev/null`" ];then
+		echo "Need to install $UTIL."
+		exit 2
+	fi
+done
 
 rm -rf $SOURCE_PACKAGING_DIR/$KMC_RPM_NAME-$KMC_VERSION
 kaltura_svn export --force --quiet $KMC_UICONF_URI $SOURCE_PACKAGING_DIR/$KMC_RPM_NAME-$KMC_VERSION/uiconf/kaltura/kmc
