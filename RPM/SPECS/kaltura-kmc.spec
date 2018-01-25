@@ -1,7 +1,7 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmc
-Version: v5.43.10
-Release: 3
+Version: v5.43.11
+Release: 1
 Summary: Kaltura Management Console
 
 Group: System Management	
@@ -85,6 +85,10 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Thu Jan 25 2018 Jess Portnoy <jess.portnoy@kaltura.com> - v5.43.11-1
+- PLAT-7249 - Expose RTSP URLs in KMC
+- PLAT-8467 - advertising url per content should be optional in the KMC - requires PLAT-8468
+
 * Tue Jan 15 2018 Jess Portnoy <jess.portnoy@kaltura.com> - v5.43.10-3
 - Ver bounce of HTML5 player to v2.65
 
