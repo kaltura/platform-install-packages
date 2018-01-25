@@ -1,0 +1,57 @@
+#!/usr/bin/make -f
+COMP_NAME ?= kaltura-alertmanager
+
+DEB_VERSION := $(shell dpkg-parsechangelog | egrep '^Version:' | cut -f 2 -d ' ')
+RC_FILE :=../../build/sources.rc
+PROMETHEUS_ALERTMANAGER_VERSION ?= $(shell egrep '^PROMETHEUS_ALERTMANAGER_VERSION=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
+PROMETHEUS_ALERTMANAGER_URI ?= https://github.com/prometheus/alertmanager/releases/download/v$(PROMETHEUS_ALERTMANAGER_VERSION)/alertmanager-$(PROMETHEUS_ALERTMANAGER_VERSION).linux-amd64.tar.gz 
+SOURCE_PACKAGING_DIR ?= $(shell egrep '^SOURCE_PACKAGING_DIR=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
+KALTURA_PREFIX ?= $(shell egrep '^KALTURA_PREFIX=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
+PROMETHEUS_ALERTMANAGER_PREFIX ?= $(KALTURA_PREFIX)/prometheus/alertmanager
+include ../includes/build-revision.mk
+archive := $(SOURCE_PACKAGING_DIR)/alertmanager-$(PROMETHEUS_ALERTMANAGER_VERSION).linux-amd64.tar.gz 
+tree := alertmanager-$(PROMETHEUS_ALERTMANAGER_VERSION).linux-amd64
+
+%:
+	dh $@ --with=systemd
+
+
+clean:
+	dh_clean
+	rm -rf $(tree)
+	rm -rf $(PROMETHEUS_ALERTMANAGER_PREFIX) 
+	rm -rf debian/tmp
+
+$(archive):
+	wget $(PROMETHEUS_ALERTMANAGER_URI) -O $(archive)
+
+$(tree): $(archive)
+	tar zxf $(archive) 
+
+build: $(tree)
+
+install: build
+
+override_dh_systemd_enable:
+	dh_systemd_enable -pkaltura-alertmanager --name kaltura-alertmanager kaltura-alertmanager.service
+
+override_dh_installinit:
+	dh_installinit -R --name kaltura-alertmanager
+
+
+binary-arch: install
+	dh_installdirs
+	mkdir -p $(PROMETHEUS_ALERTMANAGER_PREFIX)/etc/templates $(PROMETHEUS_ALERTMANAGER_PREFIX)/data $(PROMETHEUS_ALERTMANAGER_PREFIX)/bin $(KALTURA_PREFIX)/var/run/alertmanager $(KALTURA_PREFIX)/log/alertmanager 
+	cp debian/alertmanager.yml $(PROMETHEUS_ALERTMANAGER_PREFIX)/etc
+	mv $(tree)/* $(PROMETHEUS_ALERTMANAGER_PREFIX)
+	mv $(PROMETHEUS_ALERTMANAGER_PREFIX)/alertmanager $(PROMETHEUS_ALERTMANAGER_PREFIX)/bin 
+	mv $(PROMETHEUS_ALERTMANAGER_PREFIX)/amtool $(PROMETHEUS_ALERTMANAGER_PREFIX)/bin 
+	dh_install $(PROMETHEUS_ALERTMANAGER_PREFIX)
+	dh_install $(KALTURA_PREFIX)
+	dh_gencontrol -u-v$(DEB_VERSION) 
+	dh_installdebconf
+	dh_installdeb
+	dh_builddeb 
+
+binary: binary-arch
+.PHONY: clean build binary-indep binary-arch binary

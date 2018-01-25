@@ -1,0 +1,30 @@
+# Set the command-line arguments to pass to the server.
+ARGS="-config.file=/opt/kaltura/prometheus/alertmanager/etc/alertmanager.yml -storage.path /opt/kaltura/prometheus/alertmanager/data"
+ 
+# # Prometheus Alertmanager supports the following options:
+#   -config.file string
+#         Alertmanager configuration file name. (default "alertmanager.yml")
+#   -data.retention duration
+#         How long to keep data for. (default 120h0m0s)
+#   -log.level value
+#         Only log messages with the given severity or above. One of: [debug, info, warn, error] (default info)
+#   -mesh.listen-address string
+#         Mesh listen address. Pass an empty string to disable. (default "0.0.0.0:6783")
+#   -mesh.nickname string
+#         Mesh peer nickname. (default "ec2-54-86-146-203.compute-1.amazonaws.com")
+#   -mesh.password string
+#         Password to join the peer network (empty password disables encryption).
+#   -mesh.peer value
+#         Initial peers (may be repeated)
+#   -mesh.peer-id string
+#         Mesh peer ID (default: MAC address).
+#   -storage.path string
+#         Base path for data storage. (default "data/")
+#   -version
+#         Print version information.
+#   -web.external-url string
+#         The URL under which Alertmanager is externally reachable (for example, if Alertmanager is served via a reverse proxy). Used for generating relative and absolute links back to Alertmanager itself. If the URL has a path portion, it will be used to prefix all HTTP endpoints served by Alertmanager. If omitted, relevant URL components will be derived automatically.
+#   -web.listen-address string
+#         Address to listen on for the web interface and API. (default ":9093")
+#   -web.route-prefix string
+#         Prefix for the internal routes of web endpoints. Defaults to path of -web.external-url.

@@ -1,0 +1,25 @@
+#!/bin/sh
+if [ "$1" = "configure" ];then
+	PROMETHEUS_MAIN_CONF=/opt/kaltura/prometheus/etc/prometheus.yml
+        . /usr/share/debconf/confmodule
+        db_get 'kaltura-prometheus/alertmanager_url'
+        if [ -z "$RET" ];then
+                db_set 'kaltura-prometheus/alertmanager_url' "localhost:9093"
+        fi
+        db_input critical 'kaltura-prometheus/alertmanager_url' || true
+        db_go || true
+        db_get 'kaltura-prometheus/alertmanager_url'
+        ALERTMANAGER_URL=$RET
+        db_get 'kaltura-prometheus/consul_url'
+        if [ -z "$RET" ];then
+                db_set 'kaltura-prometheus/consul_url' "localhost:8500"
+        fi
+        db_input critical 'kaltura-prometheus/consul_url' || true
+        db_go || true
+        db_get 'kaltura-prometheus/consul_url'
+        CONSUL_URL=$RET
+	sed -i -e "s^@CONSUL_URL@^$CONSUL_URL^g" -e "s^@ALERTMANAGER_URL@^$ALERTMANAGER_URL^g" $PROMETHEUS_MAIN_CONF
+fi
+chown prometheus.prometheus /opt/kaltura/prometheus/data /opt/kaltura/log/prometheus /opt/kaltura/var/run/prometheus
+
+#DEBHELPER#

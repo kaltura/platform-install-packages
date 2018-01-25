@@ -1,0 +1,8 @@
+Template: kaltura-alertmanager/smtp_host
+Type: string
+Default: localhost:25
+Description: The SMTP server to send alerts through:
+
+Template: kaltura-alertmanager/from_addr
+Type: string
+Description: Alertmanager's from address
