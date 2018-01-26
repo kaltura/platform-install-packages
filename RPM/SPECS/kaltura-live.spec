@@ -1,4 +1,4 @@
-%define wowza_version 4.7.1
+%define wowza_version 4.7.3
 %define wowza_prefix /usr/local/WowzaStreamingEngine-%{wowza_version}
 %define media_server_version 4.7.2.5
 %define kaltura_prefix /opt/kaltura
@@ -8,7 +8,7 @@
 
 Summary: Kaltura Open Source Video Platform - Live Streaming Server  
 Name: kaltura-live
-Version: 13.6.0
+Version: 13.12.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -18,21 +18,11 @@ Requires: java-1.8.0-openjdk,ant, kaltura-monit, kaltura-base, redhat-lsb-core
 # ant-trax
 BuildArch: noarch
 BuildRequires: unzip
-#Source0: WowzaStreamingEngine-%{wowza_version}-linux-x64-installer.run
 Source1: https://github.com/kaltura/media-server/releases/download/rel-%{media_server_version}/KalturaWowzaServer-install-%{media_server_version}.zip
 Source2: WowzaStreamingEngine.service
 Source3: WowzaStreamingEngineManager.service
-#Source4: build.xml
-#Source5: configure.xsl
-#Source6: hdfvr.xml
 Source7: oflaDemo.xml
 Source8: wowza.rc
-#Source9: junit-dep-4.7.jar 
-#Source10: json-20090211.jar
-#Source11: hamcrest-core-1.1.jar
-#Source12: commons-logging-1.0.4.jar
-#Source13: commons-httpclient-3.1.jar
-#Source14: commons-codec-1.4.jar
 
 
 %description
@@ -100,9 +90,6 @@ usermod -g %{kaltura_group} %{kaltura_user} 2>/dev/null || true
 %files
 %{wowza_prefix}
 %config %{wowza_prefix}/conf/
-#%config %{wowza_prefix}/transcoder/templates/hdfvr.xml
-#%config %{wowza_prefix}/configure.xsl
-#%config %{wowza_prefix}/build.xml
 %config %{kaltura_prefix}/app/configurations/monit/monit.avail/wowza.rc
 %defattr(-, %{kaltura_user}, %{kaltura_group} , 0775)
 %dir %{kaltura_prefix}/var/live/dvr
@@ -114,6 +101,9 @@ usermod -g %{kaltura_group} %{kaltura_user} 2>/dev/null || true
 
 
 %changelog
+* Fri Jan 26 2018 Jess Portnoy <jess.portnoy@kaltura.com> - 13.12.0-1 
+- Wowza ver upgraded to 4.7.3
+
 * Tue Nov 29 2016 Jess Portnoy <jess.portnoy@kaltura.com> - 12.6.0-1 
 - First package.
 

@@ -54,7 +54,7 @@ else
  exit 1
 fi
 
-WOWZA_VER=4.7.1
+WOWZA_VER=4.7.3
 WOWZA_VER_DASHES=`echo $WOWZA_VER|sed 's/\./-/g'`
 
 echo -e "${CYAN}Welcome to Kaltura Live post install setup.${NORMAL}"
