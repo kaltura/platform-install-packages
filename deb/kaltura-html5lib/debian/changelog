@@ -1,3 +1,9 @@
+kaltura-html5lib (2.65.2-1) mercury; urgency=medium
+
+  * FEC-7871 - [Player V2] [Chrome] Auto-play streams playing Auto-muted regardless the configuration
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 29 Jan 2018 11:04:28 +0000
+
 kaltura-html5lib (2.65-1) mercury; urgency=low
 
   * FEC-7267 - YouTube player error when ad load fails

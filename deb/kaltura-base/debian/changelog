@@ -1,3 +1,22 @@
+kaltura-base (13.12.0-2) mercury; urgency=medium
+
+  * PLAT-8513: downloadAction() - set $fileSize to null if $filePath is a directory (https://github.com/kaltura/server/pull/6697)
+  * Chunked Encoding: enforce provided vsync setting (https://github.com/kaltura/server/pull/6686)
+  * change invalid_session.id to bigint (https://github.com/kaltura/server/pull/6683)
+  * Support setting partner and allowed types in metadata_list_without_object_filtering_partners (https://github.com/kaltura/server/pull/6679)
+  * New notification dispatched to channel subscribers when an entry is approved (https://github.com/kaltura/server/pull/6677)
+  * PLAT-8468: add new permission to create VAST cue point without URL (https://github.com/kaltura/server/pull/6665)
+  * Improved Chunked Encode compliance verification (https://github.com/kaltura/server/pull/6660)
+  * Improved Chunked Encode compliance verification (https://github.com/kaltura/server/pull/6659)
+  * TR-2068: Transcript Processing breaks when ACLs are in use (https://github.com/kaltura/server/pull/6658)
+  * PSVAMB-1496: bpm notification - send also on metadata creation (https://github.com/kaltura/server/pull/6655)
+  * PLAT-8465: KalturaRequestDeserializer - if params is not an array - throw API exception (https://github.com/kaltura/server/pull/6653)
+  * PLAT-8469: change encryption method and support encrypt of large files (https://github.com/kaltura/server/pull/6652)
+  * SUP-13175: New VOD content replacement notifications (https://github.com/kaltura/server/pull/6649)
+  * PLAT-8470 encrypt based on media type (https://github.com/kaltura/server/pull/6645)
+  * SUP-13353: Assign default frame rate when no encoder information is provided
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 29 Jan 2018 10:50:38 +0000
+
 kaltura-base (13.12.0-1) mercury; urgency=low
 
   * Switching to 13.12.0
