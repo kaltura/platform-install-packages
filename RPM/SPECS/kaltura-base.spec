@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 13.12.0
-Release: 17
+Version: 13.13.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -329,6 +329,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Jan 29 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.13.0-1
+- Ver Bounce to 13.13.0
+
 * Mon Jan 29 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.12.0-17
 - PLAT-8513: downloadAction() - set $fileSize to null if $filePath is a directory (https://github.com/kaltura/server/pull/6697)
 - Chunked Encoding: enforce provided vsync setting (https://github.com/kaltura/server/pull/6686)
