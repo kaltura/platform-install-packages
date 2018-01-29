@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.65
+Version: v2.65.2
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -82,6 +82,9 @@ fi
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Mon Jan 29 2018 Jess Portnoy <jess.portnoy@kaltura.com> - v2.65.2-1
+- FEC-7871 - [Player V2] [Chrome] Auto-play streams playing Auto-muted regardless the configuration
+
 * Mon Jan 15 2018 Jess Portnoy <jess.portnoy@kaltura.com> - v2.65-1
 - FEC-7267 - YouTube player error when ad load fails
 - FEC-7613 - HLSJS upgrade to 0.8.9

@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 13.12.0
-Release: 16
+Release: 17
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -329,47 +329,22 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Sun Jan 28 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.12.0-16
-- Nightly build.
-
-* Sat Jan 27 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.12.0-15
-- Nightly build.
-
-* Fri Jan 26 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.12.0-14
-- Nightly build.
-
-* Thu Jan 25 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.12.0-13
-- Nightly build.
-
-* Wed Jan 24 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.12.0-12
-- Nightly build.
-
-* Tue Jan 23 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.12.0-11
-- Nightly build.
-
-* Mon Jan 22 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.12.0-10
-- Nightly build.
-
-* Sun Jan 21 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.12.0-9
-- Nightly build.
-
-* Sat Jan 20 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.12.0-8
-- Nightly build.
-
-* Fri Jan 19 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.12.0-7
-- Nightly build.
-
-* Thu Jan 18 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.12.0-6
-- Nightly build.
-
-* Wed Jan 17 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.12.0-5
-- Nightly build.
-
-* Tue Jan 16 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.12.0-4
-- Nightly build.
-
-* Mon Jan 15 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.12.0-2
-- Nightly build.
+* Mon Jan 29 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.12.0-17
+- PLAT-8513: downloadAction() - set $fileSize to null if $filePath is a directory (https://github.com/kaltura/server/pull/6697)
+- Chunked Encoding: enforce provided vsync setting (https://github.com/kaltura/server/pull/6686)
+- change invalid_session.id to bigint (https://github.com/kaltura/server/pull/6683)
+- Support setting partner and allowed types in metadata_list_without_object_filtering_partners (https://github.com/kaltura/server/pull/6679)
+- New notification dispatched to channel subscribers when an entry is approved (https://github.com/kaltura/server/pull/6677)
+- PLAT-8468: add new permission to create VAST cue point without URL (https://github.com/kaltura/server/pull/6665)
+- Improved Chunked Encode compliance verification (https://github.com/kaltura/server/pull/6660)
+- Improved Chunked Encode compliance verification (https://github.com/kaltura/server/pull/6659)
+- TR-2068: Transcript Processing breaks when ACLs are in use (https://github.com/kaltura/server/pull/6658)
+- PSVAMB-1496: bpm notification - send also on metadata creation (https://github.com/kaltura/server/pull/6655)
+- PLAT-8465: KalturaRequestDeserializer - if params is not an array - throw API exception (https://github.com/kaltura/server/pull/6653)
+- PLAT-8469: change encryption method and support encrypt of large files (https://github.com/kaltura/server/pull/6652)
+- SUP-13175: New VOD content replacement notifications (https://github.com/kaltura/server/pull/6649)
+- PLAT-8470 encrypt based on media type (https://github.com/kaltura/server/pull/6645)
+- SUP-13353: Assign default frame rate when no encoder information is provided
 
 * Mon Jan 15 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.12.0-1
 - Ver Bounce to 13.12.0
