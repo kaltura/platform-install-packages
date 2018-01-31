@@ -22,6 +22,7 @@ BuildRequires: yasm
 Obsoletes: libxvidcore <= %{version}-%{release}
 Obsoletes: xvidcore <= %{version}-%{release}
 Provides: libxvidcore = %{version}-%{release}
+Provides: libxvidcore.so.4
 
 %description
 Free reimplementation of the OpenDivX video codec. You can play OpenDivX
@@ -30,7 +31,7 @@ and DivX4 videos with it, as well as encode compatible files.
 %package devel
 Summary: Static library, headers and documentation of the XviD video codec
 Group: Development/Libraries
-Requires: %{name} = %{version}
+Requires: %{name} = %{version}-%{release}
 
 Obsoletes: xvidcore-static <= 1.0.0
 Obsoletes: libxvidcore-devel <= %{version}-%{release}
@@ -59,8 +60,9 @@ cd build/generic/
 %{__make} install DESTDIR="%{buildroot}"
 cd -
 ### Make .so and .so.x symlinks to the so.x.y file
-%{__ln_s} -f libxvidcore.so.%{abi_version} %{buildroot}%{_libdir}/libxvidcore.so.4
-%{__ln_s} -f libxvidcore.so.%{abi_version} %{buildroot}%{_libdir}/libxvidcore.so
+#%{__ln_s} -f libxvidcore.so.%{abi_version} %{buildroot}%{_libdir}/libxvidcore.so.4
+#%{__ln_s} -f libxvidcore.so.%{abi_version} %{buildroot}%{_libdir}/libxvidcore.so
+chmod 755 %{buildroot}%{_libdir}/*.so*
 ### Remove unwanted files from the docs
 %{__rm} -f doc/Makefile
 
