@@ -20,6 +20,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildRequires: yasm
 %{!?_without_selinux:BuildRequires: prelink}
 Obsoletes: libxvidcore <= %{version}-%{release}
+Obsoletes: xvidcore <= %{version}-%{release}
 Provides: libxvidcore = %{version}-%{release}
 
 %description
@@ -33,6 +34,7 @@ Requires: %{name} = %{version}
 
 Obsoletes: xvidcore-static <= 1.0.0
 Obsoletes: libxvidcore-devel <= %{version}-%{release}
+Obsoletes: xvidcore-devel <= %{version}-%{release}
 Provides: libxvidcore-devel = %{version}-%{release}
 
 %description devel

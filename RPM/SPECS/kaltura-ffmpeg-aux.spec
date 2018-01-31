@@ -26,7 +26,7 @@
 Summary: Utilities and libraries to record, convert and stream audio and video
 Name: kaltura-ffmpeg-aux
 Version: 2.1.3
-Release: 1
+Release: 2
 License: GPL
 Group: Applications/Multimedia
 URL: http://ffmpeg.org/
@@ -44,7 +44,7 @@ BuildRequires: zlib-devel
 BuildRequires: schroedinger-devel
 BuildRequires: libtheora-devel
 BuildRequires: libvorbis-devel
-BuildRequires: xvidcore-devel
+BuildRequires: libxvidcore4-devel
 %{!?_without_a52dec:BuildRequires: kaltura-a52dec-devel}
 %{!?_without_dc1394:BuildRequires: libdc1394-devel}
 %{!?_without_gsm:BuildRequires: gsm-devel}
@@ -59,7 +59,7 @@ BuildRequires: xvidcore-devel
 %{!?_without_vorbis:BuildRequires: libogg-devel, libvorbis-devel}
 %{!?_without_vpx:BuildRequires: libvpx-devel >= 1.3.0}
 %{!?_without_x264:BuildRequires: kaltura-x264-devel}
-%{!?_without_xvid:BuildRequires: xvidcore-devel}
+%{!?_without_xvid:BuildRequires: libxvidcore4-devel}
 %{!?_without_a52dec:Requires: a52dec}
 BuildRequires: yasm-devel
 BuildRequires: libass-devel 
@@ -69,7 +69,7 @@ BuildRequires: speex-devel
 BuildRequires: libvpx-devel >= 1.3.0
 BuildRequires: schroedinger-devel 
 BuildRequires: libtheora-devel
-BuildRequires: xvidcore-devel >= 1.3.2
+BuildRequires: libxvidcore4-devel >= 1.3.2
 Requires:kaltura-a52dec,libass,kaltura-x264
 Requires: libvpx >= 1.3.0
 
@@ -98,7 +98,7 @@ Requires: imlib2-devel, SDL-devel, freetype-devel, zlib-devel, pkgconfig,kaltura
 %{!?_without_vorbis:Requires: libogg-devel, libvorbis-devel}
 %{!?_without_vpx:Requires: libvpx-devel}
 %{!?_without_x264:Requires: kaltura-x264-devel}
-%{!?_without_xvid:Requires: xvidcore-devel}
+%{!?_without_xvid:Requires: libxvidcore4-devel}
 
 %description devel
 FFmpeg is a very fast video and audio converter. It can also grab from a
@@ -255,6 +255,9 @@ fi
 %{base_prefix}-%{version}/share
 
 %changelog
+* Wed Jan 31 2018 Jess Portnoy <jess.portnoy@kaltura.com> - 2.1.3-2
+- Build against new xvidcore - 1.3.5
+
 * Thu Oct 15 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 2.1.3-1
 - Upgraded to 2.1.3
 
