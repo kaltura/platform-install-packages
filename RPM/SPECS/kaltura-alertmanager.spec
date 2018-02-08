@@ -64,13 +64,13 @@ cp alertmanager $RPM_BUILD_ROOT%{prefix}/bin/
 cp amtool $RPM_BUILD_ROOT%{prefix}/bin/
 
 %{__mkdir} -p $RPM_BUILD_ROOT%{_sysconfdir}/sysconfig
-%{__install} -m 644 -p %{SOURCE3} \
+%{__install} -m 644 -p %{SOURCE4} \
    $RPM_BUILD_ROOT%{_sysconfdir}/sysconfig/%{name}
 
 %if %{use_systemd}
 # install systemd-specific files
 %{__mkdir} -p $RPM_BUILD_ROOT%{_unitdir}
-%{__install} -m644 %SOURCE4 \
+%{__install} -m644 %SOURCE3 \
         $RPM_BUILD_ROOT%{_unitdir}/%{name}.service
 %else
 # install SYSV init stuff

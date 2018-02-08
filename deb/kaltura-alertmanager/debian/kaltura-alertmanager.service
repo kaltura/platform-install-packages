@@ -8,8 +8,8 @@ User=prometheus
 Group=prometheus
 Type=simple
 ExecStart=/opt/kaltura/prometheus/alertmanager/bin/alertmanager \
-        -config.file=/opt/kaltura/prometheus/alertmanager/etc/alertmanager.yml \
-        -storage.path /opt/kaltura/prometheus/alertmanager/data
+        --config.file /opt/kaltura/prometheus/alertmanager/etc/alertmanager.yml \
+        --storage.path /opt/kaltura/prometheus/alertmanager/data
 ExecReload=/bin/kill -HUP $MAINPID
 
 [Install]
