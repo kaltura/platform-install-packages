@@ -87,6 +87,7 @@ rm -rf %{buildroot}
 %changelog
 * Tue Feb 6 2018 Jess Portnoy <jess.portnoy@kaltura.com> - v5.43.12-1
 - PLAT-8413 - add two types of Chinese subtitles
+- Ver bounce of HTML5 player to v2.66
 
 * Mon Jan 29 2018 Jess Portnoy <jess.portnoy@kaltura.com> - v5.43.11-2
 - Ver bounce of HTML5 player to v2.65.2

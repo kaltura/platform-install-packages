@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 13.13.0
-Release: 11
+Release: 12
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -329,35 +329,33 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Wed Feb 7 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.13.0-11
-- Nightly build.
-
-* Tue Feb 6 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.13.0-10
-- Nightly build.
-
-* Mon Feb 5 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.13.0-9
-- Nightly build.
-
-* Sun Feb 4 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.13.0-8
-- Nightly build.
-
-* Sat Feb 3 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.13.0-7
-- Nightly build.
-
-* Fri Feb 2 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.13.0-6
-- Nightly build.
-
-* Thu Feb 1 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.13.0-5
-- Nightly build.
-
-* Wed Jan 31 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.13.0-4
-- Nightly build.
-
-* Tue Jan 30 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.13.0-3
-- Nightly build.
-
-* Mon Jan 29 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.13.0-2
-- Nightly build.
+* Thu Feb 8 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.13.0-12
+- kms-16965: add BASE_UPLOAD_PERMISSION to media->addfromrecordedwebcam() (https://github.com/kaltura/server/pull/6768)
+- PLAT-8450: additional Chinese dialects (https://github.com/kaltura/server/pull/6760)
+- SUP-13366: set the correct conversion profile ID when clipping a recorded entry (https://github.com/kaltura/server/pull/6758)
+- Drop unused indexes from caption_asset_item and entry (https://github.com/kaltura/server/pull/6754)
+- PLAT-8557: fix ordering on DFP feed advanced pages (https://github.com/kaltura/server/pull/6752)
+- Remove setLimit(40) and fetch by version to better use the file_sync index (https://github.com/kaltura/server/pull/6751)
+- Change file sync version column from varchar to int in order to optimise the query used to delete old file_sync versions (https://github.com/kaltura/server/pull/6748)
+- Don't save SchedulerStatus to prevent unneeded DB insertion load (https://github.com/kaltura/server/pull/6745)
+- PLAT-8325: Enable file encryption for KAsyncTransformMetadata (https://github.com/kaltura/server/pull/6744)
+- PLAT-8556: set frameRate to 30 if missing from the source video and the codec is vp8 or vp9 (https://github.com/kaltura/server/pull/6741)
+- Avoid chunked processing for very short sources (https://github.com/kaltura/server/pull/6739)
+- PLAT-8403: CaptionBulkUploadXmlPlugin - enable label value addition (https://github.com/kaltura/server/pull/6737)
+- PLAT-8446: get kusers list as CSV (https://github.com/kaltura/server/pull/6733)
+- PLAT-8520: Media Repurposing profile is not updated after an entry is deleted (https://github.com/kaltura/server/pull/6732)
+- Avoid connecting to both slaves in a single session (https://github.com/kaltura/server/pull/6731)
+- PLAT-8538: if the creator and co-publisher are the same user, no need to index them twice (https://github.com/kaltura/server/pull/6729)
+- PLAT-8532: add caption label to itemdata result + change caption object nesting level (https://github.com/kaltura/server/pull/6728)
+- PLAT-8544: fix flavorParamsOutput->list() returning wrong objects (https://github.com/kaltura/server/pull/6727)
+- PSVAMB-419: add -1>PARTNER_-1_GROUP_*_PERMISSION to metadata->delete() (https://github.com/kaltura/server/pull/6725)
+- PLAT-8530: only sync relevant file sync objects between DCs (https://github.com/kaltura/server/pull/6722)
+- Add query cache rules (https://github.com/kaltura/server/pull/6719)
+- set Sphinx cacheExpiry to 30 seconds (instead of 300) (https://github.com/kaltura/server/pull/6718)
+- PLAT-8456: Add questionType to the KalturaQuestionCuePoint class (https://github.com/kaltura/server/pull/6717)
+- PLAT-8435: Base Upload Permission and User-role (https://github.com/kaltura/server/pull/6714)
+- PLAT-8519: only call kEncryptFileUtils::fileSize() if fileSize > 0 (https://github.com/kaltura/server/pull/6709)
+- Remove addTrackEntry() (https://github.com/kaltura/server/pull/6708)
 
 * Mon Jan 29 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.13.0-1
 - Ver Bounce to 13.13.0

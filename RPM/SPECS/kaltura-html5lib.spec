@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.65.2
+Version: v2.66
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -82,6 +82,35 @@ fi
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Thu Feb 8 2018 Jess Portnoy <jess.portnoy@kaltura.com> - v2.66-1
+- FEV-139 - [IVQ-Player] change apply/continue to select
+- FEV-112 - [IVQ] quiz in playlist - answers below text
+- FEV-113 - [IVQ] quiz in playlist - intro page
+- FEV-147 - Hide "admin" slides/chapters/player mode in preview mode
+- KMS-15631 - [IVQ] change to the Submit button
+- FEC-7834 - CLONE - Unable to change media on Chromecast while casting media
+- SUP-13105 - KCP - Caption image is saved on the Player.
+- FEC-7797 - Adding VPAID INSECURE mode
+- FEC-7657 - PWA - Android- [360 Playback] - Video fails to play and only audio is audible with a blank screen during 360* video playback(Refer Steps)
+- SUP-13081 - Playlist secure embed not working when include in layout = false
+- FEC-7835 - CLONE - Cast fail when using Chrome browser cast button
+- SUP-13403 - KCP - Subtitle set to 'English' after subtitle option setting
+- FEC-7878 - Remove support check for Windows phone on mobile skin
+- SUP-13171 - Player is not displaying VPAID ads in a correct manner
+- FEC-7885 - KAnlony sends empty referrer in iframe embed
+- FEC-7891 - CLONE - [Chrome Cast] - Time in scrubber bar at TV displayed unclear
+- FEV-165 - Creator user does not see chapters when in preview mode
+- fix: initial captions to CC
+- fix: exception when changing from local to remote CC playback
+- fix: reset all CC state flags on media change
+- add quality watcher for dash streams
+- fix: detect if kAnalony is active
+- feat(chromecast): cast via chrome browser button (#3720)
+- add uiconf_id param to chromecast (#3721)
+- fix(chromecast): proxyData getter (#3719)
+- fix youbora error code handler
+- CC - Fix autoplay on live (#3725)
+
 * Mon Jan 29 2018 Jess Portnoy <jess.portnoy@kaltura.com> - v2.65.2-1
 - FEC-7871 - [Player V2] [Chrome] Auto-play streams playing Auto-muted regardless the configuration
 
