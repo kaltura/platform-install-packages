@@ -1,0 +1,9 @@
+Template: kaltura-prometheus/alertmanager_url
+Type: string
+Default: localhost:9093
+Description: Alert Manager host and port
+
+Template: kaltura-prometheus/consul_url
+Type: string
+Default: localhost:8500
+Description: Consul host and port
