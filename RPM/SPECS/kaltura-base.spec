@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 13.13.0
-Release: 12
+Release: 13
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -329,6 +329,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Thu Feb 8 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.13.0-13
+- Nightly build.
+
 * Thu Feb 8 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.13.0-12
 - kms-16965: add BASE_UPLOAD_PERMISSION to media->addfromrecordedwebcam() (https://github.com/kaltura/server/pull/6768)
 - PLAT-8450: additional Chinese dialects (https://github.com/kaltura/server/pull/6760)
