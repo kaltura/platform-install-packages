@@ -1,0 +1,144 @@
+# Set the command-line arguments to pass to the server.
+ARGS="--config.file /opt/kaltura/prometheus/etc/prometheus.yml --web.listen-address=127.0.0.1:9090 --storage.tsdb.path /opt/kaltura/prometheus/data"
+
+# Prometheus supports the following options:
+
+#   -config.file "/etc/prometheus/prometheus.yml"
+#      Prometheus configuration file name.
+#
+#   -log.level "info"
+#      Only log messages with the given severity or above. Valid levels:
+#      [debug, info, warn, error, fatal, panic].
+#
+# == ALERTMANAGER ==
+#
+#   -alertmanager.http-deadline 10s
+#      Alert manager HTTP API timeout.
+#
+#   -alertmanager.notification-queue-capacity 100
+#      The capacity of the queue for pending alert manager notifications.
+#
+#   -alertmanager.url
+#      The URL of the alert manager to send notifications to.
+#
+# == QUERY ==
+#
+#   -query.max-concurrency 20
+#      Maximum number of queries executed concurrently.
+#
+#   -query.staleness-delta 5m0s
+#      Staleness delta allowance during expression evaluations.
+#
+#   -query.timeout 2m0s
+#      Maximum time a query may take before being aborted.
+#
+# == STORAGE ==
+#
+#   -storage.local.checkpoint-dirty-series-limit 5000
+#      If approx. that many time series are in a state that would require
+#      a recovery operation after a crash, a checkpoint is triggered, even if
+#      the checkpoint interval hasn't passed yet. A recovery operation requires
+#      a disk seek. The default limit intends to keep the recovery time below
+#      1min even on spinning disks. With SSD, recovery is much faster, so you
+#      might want to increase this value in that case to avoid overly frequent
+#      checkpoints.
+#
+#   -storage.local.checkpoint-interval 5m0s
+#      The period at which the in-memory metrics and the chunks not yet
+#      persisted to series files are checkpointed.
+#
+#   -storage.local.chunk-encoding-version 1
+#      Which chunk encoding version to use for newly created chunks.
+#      Currently supported is 0 (delta encoding) and 1 (double-delta encoding).
+#
+#   -storage.local.dirty false
+#      If set, the local storage layer will perform crash recovery even if
+#      the last shutdown appears to be clean.
+#
+#   -storage.local.index-cache-size.fingerprint-to-metric 10485760
+#      The size in bytes for the fingerprint to metric index cache.
+#
+#   -storage.local.index-cache-size.fingerprint-to-timerange 5242880
+#      The size in bytes for the metric time range index cache.
+#
+#   -storage.local.index-cache-size.label-name-to-label-values 10485760
+#      The size in bytes for the label name to label values index cache.
+#
+#   -storage.local.index-cache-size.label-pair-to-fingerprints 20971520
+#      The size in bytes for the label pair to fingerprints index cache.
+#
+#   -storage.local.max-chunks-to-persist 1048576
+#      How many chunks can be waiting for persistence before sample
+#      ingestion will stop. Many chunks waiting to be persisted will increase
+#      the checkpoint size.
+#
+#   -storage.local.memory-chunks 1048576
+#      How many chunks to keep in memory. While the size of a chunk is
+#      1kiB, the total memory usage will be significantly higher than this value
+#      * 1kiB. Furthermore, for various reasons, more chunks might have to be
+#      kept in memory temporarily.
+#
+#   -storage.local.path "/var/lib/prometheus/metrics"
+#      Base path for metrics storage.
+#
+#   -storage.local.pedantic-checks false
+#      If set, a crash recovery will perform checks on each series file.
+#      This might take a very long time.
+#
+#   -storage.local.retention 360h0m0s
+#      How long to retain samples in the local storage.
+#
+#   -storage.local.series-sync-strategy "adaptive"
+#      When to sync series files after modification. Possible values:
+#      'never', 'always', 'adaptive'. Sync'ing slows down storage performance
+#      but reduces the risk of data loss in case of an OS crash. With the
+#      'adaptive' strategy, series files are sync'd for as long as the storage
+#      is not too much behind on chunk persistence.
+#
+#   -storage.remote.influxdb-url
+#      The URL of the remote InfluxDB server to send samples to. None, if
+#      empty.
+#
+#   -storage.remote.influxdb.database "prometheus"
+#      The name of the database to use for storing samples in InfluxDB.
+#
+#   -storage.remote.influxdb.retention-policy "default"
+#      The InfluxDB retention policy to use.
+#
+#   -storage.remote.opentsdb-url
+#      The URL of the remote OpenTSDB server to send samples to. None, if
+#      empty.
+#
+#   -storage.remote.timeout 30s
+#      The timeout to use when sending samples to the remote storage.
+#
+# == WEB ==
+#
+#   -web.console.libraries "/etc/prometheus/console_libraries"
+#      Path to the console library directory.
+#
+#   -web.console.templates "/etc/prometheus/consoles"
+#      Path to the console template directory, available at /consoles.
+#
+#   -web.enable-remote-shutdown false
+#      Enable remote service shutdown.
+#
+#   -web.external-url
+#      The URL under which Prometheus is externally reachable (for
+#      example, if Prometheus is served via a reverse proxy). Used for
+#      generating relative and absolute links back to Prometheus itself. If
+#      omitted, relevant URL components will be derived automatically.
+#
+#   -web.listen-address ":9090"
+#      Address to listen on for the web interface, API, and telemetry.
+#
+#   -web.local-assets "/usr/share/prometheus/web/"
+#      Path to static assets/templates directory.
+#
+#   -web.telemetry-path "/metrics"
+#      Path under which to expose metrics.
+#
+#   -web.user-assets
+#      Path to static asset directory, available at /user.
+#
+

@@ -13,7 +13,7 @@ alerting:
 
 # Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
 rule_files:
-   - "/opt/kaltura/prometheus/etc/rules/rules.yml"
+   - "/opt/kaltura/prometheus/etc/rules/*.yml"
 
 # A scrape configuration containing exactly one endpoint to scrape:
 # Here it's Prometheus itself.
