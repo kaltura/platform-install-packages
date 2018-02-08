@@ -30,7 +30,7 @@ if [ -f /etc/default/$NAME ]; then
         . /etc/default/$NAME
 fi
 
-test -x $DAEMON || exit 0
+test -x $DAEMON || exit 1
 
 set -e
 

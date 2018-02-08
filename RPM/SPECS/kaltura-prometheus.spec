@@ -56,13 +56,14 @@ used with Kaltura Server.
 %install
 mkdir -p $RPM_BUILD_ROOT%{prefix}/etc/rules
 mkdir -p $RPM_BUILD_ROOT%{prefix}/data
+mkdir -p $RPM_BUILD_ROOT%{prefix}/bin
 mkdir -p $RPM_BUILD_ROOT%{kaltura_prefix}/var/run/prometheus
-mkdir -p $RPM_BUILD_ROOT%{kaltura_prefix}/var/log/prometheus
+mkdir -p $RPM_BUILD_ROOT%{kaltura_prefix}/log/prometheus
 cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/etc
 cp %{SOURCE2} $RPM_BUILD_ROOT%{prefix}/etc/rules/0_general.yml
 cp %{SOURCE3} $RPM_BUILD_ROOT%{prefix}/etc/rules/1_memcached.yml
-cp prometheus $RPM_BUILD_ROOT%{prefix}/bin
-cp promtool $RPM_BUILD_ROOT%{prefix}/bin
+cp prometheus $RPM_BUILD_ROOT%{prefix}/bin/
+cp promtool $RPM_BUILD_ROOT%{prefix}/bin/
 cp -r console_libraries $RPM_BUILD_ROOT%{prefix}/
 cp -r consoles $RPM_BUILD_ROOT%{prefix}/
 
@@ -109,6 +110,7 @@ if [ $1 -eq 1 ]; then
 %else
     /sbin/chkconfig --add %{name}
 %endif
+fi
 
 %postun 
 %if %use_systemd
@@ -129,9 +131,9 @@ if [ $1 -eq 1 ]; then
 %{prefix}/etc
 %{prefix}/console_libraries
 %{prefix}/bin
-%defattr(-, prometheus_user, prometheus_group, 0755)
+%defattr(-, %{prometheus_user}, %{prometheus_group}, 0755)
 %{kaltura_prefix}/var/run/prometheus
-%{kaltura_prefix}/var/log/prometheus
+%{kaltura_prefix}/log/prometheus
 %{prefix}/data
 
 
