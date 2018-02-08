@@ -25,3 +25,7 @@ make PREFIX="${RPM_BUILD_ROOT}%_prefix" install-daemon
 %_bindir/daemon
 %doc %_mandir/man1/daemon.1.gz
 %doc %_mandir/man5/daemon.conf.5.gz
+
+%changelog
+* Thu Feb 8 2018 Jess Portnoy <jess.portnoy@kaltura.com> - 0.6.4-1
+- First release
