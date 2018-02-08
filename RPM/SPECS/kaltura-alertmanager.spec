@@ -2,10 +2,10 @@
 %define prometheus_group prometheus
 
 %define kaltura_prefix /opt/kaltura
-%define prefix %{kaltura_prefix}/prometheus
-Summary: Prometheus is a monitoring system and time series database
-Name: kaltura-prometheus
-Version: 2.1.0 
+%define prefix %{kaltura_prefix}/prometheus/alertmanager
+Summary: Alertmanager handles alerts sent by client applications such as the Prometheus server
+Name: kaltura-alertmanager
+Version: 0.13.0
 Release: 1
 License: ASL 2.0
 Group: System Environment/Daemons
@@ -27,48 +27,44 @@ Requires: systemd
 BuildRequires: systemd
 %endif
 
-Source: https://github.com/prometheus/prometheus/releases/download/v%{version}/prometheus-%{version}.linux-amd64.tar.gz
-Source1: prometheus.yml
-Source2: %{name}_0_general.yml
-Source3: %{name}_1_memcached.yml
-Source4: %{name}.service
-Source5: %{name}.sysconf
-Source6: %{name}.init
+Source: https://github.com/prometheus/alertmanager/releases/download/v%{version}/alertmanager-%{version}.linux-amd64.tar.gz 
+Source1: alertmanager.yml
+Source2: %{name}_kaltura.tmpl
+Source3: %{name}.service
+Source4: %{name}.sysconf
+Source5: %{name}.init
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
 
 %description
-Prometheus is a monitoring system and time series database.
-It collects metrics from configured targets at given intervals, evaluates 
-rule expressions, displays the results, and can trigger alerts if some 
-condition is observed to be true.
+Alertmanager handles alerts sent by client applications such as the 
+Prometheus server. It takes care of deduplicating, grouping, and routing them to 
+the correct receiver integrations such as email, PagerDuty, or OpsGenie. 
+It also takes care of silencing and inhibition of alerts.
 
-This package provides the Prometheus daemon and configuration meant to be 
+This package provides the Prometheus Alertmanager daemon and configuration meant to be 
 used with Kaltura Server.
 
 
 %prep
-%setup -qn prometheus-%{version}.linux-amd64
+%setup -qn alertmanager-%{version}.linux-amd64
 
 
 
 %install
-mkdir -p $RPM_BUILD_ROOT%{prefix}/etc/rules
+mkdir -p $RPM_BUILD_ROOT%{prefix}/etc/templates
 mkdir -p $RPM_BUILD_ROOT%{prefix}/data
 mkdir -p $RPM_BUILD_ROOT%{prefix}/bin
-mkdir -p $RPM_BUILD_ROOT%{kaltura_prefix}/var/run/prometheus
-mkdir -p $RPM_BUILD_ROOT%{kaltura_prefix}/log/prometheus
+mkdir -p $RPM_BUILD_ROOT%{kaltura_prefix}/var/run/alertmanager
+mkdir -p $RPM_BUILD_ROOT%{kaltura_prefix}/log/alertmanager
 cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/etc
-cp %{SOURCE2} $RPM_BUILD_ROOT%{prefix}/etc/rules/0_general.yml
-cp %{SOURCE3} $RPM_BUILD_ROOT%{prefix}/etc/rules/1_memcached.yml
-cp prometheus $RPM_BUILD_ROOT%{prefix}/bin/
-cp promtool $RPM_BUILD_ROOT%{prefix}/bin/
-cp -r console_libraries $RPM_BUILD_ROOT%{prefix}/
-cp -r consoles $RPM_BUILD_ROOT%{prefix}/
+cp %{SOURCE2} $RPM_BUILD_ROOT%{prefix}/etc/templates/kaltura.tmpl
+cp alertmanager $RPM_BUILD_ROOT%{prefix}/bin/
+cp amtool $RPM_BUILD_ROOT%{prefix}/bin/
 
 %{__mkdir} -p $RPM_BUILD_ROOT%{_sysconfdir}/sysconfig
-%{__install} -m 644 -p %{SOURCE5} \
+%{__install} -m 644 -p %{SOURCE3} \
    $RPM_BUILD_ROOT%{_sysconfdir}/sysconfig/%{name}
 
 %if %{use_systemd}
@@ -79,7 +75,7 @@ cp -r consoles $RPM_BUILD_ROOT%{prefix}/
 %else
 # install SYSV init stuff
 %{__mkdir} -p $RPM_BUILD_ROOT%{_initrddir}
-%{__install} -m755 %{SOURCE6} \
+%{__install} -m755 %{SOURCE5} \
    $RPM_BUILD_ROOT%{_initrddir}/%{name}
 %endif
 
@@ -127,20 +123,18 @@ fi
 %else
 %{_initrddir}/%{name}
 %endif
-%{prefix}/consoles
 %{prefix}/etc
-%config(noreplace) %{prefix}/etc/prometheus.yml
-%config(noreplace) %{prefix}/etc/rules/*.yml
-%{prefix}/console_libraries
+%config(noreplace) %{prefix}/etc/alertmanager.yml
+%config(noreplace) %{prefix}/etc/templates/*.tmpl
 %{prefix}/bin
 %defattr(-, %{prometheus_user}, %{prometheus_group}, 0755)
-%{kaltura_prefix}/var/run/prometheus
-%{kaltura_prefix}/log/prometheus
+%{kaltura_prefix}/var/run/alertmanager
+%{kaltura_prefix}/log/alertmanager
 %{prefix}/data
 
 
 
 
 %changelog
-* Thu Feb 8 2018 Jess Portnoy <jess.portnoy@kaltura.com> - 2.1.0-1
+* Thu Feb 8 2018 Jess Portnoy <jess.portnoy@kaltura.com> - 0.13.0-1
 - First release
