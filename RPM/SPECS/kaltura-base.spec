@@ -330,7 +330,7 @@ fi
 
 %changelog
 * Thu Feb 8 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.13.0-13
-- Nightly build.
+- kAsyncUsersCsv: Fix memory and scale issues (https://github.com/kaltura/server/pull/6772)
 
 * Thu Feb 8 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.13.0-12
 - kms-16965: add BASE_UPLOAD_PERMISSION to media->addfromrecordedwebcam() (https://github.com/kaltura/server/pull/6768)
