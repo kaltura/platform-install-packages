@@ -1,3 +1,9 @@
+kaltura-base (13.13.0-3) mercury; urgency=medium
+
+  * Add cue_point.ENTRY_ID to getSphinxConditionsToKeep in order to use the ENTRY_ID query invalidation key (https://github.com/kaltura/server/pull/6774)
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 12 Feb 2018 11:20:38 +0000
+
 kaltura-base (13.13.0-2) mercury; urgency=medium
 
   * kAsyncUsersCsv: Fix memory and scale issues (https://github.com/kaltura/server/pull/6772)
