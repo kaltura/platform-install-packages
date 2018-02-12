@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 13.13.0
-Release: 14
+Version: 13.14.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -329,6 +329,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Feb 12 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.14.0-1
+- Ver Bounce to 13.14.0
+
 * Mon Feb 12 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.13.0-14
 - Add cue_point.ENTRY_ID to getSphinxConditionsToKeep in order to use the ENTRY_ID query invalidation key (https://github.com/kaltura/server/pull/6774)
 
