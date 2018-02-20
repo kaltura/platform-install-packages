@@ -345,7 +345,7 @@ PROMETHEUS_ALERTMANAGER_VERSION=0.13.0
 PROMETHEUS_ALERTMANAGER_URI="https://github.com/prometheus/alertmanager/releases/download/v$PROMETHEUS_ALERTMANAGER_VERSION/alertmanager-$PROMETHEUS_ALERTMANAGER_VERSION.linux-amd64.tar.gz"
 
 PROMETHEUS_NODE_EXPORTER_VERSION=0.15.2
-PROMETHEUS_NODE_EXPORTER_URI="https://github.com/prometheus/node_exporter/archive/v$PROMETHEUS_NODE_EXPORTER_VERSION.tar.gz"
+PROMETHEUS_NODE_EXPORTER_URI="https://github.com/prometheus/node_exporter/releases/download/v$PROMETHEUS_NODE_EXPORTER_VERSION/node_exporter-$PROMETHEUS_NODE_EXPORTER_VERSION.linux-amd64.tar.gz"
 
 PROMETHEUS_SPHINX_EXPORTER_VERSION=2.2.1
 PROMETHEUS_SPHINX_EXPORTER_URI="https://github.com/jessp01/sphinx-exporter/archive/v$PROMETHEUS_SPHINX_EXPORTER_VERSION.tar.gz"
