@@ -7,6 +7,7 @@ Summary: Prometheus is a monitoring system and time series database
 Name: kaltura-prometheus
 Version: 2.1.0 
 Release: 1
+BuildArch: x86_64
 License: ASL 2.0
 Group: System Environment/Daemons
 URL: http://prometheus.org/
