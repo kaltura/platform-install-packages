@@ -1,6 +1,6 @@
 - [ ] I've read the [guidelines for Contributing to Kaltura Projects](https://github.com/kaltura/platform-install-packages/blob/master/CONTRIBUTING.md)
 - [ ] I've read the [installation guides](https://github.com/kaltura/platform-install-packages#documentation-and-guides) and [troubleshooting FAQ](https://github.com/kaltura/platform-install-packages/blob/master/doc/kaltura-packages-faq.md)
-- [ ] This is not a personal support request that should be posted on the [Kaltura forum](https://forum.kaltura.org) 
+- [ ] This is not a support request or question that should be posted on the [Kaltura forum](https://forum.kaltura.org) 
 
 
 ## Bug report
