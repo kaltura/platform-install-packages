@@ -7,6 +7,7 @@
 
 **Please provide steps to reproduce, including errors from /opt/kaltura/log/kaltura_api_v3.log, /opt/kaltura/log/kaltura_apache_errors*log and /opt/kaltura/log/kaltura_prod.log:**
 
+**Linux distribution name and version:**
 
 **Are you using the RPM or deb packages?**
 - [ ] RPM
