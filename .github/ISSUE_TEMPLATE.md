@@ -14,12 +14,12 @@
 
 **When using RPM, paste the output for:**
 ```
-# rpm -qa \"kaltura-*\"
+# rpm -qa "kaltura-*"
 ```
 
 **For deb based systems:**
 ```
-# dpkg -l \"kaltura-*\"
+# dpkg -l "kaltura-*"
 ```
 
 **Is this an all in one instance [single server] or a cluster?**
