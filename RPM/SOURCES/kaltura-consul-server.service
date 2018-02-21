@@ -1,0 +1,18 @@
+[Unit]
+Description=Consul Server
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=consul
+Group=consul
+Type=simple
+ExecStart=/opt/kaltura/consul/bin/consul agent -server -bootstrap-expect=1 \ 
+	-data-dir=/opt/kaltura/consul/var/data \ 
+	-enable-script-checks=true \ 
+	-config-dir=/opt/kaltura/consul/etc/consul.d/server/config.json
+
+ExecReload=/bin/kill -HUP $MAINPID
+
+[Install]
+WantedBy=multi-user.target
