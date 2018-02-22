@@ -1,0 +1,14 @@
+{
+    "bootstrap": false,
+    "server": false,
+    "datacenter": "@DATA_CENTER@",
+    "ui_dir": "/opt/kaltura/consul/dist",
+    "data_dir": "/opt/kaltura/consul/var/data",
+    "encrypt": "@SECRET@",
+    "encrypt_verify_incoming": false,
+    "encrypt_verify_outgoing": false,
+    "log_level": "INFO",
+    "enable_syslog": true,
+    "start_join": ["@SERVER_NODE@"]
+}
+

@@ -1,0 +1,12 @@
+{
+    "bootstrap": false,
+    "server": true,
+    "datacenter": "@DATA_CENTER@",
+    "data_dir": "/opt/kaltura/consule/var/data",
+    "encrypt": "@SECRET@",
+    "log_level": "INFO",
+    "encrypt_verify_incoming": false,
+    "encrypt_verify_outgoing": false,
+    "enable_syslog": true
+}
+

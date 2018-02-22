@@ -35,7 +35,8 @@ Source3: %{name}-server.init
 Source4: %{name}-client.service
 Source5: %{name}-client.sysconf
 Source6: %{name}-client.init
-
+Source7: %{name}-server.json 
+Source8: %{name}-client.json 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
 
@@ -47,8 +48,8 @@ This package provides the Consul daemon and configuration meant to be
 used with Kaltura Server.
 
 
-%prep
-%setup -q
+#%prep
+%setup -qn .
 
 
 
@@ -58,6 +59,8 @@ mkdir -p $RPM_BUILD_ROOT%{prefix}/var/data
 mkdir -p $RPM_BUILD_ROOT%{prefix}/bin
 mkdir -p $RPM_BUILD_ROOT%{kaltura_prefix}/var/run/consul
 mkdir -p $RPM_BUILD_ROOT%{kaltura_prefix}/log/consul
+cp %{SOURCE7} $RPM_BUILD_ROOT%{prefix}/etc/consul.d/server/config.json
+cp %{SOURCE8} $RPM_BUILD_ROOT%{prefix}/etc/consul.d/client/config.json
 #cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/etc
 cp consul $RPM_BUILD_ROOT%{prefix}/bin/
 
@@ -129,7 +132,6 @@ fi
 
 %files
 %defattr(-, root, root, 0755)
-%doc LICENSE NOTICE 
 %{_sysconfdir}/sysconfig/%{name}-server
 %{_sysconfdir}/sysconfig/%{name}-client
 %if %{use_systemd}
@@ -139,6 +141,7 @@ fi
 %{_initrddir}/%{name}-server
 %{_initrddir}/%{name}-client
 %endif
+%{prefix}
 %config(noreplace) %{prefix}/etc/consul.d/server/config.json
 %config(noreplace) %{prefix}/etc/consul.d/client/config.json
 %defattr(-, %{consul_user}, %{consul_group}, 0755)
@@ -150,5 +153,5 @@ fi
 
 
 %changelog
-* Tue Feb 21 2018 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.6-1
+* Thu Feb 22 2018 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.6-1
 - First release
