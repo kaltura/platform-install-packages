@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 13.14.0
-Release: 12
+Version: 13.15.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -329,6 +329,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Feb 26 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.15.0-1
+- Ver Bounce to 13.15.0
+
 * Mon Feb 26 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.14.0-12
 - fix AddMediaEntryReady email template (https://github.com/kaltura/server/pull/6800)
 - PLAT-8620: uDRM - clean up mpeg-ts leftovers from remuxed mp4 files (https://github.com/kaltura/server/pull/6799)
