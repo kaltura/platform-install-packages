@@ -1,3 +1,14 @@
+kaltura-base (13.14.0-2) mercury; urgency=medium
+
+  * fix AddMediaEntryReady email template (https://github.com/kaltura/server/pull/6800)
+  * PLAT-8620: uDRM - clean up mpeg-ts leftovers from remuxed mp4 files (https://github.com/kaltura/server/pull/6799)
+  * PLAT-8611: disable criteria filter only for batch in cloneEntryAction (https://github.com/kaltura/server/pull/6796)
+  * PLAT-8584: remove duplicate records creation on csv and handle api exception (https://github.com/kaltura/server/pull/6778)
+  * Drop unused indexes (https://github.com/kaltura/server/pull/6771)
+  * PLAT-8526: New Free Trial - Modification of Additional Flow behavior (https://github.com/kaltura/server/pull/6763)
+
+ -- Jess Portnoy <jess.portnoy@kaltura.com>  Mon, 26 Feb 2018 11:00:55 +0000
+
 kaltura-base (13.14.0-1) mercury; urgency=medium
 
   * Switching to 13.14.0
