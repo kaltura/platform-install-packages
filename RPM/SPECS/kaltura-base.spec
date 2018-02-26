@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 13.14.0
-Release: 10
+Release: 12
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -329,32 +329,13 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Tue Feb 20 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.14.0-10
-- Nightly build.
-
-* Mon Feb 19 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.14.0-9
-- Nightly build.
-
-* Sun Feb 18 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.14.0-8
-- Nightly build.
-
-* Sat Feb 17 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.14.0-7
-- Nightly build.
-
-* Fri Feb 16 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.14.0-6
-- Nightly build.
-
-* Thu Feb 15 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.14.0-5
-- Nightly build.
-
-* Wed Feb 14 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.14.0-4
-- Nightly build.
-
-* Tue Feb 13 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.14.0-3
-- Nightly build.
-
-* Mon Feb 12 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.14.0-2
-- Nightly build.
+* Mon Feb 26 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.14.0-12
+- fix AddMediaEntryReady email template (https://github.com/kaltura/server/pull/6800)
+- PLAT-8620: uDRM - clean up mpeg-ts leftovers from remuxed mp4 files (https://github.com/kaltura/server/pull/6799)
+- PLAT-8611: disable criteria filter only for batch in cloneEntryAction (https://github.com/kaltura/server/pull/6796)
+- PLAT-8584: remove duplicate records creation on csv and handle api exception (https://github.com/kaltura/server/pull/6778)
+- Drop unused indexes (https://github.com/kaltura/server/pull/6771)
+- PLAT-8526: New Free Trial - Modification of Additional Flow behavior (https://github.com/kaltura/server/pull/6763)
 
 * Mon Feb 12 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.14.0-1
 - Ver Bounce to 13.14.0
