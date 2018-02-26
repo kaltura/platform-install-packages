@@ -13,13 +13,11 @@ RUN service mysqld start
 
 
 # facilities
-RUN yum install -y postfix memcached ntp
+RUN yum install -y postfix ntp
 RUN chkconfig postfix on
-RUN chkconfig memcached on
 RUN chkconfig ntpd on
 RUN sed -i 's@^inet_protocols = all@inet_protocol = ipv4@g' /etc/postfix/main.cf
 RUN service postfix start
-RUN service memcached start
 RUN service ntpd start
 
 
