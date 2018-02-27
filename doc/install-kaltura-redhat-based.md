@@ -291,14 +291,7 @@ Please see documentation here [nginx-rtmp-live-streaming.md](nginx-rtmp-live-str
 A longer post about it can be found at https://blog.kaltura.com/free-and-open-live-video-streaming
 
 
-### SSL Certificate Configuration
-
-Set the following directives in `/etc/httpd/conf.d/zzzkaltura.ssl.conf`:
-```
-SSLCertificateChainFile
-SSLCACertificateFile
-```
-
+### Securing Monit
 To use the [monit](http://mmonit.com/monit/) Monitoring tab in admin console, you will need to also configure the SSL certificate for monit.
 To use the same certificate as you used for Kaltura they will need to be in PEM format. If it is not see [Generate PEM Instructions](http://www.digicert.com/ssl-support/pem-ssl-creation.htm)
 
@@ -307,6 +300,15 @@ Edit: `/opt/kaltura/app/configurations/monit/monit.conf` and add:
 SSL ENABLE
 PEMFILE /path/to/your/certificate.pem
 ```
+
+The Monit HTTP daemon binds to loopback only by default [127.0.0.1]. If you wish to access the I/F from the Monitoring tab in admin console, edit /opt/kaltura/app/configurations/monit/monit.conf and change
+```
+ADDRESS 127.0.0.1
+```
+For Monit's conf documentation, please refer to https://mmonit.com/monit/documentation/monit.html, specifically, look under the "MONIT HTTPD" section.
+
+You should also set a secure password in the ```allow``` directive.
+
 
 Finally, run: ```/etc/init.d/kaltura-monit restart```
 

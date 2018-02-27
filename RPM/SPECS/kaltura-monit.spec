@@ -7,7 +7,7 @@
 
 Summary: Process monitor and restart utility
 Name: kaltura-monit
-Version: 5.23.0
+Version: 5.25.1
 Release: 2
 License: GPLv3
 Group: High Availability Management 
@@ -135,6 +135,10 @@ fi
 #%attr(0600, root, root) %config(noreplace) %{confdir}/monit.conf
 
 %changelog
+* Tue Feb 27 2018 Jess Portnoy <jess.portnoy@kaltura.com> - 5.25.1-2
+- New upstream version [https://mmonit.com/monit/changes]
+- Bind HTTP daemon to loopback
+
 * Tue Aug 29 2017 Jess Portnoy <jess.portnoy@kaltura.com> - 5.23.0-2
 - Added set mailserver 127.0.0.1 to monit.conf
 
