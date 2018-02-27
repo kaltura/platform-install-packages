@@ -15,6 +15,8 @@ This guide describes RPM installation of an all-in-one Kaltura server and applie
 
 [Nginx SSL Configuration](nginx-ssl-config.md)
 
+[Securing Monit](install-kaltura-redhat-based.md#securing-monit)
+
 [Unattended Installation](install-kaltura-redhat-based.md#unattended-installation)
 
 [Live Streaming with Nginx and the RTMP module](install-kaltura-redhat-based.md#live-streaming-with-nginx-and-the-rtmp-module)
@@ -292,8 +294,7 @@ A longer post about it can be found at https://blog.kaltura.com/free-and-open-li
 
 
 ### Securing Monit
-To use the [monit](http://mmonit.com/monit/) Monitoring tab in admin console, you will need to also configure the SSL certificate for monit.
-To use the same certificate as you used for Kaltura they will need to be in PEM format. If it is not see [Generate PEM Instructions](http://www.digicert.com/ssl-support/pem-ssl-creation.htm)
+To use the [monit](http://mmonit.com/monit/) Monitoring tab in admin console, you will need to also configure the SSL certificate for monit, see [Generate PEM Instructions](http://www.digicert.com/ssl-support/pem-ssl-creation.htm)
 
 Edit: `/opt/kaltura/app/configurations/monit/monit.conf` and add:
 ```
