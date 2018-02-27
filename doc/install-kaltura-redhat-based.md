@@ -301,16 +301,16 @@ SSL ENABLE
 PEMFILE /path/to/your/certificate.pem
 ```
 
-The Monit HTTP daemon binds to loopback only by default [127.0.0.1]. If you wish to access the I/F from the Monitoring tab in admin console, edit /opt/kaltura/app/configurations/monit/monit.conf and change
+The Monit HTTP daemon binds to loopback only by default [127.0.0.1]. If you wish to access the I/F from the Monitoring tab in admin console, edit /opt/kaltura/app/configurations/monit/monit.conf and change the following block to suit your needs:
 ```
+set httpd port 2812
 ADDRESS 127.0.0.1
+allow root:@MONIT_PASSWD@
 ```
+
 For Monit's conf documentation, please refer to https://mmonit.com/monit/documentation/monit.html, specifically, look under the "MONIT HTTPD" section.
 
-You should also set a secure password in the ```allow``` directive.
-
-
-Finally, run: ```/etc/init.d/kaltura-monit restart```
+Once done, run: ```/etc/init.d/kaltura-monit restart```
 
 **Your Kaltura installation is now complete.**
 
