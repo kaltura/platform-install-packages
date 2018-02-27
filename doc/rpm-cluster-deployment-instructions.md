@@ -21,6 +21,7 @@ Refer to the [Deploying Kaltura Clusters Using Chef](rpm-chef-cluster-deployment
 * [Batch Nodes](#the-batch-node)
 * [Analytics Node](#the-datawarehouse)
 * [Nginx VOD Nodes](#nginx-vod-server)
+* [Securing Monit](install-kaltura-redhat-based.md#securing-monit)
 * [Live Streaming with Nginx and the RTMP module](#live-streaming-with-nginx-and-the-rtmp-module)
 * [Upgrade Kaltura](#upgrade-kaltura)
 * [Platform Monitoring](#platform-monitoring)
