@@ -15,6 +15,8 @@ This guide describes RPM installation of an all-in-one Kaltura server and applie
 
 [Nginx SSL Configuration](nginx-ssl-config.md)
 
+[Securing Monit](install-kaltura-redhat-based.md#securing-monit)
+
 [Unattended Installation](install-kaltura-redhat-based.md#unattended-installation)
 
 [Live Streaming with Nginx and the RTMP module](install-kaltura-redhat-based.md#live-streaming-with-nginx-and-the-rtmp-module)
@@ -291,16 +293,8 @@ Please see documentation here [nginx-rtmp-live-streaming.md](nginx-rtmp-live-str
 A longer post about it can be found at https://blog.kaltura.com/free-and-open-live-video-streaming
 
 
-### SSL Certificate Configuration
-
-Set the following directives in `/etc/httpd/conf.d/zzzkaltura.ssl.conf`:
-```
-SSLCertificateChainFile
-SSLCACertificateFile
-```
-
-To use the [monit](http://mmonit.com/monit/) Monitoring tab in admin console, you will need to also configure the SSL certificate for monit.
-To use the same certificate as you used for Kaltura they will need to be in PEM format. If it is not see [Generate PEM Instructions](http://www.digicert.com/ssl-support/pem-ssl-creation.htm)
+### Securing Monit
+To use the [monit](http://mmonit.com/monit/) Monitoring tab in admin console, you will need to also configure the SSL certificate for monit, see [Generate PEM Instructions](http://www.digicert.com/ssl-support/pem-ssl-creation.htm)
 
 Edit: `/opt/kaltura/app/configurations/monit/monit.conf` and add:
 ```
@@ -308,7 +302,16 @@ SSL ENABLE
 PEMFILE /path/to/your/certificate.pem
 ```
 
-Finally, run: ```/etc/init.d/kaltura-monit restart```
+The Monit HTTP daemon binds to loopback only by default [127.0.0.1]. If you wish to access the I/F from the Monitoring tab in admin console, edit /opt/kaltura/app/configurations/monit/monit.conf and change the following block to suit your needs:
+```
+set httpd port 2812
+ADDRESS 127.0.0.1
+allow root:@MONIT_PASSWD@
+```
+
+For Monit's conf documentation, please refer to https://mmonit.com/monit/documentation/monit.html, specifically, look under the "MONIT HTTPD" section.
+
+Once done, run: ```/etc/init.d/kaltura-monit restart```
 
 **Your Kaltura installation is now complete.**
 
