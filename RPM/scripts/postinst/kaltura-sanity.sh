@@ -416,7 +416,7 @@ ${NORMAL}"
 			report "Delete all entries" $RC "$OUT" "$TOTAL_T"
 
 			START=`date +%s.%N`
-			OUTP=`php $DIRNAME/delete_partner.php $DIRNAME/sanity_config.ini 2>&1`
+			OUTP=`php $DIRNAME/delete_partner.php $ADMIN_PARTNER_SECRET $PARTNER_ID 2>&1`
 			RC=$?
 			CLEANOUTPUT=`echo $OUTP|sed 's@"@@g'`
 			OUTP=`echo $CLEANOUTPUT|sed "s@'@@g"`
