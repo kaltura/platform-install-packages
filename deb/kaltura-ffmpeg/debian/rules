@@ -76,6 +76,7 @@ config.status: $(tree)
 		--disable-devices \
 		--enable-filter=movie \
 		--enable-version3 \
+	        --enable-libzvbi \
 		--enable-x11grab
 
 build: build-stamp
