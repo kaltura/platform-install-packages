@@ -1,4 +1,10 @@
 <?php
+if (count($argv)<2){
+    echo __FILE__ . ' <-2 partner admin secret> <partner ID> '."\n";
+    exit (1);
+}
+$adminSecretForSigning = $argv[1];
+$partnerId = $argv[2];
 $config = null;
 $clientConfig = null;
 /* @var $clientConfig KalturaConfiguration */
@@ -11,11 +17,9 @@ require_once __DIR__ . '/init.php';
 /**
  * Start a new session
  */
-$adminSecretForSigning = $config['adminConsoleSession']['adminConsoleSecret'];
 $client->setKs($client->generateSessionV2($adminSecretForSigning, null, KalturaSessionType::ADMIN, -2, 86400, ''));
 
 
-$partnerId = $config['session']['partnerId'];
 /**
  * Delete the partner
  */
