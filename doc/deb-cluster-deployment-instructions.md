@@ -5,6 +5,7 @@ Refer to the [All-In-One Kaltura Server Installation Guide](install-kaltura-deb-
 
 ### Instructions here are for a cluster with the following members:
 
+* [Setting up the Kaltura repos]()
 * [Load Balancing](load_balancing.md)
 * [NFS server](#the-nfs-server)
 * [MySQL Database](#the-mysql-database)
@@ -60,6 +61,27 @@ Two working solutions to the AWS EC2 email limitations are:
 * Using SendGrid as your mail service ([setting up ec2 with Sendgrid and postfix](http://www.zoharbabin.com/configure-ssmtp-or-postfix-to-send-email-via-sendgrid-on-centos-6-3-ec2)).
 * Using [Amazon's Simple Email Service](http://aws.amazon.com/ses/). 
 
+### Setting up the Kaltura repos
+On all nodes, deploy the Kaltura repo key, add the Kaltura repo and fetch the repo metadata.
+
+If using Debian: Jessie [8] or Ubuntu: Trusty [14.04], edit/create /etc/apt/sources.list.d/kaltura.list so that it reads:
+```
+deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/debian mercury main
+```
+
+And import the GPG key with:
+```
+# wget -O - http://installrepo.kaltura.org/repo/apt/debian/kaltura-deb.gpg.key|apt-key add -
+```
+
+Or, if using Ubuntu Xenial [16.04] edit/create /etc/apt/sources.list.d/kaltura.list to read:
+```
+deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/xenial mercury main
+```
+And import the GPG key with:
+```
+# wget -O - http://installrepo.kaltura.org/repo/apt/xenial/kaltura-deb-256.gpg.key|apt-key add -
+```
 
 ### The NFS server
 The NFS is the shared network storage between all machines in the cluster. To learn more about NFS read [this wikipedia article about NFS](http://en.wikipedia.org/wiki/Network_File_System).
@@ -115,11 +137,27 @@ Escape character is '^]'.
 
 
 ### The MySQL Database
+#### Debian Jessie/Ubuntu 14.04 MySQL server installation
 ```
-# wget -O - http://installrepo.kaltura.org/repo/apt/debian/kaltura-deb.gpg.key|apt-key add -
-# echo "deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/debian jupiter main" > /etc/apt/sources.list.d/kaltura.list 
+# apt-get install mysql-server
+```
+
+#### Ubuntu Xenial MySQL server installation
+The Ubuntu Xenial repos include MySQL of version 5.7 which the Kaltura Server does not currently support.
+Therefore, it is essential to install MySQL 5.5 instead.
+We recommend the use of the Percona deb packages but any MySQL 5.5 distribution should work equally well.
+To install the Percona MySQL 5.5 packages, run the following commands:
+```
+# wget https://repo.percona.com/apt/percona-release_0.1-4.xenial_all.deb
+# dpkg -i percona-release_0.1-4.xenial_all.deb
 # apt-get update
-# apt-get install mysql-server kaltura-postinst ntp 
+# apt-get install percona-server-server-5.5
+```
+
+
+
+```
+# apt-get install kaltura-postinst ntp 
 # /opt/kaltura/bin/kaltura-mysql-settings.sh
 # mysql -uroot -pYOUR_DB_ROOT_PASS
 mysql> GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'YOUR_DB_ROOT_PASS' WITH GRANT OPTION;
@@ -215,9 +253,6 @@ When query cache is enabled, the server intelligently chooses between master / s
 
 ### The Sphinx Indexing Server
 ```
-# wget -O - http://installrepo.kaltura.org/repo/apt/debian/kaltura-deb.gpg.key|apt-key add -
-# echo "deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/debian jupiter main" > /etc/apt/sources.list.d/kaltura.list 
-# apt-get update
 # apt-get install kaltura-sphinx
 ```
 
@@ -236,9 +271,6 @@ After installing the first cluster node, obtain the auto generated file placed u
 
 Front in Kaltura represents the machines hosting the user-facing components, including the Kaltura API, the KMC and Admin Console, MediaSpace and all client-side widgets. 
 ```
-# wget -O - http://installrepo.kaltura.org/repo/apt/debian/kaltura-deb.gpg.key|apt-key add -
-# echo "deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/debian jupiter main" > /etc/apt/sources.list.d/kaltura.list 
-# apt-get update
 # apt-get install kaltura-postinst
 # /opt/kaltura/bin/kaltura-nfs-client-config.sh <NFS host> <domain> <nobody-user> <nobody-group>
 # apt-get install kaltura-front kaltura-widgets kaltura-html5lib kaltura-html5-studio kaltura-clipapp 
@@ -266,9 +298,6 @@ Content-Type: text/xml
 ### Secondary Front nodes
 Front in Kaltura represents the machines hosting the user-facing components, including the Kaltura API, the KMC and Admin Console, MediaSpace and all client-side widgets. 
 ```
-# wget -O - http://installrepo.kaltura.org/repo/apt/debian/kaltura-deb.gpg.key|apt-key add -
-# echo "deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/debian jupiter main" > /etc/apt/sources.list.d/kaltura.list 
-# apt-get update
 # apt-get install kaltura-postinst
 # /opt/kaltura/bin/kaltura-nfs-client-config.sh <NFS host> <domain> <nobody-user> <nobody-group>
 # apt-get install kaltura-front kaltura-html5-studio kaltura-clipapp
@@ -282,8 +311,6 @@ Batch in Kaltura represents the machines running all async operations. To learn 
 It is strongly recommended that you install at least 2 batch nodes for redundancy.
 
 ```
-# wget -O - http://installrepo.kaltura.org/repo/apt/debian/kaltura-deb.gpg.key|apt-key add -
-# echo "deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/debian jupiter main" > /etc/apt/sources.list.d/kaltura.list 
 # apt-get update
 # apt-get install kaltura-postinst
 # /opt/kaltura/bin/kaltura-nfs-client-config.sh <NFS host> <domain> <nobody-user> <nobody-group>
@@ -298,8 +325,6 @@ When running the `kaltura-batch-config.sh` installer on the batch machine, the i
 ### The DataWarehouse
 The DWH is Kaltura's Analytics server.
 ```
-# wget -O - http://installrepo.kaltura.org/repo/apt/debian/kaltura-deb.gpg.key|apt-key add -
-# echo "deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/debian jupiter main" > /etc/apt/sources.list.d/kaltura.list 
 # apt-get update
 # apt-get install kaltura-dwh kaltura-postinst
 # /opt/kaltura/bin/kaltura-nfs-client-config.sh <NFS host> <domain> <nobody-user> <nobody-group>
@@ -313,8 +338,6 @@ https://github.com/kaltura/nginx-vod-module/
 
 #### Installation:
 ```
-# wget -O - http://installrepo.kaltura.org/repo/apt/debian/kaltura-deb.gpg.key|apt-key add -
-# echo "deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/debian jupiter main" > /etc/apt/sources.list.d/kaltura.list 
 # apt-get update
 # apt-get install kaltura-base kaltura-nginx
 # /opt/kaltura/bin/kaltura-nfs-client-config.sh <NFS host> <domain> <nobody-user> <nobody-group>
