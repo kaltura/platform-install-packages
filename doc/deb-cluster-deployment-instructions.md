@@ -146,6 +146,8 @@ Escape character is '^]'.
 The Ubuntu Xenial repos include MySQL of version 5.7 which the Kaltura Server does not currently support.
 Therefore, it is essential to install MySQL 5.5 instead.
 We recommend the use of the Percona deb packages but any MySQL 5.5 distribution should work equally well.
+**Please be aware that these packages cannot co-exist with the Xenial mysql-server packages.**
+
 To install the Percona MySQL 5.5 packages, run the following commands:
 ```
 # wget https://repo.percona.com/apt/percona-release_0.1-4.xenial_all.deb
