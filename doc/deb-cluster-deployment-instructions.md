@@ -5,7 +5,7 @@ Refer to the [All-In-One Kaltura Server Installation Guide](install-kaltura-deb-
 
 ### Instructions here are for a cluster with the following members:
 
-* [Setting up the Kaltura repos]()
+* [Setting up the Kaltura repos](#setting-up-the-kaltura-repos)
 * [Load Balancing](load_balancing.md)
 * [NFS server](#the-nfs-server)
 * [MySQL Database](#the-mysql-database)
