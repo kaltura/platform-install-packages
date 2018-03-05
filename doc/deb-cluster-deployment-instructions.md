@@ -64,7 +64,7 @@ Two working solutions to the AWS EC2 email limitations are:
 ### Setting up the Kaltura repos
 On all nodes, deploy the Kaltura repo key, add the Kaltura repo and fetch the repo metadata.
 
-If using Debian: Jessie [8] or Ubuntu: Trusty [14.04], edit/create /etc/apt/sources.list.d/kaltura.list so that it reads:
+When deploying on Debian Jessie [8] or Ubuntu Trusty [14.04], edit/create /etc/apt/sources.list.d/kaltura.list so that it reads:
 ```
 deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/debian mercury main
 ```
@@ -74,7 +74,7 @@ And import the GPG key with:
 # wget -O - http://installrepo.kaltura.org/repo/apt/debian/kaltura-deb.gpg.key|apt-key add -
 ```
 
-Or, if using Ubuntu Xenial [16.04] edit/create /etc/apt/sources.list.d/kaltura.list to read:
+When deploying on Ubuntu Xenial [16.04] edit/create /etc/apt/sources.list.d/kaltura.list to read:
 ```
 deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/xenial mercury main
 ```
@@ -154,7 +154,7 @@ To install the Percona MySQL 5.5 packages, run the following commands:
 # apt-get install percona-server-server-5.5
 ```
 
-
+Once the MySQL server is up and running, install the below packages and configure your DB:
 
 ```
 # apt-get install kaltura-postinst ntp 
