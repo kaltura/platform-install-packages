@@ -1,3 +1,21 @@
+kaltura-base (13.15.0-2) mercury; urgency=medium
+
+  * PLAT-8685: Get thumb file only if exists (https://github.com/kaltura/server/pull/6849)
+  * Fix first time input for field array configuration of type select (https://github.com/kaltura/server/pull/6844)
+  * PLAT-8645: Event notification: entry added to category fire base template (https://github.com/kaltura/server/pull/6843)
+  * Media Repurposing: added max entries limitation to dry run (https://github.com/kaltura/server/pull/6842)
+  * KMS-17162: Add ability to disallow live explicitly (https://github.com/kaltura/server/pull/6840)
+  * PLAT-8550: Add support for encrypted thumbnail - Facebook (https://github.com/kaltura/server/pull/6838)
+  * PLAT-8499: Add presentation order field to question cue point (https://github.com/kaltura/server/pull/6835)
+  * PLAT-8619: Order cue point items by start time (https://github.com/kaltura/server/pull/6834)
+  * PLAT-8645: New categoryEntry firebase http notification template (https://github.com/kaltura/server/pull/6832)
+  * PLAT-8550: Enable Facebook caption distribution for encrypted content (https://github.com/kaltura/server/pull/6827)
+  * PLAT-8492: Allow the editing of admin tags based on KS privilege (https://github.com/kaltura/server/pull/6823)
+  * PLAT-8633: Update viewMode and recordingStatus when live entry is no longer in broadcasting mode (https://github.com/kaltura/server/pull/6821)
+  * uiconf->get() requires a KS (https://github.com/kaltura/server/pull/6761)
+
+ -- Jess Portnoy <jess.portnoy@kaltura.com>  Fri, 09 Mar 2018 13:22:45 +0000
+
 kaltura-base (13.15.0-1) mercury; urgency=medium
 
   * Switching to 13.15.0
