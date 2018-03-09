@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.66
+Version: v2.67
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -82,6 +82,22 @@ fi
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Fri Mar 9 2018 Jess Portnoy <jess.portnoy@kaltura.com> - v2.67-1
+- FEC-7985 - [Player V2]Duplicate play events in Kava in playlist entry
+- WEBC-1059 - v3.0.71| Slide broadcast twice if starting streaming with slide when two producers are ed
+- SUP-13155 - unresponsive panel of stream selector in Canvas mobile
+- FEC-7923 - Ad timer for DFP VMAP tags on V2 player
+- SUP-13469 - Entries are not playing on a specific browser on HTTPS
+- SUP-12364 - Kwebcast - Live event - disable the comments (set EnableQnA as no) display irrelevant message
+- SUP-12372 - Black chapters thumbnails
+- SUP-13280 - Player: Play Button unresponsive on iOS after upgraded player.
+- SUP-13238 - Android SDK v3.0 - wrong labels in Multi Audio Chromecast menu
+- SUP-13309 - Webcast entries default to default layout every few seconds
+- FEC-7614 - Shaka upgrade to v2.3.2
+- flip behaviour to hide admin cuepoints unless explicitly turn them on (#3747)
+- changes to client to support dynamic embed and ECDN (#3715)
+- fix audio text on dash with chromecast (#3732)
+
 * Thu Feb 8 2018 Jess Portnoy <jess.portnoy@kaltura.com> - v2.66-1
 - FEV-139 - [IVQ-Player] change apply/continue to select
 - FEV-112 - [IVQ] quiz in playlist - answers below text

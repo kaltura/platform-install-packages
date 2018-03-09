@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 13.15.0
-Release: 12
+Release: 13
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -329,38 +329,21 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Thu Mar 8 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.15.0-12
-- Nightly build.
+* Fri Mar 9 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.15.0-13
+- PLAT-8685: Get thumb file only if exists (https://github.com/kaltura/server/pull/6849)
+- Fix first time input for field array configuration of type select (https://github.com/kaltura/server/pull/6844)
+- PLAT-8645: Event notification: entry added to category fire base template (https://github.com/kaltura/server/pull/6843)
+- Media Repurposing: added max entries limitation to dry run (https://github.com/kaltura/server/pull/6842)
+- KMS-17162: Add ability to disallow live explicitly (https://github.com/kaltura/server/pull/6840)
+- PLAT-8550: Add support for encrypted thumbnail - Facebook (https://github.com/kaltura/server/pull/6838)
+- PLAT-8499: Add presentation order field to question cue point (https://github.com/kaltura/server/pull/6835)
+- PLAT-8619: Order cue point items by start time (https://github.com/kaltura/server/pull/6834)
+- PLAT-8645: New categoryEntry firebase http notification template (https://github.com/kaltura/server/pull/6832)
+- PLAT-8550: Enable Facebook caption distribution for encrypted content (https://github.com/kaltura/server/pull/6827)
+- PLAT-8492: Allow the editing of admin tags based on KS privilege (https://github.com/kaltura/server/pull/6823)
+- PLAT-8633: Update viewMode and recordingStatus when live entry is no longer in broadcasting mode (https://github.com/kaltura/server/pull/6821)
+- uiconf->get() requires a KS (https://github.com/kaltura/server/pull/6761)
 
-* Wed Mar 7 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.15.0-11
-- Nightly build.
-
-* Tue Mar 6 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.15.0-10
-- Nightly build.
-
-* Mon Mar 5 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.15.0-9
-- Nightly build.
-
-* Sun Mar 4 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.15.0-8
-- Nightly build.
-
-* Sat Mar 3 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.15.0-7
-- Nightly build.
-
-* Fri Mar 2 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.15.0-6
-- Nightly build.
-
-* Thu Mar 1 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.15.0-5
-- Nightly build.
-
-* Wed Feb 28 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.15.0-4
-- Nightly build.
-
-* Tue Feb 27 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.15.0-3
-- Nightly build.
-
-* Mon Feb 26 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.15.0-2
-- Nightly build.
 
 * Mon Feb 26 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.15.0-1
 - Ver Bounce to 13.15.0

@@ -1,7 +1,7 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmc
 Version: v5.43.12
-Release: 1
+Release: 2
 Summary: Kaltura Management Console
 
 Group: System Management	
@@ -85,6 +85,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Fri Mar 9 2018 Jess Portnoy <jess.portnoy@kaltura.com> - v5.43.12-2
+- Ver bounce of HTML5 player to v2.67
+
 * Tue Feb 6 2018 Jess Portnoy <jess.portnoy@kaltura.com> - v5.43.12-1
 - PLAT-8413 - add two types of Chinese subtitles
 - Ver bounce of HTML5 player to v2.66
