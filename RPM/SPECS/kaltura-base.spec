@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 13.15.0
-Release: 13
+Version: 13.16.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -329,6 +329,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Mar 12 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.16.0-1
+- Ver Bounce to 13.16.0
+
 * Fri Mar 9 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.15.0-13
 - PLAT-8685: Get thumb file only if exists (https://github.com/kaltura/server/pull/6849)
 - Fix first time input for field array configuration of type select (https://github.com/kaltura/server/pull/6844)
