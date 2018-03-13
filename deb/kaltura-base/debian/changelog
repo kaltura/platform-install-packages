@@ -1,3 +1,9 @@
+kaltura-base (13.16.0-1) mercury; urgency=medium
+
+  * Switching to 13.16.0
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 12 Mar 2018 14:17:02 +0000
+
 kaltura-base (13.15.0-2) mercury; urgency=medium
 
   * PLAT-8685: Get thumb file only if exists (https://github.com/kaltura/server/pull/6849)
