@@ -7,7 +7,7 @@
 Summary: Kaltura Open Source Video Platform - batch server 
 Name: kaltura-batch
 Version: 13.16.0
-Release: 1
+Release: 2
 License: AGPLv3+
 Group: Server/Platform 
 Source0: zz-%{name}.ini
@@ -131,6 +131,9 @@ service httpd restart
 
 
 %changelog
+* Tue Mar 13 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.16.0-2
+- batch.ini.template: Added missing params.ffmpegCmd directive under [KAsyncExtractMedia : JobHandlerWorker]
+
 * Mon Mar 12 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.16.0-1
 - Ver Bounce to 13.16.0
 
