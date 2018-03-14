@@ -83,7 +83,7 @@ In such case, the postinst script for kaltrua-db will fail, if so, adjust it and
 The Ubuntu Xenial repos include MySQL of version 5.7 which the Kaltura Server does not currently support.
 Therefore, it is essential to install MySQL 5.5 instead.
 We recommend the use of the Percona deb packages but any MySQL 5.5 distribution should work equally well.
-See [Installing the MySQL 5.5 Percona deb package](install_percona_deb.md)
+See [Installing the MySQL 5.5 Percona deb package](install-percona-deb.md)
 
 When installing an all in one instance, for security reasons, it is best to bind the MySQL daemon to 127.0.0.1 [loopback].
 When prompted for the MySQL host/IP, please use ```127.0.0.1``` rather than ```localhost``` since the server code uses the PHP PDO MySQL extension and setting the host to localhost will cause it to attempt to connect via a UNIX socket, as opposed to over TCP, which may fa
