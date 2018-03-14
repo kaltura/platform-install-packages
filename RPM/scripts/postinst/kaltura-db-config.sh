@@ -67,8 +67,9 @@ MYMAJVER=`echo $MYVER| awk -F "." '{print $1}'`
 MYMINORVER=`echo $MYVER| awk -F "." '{print $2}'`
 
 if [ "$MYMAJVER" -ne 5 ];then
-	echo -e "${BRIGHT_RED}Your version of MySQL is not compatible with Kaltura at the moment. 
-Please install and configure MySQL 5.1 according to the instructions on the Kaltura install manual before proceeding with the Kaltura installation.${NORMAL}"
+	echo -e "${BRIGHT_RED}Your version of MySQL is incompatible. 
+The Kaltura Server supports all MySQL versions between 5.1 and 5.6, including.
+Please install and configure MySQL according to the instructions on the Kaltura install manual before proceeding with the Kaltura installation.${NORMAL}"
 	exit 1
 else
 	echo -e "${CYAN}Ver $MYVER found compatible${NORMAL}"
