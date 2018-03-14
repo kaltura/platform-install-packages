@@ -18,10 +18,9 @@ After installing the percona-server-server-5.5 deb and all its dependencies, run
 # mysql_secure_installation
 ```
 
-**Be sure to set a MySQL root password. 
+**Be sure to set a MySQL root password.**
 
-When installing an all in one Kaltura instance, simply input 'Y' whenever prompted by `mysql_secure_installation`
-
+**When installing an all in one Kaltura instance, simply input 'Y' whenever prompted by `mysql_secure_installation`. 
 When deploying a cluster, input 'Y' in response to all prompts EXCEPT for "Disallow root login remotely?" to which you should reply with 'N'**
 
 Edit /etc/mysql/my.cnf so that it incldues the following directives under the ```[mysqld]``` section:
