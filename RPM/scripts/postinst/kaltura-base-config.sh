@@ -210,7 +210,7 @@ The default is only good for testing, on a production ENV you should adjust acco
         echo -en "${CYAN}Secondary Sphinx hostname [leave empty if none]: ${NORMAL} "
         read -e SPHINX_SERVER2
         if [ -z $SPHINX_SERVER2 ];then
-                SPHINX_SERVER2="$LOCALHOST"
+                SPHINX_SERVER2="$SPHINX_SERVER1"
         fi
 
 	while [ -z "$SERVICE_URL" -o -z "$PROTOCOL" ];do
