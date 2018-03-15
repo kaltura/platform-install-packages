@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.33
-Release: 37
+Release: 38
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -82,6 +82,9 @@ find %{_sysconfdir}/logrotate.d -type l -name "kaltura_*" -exec rm {} \;
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Thu Mar 15 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.33-38
+- If no second sphinx host was inputted, use the value from SPHINX_SERVER1 rather than $LOCALHOST.
+  
 * Wed Feb 28 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.33-37
 - fix delete_partner.php
 
