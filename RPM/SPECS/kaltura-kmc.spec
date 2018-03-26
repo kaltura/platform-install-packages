@@ -1,7 +1,7 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmc
 Version: v5.43.13
-Release: 1
+Release: 5
 Summary: Kaltura Management Console
 
 Group: System Management	
