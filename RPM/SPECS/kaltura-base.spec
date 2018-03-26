@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 13.16.0
-Release: 16
+Version: 13.17.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -329,6 +329,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Mar 26 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.17.0-1
+- Ver Bounce to 13.17.0
+
 * Mon Mar 26 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.16.0-16
 - SUP-13320: data::serveAction() - pass key and IV to dumpFile() (https://github.com/kaltura/server/pull/6901)
 - webrtc/AVC recordings: if FR==0, set FR to 30 (https://github.com/kaltura/server/pull/6890)

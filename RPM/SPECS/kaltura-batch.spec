@@ -6,8 +6,8 @@
 %define apache_group	apache
 Summary: Kaltura Open Source Video Platform - batch server 
 Name: kaltura-batch
-Version: 13.16.0
-Release: 2
+Version: 13.17.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: zz-%{name}.ini
@@ -131,6 +131,9 @@ service httpd restart
 
 
 %changelog
+* Mon Mar 26 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.17.0-1
+- Ver Bounce to 13.17.0
+
 * Tue Mar 13 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.16.0-2
 - batch.ini.template: Added missing params.ffmpegCmd directive under [KAsyncExtractMedia : JobHandlerWorker]
 
