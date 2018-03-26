@@ -1,7 +1,7 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmc
-Version: v5.43.12
-Release: 2
+Version: v5.43.13
+Release: 1
 Summary: Kaltura Management Console
 
 Group: System Management	
@@ -85,6 +85,10 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Mar 26 2018 jess.portnoy@kaltura.com <Jess Portnoy> - v5.43.13-1
+- KMS-17189 - [KMC] Remove old players
+- PLAT-8681 - Change the name of Sample CSV/XML files for Bulk Upload
+
 * Fri Mar 9 2018 Jess Portnoy <jess.portnoy@kaltura.com> - v5.43.12-2
 - Ver bounce of HTML5 player to v2.67
 

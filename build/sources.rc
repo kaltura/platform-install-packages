@@ -190,7 +190,7 @@ KALTURA_PLAYSERVER_URI="https://github.com/kaltura/play-server/archive/$KALTURA_
 KALTURA_PLAYSERVER_RPM_NAME=kaltura-play-server
 
 # Kaltura KMC:
-KMC_MINUS_V_VERSION=5.43.12
+KMC_MINUS_V_VERSION=5.43.13
 KMC_VERSION=v$KMC_MINUS_V_VERSION
 KMC_LOGIN_MINUS_V_VERSION=1.2.9
 KMC_LOGIN_VERSION=v$KMC_LOGIN_MINUS_V_VERSION
@@ -198,7 +198,7 @@ KMC_URI="https://github.com/kaltura/kmc/releases/download/$KMC_VERSION/$KMC_VERS
 KMC_LOGIN_URI="https://github.com/kaltura/kmc-login/releases/download/$KMC_LOGIN_VERSION/$KMC_LOGIN_VERSION.zip"
 KMC_UICONF_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalsource/uiconf/kaltura/kmc"
 KMC_RPM_NAME="kaltura-kmc"
-KMC_DOC_VERSION="master"
+KMC_DOC_VERSION="Mercury-13.16.0"
 KMC_DOC_URI="https://github.com/kaltura/kmc-docs/archive/$KMC_DOC_VERSION.zip"
 
 # Kaltura KDP3:

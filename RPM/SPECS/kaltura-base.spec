@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 13.16.0
-Release: 15
+Release: 16
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -329,6 +329,23 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Mar 26 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.16.0-16
+- SUP-13320: data::serveAction() - pass key and IV to dumpFile() (https://github.com/kaltura/server/pull/6901)
+- webrtc/AVC recordings: if FR==0, set FR to 30 (https://github.com/kaltura/server/pull/6890)
+- SUP-13904: Handle chunk split edge conditions (https://github.com/kaltura/server/pull/6887)
+- Handle cases where LastLoginTime is empty (https://github.com/kaltura/server/pull/6886)
+- Only update LastLoginTime if more than 600 seconds passed since the last update (https://github.com/kaltura/server/pull/6885)
+- PLAT-8695: Quiz mechanism - allow excluding questions from score (https://github.com/kaltura/server/pull/6874)
+- Added missing params.ffmpegCmd directive (https://github.com/kaltura/server/pull/6866)
+- Chunked Encoding: for the last chunk, make sure that the loop/t period does not overflow the end of the file (https://github.com/kaltu
+- SUP-13373: Support setting the default audio track in the manifest (https://github.com/kaltura/server/pull/6862)
+- PLAT-8697: Extend FileAsset so it can handle objectType of type entry (https://github.com/kaltura/server/pull/6861)
+- It is not possible to unset $this inside an object method (https://github.com/kaltura/server/pull/6858)
+- Align the declaration of entry::save() with that of Baseentry::save() (https://github.com/kaltura/server/pull/6847)
+- Use OpenSSL functions if mcrypt is not available (https://github.com/kaltura/server/pull/6826)
+- SUP-13039: Live streaming: protocol selection improvements (https://github.com/kaltura/server/pull/6783)
+- PLAT-8723: User Id should always be lowercase when testing match (https://github.com/kaltura/server/pull/6907)
+
 * Sun Mar 25 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.16.0-15
 - Nightly build.
 
