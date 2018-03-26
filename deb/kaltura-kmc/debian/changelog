@@ -1,3 +1,10 @@
+kaltura-kmc (5.43.13-1) mercury; urgency=medium
+
+  * KMS-17189 - [KMC] Remove old players
+  * PLAT-8681 - Change the name of Sample CSV/XML files for Bulk Upload
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 26 Mar 2018 12:00:37 +0000
+
 kaltura-kmc (5.43.12-2) mercury; urgency=medium
 
   * Ver bounce of HTML5 player to v2.67
