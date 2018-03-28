@@ -1,3 +1,9 @@
+kaltura-base (13.17.0-1) mercury; urgency=medium
+
+  * Switching to 13.17.0
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 26 Mar 2018 17:53:33 +0000
+
 kaltura-base (13.16.0-2) mercury; urgency=medium
 
   * SUP-13320: data::serveAction() - pass key and IV to dumpFile() (https://github.com/kaltura/server/pull/6901)
