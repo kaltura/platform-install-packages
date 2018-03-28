@@ -88,6 +88,7 @@ binary-indep: install
 	cp debian/batch.ini.template $(tree)/configurations/batch/batch.ini.template
 	cp debian/kaltura-base.sh etc/profile.d/
 	cp debian/KDLOperatorFfmpeg1_1_1.php $(tree)/infra/cdl/kdl/KDLOperatorFfmpeg1_1_1.php
+	cp debian/03.uiConf.ini $(tree)/deployment/base/scripts/init_data/03.uiConf.ini
 	cp debian/start_page.php $(tree)/start/index.php
 	cp debian/start_page_survey.png $(tree)/start/img/survey.png
 	sed -i "s@^\(params.ImageMagickCmd\)\s*=.*@\1=convert@" $(tree)/configurations/batch/batch.ini.template
