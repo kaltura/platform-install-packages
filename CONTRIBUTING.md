@@ -22,6 +22,7 @@ The main repos are:
 * https://github.com/kaltura/server - The Core Backend (The Kaltura Server)
 * https://github.com/kaltura/nginx-vod-module - NGINX-based MP4 Repackager
 * https://github.com/kaltura/mwEmbed - The Kaltura JS Player Framework (aka Universal or v2 Player)
+* https://github.com/kaltura/kaltura-player-js - The Kaltura JS Player Framework (aka v3 player or TV Platform Player)
 * https://github.com/kaltura/kmc - The Kaltura Management Console (aka KMC)
 * https://github.com/kaltura/player-studio - The HTML5 Player Studio (aka Studio v2)
 
