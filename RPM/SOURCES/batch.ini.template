@@ -72,8 +72,9 @@ enabledWorkers.KAsyncIntegrateCloser                = 1
 enabledWorkers.KAsyncClearCuePoints                 = 1
 enabledWorkers.KAsyncConvertThumbAssetsGenerator    = 1
 enabledWorkers.KAsyncLiveToVod                      = 1
-enabledWorkers.KAsyncCopyCaptions					= 1
-enabledWorkers.KAsyncCopyCuePoints                   = 1
+enabledWorkers.KAsyncCopyCaptions		    = 1
+enabledWorkers.KAsyncCopyCuePoints                  = 1
+enabledWorkers.KAsyncUsersCsv 			    = 1
 
 [mainTemplate : template]
 enabledWorkers.DirectoryCleanupShared               = 1
@@ -799,3 +800,17 @@ friendlyName					    = Copy Caption Assets
 type						    = KAsyncCopyCaptions
 scriptPath					    = ../plugins/content/caption/base/batch/CopyCaptions/KAsyncCopyCaptionsExe.php
 
+[KAsyncUsersCsv : JobHandlerWorker]
+id						    = 680
+friendlyName					    = Users Csv
+type						    = KAsyncUsersCsv
+params.localTempPath                                = @TMP_DIR@/userscsv
+params.sharedTempPath                               = @WEB_DIR@/tmp/userscsv
+scriptPath					    = batches/UsersCsv/kAsyncUsersCsvExe.php
+maximumExecutionTime			            = 3600
+
+[KAsyncCopyCuePoints : JobHandlerWorker]
+id                                                  = 690
+friendlyName                                        = Copy Cue Point
+type                                                = KAsyncCopyCuePoints
+scriptPath                                          = ../plugins/cue_points/base/batch/copyCuePoints/KAsyncCopyCuePointsExe.php
