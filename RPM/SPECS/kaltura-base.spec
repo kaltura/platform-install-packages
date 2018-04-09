@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 13.17.0
-Release: 17
+Release: 18
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -152,7 +152,7 @@ cp %{SOURCE32} $RPM_BUILD_ROOT%{prefix}/app/infra/cdl/kdl/KDLOperatorFfmpeg1_1_1
 
 # tmp patch for the new start page, to be removed once merged into the server repo
 cp %{SOURCE35} $RPM_BUILD_ROOT%{prefix}/app/start/index.php
-cp %{SOURCE36} $RPM_BUILD_ROOT%{prefix}/app/start/img/survery.png
+cp %{SOURCE36} $RPM_BUILD_ROOT%{prefix}/app/start/img/survey.png
 cp %{SOURCE37} $RPM_BUILD_ROOT%{prefix}/app/start/img/newsletter.png
 cp %{SOURCE38} $RPM_BUILD_ROOT%{prefix}/app/start/css/landing-page.css
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content
