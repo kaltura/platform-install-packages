@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 13.17.0
-Release: 16
+Release: 17
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -329,47 +329,25 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Sun Apr 8 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.17.0-16
-- Nightly build.
-
-* Sat Apr 7 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.17.0-15
-- Nightly build.
-
-* Fri Apr 6 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.17.0-14
-- Nightly build.
-
-* Thu Apr 5 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.17.0-13
-- Nightly build.
-
-* Wed Apr 4 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.17.0-12
-- Nightly build.
-
-* Tue Apr 3 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.17.0-11
-- Nightly build.
-
-* Mon Apr 2 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.17.0-10
-- Nightly build.
-
-* Sun Apr 1 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.17.0-8
-- Nightly build.
-
-* Sat Mar 31 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.17.0-7
-- Nightly build.
-
-* Fri Mar 30 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.17.0-6
-- Nightly build.
-
-* Thu Mar 29 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.17.0-5
-- Nightly build.
-
-* Wed Mar 28 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.17.0-4
-- Nightly build.
-
-* Tue Mar 27 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.17.0-3
-- Nightly build.
-
-* Mon Mar 26 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.17.0-2
-- Nightly build.
+* Mon Apr 9 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.17.0-17
+- apimon - log conditional cache sql validations (https://github.com/kaltura/server/pull/6957)
+- PLAT-8768: Invalidate cache when updating answer cuepoint (https://github.com/kaltura/server/pull/6951)
+- Fix plugins dependency, required for Swift client lib (https://github.com/kaltura/server/pull/6948)
+- PLAT-8708: add `ASE_USER_SESSION_PERMISSION` permission to fileAsset service (https://github.com/kaltura/server/pull/6946)
+- SUP-13191: KAsyncLiveToVod - in the event `cuePoint->listAction()` failed, retry (https://github.com/kaltura/server/pull/6944)
+- Plat 8651: kClipManager - set partner Id on the BatchJob object (clip concat) (https://github.com/kaltura/server/pull/6943)
+- SUP-13990: Fix seek issues with large GOPs (https://github.com/kaltura/server/pull/6939)
+- plat 8651: chop and slice (https://github.com/kaltura/server/pull/6938)
+- WEBC-1162: add lastBroadcastEndTime to KalturaLiveEntry (https://github.com/kaltura/server/pull/6936)
+- PLAT-8735: Skip Sphinx query for specific partners and actions (https://github.com/kaltura/server/pull/6929)
+- SUP-13708: Update embedCodeGenerator (https://github.com/kaltura/server/pull/6927)
+- SUP-13708: Add allow="autoplay; fullscreen; encrypted-media" to player iframe (https://github.com/kaltura/server/pull/6925)
+- KalturaDocCommentParser: add the ability to annotate services and actions as beta (https://github.com/kaltura/server/pull/6923)
+- PLAT-8551: Distribution - correctly handle encrypted files (https://github.com/kaltura/server/pull/6921)
+- SUP-13039: Playing apple http with non kaltura live (https://github.com/kaltura/server/pull/6920)
+- SUP-13614 - Include entry flavor version when requesting playManifest (https://github.com/kaltura/server/pull/6913)
+- PLAT-8311 - Fetch partner ID 0's static playlists from the DB rather than Sphinx (https://github.com/kaltura/server/pull/6903)
+- exportToCsvAction(): KalturaUserFilter $filter can be null (https://github.com/kaltura/server/pull/6902)
 
 * Mon Mar 26 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.17.0-1
 - Ver Bounce to 13.17.0

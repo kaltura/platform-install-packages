@@ -33,6 +33,34 @@ include_once(__DIR__ . '/../alpha/config/kConf.php');
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script>
+    function subscribe_to_list()
+    {
+        var email = document.getElementById('email').value;
+        var name = document.getElementById('name').value;
+        var company = document.getElementById('company').value;
+        message=document.getElementById("message");
+        message.style.color = 'blue';
+	message.innerHTML = 'In progress... This may take a few seconds.';
+        $.ajax({
+                  type: 'POST',
+                  url: 'https://installytics.kaltura.org/report/mailinglist.php',
+                  data: {'name': name,'email': email,'company':company},
+                  success: function(data){
+                      if (data!==null){
+                        if (data.indexOf("ERR") !==-1) {
+                            message.style.color = 'red';
+                        }else{
+                            message.style.color = 'green';
+                        }
+                        message.className='unhidden';
+                        message.innerHTML = data;
+                        message.style.fontWeight="bold";
+                        } 
+                      } 
+        });
+    }
+    </script>
 
 </head>
 
@@ -90,6 +118,8 @@ include_once(__DIR__ . '/../alpha/config/kConf.php');
         <!-- /.container -->
 
     </div>
+
+    </div>
     <!-- /.content-section-a -->
 
     <a name="kmc" id="kmc"></a>
@@ -112,11 +142,53 @@ include_once(__DIR__ . '/../alpha/config/kConf.php');
 
         </div>
         <!-- /.container -->
+    <a name="newsletter" id="newsletter"></a>
+    <div class="content-section-a">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
+                    <hr class="section-heading-spacer">
+                    <div class="clearfix"></div>
+                    <h2 class="section-heading">Register for updates</h2>
+                    <p class="lead">Join our mailing list to get release notifications.</p>
+		    <form action="javascript:subscribe_to_list()" method="post">
+			<fieldset>
+			<div class="form-group valid-row">
+			    <label for="email">E-mail address: <span class="required">*</span></label>
+			    <input id="email" required name="email"  type="text" class="form-control required">
+			</div>
+			<div class="form-group valid-row">
+			    <label for="name">Name: <span class="required">*</span></label>
+			    <input id="name" required name="name" class="form-control required">
+			</div>
+			<div class="form-group valid-row">
+			    <label for="company">Company:</label>
+			    <input id="company" name="company" class="form-control">
+			</div>
+			<div class="btn-holder">
+			    <input type="submit" class="btn btn-default" value="Register">
+			</div>
+			</fieldset>
+		    </form>
+		    </br>
+		    <div id="message"></div>
+		    </br>
+
+                </div>
+                <!--div class="col-lg-5 col-sm-pull-6  col-sm-6">
+                    <img class="img-responsive" src="img/dog.png" alt="">
+                </div-->
+            </div>
+
+        </div>
+        <!-- /.container -->
 
     </div>
     <!-- /.content-section-b -->
 	<a name="survey" id="survey"></a>
-    <div class="content-section-a">
+    <div class="content-section-b">
 
         <div class="container">
             <div class="row">

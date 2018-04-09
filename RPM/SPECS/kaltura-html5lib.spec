@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.67
+Version: v2.68
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -82,6 +82,21 @@ fi
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Mon Apr 9 2018 jess.portnoy@kaltura.com <Jess Portnoy> - v2.68-1
+- SUP-13309 - Webcast entries default to default layout every few seconds
+- FEC-8074 - KAVA Player V2 - "playlistID" parameter isn't fired when playlist plays
+- FEC-8072 - KAVA Player V2 - "eventIndex" and "playTimeSum" parameters aren't reset after change media
+- SUP-13708 - Player: Changes in Chrome v64 ang moving forward
+- KMS-17072 - No information and elements when question icon clicked on Submit screen
+- KMS-16785 - new option to remove welcome page
+- KMS-17284 - Text not displayed after user finished to answer all questions (Preview mode)
+- KMS-17301 - True and False question on top of each other instead of next to each other
+- fix: kava live support
+- Support pure-Kaltura projects and vendor engine
+- add new flag to force adaptive for video less than 10 sec Kaltura.force10secProgressive default is true
+- fix: operator is not valid for PHP string concatenation
+- feat: kava addons
+
 * Fri Mar 9 2018 Jess Portnoy <jess.portnoy@kaltura.com> - v2.67-1
 - FEC-7985 - [Player V2]Duplicate play events in Kava in playlist entry
 - WEBC-1059 - v3.0.71| Slide broadcast twice if starting streaming with slide when two producers are ed

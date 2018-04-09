@@ -73,6 +73,7 @@ enabledWorkers.KAsyncClearCuePoints                 = 1
 enabledWorkers.KAsyncConvertThumbAssetsGenerator    = 1
 enabledWorkers.KAsyncLiveToVod                      = 1
 enabledWorkers.KAsyncCopyCaptions					= 1
+enabledWorkers.KAsyncCopyCuePoints                   = 1
 
 [mainTemplate : template]
 enabledWorkers.DirectoryCleanupShared               = 1
