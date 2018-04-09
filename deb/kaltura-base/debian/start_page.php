@@ -33,6 +33,34 @@ include_once(__DIR__ . '/../alpha/config/kConf.php');
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script>
+    function subscribe_to_list()
+    {
+        var email = document.getElementById('email').value;
+        var name = document.getElementById('name').value;
+        var company = document.getElementById('company').value;
+        message=document.getElementById("message");
+        message.style.color = 'blue';
+	message.innerHTML = 'In progress... This may take a few seconds.';
+        $.ajax({
+                  type: 'POST',
+                  url: 'https://installytics.kaltura.org/report/mailinglist.php',
+                  data: {'name': name,'email': email,'company':company},
+                  success: function(data){
+                      if (data!==null){
+                        if (data.indexOf("ERR") !==-1) {
+                            message.style.color = 'red';
+                        }else{
+                            message.style.color = 'green';
+                        }
+                        message.className='unhidden';
+                        message.innerHTML = data;
+                        message.style.fontWeight="bold";
+                        } 
+                      } 
+        });
+    }
+    </script>
 
 </head>
 
@@ -68,6 +96,43 @@ include_once(__DIR__ . '/../alpha/config/kConf.php');
     <!-- /.intro-header -->
 
     <!-- Page Content -->
+    <a name="vid" id="vid"></a>
+    <div class="content-section-b">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
+                    <hr class="section-heading-spacer">
+                    <div class="clearfix"></div>
+                    <h2 class="section-heading">Kaltura CE Intro Video</h2>
+                    <p class="lead">Take a look at this short video presented by Zohar Babin, Kaltura VP Platform and Community, and get some tips and tricks for how to get started with your new Kaltura Community Edition.</p>
+                </div>
+                <div class="col-lg-5 col-sm-pull-6  col-sm-6">
+			<div style="width: 100%;display: inline-block;position: relative;"> 
+				<!--  inner pusher div defines aspect ratio: in this case 16:9 ~ 56.25% -->
+				<div id="dummy" style="margin-top: 56.25%;"></div>
+				<!--  the player embed target, set to take up available absolute space   -->
+				<div id="kaltura_player" style="position:absolute;top:0;left:0;left: 0;right: 0;bottom:0;">
+				</div>
+			</div>
+			<script src="https://cdnapisec.kaltura.com/p/2353151/sp/235315100/embedIframeJs/uiconf_id/42286192/partner_id/2353151"></script> 
+			<script> 
+			kWidget.embed(
+				{ "targetId": "kaltura_player", 
+				"wid": "_2353151", 
+				"uiconf_id": 42286192, 
+				"flashvars": { "streamerType": "auto" }, 
+				"cache_st": 1523029447, 
+				"entry_id": "1_uhucc5ac" 
+				}
+			); 
+			</script>
+                </div>
+            </div>
+
+        </div>
+    </div>
 
 	<a name="adminconsole" id="adminconsole"></a>
     <div class="content-section-a">
@@ -87,10 +152,10 @@ include_once(__DIR__ . '/../alpha/config/kConf.php');
             </div>
 
         </div>
-        <!-- /.container -->
 
     </div>
-    <!-- /.content-section-a -->
+
+    </div>
 
     <a name="kmc" id="kmc"></a>
     <div class="content-section-b">
@@ -111,12 +176,52 @@ include_once(__DIR__ . '/../alpha/config/kConf.php');
             </div>
 
         </div>
-        <!-- /.container -->
+    </div>
+    <a name="newsletter" id="newsletter"></a>
+    <div class="content-section-a">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
+                    <hr class="section-heading-spacer">
+                    <div class="clearfix"></div>
+                    <h2 class="section-heading">Register for updates</h2>
+                    <p class="lead">Join our mailing list to get release notifications.</p>
+		    <form action="javascript:subscribe_to_list()" method="post">
+			<fieldset>
+			<div class="form-group valid-row">
+			    <label for="email">E-mail address: <span class="required">*</span></label>
+			    <input id="email" required name="email"  type="text" class="form-control required">
+			</div>
+			<div class="form-group valid-row">
+			    <label for="name">Name: <span class="required">*</span></label>
+			    <input id="name" required name="name" class="form-control required">
+			</div>
+			<div class="form-group valid-row">
+			    <label for="company">Company:</label>
+			    <input id="company" name="company" class="form-control">
+			</div>
+			<div class="btn-holder">
+			    <input type="submit" class="btn btn-default" value="Register">
+			</div>
+			</fieldset>
+		    </form>
+		    </br>
+		    <div id="message"></div>
+		    </br>
+
+                </div>
+                <div class="col-lg-5 col-sm-pull-6  col-sm-6">
+                    <img class="img-responsive" src="img/newsletter.png" alt="">
+                </div>
+            </div>
+
+        </div>
 
     </div>
-    <!-- /.content-section-b -->
 	<a name="survey" id="survey"></a>
-    <div class="content-section-a">
+    <div class="content-section-b">
 
         <div class="container">
             <div class="row">
@@ -133,7 +238,6 @@ include_once(__DIR__ . '/../alpha/config/kConf.php');
             </div>
 
         </div>
-        <!-- /.container -->
 
     </div>
 

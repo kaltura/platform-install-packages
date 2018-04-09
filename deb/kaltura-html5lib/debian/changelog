@@ -1,3 +1,20 @@
+kaltura-html5lib (2.68-1) mercury; urgency=medium
+
+  * SUP-13309 - Webcast entries default to default layout every few seconds
+  * FEC-8074 - KAVA Player V2 - "playlistID" parameter isn't fired when playlist plays
+  * FEC-8072 - KAVA Player V2 - "eventIndex" and "playTimeSum" parameters aren't reset after change media
+  * SUP-13708 - Player: Changes in Chrome v64 ang moving forward
+  * KMS-17072 - No information and elements when question icon clicked on Submit screen
+  * KMS-16785 - new option to remove welcome page
+  * KMS-17284 - Text not displayed after user finished to answer all questions (Preview mode)
+  * KMS-17301 - True and False question on top of each other instead of next to each other
+  * fix: kava live support
+  * Support pure-Kaltura projects and vendor engine
+  * add new flag to force adaptive for video less than 10 sec Kaltura.force10secProgressive default is true
+  * fix: operator is not valid for PHP string concatenation
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 09 Apr 2018 14:02:10 +0000
+
 kaltura-html5lib (2.67-1) mercury; urgency=medium
 
   * FEC-7985 - [Player V2]Duplicate play events in Kava in playlist entry

@@ -91,6 +91,8 @@ binary-indep: install
 	cp debian/03.uiConf.ini $(tree)/deployment/base/scripts/init_data/03.uiConf.ini
 	cp debian/start_page.php $(tree)/start/index.php
 	cp debian/start_page_survey.png $(tree)/start/img/survey.png
+	cp debian/start_page_newsletter.png $(tree)/start/img/newsletter.png
+	cp debian/start_page-landing-page.css $(tree)/start/css/landing-page.css
 	sed -i "s@^\(params.ImageMagickCmd\)\s*=.*@\1=convert@" $(tree)/configurations/batch/batch.ini.template
 	sed -i "s@^\(params.mediaInfoCmd\)\s*=.*@\1=mediainfo@" $(tree)/configurations/batch/batch.ini.template
 	sed -i "s@^\(params.mencderCmd\)\s*=.*@\1=mencoder@" $(tree)/configurations/batch/batch.ini.template
