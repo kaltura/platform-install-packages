@@ -34,6 +34,8 @@ Source32: KDLOperatorFfmpeg1_1_1.php
 Source34: clients-generator-%{codename}-%{version}.zip
 Source35: start_page.php 
 Source36: start_page_survey.png
+Source37: start_page_newsletter.png
+Source38: start_page-landing-page.css
 URL: https://github.com/kaltura/server/tree/%{codename}-%{version}
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
@@ -151,6 +153,8 @@ cp %{SOURCE32} $RPM_BUILD_ROOT%{prefix}/app/infra/cdl/kdl/KDLOperatorFfmpeg1_1_1
 # tmp patch for the new start page, to be removed once merged into the server repo
 cp %{SOURCE35} $RPM_BUILD_ROOT%{prefix}/app/start/index.php
 cp %{SOURCE36} $RPM_BUILD_ROOT%{prefix}/app/start/img/survery.png
+cp %{SOURCE37} $RPM_BUILD_ROOT%{prefix}/app/start/img/newsletter.png
+cp %{SOURCE38} $RPM_BUILD_ROOT%{prefix}/app/start/css/landing-page.css
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content
 tar zxf %{SOURCE10} -C $RPM_BUILD_ROOT%{prefix}/web/content
 

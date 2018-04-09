@@ -96,6 +96,43 @@ include_once(__DIR__ . '/../alpha/config/kConf.php');
     <!-- /.intro-header -->
 
     <!-- Page Content -->
+    <a name="vid" id="vid"></a>
+    <div class="content-section-b">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
+                    <hr class="section-heading-spacer">
+                    <div class="clearfix"></div>
+                    <h2 class="section-heading">Kaltura CE Intro Video</h2>
+                    <p class="lead">Take a look at this short video presented by Zohar Babin, Kaltura VP Platform and Community, and get some tips and tricks for how to get started with your new Kaltura Community Edition.</p>
+                </div>
+                <div class="col-lg-5 col-sm-pull-6  col-sm-6">
+			<div style="width: 100%;display: inline-block;position: relative;"> 
+				<!--  inner pusher div defines aspect ratio: in this case 16:9 ~ 56.25% -->
+				<div id="dummy" style="margin-top: 56.25%;"></div>
+				<!--  the player embed target, set to take up available absolute space   -->
+				<div id="kaltura_player" style="position:absolute;top:0;left:0;left: 0;right: 0;bottom:0;">
+				</div>
+			</div>
+			<script src="http://cdnapi.kaltura.com/p/2353151/sp/235315100/embedIframeJs/uiconf_id/42286192/partner_id/2353151"></script> 
+			<script> 
+			kWidget.embed(
+				{ "targetId": "kaltura_player", 
+				"wid": "_2353151", 
+				"uiconf_id": 42286192, 
+				"flashvars": { "streamerType": "auto" }, 
+				"cache_st": 1523029447, 
+				"entry_id": "1_uhucc5ac" 
+				}
+			); 
+			</script>
+                </div>
+            </div>
+
+        </div>
+    </div>
 
 	<a name="adminconsole" id="adminconsole"></a>
     <div class="content-section-a">
@@ -115,12 +152,10 @@ include_once(__DIR__ . '/../alpha/config/kConf.php');
             </div>
 
         </div>
-        <!-- /.container -->
 
     </div>
 
     </div>
-    <!-- /.content-section-a -->
 
     <a name="kmc" id="kmc"></a>
     <div class="content-section-b">
@@ -141,7 +176,7 @@ include_once(__DIR__ . '/../alpha/config/kConf.php');
             </div>
 
         </div>
-        <!-- /.container -->
+    </div>
     <a name="newsletter" id="newsletter"></a>
     <div class="content-section-a">
 
@@ -177,16 +212,14 @@ include_once(__DIR__ . '/../alpha/config/kConf.php');
 		    </br>
 
                 </div>
-                <!--div class="col-lg-5 col-sm-pull-6  col-sm-6">
-                    <img class="img-responsive" src="img/dog.png" alt="">
-                </div-->
+                <div class="col-lg-5 col-sm-pull-6  col-sm-6">
+                    <img class="img-responsive" src="img/newsletter.png" alt="">
+                </div>
             </div>
 
         </div>
-        <!-- /.container -->
 
     </div>
-    <!-- /.content-section-b -->
 	<a name="survey" id="survey"></a>
     <div class="content-section-b">
 
@@ -205,7 +238,6 @@ include_once(__DIR__ . '/../alpha/config/kConf.php');
             </div>
 
         </div>
-        <!-- /.container -->
 
     </div>
 
