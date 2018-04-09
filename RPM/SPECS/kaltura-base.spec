@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 13.17.0
-Release: 18
+Version: 13.18.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -333,6 +333,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Apr 9 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.18.0-1
+- Ver Bounce to 13.18.0
+
 * Mon Apr 9 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.17.0-17
 - apimon - log conditional cache sql validations (https://github.com/kaltura/server/pull/6957)
 - PLAT-8768: Invalidate cache when updating answer cuepoint (https://github.com/kaltura/server/pull/6951)
