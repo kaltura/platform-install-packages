@@ -116,7 +116,7 @@ include_once(__DIR__ . '/../alpha/config/kConf.php');
 				<div id="kaltura_player" style="position:absolute;top:0;left:0;left: 0;right: 0;bottom:0;">
 				</div>
 			</div>
-			<script src="http://cdnapi.kaltura.com/p/2353151/sp/235315100/embedIframeJs/uiconf_id/42286192/partner_id/2353151"></script> 
+			<script src="https://cdnapisec.kaltura.com/p/2353151/sp/235315100/embedIframeJs/uiconf_id/42286192/partner_id/2353151"></script> 
 			<script> 
 			kWidget.embed(
 				{ "targetId": "kaltura_player", 
