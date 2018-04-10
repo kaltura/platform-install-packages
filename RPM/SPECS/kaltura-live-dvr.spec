@@ -8,13 +8,13 @@
 
 Summary: Kaltura Open Source Video Platform - Live DVR
 Name: kaltura-livedvr
-Version: 1.25.2
+Version: 1.27.4
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires: kaltura-monit kaltura-base redhat-lsb-core nodejs >= 7.0.0 kaltura-nginx nodejs-chunked-stream nodejs-commander  nodejs-log4js nodejs-glob nodejs-mkdirp nodejs-q nodejs-q-io nodejs-touch nodejs-underscore nodejs-nconf nodejs-request nodejs-forever python27-python-poster python27-python-schedule python27-python-iso8601 python27-python-m3u8 python27-python-psutil python27-python-pycrypto 
+Requires: kaltura-monit kaltura-base redhat-lsb-core nodejs >= 7.0.0 kaltura-nginx nodejs-chunked-stream nodejs-commander  nodejs-log4js nodejs-glob nodejs-mkdirp nodejs-q nodejs-q-io nodejs-touch nodejs-underscore nodejs-nconf nodejs-request nodejs-forever nodejs-ini nodejs-string-width nodejs-strip-ansi nodejs-minimatch nodejs-inherits nodejs-wrappy nodejs-once 
 Requires(post): chkconfig
 Requires(preun): chkconfig
 Requires(preun): initscripts

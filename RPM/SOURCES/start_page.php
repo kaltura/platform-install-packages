@@ -110,8 +110,8 @@ include_once(__DIR__ . '/../alpha/config/kConf.php');
                 </div>
                 <div class="col-lg-5 col-sm-pull-6  col-sm-6">
 			<div style="width: 100%;display: inline-block;position: relative;"> 
-				<!--  inner pusher div defines aspect ratio: in this case 16:9 ~ 56.25% -->
-				<div id="dummy" style="margin-top: 56.25%;"></div>
+				<!--  inner pusher div defines aspect ratio-->
+				<div id="dummy" style="margin-top: 64%;"></div>
 				<!--  the player embed target, set to take up available absolute space   -->
 				<div id="kaltura_player" style="position:absolute;top:0;left:0;left: 0;right: 0;bottom:0;">
 				</div>
