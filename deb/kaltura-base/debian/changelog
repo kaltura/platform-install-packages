@@ -1,3 +1,9 @@
+kaltura-base (13.18.0-1) mercury; urgency=medium
+
+  * Switching to 13.18.0
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 09 Apr 2018 17:24:59 +0000
+
 kaltura-base (13.17.0-2) mercury; urgency=medium
 
   * apimon - log conditional cache sql validations (https://github.com/kaltura/server/pull/6957)
