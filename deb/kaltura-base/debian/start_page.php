@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <?php
 include_once(__DIR__ . '/../alpha/config/kConf.php');
+define('KALTURA_CE_SAAS_PARTNER_ID',2353151);
+define('KALTURA_CE_SAAS_UICONF_ID',42286192);
+define('KALTURA_CE_INTRO_ENTRY_ID','1_uhucc5ac');
 ?>
 
 <!-- This landing page is based on a template taken from https://github.com/BlackrockDigital/startbootstrap-landing-page, license: MIT -->
@@ -110,21 +113,21 @@ include_once(__DIR__ . '/../alpha/config/kConf.php');
                 </div>
                 <div class="col-lg-5 col-sm-pull-6  col-sm-6">
 			<div style="width: 100%;display: inline-block;position: relative;"> 
-				<!--  inner pusher div defines aspect ratio: in this case 16:9 ~ 56.25% -->
+				<!--  inner pusher div defines aspect ratio-->
 				<div id="dummy" style="margin-top: 64%;"></div>
 				<!--  the player embed target, set to take up available absolute space   -->
 				<div id="kaltura_player" style="position:absolute;top:0;left:0;left: 0;right: 0;bottom:0;">
 				</div>
 			</div>
-			<script src="https://cdnapisec.kaltura.com/p/2353151/sp/235315100/embedIframeJs/uiconf_id/42286192/partner_id/2353151"></script> 
+			<script src="https://cdnapisec.kaltura.com/p/<?php echo KALTURA_CE_SAAS_PARTNER_ID?>/sp/<?php echo KALTURA_CE_SAAS_PARTNER_ID?>00/embedIframeJs/uiconf_id/<?php echo KALTURA_CE_SAAS_UICONF_ID?>/partner_id/<?php echo KALTURA_CE_SAAS_PARTNER_ID?>"></script> 
 			<script> 
 			kWidget.embed(
 				{ "targetId": "kaltura_player", 
-				"wid": "_2353151", 
-				"uiconf_id": 42286192, 
+				"wid": "_<?php echo KALTURA_CE_SAAS_PARTNER_ID?>", 
+				"uiconf_id": <?php echo KALTURA_CE_SAAS_UICONF_ID?>, 
 				"flashvars": { "streamerType": "auto" }, 
 				"cache_st": 1523029447, 
-				"entry_id": "1_uhucc5ac" 
+				"entry_id": "<?php echo KALTURA_CE_INTRO_ENTRY_ID?>" 
 				}
 			); 
 			</script>
