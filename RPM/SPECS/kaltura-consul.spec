@@ -6,7 +6,7 @@
 Summary: Service Discovery and Configuration Made Easy
 Name: kaltura-consul
 Version: 1.0.6
-Release: 1
+Release: 2
 BuildArch: x86_64
 License: MPLv2.0 
 Group: System Environment/Daemons
@@ -49,7 +49,7 @@ used with Kaltura Server.
 
 
 #%prep
-%setup -qn .
+#%setup -qn .
 
 
 
@@ -94,9 +94,12 @@ cp consul $RPM_BUILD_ROOT%{prefix}/bin/
 %{__rm} -rf %{buildroot}
 
 %pre
+#set -x
+mkdir -p %{prefix}
 # create user/group, and update permissions
 getent group %{consul_group} >/dev/null || groupadd -r %{consul_group}  2>/dev/null
-getent passwd %{consul_user} >/dev/null || useradd -m -r -d %{prefix} -s /sbin/nologin -c "Prometheus Server" -g %{consul_group} %{consul_user} 2>/dev/null
+getent passwd %{consul_user} >/dev/null || useradd -m -r -d %{prefix} -s /sbin/nologin -c "Consul" -g %{consul_group} %{consul_user} 2>/dev/null
+#set +x
 
 %preun
 if [ $1 -eq 0 ]; then

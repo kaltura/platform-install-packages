@@ -7,8 +7,8 @@ After=network-online.target
 User=consul
 Group=consul
 Type=simple
-ExecStart=/opt/kaltura/consul/bin/consul agent -data-dir=/opt/kaltura/consul/var/data \ 
-	-enable-script-checks=true -config-file=/opt/kaltura/consul/etc/consul.d/client/config.json \ 
+ExecStart=/opt/kaltura/consul/bin/consul agent -data-dir=/opt/kaltura/consul/var/data \
+	-enable-script-checks=true -config-file=/opt/kaltura/consul/etc/consul.d/client/config.json \
 	-config-dir=/opt/kaltura/consul/etc/consul.d/ -client=0.0.0.0
 
 ExecReload=/bin/kill -HUP $MAINPID

@@ -6,7 +6,7 @@
 Summary: Prometheus is a monitoring system and time series database
 Name: kaltura-prometheus
 Version: 2.1.0 
-Release: 1
+Release: 2
 BuildArch: x86_64
 License: ASL 2.0
 Group: System Environment/Daemons
@@ -90,8 +90,11 @@ cp -r consoles $RPM_BUILD_ROOT%{prefix}/
 
 %pre
 # create user/group, and update permissions
+#set -x
+mkdir -p %{prefix} 
 getent group %{prometheus_group} >/dev/null || groupadd -r %{prometheus_group}  2>/dev/null
 getent passwd %{prometheus_user} >/dev/null || useradd -m -r -d %{prefix} -s /sbin/nologin -c "Prometheus Server" -g %{prometheus_group} %{prometheus_user} 2>/dev/null
+#set +x
 
 %preun
 if [ $1 -eq 0 ]; then

@@ -6,7 +6,7 @@
 Summary: Alertmanager handles alerts sent by client applications such as the Prometheus server
 Name: kaltura-alertmanager
 Version: 0.13.0
-Release: 1
+Release: 2
 License: ASL 2.0
 Group: System Environment/Daemons
 URL: http://prometheus.org/
@@ -85,8 +85,11 @@ cp amtool $RPM_BUILD_ROOT%{prefix}/bin/
 
 %pre
 # create user/group, and update permissions
-getent group %{prometheus_group} >/dev/null || groupadd -r %{prometheus_group}  2>/dev/null
-getent passwd %{prometheus_user} >/dev/null || useradd -m -r -d %{prefix} -s /sbin/nologin -c "Prometheus Server" -g %{prometheus_group} %{prometheus_user} 2>/dev/null
+#set -x
+mkdir -p %{kaltura_prefix}/prometheus 
+getent group %{prometheus_group} >/dev/null || groupadd -r %{prometheus_group} 2>/dev/null   
+getent passwd %{prometheus_user} >/dev/null || useradd -m -r -d %{kaltura_prefix}/prometheus -s /sbin/nologin -c "Prometheus Server" -g %{prometheus_group} %{prometheus_user} 2>/dev/null
+#set +x
 
 %preun
 if [ $1 -eq 0 ]; then
