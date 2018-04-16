@@ -1,0 +1,1 @@
+{"service": {"name": "memcached", "tags": ["kaltura-prod"], "port": 9150}}
