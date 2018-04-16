@@ -87,7 +87,7 @@ Below is a very basic example of how to fetch the files from a CF endpoint but t
 The below example assumes the S3 bucket is public and doesn't require a token but naturally, you can and SHOULD modify it if authorisation is required.**
 
 ngnix.conf:
-```
+```nginx
 include /etc/nginx/conf.d/main.conf;
 
 http {
@@ -112,7 +112,7 @@ http {
 ```
 
 main.conf:
-```
+```nginx
 user  kaltura;
 worker_processes  auto;
 
@@ -130,7 +130,7 @@ events {
 ```
 
 http.conf:
-```
+```nginx
 include    mime.types;
         default_type  application/octet-stream;
 
@@ -176,7 +176,7 @@ include    mime.types;
 ```
 
 server.conf:
-```
+```nginx
 
                 # internal location for vod subrequests
                 location ~ /media_proxy/[^/]+/(.*) {
@@ -248,7 +248,7 @@ server.conf:
 
 cors.conf:
 
-```
+```nginx
 add_header Access-Control-Allow-Headers "Origin,Range,Accept-Encoding,Referer,Cache-Control";
 add_header Access-Control-Expose-Headers "Server,Content-Length,Content-Range,Date";
 add_header Access-Control-Allow-Methods "GET, HEAD, OPTIONS";
@@ -294,12 +294,14 @@ For example, inputting this:
 ```
 
 Would create the following structure under your remote volume's root:
-
+```
 $REMOTE_STORAGE_ROOT/$PARTNER_ID/%Y-%m/%d/$ENTRY_ID_$FLAVOR_ID.$FILE_EXT
+```
 
 For example:
-
+```
 $REMOTE_STORAGE_ROOT/101/2018-01/10/0_mka2lp86_0_lfo55tdw.mp4
+```
 
 **This will only take affect when uploading new entries. Previously uploaded entries will still be served from the original location. You can move them and then adjust the file_sync table but it's a risky operation that should be carefully tested outside of production and I'd advise against it unless it is absolutely necessary.**
 
