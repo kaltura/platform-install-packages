@@ -294,12 +294,12 @@ For example, inputting this:
 ```
 
 Would create the following structure under your remote volume's root:
-```
+```shell
 $REMOTE_STORAGE_ROOT/$PARTNER_ID/%Y-%m/%d/$ENTRY_ID_$FLAVOR_ID.$FILE_EXT
 ```
 
 For example:
-```
+```shell
 $REMOTE_STORAGE_ROOT/101/2018-01/10/0_mka2lp86_0_lfo55tdw.mp4
 ```
 
