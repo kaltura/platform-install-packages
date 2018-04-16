@@ -35,6 +35,7 @@ Source: https://github.com/prometheus/mysqld_exporter/releases/download/v%{versi
 Source1: %{name}.service
 Source2: %{name}.init
 Source3: %{name}-consul.json 
+Source4: %{name}
 
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
@@ -73,6 +74,8 @@ install -p -m 0755 %{exporter_name} $RPM_BUILD_ROOT/%{prefix}
 %endif
 
 %{__install} -m644 %SOURCE3 $RPM_BUILD_ROOT%{kaltura_prefix}/consul/etc/consul.d/mysqld.json
+%{__mkdir} -p $RPM_BUILD_ROOT%{_sysconfdir}/sysconfig
+%{__install} -m644 %SOURCE4 $RPM_BUILD_ROOT%{_sysconfdir}/sysconfig/kaltura-mysqld-exporter
 
 %pre
 # create user/group, and update permissions
@@ -119,6 +122,7 @@ service %{name} restart
 %{_initrddir}/%{name}
 %endif
 %config %{kaltura_prefix}/consul/etc/consul.d/mysqld.json
+%config(noreplace) %{_sysconfdir}/sysconfig/kaltura-mysqld-exporter
 %defattr(-, %{prometheus_user}, %{prometheus_group}, 0755)
 %{kaltura_prefix}/var/run/prometheus/exporters
 %{kaltura_prefix}/log/prometheus/exporters

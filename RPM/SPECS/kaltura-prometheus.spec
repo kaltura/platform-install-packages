@@ -6,7 +6,7 @@
 Summary: Prometheus is a monitoring system and time series database
 Name: kaltura-prometheus
 Version: 2.1.0 
-Release: 2
+Release: 3
 BuildArch: x86_64
 License: ASL 2.0
 Group: System Environment/Daemons
@@ -35,6 +35,10 @@ Source3: %{name}_1_memcached.yml
 Source4: %{name}.service
 Source5: %{name}.sysconf
 Source6: %{name}.init
+Source7: %{name}_2_mysqld.yml
+Source8: %{name}_3_nginx.yml
+Source9: %{name}_4_sphinx.yml
+Source10: %{name}_5_apache.yml
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
@@ -63,6 +67,10 @@ mkdir -p $RPM_BUILD_ROOT%{kaltura_prefix}/log/prometheus
 cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/etc
 cp %{SOURCE2} $RPM_BUILD_ROOT%{prefix}/etc/rules/0_general.yml
 cp %{SOURCE3} $RPM_BUILD_ROOT%{prefix}/etc/rules/1_memcached.yml
+cp %{SOURCE7} $RPM_BUILD_ROOT%{prefix}/etc/rules/2_mysqld.yml
+cp %{SOURCE8} $RPM_BUILD_ROOT%{prefix}/etc/rules/3_nginx.yml
+cp %{SOURCE9} $RPM_BUILD_ROOT%{prefix}/etc/rules/4_sphinx.yml
+cp %{SOURCE10} $RPM_BUILD_ROOT%{prefix}/etc/rules/5_apache.yml
 cp prometheus $RPM_BUILD_ROOT%{prefix}/bin/
 cp promtool $RPM_BUILD_ROOT%{prefix}/bin/
 cp -r console_libraries $RPM_BUILD_ROOT%{prefix}/

@@ -1,10 +1,10 @@
 groups:
-- name: memcached
+- name: apache
   rules:
 
   # Alert for any instance that is unreachable for >1 minutes.
-  - alert: Memcache InstanceDown
-    expr: memcached_up == 0
+  - alert: Apache InstanceDown
+    expr: apache_up == 0
     for: 1m
     labels:
       severity: critical
