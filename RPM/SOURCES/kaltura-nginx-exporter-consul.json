@@ -1,0 +1,1 @@
+{"service": {"name": "nginx", "tags": ["kaltura-prod"], "port": 9001}}

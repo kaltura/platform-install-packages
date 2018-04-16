@@ -1,0 +1,15 @@
+[Unit]
+Description=Prometheus Sphinx Exporter
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=prometheus
+Group=prometheus
+Type=simple
+ExecStart=/opt/kaltura/prometheus-exporters/sphinx-exporter -sphinx-port 9312
+
+ExecReload=/bin/kill -HUP $MAINPID
+
+[Install]
+WantedBy=multi-user.target

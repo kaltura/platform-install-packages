@@ -1,0 +1,99 @@
+#!/bin/sh
+# kFreeBSD do not accept scripts as interpreters, using #!/bin/sh and sourcing.
+### BEGIN INIT INFO
+# Provides:          prometheus-node-exporter
+# Required-Start:    $local_fs $remote_fs $network $named
+# Required-Stop:     $local_fs $remote_fs $network $named
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Prometheus Node exporter
+# Description:       Prometheus Node exporter
+### END INIT INFO
+
+
+DESC="Prometheus Node exporter"
+PREFIX=/opt/kaltura
+DAEMON=$PREFIX/prometheus-exporters/node_exporter
+NAME=kaltura-node-exporter
+USER=prometheus
+PIDFILE=$PREFIX/var/run/prometheus/exporters/node-exporter.pid
+LOGFILE=$PREFIX/log/prometheus/exporters/node-exporter.log
+
+HELPER=/usr/bin/daemon
+HELPER_ARGS="--name=$NAME --output=$LOGFILE --pidfile=$PIDFILE --user=$USER"
+ARGS=""
+
+if [ -f /etc/sysconfig/$NAME ]; then
+        . /etc/sysconfig/$NAME
+fi
+
+test -x $DAEMON || exit 1
+
+set -e
+
+. /lib/lsb/init-functions
+
+status_message()
+{
+        if $HELPER $HELPER_ARGS --running ;then
+                echo "$NAME is running (`cat $PIDFILE`)."
+                return 0
+        else
+                echo "$NAME is not running."
+                return 1
+        fi
+}
+
+start_prometheus_node_exporter()
+{
+                $HELPER $HELPER_ARGS --running && echo "$NAME is already running (`cat $PIDFILE`)" && return 0
+                echo "Starting $NAME: ${DESC}.."
+                $HELPER $HELPER_ARGS -- $DAEMON $ARGS || return 2
+                status_message && return $?
+}
+
+stop_prometheus_node_exporter()
+{
+                if ! $HELPER $HELPER_ARGS --running ;then 
+                        echo "$NAME is not running" 
+                        return 0
+                fi
+                echo "Stopping $NAME: ${DESC}.. "
+                $HELPER $HELPER_ARGS --stop 
+                # wait for the process to really terminate
+                for n in `seq 1 5`; do
+                        sleep 1
+                        $HELPER $HELPER_ARGS --running || break
+                done
+                $HELPER $HELPER_ARGS --running && echo "Failed to stop $NAME" && return 2
+                echo "$NAME successfully stopped."
+
+}
+case "$1" in
+        start)
+                start_prometheus_node_exporter
+                ;;
+
+        stop)
+                stop_prometheus_node_exporter
+                ;;
+
+        restart|force-reload)
+                stop_prometheus_node_exporter && start_prometheus_node_exporter
+                ;;
+
+        reload)
+                $HELPER $HELPER_ARGS --running || (echo "$NAME is not running. Cannot reload." && exit 1)
+                echo "Reloading $DESC configuration "
+                /bin/kill -SIGHUP `cat $PIDFILE` || (echo "Failed to reload $NAME" && exit 2) 
+                ;;
+
+
+        status)
+                status_message
+                ;;
+        *)
+                echo "Usage: $NAME {start|stop|restart|reload|force-reload|status}" >&2
+                exit 1
+                ;;
+esac

@@ -1,0 +1,16 @@
+[Unit]
+Description=Prometheus MySQL Exporter
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=prometheus
+Group=prometheus
+EnvironmentFile=/etc/sysconfig/kaltura-mysqld-exporter
+Type=simple
+ExecStart=/opt/kaltura/prometheus-exporters/mysqld_exporter
+
+ExecReload=/bin/kill -HUP $MAINPID
+
+[Install]
+WantedBy=multi-user.target

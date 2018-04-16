@@ -9,6 +9,6 @@
     "encrypt_verify_outgoing": false,
     "log_level": "INFO",
     "enable_syslog": true,
-    "start_join": ["@SERVER_NODE@"]
+    "start_join": ["@CONSUL_SERVER_HOST@"]
 }
 
