@@ -21,7 +21,7 @@ s3:PutObject
 ```
 
 Here is a sample policy generated for a bucket called ```my_ce_bucket``` that allows the ```ce-user``` to perform the actions above:
-```
+```json
     "Version": "2012-10-17",
     "Id": "Policy0",
     "Statement": [
@@ -256,7 +256,7 @@ add_header Access-Control-Allow-Origin "\*";
 ```
 
 base.conf:
-```
+```nginx
 # nginx status page
 location = /nginx_status {
 stub_status on;
@@ -289,7 +289,7 @@ Set that to ```XSL Path``` and go to the ```Advanced``` section.
 There, in the ```Path Manager Params (JSON)``` textarea, you can input a JSON that contains a XSL describing an alternative structure.
 For example, inputting this:
 
-```
+```xsl
 [{"key":"path_format","value":"<xsl:value-of select=\"$partnerId\" \/><xsl:text>\/<\/xsl:text><xsl:value-of select=\"php:function('date', 'Y', $currentTime)\"\/><xsl:text>-<\/xsl:text><xsl:value-of select=\"php:function('date', 'm', $currentTime)\"\/><xsl:text>\/<\/xsl:text><xsl:value-of select=\"php:function('date', 'd', $currentTime)\"\/><xsl:text>\/<\/xsl:text><xsl:value-of select=\"$entryId\" \/><xsl:text>_<\/xsl:text><xsl:value-of select=\"$objectId\"\/><xsl:text>.<\/xsl:text><xsl:value-of select=\".\/content\/@extension\"\/>","relatedObjects":null}]
 ```
 
