@@ -1,3 +1,23 @@
+kaltura-base (13.18.0-2) mercury; urgency=medium
+
+  * PLAT-8311: remove partner_in for partner 0 when running sphinx entry queries (https://github.com/kaltura/server/pull/6962)
+  * PLAT-8552: youtubeApi encryption support (https://github.com/kaltura/server/pull/6955)
+  * PLAT-8651: Chop and Slice (https://github.com/kaltura/server/pull/6963)
+  * plat 8651: Chop and slice: multi audio fix (https://github.com/kaltura/server/pull/6978)
+  * PLAT-8651: Chop and Slice refactoring (https://github.com/kaltura/server/pull/6968)
+  * Plat 8651: kClipManager.php: optimise batch jobs retrieval (https://github.com/kaltura/server/pull/6990)
+  * PLAT-8738: Only create a user_add_ lock in the event the kuser does not exist (https://github.com/kaltura/server/pull/6970)
+  * PLAT-8755: Add support for multiple IP values in a single range (https://github.com/kaltura/server/pull/6976)
+  * PLAT-8785: Add categoryUserItem to categorySearch (https://github.com/kaltura/server/pull/6995)
+  * PLAT-8785: Return kuserId as string (https://github.com/kaltura/server/pull/6999)
+  * PSVAMB-2895: Fix delivery profile lookup (https://github.com/kaltura/server/pull/6985)
+  * SUP-13925: Update child categories based on the parent's status (https://github.com/kaltura/server/pull/6972)
+  * SUP-13945: DeliveryProfileAkamaiHttp.php: get file extension from container format element (https://github.com/kaltura/server/pull/6989)
+  * SUP-14139: Fix FtpDistributionEngine (https://github.com/kaltura/server/pull/7006)
+  * SUP-14195: Attr name in map should match its definition to avoid the data stored on it to be lost when fetching the object (https://github.com/kaltura/server/pull/7015)
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 23 Apr 2018 10:02:59 +0000
+
 kaltura-base (13.18.0-1) mercury; urgency=medium
 
   * Switching to 13.18.0
