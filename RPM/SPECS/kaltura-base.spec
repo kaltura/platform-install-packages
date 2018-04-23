@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 13.18.0
-Release: 15
+Release: 16
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -333,47 +333,22 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Sun Apr 22 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.18.0-15
-- Nightly build.
-
-* Sat Apr 21 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.18.0-14
-- Nightly build.
-
-* Fri Apr 20 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.18.0-13
-- Nightly build.
-
-* Thu Apr 19 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.18.0-12
-- Nightly build.
-
-* Wed Apr 18 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.18.0-11
-- Nightly build.
-
-* Tue Apr 17 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.18.0-10
-- Nightly build.
-
-* Mon Apr 16 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.18.0-9
-- Nightly build.
-
-* Sun Apr 15 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.18.0-8
-- Nightly build.
-
-* Sat Apr 14 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.18.0-7
-- Nightly build.
-
-* Fri Apr 13 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.18.0-6
-- Nightly build.
-
-* Thu Apr 12 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.18.0-6
-- Nightly build.
-
-* Wed Apr 11 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.18.0-5
-- Nightly build.
-
-* Tue Apr 10 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.18.0-4
-- Nightly build.
-
-* Mon Apr 9 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.18.0-2
-- Nightly build.
+* Mon Apr 23 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.18.0-16
+- PLAT-8311: remove partner_in for partner 0 when running sphinx entry queries (https://github.com/kaltura/server/pull/6962)
+- PLAT-8552: youtubeApi encryption support (https://github.com/kaltura/server/pull/6955)
+- PLAT-8651: Chop and Slice (https://github.com/kaltura/server/pull/6963)
+- plat 8651: Chop and slice: multi audio fix (https://github.com/kaltura/server/pull/6978)
+- PLAT-8651: Chop and Slice refactoring (https://github.com/kaltura/server/pull/6968)
+- Plat 8651: kClipManager.php: optimise batch jobs retrieval (https://github.com/kaltura/server/pull/6990)
+- PLAT-8738: Only create a user_add_ lock in the event the kuser does not exist (https://github.com/kaltura/server/pull/6970)
+- PLAT-8755: Add support for multiple IP values in a single range (https://github.com/kaltura/server/pull/6976)
+- PLAT-8785: Add categoryUserItem to categorySearch (https://github.com/kaltura/server/pull/6995)
+- PLAT-8785: Return kuserId as string (https://github.com/kaltura/server/pull/6999)
+- PSVAMB-2895: Fix delivery profile lookup (https://github.com/kaltura/server/pull/6985)
+- SUP-13925: Update child categories based on the parent's status (https://github.com/kaltura/server/pull/6972)
+- SUP-13945: DeliveryProfileAkamaiHttp.php: get file extension from container format element (https://github.com/kaltura/server/pull/6989)
+- SUP-14139: Fix FtpDistributionEngine (https://github.com/kaltura/server/pull/7006)
+- SUP-14195: Attr name in map should match its definition to avoid the data stored on it to be lost when fetching the object (https://github.com/kaltura/server/pull/7015)
 
 * Mon Apr 9 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.18.0-1
 - Ver Bounce to 13.18.0
