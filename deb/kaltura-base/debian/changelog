@@ -1,3 +1,9 @@
+kaltura-base (13.19.0-1) mercury; urgency=medium
+
+  * Switching to 13.19.0
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 23 Apr 2018 16:06:08 +0000
+
 kaltura-base (13.18.0-2) mercury; urgency=medium
 
   * PLAT-8311: remove partner_in for partner 0 when running sphinx entry queries (https://github.com/kaltura/server/pull/6962)

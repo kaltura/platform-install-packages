@@ -1,3 +1,9 @@
+kaltura-front (13.19.0-1) mercury; urgency=medium
+
+  * Switching to 13.19.0
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 23 Apr 2018 16:06:08 +0000
+
 kaltura-front (13.18.0-1) mercury; urgency=medium
 
   * Switching to 13.18.0
