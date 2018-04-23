@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 13.18.0
-Release: 16
+Version: 13.19.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -333,6 +333,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Apr 23 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.19.0-1
+- Ver Bounce to 13.19.0
+
 * Mon Apr 23 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.18.0-16
 - PLAT-8311: remove partner_in for partner 0 when running sphinx entry queries (https://github.com/kaltura/server/pull/6962)
 - PLAT-8552: youtubeApi encryption support (https://github.com/kaltura/server/pull/6955)
