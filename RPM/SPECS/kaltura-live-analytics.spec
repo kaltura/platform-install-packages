@@ -2,7 +2,7 @@
 Summary: Kaltura Live Analytics
 Name: kaltura-live-analytics
 Version: v0.5.35
-Release: 6
+Release: 7
 License: AGPLv3+
 Group: Server/Platform 
 URL: http://kaltura.org
@@ -96,7 +96,7 @@ ln -sf %{prefix}/app/configurations/live_analytics/logrotate/live-analytics-driv
 
 %preun
 if [ "$1" = 0 ] ; then
-	service live-analytics-driver stop
+	service live-analytics-driver stop || true
 	for FILE in /usr/lib/systemd/system/live-analytics-driver.service /etc/init.d/live-analytics-driver /etc/cron.d/kaltura_live_stats /etc/logrotate.d/kaltura_live_stats /etc/logrotate.d/live-analytics-driver /etc/nginx/conf.d/live.conf ;do
 		if [ -r $FILE ];then
 			rm $FILE
@@ -123,6 +123,9 @@ fi
 /usr/share/tomcat/lib/*jar
 
 %changelog
+* Tue Apr 24 2018 jess.portnoy@kaltura.com <Jess Portnoy> - v0.5.35-7
+- in preun, service live-analytics-driver stop || true so that it doesn't fail if the service is already down
+
 * Tue Aug 8 2017 jess.portnoy@kaltura.com <Jess Portnoy> - v0.5.35-6
 https://github.com/kaltura/platform-install-packages/pull/600/files
 
