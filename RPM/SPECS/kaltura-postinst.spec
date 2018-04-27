@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.33
-Release: 39
+Release: 40
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -82,6 +82,11 @@ find %{_sysconfdir}/logrotate.d -type l -name "kaltura_*" -exec rm {} \;
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Fri Apr 27 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.33-40
+- Always fetch the latest kaltura-html5lib version available in the repo and set that in studio.ini and local.ini
+Since kaltura-html5lib is deployed on /opt/kaltura/web/html5/html5lib, the RPM may not be installed on the machine 
+running kaltura-front-config.sh so rpm -q kaltura-html5lib will not work.
+
 * Tue Apr 24 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.33-39
 - Added processSqlUpdates = 1 to /opt/kaltura/app/configurations/sphinx/populate/`hostname`.ini
 Following https://github.com/kaltura/server/pull/7017/files
