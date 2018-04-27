@@ -289,7 +289,7 @@ service kaltura-monit restart
 trap - ERR
 
 HTML5_STUDIO_VERSION=`rpm -q kaltura-html5-studio --queryformat %{version}`
-HTML5LIB_VERSION=`yum info kaltura-html5lib|grep Version|awk -F ":" '{print $NF}'|sed 's/\s*//g'`
+HTML5LIB_VERSION=`yum info installed kaltura-html5lib|grep Version|awk -F ":" '{print $NF}'|sed 's/\s*//g'`
 sed -i "s@^\(html5_version\s*=\)\(.*\)@\1 $HTML5LIB_VERSION@g" -i $BASE_DIR/app/configurations/local.ini
 sed -i "s/@HTML5_VER@/$HTML5LIB_VERSION/g" -i $BASE_DIR/apps/studio/$HTML5_STUDIO_VERSION/studio.ini
 	echo "use kaltura" | mysql -h$DB1_HOST -u$DB1_USER -p$DB1_PASS -P$DB1_PORT $DB1_NAME 2> /dev/null
