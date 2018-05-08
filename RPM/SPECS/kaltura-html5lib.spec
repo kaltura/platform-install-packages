@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.68
+Version: v2.69
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -82,6 +82,13 @@ fi
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Tue May 8 2018 jess.portnoy@kaltura.com <Jess Portnoy> - v2.69-1
+- FEC-8162 - Add a wildcard to the Policy Controlled Features
+- SUP-13444 - control bar buttons don't work when small sized player in Moodle along with slides
+- SUP-12518 - VOD Entry Player Controls Greying Out After a Live Clip in Playlist
+- Create IMA adsRequest object to be passed to IMA requestAds
+- add 1 min cache (#3791)
+
 * Mon Apr 9 2018 jess.portnoy@kaltura.com <Jess Portnoy> - v2.68-1
 - SUP-13309 - Webcast entries default to default layout every few seconds
 - FEC-8074 - KAVA Player V2 - "playlistID" parameter isn't fired when playlist plays

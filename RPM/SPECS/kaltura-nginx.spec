@@ -40,7 +40,7 @@ BuildRequires: libopenssl-devel
 Requires(pre): pwdutils
 %endif
 
-%define nginx_vod_module_ver 1.22
+%define nginx_vod_module_ver 1.23
 %define nginx_secure_token_ver 1.3
 %define nginx_token_validate_ver 1.1
 %define nginx_rtmp_ver 1.2.0
@@ -50,8 +50,8 @@ Requires(pre): pwdutils
 
 Summary: High performance web server customized for Kaltura VOD
 Name: kaltura-nginx
-Version: 1.12.2
-Release: 5
+Version: 1.13.12
+Release: 1
 Vendor: Kaltura inc.
 URL: http://nginx.org/
 
@@ -400,6 +400,23 @@ if [ $1 -ge 1 ]; then
 fi
 
 %changelog
+* Tue May 8 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 1.13.12-1
+- New upstream Nginx version [see http://nginx.org/en/CHANGES]
+- New Nginx VOD module - 1.23: 
+	* support nginx 1.13.10+
+	* HLS - support SAMPLE-AES-CENC
+	* HLS - add support for DTS audio codec
+	* MSS - add Language attribute to StreamIndex
+	* SRT - clamp negative timestamps to zero
+	* SRT - ignore spaces before the first cue
+	* add vod_hls_output_iframes_playlist
+	* add vod_media_set_override_json
+	* $vod_segment_duration - make the calculation more accurate
+	* $vod_suburi - support use within alias/root directives
+	* optimization - explicitly release cache entries
+	* optimization - stop generating output when reaching range end
+	* conf templates improvements
+
 * Wed Jan 24 2018 Jess Portnoy <jess.portnoy@kaltura.com> - 1.12.2-5
 - Remove VTS module as it doesn't work with Nginx >= 1.12
 

@@ -333,16 +333,7 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Sun May 6 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.19.0-14
-- Nightly build.
-
-* Sat May 5 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.19.0-13
-- Nightly build.
-
-* Fri May 4 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.19.0-12
-- Nightly build.
-
-* Fri May 4 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.19.0-12
+* Tue May 8 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.19.0-14
 - PLAT-8878: Importing file_sync objects between DCs fails in case the file points to a directory (https://github.com/kaltura/server/pull/7070)
 - PLAT-8827: change serveWebVTT to use delivery profile hostname (https://github.com/kaltura/server/pull/7069)
 - PLAT-8844: KMC-NG configurations (https://github.com/kaltura/server/pull/7066)
