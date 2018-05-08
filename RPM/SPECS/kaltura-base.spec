@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 13.19.0
-Release: 15
+Version: 13.20.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -333,6 +333,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Tue May 8 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.20.0-1
+- Ver Bounce to 13.20.0
+
 * Tue May 8 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.19.0-14
 - PLAT-8878: Importing file_sync objects between DCs fails in case the file points to a directory (https://github.com/kaltura/server/pull/7070)
 - PLAT-8827: change serveWebVTT to use delivery profile hostname (https://github.com/kaltura/server/pull/7069)
