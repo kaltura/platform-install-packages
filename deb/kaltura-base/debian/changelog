@@ -1,3 +1,36 @@
+kaltura-base (13.19.0-2) mercury; urgency=medium
+
+  * PLAT-8878: Importing file_sync objects between DCs fails in case the file points to a directory (https://github.com/kaltura/server/pull/7070)
+  * PLAT-8827: change serveWebVTT to use delivery profile hostname (https://github.com/kaltura/server/pull/7069)
+  * PLAT-8844: KMC-NG configurations (https://github.com/kaltura/server/pull/7066)
+  * Remove update status from the add template request and add explicit-live to init.content (https://github.com/kaltura/server/pull/7064)
+  * SUP-14278: WebEx dropfoler - fix delete by name (https://github.com/kaltura/server/pull/7063)
+  * Don't set duration if flow type is EntryFlowType::LIVE_CLIPPING (https://github.com/kaltura/server/pull/7062)
+  * FEC-8162: Player: add a wildcard to the Policy Controlled Features (https://github.com/kaltura/server/pull/7060)
+  * Dynamically adjust max concurrency of chunked asset session (https://github.com/kaltura/server/pull/7058)
+  * PLAT-7832: support live clipping (https://github.com/kaltura/server/pull/7057)
+  * PLAT-7832: Support live clipping (https://github.com/kaltura/server/pull/7052)
+  * Transcript plugin: only index text assets (https://github.com/kaltura/server/pull/7056)
+  * PLAT-8543: syndication feed fix (https://github.com/kaltura/server/pull/7055)
+  * SUP-14231: Verify HTTP RC is not erroneous (https://github.com/kaltura/server/pull/7054)
+  * Disable Encoding.com transcoder (https://github.com/kaltura/server/pull/7053)
+  * Assign default values to metadataProfileField matchType & trimChars (https://github.com/kaltura/server/pull/7048)
+  * PLAT-8543: itunes syndication feed (https://github.com/kaltura/server/pull/7045)
+  * PLAT-8827: change serveWebVTT to use delivery profile hostname (https://github.com/kaltura/server/pull/7039)
+  * PLAT-8820: add segment duration to serveWebVTT url (https://github.com/kaltura/server/pull/7038)
+  * SUP-14151: fix retry on Widevine packager failure (https://github.com/kaltura/server/pull/7037)
+  * PLAT-8792: firebase event notification template update (https://github.com/kaltura/server/pull/7036)
+  * PLAT-8832: Add missing LANGUAGE field to HLS Master playlist manifest (https://github.com/kaltura/server/pull/7035)
+  * PSVAMB-3002: Add option for ip tokenization to the Akamai Tokenizer (https://github.com/kaltura/server/pull/7032)
+  * SUP-13559:  privacyContext Fix (https://github.com/kaltura/server/pull/7031)
+  * PLAT-8701: Support COPY operation for MP3 sources (https://github.com/kaltura/server/pull/7025)
+  * PLAT-8651: Chop and slice (https://github.com/kaltura/server/pull/7022)
+  * SUP-13826: Add ogg file extension to supported types (https://github.com/kaltura/server/pull/7021)
+  * PLAT-8543: Episode Author Field in iTunes Syndication (https://github.com/kaltura/server/pull/7020)
+  * Improve sphinx query time for metadata match by adding support for defining matchType and providing split & explode chars (https://github.com/kaltura/server/pull/6984)
+
+ -- Jess Portnoy <jess@b0f924504114>  Tue, 08 May 2018 12:48:07 +0000
+
 kaltura-base (13.19.0-1) mercury; urgency=medium
 
   * Switching to 13.19.0
