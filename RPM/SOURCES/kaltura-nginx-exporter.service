@@ -7,8 +7,8 @@ After=network-online.target
 User=prometheus
 Group=prometheus
 Type=simple
-ExecStart=/opt/kaltura/prometheus-exporters/prom-nginx-exporter \
- -nginx-stats-urls http://localhost:88/basic_status
+ExecStart=/opt/kaltura/prometheus-exporters/nginx_exporter \
+ -nginx.scrape_uri http://localhost:88/basic_status
 
 ExecReload=/bin/kill -HUP $MAINPID
 

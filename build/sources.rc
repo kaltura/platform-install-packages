@@ -356,8 +356,8 @@ PROMETHEUS_MEMCACHED_EXPORTER_URI="https://github.com/prometheus/memcached_expor
 PROMETHEUS_APACHE_EXPORTER_VERSION=0.5.0
 PROMETHEUS_APACHE_EXPORTER_URI="https://github.com/Lusitaniae/apache_exporter/releases/download/v$PROMETHEUS_APACHE_EXPORTER_VERSION/apache_exporter-$PROMETHEUS_APACHE_EXPORTER_VERSION.linux-amd64.tar.gz"
 
-PROMETHEUS_NGINX_EXPORTER_VERSION=1.0.0
-PROMETHEUS_NGINX_EXPORTER_URI="https://github.com/monitoring-tools/prom-nginx-exporter/archive/$PROMETHEUS_NGINX_EXPORTER_VERSION.tar.gz"
+PROMETHEUS_NGINX_EXPORTER_VERSION=0.1.0
+PROMETHEUS_NGINX_EXPORTER_URI="https://github.com/discordianfish/nginx_exporter/archive/v$PROMETHEUS_NGINX_EXPORTER_VERSION.tar.gz"
 
 PROMETHEUS_MYSQL_EXPORTER_VERSION=0.10.0
 PROMETHEUS_MYSQL_EXPORTER_URI="https://github.com/prometheus/mysqld_exporter/releases/download/v$PROMETHEUS_MYSQL_EXPORTER_VERSION/mysqld_exporter-$PROMETHEUS_MYSQL_EXPORTER_VERSION.linux-amd64.tar.gz"

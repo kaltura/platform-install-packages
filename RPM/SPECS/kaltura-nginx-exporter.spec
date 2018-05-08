@@ -3,16 +3,16 @@
 
 %define kaltura_prefix /opt/kaltura
 %define prefix %{kaltura_prefix}/prometheus-exporters
-%global exporter_name            prom-nginx-exporter
+%global exporter_name            nginx_exporter
 %global debug_package %{nil}
 
 Summary: Prometheus Nginx Exporter
 Name: kaltura-nginx-exporter
-Version: 1.0.0
-Release: 1
+Version: 0.1.0
+Release: 2
 License: MIT
 Group: System Environment/Daemons
-URL: https://github.com/monitoring-tools/%{exporter_name}
+URL: https://github.com/discordianfish/nginx_exporter
 
 Packager: Jess Portnoy <jess.portnoy@kaltura.com> 
 Vendor: Kaltura, Inc.
@@ -30,13 +30,13 @@ BuildRequires: systemd
 %endif
 
 
-Source: https://github.com/monitoring-tools/prom-nginx-exporter/archive/%{exporter_name}-v%{version}.tar.gz
+Source: %{exporter_name}-v%{version}.tar.gz
 Source1: %{name}.service
 Source2: %{name}.init
 Source3: %{name}-consul.json 
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
-BuildRequires: golang-bin glide
+BuildRequires: golang-bin 
 
 %description
 Prometheus is a monitoring system and time series database.
@@ -52,7 +52,15 @@ used with Kaltura Server.
 %setup -qn %{exporter_name}-%{version}
 
 %build
-make build-linux
+mkdir -p %{_tmppath}/%{name}-%{version}/go/src
+ln -s `pwd` %{_tmppath}/%{name}-%{version}/go/src/%{name}
+export GOPATH=%{_tmppath}/%{name}-%{version}/go
+go get -u github.com/golang/dep/cmd/dep
+cd %{_tmppath}/%{name}-%{version}/go/src/%{name}
+dep ensure
+go build -o %{exporter_name} -ldflags '-buildid %{name}-%{version}-%{release}-RPM'
+#make build-linux
+
 
 %install
 mkdir -p $RPM_BUILD_ROOT/%{prefix} \
@@ -60,7 +68,7 @@ $RPM_BUILD_ROOT%{kaltura_prefix}/var/run/prometheus/exporters \
 $RPM_BUILD_ROOT%{kaltura_prefix}/log/prometheus/exporters \
 $RPM_BUILD_ROOT%{kaltura_prefix}/consul/etc/consul.d
 
-install -p -m 0755 linux_amd64/%{exporter_name} $RPM_BUILD_ROOT/%{prefix}
+install -p -m 0755 %{exporter_name} $RPM_BUILD_ROOT/%{prefix}
 
 %if %{use_systemd}
 # install systemd-specific files
@@ -101,6 +109,9 @@ if [ $1 -eq 1 ]; then
     /sbin/chkconfig --add %{name}
 %endif
 fi
+%if %use_systemd
+	/usr/bin/systemctl daemon-reload >/dev/null 2>&1 ||:
+%endif
 service %{name} restart
 
 %postun 

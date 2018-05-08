@@ -13,7 +13,7 @@
 
 DESC="Prometheus Nginx exporter"
 PREFIX=/opt/kaltura
-DAEMON=$PREFIX/prometheus-exporters/prom-nginx-exporter
+DAEMON=$PREFIX/prometheus-exporters/nginx_exporter
 NAME=kaltura-nginx-exporter
 USER=prometheus
 PIDFILE=$PREFIX/var/run/prometheus/exporters/nginx-exporter.pid
@@ -21,7 +21,7 @@ LOGFILE=$PREFIX/log/prometheus/exporters/nginx-exporter.log
 
 HELPER=/usr/bin/daemon
 HELPER_ARGS="--name=$NAME --output=$LOGFILE --pidfile=$PIDFILE --user=$USER"
-ARGS="-nginx-stats-urls http://localhost:88/basic_status"
+ARGS="-nginx.scrape_uri http://localhost:88/basic_status"
 
 if [ -f /etc/sysconfig/$NAME ]; then
         . /etc/sysconfig/$NAME
