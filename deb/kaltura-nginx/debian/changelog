@@ -1,3 +1,23 @@
+kaltura-nginx (1.13.12-1) mercury; urgency=medium
+
+  * New upstream Nginx version [see http://nginx.org/en/CHANGES]
+  * New Nginx VOD module - 1.23: 
+    * support nginx 1.13.10+
+    * HLS - support SAMPLE-AES-CENC
+    * HLS - add support for DTS audio codec
+    * MSS - add Language attribute to StreamIndex
+    * SRT - clamp negative timestamps to zero
+    * SRT - ignore spaces before the first cue
+    * add vod_hls_output_iframes_playlist
+    * add vod_media_set_override_json
+    * $vod_segment_duration - make the calculation more accurate
+    * $vod_suburi - support use within alias/root directives
+    * optimization - explicitly release cache entries
+    * optimization - stop generating output when reaching range end
+    * conf templates improvements
+
+ -- Jess Portnoy <jess@b0f924504114>  Tue, 08 May 2018 13:23:52 +0000
+
 kaltura-nginx (1.12.2-4) mercury; urgency=low
 
   * Compile with the VTS module
