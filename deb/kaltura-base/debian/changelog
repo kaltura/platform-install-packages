@@ -1,3 +1,9 @@
+kaltura-base (13.20.0-1) mercury; urgency=medium
+
+  * Switching to 13.20.0
+
+ -- Jess Portnoy <jess@b0f924504114>  Tue, 08 May 2018 14:44:46 +0000
+
 kaltura-base (13.19.0-2) mercury; urgency=medium
 
   * PLAT-8878: Importing file_sync objects between DCs fails in case the file points to a directory (https://github.com/kaltura/server/pull/7070)
