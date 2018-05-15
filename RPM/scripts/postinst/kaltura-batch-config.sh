@@ -85,32 +85,38 @@ sed "s#@BATCH_SCHEDULER_ID@#$BATCH_SCHEDULER_ID#"  -i $BATCH_MAIN_CONF
 ln -sf $APP_DIR/configurations/logrotate/kaltura_batch /etc/logrotate.d/ 
 ln -sf $APP_DIR/configurations/logrotate/kaltura_apache /etc/logrotate.d/
 ln -sf $APP_DIR/configurations/logrotate/kaltura_apps /etc/logrotate.d/
-if [ "$PROTOCOL" = "https" ]; then
-	ln -sf $APP_DIR/configurations/apache/kaltura.ssl.conf /etc/httpd/conf.d/zzzkaltura.ssl.conf
-else
-	ln -sf $APP_DIR/configurations/apache/kaltura.conf /etc/httpd/conf.d/zzzkaltura.conf
+
+# setting KALTURA_BATCH_SKIP_WEBSERVER to anything but false||0 will configure Apache on the batch node
+# KALTURA_BATCH_SKIP_WEBSERVER=true can be used in the event you want the batch daemon to use a remote Kaltura endpoint/service URL
+# and thus do not wish for a local Apache instance to run on the node
+if [ -z "$KALTURA_BATCH_SKIP_WEBSERVER" -o "$KALTURA_BATCH_SKIP_WEBSERVER" = "false" -o "$KALTURA_BATCH_SKIP_WEBSERVER" = 0 ];then
+        if [ "$PROTOCOL" = "https" ]; then
+                ln -sf $APP_DIR/configurations/apache/kaltura.ssl.conf /etc/httpd/conf.d/zzzkaltura.ssl.conf
+        else
+                ln -sf $APP_DIR/configurations/apache/kaltura.conf /etc/httpd/conf.d/zzzkaltura.conf
+        fi
+        chkconfig httpd on
+        if service httpd status >/dev/null 2>&1;then
+                service httpd reload
+        else
+                service httpd start
+        fi
+        ln -sf $BASE_DIR/app/configurations/monit/monit.avail/httpd.rc $BASE_DIR/app/configurations/monit/monit.d/enabled.httpd.rc
 fi
 
 
-mkdir -p $LOG_DIR/batch 
+mkdir -p $LOG_DIR/batch
 find $APP_DIR/cache/ -type f -exec rm {} \;
-find $BASE_DIR/log -type d -exec chmod 775 {} \; 
-find $BASE_DIR/log -type f -exec chmod 664 {} \; 
+find $BASE_DIR/log -type d -exec chmod 775 {} \;
+find $BASE_DIR/log -type f -exec chmod 664 {} \;
 chown -R kaltura.apache $BASE_DIR/app/cache/ $BASE_DIR/log
 
-chkconfig httpd on
-if service httpd status >/dev/null 2>&1;then
-	service httpd reload
-else
-	service httpd start
-fi
 chkconfig memcached on
 service memcached restart
 
 /etc/init.d/kaltura-batch restart >/dev/null 2>&1
 ln -sf $BASE_DIR/app/configurations/monit/monit.avail/batch.rc $BASE_DIR/app/configurations/monit/monit.d/enabled.batch.rc
-ln -sf $BASE_DIR/app/configurations/monit/monit.avail/httpd.rc $BASE_DIR/app/configurations/monit/monit.d/enabled.httpd.rc
 ln -sf $BASE_DIR/app/configurations/monit/monit.avail/memcached.rc $BASE_DIR/app/configurations/monit/monit.d/enabled.memcached.rc
 service kaltura-monit stop >> /dev/null 2>&1
 service kaltura-monit start
-send_install_becon "`basename $0`" "install_success" 0 
+send_install_becon "`basename $0`" "install_success" 0
