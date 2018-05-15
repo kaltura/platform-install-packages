@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.33
-Release: 40
+Release: 41
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -82,6 +82,10 @@ find %{_sysconfdir}/logrotate.d -type l -name "kaltura_*" -exec rm {} \;
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Tue May 15 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.33-41
+- Introduced KALTURA_BATCH_SKIP_WEBSERVER ENV var to be used in the event you want the batch daemon 
+to use a remote Kaltura endpoint/service URL and thus do not wish for a local Apache instance to run on the node. 
+
 * Fri Apr 27 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.33-40
 - Always fetch the latest kaltura-html5lib version available in the repo and set that in studio.ini and local.ini
 Since kaltura-html5lib is deployed on /opt/kaltura/web/html5/html5lib, the RPM may not be installed on the machine 
