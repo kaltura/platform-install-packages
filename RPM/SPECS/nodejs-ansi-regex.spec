@@ -4,7 +4,7 @@
 %{?nodejs_find_provides_and_requires}
 
 Name: nodejs-%{npm_name}
-Version: 3.0.0
+Version: 2.1.1
 Release: 1
 Summary: Regular expression for matching ANSI escape codes
 License: MIT
@@ -48,5 +48,5 @@ rm -rf %{buildroot} %{npm_cache_dir}
 %doc readme.md
 
 %changelog
-* Tue May 15 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 3.0.0-1
+* Tue May 15 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 2.1.1-1
 - First release 
