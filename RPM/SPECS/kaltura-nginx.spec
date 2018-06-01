@@ -43,6 +43,7 @@ Requires(pre): pwdutils
 %define nginx_vod_module_ver 1.23
 %define nginx_secure_token_ver 1.3
 %define nginx_token_validate_ver 1.1
+%define nginx_vts_ver 0.1.16
 %define nginx_rtmp_ver 1.2.0
 %define ngx_aws_auth_ver 2.1.1
 %define headers_more_nginx_ver 0.32
@@ -51,7 +52,7 @@ Requires(pre): pwdutils
 Summary: High performance web server customized for Kaltura VOD
 Name: kaltura-nginx
 Version: 1.13.12
-Release: 1
+Release: 2
 Vendor: Kaltura inc.
 URL: http://nginx.org/
 
@@ -68,6 +69,7 @@ Source9: nginx.upgrade.sh
 Source10: nginx-vod-module-%{nginx_vod_module_ver}.zip  
 Source11: nginx-secure-token-module-%{nginx_secure_token_ver}.zip
 Source12: nginx-akamai-token-validate-module-%{nginx_token_validate_ver}.zip
+Source13: nginx-module-vts-v%{nginx_vts_ver}.zip
 Source14: nginx-module-rtmp-v%{nginx_rtmp_ver}.zip
 Source15: nginx_kaltura.conf.template 
 Source16: nginx.conf.template 
@@ -108,6 +110,8 @@ unzip -o %{SOURCE10}
 unzip -o %{SOURCE11}
 
 unzip -o %{SOURCE12}
+
+unzip -o %{SOURCE13}
 
 unzip -o %{SOURCE14}
 
@@ -162,8 +166,9 @@ export LIBRARY_PATH C_INCLUDE_PATH
 	--add-module=./nginx-secure-token-module-%{nginx_secure_token_ver} \
 	--add-module=./nginx-akamai-token-validate-module-%{nginx_token_validate_ver} \
 	--add-module=./nginx-rtmp-module-%{nginx_rtmp_ver} \
+	--add-dynamic-module=./nginx-module-vts-%{nginx_vts_ver} \
 	--add-dynamic-module=./ngx_aws_auth-%{ngx_aws_auth_ver} \
-    --add-dynamic-module=./headers-more-nginx-module-%{headers_more_nginx_ver} \
+    	--add-dynamic-module=./headers-more-nginx-module-%{headers_more_nginx_ver} \
         $*
 make %{?_smp_mflags}
 %{__mv} %{_builddir}/nginx-%{version}/objs/nginx \
@@ -209,8 +214,9 @@ make %{?_smp_mflags}
 	--add-module=./nginx-secure-token-module-%{nginx_secure_token_ver} \
 	--add-module=./nginx-akamai-token-validate-module-%{nginx_token_validate_ver} \
 	--add-module=./nginx-rtmp-module-%{nginx_rtmp_ver} \
+	--add-dynamic-module=./nginx-module-vts-%{nginx_vts_ver} \
 	--add-dynamic-module=./ngx_aws_auth-%{ngx_aws_auth_ver} \
-    --add-dynamic-module=./headers-more-nginx-module-%{headers_more_nginx_ver} \
+    	--add-dynamic-module=./headers-more-nginx-module-%{headers_more_nginx_ver} \
         $*
 make %{?_smp_mflags}
 
@@ -400,6 +406,9 @@ if [ $1 -ge 1 ]; then
 fi
 
 %changelog
+* Fri Jun 1 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 1.13.12-2
+- VTS module now works with Nginx 1.13 and above so including it again [as an SO, however].
+
 * Tue May 8 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 1.13.12-1
 - New upstream Nginx version [see http://nginx.org/en/CHANGES]
 - New Nginx VOD module - 1.23: 
