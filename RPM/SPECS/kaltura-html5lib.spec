@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.69
+Version: v2.69.5
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -82,6 +82,12 @@ fi
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Fri Jun 1 2018 jess.portnoy@kaltura.com <Jess Portnoy> - v2.69.5-1
+- fix: tvpanalytics fix bug related to enable nonDvrLinearMediaHits flag (#3814)
+- SUP-14316 - Media Playback fails on Android devices
+- Send mediaHits (location=0) for linear without DVR
+- fix rapt filter (#3810)
+
 * Tue May 8 2018 jess.portnoy@kaltura.com <Jess Portnoy> - v2.69-1
 - FEC-8162 - Add a wildcard to the Policy Controlled Features
 - SUP-13444 - control bar buttons don't work when small sized player in Moodle along with slides
