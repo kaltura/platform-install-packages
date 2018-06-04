@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 13.20.0
-Release: 29
+Release: 30
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -333,86 +333,30 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Sun Jun 3 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.20.0-29
-- Nightly build.
-
-* Sat Jun 2 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.20.0-28
-- Nightly build.
-
-* Fri Jun 1 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.20.0-27
-- Nightly build.
-
-* Thu May 31 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.20.0-25
-- Nightly build.
-
-* Wed May 30 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.20.0-24
-- Nightly build.
-
-* Tue May 29 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.20.0-23
-- Nightly build.
-
-* Mon May 28 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.20.0-22
-- Nightly build.
-
-* Sun May 27 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.20.0-21
-- Nightly build.
-
-* Sat May 26 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.20.0-20
-- Nightly build.
-
-* Fri May 25 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.20.0-19
-- Nightly build.
-
-* Thu May 24 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.20.0-18
-- Nightly build.
-
-* Wed May 23 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.20.0-17
-- Nightly build.
-
-* Tue May 22 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.20.0-16
-- Nightly build.
-
-* Mon May 21 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.20.0-15
-- Nightly build.
-
-* Sun May 20 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.20.0-14
-- Nightly build.
-
-* Sat May 19 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.20.0-13
-- Nightly build.
-
-* Fri May 18 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.20.0-12
-- Nightly build.
-
-* Thu May 17 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.20.0-11
-- Nightly build.
-
-* Wed May 16 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.20.0-10
-- Nightly build.
-
-* Tue May 15 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.20.0-9
-- Nightly build.
-
-* Mon May 14 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.20.0-8
-- Nightly build.
-
-* Sun May 13 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.20.0-7
-- Nightly build.
-
-* Sat May 12 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.20.0-6
-- Nightly build.
-
-* Fri May 11 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.20.0-5
-- Nightly build.
-
-* Thu May 10 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.20.0-4
-- Nightly build.
-
-* Wed May 9 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.20.0-3
-- Nightly build.
-
-* Tue May 8 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.20.0-2
-- Nightly build.
+* Mon Jun 4 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.20.0-30
+- PLAT-8583: YouTube SFTP Connector Migration to CSV (https://github.com/kaltura/server/pull/7217)
+- plat-8583: YouTube SFTP Connector Migration to CSV (https://github.com/kaltura/server/pull/7211)
+- PLAT-8966: Set property isMomentary to read only (https://github.com/kaltura/server/pull/7213)
+- Fix insertPermissions script for groupUser service (https://github.com/kaltura/server/pull/7206)
+- KMS-17587: Added momentary cue flag for clipping  (https://github.com/kaltura/server/pull/7203)
+- KMS-17656: If parent id is null, set to 0 to maintain compatiblity (https://github.com/kaltura/server/pull/7198)
+- SUP-14520 chunks with faststart (https://github.com/kaltura/server/pull/7195)
+- Allow change account for users with KMC_ACCESS permission (https://github.com/kaltura/server/pull/7194)
+- Add notification for slides view change (https://github.com/kaltura/server/pull/7188)
+- PLAT-8531: must call postUpdate of parent (https://github.com/kaltura/server/pull/7183)
+- Use the version uiconf instead of the latest.json and beta.json files (https://github.com/kaltura/server/pull/7182)
+- PLAT-8901: KalturaSyndicationFeedRenderer.php - only return entryStatus::READY (https://github.com/kaltura/server/pull/7181)
+- FEV-186: Support sending push notification when thumb cue point becomes ready (https://github.com/kaltura/server/pull/7177)
+- Allow order by status on entry vendor task (https://github.com/kaltura/server/pull/7176)
+- PLAT-8867: Get live thumb by positive offset (https://github.com/kaltura/server/pull/7174)
+- PLAT-8939: Before adding a task for catalog item defined on the action validate that it is allowed for partner (https://github.com/kaltura/server/pull/7172)
+- SUP-14485: Use job createdAt instead of queued_time to determine timeout (https://github.com/kaltura/server/pull/7169)
+- PLAT-8935: Move synonyms to use contraction (https://github.com/kaltura/server/pull/7168)
+- PLAT-8870: Remove the use of increaseEntriesChangedNum (https://github.com/kaltura/server/pull/7166)
+- PLAT-8770: Media Repurposing private content bug (https://github.com/kaltura/server/pull/7162)
+- PLAT-8926: Add remove/create flags to groupUser sync action (https://github.com/kaltura/server/pull/7157)
+- PLAT-8458: KCopyCuePointEngine.php refactoring (https://github.com/kaltura/server/pull/7155)
+- If entryId is available on the object use it when building the cacheKey (https://github.com/kaltura/server/pull/7153)
 
 * Tue May 8 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.20.0-1
 - Ver Bounce to 13.20.0
