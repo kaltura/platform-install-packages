@@ -1,3 +1,9 @@
+kaltura-kmc (5.43.13-4) mercury; urgency=medium
+
+  * Ver bounce of HTML5 player to v2.69.5
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 04 Jun 2018 10:56:26 +0000
+
 kaltura-kmc (5.43.13-3) mercury; urgency=medium
 
   * Ver bounce of HTML5 player to v2.69

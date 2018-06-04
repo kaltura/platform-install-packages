@@ -1,3 +1,31 @@
+kaltura-base (13.20.0-2) mercury; urgency=medium
+
+  * PLAT-8583: YouTube SFTP Connector Migration to CSV (https://github.com/kaltura/server/pull/7217)
+  * plat-8583: YouTube SFTP Connector Migration to CSV (https://github.com/kaltura/server/pull/7211)
+  * PLAT-8966: Set property isMomentary to read only (https://github.com/kaltura/server/pull/7213)
+  * Fix insertPermissions script for groupUser service (https://github.com/kaltura/server/pull/7206)
+  * KMS-17587: Added momentary cue flag for clipping  (https://github.com/kaltura/server/pull/7203)
+  * KMS-17656: If parent id is null, set to 0 to maintain compatiblity (https://github.com/kaltura/server/pull/7198)
+  * SUP-14520 chunks with faststart (https://github.com/kaltura/server/pull/7195)
+  * Allow change account for users with KMC_ACCESS permission (https://github.com/kaltura/server/pull/7194)
+  * Add notification for slides view change (https://github.com/kaltura/server/pull/7188)
+  * PLAT-8531: must call postUpdate of parent (https://github.com/kaltura/server/pull/7183)
+  * Use the version uiconf instead of the latest.json and beta.json files (https://github.com/kaltura/server/pull/7182)
+  * PLAT-8901: KalturaSyndicationFeedRenderer.php - only return entryStatus::READY (https://github.com/kaltura/server/pull/7181)
+  * FEV-186: Support sending push notification when thumb cue point becomes ready (https://github.com/kaltura/server/pull/7177)
+  * Allow order by status on entry vendor task (https://github.com/kaltura/server/pull/7176)
+  * PLAT-8867: Get live thumb by positive offset (https://github.com/kaltura/server/pull/7174)
+  * PLAT-8939: Before adding a task for catalog item defined on the action validate that it is allowed for partner (https://github.com/kaltura/server/pull/7172)
+  * SUP-14485: Use job createdAt instead of queued_time to determine timeout (https://github.com/kaltura/server/pull/7169)
+  * PLAT-8935: Move synonyms to use contraction (https://github.com/kaltura/server/pull/7168)
+  * PLAT-8870: Remove the use of increaseEntriesChangedNum (https://github.com/kaltura/server/pull/7166)
+  * PLAT-8770: Media Repurposing private content bug (https://github.com/kaltura/server/pull/7162)
+  * PLAT-8926: Add remove/create flags to groupUser sync action (https://github.com/kaltura/server/pull/7157)
+  * PLAT-8458: KCopyCuePointEngine.php refactoring (https://github.com/kaltura/server/pull/7155)
+  * If entryId is available on the object use it when building the cacheKey (https://github.com/kaltura/server/pull/7153)
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 04 Jun 2018 10:42:12 +0000
+
 kaltura-base (13.20.0-1) mercury; urgency=medium
 
   * Switching to 13.20.0

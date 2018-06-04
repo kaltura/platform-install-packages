@@ -1,3 +1,12 @@
+kaltura-html5lib (2.69.5-1) mercury; urgency=medium
+
+  * fix: tvpanalytics fix bug related to enable nonDvrLinearMediaHits flag (#3814)
+  * SUP-14316 - Media Playback fails on Android devices
+  * Send mediaHits (location=0) for linear without DVR
+  * fix rapt filter (#3810)
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 04 Jun 2018 10:50:28 +0000
+
 kaltura-html5lib (2.69-1) mercury; urgency=medium
 
   * FEC-8162 - Add a wildcard to the Policy Controlled Features
