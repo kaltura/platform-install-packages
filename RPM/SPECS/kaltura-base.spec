@@ -6,12 +6,12 @@
 %define confdir %{prefix}/app/configurations
 %define logdir %{prefix}/log
 %define webdir %{prefix}/web
-%define codename Mercury
+%define codename Naos
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 13.20.0
-Release: 31
+Version: 14.0.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -333,6 +333,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Tue Jun 5 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.0.0-1
+- Ver Bounce to 14.0.0
+
 * Tue Jun 5 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.20.0-31
 - PLAT-7514-PHP-5.3 bug (https://github.com/kaltura/server-saas-config/pull/1412)
 
