@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 13.20.0
-Release: 30
+Release: 31
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -333,6 +333,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Tue Jun 5 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.20.0-31
+- PLAT-7514-PHP-5.3 bug (https://github.com/kaltura/server-saas-config/pull/1412)
+
 * Mon Jun 4 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 13.20.0-30
 - PLAT-8583: YouTube SFTP Connector Migration to CSV (https://github.com/kaltura/server/pull/7217)
 - plat-8583: YouTube SFTP Connector Migration to CSV (https://github.com/kaltura/server/pull/7211)
