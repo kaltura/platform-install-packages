@@ -1,3 +1,9 @@
+kaltura-base (14.0.0-1) naos; urgency=medium
+
+  * Switching to 14.0.0
+
+ -- Jess Portnoy <jess@b0f924504114>  Tue, 05 Jun 2018 17:50:29 +0000
+
 kaltura-base (13.20.0-3) mercury; urgency=medium
 
   * PLAT-7514-PHP-5.3 bug (https://github.com/kaltura/server-saas-config/pull/1412) 
