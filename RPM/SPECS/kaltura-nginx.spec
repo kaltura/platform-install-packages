@@ -52,7 +52,7 @@ Requires(pre): pwdutils
 Summary: High performance web server customized for Kaltura VOD
 Name: kaltura-nginx
 Version: 1.13.12
-Release: 2
+Release: 3
 Vendor: Kaltura inc.
 URL: http://nginx.org/
 
@@ -147,6 +147,7 @@ export LIBRARY_PATH C_INCLUDE_PATH
         --with-http_sub_module \
         --with-http_dav_module \
         --with-http_flv_module \
+	--with-http_v2_module \
         --with-http_mp4_module \
         --with-http_gunzip_module \
         --with-http_gzip_static_module \
@@ -197,6 +198,7 @@ make %{?_smp_mflags}
         --with-http_dav_module \
         --with-http_flv_module \
         --with-http_mp4_module \
+	--with-http_v2_module \
         --with-http_gunzip_module \
         --with-http_gzip_static_module \
         --with-http_random_index_module \
@@ -406,6 +408,9 @@ if [ $1 -ge 1 ]; then
 fi
 
 %changelog
+* Wed Jun 6 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 1.13.12-3
+- --with-http_v2_module
+
 * Fri Jun 1 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 1.13.12-2
 - VTS module now works with Nginx 1.13 and above so including it again [as an SO, however].
 
