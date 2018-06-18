@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 14.0.0
-Release: 14
+Release: 15
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -333,41 +333,36 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Sat Jun 16 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.0.0-14
-- Nightly build.
+* Mon Jun 18 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.0.0-15
+- Redirect the live thumb when stream to other DC (https://github.com/kaltura/server/pull/7289)
+- Fix package annotations on reach related list objects (https://github.com/kaltura/server/pull/7286)
+- PLAT-8973: allow force stream type (https://github.com/kaltura/server/pull/7284)
+- Fix fatal when checking live entry (https://github.com/kaltura/server/pull/7283)
+- PLAT-9001: fix serveMultiFileAction to handle encrypted filesyncs (https://github.com/kaltura/server/pull/7279)
+- Fade in/out for single clip (https://github.com/kaltura/server/pull/7278)
+- KalturaBatchJobStatus.php: add suspension statuses (https://github.com/kaltura/server/pull/7277)
+- PLAT-8998: decrease index when removing a node from the xml object (https://github.com/kaltura/server/pull/7276)
+- PLAT-8985: Define live concurrency limits for new accounts (https://github.com/kaltura/server/pull/7273)
+- PLAT-8985: Define live concurrency limits for new accounts (https://github.com/kaltura/server/pull/7272)
+- KLiveToVodCopyCuePointEngine.php: reduce segment time to 6 sec (https://github.com/kaltura/server/pull/7267)
+- Admin Console HLS delivery profile: merge advanced and parent settings (https://github.com/kaltura/server/pull/7265)
+- Plat-8995: Make bulk upload CSV work in multi request (https://github.com/kaltura/server/pull/7264)
+- PLAT-8985: Define live stream limits (https://github.com/kaltura/server/pull/7263)
+- Change CATEGORY_ID_THAT_DOES_NOT_EXIST value to avoid slow sphinx query (https://github.com/kaltura/server/pull/7262)
+- PLAT-8952: Live Clipping engine: check cue point times before copying (https://github.com/kaltura/server/pull/7258)
+- PLAT-8974: Allow setting LivePackagerSigningDomain from admin console (https://github.com/kaltura/server/pull/7255)
+- PLAT-8980: Update firebase notification (https://github.com/kaltura/server/pull/7253)
+- Increase MaxDimensions to support VR360 w/4K (https://github.com/kaltura/server/pull/7251)
+- Use unique string for none existing entry ID const to avoid long query time when value is added to sphinx match optimization (https://github.com/kaltura/server/pull/7248)
+- PLAT-8583: YouTube is switching to a new CSV based feed (https://github.com/kaltura/server/pull/7243)
+- Plat-8829: Validate config INIs (https://github.com/kaltura/server/pull/7242)
+- PLAT-8967: Optimize bulk upload closing time for short tasks (https://github.com/kaltura/server/pull/7238)
+- WEBC-1188: Enable RTC tokenization (https://github.com/kaltura/server/pull/7237)
+- PLAT-8952: Set lastSyncTime for live clipping to the created time of the live entry (https://github.com/kaltura/server/pull/7236)
+- PLAT-8583: youtube sftp distribution (https://github.com/kaltura/server/pull/7235)
+- SUP-14595: Chunked Encoding - prevent unintentional lang setting (https://github.com/kaltura/server/pull/7231)
+- SUP-14517: Chunked Encoding - fix inaccurate FPS (https://github.com/kaltura/server/pull/7229)
 
-* Fri Jun 15 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.0.0-13
-- Nightly build.
-
-* Thu Jun 14 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.0.0-12
-- Nightly build.
-
-* Wed Jun 13 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.0.0-10
-- Nightly build.
-
-* Tue Jun 12 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.0.0-9
-- Nightly build.
-
-* Mon Jun 11 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.0.0-8
-- Nightly build.
-
-* Sun Jun 10 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.0.0-7
-- Nightly build.
-
-* Sat Jun 9 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.0.0-6
-- Nightly build.
-
-* Fri Jun 8 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.0.0-5
-- Nightly build.
-
-* Thu Jun 7 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.0.0-4
-- Nightly build.
-
-* Wed Jun 6 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.0.0-3
-- Nightly build.
-
-* Tue Jun 5 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.0.0-2
-- Nightly build.
 
 * Tue Jun 5 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.0.0-1
 - Ver Bounce to 14.0.0

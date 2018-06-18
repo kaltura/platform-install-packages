@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.69.5
+Version: v2.69.6
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -82,6 +82,9 @@ fi
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Mon Jun 18 2018 jess.portnoy@kaltura.com <Jess Portnoy> - v2.69.6-1
+- SUP-14288 - iOS auto captions not loaded on first launch
+
 * Fri Jun 1 2018 jess.portnoy@kaltura.com <Jess Portnoy> - v2.69.5-1
 - fix: tvpanalytics fix bug related to enable nonDvrLinearMediaHits flag (#3814)
 - SUP-14316 - Media Playback fails on Android devices
