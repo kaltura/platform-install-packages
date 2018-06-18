@@ -1,3 +1,9 @@
+kaltura-html5lib (2.69.6-1) naos; urgency=medium
+
+  * SUP-14288 - iOS auto captions not loaded on first launch
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 18 Jun 2018 11:29:05 +0000
+
 kaltura-html5lib (2.69.5-1) mercury; urgency=medium
 
   * fix: tvpanalytics fix bug related to enable nonDvrLinearMediaHits flag (#3814)
