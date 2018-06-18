@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 14.0.0
-Release: 15
+Version: 14.1.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -333,6 +333,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Jun 18 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.1.0-1
+- Ver Bounce to 14.1.0
+
 * Mon Jun 18 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.0.0-15
 - Redirect the live thumb when stream to other DC (https://github.com/kaltura/server/pull/7289)
 - Fix package annotations on reach related list objects (https://github.com/kaltura/server/pull/7286)
