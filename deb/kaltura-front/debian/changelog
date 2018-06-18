@@ -1,3 +1,9 @@
+kaltura-front (14.1.0-1) naos; urgency=medium
+
+  * Switching to 14.1.0
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 18 Jun 2018 16:38:50 +0000
+
 kaltura-front (14.0.0-1) naos; urgency=medium
 
   * Switching to 14.0.0
