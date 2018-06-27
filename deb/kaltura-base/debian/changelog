@@ -1,3 +1,9 @@
+kaltura-base (14.1.0-1) naos; urgency=medium
+
+  * Switching to 14.1.0
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 18 Jun 2018 16:38:49 +0000
+
 kaltura-base (14.0.0-2) naos; urgency=medium
 
   * Redirect the live thumb when stream to other DC (https://github.com/kaltura/server/pull/7289)
