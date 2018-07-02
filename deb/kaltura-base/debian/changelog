@@ -1,3 +1,24 @@
+kaltura-base (14.1.0-2) naos; urgency=medium
+
+  * verifyObjectDeletion - increase chunk size (https://github.com/kaltura/server/pull/7337)
+  * PLAT-8581: ValidateMetadataObjectAccess should not return false if session is of admin type (https://github.com/kaltura/server/pull/7336)
+  * PLAT-9034 Upgrade facebook distributor to graph API v3.0 (https://github.com/kaltura/server/pull/7331)
+  * PLAT-8940 facebook new auth logic (https://github.com/kaltura/server/pull/7330)
+  * SUP-14624: Support of Mac/Win EOL in serveWebVTTAction (https://github.com/kaltura/server/pull/7329)
+  * getIpFromHttpHeader(): support IPv6 addresses (https://github.com/kaltura/server/pull/7325)
+  * ip2location - support single file with IPv4 & 6 (https://github.com/kaltura/server/pull/7324)
+  * SUP-14753: Perform clip action on source DC if the file is not accesible from the current DC (https://github.com/kaltura/server/pull/7320)
+  * PLAT-8507: Return empty KalturaMetadataArray if object ID is not found (https://github.com/kaltura/server/pull/7317)
+  * Fix eventConditions for SLIDE_VIEW_CHANGE_CODE_CUE_POINT notification (https://github.com/kaltura/server/pull/7314)
+  * PLAT-9002: playManifest fix (https://github.com/kaltura/server/pull/7309)
+  * KMS-17960: Set status to pending and do not set duration if no flavours exist (https://github.com/kaltura/server/pull/7306)
+  * PLAT-9025: updateContent action - abort replacement process if an exception was raised (https://github.com/kaltura/server/pull/7304)
+  * SUP-14641: set thumb URL to the correct version (https://github.com/kaltura/server/pull/7300)
+  * PLAT-8952: Live clipping engine - handle cue points (https://github.com/kaltura/server/pull/7299)
+  * Correct action annotations (https://github.com/kaltura/server/pull/7210)
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 02 Jul 2018 16:38:35 +0000
+
 kaltura-base (14.1.0-1) naos; urgency=medium
 
   * Switching to 14.1.0
