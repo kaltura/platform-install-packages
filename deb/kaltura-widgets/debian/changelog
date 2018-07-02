@@ -1,3 +1,9 @@
+kaltura-widgets (14.1.0-1) naos; urgency=medium
+
+  * Added kaltura-kmcng as a dep
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 02 Jul 2018 17:45:09 +0000
+
 kaltura-widgets (10.9.0-1) jupiter; urgency=low
 
   * Switching to 10.9.0
