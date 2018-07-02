@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 14.1.0
-Release: 15
+Release: 17
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -110,6 +110,7 @@ find  $RPM_BUILD_ROOT%{prefix}/app -name "*.sh" -type f -exec chmod +x {} \;
 
 sed -i 's@^IsmIndex@;IsmIndex@g' $RPM_BUILD_ROOT%{prefix}/app/configurations/plugins.template.ini
 sed -i "s#^;kmc_version = @KMC_VERSION@#kmc_version = %{_kmc_version}#g" $RPM_BUILD_ROOT%{prefix}/app/configurations/local.template.ini
+sed -i 's#^\[kmcng\]\s*$#[kmcng]\nkmcng_version = %{_kmcng_version}#' $RPM_BUILD_ROOT%{prefix}/app/configurations/local.template.ini
 sed -i 's@^otp_required_partners\[\]@;otp_required_partners\[\]@g' $RPM_BUILD_ROOT%{prefix}/app/configurations/local.template.ini
 sed -i "s@^partner_otp_internal_ips@;partner_otp_internal_ips@g" $RPM_BUILD_ROOT%{prefix}/app/configurations/local.template.ini
 sed -i "s#^;html5_version = @HTML5LIB_VERSION@#html5_version = %{html5_version}#g" $RPM_BUILD_ROOT%{prefix}/app/configurations/local.template.ini
@@ -333,48 +334,23 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Sun Jul 1 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.1.0-15
-- Nightly build.
-
-* Sat Jun 30 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.1.0-14
-- Nightly build.
-
-* Fri Jun 29 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.1.0-13
-- Nightly build.
-
-* Thu Jun 28 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.1.0-12
-- Nightly build.
-
-* Wed Jun 27 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.1.0-11
-- Nightly build.
-
-* Tue Jun 26 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.1.0-10
-- Nightly build.
-
-* Mon Jun 25 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.1.0-9
-- Nightly build.
-
-* Sun Jun 24 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.1.0-8
-- Nightly build.
-
-* Sat Jun 23 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.1.0-7
-- Nightly build.
-
-* Fri Jun 22 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.1.0-6
-- Nightly build.
-
-* Thu Jun 21 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.1.0-5
-- Nightly build.
-
-* Wed Jun 20 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.1.0-4
-- Nightly build.
-
-* Tue Jun 19 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.1.0-3
-- Nightly build.
-
-* Mon Jun 18 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.1.0-2
-- Nightly build.
-
+* Mon Jul 2 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.1.0-16
+- verifyObjectDeletion - increase chunk size (https://github.com/kaltura/server/pull/7337)
+- PLAT-8581: ValidateMetadataObjectAccess should not return false if session is of admin type (https://github.com/kaltura/server/pull/7336)
+- PLAT-9034 Upgrade facebook distributor to graph API v3.0 (https://github.com/kaltura/server/pull/7331)
+- PLAT-8940 facebook new auth logic (https://github.com/kaltura/server/pull/7330)
+- SUP-14624: Support of Mac/Win EOL in serveWebVTTAction (https://github.com/kaltura/server/pull/7329)
+- getIpFromHttpHeader(): support IPv6 addresses (https://github.com/kaltura/server/pull/7325)
+- ip2location - support single file with IPv4 & 6 (https://github.com/kaltura/server/pull/7324)
+- SUP-14753: Perform clip action on source DC if the file is not accesible from the current DC (https://github.com/kaltura/server/pull/7320)
+- PLAT-8507: Return empty KalturaMetadataArray if object ID is not found (https://github.com/kaltura/server/pull/7317)
+- Fix eventConditions for SLIDE_VIEW_CHANGE_CODE_CUE_POINT notification (https://github.com/kaltura/server/pull/7314)
+- PLAT-9002: playManifest fix (https://github.com/kaltura/server/pull/7309)
+- KMS-17960: Set status to pending and do not set duration if no flavours exist (https://github.com/kaltura/server/pull/7306)
+- PLAT-9025: updateContent action - abort replacement process if an exception was raised (https://github.com/kaltura/server/pull/7304)
+- SUP-14641: set thumb URL to the correct version (https://github.com/kaltura/server/pull/7300)
+- PLAT-8952: Live clipping engine - handle cue points (https://github.com/kaltura/server/pull/7299)
+- Correct action annotations (https://github.com/kaltura/server/pull/7210)
 * Mon Jun 18 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.1.0-1
 - Ver Bounce to 14.1.0
 

@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.33
-Release: 41
+Release: 44
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -82,6 +82,9 @@ find %{_sysconfdir}/logrotate.d -type l -name "kaltura_*" -exec rm {} \;
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Mon Jul 2 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.33-42
+- Support KMCng
+
 * Tue May 15 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.33-41
 - Introduced KALTURA_BATCH_SKIP_WEBSERVER ENV var to be used in the event you want the batch daemon 
 to use a remote Kaltura endpoint/service URL and thus do not wish for a local Apache instance to run on the node. 

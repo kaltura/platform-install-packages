@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.69.6
+Version: v2.70
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -82,6 +82,25 @@ fi
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Mon Jul 2 2018 jess.portnoy@kaltura.com <Jess Portnoy> - v2.70-1
+- fix(Sup-13983): reports seem to be inaccurate update (#3849)
+- fix(sup-14444): addressed the matter with the hidden qna div on VOD entries (#3843)
+- reverting sup 14444 (#3855)
+- *FEC-8174 The progress bar growth more than the live stream rolling buffer
+- FEC-8192 [Player V2][Android]When user select unmute after preroll, the midroll and postoll are not playing later on
+- SUP-14115 SUP-14115 Live feed in Playlist inaccurately shows VOD
+- SUP-14542 Unmute button not displaying for live streaming content
+- FEC-8288 When Automute true no need to display unmute icon
+- SUP-14314 Mobile Player || Dual Screen plugins are overlapping
+- SUP-14668 Player returns to beginning in iOS after midroll
+- FEC-8312 incorrect this reference cause exception on not fatal ad error
+- SUP-14173 No quiz Playback on iOS
+- SUP-14288 iOS auto captions not loaded on first launch
+- FEC-8191 [Player V2] [Playlist-Preroll] The first entry load with endless spinner
+- FEC-8199 [Player_V2][Captions][iOS] - Default captions are not displayed on iOS
+- FEC-8192 [Player V2][Android]When user select unmute after preroll, the midroll and postoll are not playing later on
+- FEC-8174 The progress bar growth more than the live stream rolling buffer
+
 * Mon Jun 18 2018 jess.portnoy@kaltura.com <Jess Portnoy> - v2.69.6-1
 - SUP-14288 - iOS auto captions not loaded on first launch
 

@@ -1,12 +1,12 @@
 Summary: Kaltura widgets
 Name: kaltura-widgets
 Version: 1.0.0
-Release: 8
+Release: 9
 License: AGPLv3+
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
-Requires: kaltura-krecord, kaltura-kupload, kaltura-clipapp, kaltura-kmc, kaltura-kdp, kaltura-kcw, kaltura-kdp3, kaltura-kdp3wrapper, kaltura-kclip, kaltura-kdpwrapper,kaltura-flexwrapper
+Requires: kaltura-krecord, kaltura-kupload, kaltura-clipapp, kaltura-kmc, kaltura-kmcng, kaltura-kdp, kaltura-kcw, kaltura-kdp3, kaltura-kdp3wrapper, kaltura-kclip, kaltura-kdpwrapper,kaltura-flexwrapper
 
 %description
 Kaltura is the world's first Open Source Online Video Platform, transforming the way people work, 
@@ -35,6 +35,9 @@ rm -rf %{buildroot}
 # its a meta package.
 
 %changelog
+* Mon Jul 2 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.0-9
+- Added kaltura-kmcng as a dep
+
 * Mon Aug 18 2014 Jess Portnoy <jess.portnoy@kaltura.com> - 1.0.0-8
 - KSR is OnPrem only so dropping from 'Requires'
 

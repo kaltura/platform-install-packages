@@ -1,6 +1,6 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmcng
-Version: v4.5.1
+Version: v4.8.1
 Release: 1
 Summary: Kaltura HTML5 Management Console
 
