@@ -276,6 +276,10 @@ Please select one of the following options [0]:
 			php $BASE_DIR/app/deployment/uiconf/deploy_v2.php --user=www-data --ini=$KMC_PATH/config.ini >> /dev/null
 			chown -R $APACHE_USER.$KALTURA_GROUP $WEB_DIR/content/generatedUiConf/
 		fi
+		KMCNG_PATH=`ls -ld $BASE_DIR/apps/kmcng/v* 2>/dev/null|awk -F " " '{print $NF}' |tail -1`
+		if [ -d "$KMCNG_PATH" ];then
+			php $BASE_DIR/app/deployment/uiconf/deploy_v2.php --user=www-data --ini=$KMCNG_PATH/deploy/config.ini >> /dev/null
+		fi
 		sed -i "s@^\(html5_version\s*=\)\(.*\)@\1 $HTML5_VER@g" -i $BASE_DIR/app/configurations/local.ini
 	fi
 	trap 'my_trap_handler "${LINENO}" ${$?}' ERR

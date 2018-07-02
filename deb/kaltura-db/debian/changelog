@@ -1,3 +1,9 @@
+kaltura-db (14.1.0-2) naos; urgency=medium
+
+  * Deploy KMCng UI confs
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 02 Jul 2018 17:32:52 +0000
+
 kaltura-db (13.10.0-1) mercury; urgency=low
 
   * String changes

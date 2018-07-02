@@ -9,6 +9,7 @@ KALTURA_PREFIX ?= $(shell egrep '^KALTURA_PREFIX=' $(RC_FILE) | cut -d = -f 2| s
 HTML5LIB_VERSION ?= $(shell egrep '^HTML5LIB_LATEST_VERSION=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
 HTML5_STUDIO_VERSION ?= $(shell egrep '^HTML5_APP_STUDIO_VERSION=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
 KMC_VERSION ?= v$(shell egrep '^KMC_MINUS_V_VERSION=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
+KMCNG_VERSION ?= v$(shell egrep '^KMCNG_MINUS_V_VERSION=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
 KMC_LOGIN_VERSION ?= v$(shell egrep '^KMC_LOGIN_MINUS_V_VERSION=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
 KDP3WRAPPER_VERSION ?=$(shell egrep '^KDP3WRAPPER_VERSION=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
 include ../includes/build-revision.mk
@@ -66,6 +67,7 @@ binary-indep: install
 	find  $(tree) -name "*.sh" -type f -exec chmod +x {} \;
 	sed -i 's@^IsmIndex@;IsmIndex@g' $(tree)/configurations/plugins.template.ini
 	sed -i "s#^;kmc_version = @KMC_VERSION@#kmc_version = $(KMC_VERSION)#g" $(tree)/configurations/local.template.ini
+	sed -i "s#^\[kmcng\]\s*#[kmcng]\nkmcng_version = $(KMCNG_VERSION)#g" $(tree)/configurations/local.template.ini
 	sed -i 's@^otp_required_partners\[\]@;otp_required_partners\[\]@g' $(tree)/configurations/local.template.ini
 	sed -i "s@^partner_otp_internal_ips@;partner_otp_internal_ips@g" $(tree)/configurations/local.template.ini
 	sed -i "s#^;html5_version = @HTML5LIB_VERSION@#html5_version = $(HTML5LIB_VERSION)#g" $(tree)/configurations/local.template.ini
