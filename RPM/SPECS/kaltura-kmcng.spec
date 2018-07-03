@@ -1,7 +1,7 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmcng
 Version: v4.8.1
-Release: 1
+Release: 2
 Summary: Kaltura HTML5 Management Console
 
 Group: System Management	
@@ -36,6 +36,7 @@ This package installs the KMC HTML5 web interface.
 %install
 mkdir -p $RPM_BUILD_ROOT%{prefix}/apps/kmcng
 cp -r %{_builddir}/%{name}-%{version} $RPM_BUILD_ROOT%{prefix}/apps/kmcng/%{version}
+sed -i 's@useSecuredProtocol:!0@useSecuredProtocol:false@g' $RPM_BUILD_ROOT%{prefix}/apps/kmcng/%{version}/main.*.bundle.js
 
 %preun
 
