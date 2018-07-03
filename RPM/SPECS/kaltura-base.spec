@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 14.1.0
-Release: 18
+Release: 19
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -36,6 +36,7 @@ Source35: start_page.php
 Source36: start_page_survey.png
 Source37: start_page_newsletter.png
 Source38: start_page-landing-page.css
+Source39: kmcngAction.class.php
 URL: https://github.com/kaltura/server/tree/%{codename}-%{version}
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
@@ -156,6 +157,8 @@ cp %{SOURCE35} $RPM_BUILD_ROOT%{prefix}/app/start/index.php
 cp %{SOURCE36} $RPM_BUILD_ROOT%{prefix}/app/start/img/survey.png
 cp %{SOURCE37} $RPM_BUILD_ROOT%{prefix}/app/start/img/newsletter.png
 cp %{SOURCE38} $RPM_BUILD_ROOT%{prefix}/app/start/css/landing-page.css
+# tmp patch to avoid senseless redirect to HTTPs in kmcng
+cp %{SOURCE39} $RPM_BUILD_ROOT%{prefix}/app/alpha/apps/kaltura/modules/kmcng/actions/kmcngAction.class.php
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content
 tar zxf %{SOURCE10} -C $RPM_BUILD_ROOT%{prefix}/web/content
 
