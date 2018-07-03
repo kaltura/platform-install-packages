@@ -33,6 +33,9 @@ mysql -e "FLUSH PRIVILEGES"
 # installing kaltura
 /opt/kaltura/bin/kaltura-mysql-settings.sh
 
+# remove old vanilla CA bundle and reinstall the package
+rm -f /etc/ssl/certs/ca-bundle.crt && yum reinstall -y ca-certificates
+
 if [ -e /root/install/config.ans ]; then
 	/opt/kaltura/bin/kaltura-config-all.sh /root/install/config.ans
 else
