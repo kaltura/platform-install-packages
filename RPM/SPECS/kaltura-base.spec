@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 14.1.0
-Release: 17
+Release: 18
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -39,7 +39,7 @@ Source38: start_page-landing-page.css
 URL: https://github.com/kaltura/server/tree/%{codename}-%{version}
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
-Requires: rsync,mysql,kaltura-monit,kaltura-postinst,cronie, php-cli, php-xml, php-curl, php-mysql, php-gd, php-gmp, php-ldap, php-mbstring, php-process, ntp, mailx
+Requires: rsync,mysql,kaltura-monit,kaltura-postinst,cronie, php-cli, php-xml, php-curl, php-mysqli, php-pdo_mysql, php-gd, php-gmp, php-ldap, php-mbstring, php-process, ntp, mailx
 
 %description
 Kaltura is the world's first Open Source Online Video Platform, transforming the way people work, 
@@ -334,6 +334,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Tue Jul 3 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.1.0-18
+- Depend on php-mysqli and php-pdo_mysql rather than on php-mysql
+
 * Mon Jul 2 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.1.0-16
 - verifyObjectDeletion - increase chunk size (https://github.com/kaltura/server/pull/7337)
 - PLAT-8581: ValidateMetadataObjectAccess should not return false if session is of admin type (https://github.com/kaltura/server/pull/7336)
