@@ -201,19 +201,18 @@ EOF
 	exit 8
 fi
 
+KMC_VERSION=`grep "^kmc_version" $BASE_DIR/app/configurations/local.ini|awk -F "=" '{print $2}'|sed 's@\s*@@g'`
+KMCNG_VERSION=`grep "^kmcng_version" $BASE_DIR/app/configurations/local.ini|awk -F "=" '{print $2}'|sed 's@\s*@@g'`
 if [ "$IS_SSL" = 'Y' -o "$IS_SSL" = 1 -o "$IS_SSL" = 'y' -o "$IS_SSL" = 'true' ];then
 # force KMC login via HTTPs.
 	php $APP_DIR/deployment/base/scripts/insertPermissions.php -d $APP_DIR/deployment/permissions/ssl/ > /dev/null 2>&1
-	KMCNG_PATH=`ls -ld $BASE_DIR/apps/kmcng/v* 2>/dev/null|awk -F " " '{print $NF}' |tail -1`
-	if [ -d $KMCNG_PATH ];then
-		sed -i 's@useSecuredProtocol:false@useSecuredProtocol:true@g' $KMCNG_PATH/main.*.bundle.js
+	if [ -d $BASE_DIR/apps/kmcng/$KMCNG_VERSION ];then
+		sed -i 's@useSecuredProtocol:false@useSecuredProtocol:true@g' $BASE_DIR/apps/kmcng/$KMCNG_VERSION/main.*.bundle.js
 	fi 
 fi
 
-KMC_VERSION=`grep "^kmc_version" $BASE_DIR/app/configurations/local.ini|awk -F "=" '{print $2}'|sed 's@\s*@@g'`
 echo -e "${BRIGHT_BLUE}Generating UI confs..${NORMAL}"
 php $APP_DIR/deployment/uiconf/deploy_v2.php --ini=$WEB_DIR/flash/kmc/$KMC_VERSION/config.ini >> $LOG_DIR/deploy_v2.log  2>&1
-KMCNG_VERSION=`grep "^kmcng_version" $BASE_DIR/app/configurations/local.ini|awk -F "=" '{print $2}'|sed 's@\s*@@g'`
 php $BASE_DIR/app/deployment/uiconf/deploy_v2.php --ini=$BASE_DIR/apps/kmcng/$KMCNG_VERSION/deploy/config.ini >> /dev/null
 
 #for i in $APP_DIR/deployment/updates/scripts/patches/*.sh;do

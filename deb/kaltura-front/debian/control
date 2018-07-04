@@ -29,7 +29,8 @@ Depends:
  memcached,
  kaltura-base,
  mediainfo,
- libxml2-utils
+ libxml2-utils,
+ kaltura-kmcng
 Description: Kaltura Open Source Video Platform - frontend server 
  Kaltura is the world's first Open Source Online Video Platform, transforming the way people work, learn, 
  and entertain using online video. The Kaltura platform empowers media applications with advanced video 

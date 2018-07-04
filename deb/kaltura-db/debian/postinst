@@ -242,7 +242,11 @@ EOF
 
 	if [ "$IS_SSL" = true ];then
 	# force KMC login via HTTPs.
+		KMCNG_VERSION=`grep "^kmcng_version" $BASE_DIR/app/configurations/local.ini|awk -F "=" '{print $2}'|sed 's@\s*@@g'`
 		php $APP_DIR/deployment/base/scripts/insertPermissions.php -d $APP_DIR/deployment/permissions/ssl/ > /dev/null 2>&1
+		if [ -d $BASE_DIR/apps/kmcng/$KMCNG_VERSION ];then
+			sed -i 's@useSecuredProtocol:false@useSecuredProtocol:true@g' $BASE_DIR/apps/kmcng/$KMCNG_VERSION/main.*.bundle.js
+		fi 
 	fi
 	deploy_kmc_and_studio
 	rm -f $APP_DIR/log/kaltura-*.log

@@ -146,6 +146,8 @@ if [ "$1" = "configure" ]; then
 		if [ $? -eq 0 ];then
 			echo "update permission set STATUS=1 WHERE permission.PARTNER_ID IN ('0') AND permission.NAME='FEATURE_KMC_ENFORCE_HTTPS' ORDER BY permission.STATUS ASC LIMIT 1;" | mysql $DB1_NAME -h$DB1_HOST -u$DB1_USER -P$DB1_PORT -p$DB1_PASS 
 		fi
+		KMCNG_PATH=`ls -ld $BASE_DIR/apps/kmcng/v* 2>/dev/null|awk -F " " '{print $NF}' |tail -1`
+		sed -i 's@useSecuredProtocol:false@useSecuredProtocol:true@g' $KMCNG_PATH/main.*.bundle.js
 		trap 'my_trap_handler "${LINENO}" ${$?}' ERR
 	else
 		DEFAULT_PORT=80
