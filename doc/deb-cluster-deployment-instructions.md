@@ -10,7 +10,7 @@ Refer to the [All-In-One Kaltura Server Installation Guide](install-kaltura-deb-
 * [NFS server](#the-nfs-server)
 * [MySQL Database](#the-mysql-database)
 * [Sphinx Indexing](#the-sphinx-indexing-server)
-* [Front Nodes](#the-front)
+* [Front Nodes](#the-first-front-node)
 * [Batch Nodes](#the-batch)
 * [Analytics](#the-datawarehouse)
 * [Nginx VOD Nodes](#nginx-vod-server)
@@ -258,7 +258,7 @@ After installing the first cluster node, obtain the auto generated file placed u
 
 ### The first Front node
 
-####NOTES: 
+#### NOTES: 
 0. kaltura-db and kaltura-widgets kaltura-html5lib which are installed on the web mount only need to run on the first node.
 1. Before starting, make sure the balancer does not direct to the second front node since it's not yet installed.
 
@@ -267,7 +267,7 @@ Front in Kaltura represents the machines hosting the user-facing components, inc
 ```
 # apt-get install kaltura-postinst
 # /opt/kaltura/bin/kaltura-nfs-client-config.sh <NFS host> <domain> <nobody-user> <nobody-group>
-# apt-get install kaltura-front kaltura-widgets kaltura-html5lib kaltura-html5-studio kaltura-clipapp 
+# apt-get install kaltura-front kaltura-widgets kaltura-html5lib kaltura-html5-studio kaltura-kmcng kaltura-clipapp 
 # . /etc/kaltura.d/system.ini
 Make certain this call returs 200
 # curl -I $SERVICE_URL/api_v3/index.php
