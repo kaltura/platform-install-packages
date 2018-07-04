@@ -66,7 +66,7 @@ Two working solutions to the AWS EC2 email limitations are:
 
 ### The NFS server
 The NFS is the shared network storage between all machines in the cluster. To learn more about NFS read [this wikipedia article about NFS](http://en.wikipedia.org/wiki/Network_File_System).
-```
+```sh
 # yum install nfs-utils-lib ntp
 # chkconfig nfs on
 # chkconfig ntpd on
@@ -89,7 +89,7 @@ Note that you may choose different NFS settings which is fine so long as:
 * the kaltura and apache user are both able create files with them as owners. i.e: do not use all_squash as an option.
 
 Then set priviliges accordingly:
-```
+```sh
 # groupadd -r kaltura -g7373
 # useradd -M -r -u7373 -d /opt/kaltura -s /bin/bash -c "Kaltura server" -g kaltura kaltura
 # groupadd -g 48 -r apache
@@ -102,7 +102,7 @@ Then set priviliges accordingly:
 
 Before continuing, run the following test on all front and Batch machines:
 
-```
+```sh
 # yum install telnet
 # telnet NFS_HOST 2049
 Should return something similar to:
@@ -113,7 +113,7 @@ Escape character is '^]'.
 
 
 ### The MySQL Database
-```
+```sh
 # rpm -Uhv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
 # yum install mysql-server kaltura-postinst ntp 
 # /opt/kaltura/bin/kaltura-mysql-settings.sh
@@ -134,7 +134,7 @@ After the Kaltura cluster installation is done, you may want to remove the root 
  
 Before continuing the deployment, run the following test on all front, Sphinx and Batch machines:
 
-```
+```sh
 # mysql -uroot -hMYSQL_HOST -p 
 
 If the connection fails, you may have a networking issue, run:
@@ -183,7 +183,7 @@ propel.connection.dsn = "mysql:host=MASTER_DB_HOST;port=3306;dbname=kaltura;"
 
 * The sections that will follow will look the same, but after the key `propel`, you'll notice the numbers 2 and 3. These are the second and third MySQL servers that will be used as SLAVES (replace the upper case tokens with real values from your network hosts):
 
-```
+```ini
 propel2.connection.hostspec = SECOND_DB_HOST
 propel2.connection.user = kaltura
 propel2.connection.password = KALTURA_DB_USER_PASSWORD
@@ -201,7 +201,7 @@ When query cache is enabled, the server intelligently chooses between master / s
 
 
 ### The Sphinx Indexing Server
-```
+```sh
 # rpm -Uhv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
 # yum install kaltura-base kaltura-sphinx kaltura-postinst
 # /opt/kaltura/bin/kaltura-sphinx-config.sh
@@ -222,7 +222,7 @@ After installing the first cluster node, obtain the auto generated file placed u
 
 
 Front in Kaltura represents the machines hosting the user-facing components, including the Kaltura API, the KMC and Admin Console, MediaSpace and all client-side widgets. 
-```
+```sh
 # rpm -Uhv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
 # yum install kaltura-postinst
 # /opt/kaltura/bin/kaltura-nfs-client-config.sh <NFS host> <domain> <nobody-user> <nobody-group>
@@ -251,7 +251,7 @@ Content-Type: text/xml
 
 ### Secondary Front nodes
 Front in Kaltura represents the machines hosting the user-facing components, including the Kaltura API, the KMC and Admin Console, MediaSpace and all client-side widgets. 
-```
+```sh
 # rpm -Uhv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
 # yum install kaltura-postinst
 # /opt/kaltura/bin/kaltura-nfs-client-config.sh <NFS host> <domain> <nobody-user> <nobody-group>
@@ -265,7 +265,7 @@ Batch in Kaltura represents the machines running all async operations. To learn 
 
 It is strongly recommended that you install at least 2 batch nodes for redundancy.
 
-```
+```sh
 # rpm -Uhv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
 # yum install kaltura-postinst
 # /opt/kaltura/bin/kaltura-nfs-client-config.sh <NFS host> <domain> <nobody-user> <nobody-group>
@@ -280,7 +280,7 @@ When running the `kaltura-batch-config.sh` installer on the batch machine, the i
 
 ### The DataWarehouse
 The DWH is Kaltura's Analytics server.
-```
+```sh
 # rpm -Uhv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
 # yum install kaltura-dwh kaltura-postinst
 # /opt/kaltura/bin/kaltura-nfs-client-config.sh <NFS host> <domain> <nobody-user> <nobody-group>
@@ -294,7 +294,7 @@ For more info about its features see:
 https://github.com/kaltura/nginx-vod-module/
 
 #### Installation:
-```
+```sh
 # yum install kaltura-base kaltura-nginx kaltura-postinst
 # /opt/kaltura/bin/kaltura-nfs-client-config.sh <NFS host> <domain> <nobody-user> <nobody-group>
 # /opt/kaltura/bin/kaltura-base-config.sh
@@ -307,14 +307,14 @@ https://github.com/kaltura/nginx-vod-module/
 For SSL specific configuration options, please see [nginx-ssl-config.md](nginx-ssl-config.md)
 
 The default delivery profiles for DASH, HDS and HLS are defined here:
-```
+```sql
 mysql> select * from delivery_profile where partner_id=0 and streamer_type in ('applehttp','mpegdash','hdnetworkmanifest');
 ```
 
 These can be overridden for any given partner by going to Admin Console->Publishers->Profiles->Delivery profiles.
 
 The decision as to which delivery profile is default is done according to values in /opt/kaltura/app/configurations/base.ini
-```
+```ini
 ; max duration in seconds
 short_entries_max_duration = 300
 short_entries_default_delivery_type = http
@@ -323,7 +323,7 @@ default_delivery_type = http
 ```
 
 By default, all are set to 'http' which means progressive download. You can change them to reflect you preferences. For example:
-```
+```ini
 short_entries_default_delivery_type = http
 secured_default_delivery_type = hds
 default_delivery_type = hds
@@ -342,7 +342,7 @@ A longer post about it can be found at https://blog.kaltura.com/free-and-open-li
 ### Upgrade Kaltura
 On all nodes:
 
-```
+```sh
 # rpm -Uhv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
 # yum clean all
 # yum update "*kaltura*"
@@ -350,19 +350,19 @@ On all nodes:
 
 
 On front machines:
-```
+```sh
 # kaltura-base-config.sh [/path/to/ans/file]
 # kaltura-front-config.sh [/path/to/ans/file]
 ```
 
 On batch machines:
-```
+```sh
 # kaltura-base-config.sh [/path/to/ans/file]
 # kaltura-batch-config.sh [/path/to/ans/file]
 ```
 
 On sphinx machines:
-```
+```sh
 # kaltura-base-config.sh [/path/to/ans/file]
 # kaltura-sphinx-config.sh [/path/to/ans/file]
 ```
@@ -380,14 +380,14 @@ Backup and restore is quite simple. Make sure that the following is being regula
 
 Then, if needed, to restore the Kaltura server, follow these steps:
 
-* Install the **same version** of Kaltura on a clean machine
+* Intall the **same version** of Kaltura on a clean machine
 * Stop all services
 * Copy over the web and configurations directories
 * Import the MySQL dump
 * Restart all services
 * Reindex Sphinx with the following commands: 
 
-```
+```sh
 # rm -f /opt/kaltura/log/sphinx/data/*
 # cd /opt/kaltura/app/deployment/base/scripts/
 # for i in populateSphinx*;do php $i >/tmp/$.log;done
