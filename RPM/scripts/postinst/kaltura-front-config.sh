@@ -98,6 +98,8 @@ trap 'my_trap_handler "${LINENO}" $?' ERR
 send_install_becon "`basename $0`" "install_start" 0 
 KALTURA_APACHE_CONF=$APP_DIR/configurations/apache
 KALTURA_APACHE_CONFD=$KALTURA_APACHE_CONF/conf.d
+KMC_PATH=`ls -ld $BASE_DIR/web/flash/kmc/v* 2>/dev/null|awk -F " " '{print $NF}' |tail -1`
+KMCNG_PATH=`ls -ld $BASE_DIR/apps/kmcng/v* 2>/dev/null|awk -F " " '{print $NF}' |tail -1`
 #unset IS_SSL
 if [ -z "$IS_SSL" ];then
 #unset IS_SSL
@@ -200,6 +202,7 @@ if [ "$IS_SSL" = 'Y' -o "$IS_SSL" = 1 -o "$IS_SSL" = 'y' -o "$IS_SSL" = 'true' ]
 	if [ $? -eq 0 ];then
 		echo "update permission set STATUS=1 WHERE permission.PARTNER_ID IN ('0') AND permission.NAME='FEATURE_KMC_ENFORCE_HTTPS' ORDER BY permission.STATUS ASC LIMIT 1;" | mysql $DB1_NAME -h$DB1_HOST -u$DB1_USER -P$DB1_PORT -p$DB1_PASS 
 	fi
+	sed -i 's@useSecuredProtocol:false@useSecuredProtocol:true@g' $KMCNG_PATH/main.*.bundle.js
 	trap 'my_trap_handler "${LINENO}" $?' ERR
 else
 	DEFAULT_PORT=80
@@ -299,10 +302,10 @@ sed -i "s/@HTML5_VER@/$HTML5LIB_VERSION/g" -i $BASE_DIR/apps/studio/$HTML5_STUDI
 			sed -i "s@^\(studio_version\s*=\)\(.*\)@\1 $HTML5_STUDIO_VERSION@g" -i $BASE_DIR/app/configurations/local.ini
 		fi
 	# we can't use rpm -q kaltura-kmc because this node may not be the one where we installed the KMC RPM on, as it resides in the web dir and does not need to be installed on all front nodes.
-		KMC_PATH=`ls -ld $BASE_DIR/web/flash/kmc/v* 2>/dev/null|awk -F " " '{print $NF}' |tail -1`
 		php $BASE_DIR/app/deployment/uiconf/deploy_v2.php --ini=$KMC_PATH/config.ini >> /dev/null
-		KMCNG_PATH=`ls -ld $BASE_DIR/apps/kmcng/v* 2>/dev/null|awk -F " " '{print $NF}' |tail -1`
-		php $BASE_DIR/app/deployment/uiconf/deploy_v2.php --ini=$KMCNG_PATH/deploy/config.ini >> /dev/null
+		if [ -d "$KMCNG_PATH" ];then
+			php $BASE_DIR/app/deployment/uiconf/deploy_v2.php --ini=$KMCNG_PATH/deploy/config.ini >> /dev/null
+		fi
 	fi
 	trap 'my_trap_handler "${LINENO}" $?' ERR
 send_install_becon `basename $0` install_success 0 
