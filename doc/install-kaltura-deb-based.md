@@ -157,7 +157,7 @@ And install as described above.
 
 If using Debian: Jessie [8] or Ubuntu: Trusty [14.04], edit /etc/apt/sources.list.d/kaltura.list so that it reads:
 ```
-deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/debian mercury main
+deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/debian naos main
 ```
 
 And import the GPG key with:
@@ -167,7 +167,7 @@ And import the GPG key with:
 
 Or, if using Ubuntu Xenial [16.04]:
 ```
-deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/xenial mercury main
+deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/xenial naos main
 ```
 And import the GPG key with:
 ```
