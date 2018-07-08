@@ -6,7 +6,11 @@ $clientConfig = null;
 require_once __DIR__ . '/init.php';
 
 $kmcUrl = $clientConfig->serviceUrl . 'kmc';
+stream_wrapper_restore('http');
+stream_wrapper_restore('https');
 $kmcHtmlContent = file_get_contents($kmcUrl);
+stream_wrapper_unregister('http');
+stream_wrapper_unregister('https');
 if(!$kmcHtmlContent)
 {
 	echo "Fetching URL [$kmcUrl] failed\n";
