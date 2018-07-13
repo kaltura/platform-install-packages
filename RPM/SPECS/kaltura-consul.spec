@@ -37,6 +37,7 @@ Source5: %{name}-client.sysconf
 Source6: %{name}-client.init
 Source7: %{name}-server.json 
 Source8: %{name}-client.json 
+Source9: consul
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
 
@@ -62,7 +63,7 @@ mkdir -p $RPM_BUILD_ROOT%{kaltura_prefix}/log/consul
 cp %{SOURCE7} $RPM_BUILD_ROOT%{prefix}/etc/consul.d/server/config.json
 cp %{SOURCE8} $RPM_BUILD_ROOT%{prefix}/etc/consul.d/client/config.json
 #cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/etc
-cp consul $RPM_BUILD_ROOT%{prefix}/bin/
+cp %{SOURCE9} $RPM_BUILD_ROOT%{prefix}/bin/
 
 %{__mkdir} -p $RPM_BUILD_ROOT%{_sysconfdir}/sysconfig
 %{__install} -m 644 -p %{SOURCE2} \
