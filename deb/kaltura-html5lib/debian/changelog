@@ -1,3 +1,9 @@
+kaltura-html5lib (2.70.1-1) naos; urgency=medium
+
+  * SUP-14444 - Unexpected behavior when embedding Webcast entry with QnA
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 23 Jul 2018 13:54:28 +0000
+
 kaltura-html5lib (2.70-1) naos; urgency=medium
 
   * fix(Sup-13983): reports seem to be inaccurate update (#3849)

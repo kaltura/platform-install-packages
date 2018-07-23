@@ -1,3 +1,9 @@
+kaltura-nginx (1.14.0-1) naos; urgency=medium
+
+  * New upstream Nginx version [see http://nginx.org/en/CHANGES]
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 23 Jul 2018 14:07:01 +0000
+
 kaltura-nginx (1.13.12-1) mercury; urgency=medium
 
   * New upstream Nginx version [see http://nginx.org/en/CHANGES]

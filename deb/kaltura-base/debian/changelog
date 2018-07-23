@@ -1,3 +1,36 @@
+kaltura-base (14.2.0-2) naos; urgency=medium
+
+  * SUP-14941: Fix multi account login (https://github.com/kaltura/server/pull/7421)
+  * PLAT-9100: Hotfix for Response Profile (https://github.com/kaltura/server/pull/7414)
+  * Fix link from legacy KMC to KMCng, providing KS of logged-in user (https://github.com/kaltura/server/pull/7409)
+  * PLAT-9091: Adjust Facebook auth request permissions (https://github.com/kaltura/server/pull/7399)
+  * PLAT-9062: Return value from soapCall() (https://github.com/kaltura/server/pull/7391)
+  * Fix Media repurposing admin console listing and dry runner log to support REACH (https://github.com/kaltura/server/pull/7390)
+  * PLAT-9064: filter scheduledTasks that were not handled the current day (https://github.com/kaltura/server/pull/7388)
+  * PLAT-9062: kSoapClient - override  __soapCall (https://github.com/kaltura/server/pull/7387)
+  * PLAT-8941: move the config json string up to Delivery Server Node (https://github.com/kaltura/server/pull/7386)
+  * PLAT-9019: YouTube distributor - custom match and usage policy (https://github.com/kaltura/server/pull/7381)
+  * Fix Curl Wrapper response for Http notification (https://github.com/kaltura/server/pull/7378)
+  * PLAT-8903: Optimise kContentDistribution (https://github.com/kaltura/server/pull/7374)
+  * KMCNG-1941: Add link to the html based kmc from the flash based kmc (https://github.com/kaltura/server/pull/7373)
+  * PLAT-9075: handle filter generation for abstract class (https://github.com/kaltura/server/pull/7370)
+  * Handle filtering 0 enum value (https://github.com/kaltura/server/pull/7369)
+  * Use smaller chunk size for delayed file sync pull (https://github.com/kaltura/server/pull/7366)
+  * Ensure the serviceClassToIdAndName array is populated when service item is being fetched from cache (https://github.com/kaltura/server/pull/7365)
+  * admin_console/configs/lang/en.php - Added Thai (https://github.com/kaltura/server/pull/7364)
+  * PLAT-8915: Response profile access validation (https://github.com/kaltura/server/pull/7363)
+  * Add missing relatedService annotations (https://github.com/kaltura/server/pull/7361)
+  * Add missing class annotation to avoid error when using reach objects as a part of a response profile (https://github.com/kaltura/server/pull/7360)
+  * PLAT-9044: Cue point merging  (https://github.com/kaltura/server/pull/7357)
+  * PLAT-9062: SoapServer - allow remote access (https://github.com/kaltura/server/pull/7355)
+  * limit the number of last_login_pid updates (https://github.com/kaltura/server/pull/7351)
+  * PLAT-8484: add -5 permission to liveConversionProfile (https://github.com/kaltura/server/pull/7349)
+  * add kmcng_version to local.ini (https://github.com/kaltura/server/pull/7340)
+  * PLAT-8915: Response profile access validation (https://github.com/kaltura/server/pull/7313)
+  * Avoid fetching none default delivery profiles (https://github.com/kaltura/server/pull/7161)
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 23 Jul 2018 13:49:45 +0000
+
 kaltura-base (14.2.0-1) naos; urgency=medium
 
   * Switching to 14.2.0
