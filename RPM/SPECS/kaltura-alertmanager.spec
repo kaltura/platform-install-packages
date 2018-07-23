@@ -6,7 +6,7 @@
 Summary: Alertmanager handles alerts sent by client applications such as the Prometheus server
 Name: kaltura-alertmanager
 Version: 0.13.0
-Release: 2
+Release: 3
 License: ASL 2.0
 Group: System Environment/Daemons
 URL: http://prometheus.org/

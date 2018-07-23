@@ -9,7 +9,7 @@
 Summary: Prometheus Apache Exporter
 Name: kaltura-apache-exporter
 Version: 0.5.0 
-Release: 2
+Release: 3
 License: MIT
 Group: System Environment/Daemons
 URL: https://github.com/prometheus/apache_exporter/%{exporter_name}
@@ -23,6 +23,7 @@ BuildArch: x86_64
 Requires: initscripts >= 8.36
 Requires: daemon
 Requires(post): chkconfig
+Requires: redhat-lsb-core
 %endif
 
 %if 0%{?rhel}  == 7

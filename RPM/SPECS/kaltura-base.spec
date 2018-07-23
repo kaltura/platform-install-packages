@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 14.2.0
-Release: 13
+Release: 14
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -337,44 +337,36 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Sun Jul 15 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.2.0-13
-- Nightly build.
+* Mon Jul 23 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.2.0-14
+- SUP-14941: Fix multi account login (https://github.com/kaltura/server/pull/7421)
+- PLAT-9100: Hotfix for Response Profile (https://github.com/kaltura/server/pull/7414)
+- Fix link from legacy KMC to KMCng, providing KS of logged-in user (https://github.com/kaltura/server/pull/7409)
+- PLAT-9091: Adjust Facebook auth request permissions (https://github.com/kaltura/server/pull/7399)
+- PLAT-9062: Return value from soapCall() (https://github.com/kaltura/server/pull/7391)
+- Fix Media repurposing admin console listing and dry runner log to support REACH (https://github.com/kaltura/server/pull/7390)
+- PLAT-9064: filter scheduledTasks that were not handled the current day (https://github.com/kaltura/server/pull/7388)
+- PLAT-9062: kSoapClient - override  __soapCall (https://github.com/kaltura/server/pull/7387)
+- PLAT-8941: move the config json string up to Delivery Server Node (https://github.com/kaltura/server/pull/7386)
+- PLAT-9019: YouTube distributor - custom match and usage policy (https://github.com/kaltura/server/pull/7381)
+- Fix Curl Wrapper response for Http notification (https://github.com/kaltura/server/pull/7378)
+- PLAT-8903: Optimise kContentDistribution (https://github.com/kaltura/server/pull/7374)
+- KMCNG-1941: Add link to the html based kmc from the flash based kmc (https://github.com/kaltura/server/pull/7373)
+- PLAT-9075: handle filter generation for abstract class (https://github.com/kaltura/server/pull/7370)
+- Handle filtering 0 enum value (https://github.com/kaltura/server/pull/7369)
+- Use smaller chunk size for delayed file sync pull (https://github.com/kaltura/server/pull/7366)
+- Ensure the serviceClassToIdAndName array is populated when service item is being fetched from cache (https://github.com/kaltura/server/pull/7365)
+- admin_console/configs/lang/en.php - Added Thai (https://github.com/kaltura/server/pull/7364)
+- PLAT-8915: Response profile access validation (https://github.com/kaltura/server/pull/7363)
+- Add missing relatedService annotations (https://github.com/kaltura/server/pull/7361)
+- Add missing class annotation to avoid error when using reach objects as a part of a response profile (https://github.com/kaltura/server/pull/7360)
+- PLAT-9044: Cue point merging  (https://github.com/kaltura/server/pull/7357)
+- PLAT-9062: SoapServer - allow remote access (https://github.com/kaltura/server/pull/7355)
+- limit the number of last_login_pid updates (https://github.com/kaltura/server/pull/7351)
+- PLAT-8484: add -5 permission to liveConversionProfile (https://github.com/kaltura/server/pull/7349)
+- add kmcng_version to local.ini (https://github.com/kaltura/server/pull/7340)
+- PLAT-8915: Response profile access validation (https://github.com/kaltura/server/pull/7313)
+- Avoid fetching none default delivery profiles (https://github.com/kaltura/server/pull/7161)
 
-* Sat Jul 14 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.2.0-12
-- Nightly build.
-
-* Fri Jul 13 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.2.0-11
-- Nightly build.
-
-* Thu Jul 12 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.2.0-10
-- Nightly build.
-
-* Wed Jul 11 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.2.0-9
-- Nightly build.
-
-* Tue Jul 10 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.2.0-8
-- Nightly build.
-
-* Mon Jul 9 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.2.0-7
-- Nightly build.
-
-* Sun Jul 8 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.2.0-6
-- Nightly build.
-
-* Sat Jul 7 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.2.0-5
-- Nightly build.
-
-* Fri Jul 6 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.2.0-4
-- Nightly build.
-
-* Thu Jul 5 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.2.0-3
-- Nightly build.
-
-* Wed Jul 4 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.2.0-2
-- Nightly build.
-
-* Wed Jul 4 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.2.0-1
-- Ver Bounce to 14.2.0
 
 * Tue Jul 3 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.1.0-18
 - Depend on php-mysqli and php-pdo_mysql rather than on php-mysql

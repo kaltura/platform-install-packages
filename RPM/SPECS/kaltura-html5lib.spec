@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.70
+Version: v2.70.1
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -82,6 +82,9 @@ fi
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Mon Jul 23 2018 jess.portnoy@kaltura.com <Jess Portnoy> - v2.70.1-1
+- SUP-14444 - Unexpected behavior when embedding Webcast entry with QnA
+
 * Mon Jul 2 2018 jess.portnoy@kaltura.com <Jess Portnoy> - v2.70-1
 - fix(Sup-13983): reports seem to be inaccurate update (#3849)
 - fix(sup-14444): addressed the matter with the hidden qna div on VOD entries (#3843)

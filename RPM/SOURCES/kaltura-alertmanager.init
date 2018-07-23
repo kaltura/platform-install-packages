@@ -20,8 +20,8 @@ LOGFILE=/opt/kaltura/log/alertmanager/alertmanager.log
 HELPER=/usr/bin/daemon
 HELPER_ARGS="--name=$NAME --output=$LOGFILE --pidfile=$PIDFILE --user=$USER"
 
-if [ -f /etc/default/$NAME ]; then
-        . /etc/default/$NAME
+if [ -f /etc/sysconfig/$NAME ]; then
+        . /etc/sysconfig/$NAME
 fi
 
 test -x $DAEMON || exit 0
