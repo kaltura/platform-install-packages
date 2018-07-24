@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 14.2.0
-Release: 14
+Version: 14.3.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -337,6 +337,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Tue Jul 24 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.3.0-1
+- Ver Bounce to 14.3.0
+
 * Mon Jul 23 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.2.0-14
 - SUP-14941: Fix multi account login (https://github.com/kaltura/server/pull/7421)
 - PLAT-9100: Hotfix for Response Profile (https://github.com/kaltura/server/pull/7414)
