@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 14.3.0
-Release: 7
+Release: 8
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -337,23 +337,26 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Sun Jul 29 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.3.0-7
-- Nightly build.
-
-* Sat Jul 28 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.3.0-6
-- Nightly build.
-
-* Fri Jul 27 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.3.0-5
-- Nightly build.
-
-* Thu Jul 26 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.3.0-4
-- Nightly build.
-
-* Wed Jul 25 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.3.0-3
-- Nightly build.
-
-* Tue Jul 24 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.3.0-2
-- Nightly build.
+* Mon Jul 30 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.3.0-8
+- PLAT-9138: Add missing privileges to allow entry view & download (https://github.com/kaltura/server/pull/7474)
+- in case KalturaServiceClassToId cache file does not exist (https://github.com/kaltura/server/pull/7472)
+- PLAT-9135: Added reach profile max chars per line default value (https://github.com/kaltura/server/pull/7471)
+- PLAT-9127: Allow vendors to impersonate operating task account (https://github.com/kaltura/server/pull/7469)
+- PLAT-9032: lowercase additional params before checking for account type (https://github.com/kaltura/server/pull/7468)
+- SUP-14981: due to Itunes limitations, removing unnecessary fields (https://github.com/kaltura/server/pull/7467)
+- Ignore related service validation for reachProfile (https://github.com/kaltura/server/pull/7461)
+- ThumbnailDescriptor: prevent division by zero. (https://github.com/kaltura/server/pull/7460)
+- PLAT-9120: Add -5 partner permission to the report service (https://github.com/kaltura/server/pull/7459)
+- kava - retry on channel disconnected druid error (https://github.com/kaltura/server/pull/7455)
+- Do not override metadata profile field settings if the field was not specified in the schema (https://github.com/kaltura/server/pull/7453)
+- PLAT-9115: Block the option to order tasks for an entry whose status is not READY + correctly handle entry duration changes (https://github.com/kaltura/server/pull/7447)
+- Align DB schema with SaaS (https://github.com/kaltura/server/pull/7429)
+- Naos 14.3.0-SUP-14718 filtering whitelisted delivery profiles when retrieving default delivery profiles (https://github.com/kaltura/server/pull/7426)
+- KMCng: Do not force redirect to HTTP and login process modifications (https://github.com/kaltura/server/pull/7423)
+- PSVAMB-3750: Add subtitle track name to data search (https://github.com/kaltura/server/pull/7420)
+- PLAT-9101 MR dry run list to all types extending baseEntry (https://github.com/kaltura/server/pull/7418)
+- PLAT-8248: Added getClipData() (https://github.com/kaltura/server/pull/7411)
+- PLAT-8908: Multi DC configuration - do not check costume data on the other DC (https://github.com/kaltura/server/pull/7410)
 
 * Tue Jul 24 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.3.0-1
 - Ver Bounce to 14.3.0
