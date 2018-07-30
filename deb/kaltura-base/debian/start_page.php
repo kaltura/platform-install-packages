@@ -169,7 +169,7 @@ define('KALTURA_CE_INTRO_ENTRY_ID','1_uhucc5ac');
                 <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
                     <hr class="section-heading-spacer">
                     <div class="clearfix"></div>
-                    <h2 class="section-heading">KMC: Kaltura Management Console<br /><a href="//<?php echo kConf::get('apphome_url_no_protocol')?>/kmc" target="_blank">Manage Specific Accounts</a></h2>
+                    <h2 class="section-heading">KMC: Kaltura Management Console<br /><a href="//<?php echo kConf::get('apphome_url_no_protocol')?>/kmcng" target="_blank">Manage Specific Accounts</a></h2>
                     <p class="lead">The KMC is a comprehensive media management application. Perform bulk ingestion/upload, create transcoding profiles, manage metadata and categories, design and configure players, create playlists, view analytics, configure live streaming, distribute content across the web, configure ad campaigns, control access to media, manage your account, users, entitlements and permissions, and much more. <a href="https://knowledge.kaltura.com/node/1606/attachment/field_media" target="_blank">Learn more about the KMC application</a>.</p>
 		    <p>Once you have created a Kaltura account in the Admin Console, login to the KMC to get started!</p>
                 </div>
