@@ -1,3 +1,9 @@
+kaltura-base (14.3.0-1) naos; urgency=medium
+
+  * Switching to 14.3.0
+
+ -- Jess Portnoy <jess@b0f924504114>  Tue, 24 Jul 2018 13:51:54 +0000
+
 kaltura-base (14.2.0-2) naos; urgency=medium
 
   * SUP-14941: Fix multi account login (https://github.com/kaltura/server/pull/7421)
