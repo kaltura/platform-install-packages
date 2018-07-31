@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 14.3.0
-Release: 9
+Version: 14.4.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -341,6 +341,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Tue Jul 31 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.4.0-1
+- Ver Bounce to 14.4.0
+
 * Mon Jul 30 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.3.0-8
 - PLAT-9138: Add missing privileges to allow entry view & download (https://github.com/kaltura/server/pull/7474)
 - in case KalturaServiceClassToId cache file does not exist (https://github.com/kaltura/server/pull/7472)
