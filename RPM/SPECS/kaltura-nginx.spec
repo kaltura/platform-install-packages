@@ -52,7 +52,7 @@ Requires(pre): pwdutils
 Summary: High performance web server customized for Kaltura VOD
 Name: kaltura-nginx
 Version: 1.14.0
-Release: 2
+Release: 3
 Vendor: Kaltura inc.
 URL: http://nginx.org/
 
@@ -226,7 +226,7 @@ make %{?_smp_mflags}
 %{__rm} -rf $RPM_BUILD_ROOT
 %{__make} DESTDIR=$RPM_BUILD_ROOT install
 
-%{__mkdir} -p $RPM_BUILD_ROOT%{_datadir}/nginx
+%{__mkdir} -p $RPM_BUILD_ROOT%{_datadir}/nginx $RPM_BUILD_ROOT%{_tmppath}/hlsme $RPM_BUILD_ROOT%{_tmppath}/dashme $RPM_BUILD_ROOT%{_tmppath}/rec
 %{__mv} $RPM_BUILD_ROOT%{_sysconfdir}/nginx/html $RPM_BUILD_ROOT%{_datadir}/nginx/
 
 %{__rm} -f $RPM_BUILD_ROOT%{_sysconfdir}/nginx/*.default
@@ -335,6 +335,9 @@ cd $RPM_BUILD_ROOT%{_sysconfdir}/nginx && \
 
 %attr(0755,root,root) %dir %{_localstatedir}/cache/nginx
 %attr(0755,root,root) %dir %{_localstatedir}/log/nginx
+%attr(0755,%{nginx_user},%{nginx_group}) %dir %{_tmppath}/hlsme
+%attr(0755,%{nginx_user},%{nginx_group}) %dir %{_tmppath}/dashme
+%attr(0755,%{nginx_user},%{nginx_group}) %dir %{_tmppath}/rec
 
 %files debug
 %attr(0755,root,root) %{_sbindir}/nginx.debug
