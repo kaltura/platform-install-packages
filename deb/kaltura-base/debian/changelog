@@ -1,3 +1,9 @@
+kaltura-base (14.4.0-1) naos; urgency=medium
+
+  * Switching to 14.4.0
+
+ -- Jess Portnoy <jess@b0f924504114>  Tue, 31 Jul 2018 16:26:23 +0000
+
 kaltura-base (14.3.0-2) naos; urgency=medium
 
   * PLAT-9138: Add missing privileges to allow entry view & download (https://github.com/kaltura/server/pull/7474)
