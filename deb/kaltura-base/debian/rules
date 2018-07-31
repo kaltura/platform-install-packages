@@ -96,6 +96,8 @@ binary-indep: install
 	cp debian/start_page_newsletter.png $(tree)/start/img/newsletter.png
 	cp debian/start_page-landing-page.css $(tree)/start/css/landing-page.css
 	cp debian/kmcngAction.class.php $(tree)/alpha/apps/kaltura/modules/kmcng/actions/kmcngAction.class.php
+	# tmp patch until https://github.com/kaltura/server/pull/7487/files is merged
+	cp debian/01.kaltura_ce_tables.sql $(tree)/deployment/base/sql/01.kaltura_ce_tables.sql
 	sed -i "s@^\(params.ImageMagickCmd\)\s*=.*@\1=convert@" $(tree)/configurations/batch/batch.ini.template
 	sed -i "s@^\(params.mediaInfoCmd\)\s*=.*@\1=mediainfo@" $(tree)/configurations/batch/batch.ini.template
 	sed -i "s@^\(params.mencderCmd\)\s*=.*@\1=mencoder@" $(tree)/configurations/batch/batch.ini.template

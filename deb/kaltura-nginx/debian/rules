@@ -126,7 +126,7 @@ binary-indep:;
 
 # Build architecture-dependent files here.
 binary-arch: build install
-	mkdir -p $(BASE_PREFIX) opt/kaltura/log/nginx $(BASE_PREFIX)/static
+	mkdir -p $(BASE_PREFIX) opt/kaltura/log/nginx $(BASE_PREFIX)/static var/tmp/hlsme var/tmp/dashme var/tmp/rec
 	dh_testdir
 	dh_testroot
 	#dh_installchangelogs $(BASE_PREFIX)/CHANGES
@@ -136,6 +136,9 @@ binary-arch: build install
 	cp debian/*.conf $(BASE_PREFIX)/conf/
 	dh_install $(BASE_PREFIX) 
 	dh_install opt/kaltura/log/nginx
+	dh_install var/tmp/hlsme
+	dh_install var/tmp/dashme
+	dh_install var/tmp/rec
 	dh_installdebconf	
 	dh_installinit
 	dh_installman

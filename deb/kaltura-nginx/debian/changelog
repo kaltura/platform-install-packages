@@ -1,3 +1,13 @@
+kaltura-nginx (1.14.0-2) naos; urgency=medium
+
+  * We now support:
+    - Automatic Kaltrua entry provisioning
+    - DVR
+    - ABR
+    - VOD recording of the stream
+
+ -- Jess Portnoy <jess@b0f924504114>  Tue, 31 Jul 2018 15:49:21 +0000
+
 kaltura-nginx (1.14.0-1) naos; urgency=medium
 
   * New upstream Nginx version [see http://nginx.org/en/CHANGES]
