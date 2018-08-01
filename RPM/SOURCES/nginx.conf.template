@@ -77,18 +77,23 @@ rtmp {
         # This application is to accept incoming stream
         application kLive {
                 live on; # Allows live input from above
-            	# Once receive stream, transcode for adaptive streaming
+
+            	# ADAPTIVE BITRATE SUPPORT 
+		# Once the stream is alive, transcode for adaptive streaming
             	# This single ffmpeg command takes the input and transforms
             	# the source into 4 different streams with different bitrate
-            	# and quality. P.S. The scaling done here respects the aspect
+            	# and quality. The scaling done here respects the aspect
             	# ratio of the input.
 
-            	exec ffmpeg -i rtmp://localhost/$app/$name -async 1 -vsync -1
-                        -c:v libx264 -c:a libvo_aacenc -b:v 256k -b:a 32k -vf "scale=480:trunc(ow/a/2)*2" -tune zerolatency -preset veryfast -crf 23 -f flv rtmp://localhost/kLive/$name_low
-                        -c:v libx264 -c:a libvo_aacenc -b:v 768k -b:a 96k -vf "scale=720:trunc(ow/a/2)*2" -tune zerolatency -preset veryfast -crf 23 -f flv rtmp://localhost/kLive/$name_mid
-                        -c:v libx264 -c:a libvo_aacenc -b:v 1024k -b:a 128k -vf "scale=960:trunc(ow/a/2)*2" -tune zerolatency -preset veryfast -crf 23 -f flv rtmp://localhost/kLive/$name_high
-                        -c:v libx264 -c:a libvo_aacenc -b:v 1920k -b:a 128k -vf "scale=1280:trunc(ow/a/2)*2" -tune zerolatency -preset veryfast -crf 23 -f flv rtmp://localhost/kLive/$name_hd720
-                        -c copy -f flv rtmp://localhost/kLive/$name_src;
+		# This is commented by default as it is CPU and RAM intensive 
+		# If you opt to enable it, ensure you have sufficient resources.
+
+            	#exec /opt/kaltura/bin/ffmpeg -i rtmp://@VOD_PACKAGER_HOST@:@RTMP_PORT@/$app/$name -async 1 -vsync -1
+                        -c:v libx264 -b:v 256k -b:a 32k -vf "scale=480:trunc(ow/a/2)*2" -tune zerolatency -preset veryfast -crf 23 -f flv rtmp://@VOD_PACKAGER_HOST@:@RTMP_PORT@/kLive/$name_low
+                        -c:v libx264 -b:v 768k -b:a 96k -vf "scale=720:trunc(ow/a/2)*2" -tune zerolatency -preset veryfast -crf 23 -f flv rtmp://@VOD_PACKAGER_HOST@:@RTMP_PORT@/kLive/$name_mid
+                        -c:v libx264 -b:v 1024k -b:a 128k -vf "scale=960:trunc(ow/a/2)*2" -tune zerolatency -preset veryfast -crf 23 -f flv rtmp://@VOD_PACKAGER_HOST@:@RTMP_PORT@/kLive/$name_high
+                        -c:v libx264 -b:v 1920k -b:a 128k -vf "scale=1280:trunc(ow/a/2)*2" -tune zerolatency -preset veryfast -crf 23 -f flv rtmp://@VOD_PACKAGER_HOST@:@RTMP_PORT@/kLive/$name_hd720
+                        -c copy -f flv rtmp://@VOD_PACKAGER_HOST@:@RTMP_PORT@/kLive/$name_src;
 
                 dash on;
                 dash_path /var/tmp/dashme;
