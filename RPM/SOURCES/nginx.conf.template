@@ -89,11 +89,11 @@ rtmp {
 		# If you opt to enable it, ensure you have sufficient resources.
 
             	#exec /opt/kaltura/bin/ffmpeg -i rtmp://@VOD_PACKAGER_HOST@:@RTMP_PORT@/$app/$name -async 1 -vsync -1
-                        -c:v libx264 -b:v 256k -b:a 32k -vf "scale=480:trunc(ow/a/2)*2" -tune zerolatency -preset veryfast -crf 23 -f flv rtmp://@VOD_PACKAGER_HOST@:@RTMP_PORT@/kLive/$name_low
-                        -c:v libx264 -b:v 768k -b:a 96k -vf "scale=720:trunc(ow/a/2)*2" -tune zerolatency -preset veryfast -crf 23 -f flv rtmp://@VOD_PACKAGER_HOST@:@RTMP_PORT@/kLive/$name_mid
-                        -c:v libx264 -b:v 1024k -b:a 128k -vf "scale=960:trunc(ow/a/2)*2" -tune zerolatency -preset veryfast -crf 23 -f flv rtmp://@VOD_PACKAGER_HOST@:@RTMP_PORT@/kLive/$name_high
-                        -c:v libx264 -b:v 1920k -b:a 128k -vf "scale=1280:trunc(ow/a/2)*2" -tune zerolatency -preset veryfast -crf 23 -f flv rtmp://@VOD_PACKAGER_HOST@:@RTMP_PORT@/kLive/$name_hd720
-                        -c copy -f flv rtmp://@VOD_PACKAGER_HOST@:@RTMP_PORT@/kLive/$name_src;
+                #        -c:v libx264 -b:v 256k -b:a 32k -vf "scale=480:trunc(ow/a/2)*2" -tune zerolatency -preset veryfast -crf 23 -f flv rtmp://@VOD_PACKAGER_HOST@:@RTMP_PORT@/kLive/$name_low
+                #        -c:v libx264 -b:v 768k -b:a 96k -vf "scale=720:trunc(ow/a/2)*2" -tune zerolatency -preset veryfast -crf 23 -f flv rtmp://@VOD_PACKAGER_HOST@:@RTMP_PORT@/kLive/$name_mid
+                #        -c:v libx264 -b:v 1024k -b:a 128k -vf "scale=960:trunc(ow/a/2)*2" -tune zerolatency -preset veryfast -crf 23 -f flv rtmp://@VOD_PACKAGER_HOST@:@RTMP_PORT@/kLive/$name_high
+                #        -c:v libx264 -b:v 1920k -b:a 128k -vf "scale=1280:trunc(ow/a/2)*2" -tune zerolatency -preset veryfast -crf 23 -f flv rtmp://@VOD_PACKAGER_HOST@:@RTMP_PORT@/kLive/$name_hd720
+                #        -c copy -f flv rtmp://@VOD_PACKAGER_HOST@:@RTMP_PORT@/kLive/$name_src;
 
                 dash on;
                 dash_path /var/tmp/dashme;
