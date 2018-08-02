@@ -32,21 +32,57 @@ http {
 # RTMP configuration
 rtmp {
     server {
-        listen 1936; # Listen on standard RTMP port
+        listen @RTMP_PORT@; # Listen on standard RTMP port
         chunk_size 4000;
 
         # This application is to accept incoming stream
         application kLive {
                 live on; # Allows live input from above
+
+            	# ADAPTIVE BITRATE SUPPORT 
+		# Once the stream is alive, transcode for adaptive streaming
+            	# This single ffmpeg command takes the input and transforms
+            	# the source into 4 different streams with different bitrate
+            	# and quality. The scaling done here respects the aspect
+            	# ratio of the input.
+
+		# This is commented by default as it is CPU and RAM intensive 
+		# If you opt to enable it, ensure you have sufficient resources.
+
+            	#exec /opt/kaltura/bin/ffmpeg -i rtmp://@VOD_PACKAGER_HOST@:@RTMP_PORT@/$app/$name -async 1 -vsync -1
+                #        -c:v libx264 -b:v 256k -b:a 32k -vf "scale=480:trunc(ow/a/2)*2" -tune zerolatency -preset veryfast -crf 23 -f flv rtmp://@VOD_PACKAGER_HOST@:@RTMP_PORT@/kLive/$name_low
+                #        -c:v libx264 -b:v 768k -b:a 96k -vf "scale=720:trunc(ow/a/2)*2" -tune zerolatency -preset veryfast -crf 23 -f flv rtmp://@VOD_PACKAGER_HOST@:@RTMP_PORT@/kLive/$name_mid
+                #        -c:v libx264 -b:v 1024k -b:a 128k -vf "scale=960:trunc(ow/a/2)*2" -tune zerolatency -preset veryfast -crf 23 -f flv rtmp://@VOD_PACKAGER_HOST@:@RTMP_PORT@/kLive/$name_high
+                #        -c:v libx264 -b:v 1920k -b:a 128k -vf "scale=1280:trunc(ow/a/2)*2" -tune zerolatency -preset veryfast -crf 23 -f flv rtmp://@VOD_PACKAGER_HOST@:@RTMP_PORT@/kLive/$name_hd720
+                #        -c copy -f flv rtmp://@VOD_PACKAGER_HOST@:@RTMP_PORT@/kLive/$name_src;
+
                 dash on;
                 dash_path /var/tmp/dashme;
 
                 hls on; # Enable HTTP Live Streaming
+            	# Instruct clients to adjust resolution according to bandwidth
+            	hls_variant _low BANDWIDTH=288000; # Low bitrate, sub-SD resolution
+            	hls_variant _mid BANDWIDTH=448000; # Medium bitrate, SD resolution
+            	hls_variant _high BANDWIDTH=1152000; # High bitrate, higher-than-SD resolution
+            	hls_variant _hd720 BANDWIDTH=2048000; # High bitrate, HD 720p resolution
+            	hls_variant _src BANDWIDTH=4096000; # Source bitrate, source resolution
+
                 hls_cleanup on;
                 hls_sync 100ms;
                 hls_fragment 2s;
-
+		hls_playlist_length 300m;
                 hls_path /var/tmp/hlsme/;
+
+                # Enable recording archived files of each stream
+                record all;
+                # This does not need to be publicly accessible since we'll convert and publish the files later
+                record_path /var/tmp/rec;
+                record_suffix _%Y-%m-%d_%H-%M-%S.flv;
+                record_lock on;
+
+                # Define the two scripts that will run when recording starts and when it finishes
+                exec_publish /opt/kaltura/bin/create_live_entry.php $args;
+                exec_record_done /opt/kaltura/bin/upload_live_recording.php $args $path;
 
 
         }
