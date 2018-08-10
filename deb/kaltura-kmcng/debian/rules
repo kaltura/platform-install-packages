@@ -30,7 +30,6 @@ binary-indep: install
 	rm -rf $(KMCNG_PREFIX)
 	mkdir -p $(KMCNG_PREFIX)
 	mv $(tree)/* $(KMCNG_PREFIX)
-	sed -i 's@useSecuredProtocol:!0@useSecuredProtocol:false@g' $(KMCNG_PREFIX)/main.*.bundle.js
 	dh_install $(KALTURA_PREFIX)
 	dh_gencontrol -u-v$(DEB_VERSION) 
 	dh_installdebconf

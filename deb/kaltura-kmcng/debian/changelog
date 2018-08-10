@@ -1,3 +1,10 @@
+kaltura-kmcng (5.2.1-1) naos; urgency=medium
+
+  * Custom Data - Some characters entered in custom text fields are displayed with their character reference and break-lines are ignored
+  * Entries - Scrolling down action isn't smooth in IE11, edge and Firefox
+
+ -- Jess Portnoy <jess@b0f924504114>  Fri, 10 Aug 2018 10:35:53 +0000
+
 kaltura-kmcng (4.8.1-1) naos; urgency=medium
 
   * First release

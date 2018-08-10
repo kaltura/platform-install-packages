@@ -1,3 +1,9 @@
+kaltura-db (14.4.0-1) naos; urgency=medium
+
+  * No need to replace useSecuredProtocol:false anymore
+
+ -- Jess Portnoy <jess@b0f924504114>  Fri, 10 Aug 2018 10:40:11 +0000
+
 kaltura-db (14.1.0-2) naos; urgency=medium
 
   * Deploy KMCng UI confs
