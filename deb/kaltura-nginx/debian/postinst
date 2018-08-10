@@ -27,7 +27,7 @@ if [ "$1" = "configure" ]; then
 	    # we configure that one later because SSL is not always desirable.
 	    if [ "$TEMPLATE" = "$NGINX_BASE_DIR/conf/ssl.conf.template" ];then continue;fi
 	    CONF_FILE=`echo $TEMPLATE|sed 's@.template$@@'`
-	    sed -e "s#@NGINX_CONF_PATH@#$NGINX_BASE_DIR/conf#g" -e "s#@LOG_DIR@#/opt/kaltura/log/nginx#" -e "s#@PID_FILE_PATH@#$NGINX_BASE_DIR/logs/nginx.pid#g" -e "s#@VOD_PACKAGER_PORT@#$VOD_PACKAGER_PORT#g" -e "s#@VOD_PACKAGER_HOST@#$VOD_PACKAGER_HOST#g" $TEMPLATE > $CONF_FILE 
+	    sed -e "s#@NGINX_CONF_PATH@#$NGINX_BASE_DIR/conf#g" -e "s#@LOG_DIR@#/opt/kaltura/log/nginx#" -e "s#@PID_FILE_PATH@#$NGINX_BASE_DIR/logs/nginx.pid#g" -e "s#@VOD_PACKAGER_PORT@#$VOD_PACKAGER_PORT#g" -e "s#@VOD_PACKAGER_HOST@#$VOD_PACKAGER_HOST#g" -e "s#@RTMP_PORT@#$RTMP_PORT#g" $TEMPLATE > $CONF_FILE 
 	done
 	
 	db_input critical kaltura-nginx/is_ssl || true
@@ -64,7 +64,7 @@ if [ "$1" = "configure" ]; then
 		db_go || true
 		db_get 'kaltura-nginx/kaltura_service_url'
 		WWW_HOST=$RET
-		sed -e "s#@STATIC_FILES_PATH@#$NGINX_BASE_DIR/static#g" -e "s#@PROTOCOL@#$PROTOCOL#g" -e "s#@WWW_HOST@#$WWW_HOST#g"  -i $NGINX_BASE_DIR/conf/kaltura-nginx.conf $NGINX_BASE_DIR/conf/kaltura.conf
+		sed -e "s#@STATIC_FILES_PATH@#$NGINX_BASE_DIR/static#g" -e "s#@PROTOCOL@#$PROTOCOL#g" -e "s#@WWW_HOST@#$WWW_HOST#g"  -e "s#@RTMP_PORT@#$RTMP_PORT#g"  -i $NGINX_BASE_DIR/conf/kaltura-nginx.conf $NGINX_BASE_DIR/conf/kaltura.conf
 		ln -sf $NGINX_BASE_DIR/conf/kaltura-nginx.conf $NGINX_BASE_DIR/conf/nginx.conf
 		ln -sf $NGINX_BASE_DIR/conf/kaltura.conf $NGINX_BASE_DIR/conf/server.conf
 	else
