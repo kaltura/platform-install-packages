@@ -202,7 +202,6 @@ if [ "$IS_SSL" = 'Y' -o "$IS_SSL" = 1 -o "$IS_SSL" = 'y' -o "$IS_SSL" = 'true' ]
 	if [ $? -eq 0 ];then
 		echo "update permission set STATUS=1 WHERE permission.PARTNER_ID IN ('0') AND permission.NAME='FEATURE_KMC_ENFORCE_HTTPS' ORDER BY permission.STATUS ASC LIMIT 1;" | mysql $DB1_NAME -h$DB1_HOST -u$DB1_USER -P$DB1_PORT -p$DB1_PASS 
 	fi
-	sed -i 's@useSecuredProtocol:false@useSecuredProtocol:true@g' $KMCNG_PATH/main.*.bundle.js
 	trap 'my_trap_handler "${LINENO}" $?' ERR
 else
 	DEFAULT_PORT=80

@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 14.4.0
-Release: 3
+Release: 4
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -341,11 +341,19 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Wed Aug 1 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.4.0-3
-- Nightly build.
-
-* Tue Jul 31 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.4.0-2
-- Nightly build.
+* Fri Aug 10 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.4.0-4
+- addFromUrl(): Throw exception in case the result is empty (https://github.com/kaltura/server/pull/7505)
+- KMS-18227: Add custom role for Kaltura's caption editor application (https://github.com/kaltura/server/pull/7500)
+- PLAT-9121: DeliveryProfileLive.php - reverse sorting order (https://github.com/kaltura/server/pull/7499)
+- quiz: Avoid calling UserEntryPeer::retrieveByPK() per answer (https://github.com/kaltura/server/pull/7498)
+- Add the `X-XSS-Protection` header to KMCng (https://github.com/kaltura/server/pull/7491)
+- PLAT-9126: Add monitoring to Couchbase calls (https://github.com/kaltura/server/pull/7488)
+- Adjust auto inc for `dynamic_enums` and `partner` tables (https://github.com/kaltura/server/pull/7487)
+- bulk->listAction(): limit to the last 100K records in order to constrain query performance (https://github.com/kaltura/server/pull/7483)
+- PLAT-9124: Validate response profile before generating Couchbase key (https://github.com/kaltura/server/pull/7477)
+- PLAT-9122: Allow returning indexed array with Couchbase extracted values (https://github.com/kaltura/server/pull/7473)
+- sup-14543: Quiz - Non-Latin chars turn to gibberish when downloading PDF (https://github.com/kaltura/server/pull/7470)
+- PLAT-9067: KMC partner creation - new email template (https://github.com/kaltura/server/pull/7465)
 
 * Tue Jul 31 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.4.0-1
 - Ver Bounce to 14.4.0

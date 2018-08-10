@@ -1,7 +1,7 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmcng
-Version: v4.8.1
-Release: 2
+Version: v5.2.1
+Release: 1
 Summary: Kaltura HTML5 Management Console
 
 Group: System Management	
@@ -36,7 +36,6 @@ This package installs the KMC HTML5 web interface.
 %install
 mkdir -p $RPM_BUILD_ROOT%{prefix}/apps/kmcng
 cp -r %{_builddir}/%{name}-%{version} $RPM_BUILD_ROOT%{prefix}/apps/kmcng/%{version}
-sed -i 's@useSecuredProtocol:!0@useSecuredProtocol:false@g' $RPM_BUILD_ROOT%{prefix}/apps/kmcng/%{version}/main.*.bundle.js
 
 %preun
 
@@ -50,5 +49,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Fri Aug 10 2018 jess.portnoy@kaltura.com <Jess Portnoy> - v5.2.1
+- Custom Data - Some characters entered in custom text fields are displayed with their character reference and break-lines are ignored
+- Entries - Scrolling down action isn't smooth in IE11, edge and Firefox
+
 * Wed Jun 27 2018 jess.portnoy@kaltura.com <Jess Portnoy> - v4.5.1
 - First release

@@ -35,8 +35,8 @@ unzip -qo $KMCNG_RPM_NAME-$KMCNG_VERSION.zip
 rm -rf $KMCNG_RPM_NAME-$KMCNG_VERSION
 mv $KMCNG_VERSION $KMCNG_RPM_NAME-$KMCNG_VERSION
 set +x
-mv deploy server-config-example.json $KMCNG_RPM_NAME-$KMCNG_VERSION
-rm -rf __MACOSX
+#mv deploy server-config-example.json $KMCNG_RPM_NAME-$KMCNG_VERSION
+#rm -rf __MACOSX
 find $KMCNG_RPM_NAME-$KMCNG_VERSION -type f -exec chmod -x {} \;
 tar jcf $RPM_SOURCES_DIR/$KMCNG_RPM_NAME-$KMCNG_VERSION.tar.bz2 $KMCNG_RPM_NAME-$KMCNG_VERSION
 echo "Packaged into $RPM_SOURCES_DIR/$KMCNG_RPM_NAME-$KMCNG_VERSION.tar.bz2"

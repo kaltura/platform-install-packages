@@ -206,9 +206,6 @@ KMCNG_VERSION=`grep "^kmcng_version" $BASE_DIR/app/configurations/local.ini|awk 
 if [ "$IS_SSL" = 'Y' -o "$IS_SSL" = 1 -o "$IS_SSL" = 'y' -o "$IS_SSL" = 'true' ];then
 # force KMC login via HTTPs.
 	php $APP_DIR/deployment/base/scripts/insertPermissions.php -d $APP_DIR/deployment/permissions/ssl/ > /dev/null 2>&1
-	if [ -d $BASE_DIR/apps/kmcng/$KMCNG_VERSION ];then
-		sed -i 's@useSecuredProtocol:false@useSecuredProtocol:true@g' $BASE_DIR/apps/kmcng/$KMCNG_VERSION/main.*.bundle.js
-	fi 
 fi
 
 echo -e "${BRIGHT_BLUE}Generating UI confs..${NORMAL}"
