@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 14.4.0
-Release: 4
+Version: 14.5.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -341,6 +341,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Aug 13 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.5.0-1
+- Ver Bounce to 14.5.0
+
 * Fri Aug 10 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.4.0-4
 - addFromUrl(): Throw exception in case the result is empty (https://github.com/kaltura/server/pull/7505)
 - KMS-18227: Add custom role for Kaltura's caption editor application (https://github.com/kaltura/server/pull/7500)
