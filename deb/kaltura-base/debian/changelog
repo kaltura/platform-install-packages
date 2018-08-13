@@ -1,3 +1,9 @@
+kaltura-base (14.5.0-1) naos; urgency=medium
+
+  * Switching to 14.5.0
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 13 Aug 2018 13:11:15 +0000
+
 kaltura-base (14.4.0-2) naos; urgency=medium
 
   * addFromUrl(): Throw exception in case the result is empty (https://github.com/kaltura/server/pull/7505)
