@@ -1,3 +1,9 @@
+kaltura-batch (14.5.0-1) naos; urgency=medium
+
+  * Switching to 14.5.0
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 13 Aug 2018 13:11:16 +0000
+
 kaltura-batch (14.4.0-1) naos; urgency=medium
 
   * Switching to 14.4.0
