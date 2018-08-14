@@ -61,3 +61,32 @@ In the same view, you will also find the HTML code needed to embed the player on
 An important next step is to restrict publishing access [and perhaps playback too, depending on your needs]. 
 To that end, see https://github.com/arut/nginx-rtmp-module/wiki/Directives#access
 
+## Nginx's RTMP module and the Kaltura API
+Using the Nginx RTMP module exec hooks, we now support auto provisioning a Kaltura Live entry upon initiating an RTMP stream.
+A VOD recording of the stream is automatically uploaded as a separate entry once the streaming session concludes.
+The VOD entry name will be a concatenation of the stream's original name and the string '-VOD'. 
+
+### Kaltura entry auto provisioning (requires Kaltura CE 14.4.0 and above)
+When streaming, the following params must be passed to the Nginx RTMP endpoint:
+> partner_id
+> partner_secret - the partner's ADMIN secret
+> service_url - the Kaltura endpoint WITHOUT the protocol (http[s])
+> nginx_endpoint - the Nginx hostname
+> is_ssl - set to 'true', 'y' or 1 if the connection is to be done over SSL
+> entry_name - the Kaltura live entry name
+
+For example:
+```sh
+$ ffmpeg -re -i /path/to/vid/file -c:v copy -c:a copy -f flv -rtmp_live 1 \
+ "rtmp://$NGINX_HOST:$NGINX_RTMP_PORT/kLive/$STREAM_NAME?partner_id=103&partner_secret=somesecret&service_url=$KALTURA_ENDPOINT&nginx_endpoint=$NGINX_HOST:$NGINX_PORT&entry_name=my_entry&is_ssl=true"
+```
+
+By default, `$NGINX_RTMP_PORT` is 1935. For SSL, `$NGINX_PORT` is 8443, otherwise, it's 88.
+All these defaults may be changed during the kaltura-nginx configuration phase.
+
+### Adaptive bitrate support
+This can be accomplished by using `ffmpeg` to transform the source stream into 4 separate streams, each with a different bitrate.
+The configuration is disabled by default as the operation is CPU and RAM intensive. If you opt to enable it, ensure you have sufficient HW resources.
+
+To enable, edit `/etc/nginx/nginx.conf` [RPM] or `/opt/kaltura/nginx/conf/nginx.conf` [deb], uncomment the `exec /opt/kaltura/bin/ffmpeg` block under `application kLive` and reload the daemon.
+
