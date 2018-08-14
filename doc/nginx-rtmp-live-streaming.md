@@ -70,10 +70,15 @@ The VOD entry name will be a concatenation of the stream's original name and the
 When streaming, the following params must be passed to the Nginx RTMP endpoint:
 
 > `partner_id`
+
 > `partner_secret`: the partner's ADMIN secret
+
 > `service_url`: the Kaltura endpoint WITHOUT the protocol (http[s])
+
 > `nginx_endpoint`: the Nginx hostname
+
 > `is_ssl`: set to 'true', 'y' or 1 if the connection is to be done over SSL
+
 > `entry_name`: the Kaltura live entry name
 
 For example:
