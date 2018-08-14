@@ -61,12 +61,12 @@ In the same view, you will also find the HTML code needed to embed the player on
 An important next step is to restrict publishing access [and perhaps playback too, depending on your needs]. 
 To that end, see https://github.com/arut/nginx-rtmp-module/wiki/Directives#access
 
-## Nginx's RTMP module and the Kaltura API
+## Nginx's RTMP module - Kaltura API integration (requires Kaltura CE 14.4.0 and above)
 Using the Nginx RTMP module exec hooks, we now support auto provisioning a Kaltura Live entry upon initiating an RTMP stream.
 A VOD recording of the stream is automatically uploaded as a separate entry once the streaming session concludes.
 The VOD entry name will be a concatenation of the stream's original name and the string '-VOD'. 
 
-### Kaltura entry auto provisioning (requires Kaltura CE 14.4.0 and above)
+### Kaltura entry auto provisioning 
 When streaming, the following params must be passed to the Nginx RTMP endpoint:
 
 > `partner_id`
