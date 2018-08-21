@@ -26,7 +26,7 @@
 Summary: Utilities and libraries to record, convert and stream audio and video
 Name: kaltura-ffmpeg
 Version: 3.2 
-Release: 5
+Release: 7
 License: GPL
 Group: Applications/Multimedia
 URL: http://ffmpeg.org/
@@ -57,6 +57,7 @@ BuildRequires: libtheora-devel
 BuildRequires: libvorbis-devel
 BuildRequires: libxvidcore4-devel
 BuildRequires: x265-devel
+BuildRequires: gnutls-devel
 %{!?_without_a52dec:BuildRequires: kaltura-a52dec-devel}
 %{!?_without_dc1394:BuildRequires: libdc1394-devel}
 %{!?_without_gsm:BuildRequires: gsm-devel}
@@ -85,6 +86,7 @@ BuildRequires: libxvidcore4-devel >= 1.3.2
 Requires:kaltura-a52dec,libass,kaltura-x264
 Requires: libvpx >= 1.3.0
 Requires: x265-libs
+Requires: gnutls
 
 %description
 FFmpeg is a very fast video and audio converter. It can also grab from a
@@ -188,6 +190,7 @@ export CFLAGS="%{optflags}"
 --enable-filter=movie \
     --enable-version3 \
 --enable-indev=lavfi \
+--enable-gnutls \
 --enable-x11grab
 
 %{__make} %{?_smp_mflags}
@@ -281,6 +284,9 @@ fi
 %{base_prefix}-%{version}/share
 
 %changelog
+* Mon Aug 20 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 3.2-7
+- Configure FFmpeg --with-gnutls
+
 * Wed Jan 31 2018 Jess Portnoy <jess.portnoy@kaltura.com> - 3.2-5
 - Build against xvidcore 1.3.5
 
