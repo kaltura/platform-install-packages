@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 14.5.0
-Release: 15
+Release: 16
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -341,47 +341,21 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Sun Aug 26 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.5.0-15
-- Nightly build.
-
-* Sat Aug 25 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.5.0-14
-- Nightly build.
-
-* Fri Aug 24 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.5.0-13
-- Nightly build.
-
-* Thu Aug 23 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.5.0-12
-- Nightly build.
-
-* Wed Aug 22 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.5.0-11
-- Nightly build.
-
-* Tue Aug 21 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.5.0-10
-- Nightly build.
-
-* Mon Aug 20 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.5.0-9
-- Nightly build.
-
-* Sun Aug 19 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.5.0-8
-- Nightly build.
-
-* Sat Aug 18 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.5.0-7
-- Nightly build.
-
-* Fri Aug 17 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.5.0-6
-- Nightly build.
-
-* Thu Aug 16 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.5.0-5
-- Nightly build.
-
-* Wed Aug 15 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.5.0-4
-- Nightly build.
-
-* Tue Aug 14 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.5.0-3
-- Nightly build.
-
-* Mon Aug 13 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.5.0-2
-- Nightly build.
+* Mon Aug 27 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.5.0-16
+- PLAT-9163: Handle ingested flavors with 639-2B and 639-3 language codes (https://github.com/kaltura/server/pull/7533)
+- PLAT-9163: Handle ingested flavors with 639-2B and 639-3 language codes (https://github.com/kaltura/server/pull/7527)
+- SUP_15188: Align UTF8 string when adding or updating kuser name fields (https://github.com/kaltura/server/pull/7531)
+- SUP-15188: Align UTF8 string kuser name fields (https://github.com/kaltura/server/pull/7523)
+- PLAT-9037: Increase max number of groups per user (https://github.com/kaltura/server/pull/7529)
+- PLAT-9181: Add option to avoid invalidation in CouchBase for specific partners (https://github.com/kaltura/server/pull/7526)
+- Add priority to isSubstitute() check (https://github.com/kaltura/server/pull/7520)
+- Apply CDN switching only to DP with the same attributes (https://github.com/kaltura/server/pull/7519)
+- Apply CDN switching only to DP with the same path (https://github.com/kaltura/server/pull/7518)
+- Cost base multi CDN support (https://github.com/kaltura/server/pull/7517)
+- Limit bulk service `list` action to use only last 300K records when filtering events (https://github.com/kaltura/server/pull/7516)
+- When using dynamic response profiles calculate the hasKey by serializing the response profile object (https://github.com/kaltura/server/pull/7515)
+- PLAT 9130: thumbnail `execute` action - added validations (https://github.com/kaltura/server/pull/7514)
+- PLAT-8904: Sphinx load balancing phase 1 (https://github.com/kaltura/server/pull/7485)
 
 * Mon Aug 13 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.5.0-1
 - Ver Bounce to 14.5.0

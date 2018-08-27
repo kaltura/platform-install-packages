@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.70.1
+Version: v2.71.2
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -82,6 +82,9 @@ fi
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Mon Aug 27 2018 jess.portnoy@kaltura.com <Jess Portnoy> - v2.71.2-1
+- Support default language selection natively (by ios browser) (#3896)
+
 * Mon Jul 23 2018 jess.portnoy@kaltura.com <Jess Portnoy> - v2.70.1-1
 - SUP-14444 - Unexpected behavior when embedding Webcast entry with QnA
 

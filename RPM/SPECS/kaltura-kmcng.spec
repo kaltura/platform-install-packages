@@ -1,6 +1,6 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmcng
-Version: v5.2.1
+Version: v5.3.2
 Release: 1
 Summary: Kaltura HTML5 Management Console
 
@@ -49,6 +49,12 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Aug 27 2018 jess.portnoy@kaltura.com <Jess Portnoy> - v5.3.2-1
+- content/entries: adjust position of the Youtube icon on entry thumbnails (825d2f3)
+- content/entry: disable entry download if user doesn't have the required permissions (872799b)
+- upload: fix "Create from URL" upload button label (3439b78)
+- upload: set entry name and format for entries created from URL (#798) (b7d3621)
+
 * Fri Aug 10 2018 jess.portnoy@kaltura.com <Jess Portnoy> - v5.2.1
 - Custom Data - Some characters entered in custom text fields are displayed with their character reference and break-lines are ignored
 - Entries - Scrolling down action isn't smooth in IE11, edge and Firefox
