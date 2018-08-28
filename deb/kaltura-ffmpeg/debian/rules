@@ -77,6 +77,7 @@ config.status: $(tree)
 		--enable-filter=movie \
 		--enable-version3 \
 	        --enable-libzvbi \
+		--enable-gnutls \
 		--enable-x11grab
 
 build: build-stamp

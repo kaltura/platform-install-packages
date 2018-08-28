@@ -1,3 +1,9 @@
+kaltura-ffmpeg (3.2-4) naos; urgency=medium
+
+  * Configure FFmpeg --with-gnutls
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 27 Aug 2018 21:19:24 +0000
+
 kaltura-ffmpeg (3.2-3) mercury; urgency=low
 
   * avformat/hls: Disallow local file access by default: https://patchwork.ffmpeg.org/patch/3768 

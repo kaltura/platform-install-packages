@@ -1,3 +1,22 @@
+kaltura-base (14.5.0-2) naos; urgency=medium
+
+  * PLAT-9163: Handle ingested flavors with 639-2B and 639-3 language codes (https://github.com/kaltura/server/pull/7533)
+  * PLAT-9163: Handle ingested flavors with 639-2B and 639-3 language codes (https://github.com/kaltura/server/pull/7527)
+  * SUP_15188: Align UTF8 string when adding or updating kuser name fields (https://github.com/kaltura/server/pull/7531)
+  * SUP-15188: Align UTF8 string kuser name fields (https://github.com/kaltura/server/pull/7523)
+  * PLAT-9037: Increase max number of groups per user (https://github.com/kaltura/server/pull/7529)
+  * PLAT-9181: Add option to avoid invalidation in CouchBase for specific partners (https://github.com/kaltura/server/pull/7526)
+  * Add priority to isSubstitute() check (https://github.com/kaltura/server/pull/7520)
+  * Apply CDN switching only to DP with the same attributes (https://github.com/kaltura/server/pull/7519)
+  * Apply CDN switching only to DP with the same path (https://github.com/kaltura/server/pull/7518)
+  * Cost base multi CDN support (https://github.com/kaltura/server/pull/7517)
+  * Limit bulk service `list` action to use only last 300K records when filtering events (https://github.com/kaltura/server/pull/7516)
+  * When using dynamic response profiles calculate the hasKey by serializing the response profile object (https://github.com/kaltura/server/pull/7515)
+  * PLAT 9130: thumbnail `execute` action - added validations (https://github.com/kaltura/server/pull/7514)
+  * PLAT-8904: Sphinx load balancing phase 1 (https://github.com/kaltura/server/pull/7485)
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 27 Aug 2018 20:42:17 +0000
+
 kaltura-base (14.5.0-1) naos; urgency=medium
 
   * Switching to 14.5.0
