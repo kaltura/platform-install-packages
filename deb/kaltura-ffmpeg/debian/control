@@ -17,14 +17,13 @@ Build-Depends:
  libcdio-paranoia-dev,
  libdc1394-22-dev [linux-any],
  libfreetype6-dev,
- libgnutls28-dev|libgnutls-dev,
+ libgnutls26-dev|libgnutls-dev,
  libgsm1-dev,
  libimlib2-dev,
  libjack-dev,
  libmp3lame-dev,
  libopencore-amrnb-dev,
  libopencore-amrwb-dev,
- libopencv-dev,
  libopenjpeg-dev,
  libopus-dev,
  libpulse-dev,
@@ -81,7 +80,7 @@ Depends:
  libvorbisenc2, 
  x265|libx265-87|libx265-79,
  libvorbisfile3,
- libgnutls28|libgnutls30,
+ libgnutls26|libgnutls30,
  libzvbi0
 Description: 
  FFmpeg is a very fast video and audio converter. It can also grab from a
