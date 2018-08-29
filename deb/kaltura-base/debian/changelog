@@ -1,3 +1,9 @@
+kaltura-base (14.6.0-1) naos; urgency=medium
+
+  * Switching to 14.6.0
+
+ -- Jess Portnoy <jess@b0f924504114>  Tue, 28 Aug 2018 17:12:53 +0000
+
 kaltura-base (14.5.0-2) naos; urgency=medium
 
   * PLAT-9163: Handle ingested flavors with 639-2B and 639-3 language codes (https://github.com/kaltura/server/pull/7533)
