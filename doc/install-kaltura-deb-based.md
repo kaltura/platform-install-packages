@@ -103,13 +103,13 @@ https://dev.mysql.com/doc/refman/5.5/en/sql-mode.html#sql-mode-setting
 When installing an all in one instance, for security reasons, it is best to bind the MySQL daemon to 127.0.0.1 [loopback].
 When prompted for the MySQL host/IP, please use ```127.0.0.1``` rather than ```localhost``` since the server code uses the PHP PDO MySQL extension and setting the host to localhost will cause it to attempt to connect via a UNIX socket, as opposed to over TCP, which may fail, depending on where the UNIX socket is placed and the value set for the pdo_mysql.default_socket directive.
 
-#### Install Kaltura Server with PHP 7
+#### Install Kaltura Server with PHP 7 [Ubuntu 14.04 only]
 By default, the installation is done against the PHP stack available from the official repo.
 Kaltura now offers beta deb packages of PHP 7 which can be installed from our repo.
 In order to install the server using these packages, simply run:
 ```bash
 # wget -O - http://installrepo.kaltura.org/repo/apt/debian/kaltura-deb.gpg.key|apt-key add -
-# echo "deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/debian lynx main" > /etc/apt/sources.list.d/kaltura.list
+# echo "deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/debian naos main" > /etc/apt/sources.list.d/kaltura.list
 # aptitude update
 # aptitude install kaltura-php7
 ```
