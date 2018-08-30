@@ -181,7 +181,7 @@ Sphinx hostname [127.0.0.1]: "<127.0.0.1>"
 
 Secondary Sphinx hostname: [leave empty if none] "<empty>"
 
-VOD packager hostname [kalrpm.lcl]: "<http://kaltura-nginx-hostname>"
+VOD packager hostname [kalrpm.lcl]: "<kaltura-nginx-hostname>"
 
 VOD packager port to listen on [88]: 
 
@@ -259,7 +259,7 @@ Sphinx hostname [127.0.0.1]: "<127.0.0.1>"
 
 Secondary Sphinx hostname: [leave empty if none] "<empty>"
 
-VOD packager hostname [kalrpm.lcl]: "<http://kaltura-nginx-hostname>"
+VOD packager hostname [kalrpm.lcl]: "<kaltura-nginx-hostname>"
 
 VOD packager port to listen on [88]: 
 
