@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.33
-Release: 51
+Release: 52
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -82,6 +82,9 @@ find %{_sysconfdir}/logrotate.d -type l -name "kaltura_*" -exec rm {} \;
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Fri Aug 31 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.33-52
+- Correctly handle Apache SSL config in kaltura-batch-config.sh when running in interactive mode
+
 * Tue Jul 31 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.33-49
 - Added create_live_entry.php and upload_live_recording.php for Nginx RTMP-Kaltura integration
  
