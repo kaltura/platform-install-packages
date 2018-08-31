@@ -34,21 +34,21 @@ This guide describes RPM installation of an all-in-one Kaltura server and applie
 ## Pre-Install steps
 * This guide assumes that you have a clean, basic install of one of the RHEL based OS's in 64bit architecture.
 * During the installation process, you will be prompted about several hostnames. Note that it is crucial that all host names will be resolvable by other members of the cluster (and outside the cluster in the case of API/front machines). Before installing, verify that your DNS contains records for all the hostnames you intend to use or that the /etc/hosts file on all machines is properly configured to include them.
-* Before you begin, make sure you're logged in as the system root. Root access is required to install Kaltura, and you should execute ```sudo -i``` or ```su -```to make sure that you are indeed root.
+* Before you begin, make sure you're logged in as the system root. Root access is required to install Kaltura, and you should execute `sudo -i` or `su -` to make sure that you are indeed root.
 
 #### Firewall requirements
 Kaltura requires certain ports to be open for proper operation. [See the list of required open ports](kaltura-required-ports.md).
-If you're **just testing locally** and don't mind an open system, you can use the below to disbale iptables altogether:
+If you're **just testing locally** and don't mind an open system, you can use the below to disable iptables altogether:
 ```bash
-iptables -F
-service iptables stop
-chkconfig iptables off
+# iptables -F
+# service iptables stop
+# chkconfig iptables off
 ```
 #### Set SELinux to permissive mode - REQUIRED
-**Currently Kaltura doesn't properly support running with SELinux in ```enforcing``` mode, things will break if you don't set it to permissive**.
+**Currently Kaltura doesn't properly support running with SELinux in `enforcing` mode, things will break if you don't set it to permissive**.
 
 ```bash
-setenforce permissive
+# setenforce permissive
 ```
 
 To verify SELinux will not revert to enabled next restart:
@@ -60,7 +60,7 @@ To verify SELinux will not revert to enabled next restart:
 #### Setup the Kaltura RPM repository
 
 ```bash
-rpm -ihv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
+# rpm -ihv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
 ```
 
 #### Note for RHEL/CentOS 7 users
@@ -102,18 +102,18 @@ https://dev.mysql.com/doc/refman/5.5/en/sql-mode.html#sql-mode-setting
 
 RHEL/CentOS 6 setup:
 ```bash
-yum install mysql-server
-service mysqld start
-mysql_secure_installation
-chkconfig mysqld on
+# yum install mysql-server
+# service mysqld start
+# mysql_secure_installation
+# chkconfig mysqld on
 ```
 
 RHEL/CentOS 7 setup:
 ```bash
-yum install mariadb-server
-service mariadb start
-mysql_secure_installation
-chkconfig mariadb on
+# yum install mariadb-server
+# service mariadb start
+# mysql_secure_installation
+# chkconfig mariadb on
 ```
 
 **Make sure to answer YES for all steps in the `mysql_secure_install` install, and follow through all the mysql install questions before continuing further.
@@ -123,7 +123,7 @@ Failing to properly run `mysql_secure_install` will cause the kaltura mysql user
 If your machine doesn't have postfix email configured before the Kaltura install, you will not receive emails from the install system nor publisher account activation mails.
 If postfix runs without further configuration starting it is sufficient to make Kaltura work.
 ```bash
-service postfix restart
+# service postfix restart
 ```
 
 If you are using Amazon Web Services (AWS) please note that by default EC2 machines are blocked from sending email via port 25. For more information see [this thread on AWS forums](https://forums.aws.amazon.com/message.jspa?messageID=317525#317525).
@@ -133,7 +133,7 @@ If you are using Amazon Web Services (AWS) please note that by default EC2 machi
 When installing on a "desktop" environment there may be package conflicts with media encoding/decoding plugins.
 
 In Redhat 6.5 you should run the following to remove the conflicting packages:
-`rpm -e gstreamer-plugins-bad-free totem totem-nautilus`
+`# rpm -e gstreamer-plugins-bad-free totem totem-nautilus`
 
 
 ## Non-SSL Step-by-step Installation
@@ -141,31 +141,31 @@ Before you can deploy your Kaltura CE Server, you need to perform some prelimina
 
 Install the basic Kaltura Packages:
 ```bash
-yum clean all
-yum install kaltura-server
+# yum clean all
+# yum install kaltura-server
 ```
 
 Configure MySQL with the required Kaltura Settings
 ```bash
-/opt/kaltura/bin/kaltura-mysql-settings.sh
+# /opt/kaltura/bin/kaltura-mysql-settings.sh
 ```
 
 Start required service and configure them to run at boot:
 ```bash
-service memcached restart
-service ntpd restart
-chkconfig memcached on
-chkconfig ntpd on
+# service memcached restart
+# service ntpd restart
+# chkconfig memcached on
+# chkconfig ntpd on
 ```
 
 ### Start of Kaltura Configuration
 ```bash
-/opt/kaltura/bin/kaltura-config-all.sh
+# /opt/kaltura/bin/kaltura-config-all.sh
 ```
 
 The below is a sample question answer format, replace the input marked by <> with your own details:
 
-```bash
+```
 [Email\NO]: "<your email address>"
 CDN hostname [kalrpm.lcl]: "<your hostname>"
 Apache virtual hostname [kalrpm.lcl]: "<your hostname>"
@@ -181,7 +181,7 @@ Sphinx hostname [127.0.0.1]: "<127.0.0.1>"
 
 Secondary Sphinx hostname: [leave empty if none] "<empty>"
 
-VOD packager hostname [kalrpm.lcl]: "<http://kaltura-nginx-hostname>"
+VOD packager hostname [kalrpm.lcl]: "<kaltura-nginx-hostname>"
 
 VOD packager port to listen on [88]: 
 
@@ -194,7 +194,7 @@ Confirm passwd: "<your kaltura admin password>"
 Your time zone [see http://php.net/date.timezone], or press enter for [Europe/Amsterdam]: "<your timezone>"
 How would you like to name your system (this name will show as the From field in emails sent by the system) [Kaltura Video Platform]? "<your preferred system name>"
 Your website Contact Us URL [http://corp.kaltura.com/company/contact-us]: "<your contact URL>"
-'Contact us' phone number [+1 800 871 5224]? "<your phone numer>"
+'Contact us' phone number [+1 800 871 5224]? "<your phone number>"
 
 Is your Apache working with SSL?[Y/n] "<n>"
 It is recommended that you do work using HTTPs. Would you like to continue anyway?[N/y] "<y>"
@@ -209,41 +209,41 @@ Your install will now automatically perform all install tasks.
 **Your Kaltura installation is now complete.**
 
 ## Apache SSL Step-by-step Installation
-Before you can deploy your Kaltura CE Server, you need to perform some preliminary actions such as adding the Kaltura RPM repos, setting SELinux to persmissive mode and deploying MySQL. Please see [pre-install steps](install-kaltura-redhat-based.md#pre-install-steps)  
+Before you can deploy your Kaltura CE Server, you need to perform some preliminary actions such as adding the Kaltura RPM repos, setting SELinux to permissive mode and deploying MySQL. Please see [pre-install steps](install-kaltura-redhat-based.md#pre-install-steps)  
 
 Note: prior to installing Kaltura, while not a must, we recommend you update the installed packages to latest by running:
 ```bash
-yum update
+# yum update
 ```
 
 Install the basic Kaltura Packages:
 ```bash
-yum clean all
-yum update "*kaltura*" 
-yum install kaltura-server
+# yum clean all
+# yum update "*kaltura*" 
+# yum install kaltura-server
 ```
 
 Configure MySQL with the required Kaltura Settings
 ```bash
-/opt/kaltura/bin/kaltura-mysql-settings.sh
+# /opt/kaltura/bin/kaltura-mysql-settings.sh
 ```
 
 Start required service and configure them to run at boot:
 ```bash
-service memcached restart
-service ntpd restart
-chkconfig memcached on
-chkconfig ntpd on
+# service memcached restart
+# service ntpd restart
+# chkconfig memcached on
+# chkconfig ntpd on
 ```
 
 ### Start of Kaltura Configuration
 ```bash
-/opt/kaltura/bin/kaltura-config-all.sh
+# /opt/kaltura/bin/kaltura-config-all.sh
 ```
 
 The below is a sample question answer format, replace the input marked by <> with your own details:
 
-```bash
+```
 [Email\NO]: "<your email address>"
 CDN hostname [kalrpm.lcl]: "<your hostname>"
 Apache virtual hostname [kalrpm.lcl]: "<your hostname>"
@@ -259,7 +259,7 @@ Sphinx hostname [127.0.0.1]: "<127.0.0.1>"
 
 Secondary Sphinx hostname: [leave empty if none] "<empty>"
 
-VOD packager hostname [kalrpm.lcl]: "<http://kaltura-nginx-hostname>"
+VOD packager hostname [kalrpm.lcl]: "<kaltura-nginx-hostname>"
 
 VOD packager port to listen on [88]: 
 
@@ -316,7 +316,7 @@ Once done, run: ```/etc/init.d/kaltura-monit restart```
 **Your Kaltura installation is now complete.**
 
 ## Unattended Installation
-All Kaltura scripts accept an answer file as their first argument.
+All the post install scripts optionally accept an answer file as the first argument
 In order to preform an unattended [silent] install, simply edit the [template](kaltura.template.ans) and pass it along to kaltura-config-all.sh.
 
 ## Upgrade Kaltura
@@ -326,48 +326,45 @@ In order to preform an unattended [silent] install, simply edit the [template](k
 # yum clean all
 # yum update "*kaltura*"
 ```
-Then follow the on-screen instructions (in case any further actions required).
-Once the upgrade completes, please run:
+Once the upgrade completes, run:
 ```bash
-/opt/kaltura/bin/kaltura-config-all.sh
+# /opt/kaltura/bin/kaltura-config-all.sh
 ```
 
-/opt/kaltura/bin/kaltura-config-all.sh can accept an answer file as its first argument, allowing for an unattended deployment/upgrade.
-For more on that, see: kaltura.template.ans 
 
 In the event you would like to see what changes the package includes before deciding whether or not you wish to upgrade, run:
 ```bash
-yum install yum-plugin-changelog
-yum changelog all kaltura-package-name-here
+# yum install yum-plugin-changelog
+# yum changelog all kaltura-package-name-here
 ```
 
 ## Remove Kaltura
 Use this in cases where you want to clear the database and start from fresh.
 ```bash
-/opt/kaltura/bin/kaltura-drop-db.sh
-yum remove "*kaltura*"
-rm -rf /opt/kaltura
+# /opt/kaltura/bin/kaltura-drop-db.sh
+# yum remove "*kaltura*"
+# rm -rf /opt/kaltura
 ```
 
 ## Troubleshooting
 Once the configuration phase is done, you may wish to run the sanity tests, for that, run:
 ```base
-/opt/kaltura/bin/kaltura-sanity.sh
+# /opt/kaltura/bin/kaltura-sanity.sh
 ```
 
-If you experience unknown, unwanted or erroneous behaviour, the logs are a greta place to start, to get a quick view into errors and warning run:
+If you experience unknown, unwanted or erroneous behaviour, the logs are a good place to start, to get a quick view into errors and warning run:
 ```bash
 kaltlog
 ```
 
 If this does not give enough information, increase logging verbosity:
 ```bash
-sed -i 's@^writers.\(.*\).filters.priority.priority\s*=\s*7@writers.\1.filters.priority.priority=4@g' /opt/kaltura/app/configurations/logger.ini
+# sed -i 's@^writers.\(.*\).filters.priority.priority\s*=\s*7@writers.\1.filters.priority.priority=4@g' /opt/kaltura/app/configurations/logger.ini
 ```
 
 To revert this logging verbosity run:
 ```bash
-sed -i 's@^writers.\(.*\).filters.priority.priority\s*=\s*4@writers.\1.filters.priority.priority=7@g' /opt/kaltura/app/configurations/logger.ini
+# sed -i 's@^writers.\(.*\).filters.priority.priority\s*=\s*4@writers.\1.filters.priority.priority=7@g' /opt/kaltura/app/configurations/logger.ini
 ```
 
 Or output all logged information to a file for analysis:
