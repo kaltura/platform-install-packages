@@ -90,7 +90,7 @@ ln -sf $APP_DIR/configurations/logrotate/kaltura_apps /etc/logrotate.d/
 # KALTURA_BATCH_SKIP_WEBSERVER=true can be used in the event you want the batch daemon to use a remote Kaltura endpoint/service URL
 # and thus do not wish for a local Apache instance to run on the node
 if [ -z "$KALTURA_BATCH_SKIP_WEBSERVER" -o "$KALTURA_BATCH_SKIP_WEBSERVER" = "false" -o "$KALTURA_BATCH_SKIP_WEBSERVER" = 0 ];then
-        if [ "$PROTOCOL" = "https" ]; then
+	if [ "$PROTOCOL" = "https" -o "$IS_SSL" = 'Y' -o "$IS_SSL" = 1 -o "$IS_SSL" = 'y' -o "$IS_SSL" = 'true' ]; then
                 ln -sf $APP_DIR/configurations/apache/kaltura.ssl.conf /etc/httpd/conf.d/zzzkaltura.ssl.conf
         else
                 ln -sf $APP_DIR/configurations/apache/kaltura.conf /etc/httpd/conf.d/zzzkaltura.conf
