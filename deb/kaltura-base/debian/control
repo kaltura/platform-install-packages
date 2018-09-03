@@ -15,6 +15,7 @@ Depends:
  monit,
  bsd-mailx|heirloom-mailx,
  kaltura-postinst,
+ php-mbstring,
  bash,
  curl, 
  php5-mysql|php-mysql|kaltura-php7-mysql, 

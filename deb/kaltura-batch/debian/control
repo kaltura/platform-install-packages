@@ -22,7 +22,6 @@ Depends:
  libjpeg62,
  sshpass,
  kaltura-ffmpeg,
- kaltura-ffmpeg-aux,
  mediainfo,
  memcached,
  kaltura-base
