@@ -514,7 +514,7 @@ if [ "$1" = "configure" ]; then
 
         ln -sf $BASE_DIR/app/configurations/logrotate/kaltura_base /etc/logrotate.d/
         ln -sf $BASE_DIR/app/configurations/logrotate/kaltura_api /etc/logrotate.d/
-	for MOD_DIR in /etc/php5/mods-available /etc/php/7.0/mods-available /opt/kaltura/app/configurations/php/mods-available;do
+	for MOD_DIR in /etc/php5/mods-available /etc/php/7.0/mods-available /opt/kaltura/app/configurations/php/mods-available /etc/php/7.2/mods-available;do
 		if [ -d "$MOD_DIR" ];then
         		ln -sf $APP_DIR/configurations/php/kaltura.ini $MOD_DIR/zz-kaltura.ini
 		fi
