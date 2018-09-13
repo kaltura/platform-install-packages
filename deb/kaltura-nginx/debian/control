@@ -31,6 +31,7 @@ Provides: httpd,
 Conflicts: nginx
 Depends: 
  kaltura-postinst,
+ libopenjp2-7,
  ${misc:Depends},
  ${shlibs:Depends}
 Description: Nginx web/proxy server - for Kaltura

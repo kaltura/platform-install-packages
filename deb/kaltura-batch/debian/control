@@ -22,7 +22,7 @@ Depends:
  libjpeg62,
  sshpass,
  kaltura-ffmpeg,
- mediainfo,
+ kaltura-mediainfo,
  memcached,
  kaltura-base
 Description: Kaltura Open Source Video Platform - batch server 

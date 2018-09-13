@@ -26,7 +26,7 @@ Depends:
  openssl,
  memcached,
  kaltura-base,
- mediainfo,
+ kaltura-mediainfo,
  libxml2-utils,
  kaltura-kmcng
 Description: Kaltura Open Source Video Platform - frontend server 

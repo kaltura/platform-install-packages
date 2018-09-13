@@ -103,6 +103,10 @@ FFMPEG_AUX_RPM_PACKAGE_NAME=kaltura-ffmpeg-aux
 FFMPEG_URI="http://www.ffmpeg.org/releases/ffmpeg-$FFMPEG_VERSION.tar.bz2"
 FFMPEG_AUX_URI="http://www.ffmpeg.org/releases/ffmpeg-$FFMPEG_AUX_VERSION.tar.bz2"
 
+MEDIAINFO_VERSION=0.7.61
+MEDIAINFO_URI="http://mediaarea.net/download/source/mediainfo/${MEDIAINFO_VERSION}/mediainfo_${MEDIAINFO_VERSION}.tar.bz2"
+MEDIAINFO_RPM_PACKAGE_NAME="kaltura-mediainfo"
+
 # x264 build vars:
 X264_VERSION=0.140
 X264_RPM_PACKAGE_NAME=kaltura-x264

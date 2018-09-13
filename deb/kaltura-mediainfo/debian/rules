@@ -1,0 +1,86 @@
+#!/usr/bin/make -f
+
+
+DEB_VERSION := $(shell dpkg-parsechangelog | egrep '^Version:' | cut -f 2 -d ' ')
+RC_FILE :=../../build/sources.rc
+MEDIAINFO_VERSION ?= $(shell egrep '^MEDIAINFO_VERSION=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
+SOURCE_PACKAGING_DIR ?= $(shell egrep '^RPM_SOURCES_DIR=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
+include ../includes/build-revision.mk
+tree := MediaInfo/Project/GNU/CLI
+archive := $(SOURCE_PACKAGING_DIR)/mediainfo_$(MEDIAINFO_VERSION).tar.bz2
+
+BASE_PREFIX=opt/kaltura/bin
+# These are used for cross-compiling and for saving the configure script
+# from having to guess our platform (since we know it already)
+DEB_HOST_GNU_TYPE   ?= $(shell dpkg-architecture -qDEB_HOST_GNU_TYPE)
+DEB_BUILD_GNU_TYPE  ?= $(shell dpkg-architecture -qDEB_BUILD_GNU_TYPE)
+
+CFLAGS = `dpkg-buildflags --get CFLAGS`
+CFLAGS += -Wall
+LDFLAGS = `dpkg-buildflags --get LDFLAGS -L/opt/kaltura/ffmpeg-$(FFMPEG_VERSION)/lib`
+CPPFLAGS = `dpkg-buildflags --get CPPFLAGS`
+   
+ifeq (,$(findstring nostrip,$(DEB_BUILD_OPTIONS)))
+	INSTALL_PROGRAM += -s
+endif
+$(archive):
+	~/sources/platform-install-packages/build/package_mediainfo_source.sh
+
+$(tree): $(archive)
+	tar xf $(archive) 
+
+config.status: $(tree) 
+	tar xf $(archive) 
+	dh_testdir
+	cd $(tree) && ./autogen && ./configure --enable-static=no --prefix=/$(BASE_PREFIX)
+
+build: build-stamp
+
+build-stamp:  config.status
+	#dh_quilt_patch
+	dh_testdir
+
+	sed -i 's@Stream_Chapters@Stream_Other@g' MediaInfo/Source/Common/Core.cpp && cd $(tree) && $(MAKE)
+
+	touch build-stamp
+
+clean:
+	dh_testdir
+	dh_testroot
+	rm -f build-stamp config.log
+	rm -rf opt/ MediaInfo/
+	dh_quilt_unpatch
+	dh_clean 
+
+install: build
+	dh_testdir
+	dh_testroot
+	dh_clean -k 
+	dh_installdirs
+	cd $(tree) &&  $(MAKE) -C . install DESTDIR=$(CURDIR)/debian/$(tree)/
+
+
+# Build architecture-independent files here.
+binary-indep:;
+# We have nothing to do by default.
+
+# Build architecture-dependent files here.
+binary-arch: build install
+	dh_testdir
+	dh_testroot
+	#ls debian/$(tree)/$(BASE_PREFIX)/* $(BASE_PREFIX)
+	mkdir -p $(BASE_PREFIX) 
+	mv debian/$(tree)/$(BASE_PREFIX)/bin/mediainfo $(BASE_PREFIX)
+	dh_install $(BASE_PREFIX)
+	dh_installdebconf	
+	dh_installman
+	dh_link
+	dh_strip
+	dh_compress
+	dh_installdeb
+	dh_gencontrol -u-v$(DEB_VERSION) 
+	dh_md5sums
+	dh_builddeb
+
+binary: binary-indep binary-arch
+.PHONY: build clean binary-indep binary-arch binary install 
