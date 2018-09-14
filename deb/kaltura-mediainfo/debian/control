@@ -17,8 +17,7 @@ Vcs-Browser: http://git.debian.org/?p=pkg-multimedia/kaltura-mediainfo.git
 
 Package: kaltura-mediainfo
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends},
-Suggests: kaltura-mediainfo-gui
+Depends: ${shlibs:Depends}, ${misc:Depends}, libzen0v5
 Description: command-line utility for reading information from audio/video files
  MediaInfo is a utility used for retrieving technical information and other
  metadata about audio or video files.
