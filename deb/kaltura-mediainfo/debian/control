@@ -4,6 +4,7 @@ Section: utils
 Maintainer: Chow Loong Jin <hyperair@debian.org>
 Build-Depends: debhelper (>= 9),
                dh-autoreconf,
+	       kaltura-libmediainfo-dev,
                libzen-dev (>= 0.4.25),
                libwxgtk3.0-dev,
                zlib1g-dev,

@@ -1,0 +1,47 @@
+Source: kaltura-libmediainfo-dev
+Priority: optional
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+XSBC-Original-Maintainer: Chow Loong Jin <hyperair@debian.org>
+Build-Depends: debhelper (>= 9),
+               dpkg-dev (>= 1.16.1),
+               dh-autoreconf,
+               doxygen,
+               libzen-dev (>= 0.4.25),
+	       libtinyxml2-dev,
+               libcurl4-gnutls-dev,
+               libglib2.0-dev,
+               zlib1g-dev,
+               pkg-config
+Standards-Version: 3.9.5
+Section: libs
+Homepage: http://MediaArea.net/MediaInfo
+Vcs-Git: git://git.debian.org/git/pkg-multimedia/kaltura-libmediainfo.git
+Vcs-Browser: http://git.debian.org/?p=pkg-multimedia/kaltura-libmediainfo.git
+
+
+Package: kaltura-libmediainfo-dev
+Architecture: any
+Multi-Arch: same
+Pre-Depends: ${misc:Pre-Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: library for reading metadata from media files -- shared library
+ MediaInfo is a library used for retrieving technical information and other
+ metadata about audio or video files.
+ .
+ A non-exhaustive list of the information MediaInfo can retrieve from media
+ files include:
+  - General: title, author, director, album, track number, date, duration...
+  - Video: codec, aspect, fps, bitrate...
+  - Audio: codec, sample rate, channels, language, bitrate...
+  - Text: language of subtitle
+  - Chapters: number of chapters, list of chapters
+ .
+ MediaInfo supports the following formats:
+  - Video: MKV, OGM, AVI, DivX, WMV, QuickTime, Real, MPEG-1, MPEG-2,
+           MPEG-4, DVD (VOB)...
+  - Video Codecs: DivX, XviD, MSMPEG4, ASP, H.264, AVC...)
+  - Audio: OGG, MP3, WAV, RA, AC3, DTS, AAC, M4A, AU, AIFF...
+  - Subtitles: SRT, SSA, ASS, SAMI...
+ .
+ This package contains the shared library needed for running applications which
+ use this library.
