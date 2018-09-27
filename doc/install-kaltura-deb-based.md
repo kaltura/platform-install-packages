@@ -188,7 +188,7 @@ Then run the following commands to upgrade [this will work for all supported Deb
 Use this in cases where you want to clear the database and start from fresh.
 ```bash
 # /opt/kaltura/bin/kaltura-drop-db.sh
-# aptitude purge "~Nkaltura"
+# aptitude purge "~nkaltura"
 # rm -rf /opt/kaltura
 # rm -rf /etc/kaltura.d
 ```
