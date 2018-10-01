@@ -8,7 +8,7 @@
 Summary: Process monitor and restart utility
 Name: kaltura-monit
 Version: 5.25.2
-Release: 1
+Release: 2
 License: GPLv3
 Group: High Availability Management 
 URL: http://mmonit.com/monit/
@@ -59,6 +59,8 @@ sed -i 's@^#\(\s+\)set \(id|state\)file /var/\.monit\.\(id|state\)$@set $2file /
 make install DESTDIR=$RPM_BUILD_ROOT INSTALL="%{__install} -p -c"
 
 #%{__install} -Dp -m0755 system/startup/rc.monit %{buildroot}%{_initrddir}/%{name}
+%{__mkdir} -p $RPM_BUILD_ROOT%{_sysconfdir}/bash_completion.d
+%{__install} -Dp -m0644 system/bash/monit %{buildroot}%{_sysconfdir}/bash_completion.d/
 %{__install} -Dp -m0600 %{SOURCE2} %{buildroot}%{confdir}/monit.template.conf
 
 %{__install} -d -m0755 %{buildroot}%{confdir}/monit.d/
@@ -130,11 +132,15 @@ fi
 %defattr(-, root, root, 0600)
 %config %{confdir}/monit.template.conf
 %config %{prefix}/var/monit/
+%config %{_sysconfdir}/bash_completion.d/monit
 %{prefix}/var/lib/monit/
 %attr(0755, root, root) %{prefix}/bin/monit
 #%attr(0600, root, root) %config(noreplace) %{confdir}/monit.conf
 
 %changelog
+* Mon Oct 1 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 5.25.2-2
+- Added bash completion file
+
 * Mon Oct 1 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 5.25.2-1
 - New upstream version [https://mmonit.com/monit/changes]
 - Log monit events to a dedicated log rather than syslog
