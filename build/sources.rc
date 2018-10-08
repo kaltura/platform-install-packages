@@ -202,7 +202,7 @@ KMC_DOC_VERSION="Mercury-13.16.0"
 KMC_DOC_URI="https://github.com/kaltura/kmc-docs/archive/$KMC_DOC_VERSION.zip"
 
 # Kaltura KMCng:
-KMCNG_MINUS_V_VERSION=5.3.2
+KMCNG_MINUS_V_VERSION=5.4.2
 KMCNG_VERSION=v$KMCNG_MINUS_V_VERSION
 KMCNG_URI="https://github.com/kaltura/kmc-ng/releases/download/$KMCNG_VERSION/kmc-ng-$KMCNG_VERSION.zip"
 KMCNG_RPM_NAME="kaltura-kmcng"

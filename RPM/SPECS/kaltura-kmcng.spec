@@ -1,6 +1,6 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmcng
-Version: v5.3.2
+Version: v5.4.2
 Release: 1
 Summary: Kaltura HTML5 Management Console
 
@@ -49,6 +49,13 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Oct 8 2018 jess.portnoy@kaltura.com <Jess Portnoy> - v5.4.2-1
+- content/category: fix "Move Category" panel height to support other languages (211ba28)
+- content/entry: fix entry actions button width on Firefox (058bb95)
+- help: add missing help links to settings/account information section (7b75185)
+- hide OTT players from VOD Share & Embed players list (561d159)
+- settings/account-info: fix form sending error (6affdc3)
+
 * Mon Aug 27 2018 jess.portnoy@kaltura.com <Jess Portnoy> - v5.3.2-1
 - content/entries: adjust position of the Youtube icon on entry thumbnails (825d2f3)
 - content/entry: disable entry download if user doesn't have the required permissions (872799b)
