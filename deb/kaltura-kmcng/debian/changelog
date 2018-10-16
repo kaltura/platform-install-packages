@@ -1,3 +1,13 @@
+kaltura-kmcng (5.4.2-1) naos; urgency=medium
+
+  * content/category: fix "Move Category" panel height to support other languages (211ba28)
+  * content/entry: fix entry actions button width on Firefox (058bb95)
+  * help: add missing help links to settings/account information section (7b75185)
+  * hide OTT players from VOD Share & Embed players list (561d159)
+  * settings/account-info: fix form sending error (6affdc3)
+
+ -- Jess Portnoy <jess@b0f924504114>  Tue, 16 Oct 2018 10:55:12 +0000
+
 kaltura-kmcng (5.3.2-1) naos; urgency=medium
 
   * content/entries: adjust position of the Youtube icon on entry thumbnails (825d2f3)

@@ -1,3 +1,35 @@
+kaltura-base (14.6.0-2) naos; urgency=medium
+
+  * SUP-15684: TranscriptPlugin.php - handle plain text files as well (not just JSON) (https://github.com/kaltura/server/pull/7677)
+  * getPlaybackContext - include dash flavors in hls (https://github.com/kaltura/server/pull/7674)
+  * PHP7: Follow PHP strict standards. serverFile() expects 3 parameters while only 2 are being sent (https://github.com/kaltura/server/pull/7670)
+  * PHP7: Add php7.2 Support for checking if session is active to avoid exception when distributing to Facebook (https://github.com/kaltura/server/pull/7666)
+  * Fix live reports notice on empty result set (https://github.com/kaltura/server/pull/7664)
+  * Skip analytics log print on cached multi-request part (https://github.com/kaltura/server/pull/7663)
+  * PLAT-9190: Zoom-Kaltura integration (https://github.com/kaltura/server/pull/7662)
+  * Drop Object.assign() call (https://github.com/kaltura/server/pull/7661)
+  * PLAT-9305: Facebook auth request - use HTTPs endpoint (https://github.com/kaltura/server/pull/7660)
+  * KMC player preview: fix ie11 issue (https://github.com/kaltura/server/pull/7659)
+  * PHP7: Explicitly passing NULL as the object when calling get_class() is no longer allowed (https://github.com/kaltura/server/pull/7658)
+  * SUP-15684: TranscriptPlugin.php - added getValues() method (https://github.com/kaltura/server/pull/7656)
+  * PLAT-9237: Added 2018_10_09_update_bulk_sync_group_users_permissions.php (https://github.com/kaltura/server/pull/7655)
+  * PLAT-9299: Add 'filter_units' to ffmpeg cmd-lines (https://github.com/kaltura/server/pull/7649)
+  * PLAT-9256: Cache thumbnail for non block and limit thumbnail capture access control actions (https://github.com/kaltura/server/pull/7646)
+  * PLAT-9286: eSearch - save search terms even if no results were returned (https://github.com/kaltura/server/pull/7637)
+  * KMS-18522: entryVendorTaskPeer.php - Don't return aborted tasks (https://github.com/kaltura/server/pull/7636)
+  * PLAT-8950: REACH - Add support for filtering entry vendor tasks based on target language (https://github.com/kaltura/server/pull/7634)
+  * SUP-15727-fix-NGS-cmdLine (https://github.com/kaltura/server/pull/7633)
+  * PHP7: Ensure getStreamInfo() always returns an array object to avoid PHP Warning when calling count on it (https://github.com/kaltura/server/pull/7628)
+  * PLAT-9255 + PLAT-6772: handle enc_at_rest flavor conversion and thumb generation (https://github.com/kaltura/server/pull/7626)
+  * PLAT-9262: handle thumb and volume mapped with encryption (https://github.com/kaltura/server/pull/7625)
+  * PHP7.2: Avoid PHP Fatal error caused by passing too few arguments to function KalturaException::__construct(), 2 passed instead of 3 (https://github.com/kaltura/server/pull/7624)
+  * PLAT-9237: groupuser->sync does not handle special characters (https://github.com/kaltura/server/pull/7623)
+  * PHP7.2: to, cc and bcc do not implement countable() (https://github.com/kaltura/server/pull/7621)
+  * PLAT-7848: override __call function to restore http/s wrappers (https://github.com/kaltura/server/pull/7620)
+  * PLAT-8342: limit reset password per email and IP to avoid flooding (https://github.com/kaltura/server/pull/7619)
+
+ -- Jess Portnoy <jess@b0f924504114>  Tue, 16 Oct 2018 10:42:39 +0000
+
 kaltura-base (14.6.0-1) naos; urgency=medium
 
   * Switching to 14.6.0

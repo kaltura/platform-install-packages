@@ -1,3 +1,10 @@
+kaltura-html5lib (2.71.5-1) naos; urgency=medium
+
+  * SUP-15422: player crushes when KPushServerNotification does not exist (#3903)
+  * SUP-15426: user Agent not recognising Android v9
+
+ -- Jess Portnoy <jess@b0f924504114>  Tue, 16 Oct 2018 10:50:46 +0000
+
 kaltura-html5lib (2.71.2-1) naos; urgency=medium
 
   * Support default language selection natively (by ios browser) (#3896)
