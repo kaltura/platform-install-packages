@@ -342,6 +342,9 @@ fi
 
 %changelog
 * Tue Oct 16 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.7.0-1
+- Nightly build.
+
+* Tue Oct 16 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.7.0-1
 - Ver Bounce to 14.7.0
 
 * Mon Oct 15 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.6.0-43
