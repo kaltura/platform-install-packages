@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 14.6.0
-Release: 43
+Version: 14.7.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -341,6 +341,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Tue Oct 16 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.7.0-1
+- Ver Bounce to 14.7.0
+
 * Mon Oct 15 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.6.0-43
 - SUP-15684: TranscriptPlugin.php - handle plain text files as well (not just JSON) (https://github.com/kaltura/server/pull/7677)
 - getPlaybackContext - include dash flavors in hls (https://github.com/kaltura/server/pull/7674)
