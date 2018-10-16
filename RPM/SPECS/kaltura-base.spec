@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 14.6.0
-Release: 42
+Release: 43
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -341,131 +341,34 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Sun Oct 14 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.6.0-42
-- Nightly build.
-
-* Sat Oct 13 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.6.0-41
-- Nightly build.
-
-* Fri Oct 12 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.6.0-40
-- Nightly build.
-
-* Thu Oct 11 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.6.0-39
-- Nightly build.
-
-* Wed Oct 10 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.6.0-38
-- Nightly build.
-
-* Tue Oct 9 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.6.0-37
-- Nightly build.
-
-* Mon Oct 8 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.6.0-36
-- Nightly build.
-
-* Sun Oct 7 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.6.0-34
-- Nightly build.
-
-* Sat Oct 6 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.6.0-33
-- Nightly build.
-
-* Fri Oct 5 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.6.0-32
-- Nightly build.
-
-* Thu Oct 4 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.6.0-31
-- Nightly build.
-
-* Wed Oct 3 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.6.0-30
-- Nightly build.
-
-* Tue Oct 2 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.6.0-29
-- Nightly build.
-
-* Mon Oct 1 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.6.0-28
-- Nightly build.
-
-* Sun Sep 30 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.6.0-27
-- Nightly build.
-
-* Sat Sep 29 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.6.0-26
-- Nightly build.
-
-* Fri Sep 28 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.6.0-25
-- Nightly build.
-
-* Thu Sep 27 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.6.0-24
-- Nightly build.
-
-* Wed Sep 26 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.6.0-23
-- Nightly build.
-
-* Tue Sep 25 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.6.0-22
-- Nightly build.
-
-* Mon Sep 24 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.6.0-21
-- Nightly build.
-
-* Sun Sep 23 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.6.0-20
-- Nightly build.
-
-* Sat Sep 22 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.6.0-19
-- Nightly build.
-
-* Fri Sep 21 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.6.0-18
-- Nightly build.
-
-* Thu Sep 20 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.6.0-17
-- Nightly build.
-
-* Wed Sep 19 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.6.0-16
-- Nightly build.
-
-* Tue Sep 18 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.6.0-15
-- Nightly build.
-
-* Mon Sep 17 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.6.0-14
-- Nightly build.
-
-* Sun Sep 9 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.6.0-13
-- Nightly build.
-
-* Sat Sep 8 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.6.0-12
-- Nightly build.
-
-* Fri Sep 7 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.6.0-11
-- Nightly build.
-
-* Thu Sep 6 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.6.0-10
-- Nightly build.
-
-* Wed Sep 5 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.6.0-9
-- Nightly build.
-
-* Tue Sep 4 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.6.0-8
-- Nightly build.
-
-* Mon Sep 3 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.6.0-7
-- Nightly build.
-
-* Sun Sep 2 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.6.0-6
-- Nightly build.
-
-* Sat Sep 1 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.6.0-5
-- Nightly build.
-
-* Fri Aug 31 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.6.0-4
-- Nightly build.
-
-* Thu Aug 30 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.6.0-3
-- Nightly build.
-
-* Wed Aug 29 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.6.0-2
-- Nightly build.
-
-* Tue Aug 28 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.6.0-1
-- Nightly build.
-
-* Tue Aug 28 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.6.0-1
-- Ver Bounce to 14.6.0
+* Mon Oct 15 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.6.0-43
+- SUP-15684: TranscriptPlugin.php - handle plain text files as well (not just JSON) (https://github.com/kaltura/server/pull/7677)
+- getPlaybackContext - include dash flavors in hls (https://github.com/kaltura/server/pull/7674)
+- PHP7: Follow PHP strict standards. serverFile() expects 3 parameters while only 2 are being sent (https://github.com/kaltura/server/pull/7670)
+- PHP7: Add php7.2 Support for checking if session is active to avoid exception when distributing to Facebook (https://github.com/kaltura/server/pull/7666)
+- Fix live reports notice on empty result set (https://github.com/kaltura/server/pull/7664)
+- Skip analytics log print on cached multi-request part (https://github.com/kaltura/server/pull/7663)
+- PLAT-9190: Zoom-Kaltura integration (https://github.com/kaltura/server/pull/7662)
+- Drop Object.assign() call (https://github.com/kaltura/server/pull/7661)
+- PLAT-9305: Facebook auth request - use HTTPs endpoint (https://github.com/kaltura/server/pull/7660)
+- KMC player preview: fix ie11 issue (https://github.com/kaltura/server/pull/7659)
+- PHP7: Explicitly passing NULL as the object when calling get_class() is no longer allowed (https://github.com/kaltura/server/pull/7658)
+- SUP-15684: TranscriptPlugin.php - added getValues() method (https://github.com/kaltura/server/pull/7656)
+- PLAT-9237: Added 2018_10_09_update_bulk_sync_group_users_permissions.php (https://github.com/kaltura/server/pull/7655)
+- PLAT-9299: Add 'filter_units' to ffmpeg cmd-lines (https://github.com/kaltura/server/pull/7649)
+- PLAT-9256: Cache thumbnail for non block and limit thumbnail capture access control actions (https://github.com/kaltura/server/pull/7646)
+- PLAT-9286: eSearch - save search terms even if no results were returned (https://github.com/kaltura/server/pull/7637)
+- KMS-18522: entryVendorTaskPeer.php - Don't return aborted tasks (https://github.com/kaltura/server/pull/7636)
+- PLAT-8950: REACH - Add support for filtering entry vendor tasks based on target language (https://github.com/kaltura/server/pull/7634)
+- SUP-15727-fix-NGS-cmdLine (https://github.com/kaltura/server/pull/7633)
+- PHP7: Ensure getStreamInfo() always returns an array object to avoid PHP Warning when calling count on it (https://github.com/kaltura/server/pull/7628)
+- PLAT-9255 + PLAT-6772: handle enc_at_rest flavor conversion and thumb generation (https://github.com/kaltura/server/pull/7626)
+- PLAT-9262: handle thumb and volume mapped with encryption (https://github.com/kaltura/server/pull/7625)
+- PHP7.2: Avoid PHP Fatal error caused by passing too few arguments to function KalturaException::__construct(), 2 passed instead of 3 (https://github.com/kaltura/server/pull/7624)
+- PLAT-9237: groupuser->sync does not handle special characters (https://github.com/kaltura/server/pull/7623)
+- PHP7.2: to, cc and bcc do not implement countable() (https://github.com/kaltura/server/pull/7621)
+- PLAT-7848: override __call function to restore http/s wrappers (https://github.com/kaltura/server/pull/7620)
+- PLAT-8342: limit reset password per email and IP to avoid flooding (https://github.com/kaltura/server/pull/7619)
 
 * Mon Aug 27 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.5.0-16
 - PLAT-9163: Handle ingested flavors with 639-2B and 639-3 language codes (https://github.com/kaltura/server/pull/7533)

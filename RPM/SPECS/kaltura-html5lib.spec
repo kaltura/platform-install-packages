@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.71.2
+Version: v2.71.5
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -82,6 +82,10 @@ fi
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Mon Oct 15 2018 jess.portnoy@kaltura.com <Jess Portnoy> - v2.71.5-1
+- SUP-15422: player crushes when KPushServerNotification does not exist (#3903)
+- SUP-15426: user Agent not recognising Android v9
+
 * Mon Aug 27 2018 jess.portnoy@kaltura.com <Jess Portnoy> - v2.71.2-1
 - Support default language selection natively (by ios browser) (#3896)
 
