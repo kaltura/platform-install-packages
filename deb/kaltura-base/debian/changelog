@@ -1,3 +1,9 @@
+kaltura-base (14.7.0-1) naos; urgency=medium
+
+  * Switching to 14.7.0
+
+ -- Jess Portnoy <jess@b0f924504114>  Tue, 16 Oct 2018 14:56:13 +0000
+
 kaltura-base (14.6.0-2) naos; urgency=medium
 
   * SUP-15684: TranscriptPlugin.php - handle plain text files as well (not just JSON) (https://github.com/kaltura/server/pull/7677)
