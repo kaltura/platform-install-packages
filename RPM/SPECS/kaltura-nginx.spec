@@ -5,6 +5,7 @@
 %define optflags -O3
 # distribution specific definitions
 %define use_systemd (0%{?fedora} && 0%{?fedora} >= 18) || (0%{?rhel} && 0%{?rhel} >= 7)
+%define ffmpeg_ver 4.0.2
 
 %if 0%{?rhel}  == 5
 Group: System Environment/Daemons
@@ -120,8 +121,8 @@ unzip -o %{SOURCE19}
 
 
 %build
-LIBRARY_PATH=/opt/kaltura/ffmpeg-4.0.2/lib
-C_INCLUDE_PATH=/opt/kaltura/ffmpeg-4.0.2/include
+LIBRARY_PATH=/opt/kaltura/ffmpeg-%{ffmpeg_ver}/lib
+C_INCLUDE_PATH=/opt/kaltura/ffmpeg-%{ffmpeg_ver}/include
 export LIBRARY_PATH C_INCLUDE_PATH
 
 ./configure \
