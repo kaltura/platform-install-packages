@@ -40,19 +40,19 @@ BuildRequires: libopenssl-devel
 Requires(pre): pwdutils
 %endif
 
-%define nginx_vod_module_ver 1.23
+%define nginx_vod_module_ver 1.24
 %define nginx_secure_token_ver 1.3
 %define nginx_token_validate_ver 1.1
-%define nginx_vts_ver 0.1.16
+%define nginx_vts_ver 0.1.18
 %define nginx_rtmp_ver 1.2.0
 %define ngx_aws_auth_ver 2.1.1
-%define headers_more_nginx_ver 0.32
+%define headers_more_nginx_ver 0.33
 # end of distribution specific definitions
 
 Summary: High performance web server customized for Kaltura VOD
 Name: kaltura-nginx
 Version: 1.14.0
-Release: 4
+Release: 5
 Vendor: Kaltura inc.
 URL: http://nginx.org/
 
@@ -104,7 +104,6 @@ Not stripped version of nginx built with the debugging log support.
 
 %prep
 %setup -qn nginx-%{version}
-#%patch1 -p1 -b ngx_http_upstream.c.orig 
 unzip -o %{SOURCE10}
 
 unzip -o %{SOURCE11}
@@ -121,8 +120,8 @@ unzip -o %{SOURCE19}
 
 
 %build
-LIBRARY_PATH=/opt/kaltura/ffmpeg-3.2/lib
-C_INCLUDE_PATH=/opt/kaltura/ffmpeg-3.2/include
+LIBRARY_PATH=/opt/kaltura/ffmpeg-4.0.2/lib
+C_INCLUDE_PATH=/opt/kaltura/ffmpeg-4.0.2/include
 export LIBRARY_PATH C_INCLUDE_PATH
 
 ./configure \
@@ -291,7 +290,7 @@ cd $RPM_BUILD_ROOT%{_sysconfdir}/nginx && \
    $RPM_BUILD_ROOT%{_sbindir}/nginx.debug
 
 %clean
-%{__rm} -rf $RPM_BUILD_ROOT
+#%{__rm} -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root)
@@ -411,6 +410,10 @@ if [ $1 -ge 1 ]; then
 fi
 
 %changelog
+* Mon Oct 22 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 1.14.0-5
+- New upstream headers and VTS modules
+- Compile vod module with FFmpeg 4.0.2
+
 * Tue Jul 31 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 1.14.0-2
 - We now support:
 	* Automatic Kaltrua entry provisioning

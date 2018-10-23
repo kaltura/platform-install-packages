@@ -1,10 +1,10 @@
 
 %define base_prefix /opt/kaltura/ffmpeg
-%define _without_gsm 1
+%define _without_gsm 0
 %define _without_nut 1
 
 ### No package yet
-%define _without_vpx 1
+%define _without_vpx 0
 
 ### Use native vorbis
 %define _without_vorbis 1
@@ -14,19 +14,19 @@
 
 
 %{?el6:%define _without_dc1394 1}
-%{?el6:%define _without_schroedinger 1}
+#%{?el6:%define _without_schroedinger 1}
 #%{?el6:%define _without_speex 1}
 %{?el6:%define _without_theora 1}
 
 %{?el5:%define _without_dc1394 1}
-%{?el5:%define _without_schroedinger 1}
+#%{?el5:%define _without_schroedinger 1}
 %{?el5:%define _without_speex 1}
 %{?el5:%define _without_theora 1}
 
 Summary: Utilities and libraries to record, convert and stream audio and video
 Name: kaltura-ffmpeg
-Version: 3.2 
-Release: 7
+Version: 4.0.2 
+Release: 1
 License: GPL
 Group: Applications/Multimedia
 URL: http://ffmpeg.org/
@@ -35,16 +35,6 @@ Packager: Jess Portnoy <jess.portnoy@kaltura.com>
 Vendor: Kaltura, Inc.
 
 Source: http://www.ffmpeg.org/releases/ffmpeg-%{version}.tar.bz2
-Source1: vf_transform.c 
-patch0: movenc.c.diff
-#Patch0: allfilters.c.patch 
-#Patch1: crypto.c.patch 
-#Patch2: libopenjpegdec.c.patch 
-#Patch3: libopenjpegenc.c.patch
-Patch4: vf_transform.patch 
-#Patch5: ffmpeg-3.1.3-configure.patch
-# https://patchwork.ffmpeg.org/patch/3768/
-Patch6: disallow-local-file-access-by-default.patch.diff 
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
@@ -52,39 +42,36 @@ BuildRequires: SDL-devel
 BuildRequires: freetype-devel
 BuildRequires: imlib2-devel
 BuildRequires: zlib-devel
-BuildRequires: schroedinger-devel
+#BuildRequires: schroedinger-devel
 BuildRequires: libtheora-devel
 BuildRequires: libvorbis-devel
 BuildRequires: libxvidcore4-devel
 BuildRequires: x265-devel
 BuildRequires: gnutls-devel
-%{!?_without_a52dec:BuildRequires: kaltura-a52dec-devel}
-%{!?_without_dc1394:BuildRequires: libdc1394-devel}
-%{!?_without_gsm:BuildRequires: gsm-devel}
-%{!?_without_lame:BuildRequires: kaltura-lame-devel}
+BuildRequires: kaltura-a52dec-devel
+BuildRequires: kaltura-lame-devel
 %{!?_without_nut:BuildRequires: libnut-devel}
 %{!?_without_opencore_amr:BuildRequires: kaltura-libopencore-amr-devel}
 %{!?_without_openjpeg:BuildRequires: openjpeg-devel}
-%{!?_without_rtmp:BuildRequires: kaltura-librtmp-devel}
-%{!?_without_schroedinger:BuildRequires: schroedinger-devel}
+BuildRequires: kaltura-librtmp-devel
+#%{!?_without_schroedinger:BuildRequires: schroedinger-devel}
 %{!?_without_texi2html:BuildRequires: texi2html}
 %{!?_without_theora:BuildRequires: libogg-devel, libtheora-devel}
 %{!?_without_vorbis:BuildRequires: libogg-devel, libvorbis-devel}
-%{!?_without_vpx:BuildRequires: libvpx-devel >= 1.3.0}
-%{!?_without_x264:BuildRequires: kaltura-x264-devel}
-%{!?_without_xvid:BuildRequires: libxvidcore4-devel}
-%{!?_without_a52dec:Requires: a52dec}
+BuildRequires: kaltura-libvpx-devel >= 1.7.0
+BuildRequires: kaltura-x264-devel
+BuildRequires: libxvidcore4-devel
+Requires: a52dec
 BuildRequires: yasm-devel
 BuildRequires: libass-devel 
 BuildRequires: kaltura-x264-devel 
 BuildRequires: gsm-devel
 BuildRequires: speex-devel
-BuildRequires: libvpx-devel >= 1.3.0
-BuildRequires: schroedinger-devel 
+#BuildRequires: schroedinger-devel 
 BuildRequires: libtheora-devel
 BuildRequires: libxvidcore4-devel >= 1.3.2
 Requires:kaltura-a52dec,libass,kaltura-x264
-Requires: libvpx >= 1.3.0
+Requires: kaltura-libvpx >= 1.7.0
 Requires: x265-libs
 Requires: gnutls
 
@@ -109,9 +96,9 @@ Requires: imlib2-devel, SDL-devel, freetype-devel, zlib-devel, pkgconfig,kaltura
 %{!?_without_lame:Requires: kaltura-lame-devel}
 %{!?_without_openjpeg:Requires: openjpeg-devel}
 %{!?_without_rtmp:Requires: kaltura-librtmp-devel}
-%{!?_without_schroedinger:Requires: schroedinger-devel}
+#%{!?_without_schroedinger:Requires: schroedinger-devel}
 %{!?_without_vorbis:Requires: libogg-devel, libvorbis-devel}
-%{!?_without_vpx:Requires: libvpx-devel}
+%{!?_without_vpx:Requires: kaltura-libvpx-devel}
 %{!?_without_x264:Requires: kaltura-x264-devel}
 %{!?_without_xvid:Requires: libxvidcore4-devel}
 
@@ -128,14 +115,6 @@ Install this package if you want to compile apps with ffmpeg support.
 
 %prep
 %setup -qn ffmpeg-%{version}
-%patch0 -p1
-#%patch1 -p1
-#%patch2 -p1
-#%patch3 -p1
-%patch4 -p1
-#%patch5 -p1
-%patch6 -p1
-cp %{SOURCE1} %{_builddir}/ffmpeg-%{version}/libavfilter/
 
 
 %build
@@ -156,10 +135,8 @@ export CFLAGS="%{optflags}"
     --extra-cflags="%{optflags} -fPIC -I/opt/kaltura/include" \
     --extra-ldflags="-L/opt/kaltura/lib" \
     --disable-devices \
-    --enable-bzlib \
     --enable-libgsm \
     --enable-libmp3lame \
-    --enable-libschroedinger \
     --enable-libtheora \
     --enable-libvorbis \
     --enable-libx264 \
@@ -179,19 +156,19 @@ export CFLAGS="%{optflags}"
     --enable-static \
     --enable-shared \
     --enable-gpl \
-     --disable-debug \
+    --disable-debug \
     --disable-optimizations \
---enable-gpl \
---enable-pthreads \
---enable-swscale \
---enable-vdpau \
---enable-bzlib \
---disable-devices \
---enable-filter=movie \
+    --enable-gpl \
+    --enable-pthreads \
+    --enable-swscale \
+    --enable-vdpau \
+    --disable-devices \
+    --enable-filter=movie \
     --enable-version3 \
---enable-indev=lavfi \
---enable-gnutls \
---enable-x11grab
+    --enable-indev=lavfi \
+    --enable-gnutls \
+    --enable-libxcb \
+    --enable-libxcb-shm 
 
 %{__make} %{?_smp_mflags}
 
@@ -284,6 +261,9 @@ fi
 %{base_prefix}-%{version}/share
 
 %changelog
+* Mon Oct 22 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 4.0.2-1
+- New upstream version
+
 * Mon Aug 20 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 3.2-7
 - Configure FFmpeg --with-gnutls
 

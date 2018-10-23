@@ -96,7 +96,7 @@ SPHINX_VERSION=2.2.1
 SPHINX_RPM_PACKAGE_NAME=kaltura-sphinx
 
 # Ffmpeg build vars:
-FFMPEG_VERSION=3.2
+FFMPEG_VERSION=4.0.2
 FFMPEG_AUX_VERSION=2.1.3
 FFMPEG_RPM_PACKAGE_NAME=kaltura-ffmpeg
 FFMPEG_AUX_RPM_PACKAGE_NAME=kaltura-ffmpeg-aux
@@ -149,13 +149,13 @@ KALTURA_TEMPLATES_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalsource
 KALTURA_CLIENTS_GENERATOR_URI="https://github.com/kaltura/clients-generator/archive/$KALTURA_SERVER_VERSION.zip"
 
 # Kaltura nginx-vod-module:
-KALTURA_NGINX_VOD_VERSION=1.23
+KALTURA_NGINX_VOD_VERSION=1.24
 KALTURA_NGINX_VOD_URI="https://github.com/kaltura/nginx-vod-module/archive/$KALTURA_NGINX_VOD_VERSION.zip"
 
 KALTURA_NGINX_AKAMAI_TOKEN_VALIDATE_VERSION=1.1
 KALTURA_NGINX_AKAMAI_TOKEN_VALIDATE_URI="https://github.com/kaltura/nginx-akamai-token-validate-module/archive/$KALTURA_NGINX_AKAMAI_TOKEN_VALIDATE_VERSION.zip"
 
-NGINX_VTS_VERSION=v0.1.16
+NGINX_VTS_VERSION=v0.1.18
 NGINX_VTS_URI="https://github.com/vozlt/nginx-module-vts/archive/$NGINX_VTS_VERSION.zip"
 
 NGINX_RTMP_VERSION=v1.2.0
@@ -171,7 +171,7 @@ NGX_AWS_AUTH_VERSION="2.1.1"
 NGX_AWS_AUTH_URI="https://github.com/anomalizer/ngx_aws_auth/archive/$NGX_AWS_AUTH_VERSION.zip"
 
 # Nginx headers more module
-HEADERS_MORE_NGINX_VERSION="v0.32"
+HEADERS_MORE_NGINX_VERSION="v0.33"
 HEADERS_MORE_NGINX_URI="https://github.com/openresty/headers-more-nginx-module/archive/$HEADERS_MORE_NGINX_VERSION.zip"
 
 # Kaltura Streaming lib build vars:
@@ -181,7 +181,7 @@ KALTURA_MEDIASERVER_RPM_NAME=kaltura-media-server
 
 MEDIASERVER_DEPS_JARS="junit/junit-dep-4.7 json-/json-20090211 hamcrest/hamcrest-core-1.1 commons-logging/commons-logging-1.0.4 commons-httpclient/commons-httpclient-3.1 commons-codec/commons-codec-1.4"
 
-KALTURA_LIVE_DVR_VERSION="1.29.1"
+KALTURA_LIVE_DVR_VERSION="2.0.4"
 KALTURA_LIVE_DVR_URI="https://github.com/kaltura/liveDVR/archive/v$KALTURA_LIVE_DVR_VERSION.tar.gz"
 KALTURA_LIVE_DVR_RPM_NAME=kaltura-livedvr
 
