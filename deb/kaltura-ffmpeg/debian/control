@@ -50,6 +50,7 @@ Build-Depends:
  libx265-dev,
  yasm [any-amd64 any-i386],
  zlib1g-dev,
+ libopenjp2-7-dev,
  libzvbi-dev
 
 Package: kaltura-ffmpeg
@@ -81,6 +82,7 @@ Depends:
  x265|libx265-87|libx265-79,
  libvorbisfile3,
  libgnutls26|libgnutls30,
+ libopenjp2-7,
  libzvbi0
 Description: 
  FFmpeg is a very fast video and audio converter. It can also grab from a
