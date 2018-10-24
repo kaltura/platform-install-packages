@@ -30,13 +30,9 @@ $(archive):
 $(tree): $(archive)
 	tar jxf $(archive) 
 	cp $(SOURCE_PACKAGING_DIR)/platform-install-packages/RPM/SOURCES/vf_transform.c $(tree)/libavfilter/ 
-	for PATCH in $(SOURCE_PACKAGING_DIR)/platform-install-packages/RPM/SOURCES/movenc.c.diff $(SOURCE_PACKAGING_DIR)/platform-install-packages/RPM/SOURCES/vf_transform.patch $(SOURCE_PACKAGING_DIR)/platform-install-packages/RPM/SOURCES/disallow-local-file-access-by-default.patch.diff ;do \
-	       patch -p0 -i $$PATCH; \
-	done
 
 config.status: $(tree) 
 	dh_testdir
-	#CFLAGS="$(CFLAGS)" CPPFLAGS="$(CPPFLAGS)" LDFLAGS="$(LDFLAGS)" cd $(tree) && cat $(SOURCE_PACKAGING_DIR)/platform-install-packages/RPM/SOURCES/movenc.c.diff |patch -p1||true && ./configure 
 	CFLAGS="$(CFLAGS)" CPPFLAGS="$(CPPFLAGS)" LDFLAGS="$(LDFLAGS)" cd $(tree) && ./configure --prefix="$(BASE_PREFIX)" \
 		    --libdir="$(BASE_PREFIX)/lib" \
 		    --shlibdir="$(BASE_PREFIX)/lib" \
@@ -46,7 +42,6 @@ config.status: $(tree)
 		    --enable-bzlib \
 		    --enable-libgsm \
 		    --enable-libmp3lame \
-		    --enable-libschroedinger \
 		    --enable-libtheora \
 		    --enable-libvorbis \
 		    --enable-libx264 \
@@ -78,7 +73,9 @@ config.status: $(tree)
 		--enable-version3 \
 	        --enable-libzvbi \
 		--enable-gnutls \
-		--enable-x11grab
+                --enable-indev=lavfi \
+                --enable-libxcb \
+                --enable-libxcb-shm 
 
 build: build-stamp
 
