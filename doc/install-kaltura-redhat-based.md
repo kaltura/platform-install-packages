@@ -63,8 +63,8 @@ To verify SELinux will not revert to enabled next restart:
 # rpm -ihv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
 ```
 
-#### Note for RHEL/CentOS 7 users
-Depending on what repos you have enabled, you may also need to add the EPEL or CentOS repos to resolve all dependencies.
+#### Additional repos
+Before proceeding with the deployment process, please ensure that the EPEL repos are enabled.
 
 #### Installing on AWS EC2 instances
 Depending on your setup, you may need to enable two additional repos: rhui-REGION-rhel-server-extras and rhui-REGION-rhel-server-optional.
