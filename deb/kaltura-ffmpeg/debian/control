@@ -39,7 +39,7 @@ Build-Depends:
  libvo-aacenc-dev,
  libvo-amrwbenc-dev,
  libvorbis-dev,
- libvpx-dev,
+ libvpx-dev (>= 1.4.0),
  libx11-dev,
  libx264-dev,
  libxext-dev,
@@ -50,6 +50,7 @@ Build-Depends:
  libx265-dev,
  yasm [any-amd64 any-i386],
  zlib1g-dev,
+ libopenjp2-7-dev,
  libzvbi-dev
 
 Package: kaltura-ffmpeg
@@ -74,13 +75,14 @@ Depends:
  libva1,
  libva-drm1, 
  libva-x11-1,
- libvpx1|libvpx3,
+ libvpx1|libvpx3|libvpx5,
  libxvidcore4,
  libvorbis0a, 
  libvorbisenc2, 
  x265|libx265-87|libx265-79,
  libvorbisfile3,
  libgnutls26|libgnutls30,
+ libopenjp2-7,
  libzvbi0
 Description: 
  FFmpeg is a very fast video and audio converter. It can also grab from a
