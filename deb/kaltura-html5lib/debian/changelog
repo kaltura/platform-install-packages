@@ -1,3 +1,17 @@
+kaltura-html5lib (2.72-1) naos; urgency=medium
+ 
+  * FEC-8566 - V2 - Playlist - Playlist flashing and control bar with video area moved slowly down
+  * FEC-8540 - Performance - Replaying first second several times when starting video
+  * SUP-15645 - Play events are send more than one time
+  * SUP-15625 - Video Chapters issue
+  * SUP-15736 - The video does not autoplay with Safari 12 at Mac OS X.
+  * SUP-15668 - No playback in Document mode 10
+  * PHP7: Fixes after testing
+  * PHP7: remove unused methods + fix count warnings
+  * PHP7: Align code to support php7
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 29 Oct 2018 12:28:02 +0000
+
 kaltura-html5lib (2.71.5-1) naos; urgency=medium
 
   * SUP-15422: player crushes when KPushServerNotification does not exist (#3903)
