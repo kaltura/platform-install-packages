@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 14.7.0
-Release: 14
+Release: 15
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -341,44 +341,40 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Sun Oct 28 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.7.0-14
-- Nightly build.
-
-* Sat Oct 27 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.7.0-13
-- Nightly build.
-
-* Fri Oct 26 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.7.0-12
-- Nightly build.
-
-* Thu Oct 25 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.7.0-11
-- Nightly build.
-
-* Wed Oct 24 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.7.0-10
-- Nightly build.
-
-* Tue Oct 23 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.7.0-9
-- Nightly build.
-
-* Mon Oct 22 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.7.0-7
-- Nightly build.
-
-* Sun Oct 21 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.7.0-6
-- Nightly build.
-
-* Sat Oct 20 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.7.0-5
-- Nightly build.
-
-* Fri Oct 19 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.7.0-4
-- Nightly build.
-
-* Thu Oct 18 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.7.0-3
-- Nightly build.
-
-* Wed Oct 17 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.7.0-2
-- Nightly build.
-
-* Tue Oct 16 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.7.0-1
-- Nightly build.
+* Mon Oct 29 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.7.0-15
+- thumbnail action - block inactive partners (https://github.com/kaltura/server/pull/7744)
+- Reduce access to APC (https://github.com/kaltura/server/pull/7743)
+- kApcConf.php: Add map prefix (https://github.com/kaltura/server/pull/7742)
+- KalturaLiveEntry: when checking hasPropertyChanged, if `sourceObject` is null and value is set return true (https://github.com/kaltura/server/pull/7739)
+- PLAT-9352: kRemoteMemCacheConf.php - fix hostname regex pattern (https://github.com/kaltura/server/pull/7738)
+- When entryVendorTask is auto generated assign the entry userId as the entry owner, if requester partnerId is one of the system partners (https://github.com/kaltura/server/pull/7737)
+- Added script to sync DB conf maps to multiple cache (https://github.com/kaltura/server/pull/7736)
+- Block deleted (status 0) partners (https://github.com/kaltura/server/pull/7735)
+- PLAT-9349: Fix inconsistent behavior between kConf::getMap() and kConf::hasMap() (https://github.com/kaltura/server/pull/7734)
+- PLAT-9349: Fix inconsistent behavior between kConf::getMap() and kConf::hasMap()(https://github.com/kaltura/server/pull/7732)
+- PLAT-9348: Indexes with underscore in names aren't added to memcache (https://github.com/kaltura/server/pull/7731)
+- PLAT-9347: Reload content from file system if the base.reload file exist (https://github.com/kaltura/server/pull/7730)
+- PLAT-9345: Handle caching of unkown types (https://github.com/kaltura/server/pull/7726)
+- PLAT-9309: Admin Console DRM config - expose `fps_default_persistence_duration` (https://github.com/kaltura/server/pull/7725)
+- PLAT-9344: Rename kBaseCacheWrapper to kInfraMemcacheCacheWrapper (https://github.com/kaltura/server/pull/7722)
+- Split firebase IOS and Android notifications (https://github.com/kaltura/server/pull/7720)
+- PLAT-9344: Avoid duplicate cache class names (https://github.com/kaltura/server/pull/7718)
+- PLAT-9340: Preload configuration of kRemoteMemCache and kLocalMemCache (https://github.com/kaltura/server/pull/7712)
+- PLAT-9343 eSearch: searchHistory - limit the length of searchTermStartsWith to 64 (https://github.com/kaltura/server/pull/7711)
+- PLAT-9342: Avoid map merging if only one file is found (https://github.com/kaltura/server/pull/7710)
+- eSearch: Fix field validation in searchUser() action (https://github.com/kaltura/server/pull/7707)
+- PLAT-9142: Add `privacy_by_contexts` field to entry index (https://github.com/kaltura/server/pull/7706)
+- PLAT-9266: Fix param parsing in dumpApiRequest() (https://github.com/kaltura/server/pull/7703)
+- SUP-15772: retrieveActiveAndPendingByEntryIdAndPrivacyContext() - search through all categoryEntryObjects with privacyContext (https://github.com/kaltura/server/pull/7702)
+- PLAT-9340: Fix wrong handling of wildcard in kConf (https://github.com/kaltura/server/pull/7700)
+- SUP-15746: apply approve/cancel replacement flow for child media entries (https://github.com/kaltura/server/pull/7699)
+- PLAT-9336: Support multi-request with a dependent request that extracts results from objects array (https://github.com/kaltura/server/pull/7698)
+- PLAT-9331: Fix merging of associative array configuration files with numeric keys (https://github.com/kaltura/server/pull/7695)
+- PHP7: get_class() no longer supports explicitly passing NULL in the object param (https://github.com/kaltura/server/pull/7694)
+- PSVAMB-4593: New Email notifications (https://github.com/kaltura/server/pull/7692)
+- PLAT-8932: Fix "do not implement countable()" errors (https://github.com/kaltura/server/pull/7691)
+- PLAT-9183: kBulkUploadJob() - apply moderation  (https://github.com/kaltura/server/pull/7690)
+- PLAT-8932: Avoid recursive calling kConf::load() (https://github.com/kaltura/server/pull/7688)
 
 * Tue Oct 16 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.7.0-1
 - Ver Bounce to 14.7.0

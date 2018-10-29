@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.71.5
+Version: v2.72
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -82,6 +82,17 @@ fi
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Mon Oct 29 2018 jess.portnoy@kaltura.com <Jess Portnoy> - v2.72-1
+- FEC-8566 - V2 - Playlist - Playlist flashing and control bar with video area moved slowly down
+- FEC-8540 - Performance - Replaying first second several times when starting video
+- SUP-15645 - Play events are send more than one time
+- SUP-15625 - Video Chapters issue
+- SUP-15736 - The video does not autoplay with Safari 12 at Mac OS X.
+- SUP-15668 - No playback in Document mode 10
+- PHP7: Fixes after testing
+- PHP7: remove unused methods + fix count warnings
+- PHP7: Align code to support php7
+
 * Mon Oct 15 2018 jess.portnoy@kaltura.com <Jess Portnoy> - v2.71.5-1
 - SUP-15422: player crushes when KPushServerNotification does not exist (#3903)
 - SUP-15426: user Agent not recognising Android v9
