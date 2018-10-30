@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 14.7.0
-Release: 15
+Version: 14.8.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -341,6 +341,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Tue Oct 30 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.8.0-1
+- Ver Bounce to 14.8.0
+
 * Mon Oct 29 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.7.0-15
 - thumbnail action - block inactive partners (https://github.com/kaltura/server/pull/7744)
 - Reduce access to APC (https://github.com/kaltura/server/pull/7743)
