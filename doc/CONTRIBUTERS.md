@@ -1,6 +1,6 @@
 Sign Kaltura's CLA
 ===================
-http://agentcontribs.kaltura.org/agreements/KalturaCommunity/platform-install-packages
+https://agentcontribs.kaltura.org/
 
 Which repo should I contribute to?
 =================================
