@@ -341,56 +341,26 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Wed Nov 14 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.8.0-17
-- Nightly build.
-
-* Tue Nov 13 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.8.0-16
-- Nightly build.
-
-* Mon Nov 12 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.8.0-15
-- Nightly build.
-
-* Sun Nov 11 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.8.0-14
-- Nightly build.
-
-* Sat Nov 10 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.8.0-13
-- Nightly build.
-
-* Fri Nov 9 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.8.0-12
-- Nightly build.
-
-* Thu Nov 8 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.8.0-11
-- Nightly build.
-
-* Wed Nov 7 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.8.0-10
-- Nightly build.
-
-* Tue Nov 6 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.8.0-9
-- Nightly build.
-
-* Mon Nov 5 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.8.0-8
-- Nightly build.
-
-* Sun Nov 4 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.8.0-7
-- Nightly build.
-
-* Sat Nov 3 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.8.0-6
-- Nightly build.
-
-* Fri Nov 2 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.8.0-5
-- Nightly build.
-
-* Thu Nov 1 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.8.0-4
-- Nightly build.
-
-* Wed Oct 31 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.8.0-3
-- Nightly build.
-
-* Tue Oct 30 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.8.0-2
-- Nightly build.
-
-* Tue Oct 30 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.8.0-1
-- Ver Bounce to 14.8.0
+* Thu Nov 15 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.8.0-17
+- PLAT-9419: DRM (WV,ISM,AtRest) conversion status is not updated once done (https://github.com/kaltura/server/pull/7825)
+- PLAT-9315: DocumentsService::addFromUploadedFileAction() - Set fileSize when adding content (https://github.com/kaltura/server/pull/7823)
+- PLAT-9241: playManifestAction() - handle watermark flavors (https://github.com/kaltura/server/pull/7821)
+- isInternalIp(): Support CIDR range of 0.0.0.0 (https://github.com/kaltura/server/pull/7817)
+- PLAT-9315: File size of DocumentEntry is always 0 (https://github.com/kaltura/server/pull/7816)
+- PLAT-9414: If a 'security map is not defined, allow all internal IPs (https://github.com/kaltura/server/pull/7814)
+- PLAT-9411: Reduce number of writes to kConf key in APC (https://github.com/kaltura/server/pull/7807)
+- PLAT-9408: Check whether getAudioLanguage() and getAudioCodec() exist for the object before attempting to call them (https://github.com/kaltura/server/pull/7806)
+- PLAT-9404: createRecordedEntry() - check if lock exists before calling unlock() (https://github.com/kaltura/server/pull/7805)
+- sup-15616: addClipJobs() - skip flavour creation if duration is not set to a positive value (https://github.com/kaltura/server/pull/7803)
+- PLAT-9393: Add the BASE_UPLOAD_PERMISSION permission to media:addFromUplodedFile (https://github.com/kaltura/server/pull/7800)
+- PLAT-9381: Handle encrypted thumbs serving (https://github.com/kaltura/server/pull/7786)
+- Catch couchbase exception and return empty list as a response (https://github.com/kaltura/server/pull/7785)
+- PSVAMB-4443: Allow global access to entries from partner 0 (https://github.com/kaltura/server/pull/7781)
+- SUP-15841: kFlowHelper - added validateSourceFileSync() (https://github.com/kaltura/server/pull/7780)
+- PLAT-9230: Playlist service - allow user level access (add/update operations) (https://github.com/kaltura/server/pull/7778)
+- Update default flavour set (https://github.com/kaltura/server/pull/7772)
+- SUP-15174: Handle BOM in CSV bulk upload (https://github.com/kaltura/server/pull/7770)
+- Chunked encoding: compress data when storing in Memcache (https://github.com/kaltura/server/pull/7765)
 
 * Mon Oct 29 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.7.0-15
 - thumbnail action - block inactive partners (https://github.com/kaltura/server/pull/7744)

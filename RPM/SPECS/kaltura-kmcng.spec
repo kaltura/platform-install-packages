@@ -1,6 +1,6 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmcng
-Version: v5.4.2
+Version: v5.5.2
 Release: 1
 Summary: Kaltura HTML5 Management Console
 
@@ -49,6 +49,16 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Thu Nov 15 2018 jess.portnoy@kaltura.com <Jess Portnoy> - v5.5.2-1
+- content/entry: fix position of upload settings window on MS Edge when replacing video (e952515)
+- upload: fix position of upload settings window on MS Edge (f5e2453)
+- fix create menu icons width in all languages (ebe3262)
+- fix Yahoo and iTunes category tags translation in German (4411d2e)
+- administration/users: enable KMC access to existing KMS users when creating a new user using a KMS user ID (d57ef34)
+- content/category: update entitlements options labels (e4c9fe1)
+- content/playlist: remove the "Plays" field from the playlist details info (52d043c)
+- contextual-help: update broken links in contextual help system (9b5ee24)
+
 * Mon Oct 8 2018 jess.portnoy@kaltura.com <Jess Portnoy> - v5.4.2-1
 - content/category: fix "Move Category" panel height to support other languages (211ba28)
 - content/entry: fix entry actions button width on Firefox (058bb95)
