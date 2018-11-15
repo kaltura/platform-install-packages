@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 14.8.0
-Release: 17
+Release: 18
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -341,6 +341,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Thu Nov 15 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.8.0-18
+- Nightly build.
+
 * Thu Nov 15 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.8.0-17
 - PLAT-9419: DRM (WV,ISM,AtRest) conversion status is not updated once done (https://github.com/kaltura/server/pull/7825)
 - PLAT-9315: DocumentsService::addFromUploadedFileAction() - Set fileSize when adding content (https://github.com/kaltura/server/pull/7823)
