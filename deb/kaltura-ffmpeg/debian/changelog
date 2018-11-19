@@ -1,3 +1,9 @@
+kaltura-ffmpeg (4.0.2-3) naos; urgency=medium
+
+  * Added explicit declaration of additional deps.
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 19 Nov 2018 11:50:29 +0000
+
 kaltura-ffmpeg (4.0.2-2) naos; urgency=medium
 
   * We rely on libass5 in all our repos now, libass4 is no longer needed

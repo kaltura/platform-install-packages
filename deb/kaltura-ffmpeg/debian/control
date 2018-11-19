@@ -80,9 +80,22 @@ Depends:
  libvorbis0a, 
  libvorbisenc2, 
  x265|libx265-87|libx265-79,
+ libpng12-0,
  libvorbisfile3,
  libgnutls26|libgnutls30,
  libopenjp2-7,
+ libbz2-1.0,
+ libdrm2,
+ libexpat1,
+ libffi6,
+ libfontconfig1,
+ libfreetype6,
+ libfribidi0,
+ libglib2.0-0,
+ libgmp10,
+ libgsm1,
+ libpng12-0,
+ libxcb1,
  libzvbi0
 Description: 
  FFmpeg is a very fast video and audio converter. It can also grab from a
