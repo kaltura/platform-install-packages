@@ -1,3 +1,9 @@
+kaltura-base (14.8.0-4) naos; urgency=medium
+
+  * Handle cases where access_control_id doesn't exist on the entry object 
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 19 Nov 2018 17:41:08 +0000
+
 kaltura-base (14.8.0-3) naos; urgency=medium
 
   * Fix secureEntryHelperExits condition (https://github.com/kaltura/server/pull/7833)
