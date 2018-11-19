@@ -1,3 +1,16 @@
+kaltura-kmcng (5.5.2-1) naos; urgency=medium
+
+  * content/entry: fix position of upload settings window on MS Edge when replacing video (e952515)
+  * upload: fix position of upload settings window on MS Edge (f5e2453)
+  * fix create menu icons width in all languages (ebe3262)
+  * fix Yahoo and iTunes category tags translation in German (4411d2e)
+  * administration/users: enable KMC access to existing KMS users when creating a new user using a KMS user ID (d57ef34)
+  * content/category: update entitlements options labels (e4c9fe1)
+  * content/playlist: remove the "Plays" field from the playlist details info (52d043c)
+  * contextual-help: update broken links in contextual help system (9b5ee24)
+
+ -- Jess Portnoy <jess@b0f924504114>  Thu, 15 Nov 2018 14:48:40 +0000
+
 kaltura-kmcng (5.4.2-1) naos; urgency=medium
 
   * content/category: fix "Move Category" panel height to support other languages (211ba28)
