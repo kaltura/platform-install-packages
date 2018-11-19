@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 14.8.0
-Release: 21
+Release: 22
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -341,17 +341,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Sun Nov 18 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.8.0-21
-- Nightly build.
-
-* Sat Nov 17 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.8.0-20
-- Nightly build.
-
-* Fri Nov 16 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.8.0-19
-- Nightly build.
-
-* Thu Nov 15 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.8.0-18
-- Nightly build.
+* Mon Nov 19 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.8.0-22
+- Fix secureEntryHelperExits condition (https://github.com/kaltura/server/pull/7833)
+- PLAT-9424: Bulk upload fails due to PHP parse error (https://github.com/kaltura/server/pull/7834)
 
 * Thu Nov 15 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.8.0-17
 - PLAT-9419: DRM (WV,ISM,AtRest) conversion status is not updated once done (https://github.com/kaltura/server/pull/7825)
