@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 14.8.0
-Release: 22
+Release: 23
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -341,6 +341,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Nov 19 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.8.0-23
+- Handle cases where access_control_id doesn't exist on the entry object
+
 * Mon Nov 19 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.8.0-22
 - Fix secureEntryHelperExits condition (https://github.com/kaltura/server/pull/7833)
 - PLAT-9424: Bulk upload fails due to PHP parse error (https://github.com/kaltura/server/pull/7834)
