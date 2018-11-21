@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 14.8.0
-Release: 23
+Version: 14.9.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -341,6 +341,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Wed Nov 21 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.9.0-1
+- Ver Bounce to 14.9.0
+
 * Mon Nov 19 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.8.0-23
 - Handle cases where access_control_id doesn't exist on the entry object
 

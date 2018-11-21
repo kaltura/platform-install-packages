@@ -1,6 +1,6 @@
 Summary: Kaltura Open Source Video Platform all in 1 package 
 Name: kaltura-server
-Version: 14.8.0
+Version: 14.9.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -46,6 +46,9 @@ fi
 %files
 
 %changelog
+* Wed Nov 21 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.9.0-1
+- Ver Bounce to 14.9.0
+
 * Tue Oct 30 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.8.0-1
 - Ver Bounce to 14.8.0
 
