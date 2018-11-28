@@ -9,12 +9,12 @@
 Summary: Kaltura Open Source Video Platform - Live DVR
 Name: kaltura-livedvr
 Version: 2.0.4
-Release: 1
+Release: 2
 License: AGPLv3+
 Group: Server/Platform 
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires: kaltura-monit kaltura-base redhat-lsb-core nodejs >= 7.0.0 kaltura-nginx nodejs-chunked-stream nodejs-commander  nodejs-log4js nodejs-glob nodejs-mkdirp nodejs-q nodejs-q-io nodejs-touch nodejs-underscore nodejs-nconf nodejs-request nodejs-forever nodejs-ini nodejs-string-width nodejs-strip-ansi nodejs-minimatch nodejs-inherits nodejs-wrappy nodejs-once 
+Requires: kaltura-monit kaltura-base redhat-lsb-core nodejs >= 7.0.0 kaltura-nginx nodejs-chunked-stream nodejs-commander  nodejs-log4js nodejs-glob nodejs-mkdirp nodejs-q nodejs-q-io nodejs-touch nodejs-underscore nodejs-nconf nodejs-request nodejs-forever nodejs-ini nodejs-string-width nodejs-strip-ansi nodejs-minimatch nodejs-inherits nodejs-wrappy nodejs-once nodejs-socket.io-client 
 Requires(post): chkconfig
 Requires(preun): chkconfig
 Requires(preun): initscripts
@@ -135,6 +135,9 @@ fi
 #%files debug
 
 %changelog
+* Wed Nov 28 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 2.0.4-2
+- Added dep: nodejs-socket.io-client
+
 * Thu Nov 9 2017 Jess Portnoy <jess.portnoy@kaltura.com> - 1.22.1-1
 - Fixed init scripts
 - Added logrotate config
