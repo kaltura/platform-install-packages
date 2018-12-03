@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 14.9.0
-Release: 13
+Release: 14
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -341,41 +341,30 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Sun Dec 2 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.9.0-13
-- Nightly build.
-
-* Sat Dec 1 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.9.0-12
-- Nightly build.
-
-* Fri Nov 30 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.9.0-11
-- Nightly build.
-
-* Thu Nov 29 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.9.0-10
-- Nightly build.
-
-* Wed Nov 28 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.9.0-9
-- Nightly build.
-
-* Tue Nov 27 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.9.0-8
-- Nightly build.
-
-* Mon Nov 26 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.9.0-7
-- Nightly build.
-
-* Sun Nov 25 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.9.0-6
-- Nightly build.
-
-* Sat Nov 24 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.9.0-5
-- Nightly build.
-
-* Fri Nov 23 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.9.0-4
-- Nightly build.
-
-* Thu Nov 22 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.9.0-3
-- Nightly build.
-
-* Wed Nov 21 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.9.0-2
-- Nightly build.
+* Mon Dec 3 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.9.0-14
+- crypto wrapper/openssl support additional methods (https://github.com/kaltura/server/pull/7885)
+- PLAT-9399: CamelCase categoryEntry.updateStatusFromBulk action alias (https://github.com/kaltura/server/pull/7882)
+- PLAT-9410: KalturaConversionProfile.php - Prevent type mismatch during validateForUpdate() (https://github.com/kaltura/server/pull/7881)
+- playManifest - support captions in media playlist (https://github.com/kaltura/server/pull/7880)
+- SUP-15844: KAsyncConvert.class.php - retry move operation in the event of failure (https://github.com/kaltura/server/pull/7878)
+- playManifest - add track selection support (https://github.com/kaltura/server/pull/7875)
+- PLAT-9467: kUploadTokenMgr.php - verify that the source file exists (https://github.com/kaltura/server/pull/7871)
+- TR-2167: Allow MRSS's + Drop Folder + Bulk XML conversion profiles to use the 'CategoryID' as reference (https://github.com/kaltura/server/pull/7865)
+- PLAT-9460: Chunked Encoding - support EaR sources (https://github.com/kaltura/server/pull/7863)
+- Fix missing search ACL and change default dropfolder configuration (https://github.com/kaltura/server/pull/7862)
+- SUP-15957: Handle source flavor fileExt on clipping and trimming (https://github.com/kaltura/server/pull/7861)
+- Analytics: add properties mapping for filter objects (https://github.com/kaltura/server/pull/7860)
+- PLAT-9303: Enable event notification templates for all partners (https://github.com/kaltura/server/pull/7859)
+- Fix PHP Warnings (https://github.com/kaltura/server/pull/7857)
+- PLAT-9429: EaR - content shorter than 10s is not encrypted (https://github.com/kaltura/server/pull/7855)
+- PLAT-9406: eSearch - add entitled_kusers_view to entry index (https://github.com/kaltura/server/pull/7848)
+- PLAT-9381: build thumb url for playlists (https://github.com/kaltura/server/pull/7847)
+- PLAT-9441: validate the entry exist before embarking on clipping flow (https://github.com/kaltura/server/pull/7846)
+- PLAT-9440: Conversion - Handle cases where source flavor was deleted (https://github.com/kaltura/server/pull/7845)
+- PSVAMB-5293: Email notifications - support PHP 5.3 (https://github.com/kaltura/server/pull/7842)
+- SUP-15957 - Fix missing fileExt on source flavor asset after clipping (https://github.com/kaltura/server/pull/7838)
+- PLAT-9410: Prevent the addition of conversion profiles in the event their type and the type of the flavor params assigned to them do not match (https://github.com/kaltura/server/pull/7829)
+- PLAT-9399: allow bulk activate/reject for category entries (https://github.com/kaltura/server/pull/7824)
 
 * Wed Nov 21 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.9.0-1
 - Ver Bounce to 14.9.0
