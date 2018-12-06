@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 14.10.0
-Release: 2
+Release: 3
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -65,10 +65,10 @@ unzip -q -o %{SOURCE34}
 
 %install
 mkdir -p $RPM_BUILD_ROOT%{prefix}/app
-mkdir -p $RPM_BUILD_ROOT%{prefix}/log
+mkdir -p $RPM_BUILD_ROOT%{logdir}
 mkdir -p $RPM_BUILD_ROOT%{prefix}/var/run
 mkdir -p $RPM_BUILD_ROOT%{prefix}/tmp
-mkdir -p $RPM_BUILD_ROOT%{prefix}/web
+mkdir -p $RPM_BUILD_ROOT%{webdir}
 mv clients-generator-%{codename}-%{version} $RPM_BUILD_ROOT%{prefix}/clients-generator 
 for i in alpha api_v3 batch generator infra scripts sphinx testme thumb deploy testmeDoc html5;do
 	mkdir -p $RPM_BUILD_ROOT%{prefix}/app/cache/$i
@@ -82,20 +82,20 @@ mkdir -p $RPM_BUILD_ROOT%{prefix}/share
 mkdir -p $RPM_BUILD_ROOT%{prefix}/tmp/convert
 mkdir -p $RPM_BUILD_ROOT%{prefix}/tmp/thumb/
 
-mkdir -p $RPM_BUILD_ROOT%{prefix}/web/tmp
-mkdir -p $RPM_BUILD_ROOT%{prefix}/web/tmp/imports
-mkdir -p $RPM_BUILD_ROOT%{prefix}/web/tmp/convert
-mkdir -p $RPM_BUILD_ROOT%{prefix}/web/tmp/thumb
-mkdir -p $RPM_BUILD_ROOT%{prefix}/web/tmp/xml
-mkdir -p $RPM_BUILD_ROOT%{prefix}/web/dropfolders/monitor
-mkdir -p $RPM_BUILD_ROOT%{prefix}/web/control
-mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content/cacheswf
-mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content/uploads
-mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content/entry
-mkdir -p $RPM_BUILD_ROOT%{prefix}/web/tmp/dropFolderFiles
+mkdir -p $RPM_BUILD_ROOT%{webdir}/tmp
+mkdir -p $RPM_BUILD_ROOT%{webdir}/tmp/imports
+mkdir -p $RPM_BUILD_ROOT%{webdir}/tmp/convert
+mkdir -p $RPM_BUILD_ROOT%{webdir}/tmp/thumb
+mkdir -p $RPM_BUILD_ROOT%{webdir}/tmp/xml
+mkdir -p $RPM_BUILD_ROOT%{webdir}/dropfolders/monitor
+mkdir -p $RPM_BUILD_ROOT%{webdir}/control
+mkdir -p $RPM_BUILD_ROOT%{webdir}/content/cacheswf
+mkdir -p $RPM_BUILD_ROOT%{webdir}/content/uploads
+mkdir -p $RPM_BUILD_ROOT%{webdir}/content/entry
+mkdir -p $RPM_BUILD_ROOT%{webdir}/tmp/dropFolderFiles
 mkdir -p $RPM_BUILD_ROOT%{prefix}web/content//metadata
-mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content/batchfiles
-mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content/templates
+mkdir -p $RPM_BUILD_ROOT%{webdir}/content/batchfiles
+mkdir -p $RPM_BUILD_ROOT%{webdir}/content/templates
 
 
 
@@ -112,39 +112,39 @@ done
 find  $RPM_BUILD_ROOT%{prefix}/app -name "*.sh" -type f -exec chmod +x {} \;
 
 
-sed -i 's@^IsmIndex@;IsmIndex@g' $RPM_BUILD_ROOT%{prefix}/app/configurations/plugins.template.ini
-sed -i "s#^;kmc_version = @KMC_VERSION@#kmc_version = %{_kmc_version}#g" $RPM_BUILD_ROOT%{prefix}/app/configurations/local.template.ini
-sed -i 's#@KMCNG_VERSION@#%{_kmcng_version}#' $RPM_BUILD_ROOT%{prefix}/app/configurations/local.template.ini
-sed -i 's@^otp_required_partners\[\]@;otp_required_partners\[\]@g' $RPM_BUILD_ROOT%{prefix}/app/configurations/local.template.ini
-sed -i "s@^partner_otp_internal_ips@;partner_otp_internal_ips@g" $RPM_BUILD_ROOT%{prefix}/app/configurations/local.template.ini
-sed -i "s#^;html5_version = @HTML5LIB_VERSION@#html5_version = %{html5_version}#g" $RPM_BUILD_ROOT%{prefix}/app/configurations/local.template.ini
+sed -i 's@^IsmIndex@;IsmIndex@g' $RPM_BUILD_ROOT%{confdir}/plugins.template.ini
+sed -i "s#^;kmc_version = @KMC_VERSION@#kmc_version = %{_kmc_version}#g" $RPM_BUILD_ROOT%{confdir}/local.template.ini
+sed -i 's#@KMCNG_VERSION@#%{_kmcng_version}#' $RPM_BUILD_ROOT%{confdir}/local.template.ini
+sed -i 's@^otp_required_partners\[\]@;otp_required_partners\[\]@g' $RPM_BUILD_ROOT%{confdir}/local.template.ini
+sed -i "s@^partner_otp_internal_ips@;partner_otp_internal_ips@g" $RPM_BUILD_ROOT%{confdir}/local.template.ini
+sed -i "s#^;html5_version = @HTML5LIB_VERSION@#html5_version = %{html5_version}#g" $RPM_BUILD_ROOT%{confdir}/local.template.ini
 sed -i 's#<html5Url>/html5/html5lib/v.*/mwEmbedLoader.php</html5Url>#<html5Url>/html5/html5lib/%{html5_version}/mwEmbedLoader.php</html5Url>#g' $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_content/01.uiConf.99.template.xml
-sed -i "s#^;kmc_login_version = @KMC_LOGIN_VERSION@#kmc_login_version = %{kmc_login_version}#g" $RPM_BUILD_ROOT%{prefix}/app/configurations/local.template.ini
-sed -i "s@clipapp_version = @CLIPPAPP_VERSION@#clipapp_version = %{clipapp_version}#g" $RPM_BUILD_ROOT%{prefix}/app/configurations/local.template.ini
-sed -i "s#^clipapp_version =.*#clipapp_version = %{clipapp_version}#g" $RPM_BUILD_ROOT%{prefix}/app/configurations/base.ini
-sed -i "s#^;kdp3_wrapper_version = @KDP3_WRAPPER_VERSION@#kdp3_wrapper_version = %{kdp3_wrapper_version}#g" $RPM_BUILD_ROOT%{prefix}/app/configurations/local.template.ini
-sed -i 's@^writers.\(.*\).filters.priority.priority\s*=\s*7@writers.\1.filters.priority.priority=4@g' $RPM_BUILD_ROOT%{prefix}/app/configurations/logger.template.ini 
+sed -i "s#^;kmc_login_version = @KMC_LOGIN_VERSION@#kmc_login_version = %{kmc_login_version}#g" $RPM_BUILD_ROOT%{confdir}/local.template.ini
+sed -i "s@clipapp_version = @CLIPPAPP_VERSION@#clipapp_version = %{clipapp_version}#g" $RPM_BUILD_ROOT%{confdir}/local.template.ini
+sed -i "s#^clipapp_version =.*#clipapp_version = %{clipapp_version}#g" $RPM_BUILD_ROOT%{confdir}/base.ini
+sed -i "s#^;kdp3_wrapper_version = @KDP3_WRAPPER_VERSION@#kdp3_wrapper_version = %{kdp3_wrapper_version}#g" $RPM_BUILD_ROOT%{confdir}/local.template.ini
+sed -i 's@^writers.\(.*\).filters.priority.priority\s*=\s*7@writers.\1.filters.priority.priority=4@g' $RPM_BUILD_ROOT%{confdir}/logger.template.ini 
 # our Pentaho is correctly installed under its own dir and not %prefix/bin which is the known default so, adding -k path to kitchen.sh
-sed -i 's#\(@DWH_DIR@\)$#\1 -k %{prefix}/pentaho/pdi/kitchen.sh#g' $RPM_BUILD_ROOT%{prefix}/app/configurations/cron/dwh.template
+sed -i 's#\(@DWH_DIR@\)$#\1 -k %{prefix}/pentaho/pdi/kitchen.sh#g' $RPM_BUILD_ROOT%{confdir}/cron/dwh.template
 rm $RPM_BUILD_ROOT%{prefix}/clients-generator/sources/android/DemoApplication/libs/libWVphoneAPI.so
 #rm $RPM_BUILD_ROOT%{prefix}/clients-generator/sources/android2/DemoApplication/libs/libWVphoneAPI.so
-rm $RPM_BUILD_ROOT%{prefix}/app/configurations/.project
+rm $RPM_BUILD_ROOT%{confdir}/.project
 # we have our own that is provided with the kaltura-monit package
-rm $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.template.conf
+rm $RPM_BUILD_ROOT%{confdir}/monit/monit.template.conf
 rm $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_content/04.dropFolder.-4.template.xml
 
 # we bring our own for kaltura-front and kaltura-batch.
 cp %{SOURCE4} $RPM_BUILD_ROOT%{prefix}/app/batch/batches/Mailer/emails_en.template.ini
 cp %{SOURCE11} $RPM_BUILD_ROOT%{prefix}/app/alpha/crond/kaltura/clear_cache.sh
-mkdir -p $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail
-cp %{SOURCE13} $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/
-cp %{SOURCE20} $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/
-cp %{SOURCE14} $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/
-cp %{SOURCE15} $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/
-cp %{SOURCE16} $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.avail/
-rm $RPM_BUILD_ROOT%{prefix}/app/configurations/monit/monit.d/*template*
-cp %{SOURCE25} $RPM_BUILD_ROOT%{prefix}/app/configurations/logrotate/
-cp %{SOURCE26} $RPM_BUILD_ROOT%{prefix}/app/configurations/logrotate/
+mkdir -p $RPM_BUILD_ROOT%{confdir}/monit/monit.avail
+cp %{SOURCE13} $RPM_BUILD_ROOT%{confdir}/monit/monit.avail/
+cp %{SOURCE20} $RPM_BUILD_ROOT%{confdir}/monit/monit.avail/
+cp %{SOURCE14} $RPM_BUILD_ROOT%{confdir}/monit/monit.avail/
+cp %{SOURCE15} $RPM_BUILD_ROOT%{confdir}/monit/monit.avail/
+cp %{SOURCE16} $RPM_BUILD_ROOT%{confdir}/monit/monit.avail/
+rm $RPM_BUILD_ROOT%{confdir}/monit/monit.d/*template*
+cp %{SOURCE25} $RPM_BUILD_ROOT%{confdir}/logrotate/
+cp %{SOURCE26} $RPM_BUILD_ROOT%{confdir}/logrotate/
 
 
 # David Bezemer's Admin console and monit patches:
@@ -152,7 +152,7 @@ cp %{SOURCE17} $RPM_BUILD_ROOT%{prefix}/app/admin_console/configs/navigation.xml
 cp %{SOURCE18} $RPM_BUILD_ROOT%{prefix}/app/admin_console/views/scripts/index/monit.phtml
 cp %{SOURCE19} $RPM_BUILD_ROOT%{prefix}/app/admin_console/controllers/IndexController.php
 # we bring a1nother in kaltura-batch
-rm $RPM_BUILD_ROOT%{prefix}/app/configurations/batch/batch.ini.template
+rm $RPM_BUILD_ROOT%{confdir}/batch/batch.ini.template
 cp %{SOURCE32} $RPM_BUILD_ROOT%{prefix}/app/infra/cdl/kdl/KDLOperatorFfmpeg1_1_1.php
 
 # tmp patch for the new start page, to be removed once merged into the server repo
@@ -163,15 +163,15 @@ cp %{SOURCE38} $RPM_BUILD_ROOT%{prefix}/app/start/css/landing-page.css
 # tmp patch to avoid senseless redirect to HTTPs in kmcng
 cp %{SOURCE39} $RPM_BUILD_ROOT%{prefix}/app/alpha/apps/kaltura/modules/kmcng/actions/kmcngAction.class.php
 cp %{SOURCE40} $RPM_BUILD_ROOT%{prefix}/app/deployment/base/sql/01.kaltura_ce_tables.sql
-mkdir -p $RPM_BUILD_ROOT%{prefix}/web/content
-tar zxf %{SOURCE10} -C $RPM_BUILD_ROOT%{prefix}/web/content
+mkdir -p $RPM_BUILD_ROOT%{webdir}/content
+tar zxf %{SOURCE10} -C $RPM_BUILD_ROOT%{webdir}/content
 
 %{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
 cat > $RPM_BUILD_ROOT%{_sysconfdir}/profile.d/kaltura_base.sh << EOF
 PATH=\$PATH:%{prefix}/bin
 export PATH
-alias allkaltlog='grep --color "ERR:\|PHP \|Stack trace:\|CRIT\|\[error\]" %{prefix}/log/*.log %{prefix}/log/batch/*.log'
-alias kaltlog='tail -f %{prefix}/log/*.log %{prefix}/log/batch/*.log | grep -A 1 -B 1 --color "ERR:\|PHP \|Stack trace:\|CRIT\|\[error\]"'
+alias allkaltlog='grep --color "ERR:\|PHP \|Stack trace:\|CRIT\|\[error\]" %{logdir}/*.log %{logdir}/batch/*.log'
+alias kaltlog='tail -f %{logdir}/*.log %{logdir}/batch/*.log | grep -A 1 -B 1 --color "ERR:\|PHP \|Stack trace:\|CRIT\|\[error\]"'
 if [ -r /etc/kaltura.d/system.ini ];then
 	. /etc/kaltura.d/system.ini
 fi
@@ -221,30 +221,30 @@ usermod -g %{kaltura_group} %{kaltura_user} 2>/dev/null || true
 
 %post
 
-ln -sf %{prefix}/app/configurations/system.ini /etc/kaltura.d/system.ini
+ln -sf %{confdir}/system.ini /etc/kaltura.d/system.ini
 ln -sf %{prefix}/app/api_v3/web %{prefix}/app/alpha/web/api_v3
-chown apache.kaltura %{prefix}/web/content/entry %{prefix}/web/content/uploads/  %{prefix}/web/tmp/
-chmod 775 %{prefix}/web/content/entry %{prefix}/web/content/uploads  %{prefix}/web/tmp
+chown apache.kaltura %{webdir}/content/entry %{webdir}/content/uploads/  %{webdir}/tmp/
+chmod 775 %{webdir}/content/entry %{webdir}/content/uploads  %{webdir}/tmp
 service ntpd start
 if [ "$1" = 2 ];then
-	if [ -r "%{prefix}/app/configurations/local.ini" -a -r "%{prefix}/app/configurations/base.ini" ];then
-		sed -i "s@^\(kaltura_version\).*@\1 = %{version}@g" %{prefix}/app/configurations/local.ini
+	if [ -r "%{confdir}/local.ini" -a -r "%{confdir}/base.ini" ];then
+		sed -i "s@^\(kaltura_version\).*@\1 = %{version}@g" %{confdir}/local.ini
 		echo "Regenarating client libs.. this will take up to 2 minutes to complete."
 		if service httpd status;then
 			service httpd stop
 		fi
 		# this is read by kaltura-sphinx-schema-update.sh to determine rather or not to run
-		touch %{prefix}/app/configurations/sphinx_schema_update
+		touch %{confdir}/sphinx_schema_update
 		find %{prefix}/app/cache/ -type f -exec rm {} \;
 		rm -f %{prefix}/app/base-config-generator.lock
 		php %{prefix}/app/generator/generate.php
 		php %{prefix}/app/deployment/base/scripts/installPlugins.php
 		php %{prefix}/app/deployment/base/scripts/populateSphinxMetadata.php
-		find %{prefix}/app/cache/ %{prefix}/log %{prefix}/var/run -type d -exec chmod 775 {} \;
-		find %{prefix}/log -type f -exec chmod 664 {} \;
+		find %{prefix}/app/cache/ %{logdir} %{prefix}/var/run -type d -exec chmod 775 {} \;
+		find %{logdir} -type f -exec chmod 664 {} \;
 		# || true because it may fail if root_squash is used
-		chown -R %{kaltura_user}.%{apache_user} %{prefix}/app/cache/ %{prefix}/log %{prefix}/var/run || true
-		chmod 775 %{prefix}/web/content || true
+		chown -R %{kaltura_user}.%{apache_user} %{prefix}/app/cache/ %{logdir} %{prefix}/var/run || true
+		chmod 775 %{webdir}/content || true
 
 		service kaltura-monit start
 		if rpm -q httpd >> /dev/null;then
@@ -313,7 +313,7 @@ fi
 %{prefix}/app/cache
 %{prefix}/clients-generator
 
-%config %{prefix}/app/configurations/*
+%config %{confdir}/*
 %config %{prefix}/clients-generator/config/*
 %config %{_sysconfdir}/profile.d/kaltura_base.sh
 %config %{_sysconfdir}/ld.so.conf.d/kaltura_base.conf
@@ -321,17 +321,17 @@ fi
 
 %dir /etc/kaltura.d
 %defattr(-, %{kaltura_user}, %{apache_group} , 0775)
-%dir %{prefix}/log
+%dir %{logdir}
 %dir %{prefix}/var/run
 %dir %{prefix}/tmp
 %dir %{prefix}/app/cache
-%{prefix}/web/*
+%{webdir}/*
 %defattr(-, %{kaltura_user}, %{kaltura_group} , 0755)
 %dir %{prefix}
-%dir %{prefix}/web/control
-%dir %{prefix}/web/dropfolders
+%dir %{webdir}/control
+%dir %{webdir}/dropfolders
 %defattr(-, root,root, 0755)
-%dir %{prefix}/app/configurations/monit/monit.d
+%dir %{confdir}/monit/monit.d
 %dir %{prefix}/bin
 %dir %{prefix}/lib
 %dir %{prefix}/include
