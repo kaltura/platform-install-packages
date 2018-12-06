@@ -341,6 +341,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Thu Dec 6 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.10.0-3
+- Nightly build.
+
 * Wed Dec 5 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.10.0-2
 - Nightly build.
 
