@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 14.10.0
-Release: 4
+Release: 5
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -341,6 +341,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Sat Dec 8 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.10.0-5
+- Nightly build.
+
 * Fri Dec 7 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.10.0-4
 - Nightly build.
 
