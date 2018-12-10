@@ -19,18 +19,25 @@
 
 
 # Source function library.
-. /etc/kaltura.d/system.ini
+SYSTEM_INI=/etc/kaltura.d/system.ini
+if [ -r $SYSTEM_INI ];then
+    . $SYSTEM_INI
+else
+    echo "Couldn't source $SYSTEM_INI. Exiting."
+    exit 2
+fi
 
 # Define variables
 BATCHDIR=$APP_DIR/batch
 BATCHEXE=KGenericBatchMgr.class.php
 CONFIG_FILE=$APP_DIR/configurations/batch
+NAME="Batch Manager"
 LOCKFILE="$BASE_DIR/var/run/batch.pid"
 GREEN='\e[1;32m'
 RED='\e[1;31m'
 NORMAL='\e[0m'
 
-if [ $# -ne 1 ]; then
+if [ -z "$1" ]; then
     echo "Usage: $0 [start|stop|force-stop|restart|status]"
     exit 1  
 fi
@@ -51,7 +58,7 @@ get_pids() {
 
 start() {
     if [ -r $BASE_DIR/maintenance ]; then
-        echo "Server is on maintenance mode - batchMgr will not start!"
+        echo "Server is on maintenance mode - $NAME will not start!"
         return 1
     fi
     
@@ -59,17 +66,17 @@ start() {
     if [ -r "$LOCKFILE" ]; then
         kill -0 $KP_PARENT > /dev/null
         if [ $? -eq 0 ]; then
-            echo_status "Service Batch Manager already running [$KP_PARENT]" 0
+            echo_status "Service $NAME already running [$KP_PARENT]" 0
             return 0
         else
-            echo "Service Batch Manager isn't running but stale lock file exists"
+            echo "Service $NAME isn't running but stale lock file exists"
             echo "Removing stale lock file $LOCKFILE"
             rm -f $LOCKFILE
             start_scheduler
             return $?
         fi
     elif [ -n "$KP" ]; then
-        echo "Batch Manager is running as $KP without $LOCKFILE"
+        echo "$NAME is running as $KP without $LOCKFILE"
         start_scheduler
         return $?
     else
@@ -79,7 +86,7 @@ start() {
 }
 
 start_scheduler() {
-    echo -n "Starting Batch Manager."
+    echo -n "Starting $NAME."
     cd $BATCHDIR
     echo -n "."
     su $OS_KALTURA_USER -c "nohup $PHP_BIN $BATCHEXE $PHP_BIN $CONFIG_FILE >> $LOG_DIR/kaltura_batch.log 2>&1 &"
@@ -88,11 +95,11 @@ start_scheduler() {
         echo ". "
         sleep 1
         get_pids
-        echo_status "Batch Manager started with PID $KP_PARENT" 0
+        echo_status "$NAME started with PID $KP_PARENT" 0
         return 0
     else
         echo ". "
-        echo_status "Failed to start Batch Manager" 1
+        echo_status "Failed to start $NAME" 1
         return 1
     fi
 }
@@ -100,31 +107,31 @@ start_scheduler() {
 show_status() {
     get_pids
     if [ -n "$KP" ]; then
-        echo_status "Batch Manager running with PID $KP_PARENT" 0
+        echo_status "$NAME running with PID $KP_PARENT" 0
         return 0
     else
-        echo_status "Service Batch Manager isn't running" 1
+        echo_status "Service $NAME isn't running" 1
         return 1
     fi
 }
 
 stop() {
-    echo "Stopping Batch Manager.... "
+    echo "Stopping $NAME.... "
     get_pids
     SIGNAL=$1
     if [ -n "$KP" ]; then
         if [ -r $BASE_DIR/keepAlive ]; then
             echo "Server is on Keep Alive mode - workers won't be killed!"
-            echo_status "Killing Batch Manager with PID $KP_PARENT" 0
+            echo_status "Killing $NAME with PID $KP_PARENT" 0
             kill -s $SIGNAL $KP_PARENT > /dev/null
         else
-            echo_status "Killing Batch Manager with PID $KP_PARENT and related workers" 0
+            echo_status "Killing $NAME with PID $KP_PARENT and related workers" 0
             kill -s $SIGNAL $KP > /dev/null
         fi
         rm -f $LOCKFILE
         RC=$?
     else
-        echo_status "Service Batch Manager not running" 1
+        echo_status "Service $NAME not running" 1
         RC=1
     fi
     return $RC

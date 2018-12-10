@@ -1,162 +1,107 @@
 #!/bin/bash
-. /etc/kaltura.d/system.ini
-
-echo `date`
 
 #
-# elasticPopulateMgr		This shell script takes care of starting and stopping a Kaltura Elasticsearch Populate Service
+# elasticPopulateMgr            This init script takes care of starting and stopping a Kaltura Elasticsearch Populate Service
 #
 # chkconfig: 2345 13 87
 # description: Kaltura Elasticsearch Populate
 
 ### BEGIN INIT INFO
 # Provides:          kaltura-elastic-populate
-# Required-Start:    $local_fs
-# Required-Stop:     $local_fs
+# Required-Start:    $local_fs $remote_fs $network
+# Required-Stop:     $local_fs $remote_fs $network
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
 # X-Interactive:     true
-# Short-Description: Start/stop Kaltura elastic  populate daemon
+# Short-Description: Control the Kaltura elastic populate daemon
 # Description:       Control the Kaltura elastic populate daemon
 ### END INIT INFO
 
+
 # Source function library.
-#. /etc/rc.d/init.d/functions
-
-# Directory containing the populate php files
-SCRIPTDIR=$APP_DIR/plugins/search/providers/elastic_search/scripts
-
-SCRIPTEXE=populateElasticFromLog.php
-
-if [ $# -ne 1 ]; then
-	echo "Usage: $0 [start|stop|restart|status|forcestart]"
-	exit 1
+SYSTEM_INI=/etc/kaltura.d/system.ini
+if [ -r $SYSTEM_INI ];then
+    . $SYSTEM_INI
+else
+    echo "Couldn't source $SYSTEM_INI. Exiting."
+    exit 2
 fi
 
-LOCKFILE="$LOG_DIR/populate_elastic.pid"
+if [ -z "$1" ]; then
+    echo "Usage: $0 [start|stop|force-stop|restart|status]"
+    exit 1  
+fi
 
-echo_success() {
-	[ "$BOOTUP" = "color" ] && $MOVE_TO_COL
-	echo -n "["
-	[ "$BOOTUP" = "color" ] && $SETCOLOR_SUCCESS
-	echo -n $"	OK	"
-	[ "$BOOTUP" = "color" ] && $SETCOLOR_NORMAL
-	echo -n "]"
-	echo -ne "\r"
-	return 0
+# Define variables
+ES_PLUGIN_BASEDIR=$APP_DIR/plugins/search/providers/elastic_search/scripts
+ES_PLUGIN_SCRIPT=populateElasticFromLog.php
+CONFIG_FILE=$APP_DIR/configurations/batch
+NAME="ElasticSearch-Populate"
+PIDFILE="$LOG_DIR/populate_elastic.pid"
+
+if [ -r /etc/init.d/functions ];then
+        . /etc/init.d/functions
+        STATUS_COMM="status -p $PIDFILE $NAME"
+elif [ -r /lib/lsb/init-functions ];then
+        . /lib/lsb/init-functions
+        STATUS_COMM="status_of_proc -p $PIDFILE $ES_PLUGIN_SCRIPT $NAME"
+else
+        STATUS_COMM="kill -0 `cat $PIDFILE 2> /dev/null`"
+fi
+
+
+
+start() 
+{
+        if [ -r $BASE_DIR/maintenance ]; then
+                echo "Server is on maintenance mode - $NAME will not start!"
+                return 1
+        fi
+        if ! $STATUS_COMM ;then
+                cd $ES_PLUGIN_BASEDIR
+                su $OS_KALTURA_USER -c "$PHP_BIN $ES_PLUGIN_SCRIPT 2>> $LOG_DIR/kaltura_elastic_populate.log 1>/dev/null &"
+                sleep 2
+                $STATUS_COMM
+        fi
 }
 
-echo_failure() {
-	[ "$BOOTUP" = "color" ] && $MOVE_TO_COL
-	echo -n "["
-	[ "$BOOTUP" = "color" ] && $SETCOLOR_FAILURE
-	echo -n $"FAILED"
-	[ "$BOOTUP" = "color" ] && $SETCOLOR_NORMAL
-	echo -n "]"
-	echo -ne "\r"
-	return 0
-}
 
 
-start() {
-	if [ -f $BASE_DIR/maintenance ] && [ "X$FORCESTART" == "X" ]; then
-		echo "Server is on maintenance mode - elasticPopulateMgr will not start!"
-		exit 1
-	fi
-
-	echo -n $"Starting:"
-	KP=$(pgrep -P 1 -f $SCRIPTEXE)
-	if ! kill -0 `cat $LOCKFILE 2>/dev/null` 2>/dev/null; then
-		echo_failure
-		echo
-		if [ "X$KP" != "X" ]; then
-			echo "Service elastic-populate already running"
-			return 0
-		else
-			echo "Service elastic-populate isn't running but stale lock file exists"
-			echo "Removing stale lock file at $LOCKFILE"
-			rm -f $LOCKFILE
-			start_scheduler
-			return 0
-		fi
-	else
-		if [ "X$KP" != "X" ]; then
-			echo "Elastic-populate is running as $KP without a $LOCKFILE"
-			exit 0
-		fi
-		start_scheduler
-		return 0
-	fi
-}
-
-start_scheduler() {
-	echo "$PHP_BIN $SCRIPTEXE >> $LOG_DIR/kaltura_elastic_populate.log 2>&1 &"
-	cd $SCRIPTDIR
-	su $OS_KALTURA_USER -c "$PHP_BIN $SCRIPTEXE 2>> $LOG_DIR/kaltura_elastic_populate.log 1>/dev/null &"
-	if [ "$?" -eq 0 ]; then
-		echo_success
-		echo
-	else
-		echo_failure
-		echo
-	fi
-}
-
-show_status() {
-	KP=$(pgrep -P 1 -f $SCRIPTEXE)
-	if [ "X$KP" != "X" ]; then
-	echo "Elastic-populate is running as $KP ..."
-	return 0
-	else
-		echo "Service elastic-populate isn't running"
-		return 3
-	fi
-}
-
-stop() {
-	echo -n $"Shutting down:"
-	KP=`pgrep -P 1 -f $SCRIPTEXE|xargs`
-	if [ -n "$KP" ]; then
-		# hack, returnds the PIDS as string and tells kill to kill all at once
-		for pid in "$KP"
-		do
-			kill -9 $pid
-		done
-		echo_success
-		echo
-		RC=0
-	else
-		echo_failure
-		echo
-		echo "Service elastic-populate not running"
-		RC=0
-	fi
-	rm -f $LOCKFILE
-	return $RC
+stop() 
+{
+        SIGNAL=$1
+        if $STATUS_COMM;then
+                MY_PID=`cat $PIDFILE 2>/dev/null`
+                kill -s $SIGNAL $MY_PID > /dev/null
+                sleep 2 
+                if $STATUS_COMM >/dev/null;then
+                        stop 9
+                fi
+        fi
+        echo "$NAME stopped."
+        rm -f $PIDFILE
 }
 
 case "$1" in
-	start)
-		start
-		;;
-	stop)
-		stop
-		;;
-	status)
-		show_status
-		;;
-	restart)
-		stop
-		start
-		;;
-	forcestart)
-		FORCESTART=1
-		echo "Running in force start mode!!!"
-		start
-		;;
-	*)
-		echo "Usage: [start|stop|restart|status|forcestart]"
-		exit 0
-		;;
+    start)
+        start
+        ;;
+    stop)
+        stop 15
+        ;;
+    force-stop)
+        stop 9
+        ;;
+    status)
+        $STATUS_COMM
+        ;;
+    restart)
+        stop 15
+        start
+        ;;
+    *)
+        echo "Usage: [start|stop|force-stop|restart|status]"
+        exit 1
+        ;;
 esac
-exit 0
+
