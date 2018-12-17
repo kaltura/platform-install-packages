@@ -1,3 +1,30 @@
+kaltura-base (14.10.0-2) naos; urgency=medium
+
+  * REACH2-483: Support defining specific flavor param ids for the vendor to fetch (https://github.com/kaltura/server/pull/7922)
+  * PLAT-9396: Beacon search fixing fields name for new schema (https://github.com/kaltura/server/pull/7920)
+  * PLAT-9396: Beacon searchScheduledResource mapping (https://github.com/kaltura/server/pull/7918)
+  * REACH: Clone profile and partner catalog items (https://github.com/kaltura/server/pull/7915)
+  * Support latest apache versions strict standards (https://github.com/kaltura/server/pull/7914)
+  * AN-192: add `avg_drop_off` metric to syndication report (https://github.com/kaltura/server/pull/7913)
+  * AN-182: add fields to report input filter (https://github.com/kaltura/server/pull/7912)
+  * Support several chunk schedulers per node (https://github.com/kaltura/server/pull/7910)
+  * PLAT-9384: Beacon search - rename classes (https://github.com/kaltura/server/pull/7909)
+  * PLAT-9505: Fix WebM metadata extraction (https://github.com/kaltura/server/pull/7908)
+  * Check for `tags` in copyCuePoints/Engine (https://github.com/kaltura/server/pull/7907)
+  * PLAT-9504: Handle serialization of data entry with invalid chars (https://github.com/kaltura/server/pull/7905)
+  * REACH: Clone profile and partner catalog items (https://github.com/kaltura/server/pull/7903)
+  * SUP-16392: Order delivery profiles based on user defined criteria (https://github.com/kaltura/server/pull/7899)
+  * PLAT-9384: Beacon search (https://github.com/kaltura/server/pull/7897)
+  * If destFile provided and we failed to open it return false (https://github.com/kaltura/server/pull/7895)
+  * SUP-16219: Copy startDate and endDate from template entry (https://github.com/kaltura/server/pull/7894)
+  * Report filter - add missing categories mapping (https://github.com/kaltura/server/pull/7893)
+  * Change combined metrics to match graph format (for totals) (https://github.com/kaltura/server/pull/7892)
+  * Handle case where `getRemoteDeliveryByStorageId()` returned null (https://github.com/kaltura/server/pull/7890)
+  * PHP7 (strict standards): Handle PHP Fatal error: Only variables can be passed by reference (https://github.com/kaltura/server/pull/7884)
+  * AN-155: add unique users metric to reports (https://github.com/kaltura/server/pull/7883)
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 17 Dec 2018 12:32:55 +0000
+
 kaltura-base (14.10.0-1) naos; urgency=medium
 
   * Switching to 14.10.0
