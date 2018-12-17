@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 14.10.0
-Release: 6
+Release: 8
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -341,20 +341,29 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Sun Dec 9 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.10.0-6
-- Nightly build.
-
-* Sat Dec 8 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.10.0-5
-- Nightly build.
-
-* Fri Dec 7 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.10.0-4
-- Nightly build.
-
-* Thu Dec 6 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.10.0-3
-- Nightly build.
-
-* Wed Dec 5 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.10.0-2
-- Nightly build.
+* Mon Dec 17 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.10.0-8
+- REACH2-483: Support defining specific flavor param ids for the vendor to fetch (https://github.com/kaltura/server/pull/7922)
+- PLAT-9396: Beacon search fixing fields name for new schema (https://github.com/kaltura/server/pull/7920)
+- PLAT-9396: Beacon searchScheduledResource mapping (https://github.com/kaltura/server/pull/7918)
+- REACH: Clone profile and partner catalog items (https://github.com/kaltura/server/pull/7915)
+- Support latest apache versions strict standards (https://github.com/kaltura/server/pull/7914)
+- AN-192: add `avg_drop_off` metric to syndication report (https://github.com/kaltura/server/pull/7913)
+- AN-182: add fields to report input filter (https://github.com/kaltura/server/pull/7912)
+- Support several chunk schedulers per node (https://github.com/kaltura/server/pull/7910)
+- PLAT-9384: Beacon search - rename classes (https://github.com/kaltura/server/pull/7909)
+- PLAT-9505: Fix WebM metadata extraction (https://github.com/kaltura/server/pull/7908)
+- Check for `tags` in copyCuePoints/Engine (https://github.com/kaltura/server/pull/7907)
+- PLAT-9504: Handle serialization of data entry with invalid chars (https://github.com/kaltura/server/pull/7905)
+- REACH: Clone profile and partner catalog items (https://github.com/kaltura/server/pull/7903)
+- SUP-16392: Order delivery profiles based on user defined criteria (https://github.com/kaltura/server/pull/7899)
+- PLAT-9384: Beacon search (https://github.com/kaltura/server/pull/7897)
+- If destFile provided and we failed to open it return false (https://github.com/kaltura/server/pull/7895)
+- SUP-16219: Copy startDate and endDate from template entry (https://github.com/kaltura/server/pull/7894)
+- Report filter - add missing categories mapping (https://github.com/kaltura/server/pull/7893)
+- Change combined metrics to match graph format (for totals) (https://github.com/kaltura/server/pull/7892)
+- Handle case where `getRemoteDeliveryByStorageId()` returned null (https://github.com/kaltura/server/pull/7890)
+- PHP7 (strict standards): Handle PHP Fatal error: Only variables can be passed by reference (https://github.com/kaltura/server/pull/7884)
+- AN-155: add unique users metric to reports (https://github.com/kaltura/server/pull/7883)
 
 * Wed Dec 5 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.10.0-1
 - Ver Bounce to 14.10.0

@@ -2,7 +2,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.72
+Version: v2.73.2
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -82,6 +82,47 @@ fi
 %config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Mon Dec 17 2018 jess.portnoy@kaltura.com <Jess Portnoy> - v2.73.2-1
+- FEC-8755 - Player V2 - all test pages loaded muted, even when autoplay and automute = false
+- Full screen is not working on chrome 71
+- SUP-16380 - remove user and creator ID
+- SUP-15794 - "Unmute" button with no autoplay IOS
+- FEC-8576 - [KAVA] - In mobile device, locking the phone does not cause a pause event (33)
+- SUP-15744 - Chromecast doesn't work for live entries 
+- SUP-13321 - QnA box behavior when exiting full screen
+- SUP-15195 - Missing Scroll Bar in Chapters
+- SUP-16282 - Captions Flashing at bottom left of player v 2.71
+- FEC-8577 - [KAVA] - After replaying a video, no event '99' is fired
+- FEC-8545 - iOS 11 & 12/Android 8.0 seeking the video before starting playback player stays in an endless spinning wheel state
+- PSVAMB-4560 - Chromecast icon not showing on iframe player
+- FEV-232 - analytics reporting should not go via ECDN
+- FEC-8656 - Add Missing Features to Kava Plugin (AKA KAnalony)
+- FEC-8659 - Reset session ID on every change media
+- FEC-8608 -[IMA][iOS12] Autoplay is not working with PlaysInline=false configuration
+- SUP-15880 - No autoplay in Chrome for video without sound and with interaction buttons disabled
+- FEC-8560 - Wrong flavor id sent in playlist player
+- Added the isNativeIOSPlayback function to the MediaWikiClient.
+- SUP-16380 - emails are exposed within mwEmbedFrame
+- SUP-15794 - "Unmute" button with no autoplay IOS
+- Indentation
+- Added the isNativeIOSPlayback function to the MediaWikiClient.
+- FEC-8576 - [Player_V2][KAVA] - In mobile device, locking the phone does not cause a pause event (33)
+- SUP-15744 - Chromecast doesn't work for live entries
+- SUP-13321 - QnA box behavior when exiting full screen
+- SUP-15195 - Missing Scroll Bar in Chapters
+- SUP-16282 - [TR] - Captions Flashing at bottom left of player v 2.71+
+- FEC-8577 - [Player_V2][KAVA] - After replaying a video, no event '99' is fired
+- FEC-8545 - V2 - iOS 11 & 12/Android 8.0 seeking the video before starting playback player stays in an endless spinning wheel state
+- remove legacy live analytics (#3936)
+- PSVAMB-4560 - fix chromecast embed in nested iframes
+- FEV-232 - analytics reporting should not go via ECDN
+- FEC-8656 - V2 - Add Missing Features to Kava Plugin (AKA KAnalony)
+- FEC-8659 - Reset session ID on every change media
+- FEC-8608 - [V2][IMA][iOS12] Autoplay is not working with PlaysInline=false configuration
+- SUP-15880 - No autoplay in Chrome for video without sound and with interaction buttons disabled
+- FEC-8560 - Wrong flavor id sent in playlist player
+
+
 * Mon Oct 29 2018 jess.portnoy@kaltura.com <Jess Portnoy> - v2.72-1
 - FEC-8566 - V2 - Playlist - Playlist flashing and control bar with video area moved slowly down
 - FEC-8540 - Performance - Replaying first second several times when starting video
