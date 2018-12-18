@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 14.10.0
-Release: 9
+Version: 14.11.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -338,6 +338,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Tue Dec 18 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.11.0-1
+- Ver Bounce to 14.11.0
+
 * Mon Dec 17 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.10.0-8
 - REACH2-483: Support defining specific flavor param ids for the vendor to fetch (https://github.com/kaltura/server/pull/7922)
 - PLAT-9396: Beacon search fixing fields name for new schema (https://github.com/kaltura/server/pull/7920)
