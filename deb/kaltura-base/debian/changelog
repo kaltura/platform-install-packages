@@ -1,3 +1,9 @@
+kaltura-base (14.11.0-1) naos; urgency=medium
+
+  * Switching to 14.11.0
+
+ -- Jess Portnoy <jess@b0f924504114>  Tue, 18 Dec 2018 16:42:52 +0000
+
 kaltura-base (14.10.0-2) naos; urgency=medium
 
   * REACH2-483: Support defining specific flavor param ids for the vendor to fetch (https://github.com/kaltura/server/pull/7922)
