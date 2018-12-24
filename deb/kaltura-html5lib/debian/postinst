@@ -6,4 +6,4 @@ if [ -n "$2" ];then
 		echo 'update ui_conf set html5_url = "/html5/html5lib/@@PACKAGE_VERSION@@/mwEmbedLoader.php" where html5_url like "%html5lib/v2.%/mwEmbedLoader.php"'|mysql -h$DB1_HOST -u $SUPER_USER -p$SUPER_USER_PASSWD -P$DB1_PORT $DB1_NAME
 	fi
 fi
-find /opt/kaltura/web/html5/html5lib -type d -name cache -exec chown www-data {} \;
+find /opt/kaltura/apps/html5/html5lib -type d -name cache -exec chown www-data {} \;
