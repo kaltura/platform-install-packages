@@ -1,9 +1,10 @@
 %define prefix /opt/kaltura
+%define html5lib_base %{prefix}/apps/html5/html5lib
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
 Version: v2.73.2
-Release: 1
+Release: 2
 Epoch: 0 
 License: AGPLv3+
 Group: Server/Platform 
@@ -51,13 +52,16 @@ tar zxf %{SOURCE9} -C %{_builddir}/
 tar zxf %{SOURCE10} -C %{_builddir}/
 
 %install
-mkdir -p $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib
+mkdir -p $RPM_BUILD_ROOT%{html5lib_base}
 for i in v2.14  v2.37  v2.37.1  v2.38.3  v2.42  v2.44  v2.45  v2.45.1 v2.46 %{version};do
 	rm -rf %{_builddir}/%{name}-$i/modules/Widevine
-	cp -r %{_builddir}/%{name}-$i $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i
-	cp %{SOURCE1} $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i/
-	ln -sf %{prefix}/app/configurations/html5.php $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i/LocalSettings.php 
-	mkdir $RPM_BUILD_ROOT%{prefix}/web/html5/html5lib/$i/cache
+	if [ -r %{_builddir}/%{name}-$i/modules/KalturaSupport/UiConfResult.php ];then
+		sed -i '/^\s*"kAnalony"=>array(),\s*$/d' %{_builddir}/%{name}-$i/modules/KalturaSupport/UiConfResult.php
+	fi
+	cp -r %{_builddir}/%{name}-$i $RPM_BUILD_ROOT%{html5lib_base}/$i
+	cp %{SOURCE1} $RPM_BUILD_ROOT%{html5lib_base}/$i/
+	ln -sf %{prefix}/app/configurations/html5.php $RPM_BUILD_ROOT%{html5lib_base}/$i/LocalSettings.php 
+	mkdir $RPM_BUILD_ROOT%{html5lib_base}/$i/cache
 done
 
 %clean
@@ -70,7 +74,7 @@ if [ "$1" = 2 ];then
 		echo 'update ui_conf set html5_url = "/html5/html5lib/%{version}/mwEmbedLoader.php" where html5_url like "%html5lib/v2.%mwEmbedLoader.php"'|mysql -h$DB1_HOST -u $SUPER_USER -p$SUPER_USER_PASSWD -P$DB1_PORT $DB1_NAME
 	fi
 else
-	find %{prefix}/web/html5/html5lib -type d -name cache -exec chown -R 48 {} \; 
+	find %{html5lib_base} -type d -name cache -exec chown -R 48 {} \; 
 fi
 
 %postun
@@ -78,10 +82,14 @@ fi
 %files
 %defattr(-, root, root, 0755)
 %doc COPYING README.markdown 
-%{prefix}/web/html5/html5lib
-%config %{prefix}/web/html5/html5lib/%{version}/LocalSettings.KalturaPlatform.php
+%{html5lib_base}
+%config %{html5lib_base}/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Mon Dec 24 2018 jess.portnoy@kaltura.com <Jess Portnoy> - v2.73.2-2
+- Deploy onto /opt/kaltura/apps rather than to NFS for better performance
+- Disable the kAnalony plugin
+
 * Mon Dec 17 2018 jess.portnoy@kaltura.com <Jess Portnoy> - v2.73.2-1
 - FEC-8755 - Player V2 - all test pages loaded muted, even when autoplay and automute = false
 - Full screen is not working on chrome 71

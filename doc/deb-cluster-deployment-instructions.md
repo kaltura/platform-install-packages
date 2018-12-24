@@ -294,7 +294,7 @@ Front in Kaltura represents the machines hosting the user-facing components, inc
 ```
 # apt-get install kaltura-postinst
 # /opt/kaltura/bin/kaltura-nfs-client-config.sh <NFS host> <domain> <nobody-user> <nobody-group>
-# apt-get install kaltura-front kaltura-html5-studio kaltura-clipapp
+# apt-get install kaltura-front kaltura-html5lib kaltura-html5-studio kaltura-kmcng kaltura-clipapp
 # /opt/kaltura/bin/kaltura-front-config.sh
 ```
 **NOTE: you can now configure the balancer to have the node in its pull.**

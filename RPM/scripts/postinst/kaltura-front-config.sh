@@ -280,7 +280,7 @@ fi
 find $BASE_DIR/app/cache/ $BASE_DIR/log -type d -exec chmod 775 {} \; 
 find $BASE_DIR/app/cache/ $BASE_DIR/log -type f -exec chmod 664 {} \; 
 chown -R kaltura.apache $BASE_DIR/app/cache/ $BASE_DIR/log
-find $BASE_DIR/web/html5/html5lib -type d -name cache -exec chown apache {} \;
+find $BASE_DIR/apps/html5/html5lib -type d -name cache -exec chown apache {} \;
 service httpd restart
 chkconfig httpd on
 chkconfig memcached on

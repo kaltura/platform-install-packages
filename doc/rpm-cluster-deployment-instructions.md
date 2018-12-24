@@ -255,7 +255,7 @@ Front in Kaltura represents the machines hosting the user-facing components, inc
 # rpm -Uhv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
 # yum install kaltura-postinst
 # /opt/kaltura/bin/kaltura-nfs-client-config.sh <NFS host> <domain> <nobody-user> <nobody-group>
-# yum install kaltura-front kaltura-html5-studio kaltura-clipapp
+# yum install kaltura-front kaltura-html5lib kaltura-html5-studio kaltura-kmcng kaltura-clipapp
 # /opt/kaltura/bin/kaltura-front-config.sh
 ```
 **NOTE: you can now configure the balancer to have the node in its pull.**

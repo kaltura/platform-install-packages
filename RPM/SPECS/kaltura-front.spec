@@ -6,14 +6,14 @@
 Summary: Kaltura Open Source Video Platform - frontend server 
 Name: kaltura-front
 Version: 14.11.0
-Release: 1
+Release: 2
 License: AGPLv3+
 Group: Server/Platform 
 Source3: zz-%{name}.ini 
 
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires: kaltura-mediainfo, httpd, php, curl, kaltura-base, kaltura-ffmpeg, ImageMagick, memcached, php-pecl-memcache, php-mysqli, php-pdo_mysql, php-pecl-apc, php-mcrypt, kaltura-segmenter, mod_ssl,kaltura-sshpass, openssl,memcached, kaltura-html5-studio, kaltura-kmcng
+Requires: kaltura-mediainfo, httpd, php, curl, kaltura-base, kaltura-ffmpeg, ImageMagick, memcached, php-pecl-memcache, php-mysqli, php-pdo_mysql, php-pecl-apc, php-mcrypt, kaltura-segmenter, mod_ssl,kaltura-sshpass, openssl,memcached, kaltura-html5-studio, kaltura-html5lib, kaltura-kmcng
 #php-pecl-zendopcache
 Requires(post): chkconfig
 Requires(preun): chkconfig
@@ -102,6 +102,9 @@ rm -rf %{buildroot}
 %config %{_sysconfdir}/php.d/zz-%{name}.ini
 
 %changelog
+* Mon Dec 24 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.11.0-2
+- html5lib is now deployed onto /opt/kaltura/apps rather than to NFS for better performance.
+
 * Tue Dec 18 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.11.0-1
 - Ver Bounce to 14.11.0
 
