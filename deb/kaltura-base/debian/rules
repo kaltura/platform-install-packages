@@ -88,7 +88,6 @@ binary-indep: install
 	sed -i 's@/etc/sysconfig/memcached@/etc/memcached.conf@g' $(tree)/configurations/monit/monit.d/memcached.template.rc
 	rm $(tree)/deployment/base/scripts/init_content/04.dropFolder.-4.template.xml
 	cp debian/batch.ini.template $(tree)/configurations/batch/batch.ini.template
-	cp debian/apps.conf.template $(tree)/configurations/apache/conf.d/apps.conf.template
 	cp debian/kaltura-base.sh etc/profile.d/
 	cp debian/KDLOperatorFfmpeg1_1_1.php $(tree)/infra/cdl/kdl/KDLOperatorFfmpeg1_1_1.php
 	cp debian/03.uiConf.ini $(tree)/deployment/base/scripts/init_data/03.uiConf.ini
