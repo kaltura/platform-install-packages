@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 14.11.0
-Release: 10
+Release: 11
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -37,7 +37,6 @@ Source36: start_page_survey.png
 Source37: start_page_newsletter.png
 Source38: start_page-landing-page.css
 Source39: kmcngAction.class.php
-Source40: apps.conf.template
 
 URL: https://github.com/kaltura/server/tree/%{codename}-%{version}
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -144,8 +143,6 @@ cp %{SOURCE16} $RPM_BUILD_ROOT%{confdir}/monit/monit.avail/
 rm $RPM_BUILD_ROOT%{confdir}/monit/monit.d/*template*
 cp %{SOURCE25} $RPM_BUILD_ROOT%{confdir}/logrotate/
 cp %{SOURCE26} $RPM_BUILD_ROOT%{confdir}/logrotate/
-# temp patch that should be removed when https://github.com/kaltura/server/pull/7957/files is merged
-cp %{SOURCE40} $RPM_BUILD_ROOT%{confdir}/apache/conf.d
 
 
 # David Bezemer's Admin console and monit patches:
