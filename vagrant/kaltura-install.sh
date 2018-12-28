@@ -11,7 +11,7 @@ if [ `getenforce` = 'Enforcing' ] ;then
 fi
 yum -y clean all
 rpm -ihv --force http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
-yum -y install mysql-server kaltura-server kaltura-red5 postfix
+yum -y install mysql-server kaltura-server postfix
 service mysqld start
 # this might fail if we already set the root password previously
 set +e
@@ -79,6 +79,3 @@ WWW_HOST=\"$KALTURA_DOMAIN\"
 IP_RANGE=\"0.0.0.0-255.255.255.255\"
 " > kaltura.ans
 /opt/kaltura/bin/kaltura-config-all.sh kaltura.ans
-unzip oflaDemo-r4472-java6.war -d/usr/lib/red5/webapps/oflaDemo
-service red5 restart
-/opt/kaltura/bin/kaltura-red5-config.sh
