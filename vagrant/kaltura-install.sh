@@ -9,6 +9,7 @@ chkconfig iptables off
 if [ `getenforce` = 'Enforcing' ] ;then
         setenforce permissive
 fi
+rpm -ihv https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
 yum -y clean all
 rpm -ihv --force http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
 yum -y install mysql-server kaltura-server kaltura-red5 postfix
