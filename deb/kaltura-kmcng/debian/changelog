@@ -1,3 +1,14 @@
+kaltura-kmcng (5.6.1-1) naos; urgency=medium
+
+  * content/entry: fix distribution delete message layout + support passing accept and reject button labels to confirm box (2d6303d)
+  * content/entry: support additional video formats when updating flavour or replacing video (ba5b7ee)
+  * live-analytics: fix cdn_host for secured protocol (5f8511b)
+  * Custom metadata - display field system name
+  * Add support for Sami languages when uploading captions to KMC
+  * content/entry: fix position of upload settings window on MS Edge when replacing video (e952515)
+
+ -- Jess Portnoy <jess@b0f924504114>  Fri, 28 Dec 2018 14:55:09 +0000
+
 kaltura-kmcng (5.5.2-1) naos; urgency=medium
 
   * content/entry: fix position of upload settings window on MS Edge when replacing video (e952515)
