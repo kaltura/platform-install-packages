@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 14.11.0
-Release: 16
+Release: 18
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -63,6 +63,7 @@ unzip -q -o %{SOURCE34}
 
 %install
 mkdir -p $RPM_BUILD_ROOT%{prefix}/app
+mkdir -p $RPM_BUILD_ROOT%{prefix}/apps/clientlibs
 mkdir -p $RPM_BUILD_ROOT%{logdir}
 mkdir -p $RPM_BUILD_ROOT%{prefix}/var/run
 mkdir -p $RPM_BUILD_ROOT%{prefix}/tmp
@@ -220,6 +221,7 @@ usermod -g %{kaltura_group} %{kaltura_user} 2>/dev/null || true
 
 ln -sf %{confdir}/system.ini /etc/kaltura.d/system.ini
 ln -sf %{prefix}/app/api_v3/web %{prefix}/app/alpha/web/api_v3
+ln -sf %{prefix}/apps/clientlibs %{prefix}/web/content
 chown apache.kaltura %{webdir}/content/entry %{webdir}/content/uploads/  %{webdir}/tmp/
 chmod 775 %{webdir}/content/entry %{webdir}/content/uploads  %{webdir}/tmp
 service ntpd start
@@ -338,6 +340,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Wed Jan 2 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.11.0-18
+- Nightly build.
+
 * Tue Jan 1 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.11.0-16
 - Nightly build.
 
