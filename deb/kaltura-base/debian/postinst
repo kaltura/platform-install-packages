@@ -16,6 +16,9 @@ KALTURA_USER=kaltura
 APACHE_USER=www-data
 KALTURA_VERSION="`dpkg-query -W -f'${Version}' kaltura-base|awk -F "+" '{print $1}'`"
 
+if [ -d $KALTURA_PREFIX/web/content/clientlibs ];then
+        mv $KALTURA_PREFIX/web/content/clientlibs $KALTURA_PREFIX/web/content/clientlibs.orig
+fi
 ln -sf $KALTURA_PREFIX/apps/clientlibs $KALTURA_PREFIX/web/content
 ln -sf $KALTURA_PREFIX/app/api_v3/web $KALTURA_PREFIX/app/alpha/web/api_v3
 chown $APACHE_USER.kaltura -R $KALTURA_PREFIX/web/content/entry $KALTURA_PREFIX/web/content/uploads/  $KALTURA_PREFIX/web/tmp/ $KALTURA_PREFIX/tmp
