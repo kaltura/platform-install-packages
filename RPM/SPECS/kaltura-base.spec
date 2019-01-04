@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 14.11.0
-Release: 20
+Release: 22
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -36,7 +36,6 @@ Source35: start_page.php
 Source36: start_page_survey.png
 Source37: start_page_newsletter.png
 Source38: start_page-landing-page.css
-Source39: kmcngAction.class.php
 
 URL: https://github.com/kaltura/server/tree/%{codename}-%{version}
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -159,8 +158,6 @@ cp %{SOURCE35} $RPM_BUILD_ROOT%{prefix}/app/start/index.php
 cp %{SOURCE36} $RPM_BUILD_ROOT%{prefix}/app/start/img/survey.png
 cp %{SOURCE37} $RPM_BUILD_ROOT%{prefix}/app/start/img/newsletter.png
 cp %{SOURCE38} $RPM_BUILD_ROOT%{prefix}/app/start/css/landing-page.css
-# tmp patch to avoid senseless redirect to HTTPs in kmcng
-cp %{SOURCE39} $RPM_BUILD_ROOT%{prefix}/app/alpha/apps/kaltura/modules/kmcng/actions/kmcngAction.class.php
 mkdir -p $RPM_BUILD_ROOT%{webdir}/content
 tar zxf %{SOURCE10} -C $RPM_BUILD_ROOT%{webdir}/content
 
@@ -221,6 +218,9 @@ usermod -g %{kaltura_group} %{kaltura_user} 2>/dev/null || true
 
 ln -sf %{confdir}/system.ini /etc/kaltura.d/system.ini
 ln -sf %{prefix}/app/api_v3/web %{prefix}/app/alpha/web/api_v3
+if [ -d %{prefix}/web/content/clientlibs ];then
+	mv %{prefix}/web/content/clientlibs %{prefix}/web/content/clientlibs.orig
+fi
 ln -sf %{prefix}/apps/clientlibs %{prefix}/web/content
 chown apache.kaltura %{webdir}/content/entry %{webdir}/content/uploads/  %{webdir}/tmp/
 chmod 775 %{webdir}/content/entry %{webdir}/content/uploads  %{webdir}/tmp
@@ -341,53 +341,28 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Thu Jan 3 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.11.0-20
-- Nightly build.
+* Fri Jan 4 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.11.0-22
+- SUP-16649: Quiz - exclude questions from report when answers are not included in the score (https://github.com/kaltura/server/pull/798
+- serveFlavor: set JSON_UNESCAPED_UNICODE when calling json_encode() (https://github.com/kaltura/server/pull/7982)
+- SUP-16649: Quiz - exclude questions from report when answers are not included in the score (https://github.com/kaltura/server/pull/797
+- PLAT-9543: Supply URL for entire webVtt download (https://github.com/kaltura/server/pull/7970)
+- PLAT-9543: add parsing entry_id with regex on thumbnailAction to reduce dumpiApi to other DC (https://github.com/kaltura/server/pull/7
+- PLAT-9447: thumbnail strips with stitched playlist (https://github.com/kaltura/server/pull/7965)
+- PLAT-9542: retrieve categories from db in one query (https://github.com/kaltura/server/pull/7961)
+- PLAT-9543: add captions info to playbackContext result (https://github.com/kaltura/server/pull/7960)
+- Apache config changes (https://github.com/kaltura/server/pull/7957)
+- KMCng analytics integration (https://github.com/kaltura/server/pull/7956)
+- Optimize file sync queries (https://github.com/kaltura/server/pull/7952)
+- Handle cases where getRequestParameter get name param with no value (https://github.com/kaltura/server/pull/7948)
+- Handle cases where config key is passed but has no value (https://github.com/kaltura/server/pull/7947)
+- SUP-16113: add broadcasting URLs when KS user in member of a kuserEdit entitled group (https://github.com/kaltura/server/pull/7940)
+- PLAT-9517: setting source when attaching a URL resource (https://github.com/kaltura/server/pull/7936)
+- Add missing reach_profile table (https://github.com/kaltura/server/pull/7934)
+- sup-16136: KalturaLiveEntryService::registerMediaServerAction() - avoid race condition (https://github.com/kaltura/server/pull/7929)
+- PLAT-9529: add IPs from custom HTTP header (https://github.com/kaltura/server/pull/7926)
+- PLAT-8192: use eSearch instead of Sphinx for caption search services (https://github.com/kaltura/server/pull/7917)
+- Fix documentation typos (https://github.com/kaltura/server/pull/7900)
 
-* Wed Jan 2 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.11.0-18
-- Nightly build.
-
-* Tue Jan 1 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.11.0-16
-- Nightly build.
-
-* Mon Dec 31 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.11.0-15
-- Nightly build.
-
-* Sun Dec 30 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.11.0-14
-- Nightly build.
-
-* Sat Dec 29 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.11.0-13
-- Nightly build.
-
-* Fri Dec 28 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.11.0-12
-- Nightly build.
-
-* Tue Dec 25 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.11.0-10
-- Nightly build.
-
-* Mon Dec 24 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.11.0-9
-- Nightly build.
-
-* Sun Dec 23 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.11.0-7
-- Nightly build.
-
-* Sat Dec 22 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.11.0-6
-- Nightly build.
-
-* Fri Dec 21 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.11.0-5
-- Nightly build.
-
-* Thu Dec 20 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.11.0-4
-- Nightly build.
-
-* Wed Dec 19 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.11.0-3
-- Nightly build.
-
-* Tue Dec 18 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.11.0-2
-- Nightly build.
-
-* Tue Dec 18 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.11.0-1
-- Ver Bounce to 14.11.0
 
 * Mon Dec 17 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.10.0-8
 - REACH2-483: Support defining specific flavor param ids for the vendor to fetch (https://github.com/kaltura/server/pull/7922)

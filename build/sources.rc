@@ -334,7 +334,7 @@ LIVE_ANALYTICS_SCHEMA_FILE="https://github.com/kaltura/live_analytics/raw/$LIVE_
 LIVE_ANALYTICS_PACKAGE_NAME="kaltura-live-analytics"
 
 # live analytics frontend
-LIVE_ANALYTICS_FRONT_END_VERSION=v2.6
+LIVE_ANALYTICS_FRONT_END_VERSION=v2.7.3
 LIVE_ANALYTICS_FRONT_END_URI="https://github.com/kaltura/live-analytics-front-end/releases/download/$LIVE_ANALYTICS_FRONT_END_VERSION/$LIVE_ANALYTICS_FRONT_END_VERSION.zip"
 LIVE_ANALYTICS_FRONT_END_PACKAGE_NAME="kaltura-live-analytics-front"
 

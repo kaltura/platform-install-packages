@@ -3,11 +3,12 @@
 
 Summary: Kaltura Live Analytics Front End
 Name: kaltura-live-analytics-front
-Version: v2.6
+Version: v2.7.3
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
-Source0: %{name}-%{version}.tar.bz2 
+#Source0: %{name}-%{version}.tar.bz2 
+Source0: %{name}-%{version}.zip 
 URL: https://github.com/kaltura/live-analytics-front-end/releases/download/%{version}/%{version}.zip 
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
