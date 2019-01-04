@@ -42,6 +42,7 @@ binary-indep: install
 	mkdir -p $(KALTURA_PREFIX)/var/run
 	mkdir -p $(KALTURA_PREFIX)/tmp
 	mkdir -p $(KALTURA_PREFIX)/web
+	mkdir -p $(KALTURA_PREFIX)/apps/clientlibs
 	mkdir -p $(KALTURA_PREFIX)/app/cache
 	mkdir -p $(KALTURA_PREFIX)/bin
 	mkdir -p $(KALTURA_PREFIX)/lib
