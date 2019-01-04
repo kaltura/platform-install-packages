@@ -1,15 +1,15 @@
 %define base_prefix /opt/kaltura
-%define app_prefix %{base_prefix}/apps/liveanalytics/
+%define app_prefix %{base_prefix}/apps/kmc-analytics/
 
-Summary: Kaltura Live Analytics Front End
-Name: kaltura-live-analytics-front
-Version: v2.7.3
+Summary: Kaltura KMCng Analytics Front End
+Name: kaltura-kmcng-analytics-front
+Version: v0.1
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 #Source0: %{name}-%{version}.tar.bz2 
-Source0: %{name}-%{version}.zip 
-URL: https://github.com/kaltura/live-analytics-front-end/releases/download/%{version}/%{version}.zip 
+Source0: https://github.com/kaltura/analytics-front-end/releases/download/%{version}/kmcAnalytics_%{version}.zip 
+URL: https://github.com/kaltura/analytics-front-end
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
 Requires: kaltura-base
@@ -41,15 +41,13 @@ cp -r %{_builddir}/%{version} $RPM_BUILD_ROOT%{app_prefix}/%{version}
 rm -rf %{buildroot}
 
 %post
-php %{base_prefix}/app/deployment/uiconf/deploy_v2.php --ini=%{app_prefix}/%{version}/deploy/config.ini
 
 %postun
 
 %files
 %defattr(-, root, root, 0755)
 %{app_prefix}/%{version}
-%config %{app_prefix}/%{version}/deploy/config.ini
 
 %changelog
-* Fri Dec 2 2016 Jess Portnoy <jess.portnoy@kaltura.com> - v2.6-1
+* Fri Dec 2 2016 Jess Portnoy <jess.portnoy@kaltura.com> - v0.1-1
 - First release

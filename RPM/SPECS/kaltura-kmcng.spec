@@ -1,7 +1,7 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmcng
 Version: v5.6.1
-Release: 1
+Release: 2
 Summary: Kaltura HTML5 Management Console
 
 Group: System Management	
@@ -11,7 +11,7 @@ Source0: %{name}-%{version}.tar.bz2
 BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 BuildArch: noarch
 
-Requires: kaltura-base, httpd, kaltura-html5-studio,php-cli	
+Requires: kaltura-base, httpd, kaltura-html5-studio,php-cli, kaltura-live-analytics-front, kaltura-kmcng-analytics-front	
 
 %description
 Kaltura is the world's first Open Source Online Video Platform, transforming the way people work, 
