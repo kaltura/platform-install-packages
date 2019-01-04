@@ -342,6 +342,9 @@ fi
 
 %changelog
 * Fri Jan 4 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.11.0-22
+- Nightly build.
+
+* Fri Jan 4 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.11.0-22
 - SUP-16649: Quiz - exclude questions from report when answers are not included in the score (https://github.com/kaltura/server/pull/798
 - serveFlavor: set JSON_UNESCAPED_UNICODE when calling json_encode() (https://github.com/kaltura/server/pull/7982)
 - SUP-16649: Quiz - exclude questions from report when answers are not included in the score (https://github.com/kaltura/server/pull/797
