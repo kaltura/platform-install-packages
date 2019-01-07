@@ -1,3 +1,28 @@
+kaltura-base (14.11.0-2) naos; urgency=medium
+
+  * SUP-16649: Quiz - exclude questions from report when answers are not included in the score (https://github.com/kaltura/server/pull/798
+  * serveFlavor: set JSON_UNESCAPED_UNICODE when calling json_encode() (https://github.com/kaltura/server/pull/7982)
+  * SUP-16649: Quiz - exclude questions from report when answers are not included in the score (https://github.com/kaltura/server/pull/797
+  * PLAT-9543: Supply URL for entire webVtt download (https://github.com/kaltura/server/pull/7970)
+  * PLAT-9543: add parsing entry_id with regex on thumbnailAction to reduce dumpiApi to other DC (https://github.com/kaltura/server/pull/7
+  * PLAT-9447: thumbnail strips with stitched playlist (https://github.com/kaltura/server/pull/7965)
+  * PLAT-9542: retrieve categories from db in one query (https://github.com/kaltura/server/pull/7961)
+  * PLAT-9543: add captions info to playbackContext result (https://github.com/kaltura/server/pull/7960)
+  * Apache config changes (https://github.com/kaltura/server/pull/7957)
+  * KMCng analytics integration (https://github.com/kaltura/server/pull/7956)
+  * Optimize file sync queries (https://github.com/kaltura/server/pull/7952)
+  * Handle cases where getRequestParameter get name param with no value (https://github.com/kaltura/server/pull/7948)
+  * Handle cases where config key is passed but has no value (https://github.com/kaltura/server/pull/7947)
+  * SUP-16113: add broadcasting URLs when KS user in member of a kuserEdit entitled group (https://github.com/kaltura/server/pull/7940)
+  * PLAT-9517: setting source when attaching a URL resource (https://github.com/kaltura/server/pull/7936)
+  * Add missing reach_profile table (https://github.com/kaltura/server/pull/7934)
+  * sup-16136: KalturaLiveEntryService::registerMediaServerAction() - avoid race condition (https://github.com/kaltura/server/pull/7929)
+  * PLAT-9529: add IPs from custom HTTP header (https://github.com/kaltura/server/pull/7926)
+  * PLAT-8192: use eSearch instead of Sphinx for caption search services (https://github.com/kaltura/server/pull/7917)
+  * Fix documentation typos (https://github.com/kaltura/server/pull/7900)
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 07 Jan 2019 18:03:18 +0000
+
 kaltura-base (14.11.0-1) naos; urgency=medium
 
   * Switching to 14.11.0
