@@ -5,8 +5,8 @@
 %define apache_group	apache
 Summary: Kaltura Open Source Video Platform - frontend server 
 Name: kaltura-front
-Version: 14.11.0
-Release: 2
+Version: 14.12.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source3: zz-%{name}.ini 
@@ -102,6 +102,9 @@ rm -rf %{buildroot}
 %config %{_sysconfdir}/php.d/zz-%{name}.ini
 
 %changelog
+* Sun Jan 13 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.12.0-1
+- Ver Bounce to 14.12.0
+
 * Mon Dec 24 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 14.11.0-2
 - html5lib is now deployed onto /opt/kaltura/apps rather than to NFS for better performance.
 

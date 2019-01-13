@@ -59,7 +59,7 @@ WOWZA_VER_DASHES=`echo $WOWZA_VER|sed 's/\./-/g'`
 
 echo -e "${CYAN}Welcome to Kaltura Live post install setup.${NORMAL}"
 trap 'my_trap_handler "${LINENO}" $?' ERR
-send_install_becon "`basename $0" "install_start" 0 
+send_install_becon "`basename $0`" "install_start" 0 
 RELEASE=`lsb_release -r -s|awk -F . '{print $1}'`
 if [ $RELEASE = 6 ];then
         yum install -y ant-trax
