@@ -1,8 +1,8 @@
 %define prefix /opt/kaltura 
 Summary: Kaltura Live Analytics
 Name: kaltura-live-analytics
-Version: v0.5.35
-Release: 7
+Version: v0.5.63.2
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 URL: http://kaltura.org

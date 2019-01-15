@@ -2,11 +2,11 @@
 %define kaltura_user kaltura
 Summary: Kaltura Open Source Video Platform - Analytics 
 Name: kaltura-dwh
-Version: 12.14.0
+Version: 14.12.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
-Source0: https://github.com/kaltura/dwh/archive/%{name}-Lynx-%{version}.zip
+Source0: https://github.com/kaltura/dwh/archive/%{name}-Naos-%{version}.zip
 URL: https://github.com/kaltura/dwh/tree/master 
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires: kaltura-base,kaltura-pentaho,jre, kaltura-postinst 
@@ -32,14 +32,14 @@ and developing a variety of online workflows for video.
 This package configures the Data Warehouse [DWH] analytics component. 
 
 %prep
-%setup -qn dwh-Lynx-%{version} 
+%setup -qn dwh-Naos-%{version} 
 
 %build
 
 %install
 # for Apache access logs.
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/logs
-cp -r %{_builddir}/dwh-Lynx-%{version} $RPM_BUILD_ROOT%{prefix}/dwh
+cp -r %{_builddir}/dwh-Naos-%{version} $RPM_BUILD_ROOT%{prefix}/dwh
 find  $RPM_BUILD_ROOT%{prefix}/dwh/ -name "*.sh" -type f -exec chmod +x {} \;
 
 %clean
@@ -73,6 +73,9 @@ fi
 
 
 %changelog
+* Tue Jan 15 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.12.0-1
+- New UserAgent.jar, used for browser detection.
+
 * Thu Jan 7 2016 Jess Portnoy <jess.portnoy@kaltura.com> - 11.3.0-1
 - Add Hercules to Iris/Jupiter migration
 - Add Nginx log parsing

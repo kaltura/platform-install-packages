@@ -296,7 +296,7 @@ HTML5LIB_BASE_URI="https://github.com/kaltura/mwEmbed/tarball/"
 HTML5LIB_RPM_NAME="kaltura-html5lib"
 
 # Kaltura DWH
-DWH_VERSION="Lynx-12.14.0"
+DWH_VERSION="Naos-14.12.0"
 DWH_URI="https://github.com/kaltura/dwh/archive/$DWH_VERSION.zip"
 DWH_RPM_NAME="kaltura-dwh"
 
@@ -326,7 +326,7 @@ WOWZA_VERSION="4.7.3"
 WOWZA_URI="https://www.wowza.com/downloads/WowzaStreamingEngine-`echo $WOWZA_VERSION|sed 's@\.@-@g'`/WowzaStreamingEngine-$WOWZA_VERSION-linux-x64-installer.run"
 
 # live analytics 
-LIVE_ANALYTICS_VERSION=v0.5.35
+LIVE_ANALYTICS_VERSION=v0.5.63.2
 LIVE_ANALYTICS_WAR_URI="https://github.com/kaltura/live_analytics/releases/download/$LIVE_ANALYTICS_VERSION/KalturaLiveAnalytics.war"
 LIVE_ANALYTICS_DRIVER_URI="https://github.com/kaltura/live_analytics/releases/download/$LIVE_ANALYTICS_VERSION/live-analytics-driver.jar"
 LIVE_ANALYTICS_REGISTER_FILE_URI="https://github.com/kaltura/live_analytics/releases/download/$LIVE_ANALYTICS_VERSION/register-file.jar"
