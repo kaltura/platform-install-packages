@@ -1,3 +1,9 @@
+kaltura-base (14.12.0-1) naos; urgency=medium
+
+  * Switching to 14.12.0
+
+ -- Jess Portnoy <jess@b0f924504114>  Sun, 13 Jan 2019 21:46:50 +0000
+
 kaltura-base (14.11.0-2) naos; urgency=medium
 
   * SUP-16649: Quiz - exclude questions from report when answers are not included in the score (https://github.com/kaltura/server/pull/798
