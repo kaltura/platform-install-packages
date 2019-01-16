@@ -40,7 +40,7 @@ Source38: start_page-landing-page.css
 URL: https://github.com/kaltura/server/tree/%{codename}-%{version}
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
-Requires: rsync,mysql,kaltura-monit,kaltura-postinst,cronie, php-cli, php-xml, php-curl, php-mysqli, php-pdo_mysql, php-gd, php-gmp, php-ldap, php-mbstring, php-process, ntp, mailx
+Requires: rsync,mysql,kaltura-monit,kaltura-postinst,cronie, php-cli, php-xml, php-curl, php-mysqli, php-pdo_mysql, php-gd, php-gmp, php-ldap, php-mbstring, php-process, chrony, mailx
 
 %description
 Kaltura is the world's first Open Source Online Video Platform, transforming the way people work, 
