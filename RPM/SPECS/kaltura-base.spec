@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 14.12.0
-Release: 4
+Release: 5
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -341,14 +341,23 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Wed Jan 16 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.12.0-4
-- Nightly build.
-
-* Tue Jan 15 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.12.0-3
-- Nightly build.
-
-* Mon Jan 14 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.12.0-2
-- Nightly build.
+* Thu Jan 17 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.12.0-5
+- SUP-16865-HF: FFM4 audio syntax changed (https://github.com/kaltura/server/pull/8022)
+- PLAT-9576: Disable cache when calling ConfMapsService::getAction() (https://github.com/kaltura/server/pull/8014)
+- PLAT-9575: Added support for `write_address_list` - List of addresses allowed to set Memcached data (https://github.com/kaltura/server/pull/8012)
+- PLAT-9546: Add BulkUpload Status HTTP Event Notification (https://github.com/kaltura/server/pull/8011)
+- PLAT-9567: Send `serverNodeIds=internal` when we get an IP from HTTP header but no KES is configured (https://github.com/kaltura/server/pull/8008)
+- Added `2019_01_10_add_media_addbulkupload_to_batch_partner.php` (https://github.com/kaltura/server/pull/8006)
+- Enable ConfMaps plugin (https://github.com/kaltura/server/pull/8005)
+- PLAT-9568: captionAssetItem->list() - use captionAssetItem->search() (https://github.com/kaltura/server/pull/8004)
+- Force access control validation when checking partner API access control (https://github.com/kaltura/server/pull/8003)
+- PLAT-9491: Server Configuration Maps management  (https://github.com/kaltura/server/pull/8000)
+- SUP-16550: Event notifications - allow setting HTTPS as the default protocol (https://github.com/kaltura/server/pull/7999)
+- KalturaJsonSerializer.php: handle invalid UTF8 character (https://github.com/kaltura/server/pull/7997)
+- PSVAMB-5604: Allow bulk updates through the regular XML on multiple entries retrieved according to a filter (https://github.com/kaltura/server/pull/7994)
+- Handle too short chunk files (https://github.com/kaltura/server/pull/7993)
+- PLAT-9545: Resizing all the frames in the stripe to the same dimensions (https://github.com/kaltura/server/pull/7981)
+- SUP-16700: Add version to thumbnail URL on MRSS (https://github.com/kaltura/server/pull/7980)
 
 * Sun Jan 13 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.12.0-1
 - Ver Bounce to 14.12.0
