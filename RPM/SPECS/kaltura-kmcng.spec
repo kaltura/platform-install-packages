@@ -1,7 +1,7 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmcng
-Version: v5.6.1
-Release: 2
+Version: v5.6.2
+Release: 1
 Summary: Kaltura HTML5 Management Console
 
 Group: System Management	
@@ -49,6 +49,11 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Thu Jan 17 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v5.6.2-1
+- Advertisements: Enable advertisements for entries without Source flavor (e9e29d0)
+- Analytics: Fix cdn_host parameter passed to Live-Analytics (c290579)
+- Syndication: Syndication feeds are not created for some playlists
+
 * Fri Dec 28 2018 jess.portnoy@kaltura.com <Jess Portnoy> - v5.6.1-1
 - content/entry: fix distribution delete message layout + support passing accept and reject button labels to confirm box (2d6303d)
 - content/entry: support additional video formats when updating flavour or replacing video (ba5b7ee)
