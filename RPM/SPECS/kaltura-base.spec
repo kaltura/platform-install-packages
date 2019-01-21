@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 14.12.0
-Release: 9
+Release: 10
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -341,17 +341,8 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Sun Jan 20 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.12.0-9
-- Nightly build.
-
-* Sat Jan 19 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.12.0-8
-- Nightly build.
-
-* Fri Jan 18 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.12.0-7
-- Nightly build.
-
-* Thu Jan 17 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.12.0-6
-- Nightly build.
+* Mon Jan 21 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.12.0-10
+- Fix Java client lib
 
 * Thu Jan 17 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.12.0-5
 - SUP-16865-HF: FFM4 audio syntax changed (https://github.com/kaltura/server/pull/8022)

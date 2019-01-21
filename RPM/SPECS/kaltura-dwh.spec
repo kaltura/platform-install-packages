@@ -3,7 +3,7 @@
 Summary: Kaltura Open Source Video Platform - Analytics 
 Name: kaltura-dwh
 Version: 14.12.0
-Release: 1
+Release: 2
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/dwh/archive/%{name}-Naos-%{version}.zip
