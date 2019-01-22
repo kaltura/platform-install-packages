@@ -41,7 +41,9 @@ cp -r %{_builddir}/%{version} $RPM_BUILD_ROOT%{app_prefix}/%{version}
 rm -rf %{buildroot}
 
 %post
-php %{base_prefix}/app/deployment/uiconf/deploy_v2.php --ini=%{app_prefix}/%{version}/deploy/config.ini
+if [ -r %{app_prefix}/configurations/local.ini ];then
+	php %{app_prefix}/deployment/uiconf/deploy_v2.php --ini=%{app_prefix}/%{version}/deploy/config.ini
+fi
 
 %postun
 
