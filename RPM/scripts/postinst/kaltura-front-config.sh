@@ -291,6 +291,7 @@ service kaltura-monit restart
 trap - ERR
 
 HTML5_STUDIO_VERSION=`rpm -q kaltura-html5-studio --queryformat %{version}`
+LIVE_ANALYTICS_FRONT_VERSION=`rpm -q kaltura-live-analytics-front --queryformat %{version}`
 HTML5LIB_VERSION=`yum info  kaltura-html5lib| grep Version|awk -F ":" '{print $NF}'|sed 's/\s*//g'|tail -1`
 sed -i "s@^\(html5_version\s*=\)\(.*\)@\1 $HTML5LIB_VERSION@g" -i $BASE_DIR/app/configurations/local.ini
 sed -i "s/@HTML5_VER@/$HTML5LIB_VERSION/g" -i $BASE_DIR/apps/studio/$HTML5_STUDIO_VERSION/studio.ini
@@ -299,6 +300,9 @@ sed -i "s/@HTML5_VER@/$HTML5LIB_VERSION/g" -i $BASE_DIR/apps/studio/$HTML5_STUDI
 		if [ -r $BASE_DIR/apps/studio/$HTML5_STUDIO_VERSION/studio.ini ];then
 			php $BASE_DIR/app/deployment/uiconf/deploy_v2.php --ini=$BASE_DIR/apps/studio/$HTML5_STUDIO_VERSION/studio.ini >> /dev/null
 			sed -i "s@^\(studio_version\s*=\)\(.*\)@\1 $HTML5_STUDIO_VERSION@g" -i $BASE_DIR/app/configurations/local.ini
+		fi
+		if [ -r $BASE_DIR/apps/liveanalytics/$LIVE_ANALYTICS_FRONT_VERSION/deploy/config.ini ];then
+			php $BASE_DIR/app/deployment/uiconf/deploy_v2.php --ini=$BASE_DIR/apps/liveanalytics/$LIVE_ANALYTICS_FRONT_VERSION/deploy/config.ini >> /dev/null
 		fi
 	# we can't use rpm -q kaltura-kmc because this node may not be the one where we installed the KMC RPM on, as it resides in the web dir and does not need to be installed on all front nodes.
 		php $BASE_DIR/app/deployment/uiconf/deploy_v2.php --ini=$KMC_PATH/config.ini >> /dev/null

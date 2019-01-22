@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 14.12.0
-Release: 10
+Release: 11
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -224,7 +224,7 @@ fi
 ln -sf %{prefix}/apps/clientlibs %{prefix}/web/content
 chown apache.kaltura %{webdir}/content/entry %{webdir}/content/uploads/  %{webdir}/tmp/
 chmod 775 %{webdir}/content/entry %{webdir}/content/uploads  %{webdir}/tmp
-service ntpd start
+service chronyd start
 if [ "$1" = 2 ];then
 	if [ -r "%{confdir}/local.ini" -a -r "%{confdir}/base.ini" ];then
 		sed -i "s@^\(kaltura_version\).*@\1 = %{version}@g" %{confdir}/local.ini

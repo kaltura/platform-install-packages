@@ -4,7 +4,7 @@
 Summary: Kaltura Live Analytics Front End
 Name: kaltura-live-analytics-front
 Version: v2.7.3
-Release: 1
+Release: 2
 License: AGPLv3+
 Group: Server/Platform 
 #Source0: %{name}-%{version}.tar.bz2 
@@ -41,7 +41,9 @@ cp -r %{_builddir}/%{version} $RPM_BUILD_ROOT%{app_prefix}/%{version}
 rm -rf %{buildroot}
 
 %post
-php %{base_prefix}/app/deployment/uiconf/deploy_v2.php --ini=%{app_prefix}/%{version}/deploy/config.ini
+if [ -r %{app_prefix}/configurations/local.ini ];then
+	php %{app_prefix}/deployment/uiconf/deploy_v2.php --ini=%{app_prefix}/%{version}/deploy/config.ini
+fi
 
 %postun
 
