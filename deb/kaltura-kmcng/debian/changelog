@@ -1,3 +1,11 @@
+kaltura-kmcng (5.6.2-1) naos; urgency=medium
+
+  * Advertisements: Enable advertisements for entries without Source flavor (e9e29d0)
+  * Analytics: Fix cdn_host parameter passed to Live-Analytics (c290579)
+  * Syndication: Syndication feeds are not created for some playlists
+
+ -- Jess Portnoy <jess@b0f924504114>  Tue, 22 Jan 2019 11:55:20 +0000
+
 kaltura-kmcng (5.6.1-1) naos; urgency=medium
 
   * content/entry: fix distribution delete message layout + support passing accept and reject button labels to confirm box (2d6303d)
