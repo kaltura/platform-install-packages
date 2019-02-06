@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 14.13.0
-Release: 14
+Release: 15
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -341,47 +341,34 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Sun Feb 3 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.13.0-14
-- Nightly build.
-
-* Sat Feb 2 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.13.0-13
-- Nightly build.
-
-* Fri Feb 1 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.13.0-12
-- Nightly build.
-
-* Thu Jan 31 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.13.0-11
-- Nightly build.
-
-* Wed Jan 30 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.13.0-10
-- Nightly build.
-
-* Tue Jan 29 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.13.0-9
-- Nightly build.
-
-* Mon Jan 28 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.13.0-8
-- Nightly build.
-
-* Sun Jan 27 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.13.0-7
-- Nightly build.
-
-* Sat Jan 26 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.13.0-6
-- Nightly build.
-
-* Fri Jan 25 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.13.0-5
-- Nightly build.
-
-* Thu Jan 24 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.13.0-4
-- Nightly build.
-
-* Wed Jan 23 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.13.0-3
-- Nightly build.
-
-* Tue Jan 22 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.13.0-1
-- Nightly build.
-
-* Mon Jan 21 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.13.0-1
-- Nightly build.
+* Mon Feb 4 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.13.0-15
+- playsviews: use entryType instead of KalturaEntryType (https://github.com/kaltura/server/pull/8074)
+- PLAT-9563: Do not index captionAssetItem in Sphinx (https://github.com/kaltura/server/pull/8073)
+- PLAT-9626: Make KalturaAssetFilter::getTypeListResponse look up captionAssetItem using eSearch instead of Sphinx (https://github.com/kaltura/server/pull/8070)
+- SUP-16884: On flavorMediaInfo update, append new tags rather than override (https://github.com/kaltura/server/pull/8069)
+- playsViews: Fix default value + add optimization to executePlaylist() (https://github.com/kaltura/server/pull/8068)
+- PLAT-9596: Conf Maps - add option to view list of all maps in combo box (https://github.com/kaltura/server/pull/8064)
+- PLAT-9602: Extract thumbnail stripe from a segment of a video and not the entire video (https://github.com/kaltura/server/pull/8063)
+- PLAT-9622: KalturaConfMaps - Custom validateForInsert() (https://github.com/kaltura/server/pull/8060)
+- PLAT-9622: KalturaConfMaps - Custom validateForInsert() (https://github.com/kaltura/server/pull/8059)
+- Chunked encoding: Support fetching source from remote URLs (https://github.com/kaltura/server/pull/8058)
+- PLAT-9618: Add language code to playbackCaptions (https://github.com/kaltura/server/pull/8055)
+- Limit change account to partners which the MA logged in user belongs to (https://github.com/kaltura/server/pull/8053)
+- PLAT-9618: getLocalThumbFilePath() - added `start_sec` and `end_sec` args/params (https://github.com/kaltura/server/pull/8050)
+- SUP-16810: getPlaybackContext() caching (https://github.com/kaltura/server/pull/8048)
+- Service annotations (https://github.com/kaltura/server/pull/8047)
+- PLAT-9608: Support feedback on `answer` cue point (https://github.com/kaltura/server/pull/8045)
+- PLAT-9607: Support feedback on the `quiz` object (https://github.com/kaltura/server/pull/8044)
+- PLAT-9607: quiz - Support feedback (https://github.com/kaltura/server/pull/8041)
+- PLAT-9602: extract thumbnail stripe from segment of the video (https://github.com/kaltura/server/pull/8039)
+- PLAT-9614: listPartnersForUserAction() - only return partners for which the given user is set as admin (https://github.com/kaltura/server/pull/8036)
+- PLAT-9606: quiz question/answer - support free text (https://github.com/kaltura/server/pull/8035)
+- PLAT-9574: virus scan plugin - scan related assets as well (https://github.com/kaltura/server/pull/8033)
+- AN-217: New report type - source (https://github.com/kaltura/server/pull/8031)
+- PLAT-9601: Verify src asset fileSync exists on current dc before adding a conversion job (https://github.com/kaltura/server/pull/8027)
+- Retrieve plays and views from cache (https://github.com/kaltura/server/pull/8026)
+- PLAT-9539: Asset dimensions are not set when account is set with encryption + Asset size is incorrectly set with encrypted file size when account is set with encryption (https://github.com/kaltura/server/pull/8001)
+- Fix typos in service documentation (https://github.com/kaltura/server/pull/7972)
 
 * Mon Jan 21 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.13.0-1
 - Ver Bounce to 14.13.0

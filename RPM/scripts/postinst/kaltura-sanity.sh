@@ -166,6 +166,12 @@ END=`date +%s.%N`
 report "check_kmc_index_page" $RC "$MSG" "`bc <<< $END-$START`"
 
 START=`date +%s.%N`
+MSG=`check_kmcng_index_page`
+RC=$?
+END=`date +%s.%N`
+report "check_kmcng_index_page" $RC "$MSG" "`bc <<< $END-$START`"
+
+START=`date +%s.%N`
 MSG=`check_admin_console_index_page`
 RC=$?
 END=`date +%s.%N`

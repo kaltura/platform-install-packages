@@ -1,6 +1,6 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmcng
-Version: v5.6.2
+Version: v5.6.3
 Release: 1
 Summary: Kaltura HTML5 Management Console
 
@@ -49,6 +49,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Feb 4 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v5.6.3-1
+- entry/distribution: fix errors mapping (7e4419f)
+
 * Thu Jan 17 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v5.6.2-1
 - Advertisements: Enable advertisements for entries without Source flavor (e9e29d0)
 - Analytics: Fix cdn_host parameter passed to Live-Analytics (c290579)

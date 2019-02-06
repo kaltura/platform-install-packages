@@ -493,7 +493,7 @@ check_testme_page()
 check_kmc_index_page()
 {
 	GOOD_STRING='Kaltura - Open Source Video Platform'
-	curl -ks "$SERVICE_URL/kmc"  | grep -q "$GOOD_STRING"
+	curl -ks -L "$SERVICE_URL/kmc"  | grep -q "$GOOD_STRING"
 	if [ $? -eq 0 ];then
 		echo "Successfully found '$GOOD_STRING'"
 		return 0
@@ -503,6 +503,18 @@ check_kmc_index_page()
 	fi
 }
 
+check_kmcng_index_page()
+{
+	GOOD_STRING='Kaltura Management Console'
+	curl -ks -L "$SERVICE_URL/kmcng"  | grep -q "$GOOD_STRING"
+	if [ $? -eq 0 ];then
+		echo "Successfully found '$GOOD_STRING'"
+		return 0
+	else
+		echo "Did not find '$GOOD_STRING' :("
+		return 1
+	fi
+}
 check_studio_index_page()
 {
 	GOOD_STRING='Universal Studio'

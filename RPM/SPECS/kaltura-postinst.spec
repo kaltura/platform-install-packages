@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.33
-Release: 54
+Release: 58
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -82,6 +82,12 @@ find %{_sysconfdir}/logrotate.d -type l -name "kaltura_*" -exec rm {} \;
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Wed Feb 6 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.33-58
+- Added a check for KMCng accessibility 
+
+* Tue Jan 22 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.33-55
+- Invoke deploy_v2.php for kaltura-live-analytics-front
+
 * Mon Dec 24 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.33-53
 - html5lib is now deployed onto /opt/kaltura/apps rather than to NFS for better performance.
 

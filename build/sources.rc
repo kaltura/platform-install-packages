@@ -202,7 +202,7 @@ KMC_DOC_VERSION="Mercury-13.16.0"
 KMC_DOC_URI="https://github.com/kaltura/kmc-docs/archive/$KMC_DOC_VERSION.zip"
 
 # Kaltura KMCng:
-KMCNG_MINUS_V_VERSION=5.6.2
+KMCNG_MINUS_V_VERSION=5.6.3
 KMCNG_VERSION=v$KMCNG_MINUS_V_VERSION
 KMCNG_URI="https://github.com/kaltura/kmc-ng/releases/download/$KMCNG_VERSION/kmc-ng-$KMCNG_VERSION.zip"
 KMCNG_RPM_NAME="kaltura-kmcng"
@@ -290,7 +290,7 @@ FLEX_WRAPPER_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/flash/
 FLEX_WRAPPER_RPM_NAME="kaltura-flexwrapper"
 
 # HTML5 lib
-HTML5LIB_LATEST_VERSION="v2.73.2"
+HTML5LIB_LATEST_VERSION="v2.74.1"
 HTML5LIB_VERSIONS="v2.14 v2.37 v2.37.1 v2.38.3 v2.42 v2.44 v2.45 v2.45.1 v2.46 v2.47 $HTML5LIB_LATEST_VERSION"
 HTML5LIB_BASE_URI="https://github.com/kaltura/mwEmbed/tarball/"
 HTML5LIB_RPM_NAME="kaltura-html5lib"
@@ -338,7 +338,7 @@ LIVE_ANALYTICS_FRONT_END_VERSION=v2.7.3
 LIVE_ANALYTICS_FRONT_END_URI="https://github.com/kaltura/live-analytics-front-end/releases/download/$LIVE_ANALYTICS_FRONT_END_VERSION/$LIVE_ANALYTICS_FRONT_END_VERSION.zip"
 LIVE_ANALYTICS_FRONT_END_PACKAGE_NAME="kaltura-live-analytics-front"
 
-KMCNG_ANALYTICS_FRONT_END_VERSION=v0.1
+KMCNG_ANALYTICS_FRONT_END_VERSION=v0.2
 KMCNG_ANALYTICS_FRONT_END_URI="https://github.com/kaltura/analytics-front-end/releases/download/$KMCNG_ANALYTICS_FRONT_END_VERSION/kmcAnalytics_KMCNG_ANALYTICS_FRONT_END_VERSION.zip"
 LIVE_ANALYTICS_FRONT_END_PACKAGE_NAME="kaltura-kmcng-analytics-front"
 

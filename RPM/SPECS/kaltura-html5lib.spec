@@ -3,8 +3,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.73.2
-Release: 2
+Version: v2.74.1
+Release: 1
 Epoch: 0 
 License: AGPLv3+
 Group: Server/Platform 
@@ -86,6 +86,16 @@ fi
 %config %{html5lib_base}/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Mon Feb 4 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v2.74.1-1
+- SUP-16960 - No Audio When Attempting to Play Live Entry on IE11 + Windows 10
+- SUP-16617 - IOS doesn't show thumbnail anymore
+- SUP-16728 - Player Download Module Won't Work When Entry Has Only Source Flavor
+- upgrade socket.io (#3950)
+- SUP-16617 - IOS doesn't show thumbnail anymore
+- SUP-16728 - Player Download Module Won't Work When Entry Has Only Source Flavor
+- upgrade socket.io (#3950)
+
+
 * Mon Dec 24 2018 jess.portnoy@kaltura.com <Jess Portnoy> - v2.73.2-2
 - Deploy onto /opt/kaltura/apps rather than to NFS for better performance
 - Disable the kAnalony plugin
