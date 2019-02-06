@@ -1,3 +1,9 @@
+kaltura-kmc (5.43.13-11) naos; urgency=medium
+
+  * Ver bounce of HTML5 player to v2.74.1
+
+ -- Jess Portnoy <jess@b0f924504114>  Wed, 06 Feb 2019 14:44:13 +0000
+
 kaltura-kmc (5.43.13-10) naos; urgency=medium
 
   * Ver bounce of HTML5 player to v2.73.2

@@ -1,3 +1,35 @@
+kaltura-base (14.13.0-2) naos; urgency=medium
+
+  * playsviews: use entryType instead of KalturaEntryType (https://github.com/kaltura/server/pull/8074)
+  * PLAT-9563: Do not index captionAssetItem in Sphinx (https://github.com/kaltura/server/pull/8073)
+  * PLAT-9626: Make KalturaAssetFilter::getTypeListResponse look up captionAssetItem using eSearch instead of Sphinx (https://github.com/kaltura/server/pull/8070)
+  * SUP-16884: On flavorMediaInfo update, append new tags rather than override (https://github.com/kaltura/server/pull/8069)
+  * playsViews: Fix default value + add optimization to executePlaylist() (https://github.com/kaltura/server/pull/8068)
+  * PLAT-9596: Conf Maps - add option to view list of all maps in combo box (https://github.com/kaltura/server/pull/8064)
+  * PLAT-9602: Extract thumbnail stripe from a segment of a video and not the entire video (https://github.com/kaltura/server/pull/8063)
+  * PLAT-9622: KalturaConfMaps - Custom validateForInsert() (https://github.com/kaltura/server/pull/8060)
+  * PLAT-9622: KalturaConfMaps - Custom validateForInsert() (https://github.com/kaltura/server/pull/8059)
+  * Chunked encoding: Support fetching source from remote URLs (https://github.com/kaltura/server/pull/8058)
+  * PLAT-9618: Add language code to playbackCaptions (https://github.com/kaltura/server/pull/8055)
+  * Limit change account to partners which the MA logged in user belongs to (https://github.com/kaltura/server/pull/8053)
+  * PLAT-9618: getLocalThumbFilePath() - added `start_sec` and `end_sec` args/params (https://github.com/kaltura/server/pull/8050)
+  * SUP-16810: getPlaybackContext() caching (https://github.com/kaltura/server/pull/8048)
+  * Service annotations (https://github.com/kaltura/server/pull/8047)
+  * PLAT-9608: Support feedback on `answer` cue point (https://github.com/kaltura/server/pull/8045)
+  * PLAT-9607: Support feedback on the `quiz` object (https://github.com/kaltura/server/pull/8044)
+  * PLAT-9607: quiz - Support feedback (https://github.com/kaltura/server/pull/8041)
+  * PLAT-9602: extract thumbnail stripe from segment of the video (https://github.com/kaltura/server/pull/8039)
+  * PLAT-9614: listPartnersForUserAction() - only return partners for which the given user is set as admin (https://github.com/kaltura/server/pull/8036)
+  * PLAT-9606: quiz question/answer - support free text (https://github.com/kaltura/server/pull/8035)
+  * PLAT-9574: virus scan plugin - scan related assets as well (https://github.com/kaltura/server/pull/8033)
+  * AN-217: New report type - source (https://github.com/kaltura/server/pull/8031)
+  * PLAT-9601: Verify src asset fileSync exists on current dc before adding a conversion job (https://github.com/kaltura/server/pull/8027)
+  * Retrieve plays and views from cache (https://github.com/kaltura/server/pull/8026)
+  * PLAT-9539: Asset dimensions are not set when account is set with encryption + Asset size is incorrectly set with encrypted file size when account is set with encryption (https://github.com/kaltura/server/pull/8001)
+  * Fix typos in service documentation (https://github.com/kaltura/server/pull/7972)
+
+ -- Jess Portnoy <jess@b0f924504114>  Wed, 06 Feb 2019 14:37:25 +0000
+
 kaltura-base (14.13.0-1) naos; urgency=medium
 
   * Switching to 14.13.0

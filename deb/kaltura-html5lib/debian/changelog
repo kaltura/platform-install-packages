@@ -1,3 +1,15 @@
+kaltura-html5lib (2.74.1-1) naos; urgency=medium
+
+  * SUP-16960 - No Audio When Attempting to Play Live Entry on IE11 + Windows 10
+  * SUP-16617 - IOS doesn't show thumbnail anymore
+  * SUP-16728 - Player Download Module Won't Work When Entry Has Only Source Flavor
+  * upgrade socket.io (#3950)
+  * SUP-16617 - IOS doesn't show thumbnail anymore
+  * SUP-16728 - Player Download Module Won't Work When Entry Has Only Source Flavor
+  * upgrade socket.io (#3950)
+
+ -- Jess Portnoy <jess@b0f924504114>  Wed, 06 Feb 2019 15:05:05 +0000
+
 kaltura-html5lib (2.73.2-1) naos; urgency=medium
 
   * FEC-8755 - Player V2 - all test pages loaded muted, even when autoplay and automute = false

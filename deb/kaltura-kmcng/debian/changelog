@@ -1,3 +1,9 @@
+kaltura-kmcng (5.6.3-1) naos; urgency=medium
+
+  * entry/distribution: fix errors mapping (7e4419f)
+
+ -- Jess Portnoy <jess@b0f924504114>  Wed, 06 Feb 2019 15:00:01 +0000
+
 kaltura-kmcng (5.6.2-1) naos; urgency=medium
 
   * Advertisements: Enable advertisements for entries without Source flavor (e9e29d0)
