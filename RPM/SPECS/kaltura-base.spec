@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 14.13.0
-Release: 15
+Version: 14.14.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -341,6 +341,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Thu Feb 7 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.14.0-1
+- Ver Bounce to 14.14.0
+
 * Mon Feb 4 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.13.0-15
 - playsviews: use entryType instead of KalturaEntryType (https://github.com/kaltura/server/pull/8074)
 - PLAT-9563: Do not index captionAssetItem in Sphinx (https://github.com/kaltura/server/pull/8073)
