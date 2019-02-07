@@ -130,7 +130,6 @@ done
 %setup -T -q -a 49 -D -n %{cache_dir}
 
 %build
-#find /tmp/node_modules/ -type d -exec chmod 777 {} \;
 npm install --cache-min Infinity --cache %{cache_dir} --no-optional --global-style true %{npm_name}@%{version}
 
 %clean
@@ -144,7 +143,6 @@ for i in CHANGELOG.md LICENSE README.md bin lib package.json test node_modules;d
 		cp -pfr $i %{buildroot}%{nodejs_sitelib}/%{npm_name}
 	fi
 done
-#mkdir -p %{buildroot}%_defaultdocdir/%{name}-%{version}
 cp -pf CHANGELOG.md README.md LICENSE %{cache_dir}
 # If any binaries are included, symlink them to bindir here
 mkdir -p %{buildroot}%{nodejs_sitelib}/${npm_name}/bin 
