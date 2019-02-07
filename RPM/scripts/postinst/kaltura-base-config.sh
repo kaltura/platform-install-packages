@@ -365,9 +365,11 @@ SPHINX_DB_PORT=$DB1_PORT
 
 CONF_FILES=`find $KALT_CONF_DIR  -type f -name "*template*"`
 CONF_FILES="$CONF_FILES $BASE_DIR/app/batch/batches/Mailer/emails_en.template.ini $BASE_DIR/app/tests/monitoring/config.template.ini $BASE_DIR/bin/sanity_config.template.ini"
-if rpm -q kaltura-html5-studio > /dev/null;then
-        CONF_FILES="$CONF_FILES $BASE_DIR/apps/studio/`rpm -qa kaltura-html5-studio --queryformat %{version}`/studio.template.ini"
-fi 
+for STUDIO_PACKAGE in kaltura-html5-studio kaltura-html5-studio3;do
+	if rpm -q  $STUDIO_PACKAGE > /dev/null;then
+		CONF_FILES="$CONF_FILES $BASE_DIR/apps/studio/`rpm -q $STUDIO_PACKAGE --queryformat %{version}`/studio.template.ini"
+	fi 
+done
 CONF_FILES="$CONF_FILES `find $BASE_DIR/app/plugins/monitor/nagios/config -type f -name "*template*"`"
  
 if [ -d "$BASE_DIR/dwh" ];then
