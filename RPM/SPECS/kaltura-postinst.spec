@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.33
-Release: 58
+Release: 59
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -82,6 +82,9 @@ find %{_sysconfdir}/logrotate.d -type l -name "kaltura_*" -exec rm {} \;
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Mon Feb 11 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.33-59
+- Support v3 Studio and player
+
 * Wed Feb 6 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.33-58
 - Added a check for KMCng accessibility 
 
