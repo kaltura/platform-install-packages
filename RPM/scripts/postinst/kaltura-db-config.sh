@@ -220,6 +220,12 @@ if [ -r $BASE_DIR/apps/studio/$HTML5_STUDIO_VERSION/studio.ini ];then
 	php $BASE_DIR/app/deployment/uiconf/deploy_v2.php --ini=$BASE_DIR/apps/studio/$HTML5_STUDIO_VERSION/studio.ini >> /dev/null
 	sed -i "s@^\(studio_version\s*=\)\(.*\)@\1 $HTML5_STUDIO_VERSION@g" -i $BASE_DIR/app/configurations/local.ini
 fi
+HTML5LIB3_VERSION=`rpm -q kaltura-html5lib3 --queryformat %{version}`
+HTML5LIB3_BASEDIR=$BASE_DIR/html5/html5lib/playkitSources/kaltura-ovp-player
+PARTNER_ZERO_SECRET=`echo "select admin_secret from partner where id=0" | mysql -N -h $DB1_HOST -p$DB1_PASS $DB1_NAME -u$DB1_USER  -P$DB1_PORT`
+if [ -r $HTML5LIB3_BASEDIR/create_playkit_uiconf.php ];then
+	php $HTML5LIB3_BASEDIR/create_playkit_uiconf.php 0 $PARTNER_ZERO_SECRET $SERVICE_URL $HTML5LIB3_VERSION
+fi
 find  $WEB_DIR/content/generatedUiConf -type d -exec chmod 775 {} \;
 
 set +e

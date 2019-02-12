@@ -293,12 +293,20 @@ trap - ERR
 HTML5_STUDIO_VERSION=`rpm -q kaltura-html5-studio --queryformat %{version}`
 HTML5_STUDIO3_VERSION=`rpm -q kaltura-html5-studio3 --queryformat %{version}`
 LIVE_ANALYTICS_FRONT_VERSION=`rpm -q kaltura-live-analytics-front --queryformat %{version}`
-HTML5LIB_VERSION=`yum info  kaltura-html5lib| grep Version|awk -F ":" '{print $NF}'|sed 's/\s*//g'|tail -1`
+HTML5LIB_VERSION=`rpm -q kaltura-html5lib --queryformat %{version}`
+
 sed -i "s@^\(html5_version\s*=\)\(.*\)@\1 $HTML5LIB_VERSION@g" -i $BASE_DIR/app/configurations/local.ini
 sed -i "s/@HTML5_VER@/$HTML5LIB_VERSION/g" -i $BASE_DIR/apps/studio/$HTML5_STUDIO_VERSION/studio.ini
 sed -i "s/@HTML5_VER@/$HTML5LIB_VERSION/g" -i $BASE_DIR/apps/studioV3/$HTML5_STUDIO3_VERSION/studio.ini
 	echo "use kaltura" | mysql -h$DB1_HOST -u$DB1_USER -p$DB1_PASS -P$DB1_PORT $DB1_NAME 2> /dev/null
 	if [ $? -eq 0 ];then
+		HTML5LIB3_VERSION=`rpm -q kaltura-html5lib3 --queryformat %{version}`
+		HTML5LIB3_BASEDIR=$BASE_DIR/html5/html5lib/playkitSources/kaltura-ovp-player
+		PARTNER_ZERO_SECRET=`echo "select admin_secret from partner where id=0" | mysql -N -h $DB1_HOST -p$DB1_PASS $DB1_NAME -u$DB1_USER  -P$DB1_PORT`
+		if [ -r $HTML5LIB3_BASEDIR/create_playkit_uiconf.php ];then
+			php $HTML5LIB3_BASEDIR/create_playkit_uiconf.php 0 $PARTNER_ZERO_SECRET $SERVICE_URL $HTML5LIB3_VERSION
+		fi
+
 		if [ -r $BASE_DIR/apps/studio/$HTML5_STUDIO_VERSION/studio.ini ];then
 			php $BASE_DIR/app/deployment/uiconf/deploy_v2.php --ini=$BASE_DIR/apps/studio/$HTML5_STUDIO_VERSION/studio.ini >> /dev/null
 			php $BASE_DIR/app/deployment/uiconf/deploy_v2.php --ini=$BASE_DIR/apps/studioV3/$HTML5_STUDIO3_VERSION/studio.ini >> /dev/null
