@@ -9,7 +9,7 @@
 Summary: Kaltura PlayKit Bundler 
 Name: kaltura-playkit-bundler 
 Version: 1.1.1
-Release: 2
+Release: 4
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-v%{version}.tar.gz
@@ -67,9 +67,11 @@ fi
 
 %post
 /sbin/chkconfig --add %{name}
-SALT=`grep remote_addr_header_salt %{kaltura_prefix}/app/configurations/local.ini|sed 's@^remote_addr_header_salt\s*=\s*\(.*\)$@\1@g'| sed 's@"@@g'`
-sed -i "s#@APP_REMOTE_ADDR_HEADER_SALT@#$SALT#g" %{confdir}/default.json
-service %{name} restart
+if [ -r %{kaltura_prefix}/app/configurations/local.ini ];then
+	SALT=`grep remote_addr_header_salt %{kaltura_prefix}/app/configurations/local.ini|sed 's@^remote_addr_header_salt\s*=\s*\(.*\)$@\1@g'| sed 's@"@@g'`
+	sed -i "s#@APP_REMOTE_ADDR_HEADER_SALT@#$SALT#g" %{confdir}/default.json
+	service %{name} restart
+fi
 cd %{prefix} && npm install
 
 %preun

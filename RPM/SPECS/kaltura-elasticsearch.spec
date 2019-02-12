@@ -4,10 +4,10 @@
 %define es_group elasticsearch
 %define prefix /opt/kaltura
 %define confdir %{prefix}/app/configurations/elasticsearch
+%define populate_confdir %{prefix}/app/configurations/elastic/populate
 %define logdir %{prefix}/log/elasticsearch
 %define vardir %{prefix}/var/lib/elasticsearch
 %define tmpdir %{vardir}/tmp
-%define codename Naos
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-elasticsearch
@@ -21,23 +21,19 @@ Source2: elasticsearch.yml
 
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
-Requires: kaltura-base, elasticsearch >= 6.0.0
+Requires(pre): kaltura-base, elasticsearch >= 6.0.0
 %if 0%{?rhel}  == 6
 Group: System Environment/Daemons
 Requires(pre): shadow-utils
 Requires: initscripts >= 8.36
 Requires(post): chkconfig
-Requires: openssl >= 1.0.1
-BuildRequires: openssl-devel >= 1.0.1
 %endif
 
 %if 0%{?rhel}  == 7
 Group: System Environment/Daemons
 Requires(pre): shadow-utils
 Requires: systemd
-Requires: openssl >= 1.0.1
 BuildRequires: systemd
-BuildRequires: openssl-devel >= 1.0.1
 Epoch: 1
 %endif
 
@@ -58,8 +54,9 @@ This package configures everything needed for the Kaltura's Elasticsearch servic
 %prep
 
 %install
-mkdir -p $RPM_BUILD_ROOT/%{logdir} $RPM_BUILD_ROOT/%{vardir} $RPM_BUILD_ROOT/%{tmpdir} $RPM_BUILD_ROOT/%{confdir}/elastic/populate
+mkdir -p $RPM_BUILD_ROOT/%{logdir} $RPM_BUILD_ROOT/%{vardir} $RPM_BUILD_ROOT/%{tmpdir} $RPM_BUILD_ROOT/%{confdir}/elastic/populate $RPM_BUILD_ROOT%{_sysconfdir}/elasticsearch/analysis 
 
+echo "ES_JAVA_OPTS=\"-Djna.tmpdir=$BASE_DIR/var/lib/elasticsearch/tmp -Djava.io.tmpdir=$BASE_DIR/var/lib/elasticsearch/tmp\"" >> $RPM_BUILD_ROOT%{_sysconfdir}/sysconfig/elasticsearch
 
 
 %clean
@@ -76,30 +73,25 @@ and then edit /etc/selinux/config to make the change permanent."
 		exit 1;
 	fi
 fi
-# create user/group, and update permissions
-getent group %{kaltura_group} >/dev/null || groupadd -r %{kaltura_group} -g7373 2>/dev/null
-getent passwd %{kaltura_user} >/dev/null || useradd -m -r -u7373 -d %{prefix} -s /bin/bash -c "Kaltura server" -g %{kaltura_group} %{kaltura_user} 2>/dev/null
 
-getent group %{apache_user} >/dev/null || groupadd -g 48 -r %{apache_group}
-getent passwd %{apache_user} >/dev/null || \
-  useradd -r -u 48 -g %{apache_group} -s /sbin/nologin \
-    -d /var/www -c "Apache" %{apache_user}
-usermod -a -G %{kaltura_group} %{apache_user}
+%post
+service elasticsearch restart
 
-usermod -g %{kaltura_group} %{kaltura_user} 2>/dev/null || true
 if [ ! -d /usr/share/elasticsearch/plugins/analysis-icu ];then
         /usr/share/elasticsearch/bin/elasticsearch-plugin  install analysis-icu
 fi
-
-%post
-
-
 
 %preun
 
 %postun
 
 %files
+%defattr(-, %{es_user}, %{es_group} , 0775)
+%dir %{logdir} 
+%dir %{vardir}
+%dir %{tmpdir}
+%dir %{confdir}/elastic/populate 
+%dir %{_sysconfdir}/elasticsearch/analysis 
 
 %changelog
 * Mon Dec 10 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.0-1

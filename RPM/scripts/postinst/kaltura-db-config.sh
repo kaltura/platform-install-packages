@@ -226,6 +226,13 @@ PARTNER_ZERO_SECRET=`echo "select admin_secret from partner where id=0" | mysql 
 if [ -r $HTML5LIB3_BASEDIR/create_playkit_uiconf.php ];then
 	php $HTML5LIB3_BASEDIR/create_playkit_uiconf.php 0 $PARTNER_ZERO_SECRET $SERVICE_URL $HTML5LIB3_VERSION
 fi
+BUNDLER_CONF_FILE=$BASE_DIR/playkit-js-bundle-builder/config/default.json
+if [ -r $APP_DIR/configurations/local.ini -a -r $BUNDLER_CONF_FILE ];then
+        SALT=`grep remote_addr_header_salt $APP_DIR/configurations/local.ini|sed 's@^remote_addr_header_salt\s*=\s*\(.*\)$@\1@g'| sed 's@"@@g'`
+        sed -i "s#@APP_REMOTE_ADDR_HEADER_SALT@#$SALT#g" $BUNDLER_CONF_FILE
+fi
+service kaltura-bundle-builder-server restart
+
 find  $WEB_DIR/content/generatedUiConf -type d -exec chmod 775 {} \;
 
 set +e
