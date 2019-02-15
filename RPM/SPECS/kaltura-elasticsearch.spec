@@ -3,8 +3,7 @@
 %define es_user	elasticsearch
 %define es_group elasticsearch
 %define prefix /opt/kaltura
-%define confdir %{prefix}/app/configurations/elasticsearch
-%define populate_confdir %{prefix}/app/configurations/elastic/populate
+%define confdir %{prefix}/app/configurations/elastic
 %define logdir %{prefix}/log/elasticsearch
 %define vardir %{prefix}/var/lib/elasticsearch
 %define tmpdir %{vardir}/tmp
@@ -17,11 +16,12 @@ License: AGPLv3+
 Group: Server/Platform 
 Source0: kaltura-elastic-populate 
 Source1: kaltura_synonyms_contraction.txt
-Source2: elasticsearch.yml
+Source2: elasticsearch.template.yml
+Source3: aliases.json
 
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
-Requires(pre): kaltura-base, elasticsearch >= 6.0.0
+Requires(pre): kaltura-base, kaltura-postinst, elasticsearch >= 6.0.0, java-1.8.0-openjdk-headless
 %if 0%{?rhel}  == 6
 Group: System Environment/Daemons
 Requires(pre): shadow-utils
@@ -54,10 +54,15 @@ This package configures everything needed for the Kaltura's Elasticsearch servic
 %prep
 
 %install
-mkdir -p $RPM_BUILD_ROOT/%{logdir} $RPM_BUILD_ROOT/%{vardir} $RPM_BUILD_ROOT/%{tmpdir} $RPM_BUILD_ROOT/%{confdir}/elastic/populate $RPM_BUILD_ROOT%{_sysconfdir}/elasticsearch/analysis 
+mkdir -p $RPM_BUILD_ROOT/%{logdir} $RPM_BUILD_ROOT/%{vardir} $RPM_BUILD_ROOT/%{tmpdir} $RPM_BUILD_ROOT/%{confdir}/populate $RPM_BUILD_ROOT%{_sysconfdir}/elasticsearch/analysis $RPM_BUILD_ROOT%{_sysconfdir}/sysconfig $RPM_BUILD_ROOT/%{confdir}/aliases $RPM_BUILD_ROOT%{_sysconfdir}/init.d
 
-echo "ES_JAVA_OPTS=\"-Djna.tmpdir=$BASE_DIR/var/lib/elasticsearch/tmp -Djava.io.tmpdir=$BASE_DIR/var/lib/elasticsearch/tmp\"" >> $RPM_BUILD_ROOT%{_sysconfdir}/sysconfig/elasticsearch
+#echo "ES_JAVA_OPTS=\"-Djna.tmpdir=$BASE_DIR/var/lib/elasticsearch/tmp -Djava.io.tmpdir=$BASE_DIR/var/lib/elasticsearch/tmp\"" >> $RPM_BUILD_ROOT%{_sysconfdir}/sysconfig/elasticsearch 
 
+chmod +x %{SOURCE0}
+cp %{SOURCE0} $RPM_BUILD_ROOT%{_sysconfdir}/init.d 
+cp %{SOURCE1} $RPM_BUILD_ROOT/%{confdir}/
+cp %{SOURCE2} $RPM_BUILD_ROOT/%{confdir}/elasticsearch.template.yml
+cp %{SOURCE3} $RPM_BUILD_ROOT/%{confdir}/aliases/aliases.json
 
 %clean
 rm -rf %{buildroot}
@@ -75,13 +80,10 @@ and then edit /etc/selinux/config to make the change permanent."
 fi
 
 %post
-service elasticsearch restart
-
-if [ ! -d /usr/share/elasticsearch/plugins/analysis-icu ];then
-        /usr/share/elasticsearch/bin/elasticsearch-plugin  install analysis-icu
-fi
 
 %preun
+/sbin/service kaltura-elastic-populate stop > /dev/null 2>&1
+/sbin/chkconfig --del kaltura-elastic-populate
 
 %postun
 
@@ -90,9 +92,13 @@ fi
 %dir %{logdir} 
 %dir %{vardir}
 %dir %{tmpdir}
-%dir %{confdir}/elastic/populate 
+%dir %{_sysconfdir}/elasticsearch 
 %dir %{_sysconfdir}/elasticsearch/analysis 
+%defattr(-, %{kaltura_user}, %{es_group} , 0775)
+%dir %{confdir}
+%config %{confdir}/*
+%{_sysconfdir}/init.d/kaltura-elastic-populate
 
 %changelog
-* Mon Dec 10 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.0-1
+* Fri Feb 15 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.0-1
 - First release
