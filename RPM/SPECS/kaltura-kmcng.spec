@@ -1,6 +1,6 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmcng
-Version: v5.6.3
+Version: v5.6.4
 Release: 1
 Summary: Kaltura HTML5 Management Console
 
@@ -49,6 +49,11 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Feb 18 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v5.6.4-1
+- entry/captions: Support ordering captions for Youtube entries (701dd3f)
+- entry/related: Add support to JSON files in entry related files (bcc05f6)
+- syndication: Fix issue in ITunes Syndication feeds with categories containing ampersand (b738b46)
+
 * Mon Feb 4 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v5.6.3-1
 - entry/distribution: fix errors mapping (7e4419f)
 

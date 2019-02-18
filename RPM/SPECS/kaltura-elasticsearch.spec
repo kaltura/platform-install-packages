@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-elasticsearch
 Version: 1.0.0
-Release: 1
+Release: 4
 License: AGPLv3+
 Group: Server/Platform 
 Source0: kaltura-elastic-populate 
@@ -54,15 +54,15 @@ This package configures everything needed for the Kaltura's Elasticsearch servic
 %prep
 
 %install
-mkdir -p $RPM_BUILD_ROOT/%{logdir} $RPM_BUILD_ROOT/%{vardir} $RPM_BUILD_ROOT/%{tmpdir} $RPM_BUILD_ROOT/%{confdir}/populate $RPM_BUILD_ROOT%{_sysconfdir}/elasticsearch/analysis $RPM_BUILD_ROOT%{_sysconfdir}/sysconfig $RPM_BUILD_ROOT/%{confdir}/aliases $RPM_BUILD_ROOT%{_sysconfdir}/init.d
+mkdir -p $RPM_BUILD_ROOT/%{logdir} $RPM_BUILD_ROOT/%{vardir} $RPM_BUILD_ROOT/%{tmpdir} $RPM_BUILD_ROOT/%{confdir}/populate $RPM_BUILD_ROOT%{_sysconfdir}/elasticsearch/analysis $RPM_BUILD_ROOT%{_sysconfdir}/sysconfig $RPM_BUILD_ROOT%{_sysconfdir}/elasticsearch/aliases $RPM_BUILD_ROOT%{_sysconfdir}/init.d
 
 #echo "ES_JAVA_OPTS=\"-Djna.tmpdir=$BASE_DIR/var/lib/elasticsearch/tmp -Djava.io.tmpdir=$BASE_DIR/var/lib/elasticsearch/tmp\"" >> $RPM_BUILD_ROOT%{_sysconfdir}/sysconfig/elasticsearch 
 
 chmod +x %{SOURCE0}
 cp %{SOURCE0} $RPM_BUILD_ROOT%{_sysconfdir}/init.d 
-cp %{SOURCE1} $RPM_BUILD_ROOT/%{confdir}/
+cp %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/elasticsearch/analysis 
 cp %{SOURCE2} $RPM_BUILD_ROOT/%{confdir}/elasticsearch.template.yml
-cp %{SOURCE3} $RPM_BUILD_ROOT/%{confdir}/aliases/aliases.json
+cp %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}/elasticsearch/aliases/aliases.json
 
 %clean
 rm -rf %{buildroot}
@@ -94,8 +94,10 @@ fi
 %dir %{tmpdir}
 %dir %{_sysconfdir}/elasticsearch 
 %dir %{_sysconfdir}/elasticsearch/analysis 
+%dir %{_sysconfdir}/elasticsearch/aliases
+%config %{_sysconfdir}/elasticsearch/aliases
+%config %{_sysconfdir}/elasticsearch/analysis/kaltura_synonyms_contraction.txt
 %defattr(-, %{kaltura_user}, %{es_group} , 0775)
-%dir %{confdir}
 %config %{confdir}/*
 %{_sysconfdir}/init.d/kaltura-elastic-populate
 

@@ -9,14 +9,14 @@
 Summary: Kaltura PlayKit Bundler 
 Name: kaltura-playkit-bundler 
 Version: 1.1.1
-Release: 4
+Release: 9
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-v%{version}.tar.gz
 URL: https://github.com/kaltura/%{archive_dir_name}
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
-Requires: nodejs >= 6.0.0, kaltura-base nodejs-forever
+Requires: nodejs >= 10.0.0, kaltura-base
 Requires(post): chkconfig
 AutoReq: no 
 
@@ -66,13 +66,13 @@ fi
 
 
 %post
+cd %{prefix} && npm install && npm install -g gulp forever
 /sbin/chkconfig --add %{name}
 if [ -r %{kaltura_prefix}/app/configurations/local.ini ];then
 	SALT=`grep remote_addr_header_salt %{kaltura_prefix}/app/configurations/local.ini|sed 's@^remote_addr_header_salt\s*=\s*\(.*\)$@\1@g'| sed 's@"@@g'`
 	sed -i "s#@APP_REMOTE_ADDR_HEADER_SALT@#$SALT#g" %{confdir}/default.json
 	service %{name} restart
 fi
-cd %{prefix} && npm install
 
 %preun
 /sbin/service %{name} stop > /dev/null 2>&1

@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 14.14.0
-Release: 12
+Release: 14
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -36,6 +36,7 @@ Source35: start_page.php
 Source36: start_page_survey.png
 Source37: start_page_newsletter.png
 Source38: start_page-landing-page.css
+Source39: previewSuccess.php
 
 URL: https://github.com/kaltura/server/tree/%{codename}-%{version}
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -164,6 +165,9 @@ cp %{SOURCE37} $RPM_BUILD_ROOT%{prefix}/app/start/img/newsletter.png
 cp %{SOURCE38} $RPM_BUILD_ROOT%{prefix}/app/start/css/landing-page.css
 mkdir -p $RPM_BUILD_ROOT%{webdir}/content
 tar zxf %{SOURCE10} -C $RPM_BUILD_ROOT%{webdir}/content
+
+# tmp patch for player v3 preview to be removed when https://github.com/kaltura/server/pull/8134/files is merged.
+cp %{SOURCE39} $RPM_BUILD_ROOT%{prefix}/app/alpha/apps/kaltura/modules/extwidget/templates/previewSuccess.php
 
 %{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
 cat > $RPM_BUILD_ROOT%{_sysconfdir}/profile.d/kaltura_base.sh << EOF
@@ -345,35 +349,30 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Sat Feb 16 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.14.0-12
-- Nightly build.
-
-* Fri Feb 15 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.14.0-11
-- Nightly build.
-
-* Thu Feb 14 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.14.0-10
-- Nightly build.
-
-* Wed Feb 13 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.14.0-9
-- Nightly build.
-
-* Tue Feb 12 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.14.0-8
-- Nightly build.
-
-* Mon Feb 11 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.14.0-6
-- Nightly build.
-
-* Sun Feb 10 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.14.0-5
-- Nightly build.
-
-* Sat Feb 9 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.14.0-4
-- Nightly build.
-
-* Fri Feb 8 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.14.0-3
-- Nightly build.
-
-* Thu Feb 7 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.14.0-2
-- Nightly build.
+* Mon Feb 18 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.14.0-13
+- If `accessControlNameToId` is undefined call `initAccessControlNameToId()` (https://github.com/kaltura/server/pull/8121)
+- return `calcPageSize` to `kFilterPager` (https://github.com/kaltura/server/pull/8118)
+- PLAT-9653: KalturaScheduleResourceFilter.php - support filtering by `statusEqual` === DELETED (https://github.com/kaltura/server/pull/8112)
+- PLAT-9680: handle languages in `contributeToPlaybackContextDataResult()` the same as in `playManifest` (https://github.com/kaltura/server/pull/8111)
+- PLAT-9670: Scheduling - improve blackout conflict performance (https://github.com/kaltura/server/pull/8109)
+- PLAT-9672: Fix exception in thumbnail creation (https://github.com/kaltura/server/pull/8108)
+- Add `schedule_event.STATUS` to sphinx match optimization (https://github.com/kaltura/server/pull/8105)
+- PLAT-9667: Adding/updating feedback when the quiz is submitted and updating answers is disallowed (https://github.com/kaltura/server/pull/8103)
+- PLAT-9661: Update logic of setting `lastModified` of thumbnail (https://github.com/kaltura/server/pull/8101)
+- PLAT-9666: Handle multiple permissions update with a single partner save (https://github.com/kaltura/server/pull/8099)
+- Add sphinx match optimization and invalidation keys to schedule event index (https://github.com/kaltura/server/pull/8098)
+- REACH2-496: Update alignment job data to include additional params (https://github.com/kaltura/server/pull/8097)
+- Add validations to ICS bulk upload (https://github.com/kaltura/server/pull/8095)
+- Schedule event bulk upload (https://github.com/kaltura/server/pull/8094)
+- eSearch - query boolean fields only with true/false (https://github.com/kaltura/server/pull/8092)
+- PLAT-9653: KalturaScheduleResourceFilter.php - support filtering by `statusEqual` === DELETED (https://github.com/kaltura/server/pull/8091)
+- PSVAMB-4099: `playManifestAction` - call `setMinBitrate()` and `setMaxBitrate()` (https://github.com/kaltura/server/pull/8089)
+- PLAT-9642: when updating an answer cue point, the fields should be added to the modified columns (https://github.com/kaltura/server/pull/8088)
+- Fix PHP7 notices & warnings (https://github.com/kaltura/server/pull/8081)
+- Ensure the asset is found before calling `shouldEncrypt()` (https://github.com/kaltura/server/pull/8080)
+- PLAT-9629: Avoid copying Answer cue points to trimmed clipped entries (https://github.com/kaltura/server/pull/8078)
+- PLAT-9625: Support multipart upload to S3 when file size is bigger than 5G (https://github.com/kaltura/server/pull/8067)
+- eSearch - update mapping + add logstash playsviews conf (https://github.com/kaltura/server/pull/8037)
 
 * Thu Feb 7 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.14.0-1
 - Ver Bounce to 14.14.0
