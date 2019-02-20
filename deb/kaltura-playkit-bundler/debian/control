@@ -2,11 +2,11 @@ Source: kaltura-playkit-bundler
 Section: net
 Priority: extra
 Maintainer: Jess Portnoy <jess.portnoy@kaltura.com>
+
+Package: kaltura-playkit-bundler
 Pre-Depends:
  nodejs (>= 10.15.0),
  kaltura-base
-
-Package: kaltura-playkit-bundler
 Architecture: all
 Description: Kaltura Open Source Video Platform - frontend server 
  Kaltura is the world's first Open Source Online Video Platform, transforming the way people work, learn, 
