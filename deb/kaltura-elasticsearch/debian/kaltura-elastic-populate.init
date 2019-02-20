@@ -1,0 +1,107 @@
+#!/bin/bash
+
+#
+# elasticPopulateMgr            This init script takes care of starting and stopping a Kaltura Elasticsearch Populate Service
+#
+# chkconfig: 2345 13 87
+# description: Kaltura Elasticsearch Populate
+
+### BEGIN INIT INFO
+# Provides:          kaltura-elastic-populate
+# Required-Start:    $local_fs $remote_fs $network
+# Required-Stop:     $local_fs $remote_fs $network
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# X-Interactive:     true
+# Short-Description: Control the Kaltura elastic populate daemon
+# Description:       Control the Kaltura elastic populate daemon
+### END INIT INFO
+
+
+# Source function library.
+SYSTEM_INI=/etc/kaltura.d/system.ini
+if [ -r $SYSTEM_INI ];then
+    . $SYSTEM_INI
+else
+    echo "Couldn't source $SYSTEM_INI. Exiting."
+    exit 2
+fi
+
+if [ -z "$1" ]; then
+    echo "Usage: $0 [start|stop|force-stop|restart|status]"
+    exit 1  
+fi
+
+# Define variables
+ES_PLUGIN_BASEDIR=$APP_DIR/plugins/search/providers/elastic_search/scripts
+ES_PLUGIN_SCRIPT=populateElasticFromLog.php
+CONFIG_FILE=$APP_DIR/configurations/batch
+NAME="ElasticSearch-Populate"
+PIDFILE="$LOG_DIR/populate_elastic.pid"
+
+if [ -r /etc/init.d/functions ];then
+        . /etc/init.d/functions
+        STATUS_COMM="status -p $PIDFILE $NAME"
+elif [ -r /lib/lsb/init-functions ];then
+        . /lib/lsb/init-functions
+        STATUS_COMM="status_of_proc -p $PIDFILE $ES_PLUGIN_SCRIPT $NAME"
+else
+        STATUS_COMM="kill -0 `cat $PIDFILE 2> /dev/null`"
+fi
+
+
+
+start() 
+{
+        if [ -r $BASE_DIR/maintenance ]; then
+                echo "Server is on maintenance mode - $NAME will not start!"
+                return 1
+        fi
+        if ! $STATUS_COMM ;then
+                cd $ES_PLUGIN_BASEDIR
+                su $OS_KALTURA_USER -c "$PHP_BIN $ES_PLUGIN_SCRIPT 2>> $LOG_DIR/kaltura_elastic_populate.log 1>/dev/null &"
+                sleep 2
+                $STATUS_COMM
+        fi
+}
+
+
+
+stop() 
+{
+        SIGNAL=$1
+        if $STATUS_COMM;then
+                MY_PID=`cat $PIDFILE 2>/dev/null`
+                kill -s $SIGNAL $MY_PID > /dev/null
+                sleep 2 
+                if $STATUS_COMM >/dev/null;then
+                        stop 9
+                fi
+        fi
+        echo "$NAME stopped."
+        rm -f $PIDFILE
+}
+
+case "$1" in
+    start)
+        start
+        ;;
+    stop)
+        stop 15
+        ;;
+    force-stop)
+        stop 9
+        ;;
+    status)
+        $STATUS_COMM
+        ;;
+    restart)
+        stop 15
+        start
+        ;;
+    *)
+        echo "Usage: [start|stop|force-stop|restart|status]"
+        exit 1
+        ;;
+esac
+
