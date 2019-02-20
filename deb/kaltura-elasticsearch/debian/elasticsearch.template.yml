@@ -1,0 +1,27 @@
+# ---------------------------------- Cluster -----------------------------------
+#
+# Use a descriptive name for your cluster:
+#
+cluster.name: kaltura
+#
+# ------------------------------------ Node ------------------------------------
+#
+# Use a descriptive name for the node:
+#
+node.name: @HOSTNAME@
+# ----------------------------------- Paths ------------------------------------
+#
+# Path to directory where to store the data (separate multiple locations by comma):
+#
+#path.data: /var/lib/elasticsearch
+path.data: @BASE_DIR@/var/lib/elasticsearch
+#
+# Path to log files:
+#
+#path.logs: /var/log/elasticsearch
+path.logs: @LOG_DIR@/elasticsearch
+#action.destructive_requires_name: true
+bootstrap.system_call_filter: false
+node.master: true
+node.data: true
+

@@ -1,3 +1,11 @@
+kaltura-kmcng (5.6.4-1) naos; urgency=medium
+
+  * entry/captions: Support ordering captions for Youtube entries (701dd3f)
+  * entry/related: Add support to JSON files in entry related files (bcc05f6)
+  * syndication: Fix issue in ITunes Syndication feeds with categories containing ampersand (b738b46)
+
+ -- Jess Portnoy <jess@b0f924504114>  Tue, 19 Feb 2019 11:02:57 +0000
+
 kaltura-kmcng (5.6.3-1) naos; urgency=medium
 
   * entry/distribution: fix errors mapping (7e4419f)

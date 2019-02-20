@@ -375,11 +375,6 @@ PROMETHEUS_MYSQL_EXPORTER_URI="https://github.com/prometheus/mysqld_exporter/rel
 CONSUL_VERSION=1.0.6
 CONSUL_URI="https://releases.hashicorp.com/consul/${CONSUL_VERSION}/consul_${CONSUL_VERSION}_linux_amd64.zip"
 
-# playkit
-HTML5LIB3_VERSION=v0.39.4
-HTML5LIB3_URI="https://github.com/kaltura/kaltura-player-js/archive/$HTML5LIB3_VERSION.tar.gz"
-HTML5LIB3_RPM_NAME="kaltura-html5lib3"
-
 KALTURA_PLAYKIT_BUNDLER_VERSION=v1.1.1
 KALTURA_PLAYKIT_BUNDLER_URI="https://github.com/kaltura/playkit-js-bundle-builder/archive/$KALTURA_PLAYKIT_BUNDLER_VERSION.tar.gz"
 KALTURA_PLAYKIT_BUNDLER_RPM_NAME="kaltura-playkit-bundler"

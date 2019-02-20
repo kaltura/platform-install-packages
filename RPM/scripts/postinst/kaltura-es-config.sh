@@ -1,7 +1,21 @@
 #!/bin/sh -e
 
-if [ -r /etc/kaltura.d/system.ini ];then
-        . /etc/kaltura.d/system.ini
+KALTURA_FUNCTIONS_RC=`dirname $0`/kaltura-functions.rc
+if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
+        OUT="${BRIGHT_RED}ERROR:could not find $KALTURA_FUNCTIONS_RC so, exiting..${NORMAL}"
+        echo -en $OUT
+        exit 3
+fi
+. $KALTURA_FUNCTIONS_RC
+if ! rpm -q kaltura-elasticsearch;then
+        echo -e "${BRIGHT_RED}Exiting as kaltura-elasticsearch is not installed.
+This MAY be because the installation of it was skipped do to SELinux being in 'Enforcing' mode.
+Please review: https://github.com/kaltura/platform-install-packages/blob/master/doc/install-kaltura-redhat-based.md#disable-selinux---required-currently-kaltura-cant-run-properly-with-selinux
+And re-run:
+# yum install kaltura-elasticsearch
+
+${NORMAL}"
+        exit 2 
 fi
 TIME_STAMP=`date +%Y_%m`
 ES_HOST=127.0.0.1

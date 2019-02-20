@@ -43,7 +43,6 @@ mkdir -p $RPM_BUILD_ROOT%{logdir}
 mkdir -p $RPM_BUILD_ROOT%{_initrddir}
 
 sed -e "s#@LOG_DIR@#%{logdir}#g" -e "s#@BUNDLE_BUILDER_PREFIX@#%{prefix}#g" -e 's#@NODE_MODULES_PATH@#/usr/lib/node_modules#g'  %{_builddir}/%{archive_dir_name}-%{version}/bin/bundle-builder-server.template.sh > $RPM_BUILD_ROOT%{_initrddir}/%{name}
-chmod +x $RPM_BUILD_ROOT%{_initrddir}/%{name}
 sed -e "s#@LOG_DIR@#%{logdir}#g" -e "s#@HTTP_PORT@#8880#g" -e "s#@HTTPS_PORT@#8889#g" %{_builddir}/%{archive_dir_name}-%{version}/config/default.template.json > %{_builddir}/%{archive_dir_name}-%{version}/config/default.json
 chmod +x $RPM_BUILD_ROOT%{_initrddir}/%{name}
 cp -r %{_builddir}/%{archive_dir_name}-%{version}/* $RPM_BUILD_ROOT%{prefix}/

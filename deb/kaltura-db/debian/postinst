@@ -32,6 +32,20 @@ deploy_kmc_and_studio()
 		chown -R $APACHE_USER.$KALTURA_GROUP $WEB_DIR/content/generatedUiConf/
 		sed -i "s@^\(studio_version\s*=\)\(.*\)@\1 $HTML5_STUDIO_VER@g" -i $BASE_DIR/app/configurations/local.ini
 	fi
+	HTML5_STUDIO3_DIR=`ls -ld $BASE_DIR/apps/studioV3/v* 2>/dev/null|awk -F " " '{print $NF}' |tail -1`
+	HTML5_STUDIO3_VER=`basename $HTML5_STUDIO3_DIR`
+	if [ -f "$BASE_DIR/apps/studioV3/$HTML5_STUDIO3_VER/studio.template.ini" ];then
+		sed -e "s#@HTML5_STUDIO3_VER@#$HTML5_STUDIO3_VER#g" -e "s#@HTML5_VER@#$HTML5_VER#g" -e "s#@CDN_HOST@#$KALTURA_VIRTUAL_HOST_NAME#g" -e "s#@SERVICE_URL@#$SERVICE_URL#g" $BASE_DIR/apps/studioV3/$HTML5_STUDIO3_VER/studio.template.ini > $BASE_DIR/apps/studioV3/$HTML5_STUDIO3_VER/studio.ini		      
+	fi
+	if [ -r "$BASE_DIR/apps/studioV3/$HTML5_STUDIO3_VER/studio.ini" ];then
+		php $BASE_DIR/app/deployment/uiconf/deploy_v2.php --user=www-data --ini=$BASE_DIR/apps/studioV3/$HTML5_STUDIO3_VER/studio.ini >> /dev/null
+		HTML5LIB3_VERSION=`dpkg-query -W -f'${Version}' kaltura-html5lib3|awk -F "-" '{print $1}'`
+		HTML5LIB3_BASEDIR=$BASE_DIR/html5/html5lib/playkitSources/kaltura-ovp-player
+		PARTNER_ZERO_SECRET=`echo "select admin_secret from partner where id=0" | mysql -N -h $DB1_HOST -p$DB1_PASS $DB1_NAME -u$DB1_USER  -P$DB1_PORT`
+		if [ -r $HTML5LIB3_BASEDIR/create_playkit_uiconf.php ];then
+			php $HTML5LIB3_BASEDIR/create_playkit_uiconf.php 0 $PARTNER_ZERO_SECRET $SERVICE_URL $HTML5LIB3_VERSION
+		fi
+	fi
 
 	KMC_VERSION=`grep "^kmc_version" $APP_DIR/configurations/local.ini|awk -F "=" '{print $2}'|sed 's@\s*@@g'`
 	KMCNG_VERSION=`grep "^kmcng_version" $APP_DIR/configurations/local.ini|awk -F "=" '{print $2}'|sed 's@\s*@@g'`

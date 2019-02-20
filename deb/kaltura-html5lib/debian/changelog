@@ -1,3 +1,9 @@
+kaltura-html5lib (2.74.3-1) naos; urgency=medium
+
+  * New upstream version
+
+ -- Jess Portnoy <jess@b0f924504114>  Tue, 19 Feb 2019 10:49:21 +0000
+
 kaltura-html5lib (2.74.1-1) naos; urgency=medium
 
   * SUP-16960 - No Audio When Attempting to Play Live Entry on IE11 + Windows 10

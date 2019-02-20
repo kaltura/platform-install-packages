@@ -1,0 +1,41 @@
+#!/usr/bin/make -f
+
+DEB_VERSION := $(shell dpkg-parsechangelog | egrep '^Version:' | cut -f 2 -d ' ')
+RC_FILE :=../../build/sources.rc
+HTML5LIB3_VERSION ?= $(shell egrep '^HTML5LIB3_VERSION=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
+RPM_SOURCES_DIR ?= $(shell egrep '^RPM_SOURCES_DIR=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
+KALTURA_PREFIX ?= $(shell egrep '^KALTURA_PREFIX=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
+HTML5LIB3_PREFIX=$(KALTURA_PREFIX)/html5/html5lib/playkitSources/kaltura-ovp-player
+include ../includes/build-revision.mk
+archive := $(RPM_SOURCES_DIR)/kaltura-html5lib3-$(HTML5LIB3_VERSION).tar.gz
+tree := $(HTML5LIB3_VERSION)
+
+clean:
+	dh_clean
+	rm -rf $(HTML5LIB3_VERSION)
+	rm -rf debian/tmp
+
+$(archive):
+	$(RPM_SOURCES_DIR)/platform-install-packages/build/package_kaltura_html5lib3.sh	
+
+$(tree): $(archive)
+	tar zxf $(archive)
+
+build: $(tree)
+
+install: build
+
+binary-indep: install
+	dh_installdirs
+	rm -rf $(HTML5LIB3_PREFIX)
+	mkdir -p $(HTML5LIB3_PREFIX)
+	mv $(HTML5LIB3_VERSION) $(HTML5LIB3_PREFIX)/$(HTML5LIB3_VERSION)
+	cp debian/create_playkit_uiconf.php $(HTML5LIB3_PREFIX)
+	dh_install $(KALTURA_PREFIX)
+	dh_gencontrol -u-v$(DEB_VERSION) 
+	dh_installdebconf
+	dh_installdeb
+	dh_builddeb 
+
+binary: binary-indep
+.PHONY: clean build binary-indep binary-arch binary

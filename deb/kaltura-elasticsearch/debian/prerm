@@ -1,0 +1,5 @@
+#!/bin/sh
+if [ "$1" = "remove" -o $1 = "purge" ] ; then
+    /usr/sbin/service kaltura-elastic-populate stop >/dev/null 2>&1
+    update-rc.d -f kaltura-elastic-populate remove
+fi

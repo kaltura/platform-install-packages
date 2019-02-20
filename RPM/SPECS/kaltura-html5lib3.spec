@@ -13,7 +13,7 @@ Source1: create_playkit_uiconf.php
 URL: https://github.com/kaltura/kaltura-player-js 
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
-Requires: kaltura-base
+Requires: kaltura-base, httpd
 
 %description
 Kaltura is the world's first Open Source Online Video Platform, transforming the way people work, 

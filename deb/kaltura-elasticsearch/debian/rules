@@ -1,0 +1,41 @@
+#!/usr/bin/make -f
+
+DEB_VERSION := $(shell dpkg-parsechangelog | egrep '^Version:' | cut -f 2 -d ' ')
+RC_FILE :=../../build/sources.rc
+KALTURA_PREFIX ?= $(shell egrep '^KALTURA_PREFIX=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
+CONF_DIR=$(KALTURA_PREFIX)/app/configurations/elastic
+LOG_DIR=$(KALTURA_PREFIX)/log/elasticsearch
+VAR_DIR=$(KALTURA_PREFIX)/var/lib/elasticsearch
+TMP_DIR=$(KALTURA_PREFIX)/var/lib/elasticsearch/tmp
+ES_USER=elasticsearch
+ES_GROUP=elasticsearch
+KALTURA_USER=kaltura
+KALTRUA_GROUP=kaltura
+include ../includes/build-revision.mk
+
+clean:
+	dh_clean
+	rm -rf debian/tmp
+
+build: 
+
+binary-indep:  
+	dh_installdirs
+	mkdir -p $(LOG_DIR) $(VAR_DIR)/nodes $(TMP_DIR) $(CONF_DIR)/populate etc/elasticsearch/analysis  etc/elasticsearch/aliases 
+	cp debian/kaltura_synonyms_contraction.txt etc/elasticsearch/analysis
+	cp debian/elasticsearch.template.yml $(CONF_DIR)
+	cp debian/aliases.json etc/elasticsearch/aliases
+	dh_install $(LOG_DIR) 
+	dh_install $(VAR_DIR) 
+	dh_install $(TMP_DIR) 
+	dh_install $(CONF_DIR)
+	dh_install etc/elasticsearch/analysis  
+	dh_install etc/elasticsearch/aliases
+	dh_gencontrol -u-v$(DEB_VERSION) 
+	dh_installdebconf
+	dh_installinit --init-script=kaltura-elastic-populate.init --name=kaltura-elastic-populate
+	dh_installdeb
+	dh_builddeb 
+
+binary: binary-indep
+.PHONY: clean binary-indep binary-arch binary

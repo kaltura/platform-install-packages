@@ -1,0 +1,23 @@
+{
+"actions" : [
+{ "add" : { "index" : "beacon_entry_index_@MONTH_DAY@", "alias" : "beacon_entry_index" } },
+{ "add" : { "index" : "beacon_entry_index_@MONTH_DAY@", "alias" : "beacon_entry_index_search" } },
+{ "add" : { "index" : "beacon_entry_index_@MONTH_DAY@", "alias" : "beaconindex" } },
+{ "add" : { "index" : "beacon_entry_server_node_index_@MONTH_DAY@", "alias" : "beacon_entry_server_node_index" } },
+{ "add" : { "index" : "beacon_entry_server_node_index_@MONTH_DAY@", "alias" : "beaconindex" } },
+{ "add" : { "index" : "beacon_entry_server_node_index_@MONTH_DAY@", "alias" : "beacon_entry_server_node_index_search" } },
+{ "add" : { "index" : "beacon_scheduled_resource_index_@MONTH_DAY@", "alias" : "beacon_scheduled_resource_index" } },
+{ "add" : { "index" : "beacon_scheduled_resource_index_@MONTH_DAY@", "alias" : "beaconindex" } },
+{ "add" : { "index" : "beacon_scheduled_resource_index_@MONTH_DAY@", "alias" : "beacon_scheduled_resource_index_search" } },
+{ "add" : { "index" : "beacon_server_node_index_@MONTH_DAY@", "alias" : "beacon_server_node_index" } },
+{ "add" : { "index" : "beacon_server_node_index_@MONTH_DAY@", "alias" : "beaconindex" } },
+{ "add" : { "index" : "beacon_server_node_index_@MONTH_DAY@", "alias" : "beacon_server_node_index_search" } },
+{ "add" : { "index" : "beacon_entry_index_@MONTH_DAY@", "alias" : "beaconindex" } },
+{ "add" : { "index" : "beacon_entry_server_node_index_@MONTH_DAY@", "alias" : "beacon_entry_server_node_index" } },
+{ "add" : { "index" : "beacon_entry_server_node_index_@MONTH_DAY@", "alias" : "beaconindex" } },
+{ "add" : { "index" : "beacon_scheduled_resource_index_@MONTH_DAY@", "alias" : "beacon_scheduled_resource_index" } },
+{ "add" : { "index" : "beacon_scheduled_resource_index_@MONTH_DAY@", "alias" : "beaconindex" } },
+{ "add" : { "index" : "beacon_server_node_index_@MONTH_DAY@", "alias" : "beacon_server_node_index" } },
+{ "add" : { "index" : "beacon_server_node_index_@MONTH_DAY@", "alias" : "beaconindex" }} 
+]
+}
