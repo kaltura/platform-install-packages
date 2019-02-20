@@ -23,7 +23,7 @@ Source10: kaltura-html5lib-v2.46.tar.gz
 URL: https://github.com/kaltura/mwEmbed 
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
-Requires: php, kaltura-base
+Requires: php, kaltura-base, httpd
 
 %description
 Kaltura is the world's first Open Source Online Video Platform, transforming the way people work, 
