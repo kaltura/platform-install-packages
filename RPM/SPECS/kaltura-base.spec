@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 14.14.0
-Release: 14
+Version: 14.15.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -349,6 +349,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Thu Feb 21 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.15.0-1
+- Ver Bounce to 14.15.0
+
 * Mon Feb 18 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.14.0-13
 - If `accessControlNameToId` is undefined call `initAccessControlNameToId()` (https://github.com/kaltura/server/pull/8121)
 - return `calcPageSize` to `kFilterPager` (https://github.com/kaltura/server/pull/8118)
