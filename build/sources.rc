@@ -1,4 +1,5 @@
 # General ENV vars:
+
 # sometimes people package their archives in the stupidest way possible. In such cases, they are extracted here, re-assembled in a normal way and move to $RPM_SOURCES_DIR.
 # this relies on the fact the script runs directly from the build directory but it may not be the case, for instance: what if I run it from build/rpm-specific? RUN_DIR will not be 'build' then. So, leave as is but set +e before it so it does not flunk the thing if not there.
 RUN_DIR=`dirname $0`
