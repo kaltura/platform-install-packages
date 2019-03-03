@@ -1,3 +1,10 @@
+kaltura-html5lib (2.74.4-1) naos; urgency=medium
+
+  * 2.74 hotspots (#3968)
+  * FEC-8884 - Support muted autoplay policies on Firefox
+
+ -- Jess Portnoy <jess@b0f924504114>  Sun, 03 Mar 2019 15:22:56 +0000
+
 kaltura-html5lib (2.74.3-1) naos; urgency=medium
 
   * New upstream version
