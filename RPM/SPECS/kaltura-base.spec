@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 14.15.0
-Release: 10
+Release: 11
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -349,32 +349,23 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Sat Mar 2 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.15.0-10
-- Nightly build.
-
-* Fri Mar 1 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.15.0-9
-- Nightly build.
-
-* Thu Feb 28 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.15.0-8
-- Nightly build.
-
-* Wed Feb 27 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.15.0-7
-- Nightly build.
-
-* Tue Feb 26 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.15.0-6
-- Nightly build.
-
-* Mon Feb 25 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.15.0-5
-- Nightly build.
-
-* Sun Feb 24 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.15.0-4
-- Nightly build.
-
-* Sat Feb 23 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.15.0-3
-- Nightly build.
-
-* Fri Feb 22 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.15.0-2
-- Nightly build.
+* Sun Mar 3 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.15.0-11
+- PLAT-9727: Fix API annotation on `userEntryService` (https://github.com/kaltura/server/pull/8164)
+- Add missing `conf_maps` table to initial DB deployment (https://github.com/kaltura/server/pull/8163)
+- eSearch: Don't skip executed updates in `populateElasticFromLog` (https://github.com/kaltura/server/pull/8159)
+- Added `ALIGNMENT` to `$serviceTypeEnumTranslate` (https://github.com/kaltura/server/pull/8157)
+- SUP-16956: Fix missing subtitles issue (https://github.com/kaltura/server/pull/8151)
+- PLAT-9683: Add support for searching entries by `owner=groupId` or owner in `groupIds` (https://github.com/kaltura/server/pull/8150)
+- PLAT-9699: Fix `ClipConcatJobData` parsing (https://github.com/kaltura/server/pull/8142)
+- PLAT-9699: Fix `ClipConcatJobData` parsing (https://github.com/kaltura/server/pull/8141)
+- PLAT-9698: `UpdateContent()` with operation params does not trim (https://github.com/kaltura/server/pull/8140)
+- PLAT-9643: Support viewing older versions of `confMaps`  (https://github.com/kaltura/server/pull/8138)
+- PLAT-9656: create new boolean event notification (https://github.com/kaltura/server/pull/8137)
+- SUP-17265: Eliminate a situation where a client requests non-existent flavor param ID from the server and gets empty manifest as result (https://github.com/kaltura/server/pull/8136)
+- Set `UpdateAt` when deleting a cue-point (https://github.com/kaltura/server/pull/8135)
+- Use a protocol agnostic URL for `embedPlaykitJs` (https://github.com/kaltura/server/pull/8134)
+- Copy poll data cue point regardless of its time (https://github.com/kaltura/server/pull/8133)
+- PLAT-9644: Support trimming/clipping content from remote storage or the other dc (https://github.com/kaltura/server/pull/8128)
 
 * Thu Feb 21 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.15.0-1
 - Ver Bounce to 14.15.0
