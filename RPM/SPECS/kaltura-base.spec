@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 14.15.0
-Release: 11
+Version: 14.16.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -349,6 +349,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Tue Mar 5 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.16.0-1
+- Ver Bounce to 14.16.0
+
 * Sun Mar 3 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.15.0-11
 - PLAT-9727: Fix API annotation on `userEntryService` (https://github.com/kaltura/server/pull/8164)
 - Add missing `conf_maps` table to initial DB deployment (https://github.com/kaltura/server/pull/8163)
