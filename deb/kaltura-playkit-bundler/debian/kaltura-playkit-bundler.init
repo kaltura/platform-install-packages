@@ -27,7 +27,7 @@ fi
  
 NAME="Kaltura Bundle builder API Server"
 BUNDLE_BUILDER_PATH="/opt/kaltura/playkit-js-bundle-builder"
-LOG_PATH="/opt/kaltura/playkit-js-bundle-builder/log"
+LOG_PATH="$BUNDLE_BUILDER_PATH/log"
 NODE_PATH=$BUNDLE_BUILDER_PATH"/node_modules"
 APPLICATION_PATH=`readlink -e $BUNDLE_BUILDER_PATH"/main.js"`
 PIDFILE=$BUNDLE_BUILDER_PATH"/config/bundle-builder-server.pid"
