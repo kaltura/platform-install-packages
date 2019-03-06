@@ -34,7 +34,6 @@ binary-indep: install
 	rm -rf $(KALTURA_PREFIX)
 	mkdir -p $(PLAYKIT_CONF_DIR) $(PLAYKIT_LOG_DIR)
 	mv $(tree)/* $(PLAYKIT_PREFIX)/
-	sed -e "s#@LOG_DIR@#/$(PLAYKIT_LOG_DIR)#g" -e "s#@BUNDLE_BUILDER_PREFIX@#/$(PLAYKIT_PREFIX)#g" -e 's#@NODE_MODULES_PATH@#/usr/lib/node_modules#g'  $(PLAYKIT_PREFIX)/bin/bundle-builder-server.template.sh > debian/kaltura-playkit-bundler.init
 	sed -e "s#@LOG_DIR@#/$(PLAYKIT_LOG_DIR)#g" -e "s#@HTTP_PORT@#8880#g" -e "s#@HTTPS_PORT@#8889#g" $(PLAYKIT_CONF_DIR)/default.template.json > $(PLAYKIT_CONF_DIR)/default.json
 	dh_install $(PLAYKIT_PREFIX)
 	dh_gencontrol -u-v$(DEB_VERSION) 
