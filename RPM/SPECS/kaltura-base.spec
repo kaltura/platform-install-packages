@@ -36,7 +36,6 @@ Source35: start_page.php
 Source36: start_page_survey.png
 Source37: start_page_newsletter.png
 Source38: start_page-landing-page.css
-Source39: previewSuccess.php
 
 URL: https://github.com/kaltura/server/tree/%{codename}-%{version}
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -166,8 +165,6 @@ cp %{SOURCE38} $RPM_BUILD_ROOT%{prefix}/app/start/css/landing-page.css
 mkdir -p $RPM_BUILD_ROOT%{webdir}/content
 tar zxf %{SOURCE10} -C $RPM_BUILD_ROOT%{webdir}/content
 
-# tmp patch for player v3 preview to be removed when https://github.com/kaltura/server/pull/8134/files is merged.
-cp %{SOURCE39} $RPM_BUILD_ROOT%{prefix}/app/alpha/apps/kaltura/modules/extwidget/templates/previewSuccess.php
 
 %{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d
 cat > $RPM_BUILD_ROOT%{_sysconfdir}/profile.d/kaltura_base.sh << EOF
