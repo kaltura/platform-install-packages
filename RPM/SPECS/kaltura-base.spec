@@ -349,6 +349,15 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Wed Mar 6 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.16.0-1
+- Nightly build.
+
+* Wed Mar 6 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.16.0-3
+- Nightly build.
+
+* Wed Mar 6 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.16.0-2
+- Nightly build.
+
 * Tue Mar 5 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.16.0-1
 - Ver Bounce to 14.16.0
 
