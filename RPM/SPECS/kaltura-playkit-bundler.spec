@@ -5,14 +5,16 @@
 %define prefix %{kaltura_prefix}/%{archive_dir_name}
 %define confdir %{prefix}/config
 %define logdir %{prefix}/log
+%define piddir %{prefix}/var/run
 
 Summary: Kaltura PlayKit Bundler 
 Name: kaltura-playkit-bundler 
 Version: 1.1.1
-Release: 9
+Release: 11
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-v%{version}.tar.gz
+Source1: kaltura-playkit-bundler
 URL: https://github.com/kaltura/%{archive_dir_name}
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
@@ -40,9 +42,10 @@ This package provides the PlayKit bundler.
 %install
 mkdir -p $RPM_BUILD_ROOT%{confdir}
 mkdir -p $RPM_BUILD_ROOT%{logdir}
+mkdir -p $RPM_BUILD_ROOT%{piddir}
 mkdir -p $RPM_BUILD_ROOT%{_initrddir}
 
-sed -e "s#@LOG_DIR@#%{logdir}#g" -e "s#@BUNDLE_BUILDER_PREFIX@#%{prefix}#g" -e 's#@NODE_MODULES_PATH@#/usr/lib/node_modules#g'  %{_builddir}/%{archive_dir_name}-%{version}/bin/bundle-builder-server.template.sh > $RPM_BUILD_ROOT%{_initrddir}/%{name}
+sed -e "s#@BUNDLE_BUILDER_PREFIX@#%{prefix}#g" %{SOURCE1} > $RPM_BUILD_ROOT%{_initrddir}/%{name}
 sed -e "s#@LOG_DIR@#%{logdir}#g" -e "s#@HTTP_PORT@#8880#g" -e "s#@HTTPS_PORT@#8889#g" %{_builddir}/%{archive_dir_name}-%{version}/config/default.template.json > %{_builddir}/%{archive_dir_name}-%{version}/config/default.json
 chmod +x $RPM_BUILD_ROOT%{_initrddir}/%{name}
 cp -r %{_builddir}/%{archive_dir_name}-%{version}/* $RPM_BUILD_ROOT%{prefix}/
@@ -52,6 +55,8 @@ cp -r %{_builddir}/%{archive_dir_name}-%{version}/* $RPM_BUILD_ROOT%{prefix}/
 #rm -rf %{buildroot}
 
 %pre
+# we really only want this when upgrading but since we have to use '|| true' anyhow, it doesn't matter
+service %{name} stop || true
 # maybe one day we will support SELinux in which case this can be ommitted.
 if which getenforce >> /dev/null 2>&1; then
 	
@@ -83,6 +88,9 @@ fi
 %{prefix}/*
 %{_initrddir}/%{name}
 %config %{confdir}/*
+%defattr(-, %{kaltura_user}, %{kaltura_group} , 0755)
+%dir %{logdir}
+%dir %{piddir}
 
 
 %doc %{prefix}/bundle_builder_server_deployment.md
@@ -90,5 +98,8 @@ fi
 %doc %{prefix}/README.md
 
 %changelog
+* Wed Mar 6 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v1.1.1-10
+- Override the vanila init script with one that is able to run this as a none privileged user ['kaltura']
+
 * Mon Feb 11 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v1.1.1
 - First release
