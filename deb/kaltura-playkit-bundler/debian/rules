@@ -10,6 +10,7 @@ KALTURA_PREFIX ?= $(shell egrep '^KALTURA_PREFIX=' $(RC_FILE) | cut -d = -f 2| s
 PLAYKIT_PREFIX=$(KALTURA_PREFIX)/playkit-js-bundle-builder
 PLAYKIT_CONF_DIR=$(PLAYKIT_PREFIX)/config
 PLAYKIT_LOG_DIR=$(PLAYKIT_PREFIX)/log
+PLAYKIT_PID_DIR=$(PLAYKIT_PREFIX)/var/run
 include ../includes/build-revision.mk
 archive := $(SOURCE_PACKAGING_DIR)/$(KALTURA_PLAYKIT_BUNDLER_RPM_NAME)-$(KALTURA_PLAYKIT_BUNDLER_VERSION).tar.gz
 tree := playkit-js-bundle-builder-$(KALTURA_PLAYKIT_BUNDLER_VERSION_NO_V)
@@ -32,7 +33,7 @@ install: build
 binary-indep: install
 	dh_installdirs
 	rm -rf $(KALTURA_PREFIX)
-	mkdir -p $(PLAYKIT_CONF_DIR) $(PLAYKIT_LOG_DIR)
+	mkdir -p $(PLAYKIT_CONF_DIR) $(PLAYKIT_LOG_DIR) $(PLAYKIT_PID_DIR) $(KALTURA_PREFIX)/.forever
 	mv $(tree)/* $(PLAYKIT_PREFIX)/
 	sed -e "s#@LOG_DIR@#/$(PLAYKIT_LOG_DIR)#g" -e "s#@HTTP_PORT@#8880#g" -e "s#@HTTPS_PORT@#8889#g" $(PLAYKIT_CONF_DIR)/default.template.json > $(PLAYKIT_CONF_DIR)/default.json
 	dh_install $(PLAYKIT_PREFIX)
