@@ -1,0 +1,3 @@
+#!/bin/bash
+# we really only want this when upgrading but since we have to use '|| true' anyhow, it doesn't matter
+invoke-rc.d kaltura-playkit-bundler stop || true
