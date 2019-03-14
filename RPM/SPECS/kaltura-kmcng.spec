@@ -1,6 +1,6 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmcng
-Version: v5.6.4
+Version: v5.6.5
 Release: 1
 Summary: Kaltura HTML5 Management Console
 
@@ -49,6 +49,10 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Thu Mar 14 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v5.6.5-1
+- categories: Show up to 100 sub-categories in the category details panel (2bb1467)
+- login: fix password expiration message (56517e1)
+
 * Mon Feb 18 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v5.6.4-1
 - entry/captions: Support ordering captions for Youtube entries (701dd3f)
 - entry/related: Add support to JSON files in entry related files (bcc05f6)
