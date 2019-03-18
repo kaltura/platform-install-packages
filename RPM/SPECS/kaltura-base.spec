@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 14.16.0
-Release: 16
+Release: 17
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -111,6 +111,7 @@ find  $RPM_BUILD_ROOT%{prefix}/app -name "*.sh" -type f -exec chmod +x {} \;
 
 
 sed -i 's@^IsmIndex@;IsmIndex@g' $RPM_BUILD_ROOT%{confdir}/plugins.template.ini
+sed -i 's#^;ElasticSearch#ElasticSearch#g' $RPM_BUILD_ROOT%{confdir}/plugins.template.ini
 sed -i "s#^;kmc_version = @KMC_VERSION@#kmc_version = %{_kmc_version}#g" $RPM_BUILD_ROOT%{confdir}/local.template.ini
 sed -i 's#@KMCNG_VERSION@#%{_kmcng_version}#' $RPM_BUILD_ROOT%{confdir}/local.template.ini
 sed -i 's@^otp_required_partners\[\]@;otp_required_partners\[\]@g' $RPM_BUILD_ROOT%{confdir}/local.template.ini
