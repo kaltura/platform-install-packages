@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 14.16.0
-Release: 15
+Release: 16
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -346,50 +346,32 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Sun Mar 17 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.16.0-15
-- Nightly build.
-
-* Sat Mar 16 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.16.0-14
-- Nightly build.
-
-* Fri Mar 15 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.16.0-13
-- Nightly build.
-
-* Thu Mar 14 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.16.0-12
-- Nightly build.
-
-* Wed Mar 13 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.16.0-10
-- Nightly build.
-
-* Tue Mar 12 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.16.0-9
-- Nightly build.
-
-* Mon Mar 11 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.16.0-8
-- Nightly build.
-
-* Sun Mar 10 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.16.0-1
-- Nightly build.
-
-* Sat Mar 9 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.16.0-7
-- Nightly build.
-
-* Fri Mar 8 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.16.0-6
-- Nightly build.
-
-* Thu Mar 7 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.16.0-5
-- Nightly build.
-
-* Wed Mar 6 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.16.0-3
-- Nightly build.
-
-* Wed Mar 6 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.16.0-1
-- Nightly build.
-
-* Wed Mar 6 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.16.0-3
-- Nightly build.
-
-* Wed Mar 6 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.16.0-2
-- Nightly build.
+* Mon Mar 18 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.16.0-16
+- PLAT-9742: Added `ESearchGroupOrderByItem.php` (https://github.com/kaltura/server/pull/8217)
+- PLAT-9742: Move group related `eSearch` code to the `Group` plugin (https://github.com/kaltura/server/pull/8213)
+- PLAT-9742: fix param types in `validateUserNames()` and `addUserImpl()` (https://github.com/kaltura/server/pull/8212)
+- Add `PushNotification` and `BooleanNotification` to `plugins.template.ini` (https://github.com/kaltura/server/pull/8210)
+- PLAT-9742: Add the `Group` plugin to plugins.ini (https://github.com/kaltura/server/pull/8208)
+- `KMediaFileComplexity::EvaluateSampled()`: Return null if sampling data is missing (https://github.com/kaltura/server/pull/8202)
+- PLAT-9742: Upon `groupUser` delete() or add(), update the counter on group user (https://github.com/kaltura/server/pull/8198)
+- Chunked encoding fixes (https://github.com/kaltura/server/pull/8195)
+- PLAT-9754: Extract media fixes (https://github.com/kaltura/server/pull/8194)
+- PLAT-9752: eSearch - support sorting by user ID and screen name (https://github.com/kaltura/server/pull/8193)
+- PLAT-9701: Entry investigation - track template entry (https://github.com/kaltura/server/pull/8190)
+- Update Live Params and remove ingest tag from Cloud Transcode flavors (https://github.com/kaltura/server/pull/8186)
+- PLAT-9747: Upon deletion of `QuizUserEntry`, delete all its answer cuepoint objects (https://github.com/kaltura/server/pull/8185)
+- PLAT-9648: Remove BIF thumbnail v2 flow (https://github.com/kaltura/server/pull/8184)
+- PLAT-9745: Change the name of the retake fields and fix score type (https://github.com/kaltura/server/pull/8183)
+- PLAT-9740: Media repurposing - When setting `inputUserId`, `inputEntitledUsersEdit` and `inputEntitledUsersPublish` to 'N/A' the origi
+nal values will be kept (https://github.com/kaltura/server/pull/8182)
+- PLAT-9738: Drop use of `json_decode()` (lead to memory exhaustion) (https://github.com/kaltura/server/pull/8180)
+- PLAT-9318: Quiz retake - add score type and calculate overall score accordingly (https://github.com/kaltura/server/pull/8176)
+- PLAT-9730: When importing during `clip_concat()`, skip the virus scan as it blocks the other consumers (https://github.com/kaltura/server/pull/8175)
+- PLAT-9651: Handle `xsdDoc` page generation when type is invalid (https://github.com/kaltura/server/pull/8173)
+- PLAT-8580: Add managers to group user (https://github.com/kaltura/server/pull/8167)
+- SUP-17212: Disallow calling `add_content()` when entry is not in `no_content` state (https://github.com/kaltura/server/pull/8165)
+- PLAT-9681: Quiz retake functionality (https://github.com/kaltura/server/pull/8156)
+- PLAT-9648: Add BIF file generation (https://github.com/kaltura/server/pull/8139)
 
 * Tue Mar 5 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.16.0-1
 - Ver Bounce to 14.16.0
