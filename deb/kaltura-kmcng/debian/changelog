@@ -1,3 +1,10 @@
+kaltura-kmcng (5.6.5-1) naos; urgency=medium
+
+  * categories: Show up to 100 sub-categories in the category details panel (2bb1467)
+  * login: fix password expiration message (56517e1)
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 18 Mar 2019 11:20:24 +0000
+
 kaltura-kmcng (5.6.4-1) naos; urgency=medium
 
   * entry/captions: Support ordering captions for Youtube entries (701dd3f)
