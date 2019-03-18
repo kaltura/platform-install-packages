@@ -1,3 +1,12 @@
+kaltura-html5-studio3 (3.3.0-1) naos; urgency=medium
+
+  * FEC-8880: add support for youtube
+  * FEC-8805: playlist support
+  * FEC-8894: OVP player identified as OTT after creating OTT player
+  * FEC-8895: OTT player identified as OVP
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 18 Mar 2019 15:04:52 +0000
+
 kaltura-html5-studio3 (3.2.3-1) naos; urgency=low
 
   * First release
