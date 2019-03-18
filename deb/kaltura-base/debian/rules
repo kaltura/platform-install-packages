@@ -67,6 +67,7 @@ binary-indep: install
 	for i in "*.xml" "*.template" "*.ttf" "*.xsl" "*.xsd" "*.yml" "*.smil" "*.srt" "*.sql" "*.orig" "*.patch" "*.po" "*.pdf" "*.otf" "*.txt" "*.php" "*.phtml" "*.project" "*.png" "*.properties" "*.sample" "*.swf" "*.sf" "*.swz" "*.uad" "*.prefs" "*.psd" "*.rvmrc" "*.sln" "*.ini" "*.log" ;do find . -iname "$i" -exec chmod 644 {} \; ; done
 	find  $(tree) -name "*.sh" -type f -exec chmod +x {} \;
 	sed -i 's@^IsmIndex@;IsmIndex@g' $(tree)/configurations/plugins.template.ini
+	sed -i 's@^;ElasticSearch@ElasticSearch@g' $(tree)/configurations/plugins.template.ini
 	sed -i "s#^;kmc_version = @KMC_VERSION@#kmc_version = $(KMC_VERSION)#g" $(tree)/configurations/local.template.ini
 	sed -i "s#@KMCNG_VERSION@#$(KMCNG_VERSION)#g" $(tree)/configurations/local.template.ini
 	sed -i 's@^otp_required_partners\[\]@;otp_required_partners\[\]@g' $(tree)/configurations/local.template.ini
