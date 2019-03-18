@@ -3,7 +3,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5-studio3
-Version: v3.2.3
+Version: v3.3.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -52,5 +52,12 @@ rm -rf %{buildroot}
 %{studio_prefix}/%{version}
 
 %changelog
+* Mon Mar 18 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v3.3.0-1
+- FEC-8880: add support for youtube
+- FEC-8805: playlist support
+- FEC-8894: OVP player identified as OTT after creating OTT player
+- FEC-8895: OTT player identified as OVP
+
+
 * Thu Feb 7 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v3.2.3-1
 - First release
