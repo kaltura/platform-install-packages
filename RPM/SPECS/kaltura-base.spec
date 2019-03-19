@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 14.16.0
-Release: 17
+Version: 14.17.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -347,6 +347,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Tue Mar 19 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.17.0-1
+- Ver Bounce to 14.17.0
+
 * Mon Mar 18 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.16.0-16
 - PLAT-9742: Added `ESearchGroupOrderByItem.php` (https://github.com/kaltura/server/pull/8217)
 - PLAT-9742: Move group related `eSearch` code to the `Group` plugin (https://github.com/kaltura/server/pull/8213)
