@@ -74,7 +74,6 @@ enabledWorkers.KAsyncConvertThumbAssetsGenerator    = 1
 enabledWorkers.KAsyncLiveToVod                      = 1
 enabledWorkers.KAsyncCopyCaptions		    = 1
 enabledWorkers.KAsyncCopyCuePoints                  = 1
-enabledWorkers.KAsyncUsersCsv 			    = 1
 
 [mainTemplate : template]
 enabledWorkers.DirectoryCleanupShared               = 1
@@ -814,3 +813,12 @@ id                                                  = 690
 friendlyName                                        = Copy Cue Point
 type                                                = KAsyncCopyCuePoints
 scriptPath                                          = ../plugins/cue_points/base/batch/copyCuePoints/KAsyncCopyCuePointsExe.php
+
+[KAsyncExportCsv : JobHandlerWorker]
+id						    = 700
+friendlyName					    = Export Csv
+type						    = KAsyncExportCsv
+params.localTempPath                                = @TMP_DIR@/exportcsv
+params.sharedTempPath                               = @WEB_DIR@/tmp/exportcsv
+scriptPath					    = batches/ExportCsv/kAsyncExportCsvExe.php
+maximumExecutionTime			            = 3600
