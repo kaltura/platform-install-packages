@@ -7,7 +7,7 @@
 Summary: Kaltura Open Source Video Platform - batch server 
 Name: kaltura-batch
 Version: 14.17.0
-Release: 1
+Release: 2
 License: AGPLv3+
 Group: Server/Platform 
 Source0: zz-%{name}.ini
@@ -131,6 +131,9 @@ service httpd restart
 
 
 %changelog
+* Tue Mar 26 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.17.0-2
+- Added the KAsyncExportCsv job
+
 * Tue Mar 19 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.17.0-1
 - Ver Bounce to 14.17.0
 
