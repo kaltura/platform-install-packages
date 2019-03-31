@@ -3,7 +3,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.74.4
+Version: v2.75
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -86,6 +86,23 @@ fi
 %config %{html5lib_base}/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Thu Mar 28 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v2.75-1
+- FEC-8884 - Support muted autoplay policies on Firefox
+- FEC-8501 - V2 - Ads - iOS 11/12 Scrubber is disabled after selecting learn more pre-mid
+- WEBC-1365 - I as User want to be able to insert a longer text inside the Q&A module & having a counter + UI mini-makeover 
+- FEC-8607 - On IE11 -Win7 sometimes the player gets stuck on a spinning wheel
+- KMS-19285 - IVQ - Open Q - User is able to insert answer with 500 chars when the limit is 270 
+- SUP-17047 - Reducing use of Google URLs 
+- FEC-8989 - [V2][Youtube] When playing Youtube entry with Autoplay policy the player is stuck with endless spinner
+- FEC-7899 - Live without DVR: player displays a black screen instead of a video
+- FEC-8987
+- FEV-288 - IVQ - Open-Q - 'undefined UN-ANSWERED' is displayed for reflection type
+- prevent site indexing |  
+- sanitize docs site title |  
+- hotspots 4 (#3979) |  
+- fix: unmute doesn't get destroyed in playlist player (#3946) |  
+- fix(QNA): paste and cut with their events (#3989)
+
 * Sun Mar 3 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v2.74.4-1
 - 2.74 hotspots (#3968)
 - FEC-8884 - Support muted autoplay policies on Firefox

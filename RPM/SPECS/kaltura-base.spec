@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 14.17.0
-Release: 11
+Release: 12
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -347,38 +347,26 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Sat Mar 30 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.17.0-11
-- Nightly build.
-
-* Fri Mar 29 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.17.0-10
-- Nightly build.
-
-* Thu Mar 28 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.17.0-9
-- Nightly build.
-
-* Wed Mar 27 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.17.0-1
-- Nightly build.
-
-* Tue Mar 26 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.17.0-8
-- Nightly build.
-
-* Mon Mar 25 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.17.0-7
-- Nightly build.
-
-* Sun Mar 24 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.17.0-6
-- Nightly build.
-
-* Sat Mar 23 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.17.0-5
-- Nightly build.
-
-* Fri Mar 22 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.17.0-4
-- Nightly build.
-
-* Thu Mar 21 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.17.0-3
-- Nightly build.
-
-* Wed Mar 20 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.17.0-2
-- Nightly build.
+* Sun Mar 31 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.17.0-12
+- Pass mandatory param when calling `addHeaderRowToCsv()` (https://github.com/kaltura/server/pull/8259)
+- Increase elastic beacon replication factor for fallback (https://github.com/kaltura/server/pull/8258)
+- PLAT-9771 - `kClipManager.php`: avoid `concat()` on single operation attribute (https://github.com/kaltura/server/pull/8254)
+- PLAT-9771 - `kClipManager.php`: avoid `concat()` on single operation attribute (https://github.com/kaltura/server/pull/8253)
+- AN-188: Add batch job to export `report` results to CSV (https://github.com/kaltura/server/pull/8250)
+- PLAT-9766: Call `kFileUtils::dumpApiRequest()` when thumb `$srcSyncKey` only exists on the other DC (https://github.com/kaltura/server
+/pull/8242)
+- PLAT-9723: Add support for copying a group (https://github.com/kaltura/server/pull/8241)
+- KMS-19341: When querying entries by username, entries with a group that the user is entitled to should be returned as well (https://github.com/kaltura/server/pull/8240)
+- Fix `confmaps` admin console page on service forbidden (https://github.com/kaltura/server/pull/8238)
+- `playlist.updateAction()` modifications (https://github.com/kaltura/server/pull/8237)
+- PLAT-9746: Return `totalCount` of 0 when `KalturaUserEntryListResponse` is empty (https://github.com/kaltura/server/pull/8235)
+- PLAT-9421: Save `cdnWhiteList` results in memory in order to avoid multiple invocations during list() calls (https://github.com/kaltura/server/pull/8232)
+- PLAT-9760: Make `esearch.searchUser` filter by `group_ids` field to work with `puserId` (https://github.com/kaltura/server/pull/8229)
+- PLAT-9736: keep user search in recent searches (https://github.com/kaltura/server/pull/8227)
+- Add option to disable new analytics tab in KMC (https://github.com/kaltura/server/pull/8226)
+- PLAT-9663: youtubeApi - no status when video rejected due to video length  (https://github.com/kaltura/server/pull/8225)
+- PLAT-9758: Allow partial search for username (https://github.com/kaltura/server/pull/8219)
+- PSVAMB-4967, PSVAMB-4944: KMS Email Notifications update (https://github.com/kaltura/server/pull/8038)
 
 * Tue Mar 19 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.17.0-1
 - Ver Bounce to 14.17.0
