@@ -8,6 +8,7 @@ SOURCE_PACKAGING_DIR ?= $(shell egrep '^SOURCE_PACKAGING_DIR=' $(RC_FILE) | cut 
 KALTURA_PREFIX ?= $(shell egrep '^KALTURA_PREFIX=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
 HTML5LIB_VERSION ?= $(shell egrep '^HTML5LIB_LATEST_VERSION=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
 HTML5_STUDIO_VERSION ?= $(shell egrep '^HTML5_APP_STUDIO_VERSION=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
+HTML5_APP_ANALYTICS_VERSION ?= $(shell egrep '^HTML5_APP_ANALYTICS_VERSION=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
 KMC_VERSION ?= v$(shell egrep '^KMC_MINUS_V_VERSION=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
 KMCNG_VERSION ?= v$(shell egrep '^KMCNG_MINUS_V_VERSION=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
 KMC_LOGIN_VERSION ?= v$(shell egrep '^KMC_LOGIN_MINUS_V_VERSION=' $(RC_FILE) | cut -d = -f 2| sed 's@"@@g')
@@ -80,6 +81,7 @@ binary-indep: install
 	sed -i "s#@INERNAL_BUNDLER_URL@#http://127.0.0.1:8880#g" $(tree)/configurations/local.template.ini
 	sed -i "s#^play_kit_js_cache_version = 1#play_kit_js_cache_version = 2#g" $(tree)/configurations/local.template.ini
 	sed -i "s#^;kdp3_wrapper_version = @KDP3_WRAPPER_VERSION@#kdp3_wrapper_version = $(KDP3WRAPPER_VERSION)#g" $(tree)/configurations/local.template.ini
+	sed -i "s#^kmc_analytics_version =.*#kmc_analytics_version = $(HTML5_APP_ANALYTICS_VERSION)#g" $(tree)/configurations/base.ini
 	sed -i "s#^bin_path_mediainfo = .*#bin_path_mediainfo = mediainfo#g" $(tree)/configurations/local.template.ini
 	sed -i "s#^;kmc_login_version = @KMC_LOGIN_VERSION@#kmc_login_version = $(KMC_LOGIN_VERSION)#g" $(tree)/configurations/local.template.ini
 	sed -i 's@^writers.\(.*\).filters.priority.priority\s*=\s*7@writers.\1.filters.priority.priority=4@g' $(tree)/configurations/logger.template.ini
