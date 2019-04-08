@@ -5,8 +5,8 @@
 %define apache_group	apache
 Summary: Kaltura Open Source Video Platform - frontend server 
 Name: kaltura-front
-Version: 14.17.0
-Release: 2
+Version: 14.18.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source3: zz-%{name}.ini 
@@ -102,6 +102,9 @@ rm -rf %{buildroot}
 %config %{_sysconfdir}/php.d/zz-%{name}.ini
 
 %changelog
+* Mon Apr 8 2019 Jess Portnoy <jess.portnoy@kaltura.com> - 14.18.0-1
+- Ver Bounce to 14.18.0
+
 * Mon Apr 8 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.17.0-2
 - HTML5 analytics
 

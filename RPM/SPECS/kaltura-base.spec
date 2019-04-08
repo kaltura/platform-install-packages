@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 14.17.0
-Release: 14
+Version: 14.18.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -348,6 +348,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Apr 8 2019 Jess Portnoy <jess.portnoy@kaltura.com> - 14.18.0-1
+- Ver Bounce to 14.18.0
+
 * Sun Mar 31 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.17.0-12
 - Pass mandatory param when calling `addHeaderRowToCsv()` (https://github.com/kaltura/server/pull/8259)
 - Increase elastic beacon replication factor for fallback (https://github.com/kaltura/server/pull/8258)
