@@ -3,12 +3,12 @@
 %define livedvr_prefix %{kaltura_root_prefix}/livedvr
 %define kaltura_user	kaltura
 %define kaltura_group	kaltura
-%define ffmpeg_version 4.1
+%define ffmpeg_version 3.0 
 %define nginx_conf_dir /etc/nginx/conf.d/
 
 Summary: Kaltura Open Source Video Platform - Live DVR
 Name: kaltura-livedvr
-Version: 2.1.0
+Version: 2.2.1
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -56,10 +56,11 @@ NODE_PATH=~/node_modules
 export LDFLAGS="-g -lX11"
 mkdir -p %{buildroot}/%{name}-%{version}/tmp/build 
 sed -i 's@configure @configure --disable-vdpau @g' ./build_scripts/build_ffmpeg4.sh
-./build_scripts/build_ffmpeg4.sh %{buildroot}/%{name}-%{version}/tmp/build %{ffmpeg_version}
+./build_scripts/build_ffmpeg4.sh %{buildroot}/%{name}-%{version}/tmp/build
+./build_scripts/build_ffmpeg.sh %{buildroot}/%{name}-%{version}/tmp/build %{ffmpeg_version}
 ./build_scripts/build_ts2mp4_convertor.sh ./liveRecorder %{buildroot}/%{name}-%{version}/tmp/build
 npm install nan
-./build_scripts/build_addon.sh `pwd` %{buildroot}/%{name}-%{version}/tmp/build Release
+./build_scripts/build_addon.sh `pwd` %{buildroot}/%{name}-%{version}/tmp/build/ffmpeg-%{ffmpeg_version} Release
 
 
 %install
