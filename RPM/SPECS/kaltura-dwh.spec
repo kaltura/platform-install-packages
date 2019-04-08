@@ -2,8 +2,8 @@
 %define kaltura_user kaltura
 Summary: Kaltura Open Source Video Platform - Analytics 
 Name: kaltura-dwh
-Version: 14.12.0
-Release: 2
+Version: 14.18.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/dwh/archive/%{name}-Naos-%{version}.zip
@@ -73,6 +73,9 @@ fi
 
 
 %changelog
+* Thu Apr 4 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.18.0-1
+- Since RAPT is implemented as a playlist, we need to include the value 3 when querying `entry_media_type_id`.
+
 * Tue Jan 15 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.12.0-1
 - New UserAgent.jar, used for browser detection.
 

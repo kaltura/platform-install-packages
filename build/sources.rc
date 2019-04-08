@@ -182,7 +182,7 @@ KALTURA_MEDIASERVER_RPM_NAME=kaltura-media-server
 
 MEDIASERVER_DEPS_JARS="junit/junit-dep-4.7 json-/json-20090211 hamcrest/hamcrest-core-1.1 commons-logging/commons-logging-1.0.4 commons-httpclient/commons-httpclient-3.1 commons-codec/commons-codec-1.4"
 
-KALTURA_LIVE_DVR_VERSION="2.0.4"
+KALTURA_LIVE_DVR_VERSION="2.2.1"
 KALTURA_LIVE_DVR_URI="https://github.com/kaltura/liveDVR/archive/v$KALTURA_LIVE_DVR_VERSION.tar.gz"
 KALTURA_LIVE_DVR_RPM_NAME=kaltura-livedvr
 
@@ -297,7 +297,7 @@ HTML5LIB_BASE_URI="https://github.com/kaltura/mwEmbed/tarball/"
 HTML5LIB_RPM_NAME="kaltura-html5lib"
 
 # Kaltura DWH
-DWH_VERSION="Naos-14.12.0"
+DWH_VERSION="Naos-14.18.0"
 DWH_URI="https://github.com/kaltura/dwh/archive/$DWH_VERSION.zip"
 DWH_RPM_NAME="kaltura-dwh"
 

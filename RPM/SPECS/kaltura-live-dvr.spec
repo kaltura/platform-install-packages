@@ -8,8 +8,8 @@
 
 Summary: Kaltura Open Source Video Platform - Live DVR
 Name: kaltura-livedvr
-Version: 2.0.4
-Release: 2
+Version: 2.2.1
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 URL: http://kaltura.org
