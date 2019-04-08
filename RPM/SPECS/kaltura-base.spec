@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 14.17.0
-Release: 12
+Release: 13
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -121,6 +121,7 @@ sed -i 's#<html5Url>/html5/html5lib/v.*/mwEmbedLoader.php</html5Url>#<html5Url>/
 sed -i "s#^;kmc_login_version = @KMC_LOGIN_VERSION@#kmc_login_version = %{kmc_login_version}#g" $RPM_BUILD_ROOT%{confdir}/local.template.ini
 sed -i "s@clipapp_version = @CLIPPAPP_VERSION@#clipapp_version = %{clipapp_version}#g" $RPM_BUILD_ROOT%{confdir}/local.template.ini
 sed -i "s#^clipapp_version =.*#clipapp_version = %{clipapp_version}#g" $RPM_BUILD_ROOT%{confdir}/base.ini
+sed -i "s#^kmc_analytics_version =.*#kmc_analytics_version = %{kmc_analytics_version}#g" $RPM_BUILD_ROOT%{confdir}/base.ini
 sed -i "s#^;kdp3_wrapper_version = @KDP3_WRAPPER_VERSION@#kdp3_wrapper_version = %{kdp3_wrapper_version}#g" $RPM_BUILD_ROOT%{confdir}/local.template.ini
 sed -i "s#@PLAYKIT_JS_SOURCES_PATH@#%{prefix}/html5/html5lib/playkitSources#g" $RPM_BUILD_ROOT%{confdir}/local.template.ini
 sed -i "s#@PLAYKIT_JS_SOURCES_MAP_LOADER@#embedPlaykitJsSourceMaps#g" $RPM_BUILD_ROOT%{confdir}/local.template.ini
