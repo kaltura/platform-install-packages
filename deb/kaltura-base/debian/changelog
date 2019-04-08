@@ -1,3 +1,9 @@
+kaltura-base (14.18.0-1) naos; urgency=medium
+
+  * Switching to 14.18.0
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 08 Apr 2019 20:08:06 +0000
+
 kaltura-base (14.17.0-2) naos; urgency=medium
 
   * Pass mandatory param when calling `addHeaderRowToCsv()` (https://github.com/kaltura/server/pull/8259)
