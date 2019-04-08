@@ -3,12 +3,12 @@
 %define livedvr_prefix %{kaltura_root_prefix}/livedvr
 %define kaltura_user	kaltura
 %define kaltura_group	kaltura
-%define ffmpeg_version 3.0
+%define ffmpeg_version 4.1
 %define nginx_conf_dir /etc/nginx/conf.d/
 
 Summary: Kaltura Open Source Video Platform - Live DVR
 Name: kaltura-livedvr
-Version: 2.2.1
+Version: 2.1.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -53,11 +53,13 @@ rm -rf %{buildroot}
 
 %build
 NODE_PATH=~/node_modules
+export LDFLAGS="-g -lX11"
 mkdir -p %{buildroot}/%{name}-%{version}/tmp/build 
-./build_scripts/build_ffmpeg.sh %{buildroot}/%{name}-%{version}/tmp/build %{ffmpeg_version}
-./build_scripts/build_ts2mp4_convertor.sh ./liveRecorder %{buildroot}/%{name}-%{version}/tmp/build/ffmpeg-%{ffmpeg_version} 
+sed -i 's@configure @configure --disable-vdpau @g' ./build_scripts/build_ffmpeg4.sh
+./build_scripts/build_ffmpeg4.sh %{buildroot}/%{name}-%{version}/tmp/build %{ffmpeg_version}
+./build_scripts/build_ts2mp4_convertor.sh ./liveRecorder %{buildroot}/%{name}-%{version}/tmp/build
 npm install nan
-./build_scripts/build_addon.sh `pwd` %{buildroot}/%{name}-%{version}/tmp/build/ffmpeg-%{ffmpeg_version} Release
+./build_scripts/build_addon.sh `pwd` %{buildroot}/%{name}-%{version}/tmp/build Release
 
 
 %install
@@ -146,6 +148,6 @@ fi
 - PLAT-8051: Recording, jobs in processing queue of UploadTask, are not handled (https://github.com/kaltura/liveDVR/pull/534)
 - Replace number with explicit kalturaLiveStatus
 
-* Fri Mar 31 2016 Jess Portnoy <jess.portnoy@kaltura.com> - 1.9.2-1
+* Thu Mar 31 2016 Jess Portnoy <jess.portnoy@kaltura.com> - 1.9.2-1
 - First package.
 
