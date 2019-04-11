@@ -231,7 +231,7 @@ if [ -r $APP_DIR/configurations/local.ini -a -r $BUNDLER_CONF_FILE ];then
         SALT=`grep remote_addr_header_salt $APP_DIR/configurations/local.ini|sed 's@^remote_addr_header_salt\s*=\s*\(.*\)$@\1@g'| sed 's@"@@g'`
         sed -i "s#@APP_REMOTE_ADDR_HEADER_SALT@#$SALT#g" $BUNDLER_CONF_FILE
 fi
-service kaltura-bundle-builder-server restart || true
+service kaltura-playkit-bundler restart || true
 
 find  $WEB_DIR/content/generatedUiConf -type d -exec chmod 775 {} \;
 
