@@ -1,6 +1,6 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmcng
-Version: v5.7.0
+Version: v5.7.1
 Release: 1
 Summary: Kaltura HTML5 Management Console
 
@@ -49,6 +49,10 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Apr 15 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v5.7.1-1
+- Content interactions dashboard in the analytics dashboards
+- Export to csv functionality in the analytics dashboard
+
 * Thu Mar 28 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v5.7.0-1
 - entry/contribution: Fix entry size calculation (eb82ba2)
 - entry/preview: Support Youtube entries playback in mini-preview (9c18060)

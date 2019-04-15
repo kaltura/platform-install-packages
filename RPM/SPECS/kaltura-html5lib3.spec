@@ -3,7 +3,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib3
-Version: 0.37.3
+Version: 0.40.15
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -49,5 +49,8 @@ rm -rf %{buildroot}
 %{html5lib3_base}
 
 %changelog
+* Fri Apr 12 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 0.37.3-2
+- Added RAPT plugin
+
 * Tue Feb 12 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 0.37.3-1
 - First release

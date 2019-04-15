@@ -3,7 +3,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.75
+Version: v2.75.1
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -86,6 +86,9 @@ fi
 %config %{html5lib_base}/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Mon Apr 15 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v2.75.1-1
+- sup-17767 allow clicking on element beneath the hotspots(#3997)
+
 * Thu Mar 28 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v2.75-1
 - FEC-8884 - Support muted autoplay policies on Firefox
 - FEC-8501 - V2 - Ads - iOS 11/12 Scrubber is disabled after selecting learn more pre-mid
