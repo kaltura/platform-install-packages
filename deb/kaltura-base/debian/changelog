@@ -1,3 +1,37 @@
+kaltura-base (14.18.0-2) naos; urgency=medium
+
+  * PLAT-9782: Change action name to `userEntryBulkDelete()` (https://github.com/kaltura/server/pull/8322)
+  * PLAT-9807: `group.membersCount()` - reduce the chance of getting out of sync (https://github.com/kaltura/server/pull/8313)
+  * PLAT-9806: Call concat() action after every trim (https://github.com/kaltura/server/pull/8312)
+  * When searching drop folder file using `fileNameEqual` use the MD5 hash for matching (https://github.com/kaltura/server/pull/8311)
+  * DB table index enhancements (https://github.com/kaltura/server/pull/8309)
+  * `kuserKgroup`: add query cache rule on group ID (https://github.com/kaltura/server/pull/8308)
+  * Deployment script for listFeatureStatus permission (https://github.com/kaltura/server/pull/8307)
+  * Add `STUDIO_BASE` permission for capture role (https://github.com/kaltura/server/pull/8306)
+  * PLAT-9804: getNumberOfUsersInGroup() - reduce the number of DB queries needed (https://github.com/kaltura/server/pull/8305)
+  * SUP-17609: entry.php:copyInto() - catch and log exceptions when calling `setEntitledPusersEdit()` and `setEntitledPusersPublish()` (https://github.com/kaltura/server/pull/8304) 
+  * SUP-16950: `eSearch::searchCategory()` - allow searching for `categoryUser` based on its group association (https://github.com/kaltura/server/pull/8300)
+  * Esearch-Sphinx optimisations (https://github.com/kaltura/server/pull/8298)
+  * SUP-17626: Comments and Sub-commnets are deleted when trimming (https://github.com/kaltura/server/pull/8294)
+  * PLAT-9748: Prevent potential SVG thumb asset XSS (https://github.com/kaltura/server/pull/8291)
+  * REACH2-547: Support removal of all automatic rules (https://github.com/kaltura/server/pull/8290)
+  * Handle reach notices when catalog item fields are unavailable (https://github.com/kaltura/server/pull/8289)
+  * SUP-17627: Prevent email notification for temp entry annotation creation (https://github.com/kaltura/server/pull/8288)
+  * PLAT-9770: Purify URL `flashvars` in `previewAction()` (https://github.com/kaltura/server/pull/8285)
+  * Event notifications with group ID: Incorrect concatenation when running with PHP 5.3 (https://github.com/kaltura/server/pull/8284)
+  * PLAT-9707: add `idGreaterThan` and `createdAtGreaterThanOrEqual` to partner filter (https://github.com/kaltura/server/pull/8281)
+  * REACH2-545: Add support for new languages in Reach (https://github.com/kaltura/server/pull/8280)
+  * PLAT-9797: When trimming multi video source , focus only on the first … (https://github.com/kaltura/server/pull/8279)
+  * SUP-17626: Handle annotation and sub-annotation cloning when clipping and trimming (https://github.com/kaltura/server/pull/8277)
+  * Return `REPORT_SUBMITTED` count instead of `REPORT_CLICKED` (https://github.com/kaltura/server/pull/8276)
+  * SUP-17800: HF for CSV-upload for End-User is not working properly (https://github.com/kaltura/server/pull/8274)
+  * PSVAMB-6933: Update "comment added" KMS notification body - fix the link (https://github.com/kaltura/server/pull/8271)
+  * REACH2-536: Add support for new catalog item type of `audio_description` (https://github.com/kaltura/server/pull/8270)
+  * Make `userEntry.bulkDelete()` work with bulk batch job (https://github.com/kaltura/server/pull/8267)
+  * SUP-17645: Handle PHP bug when returning file MIME type (https://github.com/kaltura/server/pull/8257)
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 15 Apr 2019 15:14:39 +0000
+
 kaltura-base (14.18.0-1) naos; urgency=medium
 
   * Switching to 14.18.0
