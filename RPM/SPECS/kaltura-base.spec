@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 14.18.0
-Release: 4
+Release: 5
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -348,6 +348,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Tue Apr 16 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.18.0-5
+- Fix `kmc_analytics_version` value
+
 * Mon Apr 15 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.18.0-2
 - PLAT-9782: Change action name to `userEntryBulkDelete()` (https://github.com/kaltura/server/pull/8322)
 - PLAT-9807: `group.membersCount()` - reduce the chance of getting out of sync (https://github.com/kaltura/server/pull/8313)
