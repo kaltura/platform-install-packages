@@ -1,3 +1,10 @@
+kaltura-kmcng (5.7.1-1) naos; urgency=medium
+
+  * Content interactions dashboard in the analytics dashboards
+  * Export to csv functionality in the analytics dashboard
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 15 Apr 2019 15:58:08 +0000
+
 kaltura-kmcng (5.7.0-1) naos; urgency=medium
 
   * entry/contribution: Fix entry size calculation (eb82ba2)
