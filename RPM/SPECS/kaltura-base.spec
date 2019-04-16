@@ -349,6 +349,9 @@ fi
 
 %changelog
 * Tue Apr 16 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.19.0-1
+- Nightly build.
+
+* Tue Apr 16 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.19.0-1
 - Ver Bounce to 14.19.0
 
 * Tue Apr 16 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.18.0-5
