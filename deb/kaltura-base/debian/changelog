@@ -1,3 +1,9 @@
+kaltura-base (14.19.0-1) naos; urgency=medium
+
+  * Switching to 14.19.0
+
+ -- Jess Portnoy <jess@b0f924504114>  Tue, 16 Apr 2019 15:12:02 +0000
+
 kaltura-base (14.18.0-2) naos; urgency=medium
 
   * PLAT-9782: Change action name to `userEntryBulkDelete()` (https://github.com/kaltura/server/pull/8322)
