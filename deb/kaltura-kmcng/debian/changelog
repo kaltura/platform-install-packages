@@ -1,3 +1,13 @@
+kaltura-kmcng (5.8.0-1) naos; urgency=medium
+
+  * Server poll invalid KS handling (#827) (6215876)
+  * content/category: Allow editing entitlements of categories which owner was deleted (72219ae)
+  * content/syndication: Handle Syndication feeds which use a playlist which is not loaded in the first 500 playlists (#826) (21a1bcc)
+  * entry/users: Add co-viewers form field (#828) (d4222fd)
+  * Let the user choose the date format (#829) (a163026)
+
+ -- Jess Portnoy <jess@b0f924504114>  Thu, 25 Apr 2019 12:46:13 +0000
+
 kaltura-kmcng (5.7.1-1) naos; urgency=medium
 
   * Content interactions dashboard in the analytics dashboards

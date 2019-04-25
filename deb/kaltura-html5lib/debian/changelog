@@ -1,3 +1,9 @@
+kaltura-html5lib (2.75.3-1) naos; urgency=medium
+
+  * PSVAMB-6336 - dualScreen player when paused, the secondary video continues to play
+
+ -- Jess Portnoy <jess@b0f924504114>  Thu, 25 Apr 2019 12:51:50 +0000
+
 kaltura-html5lib (2.75.1-1) naos; urgency=medium
 
   * sup-17767 allow clicking on element beneath the hotspots(#3997)
