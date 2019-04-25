@@ -3,7 +3,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.75.1
+Version: v2.75.3
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -86,6 +86,9 @@ fi
 %config %{html5lib_base}/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Thu Apr 25 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v2.75.3-1
+- PSVAMB-6336 - dualScreen player when paused, the secondary video continues to play
+
 * Mon Apr 15 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v2.75.1-1
 - sup-17767 allow clicking on element beneath the hotspots(#3997)
 

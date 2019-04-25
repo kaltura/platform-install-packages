@@ -1,6 +1,6 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmcng
-Version: v5.7.1
+Version: v5.8.0
 Release: 1
 Summary: Kaltura HTML5 Management Console
 
@@ -49,6 +49,13 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Thu Apr 25 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v5.8.0-1
+- Server poll invalid KS handling (#827) (6215876)
+- content/category: Allow editing entitlements of categories which owner was deleted (72219ae)
+- content/syndication: Handle Syndication feeds which use a playlist which is not loaded in the first 500 playlists (#826) (21a1bcc)
+- entry/users: Add co-viewers form field (#828) (d4222fd)
+- Let the user choose the date format (#829) (a163026)
+
 * Mon Apr 15 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v5.7.1-1
 - Content interactions dashboard in the analytics dashboards
 - Export to csv functionality in the analytics dashboard
