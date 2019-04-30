@@ -41,5 +41,9 @@ for i in `mysql -h $DWH_HOST -p$PASSWD kalturadw_ds -N -e "show tables"`;do mysq
 for i in `mysql -h $DWH_HOST -p$PASSWD kalturalog -N -e "show tables"`;do mysql -h$DWH_HOST  -p$PASSWD kalturalog -e "drop table $i";done
 for i in `mysql -h $DWH_HOST -p$PASSWD -N -e "Show procedure status" |grep kalturadw|awk -F " " '{print $2}'`;do mysql -h$DWH_HOST  kalturadw -p$PASSWD -e "drop procedure $i;";done
 for i in `mysql -h $DWH_HOST -p$PASSWD -N -e "Show procedure status" |grep kalturadw_ds|awk -F " " '{print $2}'`;do mysql -h$DWH_HOST  kalturadw_ds -p$PASSWD -e "drop procedure $i;";done
+for i in `mysql -h $DWH_HOST -p$PASSWD -e "Show function status" |grep kalturadw|awk -F " " '{print $2}'`;do mysql kalturadw -h $DWH_HOST -p$PASSWD -e "drop function $i;";done
+for i in `mysql -h $DWH_HOST -p$PASSWD -e "Show procedure status" |grep kalturadw|awk -F " " '{print $2}'`;do mysql kalturadw -h $DWH_HOST -p$PASSWD -e "drop procedure $i;";done
+for i in `mysql -h $DWH_HOST -p$PASSWD -e "Show function status" |grep kalturadw_ds|awk -F " " '{print $2}'`;do mysql kalturadw_ds -h $DWH_HOST -p$PASSWD -e "drop function $i;";done
+for i in `mysql -h $DWH_HOST -p$PASSWD -e "Show procedure status" |grep kalturadw_ds|awk -F " " '{print $2}'`;do mysql kalturadw_ds -h $DWH_HOST -p$PASSWD -e "drop procedure $i;";done
 
 

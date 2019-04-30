@@ -21,8 +21,8 @@ if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
 	exit 3
 fi
 . $KALTURA_FUNCTIONS_RC
-if [ "$#" -lt 4 ];then
-	echo -e "${BRIGHT_RED}Usage: $0 <mysql-hostname> <mysql-super-user> <mysql-super-user-passwd> <mysql-port> [upgrade]${NORMAL}"
+if [ "$#" -lt 5 ];then
+	echo -e "${BRIGHT_RED}Usage: $0 <mysql-operaiotnal-hostname> <mysql-analytics-hostname> <mysql-super-user> <mysql-super-user-passwd> <mysql-port> [upgrade]${NORMAL}"
 	exit 1
 fi
 
@@ -47,11 +47,12 @@ fi
 trap 'my_trap_handler "${LINENO}" $?' ERR
 send_install_becon "`basename $0`" "install_start" 0 
 
-MYSQL_HOST=$1
-MYSQL_SUPER_USER=$2
-MYSQL_SUPER_USER_PASSWD=$3
-MYSQL_PORT=$4
-IS_UPGRADE=$5
+MYSQL_OP_HOST=$1
+MYSQL_DWH_HOST=$2
+MYSQL_SUPER_USER=$3
+MYSQL_SUPER_USER_PASSWD=$4
+MYSQL_PORT=$5
+IS_UPGRADE=$6
 
 if [ "$IS_UPGRADE" = 'upgrade' ];then
 	echo "calling upgrade script instead."
@@ -60,9 +61,26 @@ if [ "$IS_UPGRADE" = 'upgrade' ];then
 fi
 KALTURA_DB=$DB1_NAME
 
+function setup_db
+{
+	DB_NAME=$1
+	DB_HOST=$2
+
+	echo "CREATE DATABASE $DB_NAME;"
+	echo "CREATE DATABASE $DB_NAME;" | mysql -h$DB_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT
+	PRIVS=${DB_NAME}_PRIVILEGES
+	DB_USER=${DB_NAME}_USER
+	# apply privileges:
+	echo "GRANT ${!PRIVS} ON $DB_NAME.* TO '${!DB_USER}'@'%';FLUSH PRIVILEGES;" | mysql -h$DB_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT
+	DB_SQL_FILES=${DB_NAME}_SQL_FILES
+	# run table creation scripts:
+	for SQL in ${!DB_SQL_FILES};do 
+		mysql -h$DB_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT $DB_NAME < $SQL
+	done
+}
 # check DB connectivity:
 echo -e "${CYAN}Checking MySQL version..${NORMAL}"
-MYVER=`echo "select version();" | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT -N`
+MYVER=`echo "select version();" | mysql -h$MYSQL_OP_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT -N`
 MYMAJVER=`echo $MYVER| awk -F "." '{print $1}'`
 MYMINORVER=`echo $MYVER| awk -F "." '{print $2}'`
 
@@ -78,13 +96,13 @@ fi
 if [ $? -ne 0 ];then
 cat << EOF
 Failed to run:
-# mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT."
+# mysql -h$MYSQL_OP_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT."
 Check your settings."
 EOF
 	exit 4
 fi
-if ! check_mysql_settings $MYSQL_SUPER_USER $MYSQL_SUPER_USER_PASSWD $MYSQL_HOST $MYSQL_PORT ;then
-	if [ $MYSQL_HOST = 'localhost' -o $MYSQL_HOST = '127.0.0.1' ];then
+if ! check_mysql_settings $MYSQL_SUPER_USER $MYSQL_SUPER_USER_PASSWD $MYSQL_OP_HOST $MYSQL_PORT ;then
+	if [ $MYSQL_OP_HOST = 'localhost' -o $MYSQL_OP_HOST = '127.0.0.1' ];then
 		echo "Your MySQL settings are incorrect, do you wish to run $BASE_DIR/bin/kaltura-mysql-settings.sh in order to correct them? [Y/n]"
 		read ANS
 		if [ "$ANS" = "Y" ];then
@@ -109,13 +127,13 @@ fi
 trap - ERR
 if [ -z "$POPULATE_ONLY" ];then
 	# check whether the 'kaltura' already exists:
-	echo "use kaltura" | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT $KALTURA_DB 2> /dev/null
+	echo "use kaltura" | mysql -h$MYSQL_OP_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT $KALTURA_DB 2> /dev/null
 	if [ $? -eq 0 ];then
 cat << EOF
 The $KALTURA_DB DB seems to already be installed.
 
 if you meant to perform an upgrade? run with:
-# $0 $MYSQL_HOST $MYSQL_SUPER_USER $MYSQL_SUPER_USER_PASSWD $MYSQL_PORT upgrade
+# $0 $MYSQL_OP_HOST $MYSQL_DWH_HOST $MYSQL_SUPER_USER $MYSQL_SUPER_USER_PASSWD $MYSQL_PORT upgrade
 
 Otherwise, do you wish to remove the existing DB [n/Y]?
 
@@ -133,36 +151,31 @@ trap 'my_trap_handler "${LINENO}" $?' ERR
 	set -e
 
 	# create users:
-	USER_EXISTS=`echo "SELECT EXISTS(SELECT 1 FROM mysql.user WHERE user = 'kaltura');" | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT`
+	USER_EXISTS=`echo "SELECT EXISTS(SELECT 1 FROM mysql.user WHERE user = 'kaltura');" | mysql -h$MYSQL_OP_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT -N`
 	if [ "$USER_EXISTS" != "1" ];then
 		echo "CREATE USER kaltura;"
-		echo "CREATE USER kaltura@'%' IDENTIFIED BY '$DB1_PASS' ;"  | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT
+		echo "CREATE USER kaltura@'%' IDENTIFIED BY '$DB1_PASS' ;"  | mysql -h$MYSQL_OP_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT
 	fi
-	USER_EXISTS=`echo "SELECT EXISTS(SELECT 1 FROM mysql.user WHERE user = 'etl');" | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT`
-	if [ "$USER_EXISTS" != "1" ];then
-		echo "CREATE USER etl;"
-		echo "CREATE USER etl@'%' IDENTIFIED BY '$DWH_PASS' ;"  | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT
-	fi
-	# create the DBs:
-	for DB in $DBS;do 
-		echo "CREATE DATABASE $DB;"
-		echo "CREATE DATABASE $DB;" | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT
-		PRIVS=${DB}_PRIVILEGES
-		DB_USER=${DB}_USER
-		# apply privileges:
-		echo "GRANT ${!PRIVS} ON $DB.* TO '${!DB_USER}'@'%';FLUSH PRIVILEGES;" | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT
-		DB_SQL_FILES=${DB}_SQL_FILES
-		# run table creation scripts:
-		for SQL in ${!DB_SQL_FILES};do 
-			mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT $DB < $SQL
-		done
+	for DB_HOST in $MYSQL_OP_HOST $MYSQL_DWH_HOST; do
+		USER_EXISTS=`echo "SELECT EXISTS(SELECT 1 FROM mysql.user WHERE user = 'etl');" | mysql -h$DB_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT -N`
+		if [ "$USER_EXISTS" != "1" ];then
+			echo "CREATE USER etl;"
+			echo "CREATE USER etl@'%' IDENTIFIED BY '$DWH_PASS' ;FLUSH PRIVILEGES;"  | mysql -h$DB_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT
+		fi
 	done
-	echo "GRANT SELECT ON kaltura.* TO 'etl'@'%';FLUSH PRIVILEGES;" | mysql -h$MYSQL_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT
+	# create the operational DBs:
+	for DB in $OP_DBS;do 
+		setup_db $DB $MYSQL_OP_HOST
+	done
+	echo "GRANT SELECT ON kaltura.* TO 'etl'@'%';FLUSH PRIVILEGES;" | mysql -h$MYSQL_OP_HOST -u$MYSQL_SUPER_USER -p$MYSQL_SUPER_USER_PASSWD -P$MYSQL_PORT
 
-	# DB schema created. Before we move onto populating, lets check MySQL and Sphinx connectivity.
+	for DB in $DWH_DBS;do 
+		setup_db $DB $MYSQL_DWH_HOST
+	done
 fi
 set +e
 
+# DB schema created. Before we move onto populating, lets check MySQL and Sphinx connectivity.
 echo "Checking connectivity to needed daemons..."
 if ! check_connectivity $DB1_USER $DB1_PASS $DB1_HOST $DB1_PORT $SPHINX_HOST $SERVICE_URL;then
 	echo -e "${BRIGHT_RED}Please check your setup and then run $0 again.${NORMAL}"

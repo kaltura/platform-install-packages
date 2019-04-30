@@ -77,17 +77,17 @@ if [ $? -ne 0 ];then
 Configuring your Kaltura DB...
 
 "
-$BASE_DIR/bin/kaltura-db-config.sh $DB1_HOST $SUPER_USER $SUPER_USER_PASSWD $DB1_PORT $SPHINX_HOST
+$BASE_DIR/bin/kaltura-db-config.sh $DB1_HOST $DWH_HOST $SUPER_USER $SUPER_USER_PASSWD $DB1_PORT $SPHINX_HOST
 
        RC=$?
        if [ $RC -ne 0 ];then
         if [ $RC = 111 ];then
-                echo -e "${BRIGHT_RED}ERROR: $BASE_DIR/bin/kaltura-db-config.sh $DB1_HOST $SUPER_USER $SUPER_USER_PASSWD $DB1_PORT failed when trying to populate the DB.
+                echo -e "${BRIGHT_RED}ERROR: $BASE_DIR/bin/kaltura-db-config.sh $DB1_HOST $DWH_HOST $SUPER_USER $SUPER_USER_PASSWD $DB1_PORT failed when trying to populate the DB.
 It tried reaching $SERVICE_URL/api_v3/index.php?service=system&action=ping and couldn't.
 This probably means you have either inputted and bad service URL or have yet to configure your Apache.
 To configure your Apache, please use $BASE_DIR/bin/kaltura-front-config.sh.
 Since the schema creation succeeded, you can skip that part by running:
-# POPULATE_ONLY=1 $BASE_DIR/bin/kaltura-db-config.sh $DB1_HOST $SUPER_USER $SUPER_USER_PASSWD $DB1_PORT 
+# POPULATE_ONLY=1 $BASE_DIR/bin/kaltura-db-config.sh $DB1_HOST $DWH_HOST $SUPER_USER $SUPER_USER_PASSWD $DB1_PORT 
 
 Please run it manually to debug the issue.
 You may run $0 again once done.${NORMAL}"

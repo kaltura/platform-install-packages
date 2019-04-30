@@ -1,6 +1,7 @@
 # This file basically defines the DBs names, privileges and users entitled to these privileges.
 
-DBS="kaltura kaltura_sphinx_log kalturadw kalturadw_ds kalturadw_bisources kalturalog"
+OP_DBS="kaltura kaltura_sphinx_log" 
+DWH_DBS="kalturadw kalturadw_ds kalturadw_bisources kalturalog"
 DB_USERS="kaltura etl"
 kaltura_PRIVILEGES="INSERT,UPDATE,DELETE,SELECT,ALTER,CREATE"
 kaltura_USER="kaltura"

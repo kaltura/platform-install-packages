@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.33
-Release: 69
+Release: 70
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -82,6 +82,9 @@ find %{_sysconfdir}/logrotate.d -type l -name "kaltura_*" -exec rm {} \;
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Tue Apr 30 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.33-70
+- Support deploying the operational and anaytics DBS onto separate MySQL hosts.
+
 * Mon Feb 11 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.33-59
 - Support v3 Studio and player
 
