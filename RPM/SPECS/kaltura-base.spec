@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 14.19.0
-Release: 11
+Release: 12
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -348,44 +348,33 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Sun Apr 28 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.19.0-11
-- Nightly build.
-
-* Sat Apr 27 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.19.0-10
-- Nightly build.
-
-* Fri Apr 26 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.19.0-9
-- Nightly build.
-
-* Thu Apr 25 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.19.0-8
-- Nightly build.
-
-* Wed Apr 24 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.19.0-6
-- Nightly build.
-
-* Tue Apr 23 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.19.0-5
-- Nightly build.
-
-* Mon Apr 22 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.19.0-4
-- Nightly build.
-
-* Sun Apr 21 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.19.0-1
-- Nightly build.
-
-* Sat Apr 20 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.19.0-3
-- Nightly build.
-
-* Fri Apr 19 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.19.0-1
-- Nightly build.
-
-* Thu Apr 18 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.19.0-1
-- Nightly build.
-
-* Wed Apr 17 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.19.0-2
-- Nightly build.
-
-* Tue Apr 16 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.19.0-1
-- Nightly build.
+* Mon Apr 29 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.19.0-12
+- SUP-18009: kApiCache.php - added limitConditionalCacheTimeToKs() (https://github.com/kaltura/server/pull/8369)
+- PLAT-9823: Optimise Annotation::postInsert() (https://github.com/kaltura/server/pull/8361)
+- PLAT-9823: Optimise Annotation::postInsert() (https://github.com/kaltura/server/pull/8360)
+- PLAT-9832: Move `skip_sphinx` config to DB map (https://github.com/kaltura/server/pull/8359)
+- SUP-16950: KMS - Channel members added via group cannot see the channel under `My Channels` (https://github.com/kaltura/server/pull/8358)
+- PLAT-9832: Add support for blocking sphinx repetitive updates based on the `puser` ID that initiated the call (https://github.com/kaltura/server/pull/8356)
+- PLAT-9831: When returning `KalturaNullableBoolean`, cast to int (https://github.com/kaltura/server/pull/8353)
+- SUP-18051: Support Audio only cover image (https://github.com/kaltura/server/pull/8352)
+- PLAT-9817: AnswerCuePoint::postInsert() - add locking mechanism(https://github.com/kaltura/server/pull/8351)
+- Remove `entryId` from `cuepoint` `skip sphinx` fields and force partner ID context if it's a system partner [ID >= 0] (https://github.com/kaltura/server/pull/8349)
+- KMS-19428: Remove default criteria when retrieving groups of users (https://github.com/kaltura/server/pull/8347)
+- PLAT-9825: Drop parseAction() (https://github.com/kaltura/server/pull/8346)
+- PLAT-9819: Add ENG audio flavor param with audio description tag (https://github.com/kaltura/server/pull/8345)
+- Add `partner_id` to deletion criteria when deleting scheduled events (https://github.com/kaltura/server/pull/8344)
+- PLAT-9823 - user Sphinx query when filter contains `cue_point.TYPE` (https://github.com/kaltura/server/pull/8342)
+- SUP-16950: KMS - Channel members added via group cannot see the channel under `My Channels` (https://github.com/kaltura/server/pull/8341)
+- Use slave DB when making file sync import queries (https://github.com/kaltura/server/pull/8340)
+- PLAT-9821: Avoid division by zero (https://github.com/kaltura/server/pull/8336)
+- PLAT-9734: Filter by creation mode in eSearch->searchUser() (https://github.com/kaltura/server/pull/8335)
+- Only call `category->list()` if there are categories to remove (https://github.com/kaltura/server/pull/8334)
+- PLAT-9798: If thumbParams->tags includes "bif", set "bif" as the file extension (https://github.com/kaltura/server/pull/8333)
+- PLAT-9782: Move `bulkUploadId()` implementation to `userEntry` (https://github.com/kaltura/server/pull/8331)
+- WEBC-1364: Update `Kaltura-QnA` response profile to support announcement deletion (https://github.com/kaltura/server/pull/8330)
+- KMS-19409: Handle copying annotations and sub-annotations when clipping (https://github.com/kaltura/server/pull/8329)
+- Drop folders: Only call `doSelect()` if `list()` returned results (https://github.com/kaltura/server/pull/8323)
+- PLAT-9748: Enhance SVG validation (to better avoid XSS) (https://github.com/kaltura/server/pull/8321)
 
 * Tue Apr 16 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.19.0-1
 - Ver Bounce to 14.19.0
