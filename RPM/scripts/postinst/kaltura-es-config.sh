@@ -29,7 +29,8 @@ if ! rpm -q elasticsearch;then
         yum localinstall -y https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.5.1.rpm
 fi
 set -e
-sed -i 's@^\(\s*"type" : \)"boolean"\s*@\1"keyword"@g' $APP_DIR/configurations/elastic/mapping/*.json
+# should no longer be needed
+#sed -i 's@^\(\s*"type" : \)"boolean"\s*@\1"keyword"@g' $APP_DIR/configurations/elastic/mapping/*.json
 mv /etc/elasticsearch/elasticsearch.yml /etc/elasticsearch/elasticsearch.yml.orig
 sed -e "s#@BASE_DIR@#$BASE_DIR#g" -e "s#@LOG_DIR@#$LOG_DIR#g" -e "s#@HOSTNAME@#`hostname`#g" $APP_DIR/configurations/elastic/elasticsearch.template.yml > /etc/elasticsearch/elasticsearch.yml
 
