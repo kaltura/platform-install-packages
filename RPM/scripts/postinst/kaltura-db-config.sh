@@ -22,7 +22,7 @@ if [ ! -r "$KALTURA_FUNCTIONS_RC" ];then
 fi
 . $KALTURA_FUNCTIONS_RC
 if [ "$#" -lt 5 ];then
-	echo -e "${BRIGHT_RED}Usage: $0 <mysql-operaiotnal-hostname> <mysql-analytics-hostname> <mysql-super-user> <mysql-super-user-passwd> <mysql-port> [upgrade]${NORMAL}"
+	echo -e "${BRIGHT_RED}Usage: $0 <mysql-operational-hostname> <mysql-analytics-hostname> <mysql-super-user> <mysql-super-user-passwd> <mysql-port> [upgrade]${NORMAL}"
 	exit 1
 fi
 
