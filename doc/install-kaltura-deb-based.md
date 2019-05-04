@@ -38,7 +38,7 @@ The process was tested on Debian 8 and Ubuntu 14.04 but may work with other Debi
 
 #### Firewall requirements
 Kaltura requires certain ports to be open for proper operation. [See the list of required open ports](kaltura-required-ports.md).
-If you're just testing and don't mind an open system, you can use the below to disbale iptables altogether:
+If you're just testing and don't mind an open system, you can use the below to disable iptables altogether:
 ```bash
 # iptables -F
 ```
