@@ -14,7 +14,8 @@ if [ "$1" = "configure" ]; then
 	ES_HOST=127.0.0.1
 	ES_PORT=9200
 	set -e
-	sed -i 's@^\(\s*"type" : \)"boolean"\s*@\1"keyword"@g' $APP_DIR/configurations/elastic/mapping/*.json
+	# should no longer be needed
+	#sed -i 's@^\(\s*"type" : \)"boolean"\s*@\1"keyword"@g' $APP_DIR/configurations/elastic/mapping/*.json
 	mv /etc/elasticsearch/elasticsearch.yml /etc/elasticsearch/elasticsearch.yml.orig
 	sed -e "s#@BASE_DIR@#$BASE_DIR#g" -e "s#@LOG_DIR@#$LOG_DIR#g" -e "s#@HOSTNAME@#`hostname`#g" $APP_DIR/configurations/elastic/elasticsearch.template.yml > /etc/elasticsearch/elasticsearch.yml
 	# ES simply doesn't work with openjdk-9-jre-headless, we'll use openjdk-8-jre-headless
