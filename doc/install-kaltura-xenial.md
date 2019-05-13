@@ -39,7 +39,7 @@ If you're just testing and don't mind an open system, you can use the below to d
 ```
 #### Disable SELinux - REQUIRED
 **Currently Kaltura doesn't properly support running with SELinux, things will break if you don't set it to permissive**.
-If your instances has it enabled [by default Debian and Ubuntu does not enable SELinux], run:
+If your instance has it enabled [by default Debian and Ubuntu do not enable SELinux], run:
 ```bash
 # setenforce permissive
 ```

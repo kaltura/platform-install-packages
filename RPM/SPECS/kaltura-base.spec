@@ -6,7 +6,7 @@
 %define confdir %{prefix}/app/configurations
 %define logdir %{prefix}/log
 %define webdir %{prefix}/web
-%define codename Naos
+%define codename Orion
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
