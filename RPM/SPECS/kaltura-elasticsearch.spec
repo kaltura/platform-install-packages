@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-elasticsearch
 Version: 1.0.0
-Release: 4
+Release: 5
 License: AGPLv3+
 Group: Server/Platform 
 Source0: kaltura-elastic-populate 
@@ -22,20 +22,20 @@ Source3: aliases.json
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: noarch
 Requires(pre): kaltura-base, kaltura-postinst, elasticsearch >= 6.0.0, java-1.8.0-openjdk-headless
-%if 0%{?rhel}  == 6
+%define use_systemd (0%{?fedora} && 0%{?fedora} >= 18) || (0%{?rhel} && 0%{?rhel} >= 7)
+%if %{use_systemd}
+Group: System Environment/Daemons
+Requires(pre): shadow-utils
+Requires: systemd
+BuildRequires: systemd
+Epoch: 1
+%else
 Group: System Environment/Daemons
 Requires(pre): shadow-utils
 Requires: initscripts >= 8.36
 Requires(post): chkconfig
 %endif
 
-%if 0%{?rhel}  == 7
-Group: System Environment/Daemons
-Requires(pre): shadow-utils
-Requires: systemd
-BuildRequires: systemd
-Epoch: 1
-%endif
 
 %description
 Kaltura is the world's first Open Source Online Video Platform, transforming the way people work, 
@@ -80,6 +80,14 @@ and then edit /etc/selinux/config to make the change permanent."
 fi
 
 %post
+if [ $1 -eq 1 ]; then
+%if %{use_systemd}
+    /usr/bin/systemctl enable elasticsearch.service >/dev/null 2>&1 ||:
+%else
+    /sbin/chkconfig --add elasticsearch
+%endif
+/sbin/service elasticsearch start
+fi
 
 %preun
 /sbin/service kaltura-elastic-populate stop > /dev/null 2>&1
