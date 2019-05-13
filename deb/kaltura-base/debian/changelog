@@ -1,3 +1,28 @@
+kaltura-base (14.20.0-2) naos; urgency=medium
+
+  * Make `PHPMailer` code compatible with both PHP 5 and 7 (https://github.com/kaltura/server/pull/8409)
+  * REACH2-579: Correctly handle cases where the task could not be created (https://github.com/kaltura/server/pull/8407)
+  * PLAT-9857: Correctly handle `kCountryCondition` when replying from cache layer (https://github.com/kaltura/server/pull/8406)
+  * SUP-17908: `user.list` - retrieve both USER and GROUP objects if TYPE filter wasn't passed (https://github.com/kaltura/server/pull/8401)
+  * REACH2-577: When vendor marks the task status as error, set its price to 0 while saving old price value (https://github.com/kaltura/server/pull/8400)
+  * PLAT-9852 - Align with SaaS' `flavorParams` config (https://github.com/kaltura/server/pull/8398)
+  * PLAT-9848: `group.clone()` - add the option to set the new group name (`$newGroupName`) (https://github.com/kaltura/server/pull/8397)
+  * KMS-19393: `groupUser.sync()` - probe for separator char (can be either ',' or ';') (https://github.com/kaltura/server/pull/8395)
+  * PLAT-9850: kDataCenterMgr::getRedirectExternalUrl() - added timeout param (https://github.com/kaltura/server/pull/8393)
+  * PLAT-9843: Added option to limit the number of allowed actions per partner (https://github.com/kaltura/server/pull/8392)
+  * PLAT-9668: Admin console - entry investigation improvements (https://github.com/kaltura/server/pull/8391)
+  * REACH2-553: Handle live recording flows -  only set the job status to `pending` after the entire content is received (https://github.com/kaltura/server/pull/8385)
+  * KMCNG-2101: Add `X-Frame-Options` header to prevent potential iframe exploits (https://github.com/kaltura/server/pull/8382)
+  * PLAT-9845: Newer PHP versions incorrectly parse the URL when user or passwd contain the "#" char (https://github.com/kaltura/server/pull/8381)
+  * REACH2-573: Handle cases where catalog item is deleted (https://github.com/kaltura/server/pull/8379)
+  * NO-PLAT: Support ElasticSearch 6 (https://github.com/kaltura/server/pull/8376)
+  * PLAT-9814: New boolean event notification template for Reach (https://github.com/kaltura/server/pull/8367)
+  * PLAT-9795: Allow asset type condition when serving caption asset (https://github.com/kaltura/server/pull/8366)
+  * Fix PHP warnings (https://github.com/kaltura/server/pull/8130)
+  * `protocol` is Undefined use `params->getFormat()` instead (https://github.com/kaltura/server/pull/7923)
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 13 May 2019 12:19:30 +0000
+
 kaltura-base (14.20.0-1) naos; urgency=medium
 
   * Switching to 14.20.0
