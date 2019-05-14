@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 14.20.0
-Release: 14
+Version: 15.0.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -348,6 +348,12 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Tue May 14 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.0.0-1
+- Ver Bounce to 15.0.0
+
+* Mon May 13 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.0.0-1
+- Nightly build.
+
 * Mon May 13 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.20.0-14
 - Make `PHPMailer` code compatible with both PHP 5 and 7 (https://github.com/kaltura/server/pull/8409)
 - REACH2-579: Correctly handle cases where the task could not be created (https://github.com/kaltura/server/pull/8407)
