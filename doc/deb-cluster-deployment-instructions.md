@@ -66,7 +66,7 @@ On all nodes, deploy the Kaltura repo key, add the Kaltura repo and fetch the re
 
 When deploying on Debian Jessie [8] or Ubuntu Trusty [14.04], edit/create /etc/apt/sources.list.d/kaltura.list so that it reads:
 ```
-deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/debian naos main
+deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/debian orion main
 ```
 
 And import the GPG key with:
@@ -76,7 +76,7 @@ And import the GPG key with:
 
 When deploying on Ubuntu Xenial [16.04] edit/create /etc/apt/sources.list.d/kaltura.list to read:
 ```
-deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/xenial naos main
+deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/xenial orion main
 ```
 And import the GPG key with:
 ```
@@ -377,7 +377,7 @@ A longer post about it can be found at https://blog.kaltura.com/free-and-open-li
 
 If using Debian: Jessie [8] or Ubuntu: Trusty [14.04], edit /etc/apt/sources.list.d/kaltura.list so that it reads:
 ```
-deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/debian naos main
+deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/debian orion main
 ```
 
 And import the GPG key with:
@@ -387,7 +387,7 @@ And import the GPG key with:
 
 Or, if using Ubuntu Xenial [16.04]:
 ```
-deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/xenial naos main
+deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/xenial orion main
 ```
 And import the GPG key with:
 ```
