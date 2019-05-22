@@ -1,7 +1,7 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmcng
-Version: v5.8.0
-Release: 2
+Version: v5.9.1
+Release: 1
 Summary: Kaltura HTML5 Management Console
 
 Group: System Management	
@@ -49,6 +49,13 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Wed May 22 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v5.9.1-1
+- prevent passwords auto filling (#831) (d853051)
+- administration/multi-account: disable create button on error state (462881c)
+- administration/multi-account: fix adding website info when creating new account (cfbb7d4)
+- administration/multi-account: fix available accounts calculation (f270218)
+- entry/captions: support Luxembourgish captions (9cae1a9)
+
 * Thu Apr 25 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v5.8.0-1
 - Server poll invalid KS handling (#827) (6215876)
 - content/category: Allow editing entitlements of categories which owner was deleted (72219ae)
