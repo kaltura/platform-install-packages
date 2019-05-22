@@ -3,7 +3,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.75.3
+Version: v2.76
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -86,6 +86,13 @@ fi
 %config %{html5lib_base}/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Wed May 22 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v2.76-1
+FEC-9085 - need to click the pause button twice in order to pause the media
+SUP-17081 - Styling issue with a player buttons dropdown menu
+SUP-17365 - Encoding the "utility.referrer_url" in the adTag
+SUP-17808 - no playback when selecting different source qualities
+
+
 * Thu Apr 25 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v2.75.3-1
 - PSVAMB-6336 - dualScreen player when paused, the secondary video continues to play
 
