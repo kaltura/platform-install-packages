@@ -1,3 +1,12 @@
+kaltura-html5lib (2.76-1) orion; urgency=medium
+
+  * FEC-9085 - need to click the pause button twice in order to pause the media
+  * SUP-17081 - Styling issue with a player buttons dropdown menu
+  * SUP-17365 - Encoding the "utility.referrer_url" in the adTag
+  * SUP-17808 - no playback when selecting different source qualities
+
+ -- Jess Portnoy <jess@b0f924504114>  Tue, 28 May 2019 10:25:38 +0000
+
 kaltura-html5lib (2.75.3-1) naos; urgency=medium
 
   * PSVAMB-6336 - dualScreen player when paused, the secondary video continues to play
