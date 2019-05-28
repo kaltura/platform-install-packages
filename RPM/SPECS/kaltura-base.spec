@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 15.0.0
-Release: 13
+Release: 14
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -348,41 +348,40 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Sat May 25 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.0.0-13
-- Nightly build.
-
-* Fri May 24 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.0.0-12
-- Nightly build.
-
-* Thu May 23 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.0.0-11
-- Nightly build.
-
-* Wed May 22 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.0.0-10
-- Nightly build.
-
-* Tue May 21 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.0.0-9
-- Nightly build.
-
-* Mon May 20 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.0.0-8
-- Nightly build.
-
-* Sun May 19 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.0.0-7
-- Nightly build.
-
-* Sat May 18 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.0.0-6
-- Nightly build.
-
-* Fri May 17 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.0.0-5
-- Nightly build.
-
-* Thu May 16 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.0.0-4
-- Nightly build.
-
-* Wed May 15 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.0.0-3
-- Nightly build.
-
-* Tue May 14 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.0.0-2
-- Nightly build.
+* Tue May 28 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.0.0-14
+- PLAT-9844: use `retrieveByPK()` rather than calling `doSelectOne()` (https://github.com/kaltura/server/pull/8459)
+- PLAT-9867: `kCuePointManager::parseXml()` - Cast `entryId` to string (https://github.com/kaltura/server/pull/8458)
+- PLAT-9844: `setAnalyticsHost()` - include the protocol (https://github.com/kaltura/server/pull/8456)
+- plat-9877: Support the Michif Language (https://github.com/kaltura/server/pull/8453)
+- SUP-18262: When sending values with spaces the params should be encoded (https://github.com/kaltura/server/pull/8451)
+- PLAT-9844: Added `partner.getPublicInfo()` (https://github.com/kaltura/server/pull/8450)
+- SIP integration (https://github.com/kaltura/server/pull/8445)
+- SIP integration: Handling alerts (https://github.com/kaltura/server/pull/8443)
+- PLAT-9851: TVinci connector - Support catalog and ingest format type (https://github.com/kaltura/server/pull/8438)
+- SIP integration (https://github.com/kaltura/server/pull/8437)
+- Index `sipToken` in the Sphinx entry table (https://github.com/kaltura/server/pull/8436)
+- PLAT-9871: Move cache version to dynamic map (https://github.com/kaltura/server/pull/8435)
+- Support multiple `embedPlaykitJsAction uiconf` tags (https://github.com/kaltura/server/pull/8433)
+- pexip Integration (https://github.com/kaltura/server/pull/8431)
+- PLAT-9869: Avoid long query exec time by adding partner ID to the criteria when querying `uiConf` (https://github.com/kaltura/server/pull/8430)
+- PLAT-9867: Fix quiz plugin schema contribution to avoid API error when trying to bulk upload cue points (https://github.com/kaltura/server/pull/8429)
+- pexip Integration (https://github.com/kaltura/server/pull/8428)
+- SUP-18105: Support Luxembourgisch (https://github.com/kaltura/server/pull/8426)
+- PLAT-9564: thumbnail.transform() - disable caching (https://github.com/kaltura/server/pull/8425)
+- SUP-18026: `generateReachVendorKs()` - take output moderation into account (https://github.com/kaltura/server/pull/8424)
+- PLAT-9849: DFP support multiple options in keys (https://github.com/kaltura/server/pull/8423)
+- SUP-18105: Support Luxembourgisch (https://github.com/kaltura/server/pull/8422)
+- PLAT-9868: Set default value for task creation mode manual (https://github.com/kaltura/server/pull/8420)
+- Avoid DB query when fetching cue point objects (https://github.com/kaltura/server/pull/8419)
+- Auto and iframe embeds: pass KS to `embedPlaykitAction()` (https://github.com/kaltura/server/pull/8418)
+- `XmlClientGenerator`: fix warnings (https://github.com/kaltura/server/pull/8417)
+- Avoid notices when when loading old job data that does not contain the scheduler name (https://github.com/kaltura/server/pull/8416)
+- PLAT-9862: `media.approveReplace()` -  return immediately if `KalturaMediaType::IMAGE` since no conversion needs to take place (https://github.com/kaltura/server/pull/8415)
+- Add live fields if the template is a live entry one (https://github.com/kaltura/server/pull/8414)
+- REACH2-581: Support both boolean and regular rules on the same reach profile (https://github.com/kaltura/server/pull/8413)
+- New thumbnail service (https://github.com/kaltura/server/pull/8404)
+- plugins/beacon/scripts/BeaconsIndexesRotation.php: support removal of unused indices (https://github.com/kaltura/server/pull/8273)
+- PLAT-9401: Sphinx - support distributed (across nodes) indices (https://github.com/kaltura/server/pull/7828)
 
 * Tue May 14 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.0.0-1
 - Ver Bounce to 15.0.0
