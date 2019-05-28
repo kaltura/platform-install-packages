@@ -23,7 +23,7 @@ if [ "$1" = "configure" ]; then
 	ln -s /usr/lib/jvm/java-8-openjdk-amd64/bin/java /etc/alternatives/java
 
 	chown -R elasticsearch $LOG_DIR/elasticsearch $BASE_DIR/var/lib/elasticsearch
-	service elasticsearch restart
+	invoke-rc.d elasticsearch restart
 	if [ ! -d /usr/share/elasticsearch/plugins/analysis-icu ];then
 		/usr/share/elasticsearch/bin/elasticsearch-plugin  install analysis-icu
 	fi
@@ -109,9 +109,9 @@ if [ "$1" = "configure" ]; then
 	find $BASE_DIR/app/cache/ -type f -exec chmod 664 {} \;  
 	chown -R kaltura.www-data $BASE_DIR/app/cache/
 
-	service apache2 restart
-	service memcached restart
+	invoke-rc.d apache2 restart
+	invoke-rc.d memcached restart
 	set +e
-	service kaltura-elastic-populate stop || true
+	invoke-rc.d kaltura-elastic-populate stop || true
 	invoke-rc.d kaltura-elastic-populate start
 fi
