@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 15.0.0
-Release: 14
+Version: 15.1.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -348,6 +348,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Wed May 29 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.1.0-1
+- Ver Bounce to 15.1.0
+
 * Tue May 28 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.0.0-14
 - PLAT-9844: use `retrieveByPK()` rather than calling `doSelectOne()` (https://github.com/kaltura/server/pull/8459)
 - PLAT-9867: `kCuePointManager::parseXml()` - Cast `entryId` to string (https://github.com/kaltura/server/pull/8458)

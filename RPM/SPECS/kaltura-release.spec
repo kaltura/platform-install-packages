@@ -3,7 +3,7 @@
 %define prefix /opt/kaltura 
 Summary: Kaltura Server release file and package configuration
 Name: kaltura-release
-Version: 15.0.0
+Version: 15.1.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -65,6 +65,9 @@ exit 0
 %config %{_sysconfdir}/yum.repos.d/kaltura.repo
 
 %changelog
+* Wed May 29 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.1.0-1
+- Ver Bounce to 15.1.0
+
 * Tue May 14 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.0.0-1
 - Ver Bounce to 15.0.0
 
