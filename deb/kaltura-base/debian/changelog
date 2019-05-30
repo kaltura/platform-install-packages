@@ -1,3 +1,9 @@
+kaltura-base (15.1.0-1) orion; urgency=medium
+
+  * Switching to 15.1.0
+
+ -- Jess Portnoy <jess@b0f924504114>  Thu, 30 May 2019 09:13:09 +0000
+
 kaltura-base (15.0.0-2) orion; urgency=medium
 
   * PLAT-9844: use `retrieveByPK()` rather than calling `doSelectOne()` (https://github.com/kaltura/server/pull/8459)
