@@ -45,9 +45,11 @@ try {
                         $result = $client->uiConf->add($uiConf);
                 } catch (Exception $e) {
                         echo $e->getMessage();
+			exit (2);
                 }
         }
 } catch (Exception $e) {
         echo $e->getMessage();
+	exit (1);
 }
 ?>
