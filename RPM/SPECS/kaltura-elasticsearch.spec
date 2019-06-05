@@ -100,7 +100,6 @@ fi
 %dir %{logdir} 
 %dir %{vardir}
 %dir %{tmpdir}
-%dir %{_sysconfdir}/elasticsearch 
 %dir %{_sysconfdir}/elasticsearch/analysis 
 %dir %{_sysconfdir}/elasticsearch/aliases
 %config %{_sysconfdir}/elasticsearch/aliases
