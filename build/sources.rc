@@ -297,7 +297,7 @@ HTML5LIB_BASE_URI="https://github.com/kaltura/mwEmbed/tarball/"
 HTML5LIB_RPM_NAME="kaltura-html5lib"
 
 # Kaltura DWH
-DWH_VERSION="Naos-14.18.0"
+DWH_VERSION="Orion-15.1.0"
 DWH_URI="https://github.com/kaltura/dwh/archive/$DWH_VERSION.zip"
 DWH_RPM_NAME="kaltura-dwh"
 

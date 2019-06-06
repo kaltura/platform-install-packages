@@ -1,12 +1,13 @@
 %define prefix /opt/kaltura
 %define kaltura_user kaltura
+%define codename Orion 
 Summary: Kaltura Open Source Video Platform - Analytics 
 Name: kaltura-dwh
-Version: 14.18.0
+Version: 15.1.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
-Source0: https://github.com/kaltura/dwh/archive/%{name}-Naos-%{version}.zip
+Source0: https://github.com/kaltura/dwh/archive/%{name}-%{codename}-%{version}.zip
 URL: https://github.com/kaltura/dwh/tree/master 
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires: kaltura-base,kaltura-pentaho,jre, kaltura-postinst 
@@ -32,14 +33,14 @@ and developing a variety of online workflows for video.
 This package configures the Data Warehouse [DWH] analytics component. 
 
 %prep
-%setup -qn dwh-Naos-%{version} 
+%setup -qn dwh-%{codename}-%{version} 
 
 %build
 
 %install
 # for Apache access logs.
 mkdir -p $RPM_BUILD_ROOT%{prefix}/web/logs
-cp -r %{_builddir}/dwh-Naos-%{version} $RPM_BUILD_ROOT%{prefix}/dwh
+cp -r %{_builddir}/dwh-%{codename}-%{version} $RPM_BUILD_ROOT%{prefix}/dwh
 find  $RPM_BUILD_ROOT%{prefix}/dwh/ -name "*.sh" -type f -exec chmod +x {} \;
 
 %clean
