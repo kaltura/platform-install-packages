@@ -4,7 +4,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5-analytics
 Version: v0.3
-Release: 1
+Release: 2
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz 
@@ -48,5 +48,9 @@ rm -rf %{buildroot}
 %{analytics_prefix}/%{version}
 
 %changelog
+* Mon Jun 10 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v0.3-2
+- Fix peak day metrics in `engagement`
+- Display newly added entry figures under `contributors`
+
 * Mon Apr 8 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v0.2-1
 - Initial release

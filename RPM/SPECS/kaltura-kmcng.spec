@@ -1,6 +1,6 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmcng
-Version: v5.9.1
+Version: v5.10.0
 Release: 1
 Summary: Kaltura HTML5 Management Console
 
@@ -49,6 +49,13 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Jun 10 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v5.10.0-1
+- administration/multi-account: allow only active accounts to be used as templates (3107050)
+- administration/multi-account: disable "Create" button until data loads (24e9d2e)
+- administration/multi-account: disregard removed templates for new account creation (542a01c)
+- administration/multi-account: Multi-account management
+- content/entries: Bulk add/remove of co-viewers (4e24b9b)
+
 * Wed May 22 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v5.9.1-1
 - prevent passwords auto filling (#831) (d853051)
 - administration/multi-account: disable create button on error state (462881c)
