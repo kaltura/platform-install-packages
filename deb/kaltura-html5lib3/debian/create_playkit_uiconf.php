@@ -18,7 +18,7 @@ $partnerId);
 $client->setKS($ks);
 $tags="autodeploy,playerV3Versions_latest,playerV3Versions_list,7.5,playerV3Versions,latest";
  // I'm somewhat hopeful the version for the other plugins won't change very often but we may have to modify the code so that their versions are passed as args as well later on..
-$config="{\"kaltura-ovp-player\":\"$playerVersion\",\"playkit-ima\":\"0.8.7\",\"playkit-youbora\":\"0.4.2\",\"playkit-comscore\":\"2.1.4\",\"playkit-google-analytics\":\"0.1.3\",\"playkit-offline-manager\":\"1.2.0\",\"playkit-cast-sender\":\"0.2.2\",\"playkit-cast-receiver\":\"0.2.0\",\"playkit-vr\":\"1.1.8\",\"playkit-flash\":\"1.2.1\",\"path\":\"0.1.6\"}";
+$config="{\"kaltura-ovp-player\":\"$playerVersion\",\"playkit-ima\":\"0.10.7\",\"playkit-youbora\":\"1.1.0\",\"playkit-comscore\":\"2.1.4\",\"playkit-google-analytics\":\"0.1.5\",\"playkit-offline-manager\":\"1.2.0\",\"playkit-cast-sender\":\"0.2.4\",\"playkit-cast-receiver\":\"0.3.0\",\"playkit-vr\":\"1.2.0\",\"path\":\"0.1.6\",\"playkit-flash\":\"1.2.3\"}";
 $filter = new KalturaUiConfFilter();
 $filter->tagsMultiLikeAnd = $tags;
 $pager = new KalturaFilterPager();
@@ -45,9 +45,11 @@ try {
                         $result = $client->uiConf->add($uiConf);
                 } catch (Exception $e) {
                         echo $e->getMessage();
+			exit (2);
                 }
         }
 } catch (Exception $e) {
         echo $e->getMessage();
+	exit (1);
 }
 ?>

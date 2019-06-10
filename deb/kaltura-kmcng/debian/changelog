@@ -1,3 +1,13 @@
+kaltura-kmcng (5.10.0) orion; urgency=medium
+
+  * administration/multi-account: allow only active accounts to be used as templates (3107050)
+  * administration/multi-account: disable "Create" button until data loads (24e9d2e)
+  * administration/multi-account: disregard removed templates for new account creation (542a01c)
+  * administration/multi-account: Multi-account management
+  * content/entries: Bulk add/remove of co-viewers (4e24b9b)
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 10 Jun 2019 13:08:10 +0000
+
 kaltura-kmcng (5.9.1) orion; urgency=medium
 
   * prevent passwords auto filling (#831) (d853051)

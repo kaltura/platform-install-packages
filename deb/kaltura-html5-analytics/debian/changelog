@@ -1,3 +1,10 @@
+kaltura-html5-analytics (0.3) orion; urgency=medium
+
+  * Fix peak day metrics in `engagement`
+  * Display newly added entry figures under `contributors`
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 10 Jun 2019 12:51:08 +0000
+
 kaltura-html5-analytics (0.2) naos; urgency=medium
 
   * Initial release. 
