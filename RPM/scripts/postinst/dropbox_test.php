@@ -18,8 +18,12 @@ function enable_dropbox_permission($client,$config,$partner_id)
         $filter->nameEqual = $permission->name;
         $pager = null;
         $result = $client->permission->listAction($filter, $pager);
-        if (!isset($result->objects[0]->status)|| $result->objects[0]->status!==1){
-                $result = $client->permission->add($permission);
+        if (!isset($result->objects[0]->status)){
+		try {
+                	$result = $client->permission->add($permission);
+		}catch(exception $e){
+			echo $e."\n";
+		}
         }
 }
 
