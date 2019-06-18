@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 15.1.0
-Release: 19
+Release: 21
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -281,7 +281,7 @@ if [ "$1" = 2 ];then
 				sed -e "s#@ADMIN_CONSOLE_PARTNER_ADMIN_SECRET@#$MINUS_2_PARTNER_ADMIN_SECRET#g" -e "s#@SERVICE_URL@#$SERVICE_URL#g" -i $CONF_FILE		
 			done
 #	@ADMIN_CONSOLE_PARTNER_ADMIN_SECRET@ @SERVICE_URL@	
-		mysql -h$DB1_HOST -u $SUPER_USER -p$SUPER_USER_PASSWD -P$DB1_PORT < %{prefix}/app/deployment/updates/fix_version_management.sql 
+		mysql -h$DB1_HOST -u $SUPER_USER -p$SUPER_USER_PASSWD -P$DB1_PORT $DB1_NAME < %{prefix}/app/deployment/updates/fix_version_management.sql 
 		php %{prefix}/app/deployment/updates/update.php -i -d >> /opt/kaltura/log/kalt_up.log 2>&1
 		php %{prefix}/app/deployment/updates/update.php -i -s >> /opt/kaltura/log/kalt_up.log 2>&1
 		php %{prefix}/app/deployment/base/scripts/installPlugins.php >> /opt/kaltura/log/kalt_up.log 2>&1
@@ -349,6 +349,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Jun 17 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.1.0-20
+- Nightly build.
+
 * Sun Jun 16 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.1.0-18
 - Nightly build.
 
