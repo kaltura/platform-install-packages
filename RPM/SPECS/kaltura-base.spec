@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 15.1.0
-Release: 29
+Version: 15.2.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -349,6 +349,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Jun 24 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.2.0-1
+- Ver Bounce to 15.2.0
+
 * Mon Jun 24 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.1.0-29
 - PLAT-9929: return language code in `captionAsset` (https://github.com/kaltura/server/pull/8567)
 - KMCNG-2114: remove check for seed on login data (https://github.com/kaltura/server/pull/8565)
