@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 15.1.0
-Release: 27
+Release: 29
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -349,83 +349,45 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Sun Jun 23 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.1.0-27
-- Nightly build.
-
-* Sat Jun 22 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.1.0-26
-- Nightly build.
-
-* Fri Jun 21 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.1.0-25
-- Nightly build.
-
-* Thu Jun 20 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.1.0-24
-- Nightly build.
-
-* Wed Jun 19 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.1.0-23
-- Nightly build.
-
-* Tue Jun 18 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.1.0-22
-- Nightly build.
-
-* Mon Jun 17 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.1.0-20
-- Nightly build.
-
-* Sun Jun 16 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.1.0-18
-- Nightly build.
-
-* Sat Jun 15 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.1.0-17
-- Nightly build.
-
-* Fri Jun 14 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.1.0-16
-- Nightly build.
-
-* Thu Jun 13 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.1.0-15
-- Nightly build.
-
-* Wed Jun 12 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.1.0-14
-- Nightly build.
-
-* Tue Jun 11 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.1.0-1
-- Nightly build.
-
-* Mon Jun 10 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.1.0-13
-- Nightly build.
-
-* Sun Jun 9 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.1.0-11
-- Nightly build.
-
-* Sat Jun 8 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.1.0-10
-- Nightly build.
-
-* Fri Jun 7 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.1.0-1
-- Nightly build.
-
-* Thu Jun 6 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.1.0-9
-- Nightly build.
-
-* Wed Jun 5 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.1.0-1
-- Nightly build.
-
-* Tue Jun 4 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.1.0-8
-- Nightly build.
-
-* Mon Jun 3 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.1.0-7
-- Nightly build.
-
-* Sun Jun 2 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.1.0-6
-- Nightly build.
-
-* Sat Jun 1 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.1.0-5
-- Nightly build.
-
-* Fri May 31 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.1.0-4
-- Nightly build.
-
-* Thu May 30 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.1.0-3
-- Nightly build.
-
-* Wed May 29 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.1.0-2
-- Nightly build.
+* Mon Jun 24 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.1.0-29
+- PLAT-9929: return language code in `captionAsset` (https://github.com/kaltura/server/pull/8567)
+- KMCNG-2114: remove check for seed on login data (https://github.com/kaltura/server/pull/8565)
+- PLAT-9927: handle cases where login ID on partner object is null (https://github.com/kaltura/server/pull/8563)
+- PLAT-9896: Prevent non-admin users from changing roles (https://github.com/kaltura/server/pull/8562)
+- kCategoryEntryCondition.php: Always trim values to avoid extra spaces (https://github.com/kaltura/server/pull/8561)
+- kCategoryEntryCondition.php: Always trim values to avoid extra spaces (https://github.com/kaltura/server/pull/8560)
+- PLAT-9886: Handle `dynamic playList` updates (https://github.com/kaltura/server/pull/8558)
+- PLAT-9923: Avoid unnecessary DB writes (https://github.com/kaltura/server/pull/8557)
+- SUP-17775: Not all caption assets are fetched (https://github.com/kaltura/server/pull/8556)
+- FEC-9040: redesigned KMC's preview and embed view (https://github.com/kaltura/server/pull/8554)
+- PLAT-9921 update SIP permission to allow admin only usage (https://github.com/kaltura/server/pull/8553)
+- SUP-18314: Allow users with KMC access the ability to order caption requests (https://github.com/kaltura/server/pull/8552)
+- PLAT-9841: Block access to `loginByLoginId()` for certain partners (sometimes desired when SSO is used for auth) (https://github.com/kaltura/server/pull/8551)
+- REACH2-627: Ensure `consumers` array contains unique values to avoid consuming the same event twice (https://github.com/kaltura/server/pull/8549)
+- KMCNG-2114: In preparation for supporting SSO and 2FA in KMCng (https://github.com/kaltura/server/pull/8548)
+- Fix schema update flow (https://github.com/kaltura/server/pull/8546)
+- PLAT-9719: thumbnail filters (https://github.com/kaltura/server/pull/8544)
+- PLAT-9664: Support additional languages (https://github.com/kaltura/server/pull/8543)
+- SUP-17451: Incorrect user roles in CSV export (https://github.com/kaltura/server/pull/8542)
+- PLAT-9841: Block access to `loginByLoginId()` for certain partners (sometimes desired when SSO is used for auth) (https://github.com/kaltura/server/pull/8541)
+- SUP-18392: Compress indexing queries based on (configurable) size threshold (https://github.com/kaltura/server/pull/8540)
+- SUP-18090: When a user is deleted, delete all its `appTokens` (https://github.com/kaltura/server/pull/8538)
+- PLAT-9664: Support additional languages (https://github.com/kaltura/server/pull/8537)
+- PSVAMB-7338: CSV bulk upload for scheduled events (https://github.com/kaltura/server/pull/8536)
+- PLAT-9721: Image transformations (https://github.com/kaltura/server/pull/8535)
+- SUP-18428: set `creatorId` to `userId` in case no `creatorId` was passed (https://github.com/kaltura/server/pull/8533)
+- PLAT-9916: Prevent `loginByKs` when origin partner auth is not `PartnerAuthenticationType::PASSWORD_ONLY` (https://github.com/kaltura/server/pull/8531)
+- SUP-18208: When storage protocol is null, we don't need to get the remote URL (https://github.com/kaltura/server/pull/8529)
+- KMCNG-2114: change types for clients (https://github.com/kaltura/server/pull/8527)
+- Pass type to `duplicateTemplateEntry` (https://github.com/kaltura/server/pull/8526)
+- REACH2-605: Allow updating existing reach profile's credit object type (https://github.com/kaltura/server/pull/8525)
+- KMCNG-2114: Change qr code dimensions (https://github.com/kaltura/server/pull/8519)
+- REACH2-575: support sending notifications for the `NotifiedUsers` per profile configuration (https://github.com/kaltura/server/pull/8517)
+- REACH2-583: Add new chaptering service (https://github.com/kaltura/server/pull/8511)
+- PSVAMB-7338: CSV bulk upload for scheduled events (https://github.com/kaltura/server/pull/8510)
+- KMCNG-2130: 2FA mail notification strings (https://github.com/kaltura/server/pull/8509)
+- PLAT-9896: Prevent non-admin users from changing roles (https://github.com/kaltura/server/pull/8507)
+- `SipIntegration` (https://github.com/kaltura/server/pull/8505)
 
 * Wed May 29 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.1.0-1
 - Ver Bounce to 15.1.0
