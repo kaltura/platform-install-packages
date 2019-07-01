@@ -1,6 +1,6 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmcng
-Version: v5.10.0
+Version: v5.11.0
 Release: 1
 Summary: Kaltura HTML5 Management Console
 
@@ -49,6 +49,10 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Jul 1 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v5.11.0-1
+- login: fix update password to work when the user is not logged in (03bc2ee)
+- Two factor authentication support (#844) (4b809f4)
+
 * Mon Jun 10 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v5.10.0-1
 - administration/multi-account: allow only active accounts to be used as templates (3107050)
 - administration/multi-account: disable "Create" button until data loads (24e9d2e)
