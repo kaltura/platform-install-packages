@@ -25,9 +25,16 @@ yum install -y java-1.8.0-openjdk-headless
 JDK_18_VERSION=`rpm -q java-1.8.0-openjdk-headless --queryformat %{version}-%{release}.%{arch}`
 alternatives --install /usr/bin/java java /usr/lib/jvm/java-1.8.0-openjdk-$JDK_18_VERSION/jre/bin/java 1
 update-alternatives --set java /usr/lib/jvm/java-1.8.0-openjdk-$JDK_18_VERSION/jre/bin/java 
-if ! rpm -q elasticsearch;then
-        yum localinstall -y https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.5.1.rpm
+if ! rpm -q "elasticsearch-oss" >/dev/null 2>&1 && ! rpm -q "elasticsearch" >/dev/null 2>&1 ;then
+        yum localinstall -y https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-oss-6.5.4.rpm 
 fi
+
+if [ -x /sbin/chkconfig ];then
+    /sbin/chkconfig --add elasticsearch
+else
+    /usr/bin/systemctl enable elasticsearch.service >/dev/null 2>&1 ||:
+fi
+
 set -e
 # should no longer be needed
 #sed -i 's@^\(\s*"type" : \)"boolean"\s*@\1"keyword"@g' $APP_DIR/configurations/elastic/mapping/*.json
@@ -37,7 +44,7 @@ sed -e "s#@BASE_DIR@#$BASE_DIR#g" -e "s#@LOG_DIR@#$LOG_DIR#g" -e "s#@HOSTNAME@#`
 echo "ES_JAVA_OPTS=\"-Djna.tmpdir=$BASE_DIR/var/lib/elasticsearch/tmp -Djava.io.tmpdir=$BASE_DIR/var/lib/elasticsearch/tmp\"" >> /etc/sysconfig/elasticsearch
 echo JAVA_HOME="/usr/lib/jvm/java-1.8.0-openjdk-$JDK_18_VERSION" >> /etc/sysconfig/elasticsearch 
 
-chown -R elasticsearch $LOG_DIR/elasticsearch
+chown -R elasticsearch $LOG_DIR/elasticsearch $BASE_DIR/var/lib/elasticsearch/tmp
 service elasticsearch restart
 if [ ! -d /usr/share/elasticsearch/plugins/analysis-icu ];then
         /usr/share/elasticsearch/bin/elasticsearch-plugin  install analysis-icu
