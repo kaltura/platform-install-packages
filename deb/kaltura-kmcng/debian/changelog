@@ -1,3 +1,10 @@
+kaltura-kmcng (5.11.0) orion; urgency=medium
+
+  * login: fix update password to work when the user is not logged in (03bc2ee)
+  * Two factor authentication support (#844) (4b809f4)
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 01 Jul 2019 13:41:47 +0000
+
 kaltura-kmcng (5.10.0) orion; urgency=medium
 
   * administration/multi-account: allow only active accounts to be used as templates (3107050)
