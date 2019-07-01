@@ -1,3 +1,9 @@
+kaltura-base (15.2.0-1) orion; urgency=medium
+
+  * Switching to 15.2.0
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 24 Jun 2019 15:22:30 +0000
+
 kaltura-base (15.1.0-2) orion; urgency=medium
 
   * PLAT-9929: return language code in `captionAsset` (https://github.com/kaltura/server/pull/8567) 

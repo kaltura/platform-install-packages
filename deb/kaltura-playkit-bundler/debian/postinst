@@ -6,6 +6,7 @@ PLAYKIT_PREFIX=$KALTURA_PREFIX/playkit-js-bundle-builder
 if [ "$1" = "configure" ]; then
         update-rc.d kaltura-playkit-bundler defaults || true
 fi
+mkdir -p $KALTURA_PREFIX/.forever
 chown -R $KALTURA_USER:$KALTURA_GROUP $PLAYKIT_PREFIX/log $PLAYKIT_PREFIX/var/run $KALTURA_PREFIX/.forever
 cd $PLAYKIT_PREFIX && npm install && npm install -g gulp forever
 if [ -r $KALTURA_PREFIX/app/configurations/local.ini ];then
