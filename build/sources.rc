@@ -139,7 +139,7 @@ PENTAHO_RPM_PACKAGE_NAME=kaltura-pentaho
 PENTAHO_URI="http://sourceforge.net/projects/pentaho/files/Data%20Integration/$PENTAHO_VERSION-stable/pdi-ce-$PENTAHO_VERSION-stable.tar.gz"
 
 # monit:
-MONIT_VERSION=5.25.2
+MONIT_VERSION=5.25.3
 MONIT_URI="http://mmonit.com/monit/dist/monit-$MONIT_VERSION.tar.gz"
 
 # Kaltura Core build vars:
@@ -176,13 +176,13 @@ HEADERS_MORE_NGINX_VERSION="v0.33"
 HEADERS_MORE_NGINX_URI="https://github.com/openresty/headers-more-nginx-module/archive/$HEADERS_MORE_NGINX_VERSION.zip"
 
 # Kaltura Streaming lib build vars:
-KALTURA_MEDIASERVER_VERSION="4.7.3.6"
+KALTURA_MEDIASERVER_VERSION="4.7.6.11"
 KALTURA_MEDIASERVER_URI="https://github.com/kaltura/media-server/releases/download/rel-$KALTURA_MEDIASERVER_VERSION/KalturaWowzaServer-install-$KALTURA_MEDIASERVER_VERSION.zip"
 KALTURA_MEDIASERVER_RPM_NAME=kaltura-media-server
 
 MEDIASERVER_DEPS_JARS="junit/junit-dep-4.7 json-/json-20090211 hamcrest/hamcrest-core-1.1 commons-logging/commons-logging-1.0.4 commons-httpclient/commons-httpclient-3.1 commons-codec/commons-codec-1.4"
 
-KALTURA_LIVE_DVR_VERSION="2.1.0"
+KALTURA_LIVE_DVR_VERSION="2.3.2"
 KALTURA_LIVE_DVR_URI="https://github.com/kaltura/liveDVR/archive/v$KALTURA_LIVE_DVR_VERSION.tar.gz"
 KALTURA_LIVE_DVR_RPM_NAME=kaltura-livedvr
 
@@ -305,7 +305,7 @@ ASYNC_API_PROXY_VERSION=1.0.10
 ASYNC_API_PROXY_URI="https://github.com/kaltura/AsyncApiProxy/archive/v$ASYNC_API_PROXY_VERSION.tar.gz"
 ASYNC_API_PROXY_RPM_NAME=kaltura-async-api-proxy
 
-PUSH_SERVER_VERSION=1.0.9
+PUSH_SERVER_VERSION=1.1.4
 PUSH_SERVER_URI="https://github.com/kaltura/pub-sub-server/archive/v$PUSH_SERVER_VERSION.tar.gz"
 PUSH_SERVER_RPM_NAME=kaltura-push-server
 
@@ -317,13 +317,13 @@ HTML5_APP_STUDIO_RPM_NAME=kaltura-html5-studio
 HTML5_APP_STUDIO_NORMALIZED_ARCHIVE_NAME=$HTML5_APP_STUDIO_RPM_NAME-$HTML5_APP_STUDIO_VERSION.zip
 
 # PHP
-PHP_VERSION="7.0.0RC7"
-PHP7_URI="https://downloads.php.net/~ab/php-$PHP_VERSION.tar.gz"
+PHP_VERSION="7.0.32"
+PHP7_URI="https://downloads.php.net/distributions/php-$PHP_VERSION.tar.gz"
 PHP_MEMCACHE_EXT_VERSION="https://github.com/websupport-sk/pecl-memcache/archive/php7.zip"
 PHP_MEMCACHE_EXT_URI="https://github.com/Sean-Der/pecl-networking-ssh2/archive/php7.zip"
 
 # Wowza
-WOWZA_VERSION="4.7.3"
+WOWZA_VERSION="4.7.7"
 WOWZA_URI="https://www.wowza.com/downloads/WowzaStreamingEngine-`echo $WOWZA_VERSION|sed 's@\.@-@g'`/WowzaStreamingEngine-$WOWZA_VERSION-linux-x64-installer.run"
 
 # live analytics 
