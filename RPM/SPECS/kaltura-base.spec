@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 15.2.0
-Release: 12
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -349,6 +349,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Fri Jul 5 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.2.0-1
+- Nightly build.
+
 * Fri Jul 5 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.2.0-12
 - SUP-18108: Avoid endless loop when generating entry vendor task CSV (https://github.com/kaltura/server/pull/8616)
 - PLAT-9993: Quiz - report.getTotal() supporting filtering (https://github.com/kaltura/server/pull/8614)
