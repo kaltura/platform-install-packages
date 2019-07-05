@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 15.2.0
-Release: 1
+Release: 12
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -349,38 +349,21 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Thu Jul 4 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.2.0-1
-- Nightly build.
-
-* Wed Jul 3 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.2.0-11
-- Nightly build.
-
-* Tue Jul 2 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.2.0-10
-- Nightly build.
-
-* Mon Jul 1 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.2.0-9
-- Nightly build.
-
-* Sun Jun 30 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.2.0-8
-- Nightly build.
-
-* Sat Jun 29 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.2.0-7
-- Nightly build.
-
-* Fri Jun 28 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.2.0-6
-- Nightly build.
-
-* Thu Jun 27 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.2.0-5
-- Nightly build.
-
-* Wed Jun 26 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.2.0-4
-- Nightly build.
-
-* Tue Jun 25 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.2.0-3
-- Nightly build.
-
-* Mon Jun 24 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.2.0-2
-- Nightly build.
+* Fri Jul 5 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.2.0-12
+- SUP-18108: Avoid endless loop when generating entry vendor task CSV (https://github.com/kaltura/server/pull/8616)
+- PLAT-9993: Quiz - report.getTotal() supporting filtering (https://github.com/kaltura/server/pull/8614)
+- PLAT-9933: Fix Zoom auth validation (https://github.com/kaltura/server/pull/8613)
+- PLAT-9992: Fix Zoom registration bug (https://github.com/kaltura/server/pull/8612)
+- PLAT-9933: Fix Zoom auth validation (https://github.com/kaltura/server/pull/8607)
+- Update kPexipUtils.php (https://github.com/kaltura/server/pull/8605)
+- PLAT-9547: Zoom enchanments (https://github.com/kaltura/server/pull/8602)
+- PLAT-9855: Quiz report API - support filtering by datee (https://github.com/kaltura/server/pull/8599)
+- PLAT-9898: Fix defect in `quizUser` entry validation (https://github.com/kaltura/server/pull/8596)
+- PLAT-9943: 2FA - handle the case of a user associated with multiple partners (https://github.com/kaltura/server/pull/8594)
+- Forced keyframes not generated (https://github.com/kaltura/server/pull/8593)
+- PLAT-9952: KMC preview and embed: altered the fonts size and hight (https://github.com/kaltura/server/pull/8579)
+- FEC-9040: Redesigned preview page (https://github.com/kaltura/server/pull/8577)
+- PLAT-9706: Fix Zoom authentication flow (https://github.com/kaltura/server/pull/8572)
 
 * Mon Jun 24 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.2.0-1
 - Ver Bounce to 15.2.0
