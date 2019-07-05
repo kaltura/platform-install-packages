@@ -6,17 +6,16 @@
 
 Summary: Kaltura Push Server 
 Name: kaltura-push-server 
-Version: 1.0.9
+Version: 1.1.4
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-v%{version}.tar.gz
 URL: https://github.com/kaltura/pub-sub-server
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-BuildArch: noarch
 Requires: nodejs >= 6.0.0 nodejs-forever nodejs-os nodejs-continuation-local-storage nodejs-crypto nodejs-amqp nodejs-util nodejs-node-ini nodejs-socket.io nodejs-cron nodejs-uws 
 Requires(post): chkconfig
-BuildRequires: nodejs-packaging
+#BuildRequires: nodejs-packaging
 AutoReq: no 
 
 %description

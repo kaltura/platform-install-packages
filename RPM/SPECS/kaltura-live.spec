@@ -1,6 +1,6 @@
-%define wowza_version 4.7.3
+%define wowza_version 4.7.7
 %define wowza_prefix /usr/local/WowzaStreamingEngine-%{wowza_version}
-%define media_server_version 4.7.3.6
+%define media_server_version 4.7.6.11 
 %define kaltura_prefix /opt/kaltura
 %define use_systemd (0%{?fedora} && 0%{?fedora} >= 18) || (0%{?rhel} && 0%{?rhel} >= 7)
 %define kaltura_user	kaltura
@@ -8,7 +8,7 @@
 
 Summary: Kaltura Open Source Video Platform - Live Streaming Server  
 Name: kaltura-live
-Version: 13.20.0
+Version: 15.2.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 

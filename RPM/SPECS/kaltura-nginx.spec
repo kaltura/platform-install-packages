@@ -52,8 +52,8 @@ Requires(pre): pwdutils
 
 Summary: High performance web server customized for Kaltura VOD
 Name: kaltura-nginx
-Version: 1.14.0
-Release: 5
+Version: 1.16.0
+Release: 1
 Vendor: Kaltura inc.
 URL: http://nginx.org/
 
@@ -411,6 +411,9 @@ if [ $1 -ge 1 ]; then
 fi
 
 %changelog
+* Fri Jul 5 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 1.16.0-1
+- New upstream Nginx version [see http://nginx.org/en/CHANGES
+
 * Mon Oct 22 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 1.14.0-5
 - New upstream headers and VTS modules
 - Compile vod module with FFmpeg 4.0.2

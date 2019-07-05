@@ -131,6 +131,8 @@ if [ $? -ne 0 ];then
 fi
 
 $BASE_DIR/bin/kaltura-es-config.sh "$ANSFILE"
+# for an all in one instance, this needs to be set to true, see plugins/search/providers/elastic_search/lib/kElasticSearchManager.php
+sed -i 's@\(exec_elastic\s*=\s*\)false@\1true@' $APP_DIR/configurations/base.ini 
 find $APP_DIR/cache/ -type f -exec rm {} \;
 rm -f $APP_DIR/log/kaltura-*.log
 
