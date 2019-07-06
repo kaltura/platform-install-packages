@@ -1,6 +1,6 @@
 # Contributing Code to the Kaltura Platform
 Kaltura is a multi-project platform. It consists of various back-end and front-end projects, written in several programming languages using different FOSS frameworks/libraries/technologies.
-This document was put together to guide you as a developer getting started with Kaltura, walk you through the various platform projects and the best practices when contributing code.
+This document was put together to guide you as a developer getting started with Kaltura, walk you through the different code repos and the best practices when contributing code.
 
 ## Signing the Contributor License Agreement
 When you merge new code to the Kaltura Platform, we require that you sign the Kaltura Contributor License Agreement (or "CLA"). The CLA license is for your protection as a Contributor as well as the protection of the Project and its community members. It does not change your rights to use your own Contributions for any other purpose, and does not require any IP assignment of any kind.
@@ -25,6 +25,8 @@ The main repos are:
 * https://github.com/kaltura/playkit-js - The Kaltura v3 Player Framework (AKA PlayKit)
 * https://github.com/kaltura/kmcng - The Kaltura Management Console (aka KMCng)
 * https://github.com/kaltura/player-studio - The HTML5 Player Studio (aka Studio v2)
+
+For a full listing of our FOSS repos, see https://github.com/kaltura.
 
 If you are uncertain as to which project a specific code belongs to, please run:
 
