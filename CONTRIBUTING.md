@@ -26,11 +26,16 @@ The main repos are:
 * https://github.com/kaltura/kmcng - The Kaltura Management Console (aka KMCng)
 * https://github.com/kaltura/player-studio - The HTML5 Player Studio (aka Studio v2)
 
-If you are uncertain which project a specific code belongs to, please run:
+If you are uncertain as to which project a specific code belongs to, please run:
 
-```bash
+```
 $ rpm -qf /path/to/file
 $ rpm -qi package | grep URL
+```
+
+or, if using a deb based distro (Debian/Ubuntu):
+```
+$ dpkg -S /path/to/file
 ```
 
 For example:
