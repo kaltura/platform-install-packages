@@ -61,8 +61,8 @@ $ dpkg -l package
 $ /opt/kaltura/bin/kaltura-sanity.sh
 ```
 
-This might help you diagnose the issue yourself, if not, paste the results along with your report.
-For questions, rather bug reports, please post at forum.kaltura.org.
+This can help you diagnose the issue by yourself, if it does not, include the resulting output in your report.
+For questions, rather bug reports, please post at https://forum.kaltura.org.
 
 ## Contribution Guidelines
 * Please do not file big Pull Requests. It makes reviewing and ensuring correctness difficult. If possible, break it down in smaller commits/pulls, each related to a specific issue or subject
