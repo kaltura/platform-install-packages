@@ -1,6 +1,6 @@
 # Contributing Code to the Kaltura Platform
 Kaltura is a multi-project platform. It consists of various back-end and front-end projects, written in several programming languages using different FOSS frameworks/libraries/technologies.
-This document was put together to guide you as a developer getting started with Kaltura, walk you through the various platform projects and the best practices when contributing code.
+This document was put together to guide you as a developer getting started with Kaltura, walk you through the different repos and the best practices when contributing code.
 
 ## Signing the Contributor License Agreement
 When you merge new code to the Kaltura Platform, we require that you sign the Kaltura Contributor License Agreement (or "CLA"). The CLA license is for your protection as a Contributor as well as the protection of the Project and its community members. It does not change your rights to use your own Contributions for any other purpose, and does not require any IP assignment of any kind.
