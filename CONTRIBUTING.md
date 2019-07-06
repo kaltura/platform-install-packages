@@ -1,5 +1,5 @@
 # Contributing Code to the Kaltura Platform
-Kaltura is a multi-project platform. It consists of various backend and frontend projects, in several programing languages and technologies. As such, it may seem little scary to get started as a new developer in the community.   
+Kaltura is a multi-project platform. It consists of various backend and frontend projects, in several programming languages and technologies. As such, it may seem little scary to get started as a new developer in the community.   
 This guide was put together to guide your way as a developer getting started with Kaltura, walk you through the various platform projects, and practices of contributing code by submitting pull-requests and code patches.
 
 ## Signing the Contributor License Agreement
