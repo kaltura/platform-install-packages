@@ -73,7 +73,7 @@ For questions, rather bug reports, please post at https://forum.kaltura.org.
 * Always keep performance in mind
 * If you are unsure about submitting a Pull request, ask one of the repository owners for clarification
 
-## Submitting Pull-Requests
+## Submitting Pull requests
 1. Fork the default branch of the relevant repo
 2. Create a branch with a meaningful name; i.e - some-feature-name-fix
 3. Commit and make a pull request
