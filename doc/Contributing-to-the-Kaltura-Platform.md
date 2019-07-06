@@ -1,6 +1,6 @@
 # Contributing Code to the Kaltura Platform
-Kaltura is a multi-project platform. It consists of various backend and frontend projects, in several programing languages and technologies. As such, it may seem little scary to get started as a new developer in the community.   
-This guide was put together to guide your way as a developer getting started with Kaltura, walk you through the various platform projects, and practices of contributing code by submitting pull-requests and code patches.
+Kaltura is a multi-project platform. It consists of various back-end and front-end projects, written in several programming languages using different FOSS frameworks/libraries/technologies.
+This document was put together to guide you as a developer getting started with Kaltura, walk you through the various platform projects and the best practices when contributing code.
 
 ## Signing the Contributor License Agreement
 When you merge new code to the Kaltura Platform, we require that you sign the Kaltura Contributor License Agreement (or "CLA"). The CLA license is for your protection as a Contributor as well as the protection of the Project and its community members. It does not change your rights to use your own Contributions for any other purpose, and does not require any IP assignment of any kind.
@@ -21,15 +21,21 @@ The main repos are:
 * https://github.com/kaltura/platform-install-packages - The Platform Install Packages and Scripts
 * https://github.com/kaltura/server - The Core Backend (The Kaltura Server)
 * https://github.com/kaltura/nginx-vod-module - NGINX-based MP4 Repackager
-* https://github.com/kaltura/mwEmbed - The Kaltura JS Player Framework (aka Universal or v2 Player)
-* https://github.com/kaltura/kmc - The Kaltura Management Console (aka KMC)
+* https://github.com/kaltura/mwEmbed - The Kaltura v2 Player Framework (AKA Universal or v2 Player)
+* https://github.com/kaltura/playkit-js - The Kaltura v3 Player Framework (AKA PlayKit)
+* https://github.com/kaltura/kmcng - The Kaltura Management Console (aka KMCng)
 * https://github.com/kaltura/player-studio - The HTML5 Player Studio (aka Studio v2)
 
-If you are uncertain which project a specific code belongs to, please run:
+If you are uncertain as to which project a specific code belongs to, please run:
 
-```bash
+```
 $ rpm -qf /path/to/file
 $ rpm -qi package | grep URL
+```
+
+or, if using a deb based distro (Debian/Ubuntu):
+```
+$ dpkg -S /path/to/file
 ```
 
 For example:
@@ -55,21 +61,20 @@ $ dpkg -l package
 $ /opt/kaltura/bin/kaltura-sanity.sh
 ```
 
-This might help you diagnose the issue yourself, if not, paste the results along with your report.
-For questions, rather bug reports, please post at forum.kaltura.org.
+This can help you diagnose the issue by yourself, if it does not, include the resulting output in your report.
+For questions, rather bug reports, please post at https://forum.kaltura.org.
 
 ## Contribution Guidelines
-* Please do not file big Pull Requests. It makes reviewing and ensuring correctness difficult. If possible, break it down in smaller commits/pulls, each related to a specific issue or subject
-* Every commit should have a meaningful subject
-* If the code has tests, they must pass before submitting the pull request
-* When submitting a new feature, unit tests must be submitted as well
+* Please submit separate pull requests per feature/bug (it makes reviewing and approving code contributions easier)
+* Every commit should have a meaningful description
+* If the code has unit tests, they must pass before the pull request can be merged
+* When submitting a new feature, unit tests must be written and included in the pull
 * Whenever possible, implement features as plugins, not by modifying Core code
 * Always keep performance in mind
-* If you are unsure about submitting a Pull request, ask one of the repository owners for clarification
 
-## Submitting Pull-Requests
+## Submitting Pull requests
 1. Fork the default branch of the relevant repo
 2. Create a branch with a meaningful name; i.e - some-feature-name-fix
-3. Commit and make a pull request
+3. Make a pull request
 
 Thank you for helping make Kaltura even more awesome! :)
