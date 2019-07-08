@@ -1,3 +1,9 @@
+kaltura-nginx (1.16.0-1) orion; urgency=medium
+
+  * New upstream Nginx version [see http://nginx.org/en/CHANGES]
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 08 Jul 2019 08:45:05 +0000
+
 kaltura-nginx (1.14.0-3) naos; urgency=medium
 
   * New upstream headers and VTS modules
