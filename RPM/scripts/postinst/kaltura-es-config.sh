@@ -53,7 +53,7 @@ mkdir -p $APP_DIR/configurations/elastic/populate
 chown kaltura $APP_DIR/configurations/elastic/populate
 set +e
 ATTEMPT=0
-while ! curl -f -I http://$ES_HOST:$ES_PORT/ >> /dev/null 2>&1;do
+while ! curl -f "http://127.0.0.1:9200/_cluster/health?wait_for_status=green&timeout=10s" >> /dev/null 2>&1;do
         sleep 5
         if [ $ATTEMPT -eq 22 ];then 
                 echo "We've waited a minute and the ES daemon is still unreachable, we're giving up:("
