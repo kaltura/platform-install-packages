@@ -1,3 +1,21 @@
+kaltura-kmcng (5.12.0) orion; urgency=medium
+
+  * analytics: allow real-time analytics player to toggle full screen (fc2483e)
+  * Fix caption request not working on Mac Safari (b4c4461)
+  * entries/bulk-actions: prevent app crash on bulk edit (#852) (67c3172)
+  * entry/details: hide old analytics link if not available (#849) (b4d77bb)
+  * entry/live: update go live button status upon polling (#850) (2ce5741)
+  * login: Clear error message after restoring password fails (bfee611)
+  * preview: support DRM playback in all KMC preview players (e3d1dcc)
+  * settings/my-user-settings: remove email edit option (a7bd6a1)
+  * settings/transcoding-settings: prevent removal of default flavorParamId when saving profile flavors list (27ac9b8)
+  * share & embed: Refresh player when switching embed types to properly render thumbnail embed (#847) (e0a0a0c)
+  * upload: update client lib to support minimumChunkSize specification when creating a new uploadToken (537526e)
+  * analytics: provide date format in analytics config (#854) (82d31f4)
+  * entry(captions): support SCC caption type
+
+ -- Jess Portnoy <jess@b0f924504114>  Tue, 16 Jul 2019 13:00:50 +0000
+
 kaltura-kmcng (5.11.0) orion; urgency=medium
 
   * login: fix update password to work when the user is not logged in (03bc2ee)
