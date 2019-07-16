@@ -3,7 +3,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.76
+Version: v2.77
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -86,6 +86,23 @@ fi
 %config %{html5lib_base}/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Tue Jul 16 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v2.77-1
+- SUP-18895 - Vertical Space for Thai Captions is too narrow
+- FEV-345 - IVQ locale (#4040)
+- FEV-318 - hide 'Why' bubble when feedback popup is visible (#4039)
+- FEV-320 - start playing on a question-cue-point click (#4038)
+- FEC-9124 - Don't pass DRM servers data
+- fix(FEV-314): Save button was disabled upon clicking the hint icon (#4032)
+- FEV-317 - make text of feedback button and feedback popup responsive (#4035)
+- FEV-128 - set interval for updating Q&A timestamp (#4023)
+- Fev 293 open question feedback (#4027)
+- SUP-18554 - Loop quiz
+- SUP-18477 - Showing hint clears answer in an open-question
+- SUP-18486 - BUG when closing the share embed page on player.
+- FEV-291 - IVQ - Retake - iPad - After clicking on 'Done' button there is no option to click on bubble button
+- WEBC-1334 - I as User want to be able to close the poll in the case that there is a fatal error
+- FEV-118 - [IVQ] Quiz end behaviour - remove auto replay
+
 * Wed May 22 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v2.76-1
 FEC-9085 - need to click the pause button twice in order to pause the media
 SUP-17081 - Styling issue with a player buttons dropdown menu

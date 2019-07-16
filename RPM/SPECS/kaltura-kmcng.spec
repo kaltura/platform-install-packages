@@ -1,6 +1,6 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmcng
-Version: v5.11.0
+Version: v5.12.0
 Release: 1
 Summary: Kaltura HTML5 Management Console
 
@@ -49,6 +49,21 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Tue Jul 16 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v5.12.0-1
+- analytics: allow real-time analytics player to toggle full screen (fc2483e)
+- Fix caption request not working on Mac Safari (b4c4461)
+- entries/bulk-actions: prevent app crash on bulk edit (#852) (67c3172)
+- entry/details: hide old analytics link if not available (#849) (b4d77bb)
+- entry/live: update go live button status upon polling (#850) (2ce5741)
+- login: Clear error message after restoring password fails (bfee611)
+- preview: support DRM playback in all KMC preview players (e3d1dcc)
+- settings/my-user-settings: remove email edit option (a7bd6a1)
+- settings/transcoding-settings: prevent removal of default flavorParamId when saving profile flavors list (27ac9b8)
+- share & embed: Refresh player when switching embed types to properly render thumbnail embed (#847) (e0a0a0c)
+- upload: update client lib to support minimumChunkSize specification when creating a new uploadToken (537526e)
+- analytics: provide date format in analytics config (#854) (82d31f4)
+- entry(captions): support SCC caption type
+
 * Mon Jul 1 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v5.11.0-1
 - login: fix update password to work when the user is not logged in (03bc2ee)
 - Two factor authentication support (#844) (4b809f4)
