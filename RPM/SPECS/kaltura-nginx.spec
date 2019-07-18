@@ -46,7 +46,7 @@ Requires(pre): pwdutils
 %define nginx_token_validate_ver 1.1
 %define nginx_vts_ver 0.1.18
 %define nginx_rtmp_ver 1.2.0
-%define ngx_aws_auth_ver 2.1.1
+%define ngx_aws_auth_ver 1.0.1
 %define headers_more_nginx_ver 0.33
 # end of distribution specific definitions
 
@@ -168,7 +168,7 @@ export LIBRARY_PATH C_INCLUDE_PATH
 	--add-module=./nginx-akamai-token-validate-module-%{nginx_token_validate_ver} \
 	--add-module=./nginx-rtmp-module-%{nginx_rtmp_ver} \
 	--add-dynamic-module=./nginx-module-vts-%{nginx_vts_ver} \
-	--add-dynamic-module=./ngx_aws_auth-%{ngx_aws_auth_ver} \
+	--add-dynamic-module=./nginx-aws-auth-module-%{ngx_aws_auth_ver} \
     	--add-dynamic-module=./headers-more-nginx-module-%{headers_more_nginx_ver} \
         $*
 make %{?_smp_mflags}
@@ -217,7 +217,7 @@ make %{?_smp_mflags}
 	--add-module=./nginx-akamai-token-validate-module-%{nginx_token_validate_ver} \
 	--add-module=./nginx-rtmp-module-%{nginx_rtmp_ver} \
 	--add-dynamic-module=./nginx-module-vts-%{nginx_vts_ver} \
-	--add-dynamic-module=./ngx_aws_auth-%{ngx_aws_auth_ver} \
+	--add-dynamic-module=./nginx-aws-auth-module-%{ngx_aws_auth_ver} \
     	--add-dynamic-module=./headers-more-nginx-module-%{headers_more_nginx_ver} \
         $*
 make %{?_smp_mflags}
