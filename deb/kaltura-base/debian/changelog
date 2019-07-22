@@ -1,3 +1,9 @@
+kaltura-base (15.4.0-1) orion; urgency=medium
+
+  * Switching to 15.4.0
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 22 Jul 2019 19:40:49 +0000
+
 kaltura-base (15.3.0-2) orion; urgency=medium
 
   * PLAT-10043: Set access control profile correct type for esearch aggs (https://github.com/kaltura/server/pull/8656)
