@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 15.3.0
-Release: 6
+Release: 7
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -349,23 +349,33 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Sun Jul 21 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.3.0-6
-- Nightly build.
-
-* Sat Jul 20 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.3.0-5
-- Nightly build.
-
-* Fri Jul 19 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.3.0-1
-- Nightly build.
-
-* Thu Jul 18 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.3.0-4
-- Nightly build.
-
-* Wed Jul 17 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.3.0-3
-- Nightly build.
-
-* Tue Jul 16 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.3.0-2
-- Nightly build.
+* Mon Jul 22 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.3.0-7
+- PLAT-10043: Set access control profile correct type for esearch aggs (https://github.com/kaltura/server/pull/8656)
+- PLAT-10020: Zoom transcription label and language (https://github.com/kaltura/server/pull/8655)
+- PLAT-10043: E-search Aggregations - move on to the next bucket if no sub-buckets exist (https://github.com/kaltura/server/pull/8652)
+- PLAT-10024: Fix admin console OTP exploit (https://github.com/kaltura/server/pull/8651)
+- SUP-17451: Download user list as CSV: dedup records with the same kuser ID (https://github.com/kaltura/server/pull/8648)
+- PLAT-9998: Introducing the `WatchLater` Plugin (https://github.com/kaltura/server/pull/8647)
+- When filtering categoryEntry by `createdAt`, add `updatedAt` to the query to utilize an existing index (https://github.com/kaltura/server/pull/8646)
+- PLAT-10019: Fix resource reservation bug (https://github.com/kaltura/server/pull/8644)
+- SUP-18254: Correctly handle mutiple groupUser.delete() actions on user (https://github.com/kaltura/server/pull/8643)
+- SUP-16933: Rule based playlist incorrectly sorted (https://github.com/kaltura/server/pull/8642)
+- PLAT-10011: Zoom - handle duplicate transcription complete events (https://github.com/kaltura/server/pull/8639)
+- PLAT-10014: Zoom chat and transcript file types (https://github.com/kaltura/server/pull/8638)
+- PLAT-10002: Handle duplicate Zoom record complete events (https://github.com/kaltura/server/pull/8637)
+- PLAT-9959: Add `Timing-Allow-Origin` to the response header (https://github.com/kaltura/server/pull/8636)
+- PLAT-10001: eSearch - `searchUser()` and `searchCategory()` broken with PHP 7.2 (https://github.com/kaltura/server/pull/8635)
+- PLAT-9942: Add 2FA support to `adminUser->updatePassword()` and `user->updateLoginData()` (https://github.com/kaltura/server/pull/8633)
+- PLAT-9974: If moderation is enabled for the entry, only distribute after the entry has been approved (https://github.com/kaltura/server/pull/8631)
+- PLAT-9902: Support conversion of captions from scc/srt/dfxp/webvtt to scc/srt/dfxp/webvtt (https://github.com/kaltura/server/pull/8628) 
+- PSVAMB-7785: MRSS Roku syndication feed - live entry support (https://github.com/kaltura/server/pull/8626)
+- Creation date update script (https://github.com/kaltura/server/pull/8625)
+- SUP-16933: Use eSearch instead of Sphinx for playlist execute from filter (https://github.com/kaltura/server/pull/8624)
+- `partner->getSecrets()` should accept the optional $otp and pass it on to `userLoginByEmail()` (https://github.com/kaltura/server/pull/8622)
+- Fix upgrade sql alters (https://github.com/kaltura/server/pull/8618)
+- PLAT-9936: Zoom chat file support (https://github.com/kaltura/server/pull/8611)
+- Plat 9889: Add support in eSearch aggregations (https://github.com/kaltura/server/pull/8504)
+- PLAT-9784: Add whitelist of allowed `from_emails` on partner info (https://github.com/kaltura/server/pull/8388)
 
 * Tue Jul 9 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.3.0-1
 - Ver Bounce to 15.3.0
