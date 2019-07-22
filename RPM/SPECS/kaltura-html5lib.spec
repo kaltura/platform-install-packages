@@ -3,7 +3,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.77
+Version: v2.77.1
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -86,6 +86,9 @@ fi
 %config %{html5lib_base}/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Mon Jul 22 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v2.77.1
+- FEV-346 - Player loads with syntex error in IE11 causing the player to load with black screen
+
 * Tue Jul 16 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v2.77-1
 - SUP-18895 - Vertical Space for Thai Captions is too narrow
 - FEV-345 - IVQ locale (#4040)
