@@ -1,0 +1,6 @@
+#!/bin/bash -e
+
+CLASSPATH=$(systemctl show --property=Environment zookeeper | awk -F= '/CLASSPATH/ {print $3}')
+LOG4J_OPTS=-Dlog4j.configuration=file:///etc/zookeeper/log4j-cli.properties
+
+/bin/java -cp $CLASSPATH $LOG4J_OPTS org.apache.zookeeper.ZooKeeperMain "$@"
