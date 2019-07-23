@@ -424,4 +424,4 @@ PLAYKIT_FLASH_URI="https://github.com/kaltura/$PLAYKIT_FLASH_REPO_NAME/archive/v
 HTML5_APP_ANALYTICS_VERSION=v0.3
 
 ZOOKEEPER_VERSION=3.4.10
-ZOOKEEPER_URI="https://www.apache.org/dyn/closer.cgi/zookeeper/zookeeper-$ZOOKEEPER_VERSION/zookeeper-$ZOOKEEPER_VERSION.tar.gz"
+ZOOKEEPER_URI=" http://archive.apache.org/dist/zookeeper/zookeeper-$ZOOKEEPER_VERSION/zookeeper-$ZOOKEEPER_VERSION.tar.gz"
