@@ -1,0 +1,14 @@
+[Unit]
+Description=Kafka
+After=network.target
+
+[Service]
+User=kafka
+Group=kafka
+Environment=CLASSPATH=.:/opt/kafka/libs/*
+EnvironmentFile=/etc/sysconfig/kafka
+ExecStart=/bin/java -cp $CLASSPATH $KAFKA_LOG4J_OPTS $KAFKA_HEAP_OPTS $KAFKA_JVM_PERFORMANCE_OPTS $KAFKA_GC_LOG_OPTS $KAFKA_JMX_OPTS kafka.Kafka $KAFKA_SERVER_CONFIG
+SuccessExitStatus=143
+
+[Install]
+WantedBy=multi-user.target
