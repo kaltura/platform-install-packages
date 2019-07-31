@@ -164,6 +164,16 @@ NGINX_RTMP_URI="https://github.com/arut/nginx-rtmp-module/archive/$NGINX_RTMP_VE
 
 KALTURA_NGINX_SECURE_TOKEN_VERSION=1.3
 KALTURA_NGINX_SECURE_TOKEN_URI="https://github.com/kaltura/nginx-secure-token-module/archive/$KALTURA_NGINX_SECURE_TOKEN_VERSION.zip"
+
+KALTURA_NGINX_KAFKA_LOG_VERSION=1.0
+KALTURA_NGINX_KAFKA_LOG_URI="https://github.com/kaltura/nginx-kafka-log-module/archive/v$KALTURA_NGINX_KAFKA_LOG_VERSION.zip"
+
+KALTURA_NGINX_JSON_VAR_VERSION=1.0
+KALTURA_NGINX_JSON_VAR_URI="https://github.com/kaltura/nginx-json-var-module/archive/v$KALTURA_NGINX_JSON_VAR_VERSION.zip"
+
+KALTURA_NGINX_STRFTIME_VERSION=1.0
+KALTURA_NGINX_STRFTIME_URI="https://github.com/kaltura/strftime-nginx-module/archive/v$KALTURA_NGINX_STRFTIME_VERSION.zip"
+
 NGINX_VERSION=1.16.0
 NGINX_URI="http://nginx.org/download/nginx-$NGINX_VERSION.tar.gz"
 

@@ -44,6 +44,9 @@ Requires(pre): pwdutils
 %define nginx_vod_module_ver 1.24
 %define nginx_secure_token_ver 1.3
 %define nginx_token_validate_ver 1.1
+%define nginx_kafka_log_ver 1.0
+%define nginx_json_var_ver 1.0
+%define nginx_strftime_ver 1.0
 %define nginx_vts_ver 0.1.18
 %define nginx_rtmp_ver 1.2.0
 %define ngx_aws_auth_ver 1.0.1
@@ -77,6 +80,9 @@ Source16: nginx.conf.template
 Source17: nginx_ssl.conf.template
 Source18: ngx_aws_auth-%{ngx_aws_auth_ver}.zip
 Source19: headers-more-nginx-module-v%{headers_more_nginx_ver}.zip
+Source20: nginx-kafka-log-module-v%{nginx_kafka_log_ver}.zip
+Source21: nginx-json-var-module-v%{nginx_json_var_ver}.zip
+Source22: nginx-strftime-module-v%{nginx_strftime_ver}.zip
 #Patch1: nginx_kaltura.diff 
 
 License: 2-clause BSD-like license
@@ -84,8 +90,10 @@ License: 2-clause BSD-like license
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildRequires: zlib-devel
 BuildRequires: pcre-devel
+BuildRequires: librdkafka-devel
 BuildRequires: kaltura-ffmpeg-devel
 Requires: kaltura-ffmpeg
+Requires: librdkafka
 
 Provides: webserver
 Conflicts: nginx
@@ -105,19 +113,9 @@ Not stripped version of nginx built with the debugging log support.
 
 %prep
 %setup -qn nginx-%{version}
-unzip -o %{SOURCE10}
-
-unzip -o %{SOURCE11}
-
-unzip -o %{SOURCE12}
-
-unzip -o %{SOURCE13}
-
-unzip -o %{SOURCE14}
-
-unzip -o %{SOURCE18}
-
-unzip -o %{SOURCE19}
+for MODULE in %{SOURCE10} %{SOURCE11} %{SOURCE12} %{SOURCE13} %{SOURCE14} %{SOURCE18} %{SOURCE19} %{SOURCE20} %{SOURCE21} %{SOURCE22};do 
+	unzip -o $MODULE
+done
 
 
 %build
@@ -167,6 +165,9 @@ export LIBRARY_PATH C_INCLUDE_PATH
 	--add-module=./nginx-secure-token-module-%{nginx_secure_token_ver} \
 	--add-module=./nginx-akamai-token-validate-module-%{nginx_token_validate_ver} \
 	--add-module=./nginx-rtmp-module-%{nginx_rtmp_ver} \
+	--add-module=./nginx-kafka-log-module-%{nginx_kafka_log_ver} \
+	--add-module=./nginx-json-var-module-%{nginx_json_var_ver} \
+	--add-module=./strftime-nginx-module-%{nginx_strftime_ver} \
 	--add-dynamic-module=./nginx-module-vts-%{nginx_vts_ver} \
 	--add-dynamic-module=./nginx-aws-auth-module-%{ngx_aws_auth_ver} \
     	--add-dynamic-module=./headers-more-nginx-module-%{headers_more_nginx_ver} \
@@ -215,6 +216,9 @@ make %{?_smp_mflags}
 	--add-module=./nginx-vod-module-%{nginx_vod_module_ver} \
 	--add-module=./nginx-secure-token-module-%{nginx_secure_token_ver} \
 	--add-module=./nginx-akamai-token-validate-module-%{nginx_token_validate_ver} \
+	--add-module=./nginx-kafka-log-module-%{nginx_kafka_log_ver} \
+	--add-module=./nginx-json-var-module-%{nginx_json_var_ver} \
+	--add-module=./strftime-nginx-module-%{nginx_strftime_ver} \
 	--add-module=./nginx-rtmp-module-%{nginx_rtmp_ver} \
 	--add-dynamic-module=./nginx-module-vts-%{nginx_vts_ver} \
 	--add-dynamic-module=./nginx-aws-auth-module-%{ngx_aws_auth_ver} \
