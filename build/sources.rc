@@ -439,3 +439,6 @@ ZOOKEEPER_URI=" http://archive.apache.org/dist/zookeeper/zookeeper-$ZOOKEEPER_VE
 KAFKA_VERSION=2.3.0
 SCALA_VERSION=2.12
 SCALA_URI="http://mirrors.ukfast.co.uk/sites/ftp.apache.org/kafka/$KAFKA_VERSION/kafka_$SCALA_VERSION-$KAFKA_VERSION.tgz"
+
+IP2LOC_LIB_VERSION=8.0.8
+IP2LOC_LIB_URI="https://github.com/chrislim2888/IP2Location-C-Library/archive/$IP2LOC_LIB_VERSION.tar.gz"
