@@ -425,3 +425,7 @@ HTML5_APP_ANALYTICS_VERSION=v0.3
 
 ZOOKEEPER_VERSION=3.4.10
 ZOOKEEPER_URI=" http://archive.apache.org/dist/zookeeper/zookeeper-$ZOOKEEPER_VERSION/zookeeper-$ZOOKEEPER_VERSION.tar.gz"
+
+KAFKA_VERSION=2.3.0
+SCALA_VERSION=2.12
+SCALA_URI="http://mirrors.ukfast.co.uk/sites/ftp.apache.org/kafka/$KAFKA_VERSION/kafka_$SCALA_VERSION-$KAFKA_VERSION.tgz"

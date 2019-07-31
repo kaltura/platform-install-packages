@@ -54,7 +54,7 @@ install -p -D -m 644 config/server.properties $RPM_BUILD_ROOT%{_conf_dir}/
 sed -i "s:^log.dirs=.*:log.dirs=%{_data_dir}:" $RPM_BUILD_ROOT%{_conf_dir}/server.properties
 install -p -D -m 755 %{S:1} $RPM_BUILD_ROOT%{_unitdir}/
 install -p -D -m 644 %{S:2} $RPM_BUILD_ROOT%{_sysconfdir}/logrotate.d/%{name}
-install -p -D -m 644 %{S:3} $RPM_BUILD_ROOT%{_conf_dir}/
+install -p -D -m 644 %{S:3} $RPM_BUILD_ROOT%{_conf_dir}/log4j.properties
 install -p -D -m 644 %{S:4} $RPM_BUILD_ROOT%{_sysconfdir}/sysconfig/%{name}
 install -p -D -m 644 libs/* $RPM_BUILD_ROOT%{_prefix}/%{name}/libs
 %if %{build_with_metrics}
