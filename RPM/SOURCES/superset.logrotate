@@ -1,0 +1,9 @@
+/usr/share/superset/log/*.log  {
+  daily
+  dateext
+  rotate 25
+  missingok
+  notifempty
+  compress
+  copytruncate
+}

@@ -1,0 +1,22 @@
+[Unit]
+Description='Superset Server'
+After=network.target
+
+[Service]
+PIDFile=/var/run/superset.pid
+EnvironmentFile=/etc/sysconfig/superset
+WorkingDirectory=/usr/share/superset
+User=superset
+Group=superset
+ExecStart=/bin/python3.6 /usr/share/superset/bin/gunicorn -w 32 -k gevent \
+            --limit-request-line 0 \
+            --timeout 120 --pid=/var/run/superset.pid \
+            --bind 0.0.0.0:6666 \
+            superset:app
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s TERM $MAINPID
+PrivateTemp=true
+
+[Install]
+WantedBy=multi-user.target
+

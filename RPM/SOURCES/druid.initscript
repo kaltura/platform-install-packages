@@ -1,0 +1,86 @@
+#!/bin/bash
+#
+
+# Source function library.
+. /etc/init.d/functions
+RETVAL=0
+
+DRUID_USER=druid
+PID_FILE="/var/run/druid/druid-server.pid"
+DRUID_HOME="/usr/lib/druid"
+DRUID_CONF="/etc/druid/"
+CLASSPATH="$DRUID_HOME/*:$DRUID_CONF"
+LOG_DIR="/var/log/druid"
+
+. $DRUID_CONF/druid-env.sh
+
+start() {
+    pid=$(ps ax | grep druid | grep realtime | grep -v grep | awk '{print $1}')
+    if [ "$pid" != "" ]; then
+        echo "Druid server is already running."
+        exit 0
+    else
+        echo "Starting Druid server..."
+    fi
+
+    DRUID_CMD="java $DRUID_HEAP_OPTS $DRUID_OPTS $DRUID_SPEC_OPTS -Duser.timezone=UTC -Dfile.encoding=UTF-8 -classpath $CLASSPATH io.druid.cli.Main server realtime"
+    $DRUID_CMD >> $LOG_DIR/druid-server.out 2>&1 &
+    RETVAL=$?
+    if [ $RETVAL == 0 ]; then
+        ps ax | grep druid | grep realtime | grep -v grep | awk '{print $1}' > $PID_FILE
+    fi
+    status
+    return $RETVAL
+}
+
+stop() {
+    if status; then
+        echo "Stopping Druid server..."
+        killproc -p $PID_FILE -TERM
+        RETVAL=$?
+        status
+    else
+        return 0
+    fi
+    return $RETVAL
+}
+
+status() {
+    pid=$(< $PID_FILE)
+    if [ "$pid" = '' ]; then
+        return 0
+    fi
+    return 1
+}
+
+restart() {
+    stop
+    start
+}
+
+reload()  {
+    restart
+}
+
+case "$1" in
+  start)
+        start
+        ;;
+  stop)
+        stop
+        ;;
+  status)
+        status
+        ;;
+  restart)
+        restart
+        ;;
+  reload)
+        reload
+        ;;
+  *)
+        echo $"Usage: $0 {start|stop|status|restart}"
+        exit 2
+esac
+
+exit $?

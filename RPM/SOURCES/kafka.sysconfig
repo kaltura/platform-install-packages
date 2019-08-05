@@ -1,0 +1,5 @@
+KAFKA_SERVER_CONFIG=/etc/kafka/server.properties
+KAFKA_LOG4J_OPTS=-Dkafka.logs.dir=/var/log/kafka -Dlog4j.configuration=file:///etc/kafka/log4j.properties
+KAFKA_GC_LOG_OPTS=-Xloggc:/var/log/kafka/kafkaServer-gc.log -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintGCTimeStamps
+KAFKA_JVM_PERFORMANCE_OPTS=-server -XX:+UseG1GC -XX:MaxGCPauseMillis=20 -XX:InitiatingHeapOccupancyPercent=35 -XX:+DisableExplicitGC -Djava.awt.headless=true
+KAFKA_JMX_OPTS=-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false

@@ -164,6 +164,16 @@ NGINX_RTMP_URI="https://github.com/arut/nginx-rtmp-module/archive/$NGINX_RTMP_VE
 
 KALTURA_NGINX_SECURE_TOKEN_VERSION=1.3
 KALTURA_NGINX_SECURE_TOKEN_URI="https://github.com/kaltura/nginx-secure-token-module/archive/$KALTURA_NGINX_SECURE_TOKEN_VERSION.zip"
+
+KALTURA_NGINX_KAFKA_LOG_VERSION=1.0
+KALTURA_NGINX_KAFKA_LOG_URI="https://github.com/kaltura/nginx-kafka-log-module/archive/v$KALTURA_NGINX_KAFKA_LOG_VERSION.zip"
+
+KALTURA_NGINX_JSON_VAR_VERSION=1.0
+KALTURA_NGINX_JSON_VAR_URI="https://github.com/kaltura/nginx-json-var-module/archive/v$KALTURA_NGINX_JSON_VAR_VERSION.zip"
+
+KALTURA_NGINX_STRFTIME_VERSION=1.0
+KALTURA_NGINX_STRFTIME_URI="https://github.com/kaltura/strftime-nginx-module/archive/v$KALTURA_NGINX_STRFTIME_VERSION.zip"
+
 NGINX_VERSION=1.16.0
 NGINX_URI="http://nginx.org/download/nginx-$NGINX_VERSION.tar.gz"
 
@@ -203,7 +213,7 @@ KMC_DOC_VERSION="Mercury-13.16.0"
 KMC_DOC_URI="https://github.com/kaltura/kmc-docs/archive/$KMC_DOC_VERSION.zip"
 
 # Kaltura KMCng:
-KMCNG_MINUS_V_VERSION=5.12.0
+KMCNG_MINUS_V_VERSION=5.13.0
 KMCNG_VERSION=v$KMCNG_MINUS_V_VERSION
 KMCNG_URI="https://github.com/kaltura/kmc-ng/releases/download/$KMCNG_VERSION/kmc-ng-$KMCNG_VERSION.zip"
 KMCNG_RPM_NAME="kaltura-kmcng"
@@ -291,7 +301,7 @@ FLEX_WRAPPER_URI="svn+ssh://$SVN_USER@kelev.kaltura.com/usr/local/kalprod/flash/
 FLEX_WRAPPER_RPM_NAME="kaltura-flexwrapper"
 
 # HTML5 lib
-HTML5LIB_LATEST_VERSION="v2.77.1"
+HTML5LIB_LATEST_VERSION="v2.77.2"
 HTML5LIB_VERSIONS="v2.14 v2.37 v2.37.1 v2.38.3 v2.42 v2.44 v2.45 v2.45.1 v2.46 v2.47 $HTML5LIB_LATEST_VERSION"
 HTML5LIB_BASE_URI="https://github.com/kaltura/mwEmbed/tarball/"
 HTML5LIB_RPM_NAME="kaltura-html5lib"
@@ -387,13 +397,13 @@ HTML5_APP_STUDIO3_RPM_NAME=kaltura-html5-studio3
 HTML5_APP_STUDIO3_NORMALIZED_ARCHIVE_NAME=$HTML5_APP_STUDIO3_RPM_NAME-$HTML5_APP_STUDIO3_VERSION.zip
 
 # HTML5 lib v3
-HTML5LIB3_VERSION="0.43.0"
+HTML5LIB3_VERSION="0.45.5"
 HTML5LIB3_REPO_NAME=kaltura-player-js
 HTML5LIB3_URI="https://github.com/kaltura/$HTML5LIB3_REPO_NAME/archive/v$HTML5LIB3_VERSION.tar.gz"
 HTML5LIB3_RPM_NAME="kaltura-html5lib3"
 
 # HTML5 v3 plugins
-PLAYKIT_IMA_VERSION=0.13.2
+PLAYKIT_IMA_VERSION=0.16.2
 PLAYKIT_IMA_REPO_NAME=playkit-js-ima
 PLAYKIT_IMA_URI="https://github.com/kaltura/$PLAYKIT_IMA_REPO_NAME/archive/v$PLAYKIT_IMA_VERSION.tar.gz"
 PLAYKIT_YOUBORA_VERSION=1.1.1
@@ -417,8 +427,24 @@ PLAYKIT_INTERACTIVE_URI="https://github.com/kaltura/$PLAYKIT_INTERACTIVE_REPO_NA
 PLAYKIT_VR_VERSION=1.3.0
 PLAYKIT_VR_REPO_NAME=playkit-js-vr
 PLAYKIT_VR_URI="https://github.com/kaltura/$PLAYKIT_VR_REPO_NAME/archive/v$PLAYKIT_VR_VERSION.tar.gz"
-PLAYKIT_FLASH_VERSION=1.3.0
+PLAYKIT_FLASH_VERSION=0.16.2
 PLAYKIT_FLASH_REPO_NAME=playkit-js-flash
 PLAYKIT_FLASH_URI="https://github.com/kaltura/$PLAYKIT_FLASH_REPO_NAME/archive/v$PLAYKIT_FLASH_VERSION.tar.gz"
+PLAYKIT_YOUTUBE_VERSION=1.2.1
+PLAYKIT_YOUTUBE_REPO_NAME=playkit-js-youtube
+PLAYKIT_YOUTUBE_URI="https://github.com/kaltura/$PLAYKIT_YOUTUBE_REPO_NAME/archive/v$PLAYKIT_YOUTUBE_VERSION.tar.gz"
+PLAYKIT_BUMPER_VERSION=1.3.2
+PLAYKIT_BUMPER_REPO_NAME=playkit-js-bumper
+PLAYKIT_BUMPER_URI="https://github.com/kaltura/$PLAYKIT_BUMPER_REPO_NAME/archive/v$PLAYKIT_BUMPER_VERSION.tar.gz"
 
 HTML5_APP_ANALYTICS_VERSION=v0.3
+
+ZOOKEEPER_VERSION=3.4.10
+ZOOKEEPER_URI=" http://archive.apache.org/dist/zookeeper/zookeeper-$ZOOKEEPER_VERSION/zookeeper-$ZOOKEEPER_VERSION.tar.gz"
+
+KAFKA_VERSION=2.3.0
+SCALA_VERSION=2.12
+SCALA_URI="http://mirrors.ukfast.co.uk/sites/ftp.apache.org/kafka/$KAFKA_VERSION/kafka_$SCALA_VERSION-$KAFKA_VERSION.tgz"
+
+IP2LOC_LIB_VERSION=8.0.8
+IP2LOC_LIB_URI="https://github.com/chrislim2888/IP2Location-C-Library/archive/$IP2LOC_LIB_VERSION.tar.gz"
