@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 15.4.0
-Release: 1
+Release: 16
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -36,6 +36,14 @@ Source35: start_page.php
 Source36: start_page_survey.png
 Source37: start_page_newsletter.png
 Source38: start_page-landing-page.css
+Source39: CrossKalturaDistributionEngine.php 
+Source40: KalturaCrossKalturaDistributionProfile.php 
+Source41: CrossKalturaProfileConfiguration.php 
+Source42: KalturaCrossKalturaDistributionJobProviderData.php 
+Source43: CrossKalturaDistributionCustomDataField.php 
+Source44: kCrossKalturaDistributionJobProviderData.php 
+Source45: CrossKalturaDistributionProfile.php
+
 
 URL: https://github.com/kaltura/server/tree/%{codename}-%{version}
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -150,6 +158,11 @@ rm $RPM_BUILD_ROOT%{confdir}/monit/monit.d/*template*
 cp %{SOURCE25} $RPM_BUILD_ROOT%{confdir}/logrotate/
 cp %{SOURCE26} $RPM_BUILD_ROOT%{confdir}/logrotate/
 
+# Kalt connector
+cp %{SOURCE39} $RPM_BUILD_ROOT%{prefix}/app/plugins/content_distribution/providers/cross_kaltura/lib/batch/
+cp %{SOURCE40} %{SOURCE42} $RPM_BUILD_ROOT%{prefix}/app/plugins/content_distribution/providers/cross_kaltura/lib/api 
+cp %{SOURCE41} $RPM_BUILD_ROOT%{prefix}/app/plugins/content_distribution/providers/cross_kaltura/lib/admin
+cp %{SOURCE43} %{SOURCE44} %{SOURCE45}  $RPM_BUILD_ROOT%{prefix}/app/plugins/content_distribution/providers/cross_kaltura/lib/model
 
 # David Bezemer's Admin console and monit patches:
 cp %{SOURCE17} $RPM_BUILD_ROOT%{prefix}/app/admin_console/configs/navigation.xml
@@ -349,47 +362,18 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Sun Aug 4 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.4.0-1
-- Nightly build.
-
-* Sat Aug 3 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.4.0-13
-- Nightly build.
-
-* Fri Aug 2 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.4.0-12
-- Nightly build.
-
-* Thu Aug 1 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.4.0-11
-- Nightly build.
-
-* Wed Jul 31 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.4.0-10
-- Nightly build.
-
-* Tue Jul 30 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.4.0-9
-- Nightly build.
-
-* Mon Jul 29 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.4.0-8
-- Nightly build.
-
-* Sun Jul 28 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.4.0-1
-- Nightly build.
-
-* Sat Jul 27 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.4.0-7
-- Nightly build.
-
-* Fri Jul 26 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.4.0-6
-- Nightly build.
-
-* Thu Jul 25 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.4.0-5
-- Nightly build.
-
-* Wed Jul 24 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.4.0-4
-- Nightly build.
-
-* Tue Jul 23 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.4.0-3
-- Nightly build.
-
-* Mon Jul 22 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.4.0-2
-- Nightly build.
+* Mon Aug 5 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.4.0-15
+- PLAT-10026: Fix error in partner controller (https://github.com/kaltura/server/pull/8684)
+- REACH2-659: Add 5 days TAT option (https://github.com/kaltura/server/pull/8683)
+- PLAT-9949:  When permissions query returns empty, throw Exception before storing in cache (https://github.com/kaltura/server/pull/8682)
+- PLAT-10026: Validate domains from partner configuration allowed from email whitelist (https://github.com/kaltura/server/pull/8679)
+- Change `populateFromLog.php` to load shredded index config from DB config file (https://github.com/kaltura/server/pull/8676)
+- REACH2-663: Change REACH notifications subject (https://github.com/kaltura/server/pull/8668)
+- REACH2-563: Update REACH credit notification, sending notifications (https://github.com/kaltura/server/pull/8666)
+- REACH2-662: Update Reach notification Task Pending Moderation (https://github.com/kaltura/server/pull/8663)
+- PLAT-10052: Move `three_code_language_partners` to DB (https://github.com/kaltura/server/pull/8662)
+- SUP-19010: Add default `eventTypes` to live reports base filter (https://github.com/kaltura/server/pull/8661)
+- PLAT-9999: `liveStream.list()` with isRecordedEntryIdEmpty = 0 returns incorrect results (https://github.com/kaltura/server/pull/8654)
 
 * Mon Jul 22 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.4.0-1
 - Ver Bounce to 15.4.0
