@@ -3,7 +3,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.77.1
+Version: v2.77.2
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -86,6 +86,9 @@ fi
 %config %{html5lib_base}/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Mon Aug 5 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v2.77.2
+- FEC-9034 - Support more than one audio asset with same language code
+
 * Mon Jul 22 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v2.77.1
 - FEV-346 - Player loads with syntex error in IE11 causing the player to load with black screen
 

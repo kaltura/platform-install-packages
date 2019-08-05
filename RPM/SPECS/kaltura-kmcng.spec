@@ -1,6 +1,6 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmcng
-Version: v5.12.0
+Version: v5.13.0
 Release: 1
 Summary: Kaltura HTML5 Management Console
 
@@ -49,6 +49,11 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Aug 5 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v5.13.0-1
+- entry-live: Add SIP user details for entry drill-down live tab (#857) (a2ff592)
+- entry/preview: pass admin ks to player (0cc2566)
+- settings/transcoding-profiles: allow saving new profiles (b813909)
+
 * Tue Jul 16 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v5.12.0-1
 - analytics: allow real-time analytics player to toggle full screen (fc2483e)
 - Fix caption request not working on Mac Safari (b4c4461)
