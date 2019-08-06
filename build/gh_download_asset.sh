@@ -31,4 +31,8 @@ if [ "$ASSET_ID" = "null" ]; then
   exit 1
 fi
 
-curl -sL --header "Authorization: token $TOKEN" --header 'Accept: application/octet-stream' https://$TOKEN:@$GITHUB_API_ENDPOINT/repos/$REPO/releases/assets/$ASSET_ID > $OUTDIR/$FILE
+#curl -sL --header "Authorization: token $TOKEN" --header 'Accept: application/octet-stream' https://$TOKEN:@$GITHUB_API_ENDPOINT/repos/$REPO/releases/assets/$ASSET_ID > $OUTDIR/$FILE
+
+wget -q --auth-no-challenge --header='Accept:application/octet-stream' \
+  https://$TOKEN:@$GITHUB_API_ENDPOINT/repos/$REPO/releases/assets/$ASSET_ID \
+  -O $OUTDIR/$FILE
