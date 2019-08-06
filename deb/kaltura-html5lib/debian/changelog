@@ -1,3 +1,9 @@
+kaltura-html5lib (2.77.2-1) orion; urgency=medium
+
+  * FEC-9034 - Support more than one audio asset with same language code
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 05 Aug 2019 18:55:53 +0000
+
 kaltura-html5lib (2.77.1-1) orion; urgency=medium
 
   * FEV-346 - Player loads with syntex error in IE11 causing the player to load with black screen

@@ -1,3 +1,11 @@
+kaltura-kmcng (5.13.0) orion; urgency=medium
+
+  * entry-live: Add SIP user details for entry drill-down live tab (#857) (a2ff592)
+  * entry/preview: pass admin ks to player (0cc2566)
+  * settings/transcoding-profiles: allow saving new profiles (b813909)
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 05 Aug 2019 18:33:45 +0000
+
 kaltura-kmcng (5.12.0) orion; urgency=medium
 
   * analytics: allow real-time analytics player to toggle full screen (fc2483e)

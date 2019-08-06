@@ -1,3 +1,20 @@
+kaltura-base (15.4.0-2) orion; urgency=medium
+
+  * PLAT-10026: Fix error in partner controller (https://github.com/kaltura/server/pull/8684)
+  * REACH2-659: Add 5 days TAT option (https://github.com/kaltura/server/pull/8683)
+  * PLAT-9949:  When permissions query returns empty, throw Exception before storing in cache (https://github.com/kaltura/server/pull/8682)
+  * PLAT-10026: Validate domains from partner configuration allowed from email whitelist (https://github.com/kaltura/server/pull/8679)
+  * Change `populateFromLog.php` to load shredded index config from DB config file (https://github.com/kaltura/server/pull/8676)
+  * REACH2-663: Change REACH notifications subject (https://github.com/kaltura/server/pull/8668)
+  * REACH2-563: Update REACH credit notification, sending notifications (https://github.com/kaltura/server/pull/8666)
+  * REACH2-662: Update Reach notification Task Pending Moderation (https://github.com/kaltura/server/pull/8663)
+  * PLAT-10052: Move `three_code_language_partners` to DB (https://github.com/kaltura/server/pull/8662)
+  * SUP-19010: Add default `eventTypes` to live reports base filter (https://github.com/kaltura/server/pull/8661)
+  * PLAT-9999: `liveStream.list()` with isRecordedEntryIdEmpty = 0 returns incorrect results (https://github.com/kaltura/server/pull/8654)
+
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 05 Aug 2019 18:27:05 +0000
+
 kaltura-base (15.4.0-1) orion; urgency=medium
 
   * Switching to 15.4.0
