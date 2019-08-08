@@ -1,3 +1,9 @@
+kaltura-base (15.5.0-1) orion; urgency=medium
+
+  * Switching to 15.5.0
+
+ -- Jess Portnoy <jess@b0f924504114>  Thu, 08 Aug 2019 08:43:28 +0000
+
 kaltura-base (15.4.0-2) orion; urgency=medium
 
   * PLAT-10026: Fix error in partner controller (https://github.com/kaltura/server/pull/8684)
