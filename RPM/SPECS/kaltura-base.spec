@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 15.4.0
-Release: 16
+Version: 15.5.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -362,6 +362,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Thu Aug 8 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.5.0-1
+- Ver Bounce to 15.5.0
+
 * Mon Aug 5 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.4.0-15
 - PLAT-10026: Fix error in partner controller (https://github.com/kaltura/server/pull/8684)
 - REACH2-659: Add 5 days TAT option (https://github.com/kaltura/server/pull/8683)
