@@ -1,3 +1,9 @@
+kaltura-front (15.5.0-1) orion; urgency=medium
+
+  * Switching to 15.5.0
+
+ -- Jess Portnoy <jess@b0f924504114>  Thu, 08 Aug 2019 08:43:29 +0000
+
 kaltura-front (15.4.0-1) orion; urgency=medium
 
   * Switching to 15.4.0
