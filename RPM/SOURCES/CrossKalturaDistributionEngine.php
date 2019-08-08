@@ -352,9 +352,7 @@ class CrossKalturaDistributionEngine extends DistributionEngine implements
 				KalturaLog::err('Cannot get list of thumbnail assets - '.$e->getMessage());
 				throw $e;
 			}
-		}
-		else
-		{
+		}else{	
 			KalturaLog::log('No thumb assets set for distribution!');
 		}
 
@@ -386,6 +384,21 @@ class CrossKalturaDistributionEngine extends DistributionEngine implements
 			KalturaLog::err('Cannot get list of metadata objects - '.$e->getMessage());
 			throw $e;
 		}
+		// right now, there can only be one quiz per entry, the array and the looping over the list() results is done to be consistent with the rest of the code.. also, who knows what they'll add tomorrow
+		$quizObjects = array();
+		$quizClient = KalturaQuizClientPlugin::get($client);
+		$quizFilter = new KalturaQuizFilter();
+		$quizFilter->entryIdEqual = $entryId;
+		$pager = new KalturaFilterPager();
+		try {
+		    $quizObjectsList = $quizClient->quiz->listAction($quizFilter, $pager);
+			foreach ($quizObjectsList->objects as $quiz)
+			{
+				$quizObjects[] = $quiz;
+			}
+		} catch (Exception $e) {
+		   KalturaLog::err('Failed to list quiz objects on source entry - ' . $entryId .': ' .$e->getMessage());
+		}
 
 		// get entry's caption assets
 		$captionAssetClient = KalturaCaptionClientPlugin::get($client);
@@ -412,7 +425,7 @@ class CrossKalturaDistributionEngine extends DistributionEngine implements
 		$captionAssetsContent = array();
 		foreach ($captionAssets as $captionAsset)
 		{
-			$captionAssetsContent[$captionAsset->id] = $this->getAssetContentResource($captionAsset->id, $captionAssetClient, $remoteCaptionAssetContent);
+			$captionAssetsContent[$captionAsset->id] = $this->getAssetContentResource($captionAsset->id, $captionAssetClient->captionAsset, $remoteCaptionAssetContent);
 		}
 
 		$attachmentAssetClient = KalturaAttachmentClientPlugin::get($client);
@@ -475,6 +488,7 @@ class CrossKalturaDistributionEngine extends DistributionEngine implements
 		$entryObjects = new CrossKalturaEntryObjectsContainer();
 		$entryObjects->entry = $entry;
 		$entryObjects->metadataObjects = $metadataObjects;
+		$entryObjects->quizObjects = $quizObjects;
 		$entryObjects->flavorAssets = $flavorAssets;
 		$entryObjects->flavorAssetsContent = $flavorAssetsContent;
 		$entryObjects->thumbAssets = $thumbAssets;
@@ -951,6 +965,7 @@ class CrossKalturaDistributionEngine extends DistributionEngine implements
 		$data->providerData->distributedTimedThumbAssets = $this->getDistributedMapForObjects($this->sourceObjects->timedThumbAssets, $syncedObjects->timedThumbAssets);
 
 		$data->providerData->distributedMetadata = $this->getDistributedMapForObjects($this->sourceObjects->metadataObjects, $syncedObjects->metadataObjects);
+		$data->providerData->distributedQuiz = $this->getDistributedMapForObjects($this->sourceObjects->quizObjects, $syncedObjects->quizObjects);
 		$data->providerData->distributedCaptionAssets = $this->getDistributedMapForObjects($this->sourceObjects->captionAssets, $syncedObjects->captionAssets);
 
 		$data->providerData->distributedAttachmentAssets = $this->getDistributedMapForObjects($this->sourceObjects->attachmentAssets, $syncedObjects->attachmentAssets);
@@ -1175,6 +1190,15 @@ class CrossKalturaDistributionEngine extends DistributionEngine implements
 			'getMetadataAddArgs',
 			'getMetadataUpdateArgs'
 		);
+		// sync quiz objects
+		if (isset($this->sourceObjects->quizObjects[0])){
+		$targetQuizClient = KalturaQuizClientPlugin::get($this->targetClient);
+		  try {
+   			 $targetQuizClient->quiz->add($targetEntryId, $this->sourceObjects->quizObjects[0]);
+		  } catch (Exception $e) {
+			KalturaLog::err('Failed to create quiz obj on ' . $targetEntryId);
+		  }
+		}
 
 
 		// sync flavor assets
