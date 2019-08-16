@@ -362,6 +362,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Fri Aug 16 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.5.0-1
+- Nightly build.
+
 * Thu Aug 15 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.5.0-1
 - Nightly build.
 
