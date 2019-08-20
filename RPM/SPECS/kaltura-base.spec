@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 15.5.0
-Release: 9
+Release: 10
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -362,38 +362,15 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Sun Aug 18 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.5.0-9
-- Nightly build.
+* Tue Aug 20 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.5.0-10
+- Parse errors (https://github.com/kaltura/server/pull/8703)
+- Reach-audioDescription: Add clear audio flavor param ID to catalog definition (https://github.com/kaltura/server/pull/8701)
+- SUP-18989: check if PID enforce HTTPS API and modify Report Service URL accordingly (https://github.com/kaltura/server/pull/8697)
+- maxExecutionTime=6000,for 4K/H265 chunks (https://github.com/kaltura/server/pull/8694)
+- SUP-18972: Set the source entry ID when clipping/trimming from remote dc (https://github.com/kaltura/server/pull/8689)
+- Add missing `eventNotification` directives (https://github.com/kaltura/server/pull/8680)
+- PLAT-9986: Add monitoring proxy partner, permissions and e-mail alert (https://github.com/kaltura/server/pull/8677)
 
-* Sat Aug 17 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.5.0-8
-- Nightly build.
-
-* Fri Aug 16 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.5.0-1
-- Nightly build.
-
-* Thu Aug 15 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.5.0-1
-- Nightly build.
-
-* Wed Aug 14 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.5.0-7
-- Nightly build.
-
-* Tue Aug 13 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.5.0-1
-- Nightly build.
-
-* Mon Aug 12 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.5.0-6
-- Nightly build.
-
-* Sun Aug 11 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.5.0-5
-- Nightly build.
-
-* Sat Aug 10 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.5.0-4
-- Nightly build.
-
-* Fri Aug 9 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.5.0-3
-- Nightly build.
-
-* Thu Aug 8 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.5.0-2
-- Nightly build.
 
 * Thu Aug 8 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.5.0-1
 - Ver Bounce to 15.5.0

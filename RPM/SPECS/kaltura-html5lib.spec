@@ -3,7 +3,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.77.2
+Version: v2.78
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -86,6 +86,15 @@ fi
 %config %{html5lib_base}/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Tue Aug 20 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v2.78
+- SUP-18895 - Vertical Space for Thai Captions is too narrow
+- FEC-9241 - [Player_V2][Playback] - When post-roll is finished, the video replays automatically
+- SUP-18987 - When we embed a playlist vertically, the 360 videos show a little wider than when we embed a playlist horizontally.
+- FEC-8849 - V2 - Update HLS.JS to version 12
+- FEC-9034 - V2 player - allow more than one audio asset with same language code
+- FEV-248 [IVQ Player] Welcome screen - need to update text & icons (#4053)
+- FEV-250 change styles for selected multiple-choice button (#4050)
+
 * Mon Aug 5 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v2.77.2
 - FEC-9034 - Support more than one audio asset with same language code
 
