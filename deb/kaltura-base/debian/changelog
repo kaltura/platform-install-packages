@@ -1,3 +1,15 @@
+kaltura-base (15.5.0-2) orion; urgency=medium
+
+  * Parse errors (https://github.com/kaltura/server/pull/8703)
+  * Reach-audioDescription: Add clear audio flavor param ID to catalog definition (https://github.com/kaltura/server/pull/8701)
+  * SUP-18989: check if PID enforce HTTPS API and modify Report Service URL accordingly (https://github.com/kaltura/server/pull/8697)
+  * maxExecutionTime=6000,for 4K/H265 chunks (https://github.com/kaltura/server/pull/8694)
+  * SUP-18972: Set the source entry ID when clipping/trimming from remote dc (https://github.com/kaltura/server/pull/8689)
+  * Add missing `eventNotification` directives (https://github.com/kaltura/server/pull/8680)
+  * PLAT-9986: Add monitoring proxy partner, permissions and e-mail alert (https://github.com/kaltura/server/pull/8677)
+
+ -- Jess Portnoy <jess@b0f924504114>  Tue, 20 Aug 2019 10:43:20 +0000
+
 kaltura-base (15.5.0-1) orion; urgency=medium
 
   * Switching to 15.5.0

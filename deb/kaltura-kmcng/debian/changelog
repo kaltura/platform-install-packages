@@ -1,3 +1,9 @@
+kaltura-kmcng (5.13.1) orion; urgency=medium
+
+  * entries/metadata: Fix custom metadata search in refine filter (#858) (8f16be3) 
+
+ -- Jess Portnoy <jess@b0f924504114>  Tue, 20 Aug 2019 10:55:02 +0000
+
 kaltura-kmcng (5.13.0) orion; urgency=medium
 
   * entry-live: Add SIP user details for entry drill-down live tab (#857) (a2ff592)
