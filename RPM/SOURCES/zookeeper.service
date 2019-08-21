@@ -3,8 +3,8 @@ Description=Zookeeper
 After=network.target
 
 [Service]
-User=zookeeper
-Group=zookeeper
+User=kaltura
+Group=kaltura
 EnvironmentFile=/etc/sysconfig/zookeeper
 ExecStart=/bin/java -cp $CLASSPATH $LOG4J $JVMFLAGS $ZOOMAIN $ZOOCFG
 SuccessExitStatus=143

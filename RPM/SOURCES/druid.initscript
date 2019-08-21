@@ -5,14 +5,13 @@
 . /etc/init.d/functions
 RETVAL=0
 
-DRUID_USER=druid
 PID_FILE="/var/run/druid/druid-server.pid"
 DRUID_HOME="/usr/lib/druid"
-DRUID_CONF="/etc/druid/"
+DRUID_CONF="/etc/sysconfig/druid"
 CLASSPATH="$DRUID_HOME/*:$DRUID_CONF"
 LOG_DIR="/var/log/druid"
 
-. $DRUID_CONF/druid-env.sh
+. $DRUID_CONF
 
 start() {
     pid=$(ps ax | grep druid | grep realtime | grep -v grep | awk '{print $1}')

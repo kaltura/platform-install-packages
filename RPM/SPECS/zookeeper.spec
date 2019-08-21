@@ -5,11 +5,13 @@
 %define _conf_dir    %{_sysconfdir}/%{name}
 %define _log_dir     %{_var}/log/%{name}
 %define _data_dir    %{_sharedstatedir}/%{name}
+%define zookeeper_user kaltura
+%define zookeeper_group kaltura
 
 Summary: ZooKeeper is a centralized service for maintaining configuration information, naming, providing distributed synchronization, and providing group services.
 Name: zookeeper
 Version: 3.4.10
-Release: 1
+Release: 3
 License: Apache License, Version 2.0
 Group: Applications/Databases
 URL: http://zookeper.apache.org/
@@ -68,10 +70,11 @@ echo "Environment=CLASSPATH=${CLASSPATH}" >> $RPM_BUILD_ROOT%{_unitdir}/zookeepe
 rm -rf $RPM_BUILD_ROOT
 
 %pre
-/usr/bin/getent group zookeeper >/dev/null || /usr/sbin/groupadd -r zookeeper
-if ! /usr/bin/getent passwd zookeeper >/dev/null ; then
-    /usr/sbin/useradd -r -g zookeeper -m -d %{_prefix}/zookeeper -s /bin/bash -c "Zookeeper" zookeeper
-fi
+getent group %{zookeeper_group} >/dev/null || groupadd -r %{zookeeper_group}
+getent passwd %{zookeeper_user} >/dev/null || \
+    useradd -r -g %{zookeeper_group} -d /opt/%{name} -s /sbin/nologin \
+    -c "Druid Server Service" %{zookeeper_user}
+exit 0
 
 %post
 %systemd_post zookeeper.service
@@ -95,9 +98,9 @@ fi
 %config(noreplace) %{_sysconfdir}/logrotate.d/zookeeper
 %config(noreplace) %{_sysconfdir}/sysconfig/zookeeper
 %config(noreplace) %{_conf_dir}/*
-%attr(-,zookeeper,zookeeper) %{_prefix}/zookeeper
-%attr(0755,zookeeper,zookeeper) %dir %{_log_dir}
-%attr(0700,zookeeper,zookeeper) %dir %{_data_dir}
+%attr(-,%{zookeeper_user},%{zookeeper_group}) %{_prefix}/zookeeper
+%attr(0755,%{zookeeper_user},%{zookeeper_group}) %dir %{_log_dir}
+%attr(0700,%{zookeeper_user},%{zookeeper_group}) %dir %{_data_dir}
 
 %changelog
 
