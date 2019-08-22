@@ -467,7 +467,7 @@ class CrossKalturaDistributionEngine extends DistributionEngine implements
 					 * @var $cuePoint KalturaCuePoint
 					 */
 					if ($cuePoint->cuePointType != KalturaCuePointType::THUMB){
-						if ($cuePoint->cuePointType == KalturaCuePointType::ANNOTATION){
+						if ($cuePoint->cuePointType == KalturaCuePointType::ANNOTATION && $cuePoint->tags =='KMS_public_comment'){
 							continue;
 						}
 						$cuePoints[$cuePoint->id] = $cuePoint;
@@ -732,7 +732,9 @@ class CrossKalturaDistributionEngine extends DistributionEngine implements
 
 			if (!isset($this->mapMetadataProfileIds[$sourceMetadata->metadataProfileId]))
 			{
-				throw new Exception('Cannot map metadata profile ID ['.$sourceMetadata->metadataProfileId.']');
+				//throw new Exception('Cannot map metadata profile ID ['.$sourceMetadata->metadataProfileId.']');
+				KalturaLog::info('Cannot map metadata profile ID ['.$sourceMetadata->metadataProfileId.'].. skipping');
+				continue;
 			}
 			if($this->mapMetadataProfileIds[$sourceMetadata->metadataProfileId] == 0)
 			{
