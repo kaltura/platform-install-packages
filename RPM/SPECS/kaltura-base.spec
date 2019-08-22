@@ -363,6 +363,9 @@ fi
 
 %changelog
 * Thu Aug 22 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.6.0-1
+- Nightly build.
+
+* Thu Aug 22 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.6.0-1
 - Ver Bounce to 15.6.0
 
 * Tue Aug 20 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.5.0-10
