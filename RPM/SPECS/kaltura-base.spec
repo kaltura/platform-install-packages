@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 15.5.0
-Release: 11
+Version: 15.6.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -362,6 +362,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Thu Aug 22 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.6.0-1
+- Ver Bounce to 15.6.0
+
 * Tue Aug 20 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.5.0-10
 - Parse errors (https://github.com/kaltura/server/pull/8703)
 - Reach-audioDescription: Add clear audio flavor param ID to catalog definition (https://github.com/kaltura/server/pull/8701)
