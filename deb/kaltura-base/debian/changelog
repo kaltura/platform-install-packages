@@ -1,3 +1,9 @@
+kaltura-base (15.6.0-1) orion; urgency=medium
+
+  * Switching to 15.6.0
+
+ -- Jess Portnoy <jess@b0f924504114>  Thu, 22 Aug 2019 14:59:16 +0000
+
 kaltura-base (15.5.0-2) orion; urgency=medium
 
   * Parse errors (https://github.com/kaltura/server/pull/8703)
