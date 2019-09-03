@@ -1,3 +1,11 @@
+kaltura-kmcng (5.14.0) orion; urgency=medium
+
+  * content/entry: In scheduling tab: display entry end date even if entry start date is not specified (45985ea)
+  * entries/filters: fix refine filter custom scheduling date picker behavior (d231b8e)
+  * content/entries: Load thumbnails restricted by KS
+
+ -- Jess Portnoy <jess@b0f924504114>  Tue, 03 Sep 2019 12:39:32 +0000
+
 kaltura-kmcng (5.13.1) orion; urgency=medium
 
   * entries/metadata: Fix custom metadata search in refine filter (#858) (8f16be3) 
