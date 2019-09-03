@@ -3,7 +3,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.78
+Version: v2.78.1
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -86,6 +86,9 @@ fi
 %config %{html5lib_base}/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Tue Sep 3 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v2.78.1
+- SUP-19347 - Live-stream might freezes on IE11
+ 
 * Tue Aug 20 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v2.78
 - SUP-18895 - Vertical Space for Thai Captions is too narrow
 - FEC-9241 - [Player_V2][Playback] - When post-roll is finished, the video replays automatically

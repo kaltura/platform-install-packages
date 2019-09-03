@@ -148,7 +148,7 @@ $con = $target->_container;
 			 * Disabling of GOP in order to avoid duplicate KF's running through the whole file
 			 * TEMPORARY - it will be done only for WV
 			 */
-		if(isset($vid->_forWideVine) &&  $vid->_forWideVine = true
+		if(((isset($vid->_forWideVine) &&  $vid->_forWideVine = true) || $vid->_forcedKeyFramesMode==2)
 		&& in_array('-force_key_frames', $cmdValsArr) && in_array('-g', $cmdValsArr)) {
 			$key = array_search('-g', $cmdValsArr);
 			$cmdValsArr[$key+1] = 3600*24; // set GOP to 24 hrs
@@ -159,6 +159,19 @@ $con = $target->_container;
 		return $cmdStr;
 	}
 	
+	/* ---------------------------
+	 * calcForcedKeyFrames
+	 */
+	protected function calcForcedKeyFrames($vidObj, KDLFlavor $target)
+	{
+		/*
+		 * On 'follow source KF's' mode
+		 */
+		if($vidObj->_forcedKeyFramesMode==2) {
+			return " -force_key_frames source";
+		}
 		
+		return parent::calcForcedKeyFrames($vidObj, $target);
+	}
 }
 	

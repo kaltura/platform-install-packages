@@ -1,6 +1,6 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmcng
-Version: v5.13.1
+Version: v5.14.0
 Release: 1
 Summary: Kaltura HTML5 Management Console
 
@@ -49,6 +49,11 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Tue Sep 3 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v5.14.0
+- content/entry: In scheduling tab: display entry end date even if entry start date is not specified (45985ea)
+- entries/filters: fix refine filter custom scheduling date picker behavior (d231b8e)
+- content/entries: Load thumbnails restricted by KS
+
 * Tue Aug 20 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v5.13.1-1
 - entries/metadata: Fix custom metadata search in refine filter (#858) (8f16be3)
 
