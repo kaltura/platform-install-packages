@@ -1,6 +1,6 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmcng
-Version: v5.14.0
+Version: v5.15.0
 Release: 1
 Summary: Kaltura HTML5 Management Console
 
@@ -49,6 +49,10 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Wed Sep 4 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v5.15.0
+- Multi account menu style fixes (#861) (d6b823b)
+- content/drop-folders: Add drop folders filter by folder name (#863) (fffa4c4)
+ 
 * Tue Sep 3 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v5.14.0
 - content/entry: In scheduling tab: display entry end date even if entry start date is not specified (45985ea)
 - entries/filters: fix refine filter custom scheduling date picker behavior (d231b8e)
