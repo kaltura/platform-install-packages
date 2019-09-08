@@ -1,3 +1,10 @@
+kaltura-kmcng (5.15.0) orion; urgency=medium
+ 
+  * Multi account menu style fixes (#861) (d6b823b)
+  * content/drop-folders: Add drop folders filter by folder name (#863) (fffa4c4)
+
+ -- Jess Portnoy <jess@b0f924504114>  Wed, 04 Sep 2019 11:07:32 +0000
+
 kaltura-kmcng (5.14.0) orion; urgency=medium
 
   * content/entry: In scheduling tab: display entry end date even if entry start date is not specified (45985ea)
