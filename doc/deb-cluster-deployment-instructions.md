@@ -71,7 +71,7 @@ deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/debian orion main
 
 And import the GPG key with:
 ```
-# wget -O - http://installrepo.kaltura.org/repo/apt/debian/kaltura-deb.gpg.key|apt-key add -
+# wget -O - http://installrepo.kaltura.org/repo/apt/debian/kaltura-deb-curr.gpg.key|apt-key add -
 ```
 
 When deploying on Ubuntu Xenial [16.04] edit/create /etc/apt/sources.list.d/kaltura.list to read:
@@ -80,7 +80,7 @@ deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/xenial orion main
 ```
 And import the GPG key with:
 ```
-# wget -O - http://installrepo.kaltura.org/repo/apt/xenial/kaltura-deb-256.gpg.key|apt-key add -
+# wget -O - http://installrepo.kaltura.org/repo/apt/xenial/kaltura-deb-curr-256.gpg.key|apt-key add -
 ```
 
 ### The NFS server
@@ -382,7 +382,7 @@ deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/debian orion main
 
 And import the GPG key with:
 ```
-# wget -O - http://installrepo.kaltura.org/repo/apt/debian/kaltura-deb.gpg.key|apt-key add -
+# wget -O - http://installrepo.kaltura.org/repo/apt/debian/kaltura-deb-curr.gpg.key|apt-key add -
 ```
 
 Or, if using Ubuntu Xenial [16.04]:
@@ -391,7 +391,7 @@ deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/xenial orion main
 ```
 And import the GPG key with:
 ```
-# wget -O - http://installrepo.kaltura.org/repo/apt/xenial/kaltura-deb-256.gpg.key|apt-key add -
+# wget -O - http://installrepo.kaltura.org/repo/apt/xenial/kaltura-deb-curr-256.gpg.key|apt-key add -
 ```
 
 Then run the following commands to upgrade [this will work for all supported Debian and Ubuntu versions]:

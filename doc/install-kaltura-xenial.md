@@ -56,7 +56,7 @@ This section is a step-by-step guide of a Kaltura installation.
 #### Setup the Kaltura deb repository
 
 ```bash
-# wget -O - http://installrepo.kaltura.org/repo/apt/xenial/kaltura-deb-256.gpg.key|apt-key add -
+# wget -O - http://installrepo.kaltura.org/repo/apt/xenial/kaltura-deb-curr-256.gpg.key|apt-key add -
 # echo "deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/xenial orion main" > /etc/apt/sources.list.d/kaltura.list
 ```
 
@@ -136,7 +136,7 @@ deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/xenial orion main
 ```
 And import the GPG key with:
 ```
-# wget -O - http://installrepo.kaltura.org/repo/apt/xenial/kaltura-deb-256.gpg.key|apt-key add -
+# wget -O - http://installrepo.kaltura.org/repo/apt/xenial/kaltura-deb-curr-256.gpg.key|apt-key add -
 ```
 
 Then run:

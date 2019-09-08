@@ -61,7 +61,7 @@ This section is a step-by-step guide of a Kaltura installation.
 #### Setup the Kaltura deb repository
 
 ```bash
-# wget -O - http://installrepo.kaltura.org/repo/apt/debian/kaltura-deb.gpg.key|apt-key add -
+# wget -O - http://installrepo.kaltura.org/repo/apt/debian/kaltura-deb-curr.gpg.key|apt-key add -
 # echo "deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/debian orion main" > /etc/apt/sources.list.d/kaltura.list
 ```
 
@@ -108,7 +108,7 @@ By default, the installation is done against the PHP stack available from the of
 Kaltura now offers beta deb packages of PHP 7 which can be installed from our repo.
 In order to install the server using these packages, simply run:
 ```bash
-# wget -O - http://installrepo.kaltura.org/repo/apt/debian/kaltura-deb.gpg.key|apt-key add -
+# wget -O - http://installrepo.kaltura.org/repo/apt/debian/kaltura-deb-curr.gpg.key|apt-key add -
 # echo "deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/debian orion main" > /etc/apt/sources.list.d/kaltura.list
 # aptitude update
 # aptitude install kaltura-php7
@@ -162,7 +162,7 @@ deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/debian orion main
 
 And import the GPG key with:
 ```
-# wget -O - http://installrepo.kaltura.org/repo/apt/debian/kaltura-deb.gpg.key|apt-key add -
+# wget -O - http://installrepo.kaltura.org/repo/apt/debian/kaltura-deb-curr.gpg.key|apt-key add -
 ```
 
 Or, if using Ubuntu Xenial [16.04]:
@@ -171,7 +171,7 @@ deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/xenial orion main
 ```
 And import the GPG key with:
 ```
-# wget -O - http://installrepo.kaltura.org/repo/apt/xenial/kaltura-deb-256.gpg.key|apt-key add -
+# wget -O - http://installrepo.kaltura.org/repo/apt/xenial/kaltura-deb-curr-256.gpg.key|apt-key add -
 ```
 
 Then run the following commands to upgrade [this will work for all supported Debian and Ubuntu versions]:
