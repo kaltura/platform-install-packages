@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 15.6.0
-Release: 17
+Release: 18
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -362,56 +362,41 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Sat Sep 7 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.6.0-17
-- Nightly build.
+* Sun Sep 8 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.6.0-18
+- ElasticPopulate: run elastic index call inside current DC synchronously (https://github.com/kaltura/server/pull/8748)
+- PLAT-10142: Ensure `populateFromLog.php` will never run an older sphinx log ID for a given object ID (https://github.com/kaltura/server/pull/8743)
+- REACH2-690: Add ability to set transcript asset associated IDs on the caption asset (https://github.com/kaltura/server/pull/8742)
+- PLAT-10100: The trim() function is not, by default, unicode safe. (https://github.com/kaltura/server/pull/8741)
+- Fixes following static code analysis (https://github.com/kaltura/server/pull/8740)
+- PLAT-10095: Preserve caption file extension when uploading via URL (https://github.com/kaltura/server/pull/8738)
+- Reach-666: Add Hungarian + remove duplicate language (https://github.com/kaltura/server/pull/8736)
+- plat 10072: Fix `filterEntriesByPartnerOrKalturaNetwork()` (https://github.com/kaltura/server/pull/8735)
+- `eSearch`: call ` SphinxCriteria::enableForceSkipSphinx()` in populate scripts (https://github.com/kaltura/server/pull/8734)
+- SUP-18356: Add locking mechanism to `categoryUser.add()` (https://github.com/kaltura/server/pull/8731)
+- PLAT-10072: Fix `filterEntriesByPartnerOrKalturaNetwork()` (https://github.com/kaltura/server/pull/8730)
+- REACH2-666: Add additional languages to REACH (Indonesian, Greek, Romanian) (https://github.com/kaltura/server/pull/8729)
+- PLAT-10122: Add watch later user entry advanced filter (https://github.com/kaltura/server/pull/8728)
+- AN-900: Add missing dimension map (https://github.com/kaltura/server/pull/8727)
+- Sphinx populate fixes (https://github.com/kaltura/server/pull/8726)
+- Update elastic mapping (https://github.com/kaltura/server/pull/8725)
+- Fix `ExampleDistributionProfile.php` (https://github.com/kaltura/server/pull/8724)
+- PLAT-10121: Zoom - fix login page URI (https://github.com/kaltura/server/pull/8723)
+- Introduce `enableForceSkipSphinx()` and `disableForceSkipSphinx()` (https://github.com/kaltura/server/pull/8720)
+- Adjust `chunkDuration` to 4K contents (https://github.com/kaltura/server/pull/8718)
+- KMS-19596: When recurring by day for N weeks, check first occurrence in upcoming week, not just last week (https://github.com/kaltura/server/pull/8717)
+- Adjust `chunkDuration` to 4K contents (https://github.com/kaltura/server/pull/8716)
+- PLAT-10112: Catch specific `AMQPRuntimeException` exception rather than generic PHP `Exception` (https://github.com/kaltura/server/pull/8715)
+- PLAT-10050: L3 CDN tokenizer - fix ACL implementation (https://github.com/kaltura/server/pull/8714)
+- PLAT-10084: Add read only permission for `eSearch` (https://github.com/kaltura/server/pull/8713)
+- Add retry mechanism to Rabbit MQ connection + reduce connection timeout from 3 to 2 (https://github.com/kaltura/server/pull/8710)
+- Add permission for multi account analytics (https://github.com/kaltura/server/pull/8709)
+- PLAT-10089: Zoom vendor refactor (https://github.com/kaltura/server/pull/8708)
+- PLAT-10081: Add anonymous `kuser` on every partner (https://github.com/kaltura/server/pull/8704)
+- PLAT-9986: Allow adding external values to dispatch of email event notifications (https://github.com/kaltura/server/pull/8702)
+- PLAT-10050: Support L3 CDN tokenizer (https://github.com/kaltura/server/pull/8700)
+- AN-835: Add VPaaS reports (https://github.com/kaltura/server/pull/8698)
+- `CONVERT_CAPTION_ASSET` job type enum to string mapping (https://github.com/kaltura/server/pull/8658)
 
-* Fri Sep 6 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.6.0-16
-- Nightly build.
-
-* Thu Sep 5 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.6.0-15
-- Nightly build.
-
-* Wed Sep 4 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.6.0-14
-- Nightly build.
-
-* Tue Sep 3 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.6.0-13
-- Nightly build.
-
-* Mon Sep 2 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.6.0-12
-- Nightly build.
-
-* Sun Sep 1 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.6.0-11
-- Nightly build.
-
-* Sat Aug 31 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.6.0-10
-- Nightly build.
-
-* Fri Aug 30 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.6.0-9
-- Nightly build.
-
-* Thu Aug 29 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.6.0-8
-- Nightly build.
-
-* Wed Aug 28 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.6.0-7
-- Nightly build.
-
-* Tue Aug 27 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.6.0-6
-- Nightly build.
-
-* Mon Aug 26 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.6.0-5
-- Nightly build.
-
-* Sun Aug 25 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.6.0-4
-- Nightly build.
-
-* Sat Aug 24 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.6.0-3
-- Nightly build.
-
-* Fri Aug 23 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.6.0-2
-- Nightly build.
-
-* Thu Aug 22 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.6.0-1
-- Nightly build.
 
 * Thu Aug 22 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.6.0-1
 - Ver Bounce to 15.6.0
