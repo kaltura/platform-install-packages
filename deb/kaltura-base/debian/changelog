@@ -1,3 +1,9 @@
+kaltura-base (15.7.0-1) orion; urgency=medium
+
+  * Switching to 15.7.0
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 09 Sep 2019 11:00:58 +0000
+
 kaltura-base (15.6.0-2) orion; urgency=medium
 
   * ElasticPopulate: run elastic index call inside current DC synchronously (https://github.com/kaltura/server/pull/8748)

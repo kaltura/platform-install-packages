@@ -1,3 +1,9 @@
+kaltura-batch (15.7.0-1) orion; urgency=medium
+
+  * Switching to 15.7.0
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 09 Sep 2019 11:00:58 +0000
+
 kaltura-batch (15.6.0-1) orion; urgency=medium
 
   * Switching to 15.6.0
