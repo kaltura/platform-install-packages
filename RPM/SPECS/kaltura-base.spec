@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 15.6.0
-Release: 18
+Version: 15.7.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -362,6 +362,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Sep 9 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.7.0-1
+- Ver Bounce to 15.7.0
+
 * Sun Sep 8 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.6.0-18
 - ElasticPopulate: run elastic index call inside current DC synchronously (https://github.com/kaltura/server/pull/8748)
 - PLAT-10142: Ensure `populateFromLog.php` will never run an older sphinx log ID for a given object ID (https://github.com/kaltura/server/pull/8743)

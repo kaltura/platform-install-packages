@@ -3,7 +3,7 @@
 %define prefix /opt/kaltura 
 Summary: Kaltura Server release file and package configuration
 Name: kaltura-release
-Version: 15.6.0
+Version: 15.7.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -27,14 +27,14 @@ GPG keys used to sign them.
 [Kaltura]
 name = Kaltura Server
 baseurl = http://%{baseurl}/releases/latest/\$releasever/RPMS/\$basearch/
-gpgkey = http://%{baseurl}/releases/RPM-GPG-KEY-kaltura
+gpgkey = http://%{baseurl}/releases/RPM-GPG-KEY-kaltura-curr
 gpgcheck = 1 
 enabled = 1
 
 [Kaltura-noarch]
 name = Kaltura Server arch independent
 baseurl = http://%{baseurl}/releases/latest/\$releasever/RPMS/noarch
-gpgkey = http://%{baseurl}/releases/RPM-GPG-KEY-kaltura
+gpgkey = http://%{baseurl}/releases/RPM-GPG-KEY-kaltura-curr
 gpgcheck = 1
 enabled = 1
 EOF
@@ -65,6 +65,9 @@ exit 0
 %config %{_sysconfdir}/yum.repos.d/kaltura.repo
 
 %changelog
+* Mon Sep 9 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.7.0-1
+- Ver Bounce to 15.7.0 - New GPG key
+
 * Thu Aug 22 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.6.0-1
 - Ver Bounce to 15.6.0
 
