@@ -1,3 +1,11 @@
+kaltura-html5lib3 (0.46.0-1) orion; urgency=medium
+
+  * playkit-js 0.53.0
+  * playkit-js-dash 1.15.0
+  * IMA plugin - 0.17.2
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 16 Sep 2019 11:16:32 +0000
+
 kaltura-html5lib3 (0.45.5-1) orion; urgency=medium
 
   * New release

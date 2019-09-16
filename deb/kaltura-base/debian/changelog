@@ -1,3 +1,21 @@
+kaltura-base (15.7.0-2) orion; urgency=medium
+
+  * PLAT-9973: SSO - Fix email body not being included in the message (https://github.com/kaltura/server/pull/8768)
+  * SUP-19231: Email notification fix to handle more than 150 users when filtering with `idIn` (https://github.com/kaltura/server/pull/8764)
+  * REACH2-699: Reach Admin console fix for dictionary display (https://github.com/kaltura/server/pull/8763)
+  * PLAT-9973: SSO email templates (https://github.com/kaltura/server/pull/8762)
+  * PLAT-9908: Add implementation for `nameEqual` in ServerNodeFilter (https://github.com/kaltura/server/pull/8761)
+  * PLAT-9973: Determine email template to use based on SSO configuration (https://github.com/kaltura/server/pull/8759)
+  * PLAT-9838: SSO shouldn't be configured on partner 0 (https://github.com/kaltura/server/pull/8757)
+  * LEC-1784: Add `flavorparam` permission for capture app (https://github.com/kaltura/server/pull/8746)
+  * PLAT-9838: KMC SSO Support (https://github.com/kaltura/server/pull/8745)
+  * KAVA: fix adding comment to druid query (https://github.com/kaltura/server/pull/8733)
+  * Analytics: additional user level reports (https://github.com/kaltura/server/pull/8722)
+  * PLAT-10113: Add script that checks for duplicated users created since the last run and merges them (https://github.com/kaltura/server/pull/8719)
+  * WEBC-1429: QnA - display given name rather than user ID (https://github.com/kaltura/server/pull/8585)
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 16 Sep 2019 11:00:37 +0000
+
 kaltura-base (15.7.0-1) orion; urgency=medium
 
   * Switching to 15.7.0

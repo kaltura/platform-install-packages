@@ -1,3 +1,9 @@
+kaltura-kmcng (5.16.0) orion; urgency=medium
+
+  * Support SSO login (#866) (51156ee)
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 16 Sep 2019 11:23:42 +0000
+
 kaltura-kmcng (5.15.0) orion; urgency=medium
  
   * Multi account menu style fixes (#861) (d6b823b)

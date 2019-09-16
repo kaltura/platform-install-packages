@@ -1,3 +1,9 @@
+kaltura-html5lib (2.78.2-1) orion; urgency=medium
+
+  *  FEC-9335 - Win 10 | IE 11 | v2.78.1 | Off air playback doesn't work
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 16 Sep 2019 11:19:08 +0000
+
 kaltura-html5lib (2.78.1-1) orion; urgency=medium
 
   * SUP-19347 - Live-stream might freezes on IE11 

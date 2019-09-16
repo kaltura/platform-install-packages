@@ -1,3 +1,9 @@
+kaltura-html5-studio3 (3.4.0-1) orion; urgency=medium
+
+  * New rel 
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 16 Sep 2019 11:25:17 +0000
+
 kaltura-html5-studio3 (3.3.0-1) naos; urgency=medium
 
   * FEC-8880: add support for youtube
