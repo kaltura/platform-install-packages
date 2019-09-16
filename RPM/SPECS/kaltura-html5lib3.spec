@@ -3,8 +3,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib3
-Version: 0.45.6
-Release: 2
+Version: 0.46.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz 
@@ -49,6 +49,11 @@ rm -rf %{buildroot}
 %{html5lib3_base}
 
 %changelog
+* Mon Sep 16 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 0.46.0-1
+- playkit-js 0.53.0
+- playkit-js-dash 1.15.0
+- IMA plugin - 0.17.2
+
 * Mon Aug 5 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 0.45.5-1
 - Added the bumper and Youtube plugins
 

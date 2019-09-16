@@ -1,6 +1,6 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmcng
-Version: v5.15.0
+Version: v5.16.0
 Release: 1
 Summary: Kaltura HTML5 Management Console
 
@@ -49,6 +49,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Sep 16 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v5.16.0
+- Support SSO login (#866) (51156ee)
+
 * Wed Sep 4 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v5.15.0
 - Multi account menu style fixes (#861) (d6b823b)
 - content/drop-folders: Add drop folders filter by folder name (#863) (fffa4c4)

@@ -3,7 +3,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.78.1
+Version: v2.78.2
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -86,6 +86,9 @@ fi
 %config %{html5lib_base}/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Mon Sep 16 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v2.78.2
+- FEC-9335 - Win 10 | IE 11 | v2.78.1 | Off air playback doesn't work
+
 * Tue Sep 3 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v2.78.1
 - SUP-19347 - Live-stream might freezes on IE11
  

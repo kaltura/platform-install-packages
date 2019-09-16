@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 15.7.0
-Release: 8
+Release: 9
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -362,26 +362,20 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Sun Sep 15 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.7.0-8
-- Nightly build.
-
-* Sat Sep 14 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.7.0-7
-- Nightly build.
-
-* Fri Sep 13 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.7.0-6
-- Nightly build.
-
-* Thu Sep 12 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.7.0-5
-- Nightly build.
-
-* Wed Sep 11 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.7.0-4
-- Nightly build.
-
-* Tue Sep 10 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.7.0-3
-- Nightly build.
-
-* Mon Sep 9 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.7.0-2
-- Nightly build.
+* Mon Sep 16 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.7.0-9
+- PLAT-9973: SSO - Fix email body not being included in the message (https://github.com/kaltura/server/pull/8768)
+- SUP-19231: Email notification fix to handle more than 150 users when filtering with `idIn` (https://github.com/kaltura/server/pull/8764)
+- REACH2-699: Reach Admin console fix for dictionary display (https://github.com/kaltura/server/pull/8763)
+- PLAT-9973: SSO email templates (https://github.com/kaltura/server/pull/8762)
+- PLAT-9908: Add implementation for `nameEqual` in ServerNodeFilter (https://github.com/kaltura/server/pull/8761)
+- PLAT-9973: Determine email template to use based on SSO configuration (https://github.com/kaltura/server/pull/8759)
+- PLAT-9838: SSO shouldn't be configured on partner 0 (https://github.com/kaltura/server/pull/8757)
+- LEC-1784: Add `flavorparam` permission for capture app (https://github.com/kaltura/server/pull/8746)
+- PLAT-9838: KMC SSO Support (https://github.com/kaltura/server/pull/8745)
+- KAVA: fix adding comment to druid query (https://github.com/kaltura/server/pull/8733)
+- Analytics: additional user level reports (https://github.com/kaltura/server/pull/8722)
+- PLAT-10113: Add script that checks for duplicated users created since the last run and merges them (https://github.com/kaltura/server/pull/8719)
+- WEBC-1429: QnA - display given name rather than user ID (https://github.com/kaltura/server/pull/8585)
 
 * Mon Sep 9 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.7.0-1
 - Ver Bounce to 15.7.0
