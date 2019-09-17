@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 15.7.0
-Release: 9
+Version: 15.8.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -362,6 +362,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Tue Sep 17 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.8.0-1
+- Ver Bounce to 15.8.0
+
 * Mon Sep 16 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.7.0-9
 - PLAT-9973: SSO - Fix email body not being included in the message (https://github.com/kaltura/server/pull/8768)
 - SUP-19231: Email notification fix to handle more than 150 users when filtering with `idIn` (https://github.com/kaltura/server/pull/8764)
