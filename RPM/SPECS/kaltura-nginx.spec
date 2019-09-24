@@ -41,7 +41,7 @@ BuildRequires: libopenssl-devel
 Requires(pre): pwdutils
 %endif
 
-%define nginx_vod_module_ver 1.24
+%define nginx_vod_module_ver 1.25
 %define nginx_secure_token_ver 1.3
 %define nginx_token_validate_ver 1.1
 %define nginx_kafka_log_ver 1.0
@@ -55,8 +55,8 @@ Requires(pre): pwdutils
 
 Summary: High performance web server customized for Kaltura VOD
 Name: kaltura-nginx
-Version: 1.16.0
-Release: 3 
+Version: 1.16.1
+Release: 1 
 Vendor: Kaltura inc.
 URL: http://nginx.org/
 
@@ -80,9 +80,9 @@ Source16: nginx.conf.template
 Source17: nginx_ssl.conf.template
 Source18: ngx_aws_auth-%{ngx_aws_auth_ver}.zip
 Source19: headers-more-nginx-module-v%{headers_more_nginx_ver}.zip
-Source20: nginx-kafka-log-module-v%{nginx_kafka_log_ver}.zip
-Source21: nginx-json-var-module-v%{nginx_json_var_ver}.zip
-Source22: nginx-strftime-module-v%{nginx_strftime_ver}.zip
+Source20: nginx-kafka-log-module-%{nginx_kafka_log_ver}.zip
+Source21: nginx-json-var-module-%{nginx_json_var_ver}.zip
+Source22: nginx-strftime-module-%{nginx_strftime_ver}.zip
 #Patch1: nginx_kaltura.diff 
 
 License: 2-clause BSD-like license
@@ -415,6 +415,20 @@ if [ $1 -ge 1 ]; then
 fi
 
 %changelog
+* Tue Sep 24 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 1.16.1-1
+- New Nginx upstream ver:
+	* fixes for vulnerabilities in HTTP/2 (CVE-2019-9511, CVE-2019-9513, CVE-2019-9516). 
+- New VOD module (1.25)
+	* add vod_force_sequence_index directive
+	* json parser - support \uxxxx
+	* increase the max sequence ids to 4
+	* add additional language codes
+	* hls - output the sequence id in the id3 json
+	* hls - avoid returning LANGUAGE for non multi audio
+	* encryption-at-rest thumbnail fix
+	* fix compilation without openssl/libavfilter
+	* fix unmuxed hls with multi video codecs
+
 * Tue Aug 6 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 1.16.0-3
 - Build with `kafka-log`, `json-var` and `strftime` (needed for KAVA)
 
