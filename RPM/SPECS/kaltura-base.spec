@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 15.8.0
-Release: 20
+Release: 21
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -124,6 +124,8 @@ sed -i "s#^;kmc_version = @KMC_VERSION@#kmc_version = %{_kmc_version}#g" $RPM_BU
 sed -i 's#@KMCNG_VERSION@#%{_kmcng_version}#' $RPM_BUILD_ROOT%{confdir}/local.template.ini
 sed -i 's@^otp_required_partners\[\]@;otp_required_partners\[\]@g' $RPM_BUILD_ROOT%{confdir}/local.template.ini
 sed -i "s@^partner_otp_internal_ips@;partner_otp_internal_ips@g" $RPM_BUILD_ROOT%{confdir}/local.template.ini
+# when this directive is set, `report` requests go to KAVA
+sed -i "s@^\(druid_url.*$\)@;\1@g" $RPM_BUILD_ROOT%{confdir}/local.template.ini
 sed -i "s#^;html5_version = @HTML5LIB_VERSION@#html5_version = %{html5_version}#g" $RPM_BUILD_ROOT%{confdir}/local.template.ini
 sed -i 's#<html5Url>/html5/html5lib/v.*/mwEmbedLoader.php</html5Url>#<html5Url>/html5/html5lib/%{html5_version}/mwEmbedLoader.php</html5Url>#g' $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_content/01.uiConf.99.template.xml
 sed -i "s#^;kmc_login_version = @KMC_LOGIN_VERSION@#kmc_login_version = %{kmc_login_version}#g" $RPM_BUILD_ROOT%{confdir}/local.template.ini
@@ -362,63 +364,23 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Sun Oct 6 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.8.0-20
-- Nightly build.
-
-* Sat Oct 5 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.8.0-19
-- Nightly build.
-
-* Fri Oct 4 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.8.0-18
-- Nightly build.
-
-* Thu Oct 3 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.8.0-17
-- Nightly build.
-
-* Wed Oct 2 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.8.0-16
-- Nightly build.
-
-* Tue Oct 1 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.8.0-15
-- Nightly build.
-
-* Mon Sep 30 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.8.0-14
-- Nightly build.
-
-* Sun Sep 29 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.8.0-13
-- Nightly build.
-
-* Sat Sep 28 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.8.0-12
-- Nightly build.
-
-* Fri Sep 27 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.8.0-11
-- Nightly build.
-
-* Thu Sep 26 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.8.0-10
-- Nightly build.
-
-* Wed Sep 25 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.8.0-9
-- Nightly build.
-
-* Tue Sep 24 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.8.0-8
-- Nightly build.
-
-* Mon Sep 23 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.8.0-7
-- Nightly build.
-
-* Sun Sep 22 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.8.0-6
-- Nightly build.
-
-* Sat Sep 21 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.8.0-5
-- Nightly build.
-
-* Fri Sep 20 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.8.0-4
-- Nightly build.
-
-* Thu Sep 19 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.8.0-3
-- Nightly build.
-
-* Wed Sep 18 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.8.0-2
-- Nightly build.
-
+* Mon Oct 7 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.8.0-21
+- AN-931: remove media type filter from USER HIGHLIGHTS report (https://github.com/kaltura/server/pull/8788)
+- WEBC-1554: add `systemName` to the `QandA` response profile (https://github.com/kaltura/server/pull/8787)
+- Include the entry ID in the `pexip` email (https://github.com/kaltura/server/pull/8785)
+- PLAT-10200: Add ability to search history indexing per partner (https://github.com/kaltura/server/pull/8784)
+- PLAT-10199: Remove `str_entry_id` from Sphinx `kaltura_cue_point` table (https://github.com/kaltura/server/pull/8783)
+- PLAT-10143: eSearch - support double quotes for exact match of multiple strings (https://github.com/kaltura/server/pull/8781)
+- PLAT-10115: Fix total count when listing likes (https://github.com/kaltura/server/pull/8780)
+- SUP-17762: allow `playlist->clone()` when `display_in_search` is set to 2 (https://github.com/kaltura/server/pull/8779)
+- PLAT-10143: eSearch - support double quotes for exact match of multiple strings (https://github.com/kaltura/server/pull/8778)
+- SUP-19263: Fix Kaltura Capture source corruption when using WV (encryption) (https://github.com/kaltura/server/pull/8777)
+- Handle backslashes when filter is Equal or In (https://github.com/kaltura/server/pull/8776)
+- Update entry plays/views from KAVA (https://github.com/kaltura/server/pull/8775)
+- PLAT-10120: Add the option to remove synonyms in esearch (https://github.com/kaltura/server/pull/8772)
+- PLAT-10170: Enable SSO login with no user parameter (https://github.com/kaltura/server/pull/8767)
+- Enrich report with entry source (https://github.com/kaltura/server/pull/8721)
+ 
 * Tue Sep 17 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.8.0-1
 - Ver Bounce to 15.8.0
 

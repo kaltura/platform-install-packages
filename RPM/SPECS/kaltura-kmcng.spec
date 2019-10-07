@@ -1,6 +1,6 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmcng
-Version: v5.16.0
+Version: v5.17.0
 Release: 1
 Summary: Kaltura HTML5 Management Console
 
@@ -49,6 +49,10 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Oct 7 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v5.17.0-1
+- login: direct users to login with SSO page (22e9505)
+- administration/users: add user analytics drill-down action (#862) (035e7e1) 
+
 * Mon Sep 16 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v5.16.0
 - Support SSO login (#866) (51156ee)
 
