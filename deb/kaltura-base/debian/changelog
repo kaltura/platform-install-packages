@@ -1,3 +1,9 @@
+kaltura-base (15.9.0-1) orion; urgency=medium
+
+  * Switching to 15.9.0
+
+ -- Jess Portnoy <jess@b0f924504114>  Thu, 10 Oct 2019 16:24:08 +0000
+
 kaltura-base (15.8.0-2) orion; urgency=medium
  
   * AN-931: remove media type filter from USER HIGHLIGHTS report (https://github.com/kaltura/server/pull/8788)
