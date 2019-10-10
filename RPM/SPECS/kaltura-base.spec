@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 15.8.0
-Release: 23
+Version: 15.9.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -364,6 +364,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Thu Oct 10 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.9.0-1
+- Ver Bounce to 15.9.0
+
 * Mon Oct 7 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.8.0-21
 - AN-931: remove media type filter from USER HIGHLIGHTS report (https://github.com/kaltura/server/pull/8788)
 - WEBC-1554: add `systemName` to the `QandA` response profile (https://github.com/kaltura/server/pull/8787)
