@@ -1,3 +1,29 @@
+kaltura-base (15.8.0-2) orion; urgency=medium
+ 
+  * AN-931: remove media type filter from USER HIGHLIGHTS report (https://github.com/kaltura/server/pull/8788)
+  * WEBC-1554: add `systemName` to the `QandA` response profile (https://github.com/kaltura/server/pull/8787)
+  * Include the entry ID in the `pexip` email (https://github.com/kaltura/server/pull/8785)
+  * PLAT-10200: Add ability to search history indexing per partner (https://github.com/kaltura/server/pull/8784)
+  * PLAT-10199: Remove `str_entry_id` from Sphinx `kaltura_cue_point` table (https://github.com/kaltura/server/pull/8783)
+  * PLAT-10143: eSearch - support double quotes for exact match of multiple strings (https://github.com/kaltura/server/pull/8781)
+  * PLAT-10115: Fix total count when listing likes (https://github.com/kaltura/server/pull/8780)
+  * SUP-17762: allow `playlist->clone()` when `display_in_search` is set to 2 (https://github.com/kaltura/server/pull/8779)
+  * PLAT-10143: eSearch - support double quotes for exact match of multiple strings (https://github.com/kaltura/server/pull/8778)
+  * SUP-19263: Fix Kaltura Capture source corruption when using WV (encryption) (https://github.com/kaltura/server/pull/8777)
+  * Handle backslashes when filter is Equal or In (https://github.com/kaltura/server/pull/8776)
+  * Update entry plays/views from KAVA (https://github.com/kaltura/server/pull/8775)
+  * PLAT-10120: Add the option to remove synonyms in esearch (https://github.com/kaltura/server/pull/8772)
+  * PLAT-10170: Enable SSO login with no user parameter (https://github.com/kaltura/server/pull/8767)
+  * Enrich report with entry source (https://github.com/kaltura/server/pull/8721)
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 07 Oct 2019 11:06:13 +0000
+
+kaltura-base (15.8.0-1) orion; urgency=medium
+
+  * Switching to 15.8.0
+
+ -- Jess Portnoy <jess@b0f924504114>  Wed, 18 Sep 2019 14:21:10 +0000
+
 kaltura-base (15.7.0-2) orion; urgency=medium
 
   * PLAT-9973: SSO - Fix email body not being included in the message (https://github.com/kaltura/server/pull/8768)

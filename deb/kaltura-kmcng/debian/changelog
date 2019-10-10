@@ -1,3 +1,10 @@
+kaltura-kmcng (5.17.0) orion; urgency=medium
+
+  * login: direct users to login with SSO page (22e9505)
+  * administration/users: add user analytics drill-down action (#862) (035e7e1) 
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 07 Oct 2019 11:13:58 +0000
+
 kaltura-kmcng (5.16.0) orion; urgency=medium
 
   * Support SSO login (#866) (51156ee)
