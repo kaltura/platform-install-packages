@@ -1,0 +1,16 @@
+[Unit]
+Description=coordinator
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=kaltura
+Group=kaltura
+WorkingDirectory=/usr/lib/druid
+ExecStart=/etc/alternatives/java -server -Xms256m -Xmx256m -Duser.timezone=UTC -Dservice=coordinator -Dfile.encoding=UTF-8 -Djava.io.tmpdir=/var/tmp/druid -Djava.util.logging.manager=org.apache.logging.log4j.jul.LogManager -Dderby.stream.error.file=/var/log/druid/derby.log -cp '/opt/kava/conf/druid/_common:/opt/kava/conf/druid/coordinator:/opt/druid_current/lib/*' org.apache.druid.cli.Main server coordinator
+KillMode=control-group
+Restart=always
+RestartSec=30s
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,17 @@
+[Unit]
+Description=broker
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=kaltura
+Group=kaltura
+WorkingDirectory=/usr/lib/druid
+ExecStart=/etc/alternatives/java  -server -Xms1g -Xmx1g -XX:MaxDirectMemorySize=1792m -Dservice=broker -Duser.timezone=UTC -Dfile.encoding=UTF-8 -Djava.io.tmpdir=/var/druid/tmp -Djava.util.logging.manager=org.apache.logging.log4j.jul.LogManager -cp '/opt/kava/conf/druid/_common:/opt/kava/conf/druid/broker:/opt/druid_current/lib/*' org.apache.druid.cli.Main server broker
+KillMode=control-group
+Restart=always
+RestartSec=30s
+
+[Install]
+WantedBy=multi-user.target
+

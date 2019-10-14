@@ -1,0 +1,12 @@
+[Unit]
+Description=Druid
+After=network.target
+
+[Service]
+User=kaltura
+Group=kaltura
+EnvironmentFile=/etc/sysconfig/druid
+ExecStart=/etc/alternatives/java $DRUID_HEAP_OPTS $DRUID_OPTS $DRUID_SPEC_OPTS -Duser.timezone=UTC -Dfile.encoding=UTF-8 -classpath $CLASSPATH io.druid.cli.Main server realtime
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,16 @@
+[Unit]
+Description=historical_hot
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=kaltura
+Group=kaltura
+WorkingDirectory=/usr/lib/druid
+ExecStart=/etc/alternatives/java -server -Xms1g -Xmx1g -XX:MaxDirectMemorySize=1280m -Dservice=historical_hot -Duser.timezone=UTC -Dfile.encoding=UTF-8 -Djava.io.tmpdir=/var/tmp/druid -Djava.util.logging.manager=org.apache.logging.log4j.jul.LogManager -cp '/opt/kava/conf/druid/_common:/opt/kava/conf/druid/historical-hot:/opt/druid_current/lib/*' org.apache.druid.cli.Main server historical
+KillMode=control-group
+Restart=always
+RestartSec=30s
+
+[Install]
+WantedBy=multi-user.target

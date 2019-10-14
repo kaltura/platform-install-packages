@@ -1,0 +1,16 @@
+[Unit]
+Description=overlord
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=kaltura
+Group=kaltura
+WorkingDirectory=/usr/lib/druid
+ExecStart=/etc/alternatives/java -server -Xms256m -Xmx256m -Duser.timezone=UTC -Dservice=overlord -Dfile.encoding=UTF-8 -Djava.io.tmpdir=/var/tmp/druid -Djava.util.logging.manager=org.apache.logging.log4j.jul.LogManager -cp "/opt/kava/conf/druid/_common:/opt/kava/conf/druid/overlord:/opt/druid_current/lib/*" org.apache.druid.cli.Main server overlord
+KillMode=control-group
+Restart=always
+RestartSec=30s
+
+[Install]
+WantedBy=multi-user.target
