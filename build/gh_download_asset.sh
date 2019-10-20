@@ -10,7 +10,6 @@ VERSION=$4                       # tag name or the word "latest"
 OUTDIR=$5
 GITHUB_API_ENDPOINT="api.github.com"
 
-alias errcho='>&2 echo'
 
 function gh_curl() {
   curl -sL -H "Authorization: token $TOKEN" \
@@ -27,7 +26,7 @@ fi
 
 ASSET_ID=`gh_curl https://$GITHUB_API_ENDPOINT/repos/$REPO/releases | jq "$PARSER"`
 if [ "$ASSET_ID" = "null" ]; then
-  errcho "ERROR: version not found $VERSION"
+  echo "ERROR: version not found $VERSION"
   exit 1
 fi
 

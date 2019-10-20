@@ -7,8 +7,8 @@
 %define use_systemd (0%{?fedora} && 0%{?fedora} >= 18) || (0%{?rhel} && 0%{?rhel} >= 7)
 
 Name: kaltura-druid	
-Version: 0.16.0
-Release: 1
+Version: 0.15.0
+Release: 3
 Summary: Druid	
 Group: Applications/Internet
 License: Apache License, Version 2.0
@@ -42,10 +42,11 @@ AutoReqProv: no
 An open-source, real-time data store designed to power interactive applications at scale.
 
 %pre
+set -x
 %{__mkdir_p} %{prefix}
 # create user/group, and update permissions
-getent group %{kaltura_group} >/dev/null || groupadd -r %{kaltura_group} -g7373 2>/dev/null
-getent passwd %{kaltura_user} >/dev/null || useradd -m -r -u7373 -d %{prefix} -s /bin/bash -c "Kaltura server" -g %{kaltura_group} %{kaltura_user} 2>/dev/null
+getent group %{druid_group} >/dev/null || groupadd -r %{druid_group} -g7373 2>/dev/null
+getent passwd %{druid_user} >/dev/null || useradd -m -r -u7373 -d %{prefix} -s /bin/bash -c "Kaltura server" -g %{druid_group} %{druid_user} 2>/dev/null
 
 
 %prep
@@ -56,6 +57,8 @@ getent passwd %{kaltura_user} >/dev/null || useradd -m -r -u7373 -d %{prefix} -s
 %install
 # create directory skeleton
 %{__mkdir_p} %{buildroot}/usr/lib/druid
+%{__mkdir_p} %{buildroot}/usr/lib/druid/var/druid/task/assignedTasks
+%{__mkdir_p} %{buildroot}/usr/lib/druid/var/druid/task/completedTasks
 %{__mkdir_p} %{buildroot}%{_sysconfdir}/rc.d/init.d
 %{__mkdir_p} %{buildroot}%{_sysconfdir}/druid
 %{__mkdir_p} %{buildroot}%{_var}/log/druid
@@ -131,11 +134,8 @@ fi
 rm -rf $RPM_BUILD_ROOT
 
 %changelog
-* Fri Oct 11 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 0.16.0-1
+* Fri Oct 11 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 0.15.0-1
 - New upstream release
-
-* Thu Jul 25 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 0.15.0-1
-- New ver
 
 * Thu Jan 14 2016 Luciano Coutinho <lucianocoutinho@live.com> 0.6.171-0.2
 - fixed typos in initscript and updated the build process to preserve 
