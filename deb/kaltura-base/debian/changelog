@@ -1,3 +1,34 @@
+kaltura-base (15.9.0-2) orion; urgency=medium
+
+  * Disable access to `expectedFinishTime` in sphinx (https://github.com/kaltura/server/pull/8835)
+  * REACH2-704: Fix warning in reach dashboard (https://github.com/kaltura/server/pull/8834)
+  * PLAT-10242: Distribution - error on new profile (https://github.com/kaltura/server/pull/8830)
+  * REACH2-688: Add audio description file (https://github.com/kaltura/server/pull/8827)
+  * Pass `partnerId` when getting entry vendor task objects (https://github.com/kaltura/server/pull/8826)
+  * REACH2-704: Add `createdAt` to query in reach dashboard (https://github.com/kaltura/server/pull/8825)
+  * Reduce sphinx connections (https://github.com/kaltura/server/pull/8823)
+  * Reduce sphinx connections (https://github.com/kaltura/server/pull/8822)
+  * PLAT-10238: Added `getElasticEntryIndexNameForPartner()` (https://github.com/kaltura/server/pull/8821)
+  * REACH2-704: Fix warnings in reach dashboard (https://github.com/kaltura/server/pull/8820)
+  * PLAT-10231: Caption search - index all caption text on entry document (https://github.com/kaltura/server/pull/8819)
+  * PLAT-10234: eSearch - reduce results in partial search (https://github.com/kaltura/server/pull/8818)
+  * Handle stuck batch job lock objects (https://github.com/kaltura/server/pull/8817)
+  * REACH-649: Don't update `updatedAt` when daily credit sync process is done (https://github.com/kaltura/server/pull/8815)
+  * Limit bad query execution (https://github.com/kaltura/server/pull/8814)
+  * SUP-19641: issue `groupBy` instead of `topN` when ordering by `engagement_ranking` (https://github.com/kaltura/server/pull/8813)
+  * PLAT-9903: Add `lastplayed` lower then or equal or null (https://github.com/kaltura/server/pull/8812)
+  * SUP-19196: `children_count` on parent annotation cue point should decrease when deleting child (https://github.com/kaltura/server/pull/8811)
+  * PLAT-10216: Update last login when logging in via SSO (https://github.com/kaltura/server/pull/8806)
+  * REACH2-704: Reach new dashboard in admin console (https://github.com/kaltura/server/pull/8805)
+  * SUP-18336: Avoid getting external URL when storage protocol is missing (https://github.com/kaltura/server/pull/8804)
+  * PLAT-10222: Add session level caching to entry entitlement check (https://github.com/kaltura/server/pull/8801)
+  * PLAT-9903: Media Repurposing - `lastPlayedAtLessThanOrEqual` should include 0 plays as well (https://github.com/kaltura/server/pull/8800)
+  * SUP-19224: Add `map_between_objects` values to `KalturaPager.php` (https://github.com/kaltura/server/pull/8796)
+  * PLAT-10214: Should `unsetMediaServer` only when playable entry `server_node` doesn't exist (https://github.com/kaltura/server/pull/8792)
+  * PLAT-10177: Dump request to other dc in case we have the clip source there and this is not part of a `multirequest` (https://github.com/kaltura/server/pull/8774)
+
+ -- Jess Portnoy <jess@b0f924504114>  Wed, 30 Oct 2019 17:22:39 +0000
+
 kaltura-base (15.9.0-1) orion; urgency=medium
 
   * Switching to 15.9.0

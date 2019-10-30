@@ -1,3 +1,11 @@
+kaltura-kmcng (5.18-1) orion; urgency=medium
+
+  * content/entry: open live analytics for manual live entries (614c63e)
+  * Upgrade to Angular 8 (#853) (82e506c)
+  * Add the ability to toggle captions (#869) (6319b3d)
+
+ -- Jess Portnoy <jess@b0f924504114>  Wed, 30 Oct 2019 17:32:35 +0000
+
 kaltura-kmcng (5.17.0) orion; urgency=medium
 
   * login: direct users to login with SSO page (22e9505)
