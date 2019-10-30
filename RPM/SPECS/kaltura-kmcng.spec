@@ -1,6 +1,6 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmcng
-Version: v5.17.0
+Version: v5.18.0
 Release: 1
 Summary: Kaltura HTML5 Management Console
 
@@ -49,6 +49,11 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Thu Oct 24 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v5.18.0-1
+- content/entry: open live analytics for manual live entries (614c63e)
+- Upgrade to Angular 8 (#853) (82e506c)
+- Add the ability to toggle captions (#869) (6319b3d)
+
 * Mon Oct 7 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v5.17.0-1
 - login: direct users to login with SSO page (22e9505)
 - administration/users: add user analytics drill-down action (#862) (035e7e1) 

@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 15.9.0
-Release: 17
+Release: 18
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -364,59 +364,33 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Sun Oct 27 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.9.0-17
-- Nightly build.
-
-* Sat Oct 26 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.9.0-16
-- Nightly build.
-
-* Fri Oct 25 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.9.0-15
-- Nightly build.
-
-* Thu Oct 24 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.9.0-14
-- Nightly build.
-
-* Wed Oct 23 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.9.0-13
-- Nightly build.
-
-* Tue Oct 22 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.9.0-12
-- Nightly build.
-
-* Mon Oct 21 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.9.0-1
-- Nightly build.
-
-* Sun Oct 20 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.9.0-11
-- Nightly build.
-
-* Sat Oct 19 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.9.0-1
-- Nightly build.
-
-* Fri Oct 18 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.9.0-10
-- Nightly build.
-
-* Thu Oct 17 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.9.0-9
-- Nightly build.
-
-* Wed Oct 16 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.9.0-8
-- Nightly build.
-
-* Tue Oct 15 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.9.0-7
-- Nightly build.
-
-* Mon Oct 14 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.9.0-6
-- Nightly build.
-
-* Sun Oct 13 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.9.0-5
-- Nightly build.
-
-* Sat Oct 12 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.9.0-4
-- Nightly build.
-
-* Fri Oct 11 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.9.0-3
-- Nightly build.
-
-* Thu Oct 10 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.9.0-2
-- Nightly build.
+* Mon Oct 28 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.9.0-18
+- Disable access to `expectedFinishTime` in sphinx (https://github.com/kaltura/server/pull/8835)
+- REACH2-704: Fix warning in reach dashboard (https://github.com/kaltura/server/pull/8834)
+- PLAT-10242: Distribution - error on new profile (https://github.com/kaltura/server/pull/8830)
+- REACH2-688: Add audio description file (https://github.com/kaltura/server/pull/8827)
+- Pass `partnerId` when getting entry vendor task objects (https://github.com/kaltura/server/pull/8826)
+- REACH2-704: Add `createdAt` to query in reach dashboard (https://github.com/kaltura/server/pull/8825)
+- Reduce sphinx connections (https://github.com/kaltura/server/pull/8823)
+- Reduce sphinx connections (https://github.com/kaltura/server/pull/8822)
+- PLAT-10238: Added `getElasticEntryIndexNameForPartner()` (https://github.com/kaltura/server/pull/8821)
+- REACH2-704: Fix warnings in reach dashboard (https://github.com/kaltura/server/pull/8820)
+- PLAT-10231: Caption search - index all caption text on entry document (https://github.com/kaltura/server/pull/8819)
+- PLAT-10234: eSearch - reduce results in partial search (https://github.com/kaltura/server/pull/8818)
+- Handle stuck batch job lock objects (https://github.com/kaltura/server/pull/8817)
+- REACH-649: Don't update `updatedAt` when daily credit sync process is done (https://github.com/kaltura/server/pull/8815)
+- Limit bad query execution (https://github.com/kaltura/server/pull/8814)
+- SUP-19641: issue `groupBy` instead of `topN` when ordering by `engagement_ranking` (https://github.com/kaltura/server/pull/8813)
+- PLAT-9903: Add `lastplayed` lower then or equal or null (https://github.com/kaltura/server/pull/8812)
+- SUP-19196: `children_count` on parent annotation cue point should decrease when deleting child (https://github.com/kaltura/server/pull/8811)
+- PLAT-10216: Update last login when logging in via SSO (https://github.com/kaltura/server/pull/8806)
+- REACH2-704: Reach new dashboard in admin console (https://github.com/kaltura/server/pull/8805)
+- SUP-18336: Avoid getting external URL when storage protocol is missing (https://github.com/kaltura/server/pull/8804)
+- PLAT-10222: Add session level caching to entry entitlement check (https://github.com/kaltura/server/pull/8801)
+- PLAT-9903: Media Repurposing - `lastPlayedAtLessThanOrEqual` should include 0 plays as well (https://github.com/kaltura/server/pull/8800)
+- SUP-19224: Add `map_between_objects` values to `KalturaPager.php` (https://github.com/kaltura/server/pull/8796)
+- PLAT-10214: Should `unsetMediaServer` only when playable entry `server_node` doesn't exist (https://github.com/kaltura/server/pull/8792)
+- PLAT-10177: Dump request to other dc in case we have the clip source there and this is not part of a `multirequest` (https://github.com/kaltura/server/pull/8774)
 
 * Thu Oct 10 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.9.0-1
 - Ver Bounce to 15.9.0

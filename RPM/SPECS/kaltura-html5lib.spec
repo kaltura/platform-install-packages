@@ -3,7 +3,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.78.2
+Version: v2.79
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -86,6 +86,27 @@ fi
 %config %{html5lib_base}/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Mon Oct 28 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v2.79
+- FEC-9437 - V2 - playlist failed to be loaded on IE11 - regression bug 
+- FEC-9305 - cust_params is escaping without encoding in DoubleClick
+- FEC-9386 - [V2][iPad iOS13] In fallback when media displayed and selecting unmute button the volume gets unmuted but indications (unmute button and muted volume icon) are still displayed
+- FEC-9181 - selectClosedCaptions event should send analytics trackEvent with language instead of label
+- FEC-9335 - Win 10 | IE 11 | v2.78.1 | Off air playback doesn't work
+- SUP-19782 - Kaltura service returns error in ICONIC applicaion
+- SUP-18965 - PiP Layout Incorrect
+- SUP-19385 - [IVQ] Question is skipped after selecting an answer on the previous Q and using the Skip button.
+- SUP-19662 - Live stream indication with no reason 
+- SUP-18477 - Showing hint clears answer in an open-question 
+- SUP-19166 - "No Seeking Forward" feature not working in youtube video quiz with AutoPlay 
+- SUP-19550 - Duration tag on YouTube Playlist does not update on change media
+- FEV-383 - [Player v2 accessibility] issues found by Miami Uni. - expend/collapse menu
+- FEV-381 - [Player v2 accessibility] issues found by Miami Uni. - cc focus
+- FEV-221 - [player-Acc.] Clicking on the Expend arrow button on chapter menu cause it to collapsed (keyboard)
+- FEV-385 - [Player v2 accessibility] issues found by Miami Uni. - buttons state reporting
+- FEV-351 - [playlist v2] link to playlist details page
+- PLAT-9400 - KalturaAPIException spam in kaltura_api_v3.log
+- WEBC-1206 - when starting a webcast, it takes too long for the first slide to load
+
 * Mon Sep 16 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v2.78.2
 - FEC-9335 - Win 10 | IE 11 | v2.78.1 | Off air playback doesn't work
 
