@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 15.9.0
-Release: 18
+Version: 15.10.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -364,6 +364,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Thu Oct 31 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.10.0-1
+- Ver Bounce to 15.10.0
+
 * Mon Oct 28 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.9.0-18
 - Disable access to `expectedFinishTime` in sphinx (https://github.com/kaltura/server/pull/8835)
 - REACH2-704: Fix warning in reach dashboard (https://github.com/kaltura/server/pull/8834)
