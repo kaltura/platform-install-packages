@@ -656,3 +656,12 @@ check_kmc_config_versions()
 		fi
 }
 
+gen_partner_secret()
+{
+	PATTERN="A-Za-z0-9_~@#$%^*()_+-="
+	SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@#$%^*()_+-=" | head -c100`
+	HASHED_SECRET=`echo $SECRET|md5sum`
+	SECRET=`echo $HASHED_SECRET|awk -F " " '{print $1}'`
+	echo $SECRET
+}
+

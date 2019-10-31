@@ -1,3 +1,9 @@
+kaltura-base (15.10.0-1) orion; urgency=medium
+
+  * Switching to 15.10.0
+
+ -- Jess Portnoy <jess@b0f924504114>  Thu, 31 Oct 2019 10:49:43 +0000
+
 kaltura-base (15.9.0-2) orion; urgency=medium
 
   * Disable access to `expectedFinishTime` in sphinx (https://github.com/kaltura/server/pull/8835)

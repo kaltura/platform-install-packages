@@ -411,79 +411,46 @@ if [ "$1" = "configure" ]; then
 
 
         # gen secrets
-        ADMIN_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@#$%^*()_+-=" | head -c20`
-        HASHED_ADMIN_SECRET=`echo $ADMIN_SECRET|md5sum`
-        ADMIN_SECRET=`echo $HASHED_ADMIN_SECRET|awk -F " " '{print $1}'`
+        ADMIN_SECRET=`gen_partner_secret`
 
-        ADMIN_CONSOLE_PARTNER_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@#$%^*()_+-=" | head -c20`
-        HASHED_ADMIN_CONSOLE_PARTNER_SECRET=`echo $ADMIN_CONSOLE_PARTNER_SECRET|md5sum`
-        ADMIN_CONSOLE_PARTNER_SECRET=`echo $HASHED_ADMIN_CONSOLE_PARTNER_SECRET|awk -F " " '{print $1}'`
+        ADMIN_CONSOLE_PARTNER_SECRET=`gen_partner_secret`
 
-        MONITOR_PARTNER_ADMIN_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c20`
-        HASHED_MONITOR_PARTNER_ADMIN_SECRET=`echo $HASHED_MONITOR_PARTNER_ADMIN_SECRET | md5sum`
-        MONITOR_PARTNER_ADMIN_SECRET=`echo $HASHED_MONITOR_PARTNER_ADMIN_SECRET | awk -F " " '{print $1}'` 
+        MONITOR_PARTNER_ADMIN_SECRET=`gen_partner_secret` 
 
-        MONITOR_PARTNER_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c20`
-        HASHED_MONITOR_PARTNER_SECRET=`echo $HASHED_MONITOR_PARTNER_SECRET | md5sum`
-        MONITOR_PARTNER_SECRET=`echo $HASHED_MONITOR_PARTNER_SECRET | awk -F " " '{print $1}'` 
+        MONITOR_PARTNER_SECRET=`gen_partner_secret` 
 
-        MONITORING_PROXY_ADMIN_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c20`
-        HASHED_MONITORING_PROXY_ADMIN_SECRET=`echo $HASHED_MONITOR_PARTNER_ADMIN_SECRET | md5sum`
-        MONITORING_PROXY_ADMIN_SECRET=`echo $HASHED_MONITOR_PARTNER_ADMIN_SECRET | awk -F " " '{print $1}'` 
+	PARTNER_MONITORING_PROXY_ADMIN_SECRET=`gen_partner_secret`
 
-        MONITORING_PROXY_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c20`
-        HASHED_MONITORING_PROXY=`echo $HASHED_MONITOR_PARTNER_SECRET | md5sum`
-        MONITORING_PROXY_SECRET=`echo $HASHED_MONITOR_PARTNER_SECRET | awk -F " " '{print $1}'` 
+	PARTNER_MONITORING_PROXY_SECRET=`gen_partner_secret`
 
-        PARTNER_ZERO_ADMIN_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c20`
-        HASHED_PARTNER_ZERO_ADMIN_SECRET=`echo $PARTNER_ZERO_ADMIN_SECRET|md5sum`
-        PARTNER_ZERO_ADMIN_SECRET=`echo $HASHED_PARTNER_ZERO_ADMIN_SECRET|awk -F " " '{print $1}'`
+	PARTNER_KMC_SSO_ADMIN_SECRET=`gen_partner_secret`
 
-        PARTNER_ZERO_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c20`
-        HASHED_PARTNER_ZERO_SECRET=`echo $PARTNER_ZERO_SECRET|md5sum`
-        PARTNER_ZERO_SECRET=`echo $HASHED_PARTNER_ZERO_SECRET|awk -F " " '{print $1}'`
+	PARTNER_KMC_SSO_SECRET=`gen_partner_secret`
 
+        PARTNER_ZERO_ADMIN_SECRET=`gen_partner_secret`
 
-        BATCH_PARTNER_ADMIN_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c20`
-        HASHED_BATCH_PARTNER_ADMIN_SECRET=`echo $BATCH_PARTNER_ADMIN_SECRET|md5sum`
-        BATCH_PARTNER_ADMIN_SECRET=`echo $HASHED_BATCH_PARTNER_ADMIN_SECRET|awk -F " " '{print $1}'`
+        PARTNER_ZERO_SECRET=`gen_partner_secret`
 
-        BATCH_PARTNER_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c20`
-        HASHED_BATCH_PARTNER_SECRET=`echo $BATCH_PARTNER_SECRET|md5sum`
-        BATCH_PARTNER_SECRET=`echo $HASHED_BATCH_PARTNER_SECRET|awk -F " " '{print $1}'`
+        BATCH_PARTNER_ADMIN_SECRET=`gen_partner_secret`
 
-        MEDIA_PARTNER_ADMIN_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c20`
-        HASHED_MEDIA_PARTNER_ADMIN_SECRET=`echo $MEDIA_PARTNER_ADMIN_SECRET|md5sum`
-        MEDIA_PARTNER_ADMIN_SECRET=`echo $HASHED_MEDIA_PARTNER_ADMIN_SECRET|awk -F " " '{print $1}'`
+        BATCH_PARTNER_SECRET=`gen_partner_secret`
 
-        MEDIA_PARTNER_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c20`
-        HASHED_MEDIA_PARTNER_SECRET=`echo $MEDIA_PARTNER_SECRET|md5sum`
-        MEDIA_PARTNER_SECRET=`echo $HASHED_MEDIA_PARTNER_SECRET|awk -F " " '{print $1}'`
+        MEDIA_PARTNER_ADMIN_SECRET=`gen_partner_secret`
 
-        TEMPLATE_PARTNER_ADMIN_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c20`
-        HASHED_TEMPLATE_PARTNER_ADMIN_SECRET=`echo $TEMPLATE_PARTNER_ADMIN_SECRET|md5sum`
-        TEMPLATE_PARTNER_ADMIN_SECRET=`echo $HASHED_TEMPLATE_PARTNER_ADMIN_SECRET|awk -F " " '{print $1}'`
+        MEDIA_PARTNER_SECRET=`gen_partner_secret`
+
+        TEMPLATE_PARTNER_ADMIN_SECRET=`gen_partner_secret`
         TEMPLATE_PARTNER_ADMIN_PASSWORD="0+`< /dev/urandom tr -dc "A-Za-z0-9_=@%$" | head -c8`=*1"
 
-        TEMPLATE_PARTNER_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c20`
-        HASHED_TEMPLATE_PARTNER_SECRET=`echo $TEMPLATE_PARTNER_SECRET|md5sum`
-        TEMPLATE_PARTNER_SECRET=`echo $HASHED_TEMPLATE_PARTNER_SECRET|awk -F " " '{print $1}'`
+        TEMPLATE_PARTNER_SECRET=`gen_partner_secret`
 
-        HOSTED_PAGES_PARTNER_ADMIN_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c20`
-        HASHED_HOSTED_PAGES_PARTNER_ADMIN_SECRET=`echo $HOSTED_PAGES_PARTNER_ADMIN_SECRET|md5sum`
-        HOSTED_PAGES_PARTNER_ADMIN_SECRET=`echo $HASHED_HOSTED_PAGES_PARTNER_ADMIN_SECRET|awk -F " " '{print $1}'`
+        HOSTED_PAGES_PARTNER_ADMIN_SECRET=`gen_partner_secret`
 
-        HOSTED_PAGES_PARTNER_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c20`
-        HASHED_HOSTED_PAGES_PARTNER_SECRET=`echo $HOSTED_PAGES_PARTNER_SECRET|md5sum`
-        HOSTED_PAGES_PARTNER_SECRET=`echo $HASHED_HOSTED_PAGES_PARTNER_SECRET|awk -F " " '{print $1}'`
+        HOSTED_PAGES_PARTNER_SECRET=`gen_partner_secret`
 
-        PLAY_PARTNER_ADMIN_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c20`
-        HASHED_PLAY_PARTNER_ADMIN_SECRET=`echo $PLAY_PARTNER_ADMIN_SECRET|md5sum`
-        PLAY_PARTNER_ADMIN_SECRET=`echo $HASHED_PLAY_PARTNER_ADMIN_SECRET|awk -F " " '{print $1}'`
+        PLAY_PARTNER_ADMIN_SECRET=`gen_partner_secret`
 
-        PLAY_PARTNER_SECRET=`< /dev/urandom tr -dc "A-Za-z0-9_~@$%^*()_+-=" | head -c20`
-        HASHED_PLAY_PARTNER_SECRET=`echo $PLAY_PARTNER_SECRET|md5sum`
-        PLAY_PARTNER_SECRET=`echo $HASHED_PLAY_PARTNER_SECRET=|awk -F " " '{print $1}'`
+        PLAY_PARTNER_SECRET=`gen_partner_secret`
 
 
 
