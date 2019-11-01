@@ -1,3 +1,9 @@
+kaltura-db (15.10.0-1) orion; urgency=medium
+
+  * In light of changes made here: https://github.com/kaltura/platform-install-packages/commit/739a5463a8e7398bc38788d24e7d9caf483cb93b
+
+ -- Jess Portnoy <jess@b0f924504114>  Thu, 31 Oct 2019 17:08:01 +0000
+
 kaltura-db (14.4.0-1) naos; urgency=medium
 
   * No need to replace useSecuredProtocol:false anymore
