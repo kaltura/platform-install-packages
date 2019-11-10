@@ -1,6 +1,6 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmcng
-Version: v5.18.0
+Version: v5.19.0
 Release: 1
 Summary: Kaltura HTML5 Management Console
 
@@ -49,6 +49,11 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Wed Nov 6 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v5.19.0-1
+- SUP-19722: load max 500 dropfolders at once (#868) (023c0c7)
+- entries/refine-filter: Filter for entries with Quiz (#745) (be22f06)
+- entries/refine-filter: Filter for YouTube entries (#874) (6620ffe)
+
 * Thu Oct 24 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v5.18.0-1
 - content/entry: open live analytics for manual live entries (614c63e)
 - Upgrade to Angular 8 (#853) (82e506c)

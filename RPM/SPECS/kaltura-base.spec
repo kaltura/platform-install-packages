@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 15.10.0
-Release: 13
+Release: 14
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -364,35 +364,30 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Sat Nov 9 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.10.0-13
-- Nightly build.
-
-* Fri Nov 8 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.10.0-12
-- Nightly build.
-
-* Thu Nov 7 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.10.0-11
-- Nightly build.
-
-* Wed Nov 6 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.10.0-10
-- Nightly build.
-
-* Tue Nov 5 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.10.0-7
-- Nightly build.
-
-* Mon Nov 4 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.10.0-6
-- Nightly build.
-
-* Sun Nov 3 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.10.0-5
-- Nightly build.
-
-* Sat Nov 2 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.10.0-1
-- Nightly build.
-
-* Fri Nov 1 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.10.0-4
-- Nightly build.
-
-* Thu Oct 31 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.10.0-3
-- Nightly build.
+* Sun Nov 10 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.10.0-14
+- PLAT-10247: Update Kaltura favicon (https://github.com/kaltura/server/pull/8877)
+- PLAT-10285: populateElasticFromLog - reduce log size  (https://github.com/kaltura/server/pull/8870)
+- Limit sphinx slow queries (https://github.com/kaltura/server/pull/8869)
+- PSVAMB-6815: `FeedDropFolder` plugin (https://github.com/kaltura/server/pull/8867)
+- PLAT-10266: Add session counters to API response headers (https://github.com/kaltura/server/pull/8865)
+- Add the option to use parameter for report granularity in custom report (https://github.com/kaltura/server/pull/8863)
+- SUP-19359: Add `partner_id` to criteria when disabling criteria filter (https://github.com/kaltura/server/pull/8862)
+- PLAT-10266: Added `HTTP_X_KALTURA_SESSION_COUNTERS` header (https://github.com/kaltura/server/pull/8860)
+- PSVAMB-6815: `FeedDropFolder` plugin (https://github.com/kaltura/server/pull/8859)
+- SUP-20050 + SUP-20061: `eSearch` add `last_played_at` and `plays` filters (https://github.com/kaltura/server/pull/8856)
+- Add missing metrics for KMS (https://github.com/kaltura/server/pull/8855)
+- SUP-19359: Allow retrieval of deleted scheduled resources (https://github.com/kaltura/server/pull/8854)
+- REACH2-704: Enable access to `expectedFinishTime` in Sphinx (https://github.com/kaltura/server/pull/8853)
+- PSVAMB-6815: `FeedDropFolder` plugin (https://github.com/kaltura/server/pull/8852)
+- Update thumbnail locations and file sizes to match origin (https://github.com/kaltura/server/pull/8851)
+- PLAT-10209: `eSearch` - Do not interpret single quotation marks as a request for an exact match (https://github.com/kaltura/server/pull/8850)
+- Query cache triggers - add set function variable (https://github.com/kaltura/server/pull/8848)
+- PLAT-10251: SSO redirect URL, data, new dedicated partner (https://github.com/kaltura/server/pull/8843)
+- PLAT-10239: `eSearch` - support additional filter options (https://github.com/kaltura/server/pull/8841)
+- PSVAMB-8780: Additional `kuser` filters (https://github.com/kaltura/server/pull/8840)
+- PLAT-10213: Batch workers - validate file access permissions on remote storage volume (https://github.com/kaltura/server/pull/8831)
+- Real-time reports (https://github.com/kaltura/server/pull/8829)
+- PLAT-10206: Media repurposing - add retry mechanism for entry listing (https://github.com/kaltura/server/pull/8828)
 
 * Thu Oct 31 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.10.0-1
 - Ver Bounce to 15.10.0

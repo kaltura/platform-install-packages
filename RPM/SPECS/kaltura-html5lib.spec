@@ -3,7 +3,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.79
+Version: v2.79.1
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -86,6 +86,9 @@ fi
 %config %{html5lib_base}/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Sun Nov 10 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v2.79.1
+- Fix `flavorAsset.list()` request to avoid KalturaAPIException
+
 * Mon Oct 28 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v2.79
 - FEC-9437 - V2 - playlist failed to be loaded on IE11 - regression bug 
 - FEC-9305 - cust_params is escaping without encoding in DoubleClick
