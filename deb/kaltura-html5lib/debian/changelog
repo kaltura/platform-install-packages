@@ -1,3 +1,9 @@
+kaltura-html5lib (2.79.1-1) orion; urgency=medium
+
+  * Fix `flavorAsset.list()` request to avoid KalturaAPIException 
+
+ -- Jess Portnoy <jess@b0f924504114>  Sun, 10 Nov 2019 18:22:31 +0000
+
 kaltura-html5lib (2.79-1) orion; urgency=medium
 
   * FEC-9437 - V2 - playlist failed to be loaded on IE11 - regression bug 

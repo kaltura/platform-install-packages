@@ -1,3 +1,11 @@
+kaltura-kmcng (5.19-1) orion; urgency=medium
+
+  * SUP-19722: load max 500 dropfolders at once (#868) (023c0c7)
+  * entries/refine-filter: Filter for entries with Quiz (#745) (be22f06)
+  * entries/refine-filter: Filter for YouTube entries (#874) (6620ffe)
+
+ -- Jess Portnoy <jess@b0f924504114>  Sun, 10 Nov 2019 18:27:37 +0000
+
 kaltura-kmcng (5.18-1) orion; urgency=medium
 
   * content/entry: open live analytics for manual live entries (614c63e)
