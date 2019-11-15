@@ -86,8 +86,7 @@ We recommend the use of the Percona deb packages but any MySQL 5.5 distribution 
 See [Installing the MySQL 5.5 Percona deb package](install-percona-deb.md)
 
 When installing an all in one instance, for security reasons, it is best to bind the MySQL daemon to 127.0.0.1 [loopback].
-When prompted for the MySQL host/IP, please use ```127.0.0.1``` rather than ```localhost``` since the server code uses the PHP PDO MySQL extension and setting the host to localhost will cause it to attempt to connect via a UNIX socket, as opposed to over TCP, which may fa
-il, depending on where the UNIX socket is placed and the value set for the pdo_mysql.default_socket directive.
+When prompted for the MySQL host/IP, please use ```127.0.0.1``` rather than ```localhost``` since the server code uses the PHP PDO MySQL extension and setting the host to localhost will cause it to attempt to connect via a UNIX socket, as opposed to over TCP, which may fail, depending on where the UNIX socket is placed and the value set for the pdo_mysql.default_socket directive.
 
 
 #### Install Kaltura Server
