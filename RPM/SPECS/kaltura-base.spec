@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 15.11.0
-Release: 2
+Release: 4
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -146,6 +146,7 @@ rm $RPM_BUILD_ROOT%{confdir}/.project
 # we have our own that is provided with the kaltura-monit package
 rm $RPM_BUILD_ROOT%{confdir}/monit/monit.template.conf
 rm $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_content/04.dropFolder.-4.template.xml
+sed 's@#!/usr/bin/python@#!/usr/bin/python2@g' -i $RPM_BUILD_ROOT%{prefix}/app/alpha/scripts/utils/apiGrep.py
 
 # we bring our own for kaltura-front and kaltura-batch.
 cp %{SOURCE4} $RPM_BUILD_ROOT%{prefix}/app/batch/batches/Mailer/emails_en.template.ini
@@ -364,6 +365,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Tue Nov 19 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.11.0-4
+- Nightly build.
+
 * Mon Nov 18 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.11.0-2
 - Nightly build.
 
