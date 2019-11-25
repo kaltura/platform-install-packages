@@ -3,7 +3,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib3
-Version: 0.46.0
+Version: 0.49.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -49,6 +49,14 @@ rm -rf %{buildroot}
 %{html5lib3_base}
 
 %changelog
+* Mon Nov 25 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 0.49.0-1
+- config keySystem isn't boolean (#283) (4280dc5)
+- New hasUserInteracted api (#284) (6855309)
+- FEC-9307: live issue on LG SDK2 with hls.js (#273) (1ca1b5d)
+- FEC-9379: Edge chromium should use playready when exist (#274) (6b87274)
+- FEC-9326: report productVersion (#275) (304f9ca)
+- FEC-9389: media playing unmuted after unmute fallback (#272) (dafa0d6)
+
 * Mon Sep 16 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 0.46.0-1
 - playkit-js 0.53.0
 - playkit-js-dash 1.15.0

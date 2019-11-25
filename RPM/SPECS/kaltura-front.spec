@@ -6,14 +6,14 @@
 Summary: Kaltura Open Source Video Platform - frontend server 
 Name: kaltura-front
 Version: 15.11.0
-Release: 1
+Release:2 
 License: AGPLv3+
 Group: Server/Platform 
 Source3: zz-%{name}.ini 
 
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires: kaltura-mediainfo, httpd, php, curl, kaltura-base, kaltura-ffmpeg, ImageMagick, memcached, php-pecl-memcache, php-mysqli, php-pdo_mysql, php-pecl-apc, php-mcrypt, kaltura-segmenter, mod_ssl,kaltura-sshpass, openssl,memcached, kaltura-html5-studio, kaltura-html5lib, kaltura-kmcng, kaltura-html5lib3, kaltura-html5-studio3, kaltura-html5-analytics, kaltura-playkit-bundler
+Requires: kaltura-mediainfo, httpd, php, curl, kaltura-base, kaltura-ffmpeg, ImageMagick, memcached, php-pecl-memcache, php-mysqli, php-pdo_mysql, php-pecl-apc, mod_ssl,kaltura-sshpass, openssl,memcached, kaltura-html5-studio, kaltura-html5lib, kaltura-kmcng, kaltura-html5lib3, kaltura-html5-studio3, kaltura-html5-analytics, kaltura-playkit-bundler
 #php-pecl-zendopcache
 Requires(post): chkconfig
 Requires(preun): chkconfig

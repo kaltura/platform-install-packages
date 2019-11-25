@@ -1,6 +1,6 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmcng
-Version: v5.19.0
+Version: v5.19.2
 Release: 1
 Summary: Kaltura HTML5 Management Console
 
@@ -49,6 +49,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sun Nov 24 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v5.19.2-1
+- SUP-20171: prevent KMC error when loading flavors without flavorParams ID
+
 * Wed Nov 6 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v5.19.0-1
 - SUP-19722: load max 500 dropfolders at once (#868) (023c0c7)
 - entries/refine-filter: Filter for entries with Quiz (#745) (be22f06)

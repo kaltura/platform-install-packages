@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 15.11.0
-Release: 8
+Release: 9
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -365,38 +365,41 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Sat Nov 23 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.11.0-8
-- Nightly build.
-
-* Fri Nov 22 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.11.0-7
-- Nightly build.
-
-* Thu Nov 21 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.11.0-6
-- Nightly build.
-
-* Wed Nov 20 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.11.0-5
-- Nightly build.
-
-* Tue Nov 19 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.11.0-4
-- Nightly build.
-
-* Mon Nov 18 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.11.0-2
-- Nightly build.
-
-* Sun Nov 17 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.11.0-1
-- Nightly build.
-
-* Sat Nov 16 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.11.0-1
-- Nightly build.
-
-* Fri Nov 15 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.11.0-1
-- Nightly build.
-
-* Thu Nov 14 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.11.0-1
-- Nightly build.
-
-* Wed Nov 13 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.11.0-1
-- Nightly build.
+* Mon Nov 25 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.11.0-9
+- PLAT-10332: Invalidate flavor cache when relinking assets on replacement (https://github.com/kaltura/server/pull/8941)
+- PLAT-10322: Use replaced entry ID for for temp flavors deletion and other finished conversion tasks (https://github.com/kaltura/server/pull/8940)
+- PLAT-10332: Invalidate flavor cache when relinking assets on replacement (https://github.com/kaltura/server/pull/8939)
+- PLAT-10294: Optimize slow MySQL query when fetching `batch_job_log` records (https://github.com/kaltura/server/pull/8937)
+- SUP-20245: Add Price <> 0 when fetching vendor tasks to avoid returning unnecessary results, which may exceed the `memory_limit` value (https://github.com/kaltura/server/pull/8935)
+- Event notification: Fix a warning caused by unhandled flow (https://github.com/kaltura/server/pull/8932)
+- PLAT-10303: Privacy context and category names are not indexed on entry in `setContent()` (https://github.com/kaltura/server/pull/8930)
+- SUP-19501: Clone file asset with the file sync (https://github.com/kaltura/server/pull/8929)
+- PLAT-10318: Don't create a `batchJobSep` on boolean event notifications (https://github.com/kaltura/server/pull/8925)
+- Add permission `RATING_LIST_ADMIN` const (https://github.com/kaltura/server/pull/8924)
+- PLAT-10316: Don't create `entryVendorTasks` for media which is not of type video or audio (https://github.com/kaltura/server/pull/8923)
+- Handle stuck batch job lock objects (https://github.com/kaltura/server/pull/8922)
+- PLAT-10283: Add `registration` `KalturaUserEntryType`  (https://github.com/kaltura/server/pull/8919)
+- PSVAMB-8935: `kvote` enhancements (https://github.com/kaltura/server/pull/8918)
+- KAVA - move `array_map` to `genericQueryEnrich()` (https://github.com/kaltura/server/pull/8917)
+- AN-1106: Add `int_ids_only` flag + check IDs are of the same type (https://github.com/kaltura/server/pull/8916)
+- AN-1106: Add top playback context VPaaS report (https://github.com/kaltura/server/pull/8915)
+- PLAT-10256: Optimise quiz queries (https://github.com/kaltura/server/pull/8914)
+- PLAT-10223: Optimise Sphinx queries (https://github.com/kaltura/server/pull/8912)
+- KAVA - Add playback context IDs in to filter (https://github.com/kaltura/server/pull/8909)
+- AN-1014: Add metrics to `TOP_PLAYBACK_CONTEXT` report (https://github.com/kaltura/server/pull/8908)
+- PSVAMB-8935: New user-conscious 5-star rating functionality (https://github.com/kaltura/server/pull/8907)
+- Allow more than one recipient in event notification template (https://github.com/kaltura/server/pull/8905)
+- Fix timezone mapping (https://github.com/kaltura/server/pull/8902)
+- PLAT-10304: Provide support for HEVC codecs generating HDR content (https://github.com/kaltura/server/pull/8901)
+- SUP-19501: Clone file asset when cloning playlist (https://github.com/kaltura/server/pull/8900)
+- AN-1093: Update reports with player impressions and unique viewers (https://github.com/kaltura/server/pull/8898)
+- KAVA: `ctype_digit` is interpreted as the ASCII value of a single character (https://github.com/kaltura/server/pull/8891)
+- PLAT-10245 - Move all configurations from file system to db map (https://github.com/kaltura/server/pull/8890)
+- KAVA: Add QOE reports (https://github.com/kaltura/server/pull/8889)
+- PLAT-10178: Replace and trim entry based on conversion profile readiness rules (https://github.com/kaltura/server/pull/8888)
+- PLAT-10295: Remove REACH vendor partner permission when calling `entryVendorTask.list()` with a -2 KS (https://github.com/kaltura/server/pull/8885)
+- SUP-18799: Add default recording conversion profile per partner (https://github.com/kaltura/server/pull/8866)
+- PLAT-10223: Disable partner optimisations when optimisation addition… (https://github.com/kaltura/server/pull/8838)
 
 * Tue Nov 12 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.11.0-1
 - Nightly build.

@@ -328,8 +328,6 @@ class CrossKalturaDistributionEngine extends DistributionEngine implements
 		// get entry's thumbnail assets chosen for distribution
 		$thumbAssets = array();
 		$timedThumbAssets = array();
-		if (!empty($data->entryDistribution->thumbAssetIds))
-		{
 			$thumbAssetFilter = new KalturaThumbAssetFilter();
 			$thumbAssetFilter->idIn = $data->entryDistribution->thumbAssetIds;
 			//KalturaLog::info("Zoe and James thumbassets " .print_r($data->entryDistribution->thumbAssetIds,true));	
@@ -338,12 +336,9 @@ class CrossKalturaDistributionEngine extends DistributionEngine implements
 				$thumbAssetsList = $client->thumbAsset->listAction($thumbAssetFilter);
 				foreach ($thumbAssetsList->objects as $asset)
 				{
-					if (isset($asset->cuePointId))
-					{
+					if (isset($asset->cuePointId)){
 						$timedThumbAssets[$asset->id] = $asset;
-					}
-					else
-					{
+					}else{
 						$thumbAssets[$asset->id] = $asset;
 					}
 				}
@@ -352,9 +347,6 @@ class CrossKalturaDistributionEngine extends DistributionEngine implements
 				KalturaLog::err('Cannot get list of thumbnail assets - '.$e->getMessage());
 				throw $e;
 			}
-		}else{	
-			KalturaLog::log('No thumb assets set for distribution!');
-		}
 
 		// get thumb assets content
 		$thumbAssetsContent = array();
