@@ -1,3 +1,14 @@
+kaltura-html5lib3 (0.49.0-1) orion; urgency=medium
+ 
+  * config keySystem isn't boolean (#283) (4280dc5)
+  * New hasUserInteracted api (#284) (6855309)
+  * FEC-9307: live issue on LG SDK2 with hls.js (#273) (1ca1b5d)
+  * FEC-9379: Edge chromium should use playready when exist (#274) (6b87274)
+  * FEC-9326: report productVersion (#275) (304f9ca)
+  * FEC-9389: media playing unmuted after unmute fallback (#272) (dafa0d6)
+
+ -- Jess Portnoy <jess@b0f924504114>  Tue, 26 Nov 2019 11:55:38 +0000
+
 kaltura-html5lib3 (0.46.0-1) orion; urgency=medium
 
   * playkit-js 0.53.0

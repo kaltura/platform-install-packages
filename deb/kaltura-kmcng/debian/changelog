@@ -1,3 +1,9 @@
+kaltura-kmcng (5.19-2) orion; urgency=medium
+
+  * SUP-20171: prevent KMC error when loading flavors without flavorParams ID 
+
+ -- Jess Portnoy <jess@b0f924504114>  Tue, 26 Nov 2019 11:28:58 +0000
+
 kaltura-kmcng (5.19-1) orion; urgency=medium
 
   * SUP-19722: load max 500 dropfolders at once (#868) (023c0c7)
