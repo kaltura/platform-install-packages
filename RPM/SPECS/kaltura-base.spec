@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 15.11.0
-Release: 9
+Version: 15.12.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -365,6 +365,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Wed Nov 27 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.12.0-1
+- Ver Bounce to 15.12.0
+
 * Mon Nov 25 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.11.0-9
 - PLAT-10332: Invalidate flavor cache when relinking assets on replacement (https://github.com/kaltura/server/pull/8941)
 - PLAT-10322: Use replaced entry ID for for temp flavors deletion and other finished conversion tasks (https://github.com/kaltura/server/pull/8940)
