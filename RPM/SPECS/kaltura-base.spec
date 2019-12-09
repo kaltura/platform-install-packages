@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 15.12.0
-Release: 17
+Release: 19
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -365,41 +365,45 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Sun Dec 8 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.12.0-17
-- Nightly build.
-
-* Sat Dec 7 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.12.0-16
-- Nightly build.
-
-* Fri Dec 6 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.12.0-15
-- Nightly build.
-
-* Thu Dec 5 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.12.0-14
-- Nightly build.
-
-* Wed Dec 4 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.12.0-13
-- Nightly build.
-
-* Tue Dec 3 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.12.0-12
-- Nightly build.
-
-* Mon Dec 2 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.12.0-1
-- Nightly build.
-
-* Sun Dec 1 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.12.0-6
-- Nightly build.
-
-* Sat Nov 30 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.12.0-5
-- Nightly build.
-
-* Fri Nov 29 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.12.0-4
-- Nightly build.
-
-* Thu Nov 28 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.12.0-3
-- Nightly build.
-
-* Wed Nov 27 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.12.0-2
-- Nightly build.
+* Mon Dec 9 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.12.0-19
+- PLAT-10357: partner -8 partner.get() permission (https://github.com/kaltura/server/pull/8998)
+- PLAT-10108: Annotation cuepoints - grant access to all partners (https://github.com/kaltura/server/pull/8996)
+- PLAT-10347: Make `baseentry.list()` work with elastic for scheduled tasks (https://github.com/kaltura/server/pull/8993)
+- Fix placeholders (https://github.com/kaltura/server/pull/8992)
+- PLAT-10246: Move batch configuration to maps (https://github.com/kaltura/server/pull/8990)
+- PLAT-10354: Allow batch partner access to confmaps without user (https://github.com/kaltura/server/pull/8988)
+- PLAT-10246: Move batch configuration to maps (https://github.com/kaltura/server/pull/8986)
+- PLAT-10352: Batch alert exception fix (https://github.com/kaltura/server/pull/8985)
+- PLAT-10246: Move batch configuration to maps (https://github.com/kaltura/server/pull/8984)
+- PLAT-10351: Add permission for restore delete entry in admin console (https://github.com/kaltura/server/pull/8983)
+- PLAT-10339: use replaced entry for flavors deletion on `handleConvertFailed` (https://github.com/kaltura/server/pull/8979)
+- PLAT-10246: Move batch configuration to maps   (https://github.com/kaltura/server/pull/8978)
+- PLAT-10246: move batch configuration to run from remote (https://github.com/kaltura/server/pull/8977)
+- PLAT-10338: Don't copy flavors in case replacement entry was deleted (https://github.com/kaltura/server/pull/8976)
+- PLAT-10282: Custom metadata for `userEntry`, defining `MetadataUserEntryPeer` (https://github.com/kaltura/server/pull/8975)
+- PLAT-10317: Clip concat closer (https://github.com/kaltura/server/pull/8974)
+- PLAT-10246: Move batch configuration to run from remote (https://github.com/kaltura/server/pull/8973)
+- PLAT-10245: `confMaps` permissions (https://github.com/kaltura/server/pull/8968)
+- Add new role file (https://github.com/kaltura/server/pull/8966)
+- PLAT-10282: custom metadata for `userEntry` (https://github.com/kaltura/server/pull/8965)
+- SUP-19884: Escape special characters for `WebVTT` compliance support (https://github.com/kaltura/server/pull/8963)
+- PLAT-10346: Add new role for KMC Analytics (https://github.com/kaltura/server/pull/8962)
+- PLAT-10345: Thumbnail crop gravity point fix (https://github.com/kaltura/server/pull/8961)
+- PLAT-10245: Batch `confMaps` (https://github.com/kaltura/server/pull/8960)
+- PLAT-10188: Add login using SSO to admin console (https://github.com/kaltura/server/pull/8957)
+- AN-1108: Add force total count on users discovery realtime report (https://github.com/kaltura/server/pull/8956)
+- SUP-20245: Fetch SUM(price) + price <> 0 to avoid reaching PHP `memory_limit` due to too many results + method improvements (https://github.com/kaltura/server/pull/8955)
+- PLAT-10245: Moving configuration from file system to DB maps (https://github.com/kaltura/server/pull/8954)
+- PLAT-10245: Moving configuration from file system to DB maps (https://github.com/kaltura/server/pull/8952)
+- Deprecate analytics.query() (https://github.com/kaltura/server/pull/8951)
+- PLAT-10292: Add new index to `entry_vendor_task` table to improve table query time (https://github.com/kaltura/server/pull/8950)
+- PLAT-10341: If connection provided and its sphinx log connection use it instead of creating a new one to the master (https://github.com/kaltura/server/pull/8949)
+- PLAT-10333: `disableentitlementforentry` fix (https://github.com/kaltura/server/pull/8948)
+- PLAT-10055: output action for thumbnail (https://github.com/kaltura/server/pull/8947)
+- Support working with PHP `FPM` (the default PHP `SAPI` with RHEL/CentOS 8) (https://github.com/kaltura/server/pull/8942)
+- PLAT-10253: Thumbnail support for remote storage (https://github.com/kaltura/server/pull/8910)
+- PLAT-10246: move batch configuration to run from remote (https://github.com/kaltura/server/pull/8896)
+- fix(FEC-9326): Send actual player version, not the client lib ver (https://github.com/kaltura/server/pull/8847)
 
 * Wed Nov 27 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.12.0-1
 - Ver Bounce to 15.12.0

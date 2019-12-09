@@ -3,7 +3,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.79.1
+Version: v2.79.3
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -86,6 +86,10 @@ fi
 %config %{html5lib_base}/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Mon Dec 9 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v2.79.3
+- SUP-20040 - Links in "search in video" makes the progress bar stuck in one point
+- feat(PATH-352) - upgrade hotspots scripts (#4100)
+
 * Sun Nov 10 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v2.79.1
 - Fix `flavorAsset.list()` request to avoid KalturaAPIException
 
