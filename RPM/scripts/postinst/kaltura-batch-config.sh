@@ -60,7 +60,7 @@ else
 fi
 
 BATCH_SCHED_CONF=$APP_DIR/configurations/batch/scheduler.conf
-BATCH_MAIN_CONF=$APP_DIR/configurations/batch/batch.ini
+BATCH_MAIN_CONFS="$APP_DIR/configurations/batch/batch.ini $APP_DIR/configurations/batchBase.ini"
 
 # if we couldn't access the DB to retrieve the secret, assume the post install has not finished yet.
 BATCH_PARTNER_ADMIN_SECRET=`echo "select admin_secret from partner where id=-1"|mysql -N -h$DB1_HOST -u$DB1_USER -p$DB1_PASS $DB1_NAME -P$DB1_PORT`
@@ -70,15 +70,15 @@ if [ -z "$BATCH_PARTNER_ADMIN_SECRET" ];then
 fi
 
 BATCH_HOSTNAME=`hostname`
-sed -i "s#@BATCH_PARTNER_ADMIN_SECRET@#$BATCH_PARTNER_ADMIN_SECRET#" -i $BATCH_MAIN_CONF
-sed -i "s#@INSTALLED_HOSNAME@#$BATCH_HOSTNAME#" -i $BATCH_MAIN_CONF
+sed -i "s#@BATCH_PARTNER_ADMIN_SECRET@#$BATCH_PARTNER_ADMIN_SECRET#" -i $BATCH_MAIN_CONFS
+sed -i "s#@INSTALLED_HOSNAME@#$BATCH_HOSTNAME#" -i $BATCH_MAIN_CONFS
 # if this host already has a configured_id ID, in the scheduler table, use that:
 BATCH_SCHEDULER_ID=`echo "select configured_id from scheduler where host='$BATCH_HOSTNAME' order by updated_at desc limit 1"|mysql -N -h$DB1_HOST -u$DB1_USER -p$DB1_PASS $DB1_NAME -P$DB1_PORT`
 # otherwise, let's generate a random one:
 if [ -z "$BATCH_SCHEDULER_ID" ];then
     BATCH_SCHEDULER_ID=`< /dev/urandom tr -dc 0-9 | head -c5`
 fi
-sed "s#@BATCH_SCHEDULER_ID@#$BATCH_SCHEDULER_ID#"  -i $BATCH_MAIN_CONF
+sed "s#@BATCH_SCHEDULER_ID@#$BATCH_SCHEDULER_ID#"  -i $BATCH_MAIN_CONFS
 
 
 # logrotate:
