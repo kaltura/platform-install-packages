@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 15.14.0
-Release: 6
+Version: 15.13.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -365,20 +365,28 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Thu Dec 26 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.14.0-6
-- Nightly build.
-
-* Wed Dec 25 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.14.0-5
-- Nightly build.
-
-* Tue Dec 24 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.14.0-4
-- Nightly build.
-
-* Mon Dec 23 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.14.0-3
-- Nightly build.
-
-* Mon Dec 23 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.14.0-1
-- Ver Bounce to 15.14.0
+* Fri Dec 27 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.13.0-1
+- Fix mounts (https://github.com/kaltura/server/pull/9049)
+- `category::getSphinxIndexName()`: fix index name (https://github.com/kaltura/server/pull/9047)
+- Revert auto archive (WEBC-1574) (https://github.com/kaltura/server/pull/9044)
+- PLAT-10373: Media Repurposing - Duplicate entries in the dry run mode (https://github.com/kaltura/server/pull/9038)
+- SUP-20500: Handle temp recorded entry flavors when updating entry status (https://github.com/kaltura/server/pull/9035)
+- Add report for QOE - funnel analysis (https://github.com/kaltura/server/pull/9034)
+- Node avg completion rate should be based on `nodePlay` event rather than play event (https://github.com/kaltura/server/pull/9033)
+- PLAT-10370: Fix PHP warning on notification template (https://github.com/kaltura/server/pull/9032)
+- Don't block queries coming from batch servers (https://github.com/kaltura/server/pull/9031)
+- Create abstract of `getEnvDc` (https://github.com/kaltura/server/pull/9029)
+- PLAT-10373: Media Repurposing - Duplicated entries in the dry run (https://github.com/kaltura/server/pull/9026)
+- SUP-20258: Fix 'invalid user' message when setting initial passwd for KMC admins (https://github.com/kaltura/server/pull/9025)
+- SUP-20381: Check flavour type before switching and marking as ready (https://github.com/kaltura/server/pull/9023)
+- Align `getPlaybackHost()` signature across `serverNode` types (https://github.com/kaltura/server/pull/9022)
+- PLAT-10340: Add http header condition for access control profile (https://github.com/kaltura/server/pull/9020)
+- LEC-10358: Refactor abstraction for `serverNode` (https://github.com/kaltura/server/pull/9019)
+- REACH2-737: Reach: boolean event notification for privacy context (https://github.com/kaltura/server/pull/9017)
+- Add new reports for interactive video (https://github.com/kaltura/server/pull/9010)
+- Enable range searches for entry::votes property (https://github.com/kaltura/server/pull/9007)
+- PLAT-10366: Fix event notifications not being triggered when vendors call `entryVendorTask.updateJob()` (https://github.com/kaltura/server/pull/9005)
+- PLAT-10138: Add specific choice of audio language in multi audio entry VOD manifest (https://github.com/kaltura/server/pull/8987)
 
 * Mon Dec 9 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.12.0-19
 - PLAT-10357: partner -8 partner.get() permission (https://github.com/kaltura/server/pull/8998)
