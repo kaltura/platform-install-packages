@@ -1,3 +1,10 @@
+kaltura-html5lib (2.79.3-1) orion; urgency=medium
+ 
+  * SUP-20040 - Links in "search in video" makes the progress bar stuck in one point
+  * feat(PATH-352) - upgrade hotspots scripts (#4100)
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 09 Dec 2019 13:22:46 +0000
+
 kaltura-html5lib (2.79.1-1) orion; urgency=medium
 
   * Fix `flavorAsset.list()` request to avoid KalturaAPIException 
