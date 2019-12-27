@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 15.12.0
-Release: 19
+Version: 15.14.0
+Release: 6
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -365,6 +365,21 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Thu Dec 26 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.14.0-6
+- Nightly build.
+
+* Wed Dec 25 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.14.0-5
+- Nightly build.
+
+* Tue Dec 24 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.14.0-4
+- Nightly build.
+
+* Mon Dec 23 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.14.0-3
+- Nightly build.
+
+* Mon Dec 23 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.14.0-1
+- Ver Bounce to 15.14.0
+
 * Mon Dec 9 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.12.0-19
 - PLAT-10357: partner -8 partner.get() permission (https://github.com/kaltura/server/pull/8998)
 - PLAT-10108: Annotation cuepoints - grant access to all partners (https://github.com/kaltura/server/pull/8996)
