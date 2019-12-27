@@ -98,7 +98,7 @@ To add the EPEL repo:
 Please see: https://blog.remirepo.net/post/2017/12/04/Install-PHP-7.2-on-CentOS-RHEL-or-Fedora
 
 The `kaltura-nginx` package depends on certain packages from the main Remi repo.
-In addition, while Kaltura CE can work with PHP 5.5 and above, We highly recommend that you pre-install the PHP 7.2 packages from the Remi repos. For instructions, please see `remi-php72 repository activation` in the document referenced above.
+In addition, while Kaltura CE can work with PHP 5.5 and above, we highly recommend that you pre-install the PHP 7.2 packages from the Remi repos. For instructions, please see `remi-php72 repository activation` in the document referenced above.
 
 #### MySQL Install and Configuration
 For MySQL versions higher 5.5 and above, note that you must disable strict mode for the deployment to succeed.
