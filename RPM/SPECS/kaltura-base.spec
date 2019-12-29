@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 15.13.0
-Release: 1
+Release: 3
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -43,6 +43,8 @@ Source42: KalturaCrossKalturaDistributionJobProviderData.php
 Source43: CrossKalturaDistributionCustomDataField.php 
 Source44: kCrossKalturaDistributionJobProviderData.php 
 Source45: CrossKalturaDistributionProfile.php
+# tmp patch; remove when releasing 15.14.0
+Source46: KSchedulerConfig.class.php
 
 
 URL: https://github.com/kaltura/server/tree/%{codename}-%{version}
@@ -136,6 +138,11 @@ sed -i "s#^;kdp3_wrapper_version = @KDP3_WRAPPER_VERSION@#kdp3_wrapper_version =
 sed -i "s#@PLAYKIT_JS_SOURCES_PATH@#%{prefix}/html5/html5lib/playkitSources#g" $RPM_BUILD_ROOT%{confdir}/local.template.ini
 sed -i "s#@PLAYKIT_JS_SOURCES_MAP_LOADER@#embedPlaykitJsSourceMaps#g" $RPM_BUILD_ROOT%{confdir}/local.template.ini
 sed -i "s#@INERNAL_BUNDLER_URL@#http://127.0.0.1:8880#g" $RPM_BUILD_ROOT%{confdir}/local.template.ini
+
+# tmp patch; remove when releasing 15.14.0
+echo "
+loadConfigFromDisc                                  = true" >> $RPM_BUILD_ROOT%{confdir}/batchBase.template.ini
+
 sed -i "s#^play_kit_js_cache_version = 1#play_kit_js_cache_version = 2#g" $RPM_BUILD_ROOT%{confdir}/local.template.ini
 sed -i 's@^writers.\(.*\).filters.priority.priority\s*=\s*7@writers.\1.filters.priority.priority=4@g' $RPM_BUILD_ROOT%{confdir}/logger.template.ini 
 # our Pentaho is correctly installed under its own dir and not %prefix/bin which is the known default so, adding -k path to kitchen.sh
@@ -167,6 +174,8 @@ cp %{SOURCE40} %{SOURCE42} $RPM_BUILD_ROOT%{prefix}/app/plugins/content_distribu
 cp %{SOURCE41} $RPM_BUILD_ROOT%{prefix}/app/plugins/content_distribution/providers/cross_kaltura/lib/admin
 cp %{SOURCE43} %{SOURCE44} %{SOURCE45}  $RPM_BUILD_ROOT%{prefix}/app/plugins/content_distribution/providers/cross_kaltura/lib/model
 
+# tmp patch; remove when releasing 15.14.0
+cp %{SOURCE46} $RPM_BUILD_ROOT%{prefix}/app/batch/scheduler/KSchedulerConfig.class.php
 # David Bezemer's Admin console and monit patches:
 cp %{SOURCE17} $RPM_BUILD_ROOT%{prefix}/app/admin_console/configs/navigation.xml
 cp %{SOURCE18} $RPM_BUILD_ROOT%{prefix}/app/admin_console/views/scripts/index/monit.phtml
