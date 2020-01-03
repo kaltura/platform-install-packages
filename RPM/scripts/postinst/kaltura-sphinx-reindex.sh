@@ -42,7 +42,8 @@ fi
         /etc/init.d/kaltura-sphinx start
         ln -sf $APP_DIR/configurations/monit/monit.avail/sphinx.rc $APP_DIR/configurations/monit/monit.d/enabled.sphinx.rc
         service kaltura-monit restart 2>/dev/null || service monit restart 2>/dev/null
-        for SCRIPT in $APP_DIR/deployment/base/scripts/populateSphinx*.php;do php $SCRIPT
+        for IND_TYPE in entryPeer categoryPeer kuserPeer CuePointPeer TagPeer MetadataPeer categoryKuserPeer EntryDistributionPeer EntryVendorTaskPeer ScheduleEventPeer; do 
+	php  /opt/kaltura/app/alpha/scripts/utils/updatePartnerEntries2Sphinx.php -1 execute $IND_TYPE
         RC=$?
         if [ $RC -ne 0 ];then
 
@@ -52,3 +53,7 @@ fi
         fi
 	done
 /etc/init.d/kaltura-sphinx start
+
+for E_IND_SCRIPT in $APP_DIR/deployment/base/scripts/elastic/populateElasticEntries.php $APP_DIR/deployment/base/scripts/elastic/populateElasticCategories.php  $APP_DIR/deployment/base/scripts/elastic/populateElasticKusers.php;do 
+	php $E_IND_SCRIPT
+done

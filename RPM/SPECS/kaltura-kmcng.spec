@@ -1,6 +1,6 @@
 %define prefix /opt/kaltura
 Name:	kaltura-kmcng
-Version: v5.19.2
+Version: v5.21.0
 Release: 1
 Summary: Kaltura HTML5 Management Console
 
@@ -49,6 +49,10 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Fri Dec 27 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v5.20.0-1
+- KMCNG-2201: selected entries bucket style (#871) (06c0e5b)
+- content/playlists: Support Interactive Video entries(#880) (e6778ee)
+
 * Sun Nov 24 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v5.19.2-1
 - SUP-20171: prevent KMC error when loading flavors without flavorParams ID
 

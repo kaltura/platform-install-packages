@@ -3,7 +3,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib3
-Version: 0.49.0
+Version: 0.50.1
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -49,6 +49,10 @@ rm -rf %{buildroot}
 %{html5lib3_base}
 
 %changelog
+* Fri Dec 27 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 0.51.1-1
+- FEC-9471, FEC-8436, FEC-8443: slider progress bar exceeds 100% (#287) (a617eae)
+- FEC-9175: cast content coming from external sources (#288) (43a46b2)
+
 * Mon Nov 25 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 0.49.0-1
 - config keySystem isn't boolean (#283) (4280dc5)
 - New hasUserInteracted api (#284) (6855309)

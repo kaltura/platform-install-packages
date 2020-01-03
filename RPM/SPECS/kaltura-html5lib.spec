@@ -3,7 +3,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.79.3
+Version: v2.80
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -86,6 +86,19 @@ fi
 %config %{html5lib_base}/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Fri Dec 27 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v2.80
+- SUP-20146 - [IVQ] Accessibility change aria label to label by open question
+- SUP-20415 - KMS eCDN Playlist Forms Wrong URL.
+- PLAT-9400 - KalturaAPIException spam in kaltura_api_v3.log
+- FEC-9490 - Chromecast button does not show sometimes
+- FEC-9507 - No audio on live stream using Microsoft Edge
+- SUP-19930 - Closed Caption text are shown twice
+- SUP-20040 - Links in "search in video" makes the progress bar hang in one point
+- FEC-9441 - [Player_V2][Thumbnail][iPad] - When tapping on play icon video is not playing
+- fix(FEV-401): Chapters are overlapping Vertical Volume Control (#4098)
+- fix(FEV-437): Unable to select from the menu when dualScreen is on (#4102)
+- fix(FEV-396): Disable the skip button when the question is saved on an (Open Q) (#4084)
+
 * Mon Dec 9 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v2.79.3
 - SUP-20040 - Links in "search in video" makes the progress bar stuck in one point
 - feat(PATH-352) - upgrade hotspots scripts (#4100)
