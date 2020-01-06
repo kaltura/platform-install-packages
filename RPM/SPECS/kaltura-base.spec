@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 15.14.0
-Release: 18
+Release: 19
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -365,32 +365,29 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Sun Jan 5 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.14.0-18
-- Nightly build.
-
-* Sat Jan 4 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.14.0-17
-- Nightly build.
-
-* Fri Jan 3 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.14.0-16
-- Nightly build.
-
-* Thu Jan 2 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.14.0-15
-- Nightly build.
-
-* Wed Jan 1 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.14.0-11
-- Nightly build.
-
-* Tue Dec 31 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.14.0-10
-- Nightly build.
-
-* Mon Dec 30 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.14.0-9
-- Nightly build.
-
-* Sun Dec 29 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.14.0-8
-- Nightly build.
-
-* Sun Dec 29 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.14.0-7
-- Nightly build.
+* Mon Jan 6 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.14.0-19
+- Ignore loading remote and local memcache instances when PHP_SAPI is CLI (https://github.com/kaltura/server/pull/9083)
+- PLAT-10518: Zoom meeting participant owner match case insensitive (https://github.com/kaltura/server/pull/9082)
+- `ReachFixCategoryEntry`: Validate that category entry status was modified (https://github.com/kaltura/server/pull/9081)
+- KAVA: Set default value for descending ordering (https://github.com/kaltura/server/pull/9078)
+- AP drop folder config not being saved (https://github.com/kaltura/server/pull/9077)
+- SUP-19947: Zoom source file missing file extensions (https://github.com/kaltura/server/pull/9074)
+- PLAT-10466: handle invalid chars for partner `describeYourself` field (https://github.com/kaltura/server/pull/9073)
+- KAVA: align metric headers for QOE reports (https://github.com/kaltura/server/pull/9072)
+- `confMaps`: `strtolower(hostname)` (https://github.com/kaltura/server/pull/9071)
+- QOE-173: Add `eventVar1` to `datasource` dimension map (https://github.com/kaltura/server/pull/9070)
+- Avoid trying to log FS access when monitor client is not loaded (https://github.com/kaltura/server/pull/9068)
+- `ConfMaps` table fix modify content column size (https://github.com/kaltura/server/pull/9066)
+- PLAT-10267: Zoom: case insensitive user matching (https://github.com/kaltura/server/pull/9065)
+- PLAT-10453: Add apiMon stats for file operations (https://github.com/kaltura/server/pull/9063)
+- KAVA: Add `entry_source` in order to identify interactive video entries (https://github.com/kaltura/server/pull/9061)
+- REACH: updating credits (https://github.com/kaltura/server/pull/9060)
+- PSVAMB-9373: `KalturaExportToCsvOptions()` additional documentation (https://github.com/kaltura/server/pull/9059)
+- Enable range searches for entry::votes property (https://github.com/kaltura/server/pull/9058)
+- PSVAMB-9513: Support expanding specific nodes in the AP feed (https://github.com/kaltura/server/pull/9056)
+- Load batch service configuration from server/disc according to config (https://github.com/kaltura/server/pull/9053)
+- Add recently played entries report (https://github.com/kaltura/server/pull/8994)
+- Add partner ID check for storage profile retrieval by ID (https://github.com/kaltura/server/pull/8021)
 
 * Fri Dec 27 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 15.13.0-1
 - Fix mounts (https://github.com/kaltura/server/pull/9049)
