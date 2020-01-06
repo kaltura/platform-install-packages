@@ -1,3 +1,9 @@
+kaltura-kmcng (5.19-3+really5.17-1) orion; urgency=medium
+
+  * Downgrade KMCng ver on account of analytics
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 06 Jan 2020 12:04:25 +0000
+
 kaltura-kmcng (5.19-2) orion; urgency=medium
 
   * SUP-20171: prevent KMC error when loading flavors without flavorParams ID 

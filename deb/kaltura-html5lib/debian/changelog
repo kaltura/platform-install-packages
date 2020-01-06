@@ -1,3 +1,20 @@
+kaltura-html5lib (2.80-1) orion; urgency=medium
+ 
+  * SUP-20146 - [IVQ] Accessibility change aria label to label by open question
+  * SUP-20415 - KMS eCDN Playlist Forms Wrong URL.
+  * PLAT-9400 - KalturaAPIException spam in kaltura_api_v3.log
+  * FEC-9490 - Chromecast button does not show sometimes
+  * FEC-9507 - No audio on live stream using Microsoft Edge
+  * SUP-19930 - Closed Caption text are shown twice
+  * SUP-20040 - Links in "search in video" makes the progress bar hang in one point
+  * FEC-9441 - [Player_V2][Thumbnail][iPad] - When tapping on play icon video is not playing
+  * fix(FEV-401): Chapters are overlapping Vertical Volume Control (#4098)
+  * fix(FEV-437): Unable to select from the menu when dualScreen is on (#4102)
+  * fix(FEV-396): Disable the skip button when the question is saved on an (Open Q) (#4084)
+
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 06 Jan 2020 11:54:10 +0000
+
 kaltura-html5lib (2.79.3-1) orion; urgency=medium
  
   * SUP-20040 - Links in "search in video" makes the progress bar stuck in one point

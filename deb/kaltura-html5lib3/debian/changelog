@@ -1,3 +1,10 @@
+kaltura-html5lib3 (0.50.1-1) orion; urgency=medium
+
+  * FEC-9471, FEC-8436, FEC-8443: slider progress bar exceeds 100% (#287) (a617eae)
+  * FEC-9175: cast content coming from external sources (#288) (43a46b2)
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 06 Jan 2020 12:09:12 +0000
+
 kaltura-html5lib3 (0.49.0-1) orion; urgency=medium
  
   * config keySystem isn't boolean (#283) (4280dc5)
