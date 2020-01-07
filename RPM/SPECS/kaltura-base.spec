@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 15.14.0
-Release: 19
+Version: 15.15.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -365,6 +365,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Tue Jan 7 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.15.0-1
+- Ver Bounce to 15.15.0
+
 * Mon Jan 6 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.14.0-19
 - Ignore loading remote and local memcache instances when PHP_SAPI is CLI (https://github.com/kaltura/server/pull/9083)
 - PLAT-10518: Zoom meeting participant owner match case insensitive (https://github.com/kaltura/server/pull/9082)
