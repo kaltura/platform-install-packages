@@ -404,9 +404,9 @@ SUPER_USER=$SUPER_USER
 SUPER_USER_PASSWD=\"$SUPER_USER_PASSWD\"
 KALTURA_VIRTUAL_HOST_NAME=$KALTURA_VIRTUAL_HOST_NAME
 PRIMARY_MEDIA_SERVER_HOST=$PRIMARY_MEDIA_SERVER_HOST">> $BASE_DIR/app/configurations/system.ini
-# these two have passwds in them.
-chown kaltura.apache $BASE_DIR/app/configurations/system.ini $BASE_DIR/app/configurations/db.ini
-chmod 640 $BASE_DIR/app/configurations/system.ini $BASE_DIR/app/configurations/db.ini
+# these t have passwds in them.
+chown kaltura.apache $BASE_DIR/app/configurations/system.ini $BASE_DIR/app/configurations/db.ini $BASE_DIR/app/configurations/local.ini
+chmod 640 $BASE_DIR/app/configurations/system.ini $BASE_DIR/app/configurations/db.ini $BASE_DIR/app/configurations/local.ini
 chown root.root $BASE_DIR/app/configurations/monit/monit.conf
 chmod 600 $BASE_DIR/app/configurations/monit/monit.conf
 
