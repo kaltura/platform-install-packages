@@ -8,6 +8,15 @@ fi
 
 
 . $KALTURA_FUNCTIONS_RC
+BASE_RC=/etc/profile.d/kaltura-base.sh
+if [ ! -r "$BASE_RC" ];then
+        OUT="${BRIGHT_RED}ERROR:could not find $BASE_RC so, exiting..${NORMAL}"
+        echo -en $OUT
+        exit 7 
+fi
+
+
+. $BASE_RC
 if [ "$1" = "configure" ]; then
         update-rc.d kaltura-elastic-populate defaults || true
 	TIME_STAMP=`date +%Y_%m`
