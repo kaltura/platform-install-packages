@@ -251,13 +251,13 @@ find  $WEB_DIR/content/generatedUiConf -type d -exec chmod 775 {} \;
 set +e
 
 
-if [ "$DB1_HOST" = `hostname` -o "$DB1_HOST" = '127.0.0.1' -o "$DB1_HOST" = 'localhost' ];then
-	if [ `rpm -qa "Percona-Server-server*"` ]; then 
-		ln -sf $BASE_DIR/app/configurations/monit/monit.avail/percona.rc $BASE_DIR/app/configurations/monit/monit.d/enabled.mysqld.rc
-	else
-		ln -sf $BASE_DIR/app/configurations/monit/monit.avail/mysqld.rc $BASE_DIR/app/configurations/monit/monit.d/enabled.mysqld.rc
-	fi
-	service kaltura-monit stop >> /dev/null 2>&1
-	service kaltura-monit restart
-fi
+#if [ "$DB1_HOST" = `hostname` -o "$DB1_HOST" = '127.0.0.1' -o "$DB1_HOST" = 'localhost' ];then
+#	if [ `rpm -qa "Percona-Server-server*"` ]; then 
+#		ln -sf $BASE_DIR/app/configurations/monit/monit.avail/percona.rc $BASE_DIR/app/configurations/monit/monit.d/enabled.mysqld.rc
+#	else
+#		ln -sf $BASE_DIR/app/configurations/monit/monit.avail/mysqld.rc $BASE_DIR/app/configurations/monit/monit.d/enabled.mysqld.rc
+#	fi
+#	service kaltura-monit stop >> /dev/null 2>&1
+#	service kaltura-monit restart
+#fi
 send_install_becon "`basename $0`" "install_success" 0 
