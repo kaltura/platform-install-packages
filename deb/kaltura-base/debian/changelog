@@ -1,3 +1,15 @@
+kaltura-base (15.16.0-1) orion; urgency=medium
+
+  * Switching to 15.16.0
+
+ -- Jess Portnoy <jess@b0f924504114>  Tue, 28 Jan 2020 13:05:33 +0000
+
+kaltura-base (15.15.0-1) orion; urgency=medium
+
+  * Switching to 15.15.0
+
+ -- Jess Portnoy <jess@b0f924504114>  Tue, 07 Jan 2020 14:22:46 +0000
+
 kaltura-base (15.14.0-2) orion; urgency=medium
 
   * Ignore loading remote and local memcache instances when PHP_SAPI is CLI (https://github.com/kaltura/server/pull/9083)
