@@ -366,6 +366,9 @@ fi
 
 %changelog
 * Tue Jan 28 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.16.0-1
+- Nightly build.
+
+* Tue Jan 28 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.16.0-1
 - Ver Bounce to 15.16.0
 
 * Sun Jan 19 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.15.0-14
