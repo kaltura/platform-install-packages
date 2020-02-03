@@ -1,3 +1,29 @@
+kaltura-base (15.16.0-2) orion; urgency=medium
+
+  * SUP-20831: Fix `Media.List()` filter by `userIdNotEqual` (https://github.com/kaltura/server/pull/9142)
+  * QOE-215: Add OS + browsers to `reportInputFilter` (https://github.com/kaltura/server/pull/9141)
+  * SUP-19976: Increase `MAX_SQL_LENGTH` to 262144 (https://github.com/kaltura/server/pull/9140)
+  * SUP-20681: Fix Zoom `expire_in` incorrect calculation + small refactor (https://github.com/kaltura/server/pull/9139)
+  * PLAT-10387: Media Repurposing UX bug (https://github.com/kaltura/server/pull/9138)
+  * PLAT-10596: Add exceptions catch for rabbit connection and sending failures (https://github.com/kaltura/server/pull/9137)
+  * PLAT-10553: Lock replace entry flow to avoid race condition in case two flavours become ready at the same time (https://github.com/kaltura/server/pull/9135)
+  * QOE-215: Added filter by `ispIn` to `reportInputFilter` (https://github.com/kaltura/server/pull/9133)
+  * SUP-20262: Youtube connector - increase process timeout to 20 min for entries > 2GB (https://github.com/kaltura/server/pull/9131)
+  * `KalturaMediaInfo` - added missing 'colorSpace' prop (https://github.com/kaltura/server/pull/9130)
+  * View entry information within the player (https://github.com/kaltura/server/pull/9129)
+  * PLAT-10546: New notification template `Item_Pending_Moderation_Extended` (https://github.com/kaltura/server/pull/9128)
+  * youtubeFix: Increase `TIME_TO_WAIT_FOR_YOUTUBE_TRANSCODING` to 20 seconds (https://github.com/kaltura/server/pull/9127)
+  * REACH2-769: Remove `toDate` and `addOn` from unlimited credit (https://github.com/kaltura/server/pull/9125)
+  * SUP-20076: Handle copying cue points during clipping and trimming according to partner configuration (https://github.com/kaltura/server/pull/9124)
+  * PLAT-10583: Add `serverNodeIdIn` field to filter (https://github.com/kaltura/server/pull/9122)
+  * REACH2-761: Display 0 in reach profile credit edit page (https://github.com/kaltura/server/pull/9121)
+  * PLAT-10575: Create SIP `ADPs` with `RTMPS` stream URLs (https://github.com/kaltura/server/pull/9118)
+  * PLAT-10561: In the event of a conversion failure, verify that the entry exists before throwing `flavorAsset` exception (https://github.com/kaltura/server/pull/9113)
+  * PLAT-10510: Send `apimon` data to Kafka (https://github.com/kaltura/server/pull/9112)
+  * QOE reports fixes (https://github.com/kaltura/server/pull/9096)
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 03 Feb 2020 10:42:30 +0000
+
 kaltura-base (15.16.0-1) orion; urgency=medium
 
   * Switching to 15.16.0
