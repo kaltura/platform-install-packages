@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 15.16.0
-Release: 5
+Release: 7 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -365,20 +365,28 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Sat Feb 1 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.16.0-5
-- Nightly build.
-
-* Fri Jan 31 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.16.0-4
-- Nightly build.
-
-* Thu Jan 30 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.16.0-3
-- Nightly build.
-
-* Wed Jan 29 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.16.0-2
-- Nightly build.
-
-* Tue Jan 28 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.16.0-1
-- Nightly build.
+* Mon Feb 3 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.16.0-7
+- SUP-20831: Fix `Media.List()` filter by `userIdNotEqual` (https://github.com/kaltura/server/pull/9142)
+- QOE-215: Add OS + browsers to `reportInputFilter` (https://github.com/kaltura/server/pull/9141)
+- SUP-19976: Increase `MAX_SQL_LENGTH` to 262144 (https://github.com/kaltura/server/pull/9140)
+- SUP-20681: Fix Zoom `expire_in` incorrect calculation + small refactor (https://github.com/kaltura/server/pull/9139)
+- PLAT-10387: Media Repurposing UX bug (https://github.com/kaltura/server/pull/9138)
+- PLAT-10596: Add exceptions catch for rabbit connection and sending failures (https://github.com/kaltura/server/pull/9137)
+- PLAT-10553: Lock replace entry flow to avoid race condition in case two flavours become ready at the same time (https://github.com/kaltura/server/pull/9135)
+- QOE-215: Added filter by `ispIn` to `reportInputFilter` (https://github.com/kaltura/server/pull/9133)
+- SUP-20262: Youtube connector - increase process timeout to 20 min for entries > 2GB (https://github.com/kaltura/server/pull/9131)
+- `KalturaMediaInfo` - added missing 'colorSpace' prop (https://github.com/kaltura/server/pull/9130)
+- View entry information within the player (https://github.com/kaltura/server/pull/9129)
+- PLAT-10546: New notification template `Item_Pending_Moderation_Extended` (https://github.com/kaltura/server/pull/9128)
+- youtubeFix: Increase `TIME_TO_WAIT_FOR_YOUTUBE_TRANSCODING` to 20 seconds (https://github.com/kaltura/server/pull/9127)
+- REACH2-769: Remove `toDate` and `addOn` from unlimited credit (https://github.com/kaltura/server/pull/9125)
+- SUP-20076: Handle copying cue points during clipping and trimming according to partner configuration (https://github.com/kaltura/server/pull/9124)
+- PLAT-10583: Add `serverNodeIdIn` field to filter (https://github.com/kaltura/server/pull/9122)
+- REACH2-761: Display 0 in reach profile credit edit page (https://github.com/kaltura/server/pull/9121)
+- PLAT-10575: Create SIP `ADPs` with `RTMPS` stream URLs (https://github.com/kaltura/server/pull/9118)
+- PLAT-10561: In the event of a conversion failure, verify that the entry exists before throwing `flavorAsset` exception (https://github.com/kaltura/server/pull/9113)
+- PLAT-10510: Send `apimon` data to Kafka (https://github.com/kaltura/server/pull/9112)
+- QOE reports fixes (https://github.com/kaltura/server/pull/9096)
 
 * Tue Jan 28 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.16.0-1
 - Ver Bounce to 15.16.0
