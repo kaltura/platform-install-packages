@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 15.16.0
-Release: 7 
+Version: 15.17.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -365,6 +365,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Tue Feb 4 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.17.0-1
+- Ver Bounce to 15.17.0
+
 * Mon Feb 3 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.16.0-7
 - SUP-20831: Fix `Media.List()` filter by `userIdNotEqual` (https://github.com/kaltura/server/pull/9142)
 - QOE-215: Add OS + browsers to `reportInputFilter` (https://github.com/kaltura/server/pull/9141)
