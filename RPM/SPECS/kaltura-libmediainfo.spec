@@ -1,10 +1,10 @@
-%global libzen_version  0.4.37
+%define libzen_version  0.4.37
 %define prefix /opt/kaltura
 %define libname libmediainfo
-
+%define debug_package %{nil}
 Name:           kaltura-libmediainfo
 Version:        0.7.61
-Release:        9
+Release:        10
 Summary:        Library for supplies technical and tag information about a video or audio file
 
 Group:          System Environment/Libraries
@@ -13,10 +13,10 @@ URL:            http://mediaarea.net/MediaInfo
 Source0:        http://mediaarea.net/download/source/%{libname}/%{version}/%{libname}_%{version}.tar.bz2
 
 BuildRequires:  gcc-c++
-BuildRequires:  pkgconfig(libzen) >= %{libzen_version}
-BuildRequires:  pkgconfig(zlib)
+BuildRequires:  libzen >= %{libzen_version}
+BuildRequires:  zlib
 BuildRequires:  doxygen
-BuildRequires:  pkgconfig(libcurl)
+BuildRequires: libcurl
 #BuildRequires:  pkgconfig(tinyxml2)
 Requires: libzen >= %{libzen_version}
 
@@ -82,7 +82,7 @@ pushd Project/GNU/Library
     ./configure --prefix=%{prefix} --enable-shared
     make %{?_smp_mflags}
 popd
-
+#pwd;
 %install
 pushd Project/GNU/Library
     %make_install
@@ -98,7 +98,8 @@ cat > $RPM_BUILD_ROOT%{_sysconfdir}/ld.so.conf.d/%{name}.conf << EOF
 %{prefix}/lib
 EOF
 
-rm -f %{buildroot}%{prefix}/lib/%{libname}.la
+rm -f %{buildroot}%{prefix}/lib/%{libname}.la 
+rm -f %{buildroot}/debugsourcefiles.list
 
 
 %post -p /sbin/ldconfig

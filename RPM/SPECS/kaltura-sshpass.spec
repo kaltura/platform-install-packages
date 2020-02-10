@@ -1,7 +1,7 @@
 %define prefix /opt/kaltura
 Summary: Non-interactive SSH authentication utility
 Name: kaltura-sshpass
-Version: 1.05
+Version: 1.06
 Release: 1
 License: GPLv2
 Group: Applications/Internet

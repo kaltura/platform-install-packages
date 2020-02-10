@@ -1,10 +1,12 @@
 
+%global debug_package %{nil}
 %define base_prefix /opt/kaltura/ffmpeg
-%define _without_gsm 1
+%define _without_gsm 0
+%define _build_id_links none
 %define _without_nut 1
 
 ### No package yet
-%define _without_vpx 1
+%define _without_vpx 0
 
 ### Use native vorbis
 %define _without_vorbis 1
@@ -14,19 +16,19 @@
 
 
 %{?el6:%define _without_dc1394 1}
-%{?el6:%define _without_schroedinger 1}
+#%{?el6:%define _without_schroedinger 1}
 #%{?el6:%define _without_speex 1}
 %{?el6:%define _without_theora 1}
 
 %{?el5:%define _without_dc1394 1}
-%{?el5:%define _without_schroedinger 1}
+#%{?el5:%define _without_schroedinger 1}
 %{?el5:%define _without_speex 1}
 %{?el5:%define _without_theora 1}
 
 Summary: Utilities and libraries to record, convert and stream audio and video
 Name: kaltura-ffmpeg-aux
-Version: 2.1.3
-Release: 2
+Version: 3.4.6
+Release: 3 
 License: GPL
 Group: Applications/Multimedia
 URL: http://ffmpeg.org/
@@ -35,43 +37,45 @@ Packager: Jess Portnoy <jess.portnoy@kaltura.com>
 Vendor: Kaltura, Inc.
 
 Source: http://www.ffmpeg.org/releases/ffmpeg-%{version}.tar.bz2
+
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
 BuildRequires: SDL-devel
 BuildRequires: freetype-devel
 BuildRequires: imlib2-devel
 BuildRequires: zlib-devel
-BuildRequires: schroedinger-devel
+#BuildRequires: schroedinger-devel
 BuildRequires: libtheora-devel
 BuildRequires: libvorbis-devel
-BuildRequires: libxvidcore4-devel
-%{!?_without_a52dec:BuildRequires: kaltura-a52dec-devel}
-%{!?_without_dc1394:BuildRequires: libdc1394-devel}
-%{!?_without_gsm:BuildRequires: gsm-devel}
-%{!?_without_lame:BuildRequires: kaltura-lame-devel}
+BuildRequires: xvidcore
+BuildRequires: x265-devel
+BuildRequires: gnutls-devel
+BuildRequires: kaltura-a52dec-devel
+BuildRequires: kaltura-lame-devel
+BuildRequires: libvdpau-devel 
+BuildRequires: openjpeg2-devel
 %{!?_without_nut:BuildRequires: libnut-devel}
 %{!?_without_opencore_amr:BuildRequires: kaltura-libopencore-amr-devel}
-%{!?_without_openjpeg:BuildRequires: openjpeg-devel}
-%{!?_without_rtmp:BuildRequires: librtmp-devel}
-%{!?_without_schroedinger:BuildRequires: schroedinger-devel}
+BuildRequires: kaltura-librtmp-devel
+#%{!?_without_schroedinger:BuildRequires: schroedinger-devel}
 %{!?_without_texi2html:BuildRequires: texi2html}
 %{!?_without_theora:BuildRequires: libogg-devel, libtheora-devel}
 %{!?_without_vorbis:BuildRequires: libogg-devel, libvorbis-devel}
-%{!?_without_vpx:BuildRequires: libvpx-devel >= 1.3.0}
-%{!?_without_x264:BuildRequires: kaltura-x264-devel}
-%{!?_without_xvid:BuildRequires: libxvidcore4-devel}
-%{!?_without_a52dec:Requires: a52dec}
-BuildRequires: yasm-devel
+BuildRequires: kaltura-libvpx-devel >= 1.7.0
+BuildRequires: kaltura-x264-devel
+BuildRequires: xvidcore-devel
+Requires: a52dec
 BuildRequires: libass-devel 
 BuildRequires: kaltura-x264-devel 
 BuildRequires: gsm-devel
 BuildRequires: speex-devel
-BuildRequires: libvpx-devel >= 1.3.0
-BuildRequires: schroedinger-devel 
+#BuildRequires: schroedinger-devel 
 BuildRequires: libtheora-devel
-BuildRequires: libxvidcore4-devel >= 1.3.2
+BuildRequires: xvidcore-devel >= 1.3.2
 Requires:kaltura-a52dec,libass,kaltura-x264
-Requires: libvpx >= 1.3.0
+Requires: kaltura-libvpx >= 1.7.0
+Requires: x265-libs
+Requires: gnutls
 
 %description
 FFmpeg is a very fast video and audio converter. It can also grab from a
@@ -85,20 +89,18 @@ quality polyphase filter.
 %package devel
 Summary: Header files and static library for the ffmpeg codec library
 Group: Development/Libraries
-Requires: %{name} = %{version}
+Requires: %{name} = %{version}-%{release}
 Requires: imlib2-devel, SDL-devel, freetype-devel, zlib-devel, pkgconfig,kaltura-x264
 %{!?_without_a52dec:Requires: kaltura-a52dec-devel}
-%{!?_without_dc1394:Requires: libdc1394-devel}
-%{!?_without_faad:Requires: faad2-devel}
+#%{!?_without_faad:Requires: faad2-devel}
 %{!?_without_gsm:Requires: gsm-devel}
 %{!?_without_lame:Requires: kaltura-lame-devel}
-%{!?_without_openjpeg:Requires: openjpeg-devel}
-%{!?_without_rtmp:Requires: librtmp-devel}
-%{!?_without_schroedinger:Requires: schroedinger-devel}
+%{!?_without_rtmp:Requires: kaltura-librtmp-devel}
+#%{!?_without_schroedinger:Requires: schroedinger-devel}
 %{!?_without_vorbis:Requires: libogg-devel, libvorbis-devel}
-%{!?_without_vpx:Requires: libvpx-devel}
+%{!?_without_vpx:Requires: kaltura-libvpx-devel}
 %{!?_without_x264:Requires: kaltura-x264-devel}
-%{!?_without_xvid:Requires: libxvidcore4-devel}
+%{!?_without_xvid:Requires: xvidcore-devel}
 
 %description devel
 FFmpeg is a very fast video and audio converter. It can also grab from a
@@ -133,13 +135,13 @@ export CFLAGS="%{optflags}"
     --extra-cflags="%{optflags} -fPIC -I/opt/kaltura/include" \
     --extra-ldflags="-L/opt/kaltura/lib" \
     --disable-devices \
-    --enable-bzlib \
     --enable-libgsm \
     --enable-libmp3lame \
-    --enable-libschroedinger \
     --enable-libtheora \
     --enable-libvorbis \
     --enable-libx264 \
+    --enable-libx265 \
+    --enable-avisynth \
     --enable-libxvid \
     --enable-filter=movie \
     --enable-avfilter \
@@ -154,18 +156,19 @@ export CFLAGS="%{optflags}"
     --enable-static \
     --enable-shared \
     --enable-gpl \
-     --disable-debug \
+    --disable-debug \
     --disable-optimizations \
---enable-gpl \
---enable-pthreads \
---enable-swscale \
---enable-vdpau \
---enable-bzlib \
---disable-devices \
---enable-filter=movie \
+    --enable-gpl \
+    --enable-pthreads \
+    --enable-swscale \
+    --enable-vdpau \
+    --disable-devices \
+    --enable-filter=movie \
     --enable-version3 \
---enable-indev=lavfi \
---enable-x11grab
+    --enable-indev=lavfi \
+    --enable-gnutls \
+    --enable-libxcb \
+    --enable-libxcb-shm 
 
 %{__make} %{?_smp_mflags}
 
@@ -210,7 +213,8 @@ fi
 
 %files
 %defattr(-, root, root, 0755)
-%doc Changelog COPYING* CREDITS INSTALL MAINTAINERS RELEASE README
+%doc Changelog COPYING* CREDITS INSTALL.md MAINTAINERS RELEASE RELEASE_NOTES README.md 
+#%doc Changelog COPYING* CREDITS INSTALL MAINTAINERS RELEASE README
 %doc %{base_prefix}-%{version}/share/man/man1
 %config %{_sysconfdir}/profile.d/kaltura_ffmpeg_aux.sh
 %config %{_sysconfdir}/ld.so.conf.d/kaltura_ffmpeg_aux.conf
@@ -233,18 +237,6 @@ fi
 %{base_prefix}-%{version}/include/libavformat/
 %{base_prefix}-%{version}/include/libavutil/
 %{base_prefix}-%{version}/include/libswscale/
-#%{base_prefix}-%{version}/lib/libavcodec.a
-#%{base_prefix}-%{version}/lib/libavdevice.a
-#%{base_prefix}-%{version}/lib/libavfilter.a
-#%{base_prefix}-%{version}/lib/libavformat.a
-#%{base_prefix}-%{version}/lib/libavutil.a
-#%{base_prefix}-%{version}/lib/libswscale.a
-#%{base_prefix}-%{version}/lib/libavcodec.so
-#%{base_prefix}-%{version}/lib/libavdevice.so
-#%{base_prefix}-%{version}/lib/libavfilter.so
-#%{base_prefix}-%{version}/lib/libavformat.so
-#%{base_prefix}-%{version}/lib/libavutil.so
-#%{base_prefix}-%{version}/lib/libswscale.so
 %{base_prefix}-%{version}/lib/*so*
 %{base_prefix}-%{version}/lib/pkgconfig/libavcodec.pc
 %{base_prefix}-%{version}/lib/pkgconfig/libavdevice.pc

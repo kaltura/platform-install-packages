@@ -1,5 +1,6 @@
 %global libzen_version  0.4.37
 %define prefix /opt/kaltura
+%define debug_package %{nil}
 
 Name:           kaltura-mediainfo
 Version:        0.7.61
