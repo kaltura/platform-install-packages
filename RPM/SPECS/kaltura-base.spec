@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 15.17.0
-Release: 3
+Release: 4
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -365,6 +365,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Tue Feb 11 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.17.0-4
+- Nightly build.
+
 * Mon Feb 10 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.17.0-3
 - Nightly build.
 
@@ -396,45 +399,6 @@ fi
 
 * Tue Jan 28 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.16.0-1
 - Ver Bounce to 15.16.0
-
-* Sun Jan 19 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.15.0-14
-- Nightly build.
-
-* Sat Jan 18 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.15.0-13
-- Nightly build.
-
-* Fri Jan 17 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.15.0-12
-- Nightly build.
-
-* Thu Jan 16 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.15.0-11
-- Nightly build.
-
-* Wed Jan 15 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.15.0-10
-- Nightly build.
-
-* Tue Jan 14 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.15.0-9
-- Nightly build.
-
-* Mon Jan 13 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.15.0-8
-- Nightly build.
-
-* Sun Jan 12 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.15.0-7
-- Nightly build.
-
-* Sat Jan 11 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.15.0-6
-- Nightly build.
-
-* Fri Jan 10 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.15.0-5
-- Nightly build.
-
-* Thu Jan 9 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.15.0-4
-- Nightly build.
-
-* Wed Jan 8 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.15.0-3
-- Nightly build.
-
-* Tue Jan 7 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.15.0-2
-- Nightly build.
 
 * Tue Jan 7 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.15.0-1
 - Ver Bounce to 15.15.0
