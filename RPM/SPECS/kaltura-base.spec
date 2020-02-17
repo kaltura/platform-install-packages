@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 15.17.0
-Release: 9
+Release: 10
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -365,26 +365,40 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Sun Feb 16 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.17.0-9
-- Nightly build.
+* Mon Feb 17 2020 jess.portnoy@kaltura.com <Jess Portnoy> -
+- AN-1230: limit report CSV file name length (https://github.com/kaltura/server/pull/9183)
+- Add `LiveCluster` plugin (https://github.com/kaltura/server/pull/9180)
+- PLAT-10646 : Indexing of caption incomplete if there is an empty line (https://github.com/kaltura/server/pull/9179)
+- PLAT-10646 : Indexing of caption incomplete if there is an empty line (https://github.com/kaltura/server/pull/9178)
+- WEBC-1820: Fix auto archive with self serve (https://github.com/kaltura/server/pull/9177)
+- SUP-20392: Syndication fix `getEntryCount` (https://github.com/kaltura/server/pull/9176)
+- PLAT-10626 - `ClipConcat` convert jobs should run with high priority (https://github.com/kaltura/server/pull/9174)
+- PLAT-10626 - `ClipConcat` convert jobs should run with high priority (https://github.com/kaltura/server/pull/9173)
+- REACH allowed for partner fix (https://github.com/kaltura/server/pull/9172)
+- SUP-20392: Syndication fix (https://github.com/kaltura/server/pull/9170)
+- PLAT-10642: `baseentry.list()` does not work when filtering by `KalturaEntryCaptionAdvancedFilter`  (https://github.com/kaltura/server/pull/9169)
+- PLAT-10607 : indexing issues when building elastic index (https://github.com/kaltura/server/pull/9168)
+- QOE-249: Add application version to report filter (https://github.com/kaltura/server/pull/9166)
+- CSV Bulk Event Scheduling - Add option to specify resource by ID (https://github.com/kaltura/server/pull/9164)
+- PSVAMB-10351: Drop folder item getting created for MRSS item that has no content node  (https://github.com/kaltura/server/pull/9163)
+- QOE-237: Move error tracking reports to dynamic `datasource` (https://github.com/kaltura/server/pull/9162)
+- PLAT-10265: Filter entries by captions (https://github.com/kaltura/server/pull/9160)
+- SUP-20262: Print log limit size in GB instead of bytes (https://github.com/kaltura/server/pull/9159)
+- SUP-20420: `groupUser.list()` returns wrong number of users (https://github.com/kaltura/server/pull/9158)
+- SUP-19410: Change `noex` flavour extension by its container type (https://github.com/kaltura/server/pull/9156)
+- reach-779: Allow catalog item pricing view from KMC (https://github.com/kaltura/server/pull/9155)
+- PLAT-10609: Get entry after waiting in lock for replacement to end (https://github.com/kaltura/server/pull/9154)
+- PLAT-10547: Add timezone to `liveentry` recording options for archive (https://github.com/kaltura/server/pull/9153)
+- PLAT-10610: Avoid validation of NG live entry server node (https://github.com/kaltura/server/pull/9152)
+- PLAT-10616: add exception catch for connection close and increase timeout (https://github.com/kaltura/server/pull/9151)
+- SUP-20392: make syndication feed with dynamic playlist work the same as playlist `executeFromFilter` (https://github.com/kaltura/server/pull/9149)
+- Add partner package to partner audit trail config (https://github.com/kaltura/server/pull/9148)
+- Allow setting cache expiry on rule + allow setting multiple partner IDs for rule (https://github.com/kaltura/server/pull/9143)
+- PLAT-10598: Return entry-server-node value to action level (https://github.com/kaltura/server/pull/9132)
+- KMS-19964: Registration module report (https://github.com/kaltura/server/pull/9126)
+- feat(FEC-9465): Internationalization (i18n) - player localization (https://github.com/kaltura/server/pull/9123)
+- Orion-15.13.0-PLAT-10358: new live cluster server node (https://github.com/kaltura/server/pull/9067)
 
-* Sat Feb 15 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.17.0-8
-- Nightly build.
-
-* Fri Feb 14 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.17.0-7
-- Nightly build.
-
-* Thu Feb 13 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.17.0-6
-- Nightly build.
-
-* Wed Feb 12 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.17.0-5
-- Nightly build.
-
-* Tue Feb 11 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.17.0-4
-- Nightly build.
-
-* Mon Feb 10 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.17.0-3
-- Nightly build.
 
 * Tue Feb 4 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.17.0-1
 - Ver Bounce to 15.17.0

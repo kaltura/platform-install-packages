@@ -1,9 +1,9 @@
 %define prefix /opt/kaltura
 %define html5lib_base %{prefix}/apps/html5/html5lib
-
+ 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.80
+Version: v2.81
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -86,6 +86,22 @@ fi
 %config %{html5lib_base}/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Mon Feb 17 2020 jess.portnoy@kaltura.com <Jess Portnoy> - v2.81-1
+KMS-20534 - [PLAYER] An error is received after using the continue button from a reflection point inside any Quiz Entry that its unanswered
+FEC-9593 - Incorrect video size in player containing bumper/Ad
+SUP-18260 - [IVQ] Change rotation text in player
+FEC-9626 - Ad adCuePoints do not work with Cust_Parms
+SUP-20644 - No captions/transcript on iPhone when EmbedPlayer.WebKitPlaysInline = True
+SUP-20341 - Real time analytics showing incorrect entry in the list.
+FEC-9424 - The player does not load and for the load process not to be counted as buffering
+PLAT-9400 - KalturaAPIException spam in kaltura_api_v3.log
+PATH-501 - [Design-System-Label Hints] Zooming in will display the 'Hint Content' at the bottom of the page
+FEV-475 - I as User want to view the time it took to download the video segments
+FEV-473 - Support networkConnectionType in event 99
+FEV-304 - Send UUID with analytics events
+FEC-398 - Flavour selector is disabled for a short time (about 30 seconds) while changing between flavours
+FEV-466 - [Caliper] Player - send Quiz caliper events
+
 * Fri Dec 27 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v2.80
 - SUP-20146 - [IVQ] Accessibility change aria label to label by open question
 - SUP-20415 - KMS eCDN Playlist Forms Wrong URL.
