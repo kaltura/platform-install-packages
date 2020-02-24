@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 15.17.0
-Release: 10
+Version: 15.18.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -365,6 +365,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Feb 24 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.18.0-1
+- Ver Bounce to 15.18.0
+
 * Mon Feb 17 2020 jess.portnoy@kaltura.com <Jess Portnoy> -
 - AN-1230: limit report CSV file name length (https://github.com/kaltura/server/pull/9183)
 - Add `LiveCluster` plugin (https://github.com/kaltura/server/pull/9180)
