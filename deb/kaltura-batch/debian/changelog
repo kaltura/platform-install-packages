@@ -1,3 +1,9 @@
+kaltura-batch (15.18.0-1) orion; urgency=medium
+
+  * Switching to 15.18.0
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 24 Feb 2020 10:02:09 +0000
+
 kaltura-batch (15.17.0-1) orion; urgency=medium
 
   * Switching to 15.17.0
