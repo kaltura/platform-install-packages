@@ -1,3 +1,23 @@
+kaltura-base (15.18.0-2) orion; urgency=medium
+
+  * New entry source type for KMS GO (https://github.com/kaltura/server/pull/9209)
+  * PLAT-10720: `eSearch` - support external video type criteria (https://github.com/kaltura/server/pull/9207)
+  * PLAT-10718: Fixing internal server error when filtering by custom data (https://github.com/kaltura/server/pull/9205)
+  * PLAT-10714: `eSearch` support advanced search criteria (https://github.com/kaltura/server/pull/9203)
+  * SUP-21097: Use total result in case pager is not being sent (https://github.com/kaltura/server/pull/9202)
+  * PLAT-10713: Support Sphinx sticky session during read operations (https://github.com/kaltura/server/pull/9201)
+  * PLAT-10708: Duration type support (https://github.com/kaltura/server/pull/9200)
+  * PLAT-10706: `esearch` - add support for isQuiz filter (https://github.com/kaltura/server/pull/9197)
+  * PLAT-10697: Fix categories fields search when converting `KalturaMediaEntryFilter` to `eSearch` (https://github.com/kaltura/server/pull/9195)
+  * PLAT-10694: Add Linux batch for PDF doc conversion (https://github.com/kaltura/server/pull/9194)
+  * PLAT-10641: Fix `KalturaExternalMediaEntryFilter` (https://github.com/kaltura/server/pull/9193)
+  * Increase dictionary max chars to 4000 (https://github.com/kaltura/server/pull/9189)
+  * SUP-20389: Convert SCC caption time stamps (https://github.com/kaltura/server/pull/9185)
+  * FEC-9465: player v3: internationalisation (i18n) - player localisation (https://github.com/kaltura/server/pull/9182)
+  * New entry source types for KMS GO (https://github.com/kaltura/server/pull/8332)
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 02 Mar 2020 15:16:54 +0000
+
 kaltura-base (15.18.0-1) orion; urgency=medium
 
   * Switching to 15.18.0
