@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 15.18.0
-Release: 9 
+Version: 15.19.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -365,6 +365,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Wed Mar 4 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.19.0-1
+- Ver Bounce to 15.19.0
+
 * Mon Mar 2 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.18.0-9
 - New entry source type for KMS GO (https://github.com/kaltura/server/pull/9209)
 - PLAT-10720: `eSearch` - support external video type criteria (https://github.com/kaltura/server/pull/9207)
