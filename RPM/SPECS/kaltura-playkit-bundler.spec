@@ -9,8 +9,8 @@
 
 Summary: Kaltura PlayKit Bundler 
 Name: kaltura-playkit-bundler 
-Version: 1.1.1
-Release: 11
+Version: 1.2.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-v%{version}.tar.gz
@@ -98,6 +98,10 @@ fi
 %doc %{prefix}/README.md
 
 %changelog
+* Mon Mar 16 2020 jess.portnoy@kaltura.com <Jess Portnoy> - v1.2.0-1
+- feat(FEC-9465): Internationalization (i18n) - player localization (#8)
+- fix(FEC-9458): bundle builder doesn't order dependencies correctly (#8)
+
 * Wed Mar 6 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v1.1.1-10
 - Override the vanila init script with one that is able to run this as a none privileged user ['kaltura']
 

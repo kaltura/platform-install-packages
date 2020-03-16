@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 15.19.0
-Release: 13
+Release: 14
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -365,41 +365,22 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Sun Mar 15 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.19.0-13
-- Nightly build.
-
-* Sat Mar 14 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.19.0-12
-- Nightly build.
-
-* Fri Mar 13 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.19.0-11
-- Nightly build.
-
-* Thu Mar 12 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.19.0-10
-- Nightly build.
-
-* Wed Mar 11 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.19.0-9
-- Nightly build.
-
-* Tue Mar 10 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.19.0-8
-- Nightly build.
-
-* Mon Mar 9 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.19.0-7
-- Nightly build.
-
-* Sun Mar 8 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.19.0-6
-- Nightly build.
-
-* Sat Mar 7 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.19.0-5
-- Nightly build.
-
-* Fri Mar 6 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.19.0-4
-- Nightly build.
-
-* Thu Mar 5 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.19.0-3
-- Nightly build.
-
-* Wed Mar 4 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.19.0-2
-- Nightly build.
+* Mon Mar 16 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.19.0-14
+- Increase `copy_partner_limit_metadata_profiles` default from 10 to 13 (https://github.com/kaltura/server/pull/9242)
+- PSVAMB-11201: New event notification template - `HTTP_ENTRY_TRIM_JOB_FINISHED` (https://github.com/kaltura/server/pull/9239)
+- When building current thumb path use the original `thumbName` without the `uniqid` (https://github.com/kaltura/server/pull/9237)
+- PLAT-10625: Grant access to `listTemplates()` to the `ecdn` monitoring proxy partner (-7) (https://github.com/kaltura/server/pull/9236)
+- PLAT-10736: `KAsyncDirectoryCleanup` fix (https://github.com/kaltura/server/pull/9234)
+- PLAT-10725: Support defining multiple old thumb dirs (https://github.com/kaltura/server/pull/9224)
+- PLAT-10725: Support defining multiple old thumb dirs (https://github.com/kaltura/server/pull/9223)
+- PLAT-10725: Support defining multiple old thumb dirs (https://github.com/kaltura/server/pull/9222)
+- PLAT-10733: `ElasticSearch` - Use reduced results (optimised) mode by default (https://github.com/kaltura/server/pull/9219)
+- PLAT-10732: Avoid fatal error in auto archive when the live entry was deleted (https://github.com/kaltura/server/pull/9217)
+- PLAT-10725: Support switching temp thumbnail dir to allow storage cleanup (https://github.com/kaltura/server/pull/9213)
+- PLAT-10636 - Display `systemName` column to event notification in admin console (https://github.com/kaltura/server/pull/9212)
+- feat(FEC-9465): `embedPlaykitJsAction (player v3)` - Internationalisation (i18n) (https://github.com/kaltura/server/pull/9211)
+- PLAT-10610: `KalturaEntryServerNodeBaseFilter` - add `serverNodeIdNotIn` criterion (https://github.com/kaltura/server/pull/9208)
+- KAVA: Get source from external data if external source is defined (https://github.com/kaltura/server/pull/9199)
 
 * Wed Mar 4 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.19.0-1
 - Ver Bounce to 15.19.0

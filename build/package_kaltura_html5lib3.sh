@@ -46,11 +46,14 @@ for SOURCE in HTML5LIB3 PLAYKIT_IMA PLAYKIT_YOUBORA PLAYKIT_GOOGLE_ANALYTICS PLA
 	fi
 	# that's OTT and we don't want it
 done 
-$BASE_CHECKOUT_DIR/build/gh_download_asset.sh $GITHUB_TOKEN kaltura/kaltura-interactive-player path-kaltura-player.js v$PLAYKIT_INTERACTIVE_VERSION $SOURCE_PACKAGING_DIR/html5lib3_tmp/$HTML5LIB3_VERSION
-$BASE_CHECKOUT_DIR/build/gh_download_asset.sh $GITHUB_TOKEN kaltura/kaltura-interactive-player path-kaltura-player.js.map v$PLAYKIT_INTERACTIVE_VERSION $SOURCE_PACKAGING_DIR/html5lib3_tmp/$HTML5LIB3_VERSION
+$BASE_CHECKOUT_DIR/build/gh_download_asset.sh $GITHUB_TOKEN kaltura/kaltura-interactive-player $PLAYKIT_INTERACTIVE_VERSION.tar.gz v$PLAYKIT_INTERACTIVE_VERSION $SOURCE_PACKAGING_DIR/html5lib3_tmp/$HTML5LIB3_VERSION
+#$BASE_CHECKOUT_DIR/build/gh_download_asset.sh $GITHUB_TOKEN kaltura/kaltura-interactive-player path-kaltura-player.js v$PLAYKIT_INTERACTIVE_VERSION $SOURCE_PACKAGING_DIR/html5lib3_tmp/$HTML5LIB3_VERSION
+#$BASE_CHECKOUT_DIR/build/gh_download_asset.sh $GITHUB_TOKEN kaltura/kaltura-interactive-player path-kaltura-player.js.map v$PLAYKIT_INTERACTIVE_VERSION $SOURCE_PACKAGING_DIR/html5lib3_tmp/$HTML5LIB3_VERSION
 
 rm $SOURCE_PACKAGING_DIR/html5lib3_tmp/$HTML5LIB3_VERSION/kaltura-tv-player.js*
-cd $SOURCE_PACKAGING_DIR/html5lib3_tmp/
+cd $SOURCE_PACKAGING_DIR/html5lib3_tmp/$HTML5LIB3_VERSION
+tar zxf $PLAYKIT_INTERACTIVE_VERSION.tar.gz && rm $PLAYKIT_INTERACTIVE_VERSION.tar.gz
+cd ..
 tar zcf $RPM_SOURCES_DIR/$HTML5LIB3_RPM_NAME-$HTML5LIB3_VERSION.tar.gz $HTML5LIB3_VERSION
 cd $SOURCE_PACKAGING_DIR
 rm -rf $SOURCE_PACKAGING_DIR/html5lib3_tmp
