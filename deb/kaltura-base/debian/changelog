@@ -1,3 +1,29 @@
+kaltura-base (15.19.0-2) orion; urgency=medium
+
+  * Increase `copy_partner_limit_metadata_profiles` default from 10 to 13 (https://github.com/kaltura/server/pull/9242)
+  * PSVAMB-11201: New event notification template - `HTTP_ENTRY_TRIM_JOB_FINISHED` (https://github.com/kaltura/server/pull/9239)
+  * When building current thumb path use the original `thumbName` without the `uniqid` (https://github.com/kaltura/server/pull/9237)
+  * PLAT-10625: Grant access to `listTemplates()` to the `ecdn` monitoring proxy partner (-7) (https://github.com/kaltura/server/pull/9236)
+  * PLAT-10736: `KAsyncDirectoryCleanup` fix (https://github.com/kaltura/server/pull/9234)
+  * PLAT-10725: Support defining multiple old thumb dirs (https://github.com/kaltura/server/pull/9224)
+  * PLAT-10725: Support defining multiple old thumb dirs (https://github.com/kaltura/server/pull/9223)
+  * PLAT-10725: Support defining multiple old thumb dirs (https://github.com/kaltura/server/pull/9222)
+  * PLAT-10733: `ElasticSearch` - Use reduced results (optimised) mode by default (https://github.com/kaltura/server/pull/9219)
+  * PLAT-10732: Avoid fatal error in auto archive when the live entry was deleted (https://github.com/kaltura/server/pull/9217)
+  * PLAT-10725: Support switching temp thumbnail dir to allow storage cleanup (https://github.com/kaltura/server/pull/9213)
+  * PLAT-10636 - Display `systemName` column to event notification in admin console (https://github.com/kaltura/server/pull/9212)
+  * feat(FEC-9465): `embedPlaykitJsAction (player v3)` - Internationalisation (i18n) (https://github.com/kaltura/server/pull/9211)
+  * PLAT-10610: `KalturaEntryServerNodeBaseFilter` - add `serverNodeIdNotIn` criterion (https://github.com/kaltura/server/pull/9208)
+  * KAVA: Get source from external data if external source is defined (https://github.com/kaltura/server/pull/9199)
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 16 Mar 2020 14:36:16 +0000
+
+kaltura-base (15.19.0-1) orion; urgency=medium
+
+  * Switching to 15.19.0
+
+ -- Jess Portnoy <jess@b0f924504114>  Wed, 04 Mar 2020 11:21:29 +0000
+
 kaltura-base (15.18.0-2) orion; urgency=medium
 
   * New entry source type for KMS GO (https://github.com/kaltura/server/pull/9209)
