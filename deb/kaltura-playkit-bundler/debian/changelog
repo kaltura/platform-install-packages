@@ -1,3 +1,10 @@
+kaltura-playkit-bundler (1.2.0-1) orion; urgency=medium
+
+  * feat(FEC-9465): Internationalization (i18n) - player localization (#8)
+  * fix(FEC-9458): bundle builder doesn't order dependencies correctly (#8)
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 16 Mar 2020 14:42:36 +0000
+
 kaltura-playkit-bundler (1.1.1-1) naos; urgency=low
 
   * First release
