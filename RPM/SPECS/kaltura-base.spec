@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 15.19.0
-Release: 15
+Version: 15.20.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -365,6 +365,42 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Fri Mar 27 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.20.0-1
+- Add date of map creation in admin console (https://github.com/kaltura/server/pull/9297)
+- PLAT-10758: `cuePointDeleted()` - avoid multiple queries in case of children (https://github.com/kaltura/server/pull/9296)
+- `KalturaMonitorClient::prettyPrintCounters()` - additional session counters info (https://github.com/kaltura/server/pull/9295)
+- SUP-19377: `ReachProfile::fulfillsRules()` PHP 5 fix  (https://github.com/kaltura/server/pull/9292)
+- PLAT-10758: Avoid setting entry `updated_at` when deleting an entry (https://github.com/kaltura/server/pull/9291)
+- PLAT-10759: Entry stuck in pending status when doing clip & trim on parent+child entry (https://github.com/kaltura/server/pull/9290)
+- Write temp MP4 to local FS dir (/tmp) (https://github.com/kaltura/server/pull/9289)
+- PLAT-10751 `DisableEntitlementForPlaylist` in execute playlist (https://github.com/kaltura/server/pull/9288)
+- Update report title with `categories/playbackContext` IDs (https://github.com/kaltura/server/pull/9287)
+- Fix zoom enum name convention (https://github.com/kaltura/server/pull/9284)
+- PLAT-10752: `kUploadTokenMgr` - dismiss chunks that are of 0 bytes (https://github.com/kaltura/server/pull/9282)
+- PLAT-10750: Avoid multiple handling of tags in case of entry deletion (https://github.com/kaltura/server/pull/9281)
+- PLAT-10745- Segment duration part removed from packager URL for `LiveClusterMediaServerNode` (https://github.com/kaltura/server/pull/9280)
+- AN-1273: Add `nodeIdsIn` to report filter (https://github.com/kaltura/server/pull/9279)
+- SUP-19377: Prevent auto rule when `categoryEntry` is created (https://github.com/kaltura/server/pull/9278)
+- PLAT-10726: Wild card entry name search does not return list of entries with matching names  (https://github.com/kaltura/server/pull/9277)
+- SUP-21111: handle syndication feed according to syndication `confmap` (https://github.com/kaltura/server/pull/9276)
+- PLAT-10747: Block chunk uploads that have more than 1000 chunks waiting to be concatenated (debug mode) (https://github.com/kaltura/server/pull/9272)
+- Adding the playlist ID to the eligible entires (https://github.com/kaltura/server/pull/9271)
+- PLAT-10746: Zoom chat files (https://github.com/kaltura/server/pull/9268)
+- REACH2-727: Caption fix (https://github.com/kaltura/server/pull/9267)
+- PLAT-10743: Correctly handle the `PRIVILEGE_DISABLE_ENTITLEMENT_FOR_PLAYLIST` privilege (https://github.com/kaltura/server/pull/9264)
+- Handle `*` and `!` on Free text search and make free text search partial rather than exact match (https://github.com/kaltura/server/pull/9263)
+- PLAT-10741: Fix HTTP 500 when calling `executeStaticPlaylist()` with an empty ID (https://github.com/kaltura/server/pull/9262)
+- PLAT-10740: Fix permissions on `systemPartner` and jobs services (https://github.com/kaltura/server/pull/9260)
+- Support entitlement check skip validation flag (https://github.com/kaltura/server/pull/9258)
+- PLAT-10665: Reduce the `isLive` expiry cache when not live from `10` to `5` (https://github.com/kaltura/server/pull/9256)
+- SUP-21037: update `kuser_id` column to match `sessionUserId = puser_id`, generate user on the fly if does not exist (https://github.com/kaltura/server/pull/9254)
+- Add avg. drop-off metric for `TOP_USER_CONTENT` to use it for category analytics (https://github.com/kaltura/server/pull/9252)
+- PLAT-10651: Added `disableentitlementforplaylist` privilege (https://github.com/kaltura/server/pull/9250)
+- Add new report type for category analytics - highlights report (https://github.com/kaltura/server/pull/9248)
+- PLAT-10739: Add an option for media repurposing to delete MR metadata(https://github.com/kaltura/server/pull/9245)
+- webc-1856: Set `wasBroadcast` to true only when the entry was in 'live' mode (https://github.com/kaltura/server/pull/9243)
+- plat-10128: As a Zoom user, I'd like to have my webinar recordings also transferred to Kaltura (https://github.com/kaltura/server/pull/9220)
+
 * Mon Mar 16 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.19.0-14
 - Increase `copy_partner_limit_metadata_profiles` default from 10 to 13 (https://github.com/kaltura/server/pull/9242)
 - PSVAMB-11201: New event notification template - `HTTP_ENTRY_TRIM_JOB_FINISHED` (https://github.com/kaltura/server/pull/9239)
