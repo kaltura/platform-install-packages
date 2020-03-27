@@ -3,7 +3,7 @@
  
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.81
+Version: v2.81.3
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -86,6 +86,9 @@ fi
 %config %{html5lib_base}/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Fri Mar 27 2020 jess.portnoy@kaltura.com <Jess Portnoy> - v2.81.3-1
+- SUP-21019 - Internet Explorer buffering issue in livestreams
+
 * Mon Feb 17 2020 jess.portnoy@kaltura.com <Jess Portnoy> - v2.81-1
 KMS-20534 - [PLAYER] An error is received after using the continue button from a reflection point inside any Quiz Entry that its unanswered
 FEC-9593 - Incorrect video size in player containing bumper/Ad
