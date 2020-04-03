@@ -6,11 +6,11 @@
 %define confdir %{prefix}/app/configurations
 %define logdir %{prefix}/log
 %define webdir %{prefix}/web
-%define codename Orion
+%define codename Propus
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 15.20.0
+Version: 16.0.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -365,6 +365,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Fri Apr 3 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.0.0-1
+- Ver Bounce to 16.0.0
+
 * Fri Mar 27 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 15.20.0-1
 - Add date of map creation in admin console (https://github.com/kaltura/server/pull/9297)
 - PLAT-10758: `cuePointDeleted()` - avoid multiple queries in case of children (https://github.com/kaltura/server/pull/9296)
