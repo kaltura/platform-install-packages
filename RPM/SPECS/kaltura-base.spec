@@ -365,6 +365,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Sat Apr 4 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.0.0-1
+- Nightly build.
+
 * Fri Apr 3 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.0.0-1
 - Nightly build.
 
