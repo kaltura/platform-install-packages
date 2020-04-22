@@ -131,7 +131,7 @@ service httpd restart
 
 
 %changelog
-* Wed Apr 22 2020 john.hasty@kaltura.com <John Hasty> - 16.0.0-1
+* Wed Apr 22 2020 john.hasty@kaltura.com <John Hasty> - 16.0.0-2
 - Add php-pecl-ssh2 as dependency
 
 * Fri Apr 3 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.0.0-1
