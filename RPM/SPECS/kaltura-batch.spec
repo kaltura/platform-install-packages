@@ -15,7 +15,7 @@ Source1: kaltura-batch
 Source3: batch.ini.template 
 URL: http://kaltura.org
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Requires: kaltura-base, kaltura-ffmpeg, kaltura-ffmpeg-aux, php, curl, httpd, sox, ImageMagick, kaltura-sshpass, php-pecl-memcache,php-pecl-apc,memcached,kaltura-mediainfo, mod_ssl
+Requires: kaltura-base, kaltura-ffmpeg, kaltura-ffmpeg-aux, php, curl, httpd, sox, ImageMagick, kaltura-sshpass, php-pecl-ssh2, php-pecl-memcache,php-pecl-apc,memcached,kaltura-mediainfo, mod_ssl
 #php-pecl-zendopcache
 %{?el7:Requires: php-pecl-zendopcache}
 #PreReq: httpd
