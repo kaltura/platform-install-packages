@@ -1,4 +1,4 @@
-%define libzen_version  0.4.37
+%define libzen_version  0.4.38
 %define prefix /opt/kaltura
 %define libname libmediainfo
 %define debug_package %{nil}

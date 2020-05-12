@@ -3,7 +3,7 @@
  
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.81.3
+Version: v2.82.2
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -86,6 +86,22 @@ fi
 %config %{html5lib_base}/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Tue May 12 2020 jess.portnoy@kaltura.com <Jess Portnoy> - v2.82.2-1
+- FEC-10005 - investigate flow when isLive XHR call fails
+- SUP-21601 - [Issue] - Player looks 'native' after going Full-Screen
+- KMS-20622 - [KEA] Quiz Scrubbers are missing after using the "Take the quiz again" option on a quiz entry
+- KMS-20782 - [Quiz] The user is unable to submit the quiz after having a Reflection point and used the retake option
+- SUP-20818 - [IVQ] Accessibility aria-labelled-by vs aria-label
+- KMS-19979 - IVQ - Showing hint saves answer after edit for open-question
+- KMS-20600 - [Quiz] cannot submit when having a Reflection Point at the end and "no seeking" enabled
+- SUP-21282 - Video is rendering in Kaltura player and not in native IOS player when in fullscreen mode. Safari issue only
+- SUP-21243 - [IVQ Accessibility] "1 UN-ANSWERED QUESTION 2/4" no read by SR
+- SUP-21019 - Internet Explorer buffering issue in livestreams
+- SUP-21004 - Play Media with Chromecast via Mobile device using V2 Player
+- SUP-21183 - icons were truncated on iphone
+- FEV-472 - Support forwardBufferHealth in event 99
+- FEV-471 - Support manifestDownloadTime in event 99
+
 * Fri Mar 27 2020 jess.portnoy@kaltura.com <Jess Portnoy> - v2.81.3-1
 - SUP-21019 - Internet Explorer buffering issue in livestreams
 
