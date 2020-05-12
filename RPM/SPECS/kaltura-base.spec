@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 16.2.0
-Release: 1
+Release: 2
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -140,6 +140,7 @@ sed -i "s#^play_kit_js_cache_version = 1#play_kit_js_cache_version = 2#g" $RPM_B
 sed -i 's@^writers.\(.*\).filters.priority.priority\s*=\s*7@writers.\1.filters.priority.priority=4@g' $RPM_BUILD_ROOT%{confdir}/logger.template.ini 
 # our Pentaho is correctly installed under its own dir and not %prefix/bin which is the known default so, adding -k path to kitchen.sh
 sed -i 's#\(@DWH_DIR@\)$#\1 -k %{prefix}/pentaho/pdi/kitchen.sh#g' $RPM_BUILD_ROOT%{confdir}/cron/dwh.template
+sed -i 's@2\s*=\s*"kmcng"@;2 = "kmcng"@g' $RPM_BUILD_ROOT%{confdir}/elasticDynamicMap.template.ini
 rm $RPM_BUILD_ROOT%{prefix}/clients-generator/sources/android/DemoApplication/libs/libWVphoneAPI.so
 #rm $RPM_BUILD_ROOT%{prefix}/clients-generator/sources/android2/DemoApplication/libs/libWVphoneAPI.so
 rm $RPM_BUILD_ROOT%{confdir}/.project
@@ -365,6 +366,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Tue May 12 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.2.0-2
+- Disable KMCng ES search by defaul as some ENVs may not have it.
+
 * Tue May 12 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.2.0-1
 - Ver Bounce to 16.2.0
 
