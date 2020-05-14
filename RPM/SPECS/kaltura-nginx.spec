@@ -41,7 +41,7 @@ BuildRequires: libopenssl-devel
 Requires(pre): pwdutils
 %endif
 
-%define nginx_vod_module_ver 1.25
+%define nginx_vod_module_ver 1.26
 %define nginx_secure_token_ver 1.3
 %define nginx_token_validate_ver 1.1
 %define nginx_kafka_log_ver 1.0
@@ -51,11 +51,13 @@ Requires(pre): pwdutils
 %define nginx_rtmp_ver 1.2.0
 %define ngx_aws_auth_ver 1.0.1
 %define headers_more_nginx_ver 0.33
+%define set_misc_nginx_ver 0.33
+%define devel_kit_nginx_ver 0.3.1
 # end of distribution specific definitions
 
 Summary: High performance web server customized for Kaltura VOD
 Name: kaltura-nginx
-Version: 1.16.1
+Version: 1.17.10
 Release: 1 
 Vendor: Kaltura inc.
 URL: http://nginx.org/
@@ -83,6 +85,8 @@ Source19: headers-more-nginx-module-v%{headers_more_nginx_ver}.zip
 Source20: nginx-kafka-log-module-%{nginx_kafka_log_ver}.zip
 Source21: nginx-json-var-module-%{nginx_json_var_ver}.zip
 Source22: nginx-strftime-module-%{nginx_strftime_ver}.zip
+Source23: set-misc-nginx-module-v%{set_misc_nginx_ver}.zip
+Source24: devel-kit-nginx-module-v%{devel_kit_nginx_ver}.zip
 #Patch1: nginx_kaltura.diff 
 
 License: 2-clause BSD-like license
@@ -113,7 +117,7 @@ Not stripped version of nginx built with the debugging log support.
 
 %prep
 %setup -qn nginx-%{version}
-for MODULE in %{SOURCE10} %{SOURCE11} %{SOURCE12} %{SOURCE13} %{SOURCE14} %{SOURCE18} %{SOURCE19} %{SOURCE20} %{SOURCE21} %{SOURCE22};do 
+for MODULE in %{SOURCE10} %{SOURCE11} %{SOURCE12} %{SOURCE13} %{SOURCE14} %{SOURCE18} %{SOURCE19} %{SOURCE20} %{SOURCE21} %{SOURCE22} %{SOURCE24} %{SOURCE23};do 
 	unzip -o $MODULE
 done
 
@@ -171,6 +175,8 @@ export LIBRARY_PATH C_INCLUDE_PATH
 	--add-dynamic-module=./nginx-module-vts-%{nginx_vts_ver} \
 	--add-dynamic-module=./nginx-aws-auth-module-%{ngx_aws_auth_ver} \
     	--add-dynamic-module=./headers-more-nginx-module-%{headers_more_nginx_ver} \
+    	--add-dynamic-module=./ngx_devel_kit-%{devel_kit_nginx_ver} \
+    	--add-dynamic-module=./set-misc-nginx-module-%{set_misc_nginx_ver} \
         $*
 make %{?_smp_mflags}
 %{__mv} %{_builddir}/nginx-%{version}/objs/nginx \
@@ -222,6 +228,8 @@ make %{?_smp_mflags}
 	--add-module=./nginx-rtmp-module-%{nginx_rtmp_ver} \
 	--add-dynamic-module=./nginx-module-vts-%{nginx_vts_ver} \
 	--add-dynamic-module=./nginx-aws-auth-module-%{ngx_aws_auth_ver} \
+    	--add-dynamic-module=./ngx_devel_kit-%{devel_kit_nginx_ver} \
+    	--add-dynamic-module=./set-misc-nginx-module-%{set_misc_nginx_ver} \
     	--add-dynamic-module=./headers-more-nginx-module-%{headers_more_nginx_ver} \
         $*
 make %{?_smp_mflags}

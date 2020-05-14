@@ -47,6 +47,10 @@ wget $NGX_AWS_AUTH_URI -O$RPM_SOURCES_DIR/ngx_aws_auth-$NGX_AWS_AUTH_VERSION.zip
 echo "Packaged into $RPM_SOURCES_DIR/ngx_aws_auth-$NGX_AWS_AUTH_VERSION.zip"
 wget $HEADERS_MORE_NGINX_URI -O$RPM_SOURCES_DIR/headers-more-nginx-module-$HEADERS_MORE_NGINX_VERSION.zip
 echo "Packaged into $RPM_SOURCES_DIR/headers-more-nginx-module-$HEADERS_MORE_NGINX_VERSION.zip"
+wget $NGINX_SET_MISC_URI -O$RPM_SOURCES_DIR/set-misc-nginx-module-$NGINX_SET_MISC_VERSION.zip
+echo "Packaged into $RPM_SOURCES_DIR/set-misc-nginx-module-$NGINX_SET_MISC_VERSION.zip"
+wget $NGINX_DEVEL_KIT_URI -O$RPM_SOURCES_DIR/devel-kit-nginx-module-$NGINX_DEVEL_KIT_VERSION.zip
+echo "Packaged into $RPM_SOURCES_DIR/devel-kit-nginx-module-$NGINX_DEVEL_KIT_VERSION.zip"
 
 if [ -x "`which rpmbuild 2>/dev/null`" ];then
 	rpmbuild -ba $RPM_SPECS_DIR/kaltura-nginx.spec
