@@ -423,6 +423,11 @@ if [ $1 -ge 1 ]; then
 fi
 
 %changelog
+* Thu May 14 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 1.17.10-1
+- New mainline Nginx - 1.17.10 
+- Include set-misc module as an SO 
+- New Nginx VOD module ver - 1.26
+
 * Tue Sep 24 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 1.16.1-1
 - New Nginx upstream ver:
 	* fixes for vulnerabilities in HTTP/2 (CVE-2019-9511, CVE-2019-9513, CVE-2019-9516). 
