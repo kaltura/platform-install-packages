@@ -91,6 +91,7 @@ binary-indep: install
 	sed -i 's@kaltura_sphinx@kaltura-sphinx@g' $(tree)/configurations/monit/monit.d/sphinx.template.rc
 	sed -i 's@kaltura_batch@kaltura-batch@g' $(tree)/configurations/monit/monit.d/batch.template.rc
 	sed -i 's@kaltura_populate@kaltura-populate@g' $(tree)/configurations/monit/monit.d/sphinx.populate.template.rc
+	sed -i 's@2\s*=\s*"kmcng"@;2 = "kmcng"@g' $(tree)/configurations/elasticDynamicMap.template.ini
 	sed -i 's@httpd@apache2@g' $(tree)/configurations/monit/monit.d/httpd.template.rc
 	sed -i 's#@PROTOCOL@#http#g' $(tree)/configurations/monit/monit.d/httpd.template.rc
 	sed -i 's@/var/run/memcached/memcached.pid@/var/run/memcached.pid@g' $(tree)/configurations/monit/monit.d/memcached.template.rc

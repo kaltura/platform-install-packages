@@ -1,3 +1,11 @@
+kaltura-nginx (1.17.10-1) propus; urgency=medium
+
+  * New mainline Nginx - 1.17.10 
+  * Include set-misc module as an SO 
+  * New Nginx VOD module ver - 1.26
+
+ -- Jess Portnoy <jess@b0f924504114>  Thu, 14 May 2020 13:13:39 +0000
+
 kaltura-nginx (1.16.0-1) orion; urgency=medium
 
   * New upstream Nginx version [see http://nginx.org/en/CHANGES]
