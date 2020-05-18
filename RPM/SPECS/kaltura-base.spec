@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 16.2.0
-Release: 8
+Release: 9 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -366,23 +366,25 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Sun May 17 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.2.0-8
-- Nightly build.
+* Mon May 18 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.2.0-9
+- PLAT-10889: Entry replacement: pass assets rather than IDs to export (https://github.com/kaltura/server/pull/9412)
+- Update myEntryUtils.class.php (https://github.com/kaltura/server/pull/9405)
+- REACH2-845: Add Reach profile to audit trail (https://github.com/kaltura/server/pull/9404)
+- PLAT-10846: Add captions export support for all remote storage types (https://github.com/kaltura/server/pull/9403)
+- `serveFlavor` - support encrypted captions (https://github.com/kaltura/server/pull/9401)
+- PLAT-10854: handle delivery profile IDs order in `playmanifest` and `playbackContext` according to partner configuration order and remote storage order (https://github.com/kaltura/server/pull/9400)
+- Handle cases where the uploaded chunk partially overrides content that was already concatenated to the output file (https://github.com/kaltura/server/pull/9399)
+- PLAT-10865: exclude invalid flavors when checking if we should delete… (https://github.com/kaltura/server/pull/9397)
+- Check if `pcntl` is enabled before using it (https://github.com/kaltura/server/pull/9396)
+- PLAT-10829 - DRM license URL handling (https://github.com/kaltura/server/pull/9393)
+- REACH2-848: fix incorrect TAT displayed on REACH requests in admin console (https://github.com/kaltura/server/pull/9392)
+- PLAT-10856 : Add `remotestorage` from global partner when searching by profile ID (https://github.com/kaltura/server/pull/9391)
+- Batch mgr intercept `SIGINT` and `SIGTERM` (https://github.com/kaltura/server/pull/9389)
+- PLAT-10683 - Add dedicated S3 path manager (https://github.com/kaltura/server/pull/9386)
+- REACH2-853: Add missing fields to export file (https://github.com/kaltura/server/pull/9385)
+- PLAT-10838: Add entry server node id to the M3U8 URL as `sessionId` (https://github.com/kaltura/server/pull/9380)
+- PLAT-10835 - Handle `volume_map` and thumbs with remote packager (https://github.com/kaltura/server/pull/9370)
 
-* Sat May 16 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.2.0-7
-- Nightly build.
-
-* Fri May 15 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.2.0-6
-- Nightly build.
-
-* Thu May 14 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.2.0-5
-- Nightly build.
-
-* Wed May 13 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.2.0-4
-- Nightly build.
-
-* Tue May 12 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.2.0-3
-- Nightly build.
 
 * Tue May 12 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.2.0-2
 - Disable KMCng ES search by defaul as some ENVs may not have it.
