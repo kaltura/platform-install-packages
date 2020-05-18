@@ -3,7 +3,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5-studio3
-Version: v3.4.0
+Version: v3.5.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -52,6 +52,14 @@ rm -rf %{buildroot}
 %{studio_prefix}/%{version}
 
 %changelog
+* Mon May 18 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 3.5.0-1
+- FEC-9465: Internationalisation (i18n) - player localisation (#78)
+- FEC-9622: Localisation studio configuration (#78)
+- FEC-9653: https://github.com/kaltura/player-studio/pull/79
+- FEC-9621: Translate player labels to default languages (#80)
+- FEC-10019: https://github.com/kaltura/player-studio/pull/84
+- FRC-10020: https://github.com/kaltura/player-studio/pull/83
+
 * Mon Mar 18 2019 jess.portnoy@kaltura.com <Jess Portnoy> - v3.3.0-1
 - FEC-8880: add support for youtube
 - FEC-8805: playlist support
