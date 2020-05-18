@@ -1,3 +1,14 @@
+kaltura-html5-studio3 (3.5.0-1) propus; urgency=medium
+
+  * FEC-9465: Internationalisation (i18n) - player localisation (#78)
+  * FEC-9622: Localisation studio configuration (#78)
+  * FEC-9653: https://github.com/kaltura/player-studio/pull/79
+  * FEC-9621: Translate player labels to default languages (#80)
+  * FEC-10019: https://github.com/kaltura/player-studio/pull/84
+  * FRC-10020: https://github.com/kaltura/player-studio/pull/83
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 18 May 2020 12:39:43 +0000
+
 kaltura-html5-studio3 (3.4.0-1) orion; urgency=medium
 
   * New rel 
