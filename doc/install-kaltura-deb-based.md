@@ -62,7 +62,7 @@ This section is a step-by-step guide of a Kaltura installation.
 
 ```bash
 # wget -O - http://installrepo.kaltura.org/repo/apt/debian/kaltura-deb-curr.gpg.key|apt-key add -
-# echo "deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/debian orion main" > /etc/apt/sources.list.d/kaltura.list
+# echo "deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/debian propus main" > /etc/apt/sources.list.d/kaltura.list
 ```
 
 *NOTE: for Debian, the non-free repo must also be enabled*
@@ -109,7 +109,7 @@ Kaltura now offers beta deb packages of PHP 7 which can be installed from our re
 In order to install the server using these packages, simply run:
 ```bash
 # wget -O - http://installrepo.kaltura.org/repo/apt/debian/kaltura-deb-curr.gpg.key|apt-key add -
-# echo "deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/debian orion main" > /etc/apt/sources.list.d/kaltura.list
+# echo "deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/debian propus main" > /etc/apt/sources.list.d/kaltura.list
 # aptitude update
 # aptitude install kaltura-php7
 ```
@@ -157,7 +157,7 @@ And install as described above.
 
 If using Debian: Jessie [8] or Ubuntu: Trusty [14.04], edit /etc/apt/sources.list.d/kaltura.list so that it reads:
 ```
-deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/debian orion main
+deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/debian propus main
 ```
 
 And import the GPG key with:
@@ -167,7 +167,7 @@ And import the GPG key with:
 
 Or, if using Ubuntu Xenial [16.04]:
 ```
-deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/xenial orion main
+deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/xenial propus main
 ```
 And import the GPG key with:
 ```
