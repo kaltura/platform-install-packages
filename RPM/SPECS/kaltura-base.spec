@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 16.2.0
-Release: 9 
+Release: 11
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -43,7 +43,8 @@ Source42: KalturaCrossKalturaDistributionJobProviderData.php
 Source43: CrossKalturaDistributionCustomDataField.php 
 Source44: kCrossKalturaDistributionJobProviderData.php 
 Source45: CrossKalturaDistributionProfile.php
-
+Source46: CrossKalturaDistributionPlugin.php
+Source47: CrossKalturaEntryObjectsContainer.php
 
 URL: https://github.com/kaltura/server/tree/%{codename}-%{version}
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -163,10 +164,11 @@ cp %{SOURCE25} $RPM_BUILD_ROOT%{confdir}/logrotate/
 cp %{SOURCE26} $RPM_BUILD_ROOT%{confdir}/logrotate/
 
 # Kalt connector
-cp %{SOURCE39} $RPM_BUILD_ROOT%{prefix}/app/plugins/content_distribution/providers/cross_kaltura/lib/batch/
+cp %{SOURCE39} %{SOURCE47} $RPM_BUILD_ROOT%{prefix}/app/plugins/content_distribution/providers/cross_kaltura/lib/batch/
 cp %{SOURCE40} %{SOURCE42} $RPM_BUILD_ROOT%{prefix}/app/plugins/content_distribution/providers/cross_kaltura/lib/api 
 cp %{SOURCE41} $RPM_BUILD_ROOT%{prefix}/app/plugins/content_distribution/providers/cross_kaltura/lib/admin
 cp %{SOURCE43} %{SOURCE44} %{SOURCE45}  $RPM_BUILD_ROOT%{prefix}/app/plugins/content_distribution/providers/cross_kaltura/lib/model
+cp %{SOURCE46} $RPM_BUILD_ROOT%{prefix}/app/plugins/content_distribution/providers/cross_kaltura/ 
 
 # David Bezemer's Admin console and monit patches:
 cp %{SOURCE17} $RPM_BUILD_ROOT%{prefix}/app/admin_console/configs/navigation.xml
@@ -366,6 +368,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Thu May 21 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.2.0-11
+- Upgrade process should not require interactive inputs (https://github.com/kaltura/server/pull/9428)
+
 * Mon May 18 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.2.0-9
 - PLAT-10889: Entry replacement: pass assets rather than IDs to export (https://github.com/kaltura/server/pull/9412)
 - Update myEntryUtils.class.php (https://github.com/kaltura/server/pull/9405)

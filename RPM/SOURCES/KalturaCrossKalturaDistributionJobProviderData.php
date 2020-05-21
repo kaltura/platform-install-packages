@@ -30,6 +30,12 @@ class KalturaCrossKalturaDistributionJobProviderData extends KalturaConfigurable
     public $distributedCaptionAssets;
 
     /**
+     * Key-value array where the keys are IDs of distributed fileassets in the source account and the values are the matching IDs in the target account
+     * @var string
+     */
+    public $distributedFileAssets;
+
+    /**
      * Key-value array where the keys are IDs of distributed caption assets in the source account and the values are the matching IDs in the target account
      * @var string
      */
@@ -78,6 +84,7 @@ class KalturaCrossKalturaDistributionJobProviderData extends KalturaConfigurable
 		$this->distributedThumbAssets = $entryDistributionDb->getFromCustomData(CrossKalturaDistributionCustomDataField::DISTRIBUTED_THUMB_ASSETS);
 		$this->distributedMetadata = $entryDistributionDb->getFromCustomData(CrossKalturaDistributionCustomDataField::DISTRIBUTED_METADATA);
 		$this->distributedCaptionAssets = $entryDistributionDb->getFromCustomData(CrossKalturaDistributionCustomDataField::DISTRIBUTED_CAPTION_ASSETS);
+		$this->distributedFileAssets = $entryDistributionDb->getFromCustomData(CrossKalturaDistributionCustomDataField::DISTRIBUTED_FILE_ASSETS);
 		$this->distributedCuePoints = $entryDistributionDb->getFromCustomData(CrossKalturaDistributionCustomDataField::DISTRIBUTED_CUE_POINTS);
 		$this->distributedThumbCuePoints = $entryDistributionDb->getFromCustomData(CrossKalturaDistributionCustomDataField::DISTRIBUTED_THUMB_CUE_POINTS);
 		$this->distributedTimedThumbAssets = $entryDistributionDb->getFromCustomData(CrossKalturaDistributionCustomDataField::DISTRIBUTED_TIMED_THUMB_ASSETS);
@@ -90,6 +97,7 @@ class KalturaCrossKalturaDistributionJobProviderData extends KalturaConfigurable
 		'distributedThumbAssets',
 		'distributedMetadata',
 		'distributedCaptionAssets',
+		'distributedFileAssets',
     	'distributedCuePoints',
     	'distributedThumbCuePoints',
 	    'distributedTimedThumbAssets',

@@ -31,6 +31,12 @@ class kCrossKalturaDistributionJobProviderData extends kDistributionJobProviderD
     protected $distributedCaptionAssets;
 
     /**
+     * array of information about distributed file assets
+     * @var string
+     */
+    protected $distributedFileAssets;
+
+    /**
      * array of information about distributed caption assets
      * @var string
      */
@@ -116,6 +122,23 @@ class kCrossKalturaDistributionJobProviderData extends kDistributionJobProviderD
     public function setDistributedCaptionAssets ($distributedCaptionAssets)
     {
         $this->distributedCaptionAssets = $distributedCaptionAssets;
+    }
+
+
+	/**
+     * @return the $distributedFileAssets
+     */
+    public function getDistributedFileAssets ()
+    {
+        return $this->distributedFileAssets;
+    }
+
+	/**
+     * @param string $distributedFileAssets
+     */
+    public function setDistributedFileAssets ($distributedFileAssets)
+    {
+        $this->distributedFileAssets = $distributedFileAssets;
     }
 
 

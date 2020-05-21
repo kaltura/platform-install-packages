@@ -3,7 +3,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib3
-Version: 0.51.3
+Version: 0.53.7
 Release: 2
 License: AGPLv3+
 Group: Server/Platform 
@@ -49,6 +49,12 @@ rm -rf %{buildroot}
 %{html5lib3_base}
 
 %changelog
+* Thu May 21 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 0.53.7-1
+- FEC-9109: add DRM Load time metric (#305) (e0b267e)
+- Remove French (fr) translation file (5529611)
+- FEC-9734: auto play doesn't works, if "playsinline"=false on all platforms (#307) 
+- New RAPT plugin (0.2.4)
+
 * Mon Mar 16 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 0.51.3-2
 - New RAPT/PATH ver - 0.1.12
 

@@ -106,6 +106,8 @@ class CrossKalturaDistributionEngine extends DistributionEngine implements
 	protected $mapCaptionParamsIds = array();
 	protected $mapAttachmentParamsIds = array();
 
+	protected $srcPlaylistEntList = array();
+	protected $trgtPlaylistEntList = array();
 	/**
 	 * @var CrossKalturaEntryObjectsContainer
 	 */
@@ -131,6 +133,7 @@ class CrossKalturaDistributionEngine extends DistributionEngine implements
 		$this->mapThumbParamsIds = array();
 		$this->mapCaptionParamsIds = array();
 		$this->mapAttachmentParamsIds = array();
+		$this->mapFileParamsIds = array();
 		$this->fieldValues = array();
 		$this->sourceObjects = null;
 	}
@@ -285,6 +288,41 @@ class CrossKalturaDistributionEngine extends DistributionEngine implements
 
 		// get entry
 		$entry = $client->baseEntry->get($entryId);
+		if ($entry->type == KalturaEntryType::PLAYLIST ){
+			// let's find the remote IDs of the distributed entries this list includes
+			$contentDistributionPlugin = KalturaContentDistributionClientPlugin::get($this->sourceClient);
+			$filter = new KalturaEntryDistributionFilter();
+			$filter->entryIdIn = $entry->playlistContent;
+			$filter->distributionProfileIdEqual = $data->distributionProfileId;
+			$playlistEntriesArr=explode(',',$entry->playlistContent);
+			$numOfEntries=count($playlistEntriesArr);
+			while (true){
+				try {
+					$distributedEntryList = $contentDistributionPlugin->entryDistribution->listAction($filter, null);
+					$distributedEntries=$distributedEntryList->totalCount;
+				} catch (Exception $e) {
+					echo $e->getMessage();
+				}
+				if ($numOfEntries !=$distributedEntries){
+					sleep(10);
+					continue;
+				}
+				// populate the array of original and new entries for the playList; we will use this to set playlistContent on the target obj and to replace reference in the fileAssets (if RAPT)
+				
+				foreach ($distributedEntryList->objects as $dentry){
+					if (!isset($dentry->remoteId) || empty($dentry->remoteId)){
+						sleep(10);
+						break;
+					}
+					$this->trgtPlaylistEntList[] = $dentry->remoteId; 
+					$this->srcPlaylistEntList[] = $dentry->entryId;
+				}	
+				if (count($this->trgtPlaylistEntList) == $numOfEntries){
+					break;
+				}
+			}
+		}
+
 
 		// get entry's flavor assets chosen for distribution
 		$flavorAssets = array();
@@ -392,6 +430,31 @@ class CrossKalturaDistributionEngine extends DistributionEngine implements
 		   KalturaLog::err('Failed to list quiz objects on source entry - ' . $entryId .': ' .$e->getMessage());
 		}
 
+		// get entry's file assets
+		$fileAssets = array();
+		$fileAssetFilter = new KalturaFileAssetFilter();
+		$fileAssetFilter->objectIdEqual = $entryId;
+		$fileAssetFilter->fileAssetObjectTypeEqual = KalturaFileAssetObjectType::ENTRY;
+		try {
+			$fileAssetsList = $client->fileAsset->listAction($fileAssetFilter);
+			foreach ($fileAssetsList->objects as $asset)
+			{
+				$fileAssets[$asset->id] = $asset;
+			}
+		}
+		catch (Exception $e) {
+			KalturaLog::err('Cannot get list of file assets - '.$e->getMessage());
+			throw $e;
+		}
+
+
+		// get file assets content
+		$fileAssetsContent = array();
+		foreach ($fileAssets as $fileAsset)
+		{
+			$fileAssetsContent[$fileAsset->id] = $this->getAssetContentResource($fileAsset->id, $client->fileAsset, $remoteFileAssetContent);
+		}
+
 		// get entry's caption assets
 		$captionAssetClient = KalturaCaptionClientPlugin::get($client);
 		$captionAssets = array();
@@ -459,7 +522,9 @@ class CrossKalturaDistributionEngine extends DistributionEngine implements
 					 * @var $cuePoint KalturaCuePoint
 					 */
 					if ($cuePoint->cuePointType != KalturaCuePointType::THUMB){
-						if ($cuePoint->cuePointType == KalturaCuePointType::ANNOTATION && $cuePoint->tags =='KMS_public_comment'){
+						/* skip if this is a comment or a qna operational cuepoint
+						comments could  be exported but not with their original parents and it feels undesired in any case */
+						if ($cuePoint->tags =='KMS_public_comment' || $cuePoint->tags=='player-qna-settings-update'){
 							continue;
 						}
 						$cuePoints[$cuePoint->id] = $cuePoint;
@@ -486,6 +551,8 @@ class CrossKalturaDistributionEngine extends DistributionEngine implements
 		$entryObjects->thumbAssets = $thumbAssets;
 		$entryObjects->timedThumbAssets = $timedThumbAssets;
 		$entryObjects->thumbAssetsContent = $thumbAssetsContent;
+		$entryObjects->fileAssets= $fileAssets;
+		$entryObjects->fileAssetsContent = $fileAssetsContent;
 		$entryObjects->captionAssets = $captionAssets;
 		$entryObjects->captionAssetsContent = $captionAssetsContent;
 		$entryObjects->attachmentAssets = $attachmentAssets;
@@ -580,6 +647,9 @@ class CrossKalturaDistributionEngine extends DistributionEngine implements
 			$options->fileName = $assetId;
 			return $assetService->getUrl($assetId, null, false, $options);
 		}
+		if ( $assetService instanceof KalturaFileAssetService ) {
+			return $assetService->serve($assetId);
+		}
 		
 		return $assetService->getUrl($assetId);
 	}
@@ -633,13 +703,16 @@ class CrossKalturaDistributionEngine extends DistributionEngine implements
 		$targetEntry->userId = $this->getValueForField(KalturaCrossKalturaDistributionField::BASE_ENTRY_USER_ID);
 		$targetEntry->tags = $this->getValueForField(KalturaCrossKalturaDistributionField::BASE_ENTRY_TAGS);
 		//KalturaLog::info("Zoe and James dist to categories: " . print_r($this->distributeCategories,true) . "\n");
-		if ($this->distributeCategories){
-			$targetEntry->categories = $this->designatedCategories;
-			//KalturaLog::info("Zoe and James dist to des categories: " . print_r($this->designatedCategories,true) . "\n");
+		// RAPT media entries are associated with the 'MediaSpace>PathNodes' cat in order to allow baseentry.get() regardless of other cat associations.
+		if ($sourceEntry->type != KalturaEntryType::PLAYLIST && $sourceEntry->adminTags === 'raptentry' ){
+			$targetEntry->categories = 'MediaSpace>PathNodes';
 		}else{
-			$targetEntry->categories = $this->getValueForField(KalturaCrossKalturaDistributionField::BASE_ENTRY_CATEGORIES);
+			if ($this->distributeCategories){
+				$targetEntry->categories = $this->designatedCategories;
+			}else{
+				$targetEntry->categories = $this->getValueForField(KalturaCrossKalturaDistributionField::BASE_ENTRY_CATEGORIES);
 
-			//KalturaLog::info("Zoe and James: " . $targetEntry->categories . "\n");
+			}
 		}
 		$targetEntry->categoriesIds = null;
 		if ($sourceEntry->sourceType == 37 || $sourceEntry->sourceType == 36 || $sourceEntry->sourceType == 35){
@@ -651,6 +724,10 @@ class CrossKalturaDistributionEngine extends DistributionEngine implements
 		$targetEntry->endDate = $this->getValueForField(KalturaCrossKalturaDistributionField::BASE_ENTRY_END_DATE);
 		$targetEntry->referenceId = $this->getValueForField(KalturaCrossKalturaDistributionField::BASE_ENTRY_REFERENCE_ID);
 		$targetEntry->licenseType = $this->getValueForField(KalturaCrossKalturaDistributionField::BASE_ENTRY_LICENSE_TYPE);
+		if ($sourceEntry->type == KalturaEntryType::PLAYLIST && !empty($this->trgtPlaylistEntList)){
+			// if playlist, we need to update the contents
+			$targetEntry->playlistContent=implode(',',$this->trgtPlaylistEntList);
+		}
 		$catFilter = new KalturaCategoryFilter();
 		$catFilter->fullNameIn = $targetEntry->categories;
 		$targetCategories = $this->targetClient->category->listAction($catFilter,null);
@@ -782,6 +859,15 @@ class CrossKalturaDistributionEngine extends DistributionEngine implements
 	{
 		return $this->transformAssets($sourceCaptionAssets, $this->mapCaptionParamsIds, 'captionParamsId');
 	}
+	/**
+	 * Transform source file assets to target objects ready for insert/update
+	 * @param array<KalturaFileAsset> $sourceFileAssets
+	 * @return array<KalturaFileAsset>
+	 */
+	protected function transformFileAssets(array $sourceFileAssets)
+	{
+		return $this->transformAssets($sourceFileAssets, $this->mapFileParamsIds);
+	}
 
 	/**
 	 * Transform source attachment assets to target objects ready for insert/update
@@ -801,7 +887,7 @@ class CrossKalturaDistributionEngine extends DistributionEngine implements
 	 * @param string $paramsFieldName
 	 * @return array<KalturaAsset>
 	 */
-	protected function transformAssets(array $sourceAssets, array $mapParams, $paramsFieldName = null)
+	protected function transformAssets(array $sourceAssets, array $mapParams=array(), $paramsFieldName = null)
 	{
 		if (!count($sourceAssets)) {
 			return array();
@@ -884,6 +970,8 @@ class CrossKalturaDistributionEngine extends DistributionEngine implements
 		{
 			$targetObjects->captionAssets = $this->transformCaptionAssets($sourceObjects->captionAssets); // caption assets
 			$targetObjects->captionAssetsContent = $sourceObjects->captionAssetsContent; // caption assets content - already transformed
+			$targetObjects->fileAssets = $this->transformFileAssets($sourceObjects->fileAssets,array()); // file assets
+			$targetObjects->fileAssetsContent = $sourceObjects->fileAssetsContent; // file assets content - already transformed
 		}
 		if ($this->distributeCuePoints)
 		{
@@ -931,6 +1019,17 @@ class CrossKalturaDistributionEngine extends DistributionEngine implements
 	}
 
 	/**
+	 * @return array of arguments that should be passed to fileAsset->add api action
+	 * @param KalturaCuePoint $newObj
+	 */
+	protected function getFileAssetAddArgs(KalturaFileAsset $newObj)
+	{
+		return array(
+			$newObj
+		);
+	}
+
+	/**
 	 * @return array of arguments that should be passed to cuepoint->add api action
 	 * @param KalturaCuePoint $newObj
 	 */
@@ -961,6 +1060,7 @@ class CrossKalturaDistributionEngine extends DistributionEngine implements
 		$data->providerData->distributedMetadata = $this->getDistributedMapForObjects($this->sourceObjects->metadataObjects, $syncedObjects->metadataObjects);
 		$data->providerData->distributedQuiz = $this->getDistributedMapForObjects($this->sourceObjects->quizObjects, $syncedObjects->quizObjects);
 		$data->providerData->distributedCaptionAssets = $this->getDistributedMapForObjects($this->sourceObjects->captionAssets, $syncedObjects->captionAssets);
+		$data->providerData->distributedFileAssets = $this->getDistributedMapForObjects($this->sourceObjects->fileAssets, $syncedObjects->fileAssets);
 
 		$data->providerData->distributedAttachmentAssets = $this->getDistributedMapForObjects($this->sourceObjects->attachmentAssets, $syncedObjects->attachmentAssets);
 		$data->providerData->distributedCuePoints = $this->getDistributedMapForObjects($this->sourceObjects->cuePoints, $syncedObjects->cuePoints);
@@ -1136,7 +1236,18 @@ class CrossKalturaDistributionEngine extends DistributionEngine implements
 			else
 			{
 				KalturaLog::info('Updating content for source asset id ['.$sourceAssetId.'] target id ['.$targetAssetId.']');
-				$targetClientService->setContent($targetAssetId, $targetAssetContent);
+				if ($targetClientService instanceof KalturaFileAssetService) {
+					$contentResource = new KalturaStringResource();
+					if (!empty($this->srcPlaylistEntList) && !empty($this->trgtPlaylistEntList)){
+						//KalturaLog::info('ZFP173: ' .print_r($targetAssetContent->url,true));
+  						$contentResource->content = str_replace($this->srcPlaylistEntList,$this->trgtPlaylistEntList,kFile::downloadUrlToString($targetAssetContent->url,1));
+					}
+
+    					$result = $targetClientService->setContent($targetAssetId, $contentResource);
+					KalturaLog::info(print_r($targetAssetContent,true));	
+				}else{	
+					$targetClientService->setContent($targetAssetId, $targetAssetContent);
+				}
 			}
 		}
 	}
@@ -1162,7 +1273,15 @@ class CrossKalturaDistributionEngine extends DistributionEngine implements
 		else
 		{
 			// add entry
-			$syncedObjects->entry = $this->targetClient->baseEntry->add($targetObjects->entry);
+			if ($targetObjects->entry->type == KalturaEntryType::PLAYLIST ){
+
+				// this is a playlist
+				// fileAssets
+				$syncedObjects->entry = $this->targetClient->playlist->add($targetObjects->entry);
+			}else{	
+				$syncedObjects->entry = $this->targetClient->baseEntry->add($targetObjects->entry);
+			}
+
 			$targetEntryId = $syncedObjects->entry->id;
 			KalturaLog::info('New target entry added with id ['.$targetEntryId.']');
 		}
@@ -1246,6 +1365,29 @@ class CrossKalturaDistributionEngine extends DistributionEngine implements
 			);
 		}
 
+		foreach ($targetObjects->fileAssets as $fileAsset)
+		{
+			/* @var $fileAsset KalturaFileAsset */
+			$fileAsset->objectId = $targetEntryId;
+		}
+		$syncedObjects->fileAssets = $this->syncTargetEntryObjects(
+			$this->targetClient->fileAsset,
+			$targetObjects->fileAssets,
+			$this->sourceObjects->fileAssets,
+			$jobData->providerData->distributedFileAssets,
+			$targetEntryId,
+			'getFileAssetAddArgs'
+		);
+
+
+		// sync file content
+		$this->syncAssetsContent(
+			$this->targetClient->fileAsset,
+			$targetObjects->fileAssetsContent,
+			$syncedObjects->fileAssets,
+			$jobData->providerData->distributedFileAssets,
+			$this->sourceObjects->fileAssets
+		);
 
 		// sync cue points
 		if ($this->distributeCuePoints)
