@@ -1,3 +1,12 @@
+kaltura-html5lib3 (0.53.7-1) propus; urgency=medium
+
+  * FEC-9109: add DRM Load time metric (#305) (e0b267e)
+  * Remove French (fr) translation file (5529611)
+  * FEC-9734: auto play doesn't works, if "playsinline"=false on all platforms (#307) 
+  * New RAPT plugin (0.2.4)
+
+ -- Jess Portnoy <jess@b0f924504114>  Thu, 21 May 2020 14:24:06 +0000
+
 kaltura-html5lib3 (0.51.3-2) orion; urgency=medium
 
   * New RAPT/PATH ver - 0.1.12  
