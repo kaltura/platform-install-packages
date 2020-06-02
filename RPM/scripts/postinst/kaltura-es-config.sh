@@ -133,6 +133,6 @@ chown -R kaltura.apache $BASE_DIR/app/cache/
 service httpd restart
 service memcached restart
 set +e
-service kaltura-elastic-populate stop || true
-service kaltura-elastic-populate start
+/etc/init.d/kaltura-elastic-populate stop || true
+/etc/init.d/kaltura-elastic-populate start
 

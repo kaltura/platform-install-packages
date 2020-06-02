@@ -10,7 +10,7 @@
 Summary: Kaltura PlayKit Bundler 
 Name: kaltura-playkit-bundler 
 Version: 1.2.0
-Release: 1
+Release: 2
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-v%{version}.tar.gz
@@ -70,7 +70,7 @@ fi
 
 
 %post
-cd %{prefix} && npm install && npm install -g gulp forever
+cd %{prefix} && npm install yarn -g && yarn install -g forever gulp@3.9.1
 /sbin/chkconfig --add %{name}
 if [ -r %{kaltura_prefix}/app/configurations/local.ini ];then
 	SALT=`grep remote_addr_header_salt %{kaltura_prefix}/app/configurations/local.ini|sed 's@^remote_addr_header_salt\s*=\s*\(.*\)$@\1@g'| sed 's@"@@g'`
@@ -98,6 +98,9 @@ fi
 %doc %{prefix}/README.md
 
 %changelog
+* Tue Jun 2 2020 jess.portnoy@kaltura.com <Jess Portnoy> - v1.2.0-2
+- Deploying using `yarn` rather than `npm`
+
 * Mon Mar 16 2020 jess.portnoy@kaltura.com <Jess Portnoy> - v1.2.0-1
 - feat(FEC-9465): Internationalization (i18n) - player localization (#8)
 - fix(FEC-9458): bundle builder doesn't order dependencies correctly (#8)

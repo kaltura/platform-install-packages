@@ -238,6 +238,10 @@ CONF_FILES=`find $APP_DIR/configurations  -type f| grep -v template`
 
 find /etc/httpd/conf.d -type l -name "zzzkaltura*" -exec rm {} \;
 ln -fs $MAIN_APACHE_CONF /etc/httpd/conf.d/zzz`basename $MAIN_APACHE_CONF`
+if [ -d /etc/php-fpm.d ];then
+        ln -fs $APP_DIR/configurations/php/kaltura-fpm.ini /etc/php-fpm.d/zzzkaltura.conf
+fi
+
 
 if [ -z "$CONFIG_CHOICE" ];then
 cat << EOF 
