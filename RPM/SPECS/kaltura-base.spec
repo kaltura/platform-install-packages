@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 16.3.0
-Release: 8
+Release: 9
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -368,26 +368,38 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Sun May 31 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.3.0-8
-- Nightly build.
-
-* Sat May 30 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.3.0-7
-- Nightly build.
-
-* Fri May 29 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.3.0-6
-- Nightly build.
-
-* Thu May 28 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.3.0-5
-- Nightly build.
-
-* Wed May 27 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.3.0-4
-- Nightly build.
-
-* Tue May 26 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.3.0-3
-- Nightly build.
-
-* Mon May 25 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.3.0-2
-- Nightly build.
+* Tue Jun 2 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.3.0-9
+- PLAT-10930: Add permission ANALYTICS_BASE to tag search (https://github.com/kaltura/server/pull/9453)
+- PLAT-10938: MR infinite loop (https://github.com/kaltura/server/pull/9452)
+- REACH2-863: Fix error in audit trail service (https://github.com/kaltura/server/pull/9450)
+- PLAT-10935: Enable interactivity for RAPT playlist (https://github.com/kaltura/server/pull/9449)
+- PLAT-10937: Fix crash that was introduced in PLAT-10780 (https://github.com/kaltura/server/pull/9448)
+- Always check if `pathOnly` is sent before checking the second condition (https://github.com/kaltura/server/pull/9446)
+- PLAT-10931: Use `serveFlavor` when exporting from remote storage periodic (https://github.com/kaltura/server/pull/9442)
+- PLAT-10780: Make account owner the owner of all copied content from template partner (99) (https://github.com/kaltura/server/pull/9441)
+- SUP-22038: OnPrem: Add `playsviews` cache update (https://github.com/kaltura/server/pull/9438)
+- PLAT-10769: `lockFileSyncsAction`: set `updatedAt` (https://github.com/kaltura/server/pull/9437)
+- LIV-114: Get max stream limit from partner (https://github.com/kaltura/server/pull/9436)
+- REACH2-863: Add audit trail to admin console (https://github.com/kaltura/server/pull/9435)
+- PLAT-10889: `kClipManager`: introduce `LOCK_EXPIRY` (https://github.com/kaltura/server/pull/9434)
+- PLAT-10769: `KAsyncStoragePeriodicPurge`: add range to the query (https://github.com/kaltura/server/pull/9433)
+- PLAT-10927: `playManifest`: Return local and remote flavors (https://github.com/kaltura/server/pull/9432)
+- PLAT-10889 - `startConcat()` add locking mechanism during clip/trim flow (https://github.com/kaltura/server/pull/9431)
+- PLAT-10919: Added `UserService::validateLoginDataParams()` (https://github.com/kaltura/server/pull/9430)
+- PLAT-10920 chunked encoding updates (https://github.com/kaltura/server/pull/9429)
+- PLAT-10895: Add storage class to `S3` uploaded objects (https://github.com/kaltura/server/pull/9425)
+- REACH2-857: Import catalog item CSV from admin console (https://github.com/kaltura/server/pull/9424)
+- PLAT-10913 - Handle `storagePriority` and local/external `fileSync` retrieval (https://github.com/kaltura/server/pull/9423)
+- PLAT-10894: Periodically delete local file syncs that were exported (https://github.com/kaltura/server/pull/9420)
+- PLAT-10892: Return S3 file location or local file path for `pathOnly` requests coming from `S3` supported packager (https://github.com/kaltura/server/pull/9419)
+- Support external YouTube as entry source type in analytics reports (https://github.com/kaltura/server/pull/9416)
+- PLAT-10890 - retrieve `lastFileSyncId` from DB in case it's not found in cache (https://github.com/kaltura/server/pull/9414)
+- PLAT-10806: Introduced `kNetworkUtils::isAuthenticatedURI()` (https://github.com/kaltura/server/pull/9413)
+- PLAT-10874: Add ability to set partner package type in cloud storage (https://github.com/kaltura/server/pull/9411)
+- PLAT-10810: Export content using serve from local or remote (https://github.com/kaltura/server/pull/9376)
+- QOE-256: update `QOE` error tracking (https://github.com/kaltura/server/pull/9286)
+- QOE-254: update `QOE` experience (https://github.com/kaltura/server/pull/9285)
+- Util script to move file syncs to the other DC(https://github.com/kaltura/server/pull/9274)
 
 * Mon May 25 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.3.0-1
 - Ver Bounce to 16.3.0
