@@ -70,7 +70,7 @@ fi
 
 
 %post
-cd %{prefix} && npm install yarn -g && yarn install -g forever gulp@3.9.1
+cd %{prefix} && npm install yarn -g && yarn install && yarn install -g forever gulp@3.9.1
 /sbin/chkconfig --add %{name}
 if [ -r %{kaltura_prefix}/app/configurations/local.ini ];then
 	SALT=`grep remote_addr_header_salt %{kaltura_prefix}/app/configurations/local.ini|sed 's@^remote_addr_header_salt\s*=\s*\(.*\)$@\1@g'| sed 's@"@@g'`
