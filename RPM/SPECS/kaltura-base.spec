@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 16.3.0
-Release: 10 
+Release: 11
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -368,6 +368,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Thu Jun 4 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.3.0-11
+- Fix Admin Console and Chrome 83 bug - https://github.com/kaltura/server/pull/9473
+
 * Tue Jun 2 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.3.0-9
 - PLAT-10930: Add permission ANALYTICS_BASE to tag search (https://github.com/kaltura/server/pull/9453)
 - PLAT-10938: MR infinite loop (https://github.com/kaltura/server/pull/9452)
