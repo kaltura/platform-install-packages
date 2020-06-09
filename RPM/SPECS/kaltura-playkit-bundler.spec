@@ -10,7 +10,7 @@
 Summary: Kaltura PlayKit Bundler 
 Name: kaltura-playkit-bundler 
 Version: 1.2.0
-Release: 9
+Release: 11
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-v%{version}.tar.gz
@@ -70,7 +70,7 @@ fi
 
 
 %post
-cd %{prefix} && npm install yarn -g && yarn install && yarn  add global  forever gulp@4.0.2 && npm install natives
+cd %{prefix} && rm -rf %{prefix}/node_modules && yarn remove gulp && npm remove gulp && npm install yarn -g && yarn install && yarn add gulp@3.9.1 && yarn add global  forever gulp@3.9.1
 /sbin/chkconfig --add %{name}
 if [ -r %{kaltura_prefix}/app/configurations/local.ini ];then
 	SALT=`grep remote_addr_header_salt %{kaltura_prefix}/app/configurations/local.ini|sed 's@^remote_addr_header_salt\s*=\s*\(.*\)$@\1@g'| sed 's@"@@g'`
@@ -98,6 +98,9 @@ fi
 %doc %{prefix}/README.md
 
 %changelog
+* Tue Jun 9 2020 jess.portnoy@kaltura.com <Jess Portnoy> - v1.2.0-11
+- Revert to Gulp 3.9.1 
+
 * Mon Jun 8 2020 jess.portnoy@kaltura.com <Jess Portnoy> - v1.2.0-9
 - Use Gulp 4.0.2
 * Tue Jun 2 2020 jess.portnoy@kaltura.com <Jess Portnoy> - v1.2.0-2
