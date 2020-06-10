@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.33
-Release: 101 
+Release: 104
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -82,6 +82,9 @@ find %{_sysconfdir}/logrotate.d -type l -name "kaltura_*" -exec rm {} \;
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Wed Jun 10 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.33.103
+- Support PHP FPM 
+
 * Thu Oct 31 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.33-81
 - KMC SSO partner was introduced (https://github.com/kaltura/server/pull/8843/files)
 
