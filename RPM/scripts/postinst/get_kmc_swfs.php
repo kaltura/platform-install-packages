@@ -58,7 +58,7 @@ foreach($swfPaths as $swfPath)
 		echo "Content returned for [$url]\n";
 	}
 	
-	if(!isset($headers['content-type']) || $headers['content-type'] != 'application/x-shockwave-flash'){
+	if(!isset($headers['content-type']) || ($headers['content-type'] !== 'application/x-shockwave-flash' && $headers['content-type'] !== 'application/vnd.adobe.flash.movie')){
 		echo "Fetching URL [$url] failed, wrong content type [" . $headers['content-type'] . "]\n";
 		exit(-2);
 	}else{
