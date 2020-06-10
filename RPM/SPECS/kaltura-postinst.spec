@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.33
-Release: 105
+Release: 107
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -82,7 +82,8 @@ find %{_sysconfdir}/logrotate.d -type l -name "kaltura_*" -exec rm {} \;
 %config %{prefix}/app/configurations/*
 
 %changelog
-* Wed Jun 10 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.33.103
+* Wed Jun 10 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.33.107
+- Elasticsearch plugin is already enabled by default, no need to enable in kaltura-es-config
 - Support PHP FPM 
 
 * Thu Oct 31 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.33-81

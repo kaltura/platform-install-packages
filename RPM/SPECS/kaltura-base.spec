@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 16.4.0
-Release: 2
+Release: 3 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -45,6 +45,7 @@ Source44: kCrossKalturaDistributionJobProviderData.php
 Source45: CrossKalturaDistributionProfile.php
 Source46: CrossKalturaDistributionPlugin.php
 Source47: CrossKalturaEntryObjectsContainer.php
+Source48: php.yml
 
 URL: https://github.com/kaltura/server/tree/%{codename}-%{version}
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -185,6 +186,9 @@ cp %{SOURCE37} $RPM_BUILD_ROOT%{prefix}/app/start/img/newsletter.png
 cp %{SOURCE38} $RPM_BUILD_ROOT%{prefix}/app/start/css/landing-page.css
 mkdir -p $RPM_BUILD_ROOT%{webdir}/content
 tar zxf %{SOURCE10} -C $RPM_BUILD_ROOT%{webdir}/content
+
+# tmp patch until https://github.com/kaltura/server/pull/9492 is merged
+cp %{SOURCE48} $RPM_BUILD_ROOT%{prefix}/app/vendor/symfony-data/config/php.yml
 
 
 %{__mkdir_p} $RPM_BUILD_ROOT%{_sysconfdir}/profile.d

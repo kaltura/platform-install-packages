@@ -3,8 +3,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib3
-Version: 0.53.7
-Release: 2
+Version: 0.54.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz 
@@ -49,6 +49,11 @@ rm -rf %{buildroot}
 %{html5lib3_base}
 
 %changelog
+* Wed Jun 10 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 0.54.0-1
+- FEC-10053: Subtitle issue for Player with TTML in MP4 container (#316) (c053ac2)
+- FEC-10155: text track language is incorrect on cast disconnecting (#318) (75690a3), closes #188
+- FEC-9631: add support for out of band text tracks on cast sdk (#319) (16562b6)
+
 * Thu May 21 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 0.53.7-1
 - FEC-9109: add DRM Load time metric (#305) (e0b267e)
 - Remove French (fr) translation file (5529611)

@@ -121,13 +121,10 @@ echo "elasticCluster = kaltura
 elasticServer = $ES_HOST 
 elasticPort = $ES_PORT
 " >$APP_DIR/configurations/elastic/populate/`hostname`.ini
-sed -i 's#^;ElasticSearch#ElasticSearch#g' $APP_DIR/configurations/plugins.ini
 sed -i -e "s#@ELASTIC_PORT@#$ES_PORT#g" -e "s#@ELASTIC_HOST@#$ES_HOST#g" $APP_DIR/configurations/elastic.ini
-php $APP_DIR/deployment/base/scripts/installPlugins.php 
 find $APP_DIR/cache/ -type f -exec rm {} \;
-php $APP_DIR/generator/generate.php
-find $BASE_DIR/app/cache/ -type d -exec chmod 775 {} \;  
-find $BASE_DIR/app/cache/ -type f -exec chmod 664 {} \;  
+find $APP_DIR/cache/ -type d -exec chmod 775 {} \;  
+find $APP_DIR/cache/ -type f -exec chmod 664 {} \;  
 chown -R kaltura.apache $BASE_DIR/app/cache/
 
 service httpd restart
