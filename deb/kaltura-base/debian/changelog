@@ -1,3 +1,9 @@
+kaltura-base (16.4.0-1) propus; urgency=medium
+
+  * Switching to 16.4.0
+
+ -- Jess Portnoy <jess@b0f924504114>  Tue, 09 Jun 2020 14:07:27 +0000
+
 kaltura-base (16.3.0-2) propus; urgency=medium
  
   * PLAT-10930: Add permission ANALYTICS_BASE to tag search (https://github.com/kaltura/server/pull/9453)

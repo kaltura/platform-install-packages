@@ -1,3 +1,12 @@
+kaltura-html5lib3 (0.54.0-1) propus; urgency=medium
+
+  * FEC-10053: Subtitle issue for Player with TTML in MP4 container (#316) (c053ac2)
+  * FEC-10155: text track language is incorrect on cast disconnecting (#318) (75690a3), closes #188
+  * FEC-9631: add support for out of band text tracks on cast sdk (#319) (16562b6)
+
+
+ -- Jess Portnoy <jess@b0f924504114>  Wed, 10 Jun 2020 15:25:11 +0000
+
 kaltura-html5lib3 (0.53.7-1) propus; urgency=medium
 
   * FEC-9109: add DRM Load time metric (#305) (e0b267e)
