@@ -26,7 +26,6 @@ $(archive):
 
 $(tree): $(archive)
 	tar jxf $(archive) 
-	cd $(tree) && patch -p1 < ../debian/6540fe04a3f9a11ba7084a49b3ee5fa2fc5b32ab.patch 
 
 config.status: $(tree) 
 	dh_testdir
@@ -40,7 +39,6 @@ config.status: $(tree)
 	    --enable-bzlib \
 	    --enable-libgsm \
 	    --enable-libmp3lame \
-	    --enable-libschroedinger \
 	    --enable-libtheora \
 	    --enable-libvorbis \
 	    --enable-libx264 \
@@ -68,7 +66,8 @@ config.status: $(tree)
 	--disable-devices \
 	--enable-filter=movie \
 	--enable-version3 \
-	--enable-x11grab
+	--enable-libxcb \
+        --enable-libxcb-shm 
 
 
 
