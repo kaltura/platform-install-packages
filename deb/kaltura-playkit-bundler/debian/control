@@ -6,6 +6,7 @@ Maintainer: Jess Portnoy <jess.portnoy@kaltura.com>
 Package: kaltura-playkit-bundler
 Pre-Depends:
  nodejs (>= 9.11.2),
+ npm,
  kaltura-base
 Architecture: all
 Description: Kaltura Open Source Video Platform - frontend server 

@@ -5,7 +5,7 @@ Maintainer: Jess Portnoy <jess.portnoy@kaltura.com>
 Build-Depends: 
  debhelper (>= 7.0.50),
  autotools-dev,
- libmysqlclient-dev,
+ libmysqlclient-dev|libperconaserverclient18-dev,
  libtool,
  libexpat-dev,
 
@@ -15,7 +15,7 @@ Architecture: any
 Pre-Depends:
  dpkg (>= 1.15.7.2~)
 Depends: 
- libmysqlclient18|libmysqlclient20,
+ libmysqlclient18|libperconaserverclient18,
  kaltura-base, libodbc1
  ${misc:Depends},
  ${shlibs:Depends}
