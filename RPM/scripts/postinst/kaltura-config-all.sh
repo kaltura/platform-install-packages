@@ -69,6 +69,10 @@ if [ $? -ne 0 ];then
        echo -e "${BRIGHT_RED}ERROR: $BASE_DIR/bin/kaltura-sphinx-config.sh failed:( You can re-run it when the issue is fixed.${NORMAL}"
        exit 3 
 fi
+$BASE_DIR/bin/kaltura-es-config.sh "$ANSFILE"
+# for an all in one instance, this needs to be set to true, see plugins/search/providers/elastic_search/lib/kElasticSearchManager.php
+sed -i 's@\(exec_elastic\s*=\s*\)false@\1true@' $APP_DIR/configurations/base.ini 
+service httpd reload
 trap - ERR
 echo "use kaltura" | mysql -h$DB1_HOST -P$DB1_PORT -u$SUPER_USER -p$SUPER_USER_PASSWD mysql 2> /dev/null
 if [ $? -ne 0 ];then
@@ -130,9 +134,6 @@ if [ $? -ne 0 ];then
 	exit 115
 fi
 
-$BASE_DIR/bin/kaltura-es-config.sh "$ANSFILE"
-# for an all in one instance, this needs to be set to true, see plugins/search/providers/elastic_search/lib/kElasticSearchManager.php
-sed -i 's@\(exec_elastic\s*=\s*\)false@\1true@' $APP_DIR/configurations/base.ini 
 find $APP_DIR/cache/ -type f -exec rm {} \;
 rm -f $APP_DIR/log/kaltura-*.log
 

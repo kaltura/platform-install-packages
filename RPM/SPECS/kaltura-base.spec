@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 16.4.0
-Release: 8
+Release: 9 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -372,23 +372,26 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Sun Jun 14 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.4.0-8
-- Nightly build.
-
-* Sat Jun 13 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.4.0-7
-- Nightly build.
-
-* Fri Jun 12 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.4.0-6
-- Nightly build.
-
-* Thu Jun 11 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.4.0-5
-- Nightly build.
-
-* Wed Jun 10 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.4.0-4
-- Nightly build.
-
-* Tue Jun 9 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.4.0-2
-- Nightly build.
+* Mon Jun 15 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.4.0-9
+- Support GB units for usage in custom reports (https://github.com/kaltura/server/pull/9494)
+- PLAT-10785: Handle attachment filename CRLF HTML chars (https://github.com/kaltura/server/pull/9493)
+- PLAT-10897: `batchJob` - add `urgency` member (https://github.com/kaltura/server/pull/9487)
+- REACH2-849: Added notification to be sent when caption is ready and all the conditions are fulfilled (https://github.com/kaltura/server/pull/9486)
+- REACH2-678: Do not retrieve captions for `getPlaybackContext` when `displayOnPlayer` is false (https://github.com/kaltura/server/pull/9483)
+- PLAT-10914: Support searching for terms in specific fields (https://github.com/kaltura/server/pull/9481)
+- PLAT-10944: Export source once conversion is done (https://github.com/kaltura/server/pull/9480)
+- PLAT-10914: Support excluding search group when using free text search (https://github.com/kaltura/server/pull/9477)
+- Support S3 authentication using ARN role name  (https://github.com/kaltura/server/pull/9476)
+- `KalturaConvertJobData`: store CPU usage stats (https://github.com/kaltura/server/pull/9475)
+- PLAT-10934: Add v7 player UI Conf to KMC wrapper (https://github.com/kaltura/server/pull/9470)
+- REACH2-871: Change to the way bulk upload result is displayed in REACH (https://github.com/kaltura/server/pull/9467)
+- PATH-837: Add `PLAYBACK_BASE_PERMISSION` permission to `interactivity.get()` (https://github.com/kaltura/server/pull/9466)
+- FEC-9495: Add canary version to `embedPlaykit` action (https://github.com/kaltura/server/pull/9461)
+- REACH2-867: Support adding `captionAssetId` to translation `EntryVendorTask` (https://github.com/kaltura/server/pull/9459)
+- PLAT-10943: Periodic export - update `lastId` when there're no hits in … (https://github.com/kaltura/server/pull/9456)
+- PLAT-10782: deployment/uiconf/deploy_v2.php fix (https://github.com/kaltura/server/pull/9455)
+- PLAT-10916: Add `user.validateHashKay()` (https://github.com/kaltura/server/pull/9454)
+- PLAT-10933: Generate direct URL to packager with auth header for internal use (https://github.com/kaltura/server/pull/9451)
 
 * Tue Jun 9 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.4.0-1
 - Ver Bounce to 16.4.0
