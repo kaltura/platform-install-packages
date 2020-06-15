@@ -41,7 +41,7 @@ if [ "$1" = "configure" ]; then
 	set +e
 	echo "Waiting for the ElasticSearch daemon to start..."
 	ATTEMPT=0
-	while ! curl -f "http://$ES_HOST:$ES_PORT/_cluster/health?wait_for_status=yellow&timeout=10s" >> /dev/null 2>&1;do
+	while ! curl -f "http://$ES_HOST:$ES_PORT" >> /dev/null 2>&1;do
 		sleep 5
 		if [ $ATTEMPT -eq 22 ];then 
 			echo "We've waited a minute and the ES daemon is still unreachable, we're giving up:("
@@ -109,13 +109,10 @@ if [ "$1" = "configure" ]; then
 	elasticServer = $ES_HOST 
 	elasticPort = $ES_PORT
 	" >$APP_DIR/configurations/elastic/populate/`hostname`.ini
-	sed -i 's#^;ElasticSearch#ElasticSearch#g' $APP_DIR/configurations/plugins.ini
 	sed -i -e "s#@ELASTIC_PORT@#$ES_PORT#g" -e "s#@ELASTIC_HOST@#$ES_HOST#g" $APP_DIR/configurations/elastic.ini
-	php $APP_DIR/deployment/base/scripts/installPlugins.php 
 	find $APP_DIR/cache/ -type f -exec rm {} \;
-	php $APP_DIR/generator/generate.php
-	find $BASE_DIR/app/cache/ -type d -exec chmod 775 {} \;  
-	find $BASE_DIR/app/cache/ -type f -exec chmod 664 {} \;  
+	find $APP_DIR/cache/ -type d -exec chmod 775 {} \;  
+	find $APP_DIR/cache/ -type f -exec chmod 664 {} \;  
 	chown -R kaltura.www-data $BASE_DIR/app/cache/
 
 	invoke-rc.d apache2 restart
