@@ -2,6 +2,8 @@
 This guide describes RPM installation of an all-in-one Kaltura server and applies to all major RH based Linux distros including Fedora Core, RHEL, CentOS, etc.
 ([Note the supported distros and versions](http://kaltura.github.io/platform-install-packages/#supported-distros)).
 
+**Kaltura CE was just ported to CentOS/RHEL 8. Please note that this is a beta version and one must exercise judgement before deploying it to Prod ENVs**
+
 [Kaltura Inc.](http://corp.kaltura.com) also provides commercial solutions and services including pro-active platform monitoring, applications, SLA, 24/7 support and professional services. If you're looking for a commercially supported video platform  with integrations to commercial encoders, streaming servers, eCDN, DRM and more - Start a [Free Trial of the Kaltura.com Hosted Platform](http://corp.kaltura.com/free-trial) or learn more about [Kaltura' Commercial OnPrem Edition™](http://corp.kaltura.com/Deployment-Options/Kaltura-On-Prem-Edition). For existing RPM based users, Kaltura offers commercial upgrade options.
 
 #### Table of Contents
@@ -100,10 +102,20 @@ Please see: https://blog.remirepo.net/post/2017/12/04/Install-PHP-7.2-on-CentOS-
 The `kaltura-nginx` package depends on certain packages from the main Remi repo.
 In addition, while Kaltura CE can work with PHP 5.5 and above, we highly recommend that you pre-install the PHP 7.2 packages from the Remi repos. For instructions, please see `remi-php72 repository activation` in the document referenced above.
 
+#### Enabling the PowerTools repos ####
+For CentOS/RHEL 8, it is also necessary to enable the PowerTools repos:
+```
+# dnf config-manager --set-enabled PowerTools
+```
+
 #### MySQL Install and Configuration
-For MySQL versions higher 5.5 and above, note that you must disable strict mode for the deployment to succeed.
-Please see the following document:
-https://dev.mysql.com/doc/refman/5.5/en/sql-mode.html#sql-mode-setting
+Kaltura CE does not currently support MySQL 5.6 and above. Please be sure to deploy MySQL 5.5.
+If your distro's repos do not provide a suitable version (the CentOS/RHEL 8 repos have a higher version), we recommend the Percona project. See:
+https://github.com/percona/percona-server/tree/5.5
+And, in particualr:
+https://github.com/percona/percona-server/blob/5.5/build-ps/build-rpm.sh
+
+
 
 RHEL/CentOS 6 setup:
 ```bash
