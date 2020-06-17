@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 16.4.0
-Release: 9 
+Version: 16.5.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -372,6 +372,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Wed Jun 17 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.5.0-1
+- Ver Bounce to 16.5.0
+
 * Mon Jun 15 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.4.0-9
 - Support GB units for usage in custom reports (https://github.com/kaltura/server/pull/9494)
 - PLAT-10785: Handle attachment filename CRLF HTML chars (https://github.com/kaltura/server/pull/9493)
