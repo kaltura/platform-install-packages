@@ -2,7 +2,8 @@
 
 Below are **RPM** based instructions for deploying Kaltura Clusters.    
 Refer to the [All-In-One Kaltura Server Installation Guide](install-kaltura-redhat-based.md) for more notes about deploying Kaltura in RPM supported environments.    
-Refer to the [Deploying Kaltura Clusters Using Chef](rpm-chef-cluster-deployment.md) for automated Chef based deployments.
+
+**Kaltura CE was just ported to CentOS/RHEL 8. Please note that this is a beta version and one must exercise judgement before deploying it to Prod ENVs.**
 
 ### Before You Get Started Notes
 * If you see a `#` at the beginning of a line, this line should be run as `root`.
@@ -41,11 +42,54 @@ setenforce permissive
 # Save /etc/selinux/config
 ```
 
+#### Additional repos
+Before proceeding with the deployment process, please ensure that the EPEL repos are enabled.
+
+#### Installing on AWS EC2 instances
+Depending on your setup, you may need to enable two additional repos: rhui-REGION-rhel-server-extras and rhui-REGION-rhel-server-optional.
+This can be done by editing /etc/yum.repos.d/redhat-rhui.repo and changing:
+```
+enabled=0
+```
+to:
+```
+enabled=1
+```
+under the following sections:
+```
+rhui-REGION-rhel-server-optional
+rhui-REGION-rhel-server-extras
+```
+
+Or by running the following commands:
+```
+# yum -y install yum-utils
+# yum-config-manager --enable rhui-REGION-rhel-server-extras rhui-REGION-rhel-server-optional
+```
+
+#### Enabling the EPEL repo
+To add the EPEL repo:
+```
+# rpm -ihv https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+```
+
+#### Enabling the Remi repos
+Please see: https://blog.remirepo.net/post/2017/12/04/Install-PHP-7.2-on-CentOS-RHEL-or-Fedora
+
+The `kaltura-nginx` package depends on certain packages from the main Remi repo.
+In addition, while Kaltura CE can work with PHP 5.5 and above, we highly recommend that you pre-install the PHP 7.2 packages from the Remi repos. For instructions, please see `remi-php72 repository activation` in the document referenced above.
+
+#### Enabling the PowerTools repos ####
+For CentOS/RHEL 8, it is also necessary to enable the PowerTools repos:
+```
+# dnf config-manager --set-enabled PowerTools
+```
+
 ##### Note about SSL certificates
 
 You can run Kaltura with or without SSL (state the correct protocol and certificates during the installation).  
 It is recommended that you use a properly signed certificate and avoid self-signed certificates due to limitations of various browsers in properly loading websites using self-signed certificates.    
-You can generate a free valid cert using [http://cert.startcom.org/](http://cert.startcom.org/).    
+You can generate a free valid cert using [https://letsencrypt.org/](https://letsencrypt.org/).    
 To verify the validity of your certificate, you can then use [SSLShoper's SSL Check Utility](http://www.sslshopper.com/ssl-checker.html).  
 
 Depending on your certificate, you may also need to set the following directives in `/etc/httpd/conf.d/zzzkaltura.ssl.conf`: 
@@ -88,7 +132,7 @@ Note that you may choose different NFS settings which is fine so long as:
 * the kaltura and apache user are both able to write to this volume
 * the kaltura and apache user are both able create files with them as owners. i.e: do not use all_squash as an option.
 
-Then set priviliges accordingly:
+Then set privileges accordingly:
 ```sh
 # groupadd -r kaltura -g7373
 # useradd -M -r -u7373 -d /opt/kaltura -s /bin/bash -c "Kaltura server" -g kaltura kaltura
@@ -113,6 +157,12 @@ Escape character is '^]'.
 
 
 ### The MySQL Database
+Kaltura CE does not currently support MySQL 5.6 and above. Please be sure to deploy MySQL 5.5.
+If your distro's repos do not provide a suitable version (the CentOS/RHEL 8 repos have a higher version), we recommend the Percona project. See:
+https://github.com/percona/percona-server/tree/5.5
+And, in particular:
+https://github.com/percona/percona-server/blob/5.5/build-ps/build-rpm.sh
+
 ```sh
 # rpm -Uhv http://installrepo.kaltura.org/releases/kaltura-release.noarch.rpm
 # yum install mysql-server kaltura-postinst ntp 
@@ -121,15 +171,15 @@ Escape character is '^]'.
 # chkconfig ntp on
 # service ntpd start
 ```
-**Make sure to say Y** for the `mysql_secure_installation` install, and follow through all the mysql install questions before continuing further.    
-Failing to properly run `mysql_secure_installation` will cause the kaltura mysql user to run without proper permissions to access your mysql DB.    
+**Make sure to say Y** for the `mysql_secure_installation` install, and follow through all the MySQL install questions before continuing further.    
+Failing to properly run `mysql_secure_installation` will cause the kaltura MySQL user to run without proper permissions to access your MySQL DB.    
 ```
 # mysql -uroot -pYOUR_DB_ROOT_PASS
 mysql> GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'YOUR_DB_ROOT_PASS' WITH GRANT OPTION;
 mysql> FLUSH PRIVILEGES;
 ```
 Note that in the statement above, MySQL is being open for access as root from ALL machines, depending on your setup, you may want to limit it further to allow only members of your Kaltura cluster.
-Remote root user should have an access to the mysql DB during the installation of the front and batch servers.
+Remote root user should have an access to the MySQL DB during the installation of the front and batch servers.
 After the Kaltura cluster installation is done, you may want to remove the root access for security reasons, it will not longer be needed for the platform to operate as it will be using the 'kaltura' user to connect this point.
  
 Before continuing the deployment, run the following test on all front, Sphinx and Batch machines:
@@ -151,7 +201,7 @@ If that works, then the block is at the MySQL level and not in the networking, m
 ```
 
 #### MySQL Replication and Scaling
-Scaling MySQL is an art on it's own. There are two aspects to it: Replication (having data live in more than one MySQL server for redundency and read scaling) and setting up read slaves.    
+Scaling MySQL is an art on it's own. There are two aspects to it: Replication (having data live in more than one MySQL server for redundancy and read scaling) and setting up read slaves.    
 
 ##### MySQL Replication 
 To assist with MySQL master-slave replication, please refer to the [`kaltura-mysql-replication-config.sh` script](https://github.com/kaltura/platform-install-packages/blob/master/RPM/scripts/postinst/kaltura-mysql-replication-config.sh).    
@@ -274,9 +324,9 @@ It is strongly recommended that you install at least 2 batch nodes for redundanc
 ```
 
 #### Note about batch scaling
-Adding more batch machines is simple and easy! Due to the distributed architecture of batches in Kaltura, batches are independantly registering themselves against the Kaltura cluster, and independantly assume jobs from the queue.   
-In order to scale your system batch capacity, simply install new bacth machines in the cluster.   
-When running the `kaltura-batch-config.sh` installer on the batch machine, the installer replaces the config tokens and sets a uniq ID per batch. Then seamlessly, the batch registers against the DB and starts taking available jobs.
+Adding more batch machines is simple and easy! Due to the distributed architecture of batches in Kaltura, batches are independently registering themselves against the Kaltura cluster, and independently assume jobs from the queue.   
+In order to scale your system batch capacity, simply install new batch machines in the cluster.   
+When running the `kaltura-batch-config.sh` installer on the batch machine, the installer replaces the config tokens and sets a unique ID per batch. Then seamlessly, the batch registers against the DB and starts taking available jobs.
 
 ### The DataWarehouse
 The DWH is Kaltura's Analytics server.

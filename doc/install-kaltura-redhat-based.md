@@ -2,7 +2,7 @@
 This guide describes RPM installation of an all-in-one Kaltura server and applies to all major RH based Linux distros including Fedora Core, RHEL, CentOS, etc.
 ([Note the supported distros and versions](http://kaltura.github.io/platform-install-packages/#supported-distros)).
 
-**Kaltura CE was just ported to CentOS/RHEL 8. Please note that this is a beta version and one must exercise judgement before deploying it to Prod ENVs**
+**Kaltura CE was just ported to CentOS/RHEL 8. Please note that this is a beta version and one must exercise judgement before deploying it to Prod ENVs.**
 
 [Kaltura Inc.](http://corp.kaltura.com) also provides commercial solutions and services including pro-active platform monitoring, applications, SLA, 24/7 support and professional services. If you're looking for a commercially supported video platform  with integrations to commercial encoders, streaming servers, eCDN, DRM and more - Start a [Free Trial of the Kaltura.com Hosted Platform](http://corp.kaltura.com/free-trial) or learn more about [Kaltura' Commercial OnPrem Edition™](http://corp.kaltura.com/Deployment-Options/Kaltura-On-Prem-Edition). For existing RPM based users, Kaltura offers commercial upgrade options.
 
@@ -112,7 +112,7 @@ For CentOS/RHEL 8, it is also necessary to enable the PowerTools repos:
 Kaltura CE does not currently support MySQL 5.6 and above. Please be sure to deploy MySQL 5.5.
 If your distro's repos do not provide a suitable version (the CentOS/RHEL 8 repos have a higher version), we recommend the Percona project. See:
 https://github.com/percona/percona-server/tree/5.5
-And, in particualr:
+And, in particular:
 https://github.com/percona/percona-server/blob/5.5/build-ps/build-rpm.sh
 
 
@@ -289,7 +289,7 @@ Confirm passwd: "<your kaltura admin password>"
 Your time zone [see http://php.net/date.timezone], or press enter for [Europe/Amsterdam]: "<your timezone>"
 How would you like to name your system (this name will show as the From field in emails sent by the system) [Kaltura Video Platform]? "<your preferred system name>"
 Your website Contact Us URL [http://corp.kaltura.com/company/contact-us]: "<your contact URL>"
-'Contact us' phone number [+1 800 871 5224]? "<your phone numer>"
+'Contact us' phone number [+1 800 871 5224]? "<your phone number>"
 
 Is your Apache working with SSL?[Y/n]: "<Y>"
 Please input path to your SSL certificate: "</path/to/my/ssl/certificate>"
