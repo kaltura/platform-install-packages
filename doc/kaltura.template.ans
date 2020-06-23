@@ -5,7 +5,7 @@ KALTURA_VIRTUAL_HOST_PORT="443"
 KALTURA_VIRTUAL_HOST_NAME="@HOSTNAME@"
 # host and port
 KALTURA_FULL_VIRTUAL_HOST_NAME="$KALTURA_VIRTUAL_HOST_NAME:$KALTURA_VIRTUAL_HOST_PORT"
-# operational DB user and passwd
+# operational DB name and user
 DB1_NAME="kaltura"
 DB1_USER="kaltura"
 PROTOCOL="https"
@@ -51,7 +51,7 @@ DB1_PASS="@KALT_DB_PASS@"
 DWH_HOST="@MYSQL_HOST@"
 # analytics MySQL port 
 DWH_PORT="@MYSQL_PORT@"
-# analytics MySQL port 
+# analytics MySQL password 
 DWH_PASS="@KALT_DB_PASS@"
 # MySQL super user, this is only used for bootstrap, the app itself will not connect with it.
 SUPER_USER="@MYSQL_SUPER_USER@"
