@@ -4,7 +4,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib3
 Version: 0.54.0
-Release: 1
+Release: 2
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz 
@@ -49,6 +49,9 @@ rm -rf %{buildroot}
 %{html5lib3_base}
 
 %changelog
+* Fri Jun 26 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 0.54.0-2
+- New RAPT plugin (0.4.0)
+
 * Wed Jun 10 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 0.54.0-1
 - FEC-10053: Subtitle issue for Player with TTML in MP4 container (#316) (c053ac2)
 - FEC-10155: text track language is incorrect on cast disconnecting (#318) (75690a3), closes #188

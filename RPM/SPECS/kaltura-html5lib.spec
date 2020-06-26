@@ -3,7 +3,7 @@
  
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.82.2
+Version: v2.83
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -86,6 +86,21 @@ fi
 %config %{html5lib_base}/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Fri Jun 26 2020 jess.portnoy@kaltura.com <Jess Portnoy> - v2.83
+- SUP-9435 - lower case letters in Chapters
+- SUP-20488 - Information plugin displaying HTML
+- SUP-22588 - Player UI text in different language (localizationCode) is missing a parameter
+- PSVAMB-13273 - Undefined messages instead of questions in QA for the current Webcast
+- FEC-10004 - remove old analytics plugin from player
+- SUP-22436 - Thumbnails not seen at Playlist player
+- SUP-22116 - Analytics for youtube entries not sending Play and Resume Events
+- FEC-10103 - Escape quotes with htmlspecialchars()
+- FEC-10114 - jquery 3.0 breaks the player
+- feat: report hls frag url on error (#4169)
+- Typo in JS code outputted (as HTML)
+- feat: sanitize request helper params (#4161)
+- feat: send error report to kava (#4154)
+
 * Tue May 12 2020 jess.portnoy@kaltura.com <Jess Portnoy> - v2.82.2-1
 - FEC-10005 - investigate flow when isLive XHR call fails
 - SUP-21601 - [Issue] - Player looks 'native' after going Full-Screen

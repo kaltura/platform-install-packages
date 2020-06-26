@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 16.5.0
-Release: 10
+Release: 11
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -372,32 +372,31 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Thu Jun 25 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.5.0-10
-- Nightly build.
-
-* Wed Jun 24 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.5.0-9
-- Nightly build.
-
-* Tue Jun 23 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.5.0-8
-- Nightly build.
-
-* Mon Jun 22 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.5.0-7
-- Nightly build.
-
-* Sun Jun 21 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.5.0-6
-- Nightly build.
-
-* Sat Jun 20 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.5.0-5
-- Nightly build.
-
-* Fri Jun 19 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.5.0-4
-- Nightly build.
-
-* Thu Jun 18 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.5.0-3
-- Nightly build.
-
-* Wed Jun 17 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.5.0-2
-- Nightly build.
+* Fri Jun 26 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.5.0-11
+- PLAT-10898: Storage profiles - add ability to block export entries by type (https://github.com/kaltura/server/pull/9531)
+- PLAT-11009: Explicit RTMP overriding per partner for SIP adp creation (https://github.com/kaltura/server/pull/9528)
+- PLAT-11009: Explicit RTMP overriding per partner for SIP adp creation (https://github.com/kaltura/server/pull/9527)
+- Apply dynamic granularity for topN query (https://github.com/kaltura/server/pull/9526)
+- PLAT-10970: Set Kaltura auth time to expiry time (https://github.com/kaltura/server/pull/9525)
+- Edit filter to include only live entries (https://github.com/kaltura/server/pull/9524)
+- PLAT-10997: If delete flag is set but the partner doesn't have additional storage profiles, export anyway (https://github.com/kaltura/server/pull/9523)
+- PLAT-11002 - Don't export sources to remote storage (https://github.com/kaltura/server/pull/9522)
+- PLAT-11001: `prepareStorageProfilesForSort()`: Return `partnerIds` as an array (https://github.com/kaltura/server/pull/9521)
+- PLAT-10998: Export assets to remote storage script (https://github.com/kaltura/server/pull/9519)
+- SUP-22163: New script for deleting Webex files by recording id (https://github.com/kaltura/server/pull/9518)
+- PLAT-10968: Add S3 serve support for stitched playlist and sequence (https://github.com/kaltura/server/pull/9516)
+- PLAT-10932: Support logical or condition in advanced search (https://github.com/kaltura/server/pull/9514)
+- SUP-22509: Revised caption asset logic (https://github.com/kaltura/server/pull/9510)
+- Support time conversion in table reports (https://github.com/kaltura/server/pull/9508)
+- PLAT-10957 - Support partial search in `description` field (https://github.com/kaltura/server/pull/9506)
+- LIV-145: Add `partner.get()` permission to partner ID -5 (https://github.com/kaltura/server/pull/9505)
+- AN-1388: Add avg bitrate to QOS overview report (https://github.com/kaltura/server/pull/9504)
+- plat-10936: Extending `interactivity.get()` (https://github.com/kaltura/server/pull/9503)
+- PLAT-10875: Allow additional parameters in partner creation (https://github.com/kaltura/server/pull/9502)
+- SUP-22619: Make sure `clipTo` is part of the signature (https://github.com/kaltura/server/pull/9501)
+- Fix deprecation errors and warnings (https://github.com/kaltura/server/pull/9498)
+- Add hotspot click percentiles report (both for hotspot_clicked and `node_switch` events) (https://github.com/kaltura/server/pull/9491)
+- Broadcast controller view - new reports (https://github.com/kaltura/server/pull/9440)
 
 * Wed Jun 17 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.5.0-1
 - Ver Bounce to 16.5.0
