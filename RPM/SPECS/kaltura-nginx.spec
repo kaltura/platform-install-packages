@@ -42,7 +42,7 @@ Requires(pre): pwdutils
 %endif
 
 %define nginx_vod_module_ver 1.26
-%define nginx_secure_token_ver 1.3
+%define nginx_secure_token_ver 1.4
 %define nginx_token_validate_ver 1.1
 %define nginx_kafka_log_ver 1.0
 %define nginx_json_var_ver 1.0
@@ -58,7 +58,7 @@ Requires(pre): pwdutils
 Summary: High performance web server customized for Kaltura VOD
 Name: kaltura-nginx
 Version: 1.17.10
-Release: 2 
+Release: 3
 Vendor: Kaltura inc.
 URL: http://nginx.org/
 
@@ -423,6 +423,8 @@ if [ $1 -ge 1 ]; then
 fi
 
 %changelog
+* Mon Jul 6 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 1.17.10-3
+- New secure-token-module (1.4): Support cdnvideo tokens (https://github.com/kaltura/nginx-secure-token-module/pull/84)
 * Thu May 14 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 1.17.10-1
 - New mainline Nginx - 1.17.10 
 - Include set-misc module as an SO 
