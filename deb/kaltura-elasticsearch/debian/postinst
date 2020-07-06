@@ -118,6 +118,6 @@ if [ "$1" = "configure" ]; then
 	invoke-rc.d apache2 restart
 	invoke-rc.d memcached restart
 	set +e
-	invoke-rc.d kaltura-elastic-populate stop || true
-	invoke-rc.d kaltura-elastic-populate start
+	/etc/init.d/kaltura-elastic-populate stop || true
+	/etc/init.d/kaltura-elastic-populate start
 fi
