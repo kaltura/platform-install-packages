@@ -48,7 +48,7 @@ Requires(pre): pwdutils
 %define nginx_json_var_ver 1.0
 %define nginx_strftime_ver 1.0
 %define nginx_vts_ver 0.1.18
-%define nginx_rtmp_ver 1.2.0
+%define nginx_rtmp_ver 1.21.0
 %define ngx_aws_auth_ver 1.0.1
 %define headers_more_nginx_ver 0.33
 %define set_misc_nginx_ver 0.33

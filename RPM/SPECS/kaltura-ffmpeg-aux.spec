@@ -47,7 +47,7 @@ BuildRequires: zlib-devel
 #BuildRequires: schroedinger-devel
 BuildRequires: libtheora-devel
 BuildRequires: libvorbis-devel
-BuildRequires: xvidcore
+BuildRequires: libxvidcore4-devel
 BuildRequires: x265-devel
 BuildRequires: gnutls-devel
 BuildRequires: kaltura-a52dec-devel
@@ -56,26 +56,27 @@ BuildRequires: libvdpau-devel
 BuildRequires: openjpeg2-devel
 %{!?_without_nut:BuildRequires: libnut-devel}
 %{!?_without_opencore_amr:BuildRequires: kaltura-libopencore-amr-devel}
-BuildRequires: kaltura-librtmp-devel
+BuildRequires: librtmp-devel
 #%{!?_without_schroedinger:BuildRequires: schroedinger-devel}
 %{!?_without_texi2html:BuildRequires: texi2html}
 %{!?_without_theora:BuildRequires: libogg-devel, libtheora-devel}
 %{!?_without_vorbis:BuildRequires: libogg-devel, libvorbis-devel}
 BuildRequires: kaltura-libvpx-devel >= 1.7.0
-BuildRequires: kaltura-x264-devel
-BuildRequires: xvidcore-devel
+BuildRequires: x264-devel
+BuildRequires: libxvidcore4-devel
 Requires: a52dec
 BuildRequires: libass-devel 
-BuildRequires: kaltura-x264-devel 
+BuildRequires: x264-devel 
 BuildRequires: gsm-devel
 BuildRequires: speex-devel
 #BuildRequires: schroedinger-devel 
 BuildRequires: libtheora-devel
-BuildRequires: xvidcore-devel >= 1.3.2
-Requires:kaltura-a52dec,libass,kaltura-x264
+BuildRequires: libxvidcore4-devel
+Requires:kaltura-a52dec,libass,x264
 Requires: kaltura-libvpx >= 1.7.0
 Requires: x265-libs
 Requires: gnutls
+Requires: libxvidcore4
 
 %description
 FFmpeg is a very fast video and audio converter. It can also grab from a
@@ -90,17 +91,17 @@ quality polyphase filter.
 Summary: Header files and static library for the ffmpeg codec library
 Group: Development/Libraries
 Requires: %{name} = %{version}-%{release}
-Requires: imlib2-devel, SDL-devel, freetype-devel, zlib-devel, pkgconfig,kaltura-x264
+Requires: imlib2-devel, SDL-devel, freetype-devel, zlib-devel, pkgconfig,x264
 %{!?_without_a52dec:Requires: kaltura-a52dec-devel}
 #%{!?_without_faad:Requires: faad2-devel}
 %{!?_without_gsm:Requires: gsm-devel}
 %{!?_without_lame:Requires: kaltura-lame-devel}
-%{!?_without_rtmp:Requires: kaltura-librtmp-devel}
+%{!?_without_rtmp:Requires: librtmp-devel}
 #%{!?_without_schroedinger:Requires: schroedinger-devel}
 %{!?_without_vorbis:Requires: libogg-devel, libvorbis-devel}
 %{!?_without_vpx:Requires: kaltura-libvpx-devel}
-%{!?_without_x264:Requires: kaltura-x264-devel}
-%{!?_without_xvid:Requires: xvidcore-devel}
+%{!?_without_x264:Requires: x264-devel}
+%{!?_without_xvid:Requires: libxvidcore4-devel}
 
 %description devel
 FFmpeg is a very fast video and audio converter. It can also grab from a
