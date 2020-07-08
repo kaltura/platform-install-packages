@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 16.5.0
-Release: 15
+Version: 16.6.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -372,6 +372,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Wed Jul 8 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.6.0-1
+- Ver Bounce to 16.6.0
+
 * Mon Jun 29 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.5.0-15
 - PLAT-10898: Storage profiles - add ability to block export entries by type (https://github.com/kaltura/server/pull/9531)
 - PLAT-11009: Explicit RTMP overriding per partner for SIP adp creation (https://github.com/kaltura/server/pull/9528)
