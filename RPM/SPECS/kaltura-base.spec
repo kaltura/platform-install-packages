@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 16.7.0
-Release: 8
+Release: 9 
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -372,26 +372,33 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Sat Jul 25 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.7.0-8
-- Nightly build.
-
-* Fri Jul 24 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.7.0-7
-- Nightly build.
-
-* Thu Jul 23 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.7.0-6
-- Nightly build.
-
-* Wed Jul 22 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.7.0-5
-- Nightly build.
-
-* Tue Jul 21 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.7.0-4
-- Nightly build.
-
-* Mon Jul 20 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.7.0-3
-- Nightly build.
-
-* Mon Jul 20 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.7.0-2
-- Nightly build.
+* Sun Jul 26 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.7.0-9
+- PSVAMB-13444: KAVA DB name can be different than "kava" (https://github.com/kaltura/server/pull/9612)
+- PLAT-11067: Fix thumbnail adapter with encrypted file (https://github.com/kaltura/server/pull/9610)
+- Export to remote storage by entry list file (https://github.com/kaltura/server/pull/9609)
+- PLAT-11057: Remove check for the existence of private storage profiles on export to periodic storage (https://github.com/kaltura/server/pull/9608)
+- PLAT-11055: Thumbnail adapter fixes (https://github.com/kaltura/server/pull/9607)
+- Support defining different mount point based on partner ID (https://github.com/kaltura/server/pull/9605)
+- WEBC-1925: Add description to `qna` response profile user (https://github.com/kaltura/server/pull/9604)
+- Elastic population script fix (https://github.com/kaltura/server/pull/9602)
+- PLAT-11057: Delete local file syncs siblings only if partner is dedicated AWS (https://github.com/kaltura/server/pull/9601)
+- PLAT-10953: Add privileges field to widget (https://github.com/kaltura/server/pull/9600)
+- SUP-23001: Export to periodic storage once file sync is ready (https://github.com/kaltura/server/pull/9599)
+- moveConvertJobs - Exclude `PIDs` param (`excludePartnerIds`) for auto mode (https://github.com/kaltura/server/pull/9598)
+- REACH2-900: Add lock to `entryVendorTask.add()` action (https://github.com/kaltura/server/pull/9597)
+- KAVA - round filter `fromDay/fromDate` to partner creation date (https://github.com/kaltura/server/pull/9596)
+- WEBC-1925: Add more user data to `QnA` response profile (https://github.com/kaltura/server/pull/9593)
+- PLAT-11027 - `compatcheck` new alerts on new server errors (https://github.com/kaltura/server/pull/9591)
+- Update `deploy_v2.php` (https://github.com/kaltura/server/pull/9590)
+- SUP-21781: For VOD get single edge server for all flavors (https://github.com/kaltura/server/pull/9589)
+- PLAT-11052: Thumbnail adapter when there isn't vid sec or vid slices (https://github.com/kaltura/server/pull/9588)
+- REACH2-901: Enable reach request with price 0 even if the credit expired (https://github.com/kaltura/server/pull/9586)
+- Plat-11051: Release lock in case we failed processing the thumbnail (https://github.com/kaltura/server/pull/9584)
+- PLAT-11048: Temporarily disable content type setting on notifications (https://github.com/kaltura/server/pull/9583)
+- Add new permission allowing admin KS to set `userId` on new cue point (https://github.com/kaltura/server/pull/9581)
+- PLAT-11048: Fix http notification if no `dataType` (https://github.com/kaltura/server/pull/9580)
+- REACH2-879: Limit export reach requests to 9999 results (https://github.com/kaltura/server/pull/9575)
+- PLAT-10924 - Handle Dual Stream (talking heads and screenshare) for `VCI` (https://github.com/kaltura/server/pull/9554)
 
 * Tue Jul 14 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.7.0-1
 - Ver Bounce to 16.7.0
