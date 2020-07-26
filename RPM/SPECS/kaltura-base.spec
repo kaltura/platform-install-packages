@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 16.7.0
-Release: 9 
+Release: 10
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -372,6 +372,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Sun Jul 26 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.7.0-10
+- Nightly build.
+
 * Sun Jul 26 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.7.0-9
 - PSVAMB-13444: KAVA DB name can be different than "kava" (https://github.com/kaltura/server/pull/9612)
 - PLAT-11067: Fix thumbnail adapter with encrypted file (https://github.com/kaltura/server/pull/9610)
