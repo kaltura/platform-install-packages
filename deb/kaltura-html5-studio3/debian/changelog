@@ -1,3 +1,11 @@
+kaltura-html5-studio3 (3.6.0-1) propus; urgency=medium
+
+  * FEC-9649: external css (#90)
+  * FEC-9732: DFP DAI - Studio Configuration (#87)
+  * FEC-9972: floating player (#88)
+
+ -- Jess Portnoy <jess@b0f924504114>  Fri, 31 Jul 2020 12:48:21 +0000
+
 kaltura-html5-studio3 (3.5.0-1) propus; urgency=medium
 
   * FEC-9465: Internationalisation (i18n) - player localisation (#78)
