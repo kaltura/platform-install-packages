@@ -3,7 +3,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5-studio3
-Version: v3.5.0
+Version: v3.6.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -52,6 +52,11 @@ rm -rf %{buildroot}
 %{studio_prefix}/%{version}
 
 %changelog
+* Fri Jul 31 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 3.6.0-1
+- FEC-9649: external css (#90)
+- FEC-9732: DFP DAI - Studio Configuration (#87)
+- FEC-9972: floating player (#88)
+
 * Mon May 18 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 3.5.0-1
 - FEC-9465: Internationalisation (i18n) - player localisation (#78)
 - FEC-9622: Localisation studio configuration (#78)
