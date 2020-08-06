@@ -58,7 +58,7 @@ This section is a step-by-step guide of a Kaltura installation.
 #### Setup the Kaltura deb repository
 
 ```bash
-# wget -O - http://installrepo.kaltura.org/repo/aptn/focal/kaltura-deb-curr-256.gpg.key|apt-key add -
+# wget -O - http://installrepo.kaltura.org/repo/aptn/focal/kaltura-deb-256.gpg.key|apt-key add -
 # echo "deb [arch=amd64] http://installrepo.kaltura.org/repo/aptn/focal propus main" > /etc/apt/sources.list.d/kaltura.list
 ```
 
