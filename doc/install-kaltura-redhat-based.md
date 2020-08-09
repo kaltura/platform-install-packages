@@ -108,6 +108,12 @@ For CentOS/RHEL 8, it is also necessary to enable the PowerTools repos:
 # dnf config-manager --set-enabled PowerTools
 ```
 
+#### Enabling the RPM Fusion repos ####
+For CentOS/RHEL 8, it is also necessary to enable the Fusion repos:
+```
+# rpm -ihv https://download1.rpmfusion.org/free/el/rpmfusion-free-release-8.noarch.rpm
+```
+
 #### MySQL Install and Configuration
 Kaltura CE does not currently support MySQL 5.6 and above. Please be sure to deploy MySQL 5.5.
 If your distro's repos do not provide a suitable version (the CentOS/RHEL 8 repos have a higher version), we recommend the Percona project. See:
