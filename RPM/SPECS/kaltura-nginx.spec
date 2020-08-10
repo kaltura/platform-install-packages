@@ -5,7 +5,7 @@
 %define optflags -O3
 # distribution specific definitions
 %define use_systemd (0%{?fedora} && 0%{?fedora} >= 18) || (0%{?rhel} && 0%{?rhel} >= 7)
-%define ffmpeg_ver 4.0.2
+%define ffmpeg_ver 4.2.2
 
 %if 0%{?rhel}  == 5
 Group: System Environment/Daemons
@@ -57,8 +57,8 @@ Requires(pre): pwdutils
 
 Summary: High performance web server customized for Kaltura VOD
 Name: kaltura-nginx
-Version: 1.17.10
-Release: 3
+Version: 1.19.1
+Release: 1
 Vendor: Kaltura inc.
 URL: http://nginx.org/
 
@@ -423,6 +423,10 @@ if [ $1 -ge 1 ]; then
 fi
 
 %changelog
+* Mon Aug 10 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 1.19.1-1
+- New mainline ver - 1.19.1
+- New FFmpeg ver - 4.2.2
+
 * Mon Jul 6 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 1.17.10-3
 - New secure-token-module (1.4): Support cdnvideo tokens (https://github.com/kaltura/nginx-secure-token-module/pull/84)
 * Thu May 14 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 1.17.10-1
