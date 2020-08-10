@@ -3,8 +3,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib3
-Version: 0.54.0
-Release: 2
+Version: 0.56.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz 
@@ -49,6 +49,15 @@ rm -rf %{buildroot}
 %{html5lib3_base}
 
 %changelog
+* Sun Aug 9 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 0.56.0-1
+- New RAPT plugin (0.4.0)
+- Downgrade shaka from 3.0.x (#346) (f126796)
+- Old browser(IE11) get mehtod in proxy doesn't work (#345) (4d3f69c)
+- FEC-10356: 4K DASH HEVC + LIVE doesn't play correctly on LG (#342) (111cdac)
+- FEC-10057: move the plugin manager to kaltura player (#332) (66b2f3d)
+- FEC-10290: upgrade NPM packages (#335) (07fa73b)
+- FEC-10291: migrate analytics plugins injection from kaltura player to server (#337) (1caf168)
+
 * Fri Jun 26 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 0.54.0-2
 - New RAPT plugin (0.4.0)
 

@@ -91,13 +91,22 @@ Or by running the following commands:
 ```
 
 #### Enabling the EPEL repo
-To add the EPEL repo:
-```
-# rpm -ihv https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-```
+See https://fedoraproject.org/wiki/EPEL#Quickstart
 
 #### Enabling the Remi repos
 Please see: https://blog.remirepo.net/post/2017/12/04/Install-PHP-7.2-on-CentOS-RHEL-or-Fedora
+Then, run:
+```
+# dnf module reset php
+# dnf module install php:remi-7.2
+```
+
+Kaltura CE was ported to PHP 7.4 recently but it is not as well tested. You may elect to use that version instead, in which case, invoke:
+```
+# dnf module install php:remi-7.4
+```
+But please test on a non-production instance first. We're happy to receive bug reports should you encounter issues.
+
 
 The `kaltura-nginx` package depends on certain packages from the main Remi repo.
 In addition, while Kaltura CE can work with PHP 5.5 and above, we highly recommend that you pre-install the PHP 7.2 packages from the Remi repos. For instructions, please see `remi-php72 repository activation` in the document referenced above.

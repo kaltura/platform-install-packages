@@ -3,7 +3,7 @@
  
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.83
+Version: v2.83.2
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -86,6 +86,9 @@ fi
 %config %{html5lib_base}/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Sun Aug 9 2020 jess.portnoy@kaltura.com <Jess Portnoy> - v2.83.2
+- PSVAMB-14660 - no Slide Sync during Webcasting Event
+
 * Fri Jun 26 2020 jess.portnoy@kaltura.com <Jess Portnoy> - v2.83
 - SUP-9435 - lower case letters in Chapters
 - SUP-20488 - Information plugin displaying HTML

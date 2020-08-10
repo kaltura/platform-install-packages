@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 16.7.0
-Release: 10
+Version: 16.8.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -372,6 +372,39 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Sun Aug 9 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.8.0-1
+- PLAT-10924: Stream a specific video conference source (https://github.com/kaltura/server/pull/9663)
+- PLAT-10924: Support sip dual stream (https://github.com/kaltura/server/pull/9661)
+- PLAT-10924: VCI modifications (https://github.com/kaltura/server/pull/9652)
+- AN-1448: Add filtered users to CSV report (https://github.com/kaltura/server/pull/9651)
+- FEC-10291: Migrate Analytics Plugins Injection from Kaltura Player to Server (https://github.com/kaltura/server/pull/9650)
+- PLAT-11073: Thumbnail resize - handle cases where height or width is 0 (https://github.com/kaltura/server/pull/9649)
+- PLAT-10731: Configurable live `segmentDuration` and `dvrWindowSize` (https://github.com/kaltura/server/pull/9647)
+- PLAT-11090: adjusted chunk timeout (https://github.com/kaltura/server/pull/9645)
+- Do not round `fromDate/toDate` (in order to get the same results both from KMC and API) (https://github.com/kaltura/server/pull/9644)
+- PLAT-11089: FFmpeg 4.2.2 regression - metadata mapping (https://github.com/kaltura/server/pull/9643)
+- PLAT-11043: Allow updating `KalturaPartner.additionalParams` (https://github.com/kaltura/server/pull/9642)
+- LIV-197: Dynamically change live limits (https://github.com/kaltura/server/pull/9641)
+- Support loading sphinx config using `kConf` (https://github.com/kaltura/server/pull/9640)
+- Support redirecting all `embedIframeJs` action via redirect host and overriding dc list values (https://github.com/kaltura/server/pull/9638)
+- PLAT-11085: Fix `Youtube` CSV distribution failure when `thumbAssetId` is empty (https://github.com/kaltura/server/pull/9637)
+- `KalturaDeliveryProfileCondition`: set `type` to `ConditionType::DELIVERY_PROFILE` in the constructor (https://github.com/kaltura/server/pull/9635)
+- PSVAMB-14576: Drop folder enhancements (https://github.com/kaltura/server/pull/9634)
+- REACH2-911: `KAsyncReachJobCleaner.php` - clean pending and processing stuck jobs (https://github.com/kaltura/server/pull/9631)
+- AN-1345: Add unique viewers metric (https://github.com/kaltura/server/pull/9630)
+- Support overriding file group in a `kAsyncImport` job (https://github.com/kaltura/server/pull/9629)
+- AN-1345: Add unique viewers metric (https://github.com/kaltura/server/pull/9628)
+- AN-1449: add `customVars` to `playmanifest` beacon (https://github.com/kaltura/server/pull/9627)
+- SUP-21926: Ignore entries with `display_in_search=-1` in elastic free text search (https://github.com/kaltura/server/pull/9626)
+- PLAT-10924: Expose SIP source type to client (https://github.com/kaltura/server/pull/9625)
+- PLAT-10924: Expose SIP source type to client (https://github.com/kaltura/server/pull/9624)
+- SUP-21354: `BulkUploadUserEngineCsv` - log unknown encoding errors (https://github.com/kaltura/server/pull/9623)
+- LIV-167: Enable streaming both primary + backup on the same cluster (2 RTMP pods, 2 packagers) (https://github.com/kaltura/server/pull/9622)
+- Export to remote storage by parsing entry list from file (https://github.com/kaltura/server/pull/9619)
+- PLAT-11013: `quiz->serve()` - fix invalid PDF (https://github.com/kaltura/server/pull/9611)
+- PLAT-10876: New KMS user reset password link (https://github.com/kaltura/server/pull/9606)
+- PLAT-11037: Support using different batch versions when jobs are added|pulled (https://github.com/kaltura/server/pull/9565)
+
 * Sun Jul 26 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.7.0-10
 - Nightly build.
 
