@@ -1,3 +1,10 @@
+kaltura-nginx (1.19.1-1) propus; urgency=medium
+
+  * New mainline ver - 1.19.1
+  * New FFmpeg ver - 4.2.2
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 10 Aug 2020 11:19:24 +0000
+
 kaltura-nginx (1.17.10-1) propus; urgency=medium
 
   * New mainline Nginx - 1.17.10 
