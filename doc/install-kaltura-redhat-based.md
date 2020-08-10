@@ -101,15 +101,16 @@ Then, run:
 # dnf module install php:remi-7.2
 ```
 
-Kaltura CE was ported to PHP 7.4 recently but it is not as well tested. You may elect to use that version instead, in which case, invoke:
-```
-# dnf module install php:remi-7.4
-```
-But please test on a non-production instance first. We're happy to receive bug reports should you encounter issues.
-
 
 The `kaltura-nginx` package depends on certain packages from the main Remi repo.
 In addition, while Kaltura CE can work with PHP 5.5 and above, we highly recommend that you pre-install the PHP 7.2 packages from the Remi repos. For instructions, please see `remi-php72 repository activation` in the document referenced above.
+
+**NOTE: Kaltura CE was ported to PHP 7.4 recently but it is not as well tested. You may elect to use that version instead, in which case, invoke:
+```
+# dnf module install php:remi-7.4
+```
+
+Please test on a non-production instance first. We're happy to receive bug reports should you encounter issues.**
 
 #### Enabling the PowerTools repos ####
 For CentOS/RHEL 8, it is also necessary to enable the PowerTools repos:
