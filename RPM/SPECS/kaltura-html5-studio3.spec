@@ -3,7 +3,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5-studio3
-Version: v3.6.0
+Version: v3.7.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -52,6 +52,11 @@ rm -rf %{buildroot}
 %{studio_prefix}/%{version}
 
 %changelog
+* Tue Aug 11 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 3.7.0-1
+- feat(FEC-10283): add arbitrary studio config in advanced menu (#92)
+- feat(FEC-10105): as a platform user I would like to be able to toggle floating player re-positioning capability on and off (#91)
+
+
 * Fri Jul 31 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 3.6.0-1
 - FEC-9649: external css (#90)
 - FEC-9732: DFP DAI - Studio Configuration (#87)
