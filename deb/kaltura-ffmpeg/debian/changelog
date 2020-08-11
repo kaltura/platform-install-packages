@@ -1,3 +1,9 @@
+kaltura-ffmpeg (4.2.2-1) propus; urgency=medium
+
+  * New upstream version
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 10 Aug 2020 09:41:45 +0000
+
 kaltura-ffmpeg (4.0.2-3) naos; urgency=medium
 
   * Added explicit declaration of additional deps.

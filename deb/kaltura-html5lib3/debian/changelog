@@ -1,3 +1,15 @@
+kaltura-html5lib3 (0.56.0-1) propus; urgency=medium
+
+  * New RAPT plugin (0.4.2)
+  * Downgrade shaka from 3.0.x (#346) (f126796)
+  * Old browser(IE11) get mehtod in proxy doesn't work (#345) (4d3f69c)
+  * FEC-10356: 4K DASH HEVC + LIVE doesn't play correctly on LG (#342) (111cdac)
+  * FEC-10057: move the plugin manager to kaltura player (#332) (66b2f3d)
+  * FEC-10290: upgrade NPM packages (#335) (07fa73b)
+  * FEC-10291: migrate analytics plugins injection from kaltura player to server (#337) (1caf168)
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 10 Aug 2020 11:43:04 +0000
+
 kaltura-html5lib3 (0.54.0-1) propus; urgency=medium
 
   * FEC-10053: Subtitle issue for Player with TTML in MP4 container (#316) (c053ac2)

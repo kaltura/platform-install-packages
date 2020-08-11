@@ -1,3 +1,9 @@
+kaltura-html5lib (2.83.2-1) propus; urgency=medium
+
+  * PSVAMB-14660 - no Slide Sync during Webcasting Event 
+
+ -- Jess Portnoy <jess@b0f924504114>  Mon, 10 Aug 2020 11:33:45 +0000
+
 kaltura-html5lib (2.83-1) propus; urgency=medium
 
   * SUP-9435 - lower case letters in Chapters

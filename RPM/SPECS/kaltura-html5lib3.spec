@@ -50,7 +50,7 @@ rm -rf %{buildroot}
 
 %changelog
 * Sun Aug 9 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 0.56.0-1
-- New RAPT plugin (0.4.0)
+- New RAPT plugin (0.4.2)
 - Downgrade shaka from 3.0.x (#346) (f126796)
 - Old browser(IE11) get mehtod in proxy doesn't work (#345) (4d3f69c)
 - FEC-10356: 4K DASH HEVC + LIVE doesn't play correctly on LG (#342) (111cdac)
