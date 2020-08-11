@@ -1,3 +1,10 @@
+kaltura-html5-studio3 (3.7.0-1) propus; urgency=medium
+
+  * feat(FEC-10283): add arbitrary studio config in advanced menu (#92)
+  * feat(FEC-10105): as a platform user I would like to be able to toggle floating player re-positioning capability on and off (#91)
+
+ -- Jess Portnoy <jess@b0f924504114>  Tue, 11 Aug 2020 13:47:59 +0000
+
 kaltura-html5-studio3 (3.6.0-1) propus; urgency=medium
 
   * FEC-9649: external css (#90)
