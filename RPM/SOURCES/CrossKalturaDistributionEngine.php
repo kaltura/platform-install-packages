@@ -524,7 +524,7 @@ class CrossKalturaDistributionEngine extends DistributionEngine implements
 					if ($cuePoint->cuePointType != KalturaCuePointType::THUMB){
 						/* skip if this is a comment or a qna operational cuepoint
 						comments could  be exported but not with their original parents and it feels undesired in any case */
-						if ($cuePoint->tags =='KMS_public_comment' || $cuePoint->tags=='player-qna-settings-update'){
+						if ($cuePoint->tags =='KMS_public_comment' || $cuePoint->tags=='player-qna-settings-update' || $cuePoint->tags == 'change-view-mode'){
 							continue;
 						}
 						$cuePoints[$cuePoint->id] = $cuePoint;
