@@ -3,7 +3,7 @@
  
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.83.2
+Version: v2.84
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -86,6 +86,17 @@ fi
 %config %{html5lib_base}/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Wed Oct 14 2020 jess.portnoy@kaltura.com <Jess Portnoy> - v2.84-1
+- SUP-16764 - Quiz.plugin pushes the captions up
+- SUP-22922 - Closed Captions "Use Cookie" in player configuration is on by default
+- PSVAMB-14660 - No Slide Sync during Webcasting Event- June 19th
+- FEV-684 - kava - add full screen to screen mode on view events on V2
+- FEV-715 - player v2: add player notification when the QnA panel opens and closes
+- Toggle off polls when poll change is just a local change (Webcast hide polls) (#4180)
+- fix: add php variable access protection (#4184)
+- FEC-10337 - v2 player server to read the new map
+- SUP-23047 - Accessibility issues with volume and progress bar
+
 * Sun Aug 9 2020 jess.portnoy@kaltura.com <Jess Portnoy> - v2.83.2
 - PSVAMB-14660 - no Slide Sync during Webcasting Event
 
