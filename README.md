@@ -7,7 +7,7 @@ To enable the use of standard binary packages and package managers when deployin
 This project features official deployment packages to install the Kaltura Video Platform on a server or cluster environments using native OS package managers.
 
 * **[Learn more & keep track on the project page](http://kaltura.github.io/platform-install-packages/)**.    
-* [Read Latest Project Status](https://github.com/kaltura/platform-install-packages/blob/master/doc/project-status-updates.md).
+* [Read Latest Project Status](https://forum.kaltura.org/c/new-release-updates).
 * [See the Build and Test Reports on the Continuous Integration system](http://installrepo.kaltura.org/reports/ci/).    
 + Visit the [Kaltura Video Platform Packages CI Project](https://github.com/kaltura/platform-continuous-integration) and help by contributing automatic sanity tests.
 * Track the development of the [Kaltura Video Platform Packages CI Project](https://github.com/kaltura/platform-continuous-integration).
