@@ -10,7 +10,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 16.9.0
+Version: 16.10.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -372,6 +372,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Wed Oct 21 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.10.0-1
+- Ver Bounce to 16.10.0
+
 * Wed Oct 14 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.9.0-1
 - PLAT-11215: HotFix - simulive fix playable (https://github.com/kaltura/server/pull/9955)
 - Fix chunk convert flow to S3 + reduce `kconf` calls during chunk convert + fix `sharedMgr` bugs (https://github.com/kaltura/server/pull/9948)

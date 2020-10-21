@@ -3,7 +3,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib3
-Version: 0.56.0
+Version: 1.0.3
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -49,6 +49,19 @@ rm -rf %{buildroot}
 %{html5lib3_base}
 
 %changelog
+* Wed Oct 21 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.3-1
+- FEC-10161: add kava analytics url from server response (#355) (e4ce3f1)
+- FEC-10275: Bumper incorrectly recognised as ad (#352) (716d01a)
+- FEC-10417: playlist by sources stuck after press Play button when set IMA or bumper plugins (#349) (b2256f3)
+- FEC-10455: incorrect order in reset and destroy process (#353) (fc9bf96)
+- FEC-10468: PLAYBACK_START not fired on autoplay (#356) (78c3ed5)
+- FEC-10076: add support for dynamic injection (#351) (b9e9a31)
+- FEC-10296: upgrade hls.js to 0.14.9 (#348) (2d0ec6e)
+- FEC-10435: upgrade shaka for fixing live issue and optimizations for smartTV (#354) (90ce625)
+- FEC-10347: expose kaltura player as a global variable instead of UMD (#350) (b6253ff)
+- FEC-10347: kaltura-player is not UMD anymore
+- DRM doesn't play on edge chromium (#364) (cc4cce4)
+
 * Sun Aug 9 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 0.56.0-1
 - New RAPT plugin (0.4.2)
 - Downgrade shaka from 3.0.x (#346) (f126796)
