@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 16.10.0
-Release: 1
+Release: 3
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -372,6 +372,45 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Oct 26 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.10.0-3
+- serveFlavorAction: Round the initial segment time (https://github.com/kaltura/server/pull/10028)
+- PLAT-11232: Support alt configuration for base url for local volume (https://github.com/kaltura/server/pull/10027)
+- VIRTC-587: `Simulive` - set initial segment index for `simulive` (https://github.com/kaltura/server/pull/10026)
+- PLAT-11214: Ensure at least 2 secs passed since the last MRP run (https://github.com/kaltura/server/pull/10025)
+- Doc convert scripts: Use `WMI` for listing processes (https://github.com/kaltura/server/pull/10024)
+- REACH2-965: Set caption asset as default only if requested (https://github.com/kaltura/server/pull/10023)
+- SUP-24570: `addFromUploadedFileAction()` - call `kFileUtils::dumpApiRequest()` if remote DC (https://github.com/kaltura/server/pull/10022)
+- Set web/tmp/convert/$DIR to 775 (`kaltura.apache`) (https://github.com/kaltura/server/pull/10021)
+- PLAT-11161: Remove calls that generate sig tokenized URL (https://github.com/kaltura/server/pull/10020)
+- Support loading slave list dynamically from DB config (https://github.com/kaltura/server/pull/10016)
+- SUP-24553: Fix Interlace issue (https://github.com/kaltura/server/pull/10008)
+- PLAT-11076: Generate thumbnails from sources at `S3` via `ffmpeg` using signed URL (https://github.com/kaltura/server/pull/10007)
+- PLAT-11225: manual live stream - handle backups (https://github.com/kaltura/server/pull/10006)
+- VIRTC-490: add `postEnd` to event (https://github.com/kaltura/server/pull/10004)
+- Chunk convert: `fopen` video concat + retry chunks + video file to local tmp folder (https://github.com/kaltura/server/pull/10001)
+- PLAT-11214: Ensure at least 2 secs passed since the last MRP run (https://github.com/kaltura/server/pull/10000)
+- output `Memcache` stats to log after bootstrap (https://github.com/kaltura/server/pull/9997)
+- FixChunks and Merge retries (https://github.com/kaltura/server/pull/9996)
+- AWS: Fix bug caused when UNIX timestamp drifts between setting `httpDate` and `X-Amz-Date` (https://github.com/kaltura/server/pull/9992)
+- PLAT-11161: Add download support using the packager by adding kaltura `tokenizer` and `recognizer` to sign serve URLs (https://github.com/kaltura/server/pull/9990)
+- PLAT-11205: Thumbnail generation using packager (https://github.com/kaltura/server/pull/9989)
+- SUP-24282: Fix clipping and treaming (https://github.com/kaltura/server/pull/9988)
+- VIRTC-166: `simulive` improvements (https://github.com/kaltura/server/pull/9986)
+- Ignore validate local source on `replaceResource` (https://github.com/kaltura/server/pull/9984)
+- query cache: increase query master threshold (https://github.com/kaltura/server/pull/9982)
+- PLAT-11220: Support private indices per partner (https://github.com/kaltura/server/pull/9979)
+- AWS: Support max session duration allowed when assuming role `ASSUME_ROLE_CREDENTIALS_EXPIRY_TIME` (https://github.com/kaltura/server/pull/9977)
+- PLAT-11207: Fix export `flavorAsset` when the file sync does not exist in the other DC (https://github.com/kaltura/server/pull/9966)
+- SUP-22605: Kaltura Cross Distribution Connector - Do not set `parentEntryId` on `targetEntry` (https://github.com/kaltura/server/pull/9964)
+- AWS: Support upload retry with rand sleep + avoid calling `mkdir()` (https://github.com/kaltura/server/pull/9961)
+- Propus-16.9.0-PLAT-11215: `Simulive` - `getPlayableSimuliveEvent()`  (https://github.com/kaltura/server/pull/9960)
+- Fix support for chunk to S3 flow when using key and token (https://github.com/kaltura/server/pull/9958)
+- Fix chunk convert onto `s3` (https://github.com/kaltura/server/pull/9954)
+- CLOUDMGT-750: Fix thumbnail generation for playlist (https://github.com/kaltura/server/pull/9945)
+- REACH2-948: Boolean event notification condition rule should not be cloned from source partner (https://github.com/kaltura/server/pull/9773)
+- WEBC-2048: Allow dynamic batch hostname config with wildcard and dynamic scheduler loading (https://github.com/kaltura/server/pull/9699)
+- SUP-21354: Log unknown encoding for all CSV bulk upload types (https://github.com/kaltura/server/pull/9655)
+
 * Wed Oct 21 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.10.0-1
 - Ver Bounce to 16.10.0
 

@@ -3,7 +3,7 @@
  
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.84
+Version: v2.84.1
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -86,6 +86,9 @@ fi
 %config %{html5lib_base}/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Mon Oct 26 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 2.84.1-1
+- FEV-772 - Can't play entries in context of playlist or embed in v2.84 player while hotspot is enabled
+
 * Wed Oct 14 2020 jess.portnoy@kaltura.com <Jess Portnoy> - v2.84-1
 - SUP-16764 - Quiz.plugin pushes the captions up
 - SUP-22922 - Closed Captions "Use Cookie" in player configuration is on by default
