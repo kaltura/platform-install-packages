@@ -5,7 +5,7 @@
 %define apache_group	apache
 Summary: Kaltura Open Source Video Platform - frontend server 
 Name: kaltura-front
-Version: 16.10.0
+Version: 16.11.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -102,6 +102,9 @@ rm -rf %{buildroot}
 %config %{_sysconfdir}/php.d/zz-%{name}.ini
 
 %changelog
+* Mon Nov 2 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.11.0-1
+- Ver Bounce to 16.11.0
+
 * Wed Oct 21 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.10.0-1
 - Ver Bounce to 16.10.0
 
