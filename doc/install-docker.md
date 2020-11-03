@@ -1,17 +1,17 @@
 # Installing Kaltura Docker container 
-This guide describes docker container installation of an all-in-one Kaltura server and applies to all docker engines on linux, windows and mac.
+This guide describes docker container installation of an all-in-one Kaltura server and applies to all docker engines on Linux, windows and mac.
 
 [Kaltura Inc.](http://corp.kaltura.com) also provides commercial solutions and services including pro-active platform monitoring, applications, SLA, 24/7 support and professional services. If you're looking for a commercially supported video platform  with integrations to commercial encoders, streaming servers, eCDN, DRM and more - Start a [Free Trial of the Kaltura.com Hosted Platform](http://corp.kaltura.com/free-trial) or learn more about [Kaltura' Commercial OnPrem Edition™](http://corp.kaltura.com/Deployment-Options/Kaltura-On-Prem-Edition). For existing RPM based users, Kaltura offers commercial upgrade options.
 
 #### Table of Contents
 
-[Prerequites](install-docker.md#prerequites)
+[Prerequisites](install-docker.md#prerequites)
 
 [Step-by-step Installation](install-docker.md#step-by-step-installation)
 
 [Unattended Installation](install-docker.md#unattended-installation)
 
-## Prerequites
+## Prerequisites
 
 Installed [Docker Engine](https://docs.docker.com/engine/installation).
 

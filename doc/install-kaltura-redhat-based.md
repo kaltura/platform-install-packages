@@ -7,7 +7,7 @@ This guide describes RPM installation of an all-in-one Kaltura server and applie
 [Kaltura Inc.](http://corp.kaltura.com) also provides commercial solutions and services including pro-active platform monitoring, applications, SLA, 24/7 support and professional services. If you're looking for a commercially supported video platform  with integrations to commercial encoders, streaming servers, eCDN, DRM and more - Start a [Free Trial of the Kaltura.com Hosted Platform](http://corp.kaltura.com/free-trial) or learn more about [Kaltura' Commercial OnPrem Edition™](http://corp.kaltura.com/Deployment-Options/Kaltura-On-Prem-Edition). For existing RPM based users, Kaltura offers commercial upgrade options.
 
 #### Table of Contents
-[Prerequites](pre-requisites.md)
+[Prerequisites](pre-requisites.md)
 
 [Pre-Install Steps](install-kaltura-redhat-based.md#pre-install-steps)
 
@@ -170,7 +170,7 @@ In Redhat 6.5 you should run the following to remove the conflicting packages:
 
 
 ## Non-SSL Step-by-step Installation
-Before you can deploy your Kaltura CE Server, you need to perform some preliminary actions such as adding the Kaltura RPM repos, setting SELinux to persmissive mode and deploying MySQL. Please see [pre-install steps](install-kaltura-redhat-based.md#pre-install-steps). 
+Before you can deploy your Kaltura CE Server, you need to perform some preliminary actions such as adding the Kaltura RPM repos, setting SELinux to permissive mode and deploying MySQL. Please see [pre-install steps](install-kaltura-redhat-based.md#pre-install-steps). 
 
 Install the basic Kaltura Packages:
 ```bash

@@ -1,8 +1,8 @@
 General
 =======
-The query cache is a generic mechanism for caching the results of database queries using memcache. 
+The query cache is a generic mechanism for caching the results of database queries using Memcache. 
 
-The query cache uses a single shared memcache that will be added to each datacenter (not machine local memcaches). 
+The query cache uses a single shared Memcache that will be added to each datacentre (not machine local memcaches). 
 
 How does it work?
 

@@ -10,7 +10,7 @@ The Open Source Kaltura Platform is provided under the [AGPLv3 license](http://w
 [Kaltura Inc.](http://corp.kaltura.com) also provides commercial solutions and services including pro-active platform monitoring, applications, SLA, 24/7 support and professional services. If you're looking for a commercially supported video platform  with integrations to commercial encoders, streaming servers, eCDN, DRM and more - Start a [Free Trial of the Kaltura.com Hosted Platform](http://corp.kaltura.com/free-trial) or learn more about [Kaltura' Commercial OnPrem Edition™](http://corp.kaltura.com/Deployment-Options/Kaltura-On-Prem-Edition). For existing RPM based users, Kaltura offers commercial upgrade options.
 
 ### How to contribute
-We value contributions from our Community Edition user base very much. To make a contribution, follow the [See our CONTRIBUTERS doc](https://github.com/kaltura/platform-install-packages/blob/master/doc/CONTRIBUTERS.md).
+We value contributions from our Community Edition user base very much. To make a contribution, follow the [See our CONTRIBUTORS doc](https://github.com/kaltura/platform-install-packages/blob/master/doc/CONTRIBUTERS.md).
 
 
 ### Changing Apache configurations post install.
@@ -115,13 +115,13 @@ In summary, when troubleshooting Analytics issues:
 
 #### Troubleshooting Analytics Issues
 
-check if a process lock is stuck:
+Check if a process lock is stuck:
 ```
 mysql> select * from kalturadw_ds.locks ;
 ```
 if lock_state says 1 for any of these, make sure you have no stuck dwh procs running, update it to read 0 and retry.
 
-check if access files were processed:
+Check if access files were processed:
 ```
 mysql> select * from kalturadw_ds.files where insert_time >=%Y%m%d;
 ```
@@ -205,7 +205,7 @@ This should reset your passwd to 'admin123!'
 If you try to access /kmc and get routed to https://vod.linnovate.net/index.php/kmc/kmc4 -
 (even if you prompted to work in non SSL mode...
 
-run the following commands...
+Run the following commands...
 ```
   mysql kaltura
   select id from permission WHERE permission.NAME='FEATURE_KMC_ENFORCE_HTTPS';

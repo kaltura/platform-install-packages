@@ -1,5 +1,5 @@
 # Tasks That Make A Difference!
-This document outlines general "smaller" or "easier" tasks that new Kaltura platform developers can take on as learning challenges, but at the same time also be proud of making a valueable contribution to the platform evolution!    
+This document outlines general "smaller" or "easier" tasks that new Kaltura platform developers can take on as learning challenges, but at the same time also be proud of making a valuable contribution to the platform evolution!    
 If you decide to take on a challenge, please open a bug with the details of the task, and mark it as yours on the issue queue. We promise to do our best at mentoring you to greatness!
 
 Thanks!

@@ -6,7 +6,7 @@
 
 * Under Viewer Protocol Policy: Choose **HTTP and HTTPS**
 
-* Select your bucket as the origin ID, and decide wether you want logging or not.
+* Select your bucket as the origin ID, and decide whether you want logging or not.
 
 * Click on **Create Distribution**
 
@@ -73,7 +73,6 @@ HTTPS Delivery Base URL:  https://d2xxxxxxxxxxxx.cloudfront.net/kaltura
 
 * Select **Export Automatically** and then click **OK**
 
-* You will receive the confirmation that your storage was autoed :)
 
   Test your new configuration
   You can go ahead and test your new configuration. Upload a new video in the KMC, let it convert, and wait for it to     get distributed. After that, try to play the entry and analyse it in your favorite sniffer. You should see that the     movies are being downloaded from your cloudfront CDN, look for flv and mp4 files.

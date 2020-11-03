@@ -53,7 +53,7 @@ Utility scripts
 ===============
 under build/deb-specific:
 
-* bounce_core_ver.sh - utiliy script to bounce core version for kaltura-base, kaltura-front and kaltura-batch. Should be run whenever a new branch is created
+* bounce_core_ver.sh - utility script to bounce core version for kaltura-base, kaltura-front and kaltura-batch. Should be run whenever a new branch is created
 
 Deployment instructions
 ================================
@@ -68,7 +68,7 @@ Step by step release process
 
 2. update versions in platform-install-packages/build/sources.rc.
 
-3. run platform-install-packages/build/deb-specifc/bounce_core_ver.sh $NEW_VER $DIST
+3. run platform-install-packages/build/deb-specific/bounce_core_ver.sh $NEW_VER $DIST
 This will update the Core version in the various relevant spec files. $DIST is the release codename, for example, 10.n.n codename is 'jupiter'.
 
 4. update specs for additional components according to versions in the deployment doc, i.e:
