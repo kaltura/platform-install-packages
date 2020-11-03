@@ -14,7 +14,7 @@ The following server roles should not be load-balanced:
 ### HAProxy Load Balancer
 Load balancing is recommended in order to scale your front and streaming machines.   
 
-Make sure you have HAProxy compiled with SSL support. It seems the official packages on several Linux distros are compiled without it [propbably due to licensing considerations]  and so, you may need to compile your own. 
+Make sure you have HAProxy compiled with SSL support. It seems the official packages on several Linux distros are compiled without it [probably due to licensing considerations]  and so, you may need to compile your own. 
 This can be done with these simple steps [replace $HA_PROXY_VERSION with whatever the latest stable happens to be at the time of reading this]:
 
 ```
@@ -28,7 +28,7 @@ This can be done with these simple steps [replace $HA_PROXY_VERSION with whateve
 Please refer to the [configuration file example](haproxy.cfg).
 To configure the load balancer on your environment:
 
-1. Replace all occurances of `node0.domain.org` with the first front machine hostname and `node1.domain.org` with the second front machine hostname.
+1. Replace all occurrences of `node0.domain.org` with the first front machine hostname and `node1.domain.org` with the second front machine hostname.
 2. In order to add more front machines to the load balancing poll, simply clone the nodeX.domain.org line and change to the hostnames of the new front machines and change the server cookie ID (after the cookie keyword).
 
 If you want to have logging for HAProxy with the sample configuration, add the following lines to the syslog/rsyslog configuration (for rsyslog you can put this in the file /etc/rsyslog.d/haproxy.conf):
@@ -52,8 +52,8 @@ To deploy an Apache based load balancer, refer to the [Apache Load Balancer conf
 This example config uses the `proxy_balancer_module` and `proxy_module` Apache modules to setup a simple Apache based load balancer (refer to official docs about [proxy_balancer_module](http://httpd.apache.org/docs/2.2/mod/mod_proxy_balancer.html) and [proxy_module](http://httpd.apache.org/docs/2.2/mod/mod_proxy.html) to learn more).    
 To configure the load balancer on your environment: 
 
-1. Replace all occurances of `balancer.domain.org` with the desired hostname for the load balanacer (the main end-point your end-users will reach).
-1. Replace all occurances of `node0.domain.org` with the first front machine hostname and `node1.domain.org` with the second front machine hostname.    
+1. Replace all occurrences of `balancer.domain.org` with the desired hostname for the load balancer (the main end-point your end-users will reach).
+1. Replace all occurrences of `node0.domain.org` with the first front machine hostname and `node1.domain.org` with the second front machine hostname.    
 1. In order to add more front machines to the load balancing poll, simply clone the nodeX.domain.org lines and change to the hostnames of the new front machines and the route.
 
 Note that the port in the example file is 80 (standard HTTP port), feel free to change it if you're using a non-standard port.

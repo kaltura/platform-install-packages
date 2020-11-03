@@ -9,12 +9,12 @@
 + Packages for [Nginx server](https://github.com/kaltura/nginx-vod-module) (for VOD repackaging, and eCDN caching server)
 + Packages for [Media Server](https://github.com/kaltura/media-server) (for Live Streaming)
 + Packages for Play Server (for stream stitching capabilities such Ad Stitching)
-+ Integration points and support for Kaltura on [OpenStack](http://www.openstack.org/) and [CloudFoundry](http://www.cloudfoundry.org) - discovery and integration hooks to virtualize resource management and launch cluster node scaling.
++ Integration points and support for Kaltura on [OpenStack](http://www.openstack.org/) and [CloudFoundry](http://www.cloudfoundry.org) - discovery and integration hooks to virtualise resource management and launch cluster node scaling.
 + API Client Libraries testing using TravisCI post successful CI tests. 
 + Automatic distribution of API Client Libraries, (upon successful CI and after official package releases) to respective repositories, including: [RubyGems](http://rubygems.org), [Node npm](https://www.npmjs.org), [PHP composer](https://getcomposer.org), [pypi](https://pypi.python.org), etc.
 + Packages for the Live Analytics project. 
 
-Much more to come... please send ideas or suggestions to community@kaltura.org or post to the [community forums](http://forum.kaltura.org).
+Much more to come... Please send ideas or suggestions to community@kaltura.org or post to the [community forums](http://forum.kaltura.org).
 
 #### 2014-11-01:
 
@@ -50,7 +50,7 @@ Celebrating over 100 bugs crushed mark! :) Thanks to all active contributors! (D
 + Many bug patches were merged to core in uiConfs, monitors, batches, and client generators. (ref: [pull1](https://github.com/jessp01/server/compare/kaltura:master...master), [pull2](https://github.com/kaltura/server/commit/3cfacf04d48640d63cc6080592ffcc1270da82a3))
 + Amazon Web Services documentations contributed by [@blackyboy](https://github.com/blackyboy): 1) [CloudFront HTTP/s](setting-up-amazon-cloudfront-cdn-http-https.md), 2) [CloudFront RTMP](setting-up-amazon-cloudfront-cdn-rtmp.md), and 3) [AWS S3 Remote Storage](setup-amazon-S3-remote-storage.md).
 + Chef Kaltura cookbook are now available for download from the [official Chef community site](http://community.opscode.com/cookbooks/kaltura). 
-+ Signed RPM packages: Signing RPMs adds an extra level of trustworthiness to the RPMs. A digital signature helps establish that the package indeed came from Kaltura, and not from someone masquerading as Kaltura or retrafficing via DNS spoofing, etc. (Read more about [RPM signing](http://docs.fedoraproject.org/en-US/Fedora_Draft_Documentation/0.1/html/RPM_Guide/ch11s04.html)). 
++ Signed RPM packages: Signing RPMs adds an extra level of trustworthiness to the RPMs. A digital signature helps establish that the package indeed came from Kaltura, and not from someone masquerading as Kaltura or re-trafficing via DNS spoofing, etc. (Read more about [RPM signing](http://docs.fedoraproject.org/en-US/Fedora_Draft_Documentation/0.1/html/RPM_Guide/ch11s04.html)). 
 + Introducing: [Simple Tasks That Make A Difference!](tasks.md) - small things you could patch to learn and at the same time contribute greatly to the platform!
 
 
@@ -58,7 +58,7 @@ Celebrating over 100 bugs crushed mark! :) Thanks to all active contributors! (D
 
 + Stable version is now 9.14.0.
 + Progressed with tests for CI.
-+ Dropped plans for using [The Foremen](http://www.theforeman.org/), seems not ready yet. Collaborators who are familiar with TheForeman are welcome to take on that task. For now, Chef + bash scripts seems to be answering the needs.
++ Dropped plans for using [The Foremen](http://www.theforeman.org/), seems not ready yet. Collaborators who are familiar with The Foreman are welcome to take on that task. For now, Chef + bash scripts seems to be answering the needs.
 
 #### 2014-03-02:
 
@@ -86,10 +86,10 @@ Celebrating over 100 bugs crushed mark! :) Thanks to all active contributors! (D
 
 #### 2014-03-02:
 
-+ Alpha tests have all passes sucessfully. 
++ Alpha tests have all passes successfully. 
 + Further Cluster and Chef deployment guides were tested on AWS.
 + Red5 package fully tested (both webcam and FMLE).
-+ QA Analytics reporting events deployed, users can now opt-in to send repoting events for system stability reports and deployment issue assistance.
++ QA Analytics reporting events deployed, users can now opt-in to send reporting events for system stability reports and deployment issue assistance.
 + IX-9.11.0 was released and tested.
 + Specifications and definition for the [Kaltura Platform Packages CI Project](https://github.com/kaltura/platform-continuous-integration) were created.
 + Entered [Phase D - Public Beta, and Continuous Integration System](http://kaltura.github.io/platform-install-packages/#phase-d).
