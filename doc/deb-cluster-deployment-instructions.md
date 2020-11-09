@@ -102,7 +102,7 @@ Note that you may choose different NFS settings which is fine so long as:
 * the kaltura and www-data user are both able to write to this volume
 * the kaltura and www-data user are both able create files with them as owners. i.e: do not use all_squash as an option.
 
-Then set priviliges accordingly:
+Then set privileges accordingly:
 ```
 if ! getent group $KALTURA_GROUP >/dev/null; then
         addgroup --system --force-badname --quiet $KALTURA_GROUP --gid 7373
@@ -313,8 +313,8 @@ It is strongly recommended that you install at least 2 batch nodes for redundanc
 
 #### Note about batch scaling
 Adding more batch machines is simple and easy! Due to the distributed architecture of batches in Kaltura, batches are independently registering themselves against the Kaltura cluster, and independently assume jobs from the queue.   
-In order to scale your system batch capacity, simply install new bacth machines in the cluster.   
-When running the `kaltura-batch-config.sh` installer on the batch machine, the installer replaces the config tokens and sets a uniq ID per batch. Then seamlessly, the batch registers against the DB and starts taking available jobs.
+In order to scale your system batch capacity, simply install new batch machines in the cluster.   
+When running the `kaltura-batch-config.sh` installer on the batch machine, the installer replaces the config tokens and sets a unique ID per batch. Then seamlessly, the batch registers against the DB and starts taking available jobs.
 
 ### The DataWarehouse
 The DWH is Kaltura's Analytics server.

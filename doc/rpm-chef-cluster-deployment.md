@@ -6,7 +6,7 @@ This guide is intended for users of Chef that would like to deploy Kaltura clust
 
 * Please review the [frequently answered questions](kaltura-packages-faq.md) document for general help before posting to the forums or issue queue.
 * If you don't know what Chef is, start by reading [An Overview of Chef](http://docs.opscode.com/chef_overview.html).
-* If you're looking to install Kaltura on a signle machine, see: [Installing Kaltura on a Single All-In-One Server (RPM)](install-kaltura-redhat-based.md)
+* If you're looking to install Kaltura on a single machine, see: [Installing Kaltura on a Single All-In-One Server (RPM)](install-kaltura-redhat-based.md)
 * If you're looking to deploy a cluster manually or using other automation tools, see [Deploying Kaltura Clusters](rpm-cluster-deployment-instructions.md).
 * [Kaltura Inc.](http://corp.kaltura.com) also provides commercial solutions and services including pro-active platform monitoring, applications, SLA, 24/7 support and professional services. If you're looking for a commercially supported video platform  with integrations to commercial encoders, streaming servers, eCDN, DRM and more - Start a [Free Trial of the Kaltura.com Hosted Platform](http://corp.kaltura.com/free-trial) or learn more about [Kaltura' Commercial OnPrem Edition™](http://corp.kaltura.com/Deployment-Options/Kaltura-On-Prem-Edition). For existing RPM based users, Kaltura offers commercial upgrade options.
 
@@ -182,7 +182,7 @@ And deploy the cluster from the "Nodes"->"Edit" menu.
 ### Notes 
 
 1. The db_config runs from sphinx because it requires Kaltura's code which there is no reason to deploy on the DB machine.
-2. The above run lists are a recommedation, you can of course run more than one role per node.
+2. The above run lists are a recommendation, you can of course run more than one role per node.
 3. The order of the run_list is crucial. NFS needs to happen first. Note that your recipe should include creation of /opt/kaltura/web BEFORE the NFS recipe runs.
 
 

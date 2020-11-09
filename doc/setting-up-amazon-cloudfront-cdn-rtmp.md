@@ -15,12 +15,12 @@
 
 Next we need to configure the Remote Storage Profile. In order to do this, we must click on the partner’s left drop-down box (under **Profiles**) and select **Remote Storage**. You should see the **Remote Storage Profiles** page for your publisher (If you haven’t yet set up any remote storage profiles, the list should be empty).
 
-There was our s3 storage will be listed as we have done in above Step, 
+There was our S3 storage will be listed as we have done in above Step, 
 
 1. Select action Click **configure** 
 
-2. Under Delivery Details Below http & https we need to enter the rtmp url of cloudnfront
-Prefix must be our Directory which was created in s3 bucket
+2. Under Delivery Details Below http & https we need to enter the RTMP URL of Cloudnfront
+Prefix must be our Directory which was created in S3 bucket
 
 Note : There is no slash after /st
 Note : There is no slash after /kaltura

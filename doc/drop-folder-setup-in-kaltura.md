@@ -3,7 +3,7 @@ Setting up a Drop folder in Kaltura
 
 ######After Creating a Publisher in Kaltura 
 
-* Creat a Transcoding Profile ( I have created in my name as blackyboy transcoding 
+* Create a Transcoding Profile ( I have created in my name as blackyboy transcoding 
 
 * Then Configure DropBox for Publisher by choosing configure in Drop menu
 
@@ -25,7 +25,7 @@ Setting up a Drop folder in Kaltura
 
 * Choose Manual Deletion if you Don't want to delete the Source.
 
-  Save it ... that't it in KMC side..
+  Save it... That's it in KMC side..
 
 -------------------------------------------------------------------------
 
@@ -53,7 +53,7 @@ New passwd: ********
 Con Passwd: ********
 ```
 
-* Add the user blackyboy to apache & kaltura Group
+* Add the user `blackyboy` to `apache` & kaltura Group
    Only kaltura Group is Enough
 
 ```
@@ -67,33 +67,31 @@ Con Passwd: ********
 # cd /opt/kaltura/web/content
 ```
 
-* Change the Ownership of blackyboy
+* Change the Ownership of `blackyboy`
 
 ```
 # chown blackyboy:kaltura blackyboy/
 
 ```
-  Note : Here i have setuped for sftp because ftp is not secured one, If we need ftp just 2 more step to be added in above steps, those are 
+  Note : Here i have setup for SFTP because FTP is not secured one, If we need ftp just 2 more step to be added in above steps, those are 
 
 ```
 # usermod -a -G ftp,kaltura blackyboy
 
 ```
 
-  And at last we need to restart the vsftpd Service 
+  And at last we need to restart the `vsftpd` Service 
 
 ```
 # /etc/init.d/vsftpd restart
 ```
 
-* Login the sftp from filezilla 
+* Login into the SFTP server and upload a video file, it will be uploaded to **/opt/kaltura/web/content/blackyboy**
 
-  And upload a video file, it will be uploaded to **/opt/kaltura/web/content/blackyboy**
-
-  After Completing upload it wait's for 10 seconds and it will move to KMC Content TAB and Start to convert it Using      Transcoding profile Which we have created.
+  After Completing the upload it will wait for 10 seconds and move to KMC Content TAB and Start to convert it Using      Transcoding profile Which we have created.
 
   We can see the Progress of uploading from (Drop folder) Under Content TAB 
 
-  That's it ..
+  That's it.
 
   

@@ -23,7 +23,7 @@ After installing the percona-server-server-5.5 deb and all its dependencies, run
 **When installing an all in one Kaltura instance, simply input 'Y' whenever prompted by `mysql_secure_installation`. 
 When deploying a cluster, input 'Y' in response to all prompts EXCEPT for "Disallow root login remotely?" to which you should reply with 'N'.**
 
-Edit /etc/mysql/my.cnf so that it incldues the following directives under the ```[mysqld]``` section:
+Edit /etc/mysql/my.cnf so that it includes the following directives under the ```[mysqld]``` section:
 ```
 lower_case_table_names = 1
 innodb_file_per_table
