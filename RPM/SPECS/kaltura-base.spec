@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 16.11.0
-Release: 1
+Release: 2
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -372,6 +372,55 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Nov 9 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.11.0-2
+- PLAT-11190: Correctly create thumbnail destination path (https://github.com/kaltura/server/pull/10119)
+- PLAT-22437-Reach: Fix transcription addition (https://github.com/kaltura/server/pull/10116)
+- KCurlWrapper fixes (https://github.com/kaltura/server/pull/10113)
+- `KalturaRequestDeserializer`: call `validateFile()` (https://github.com/kaltura/server/pull/10112)
+- Add the server `time()` to x-kaltura-session header (https://github.com/kaltura/server/pull/10109)
+- sphinx_log: Add DC,ID index and force it (https://github.com/kaltura/server/pull/10108)
+- `KFFMpegMediaParser`: Handle `S3` paths in `checkForScanType()` (https://github.com/kaltura/server/pull/10103)
+- PLAT-11259: Init `kUser` in case user ID or partner ID were changed (https://github.com/kaltura/server/pull/10102)
+- AWS: Add FFmpeg reconnect params to support error recovery when working with remote files (https://github.com/kaltura/server/pull/10100)
+- PLAT-11113: Thumbnail adapter handling of `src_x, src_y, src_h, src_w` (https://github.com/kaltura/server/pull/10098)
+- PLAT-11266: Fix `loadLanguageCodeMap()`: verify file exists (https://github.com/kaltura/server/pull/10095)
+- SUP-24553: `checkForScanType()` - fix detection (https://github.com/kaltura/server/pull/10094)
+- PLAT-11257: Always require `OTP` if `getUseTwoFactorAuthentication()` returns true (https://github.com/kaltura/server/pull/10093)
+- PLAT-11256: Exit with error when preview page is disabled (https://github.com/kaltura/server/pull/10090)
+- PLAT-11258: Limit number of failing `OTP` login attempts (https://github.com/kaltura/server/pull/10088)
+- PLAT-11257: `OTP` login - throw an exception if user doesn't exist (https://github.com/kaltura/server/pull/10087)
+- Reach: Allow vendor accounts to fetch catalog item data when using a response profile (https://github.com/kaltura/server/pull/10086)
+- Sphinx populate: issue a separate query per DC (https://github.com/kaltura/server/pull/10085)
+- PLAT-11256: Add option to disable preview page using config (https://github.com/kaltura/server/pull/10084)
+- Export script: Support list of file sync keys (https://github.com/kaltura/server/pull/10083)
+- SUP-24521: When `FEATURE_DISABLE_CATEGORY_LIMIT` is enabled, its indexed entries do not get the privacy-context if their status is pending (https://github.com/kaltura/server/pull/10082)
+- AWS: Validate resolved file sync is pending before returning it (https://github.com/kaltura/server/pull/10080)
+- PLAT-11249: `shortlink.list()` - remove `WIDGET_SESSION_PERMISSION` (https://github.com/kaltura/server/pull/10079)
+- SUP-24583: Fixing thumbnails capture (https://github.com/kaltura/server/pull/10077)
+- PLAT-11171: Get expiry of exported files according to partner config (https://github.com/kaltura/server/pull/10075)
+- aws: Use legacy cloud storage ID when pushing src to remote and converting from remote (https://github.com/kaltura/server/pull/10074)
+- PLAT-11246: Add support for raw action in case the file sync exists in shared DC (https://github.com/kaltura/server/pull/10069)
+- `KCurlWrapper` cleanup (https://github.com/kaltura/server/pull/10068)
+- AWS: Shared DC file syncs should also served as remote DC (https://github.com/kaltura/server/pull/10067)
+- AWS: Prefer shared file sync for chunk convert flow only (https://github.com/kaltura/server/pull/10066)
+- AWS: Do not use remote convert flow in `KAsyncConvert.convert()` (https://github.com/kaltura/server/pull/10060)
+- PLAT-11246: Only redirect raw requests to packager if the file exists in shared storage (https://github.com/kaltura/server/pull/10058)
+- kava - Add users registration info enrichment (https://github.com/kaltura/server/pull/10056)
+- SUP-23292: Access control `SiteRestriction` - use the entry id in order to identify the partner ID when a KS isn't present (https://github.com/kaltura/server/pull/10055)
+- plat-11245: [KMS->my-media] user can't see content that he is co-editor of, unless the content has been published (https://github.com/kaltura/server/pull/10052)
+- Don't create file sync in shared DC if `sharedPath` was not provided on `jobData` (https://github.com/kaltura/server/pull/10050)
+- REACH2-970: Add languages (https://github.com/kaltura/server/pull/10047)
+- PLAT-11243: Validate user is allowed to edit entry assets (https://github.com/kaltura/server/pull/10046)
+- No-Plat: Delete tmp local merged video file in case concat failed to save disk space (https://github.com/kaltura/server/pull/10045)
+- PLAT-11241: Support reconvert operation from `S3` (https://github.com/kaltura/server/pull/10044)
+- CLOUDMGT-893: Source to `S3` flow + convert directly from `S3` (https://github.com/kaltura/server/pull/10043)
+- Source to `S3` flow + convert directly from `S3` (https://github.com/kaltura/server/pull/10042)
+- VIRTC-655: `getLiveStatus()` - support `simulive` (https://github.com/kaltura/server/pull/10038)
+- Simulive: Add offset support (https://github.com/kaltura/server/pull/10037)
+- Add exception for entry not found in `getPlaybackContext` action (https://github.com/kaltura/server/pull/10035)
+- PLAT-11190: Thumbnail creation on `S3` (https://github.com/kaltura/server/pull/9903)
+- PSVAMB-16978: Update LC conversion profile (https://github.com/kaltura/server/pull/9806)
+
 * Mon Nov 2 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.11.0-1
 - Ver Bounce to 16.11.0
 

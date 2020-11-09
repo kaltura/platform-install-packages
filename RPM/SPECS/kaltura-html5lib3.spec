@@ -3,7 +3,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib3
-Version: 1.0.3
+Version: 1.0.5
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -49,6 +49,9 @@ rm -rf %{buildroot}
 %{html5lib3_base}
 
 %changelog
+* Mon Nov 9 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.5-1
+- FEC-10469: pre-roll Ad for playlist displays for each second media instead of for each one (#367) (c3a52cd)
+
 * Wed Oct 21 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.3-1
 - FEC-10161: add kava analytics url from server response (#355) (e4ce3f1)
 - FEC-10275: Bumper incorrectly recognised as ad (#352) (716d01a)

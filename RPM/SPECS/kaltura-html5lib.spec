@@ -3,7 +3,7 @@
  
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.84.1
+Version: v2.84.4
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -86,6 +86,12 @@ fi
 %config %{html5lib_base}/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Mon Nov 9 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 2.84.4-1
+- Feat: add xml proxy header redirect function filter (#4197)
+- Fix: jquery is missing (#4196)
+- FEC-10621 - V2 - Support sending Kava beacons as POST
+- Fix: additional sanitiziation for xml proxy
+
 * Mon Oct 26 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 2.84.1-1
 - FEV-772 - Can't play entries in context of playlist or embed in v2.84 player while hotspot is enabled
 
