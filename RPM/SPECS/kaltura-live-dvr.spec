@@ -8,7 +8,7 @@
 
 Summary: Kaltura Open Source Video Platform - Live DVR
 Name: kaltura-livedvr
-Version: 2.3.2
+Version: 2.3.10
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -138,6 +138,15 @@ fi
 #%files debug
 
 %changelog
+* Tue Nov 24 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 2.3.10-1
+- Don't remove redirect when reset recording by default
+- https://kaltura.atlassian.net/browse/SUP-22697
+- https://kaltura.atlassian.net/browse/PSVAMB-14598
+- https://kaltura.atlassian.net/browse/PSVAMB-14598 
+- https://kaltura.atlassian.net/browse/SUP-22058
+- SUP-22058: reset recording if per session is used (#625)
+- PLAT-10319
+
 * Wed Nov 28 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 2.0.4-2
 - Added dep: nodejs-socket.io-client
 

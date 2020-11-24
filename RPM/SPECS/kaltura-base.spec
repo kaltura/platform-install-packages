@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 16.11.0
-Release: 2
+Version: 16.12.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -372,6 +372,55 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Tue Nov 24 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.12.0-1
+- Sup-23216: Audio track display is missing from the Editor (https://github.com/kaltura/server/pull/10202)
+- Support remote convert via packager when working with shared storage (https://github.com/kaltura/server/pull/10194)
+- PLAT-22465: entry::allowEdit() - auth validation enhancement (https://github.com/kaltura/server/pull/10190)
+- Add invalidation keys for `ReachProfile` and `VendorCatalogItem` (https://github.com/kaltura/server/pull/10189)
+- KMS-22652: `eSearch` - add max metadata index length to dynamic config (https://github.com/kaltura/server/pull/10188)
+- PLAT-11197: Fix retrieval of sources of bumper entry (https://github.com/kaltura/server/pull/10187)
+- Handle large source files in case local tmp storage is not shared + handle subs flow and watermark in tmp local disk (https://github.com/kaltura/server/pull/10186)
+- PLAT-22459: system::pingAction() - add cache expiry (https://github.com/kaltura/server/pull/10185)
+- kKavaReportsMgr: Increase memory limit, exec time and result size limit for CSV (https://github.com/kaltura/server/pull/10184)
+- PLAT-22464: Check update attempts and return generic message (https://github.com/kaltura/server/pull/10183)
+- SUP-24551: `sshUrlResource` - Add support for `CaptionAsset` (https://github.com/kaltura/server/pull/10182)
+- REACH2-973: Multiple zoom entries to have 1 parent entry (https://github.com/kaltura/server/pull/10181)
+- PLAT-11197: Support Bumper for live stream (https://github.com/kaltura/server/pull/10180)
+- PLAT-22458: Align flavour spec with SaaS (https://github.com/kaltura/server/pull/10179)
+- PLAT-22459: Add cache section per action in `api_v3` (https://github.com/kaltura/server/pull/10175)
+- PLAT-11197: Add playback sources to `KalturaBumper` (https://github.com/kaltura/server/pull/10174)
+- PSVAMB-17989: Start pageIndex at 1 (https://github.com/kaltura/server/pull/10173)
+- `getSingleItemSearchQuery()`: Use dedicated index if exists (https://github.com/kaltura/server/pull/10172)
+- Remove tmp files post convert (https://github.com/kaltura/server/pull/10168)
+- Add `simulive` and manual live to the "broadcasting now" report (https://github.com/kaltura/server/pull/10161)
+- PLAT-11221: Add option to delete the recorded live entry automatically when deleting live entry (https://github.com/kaltura/server/pull/10160)
+- `kBaseMemcacheConf`: Support persistent/flags (https://github.com/kaltura/server/pull/10159)
+- REACH2-959: Allow resubmission of entry vendor task (https://github.com/kaltura/server/pull/10158)
+- PLAT-22452: Support Thumbs from images stored on S3 (https://github.com/kaltura/server/pull/10157)
+- SUP-24970: `KEmailNotificationCategoryRecipientEngine` - get `max_pages_to_scan` value from config, default is 7 (https://github.com/kaltura/server/pull/10156)
+- PLAT-11197: Add Bumper plugin (https://github.com/kaltura/server/pull/10155)
+- `KCurlWrapper` - allow relative redirect operations (https://github.com/kaltura/server/pull/10152)
+- get `playbackTypes` from filter in case it is missing in the report definition (https://github.com/kaltura/server/pull/10151)
+- SUP-24940: Fix language codes to prevent duplications (https://github.com/kaltura/server/pull/10150)
+- Allow 8K resolution source ingestion (https://github.com/kaltura/server/pull/10147)
+- `KChunkedEncodeMemcacheWrap`: `FetchNextJob()` default `fetchRangeRandMax` param set to 20 (https://github.com/kaltura/server/pull/10146)
+- Fix `getClearTempPath()` (https://github.com/kaltura/server/pull/10144)
+- `getDetails()`: Support manual live (https://github.com/kaltura/server/pull/10142)
+- PLAT-11244: Do not add captions to child manifest if `disableCaptions` flag is set to `true` (https://github.com/kaltura/server/pull/10141)
+- SUP-24985: fix `getImportUrl()` (https://github.com/kaltura/server/pull/10140)
+- FEC-10567: Bundle builder - better error handling/reporting (https://github.com/kaltura/server/pull/10139)
+- PLAT-22449: Only access `remoteMemCache` if a value is requested (https://github.com/kaltura/server/pull/10138)
+- PLAT-11119: Kaltura SSO server - support login via POST (https://github.com/kaltura/server/pull/10134)
+- Support multiple CDN ratios on a single account (https://github.com/kaltura/server/pull/10132)
+- PLAT-22444: `EntryVendorTask::preSave()` - Remove entry duration update (https://github.com/kaltura/server/pull/10130)
+- PLAT-22426: use default filter when getting MRSS entry (https://github.com/kaltura/server/pull/10129)
+- `getLiveStreamConfigurations()`: Detect protocol using `requestUtils::getProtocol()` by default (https://github.com/kaltura/server/pull/10127)
+- Introduced `myCloudUtils::shouldExportThumbToCloud()` (https://github.com/kaltura/server/pull/10126)
+- PLAT-22441: Fix in `captionAsset::list()` when user is not entitled (https://github.com/kaltura/server/pull/10125)
+- PLAT-22429: Return an API error when the DB cannot be accessed (https://github.com/kaltura/server/pull/10124)
+- PLAT-22428 and PLAT-22428: `document.addFromUploadedFile()` - enforce file type restriction (https://github.com/kaltura/server/pull/10123)
+- KAVA realtime reports - add query cache (https://github.com/kaltura/server/pull/10015)
+
 * Mon Nov 9 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.11.0-2
 - PLAT-11190: Correctly create thumbnail destination path (https://github.com/kaltura/server/pull/10119)
 - PLAT-22437-Reach: Fix transcription addition (https://github.com/kaltura/server/pull/10116)

@@ -9,8 +9,8 @@
 
 Summary: Kaltura PlayKit Bundler 
 Name: kaltura-playkit-bundler 
-Version: 1.2.0
-Release: 14
+Version: 1.3.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-v%{version}.tar.gz
@@ -99,6 +99,9 @@ fi
 %doc %{prefix}/README.md
 
 %changelog
+* Tue Nov 24 2020 jess.portnoy@kaltura.com <Jess Portnoy> - v1.3.0-1
+- Better handling of errors
+
 * Tue Jun 9 2020 jess.portnoy@kaltura.com <Jess Portnoy> - v1.2.0-11
 - Revert to Gulp 3.9.1 
 

@@ -3,7 +3,7 @@
  
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.84.4
+Version: v2.85
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -86,6 +86,17 @@ fi
 %config %{html5lib_base}/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Tue Nov 24 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 2.85-1
+- SUP-24022 - Bug in captions in playlist
+- FEC-10621 - V2 - Support sending Kava beacons as POST
+- SUP-23162 - [FR] Read when the user tabs the slider on the player
+- SUP-24104 - Auto play ignores bumper
+- feat: use Memcache pconnect
+- fix: headerCallback location trim value is incorrect
+- feat: add xml proxy header redirect function filter (#4197)
+- fix: jquery is missing
+- fix: additional sanitiziation for xml proxy
+
 * Mon Nov 9 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 2.84.4-1
 - Feat: add xml proxy header redirect function filter (#4197)
 - Fix: jquery is missing (#4196)
