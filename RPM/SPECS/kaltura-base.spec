@@ -10,7 +10,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 16.12.0
+Version: 16.13.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -372,6 +372,51 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Dec 14 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.13.0-1
+- FOUN-65: Avoid writing to shared if file already exists and size matches (https://github.com/kaltura/server/pull/10287)
+- apimon: Add upload event (https://github.com/kaltura/server/pull/10285)
+- apimon: Monitor PS2 actions (https://github.com/kaltura/server/pull/10283)
+- FOUN-64: Avoid saving file ext that contains none alphanumeric chars (https://github.com/kaltura/server/pull/10282)
+- apimon: Track sleep time (https://github.com/kaltura/server/pull/10280)
+- apimon: Add events on `KCurlWrapper` (https://github.com/kaltura/server/pull/10277)
+- apimon: Add Memcache events (https://github.com/kaltura/server/pull/10275)
+- apimon: API exec time fix (https://github.com/kaltura/server/pull/10272)
+- FOUN-61: Use FS wrapper methods when working with files + resolve file path when building `FFmpeg` CLI command (https://github.com/kaltura/server/pull/10267)
+- `Filesync` should be resolved before retuning it to handle links (https://github.com/kaltura/server/pull/10266)
+- Compat check fixes (https://github.com/kaltura/server/pull/10260)
+- KAVA - Add max result size to report def (https://github.com/kaltura/server/pull/10253)
+- PLAT-22458 - Update flavour param configuration (https://github.com/kaltura/server/pull/10251)
+- PSVAMB-16978 - Update LC conversion profiles (https://github.com/kaltura/server/pull/10249)
+- SUP-25324: Treat shared storage file syncs as if they were local (https://github.com/kaltura/server/pull/10248)
+- Sup-25292: Revert zoom pairing records into parent-child (https://github.com/kaltura/server/pull/10245)
+- SUP-24970: `KDispatchEmailNotificationEngine` - support multiple BCC email addresses (https://github.com/kaltura/server/pull/10242)
+- SUP-25292: Zoom - different records in same event (https://github.com/kaltura/server/pull/10241)
+- PLAT-22504: Add stream password on clone (https://github.com/kaltura/server/pull/10240)
+- PLAT-22489 [Zoom Integration] Configurable Transcoding Profile release notes (https://github.com/kaltura/server/pull/10238)
+- fix(FEC-10733): `embedPlaykit` service doesn't throw critical error when `confvars` are not present (https://github.com/kaltura/server/pull/10237)
+- `contextdata` cache fix (https://github.com/kaltura/server/pull/10236)
+- Support forcing cached result (https://github.com/kaltura/server/pull/10230)
+- KAVA - modify `partnerUsageEditFilter` (https://github.com/kaltura/server/pull/10227)
+- Support defining group co existence constraints (https://github.com/kaltura/server/pull/10226)
+- Doc conversion: Support pop-up windows closer for office 2013 (https://github.com/kaltura/server/pull/10225)
+- psvamp-18174: Zoom transcoding profile configuration (https://github.com/kaltura/server/pull/10224)
+- KAVA - edit filter for `simulive` webcast analytics (https://github.com/kaltura/server/pull/10223)
+- Log the file path in case of file not found (https://github.com/kaltura/server/pull/10217)
+- Export script - skip `dir` file syncs (https://github.com/kaltura/server/pull/10216)
+- ExportToDifferentStorage: Export all types in assets mode (https://github.com/kaltura/server/pull/10213)
+- If available, use S3 file sync for thumbnail action (https://github.com/kaltura/server/pull/10212)
+- PLAT-22486: Remove the access control validation on a Bumper entry (https://github.com/kaltura/server/pull/10211)
+- SUP-25014: Adjust Sphinx query in case there's no privacy context (https://github.com/kaltura/server/pull/10208)
+- PLAT-22485: Support ClamAV 0.102.4 (https://github.com/kaltura/server/pull/10207)
+- Support remote ffmpeg convert (https://github.com/kaltura/server/pull/10203)
+- SUP-24970: Get `maxPagesToScan` value from worker `params` config, default is 7 (https://github.com/kaltura/server/pull/10200)
+- SUP-24473: Fix thumbnail rotation (https://github.com/kaltura/server/pull/10199)
+- SUP-23216: Volume map support on `filesync` on S3 (https://github.com/kaltura/server/pull/10192)
+- PLAT-22454: Prevent `media.set/updateContent()` when restricted filetypes is enabled (https://github.com/kaltura/server/pull/10177)
+- VIRTC-920: Support manual live status (https://github.com/kaltura/server/pull/10167)
+- SUP-25064, PSVAMB-17989 - Not All cue points are copied (https://github.com/kaltura/server/pull/10165)
+- Support pushing & getting metadata files to & from shared storage (https://github.com/kaltura/server/pull/10120)
+
 * Tue Nov 24 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.12.0-1
 - Sup-23216: Audio track display is missing from the Editor (https://github.com/kaltura/server/pull/10202)
 - Support remote convert via packager when working with shared storage (https://github.com/kaltura/server/pull/10194)
