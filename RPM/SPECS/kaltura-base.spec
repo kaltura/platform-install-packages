@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 16.13.0
-Release: 1
+Release: 4
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -143,6 +143,7 @@ sed -i 's@^writers.\(.*\).filters.priority.priority\s*=\s*7@writers.\1.filters.p
 # our Pentaho is correctly installed under its own dir and not %prefix/bin which is the known default so, adding -k path to kitchen.sh
 sed -i 's#\(@DWH_DIR@\)$#\1 -k %{prefix}/pentaho/pdi/kitchen.sh#g' $RPM_BUILD_ROOT%{confdir}/cron/dwh.template
 sed -i 's@2\s*=\s*"kmcng"@;2 = "kmcng"@g' $RPM_BUILD_ROOT%{confdir}/elasticDynamicMap.template.ini
+sed -i 's@sphinx_log@kaltura_sphinx_log.sphinx_log@g' $RPM_BUILD_ROOT%{prefix}/app/deployment/updates/sql/2020_11_05_sphinx_log_dc_id_index.sql
 rm $RPM_BUILD_ROOT%{prefix}/clients-generator/sources/android/DemoApplication/libs/libWVphoneAPI.so
 #rm $RPM_BUILD_ROOT%{prefix}/clients-generator/sources/android2/DemoApplication/libs/libWVphoneAPI.so
 rm $RPM_BUILD_ROOT%{confdir}/.project
@@ -372,7 +373,23 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
-* Mon Dec 14 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.13.0-1
+* Thu Dec 31 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.13.0-4
+- https://github.com/kaltura/server/pull/10340
+
+* Mon Dec 21 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.13.0-3
+- Fix deployment/updates/sql/2020_11_05_sphinx_log_dc_id_index.sql
+
+* Mon Dec 21 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.13.0-2
+- apimon: Reset Memcache & sleep vars in `multireq` (https://github.com/kaltura/server/pull/10301)
+- FOUN-68: Avoid `fseek` notices when grabbing thumbnails from shared storage (https://github.com/kaltura/server/pull/10300)
+- apimon fixes: Make sure Memcached wrapper is loaded (https://github.com/kaltura/server/pull/10299)
+- FOUN-68: Avoid php notices due to early resolution of file sync path to shared URI (https://github.com/kaltura/server/pull/10297)
+- apimon: Add `strval` on client tag (https://github.com/kaltura/server/pull/10295)
+- Output the external err code to analytics & apimon (https://github.com/kaltura/server/pull/10294)
+- `openFile()` and `readBytesFromStream()` should be static methods (https://github.com/kaltura/server/pull/10293)
+- FOUN-67: Use `file_path` when invoking `isSharedPath()` (https://github.com/kaltura/server/pull/10290)
+- FOUN-67: Handle shared storage dir serving as if they were local (https://github.com/kaltura/server/pull/10288)
+
 - FOUN-65: Avoid writing to shared if file already exists and size matches (https://github.com/kaltura/server/pull/10287)
 - apimon: Add upload event (https://github.com/kaltura/server/pull/10285)
 - apimon: Monitor PS2 actions (https://github.com/kaltura/server/pull/10283)
@@ -416,6 +433,9 @@ fi
 - VIRTC-920: Support manual live status (https://github.com/kaltura/server/pull/10167)
 - SUP-25064, PSVAMB-17989 - Not All cue points are copied (https://github.com/kaltura/server/pull/10165)
 - Support pushing & getting metadata files to & from shared storage (https://github.com/kaltura/server/pull/10120)
+
+* Mon Dec 14 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.13.0-1
+- Ver bounce to 16.13.0
 
 * Tue Nov 24 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 16.12.0-1
 - Sup-23216: Audio track display is missing from the Editor (https://github.com/kaltura/server/pull/10202)

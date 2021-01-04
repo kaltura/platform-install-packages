@@ -4,7 +4,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
 Version: v2.85
-Release: 1
+Release: 2
 Epoch: 0 
 License: AGPLv3+
 Group: Server/Platform 
@@ -57,6 +57,7 @@ for i in v2.14  v2.37  v2.37.1  v2.38.3  v2.42  v2.44  v2.45  v2.45.1 v2.46 %{ve
 	rm -rf %{_builddir}/%{name}-$i/modules/Widevine
 	if [ -r %{_builddir}/%{name}-$i/modules/KalturaSupport/UiConfResult.php ];then
 		sed -i '/^\s*"kAnalony"=>array(),\s*$/d' %{_builddir}/%{name}-$i/modules/KalturaSupport/UiConfResult.php
+		sed -i "s@\(\s*\)//'statistics' => array(),@\1'statistics' => array(),@g"  %{_builddir}/%{name}-$i/modules/KalturaSupport/UiConfResult.php
 	fi
 	cp -r %{_builddir}/%{name}-$i $RPM_BUILD_ROOT%{html5lib_base}/$i
 	cp %{SOURCE1} $RPM_BUILD_ROOT%{html5lib_base}/$i/
@@ -86,6 +87,9 @@ fi
 %config %{html5lib_base}/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Mon Dec 14 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 2.85-2
+- Enable the `stats` plugin to support non-kava ENVs
+
 * Tue Nov 24 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 2.85-1
 - SUP-24022 - Bug in captions in playlist
 - FEC-10621 - V2 - Support sending Kava beacons as POST

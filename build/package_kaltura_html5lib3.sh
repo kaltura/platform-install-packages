@@ -50,7 +50,8 @@ $BASE_CHECKOUT_DIR/build/gh_download_asset.sh $GITHUB_TOKEN kaltura/kaltura-inte
 #$BASE_CHECKOUT_DIR/build/gh_download_asset.sh $GITHUB_TOKEN kaltura/kaltura-interactive-player path-kaltura-player.js v$PLAYKIT_INTERACTIVE_VERSION $SOURCE_PACKAGING_DIR/html5lib3_tmp/$HTML5LIB3_VERSION
 #$BASE_CHECKOUT_DIR/build/gh_download_asset.sh $GITHUB_TOKEN kaltura/kaltura-interactive-player path-kaltura-player.js.map v$PLAYKIT_INTERACTIVE_VERSION $SOURCE_PACKAGING_DIR/html5lib3_tmp/$HTML5LIB3_VERSION
 
-rm $SOURCE_PACKAGING_DIR/html5lib3_tmp/$HTML5LIB3_VERSION/kaltura-tv-player.js*
+rm $SOURCE_PACKAGING_DIR/html5lib3_tmp/$HTML5LIB3_VERSION/kaltura-tv-player*
+rm $SOURCE_PACKAGING_DIR/html5lib3_tmp/$HTML5LIB3_VERSION/*.cjs.js*
 cd $SOURCE_PACKAGING_DIR/html5lib3_tmp/$HTML5LIB3_VERSION
 tar zxf $PLAYKIT_INTERACTIVE_VERSION.tar.gz && rm $PLAYKIT_INTERACTIVE_VERSION.tar.gz
 cd ..
