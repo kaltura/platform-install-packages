@@ -4,7 +4,7 @@
 Summary: Kaltura Open Source Video Platform - Analytics 
 Name: kaltura-dwh
 Version: 15.1.0
-Release: 1
+Release: 3
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/dwh/archive/%{name}-%{codename}-%{version}.zip
@@ -74,6 +74,9 @@ fi
 
 
 %changelog
+* Tue Jan 5 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 15.1.0-2
+- 2021 bug (https://github.com/kaltura/dwh/commit/b0b0288063c06216ef0a2fecb68cffcfe6950c36)
+
 * Thu Apr 4 2019 jess.portnoy@kaltura.com <Jess Portnoy> - 14.18.0-1
 - Since RAPT is implemented as a playlist, we need to include the value 3 when querying `entry_media_type_id`.
 

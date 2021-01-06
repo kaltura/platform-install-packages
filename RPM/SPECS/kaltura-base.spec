@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 16.14.0
-Release: 1
+Release: 2
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -373,6 +373,27 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Tue Jan 5 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 16.14.0-2
+- FOUN-77: Add `ffmpeg` reconnect params to 2pass flow (https://github.com/kaltura/server/pull/10357)
+- FOUN-75: Add `ffmpeg|ffprobe` reconnect params when running `mediainfo` parser (https://github.com/kaltura/server/pull/10348)
+- PSVAMB-19304: Memcache - prevent attempt to connect when config is not present (https://github.com/kaltura/server/pull/10347)
+- REACH2-973: Group zoom recording by start time (https://github.com/kaltura/server/pull/10335)
+- PLAT-22550: Vid/Aud track duration detection (https://github.com/kaltura/server/pull/10330)
+- SUP-24714: Allow download of assests for document type entries (https://github.com/kaltura/server/pull/10328)
+- AN-22440: Add playbackType filter to total completion rate metric (https://github.com/kaltura/server/pull/10327)
+- FOUN-71: Construct external URLs for shared file syncs as if they were local (https://github.com/kaltura/server/pull/10326)
+- FOUN-48: S3 content set `fileAsset|Attachement|Transcript` (https://github.com/kaltura/server/pull/10325)
+- Revert population of `liveStatus` attribute on manual live entry (https://github.com/kaltura/server/pull/10322)
+- REACH2-981: Do not resubmit job while an older version is in progress (https://github.com/kaltura/server/pull/10320)
+- FOUN-69: Support setting custom storage class when uploading files to S3 (https://github.com/kaltura/server/pull/10310)
+- apimon: Additional `curl_exec()` monitors (https://github.com/kaltura/server/pull/10309)
+- apimon: Monitor the different PHP exec functions (https://github.com/kaltura/server/pull/10308)
+- REACH2-981: Do not resubmit job while an older version is in progress (https://github.com/kaltura/server/pull/10307)
+- SUP-24350: Detect file extension for flavor assets when missing (https://github.com/kaltura/server/pull/10306)
+- PLAT-22530: Support captions in `simulive` mode (https://github.com/kaltura/server/pull/10302)
+- REACH2-982: Prevent resubmission when task is in Pending/Processing mode (https://github.com/kaltura/server/pull/10292)
+- PLAT-11239: Add expiry to kaltura URL `tokenizer` and `recognizer` (https://github.com/kaltura/server/pull/10279)
+
 * Mon Jan 4 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 16.14.0-1
 - Ver Bounce to 16.14.0
 
