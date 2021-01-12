@@ -1,3 +1,9 @@
+kaltura-front (16.14.0-1) propus; urgency=medium
+
+  * Switching to 16.14.0
+
+ -- Jess Portnoy <jess@a5d1111604e7>  Wed, 06 Jan 2021 13:30:26 +0000
+
 kaltura-front (16.8.0-1) propus; urgency=medium
 
   * Switching to 16.8.0

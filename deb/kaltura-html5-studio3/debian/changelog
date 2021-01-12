@@ -1,3 +1,9 @@
+kaltura-html5-studio3 (3.8.0-1) propus; urgency=medium
+
+  * feat(FEC-10401): add analytics plugins in studio (#94)
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Wed, 06 Jan 2021 15:13:43 +0000
+
 kaltura-html5-studio3 (3.7.0-1) propus; urgency=medium
 
   * feat(FEC-10283): add arbitrary studio config in advanced menu (#92)

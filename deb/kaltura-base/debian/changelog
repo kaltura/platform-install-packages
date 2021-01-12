@@ -1,3 +1,33 @@
+kaltura-base (16.14.0-1) propus; urgency=medium
+
+  * FOUN-77: Add `ffmpeg` reconnect params to 2pass flow (https://github.com/kaltura/server/pull/10357)
+  * FOUN-75: Add `ffmpeg|ffprobe` reconnect params when running `mediainfo` parser (https://github.com/kaltura/server/pull/10348)
+  * PSVAMB-19304: Memcache - prevent attempt to connect when config is not present (https://github.com/kaltura/server/pull/10347)
+  * REACH2-973: Group zoom recording by start time (https://github.com/kaltura/server/pull/10335)
+  * PLAT-22550: Vid/Aud track duration detection (https://github.com/kaltura/server/pull/10330)
+  * SUP-24714: Allow download of assests for document type entries (https://github.com/kaltura/server/pull/10328)
+  * AN-22440: Add playbackType filter to total completion rate metric (https://github.com/kaltura/server/pull/10327)
+  * FOUN-71: Construct external URLs for shared file syncs as if they were local (https://github.com/kaltura/server/pull/10326)
+  * FOUN-48: S3 content set `fileAsset|Attachement|Transcript` (https://github.com/kaltura/server/pull/10325)
+  * Revert population of `liveStatus` attribute on manual live entry (https://github.com/kaltura/server/pull/10322)
+  * REACH2-981: Do not resubmit job while an older version is in progress (https://github.com/kaltura/server/pull/10320)
+  * FOUN-69: Support setting custom storage class when uploading files to S3 (https://github.com/kaltura/server/pull/10310)
+  * apimon: Additional `curl_exec()` monitors (https://github.com/kaltura/server/pull/10309)
+  * apimon: Monitor the different PHP exec functions (https://github.com/kaltura/server/pull/10308)
+  * REACH2-981: Do not resubmit job while an older version is in progress (https://github.com/kaltura/server/pull/10307)
+  * SUP-24350: Detect file extension for flavor assets when missing (https://github.com/kaltura/server/pull/10306)
+  * PLAT-22530: Support captions in `simulive` mode (https://github.com/kaltura/server/pull/10302)
+  * REACH2-982: Prevent resubmission when task is in Pending/Processing mode (https://github.com/kaltura/server/pull/10292)
+  * PLAT-11239: Add expiry to kaltura URL `tokenizer` and `recognizer` (https://github.com/kaltura/server/pull/10279)
+
+ -- Jess Portnoy <jess@a5d1111604e7>  Wed, 06 Jan 2021 13:32:20 +0000
+
+kaltura-base (16.14.0-1) propus; urgency=medium
+
+  * Switching to 16.14.0
+
+ -- Jess Portnoy <jess@a5d1111604e7>  Wed, 06 Jan 2021 13:30:26 +0000
+
 kaltura-base (16.8.0-2) propus; urgency=medium
 
   * PLAT-10924: Stream a specific video conference source (https://github.com/kaltura/server/pull/9663)

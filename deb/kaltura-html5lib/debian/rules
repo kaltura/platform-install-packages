@@ -37,12 +37,13 @@ binary-indep: install
 	mv kaltura-html5lib-$(HTML5LIB_LATEST_VERSION) $(HTML5LIB_PREFIX)/$(HTML5LIB_LATEST_VERSION)
 	cp debian/LocalSettings.php $(HTML5LIB_PREFIX)/$(HTML5LIB_LATEST_VERSION)/
 	mkdir $(HTML5LIB_PREFIX)/$(HTML5LIB_LATEST_VERSION)/cache 
-	for HTML5_VER in $(HTML5LIB_VERSIONS);do \
+	for HTML5_VER in $(HTML5LIB_VERSIONS) $(HTML5LIB_LATEST_VERSION) ;do \
 		mv kaltura-html5lib-$$HTML5_VER $(HTML5LIB_PREFIX)/$$HTML5_VER; \
 		cp debian/LocalSettings.php $(HTML5LIB_PREFIX)/$$HTML5_VER/; \
 		sed -i '/^\s*"kAnalony"=>array(),\s*/d' $(HTML5LIB_PREFIX)/$$HTML5_VER/modules/KalturaSupport/UiConfResult.php; \
+		sed -i "s@\(\s*\)//'statistics' => array(),@\1'statistics' => array(),@g"  $(HTML5LIB_PREFIX)/$$HTML5_VER/modules/KalturaSupport/UiConfResult.php; \
 		cp debian/simplePhpXMLProxy.php $(HTML5LIB_PREFIX)/; \
-		mkdir $(HTML5LIB_PREFIX)/$$HTML5_VER/cache; \
+		mkdir -p $(HTML5LIB_PREFIX)/$$HTML5_VER/cache; \
 	done
 	dh_install $(KALTURA_PREFIX)
 	dh_gencontrol -u-v$(DEB_VERSION) 

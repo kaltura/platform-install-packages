@@ -17,6 +17,7 @@ if ! getent passwd $KALTURA_USER >/dev/null; then
         usermod -c "Kaltura server" $KALTURA_USER
 	usermod -a -G www-data kaltura
 fi
+usermod -G kaltura www-data
 
 if [ -n "$2" ];then
 	touch $KALTURA_PREFIX/bin/kaltura-base-upgrading

@@ -70,6 +70,7 @@ binary-indep: install
 	sed -i 's@^IsmIndex@;IsmIndex@g' $(tree)/configurations/plugins.template.ini
 	sed -i 's@^;ElasticSearch@ElasticSearch@g' $(tree)/configurations/plugins.template.ini
 	sed -i "s#^;kmc_version = @KMC_VERSION@#kmc_version = $(KMC_VERSION)#g" $(tree)/configurations/local.template.ini
+	sed -i 's@sphinx_log@kaltura_sphinx_log.sphinx_log@g' $(tree)/deployment/updates/sql/2020_11_05_sphinx_log_dc_id_index.sql
 	sed -i "s#@KMCNG_VERSION@#$(KMCNG_VERSION)#g" $(tree)/configurations/local.template.ini
 	sed -i 's@^otp_required_partners\[\]@;otp_required_partners\[\]@g' $(tree)/configurations/local.template.ini
 	sed -i "s@^\(druid_url.*\)@;\1@g" $(tree)/configurations/local.template.ini

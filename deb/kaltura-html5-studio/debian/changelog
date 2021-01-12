@@ -1,3 +1,9 @@
+kaltura-html5-studio (2.2.3-1) propus; urgency=medium
+
+  * Fix numbers saved as strings(FEC-10523)
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Wed, 06 Jan 2021 15:08:35 +0000
+
 kaltura-html5-studio (2.2.1-1) mercury; urgency=low
 
   * Fix studio link name(FEC-7651)

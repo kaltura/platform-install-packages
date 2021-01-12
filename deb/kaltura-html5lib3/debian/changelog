@@ -1,3 +1,17 @@
+kaltura-html5lib3 (1.2.1-1) propus; urgency=medium
+
+  * FEC-10324: class instances merged like simple object (#368) (4968c5f)
+  * FEC-10694: Ima post roll overrides the post bumper (#378) (e350cbe)
+  * FEC-10749: playlist by sources stuck (#386) (a747f70), closes #370 /github.com/kaltura/kaltura-player-js/pull/370/files#diff-b20fda8cac0288af75e0f3c4304df5420584de585d923934f9606e3634d2dbf5L302
+  * FEC-10233: plugin async loading support (#372) (716e8c0)
+  * FEC-10632: handle player dimensions dynamically (#373) (c0bf2e1)
+  * FEC-10656: set forceRedirectExternalStreams as true by default on IE11 and Chromecast (#370) (51d8a4a)
+  * FEC-10669: add ability to pass options to loadMedia request (#374) (1db395a)
+  * FEC-10684: reset player automatically inside setMedia (#376) (63f698d)
+  * update playkit-js-* versions (318d87a)
+
+ -- Jess Portnoy <jess@a5d1111604e7>  Wed, 06 Jan 2021 14:11:50 +0000
+
 kaltura-html5lib3 (0.56.0-1) propus; urgency=medium
 
   * New RAPT plugin (0.4.2)

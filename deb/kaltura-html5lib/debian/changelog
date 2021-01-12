@@ -1,3 +1,31 @@
+kaltura-html5lib (2.85-1) propus; urgency=medium
+
+  * SUP-24022 - Bug in captions in playlist
+  * FEC-10621 - V2 - Support sending Kava beacons as POST
+  * SUP-23162 - [FR] Read when the user tabs the slider on the player
+  * SUP-24104 - Auto play ignores bumper
+  * feat: use Memcache pconnect
+  * fix: headerCallback location trim value is incorrect
+  * feat: add xml proxy header redirect function filter (#4197)
+  * fix: jquery is missing
+  * fix: additional sanitiziation for xml proxy
+  * Feat: add xml proxy header redirect function filter (#4197)
+  * Fix: jquery is missing (#4196)
+  * FEC-10621 - V2 - Support sending Kava beacons as POST
+  * Fix: additional sanitiziation for xml proxy
+  * FEV-772 - Can't play entries in context of playlist or embed in v2.84 player while hotspot is enabled
+  * SUP-16764 - Quiz.plugin pushes the captions up
+  * SUP-22922 - Closed Captions "Use Cookie" in player configuration is on by default
+  * PSVAMB-14660 - No Slide Sync during Webcasting Event- June 19th
+  * FEV-684 - kava - add full screen to screen mode on view events on V2
+  * FEV-715 - player v2: add player notification when the QnA panel opens and closes
+  * Toggle off polls when poll change is just a local change (Webcast hide polls) (#4180)
+  * fix: add php variable access protection (#4184)
+  * FEC-10337 - v2 player server to read the new map
+  * SUP-23047 - Accessibility issues with volume and progress bar
+
+ -- Jess Portnoy <jess@a5d1111604e7>  Wed, 06 Jan 2021 13:50:42 +0000
+
 kaltura-html5lib (2.83.2-1) propus; urgency=medium
 
   * PSVAMB-14660 - no Slide Sync during Webcasting Event 
