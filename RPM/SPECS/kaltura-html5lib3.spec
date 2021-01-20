@@ -3,8 +3,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib3
-Version: 1.2.1
-Release: 4
+Version: 1.3.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz 
@@ -49,6 +49,17 @@ rm -rf %{buildroot}
 %{html5lib3_base}
 
 %changelog
+* Wed Jan 20 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 1.3.0-1
+- Added the following plugins: live, navigation, qna, hotspot and transript
+- FEC-10680: back-end bumper: the app should decide what bumper will be displayed when also set user bumper (#392) (a062427)
+- FEC-10729: forceRedirectExternalStreams is reset in playlist (#381) (77e86ec), closes #370
+- FEC-10732, FEC-10759: player params are not injected to additional instances config (#385) (8c5a6c7)
+- FEC-10776: set the plugins event registration after kaltura player internal events (#383) (4233d9f)
+- FEC-10797: back-end bumper config is left from previous media played (#393) (f3905e7)
+- FEC-10806: playlist has limitation which configure cause setMedia (#390) (c5caeda)
+- FEC-10015: support smart scrubber preview and timeline marker (#359) (ed9606a)
+- FEC-10766: create text config section and option for styling (#387) (dac194d)
+
 * Mon Nov 9 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.5-1
 - FEC-10469: pre-roll Ad for playlist displays for each second media instead of for each one (#367) (c3a52cd)
 
