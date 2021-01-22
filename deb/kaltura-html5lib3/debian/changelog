@@ -1,3 +1,17 @@
+kaltura-html5lib3 (1.3.0) propus; urgency=medium
+
+  * Added the following plugins: live, navigation, qna, hotspot and transript
+  * FEC-10680: back-end bumper: the app should decide what bumper will be displayed when also set user bumper (#392) (a062427)
+  * FEC-10729: forceRedirectExternalStreams is reset in playlist (#381) (77e86ec), closes #370
+  * FEC-10732, FEC-10759: player params are not injected to additional instances config (#385) (8c5a6c7)
+  * FEC-10776: set the plugins event registration after kaltura player internal events (#383) (4233d9f)
+  * FEC-10797: back-end bumper config is left from previous media played (#393) (f3905e7)
+  * FEC-10806: playlist has limitation which configure cause setMedia (#390) (c5caeda)
+  * FEC-10015: support smart scrubber preview and timeline marker (#359) (ed9606a)
+  * FEC-10766: create text config section and option for styling (#387) (dac194d)
+
+ -- Jess Portnoy <jess.portnoy@kaltura.org>  Wed, 20 Jan 2021 15:18:52 +0000
+
 kaltura-html5lib3 (1.2.1-1) propus; urgency=medium
 
   * FEC-10324: class instances merged like simple object (#368) (4968c5f)

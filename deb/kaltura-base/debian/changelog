@@ -1,3 +1,60 @@
+kaltura-base (16.15.0-2) propos; urgency=medium
+ 
+  * Chunked encoding: support `fetchRangeRandMax` (https://github.com/kaltura/server/pull/10409)
+  * HF: Increase `fetchRangeRandMax` default value (https://github.com/kaltura/server/pull/10406)
+  * PLAT-22587: Do not use packager for download for encrypted content (https://github.com/kaltura/server/pull/10401)
+  * PLAT-22584 - Zoom user is missing when trying to match `cms_id` (https://github.com/kaltura/server/pull/10399)
+  * FOUN-72: Export CSV to S3 - do not use `seek()` (https://github.com/kaltura/server/pull/10398)
+  * Remove disallowed temp file (https://github.com/kaltura/server/pull/10395)
+  * FOUN-83: ES index `kuser.picture` (https://github.com/kaltura/server/pull/10394)
+  * FOUN-52: Support S3 read and write of bulk upload files (https://github.com/kaltura/server/pull/10393)
+  * PLAT-22579: `Simulive` - add id to sequence (`serveFlavor()`) (https://github.com/kaltura/server/pull/10392)
+  * FOUN-84: Retry file not found only when running on NFS mounted FS (https://github.com/kaltura/server/pull/10391)
+  * PLAT-22576: Avoid using different storage profiles for download (https://github.com/kaltura/server/pull/10389)
+  * `thumbnailAction()`: set `ignore_user_abort(true)` (https://github.com/kaltura/server/pull/10387)
+  * PLAT-11239: Avoid double slash chars on URL (https://github.com/kaltura/server/pull/10386)
+  * PLAT-22564: `attachementasset::get()` must have a KS (https://github.com/kaltura/server/pull/10384)
+  * SUP-24551: Add `sshUrlContentResource` support for subtitles (https://github.com/kaltura/server/pull/10383)
+  * SUP-25087: Add retry mechanism to `concatFiles`, increasing `FFmpeg` probe values upon attempt (https://github.com/kaltura/server/pull/10381)
+  * FOUN-80: Sync convert logs to shared storage in case conversion failed (https://github.com/kaltura/server/pull/10380)
+  * FOUN-79: Add reconnect params when working with `FFmpeg` aux (https://github.com/kaltura/server/pull/10379)
+  * PLAT-22544: Sanitise XML and HTML content on bulk (https://github.com/kaltura/server/pull/10378)
+  * apimon: Send the `hostname` on DB events (https://github.com/kaltura/server/pull/10376)
+  * PLAT-10788: Prevent default symfony page from loading (https://github.com/kaltura/server/pull/10375)
+  * REACH2-990: Add the ability to change the caption's label for ASR (https://github.com/kaltura/server/pull/10372)
+  * FOUN-50: Conversion profile XSLT to S3 (https://github.com/kaltura/server/pull/10370)
+  * FOUN-72: Export CSV to S3 (https://github.com/kaltura/server/pull/10369)
+  * FOUN-72: Export CSV to S3 (https://github.com/kaltura/server/pull/10368)
+  * REACH2-999: Add REACH job only after requested flavor params in REACH profile are ready (https://github.com/kaltura/server/pull/10367)
+  * SUP-24555: Add country name map in geo reports (https://github.com/kaltura/server/pull/10366)
+  * SUP-23739: Fix entries stuck in MR processing scripts (https://github.com/kaltura/server/pull/10365)
+  * Plat-22514: Zoom (https://github.com/kaltura/server/pull/10364)
+  * SUP-25701: Increase Keyframe seek interval (https://github.com/kaltura/server/pull/10362)
+  * SUP-25144: Add exception when elastic max matches threshold was reached (https://github.com/kaltura/server/pull/10360)
+  * AN-22457: Add a calendar clicked event metric (https://github.com/kaltura/server/pull/10359)
+  * FOUN-77: Add `ffmpeg` reconnect params in ngs and 2pass flow (https://github.com/kaltura/server/pull/10358)
+  * SUP-24759: Add `targetLanguage` in REACH export CSV (https://github.com/kaltura/server/pull/10356)
+  * FOUN-76: Move `kconf` methods to infra batch utils (https://github.com/kaltura/server/pull/10355)
+  * FOUN-75: Add `ffmpeg|ffprobe` reconnect params when running media info parser (https://github.com/kaltura/server/pull/10354)
+  * SUP-25559: Check if source asset is still in convert grace period (https://github.com/kaltura/server/pull/10353)
+  * PLAT-11239: Support download through `getServeFlavorUrl()` (https://github.com/kaltura/server/pull/10352)
+  * apimon: Improve partner ID coverage (https://github.com/kaltura/server/pull/10351)
+  * REACH2-998: Include media version in `reach_vendor` response profile (https://github.com/kaltura/server/pull/10345)
+  * FOUN-74 - Support S3 read and write generic syndication feed files (https://github.com/kaltura/server/pull/10344)
+  * FOUN-72 - Support writing & reading CSV export files directly to & from S3 (https://github.com/kaltura/server/pull/10339)
+  * S3 content set entry distribution (https://github.com/kaltura/server/pull/10337)
+  * SUP-23752: Handle HTTP 204 response code (https://github.com/kaltura/server/pull/10336)
+  * KAVA: Add `crmId` filter (https://github.com/kaltura/server/pull/10331)
+  * SUP-20297: Add REACH2 support for `external_media` of type YouTube (https://github.com/kaltura/server/pull/10268)
+
+ -- Jess Portnoy <jess@a5d1111604e7>  Wed, 20 Jan 2021 15:09:38 +0000
+
+kaltura-base (16.15.0-1) propus; urgency=medium
+
+  * Switching to 16.15.0
+
+ -- Jess Portnoy <jess@a5d1111604e7>  Tue, 12 Jan 2021 12:47:03 +0000
+
 kaltura-base (16.14.0-1) propus; urgency=medium
 
   * FOUN-77: Add `ffmpeg` reconnect params to 2pass flow (https://github.com/kaltura/server/pull/10357)
