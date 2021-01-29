@@ -16,7 +16,7 @@ We value contributions from our Community Edition user base very much. To make a
 ### Changing Apache configurations post install.
 
 Sometimes, you may want to change deployment settings post installation, for example: replacing the domain, port or protocol, or changing the system to use SSL or stop using SSL.   
-You can run `/opt/kaltura/bin/kaltura-front-config.sh` as many times as you'd like with different values. The script will re-configure the system accordingly.   
+You can run `/opt/kaltura/bin/kaltura-front-config.sh` [for RPM] or `dpkg-reconfigure kaltura-front` [for Deb] as many times as you'd like with different values. The script will re-configure the system accordingly.   
 For instance, you may want to change the service URL, port or protocol.
 
 #### For RPM packages:
