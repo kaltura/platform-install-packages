@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 16.15.0
-Release: 2
+Version: 16.16.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -373,6 +373,28 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Fri Jan 29 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 16.16.0-1
+- Chunked Encoding range (https://github.com/kaltura/server/pull/10432)
+- `KFFMpegMediaParser::detectEmptyFrames()`: handle empty lines (https://github.com/kaltura/server/pull/10430)
+- PLAT-22544: `BulkUploadService::serve()` - set Content-Type to `text/plain` (https://github.com/kaltura/server/pull/10427)
+- FOUN-100: Support running antivirus on remotely shared files using file pipe (https://github.com/kaltura/server/pull/10426)
+- REACH2-1009: Enable Resubmission when job is in Pending/Processing mode for new version cases (https://github.com/kaltura/server/pull/10424)
+- Handle edge case resulting in empty final chunks (https://github.com/kaltura/server/pull/10421)
+- SUP-25701: Try to overcome possible zeroed frames issue, caused by too large GOP values in source files (https://github.com/kaltura/server/pull/10419)
+- KAVA: Added `playlistId` filter (https://github.com/kaltura/server/pull/10418)
+- Add full name to user usage report (https://github.com/kaltura/server/pull/10417)
+- FOUN-82: Use `ffprobe` instead of `mediainfo` (https://github.com/kaltura/server/pull/10416)
+- FOUN-96: Add kill method for memcache chunk encoder wrapper to support job re queuing (https://github.com/kaltura/server/pull/10415)
+- SUP-25195: Thumbnail adapter support auto rotation (https://github.com/kaltura/server/pull/10412)
+- Query cache: when caching use the hydration time (https://github.com/kaltura/server/pull/10410)
+- REACH2-989: validate statuses before updating `entryVendorTask` status (https://github.com/kaltura/server/pull/10408)
+- KChunkedEncodeMemcacheWrap: Increase `fetchRangeRandMax` (https://github.com/kaltura/server/pull/10407)
+- PLAT-22547: Reload event notification templates after adding new ones (https://github.com/kaltura/server/pull/10396)
+- FOUN-81: Support importing file directly to shared storage (https://github.com/kaltura/server/pull/10390)
+- PLAT-22575: New drop folder type S3 (https://github.com/kaltura/server/pull/10388)
+- FOUN-70: Support setting S3 upload concurrency (https://github.com/kaltura/server/pull/10361)
+
+
 * Tue Jan 19 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 16.15.0-2
 - Chunked encoding: support `fetchRangeRandMax` (https://github.com/kaltura/server/pull/10409)
 - HF: Increase `fetchRangeRandMax` default value (https://github.com/kaltura/server/pull/10406)
