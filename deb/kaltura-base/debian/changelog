@@ -1,3 +1,33 @@
+kaltura-base (16.16.0-2) propos; urgency=medium
+ 
+  * Chunked Encoding range (https://github.com/kaltura/server/pull/10432)
+  * `KFFMpegMediaParser::detectEmptyFrames()`: handle empty lines (https://github.com/kaltura/server/pull/10430)
+  * PLAT-22544: `BulkUploadService::serve()` - set Content-Type to `text/plain` (https://github.com/kaltura/server/pull/10427)
+  * FOUN-100: Support running antivirus on remotely shared files using file pipe (https://github.com/kaltura/server/pull/10426)
+  * REACH2-1009: Enable Resubmission when job is in Pending/Processing mode for new version cases (https://github.com/kaltura/server/pull/10424)
+  * Handle edge case resulting in empty final chunks (https://github.com/kaltura/server/pull/10421)
+  * SUP-25701: Try to overcome possible zeroed frames issue, caused by too large GOP values in source files (https://github.com/kaltura/server/pull/10419)
+  * KAVA: Added `playlistId` filter (https://github.com/kaltura/server/pull/10418)
+  * Add full name to user usage report (https://github.com/kaltura/server/pull/10417)
+  * FOUN-82: Use `ffprobe` instead of `mediainfo` (https://github.com/kaltura/server/pull/10416)
+  * FOUN-96: Add kill method for memcache chunk encoder wrapper to support job re queuing (https://github.com/kaltura/server/pull/10415)
+  * SUP-25195: Thumbnail adapter support auto rotation (https://github.com/kaltura/server/pull/10412)
+  * Query cache: when caching use the hydration time (https://github.com/kaltura/server/pull/10410)
+  * REACH2-989: validate statuses before updating `entryVendorTask` status (https://github.com/kaltura/server/pull/10408)
+  * KChunkedEncodeMemcacheWrap: Increase `fetchRangeRandMax` (https://github.com/kaltura/server/pull/10407)
+  * PLAT-22547: Reload event notification templates after adding new ones (https://github.com/kaltura/server/pull/10396)
+  * FOUN-81: Support importing file directly to shared storage (https://github.com/kaltura/server/pull/10390)
+  * PLAT-22575: New drop folder type S3 (https://github.com/kaltura/server/pull/10388)
+  * FOUN-70: Support setting S3 upload concurrency (https://github.com/kaltura/server/pull/10361)
+
+ -- Jess Portnoy <jess@a5d1111604e7>  Mon, 01 Feb 2021 15:46:56 +0000
+
+kaltura-base (16.16.0-1) propos; urgency=medium
+
+  * Switching to 16.16.0
+
+ -- Jess Portnoy <jess@a5d1111604e7>  Fri, 29 Jan 2021 15:21:07 +0000
+
 kaltura-base (16.15.0-2) propos; urgency=medium
  
   * Chunked encoding: support `fetchRangeRandMax` (https://github.com/kaltura/server/pull/10409)

@@ -1,3 +1,9 @@
+kaltura-batch (16.16.0-1) propus; urgency=medium
+
+  * Switching to 16.16.0
+
+ -- Jess Portnoy <jess@a5d1111604e7>  Fri, 29 Jan 2021 15:21:07 +0000
+
 kaltura-batch (16.15.0-1) propus; urgency=medium
 
   * Switching to 16.15.0
