@@ -3,7 +3,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5-studio3
-Version: v3.8.0
+Version: v3.9.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -52,6 +52,12 @@ rm -rf %{buildroot}
 %{studio_prefix}/%{version}
 
 %changelog
+* Mon Feb 1 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 3.9.0-1
+- feat(FEC-10695): add screen lock orientation to studio (#103)
+- feat(FEC-9451): Bumper Studio Configuration (#102)
+- feat(FEC-10709, FEC-10712): player visibility - Auto-pause when player is out of view, Autoplay only when player is in view (#98)
+- feat(FEC-10550): [Timeline Markers] Ad break indication on the timeline (#100)
+
 * Wed Oct 14 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 3.8.0-1
 - feat(FEC-10401): add analytics plugins in studio (#94)
 
