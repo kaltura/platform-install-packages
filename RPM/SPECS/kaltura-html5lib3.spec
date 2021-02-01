@@ -4,7 +4,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib3
 Version: 1.3.0
-Release: 1
+Release: 2  
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz 
@@ -49,6 +49,9 @@ rm -rf %{buildroot}
 %{html5lib3_base}
 
 %changelog
+* Mon Feb 1 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 1.3.0-2
+- Added `timeline` plug and updated versions for some others
+
 * Wed Jan 20 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 1.3.0-1
 - Added the following plugins: live, navigation, qna, hotspot and transript
 - FEC-10680: back-end bumper: the app should decide what bumper will be displayed when also set user bumper (#392) (a062427)

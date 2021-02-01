@@ -73,7 +73,7 @@ if ! curl -f -I -H "Content-Type: application/json" "http://$ES_HOST:$ES_PORT/ka
 fi
 set +e
 if ! curl -f -I -H "Content-Type: application/json" "http://$ES_HOST:$ES_PORT/kaltura_kuser";then
-        set -e 
+        #set -e 
         curl -f -XPUT -H "Content-Type: application/json" "http://$ES_HOST:$ES_PORT/kaltura_kuser" -d @$APP_DIR/configurations/elastic/mapping/kuser_mapping.json
 fi
 set +e
@@ -131,5 +131,5 @@ service httpd restart
 service memcached restart
 set +e
 /etc/init.d/kaltura-elastic-populate stop || true
-/etc/init.d/kaltura-elastic-populate start
+/etc/init.d/kaltura-elastic-populate start || true
 
