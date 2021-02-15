@@ -3,8 +3,8 @@
  
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.85
-Release: 2
+Version: v2.86
+Release: 1
 Epoch: 0 
 License: AGPLv3+
 Group: Server/Platform 
@@ -87,6 +87,15 @@ fi
 %config %{html5lib_base}/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Mon Feb 15 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 2.86-1
+- SUP-24927 - Audio playlist shows distorted poster image
+- FEC-10979 - No autoplay on page open
+- FEC-10935 - Extend the labels width when open the CC button
+- SUP-24147 - [Player Captions Plugin] Player displaying captions for entry, even if the captions plugin is disabled
+- FEC-10953 - upgrade shaka
+- FEC-10946 - upgrade hlsjs
+- feat: better error handling for Peer5 plugin (#4199)
+
 * Mon Dec 14 2020 jess.portnoy@kaltura.com <Jess Portnoy> - 2.85-2
 - Enable the `stats` plugin to support non-kava ENVs
 

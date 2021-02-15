@@ -10,7 +10,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 16.16.0
+Version: 16.17.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -373,6 +373,40 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Feb 15 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 16.17.0-1
+- FOUN-101: Doc conv., Webcasting and Webex - save output files to s3 (https://github.com/kaltura/server/pull/10490)
+- Avoid internal redirect for files stored in shared storage (https://github.com/kaltura/server/pull/10485)
+- PLAT-22650: oauthValidationAction() - do not disable `ZoomIntegration` (https://github.com/kaltura/server/pull/10483)
+- Workaround for long audio conversions of MXF files (https://github.com/kaltura/server/pull/10481)
+- FOUN-54: reset populate elastic client if ping check failed (https://github.com/kaltura/server/pull/10480)
+- Fix `validateObjectContent` when working with encrypted files (https://github.com/kaltura/server/pull/10479)
+- FOUN-113: if `mime_content_type()` doesn't exist, get type from `file` util (https://github.com/kaltura/server/pull/10478)
+- Add played entries metric to category highlights report (https://github.com/kaltura/server/pull/10477)
+- SUP-26014: groupUser - support removal of user from all groups (https://github.com/kaltura/server/pull/10475)
+- Add played entries metric to category highlights report (https://github.com/kaltura/server/pull/10474)
+- VIRTC-1606: Prevent saving on dry-run mode (https://github.com/kaltura/server/pull/10472)
+- Limit number of failed job fetching attempts (https://github.com/kaltura/server/pull/10471)
+- FOUN-101: Handle windows conversion for s3 (https://github.com/kaltura/server/pull/10470)
+- PLAT-22609: Add new property called `adminTags` to category (https://github.com/kaltura/server/pull/10469)
+- Plat-22608: Add company and title to `kuser.custom_data`  (https://github.com/kaltura/server/pull/10468)
+- AN-22486: Add unique played entries metric (https://github.com/kaltura/server/pull/10467)
+- Allow Chunked Encoding to process short contents (https://github.com/kaltura/server/pull/10464)
+- FOUN-111: Handle dir listing on S3 buckets (https://github.com/kaltura/server/pull/10462)
+- PLAT-22455: Fix purifier behaviour caused due to bad caching (https://github.com/kaltura/server/pull/10460)
+- VIRTC-1606: Script for deleting non admin kusers (https://github.com/kaltura/server/pull/10457)
+- FOUN-110: Change S3 dir list output logic to match non-S3 (https://github.com/kaltura/server/pull/10455)
+- REACH2-1026: Cancel pending jobs via admin console (https://github.com/kaltura/server/pull/10454)
+- FOUN-101: Doc conv., Webcasting and Webex - save output files to s3 (https://github.com/kaltura/server/pull/10453)
+- FOUN-109: Support fetching shared directories to local storage for conversions (https://github.com/kaltura/server/pull/10452)
+- FOUN-108 - Fix `cloud_storage` conf loading in batches (https://github.com/kaltura/server/pull/10449)
+- FOUN-101: Make windows batches work with shared Storage (https://github.com/kaltura/server/pull/10447)
+- FOUN-105: Support pushing src files created by clip concat flow directly to shared storage (https://github.com/kaltura/server/pull/10442)
+- FOUN-106: File sync path should be generated with the next version suffix (https://github.com/kaltura/server/pull/10441)
+- PLAT-11247: Added a script to update `flavorAsset->SizeInBytes` (https://github.com/kaltura/server/pull/10439)
+- PLAT-22561: Expose `setEnforceHttpsApi` as checkbox in Admin Console `configure` view (https://github.com/kaltura/server/pull/10437)
+- PLAT-22514: Zoom registration new UI (https://github.com/kaltura/server/pull/10425)
+
+
 * Fri Jan 29 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 16.16.0-1
 - Chunked Encoding range (https://github.com/kaltura/server/pull/10432)
 - `KFFMpegMediaParser::detectEmptyFrames()`: handle empty lines (https://github.com/kaltura/server/pull/10430)
