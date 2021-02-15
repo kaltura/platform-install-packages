@@ -1,3 +1,12 @@
+kaltura-html5-studio3 (3.9.0-1) propus; urgency=medium
+
+  * feat(FEC-10695): add screen lock orientation to studio (#103)
+  * feat(FEC-9451): Bumper Studio Configuration (#102)
+  * feat(FEC-10709, FEC-10712): player visibility - Auto-pause when player is out of view, Autoplay only when player is in view (#98)
+  * feat(FEC-10550): [Timeline Markers] Ad break indication on the timeline (#100)
+
+ -- Jess Portnoy <jess@a5d1111604e7>  Mon, 01 Feb 2021 17:09:16 +0000
+
 kaltura-html5-studio3 (3.8.0-1) propus; urgency=medium
 
   * feat(FEC-10401): add analytics plugins in studio (#94)
