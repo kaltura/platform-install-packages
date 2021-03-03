@@ -10,7 +10,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 16.17.0
+Version: 16.18.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -373,6 +373,32 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Fri Feb 26 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 16.18.0-1
+- `thumbnailAction()`: Avoid hitting the JPEG 64k limit (https://github.com/kaltura/server/pull/10534)
+- Export script: Fix incorrect print for pending FS (https://github.com/kaltura/server/pull/10533)
+- PLAT-22676: Fix S3 drop folder XML file handler (https://github.com/kaltura/server/pull/10532)
+- PLAT-22670: `handleSignleRecordingInfo()` - revert `isPlayableUser` default to true (https://github.com/kaltura/server/pull/10531)
+- SUP-24410: Add `entitledPusersView` in entry.php to support `entitledUsersView` (https://github.com/kaltura/server/pull/10527)
+- SUP-26477: Add `PENDING_ENTRY_READY` status to `retrieveActiveTasks()` to prevent duplication of entry vendor tasks (https://github.com/kaltura/server/pull/10526)
+- PLAT-22657: Update purify whitelist [`xss_allowed_object_properties`] (https://github.com/kaltura/server/pull/10522)
+- AN-22495: Add download attachment clicked event (https://github.com/kaltura/server/pull/10521)
+- PLAT-22617: Add the ability to set default KS privileges per user (https://github.com/kaltura/server/pull/10520)
+- PLAT-22663: Zoom integration UI - added `createUserIfNotExist` (https://github.com/kaltura/server/pull/10519)
+- PLAT-22657: Purifier - whitelist `ScheduleEvent` description (https://github.com/kaltura/server/pull/10516)
+- PLAT-22661: Add the entry `viewMode` to the `EntryServerNode` object (https://github.com/kaltura/server/pull/10515)
+- REACH2-1044: Support label addition for service CAPTIONS only (https://github.com/kaltura/server/pull/10512)
+- FOUN-114: Add mandatory `confmap` description to keep track of change reason (https://github.com/kaltura/server/pull/10509)
+- PLAT-22607: Set default `kuserId` for manager in `category.list()` (https://github.com/kaltura/server/pull/10507)
+- PLAT-9940: Add filter options to `WidgetController` (https://github.com/kaltura/server/pull/10505)
+- SUP-24964: Add domain + canonical URL to report filter (https://github.com/kaltura/server/pull/10504)
+- Set `MinExection` Timeout (https://github.com/kaltura/server/pull/10500)
+- PLAT-22638: Moved `kZoomClient` to infra folder (https://github.com/kaltura/server/pull/10497)
+- SUP-24898: Allow reach vendors to access entries with access control (https://github.com/kaltura/server/pull/10496)
+- PLAT-22614: Remove `remoteDir` from the S3 file path (https://github.com/kaltura/server/pull/10495)
+- FOUN-116: Fix Sphinx delete command constructing index name incorrectly (https://github.com/kaltura/server/pull/10489)
+- SUP-25018: Support live URL without redirect for internal media servers (https://github.com/kaltura/server/pull/10488)
+- PLAT-11136: Show list of all `user_entry` if user is a entitled for entry (https://github.com/kaltura/server/pull/10438)
+
 * Mon Feb 15 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 16.17.0-1
 - FOUN-101: Doc conv., Webcasting and Webex - save output files to s3 (https://github.com/kaltura/server/pull/10490)
 - Avoid internal redirect for files stored in shared storage (https://github.com/kaltura/server/pull/10485)
