@@ -438,7 +438,5 @@ Then, if needed, to restore the Kaltura server, follow these steps:
 * Reindex Sphinx with the following commands: 
 
 ```sh
-# rm -f /opt/kaltura/log/sphinx/data/*
-# cd /opt/kaltura/app/deployment/base/scripts/
-# for i in populateSphinx*;do php $i >/tmp/$.log;done
+# /opt/kaltura/bin/kaltura-sphinx-reindex.sh 
 ```
