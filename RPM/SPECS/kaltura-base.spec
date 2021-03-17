@@ -10,7 +10,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 16.18.0
+Version: 16.19.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -373,6 +373,27 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Mar 15 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 16.19.0-1
+- ExportToDifferentStorage.php: Cross partner ID link bug fix (https://github.com/kaltura/server/pull/10576)
+- PLAT-22695: Handle uninstall/install of Zoom integration (https://github.com/kaltura/server/pull/10575)
+- ExportToDifferentStorage.php: Handle null file type (https://github.com/kaltura/server/pull/10574)
+- FOUN-126: Don't set enc key on post convert when asset format is `mpegts` (https://github.com/kaltura/server/pull/10571)
+- Use `kDataCenterMgr::getSharedStorageProfileIds()` instead of `kStorageExporter::getPeriodicStorageIds()` (https://github.com/kaltura/server/pull/10570)
+- Fix parse error on `kuser_mapping.json` (https://github.com/kaltura/server/pull/10567)
+- PLAT-22606: Add parameter `entry_reference_id` to `EventNotificationTemplate` `HTTP_ENTRY_DISTRIBUTION_STATUS_CHANGED` (https://github.com/kaltura/server/pull/10566)
+- Avoid Undefined variable notice when `calc_vid_sec` is unset (https://github.com/kaltura/server/pull/10565)
+- VIRTC-2103: Allow dynamic adding of mapped fields to report (https://github.com/kaltura/server/pull/10564)
+- PLAT-22679: Add parameter `file_name` to HTTP `EventNotificationTemplate` (https://github.com/kaltura/server/pull/10563)
+- FOUN-124: Fix MR flow to delete local content file syncs (https://github.com/kaltura/server/pull/10562)
+- PSVAMB-19547: VOD thumbnail to be applied to the live entry (https://github.com/kaltura/server/pull/10561)
+- PLAT-22684 : Add schedule event type MEETING (https://github.com/kaltura/server/pull/10557)
+- If prev `calc_vid_sec` is the same as the current one, re-use existing image (https://github.com/kaltura/server/pull/10556)
+- PLAT-22683: Invalidate cache after `userLogin` was disabled (https://github.com/kaltura/server/pull/10555)
+- FOUN-85: Set conversion log ext to conv.log (https://github.com/kaltura/server/pull/10551)
+- HF: Prevent-Chk0-Reconverts (https://github.com/kaltura/server/pull/10548)
+- PLAT-22622: Add `ClosedCaptions` to `PlayManifest` (https://github.com/kaltura/server/pull/10545)
+- SUP-25895: Add flavour asset to `addImportJob()` in `handleVideoRecord()` (https://github.com/kaltura/server/pull/10543)
+
 * Fri Feb 26 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 16.18.0-1
 - `thumbnailAction()`: Avoid hitting the JPEG 64k limit (https://github.com/kaltura/server/pull/10534)
 - Export script: Fix incorrect print for pending FS (https://github.com/kaltura/server/pull/10533)
