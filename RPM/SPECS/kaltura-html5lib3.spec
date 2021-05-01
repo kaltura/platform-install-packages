@@ -3,8 +3,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib3
-Version: 1.3.0
-Release: 2  
+Version: 1.6.1
+Release: 2
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz 
@@ -49,6 +49,35 @@ rm -rf %{buildroot}
 %{html5lib3_base}
 
 %changelog
+* Mon Apr 26 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 1.6.1-1
+- FEC-10281: chromecast does not work after playing it once and trying it on another video (#417) (42e7939)
+- FEC-10405: set capabilities manually on iOS devices when airplay is configured (#422) (d16d4b1)
+- FEC-11057: ima postroll doesn't play when imadai configured before (#424) (a838ea5)
+- FEC-11062: ad layout doesn't work when IMA DAI configured (#425) (2251d5f)
+- FEC-11089: bumper preroll doesn't play after ima preroll (#428) (cd7a287)
+- FEC-11077: expose api for restart the media source (#427) (145f53c)
+- FEC-10541: add support on working with bidding, Prebid and IMA (#412) (0f21b24)
+- FEC-10941: Use In-Stream DASH thumbnails on the timeline (#423) (33bc80c)
+- remove thumbnail height from thumbnail service call (#421) (9611685)
+- FEC-11037: multiple decorator exist after destroy plugin with decorator (#418) (9e9685c)
+- FEC-11041: player fails in IE11 (#419) (3f16f12)
+- FEC-11041: player fails in IE11 (#419) (52f9bc1)
+- FEC-11041: player fails in IE11 (#419) (84a37bd)
+- FEC-10872: loadMedia returns the provider response instead of the updated one (#405) (d26013d)
+- FEC-10995: update Shaka to 3.0.8 (#411) (e40bc1e)
+- FEC-10041: playAdsWithMSE with DAI detach the playback and ad (#408) (d7b5e09)
+- FEC-10640: add api to get the playlist current working item index (#413) (7e59c37)
+- FEC-10768: expose in-stream DASH thumbnails (#415) (9581fa1)
+- FEC-10961: show the thumbnail preview in live (#407) (c1ac3fe)
+- FEC-10970: expose vpaid field on ad object (#410) (2db9ce8)
+- FEC-11013: upgrade to hlsjs latest (0.14.17) (#414) (863b18d)
+- ads-controller: sources.startTime isn't always exists and can change from source to source (#399) (3965295)
+- FEC-10687: Allow partial config in setMedia API (#394) (aab1eab)
+- FEC-10945: ad / bumper isn't paused with autoPause (#404) (6495047)
+- update Shaka to fix the memory leak (#396) (f6cc4dd)
+- FEC-10686: move startTime config from playback to sources (#398) (bf909e0)
+- FEC-10709, FEC-10712: player visibility - Auto-pause when player is out of view, Autoplay only when player is in view (#395) (d1d3feb)
+
 * Mon Feb 1 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 1.3.0-2
 - Added `timeline` plug and updated versions for some others
 

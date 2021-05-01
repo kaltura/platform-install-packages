@@ -3,7 +3,7 @@
  
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.86
+Version: v2.86.1
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -87,6 +87,9 @@ fi
 %config %{html5lib_base}/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Mon Apr 26 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 2.86.1-1
+- FEC-11061 - Chapters uploaded as a deck prevent playback in the player with bumper
+
 * Mon Feb 15 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 2.86-1
 - SUP-24927 - Audio playlist shows distorted poster image
 - FEC-10979 - No autoplay on page open

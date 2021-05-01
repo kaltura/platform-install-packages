@@ -6,11 +6,11 @@
 %define confdir %{prefix}/app/configurations
 %define logdir %{prefix}/log
 %define webdir %{prefix}/web
-%define codename Propus
+%define codename Quasar
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 16.19.0
+Version: 17.0.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -373,6 +373,24 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Apr 26 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 17.0.0-1
+- Ver Bounce to 17.0.0
+
+* Mon Apr 26 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 17.0.0-1
+- Support asset labels in `simulive` (https://github.com/kaltura/server/pull/10643)
+- SUP-27036: Change `bumperdata` type in `KalturaPlaybackContext` to fix parsing error in client library (https://github.com/kaltura/server/pull/10639)
+- `appToken.startSessionAction()` does not require a KS (https://github.com/kaltura/server/pull/10638)
+- Number of categories limited if there are more than 1 privacy context (https://github.com/kaltura/server/pull/10637)
+- FOUN-98: save `importedFile` to shared path if size exceeds the size threshold (https://github.com/kaltura/server/pull/10634)
+- PLAT-22760: Improve `S3` drop folder ingest time (https://github.com/kaltura/server/pull/10632)
+- PLAT-22741: Add map between objects to `KalturaMeetingScheduleEvent` (https://github.com/kaltura/server/pull/10627)
+- PLAT-22711: Increase category limit (without privacy context) to 1000 (https://github.com/kaltura/server/pull/10626)
+- SUP-27046: Get width/height from file in `S3` (https://github.com/kaltura/server/pull/10625)
+- PLAT-22738: Return correct `recorededEntryId` when `RedirectScheduleEvent` is active (https://github.com/kaltura/server/pull/10624)
+- Add `StorageClass` & `ArchiveStatus` values to the head object result (https://github.com/kaltura/server/pull/10620)
+- PLAT-22592: add `video/x-m4v` to allowed file types (https://github.com/kaltura/server/pull/10616)
+- PLAT-22719: Restrict Access-Control-Allow-Origin Domains (https://github.com/kaltura/server/pull/10615)
+
 * Mon Mar 15 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 16.19.0-1
 - ExportToDifferentStorage.php: Cross partner ID link bug fix (https://github.com/kaltura/server/pull/10576)
 - PLAT-22695: Handle uninstall/install of Zoom integration (https://github.com/kaltura/server/pull/10575)
