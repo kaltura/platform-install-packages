@@ -3,8 +3,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib3
-Version: 1.6.1
-Release: 2
+Version: 1.7.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz 
@@ -49,6 +49,14 @@ rm -rf %{buildroot}
 %{html5lib3_base}
 
 %changelog
+* Wed May 5 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 1.7.0-1
+- update playkit.js to 0.70.0 (2e8311f)
+- update playkit.js-dash to 1.24.2 (4974cf8)
+- update playkit.js-hls to 1.25.1 (59e35e2)
+- update playkit.js-ui to 0.65.3 (874f0be)
+- FEC-11091: add support for XMLHttpRequest.withCredentials in request filter (#438) (5ccdc1a)
+- FEC-11126: upgrade Shaka to 3.0.10 (#434) (18bafd6)
+
 * Mon Apr 26 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 1.6.1-1
 - FEC-10281: chromecast does not work after playing it once and trying it on another video (#417) (42e7939)
 - FEC-10405: set capabilities manually on iOS devices when airplay is configured (#422) (d16d4b1)

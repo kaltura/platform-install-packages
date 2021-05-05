@@ -3,7 +3,7 @@
  
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.86.1
+Version: v2.88.1
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -87,6 +87,22 @@ fi
 %config %{html5lib_base}/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Wed May 5 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 2.88.1-1
+- FEC-11179 - Server-side request forgery (SSRF)
+- SUP-24727 - Cross site scripting enabled string as name when adding new playlist from entry page
+- FEC-11158 - Accessibility in Video quiz - can't reach continue button using keyboard
+- FEC-11135 - Video duration differences affects Analytics completion rate
+- FEC-11111 - Images remain static according to their dimensions
+- FEC-11066 - Preview Entry set as Playlist forcing Kaltura capture entries to show as playlist playback in MediaSpace
+- FEC-11027 - Thumbnail API scaling problem
+- SUP-24727 - Cross site scripting enabled string as name when adding new playlist from entry page
+- FEC-11158 - Accessibility in Video quiz - can't reach continue button using keyboard
+- FEC-11135 - Video duration differences affects Analytics completion rate
+- FEC-11111 - Images remain static according to their dimensions
+- FEC-11066 - Preview Entry set as Playlist forcing Kaltura capture entries to show as playlist playback in MediaSpace
+- SUP-24727 - Cross site scripting enabled string as name when adding new playlist from entry page
+- FEC-11027 - Thumbnail API scaling problem
+
 * Mon Apr 26 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 2.86.1-1
 - FEC-11061 - Chapters uploaded as a deck prevent playback in the player with bumper
 

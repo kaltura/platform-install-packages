@@ -10,7 +10,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 17.0.0
+Version: 17.1.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -373,6 +373,42 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Wed May 5 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 17.1.0-1
+- Config for collecting Sphinx Search stats (https://github.com/kaltura/server/pull/10716)
+- PLAT-22839: Fix wrong handling of updating pre-configured `LiveStreamScheduleEvents` (https://github.com/kaltura/server/pull/10702)
+- SUP-24181: Prevents sending email notifications for temporary entries (https://github.com/kaltura/server/pull/10701)
+- PLAT-22800: `KalturaLiveStreamScheduleEvent` - refactor start /end date calculation (https://github.com/kaltura/server/pull/10697)
+- Use config to disable Zoom drop folder (https://github.com/kaltura/server/pull/10696)
+- PLAT-22737: For `thumbAssets`, when entry is image, create file sync per asset (not per entry) (https://github.com/kaltura/server/pull/10694)
+- PLAT-22836: Pre/post simulive config not honoured (https://github.com/kaltura/server/pull/10693)
+- PLAT-22836: `Simulive` - Wrong calculation of `startDate` and `endDate` (https://github.com/kaltura/server/pull/10692)
+- PLAT-22836 - `LiveScheduling` index issue (https://github.com/kaltura/server/pull/10691)
+- PLAT-22835: Handle 2 recording on the same scheduling event (https://github.com/kaltura/server/pull/10690)
+- Zoom: block auto transcript when `flavorAsset` has changed (https://github.com/kaltura/server/pull/10689)
+- PLAT-22647: Allow creating of Zoom Integration without oAuth2 call from Zoom (https://github.com/kaltura/server/pull/10686)
+- PLAT-22800: `KalturaLiveStreamScheduleEvent` - refactor start /end date calculation (https://github.com/kaltura/server/pull/10685)
+- PLAT-22737: Update every `flavorAsset` status to ready when import finishes (https://github.com/kaltura/server/pull/10684)
+- LIV-511 : Revise recording creation check (https://github.com/kaltura/server/pull/10683)
+- SUP-24181: Do not trigger email notification for temporary entries (https://github.com/kaltura/server/pull/10682)
+- PLAT-22800: Live Stream Schedule Event (https://github.com/kaltura/server/pull/10681)
+- Zoom: Check entry by `refernceId` for the last hours, fix auto deletion policy (https://github.com/kaltura/server/pull/10680)
+- `KalturaLiveStreamScheduleEvent` - refactor start /end date calculation (https://github.com/kaltura/server/pull/10678)
+- SUP-26711: `YouTubeApi` prefer file sync from `periodic_storage_ids` if exists (https://github.com/kaltura/server/pull/10677)
+- SUP-26711: `postConvert` -  prefer file sync from `periodic_storage_ids` if exists (https://github.com/kaltura/server/pull/10676)
+- PLAT-22799: Zoom drop folder was not editable via adminConsole without param `FileNamePatterns` (https://github.com/kaltura/server/pull/10675)
+- PLAT-22797: Zoom V2 integration user is NOT added to Co-Publishers when performing host/invite meeting (https://github.com/kaltura/server/pull/10673)
+- Zom: Add page redirection to the regional cloud (derived by the kmc url) (https://github.com/kaltura/server/pull/10671)
+- PLAT-22773: VendorIntegration.listAction() - return all Zoom integrations per partner (https://github.com/kaltura/server/pull/10670)
+- PLAT-22772: Add Zoom account description to vendor integration (https://github.com/kaltura/server/pull/10669)
+- plat 22769: Live code with schedule events refactoring (https://github.com/kaltura/server/pull/10668)
+- PLAT-22793: Allow all partners dropfolder access (https://github.com/kaltura/server/pull/10666)
+- Enable mapping of secondary secret to a specific user role (https://github.com/kaltura/server/pull/10664)
+- PLAT-22779: `zoomClient` creation with `access_token` (https://github.com/kaltura/server/pull/10663)
+- SUP-27074: Add null check for asset before use to prevent errors (https://github.com/kaltura/server/pull/10662)
+- `apiV3/playManifest`:  referrer cache fix (https://github.com/kaltura/server/pull/10659)
+- export script: support original only mode (https://github.com/kaltura/server/pull/10658)
+- AN-22544: KAVA - add reactions and `addToCalander` events to webcast reports (https://github.com/kaltura/server/pull/10642)
+
 * Mon Apr 26 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 17.0.0-1
 - Ver Bounce to 17.0.0
 
