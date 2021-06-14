@@ -3,7 +3,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib3
-Version: 1.7.0
+Version: 1.7.5
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -49,6 +49,17 @@ rm -rf %{buildroot}
 %{html5lib3_base}
 
 %changelog
+* Mon Jun 14 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 1.7.5-1
+- FEC-11304: missing entryId on plugins (#453)
+- Downgrade playkit.js-ui to v0.66.0
+- Update playkit.js to 0.71.0 (b148b26)
+- Update playkit.js-dash to 1.25.0 (155d5f3)
+- Update playkit.js-hls to 1.26.0 (8305089)
+- FEC-10381: sources config need to be passed via setMedia api (#440) (2e91c65)
+- FEC-11281: youbora reporting buffering during playback (#450) (fcc7234)
+- SUP-26832 - Rapt video player scrubber is the top of the video
+- First version of dual screen plugin
+
 * Wed May 5 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 1.7.0-1
 - update playkit.js to 0.70.0 (2e8311f)
 - update playkit.js-dash to 1.24.2 (4974cf8)

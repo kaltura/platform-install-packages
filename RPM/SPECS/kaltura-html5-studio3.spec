@@ -3,7 +3,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5-studio3
-Version: v3.9.0
+Version: v3.11.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -52,6 +52,10 @@ rm -rf %{buildroot}
 %{studio_prefix}/%{version}
 
 %changelog
+* Mon Jun 14 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 3.11.0-1
+- FEC-11175: add new languages to studio (#111)
+- FEC-10955: Deprecate FLASH playback option (#112)
+
 * Mon Feb 1 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 3.9.0-1
 - feat(FEC-10695): add screen lock orientation to studio (#103)
 - feat(FEC-9451): Bumper Studio Configuration (#102)

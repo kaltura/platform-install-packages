@@ -10,7 +10,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 17.2.0
+Version: 17.3.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -373,6 +373,32 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Jun 14 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 17.3.0-1
+- PLAT-22921: Resubmission should not be possible for tasks while an active task exists in the queue. (https://github.com/kaltura/server/pull/10810)
+- PLAT-22917: Can't edit and save a recurring event (https://github.com/kaltura/server/pull/10809)
+- PLAT-22915: Support obtaining legacy content from Zoom (https://github.com/kaltura/server/pull/10808)
+- FOUN-147: Support setting `userAgent` when using S3 client (https://github.com/kaltura/server/pull/10804)
+- Handle error in `jobRequeue` when no token is defined + avoid chunk job loop when timeout is reached (https://github.com/kaltura/server/pull/10797)
+- PLAT-22902: Chunked Encoding - fix user CPU metrics (https://github.com/kaltura/server/pull/10796)
+- PLAT-22900: Zoom - do not pull content when it already uploaded with an old reference (https://github.com/kaltura/server/pull/10795)
+- SUP-27646: `ThumbAssetService::attachFileSync()` - Resolve to `linked_id` `fileSync` if exists so that height, width and size be set properly (https://github.com/kaltura/server/pull/10794)
+- PLAT-22840: Partner Registration validation (https://github.com/kaltura/server/pull/10791)
+- PLAT-22901: REACH - HTTP 500 when ordering caption (https://github.com/kaltura/server/pull/10790)
+- PSVAMB-18194: Develop REACH middleware layer (https://github.com/kaltura/server/pull/10789)
+- PLAT-22888: Zoom - handle both `fullName` and `name` in categories (https://github.com/kaltura/server/pull/10788)
+- PLAT-22895: Event scheduling - unable to update event (https://github.com/kaltura/server/pull/10787)
+- PLAT-22885: `KalturaObject::generateFromObjectClass()` pass response profile (https://github.com/kaltura/server/pull/10786)
+- No-Plat: Fix `s3Mgr` `isDir()` check to take into account file names with no extension (https://github.com/kaltura/server/pull/10784)
+- PLAT-22891: Change `autoDeletionDays`, set default values on integration, update `deletionPolicy` on drop folder according to integration (https://github.com/kaltura/server/pull/10781)
+- PLAT-22889: On transcription completed event, search the `parentEntry` for every transcription file (https://github.com/kaltura/server/pull/10776)
+- PLAT-22888: Zoom - fix category assoc (https://github.com/kaltura/server/pull/10773)
+- FOUN-103: Correct elastic populate (check for `is_null()` as well as `empty()`) (https://github.com/kaltura/server/pull/10772)
+- PLAT-22884: `zoomRecordingProcessor::approveEntryIfNeeded()` (https://github.com/kaltura/server/pull/10771)
+- PSVAMB-18194: Develop REACH middleware layer (https://github.com/kaltura/server/pull/10769)
+- PLAT-22858: Sphinx - "starts with" expressions incorrectly interpreted (https://github.com/kaltura/server/pull/10755)
+- PLAT 22767: `infraRequestUtils::getRequestParams()` - incorrect JSON parsing (https://github.com/kaltura/server/pull/10750)
+- PLAT-22844: added error code and message to bulk upload failed HTTP notification (https://github.com/kaltura/server/pull/10749)
+
 * Wed May 26 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 17.2.0-1
 - Add playback base role update script (https://github.com/kaltura/server/pull/10758)
 - PLAT-22864: Changing label name on `zoomRegistrationPage` (https://github.com/kaltura/server/pull/10756)

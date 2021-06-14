@@ -3,7 +3,7 @@
  
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.88.1
+Version: v2.89
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -87,6 +87,17 @@ fi
 %config %{html5lib_base}/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Mon Jun 14 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 2.89-1
+- FEC-11232 - [Quiz - German] The 'I understand' button in the Quiz 'Sent' page is not truncated properly
+- FEC-11178 - Remove chapters plug-in page from knowledge base
+- FEC-11282 - Cannot read property 'capabilities' of null
+- FEC-11269 - Mute & Unmute isn't localized on v2 for quiz player - Summits
+- FEC-11271 - Displaying .VTT captions not working properly for below video layout
+- FEC-11238 - Hotspots on mobile (Android specifically) - hotspot is unclickable when mobile skin is used
+- FEC-11264 - accessibility - missing some translation keys in cvaa template
+- FEC-11252 - Caption with displayOnPlayer off doesn't work properly in playlist
+- FEC-11256 - Video controls are not clickable on IOS when captureClickEventForiOS flag is used
+- FEC-11239 - black bars upon exiting full screen
 * Wed May 5 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 2.88.1-1
 - FEC-11179 - Server-side request forgery (SSRF)
 - SUP-24727 - Cross site scripting enabled string as name when adding new playlist from entry page
