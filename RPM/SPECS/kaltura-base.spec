@@ -10,7 +10,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 17.1.0
+Version: 17.2.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -373,6 +373,33 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Wed May 26 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 17.2.0-1
+- Add playback base role update script (https://github.com/kaltura/server/pull/10758)
+- PLAT-22864: Changing label name on `zoomRegistrationPage` (https://github.com/kaltura/server/pull/10756)
+- PLAT-22864: Zoom: Registering multiple PIDs to same Zoom account creates inconsistency in uploads (https://github.com/kaltura/server/pull/10754)
+- `callOauth`: Zoom: Replace action names `oauthValidationAction` and `preOauthValidation` (https://github.com/kaltura/server/pull/10752)
+- Introduced `loadDropFolderFiles()` (https://github.com/kaltura/server/pull/10748)
+- PLAT-22865: `KZoomDropFolderEngine` - Introduced `enableMeetingUpload` to `registrationPage()`(https://github.com/kaltura/server/pull/10745)
+- `Simulive`: `mpeg-ts` wraparound fix (https://github.com/kaltura/server/pull/10744)
+- PLAT-22865: Added `EnableMeetingUpload` flag on `vendorIntegration` (https://github.com/kaltura/server/pull/10743)
+- PLAT-22865: Added `EnableMeetingUpload` flag on `vendorIntegration` (https://github.com/kaltura/server/pull/10742)
+- PLAT-22867: Add webinar handling on new zoom (https://github.com/kaltura/server/pull/10740)
+- FOUN-143: Support setting bulk size dynamically (https://github.com/kaltura/server/pull/10739)
+- PLAT-22862: Remove certain fields when zoom integration is without drop folder (https://github.com/kaltura/server/pull/10736)
+- PLAT-22860: When `ZoomTranscription` field is disabled, do not pull Zoom transcription (https://github.com/kaltura/server/pull/10734)
+- SUP-27631: `KCurlWrapper` - Remove double quotation marks on 'user-agent' header (https://github.com/kaltura/server/pull/10728)
+- AN-22489: `playsviews` copy VOD metrics to live (https://github.com/kaltura/server/pull/10727)
+- FOUN-132: Add missing permission to `PLAYBACK_BASE_ROLE` (https://github.com/kaltura/server/pull/10726)
+- PLAT-22774: Schedule event - block creation of multiple events in the same time window (https://github.com/kaltura/server/pull/10725)
+- PLAT-22853: Support setting `access-control-allowed-domain` on `playManifest` calls (https://github.com/kaltura/server/pull/10723)
+- SUP-26045: When `rowData` is longer than what the DB can contain, save the rest in `custom_data` (https://github.com/kaltura/server/pull/10722)
+- PLAT-22848: Mapping `createdAt` and `updatedAt` fields on `KalturaZoomIntegrationSetting` (https://github.com/kaltura/server/pull/10721)
+- PLAT-22838: Pass `partnerId` to the Facebook `OAuth2` flow (https://github.com/kaltura/server/pull/10720)
+- Refactored partner registration and validation (https://github.com/kaltura/server/pull/10715)
+- SUP-27196: Add `inputEntitledUsersView` to MR (https://github.com/kaltura/server/pull/10708)
+- SUP-24966: Check container format using `MediaInfo` (https://github.com/kaltura/server/pull/10707)
+- Fix dynamic `confiugred_id` allocation (https://github.com/kaltura/server/pull/10703)
+
 * Wed May 5 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 17.1.0-1
 - Config for collecting Sphinx Search stats (https://github.com/kaltura/server/pull/10716)
 - PLAT-22839: Fix wrong handling of updating pre-configured `LiveStreamScheduleEvents` (https://github.com/kaltura/server/pull/10702)
