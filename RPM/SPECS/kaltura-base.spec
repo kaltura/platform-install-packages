@@ -10,7 +10,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 17.3.0
+Version: 17.4.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -373,6 +373,22 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Tue Jun 22 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 17.4.0-1
+- PLAT-22740: Trigger the distribution last (https://github.com/kaltura/server/pull/10833)
+- PLAT-22950: `dynamicGetter()` in case of `simuliveFlow` return playable only once we're at least 18 seconds into playback (https://github.com/kaltura/server/pull/10832)
+- SUP-27856: Verify that asset is not a `CaptionAsset` before updating entry status to prevent the entry from being stuck at `import` state when adding captions from `urlResource` (https://github.com/kaltura/server/pull/10830)
+- PLAT-22906: Add the ability to auto delete specific drop folder files based on regex (https://github.com/kaltura/server/pull/10828)
+- PLAT-22933: Fix `firstNameOrLastNameStartsWith` filter (https://github.com/kaltura/server/pull/10827)
+- SUP-26045: Fix `PeerUtils::setExtension()` (https://github.com/kaltura/server/pull/10822)
+- SUP-27927: `kMetadataKavaUtils()` - Fetch metadata from shared storage (https://github.com/kaltura/server/pull/10821)
+- PLAT-22740: Fix distribution of thumbnails after update via XML bulk upload (https://github.com/kaltura/server/pull/10820)
+- Specific origin `CORS` fix (https://github.com/kaltura/server/pull/10819)
+- PLAT-22916: Handle audio files in Zoom (https://github.com/kaltura/server/pull/10818)
+- SUP-24729: Change `execute()` action to go to elastic if no filter is provided (https://github.com/kaltura/server/pull/10817)
+- PLAT-22872: `kUser` password validation - block "common" passwords (https://github.com/kaltura/server/pull/10798)
+- PLAT-22871: API to fetch password structure rules (https://github.com/kaltura/server/pull/10779)
+
+
 * Mon Jun 14 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 17.3.0-1
 - PLAT-22921: Resubmission should not be possible for tasks while an active task exists in the queue. (https://github.com/kaltura/server/pull/10810)
 - PLAT-22917: Can't edit and save a recurring event (https://github.com/kaltura/server/pull/10809)
