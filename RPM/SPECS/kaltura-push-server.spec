@@ -6,7 +6,7 @@
 
 Summary: Kaltura Push Server 
 Name: kaltura-push-server 
-Version: 1.1.4
+Version: 1.1.5
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 

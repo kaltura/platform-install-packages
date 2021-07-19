@@ -10,7 +10,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 17.4.0
+Version: 17.5.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -373,6 +373,30 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Thu Jul 8 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 17.5.0-1
+- PLAT-22874: Fix checkIsLive for LiveDash (https://github.com/kaltura/server/pull/10868)
+- Support AV1 video codec (https://github.com/kaltura/server/pull/10867)
+- Support AV1 video codec (https://github.com/kaltura/server/pull/10866)
+- Support AV1 video codec (https://github.com/kaltura/server/pull/10865)
+- Support AV1 video codec (https://github.com/kaltura/server/pull/10864)
+- PLAT-22972: Multi Audio Clipping - One multi audio flavor is missing if clipping for which there's a different clipping operation in progress (https://github.com/kaltura/server/pull/10863)
+- PLAT-22874: Support Live AWS DASH Playback for Manual Entries (https://github.com/kaltura/server/pull/10860)
+- SUP-28118: add file extension when creating original flavor asset in `attachFileSync` (https://github.com/kaltura/server/pull/10859)
+- FEC-11008: Correctly pass player version (https://github.com/kaltura/server/pull/10857)
+- PLAT-22961: Support enabling 2FA for admin users only (https://github.com/kaltura/server/pull/10850)
+- SUP-28207: Zoom - Pass correct filter object when fetching user by email (https://github.com/kaltura/server/pull/10849)
+- PLAT-22961: Support enabling 2FA for admin users only (https://github.com/kaltura/server/pull/10848)
+- SUP-27954: Call `setSizeInBytesOnAsset()` when using share and remote storage (https://github.com/kaltura/server/pull/10847)
+- Add support for `OpenCalais` API Endpoint configuration in `partner.custom_data` (https://github.com/kaltura/server/pull/10846)
+- PLAT-22961: Support enabling 2FA for admin users only (https://github.com/kaltura/server/pull/10845)
+- PLAT-22960: Zoom - don't upload old meetings (https://github.com/kaltura/server/pull/10842)
+- PLAT-22955: Do not register sub partners on Marketo (https://github.com/kaltura/server/pull/10840)
+- SUP-28076: Fix `restoreDeletedEntriesByEntryList.php` to work with S3 file sync path (https://github.com/kaltura/server/pull/10836)
+- PLAT-22841: For multi audio files, do not reconvert when clipping (https://github.com/kaltura/server/pull/10829)
+- SUP-27690: Prevent sending of "Entry Was Added To Category" email notifications for live entries (https://github.com/kaltura/server/pull/10826)
+- FEC-11288: Define product version by core components (https://github.com/kaltura/server/pull/10802)
+- PSVAMB-25378, PSVAMB-24119: Support Pexip >= v21 (https://github.com/kaltura/server/pull/10783)
+
 * Tue Jun 22 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 17.4.0-1
 - PLAT-22740: Trigger the distribution last (https://github.com/kaltura/server/pull/10833)
 - PLAT-22950: `dynamicGetter()` in case of `simuliveFlow` return playable only once we're at least 18 seconds into playback (https://github.com/kaltura/server/pull/10832)

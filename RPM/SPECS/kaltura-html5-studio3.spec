@@ -3,7 +3,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5-studio3
-Version: v3.11.0
+Version: v3.12.2
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -52,6 +52,13 @@ rm -rf %{buildroot}
 %{studio_prefix}/%{version}
 
 %changelog
+* Thu Jul 8 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 3.12.2-1
+- fix(FEC-11367): "Share and embed" instead of "Share and Embed" (#116)
+- fix(FEC-11384): studio is crashing on null pointer (#117)
+- https://kaltura.atlassian.net/browse/FEC-9180
+- https://kaltura.atlassian.net/browse/FEC-11357
+- https://kaltura.atlassian.net/browse/FEC-11369
+
 * Mon Jun 14 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 3.11.0-1
 - FEC-11175: add new languages to studio (#111)
 - FEC-10955: Deprecate FLASH playback option (#112)

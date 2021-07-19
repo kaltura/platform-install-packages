@@ -4,7 +4,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib3
 Version: 1.7.5
-Release: 1
+Release: 2
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz 
@@ -49,6 +49,10 @@ rm -rf %{buildroot}
 %{html5lib3_base}
 
 %changelog
+* Thu Jul 8 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 1.7.5-2
+- New RAPT (0.44)
+- New QnA (2.1.2)
+
 * Mon Jun 14 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 1.7.5-1
 - FEC-11304: missing entryId on plugins (#453)
 - Downgrade playkit.js-ui to v0.66.0
