@@ -330,7 +330,7 @@ class CrossKalturaDistributionEngine extends DistributionEngine implements
 		{
 			$flavorAssetFilter = new KalturaFlavorAssetFilter();
 			// only export the source flavour, let KDL do the rest
-			$flavorAssetFilter->flavorParamsIdEqual = "0,32";
+			$flavorAssetFilter->flavorParamsIdIn = "0,32";
 			$flavorAssetFilter->idIn = $data->entryDistribution->flavorAssetIds;
 			$flavorAssetFilter->entryIdEqual = $entryId;
 			try {
