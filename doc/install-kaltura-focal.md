@@ -132,11 +132,11 @@ And install as described above.
 
 Make sure /etc/apt/sources.list.d/kaltura.list has:
 ```
-deb [arch=amd64] http://installrepo.kaltura.org/repo/aptn/focal propus main
+# echo "deb [arch=amd64] http://installrepo.origin.kaltura.org/repo/aptn/focal propus main" > /etc/apt/sources.list.d/kaltura.list
 ```
 And import the GPG key with:
 ```
-# wget -O - http://installrepo.kaltura.org/repo/aptn/focal/kaltura-deb-256.gpg.key|apt-key add -
+# wget -O - http://installrepo.origin.kaltura.org/repo/aptn/focal/kaltura-deb-curr-256.gpg.key|apt-key add -
 ```
 
 Then run:
