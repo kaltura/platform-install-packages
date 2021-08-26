@@ -4,7 +4,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib3
 Version: 1.7.5
-Release: 3
+Release: 4
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz 
@@ -49,6 +49,9 @@ rm -rf %{buildroot}
 %{html5lib3_base}
 
 %changelog
+* Fri Aug 20 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 1.7.5-4
+- New RAPT (0.46)
+
 * Mon Aug 9 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 1.7.5-3
 - Removed dual screen plugin as it doesn't work
 
