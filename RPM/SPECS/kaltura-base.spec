@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 17.5.0
-Release: 2
+Version: 17.9.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -373,6 +373,90 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Sun Aug 29 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 17.9.0-1
+- Add IF NOT EXIST to all table creation statements (https://github.com/kaltura/server/pull/11019)
+- PLAT-23018: C&C partner (https://github.com/kaltura/server/pull/11013)
+- PLAT-23041: Fix `KalturaEntryVendorTaskFilter` (https://github.com/kaltura/server/pull/11007)
+- SUP-28126: SIP URL encryption (https://github.com/kaltura/server/pull/11002)
+- SUP-28126: SIP URL encryption enhancement (https://github.com/kaltura/server/pull/11001)
+- FOUN-204: handle static content reconversion (https://github.com/kaltura/server/pull/10998)
+- PLAT-23004: Thumbnails and distribution information for virtual (image) entries (https://github.com/kaltura/server/pull/10981)
+- FOUN-172: Only index `READY` captions in ES and Sphinx (https://github.com/kaltura/server/pull/10979)
+- FOUN-152: Optimise updating of `tag` table records (https://github.com/kaltura/server/pull/10856)
+
+* Sun Aug 15 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 17.8.0-1
+- SUP-28787: Fix drop folder 'match existing' flow (https://github.com/kaltura/server/pull/11012)
+- SUP-28787: `KDropFolderFileTransferEngine::isEntryMatch()` - if no entry with the desired `conversionProfileId` exists, use default (https://github.com/kaltura/server/pull/11010)
+- SUP-28655: If `recurrenceType == recurring`, populate `endDate` before the if null check (https://github.com/kaltura/server/pull/11008)
+- FOUN-174: For static content trimming, we need to pass the `adminTags` to the temp entry in order to convert with the same flow as the original (https://github.com/kaltura/server/pull/10987)
+- PLAT-23056: Zoom - Set vendor description only when the `dropfolder` description is updated (https://github.com/kaltura/server/pull/10986)
+- PLAT-23066: Fix `playManifest` crash when a live liveEntry has an AC profile applied (https://github.com/kaltura/server/pull/10985)
+- PLAT-23052: Teams int - Prevent creation of duplicate entries (https://github.com/kaltura/server/pull/10978)
+- FOUN-195: Zoom - inconsistent conversion profile (https://github.com/kaltura/server/pull/10973)
+- PLAT-23048: Support displaying system default (partner ID 0) conversion profiles (https://github.com/kaltura/server/pull/10971)
+- SUP-28434: Verify that the audio flavor status is `READY` before clipping (https://github.com/kaltura/server/pull/10967)
+- PLAT-22934: KMS 2FA authentication (https://github.com/kaltura/server/pull/10966)
+- `kBusinessPreConvertDL::shouldCheckStaticContentFlow()` (https://github.com/kaltura/server/pull/10964)
+- PLAT-23047: `KalturaIntegrationSetting::toInsertableObject()` Ignore `updateAt` and `createdAt` read only params (https://github.com/kaltura/server/pull/10961)
+- PLAT-23020: Added `conversionProfileIdEqual` to `KalturaBaseEntryFilter` (https://github.com/kaltura/server/pull/10957)
+- PLAT-23042: Manage caching of `simulive` entries (https://github.com/kaltura/server/pull/10954)
+- PSVAMB-25152: MS Teams integration (https://github.com/kaltura/server/pull/10953)
+- SUP-25858: Added `kEntryScheduledCondition` (https://github.com/kaltura/server/pull/10949)
+- FOUN-174: Handle static content conversions (https://github.com/kaltura/server/pull/10944)
+- Fix duration issue for Schedule Events (https://github.com/kaltura/server/pull/10943)
+- SUP-27619: Support raw file concat in concat job based on worker params (https://github.com/kaltura/server/pull/10941)
+- PLAT-23025: Before indexing in ES, filter captions by language, label and accuracy (https://github.com/kaltura/server/pull/10936)
+- Add partner ID filter to webcast highlights report so we can use it in the SF integration (https://github.com/kaltura/server/pull/10933)
+- PSVAMB-16509: Add setup script for Webcast event notifications (https://github.com/kaltura/server/pull/10931)
+- PLAT-22932: Add the ability to replace captions with `MRSS` (https://github.com/kaltura/server/pull/10924)
+- AN-22584: Add `hasSegmentDownloadTime`, `hasManifestDownloadTime` to RT discovery reports (https://github.com/kaltura/server/pull/10913)
+- SUP-27588: Change query for replacing entry drop folder file (https://github.com/kaltura/server/pull/10738)
+
+* Sun Aug 1 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 17.7.0-1
+- FOUN-174-HF: Better handling of static content "Talking heads" conversion (https://github.com/kaltura/server/pull/10960)
+- Added handling of duration update on linked events (https://github.com/kaltura/server/pull/10937)
+- SUP-28507: isConcatOfAllChildrenDone() return true once conversion is over (https://github.com/kaltura/server/pull/10934)
+- SUP-28338: Added `CONTAINER_FORMAT_MPEG_AUDIO` and `CONTAINER_FORMAT_MPEG_TS` constants to `assetParams` (https://github.com/kaltura/server/pull/10927)
+- SUP-28364 : Do not copy default live conversion profile from template (https://github.com/kaltura/server/pull/10925)
+- PLAT-23005: Create DRM custom data even if the entry has no flavours (https://github.com/kaltura/server/pull/10922)
+- Fix Reach profile credit update check (https://github.com/kaltura/server/pull/10921)
+- SUP-27422: Support additional elements when generating `webvtt` from `DFXP` caption (https://github.com/kaltura/server/pull/10919)
+- SUP-27559: Fix `SRT` line index when clipping the beginning of the entry (https://github.com/kaltura/server/pull/10918)
+- Always prefer file syncs from current DC (https://github.com/kaltura/server/pull/10917)
+- SUP-27990: Support long UTF8 strings for `kuser` `firstName` and `lastName` (https://github.com/kaltura/server/pull/10916)
+- PLAT-22925: Validate caption content upon ingest (https://github.com/kaltura/server/pull/10907)
+- REG-202: Support Elastic split indexes (https://github.com/kaltura/server/pull/10837)
+
+* Sun Jul 18 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 17.6.0-1
+- SUP-27609: Fix issue in Zoom transcript processing (https://github.com/kaltura/server/pull/10923)
+- PLAT-23016: Ignore short name in password validations (https://github.com/kaltura/server/pull/10910)
+- Export script: Improve original DC logic (https://github.com/kaltura/server/pull/10908)
+- Export script touch-ups (https://github.com/kaltura/server/pull/10906)
+- SUP-28225: Invoke `kEntitlementUtils::getEntitlementEnforcement()` to handle execution of playlist with privacyContext (https://github.com/kaltura/server/pull/10905)
+- PLAT-23003: Scheduling - fix error when deleting events (https://github.com/kaltura/server/pull/10904)
+- SUP-28338: Added `CONTAINER_FORMAT_MPEG_AUDIO` and `CONTAINER_FORMAT_MPEG_TS` to `assetParams` (https://github.com/kaltura/server/pull/10903)
+- SUP-27609: Use `zoomIntegration` param rather than property which is undefined at `kZoomTranscriptProcessor` (https://github.com/kaltura/server/pull/10901)
+- Support skip regex per file sync `type:objectType` (https://github.com/kaltura/server/pull/10900)
+- LIV-529 : Upload source when media info changed (https://github.com/kaltura/server/pull/10899)
+- Fix fatal during convert job creation + refactor tmp bucket usage (https://github.com/kaltura/server/pull/10897)
+- PLAT-22995: `addLoginData()`: Avoid validating password if `checkPasswordStructure` is false (https://github.com/kaltura/server/pull/10896)
+- Added `encryptedSeed` field to user object (https://github.com/kaltura/server/pull/10893)
+- SUP-28338: Added `CONTAINER_FORMAT_QT` to `assetParams` (https://github.com/kaltura/server/pull/10892)
+- FOUN-153: Disable `rate_limiter` check when running in batch context (https://github.com/kaltura/server/pull/10890)
+- FOUN-129: Handle '#' in URL when importing (https://github.com/kaltura/server/pull/10889)
+- Add graph to webcast highlights report (https://github.com/kaltura/server/pull/10885)
+- FOUN-150: Support file deletion from S3 (https://github.com/kaltura/server/pull/10884)
+- SUP-27743: Change type of `sizeInBytes` from `int` to `bigint` (https://github.com/kaltura/server/pull/10882)
+- PLAT-22973: Allow setting of ES search options per partner (https://github.com/kaltura/server/pull/10879)
+- PLAT-22976: Add null protection for `limitLiveByAdminTag` (https://github.com/kaltura/server/pull/10876)
+- FOUN-153: Disable `rate_limiter` when running in batch context (https://github.com/kaltura/server/pull/10875)
+- FOUN-127: Move writing of tmp files created by clip|trim operations to the temp bucket so they will be purged by the policy lifecycle  (https://github.com/kaltura/server/pull/10873)
+- FOUN-150: Support file deletion from S3 (https://github.com/kaltura/server/pull/10872)
+- FOUN-129: Handle '#' in URL when importing (https://github.com/kaltura/server/pull/10871)
+- PLAT-22966: Fix `getDetailsAction` for `Simulive` (https://github.com/kaltura/server/pull/10861)
+- FOUN-66 - Fix `kSitCondition` to work with `endSwith` (https://github.com/kaltura/server/pull/10854)
+- plat-22775: Allow admins to schedule the time to redirect a recording to another entry (https://github.com/kaltura/server/pull/10852)
+
 * Thu Jul 8 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 17.5.0-1
 - PLAT-22874: Fix checkIsLive for LiveDash (https://github.com/kaltura/server/pull/10868)
 - Support AV1 video codec (https://github.com/kaltura/server/pull/10867)

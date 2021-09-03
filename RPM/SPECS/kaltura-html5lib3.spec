@@ -3,8 +3,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib3
-Version: 1.7.5
-Release: 4
+Version: 1.12.1
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz 
@@ -49,6 +49,16 @@ rm -rf %{buildroot}
 %{html5lib3_base}
 
 %changelog
+* Fri Sep 3 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 1.12.1-1
+- Update playkit-js-ui to 0.69.1
+- Update playkit-js-dash to 1.27.2
+- Update playkit-js-providers to 2.30.0
+- FEC-10598: add streamId to ad object (#481) (e70c741)
+- FEC-11441: Default KAVA details are reported with wrong (unknown) player version (#478) (d918029)
+- FEC-11475: revert API in uiWrapper of Manager for backward compatibility (#483) (1f5d4a7)
+- FEC-11399: allow ignoring server config (#480) (707d519)
+- FEC-11475: create service manager that allows registration and accessing of services (#477) (437f7b6)
+
 * Fri Aug 20 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 1.7.5-4
 - New RAPT (0.46)
 
