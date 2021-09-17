@@ -10,7 +10,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 17.9.0
+Version: 17.10.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -373,6 +373,24 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Fri Sep 17 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 17.10.0-1
+- PLAT-23147: remove base64 encoding in `servePlaybackKeyAction` (https://github.com/kaltura/server/pull/11056)
+- Don't override template account permissions (https://github.com/kaltura/server/pull/11055)
+- Zoom: Assign a default accuracy value (85%) (https://github.com/kaltura/server/pull/11054)
+- PLAT-23135: REACH - allow aborting tasks that are in `pending` status (https://github.com/kaltura/server/pull/11048)
+- Adjust abnormal frame rate value (https://github.com/kaltura/server/pull/11044)
+- PLAT-22929: Webex - handle stuck files (https://github.com/kaltura/server/pull/11042)
+- PLAT-23072: Admin Console - display DRM policies (https://github.com/kaltura/server/pull/11039)
+- REACH: Add conditions to dynamic object cross-checks (https://github.com/kaltura/server/pull/11031)
+- SUP-25390: Added script to set/update `templatePartnerId` for partner (https://github.com/kaltura/server/pull/11021)
+- Add caption permissions API to live partner [ID -5] (https://github.com/kaltura/server/pull/11015)
+- plat-23082: Partner registration - move all time consuming parts to run as batch jobs (https://github.com/kaltura/server/pull/10999)
+- LIV-756: Simulive - support pre-roll and post-roll (https://github.com/kaltura/server/pull/10983)
+- Support encrypted HLS (https://github.com/kaltura/server/pull/10982)
+- PLAT-23050: Check that the object has the "getLanguage()" callable function (https://github.com/kaltura/server/pull/10968)
+- LIV-780: refactor `checkAndCreateRecordedEntry()` (https://github.com/kaltura/server/pull/10948)
+- PLAT-22565: Support `simulive` without specifying delivery profile (https://github.com/kaltura/server/pull/10385)
+
 * Sun Aug 29 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 17.9.0-1
 - Add IF NOT EXIST to all table creation statements (https://github.com/kaltura/server/pull/11019)
 - PLAT-23018: C&C partner (https://github.com/kaltura/server/pull/11013)
