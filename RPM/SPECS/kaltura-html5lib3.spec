@@ -3,7 +3,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib3
-Version: 1.12.1
+Version: 1.13.2
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -49,6 +49,16 @@ rm -rf %{buildroot}
 %{html5lib3_base}
 
 %changelog
+
+* Wed Oct 6 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 1.13.2
+- Update playkit-js to 0.74.1 (c0788f7)
+- Update playkit-js-ui to 0.69.2 (94c5491)
+- FEC-11498: Remove product version from player config (#492) (900ad75)
+- FEC-11510: fix cvaa default font size (#491) (99f2959), closes kaltura/playkit-js#603 kaltura/playkit-js-ui#639
+- FEC-11513: Need to click the Retry button twice after error (#485) (84406e9)
+- FEC-11525: disableUserCache is not working properly for text style (#487) (a44e060)
+- FEC-11540: CuePoint Manager (#488) (025059a)
+
 * Fri Sep 3 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 1.12.1-1
 - Update playkit-js-ui to 0.69.1
 - Update playkit-js-dash to 1.27.2

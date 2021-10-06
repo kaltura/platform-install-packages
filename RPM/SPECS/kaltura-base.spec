@@ -10,7 +10,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 17.10.0
+Version: 17.11.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -373,6 +373,23 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Wed Oct 6 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 17.11.0-1
+- PLAT-23203: Set `enableZoomTranscription` to true by default (https://github.com/kaltura/server/pull/11091)
+- SUP-29337: Support the ability to not return partner API secrets (https://github.com/kaltura/server/pull/11086)
+- PLAT-23131: Analytics - add the ability to configure the export method per partner (https://github.com/kaltura/server/pull/11083)
+- PLAT-23130: `kFlowHelper::buildCustomUrl()` - call `urldecode()` on `baseUrl` (https://github.com/kaltura/server/pull/11078)
+- FOUN-223: Support ES 7.10.2 (https://github.com/kaltura/server/pull/11076)
+- PLAT-23144: New schedule event type - `VodScheduleEvent` (https://github.com/kaltura/server/pull/11071)
+- PLAT-23130: Analytics - Add the referring URL (https://github.com/kaltura/server/pull/11069)
+- Partner registration: move the operation of copying categories and UI confs to batch worker (https://github.com/kaltura/server/pull/11063)
+- PLAT-23087: Thumbnail ingestion - restrict allowed content type (https://github.com/kaltura/server/pull/11061)
+- REACH2-1085: Add Catalan REACH catalog item (https://github.com/kaltura/server/pull/11060)
+- PLAT-23128: Add `session` and `usergroup` permissions to the CNC partner [-11] (https://github.com/kaltura/server/pull/11057)
+- PLAT-23083: Purify cloned group properties (https://github.com/kaltura/server/pull/11053)
+- PLAT-23046: Enhance admin console event notifications templates page (https://github.com/kaltura/server/pull/11051)
+- Handle hashed/masked user ID on filter according to dimension and datasource (https://github.com/kaltura/server/pull/10975)
+- Added VPaaS self served report (https://github.com/kaltura/server/pull/10834)
+
 * Fri Sep 17 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 17.10.0-1
 - PLAT-23147: remove base64 encoding in `servePlaybackKeyAction` (https://github.com/kaltura/server/pull/11056)
 - Don't override template account permissions (https://github.com/kaltura/server/pull/11055)
