@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.33
-Release: 110
+Release: 113
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -82,6 +82,9 @@ find %{_sysconfdir}/logrotate.d -type l -name "kaltura_*" -exec rm {} \;
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Mon Oct 18 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.33-110
+- Replace tokens for CNC (-11) and SELF_SERVE partner (-12)
+
 * Mon Feb 1 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.33-110
 - Be a bit more forgiving towards ES configuration failures. It is not mandatory for a functioning CE ENV and you don't want failures there to fail the whole deployment. It is re-entrant anyways so you can always re-run it.
 
