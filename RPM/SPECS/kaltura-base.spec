@@ -10,7 +10,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 17.11.0
+Version: 17.12.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -373,6 +373,37 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Oct 18 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 17.12.0-1
+- PLAT-23221: `simulive` - round the duration to avoid stitching issues (https://github.com/kaltura/server/pull/11129)
+- FOUN-223: Support ES 7 (https://github.com/kaltura/server/pull/11127)
+- KMS-24770: Order user entries by `updatedAt` rather `id` (https://github.com/kaltura/server/pull/11123)
+- FOUN-224: ES v7 mappings (https://github.com/kaltura/server/pull/11122)
+- PSVAMB-27566: Add `lastEntryId` field to the `ViewHistoryUserEntry` object (https://github.com/kaltura/server/pull/11120)
+- PLAT-23215: Grant `report.getTotal()` permission to self serve partner [-12] (https://github.com/kaltura/server/pull/11118)
+- Add VP9/AV1 to Chunked Encoding verified codecs (https://github.com/kaltura/server/pull/11115)
+- FOUN-230: Allow setting `isDefault=true` when adding new ACP (https://github.com/kaltura/server/pull/11113)
+- SUP-28652: Fix Zoom registration failure due to `deletionPolicy=1` (https://github.com/kaltura/server/pull/11111)
+- Add caption permissions + change release notes. (https://github.com/kaltura/server/pull/11110)
+- FOUN-215 modify batch host wildcard regex (https://github.com/kaltura/server/pull/11109)
+- FOUN-240 (https://github.com/kaltura/server/pull/11108)
+- PLAT-23202: Internal server error on attempt to filter userGroups wit… (https://github.com/kaltura/server/pull/11107)
+- SUP-28549: Set target quality to sharpen image (https://github.com/kaltura/server/pull/11106)
+- PLAT-22927: Block sessions from embargoed countries (https://github.com/kaltura/server/pull/11105)
+- PLAT-23207: Fix admin console behavior for new event notifications screen (https://github.com/kaltura/server/pull/11104)
+- PLAT-23205: retrieve only oldest job in retrieveByJobTypeAndObject (https://github.com/kaltura/server/pull/11103)
+- LIV-811 : Add permissions for caption service (update, list) for liveNG (partner -5 ) (https://github.com/kaltura/server/pull/11100)
+- PLAT-23204: KDL - Add AV1 support (https://github.com/kaltura/server/pull/11099)
+- PLAT-23017: Chunk enc VP9 AV1 (https://github.com/kaltura/server/pull/11098)
+- PLAT-23206: `liveStream:authenticate()` - check the status of the partner ID the entry belongs to, rather than that of the -5 partner (https://github.com/kaltura/server/pull/11094)
+- PLAT-23197: Add the ability to delete captions via MRSS (https://github.com/kaltura/server/pull/11093)
+- PLAT-23201: Create new partner, status and permissions for self serve [-12] (https://github.com/kaltura/server/pull/11090)
+- LIV-823: `getExcludeServerNodesFromAPI()` - Increase pager size for `serverNode.list()` (https://github.com/kaltura/server/pull/11088)
+- PLAT-23102: Fixed `passwordUsedBefore()` (https://github.com/kaltura/server/pull/11087)
+- PLAT-23148: Bulk upload, `addThumbAssets()` - Set the new thumbnail on the updated entry (https://github.com/kaltura/server/pull/11082)
+- FOUN-240: Apply rate limiter on responseCacher (https://github.com/kaltura/server/pull/11072)
+- FOUN-223: Support ES >= 7.X (https://github.com/kaltura/server/pull/11049)
+- SUP-28194: Add fileSyncs in shared storage profile Ids to be queried in `getReadyInternalFileSyncsForKey()`(https://github.com/kaltura/server/pull/10932)
+
 * Wed Oct 6 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 17.11.0-1
 - PLAT-23203: Set `enableZoomTranscription` to true by default (https://github.com/kaltura/server/pull/11091)
 - SUP-29337: Support the ability to not return partner API secrets (https://github.com/kaltura/server/pull/11086)
