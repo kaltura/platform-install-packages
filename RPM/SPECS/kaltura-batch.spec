@@ -6,7 +6,7 @@
 %define apache_group	apache
 Summary: Kaltura Open Source Video Platform - batch server 
 Name: kaltura-batch
-Version: 17.5.0
+Version: 17.9.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 

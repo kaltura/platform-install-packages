@@ -3,7 +3,7 @@
 %define prefix /opt/kaltura 
 Summary: Kaltura Server release file and package configuration
 Name: kaltura-release
-Version: 17.5.0
+Version: 17.9.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
