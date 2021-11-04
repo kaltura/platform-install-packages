@@ -3,7 +3,7 @@
  
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.89
+Version: v2.90
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -87,6 +87,18 @@ fi
 %config %{html5lib_base}/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Thu Nov 4 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 2.90-1
+- FEC-11373 - Blank space in QnA area when onPage is false
+- FEC-11371 - Moderation submit button on Player is not WCAG accessibility compliant
+- SUP-28484 - [Accessibility] Chapters in v2 player - chapters thumbnails not actionable
+- FEV-1050 - V2 Hotspots | Screen reader is not working properly
+- SUP-28319 - [Accessibility] Chapters module in v2 player should not open on tab
+- FEV-1057 - Player v2|Accessibility| Chapters with slides - Navigation by the Tab key does not work properly
+- FEV-1056 - Player v2|Accessibility| Chapters with slides -after using the mouse/Shift+Tab- all the chapters disappear from the list
+- FEV-1055 - Player v2|Accessibility| Chapters with slides -Screen reader (Narrator) does not read the chapter's title
+- FEV-1054 - Player v2|Accessibility| Chapters -navigation by the 'Home'/'End' keys does not work properly
+- FEV-1060 - Player v2|Accessibility| Chapters with slides -When the chapter's kitchen sink is opened, it's impossible to navigate to the video's interactive area (HS, Child player etc..)
+
 * Mon Jun 14 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 2.89-1
 - FEC-11232 - [Quiz - German] The 'I understand' button in the Quiz 'Sent' page is not truncated properly
 - FEC-11178 - Remove chapters plug-in page from knowledge base
