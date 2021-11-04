@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 17.12.0
-Release: 1
+Version: 17.13.0
+Release: 2
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -373,6 +373,17 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Tue Nov 2 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 17.13.0-2
+- REFINITIV-2515: Set Calais API `x-calais-selectiveTags` header (https://github.com/kaltura/server/pull/11170)
+- Sphinx schema update (https://github.com/kaltura/server/pull/11160)
+- FOUN-260: Support cue point table sharding (https://github.com/kaltura/server/pull/11149)
+- FOUN-239 Access control - block requests whose GET params include sensitive data (https://github.com/kaltura/server/pull/11140)
+- PLAT-23228: Admin console - only return roles that belong to partner ID -2 [Admin Console partner] (https://github.com/kaltura/server/pull/11138)
+- Updated live thumbnail code to work with LiveNG (https://github.com/kaltura/server/pull/11024)
+
+* Tue Oct 26 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 17.13.0-1
+- Ver Bounce to 17.13.0
+
 * Mon Oct 18 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 17.12.0-1
 - PLAT-23221: `simulive` - round the duration to avoid stitching issues (https://github.com/kaltura/server/pull/11129)
 - FOUN-223: Support ES 7 (https://github.com/kaltura/server/pull/11127)
