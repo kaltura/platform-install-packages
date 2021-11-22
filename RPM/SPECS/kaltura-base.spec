@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 17.13.0
-Release: 3
+Version: 17.14.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -373,6 +373,33 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Nov 22 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 17.14.0-1
+- SUP-30027 - Zoom `hotfix` (https://github.com/kaltura/server/pull/11228)
+- SUP-29888: Zoom `hotfix` (https://github.com/kaltura/server/pull/11217)
+- Create the `virtual_event` table (https://github.com/kaltura/server/pull/11214)
+- Change `virtual_event.status_index` to `virtual_event.status_partner_index` (https://github.com/kaltura/server/pull/11209)
+- Create the `virtual_event` table (https://github.com/kaltura/server/pull/11207)
+- SUP-29192: Fix audio desc probing (https://github.com/kaltura/server/pull/11205)
+- Fix `getLastFileUpdateTimeStampPath()` (https://github.com/kaltura/server/pull/11202)
+- Chunked Encoding: Ensure the video is at least one second long (https://github.com/kaltura/server/pull/11201)
+- PLAT-23234: Add credit info view role (https://github.com/kaltura/server/pull/11198)
+- SUP-29192: Add audio language codes (https://github.com/kaltura/server/pull/11195)
+- PLAT-23236: Remove zoom audio files when deleting the video file (https://github.com/kaltura/server/pull/11194)
+- SUP-28825: Check `tff` when probing for interlaced content (https://github.com/kaltura/server/pull/11192)
+- PLAT-23242: `report.getCsvAction()` - Support exclusion of fields (https://github.com/kaltura/server/pull/11191)
+- PLAT-23233: Add `isSelfServe` property on partner object (https://github.com/kaltura/server/pull/11190)
+- PLAT-23257: Fix `getDetails()` response (https://github.com/kaltura/server/pull/11186)
+- Chunked Encoding: Support `FFMPEG_VP8` transcoding engine (https://github.com/kaltura/server/pull/11184)
+- SUP-29168: Zoom fix (https://github.com/kaltura/server/pull/11182)
+- PSVAMB-28716: Entity extraction process - Add support for live stream entries (https://github.com/kaltura/server/pull/11181)
+- SUP-29832: Fix image input purification flow (https://github.com/kaltura/server/pull/11180)
+- FOUN-166: Reduce the amount of DB updates made to `scheduler_worker` (https://github.com/kaltura/server/pull/11179)
+- PLAT-23255: Configurable option: hide admin secrets in `KMCNG` (https://github.com/kaltura/server/pull/11178)
+- PLAT-23192: add `systemPartner.updateConfiguration` permission for partner ID -12 (https://github.com/kaltura/server/pull/11167)
+- Support graph and `partner_id` filter in `SELF_SERVE_USAGE` report (https://github.com/kaltura/server/pull/11137)
+- Virtual Event integration (https://github.com/kaltura/server/pull/11114)
+
+
 * Tue Nov 2 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 17.13.0-2
 - REFINITIV-2515: Set Calais API `x-calais-selectiveTags` header (https://github.com/kaltura/server/pull/11170)
 - Sphinx schema update (https://github.com/kaltura/server/pull/11160)
