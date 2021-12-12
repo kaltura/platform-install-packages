@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 17.14.0
-Release: 1
+Version: 17.16.0
+Release: 2
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -373,6 +373,24 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Sat Dec 11 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 17.16.0-2
+- Allow disabling of admin email notifications on new registration (https://github.com/kaltura/server/pull/11272)
+- Less revealing exception messages (https://github.com/kaltura/server/pull/11269)
+- PLAT-23312: `KDL` - new optimization mode (https://github.com/kaltura/server/pull/11268)
+- PLAT-23311: Add permission for self serve partner to get partner object (https://github.com/kaltura/server/pull/11266)
+- SUP-30171: Set `-max_muxing_queue_size` (https://github.com/kaltura/server/pull/11263)
+- AN-22681: Add `count_all` metric (https://github.com/kaltura/server/pull/11256)
+- Extend the period for `KalturaVodScheduleEvent` to max of 5 years (https://github.com/kaltura/server/pull/11252)
+- Removed sub-type validation from Virtual Event (https://github.com/kaltura/server/pull/11251)
+- SUP-29836: Added languages to live audio flavours (https://github.com/kaltura/server/pull/11250)
+- Virtual Events: Added ability to insert multiple group IDs (https://github.com/kaltura/server/pull/11249)
+- PLAT-23063: DRM - Add the ability to change more values in partner config via Admin Console (https://github.com/kaltura/server/pull/11248)
+- PLAT-23219: Create EP Admin User - For Event Platform Manager application (https://github.com/kaltura/server/pull/11247)
+- SUP-28990: Support the import of `SCC` caption from URL (https://github.com/kaltura/server/pull/11235)
+- feat(FEC-11387): move player and studio version directives from `base.ini` to `appVersions.ini` (https://github.com/kaltura/server/pull/10894)
+* Thu Dec 2 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 17.16.0-1
+- Ver Bounce to 17.16.0
+
 * Mon Nov 22 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 17.14.0-1
 - SUP-30027 - Zoom `hotfix` (https://github.com/kaltura/server/pull/11228)
 - SUP-29888: Zoom `hotfix` (https://github.com/kaltura/server/pull/11217)

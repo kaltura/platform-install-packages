@@ -103,49 +103,6 @@ for D in $ALL_DAEMONS; do
 	fi
 done
 
-$QUERY_COMMAND kaltura-kmc --queryformat %{version} >/dev/null 2>&1
-if [ $? -eq 0 ];then
-	KMC_VER=`$QUERY_COMMAND kaltura-kmc --queryformat %{version} `
-	COMP_NAME=kaltura-html5lib
-        COMP_VER=`$QUERY_COMMAND $COMP_NAME --queryformat %{version} >/dev/null 2>&1`
-	if [ $? -eq 0 ];then
-		START=`date +%s.%N`
-		MSG=`check_kmc_config_versions $COMP_NAME $KMC_VER`
-		RC=$?
-		END=`date +%s.%N`
-		report "$COMP_NAME ver in KMC config.ini" $RC "$MSG" "`bc <<< $END-$START`"
-	else
-		echo -e "[${CYAN}$COMP_NAME ver in KMC config.ini${NORMAL}][${BRIGHT_YELLOW}SKIPPED as $COMP_NAME is not installed${NORMAL}]"
-	fi
-	COMP_NAME=kaltura-kdp3	
-        COMP_VER=`$QUERY_COMMAND $COMP_NAME --queryformat %{version} >/dev/null 2>&1`
-	if [ $? -eq 0 ];then
-		START=`date +%s.%N`
-		MSG=`check_kmc_config_versions $COMP_NAME $KMC_VER`
-		RC=$?
-		END=`date +%s.%N`
-		report "$COMP_NAME ver in KDP3 config.ini" $RC "$MSG" "`bc <<< $END-$START`"
-	else
-		echo -e "[${CYAN}$COMP_NAME ver in KDP3 config.ini${NORMAL}][${BRIGHT_YELLOW}SKIPPED as $COMP_NAME is not installed${NORMAL}]"
-	fi
-	COMP_NAME=kaltura-kmc
-        COMP_VER=`$QUERY_COMMAND $COMP_NAME --queryformat %{version}`
-	if [ $? -eq 0 ];then
-		START=`date +%s.%N`
-		MSG=`check_kmc_config_versions kaltura-kmc $KMC_VER`
-		RC=$?
-		END=`date +%s.%N`
-		report "$COMP_NAME ver in KMC config.ini" $RC "$MSG" "`bc <<< $END-$START`"
-		START=`date +%s.%N`
-		OUT=`php $DIRNAME/get_kmc_swfs.php`
-		RC=$?
-		END=`date +%s.%N`
-		report "Get KMC SWFs" $RC "$OUT" "`bc <<< $END-$START`"
-		
-	else
-		echo -e "[${CYAN}$COMP_NAME ver in KMC config.ini${NORMAL}][${BRIGHT_YELLOW}SKIPPED as $COMP_NAME is not installed${NORMAL}]"
-	fi
-fi
 
 START=`date +%s.%N`
 MSG=`check_start_page`
