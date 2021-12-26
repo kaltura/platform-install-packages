@@ -3,7 +3,7 @@
  
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.90
+Version: v2.91
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -87,6 +87,10 @@ fi
 %config %{html5lib_base}/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Sun Dec 26 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 2.91-1
+- FEC-11713 - Playback rate options are overlaid by dual screen menu
+- FEC-11542 - tooltips in full screen don't pop out when hovering over it
+
 * Thu Nov 4 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 2.90-1
 - FEC-11373 - Blank space in QnA area when onPage is false
 - FEC-11371 - Moderation submit button on Player is not WCAG accessibility compliant
