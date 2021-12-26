@@ -10,7 +10,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 17.16.0
+Version: 17.17.0
 Release: 2
 License: AGPLv3+
 Group: Server/Platform 
@@ -373,6 +373,27 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Sun Dec 26 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 17.17.0-2
+- PLAT-23289: Reset password - replace '.' with spaces in user's display name (https://github.com/kaltura/server/pull/11302)
+- PLAT-23325: User login - attempt to prevent brute force attacks (https://github.com/kaltura/server/pull/11300)
+- KMS-24338: Reject strings that contain certain special chars for certain properties on `kuser` object (https://github.com/kaltura/server/pull/11298)
+- PLAT-23289: Added `myKuserUtils::sanitizeFields()` (https://github.com/kaltura/server/pull/11296)
+- SUP-29689: Add support for `MPEG-4`, `MPEG-PS`, `Quicktime`, Windows Media and Flash video container formats (https://github.com/kaltura/server/pull/11292)
+- Fix `resetUserPassword()` (https://github.com/kaltura/server/pull/11290)
+- apimon: Improve `PS2` tracking (https://github.com/kaltura/server/pull/11289)
+- `getDynamicEmailUserRoleName()` - verify `userRoleNames` is not a null value before continuing exec (https://github.com/kaltura/server/pull/11286)
+- FOUN-182 - Beacon search - return more descriptive exceptions on missing parameters (https://github.com/kaltura/server/pull/11282)
+- SUP-29860: Add an option to change the default audio flavor selection in the manifest file that's created from `LiveNG` (https://github.com/kaltura/server/pull/11279)
+- FOUN-290 - Allow `FFMpeg` non-chunk convert to handle `estimatedEffort` threshold (https://github.com/kaltura/server/pull/11277)
+- FEC-11387: Move player and studio version directives from `base.ini` to `appVersions.ini` (https://github.com/kaltura/server/pull/11271)
+- AN-22688: Add virtual event id to `reportInputFilter` (https://github.com/kaltura/server/pull/11262)
+- FOUN-289: Use `kFile` methods in upload flow (https://github.com/kaltura/server/pull/11241)
+- FOUN-156: Support `api_rate limit` in `PS2` services (https://github.com/kaltura/server/pull/11210)
+- SUP-20297: support REACH automatic rules when updating External-Media type (KMS current flow) (https://github.com/kaltura/server/pull/11199)
+
+* Mon Dec 20 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 17.17.0-1
+- Ver Bounce to 17.17.0
+
 * Sat Dec 11 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 17.16.0-2
 - Allow disabling of admin email notifications on new registration (https://github.com/kaltura/server/pull/11272)
 - Less revealing exception messages (https://github.com/kaltura/server/pull/11269)
