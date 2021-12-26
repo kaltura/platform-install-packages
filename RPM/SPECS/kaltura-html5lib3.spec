@@ -3,7 +3,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib3
-Version: 1.13.2
+Version: 1.15.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -49,6 +49,13 @@ rm -rf %{buildroot}
 %{html5lib3_base}
 
 %changelog
+* Sun Dec 26 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 1.15.0-1
+- FEC-11649: live duration APIs (#501) (ab8a715)
+- FEV-1011: add TS-types for cue-point manager and cues (#499) (5abb342)
+- FEV-1011: add TS-types for player (#500) (6823193)
+- Updated plugin versions 
+- Readded dual screen plugin
+- Added cuepoints plugin
 
 * Wed Oct 6 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 1.13.2
 - Update playkit-js to 0.74.1 (c0788f7)
