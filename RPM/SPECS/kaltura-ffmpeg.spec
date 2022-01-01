@@ -25,7 +25,7 @@
 
 Summary: Utilities and libraries to record, convert and stream audio and video
 Name: kaltura-ffmpeg
-Version: 4.2.2 
+Version: 4.4
 Release: 1
 License: GPL
 Group: Applications/Multimedia
@@ -141,7 +141,6 @@ export CFLAGS="%{optflags}"
     --enable-libvorbis \
     --enable-libx264 \
     --enable-libx265 \
-    --enable-avisynth \
     --enable-libxvid \
     --enable-filter=movie \
     --enable-avfilter \
@@ -261,6 +260,9 @@ fi
 %{base_prefix}-%{version}/share
 
 %changelog
+* Sat Jan 1 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 4.4-1
+- New upstream version
+
 * Mon Oct 22 2018 jess.portnoy@kaltura.com <Jess Portnoy> - 4.0.2-1
 - New upstream version
 
