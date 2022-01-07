@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 17.17.0
-Release: 2
+Release: 3
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -128,7 +128,9 @@ sed -i 's@^otp_required_partners\[\]@;otp_required_partners\[\]@g' $RPM_BUILD_RO
 sed -i "s@^partner_otp_internal_ips@;partner_otp_internal_ips@g" $RPM_BUILD_ROOT%{confdir}/local.template.ini
 # when this directive is set, `report` requests go to KAVA
 sed -i "s@^\(druid_url.*$\)@;\1@g" $RPM_BUILD_ROOT%{confdir}/local.template.ini
-sed -i "s#^;html5_version = @HTML5LIB_VERSION@#html5_version = %{html5_version}#g" $RPM_BUILD_ROOT%{confdir}/local.template.ini
+sed -i "s#@HTML5LIB_VERSION@#%{html5_version}#g" $RPM_BUILD_ROOT%{confdir}/appVersions.template.ini
+sed -i "s#@STUDIO_VERSION@#%{studio_2_version}#g" $RPM_BUILD_ROOT%{confdir}/appVersions.template.ini
+sed -i "s#@STUDIO3_VERSION@#%{studio_3_version}#g" $RPM_BUILD_ROOT%{confdir}/appVersions.template.ini
 sed -i 's#<html5Url>/html5/html5lib/v.*/mwEmbedLoader.php</html5Url>#<html5Url>/html5/html5lib/%{html5_version}/mwEmbedLoader.php</html5Url>#g' $RPM_BUILD_ROOT%{prefix}/app/deployment/base/scripts/init_content/01.uiConf.99.template.xml
 sed -i "s#^;kmc_login_version = @KMC_LOGIN_VERSION@#kmc_login_version = %{kmc_login_version}#g" $RPM_BUILD_ROOT%{confdir}/local.template.ini
 sed -i "s@clipapp_version = @CLIPPAPP_VERSION@#clipapp_version = %{clipapp_version}#g" $RPM_BUILD_ROOT%{confdir}/local.template.ini
