@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 17.17.0
-Release: 3
+Version: 17.18.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -375,6 +375,27 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Fri Jan 7 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 17.18.0-1
+- PLAT-23499: Support permission checking on impersonated partners (https://github.com/kaltura/server/pull/11336)
+- SUP-30033: `KZoomDropFolderEngine` - check zoom access token expiry (https://github.com/kaltura/server/pull/11335)
+- SUP-28690: Added `retrieveNonVideoFlavorsByEntryID()` to `assetPeer` (https://github.com/kaltura/server/pull/11331)
+- PLAT-23300: HTML Purifier - enable the white-listing of certain tags (https://github.com/kaltura/server/pull/11328)
+- Retrieve backup entry-server-node for live thumb (https://github.com/kaltura/server/pull/11324)
+- SUP-28690: YoutubeAPI distribution - do not export audio only flavours (https://github.com/kaltura/server/pull/11323)
+- SUP-30407: New feature: 'fetch thumbnail with KS' (https://github.com/kaltura/server/pull/11321)
+- `apimon`: Prefix rabbit/amqp errors (https://github.com/kaltura/server/pull/11320)
+- PLAT-23259: add `shouldRedirect` flag to live delivery profile (https://github.com/kaltura/server/pull/11318)
+- `apimon`: Report db/sphinx conn errors (https://github.com/kaltura/server/pull/11317)
+- `apimon`: Avoid sending error dim when empty (https://github.com/kaltura/server/pull/11316)
+- `apimon`: Report curl/http druid errors (https://github.com/kaltura/server/pull/11315)
+- `apimon`: Add elastic errors (https://github.com/kaltura/server/pull/11314)
+- `apimon`: Add exec errors (https://github.com/kaltura/server/pull/11313)
+- `apimon`: Add curl errors (https://github.com/kaltura/server/pull/11312)
+- `apimon`: Report memcache conn/op errors (https://github.com/kaltura/server/pull/11310)
+- PLAT-23303: Fix reset passwd flow (https://github.com/kaltura/server/pull/11304)
+- SUP-30171: Update `conversionEnginesExtraParams` (https://github.com/kaltura/server/pull/11275)
+- FOUN-301: report user space CPU usage during conversion process (https://github.com/kaltura/server/pull/11261)
+
 * Sun Dec 26 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 17.17.0-2
 - PLAT-23289: Reset password - replace '.' with spaces in user's display name (https://github.com/kaltura/server/pull/11302)
 - PLAT-23325: User login - attempt to prevent brute force attacks (https://github.com/kaltura/server/pull/11300)
