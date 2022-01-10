@@ -3,7 +3,7 @@
  
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.91
+Version: v2.92
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -87,6 +87,10 @@ fi
 %config %{html5lib_base}/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Mon Jan 10 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 2.92-1
+- FEC-11713 - Playback rate options are overlaid by dual screen menu
+- FEC-11542 - tooltips in full screen don't pop out when hovering over it
+
 * Sun Dec 26 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 2.91-1
 - FEC-11713 - Playback rate options are overlaid by dual screen menu
 - FEC-11542 - tooltips in full screen don't pop out when hovering over it
