@@ -3,7 +3,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib3
-Version: 1.15.0
+Version: 2.0.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -49,6 +49,16 @@ rm -rf %{buildroot}
 %{html5lib3_base}
 
 %changelog
+* Mon Jan 24 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 2.0.0-1
+- FEC-11863: default kava details are reported with no player version (#513) (42425b8)
+- FEC-11864: kava reports player version instead of product version (#514) (b81f88b)
+- Updated playkit-js to 0.77.0 (5dbbda4)
+- Updated playkit-js-dash to 1.29.0 (2054f7c)
+- Updated playkit-js-hls to 1.28.0 (7c83f29)
+- Updated playkit-js-ui to 0.70.0 (363cc8f)
+- FEC-11738: Related Entries - Phase 1 (#511) (13163a8)
+- FEC-11761: Timed metadata: Align all metadata types (#512) (dea6cbb)
+
 * Sun Dec 26 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 1.15.0-1
 - FEC-11649: live duration APIs (#501) (ab8a715)
 - FEV-1011: add TS-types for cue-point manager and cues (#499) (5abb342)

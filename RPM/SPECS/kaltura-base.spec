@@ -10,7 +10,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 17.18.0
+Version: 17.19.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -375,6 +375,24 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Jan 24 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 17.19.0-1
+- `kPlayManifestCacher`: ignore missing files (https://github.com/kaltura/server/pull/11371)
+- ES mapping change (https://github.com/kaltura/server/pull/11369)
+- PSVAMB-29794: Added `-max_muxing_queue_size 1024 -crf 20 -threads 4` to `conversionEnginesExtraParams` (https://github.com/kaltura/server/pull/11368)
+- PLAT-23527: Copy `systemName` when cloning roles (https://github.com/kaltura/server/pull/11363)
+- PLAT-23541: HTML Purifier -  Allow `rel` and `target` attribs (https://github.com/kaltura/server/pull/11362)
+- SUP-29726: Added import redirected URL to zoom event imports (https://github.com/kaltura/server/pull/11358)
+- Use `kSharedFileSystemMgr::safeLog()` rather than `KalturaLog::err()` (https://github.com/kaltura/server/pull/11357)
+- PLAT-23393: `thumbAssetService` - validate file extension (https://github.com/kaltura/server/pull/11356)
+- PLAT-23290: Support file type restriction when uploading files (https://github.com/kaltura/server/pull/11355)
+- PLAT-23330: Correctly handle single audio stream (https://github.com/kaltura/server/pull/11353)
+- PLAT-23393: Added restricted file support to thumbnail upload (https://github.com/kaltura/server/pull/11351)
+- SUP-30315: Added script to index user by `kuser` ID (https://github.com/kaltura/server/pull/11347)
+- Added `VE` registration reports (https://github.com/kaltura/server/pull/11345)
+- Enable `ReadOnly` account user login (https://github.com/kaltura/server/pull/11344)
+- `apimon`: report `Memcache` error codes (https://github.com/kaltura/server/pull/11343)
+- Introduced `kmcng_content_security_policy` directive (KMC will set that as the CSP header) (https://github.com/kaltura/server/pull/11338)
+
 * Fri Jan 7 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 17.18.0-1
 - PLAT-23499: Support permission checking on impersonated partners (https://github.com/kaltura/server/pull/11336)
 - SUP-30033: `KZoomDropFolderEngine` - check zoom access token expiry (https://github.com/kaltura/server/pull/11335)
