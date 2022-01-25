@@ -26,7 +26,7 @@
 Summary: Utilities and libraries to record, convert and stream audio and video
 Name: kaltura-ffmpeg
 Version: 4.4
-Release: 1
+Release: 2
 License: GPL
 Group: Applications/Multimedia
 URL: http://ffmpeg.org/
@@ -35,7 +35,7 @@ Packager: Jess Portnoy <jess.portnoy@kaltura.com>
 Vendor: Kaltura, Inc.
 
 Source: http://www.ffmpeg.org/releases/ffmpeg-%{version}.tar.bz2
-
+Patch0: libavformat_http.c.diff
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
 BuildRequires: SDL-devel
@@ -115,6 +115,7 @@ Install this package if you want to compile apps with ffmpeg support.
 
 %prep
 %setup -qn ffmpeg-%{version}
+%patch0 -p1
 
 
 %build
@@ -260,6 +261,11 @@ fi
 %{base_prefix}-%{version}/share
 
 %changelog
+* Tue Jan 25 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 4.4-2
+- Patched against these commits:
+  https://github.com/FFmpeg/FFmpeg/commit/6348be83e8d16671dde07d299a6d6e973f94d3e2
+  https://github.com/FFmpeg/FFmpeg/commit/625ea2d2a901f8717c90bac286982774075557bd
+
 * Sat Jan 1 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 4.4-1
 - New upstream version
 
