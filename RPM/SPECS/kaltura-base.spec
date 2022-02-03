@@ -10,7 +10,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 17.19.0
+Version: 17.20.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -375,6 +375,19 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Thu Feb 3 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 17.20.0-1
+- Skip CDN delivery enforcement for `mappedthumb` requests (https://github.com/kaltura/server/pull/11389)
+- Add avg storage to `SELF_SERVE_USAGE` report (https://github.com/kaltura/server/pull/11386)
+- SUP-30797: `assetPeer.retrieveAudioFlavorsByEntryIdAndDimensions()` - Added flavor type criteria (https://github.com/kaltura/server/pull/11383)
+- SUP-30406: `DeliveryProfileVod.supportsDeliveryDynamicAttributes()` - check if entry exists (https://github.com/kaltura/server/pull/11382)
+- LIV-894-B: Fix `simulive` to live `playManifest` caching issue (https://github.com/kaltura/server/pull/11381)
+- LIV-894: Fix `simulive` to live `playManifest` caching issue (https://github.com/kaltura/server/pull/11380)
+- SUP-30846: `ZoomHelper.getRedirectUrl` - Fetch headers only (https://github.com/kaltura/server/pull/11378)
+- PLAT-23546: Check uploaded file against extension white-list (https://github.com/kaltura/server/pull/11374)
+- Support new `ve` registration event types and add origin filter (https://github.com/kaltura/server/pull/11370)
+- PLAT-23504: Improvements to Zoom drop folder (https://github.com/kaltura/server/pull/11361)
+- LIV-846: `simulive` to live transition (and vice versa) (https://github.com/kaltura/server/pull/11349)
+
 * Mon Jan 24 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 17.19.0-1
 - `kPlayManifestCacher`: ignore missing files (https://github.com/kaltura/server/pull/11371)
 - ES mapping change (https://github.com/kaltura/server/pull/11369)

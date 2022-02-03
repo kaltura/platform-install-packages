@@ -299,7 +299,7 @@ HTML5_STUDIO3_VERSION=`rpm -q kaltura-html5-studio3 --queryformat %{version}`
 LIVE_ANALYTICS_FRONT_VERSION=`rpm -q kaltura-live-analytics-front --queryformat %{version}`
 HTML5LIB_VERSION=`rpm -q kaltura-html5lib --queryformat %{version}`
 
-sed -i "s@^\(html5_version\s*=\)\(.*\)@\1 $HTML5LIB_VERSION@g" -i $BASE_DIR/app/configurations/local.ini
+sed -i "s@^\(html5_version\s*=\)\(.*\)@\1 $HTML5LIB_VERSION@g" -i $BASE_DIR/app/configurations/appVersions.ini
 sed -i "s/@HTML5_VER@/$HTML5LIB_VERSION/g" -i $BASE_DIR/apps/studio/$HTML5_STUDIO_VERSION/studio.ini
 sed -i "s/@HTML5_VER@/$HTML5LIB_VERSION/g" -i $BASE_DIR/apps/studioV3/$HTML5_STUDIO3_VERSION/studio.ini
 	echo "use kaltura" | mysql -h$DB1_HOST -u$DB1_USER -p$DB1_PASS -P$DB1_PORT $DB1_NAME 2> /dev/null
