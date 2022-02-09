@@ -10,7 +10,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 17.20.0
+Version: 18.0.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -375,6 +375,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Wed Feb 9 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 18.0.0-1
+- Ver Bounce to 18.0.0
+
 * Thu Feb 3 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 17.20.0-1
 - Skip CDN delivery enforcement for `mappedthumb` requests (https://github.com/kaltura/server/pull/11389)
 - Add avg storage to `SELF_SERVE_USAGE` report (https://github.com/kaltura/server/pull/11386)
