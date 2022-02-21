@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 18.0.0
-Release: 1
+Release: 2
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -375,6 +375,20 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Feb 21 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 18.0.0-2
+- KAVA: Enrich user info from `custom_data` (https://github.com/kaltura/server/pull/11416)
+- PLAT-23612: Added `FEATURE_BLOCK_MEETING_ROOMS` (https://github.com/kaltura/server/pull/11414)
+- REACH2-1092: Support the importing of dubbing data in `bulkUpload` batch (https://github.com/kaltura/server/pull/11413)
+- SUP-31030: Duplicate entries are created for Zoom recordings (https://github.com/kaltura/server/pull/11411)
+- PLAT-23570: Add MIME types to `file_type` (https://github.com/kaltura/server/pull/11410)
+- SUP-31051: Change `id` member from `int` to `bigint` (https://github.com/kaltura/server/pull/11408)
+- REACH2-1091: Adding target language to the dubbing catalog item (https://github.com/kaltura/server/pull/11405)
+- Increase the default CONVERT job quota to 200 (https://github.com/kaltura/server/pull/11401)
+- PLAT-23565: Give `KME` partner (ID -13) permission to list media entries from all the partners (https://github.com/kaltura/server/pull/11399)
+- Add link to `playerWrapper` used for v2 embed preview under CSP (https://github.com/kaltura/server/pull/11397)
+- Add world regions report for VE registration reports (https://github.com/kaltura/server/pull/11394)
+- REACH2-1082: New Dubbing Reach Catalog Item (https://github.com/kaltura/server/pull/11311)
+
 * Wed Feb 9 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 18.0.0-1
 - Ver Bounce to 18.0.0
 
