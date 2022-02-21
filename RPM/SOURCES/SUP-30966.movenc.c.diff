@@ -1,0 +1,13 @@
+--- ffmpeg-4.4/libavformat/movenc.c	2021-04-08 17:28:40.000000000 -0400
++++ ffmpeg-4.4n/libavformat/movenc.c	2022-02-21 08:33:47.643141103 -0500
+@@ -1096,6 +1096,10 @@
+ 
+ static int mov_write_btrt_tag(AVIOContext *pb, MOVTrack *track)
+ {
++    // it seems some TV sets can't handle this atom
++    // As a temporary fix, we'll return without doing anything
++    // See https://kaltura.atlassian.net/browse/SUP-30966
++    return 0;
+     int64_t pos = avio_tell(pb);
+     struct mpeg4_bit_rate_values bit_rates = calculate_mpeg4_bit_rates(track);
+     if (!bit_rates.max_bit_rate && !bit_rates.avg_bit_rate &&
