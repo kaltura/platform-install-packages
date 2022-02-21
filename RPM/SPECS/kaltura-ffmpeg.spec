@@ -26,7 +26,7 @@
 Summary: Utilities and libraries to record, convert and stream audio and video
 Name: kaltura-ffmpeg
 Version: 4.4
-Release: 2
+Release: 3
 License: GPL
 Group: Applications/Multimedia
 URL: http://ffmpeg.org/
@@ -36,6 +36,7 @@ Vendor: Kaltura, Inc.
 
 Source: http://www.ffmpeg.org/releases/ffmpeg-%{version}.tar.bz2
 Patch0: libavformat_http.c.diff
+Patch1: SUP-30966.movenc.c.diff
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 
 BuildRequires: SDL-devel
@@ -116,6 +117,7 @@ Install this package if you want to compile apps with ffmpeg support.
 %prep
 %setup -qn ffmpeg-%{version}
 %patch0 -p1
+%patch1 -p1
 
 
 %build
