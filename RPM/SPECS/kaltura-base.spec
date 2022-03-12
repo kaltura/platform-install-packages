@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 18.0.0
-Release: 2
+Version: 18.1.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -375,6 +375,31 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Sat Mar 12 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 18.1.0-1
+- PLAT-23629: Block partner registration from blacklisted countries (https://github.com/kaltura/server/pull/11450)
+- PLAT-23627: Add `VE` analytics user role (https://github.com/kaltura/server/pull/11447)
+- PLAT-23508: Added auth for `Redis` (https://github.com/kaltura/server/pull/11446)
+- SUP-24926: Kaltura cross connector: support distribution of quiz objects (https://github.com/kaltura/server/pull/11442)
+- SUP-29591-1: add copy of `is_original` attribute for `existingNonReadyAssetIds` during replacement (https://github.com/kaltura/server/pull/11441)
+- SUP-30691: Update entry ready event notification template (https://github.com/kaltura/server/pull/11440)
+- PLAT-23508: Leaderboard plugin (https://github.com/kaltura/server/pull/11439)
+- Add throw error to `setRecordedContent` action (https://github.com/kaltura/server/pull/11436)
+- Changes to `userScores` returned values (https://github.com/kaltura/server/pull/11435)
+- gameService: add default return value in case `Redis` config is missing (https://github.com/kaltura/server/pull/11434)
+- Added `game.userscore` permissions to partner 0 (https://github.com/kaltura/server/pull/11433)
+- SUP-29591: Add `is_original` on `flavorAsset` replacement (https://github.com/kaltura/server/pull/11429)
+- SUP-29598: Sphinx search - escape '!' (https://github.com/kaltura/server/pull/11423)
+- SUP-31042: Set `executionScope` before indexing (LIV-900) (https://github.com/kaltura/server/pull/11422)
+- SUP-30667: Set html purifier `doctype` to HTML 4.01 Transitional (https://github.com/kaltura/server/pull/11421)
+- FOUN-354: Support passing `partnerId` to `ScheduleEventResourcePeer::retrieveByEventId` to reduce DB load when rebuilding search indices (https://github.com/kaltura/server/pull/11419)
+- FOUN-293: Store `uiConf` file directly on `S3` path (https://github.com/kaltura/server/pull/11409)
+- PLAT-23554: `kQuizManager` send analytics beacon on object change (https://github.com/kaltura/server/pull/11407)
+- PLAT-23508: Introduced LeaderBoard plugin and service (https://github.com/kaltura/server/pull/11400)
+- FOUN-320: Support clipping and trimming on `EntrySourceType::LECTURE_CAPTURE` objects (https://github.com/kaltura/server/pull/11359)
+- FOUN-328: Return default conversion profile if currently set conversion profile is not active (https://github.com/kaltura/server/pull/11346)
+- FOUN-291: Added "reload" action to `kaltura_batch.sh` which will not attempt to kill the child processes (workers) (https://github.com/kaltura/server/pull/11326)
+- FOUN-155: Move static data from `Memcache` to `Redis` (https://github.com/kaltura/server/pull/10926)
+
 * Mon Feb 21 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 18.0.0-2
 - KAVA: Enrich user info from `custom_data` (https://github.com/kaltura/server/pull/11416)
 - PLAT-23612: Added `FEATURE_BLOCK_MEETING_ROOMS` (https://github.com/kaltura/server/pull/11414)

@@ -3,7 +3,7 @@
  
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.92
+Version: v2.93
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -87,6 +87,10 @@ fi
 %config %{html5lib_base}/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Sat Mar 12 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 2.93-1
+- FEC-11831 - embedded captions in dual screen are shown when autoPlay is true
+- FEC-11887 - Q&A plugin is not visible on embedded player by default if the uivar “Kaltura.ForceLayoutRedraw” is set to true
+
 * Mon Jan 10 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 2.92-1
 - FEC-11713 - Playback rate options are overlaid by dual screen menu
 - FEC-11542 - tooltips in full screen don't pop out when hovering over it

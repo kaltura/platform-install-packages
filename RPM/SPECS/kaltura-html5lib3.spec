@@ -3,7 +3,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib3
-Version: 3.0.0
+Version: 3.0.1
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -49,6 +49,9 @@ rm -rf %{buildroot}
 %{html5lib3_base}
 
 %changelog
+* Sat Mar 12 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 3.0.1-1
+- FEC-12000: smart tv - dash video not working (7c45812)
+
 * Mon Feb 21 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 3.0.0-1
 - Update playkit-js-ui to 0.70.1 (11ea80f)
 - FEC-9716: An array doesn't merged into plugin config (#524) (773171d)
