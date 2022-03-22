@@ -10,7 +10,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 18.1.0
+Version: 18.2.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -375,6 +375,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Tue Mar 22 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 18.2.0-1
+- Ver Bounce to 18.2.0
+
 * Sat Mar 12 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 18.1.0-1
 - PLAT-23629: Block partner registration from blacklisted countries (https://github.com/kaltura/server/pull/11450)
 - PLAT-23627: Add `VE` analytics user role (https://github.com/kaltura/server/pull/11447)
