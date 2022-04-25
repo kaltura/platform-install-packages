@@ -376,7 +376,31 @@ fi
 
 %changelog
 * Tue Mar 22 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 18.2.0-1
-- Ver Bounce to 18.2.0
+- SUP-31443 compare purifier output to decoded input string to consider case of escaping special chars (https://github.com/kaltura/server/pull/11498)
+- LIV-567: `kBroadcastUrlManager` - Change encryption method (https://github.com/kaltura/server/pull/11496)
+- PLAT-23649: `userScore` permissions for -2 (admin console) partner (https://github.com/kaltura/server/pull/11495)
+- plat-23626: Added `clearAdminUserData.php` (https://github.com/kaltura/server/pull/11494)
+- PLAT-23648: Improve chunk encoding timeout logic and `AV1` chunks media extraction (https://github.com/kaltura/server/pull/11490)
+- When possible, pass partner ID when fetching schedule event resources (https://github.com/kaltura/server/pull/11486)
+- When possible, pass partner ID when fetching schedule event resources (https://github.com/kaltura/server/pull/11485)
+- SUP-31493: Fix IVQ Scores Reports (https://github.com/kaltura/server/pull/11483)
+- FOUN-394: Added `elasticClusterProvisioning.php` (https://github.com/kaltura/server/pull/11482)
+- PLAT-23641: Add permissions to partner 0 - `EP_USER_ANALYTICS` role (https://github.com/kaltura/server/pull/11480)
+- FOUN-414: Modify "deploy_v2.php" script to work with kFile wrapper (https://github.com/kaltura/server/pull/11479)
+- SUP-31493: Removed redundant `save()` call (https://github.com/kaltura/server/pull/11473)
+- PLAT-23628: Removed redundant `set()` call (https://github.com/kaltura/server/pull/11472)
+- SUP-31376: Add and submit requests for `entry_distribution` with the distribution profile of the request partner (https://github.com/kaltura/server/pull/11471)
+- PLAT-23566: Chunked Encoding - add language support (https://github.com/kaltura/server/pull/11469)
+- SUP-31493: Fix IVQ Scores Reports (https://github.com/kaltura/server/pull/11466)
+- PLAT-23637: Change  default transcoding optimisation mode (https://github.com/kaltura/server/pull/11464)
+- PLAT-23508: Support TLS with `php-redis` (https://github.com/kaltura/server/pull/11462)
+- PLAT-23628: Add partner level allowed domains config (https://github.com/kaltura/server/pull/11459)
+- sync `kuser` and `kgroup` (https://github.com/kaltura/server/pull/11458)
+- SUP-31251: Enable the updating of existing profiles regardless of max MR profile limit (https://github.com/kaltura/server/pull/11456)
+- PLAT-23554: Round score (https://github.com/kaltura/server/pull/11449)
+- Fix `kFileBase::rename()` (https://github.com/kaltura/server/pull/11445)
+- FOUN-353: skip MR flavor delete actions for "static" content (https://github.com/kaltura/server/pull/11443)
+- PLAT-23516: Support excluding specific users from SSO login (https://github.com/kaltura/server/pull/11417)
 
 * Sat Mar 12 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 18.1.0-1
 - PLAT-23629: Block partner registration from blacklisted countries (https://github.com/kaltura/server/pull/11450)

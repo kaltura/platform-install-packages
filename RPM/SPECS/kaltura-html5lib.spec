@@ -3,7 +3,7 @@
  
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.93
+Version: v2.94
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -87,6 +87,10 @@ fi
 %config %{html5lib_base}/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Mon Mar 28 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 2.94-1
+- FEC-12016 - Poll responses is showing 0 after toggling between the 'Hide/Show' button within the Webcasting App
+- FEC-12080 - Slides do not appear in dual screen in VOD webcast
+
 * Sat Mar 12 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 2.93-1
 - FEC-11831 - embedded captions in dual screen are shown when autoPlay is true
 - FEC-11887 - Q&A plugin is not visible on embedded player by default if the uivar “Kaltura.ForceLayoutRedraw” is set to true

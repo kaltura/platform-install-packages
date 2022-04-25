@@ -3,7 +3,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib3
-Version: 3.0.1
+Version: 3.1.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -49,6 +49,14 @@ rm -rf %{buildroot}
 %{html5lib3_base}
 
 %changelog
+* Mon Mar 28 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 3.1.0-1
+- FEC-12059: [Youbora] Rendition values have a high number of "Undefined data" records (#533) (43e023e)
+- Update playkit-js to 0.79.0 (66e3572)
+- Update playkit-js-hls to 1.30.1 (7d6ffef)
+- Update playkit-js-providers to 2.34.0 (b55539d)
+- FEC-11875: Related Entries - by context (#523) (86fe909)
+- FEC-11889: Upgrade to hlsjs 1.1.5 (#528) (6990f08)
+
 * Sat Mar 12 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 3.0.1-1
 - FEC-12000: smart tv - dash video not working (7c45812)
 

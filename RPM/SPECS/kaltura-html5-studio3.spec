@@ -3,7 +3,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5-studio3
-Version: v3.12.2
+Version: v3.13.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -52,6 +52,10 @@ rm -rf %{buildroot}
 %{studio_prefix}/%{version}
 
 %changelog
+* Mon Mar 28 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 3.13.0-1
+- feat(FEC-11590): Related grid Studio requirements #120
+- feat(FEC-12028): Skip Plugin - Studio #122
+
 * Thu Jul 8 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 3.12.2-1
 - fix(FEC-11367): "Share and embed" instead of "Share and Embed" (#116)
 - fix(FEC-11384): studio is crashing on null pointer (#117)
