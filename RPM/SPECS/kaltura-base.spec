@@ -10,7 +10,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 18.2.0
+Version: 18.3.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -375,6 +375,29 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Apr 25 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 18.3.0-1
+- PLAT-23641: Add EP analytics user role (https://github.com/kaltura/server/pull/11544)
+- SUP-30803: add duration limitation on scheduled event update to make i… (https://github.com/kaltura/server/pull/11543)
+- Add transcoding hours metric and update reports (https://github.com/kaltura/server/pull/11541)
+- LIV-944: `simulive` - validate pre/post entry type is supported (https://github.com/kaltura/server/pull/11538)
+- FOUN-440: Index `kuser.title` and `kuser.company` fields (https://github.com/kaltura/server/pull/11533)
+- Cancel `sim2live` flow in case of `playManifest` request with time/offset (https://github.com/kaltura/server/pull/11530)
+- Add flag to indicate whether result size limit was reached (https://github.com/kaltura/server/pull/11528)
+- SUP-30673: `getLastLoginPartnerId()` revisions (https://github.com/kaltura/server/pull/11526)
+- LIV-932: `simulive` - chop the main content according to event duration (https://github.com/kaltura/server/pull/11525)
+- SUP-30689: Remove starts with special char check for user name validation (https://github.com/kaltura/server/pull/11522)
+- SUP-31752: Log response from zoom on error (https://github.com/kaltura/server/pull/11520)
+- SUP-31816: Zoom - Get meeting files for each iteration of listing recordings (https://github.com/kaltura/server/pull/11518)
+- VCP-9440: Generate Elastic config.ini if one does not exist (https://github.com/kaltura/server/pull/11516)
+- Partner ID 99 - remove explicit role assignment (https://github.com/kaltura/server/pull/11515)
+- SUP-29718: Retrieve automatic storage profiles for automatic distribution (https://github.com/kaltura/server/pull/11514)
+- No-Plat: Fix minor Chunked Encoding rounding issue (https://github.com/kaltura/server/pull/11513)
+- FOUN-441: "static content" flow enhancement in case only a single asset (excluding the source) has been created (https://github.com/kaltura/server/pull/11512)
+- SUP-31027: Fix handling of entries pending approval (https://github.com/kaltura/server/pull/11511)
+- PLAT-23640: Security -  enable file type restriction on all newly created partners (https://github.com/kaltura/server/pull/11508)
+- PSVAMB-32896: `FFMpeg` - use correct stream specifier format (https://github.com/kaltura/server/pull/11504)
+- LIV-917: `simulive` - add support for playlist source (https://github.com/kaltura/server/pull/11487)
+
 * Tue Mar 22 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 18.2.0-1
 - SUP-31443 compare purifier output to decoded input string to consider case of escaping special chars (https://github.com/kaltura/server/pull/11498)
 - LIV-567: `kBroadcastUrlManager` - Change encryption method (https://github.com/kaltura/server/pull/11496)
