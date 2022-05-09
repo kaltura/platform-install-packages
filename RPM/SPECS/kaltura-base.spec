@@ -10,7 +10,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 18.3.0
+Version: 18.4.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -375,6 +375,17 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Wed May 4 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 18.4.0-1
+- KChunkedEncodeParams: Set `pathResolveInterval` to 10hrs (https://github.com/kaltura/server/pull/11561)
+- PLAT-23692: `kmcngaction` - get base URLs from `kConf` (https://github.com/kaltura/server/pull/11560)
+- LIV-932: `simulive` - consider the postEnd duration while chopping main playback (https://github.com/kaltura/server/pull/11559)
+- PLAT-23683: Remove Legacy KMC button in the admin console (https://github.com/kaltura/server/pull/11556)
+- SUP-31245: Expose `stopProcessingOnError` option in media repurposing admin console config (https://github.com/kaltura/server/pull/11555)
+- PLAT-23694: Chunked Encoding `AV1` fixes and URL expiry over threads (https://github.com/kaltura/server/pull/11553)
+- SUP-31863: zoom user - return default user if host email is empty (https://github.com/kaltura/server/pull/11539)
+- PLAT-23665: `eSearch` - lookup users by company and title (https://github.com/kaltura/server/pull/11524)
+
+
 * Mon Apr 25 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 18.3.0-1
 - PLAT-23641: Add EP analytics user role (https://github.com/kaltura/server/pull/11544)
 - SUP-30803: add duration limitation on scheduled event update to make i… (https://github.com/kaltura/server/pull/11543)
