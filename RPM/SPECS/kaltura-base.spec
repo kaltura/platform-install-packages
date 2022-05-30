@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 18.4.0
-Release: 2
+Version: 18.6.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -375,6 +375,14 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon May 30 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 18.6.0-1
+- PLAT-23729: Facebook connector - managePages permission deprecation (https://github.com/kaltura/server/pull/11603)
+- PLAT-23680: Recording Ingestion By Group - Batch Workflow (https://github.com/kaltura/server/pull/11595)
+- PLAT-23675: Fixing (https://github.com/kaltura/server/pull/11594)
+- LIV-956: Block creation of live entry with type Akamai universal live (https://github.com/kaltura/server/pull/11593)
+- PLAT-23675: Recording Ingestion By Group - Event Workflow (https://github.com/kaltura/server/pull/11588) 
+- PLAT-23698: Enable the generation of impersonated KS on read only accounts (https://github.com/kaltura/server/pull/11587)
+
 * Mon May 16 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 18.4.0-2
 - Zend client was broken. Fixed with https://github.com/kaltura/clients-generator/pull/807#event-6616856270
  
