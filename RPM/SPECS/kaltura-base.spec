@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 18.4.0
-Release: 1
+Release: 2
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -375,6 +375,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon May 16 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 18.4.0-2
+- Zend client was broken. Fixed with https://github.com/kaltura/clients-generator/pull/807#event-6616856270
+ 
 * Wed May 4 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 18.4.0-1
 - KChunkedEncodeParams: Set `pathResolveInterval` to 10hrs (https://github.com/kaltura/server/pull/11561)
 - PLAT-23692: `kmcngaction` - get base URLs from `kConf` (https://github.com/kaltura/server/pull/11560)
