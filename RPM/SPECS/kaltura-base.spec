@@ -10,7 +10,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 18.6.0
+Version: 18.7.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -375,6 +375,18 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Fri Jun 10 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 18.7.0-1
+- SUP-32652: Fix `kBatchUtils::addReconnectParams()` invocation (https://github.com/kaltura/server/pull/11623)
+- SUP-31819: Support closed caption zoom file type (https://github.com/kaltura/server/pull/11621)
+- SUP-31453: Reindex entry after adding a cue point (https://github.com/kaltura/server/pull/11619)
+- SUP-31819 zoom - add support for zoom caption files of file type cc (https://github.com/kaltura/server/pull/11617)
+- PSVAMB-32961: Custom KMS channel level report (https://github.com/kaltura/server/pull/11612)
+- FOUN-468: `kInfraMemcacheCacheWrapper` - abort on fatal err (https://github.com/kaltura/server/pull/11610)
+- LIV-973: Add Italian audio flavour for live stream (https://github.com/kaltura/server/pull/11608)
+- SUP-31492: Fix type declaration of API action params (https://github.com/kaltura/server/pull/11605)
+- FOUN-456: Increase `country` max allowed chars and support eSearch lookup by `country` (https://github.com/kaltura/server/pull/11602)
+- SUP-31819: Zoom - add support for caption files of type CC (https://github.com/kaltura/server/pull/11596)
+
 * Mon May 30 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 18.6.0-1
 - PLAT-23729: Facebook connector - managePages permission deprecation (https://github.com/kaltura/server/pull/11603)
 - PLAT-23680: Recording Ingestion By Group - Batch Workflow (https://github.com/kaltura/server/pull/11595)

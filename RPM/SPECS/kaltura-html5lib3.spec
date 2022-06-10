@@ -3,7 +3,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib3
-Version: 3.1.0
+Version: 3.2.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -49,6 +49,20 @@ rm -rf %{buildroot}
 %{html5lib3_base}
 
 %changelog
+* Fri Jun 10 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 3.2.0-1
+- Added Airplay and info plugins
+- Update playkit-js-dash to 1.30.1 (40d6a06)
+- FEC-12161: Replace static jpg files in player tests (ae2798a)
+- FEC-12161: replace static jpg files in player tests (d4c36b4)
+- add fake-event-target to ts types (#534) (e29204a)
+- Update playkit-js to 0.80.1 (e61fe4e)
+- Update playkit-js-providers to 2.35.0 (0fabe44)
+- Update playkit-js-ui to 0.71.0 (a65b7d5)
+- FEC-11981: Related Entries p3 (#532) (7b1596b), closes kaltura/playkit-js-related#5 kaltura/playkit-js-ui#668
+- FEC-12015: CC button for on/off subtitles (#536) (8e3cc43)
+- FEC-12113: Add Side Panels Management to player UI (#544) (b3f599a), closes kaltura/playkit-js-ui-managers#1 kaltura/playkit-js-ui#674
+- FEC-12229: append KS to thumbnail API (#545) (6e5a2e8)
+
 * Mon Mar 28 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 3.1.0-1
 - FEC-12059: [Youbora] Rendition values have a high number of "Undefined data" records (#533) (43e023e)
 - Update playkit-js to 0.79.0 (66e3572)

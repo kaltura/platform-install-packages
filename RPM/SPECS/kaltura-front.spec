@@ -5,7 +5,7 @@
 %define apache_group	apache
 Summary: Kaltura Open Source Video Platform - frontend server 
 Name: kaltura-front
-Version: 18.6.0
+Version: 18.7.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -102,6 +102,9 @@ rm -rf %{buildroot}
 %config %{_sysconfdir}/php.d/zz-%{name}.ini
 
 %changelog
+* Fri Jun 10 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 18.7.0-1
+- Ver Bounce to 18.7.0
+
 * Mon May 30 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 18.6.0-1
 - Ver Bounce to 18.6.0
 
