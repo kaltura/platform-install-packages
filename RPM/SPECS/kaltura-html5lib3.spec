@@ -3,7 +3,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib3
-Version: 3.2.0
+Version: 3.3.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -49,6 +49,13 @@ rm -rf %{buildroot}
 %{html5lib3_base}
 
 %changelog
+* Mon Jun 20 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 3.3.0-1
+- Update playkit-js to 0.80.3 (b1f86b8)
+- Update playkit-js-providers to 2.35.1 (8679358)
+- FEC-12113: Add Side Panels Management to player UI (#547) (5ea1b5b)
+- FEC-12157: update Creating New Kaltura Player MD file (#543) (389e386)
+- FEC-12252: getTextTracks should be called getNativeTextTracks (#548) (fe28136)
+
 * Fri Jun 10 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 3.2.0-1
 - Added Airplay and info plugins
 - Update playkit-js-dash to 1.30.1 (40d6a06)
