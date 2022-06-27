@@ -10,7 +10,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 18.7.0
+Version: 18.8.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -375,6 +375,23 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Jun 27 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 18.8.0-1
+- FOUN-373: Fix - when `disable_category_limit` is set, categories with ',' in their name cannot be created (https://github.com/kaltura/server/pull/11651)
+- PLAT-23756: Allow `partner.get()` for system `CNC` partner (ID -11) (https://github.com/kaltura/server/pull/11649)
+- SUP-28750: Add `externalMediaType` (if exists) to criteria in `playlist.execute()` (https://github.com/kaltura/server/pull/11641)
+- PLAT-23774: Error is encountered when trying to export entries/users and `$options` is null (https://github.com/kaltura/server/pull/11640)
+- PSVAMB-29073: Set `cURL` timeout when making Graph requests (https://github.com/kaltura/server/pull/11638)
+- PLAT-23773: Add mapping of entry and user status when exporting CSV (https://github.com/kaltura/server/pull/11636)
+- Foun-477: New KS privilege - `virtualeventid` (https://github.com/kaltura/server/pull/11635)
+- Add game `object_id` and type to report output path (https://github.com/kaltura/server/pull/11633)
+- LIV-964: Add vendor task ID (https://github.com/kaltura/server/pull/11631)
+- PLAT-23749: Expose `KalturaUploadToken` `object_id` and `object_type` (https://github.com/kaltura/server/pull/11627)
+- LIV-962: Add live captions objects (https://github.com/kaltura/server/pull/11622)
+- PLAT-23744: Provide the ability to filter additional fields on entry/users export report (https://github.com/kaltura/server/pull/11620)
+- LIV-692: Add `scheduleEvent.list()` permission to media partner (https://github.com/kaltura/server/pull/11616)
+- SUP-30452: User with restricted role cannot filter categories in Analytics (https://github.com/kaltura/server/pull/11599)
+- PLAT-23647: Scores report CSV (https://github.com/kaltura/server/pull/11503)
+
 * Fri Jun 10 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 18.7.0-1
 - SUP-32652: Fix `kBatchUtils::addReconnectParams()` invocation (https://github.com/kaltura/server/pull/11623)
 - SUP-31819: Support closed caption zoom file type (https://github.com/kaltura/server/pull/11621)

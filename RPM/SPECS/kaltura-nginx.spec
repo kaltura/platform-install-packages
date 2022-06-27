@@ -41,8 +41,8 @@ BuildRequires: libopenssl-devel
 Requires(pre): pwdutils
 %endif
 
-%define nginx_vod_module_ver 1.29
-%define nginx_secure_token_ver 1.4
+%define nginx_vod_module_ver 1.30
+%define nginx_secure_token_ver 1.5
 %define nginx_token_validate_ver 1.1
 %define nginx_kafka_log_ver 1.0
 %define nginx_json_var_ver 1.0
@@ -50,14 +50,14 @@ Requires(pre): pwdutils
 %define nginx_vts_ver 0.1.18
 %define nginx_rtmp_ver 1.21.0
 %define ngx_aws_auth_ver 1.0.1
-%define headers_more_nginx_ver 0.33
+#%define headers_more_nginx_ver 0.33
 %define set_misc_nginx_ver 0.33
 %define devel_kit_nginx_ver 0.3.1
 # end of distribution specific definitions
 
 Summary: High performance web server customized for Kaltura VOD
 Name: kaltura-nginx
-Version: 1.21.2
+Version: 1.23.0
 Release: 1
 Vendor: Kaltura inc.
 URL: http://nginx.org/
@@ -81,7 +81,7 @@ Source15: nginx_kaltura.conf.template
 Source16: nginx.conf.template 
 Source17: nginx_ssl.conf.template
 Source18: ngx_aws_auth-%{ngx_aws_auth_ver}.zip
-Source19: headers-more-nginx-module-v%{headers_more_nginx_ver}.zip
+#Source19: headers-more-nginx-module-v%{headers_more_nginx_ver}.zip
 Source20: nginx-kafka-log-module-%{nginx_kafka_log_ver}.zip
 Source21: nginx-json-var-module-%{nginx_json_var_ver}.zip
 Source22: nginx-strftime-module-%{nginx_strftime_ver}.zip
@@ -117,7 +117,8 @@ Not stripped version of nginx built with the debugging log support.
 
 %prep
 %setup -qn nginx-%{version}
-for MODULE in %{SOURCE10} %{SOURCE11} %{SOURCE12} %{SOURCE13} %{SOURCE14} %{SOURCE18} %{SOURCE19} %{SOURCE20} %{SOURCE21} %{SOURCE22} %{SOURCE24} %{SOURCE23};do 
+#for MODULE in %{SOURCE10} %{SOURCE11} %{SOURCE12} %{SOURCE13} %{SOURCE14} %{SOURCE18} %{SOURCE19} %{SOURCE20} %{SOURCE21} %{SOURCE22} %{SOURCE24} %{SOURCE23};do 
+for MODULE in %{SOURCE10} %{SOURCE11} %{SOURCE12} %{SOURCE13} %{SOURCE14} %{SOURCE18} %{SOURCE20} %{SOURCE21} %{SOURCE22} %{SOURCE24} %{SOURCE23};do 
 	unzip -o $MODULE
 done
 
@@ -127,6 +128,7 @@ LIBRARY_PATH=/opt/kaltura/ffmpeg-%{ffmpeg_ver}/lib
 C_INCLUDE_PATH=/opt/kaltura/ffmpeg-%{ffmpeg_ver}/include
 export LIBRARY_PATH C_INCLUDE_PATH
 
+#    	--add-dynamic-module=./headers-more-nginx-module-%{headers_more_nginx_ver} \
 ./configure \
         --prefix=%{_sysconfdir}/nginx \
         --sbin-path=%{_sbindir}/nginx \
@@ -174,7 +176,6 @@ export LIBRARY_PATH C_INCLUDE_PATH
 	--add-module=./strftime-nginx-module-%{nginx_strftime_ver} \
 	--add-dynamic-module=./nginx-module-vts-%{nginx_vts_ver} \
 	--add-dynamic-module=./nginx-aws-auth-module-%{ngx_aws_auth_ver} \
-    	--add-dynamic-module=./headers-more-nginx-module-%{headers_more_nginx_ver} \
     	--add-dynamic-module=./ngx_devel_kit-%{devel_kit_nginx_ver} \
     	--add-dynamic-module=./set-misc-nginx-module-%{set_misc_nginx_ver} \
         $*
@@ -230,8 +231,8 @@ make %{?_smp_mflags}
 	--add-dynamic-module=./nginx-aws-auth-module-%{ngx_aws_auth_ver} \
     	--add-dynamic-module=./ngx_devel_kit-%{devel_kit_nginx_ver} \
     	--add-dynamic-module=./set-misc-nginx-module-%{set_misc_nginx_ver} \
-    	--add-dynamic-module=./headers-more-nginx-module-%{headers_more_nginx_ver} \
         $*
+#    	--add-dynamic-module=./headers-more-nginx-module-%{headers_more_nginx_ver} \
 make %{?_smp_mflags}
 
 %install
@@ -423,6 +424,11 @@ if [ $1 -ge 1 ]; then
 fi
 
 %changelog
+* Mon Jun 27 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 1.23.0-1
+- New mainline ver (http://nginx.org/en/CHANGES)
+- New VOD module ver - 1.30
+- New nginx-secure-token module ver - 1.5 (support Nginx 1.23.0)
+
 * Mon Oct 11 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 1.21.2-1
 - New mainline ver - 1.21.2-1
 - New VOD module ver - 1.29
