@@ -3,7 +3,7 @@
  
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.94
+Version: v2.96.1
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -87,6 +87,13 @@ fi
 %config %{html5lib_base}/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Mon Jun 20 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 2.96.1-1
+- FEC-12322 - Add alternatives to getReferer logic
+- FEC-12230 - VTT Captions are covered up by player controls when Hover mode enabled
+- FEC-12265 - V2 Share button generates mostly blank email, due to Ampersand
+- FEC-12293 - update kbind api documentation
+- FEC-12267 - [WEB][V2] XSS Vulnerability in mwEmbed
+
 * Mon Mar 28 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 2.94-1
 - FEC-12016 - Poll responses is showing 0 after toggling between the 'Hide/Show' button within the Webcasting App
 - FEC-12080 - Slides do not appear in dual screen in VOD webcast
