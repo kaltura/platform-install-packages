@@ -190,7 +190,8 @@ NGINX_SET_MISC_VERSION="v0.33"
 NGINX_SET_MISC_URI="https://github.com/kaltura/set-misc-nginx-module/archive/$NGINX_SET_MISC_VERSION.zip"
 
 # Nginx headers more module
-HEADERS_MORE_NGINX_VERSION="v0.33"
+#HEADERS_MORE_NGINX_VERSION="v0.33"
+HEADERS_MORE_NGINX_VERSION="master"
 HEADERS_MORE_NGINX_URI="https://github.com/openresty/headers-more-nginx-module/archive/$HEADERS_MORE_NGINX_VERSION.zip"
 
 # Kaltura Streaming lib build vars:
