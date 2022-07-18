@@ -91,8 +91,8 @@ Source21: nginx-json-var-module-%{nginx_json_var_ver}.zip
 Source22: nginx-strftime-module-%{nginx_strftime_ver}.zip
 Source23: set-misc-nginx-module-v%{set_misc_nginx_ver}.zip
 Source24: devel-kit-nginx-module-v%{devel_kit_nginx_ver}.zip
-Source25: echo-nginx-module-v%{echo_nginx_ver}.zip
-Source26: lua-nginx-module-%{lua_nginx_ver}.zip
+#Source25: echo-nginx-module-v%{echo_nginx_ver}.zip
+#Source26: lua-nginx-module-%{lua_nginx_ver}.zip
 #Patch1: nginx_kaltura.diff 
 
 License: 2-clause BSD-like license
@@ -123,7 +123,7 @@ Not stripped version of nginx built with the debugging log support.
 
 %prep
 %setup -qn nginx-%{version}
-for MODULE in %{SOURCE10} %{SOURCE11} %{SOURCE12} %{SOURCE13} %{SOURCE14} %{SOURCE18} %{SOURCE19} %{SOURCE20} %{SOURCE21} %{SOURCE22} %{SOURCE24} %{SOURCE23} %{SOURCE25} %{SOURCE26};do 
+for MODULE in %{SOURCE10} %{SOURCE11} %{SOURCE12} %{SOURCE13} %{SOURCE14} %{SOURCE18} %{SOURCE19} %{SOURCE20} %{SOURCE21} %{SOURCE22} %{SOURCE24} %{SOURCE23} ;do 
 #for MODULE in %{SOURCE10} %{SOURCE11} %{SOURCE12} %{SOURCE13} %{SOURCE14} %{SOURCE18} %{SOURCE20} %{SOURCE21} %{SOURCE22} %{SOURCE24} %{SOURCE23};do 
 	unzip -o $MODULE
 done
