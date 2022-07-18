@@ -41,6 +41,7 @@ BuildRequires: libopenssl-devel
 Requires(pre): pwdutils
 %endif
 
+
 %define nginx_vod_module_ver 1.30
 %define nginx_secure_token_ver 1.5
 %define nginx_token_validate_ver 1.1
@@ -50,7 +51,10 @@ Requires(pre): pwdutils
 %define nginx_vts_ver 0.1.18
 %define nginx_rtmp_ver 1.21.0
 %define ngx_aws_auth_ver 1.0.1
-%define headers_more_nginx_ver master
+%define headers_more_nginx_ver 0.34
+%define echo_nginx_ver 0.62
+#%define lua_nginx_ver 0.10.21
+%define lua_nginx_ver master
 %define set_misc_nginx_ver 0.33
 %define devel_kit_nginx_ver 0.3.1
 # end of distribution specific definitions
@@ -81,13 +85,14 @@ Source15: nginx_kaltura.conf.template
 Source16: nginx.conf.template 
 Source17: nginx_ssl.conf.template
 Source18: ngx_aws_auth-%{ngx_aws_auth_ver}.zip
-#Source19: headers-more-nginx-module-v%{headers_more_nginx_ver}.zip
-Source19: headers-more-nginx-module-%{headers_more_nginx_ver}.zip
+Source19: headers-more-nginx-module-v%{headers_more_nginx_ver}.zip
 Source20: nginx-kafka-log-module-%{nginx_kafka_log_ver}.zip
 Source21: nginx-json-var-module-%{nginx_json_var_ver}.zip
 Source22: nginx-strftime-module-%{nginx_strftime_ver}.zip
 Source23: set-misc-nginx-module-v%{set_misc_nginx_ver}.zip
 Source24: devel-kit-nginx-module-v%{devel_kit_nginx_ver}.zip
+Source25: echo-nginx-module-v%{echo_nginx_ver}.zip
+Source26: lua-nginx-module-%{lua_nginx_ver}.zip
 #Patch1: nginx_kaltura.diff 
 
 License: 2-clause BSD-like license
@@ -118,7 +123,7 @@ Not stripped version of nginx built with the debugging log support.
 
 %prep
 %setup -qn nginx-%{version}
-for MODULE in %{SOURCE10} %{SOURCE11} %{SOURCE12} %{SOURCE13} %{SOURCE14} %{SOURCE18} %{SOURCE19} %{SOURCE20} %{SOURCE21} %{SOURCE22} %{SOURCE24} %{SOURCE23};do 
+for MODULE in %{SOURCE10} %{SOURCE11} %{SOURCE12} %{SOURCE13} %{SOURCE14} %{SOURCE18} %{SOURCE19} %{SOURCE20} %{SOURCE21} %{SOURCE22} %{SOURCE24} %{SOURCE23} %{SOURCE25} %{SOURCE26};do 
 #for MODULE in %{SOURCE10} %{SOURCE11} %{SOURCE12} %{SOURCE13} %{SOURCE14} %{SOURCE18} %{SOURCE20} %{SOURCE21} %{SOURCE22} %{SOURCE24} %{SOURCE23};do 
 	unzip -o $MODULE
 done
@@ -181,11 +186,9 @@ export LIBRARY_PATH C_INCLUDE_PATH
     	--add-dynamic-module=./headers-more-nginx-module-%{headers_more_nginx_ver} \
         $*
 make %{?_smp_mflags}
-prove -I. -r t
 
 %{__mv} %{_builddir}/nginx-%{version}/objs/nginx \
         %{_builddir}/nginx-%{version}/objs/nginx.debug
-
 ./configure \
         --prefix=%{_sysconfdir}/nginx \
         --sbin-path=%{_sbindir}/nginx \

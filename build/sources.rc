@@ -190,9 +190,20 @@ NGINX_SET_MISC_VERSION="v0.33"
 NGINX_SET_MISC_URI="https://github.com/kaltura/set-misc-nginx-module/archive/$NGINX_SET_MISC_VERSION.zip"
 
 # Nginx headers more module
-#HEADERS_MORE_NGINX_VERSION="v0.33"
-HEADERS_MORE_NGINX_VERSION="master"
+HEADERS_MORE_NGINX_VERSION="v0.34"
+#HEADERS_MORE_NGINX_VERSION="master"
 HEADERS_MORE_NGINX_URI="https://github.com/openresty/headers-more-nginx-module/archive/$HEADERS_MORE_NGINX_VERSION.zip"
+
+# Nginx echo module
+ECHO_NGINX_VERSION="v0.62"
+ECHO_NGINX_URI="https://github.com/openresty/echo-nginx-module/archive/$ECHO_NGINX_VERSION.zip"
+
+#LUA_NGINX_VERSION="v0.10.21"
+LUA_NGINX_VERSION="master"
+LUA_NGINX_URI="https://github.com/openresty/lua-nginx-module/archive/$LUA_NGINX_VERSION.zip"
+
+LUA_RESTY_CORE_NGINX_VERSION="v0.1.23"
+LUA_RESTY_CORE_NGINX_URI="https://github.com/openresty/lua-rest-core/archive/$LUA_RESTY_CORE_NGINX_VERSION.zip"
 
 # Kaltura Streaming lib build vars:
 KALTURA_MEDIASERVER_VERSION="4.7.6.11"
