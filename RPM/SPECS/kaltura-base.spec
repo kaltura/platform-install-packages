@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 18.10.0
-Release: 1
+Release: 2
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -375,6 +375,25 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Wed Jul 27 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 18.10.0-2
+- SUP-32804: Support `stopProcessingOnError` in MR for distribution and exportation batch jobs (https://github.com/kaltura/server/pull/11702)
+- Player highlights - new report (https://github.com/kaltura/server/pull/11701)
+- SUP-32804: Support `stopProcessingOnError` in MR for distribution and exportation batch jobs (https://github.com/kaltura/server/pull/11700)
+- PLAT-23808: `session->impersonate()` doesn't allow overriding KS expiry (https://github.com/kaltura/server/pull/11699)
+- Add to `srt` to allowed file formats (https://github.com/kaltura/server/pull/11698)
+- Add count aggregation for reaction types (https://github.com/kaltura/server/pull/11694)
+- `elasticClient.php` - error handling (https://github.com/kaltura/server/pull/11692)
+- PLAT-23811: `serveAsJsonAction()` - return array of captions (https://github.com/kaltura/server/pull/11690)
+- PLAT-23811: `serveAsJsonAction()` - specify mime type (https://github.com/kaltura/server/pull/11689)
+- PSVAMB-35059: Modify Mentioned Terms cue point creation logic to account for non-alphanumeric characters (https://github.com/kaltura/server/pull/11688)
+- PLAT-23812: `validate2FA()` - throw descriptive exception (https://github.com/kaltura/server/pull/11687)
+- PLAT-23811: Add new action to serve caption as `JSON` (https://github.com/kaltura/server/pull/11686)
+- PLAT-23720: Internal accounts clean up report (https://github.com/kaltura/server/pull/11679)
+- PLAT-23805: `userScore.list()` doesn't work with 'game' services (https://github.com/kaltura/server/pull/11678)
+- SUP-32497: Download `isOriginal` instead of `paramsId` == 0 to find source `flavorAseet` (https://github.com/kaltura/server/pull/11669)
+- Sync partner service edition and account type (https://github.com/kaltura/server/pull/11600)
+- PLAT-23664: `KDistributedFileManager.fetchFile()` - header check should be case insensitive (https://github.com/kaltura/server/pull/11537)
+
 * Mon Jul 18 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 18.10.0-1
 - Ver Bounce to 18.10.0
 
