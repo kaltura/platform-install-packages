@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 18.10.0
-Release: 2
+Version: 18.11.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -375,6 +375,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Wed Jul 27 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 18.11.0-1
+- Ver Bounce to 18.11.0
+
 * Wed Jul 27 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 18.10.0-2
 - SUP-32804: Support `stopProcessingOnError` in MR for distribution and exportation batch jobs (https://github.com/kaltura/server/pull/11702)
 - Player highlights - new report (https://github.com/kaltura/server/pull/11701)
