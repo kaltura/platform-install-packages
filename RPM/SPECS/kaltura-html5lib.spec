@@ -3,7 +3,7 @@
  
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.96.1
+Version: v2.97
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -87,6 +87,18 @@ fi
 %config %{html5lib_base}/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Mon Aug 1 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 2.97-1
+- FEC-12319 - player showing out of schedule message even there is admin ks
+- FEC-12322 - add alternatives to getReferer logic (same fix which is applied on v2.96.2)
+- FEC-12328 - Android fullscreen not working using iframe embed
+- FEC-12332 - Video share to LinkedIn cut out the query parameters
+- FEC-12265 - V2 Share button generates mostly blank email, due to Ampersand
+- FEC-12293 - update kbind api documentation
+- Update the valid host regex (103bffb)
+- FEC-12371 - Multi-audio with live does not switch back to first audio track in Safari
+- FEC-12370 - Share to email button does not working on Safari
+- FEC-12404 - Scrubber has the native design of the browser and not the design of Kaltura
+
 * Mon Jun 20 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 2.96.1-1
 - FEC-12322 - Add alternatives to getReferer logic
 - FEC-12230 - VTT Captions are covered up by player controls when Hover mode enabled

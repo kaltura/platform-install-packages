@@ -3,7 +3,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib3
-Version: 3.3.0
+Version: 3.4.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -49,6 +49,10 @@ rm -rf %{buildroot}
 %{html5lib3_base}
 
 %changelog
+* Mon Aug 1 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 3.4.0-1
+- Update playkit-js-dash to 1.30.2 (b1e0ffb)
+- FEC-12218: [Google Tag Manager] - Add relevant TS types (#552) (dd706e6)
+
 * Mon Jun 20 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 3.3.0-1
 - Update playkit-js to 0.80.3 (b1f86b8)
 - Update playkit-js-providers to 2.35.1 (8679358)
