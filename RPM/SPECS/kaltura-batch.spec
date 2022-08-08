@@ -6,7 +6,7 @@
 %define apache_group	apache
 Summary: Kaltura Open Source Video Platform - batch server 
 Name: kaltura-batch
-Version: 18.11.0
+Version: 18.12.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -131,6 +131,9 @@ service httpd restart
 
 
 %changelog
+* Mon Aug 8 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 18.12.0-1
+- Ver Bounce to 18.12.0
+
 * Wed Jul 27 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 18.11.0-1
 - Ver Bounce to 18.11.0
 

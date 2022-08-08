@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 18.11.0
-Release: 2
+Version: 18.12.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -375,6 +375,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Aug 8 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 18.12.0-1
+- Ver Bounce to 18.12.0
+
 * Mon Aug 8 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 18.11.0-2
 - Support consistent KS flow (https://github.com/kaltura/server/pull/11728)
 - PLAT-23772: Removed UI conf validation for player section (https://github.com/kaltura/server/pull/11725)
