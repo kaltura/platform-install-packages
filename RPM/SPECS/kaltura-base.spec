@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 18.11.0
-Release: 1
+Release: 2
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -375,6 +375,24 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Aug 8 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 18.11.0-2
+- Support consistent KS flow (https://github.com/kaltura/server/pull/11728)
+- PLAT-23772: Removed UI conf validation for player section (https://github.com/kaltura/server/pull/11725)
+- LIV-974: Confirm task data exists (https://github.com/kaltura/server/pull/11724)
+- Optimisation: Remove invocation of `kConversionInfo->fillFromMetadata()` in `myFileConverter::captureFrame()` (https://github.com/kaltura/server/pull/11723)
+- PLAT-23767: Add improvements and validations to `deploy_v2` script (https://github.com/kaltura/server/pull/11722)
+- Additional validations for scheduled vendor tasks (https://github.com/kaltura/server/pull/11721)
+- PLAT-23832: Add partner name to internal accounts report (https://github.com/kaltura/server/pull/11719)
+- AN-22830: Add VOD play time metric (https://github.com/kaltura/server/pull/11718)
+- PLAT-23825: Create internal BI Partner to pull the data from `KAVA` (https://github.com/kaltura/server/pull/11715)
+- Add new internal connectors framework partner (https://github.com/kaltura/server/pull/11714)
+- PLAT-23817: Increase the allowed amount of user roles to copy from template (https://github.com/kaltura/server/pull/11713)
+- Use __CLASS__ rather than `self::class` (https://github.com/kaltura/server/pull/11709)
+- FOUN-579: add `registrationFormSchema` JSON-Schema value to `virtualEvent` object (https://github.com/kaltura/server/pull/11708)
+- LIV-958: Add new `SCHEDULE_EVENT_FEATURE_MANAGE` for the update live feature (https://github.com/kaltura/server/pull/11705)
+- LIV-958: Added live captioning REACH objects (https://github.com/kaltura/server/pull/11671)
+- FOUN-194 - Add Kafka support to `event_notification` plugin (https://github.com/kaltura/server/pull/11568)
+
 * Wed Jul 27 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 18.11.0-1
 - Ver Bounce to 18.11.0
 
