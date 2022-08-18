@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 18.12.0
-Release: 1
+Release: 2
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -375,6 +375,26 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Thu Aug 18 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 18.2.0-2
+- PSVAMB-35945: User ID Format of Teams Recording Ingestion (https://github.com/kaltura/server/pull/11757)
+- PLAT-23850: REACH - Move catalog validation into `validateForInsert` (https://github.com/kaltura/server/pull/11755)
+- LIV-961: Prevent exception if scheduled event is deleted before the vendor task (https://github.com/kaltura/server/pull/11752)
+- LIV-1004: Handle duration change for live entry vendor tasks (https://github.com/kaltura/server/pull/11751)
+- SUP-31782: Temp thumbnails implementation (https://github.com/kaltura/server/pull/11750)
+- SUP-33664: support leader board new ID format and calculate rule score accordingly (https://github.com/kaltura/server/pull/11748)
+- LIV-1003: Generate scheduled event if one does not exist (https://github.com/kaltura/server/pull/11747)
+- SUP-30103: Obtain `userId` from the request only on admin session otherwise, from the KS (https://github.com/kaltura/server/pull/11746)
+- PLAT-23848: Partner configuration update is blocked by email whitelist validation (https://github.com/kaltura/server/pull/11745)
+- New `entryPermissionLevel` core plugin (https://github.com/kaltura/server/pull/11744)
+- SUP-33280: Change `loginDataResetPasswordAction()` to return the user with `encryptedSeed` instead of void (https://github.com/kaltura/server/pull/11743)
+- SSRV-710: Added `systemPartner.getConfiguration` permission for self serve partner (ID -12) (https://github.com/kaltura/server/pull/11742)
+- SUP-32940: Send `userID` when creating a zoom entry in `KZoomDropFolderEngine` (https://github.com/kaltura/server/pull/11741)
+- PLAT-23807: REACH - aborted tasks are not refunded (https://github.com/kaltura/server/pull/11739)
+- Use timezone offset instead of timezone names (https://github.com/kaltura/server/pull/11730)
+- Added new cross partner reports for COGS (https://github.com/kaltura/server/pull/11727)
+- PLAT-23826: `playlist.execute()` by context returns incorrect entries (https://github.com/kaltura/server/pull/11726)
+- SUP-30725: Moderation flag count is not incremented (https://github.com/kaltura/server/pull/11693)
+
 * Mon Aug 8 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 18.12.0-1
 - Ver Bounce to 18.12.0
 
