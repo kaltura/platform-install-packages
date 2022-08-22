@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 18.12.0
-Release: 2
+Release: 3
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -386,7 +386,6 @@ fi
 - SUP-30103: Obtain `userId` from the request only on admin session otherwise, from the KS (https://github.com/kaltura/server/pull/11746)
 - PLAT-23848: Partner configuration update is blocked by email whitelist validation (https://github.com/kaltura/server/pull/11745)
 - New `entryPermissionLevel` core plugin (https://github.com/kaltura/server/pull/11744)
-- SUP-33280: Change `loginDataResetPasswordAction()` to return the user with `encryptedSeed` instead of void (https://github.com/kaltura/server/pull/11743)
 - SSRV-710: Added `systemPartner.getConfiguration` permission for self serve partner (ID -12) (https://github.com/kaltura/server/pull/11742)
 - SUP-32940: Send `userID` when creating a zoom entry in `KZoomDropFolderEngine` (https://github.com/kaltura/server/pull/11741)
 - PLAT-23807: REACH - aborted tasks are not refunded (https://github.com/kaltura/server/pull/11739)
