@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 18.12.0
-Release: 3
+Version: 18.13.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -375,6 +375,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Aug 22 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 18.13.0-1
+- Ver Bounce to 18.13.0
+
 * Thu Aug 18 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 18.2.0-2
 - PSVAMB-35945: User ID Format of Teams Recording Ingestion (https://github.com/kaltura/server/pull/11757)
 - PLAT-23850: REACH - Move catalog validation into `validateForInsert` (https://github.com/kaltura/server/pull/11755)
