@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 18.13.0
-Release: 1
+Release: 2
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -375,6 +375,26 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Thu Sep 1 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 18.13.0-2
+- Use Kafka's `flushTtl` value if provided (https://github.com/kaltura/server/pull/11790)
+- Send API object instead of core object + reduce Kafka poll time (https://github.com/kaltura/server/pull/11787)
+- PSVAMB-37517: Sphinx - Change log message from notice to error level (https://github.com/kaltura/server/pull/11785)
+- FOUN-634: Fix call from deprecated `ConversionProfilePeer` to `conversionProfile2Peer` (https://github.com/kaltura/server/pull/11782)
+- Use `X-Accel-Redirect` instead of custom status code (https://github.com/kaltura/server/pull/11780)
+- apimon: Report the partner ID on invalid KS error (https://github.com/kaltura/server/pull/11778)
+- FOUN-627: Add logs for sphinx field to detect unbalanced `"` and uneven `\` at `EOL` (https://github.com/kaltura/server/pull/11777)
+- PLAT-23830: Added `uploadToken` status in error message (https://github.com/kaltura/server/pull/11776)
+- KAVA - Fix php timezone names (https://github.com/kaltura/server/pull/11773)
+- LIV-997: Introduced `KalturaLiveRestreamFeature` class (https://github.com/kaltura/server/pull/11771)
+- Move `proxy_redirect_to_storage_secret` to local map (https://github.com/kaltura/server/pull/11769)
+- PLAT-23858: Differentiate between `uiConf` custom to system players (https://github.com/kaltura/server/pull/11768)
+- SUP-33280: Return the user on `loginDataResetPasswordAction()` (https://github.com/kaltura/server/pull/11767)
+- PLAT-23852: Support name and ID fields for sorting `UIconf` list action (https://github.com/kaltura/server/pull/11762)
+- PLAT-23830: Invoking `uploadToken->upload()` with `finalChunk` set to true results in failure (https://github.com/kaltura/server/pull/11758)
+- FOUN-607: Change API exception thrown when sphinx query fails on 'syntax error' to avoid false-positive alerts (https://github.com/kaltura/server/pull/11754)
+- FOUN-596: `entryVendorTask->add()/update()`: use general `kString::checkIsValidJson()` (https://github.com/kaltura/server/pull/11716)
+- SUP-28334: Update co-editor/publisher event notification (https://github.com/kaltura/server/pull/11527)
+
 * Mon Aug 22 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 18.13.0-1
 - Ver Bounce to 18.13.0
 

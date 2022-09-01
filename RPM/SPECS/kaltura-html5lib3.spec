@@ -3,8 +3,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib3
-Version: 3.5.0
-Release: 2
+Version: 3.6.1
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz 
@@ -49,6 +49,15 @@ rm -rf %{buildroot}
 %{html5lib3_base}
 
 %changelog
+* Thu Sep 1 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 3.6.1-1
+- Update playkit-js to 0.80.5 (0e89918)
+- Update playkit-js-ui to 0.72.2 (2a06bb2)
+- FEC-12238: [WEB][ShakaPlayer] - upgrade shaka player to v4.1.2 (#561) (8a26067)
+- FEC-12335: Side Panel Item gets refreshed in every 'change media' (#562) (1c452c0), closes kaltura/playkit-js#659 kaltura/playkit-js-ui#687
+- FEC-12460: upgrade HLS.JS player to v1.2.0 (#560) (b4f1c08), closes kaltura/playkit-js-hls#175
+- Update playkit-js-hls to 1.30.2 (1652d7a)
+- Update playkit-js-dash to 1.31.0 (3d5861f)
+
 * Thu Aug 18 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 3.5.0-2
 - Added playlist plugin
 
