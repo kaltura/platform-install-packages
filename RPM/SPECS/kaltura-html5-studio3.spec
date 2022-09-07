@@ -3,7 +3,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5-studio3
-Version: v3.16.0
+Version: v3.17.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -52,6 +52,9 @@ rm -rf %{buildroot}
 %{studio_prefix}/%{version}
 
 %changelog
+* Wed Sep 7 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 3.17.0-1
+- FEV-1417: fix timeline plugin component name
+
 * Mon Mar 28 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 3.13.0-1
 - feat(FEC-11590): Related grid Studio requirements #120
 - feat(FEC-12028): Skip Plugin - Studio #122

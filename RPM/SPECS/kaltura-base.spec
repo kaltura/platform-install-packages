@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 18.13.0
-Release: 2
+Version: 18.14.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -375,6 +375,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Wed Sep 7 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 18.14.0-1
+- Ver Bounce to 18.14.0
+
 * Thu Sep 1 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 18.13.0-2
 - Use Kafka's `flushTtl` value if provided (https://github.com/kaltura/server/pull/11790)
 - Send API object instead of core object + reduce Kafka poll time (https://github.com/kaltura/server/pull/11787)
