@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 18.14.0
-Release: 1
+Release: 2
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -375,6 +375,22 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Sep 19 2022 jess.portnoy@kaltura.com <Jess Portnoy> -
+- PLAT-23200: Fix to `Partner Added Custom Application` notification condition (https://github.com/kaltura/server/pull/11811)
+- LIV-960: Added scheduled status to REACH testme UI (https://github.com/kaltura/server/pull/11809)
+- SUP-31744: Avoid skipping `entryVendorTask` objects when exporting CSV (https://github.com/kaltura/server/pull/11808)
+- AN-22841: Added new metrics: `METRIC_UNIQUE_VOD_PLAYED_ENTRIES` and `METRIC_UNIQUE_LIVE_PLAYED_ENTRIES` (https://github.com/kaltura/server/pull/11807)
+- Escape values returned from `getFieldPossibleValues` (https://github.com/kaltura/server/pull/11806)
+- PLAT-23857: Add EP allowed templates config to partner (https://github.com/kaltura/server/pull/11804)
+- PLAT-23842: Allow partner -16 to use `groupUser.list` (https://github.com/kaltura/server/pull/11803)
+- PLAT-23854: Create partner ID -16 for game services (https://github.com/kaltura/server/pull/11800)
+- PLAT-23200: Create new event notification template for creating custom applications on new partner creation (https://github.com/kaltura/server/pull/11799)
+- PLAT-23868: Move `puserId` to parent class (https://github.com/kaltura/server/pull/11795)
+- LIV-960: Enable update of scheduled status of `entryvendortask` (https://github.com/kaltura/server/pull/11794)
+- PLAT-23853: `compatCheck` enhancements (https://github.com/kaltura/server/pull/11793)
+- PLAT-23869: get `entryId` explicitly from the entry object rather than user input (https://github.com/kaltura/server/pull/11792)
+- FOUN-623: Support setting `checkAliveTimeoutMs` to confirm node is reachable (https://github.com/kaltura/server/pull/11791)
+
 * Wed Sep 7 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 18.14.0-1
 - Ver Bounce to 18.14.0
 

@@ -5,7 +5,7 @@
 %define optflags -O3
 # distribution specific definitions
 %define use_systemd (0%{?fedora} && 0%{?fedora} >= 18) || (0%{?rhel} && 0%{?rhel} >= 7)
-%define ffmpeg_ver 4.2.2
+%define ffmpeg_ver 4.4
 
 %if 0%{?rhel}  == 5
 Group: System Environment/Daemons
@@ -50,7 +50,7 @@ Requires(pre): pwdutils
 %define nginx_strftime_ver 1.0
 %define nginx_vts_ver 0.1.18
 %define nginx_rtmp_ver 1.21.0
-%define ngx_aws_auth_ver 1.0.1
+%define ngx_aws_auth_ver 1.1
 %define headers_more_nginx_ver 0.34
 %define echo_nginx_ver 0.62
 #%define lua_nginx_ver 0.10.21
@@ -62,7 +62,7 @@ Requires(pre): pwdutils
 Summary: High performance web server customized for Kaltura VOD
 Name: kaltura-nginx
 Version: 1.23.0
-Release: 1
+Release: 2
 Vendor: Kaltura inc.
 URL: http://nginx.org/
 
@@ -430,6 +430,10 @@ if [ $1 -ge 1 ]; then
 fi
 
 %changelog
+* Mon Sep 19 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 1.23.0-2
+- Compile against FFmpeg 4.4
+- New version of aws_auth - 1.1
+
 * Mon Jun 27 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 1.23.0-1
 - New mainline ver (http://nginx.org/en/CHANGES)
 - New VOD module ver - 1.30
