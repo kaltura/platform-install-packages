@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 18.14.0
-Release: 2
+Version: 18.15.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -375,6 +375,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Tue Sep 20 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 18.15.0-1
+- Ver Bounce to 18.15.0
+
 * Mon Sep 19 2022 jess.portnoy@kaltura.com <Jess Portnoy> -
 - PLAT-23200: Fix to `Partner Added Custom Application` notification condition (https://github.com/kaltura/server/pull/11811)
 - LIV-960: Added scheduled status to REACH testme UI (https://github.com/kaltura/server/pull/11809)
