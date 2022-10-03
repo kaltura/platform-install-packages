@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 18.15.0
-Release: 2
+Version: 18.16.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -375,6 +375,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Oct 3 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 18.16.0-1
+- Ver Bounce to 18.16.0
+
 * Thu Sep 29 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 18.15.0-2
 - PLAT-23925: Injection of Specific Locale Overrides Response Profile (https://github.com/kaltura/server/pull/11830)
 - PLAT-23921: Increase meeting event max schedule event duration to 3 days (https://github.com/kaltura/server/pull/11825)
