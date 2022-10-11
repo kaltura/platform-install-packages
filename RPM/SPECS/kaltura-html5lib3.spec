@@ -3,8 +3,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib3
-Version: 3.6.1
-Release: 2
+Version: 3.7.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz 
@@ -49,6 +49,17 @@ rm -rf %{buildroot}
 %{html5lib3_base}
 
 %changelog
+* Tue Oct 04 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 3.7.0-1
+- Added the playkit-related plugin
+- Update playkit-js to 0.80.6 (2fc62dd)
+- Update playkit-js-providers to 2.36.1 (35d8752)
+- Update playkit-js-ui to 0.72.3 (87f2e44)
+- FEC-12097: More plugins - Update relevant types (#563) (2fb7bd4), closes kaltura/playkit-js-ui-managers#10
+- FEC-12347: sanitize before Json parse (#576) (5e558ba)
+- FEC-12526: add debug to analyze player version not updated (#564) (09ef6a9)
+- FEC-12562: Ignore ks configuration on kava plugin incase of ottAnalytics exists on player (#574) (b01430b)
+- FEC-12574: loadThumbnailWithKs can break media load when used with playlist or setMedia (#571) (67ae49d)
+
 * Thu Sep 29 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 3.6.1-2
 - Added moderation plugin
 
