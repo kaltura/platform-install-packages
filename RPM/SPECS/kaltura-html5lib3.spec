@@ -49,7 +49,7 @@ rm -rf %{buildroot}
 %{html5lib3_base}
 
 %changelog
-* Tue Oct 4 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 3.7.0-1
+* Tue Oct 04 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 3.7.0-1
 - Added the playkit-related plugin
 - Update playkit-js to 0.80.6 (2fc62dd)
 - Update playkit-js-providers to 2.36.1 (35d8752)

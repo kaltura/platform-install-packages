@@ -3,7 +3,7 @@
  
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib
-Version: v2.97
+Version: v2.98
 Release: 1
 Epoch: 0 
 License: AGPLv3+
@@ -87,6 +87,11 @@ fi
 %config %{html5lib_base}/%{version}/LocalSettings.KalturaPlatform.php
 
 %changelog
+* Wed Oct 12 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 2.98-1
+- FEC-12575 - YouTube entries time update issue
+- FEC-12521 - [ECDN] Player V2 Fallback Option Upon Inaccessible API Gateway
+- FEC-12512 - Unmute button opens the ad url when using Bumper
+
 * Mon Aug 1 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 2.97-1
 - FEC-12319 - player showing out of schedule message even there is admin ks
 - FEC-12322 - add alternatives to getReferer logic (same fix which is applied on v2.96.2)
