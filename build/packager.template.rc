@@ -1,2 +1,7 @@
 PACKAGER_NAME="@PACKAGER_NAME@"
 PACKAGER_MAIL="@PACKAGER_MAIL@"
+# needed for fetching from private repos
+GITHUB_TOKEN=""
+# only needed for the third party Brand3D playkit plugin
+BITBUCKET_TOKEN=""
+BITBUCKET_USER=""
