@@ -50,6 +50,10 @@ for i in path-kaltura-player.js path-kaltura-player.js.map;do
 	$BASE_CHECKOUT_DIR/build/gh_download_asset.sh $GITHUB_TOKEN kaltura/kaltura-interactive-player $i v$PLAYKIT_INTERACTIVE_VERSION $SOURCE_PACKAGING_DIR/html5lib3_tmp/$HTML5LIB3_VERSION
 done
 
+curl -L $PLAYKIT_UI_URI > playkit-ui_$PLAYKIT_UI_VERSION.tar.gz
+tar zxf playkit-ui_$PLAYKIT_UI_VERSION.tar.gz
+cp -r playkit-js-ui-$PLAYKIT_UI_VERSION/translations $SOURCE_PACKAGING_DIR/html5lib3_tmp/$HTML5LIB3_VERSION
+
 # Fetch Brand3d from Bitbucket:
 BRAND3D_ARCHIVE=$SOURCE_PACKAGING_DIR/playkit_brand3d_${PLAYKIT_BRAND3D_VERSION}.tar.bz2
 curl -L $PLAYKIT_BRAND3D_URI --output $BRAND3D_ARCHIVE
