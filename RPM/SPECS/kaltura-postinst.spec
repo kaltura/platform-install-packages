@@ -2,7 +2,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
 Version: 1.0.33
-Release: 118
+Release: 121
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz
@@ -82,6 +82,9 @@ find %{_sysconfdir}/logrotate.d -type l -name "kaltura_*" -exec rm {} \;
 %config %{prefix}/app/configurations/*
 
 %changelog
+* Thu Oct 20 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.33-119
+- Replace token for additional system partners
+
 * Thu Nov 25 2021 jess.portnoy@kaltura.com <Jess Portnoy> - 1.0.33-117
 - Remove legacy KMC sanity checks
 
