@@ -4,7 +4,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib3
 Version: 3.7.0
-Release: 2
+Release: 3
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz 
@@ -49,6 +49,10 @@ rm -rf %{buildroot}
 %{html5lib3_base}
 
 %changelog
+* Thu Oct 20 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 3.7.0-3
+- Renamed Brand3d plugin name to ensure it loads after its deps
+- Remove zero sized files before archiving
+
 * Thu Oct 13 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 3.7.0-2
 - Added translation files from https://github.com/kaltura/playkit-js-ui/tree/master/translations
 

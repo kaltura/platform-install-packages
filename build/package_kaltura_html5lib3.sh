@@ -58,11 +58,15 @@ cp -r playkit-js-ui-$PLAYKIT_UI_VERSION/translations $SOURCE_PACKAGING_DIR/html5
 BRAND3D_ARCHIVE=$SOURCE_PACKAGING_DIR/playkit_brand3d_${PLAYKIT_BRAND3D_VERSION}.tar.bz2
 curl -L $PLAYKIT_BRAND3D_URI --output $BRAND3D_ARCHIVE
 tar jxf $BRAND3D_ARCHIVE -C $SOURCE_PACKAGING_DIR/ 
-cp -r $SOURCE_PACKAGING_DIR/brand3d-brand3d-overlay-c3a7824dcfdf/dist/* $SOURCE_PACKAGING_DIR/html5lib3_tmp/$HTML5LIB3_VERSION/
+cp $SOURCE_PACKAGING_DIR/brand3d-brand3d-overlay-c3a7824dcfdf/dist/brand3d-overlay.js $SOURCE_PACKAGING_DIR/html5lib3_tmp/$HTML5LIB3_VERSION/plugin-marketplace-brand3d-overlay.js
+cp $SOURCE_PACKAGING_DIR/brand3d-brand3d-overlay-c3a7824dcfdf/dist/brand3d-overlay.js.map $SOURCE_PACKAGING_DIR/html5lib3_tmp/$HTML5LIB3_VERSION/plugin-marketplace-brand3d-overlay.js.map
 
-
+# remove OTT player
 rm $SOURCE_PACKAGING_DIR/html5lib3_tmp/$HTML5LIB3_VERSION/kaltura-tv-player*
 rm $SOURCE_PACKAGING_DIR/html5lib3_tmp/$HTML5LIB3_VERSION/*.cjs.js*
+# sometimes the plugin archives include empty files or do not have the files we expect so, let's remove zero sized files
+find $SOURCE_PACKAGING_DIR/html5lib3_tmp/$HTML5LIB3_VERSION -size 0 -exec rm {} \;
+
 cd $SOURCE_PACKAGING_DIR/html5lib3_tmp/$HTML5LIB3_VERSION
 cd ..
 tar zcf $RPM_SOURCES_DIR/$HTML5LIB3_RPM_NAME-$HTML5LIB3_VERSION.tar.gz $HTML5LIB3_VERSION
