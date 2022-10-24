@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 18.16.0
-Release: 2
+Release: 3
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -375,6 +375,18 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Oct 24 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 18.16.0-3
+- PLAT-23940: Allow `Selfserve` partner [ID -12] to call `virtualEvent.list()` (https://github.com/kaltura/server/pull/11849)
+- PLAT-23930: Password restriction message is incorrect (https://github.com/kaltura/server/pull/11845)
+- PLAT-23928: Allow disabling of password restriction (https://github.com/kaltura/server/pull/11844)
+- PLAT-23934: Removing description/Tag after it was already set on entry object is not possible (https://github.com/kaltura/server/pull/11842)
+- SSRV-853: Add `user.list()` permission for self serve partner [ID -12] (https://github.com/kaltura/server/pull/11841)
+- FOUN-743: `Playkit` - Support dynamic module dependency resolution (https://github.com/kaltura/server/pull/11840)
+- ILMS-287: Add new extended status enum values for Quiz user entries (https://github.com/kaltura/server/pull/11839)
+- PLAT-23926: When Cloning an Entry, all Multi-Lingual values Should be… (https://github.com/kaltura/server/pull/11838)
+- Force redirect on live-caption (https://github.com/kaltura/server/pull/11835)
+- SUP-31814: Replace `file_exists()` and `filesize()` functions with `kFile` counterparts. (https://github.com/kaltura/server/pull/11834)
+
 * Mon Oct 3 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 18.16.0-1
 - Ver Bounce to 18.16.0
 

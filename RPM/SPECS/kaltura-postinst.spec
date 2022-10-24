@@ -1,7 +1,7 @@
 %define prefix /opt/kaltura 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-postinst 
-Version: 1.0.33
+Version: 1.0.34
 Release: 121
 License: AGPLv3+
 Group: Server/Platform 

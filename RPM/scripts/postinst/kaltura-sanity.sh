@@ -38,6 +38,7 @@ DIRNAME=`dirname $0`
 CAPTIONS_FILE=$DIRNAME/example.srt
 rm  /tmp/`hostname`-reportme.`date +%d_%m_%Y`.sql 2> /dev/null
 rm $LOG_DIR/*log  $LOG_DIR/batch/*log 2> /dev/null
+service kaltura-monit restart
 for PARTITION in $BASE_DIR $WEB_DIR;do
 	START=`date +%s.%N`
 	OUT=`check_space $PARTITION`
