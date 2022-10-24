@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 18.16.0
-Release: 3
+Version: 18.17.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -375,6 +375,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Oct 24 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 18.17.0-1
+- Ver Bounce to 18.17.0
+
 * Mon Oct 24 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 18.16.0-3
 - PLAT-23940: Allow `Selfserve` partner [ID -12] to call `virtualEvent.list()` (https://github.com/kaltura/server/pull/11849)
 - PLAT-23930: Password restriction message is incorrect (https://github.com/kaltura/server/pull/11845)
