@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 18.17.0
-Release: 3
+Release: 5
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -375,6 +375,20 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Wed Nov 2 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 18.17.0-4
+- SSRV-892: Add self serve admin view permission (https://github.com/kaltura/server/pull/11868)
+- Following the introduction of `KalturaMultiLingualString`, deployment/base/scripts/insertDefaults.php fails (https://github.com/kaltura/server/pull/11866)
+- PLAT-23950 - Expose flag skip password restriction of first/last name on response (https://github.com/kaltura/server/pull/11865)
+- PLAT-23909 - `iconv()` ignore errors (https://github.com/kaltura/server/pull/11863)
+- PLAT-23947: Allow thumbnails on readonly partner (https://github.com/kaltura/server/pull/11862)
+- PSVAMB-39090 - Fix `ClamAVScanWrapper::runWrapped()` (https://github.com/kaltura/server/pull/11858)
+- LIV-1002: Function to mark entry server nodes when a live scheduled event is added or updated (https://github.com/kaltura/server/pull/11857)
+- PLAT-23939 - Return the vertical in `partner.get()` response (https://github.com/kaltura/server/pull/11854)
+- PLAT-23875: Audit trail for `CATEGORY_ENTRY` objects (https://github.com/kaltura/server/pull/11853)
+- SSRV-755: Allow unblocking of read only partners (https://github.com/kaltura/server/pull/11851)
+- Set new file root of file sync when cloning objects to a different storage (https://github.com/kaltura/server/pull/11847)
+- PLAT-23927: Fix issue on like/unlike actions (https://github.com/kaltura/server/pull/11846
+
 * Mon Oct 24 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 18.17.0-1
 - Ver Bounce to 18.17.0
 

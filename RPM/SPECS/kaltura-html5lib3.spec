@@ -3,8 +3,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib3
-Version: 3.7.0
-Release: 3
+Version: 3.8.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz 
@@ -49,6 +49,12 @@ rm -rf %{buildroot}
 %{html5lib3_base}
 
 %changelog
+* Fri Nov 4 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 3.8.0-1
+- Update playkit-js to 0.80.8 (88e82df)
+- Update playkit-js-dash to 1.31.3 (a470b3a)
+- FEC-12097: Update TS types - constructor should be public (#584) (1e2b5ff)
+- FEC-12691: Shaka Text Track Displayer does not work unless useNativeTextTrack set to true (76f772f)
+
 * Thu Oct 20 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 3.7.0-3
 - Renamed Brand3d plugin name to ensure it loads after its deps
 - Remove zero sized files before archiving
