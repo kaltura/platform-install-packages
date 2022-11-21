@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 18.17.0
-Release: 5
+Version: 18.18.0
+Release: 2
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -375,6 +375,23 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Nov 21 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 18.18.0-2
+- SUP-34498: Fix `calculateChunkTimings()` (https://github.com/kaltura/server/pull/11890)
+- SUP-33907: Replace Zoom datetime functions with `kTimezoneUtils` functions (https://github.com/kaltura/server/pull/11886)
+- LIV-978: `live-redirect` delivery profile for LLHLS (Low-Latency HLS) (https://github.com/kaltura/server/pull/11883)
+- SUP-33912: Add Time Zone (GMT) to recording description (https://github.com/kaltura/server/pull/11882)
+- PLAT-23970: Studio v7 integration (https://github.com/kaltura/server/pull/11880)
+- PLAT-23953: "Enforce HTTPS API" is ignored on session.start (https://github.com/kaltura/server/pull/11879)
+- PLAT-23957: `KalturaApplicationPlugin` - add links to external Kaltura apps in Admin Console (https://github.com/kaltura/server/pull/11878)
+- PLAT-23957: `KalturaApplicationPlugin` - add links to external Kaltura apps in Admin Console (https://github.com/kaltura/server/pull/11872)
+- SUP-34127: Template entry is being duplicated (https://github.com/kaltura/server/pull/11870)
+- `compatCheck` - add testing of URI and compare binary content (https://github.com/kaltura/server/pull/11869)
+- NR2-7294: Add `isGuest` member to KalturaUser (https://github.com/kaltura/server/pull/11861)
+- SUP-32019: Send email notification to all users of the Kaltura group (https://github.com/kaltura/server/pull/11796)
+
+* Thu Nov 10 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 18.18.0-1
+- Ver Bounce to 18.18.0
+
 * Wed Nov 2 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 18.17.0-4
 - SSRV-892: Add self serve admin view permission (https://github.com/kaltura/server/pull/11868)
 - Following the introduction of `KalturaMultiLingualString`, deployment/base/scripts/insertDefaults.php fails (https://github.com/kaltura/server/pull/11866)
