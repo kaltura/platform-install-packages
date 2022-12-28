@@ -18,7 +18,7 @@ $partnerId);
 $client->setKS($ks);
 $tags="autodeploy,playerV3Versions_latest,playerV3Versions_list,7.5,playerV3Versions,latest";
  // I'm somewhat hopeful the version for the other plugins won't change very often but we may have to modify the code so that their versions are passed as args as well later on..
-$config="{\"kaltura-ovp-player\":\"$playerVersion\",\"playkit-ima\":\"1.6.1\",\"playkit-youbora\":\"2.3.1\",\"playkit-google-analytics\":\"1.1.0\",\"playkit-offline-manager\":\"1.2.0\",\"playkit-cast-sender\":\"1.2.2\",\"playkit-cast-receiver\":\"1.1.1\",\"playkit-vr\":\"2.0.3\",\"path\":\"0.4.8\",\"playkit-flash\":\"2.0.11\",\"playkit-youtube\":\"2.0.1\",\"playkit-bumper\":\"2.0.7\", \"playkit-kava\":\"1.3.1\", \"playkit-timeline\":\"3.0.0\"}";
+$config="{\"kaltura-ovp-player\":\"$playerVersion\",\"playkit-ima\":\"1.6.4\",\"playkit-youbora\":\"2.3.4\",\"playkit-google-analytics\":\"1.1.0\",\"playkit-offline-manager\":\"1.2.0\",\"playkit-cast-sender\":\"1.2.3\",\"playkit-cast-receiver\":\"1.1.1\",\"playkit-vr\":\"2.0.3\",\"path\":\"0.4.8\",\"playkit-flash\":\"2.0.11\",\"playkit-youtube\":\"2.0.6\",\"playkit-bumper\":\"2.0.7\", \"playkit-kava\":\"1.3.1\", \"playkit-timeline\":\"3.0.0\"}";
 $filter = new KalturaUiConfFilter();
 $filter->tagsMultiLikeAnd = $tags;
 $pager = new KalturaFilterPager();

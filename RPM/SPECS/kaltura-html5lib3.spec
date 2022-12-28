@@ -4,7 +4,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib3
 Version: 3.8.1
-Release: 2
+Release: 3
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz 
@@ -49,6 +49,9 @@ rm -rf %{buildroot}
 %{html5lib3_base}
 
 %changelog
+* Wed Dec 28 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 3.8.1-3
+- Updated plugin version
+
 * Wed Dec 14 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 3.8.1-2
 - Added playkit-js-share plugin
 

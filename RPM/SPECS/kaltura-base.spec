@@ -10,7 +10,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 18.19.0
+Version: 18.20.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -375,6 +375,27 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Wed Dec 28 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 18.20.0-1
+- PLAT-24035: `findCategoryIdByName()` - pass `partnerId` as argument (https://github.com/kaltura/server/pull/11958)
+- PLAT-24035: `findCategoryIdByName()` - pass `partnerId` as argument (https://github.com/kaltura/server/pull/11957)
+- FOUN-919: Return `externalId` on `kalturaUser` object (https://github.com/kaltura/server/pull/11955)
+- SUP-32090: Update `New_Item_Pending_Moderation` notification template (https://github.com/kaltura/server/pull/11953)
+- SUP-35247: Prevent entry bulk upload from creating `categoryEntry` records for deleted categories (https://github.com/kaltura/server/pull/11952)
+- PLAT-23891: Webex - Add co-hosts as co-publishers on recordings (https://github.com/kaltura/server/pull/11951)
+- LIV-1087: Sanitise broadcast URL (https://github.com/kaltura/server/pull/11950)
+- PLAT-23958: Static Transcoding Profile for Webex (https://github.com/kaltura/server/pull/11949)
+- FOUN-912: Add `appToken` query cache based on `partnerId` (https://github.com/kaltura/server/pull/11948)
+- SUP-34126: Added Ukrainian and Swahili live flavors (https://github.com/kaltura/server/pull/11946)
+- PLAT-24027: Handle pagination on responses from Webex (https://github.com/kaltura/server/pull/11945)
+- FOUN-903: Support purging of `PII` data on user deletion (https://github.com/kaltura/server/pull/11942)
+- PLAT-24005: Change the 2FA email text for Kaltura Events (https://github.com/kaltura/server/pull/11939)
+- PLAT-24016: Webex - improve error handling (https://github.com/kaltura/server/pull/11937)
+- plat 23901: Webex - opt-in/out of recording based on group association (https://github.com/kaltura/server/pull/11935)
+- PLAT-23976: Support short link generation for playlist with v7 players (https://github.com/kaltura/server/pull/11929)
+- KAVA: Fix REACH "total minutes" metric (https://github.com/kaltura/server/pull/11912)
+- PSVAMB-38332 and PSVAMB-36136: removal of Flash KMC links and inclusion of audio-only flavors (https://github.com/kaltura/server/pull/11843)
+- Add bandwidth report for self serve billing (https://github.com/kaltura/server/pull/11831)
+
 * Mon Nov 28 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 18.19.0-1
 - Ver Bounce to 18.19.0
 
