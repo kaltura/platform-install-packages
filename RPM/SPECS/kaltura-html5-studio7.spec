@@ -27,14 +27,13 @@ For more information visit: http://corp.kaltura.com, http://www.kaltura.org and 
 This package installs the Kaltura HTML5 Studio v7.
 
 %prep
-%setup -qn kaltura-player-studio-v7-563d6744346ecb2ea4edf1d772489b001032f3b4
-
+%setup -q
 
 
 
 %install
 mkdir -p $RPM_BUILD_ROOT%{studio_prefix}
-npm install
+npm install --legacy-peer-deps 
 npm run build
 cp -r build $RPM_BUILD_ROOT%{studio_prefix}/%{version}
 
