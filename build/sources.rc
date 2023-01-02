@@ -422,6 +422,10 @@ HTML5_APP_STUDIO3_URI="https://github.com/kaltura/player-studio/releases/downloa
 HTML5_APP_STUDIO3_RPM_NAME=kaltura-html5-studio3
 HTML5_APP_STUDIO3_NORMALIZED_ARCHIVE_NAME=$HTML5_APP_STUDIO3_RPM_NAME-$HTML5_APP_STUDIO3_VERSION.zip
 
+HTML5_APP_STUDIO7_VERSION="v1.0.0"
+HTML5_APP_STUDIO7_URI="https://api.github.com/repos/kaltura/player-studio-v7/tarball/$HTML5_APP_STUDIO7_VERSION"
+HTML5_APP_STUDIO7_RPM_NAME=kaltura-html5-studio7
+
 # HTML5 lib v3
 HTML5LIB3_VERSION="3.8.1"
 HTML5LIB3_REPO_NAME=kaltura-player-js
