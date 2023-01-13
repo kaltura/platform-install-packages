@@ -42,7 +42,7 @@ Requires(pre): pwdutils
 %endif
 
 
-%define nginx_vod_module_ver 1.30
+%define nginx_vod_module_ver 1.31
 %define nginx_secure_token_ver 1.5
 %define nginx_token_validate_ver 1.1
 %define nginx_kafka_log_ver 1.0
@@ -61,8 +61,8 @@ Requires(pre): pwdutils
 
 Summary: High performance web server customized for Kaltura VOD
 Name: kaltura-nginx
-Version: 1.23.0
-Release: 3
+Version: 1.23.3
+Release: 1
 Vendor: Kaltura inc.
 URL: http://nginx.org/
 
@@ -430,6 +430,10 @@ if [ $1 -ge 1 ]; then
 fi
 
 %changelog
+* Fri Jan 13 2023 jess.portnoy@kaltura.com <Jess Portnoy> - 1.23.3-1
+- New mainline ver (http://nginx.org/en/CHANGES)
+- New version of vod module - 1.31
+
 * Mon Sep 19 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 1.23.0-2
 - Compile against FFmpeg 4.4
 - New version of aws_auth - 1.1
