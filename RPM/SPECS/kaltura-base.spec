@@ -6,11 +6,11 @@
 %define confdir %{prefix}/app/configurations
 %define logdir %{prefix}/log
 %define webdir %{prefix}/web
-%define codename Rigel 
+%define codename Scorpius 
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 18.20.0
+Version: 19.0.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -375,6 +375,18 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Fri Jan 13 2023 jess.portnoy@kaltura.com <Jess Portnoy> - 19.0.0-1
+- Grant vendor.vendorIntegration.update() permission to partner ID -1 (https://github.com/kaltura/server/pull/11992)
+- PLAT-23900: Support uploading of closed captions along with the media (https://github.com/kaltura/server/pull/11989)
+- Add support for OneDrive entry source type in analytics reports (https://github.com/kaltura/server/pull/11987)
+- PLAT-24024: Setting DF config to Autodelete after 0 Days results in the recording being deleted from WebEx and an err while uploading to Kaltura (https://github.com/kaltura/server/pull/11986)
+- `WebexAccount` config template (https://github.com/kaltura/server/pull/11985)
+- PLAT-24062: Export to CSV actions - disregard `orderBy` param (https://github.com/kaltura/server/pull/11981)
+- Add support for Webex API source type (https://github.com/kaltura/server/pull/11971)
+- PLAT-24064: Webex integration should always use UTC as timezone (https://github.com/kaltura/server/pull/11969)
+- PLAT-24059: Script to enable `FEATURE_V3_STUDIO_PERMISSION` on all partners (https://github.com/kaltura/server/pull/11968)
+- PLAT-24033: redirect to KMCNG integration page from Webex app flow (https://github.com/kaltura/server/pull/11963)
+
 * Wed Dec 28 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 18.20.0-1
 - PLAT-24035: `findCategoryIdByName()` - pass `partnerId` as argument (https://github.com/kaltura/server/pull/11958)
 - PLAT-24035: `findCategoryIdByName()` - pass `partnerId` as argument (https://github.com/kaltura/server/pull/11957)
