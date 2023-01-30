@@ -10,7 +10,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 19.0.0
+Version: 19.1.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -375,6 +375,23 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Jan 30 2023 jess.portnoy@kaltura.com <Jess Portnoy> - 19.1.0-1
+- FOUN-1000: `getHashedUserId()` - add `partner_id` prefix to the `exteral_id` when creating the hash (https://github.com/kaltura/server/pull/12026)
+- PLAT-24116: Pass access token in Authoirization header in Zoom recordings batch flow (https://github.com/kaltura/server/pull/12025)
+- PLAT-24114: Admin Console - add `KmsAdminAction()` (https://github.com/kaltura/server/pull/12023)
+- PLAT-24111: Send Zoom access token in Authorization header (https://github.com/kaltura/server/pull/12022)
+- SUP-27694: Generate capture thumbnails based on flavour cached version (https://github.com/kaltura/server/pull/12021)
+- Floor and limit percentiles cardinality aggregator (https://github.com/kaltura/server/pull/12019)
+- Omit services with no actions from client XML (https://github.com/kaltura/server/pull/12018)
+- SUP-34618: Omit disallowed chars when encoding XML strings (https://github.com/kaltura/server/pull/12017)
+- `scripts/utils/restoreDeletedEntries.php` - Use `kFile::checkFileExists()` instead of `file_exists()` (https://github.com/kaltura/server/pull/12013)
+- PLAT-24090: Expose `SYSTEM` creation type in admin console UI conf form (https://github.com/kaltura/server/pull/12012)
+- PLAT-24098: Partner ID -16 (games) - grant `baseEntry.list/get()` permissions (https://github.com/kaltura/server/pull/12011)
+- SUP-35555: `admin_console/controllers/WidgetController.php` - normalise request params (https://github.com/kaltura/server/pull/11996)
+- PLAT-24069: Admin Console - support searching partners by `adminEmailEqual` criterion (https://github.com/kaltura/server/pull/11990)
+- FOUN-968: Support exclusion of services and objects from API schema (https://github.com/kaltura/server/pull/11983)
+- FOUN-960: MR - Don't skip entries that have ready flavors with flavor param ID 0 (https://github.com/kaltura/server/pull/11974)
+
 * Fri Jan 13 2023 jess.portnoy@kaltura.com <Jess Portnoy> - 19.0.0-1
 - Grant vendor.vendorIntegration.update() permission to partner ID -1 (https://github.com/kaltura/server/pull/11992)
 - PLAT-23900: Support uploading of closed captions along with the media (https://github.com/kaltura/server/pull/11989)

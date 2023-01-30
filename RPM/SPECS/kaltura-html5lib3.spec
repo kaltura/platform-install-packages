@@ -3,8 +3,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib3
-Version: 3.8.1
-Release: 3
+Version: 3.10.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: %{name}-%{version}.tar.gz 
@@ -49,6 +49,13 @@ rm -rf %{buildroot}
 %{html5lib3_base}
 
 %changelog
+* Mon Jan 30 2023 jess.portnoy@kaltura.com <Jess Portnoy> - 3.10.0-1
+- FEC-12844: Related - autoContinue: true - countdown not canceled (8e8cd07)
+- FEC-12610: Image Playback Engine - Support for rendering an image, with or without duration (#598) (af31665)
+- FEC-12873: upgrade hls.js library to v1.3.1 (#601) (5453a74)
+- FEC-12874: upgrade shaka player library to v4.3.3 (#602) (9255cde)
+- Update plugins
+
 * Wed Dec 28 2022 jess.portnoy@kaltura.com <Jess Portnoy> - 3.8.1-3
 - Updated plugin version
 
