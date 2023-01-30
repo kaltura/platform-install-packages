@@ -10,7 +10,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 19.1.0
+Version: 19.2.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -375,6 +375,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Jan 30 2023 jess.portnoy@kaltura.com <Jess Portnoy> - 19.2.0-1
+- Ver Bounce to 19.2.0
+
 * Mon Jan 30 2023 jess.portnoy@kaltura.com <Jess Portnoy> - 19.1.0-1
 - FOUN-1000: `getHashedUserId()` - add `partner_id` prefix to the `exteral_id` when creating the hash (https://github.com/kaltura/server/pull/12026)
 - PLAT-24116: Pass access token in Authoirization header in Zoom recordings batch flow (https://github.com/kaltura/server/pull/12025)
