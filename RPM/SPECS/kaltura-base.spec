@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 19.2.0
-Release: 1
+Release: 2
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -375,6 +375,17 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Fri Feb 10 2023 jess.portnoy@kaltura.com <Jess Portnoy> - 19.2.0-2
+- Update Kafka provider to monitor events (https://github.com/kaltura/server/pull/12043)
+- PLAT-24146: Grant partner -16 (games) `metadata.list()` permission (https://github.com/kaltura/server/pull/12041)
+- AN-22915: CSV report - add BOM (https://github.com/kaltura/server/pull/12040)
+- PLAT-24104: Add Czech as REACH source language (https://github.com/kaltura/server/pull/12039)
+- FOUN-892: add 'messaging' MS partner & permissions (-20) (https://github.com/kaltura/server/pull/12038)
+- SUP-35852: `getExcludeServerIds()` - throw exception on failure (https://github.com/kaltura/server/pull/12035)
+- PLAT-24128: Use entry ID to build capture thumbnail path if `localCaptureFlavor` does not exist (https://github.com/kaltura/server/pull/12031)
+- Add KME metrics to usage report (https://github.com/kaltura/server/pull/12029)
+- Use new auth broker to get user data for registration reports (https://github.com/kaltura/server/pull/12008)
+
 * Mon Jan 30 2023 jess.portnoy@kaltura.com <Jess Portnoy> - 19.2.0-1
 - Ver Bounce to 19.2.0
 
