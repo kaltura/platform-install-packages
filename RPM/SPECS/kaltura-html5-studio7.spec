@@ -3,7 +3,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5-studio7
-Version: v1.1.0
+Version: v1.4.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -50,10 +50,14 @@ rm -rf %{buildroot}
 %{studio_prefix}/%{version}
 
 %changelog
-* Fri Jan 13 2023 jess.portnoy@kaltura.com <Jess Portnoy> - v1.1.0
+* Mon Feb 27 2023 jess.portnoy@kaltura.com <Jess Portnoy> - v1.4.0-1
+- Support image playback
+- Bug fixes
+
+* Fri Jan 13 2023 jess.portnoy@kaltura.com <Jess Portnoy> - v1.1.0-1
 - Player colors configuration
 - Additional properties configuration for the Related plugin
 - UI enhancements
 
-* Mon Jan 2 2023 jess.portnoy@kaltura.com <Jess Portnoy> - v1.0.0
+* Mon Jan 2 2023 jess.portnoy@kaltura.com <Jess Portnoy> - v1.0.0-1
 - Initial build

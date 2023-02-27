@@ -10,8 +10,8 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 19.2.0
-Release: 2
+Version: 19.3.0
+Release: 1
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -375,6 +375,18 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Mon Feb 27 2023 jess.portnoy@kaltura.com <Jess Portnoy> - 19.3.0-1
+- KAVA: Change `added_meeting_recording_hours` metric time unit to seconds (https://github.com/kaltura/server/pull/12065)
+- PSVAMB-37604: Only captions that are in status Ready should be exported (https://github.com/kaltura/server/pull/12063)
+- SUP-35733: Fix Cross-Site Scripting (reflective `XSS`) vulnerability (https://github.com/kaltura/server/pull/12062)
+- SUP-34618: Throw exception if invalid chars are found in multilingual string (https://github.com/kaltura/server/pull/12061)
+- Revert "SUP-34618: ignore disallowed chars when encoding xml" (https://github.com/kaltura/server/pull/12060)
+- SUP-31688: `createCsvDownloadUrl()`: extend KS expiry to 24 hours (https://github.com/kaltura/server/pull/12052)
+- FOUN-951: Add `video/ogg` mime-type to supported file types (https://github.com/kaltura/server/pull/12051)
+- PSVAMB-37604: Cortex Connector (https://github.com/kaltura/server/pull/12050)
+- Reduce Memcache/Db access by caching objects accessed during thumb capture requests (https://github.com/kaltura/server/pull/12046)
+- PLAT-23990: Add extended audio description as a REACH service (https://github.com/kaltura/server/pull/11970)
+
 * Fri Feb 10 2023 jess.portnoy@kaltura.com <Jess Portnoy> - 19.2.0-2
 - Update Kafka provider to monitor events (https://github.com/kaltura/server/pull/12043)
 - PLAT-24146: Grant partner -16 (games) `metadata.list()` permission (https://github.com/kaltura/server/pull/12041)
