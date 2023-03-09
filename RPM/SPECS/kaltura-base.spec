@@ -10,7 +10,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
-Version: 19.3.0
+Version: 19.4.0
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -375,6 +375,16 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Thu Mar 9 2023 jess.portnoy@kaltura.com <Jess Portnoy> - 19.4.0-1
+- PLAT-24161: Add virtual event ID to quiz analytics beacon (https://github.com/kaltura/server/pull/12077)
+- PLAT-24131: Expose recycle bin partner config in Admin Console (https://github.com/kaltura/server/pull/12076)
+- SUP-36227: Support `loudnorm` audio filter (https://github.com/kaltura/server/pull/12074)
+- PLAT-24161: REACH - Add CA to `VendorTaskProcessingRegion` (https://github.com/kaltura/server/pull/12073)
+- SUP-36041: Fix wrong FPS on HLS manifest (https://github.com/kaltura/server/pull/12072)
+- PLAT-24131: Entry recycle bin (https://github.com/kaltura/server/pull/12071)
+- SUP-36087: Only trigger entry vendor audio description tasks for video and audio entries  (https://github.com/kaltura/server/pull/12070)
+- AN-22934: Add `EP` to `EntryApplication` enums (https://github.com/kaltura/server/pull/12068)
+
 * Mon Feb 27 2023 jess.portnoy@kaltura.com <Jess Portnoy> - 19.3.0-1
 - KAVA: Change `added_meeting_recording_hours` metric time unit to seconds (https://github.com/kaltura/server/pull/12065)
 - PSVAMB-37604: Only captions that are in status Ready should be exported (https://github.com/kaltura/server/pull/12063)

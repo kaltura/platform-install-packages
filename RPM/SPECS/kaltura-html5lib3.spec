@@ -3,7 +3,7 @@
 
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-html5lib3
-Version: 3.10.0
+Version: 3.12.1
 Release: 1
 License: AGPLv3+
 Group: Server/Platform 
@@ -49,6 +49,10 @@ rm -rf %{buildroot}
 %{html5lib3_base}
 
 %changelog
+* Thu Mar 9 2023 jess.portnoy@kaltura.com <Jess Portnoy> - 3.12.1-1
+- Image Player support
+- FEC-12987 - update playkit-js-ui to 0.75.2 (65f88ff)
+
 * Mon Jan 30 2023 jess.portnoy@kaltura.com <Jess Portnoy> - 3.10.0-1
 - FEC-12844: Related - autoContinue: true - countdown not canceled (8e8cd07)
 - FEC-12610: Image Playback Engine - Support for rendering an image, with or without duration (#598) (af31665)
