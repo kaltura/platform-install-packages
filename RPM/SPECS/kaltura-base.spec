@@ -11,7 +11,7 @@
 Summary: Kaltura Open Source Video Platform 
 Name: kaltura-base
 Version: 19.4.0
-Release: 1
+Release: 3
 License: AGPLv3+
 Group: Server/Platform 
 Source0: https://github.com/kaltura/server/archive/%{codename}-%{version}.zip 
@@ -375,6 +375,9 @@ fi
 %doc %{prefix}/app/VERSION.txt
 
 %changelog
+* Thu Mar 23 2023 jess.portnoy@kaltura.com <Jess Portnoy> - 19.4.0-2
+- Added `VirtualEvent` plugin
+
 * Thu Mar 9 2023 jess.portnoy@kaltura.com <Jess Portnoy> - 19.4.0-1
 - PLAT-24161: Add virtual event ID to quiz analytics beacon (https://github.com/kaltura/server/pull/12077)
 - PLAT-24131: Expose recycle bin partner config in Admin Console (https://github.com/kaltura/server/pull/12076)
